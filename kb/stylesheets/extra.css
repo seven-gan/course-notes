@@ -1,0 +1,444 @@
+/* =============================================================
+ * 知识库自定义样式
+ * -------------------------------------------------------------
+ * 重点解决：
+ *  1. 移动端公式溢出（最高优先）
+ *  2. 元数据卡片（用于课程 / 重要度 / 依据）
+ *  3. 相关导航（前置 / 后续）
+ *  4. 阅读体验（中文排版、行距、触控尺寸）
+ * ============================================================= */
+
+/* ---------- 1. 中文排版优化 ---------- */
+.md-typeset {
+  font-size: 0.82rem;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* 段落间距：中文段落用较紧凑的行距+段距，避免大片空白 */
+.md-typeset p {
+  margin: 0.75em 0;
+}
+
+/* 标题间距：中文排版下收紧，避免章节之间出现大片空白 */
+.md-typeset h1 { margin: 0 0 1rem; font-weight: 700; }
+.md-typeset h2 { margin: 1.5rem 0 0.7rem; font-weight: 700; }
+.md-typeset h3 { margin: 1.2rem 0 0.55rem; font-weight: 700; }
+.md-typeset h4 { margin: 1rem 0 0.5rem; font-weight: 700; }
+
+/* 第一个标题不要上边距（避免页面开头出现大空白） */
+.md-typeset > h1:first-child,
+.md-typeset > h2:first-child,
+.md-typeset > h3:first-child {
+  margin-top: 0;
+}
+
+/* 分隔线：默认边距太大，中文页面里显得空 */
+.md-typeset hr {
+  margin: 1.4rem 0;
+  border-bottom-width: 1px;
+}
+
+/* 引用块（> 开头，首页用于导语） */
+.md-typeset blockquote {
+  margin: 0.9rem 0;
+  padding: 0.5rem 1rem;
+  border-left-width: 3px;
+  color: var(--md-default-fg-color--light);
+}
+
+/* 列表间距收紧 */
+.md-typeset ul,
+.md-typeset ol {
+  margin: 0.6em 0;
+}
+.md-typeset li {
+  margin-bottom: 0.25em;
+}
+
+/* 表格间距 */
+.md-typeset table:not([class]) {
+  margin: 0.9rem 0;
+}
+
+/* 提示块间距 */
+.md-typeset .admonition,
+.md-typeset details {
+  margin: 0.9rem 0;
+}
+
+/* 卡片网格：上下留白收紧 */
+.md-typeset .kb-grid {
+  margin: 1rem 0;
+}
+
+/* ---------- 2. 【关键】移动端公式处理 ---------- */
+/* 行内公式：允许换行，避免撑破容器 */
+.md-typeset .arithmatex {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: middle;
+}
+
+/* 行间公式：独立滚动容器 + 视觉提示 */
+.md-typeset .arithmatex > .katex-display {
+  margin: 1.2em 0;
+  padding: 0.4em 0.2em;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 【关键修复】KaTeX 内部结构必须允许收缩，否则会把容器撑破 */
+.md-typeset .katex-display > .katex {
+  max-width: 100%;
+}
+.md-typeset .katex-display > .katex > .katex-html {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+/* 矩阵（mtable）等宽结构：允许内部滚动 */
+.md-typeset .katex .mtable,
+.md-typeset .katex .arraycolsep {
+  max-width: 100%;
+}
+.md-typeset mtable,
+.md-typeset .katex-display mtable {
+  max-width: 100%;
+}
+
+/* 移动端：让公式容器强制可滚动，并给出视觉提示 */
+@media (max-width: 768px) {
+  .md-typeset .arithmatex > .katex-display,
+  .md-typeset .katex-display > .katex > .katex-html {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+  }
+  /* 右侧渐隐，暗示可横向滚动 */
+  .md-typeset .arithmatex > .katex-display {
+    background: linear-gradient(
+      to right,
+      transparent calc(100% - 24px),
+      var(--md-default-bg-color) 100%
+    );
+  }
+  /* 移动端公式整体略缩小，减少溢出概率 */
+  .md-typeset .katex {
+    font-size: 1.0em;
+  }
+  .md-typeset .katex-display > .katex {
+    font-size: 0.98em;
+  }
+}
+
+/* 极窄屏进一步缩小 */
+@media (max-width: 480px) {
+  .md-typeset .katex { font-size: 0.96em; }
+  .md-typeset .katex-display > .katex { font-size: 0.92em; }
+  .md-typeset { font-size: 0.8rem; }
+}
+
+/* 【关键修复】所有表格必须可横向滚动，不能撑破页面 */
+.md-typeset table:not([class]),
+.md-typeset .md-typeset__table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.md-typeset .md-typeset__table table {
+  display: table;
+  width: max-content;
+  min-width: 100%;
+}
+
+/* 【关键修复】防止 KaTeX 内部元素被计入溢出检测 */
+.md-typeset .katex,
+.md-typeset .katex * {
+  max-width: none;
+}
+.md-typeset .katex-display,
+.md-typeset .katex-display > .katex,
+.md-typeset .katex-display > .katex > .katex-html {
+  max-width: 100%;
+}
+
+/* 长代码块与预格式化文本 */
+.md-typeset pre,
+.md-typeset code {
+  max-width: 100%;
+}
+.md-typeset pre > code {
+  display: block;
+  overflow-x: auto;
+}
+
+/* 长 URL / 长英文单词换行 */
+.md-typeset p,
+.md-typeset li,
+.md-typeset td {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* ---------- 3. 元数据卡片（hook 生成） ---------- */
+.kb-metacard {
+  margin: 0 0 1.8rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-left: 3px solid var(--md-primary-fg-color);
+  border-radius: 0 8px 8px 0;
+  background: var(--md-code-bg-color);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.kb-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.6rem;
+  padding: 0.28rem 0;
+}
+
+.kb-meta-row + .kb-meta-row {
+  border-top: 1px dashed var(--md-default-fg-color--lightest);
+  margin-top: 0.28rem;
+  padding-top: 0.5rem;
+}
+
+.kb-meta-label {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--md-default-fg-color--light);
+  text-transform: uppercase;
+  min-width: 4.2em;
+}
+
+/* 课程标签 */
+.kb-course-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.kb-course-tag {
+  display: inline-block;
+  padding: 0.12rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--md-primary-fg-color--light);
+  background: var(--md-primary-fg-color--transparent, rgba(63, 81, 181, 0.08));
+  color: var(--md-primary-fg-color);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 重要程度徽章 */
+.kb-imp {
+  display: inline-block;
+  padding: 0.12rem 0.6rem;
+  border-radius: 999px;
+  color: #fff;
+  background: var(--imp-color, #6b7280);
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.kb-imp-desc {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.72rem;
+}
+
+/* 内容依据 */
+.kb-sources code {
+  font-size: 0.7rem;
+  margin-right: 0.3rem;
+}
+
+/* ---------- 4. 相关导航（前置 / 后续） ---------- */
+.kb-relnav {
+  margin: 2.4rem 0 0;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  background: var(--md-code-bg-color);
+  font-size: 0.78rem;
+}
+
+.kb-navitem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.7rem;
+  padding: 0.24rem 0;
+}
+
+.kb-navlabel {
+  flex: 0 0 auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--md-default-fg-color--light);
+  text-transform: uppercase;
+  min-width: 4.2em;
+}
+
+.kb-navlinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.kb-navlinks a {
+  padding: 0.15rem 0.55rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.kb-navlinks a:hover {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color--transparent, rgba(63, 81, 181, 0.08));
+}
+
+/* ---------- 5. 首页卡片网格 ----------
+ * 注意：卡片必须用纯 HTML 写（<a> 包裹 <span>），
+ * 不能用 markdown 语法。因为 Markdown 把 <a> 当行内元素，
+ * 会自动插入 <p> 把卡片切断，导致布局错乱、出现大片空白。 */
+.kb-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.9rem;
+  margin: 1.4rem 0;
+}
+
+.kb-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 10px;
+  text-decoration: none !important;
+  color: inherit !important;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+  background: var(--md-default-bg-color);
+}
+
+.kb-card:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.kb-card-title {
+  display: block;
+  margin: 0 0 0.4rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--md-primary-fg-color);
+}
+
+.kb-card-desc {
+  display: block;
+  flex: 1 1 auto;
+  font-size: 0.75rem;
+  line-height: 1.65;
+  color: var(--md-default-fg-color--light);
+}
+
+.kb-card-meta {
+  display: block;
+  margin-top: 0.7rem;
+  padding-top: 0.55rem;
+  border-top: 1px dashed var(--md-default-fg-color--lightest);
+  font-size: 0.7rem;
+  color: var(--md-default-fg-color--light);
+}
+
+@media (max-width: 480px) {
+  .kb-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+  .kb-card { padding: 0.9rem 1rem; }
+  .kb-card-title { font-size: 0.92rem; }
+}
+
+/* 非链接卡片（用于展示规划中的知识点清单）
+ * 与链接卡片的区别：不能点击、颜色更淡、无 hover 位移 */
+.kb-card-plain {
+  cursor: default;
+  background: var(--md-code-bg-color);
+}
+.kb-card-plain:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--md-default-fg-color--lightest);
+}
+.kb-card-plain .kb-card-title {
+  color: var(--md-default-fg-color);
+}
+.kb-card-plain .kb-card-meta {
+  color: var(--md-default-fg-color--light);
+  font-size: 0.68rem;
+}
+
+/* ---------- 6. 触控友好（移动端） ---------- */
+@media (max-width: 768px) {
+  /* 链接点击区域加大 */
+  .md-typeset a {
+    padding: 0.05em 0;
+  }
+
+  /* 提示块内边距适配窄屏 */
+  .md-typeset .admonition,
+  .md-typeset details {
+    margin: 1rem 0;
+    font-size: 0.78rem;
+  }
+
+  /* 元数据卡片更紧凑 */
+  .kb-metacard {
+    padding: 0.8rem 0.9rem;
+    font-size: 0.74rem;
+  }
+  .kb-meta-label,
+  .kb-navlabel {
+    min-width: 3.6em;
+    font-size: 0.66rem;
+  }
+}
+
+/* 导航抽屉在窄屏不应造成横向溢出 */
+@media (max-width: 1220px) {
+  .md-nav--primary,
+  .md-nav--primary .md-nav__list {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+  .md-sidebar {
+    max-width: 100%;
+  }
+}
+
+/* ---------- 7. 打印 ---------- */
+@media print {
+  .kb-metacard,
+  .kb-relnav {
+    break-inside: avoid;
+  }
+  .md-typeset .arithmatex > .katex-display {
+    overflow: visible;
+  }
+}

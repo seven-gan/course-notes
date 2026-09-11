@@ -1,0 +1,1614 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/linear-algebra/basis-dimension/">
+      
+      
+        <link rel="prev" href="../vector-space/">
+      
+      
+        <link rel="next" href="../eigenvalue/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>线性无关、张成与基 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              线性无关、张成与基
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、线性组合：能拼出什么
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、线性组合：能拼出什么">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从两个向量看
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、张成：能拼出的全部
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、张成：能拼出的全部">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几个例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、线性无关：没有冗余
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、线性无关：没有冗余">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        怎么理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        判断方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两个快速判据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、基：刚好够用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、基：刚好够用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基的核心性质：表示唯一
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、维数：空间的本质不变量
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、维数：空间的本质不变量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常见空间的维数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、秩-零化度定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 傅里叶变换就是换基
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 降维就是找低维子空间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 奇异位形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 可观性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">机器人机构学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Axler Ch.2</code><code>MML §2.5–2.7</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 2 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../vector-space/">vector-space</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../eigenvalue/">eigenvalue</a></span></div></div>
+
+<h1 id="_1">线性无关、张成与基<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页说向量空间是「能做加法与数乘的集合」。这一页回答一个自然的问题：</p>
+<blockquote>
+<p><strong>最少需要几个向量，才能「拼出」整个空间？</strong></p>
+</blockquote>
+<p>答案的三个关键词：<strong>张成</strong>（能不能拼出来）、<strong>线性无关</strong>（有没有多余的）、<strong>基</strong>（刚好够用的一组）。
+这三个概念合起来给出 <strong>维数</strong>——空间最本质的不变量。</p>
+<p>对工程来说，这一节的价值在于：<strong>「基」就是坐标系，「坐标」就是换基后的表示</strong>。
+信号处理里的傅里叶变换、模式识别里的 PCA，本质上都是「换一组基」。</p>
+<hr />
+<h2 id="_2">一、线性组合：能拼出什么<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(\boldsymbol{v}_1,\dots,\boldsymbol{v}_m \in V\)</span>。形如</p>
+<div class="arithmatex">\[
+\lambda_1\boldsymbol{v}_1 + \lambda_2\boldsymbol{v}_2 + \cdots + \lambda_m\boldsymbol{v}_m
+\]</div>
+<p>的向量（<span class="arithmatex">\(\lambda_i\)</span> 是标量）称为这些向量的<strong>线性组合</strong>。</p>
+<p><strong>直观理解</strong>：线性组合就是「把每个向量按不同倍数放大，再叠加」。</p>
+<h3 id="_3">从两个向量看<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>在 <span class="arithmatex">\(\mathbb{R}^2\)</span> 中取 <span class="arithmatex">\(\boldsymbol{v}_1 = (1,0)\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2 = (0,1)\)</span>。它们的线性组合是</p>
+<div class="arithmatex">\[
+\lambda_1(1,0) + \lambda_2(0,1) = (\lambda_1, \lambda_2)
+\]</div>
+<p><strong>能取到平面上任意一点</strong>——这就是「<span class="arithmatex">\(xy\)</span> 坐标系」。</p>
+<p>现在换一组：<span class="arithmatex">\(\boldsymbol{v}_1 = (1,0)\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2 = (2,0)\)</span>。线性组合是</p>
+<div class="arithmatex">\[
+\lambda_1(1,0) + \lambda_2(2,0) = (\lambda_1 + 2\lambda_2,\ 0)
+\]</div>
+<p><strong>只能取到 <span class="arithmatex">\(x\)</span> 轴上的点</strong>。两个向量「方向重复」了，白白多了一个却没能多覆盖任何方向。</p>
+<p>这个对比直接引出下一个概念。</p>
+<hr />
+<h2 id="_4">二、张成：能拼出的全部<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：所有线性组合的集合称为这些向量的<strong>张成</strong>：</p>
+<div class="arithmatex">\[
+\operatorname{span}(\boldsymbol{v}_1,\dots,\boldsymbol{v}_m)
+= \left\{\sum_{i=1}^m \lambda_i \boldsymbol{v}_i : \lambda_i \in \mathbb{R}\right\}
+\]</div>
+<p><strong>性质</strong>：张成一定是<strong>子空间</strong>（含零向量，对加法与数乘封闭）。</p>
+<p>验证一下数乘封闭：若 <span class="arithmatex">\(\boldsymbol{u} = \sum \lambda_i\boldsymbol{v}_i\)</span>，则</p>
+<div class="arithmatex">\[
+\mu\boldsymbol{u} = \sum (\mu\lambda_i)\boldsymbol{v}_i
+\]</div>
+<p>仍是线性组合 ✓</p>
+<h3 id="_5">几个例子<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>向量组</th>
+<th>张成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\{(1,0)\}\)</span></td>
+<td><span class="arithmatex">\(x\)</span> 轴</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{(1,0),(0,1)\}\)</span></td>
+<td>整个 <span class="arithmatex">\(\mathbb{R}^2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{(1,0),(2,0)\}\)</span></td>
+<td><span class="arithmatex">\(x\)</span> 轴（仍是 1 维）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{(1,0),(0,1),(1,1)\}\)</span></td>
+<td>整个 <span class="arithmatex">\(\mathbb{R}^2\)</span>（2 维，但有 3 个向量）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一行很重要</strong>：3 个向量张成 2 维空间，说明<strong>有冗余</strong>。</p>
+<hr />
+<h2 id="_6">三、线性无关：没有冗余<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：称 <span class="arithmatex">\(\boldsymbol{v}_1,\dots,\boldsymbol{v}_m\)</span> <strong>线性无关</strong>，若</p>
+<div class="arithmatex">\[
+\sum_{i=1}^m \lambda_i \boldsymbol{v}_i = \boldsymbol{0}
+\]</div>
+<p><strong>只有</strong> <span class="arithmatex">\(\lambda_1 = \cdots = \lambda_m = 0\)</span> 这一组解。</p>
+<p>若存在<strong>不全为零</strong>的系数使上式成立，则称这些向量<strong>线性相关</strong>。</p>
+<h3 id="_7">怎么理解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>线性相关意味着：<strong>某一个向量可以被其它向量线性表示</strong>。</p>
+<p><strong>推导</strong>：设存在不全为零的 <span class="arithmatex">\(\lambda_i\)</span> 使 <span class="arithmatex">\(\sum \lambda_i\boldsymbol{v}_i = \boldsymbol{0}\)</span>。
+取一个非零的 <span class="arithmatex">\(\lambda_k\)</span>，则</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_k = -\frac{1}{\lambda_k}\sum_{i \neq k} \lambda_i \boldsymbol{v}_i
+\]</div>
+<p>即 <span class="arithmatex">\(\boldsymbol{v}_k\)</span> 是其余向量的线性组合——<strong>它是多余的</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话记住</p>
+<ul>
+<li><strong>线性无关</strong> = 「每一个都不可替代」</li>
+<li><strong>线性相关</strong> = 「至少有一个是多余的」</li>
+</ul>
+</div>
+<h3 id="_8">判断方法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>把向量按列排成矩阵 <span class="arithmatex">\(A = [\boldsymbol{v}_1\ \cdots\ \boldsymbol{v}_m]\)</span>，则</p>
+<div class="arithmatex">\[
+\sum \lambda_i \boldsymbol{v}_i = A\boldsymbol{\lambda}
+\]</div>
+<p>所以<strong>线性无关 <span class="arithmatex">\(\iff\)</span> 方程组 <span class="arithmatex">\(A\boldsymbol{\lambda} = \boldsymbol{0}\)</span> 只有零解 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(A\)</span> 的列满秩</strong>。</p>
+<p>这就把线性无关问题化归为<strong>秩</strong>的计算。</p>
+<h3 id="_9">两个快速判据<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="admonition note">
+<p class="admonition-title">实用判据</p>
+<p><strong>判据 1（数量）</strong>：<span class="arithmatex">\(\mathbb{R}^n\)</span> 中，超过 <span class="arithmatex">\(n\)</span> 个向量<strong>必</strong>线性相关。</p>
+<p>原因：<span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(n \times m\)</span> 矩阵且 <span class="arithmatex">\(m &gt; n\)</span>，方程个数少于未知数个数，必有非零解。</p>
+<p><strong>判据 2（含零向量）</strong>：含零向量的组<strong>必</strong>线性相关。</p>
+<p>原因：给零向量配系数 1、其余配 0，就得到 <span class="arithmatex">\(\sum \lambda_i \boldsymbol{v}_i = \boldsymbol{0}\)</span> 且系数不全为零。</p>
+</div>
+<hr />
+<h2 id="_10">四、基：刚好够用<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>现在把两个条件合起来。</p>
+<p><strong>定义</strong>：向量组 <span class="arithmatex">\(\boldsymbol{v}_1,\dots,\boldsymbol{v}_n\)</span> 是 <span class="arithmatex">\(V\)</span> 的<strong>基</strong>，若</p>
+<ol>
+<li>它<strong>张成</strong> <span class="arithmatex">\(V\)</span>（能拼出全部）</li>
+<li>它<strong>线性无关</strong>（没有多余）</li>
+</ol>
+<h3 id="_11">基的核心性质：表示唯一<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>这是基最重要的性质，值得单独推一遍。</p>
+<p><strong>命题</strong>：若 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_n\}\)</span> 是 <span class="arithmatex">\(V\)</span> 的基，则 <span class="arithmatex">\(V\)</span> 中每个向量都能<strong>唯一地</strong>写成线性组合。</p>
+<p><strong>证明</strong>：</p>
+<p><strong>存在性</strong>由「张成」直接得到。</p>
+<p><strong>唯一性</strong>：设 <span class="arithmatex">\(\boldsymbol{v}\)</span> 有两种表示</p>
+<div class="arithmatex">\[
+\boldsymbol{v} = \sum_{i=1}^n \lambda_i \boldsymbol{v}_i = \sum_{i=1}^n \mu_i \boldsymbol{v}_i
+\]</div>
+<p>两式相减：</p>
+<div class="arithmatex">\[
+\sum_{i=1}^n (\lambda_i - \mu_i)\boldsymbol{v}_i = \boldsymbol{0}
+\]</div>
+<p>由线性无关，只能有 <span class="arithmatex">\(\lambda_i - \mu_i = 0\)</span>，即 <span class="arithmatex">\(\lambda_i = \mu_i\)</span>。故表示唯一。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p><strong>这组唯一的系数 <span class="arithmatex">\((\lambda_1,\dots,\lambda_n)\)</span> 就称为 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在这组基下的坐标。</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">为什么坐标需要先定基</p>
+<p>说「这个点的坐标是 <span class="arithmatex">\((3,4)\)</span>」，其实隐含了「相对于标准基 <span class="arithmatex">\(\{(1,0),(0,1)\}\)</span>」。</p>
+<p>换一组基，同一个向量的坐标就变了。<strong>向量本身没变，变的是描述它的数字。</strong></p>
+<p>这正是「坐标是相对的，向量是绝对的」这句话的含义。</p>
+</div>
+<hr />
+<h2 id="_12">五、维数：空间的本质不变量<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：<span class="arithmatex">\(V\)</span> 的<strong>维数</strong> <span class="arithmatex">\(\dim V\)</span> 是它任意一组基中向量的个数。</p>
+<p><strong>这个定义能成立，需要一件事</strong>：不同基的向量个数相同。这是个定理（基的个数不变量）：</p>
+<div class="admonition note">
+<p class="admonition-title">定理：任何两组基的向量个数相等</p>
+<p><strong>证明思路</strong>（用「线性无关组长度 ≤ 张成组长度」这个引理）：</p>
+<p>设 <span class="arithmatex">\(\{\boldsymbol{u}_1,\dots,\boldsymbol{u}_m\}\)</span> 和 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_n\}\)</span> 都是 <span class="arithmatex">\(V\)</span> 的基。</p>
+<p>因为 <span class="arithmatex">\(\{\boldsymbol{u}_i\}\)</span> 张成 <span class="arithmatex">\(V\)</span>，而 <span class="arithmatex">\(\{\boldsymbol{v}_j\}\)</span> 线性无关，
+由引理得 <span class="arithmatex">\(n \leq m\)</span>。</p>
+<p>同理，交换两者角色得 <span class="arithmatex">\(m \leq n\)</span>。</p>
+<p>故 <span class="arithmatex">\(m = n\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</div>
+<p><strong>引理本身</strong>（<span class="arithmatex">\(\mathbb{R}^n\)</span> 中任何线性无关组的长度 ≤ 张成组的长度）的证明用的是「替换论证」，
+这里不展开，但结论很重要：<strong>维数是良定义的</strong>。</p>
+<h3 id="_13">常见空间的维数<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>空间</th>
+<th>维数</th>
+<th>一组基</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mathbb{R}^n\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+<td>标准基 <span class="arithmatex">\(\boldsymbol{e}_1,\dots,\boldsymbol{e}_n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P_n\)</span>（次数 ≤ <span class="arithmatex">\(n\)</span> 的多项式）</td>
+<td><span class="arithmatex">\(n+1\)</span></td>
+<td><span class="arithmatex">\(1, x, x^2, \dots, x^n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(m\times n\)</span> 矩阵</td>
+<td><span class="arithmatex">\(mn\)</span></td>
+<td><span class="arithmatex">\(E_{ij}\)</span>（只有一个位置为 1）</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意 <span class="arithmatex">\(P_n\)</span> 的维数是 <span class="arithmatex">\(n+1\)</span> 而不是 <span class="arithmatex">\(n\)</span>——因为从 <span class="arithmatex">\(x^0\)</span> 到 <span class="arithmatex">\(x^n\)</span> 共 <span class="arithmatex">\(n+1\)</span> 个。</p>
+</blockquote>
+<hr />
+<h2 id="-">六、秩-零化度定理<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<p>这是线性代数最有用的定理之一，它把维数关系说清楚了。</p>
+<p>先定义两个空间。设 <span class="arithmatex">\(T: V \to W\)</span> 是线性映射：</p>
+<p><strong>零空间</strong>（kernel / null space）：</p>
+<div class="arithmatex">\[
+\operatorname{null} T = \{\boldsymbol{v} \in V : T\boldsymbol{v} = \boldsymbol{0}\}
+\]</div>
+<p><strong>值域</strong>（range）：</p>
+<div class="arithmatex">\[
+\operatorname{range} T = \{T\boldsymbol{v} : \boldsymbol{v} \in V\}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">秩-零化度定理</p>
+<div class="arithmatex">\[
+\dim V = \dim(\operatorname{null} T) + \dim(\operatorname{range} T)
+\]</div>
+<p>也就是说：<strong>输入空间的维数 = 「被压掉的维数」+ 「保留的维数」</strong>。</p>
+</div>
+<p><strong>证明思路</strong>：</p>
+<p>取 <span class="arithmatex">\(\operatorname{null}T\)</span> 的一组基 <span class="arithmatex">\(\{\boldsymbol{u}_1,\dots,\boldsymbol{u}_k\}\)</span>，
+把它扩充成 <span class="arithmatex">\(V\)</span> 的基 <span class="arithmatex">\(\{\boldsymbol{u}_1,\dots,\boldsymbol{u}_k,\boldsymbol{w}_1,\dots,\boldsymbol{w}_m\}\)</span>。</p>
+<p>关键是要证明 <span class="arithmatex">\(\{T\boldsymbol{w}_1,\dots,T\boldsymbol{w}_m\}\)</span> 是 <span class="arithmatex">\(\operatorname{range}T\)</span> 的基：</p>
+<p><strong>（1）张成 range</strong>：任取 <span class="arithmatex">\(T\boldsymbol{v}\)</span>，把 <span class="arithmatex">\(\boldsymbol{v}\)</span> 用基展开：</p>
+<div class="arithmatex">\[
+\boldsymbol{v} = \sum a_i\boldsymbol{u}_i + \sum b_j\boldsymbol{w}_j
+\]</div>
+<p>作用 <span class="arithmatex">\(T\)</span>：</p>
+<div class="arithmatex">\[
+T\boldsymbol{v} = \sum a_i \underbrace{T\boldsymbol{u}_i}_{= \boldsymbol{0}} + \sum b_j T\boldsymbol{w}_j = \sum b_j T\boldsymbol{w}_j
+\]</div>
+<p>所以 <span class="arithmatex">\(\{T\boldsymbol{w}_j\}\)</span> 张成 <span class="arithmatex">\(\operatorname{range}T\)</span> ✓</p>
+<p><strong>（2）线性无关</strong>：设 <span class="arithmatex">\(\sum c_j T\boldsymbol{w}_j = \boldsymbol{0}\)</span>，则</p>
+<div class="arithmatex">\[
+T\left(\sum c_j\boldsymbol{w}_j\right) = \boldsymbol{0}
+\]</div>
+<p>所以 <span class="arithmatex">\(\sum c_j\boldsymbol{w}_j \in \operatorname{null}T\)</span>，可写成 <span class="arithmatex">\(\sum a_i\boldsymbol{u}_i\)</span>。即</p>
+<div class="arithmatex">\[
+\sum c_j\boldsymbol{w}_j + \sum(-a_i)\boldsymbol{u}_i = \boldsymbol{0}
+\]</div>
+<p>但 <span class="arithmatex">\(\{\boldsymbol{u}_i,\boldsymbol{w}_j\}\)</span> 是基（线性无关），所以所有系数为零，特别地 <span class="arithmatex">\(c_j = 0\)</span> ✓</p>
+<p>于是 <span class="arithmatex">\(\operatorname{range}T\)</span> 的维数是 <span class="arithmatex">\(m\)</span>，而 <span class="arithmatex">\(\dim V = k + m\)</span>。定理成立。<span class="arithmatex">\(\blacksquare\)</span></p>
+<div class="admonition tip">
+<p class="admonition-title">这个定理在工程里的意义</p>
+<p><strong>它告诉你「信息损失了多少」。</strong></p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>解读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>降维（PCA）</td>
+<td>range 维数 &lt; 输入维数，损失的是 null 空间方向的信息</td>
+</tr>
+<tr>
+<td>传感器融合</td>
+<td>若 <span class="arithmatex">\(T\)</span> 的 null 空间非平凡，说明有状态观测不到（不可观）</td>
+</tr>
+<tr>
+<td>机器人奇异位形</td>
+<td>雅可比 <span class="arithmatex">\(J\)</span> 的 null 空间 → 末端无法运动的方向</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="_14">七、用在哪些课程里<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="_15">现代数字信号处理 · 傅里叶变换就是换基<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>离散信号空间 <span class="arithmatex">\(\mathbb{C}^N\)</span> 的<strong>标准基</strong>是 <span class="arithmatex">\(\{\boldsymbol{e}_0,\dots,\boldsymbol{e}_{N-1}\}\)</span>，
+<span class="arithmatex">\(\boldsymbol{e}_k\)</span> 表示「第 <span class="arithmatex">\(k\)</span> 个时刻有冲激」。</p>
+<p><strong>傅里叶变换换了一组新基</strong>——复指数序列：</p>
+<div class="arithmatex">\[
+\boldsymbol{w}_k = \left(1,\ e^{j2\pi k/N},\ e^{j4\pi k/N},\ \dots,\ e^{j2\pi k(N-1)/N}\right)
+\]</div>
+<p>原来信号的坐标是「各时刻的采样值」，换基后的坐标是「各频率的强度」。</p>
+<p><strong>这就是为什么频谱分析有意义</strong>：同一信号，换一组基看，能看出原本看不出的结构。</p>
+<h3 id="_16">模式识别 · 降维就是找低维子空间<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(N\)</span> 个样本、每个 <span class="arithmatex">\(d\)</span> 维，数据张成一个不超过 <span class="arithmatex">\(d\)</span> 维的子空间。若数据实际接近一个低维子空间（比如 <span class="arithmatex">\(k\)</span> 维，<span class="arithmatex">\(k \ll d\)</span>），则</p>
+<ul>
+<li>用这 <span class="arithmatex">\(k\)</span> 个基向量表示数据，<strong>信息损失很小</strong></li>
+<li>这就是 PCA 的思路：找「最好的」<span class="arithmatex">\(k\)</span> 维子空间</li>
+</ul>
+<p><strong>秩-零化度定理</strong>在这里告诉你：投影到 <span class="arithmatex">\(k\)</span> 维子空间，损失掉的是 <span class="arithmatex">\(d-k\)</span> 维的信息。</p>
+<h3 id="_17">机器人学 · 奇异位形<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>机械臂的雅可比 <span class="arithmatex">\(J(\boldsymbol{q}) \in \mathbb{R}^{6\times n}\)</span> 给出关节速度到末端速度的映射：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_{\text{末端}} = J(\boldsymbol{q})\,\dot{\boldsymbol{q}}
+\]</div>
+<p><strong>奇异位形</strong>定义为 <span class="arithmatex">\(J\)</span> 的秩下降的位形。此时</p>
+<div class="arithmatex">\[
+\dim(\operatorname{null} J) &gt; 0
+\]</div>
+<p>意味着存在<strong>非零的关节速度</strong>使末端<strong>不动</strong>——某些方向失去了运动能力。</p>
+<p>对 <span class="arithmatex">\(n = 6\)</span> 的机械臂：正常时 <span class="arithmatex">\(\operatorname{rank}J = 6\)</span>（可任意运动）；奇异时秩 &lt; 6，无法沿某些方向运动。</p>
+<h3 id="_18">智能传感与信息处理 · 可观性<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>状态方程 <span class="arithmatex">\(y = C\boldsymbol{x}\)</span>（只看输出）。若 <span class="arithmatex">\(C\)</span> 的零空间非平凡，
+则零空间中的状态<strong>不产生任何输出</strong>——这些状态<strong>不可观测</strong>。</p>
+<p><strong>可观性判据</strong>就是要求 <span class="arithmatex">\(C\)</span> 及其幂次的零空间交集只有 <span class="arithmatex">\(\{\boldsymbol{0}\}\)</span>。</p>
+<hr />
+<h2 id="_19">八、自测<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断 <span class="arithmatex">\(\{(1,2,3),\ (4,5,6),\ (7,8,9)\}\)</span> 是否线性无关。</p>
+<details class="note">
+<summary>提示</summary>
+<p>排成矩阵求行列式，或看第三行是否为前两行的组合。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>线性相关。</strong></p>
+<p>观察：<span class="arithmatex">\(\boldsymbol{v}_3 = 2\boldsymbol{v}_2 - \boldsymbol{v}_1\)</span>？</p>
+<div class="arithmatex">\[
+2(4,5,6) - (1,2,3) = (8-1,\ 10-2,\ 12-3) = (7,8,9) \checkmark
+\]</div>
+<p>确实成立。所以存在非零系数（<span class="arithmatex">\(-1, 2, -1\)</span>）使组合为零：</p>
+<div class="arithmatex">\[
+-\boldsymbol{v}_1 + 2\boldsymbol{v}_2 - \boldsymbol{v}_3 = \boldsymbol{0}
+\]</div>
+<p>故线性相关。</p>
+<p><strong>行列式验证</strong>：</p>
+<div class="arithmatex">\[
+\det\begin{bmatrix} 1&amp;4&amp;7\\2&amp;5&amp;8\\3&amp;6&amp;9\end{bmatrix} = 0
+\]</div>
+<p><strong>原因</strong>：第一个向量 <span class="arithmatex">\(+\)</span> 第三个向量 <span class="arithmatex">\(= (8,10,12) = 2\times\)</span> 第二个向量。
+三个点共线（都在直线 <span class="arithmatex">\(y = x+1\)</span> 上）。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 求 <span class="arithmatex">\(\operatorname{span}\{(1,1,0),\ (0,1,1)\}\)</span> 的维数与一组基。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先看这两个向量是否线性无关。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>维数为 2</strong>，一组基就是这两个向量本身。</p>
+<p><strong>验证线性无关</strong>：设 <span class="arithmatex">\(\lambda_1(1,1,0) + \lambda_2(0,1,1) = \boldsymbol{0}\)</span>，即</p>
+<div class="arithmatex">\[
+(\lambda_1,\ \lambda_1+\lambda_2,\ \lambda_2) = (0,0,0)
+\]</div>
+<p>由第一个分量 <span class="arithmatex">\(\lambda_1 = 0\)</span>；由第三个分量 <span class="arithmatex">\(\lambda_2 = 0\)</span>。故只有零解，线性无关。</p>
+<p>所以这组向量张成一个 2 维子空间，它们本身就是基。</p>
+<p><strong>几何图像</strong>：这是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中过原点的一个平面，法向量为</p>
+<div class="arithmatex">\[
+(1,1,0) \times (0,1,1) = (1\cdot1 - 0\cdot1,\ 0\cdot0 - 1\cdot1,\ 1\cdot1 - 1\cdot0) = (1,-1,1)
+\]</div>
+<p>即平面 <span class="arithmatex">\(x - y + z = 0\)</span>。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 设 <span class="arithmatex">\(T:\mathbb{R}^4 \to \mathbb{R}^3\)</span> 是满射（onto）。求 <span class="arithmatex">\(\dim(\operatorname{null}T)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用秩-零化度定理。满射说明 range 维数是多少？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[\dim(\operatorname{null}T) = 1\]</div>
+<p><strong>推导</strong>：</p>
+<p><span class="arithmatex">\(T\)</span> 满射意味着 <span class="arithmatex">\(\operatorname{range}T = \mathbb{R}^3\)</span>，所以</p>
+<div class="arithmatex">\[
+\dim(\operatorname{range}T) = 3
+\]</div>
+<p>由秩-零化度定理：</p>
+<div class="arithmatex">\[
+\dim(\operatorname{null}T) = \dim(\mathbb{R}^4) - \dim(\operatorname{range}T) = 4 - 3 = 1
+\]</div>
+<p><strong>解读</strong>：从 4 维压到 3 维，必然有 1 维被「压掉」了。
+这意味着<strong>至少有一个非零方向被映射到零</strong>——不可能做到「单射」。</p>
+<p><strong>推论</strong>：从低维空间到高维空间的线性映射<strong>永远不可能是满射</strong>（维数就不够）。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 证明：<span class="arithmatex">\(\{\boldsymbol{v}_1, \boldsymbol{v}_2, \boldsymbol{v}_3\}\)</span> 线性无关 <span class="arithmatex">\(\Longrightarrow\)</span> <span class="arithmatex">\(\{\boldsymbol{v}_1+\boldsymbol{v}_2,\ \boldsymbol{v}_2+\boldsymbol{v}_3,\ \boldsymbol{v}_3\}\)</span> 线性无关。</p>
+<details class="note">
+<summary>提示</summary>
+<p>设新组合为零，展开后利用原组的线性无关性。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>设存在标量 <span class="arithmatex">\(a,b,c\)</span> 使得</p>
+<div class="arithmatex">\[
+a(\boldsymbol{v}_1+\boldsymbol{v}_2) + b(\boldsymbol{v}_2+\boldsymbol{v}_3) + c\boldsymbol{v}_3 = \boldsymbol{0}
+\]</div>
+<p>按原向量整理：</p>
+<div class="arithmatex">\[
+a\boldsymbol{v}_1 + (a+b)\boldsymbol{v}_2 + (b+c)\boldsymbol{v}_3 = \boldsymbol{0}
+\]</div>
+<p>由 <span class="arithmatex">\(\{\boldsymbol{v}_1,\boldsymbol{v}_2,\boldsymbol{v}_3\}\)</span> 线性无关，各系数必须为零：</p>
+<div class="arithmatex">\[
+\begin{cases} a = 0 \\ a+b = 0 \\ b+c = 0 \end{cases}
+\]</div>
+<p>由 <span class="arithmatex">\(a=0\)</span> 代入第二式得 <span class="arithmatex">\(b=0\)</span>，再代入第三式得 <span class="arithmatex">\(c=0\)</span>。</p>
+<p>所以只有平凡解，新向量组线性无关。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p><strong>思路总结</strong>：把「新组的线性组合」翻译成「原组的线性组合」，
+再用原组的无关性推出系数全为零。这是这类题的通用解法。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../vector-space/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 向量与向量空间">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                向量与向量空间
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../eigenvalue/" class="md-footer__link md-footer__link--next" aria-label="下一页: 特征值与特征向量">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                特征值与特征向量
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/copy-tex.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
