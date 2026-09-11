@@ -1,0 +1,243 @@
+/* 深度学习数学基础 · 共享样式表
+ * 供 nndl-math-notes 各讲复用：字体、版式、公式块、卡片、表格、自测题。
+ * 完成人：Codex（OpenAI）· 2026-09-10
+ */
+
+@font-face { font-family: 'PlexSerif'; src: url('../_shared/fonts/IBMPlexSerif-Regular.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'PlexSerif'; src: url('../_shared/fonts/IBMPlexSerif-Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
+    @font-face { font-family: 'PlexSerif'; src: url('../_shared/fonts/IBMPlexSerif-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'PlexSerif'; src: url('../_shared/fonts/IBMPlexSerif-BoldItalic.ttf') format('truetype'); font-weight: 700; font-style: italic; font-display: swap; }
+    @font-face { font-family: 'InstSans'; src: url('../_shared/fonts/InstrumentSans-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'InstSans'; src: url('../_shared/fonts/InstrumentSans-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+    @font-face { font-family: 'JBMono'; src: url('../_shared/fonts/JetBrainsMono-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'JBMono'; src: url('../_shared/fonts/JetBrainsMono-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+
+:root {
+      --bg: #FFFFFF;
+      --bg2: #F7F6F2;
+      --ink: #16171B;
+      --muted: #6B6E78;
+      --rule: #E4E2DC;
+      --accent: #2B4EA2;
+      --accent2: #B4530A;
+      --accent-soft: #EEF1FA;
+      --accent2-soft: #FBF1E8;
+      --font-serif: 'PlexSerif', 'Songti SC', 'SimSun', 'Noto Serif CJK SC', serif;
+      --font-sans: 'InstSans', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+      --font-mono: 'JBMono', 'IBMPlexMono', 'Cascadia Mono', Consolas, monospace;
+      --max: 900px;
+      --m: 'PlexSerif', 'Cambria Math', 'Latin Modern Math', Georgia, serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans); color: var(--ink); background: var(--bg);
+      line-height: 1.8; padding: 2rem 1.25rem 4rem; -webkit-font-smoothing: antialiased;
+    }
+    article.page { max-width: var(--max); margin: 0 auto; }
+
+    .backlink {
+      display: inline-block; font-size: .82rem; color: var(--muted); text-decoration: none;
+      border: 1px solid var(--rule); border-radius: 999px; padding: .25rem .85rem; background: var(--bg2);
+    }
+    .backlink:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- cover ---------- */
+    .cover { padding: 1.75rem 0 2rem; border-bottom: 1px solid var(--rule); margin-bottom: 2.5rem; }
+    .eyebrow {
+      font-size: .78rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--accent2); margin-bottom: .9rem;
+    }
+    .cover h1 {
+      font-family: var(--font-serif); font-weight: 700;
+      font-size: clamp(1.8rem, 4.4vw, 2.5rem); line-height: 1.25; margin-bottom: .9rem;
+    }
+    .cover .lede { font-size: 1.04rem; color: var(--muted); }
+    .meta-list { list-style: none; display: flex; flex-wrap: wrap; gap: .5rem .6rem; margin-top: 1.4rem; }
+    .meta-list li {
+      font-size: .78rem; color: var(--muted); border: 1px solid var(--rule);
+      border-radius: 999px; padding: .22rem .8rem; background: var(--bg2);
+    }
+
+    /* ---------- toc ---------- */
+    .toc { border: 1px solid var(--rule); border-radius: 8px; padding: 1.15rem 1.35rem; background: var(--bg2); margin-bottom: 3rem; }
+    .toc h2 { border: none; padding: 0; font-size: 1rem; margin-bottom: .7rem; }
+    .toc ol { list-style: none; counter-reset: t; }
+    .toc > ol > li { margin-bottom: .45rem; }
+    .toc a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+    .toc a:hover { color: var(--accent); border-color: var(--accent); }
+    .toc .sub { font-size: .88rem; color: var(--muted); margin: .35rem 0 .6rem 1rem; }
+    .toc .sub span { margin-right: .9rem; }
+
+    /* ---------- sections ---------- */
+    section { margin-bottom: 3.25rem; }
+    h2 {
+      font-family: var(--font-serif); font-size: 1.45rem; font-weight: 700; line-height: 1.4;
+      margin-bottom: 1.1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--accent);
+    }
+    h3 { font-family: var(--font-serif); font-size: 1.12rem; font-weight: 700; margin: 2rem 0 .7rem; }
+    h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 700; margin: 1.4rem 0 .5rem; color: var(--accent); }
+    p { margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+    em { font-family: var(--font-serif); font-style: italic; }
+    mark.key { background: none; color: var(--accent); font-weight: 600; }
+    code { font-family: var(--font-mono); font-size: .87em; background: var(--bg2); border: 1px solid var(--rule); border-radius: 4px; padding: .08em .35em; }
+    ul.plain, ol.plain { padding-left: 1.3rem; margin-bottom: 1rem; }
+    ul.plain li, ol.plain li { margin-bottom: .5rem; }
+    .pageref { font-family: var(--font-mono); font-size: .74rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 999px; padding: .05rem .5rem; margin-left: .5rem; vertical-align: .12em; white-space: nowrap; }
+
+    /* ---------- math ---------- */
+    .m { font-family: var(--m); font-size: 1.03em; }
+    .m i { font-style: italic; }
+    .eq {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0;
+      padding: .85rem 1rem; margin: 1.15rem 0; overflow-x: auto; 
+    }
+    .eq .eq-no { margin-left: auto; color: var(--muted); font-size: .76rem; font-family: var(--font-mono); white-space: nowrap; }
+    .mat { display: inline-flex; align-items: center; gap: .3rem; }
+    .mat .bar { width: 2px; background: var(--ink); align-self: stretch; border-radius: 1px; }
+    .cases { display: inline-flex; align-items: center; gap: .34rem; }
+    .cases .brace { font-family: var(--m); font-size: 5.0em; line-height: .82; font-weight: 400; transform: scaleY(.92); }
+    .cases table { border-collapse: collapse; }
+    .cases td { padding: .1rem .2rem .1rem 0; text-align: left; white-space: nowrap; }
+    .mat table { border-collapse: collapse; }
+    .mat td { padding: .1rem .48rem; text-align: center; font-family: var(--m); font-size: .97em; }
+
+    /* ---------- boxes ---------- */
+    .box { border-radius: 8px; padding: 1rem 1.2rem; margin: 1.4rem 0; background: var(--bg2); border-left: 3px solid var(--muted); font-size: .96rem; }
+    .box .tag { display: block; font-size: .73rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .4rem; color: var(--muted); }
+    .box p:last-child { margin-bottom: 0; }
+    .box.def { border-left-color: var(--accent); background: var(--accent-soft); }
+    .box.def .tag { color: var(--accent); }
+    .box.why { border-left-color: var(--accent2); background: var(--accent2-soft); }
+    .box.why .tag { color: var(--accent2); }
+    .box.use { border-left-color: var(--accent); background: var(--bg2); }
+    .box.use .tag { color: var(--accent); }
+    .box.ex { border-left-color: var(--muted); background: var(--bg2); }
+    .box.ex .tag { color: var(--muted); }
+
+    /* ---------- figures ---------- */
+    figure.fig { margin: 1.75rem 0; }
+    figure.fig svg { width: 100%; height: auto; display: block; }
+    figure.fig figcaption { font-size: .82rem; color: var(--muted); text-align: center; margin-top: .7rem; }
+
+    /* ---------- table ---------- */
+    .table-wrap { overflow-x: auto; overflow-y: auto; max-height: 600px; border: 1px solid var(--rule); border-radius: 8px; margin: 1.5rem 0; }
+    table.data { border-collapse: collapse; width: 100%; font-size: .9rem; min-width: 620px; }
+    table.data thead th { background: var(--bg2); text-align: left; font-weight: 700; padding: .65rem .85rem; border-bottom: 1px solid var(--rule); position: sticky; top: 0; }
+    table.data tbody td { padding: .65rem .85rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+    table.data tbody tr:last-child td { border-bottom: none; }
+    table.data .m { white-space: nowrap; }
+
+    /* ---------- quiz ---------- */
+    .quiz { counter-reset: q; list-style: none; }
+    .quiz li { counter-increment: q; position: relative; padding-left: 2rem; margin-bottom: 1rem; }
+    .quiz li::before {
+      content: "Q" counter(q); position: absolute; left: 0; top: .1rem;
+      font-family: var(--font-mono); font-size: .78rem; font-weight: 700; color: var(--accent);
+    }
+    .quiz .hint { margin-top: .35rem; font-size: .85rem; color: var(--muted); }
+    .quiz .hint summary { display: inline-block; cursor: pointer; list-style: none; color: var(--accent); font-size: .8rem; font-weight: 600; border: 1px solid var(--rule); border-radius: 999px; padding: .06rem .62rem; user-select: none; }
+    .quiz .hint summary::-webkit-details-marker { display: none; }
+    .quiz .hint summary::before { content: "\25B8\00A0"; }
+    .quiz .hint[open] summary::before { content: "\25BE\00A0"; }
+    .quiz .hint p { margin: .45rem 0 0; }
+
+    /* ---------- svg text classes ---------- */
+    .ft { fill: var(--ink); font-family: var(--font-sans); font-size: 13px; }
+    .ftb { fill: var(--ink); font-family: var(--font-sans); font-size: 13.5px; font-weight: 700; }
+    .fs { fill: var(--muted); font-family: var(--font-sans); font-size: 11.5px; }
+    .fm { fill: var(--ink); font-family: var(--m); font-size: 15px; font-style: italic; }
+    .fmb { fill: var(--ink); font-family: var(--m); font-size: 13px; }
+    .fma { fill: var(--accent); font-family: var(--m); font-size: 13px; }
+    .fl { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .fa { stroke: var(--muted); stroke-width: 1.6; fill: none; stroke-linecap: round; }
+    .fab { stroke: var(--accent); stroke-width: 2; fill: none; stroke-linecap: round; }
+    .fd { stroke: var(--muted); stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; }
+    .fdash { stroke: var(--accent2); stroke-width: 1.3; fill: none; stroke-dasharray: 5 4; }
+
+    footer { border-top: 1px solid var(--rule); padding-top: 1.5rem; font-size: .82rem; color: var(--muted); }
+    footer p { margin-bottom: .4rem; }
+    footer .credit {
+      font-family: var(--font-sans); font-size: .8rem; color: var(--ink);
+      border-top: 1px dashed var(--rule); margin-top: .9rem; padding-top: .8rem;
+    }
+    footer .credit strong { font-weight: 700; color: var(--accent); }
+
+    @media (max-width: 640px) {
+      body { padding: 1.5rem .9rem 3rem; }
+      h2 { font-size: 1.22rem; }
+      .eq { font-size: .92rem; }
+    .eq > math[display="block"] { flex: 1 1 auto; }
+    .eq > .eqtail { flex: 0 0 auto; }
+    }
+    @media print {
+      .backlink { display: none; }
+      section { break-inside: avoid-page; }
+    }
+
+    /* ---------- MathML 原生公式（浏览器内建，零依赖） ---------- */
+    math { font-size: 1.04em; font-family: var(--m); }
+    /* 关键：不要覆盖 MathML 的 display:block math，否则内部退化成普通盒子、逐符号换行 */
+    .eq math[display="block"] { display: block math; }
+    math mfrac, math msqrt, math mroot, math munderover, math munder, math mover { font-size: 1em; }
+
+    /* ---------- 窄屏安全兜底 ----------
+       行内公式（display="inline" 或未标注）本身没有换行机会，
+       过长的公式会把页面撑宽。这里允许它们在必要时横向滚动，
+       而不影响外层版面宽度。 */
+    math:not([display="block"]) {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      vertical-align: middle;
+    }
+    /* 块级公式所在容器已有横向滚动，无需重复 */
+    .eq > math[display="block"], .eqline > math[display="block"] { overflow-x: visible; }
+    /* 独立成行的公式 */
+    .eqline {
+      background: var(--bg2); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0;
+      padding: .85rem 1rem; margin: 1.15rem 0; overflow-x: auto;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .eqline > math { flex: 1 1 auto; }
+    .eqline .eq-no { flex: 0 0 auto; }
+    /* 公式块内的文字注（如"当 x > 0 时"） */
+    .txtop { font-family: var(--font-sans); font-size: .84em; color: var(--muted); }
+
+    @media print {
+      .backlink { display: none; }
+      section { break-inside: avoid-page; }
+      .eq, .eqline, .box, .table-wrap, figure.fig { break-inside: avoid; }
+      body { padding: 0; }
+    }
+
+    /* ---------- 多行 / 组合公式 ---------- */
+    .eq-multi { flex-direction: column; align-items: flex-start; gap: .45rem; }
+    .eq-multi .eq-one { display: block; }
+    .eqtail { font-family: var(--font-sans); font-size: .84em; color: var(--muted); }
+
+    /* ---------- 自测题：提示 与 详细解答 ---------- */
+    .quiz .answer { margin-top: .45rem; }
+    .quiz .answer summary {
+      display: inline-block; cursor: pointer; list-style: none;
+      color: var(--accent2); font-size: .82rem; font-weight: 700;
+      border: 1px solid var(--accent2); border-radius: 999px;
+      padding: .1rem .7rem; user-select: none; background: var(--accent2-soft);
+    }
+    .quiz .answer summary::-webkit-details-marker { display: none; }
+    .quiz .answer summary::before { content: "\25B8\00A0"; }
+    .quiz .answer[open] summary::before { content: "\25BE\00A0"; }
+    .ans-body {
+      margin-top: .6rem; padding: .9rem 1.05rem;
+      background: var(--bg2); border-left: 3px solid var(--accent2); border-radius: 0 6px 6px 0;
+      font-size: .95rem;
+    }
+    .ans-body > p { margin-bottom: .7rem; }
+    .ans-body .eq { background: #fff; }
+    .sol-step { font-weight: 700; margin: .9rem 0 .35rem; color: var(--accent); }
+    .ans-body .sol-step:first-child { margin-top: 0; }
+    .ans-body ul.plain, .ans-body ol.plain { margin-bottom: .7rem; }
+    .ans-body .box { margin: .7rem 0; background: #fff; }
