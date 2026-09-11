@@ -1,0 +1,2041 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/linear-algebra/linear-map/">
+      
+      
+        <link rel="prev" href="../basis-dimension/">
+      
+      
+        <link rel="next" href="../inner-product/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>线性映射与矩阵 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              线性映射与矩阵
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、线性映射的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、线性映射的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        立即得到的推论
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个典型例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、矩阵：线性映射的坐标表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、矩阵：线性映射的坐标表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        「矩阵表示」依赖于基的选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、零空间与值域
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、零空间与值域">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        直观理解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个基本判据
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、秩-零化度定理（重述与矩阵版本）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、秩-零化度定理（重述与矩阵版本）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两种常见情形
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：写出线性映射的矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：求零空间与值域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：相似变换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：证明秩的对称性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 雅可比矩阵与奇异位形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 特征降维的线性映射视角
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · LTI 系统是线性映射（而且是时不变的）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 可观性与可控性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">机器人机构学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Axler Ch.3</code><code>MML §2.7–2.8</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 3 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../basis-dimension/">basis-dimension</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../eigenvalue/">eigenvalue</a></span></div></div>
+
+<h1 id="_1">线性映射与矩阵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前三页建立了「向量空间」这套语言。但线性代数真正的主角不是向量，而是<strong>映射</strong>：</p>
+<blockquote>
+<p><strong>向量空间之间的「保持线性结构」的映射，以及它们的矩阵表示。</strong></p>
+</blockquote>
+<p>这里有一个关键认识，值得先把话说透：</p>
+<div class="admonition tip">
+<p class="admonition-title">矩阵不是数字表格，而是线性映射的坐标表示</p>
+<p>这是本节最重要的一句话。</p>
+<p><strong>线性映射</strong>是客观对象（一个几何/物理作用，比如旋转、投影、求导）；
+<strong>矩阵</strong>是它在一组基下的「记账方式」。</p>
+<p><strong>换了基，矩阵就变了，但映射本身没变。</strong></p>
+<p>明白这一点，才能理解为什么「相似矩阵有相同特征值」，
+以及为什么傅里叶变换、Z 变换可以看成「换一组基看同一个系统」。</p>
+</div>
+<hr />
+<h2 id="_2">一、线性映射的定义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：设 <span class="arithmatex">\(T: V \to W\)</span> 是向量空间之间的映射。若对任意
+<span class="arithmatex">\(\boldsymbol{u},\boldsymbol{v} \in V\)</span> 与标量 <span class="arithmatex">\(\lambda\)</span>，都有</p>
+<div class="arithmatex">\[
+T(\boldsymbol{u}+\boldsymbol{v}) = T\boldsymbol{u} + T\boldsymbol{v}
+\qquad\text{（可加性）}
+\]</div>
+<div class="arithmatex">\[
+T(\lambda\boldsymbol{u}) = \lambda\, T\boldsymbol{u}
+\qquad\text{（齐次性）}
+\]</div>
+<p>则称 <span class="arithmatex">\(T\)</span> 是<strong>线性映射</strong>。</p>
+<p><strong>两条合起来等价于一条</strong>：</p>
+<div class="arithmatex">\[
+T(\lambda\boldsymbol{u}+\boldsymbol{v}) = \lambda T\boldsymbol{u} + T\boldsymbol{v}
+\]</div>
+<h3 id="_3">立即得到的推论<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(T\boldsymbol{0} = \boldsymbol{0}\)</span></td>
+<td>取 <span class="arithmatex">\(\lambda=0\)</span> 于 <span class="arithmatex">\(T(\lambda\boldsymbol{0}) = \lambda T\boldsymbol{0}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(T(-\boldsymbol{u}) = -T\boldsymbol{u}\)</span></td>
+<td>取 <span class="arithmatex">\(\lambda=-1\)</span></td>
+</tr>
+<tr>
+<td>保持线性组合</td>
+<td><span class="arithmatex">\(T\big(\sum c_k\boldsymbol{v}_k\big) = \sum c_k T\boldsymbol{v}_k\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">「线性」与「正比」是两回事</p>
+<p>中学说的「正比」（<span class="arithmatex">\(y = kx\)</span>）是一类特殊线性映射。
+但也有<strong>不是</strong>线性的映射看起来像正比：</p>
+<div class="arithmatex">\[
+T(x) = 2x + 1
+\]</div>
+<p>它不能「过零」——<span class="arithmatex">\(T(0) = 1 \neq 0\)</span>。用第一条推论即可判否。</p>
+<p>这就是为什么神经网络里的「仿射层」<span class="arithmatex">\(\boldsymbol{y} = W\boldsymbol{x} + \boldsymbol{b}\)</span>
+严格说<strong>不是线性</strong>的（除非 <span class="arithmatex">\(\boldsymbol{b}=\boldsymbol{0}\)</span>），
+它是<strong>仿射</strong>（线性 + 平移）。</p>
+</div>
+<h3 id="_4">三个典型例子<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>例 1：旋转</strong>（<span class="arithmatex">\(\mathbb{R}^2 \to \mathbb{R}^2\)</span>）</p>
+<div class="arithmatex">\[
+T\begin{bmatrix} x \\ y\end{bmatrix} = \begin{bmatrix} x\cos\theta - y\sin\theta \\ x\sin\theta + y\cos\theta \end{bmatrix}
+\]</div>
+<p><strong>例 2：求导</strong>（多项式空间 <span class="arithmatex">\(P_n \to P_{n-1}\)</span>）</p>
+<div class="arithmatex">\[
+T(p) = p'
+\]</div>
+<p>线性性来自求导的运算法则：<span class="arithmatex">\((p+q)' = p'+q'\)</span> 与 <span class="arithmatex">\((\lambda p)' = \lambda p'\)</span>。</p>
+<div class="admonition tip">
+<p class="admonition-title">这个例子说明什么</p>
+<p><strong>求导是线性映射！</strong> 这一点在信号处理里极为重要——
+微分方程可以写成线性算子方程，于是能用「线性系统」的整套工具分析。</p>
+</div>
+<p><strong>例 3：内积（固定一个变量）</strong></p>
+<p>固定 <span class="arithmatex">\(\boldsymbol{u} \in V\)</span>，定义 <span class="arithmatex">\(\varphi(\boldsymbol{x}) = \langle\boldsymbol{x},\boldsymbol{u}\rangle\)</span>。
+这是 <span class="arithmatex">\(V \to \mathbb{R}\)</span>（或 <span class="arithmatex">\(\mathbb{C}\)</span>）的线性映射，称为<strong>线性泛函</strong>。</p>
+<hr />
+<h2 id="_5">二、矩阵：线性映射的坐标表示<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>现在把抽象定义「落地」。</p>
+<p>设 <span class="arithmatex">\(V\)</span> 的基为 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_n\}\)</span>，<span class="arithmatex">\(W\)</span> 的基为 <span class="arithmatex">\(\{\boldsymbol{w}_1,\dots,\boldsymbol{w}_m\}\)</span>。</p>
+<p><strong>关键</strong>：只要知道 <span class="arithmatex">\(T\)</span> 把<strong>基向量</strong>映到哪里，就完全确定了 <span class="arithmatex">\(T\)</span>——
+因为任意 <span class="arithmatex">\(\boldsymbol{v}\)</span> 都是基的线性组合，而 <span class="arithmatex">\(T\)</span> 保持线性组合：</p>
+<div class="arithmatex">\[
+\boldsymbol{v} = \sum_k c_k \boldsymbol{v}_k
+\quad\Longrightarrow\quad
+T\boldsymbol{v} = \sum_k c_k\, T\boldsymbol{v}_k
+\]</div>
+<p><strong>做法</strong>：把每个 <span class="arithmatex">\(T\boldsymbol{v}_k\)</span> 用 <span class="arithmatex">\(W\)</span> 的基表示出来</p>
+<div class="arithmatex">\[
+T\boldsymbol{v}_k = \sum_{j=1}^m a_{jk}\,\boldsymbol{w}_j
+\]</div>
+<p>把系数 <span class="arithmatex">\(a_{jk}\)</span> 按列排列，得到矩阵 <span class="arithmatex">\(A = (a_{jk})\)</span>。于是</p>
+<div class="arithmatex">\[
+T\boldsymbol{v} = \sum_k c_k \sum_j a_{jk}\boldsymbol{w}_j
+= \sum_j \left(\sum_k a_{jk} c_k\right)\boldsymbol{w}_j
+\]</div>
+<p>括号里正是矩阵乘法的第 <span class="arithmatex">\(j\)</span> 个分量：</p>
+<div class="arithmatex">\[
+\boxed{\ \text{坐标}(T\boldsymbol{v}) = A\,\text{坐标}(\boldsymbol{v})\ }
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">矩阵乘法的定义从哪来</p>
+<p>很多人觉得矩阵乘法规则（「行乘列」）很突兀。现在清楚了：</p>
+<p><strong>它就是「线性映射的复合」在坐标下的表现。</strong></p>
+<p>设 <span class="arithmatex">\(T: V\to W\)</span>，<span class="arithmatex">\(S: W\to U\)</span>，矩阵分别为 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>。
+则复合 <span class="arithmatex">\(S\circ T\)</span> 的矩阵是 <span class="arithmatex">\(BA\)</span>。</p>
+<p>验证一下维度：<span class="arithmatex">\(\boldsymbol{x} \in V\)</span> 的坐标是 <span class="arithmatex">\(n\)</span> 维。
+<span class="arithmatex">\(T\)</span> 先作用得 <span class="arithmatex">\(A\boldsymbol{x}\)</span>（<span class="arithmatex">\(m\)</span> 维），再作用 <span class="arithmatex">\(S\)</span> 得 <span class="arithmatex">\(B(A\boldsymbol{x})\)</span>。
+所以「先 <span class="arithmatex">\(A\)</span> 后 <span class="arithmatex">\(B\)</span>」写成矩阵就是 <span class="arithmatex">\(BA\)</span> —— <strong>注意顺序是反的</strong>，
+因为作用顺序是从右往左读。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="线性映射与矩阵的对应关系">
+<defs>
+<marker id="lm1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左圆圈：V -->
+<ellipse class="gd" cx="85" cy="118" rx="58" ry="46"/>
+<text class="lbl" x="60" y="70">V（基 v₁…vₙ）</text>
+<circle class="d1" cx="70" cy="130" r="4"/>
+<text class="l1" x="36" y="148">v</text>
+<!-- 箭头 T -->
+<line class="a1" x1="150" y1="118" x2="272" y2="118" marker-end="url(#lm1-ah1)"/>
+<text class="l1" x="192" y="108">T</text>
+<!-- 右圆圈：W -->
+<ellipse class="gd" cx="345" cy="118" rx="58" ry="46"/>
+<text class="lbl" x="300" y="70">W（基 w₁…wₘ）</text>
+<circle class="d2" cx="330" cy="130" r="4"/>
+<text class="l2" x="356" y="150">T v</text>
+<!-- 下方：坐标与矩阵 -->
+<text class="lbl-s" x="34" y="192">坐标向量 x（n 维）</text>
+<line class="a2" x1="152" y1="186" x2="262" y2="186" marker-end="url(#lm1-ah2)"/>
+<text class="l2" x="182" y="180">A</text>
+<text class="lbl-s" x="298" y="192">坐标向量 A x（m 维）</text>
+</svg>
+<figcaption>图 1　线性映射 <b>T</b> 与它的矩阵 <b>A</b> 的关系：<b>T</b> 是客观作用，<b>A</b> 是它在一组选定基下的记账方式。图中上下两行是同一件事的两种描述</figcaption>
+</figure>
+
+<h3 id="_6">「矩阵表示」依赖于基的选择<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>这是最容易忽视的一点。同一个线性映射，换一组基，矩阵就变。</p>
+<p><strong>关系式</strong>：设旧基下矩阵为 <span class="arithmatex">\(A\)</span>，新基下为 <span class="arithmatex">\(B\)</span>，两组基之间的过渡矩阵为 <span class="arithmatex">\(P\)</span>（旧坐标 <span class="arithmatex">\(= P\cdot\)</span> 新坐标）。则</p>
+<div class="arithmatex">\[
+\boxed{\ B = P^{-1} A P\ }
+\]</div>
+<p>这样的 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 称为<strong>相似</strong>。</p>
+<p><strong>相似矩阵有相同的特征值</strong>——这一点在特征值那一页会用到，
+而它的根本原因就是：<strong>它们描述的是同一个映射</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 245" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同一个映射在两坐标系下的矩阵不同">
+<defs>
+<marker id="lm2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm2-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm2-ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a4" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左上：旧基 -->
+<text class="l3" x="26" y="22">旧基 e₁,e₂</text>
+<line class="gb" x1="34" y1="96" x2="160" y2="96"/>
+<line class="gb" x1="92" y1="30" x2="92" y2="108"/>
+<line class="a1" x1="92" y1="96" x2="150" y2="96" marker-end="url(#lm2-ah1)"/>
+<line class="a3" x1="92" y1="96" x2="92" y2="46" marker-end="url(#lm2-ah3)"/>
+<!-- 左下：新基 -->
+<text class="l4" x="26" y="152">新基 b₁,b₂</text>
+<line class="gb" x1="34" y1="228" x2="160" y2="228"/>
+<line class="gb" x1="92" y1="160" x2="92" y2="240"/>
+<line class="a2" x1="92" y1="228" x2="146" y2="206" marker-end="url(#lm2-ah2)"/>
+<line class="a4" x1="92" y1="228" x2="124" y2="170" marker-end="url(#lm2-ah4)"/>
+<!-- 右上：同一映射在两组基下的矩阵 -->
+<text class="lbl-s" x="250" y="60">同一个 T：</text>
+<text class="lbl" x="250" y="86">旧基下 → A</text>
+<text class="lbl" x="250" y="112">新基下 → B = P⁻¹AP</text>
+<text class="lbl-s" x="250" y="146">A 与 B 相似</text>
+<text class="lbl-s" x="250" y="168">特征值相同</text>
+<text class="lbl-s" x="250" y="200">（映射没变，只是记账方式变了）</text>
+</svg>
+<figcaption>图 2　「换基」不改变映射本身。左上与左下是同一空间的两种坐标系；右上说明两组基下得到的矩阵 <b>A</b> 与 <b>B</b> 是相似的，因此共享特征值</figcaption>
+</figure>
+
+<hr />
+<h2 id="_7">三、零空间与值域<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>这两个子空间刻画映射的「信息行为」。</p>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[
+\operatorname{null} T = \{\boldsymbol{v} : T\boldsymbol{v} = \boldsymbol{0}\}
+\qquad\text{（零空间，又称核）}
+\]</div>
+<div class="arithmatex">\[
+\operatorname{range} T = \{T\boldsymbol{v} : \boldsymbol{v} \in V\}
+\qquad\text{（值域，又称象）}
+\]</div>
+<p>两者都是子空间（留作自测）。</p>
+<h3 id="_8">直观理解<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="零空间与值域的几何意义">
+<defs>
+<marker id="lm3-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm3-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：平面 V -->
+<ellipse class="gd" cx="92" cy="118" rx="62" ry="50"/>
+<text class="lbl" x="62" y="64">V（3 维）</text>
+<!-- 零空间：过原点的一条线 -->
+<line class="a3" x1="52" y1="158" x2="132" y2="78" marker-end="url(#lm3-ah3)"/>
+<text class="l3" x="34" y="180">零空间（被压成 0）</text>
+<!-- 箭头 -->
+<line class="a1" x1="164" y1="118" x2="272" y2="118" marker-end="url(#lm3-ah1)"/>
+<text class="l1" x="206" y="108">T</text>
+<!-- 右：平面 W -->
+<ellipse class="gd" cx="348" cy="118" rx="62" ry="50"/>
+<text class="lbl" x="316" y="64">W（2 维）</text>
+<rect class="f1" x="304" y="82" width="88" height="72" rx="4"/>
+<text class="l1" x="312" y="176">值域（保留下来）</text>
+</svg>
+<figcaption>图 3　零空间是「被压成零」的方向集合（丢失信息），值域是「能到达」的区域（保留信息）。秩-零化度定理说两者维数之和等于输入维数</figcaption>
+</figure>
+
+<h3 id="_9">三个基本判据<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>等价条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单射</strong>（一一对应）</td>
+<td><span class="arithmatex">\(\operatorname{null}T = \{\boldsymbol{0}\}\)</span></td>
+</tr>
+<tr>
+<td><strong>满射</strong>（能覆盖 <span class="arithmatex">\(W\)</span>）</td>
+<td><span class="arithmatex">\(\operatorname{range}T = W\)</span></td>
+</tr>
+<tr>
+<td><strong>可逆</strong>（同构）</td>
+<td>单射且满射，此时 <span class="arithmatex">\(\dim V = \dim W\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>「单射 <span class="arithmatex">\(\iff\)</span> 零空间只有零向量」的证明</strong>：</p>
+<p>（<span class="arithmatex">\(\Leftarrow\)</span>）设 <span class="arithmatex">\(T\boldsymbol{u} = T\boldsymbol{v}\)</span>，则 <span class="arithmatex">\(T(\boldsymbol{u}-\boldsymbol{v}) = \boldsymbol{0}\)</span>，
+所以 <span class="arithmatex">\(\boldsymbol{u}-\boldsymbol{v} \in \operatorname{null}T = \{\boldsymbol{0}\}\)</span>，即 <span class="arithmatex">\(\boldsymbol{u}=\boldsymbol{v}\)</span> ✓</p>
+<p>（<span class="arithmatex">\(\Rightarrow\)</span>）设 <span class="arithmatex">\(T\)</span> 单射，取 <span class="arithmatex">\(\boldsymbol{v} \in \operatorname{null}T\)</span>，则 <span class="arithmatex">\(T\boldsymbol{v} = \boldsymbol{0} = T\boldsymbol{0}\)</span>，
+由单射性得 <span class="arithmatex">\(\boldsymbol{v} = \boldsymbol{0}\)</span> ✓</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么这个判据很实用</p>
+<p>判断「映射是否单射」要比较「不同输入是否给出不同输出」，
+这需要检查无穷多对输入。</p>
+<p>但上面的判据把它化成了<strong>一个齐次方程是否有非零解</strong>：
+只需看 <span class="arithmatex">\(\operatorname{null}T\)</span> 里有没有非零向量。<strong>从无穷检查变成一次代数判定。</strong></p>
+</div>
+<hr />
+<h2 id="-">四、秩-零化度定理（重述与矩阵版本）<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
+<p>上一页（线性无关与基）给过这个定理，这里补充它的<strong>矩阵形式</strong>与实际意义。</p>
+<div class="arithmatex">\[
+\dim V = \dim(\operatorname{null}T) + \dim(\operatorname{range}T)
+\]</div>
+<p><strong>矩阵版本</strong>：设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m\times n\)</span> 矩阵，看作映射 <span class="arithmatex">\(\mathbb{R}^n \to \mathbb{R}^m\)</span>，则</p>
+<div class="arithmatex">\[
+n = \dim(\operatorname{null}A) + \operatorname{rank}(A)
+\]</div>
+<p>即</p>
+<div class="arithmatex">\[
+\boxed{\ \operatorname{rank}(A) = n - \dim(\operatorname{null}A)\ }
+\]</div>
+<h3 id="_10">两种常见情形<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="矮胖矩阵与高瘦矩阵的信息行为">
+<defs>
+<marker id="lm4-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lm4-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 上：高瘦（m>n） -->
+<text class="l1" x="24" y="22">高瘦 m &gt; n：零空间必非平凡（信息压缩）</text>
+<line class="a1" x1="60" y1="72" x2="170" y2="72" marker-end="url(#lm4-ah1)"/>
+<text class="lbl-s" x="66" y="92">n 维输入</text>
+<line class="gd" x1="190" y1="40" x2="190" y2="104"/>
+<text class="lbl-s" x="206" y="92">m 维输出</text>
+<text class="lbl-s" x="250" y="60">至少丢掉 m − n 之外的自由度</text>
+<text class="lbl-s" x="250" y="80">⟹ 不可能单射</text>
+<!-- 下：矮胖（n>m） -->
+<text class="l2" x="24" y="152">矮胖 n &gt; m：值域不可能覆盖整个输出（信息不够）</text>
+<line class="a2" x1="60" y1="202" x2="170" y2="202" marker-end="url(#lm4-ah2)"/>
+<text class="lbl-s" x="66" y="222">n 维输入</text>
+<line class="gd" x1="190" y1="170" x2="190" y2="234"/>
+<text class="lbl-s" x="206" y="222">m 维输出</text>
+<text class="lbl-s" x="250" y="190">至多张成 m 维</text>
+<text class="lbl-s" x="250" y="210">⟹ 不可能满射</text>
+</svg>
+<figcaption>图 4　矩阵形状决定信息行为。高瘦矩阵必有非平凡零空间（一定不单射）；矮胖矩阵值域维数不超过 m（因 m &lt; n，一定不满射）。<b>只有方阵才可能既单射又满射</b></figcaption>
+</figure>
+
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>结论</th>
+<th>工程含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(m &gt; n\)</span>（高瘦，方程多于未知数）</td>
+<td>零空间非平凡，<strong>不可能单射</strong></td>
+<td>超定方程组一般无解 → 用最小二乘</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n &gt; m\)</span>（矮胖，未知数多于方程）</td>
+<td>值域维数 <span class="arithmatex">\(\leq m &lt; n\)</span>，<strong>不可能满射</strong></td>
+<td>欠定方程组有无穷多解 → 取最小范数解</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(m = n\)</span>（方阵）</td>
+<td>可能可逆</td>
+<td>可逆 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\operatorname{rank} = n\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\det \neq 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">这解释了为什么工程问题总要用「最小二乘」或「伪逆」</p>
+<p><strong>只要不是恰好可逆的方阵，就必然要面对「无解」或「多解」。</strong></p>
+<ul>
+<li>无解（高瘦）→ 投影到列空间，求最小二乘解（上一页的内容）</li>
+<li>多解（矮胖）→ 在所有解中取范数最小的（这需要伪逆）</li>
+</ul>
+<p>这两条路都通向<strong>伪逆</strong> <span class="arithmatex">\(A^+\)</span>，是机器人逆运动学、稀疏传感、
+病态反问题的共同基础。</p>
+</div>
+<hr />
+<h2 id="_11">五、典型例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：写出线性映射的矩阵<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>定义 <span class="arithmatex">\(T: \mathbb{R}^2 \to \mathbb{R}^3\)</span> 为</p>
+<div class="arithmatex">\[
+T\begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x + y \\ 2x \\ y - x \end{bmatrix}
+\]</div>
+<p><strong>(a)</strong> 验证 <span class="arithmatex">\(T\)</span> 是线性的。</p>
+<p><strong>(b)</strong> 写出 <span class="arithmatex">\(T\)</span> 在标准基下的矩阵。</p>
+<details class="note">
+<summary>思路</summary>
+<p>线性性按定义验证；矩阵的列就是「基向量的像」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 验证线性性</strong></p>
+<p>设 <span class="arithmatex">\(\boldsymbol{u} = (x_1,y_1)\)</span>、<span class="arithmatex">\(\boldsymbol{v} = (x_2,y_2)\)</span>，标量 <span class="arithmatex">\(\lambda\)</span>。</p>
+<div class="arithmatex">\[
+T(\lambda\boldsymbol{u}+\boldsymbol{v}) = T(\lambda x_1+x_2,\ \lambda y_1+y_2)
+\]</div>
+<p>代入定义（各分量分别计算）：</p>
+<div class="arithmatex">\[
+= \begin{bmatrix} (\lambda x_1+x_2)+(\lambda y_1+y_2) \\ 2(\lambda x_1+x_2) \\ (\lambda y_1+y_2)-(\lambda x_1+x_2)\end{bmatrix}
+\]</div>
+<p>而</p>
+<div class="arithmatex">\[
+\lambda T\boldsymbol{u} + T\boldsymbol{v} = \lambda\begin{bmatrix} x_1+y_1\\2x_1\\y_1-x_1\end{bmatrix} + \begin{bmatrix}x_2+y_2\\2x_2\\y_2-x_2\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+= \begin{bmatrix} \lambda x_1+\lambda y_1 + x_2+y_2 \\ 2\lambda x_1 + 2x_2 \\ \lambda y_1-\lambda x_1 + y_2-x_2\end{bmatrix}
+\]</div>
+<p><strong>两式逐分量相等</strong> ✓ 所以 <span class="arithmatex">\(T\)</span> 线性。</p>
+<p><strong>（更简洁的做法）</strong>：注意到每个输出分量都是输入的<strong>一次齐次</strong>表达式
+（没有常数项、没有乘积项），这直接保证线性。</p>
+<p><strong>(b) 求矩阵</strong></p>
+<p>矩阵的<strong>第 <span class="arithmatex">\(k\)</span> 列 = 第 <span class="arithmatex">\(k\)</span> 个基向量的像</strong>。</p>
+<div class="arithmatex">\[
+T\boldsymbol{e}_1 = T(1,0) = \begin{bmatrix}1\\2\\-1\end{bmatrix},
+\qquad
+T\boldsymbol{e}_2 = T(0,1) = \begin{bmatrix}1\\0\\1\end{bmatrix}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix} 1 &amp; 1 \\ 2 &amp; 0 \\ -1 &amp; 1 \end{bmatrix}
+\]</div>
+<p><strong>验证</strong>：用矩阵算 <span class="arithmatex">\((x,y) = (3,2)\)</span>：</p>
+<div class="arithmatex">\[
+A\begin{bmatrix}3\\2\end{bmatrix} = \begin{bmatrix}1\cdot3+1\cdot2\\2\cdot3+0\cdot2\\-1\cdot3+1\cdot2\end{bmatrix} = \begin{bmatrix}5\\6\\-1\end{bmatrix}
+\]</div>
+<p>直接代入定义：<span class="arithmatex">\((x+y, 2x, y-x) = (5, 6, -1)\)</span> ✓ 一致。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">求矩阵的通用方法</p>
+<p><strong>矩阵的每一列，就是对应基向量的像。</strong></p>
+<p>所以求矩阵只需做 <span class="arithmatex">\(n\)</span> 次计算（<span class="arithmatex">\(n\)</span> 是定义域维数），
+不必背公式。</p>
+</div>
+<hr />
+<h3 id="2">例题 2：求零空间与值域<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 2 &amp; 4 &amp; 6 \end{bmatrix}\)</span>，看作 <span class="arithmatex">\(\mathbb{R}^3 \to \mathbb{R}^2\)</span> 的映射。</p>
+<p><strong>(a)</strong> 求 <span class="arithmatex">\(\operatorname{rank}(A)\)</span>。</p>
+<p><strong>(b)</strong> 求零空间的维数。</p>
+<p><strong>&copy;</strong> 这个映射可能单射吗？</p>
+<details class="note">
+<summary>思路</summary>
+<p>注意第二行是第一行的 2 倍，两行线性相关。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 求秩</strong></p>
+<p>观察：第二行 <span class="arithmatex">\(= 2 \times\)</span> 第一行。所以</p>
+<div class="arithmatex">\[
+\operatorname{rank}(A) = 1
+\]</div>
+<p><strong>几何图像</strong>：值域是 <span class="arithmatex">\(\mathbb{R}^2\)</span> 中由 <span class="arithmatex">\((1,2)\)</span> 张成的一条直线。</p>
+<p><strong>(b) 零空间维数</strong></p>
+<p>由秩-零化度定理（<span class="arithmatex">\(n = 3\)</span>）：</p>
+<div class="arithmatex">\[
+\dim(\operatorname{null}A) = 3 - \operatorname{rank}(A) = 3 - 1 = 2
+\]</div>
+<p><strong>具体求出来验证</strong>：解 <span class="arithmatex">\(A\boldsymbol{x}=\boldsymbol{0}\)</span>，即</p>
+<div class="arithmatex">\[
+x + 2y + 3z = 0
+\]</div>
+<p>（第二行是它的 2 倍，冗余。）</p>
+<p>这是一张过原点的平面。取两个线性无关的解：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_1 = (-2,1,0), \qquad \boldsymbol{v}_2 = (-3,0,1)
+\]</div>
+<p>验证 <span class="arithmatex">\(A\boldsymbol{v}_1 = (-2+2, -4+4) = (0,0)\)</span> ✓，
+<span class="arithmatex">\(A\boldsymbol{v}_2 = (-3+3, -6+6) = (0,0)\)</span> ✓。
+二者线性无关，故零空间维数 <span class="arithmatex">\(=2\)</span> ✓ 与定理一致。</p>
+<p><strong>&copy; 可能单射吗</strong></p>
+<p><strong>不可能</strong>。因为 <span class="arithmatex">\(\operatorname{null}A \neq \{\boldsymbol{0}\}\)</span>
+（维数 2，含大量非零向量）。</p>
+<p>物理上：<strong>3 维输入被压到 1 维，必然丢失 2 维信息</strong>。
+具体地，<span class="arithmatex">\(\boldsymbol{v}_1\)</span> 与 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 是「看不见的输入」——
+它们不产生任何输出，所以从输出无法区分「<span class="arithmatex">\(\boldsymbol{x}\)</span>」与「<span class="arithmatex">\(\boldsymbol{x}+\boldsymbol{v}_1\)</span>」。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">注意：两行真的不成比例吗？</p>
+<p>它们<strong>成比例</strong>（后者是前者的 2 倍），所以两行线性相关，秩为 1。</p>
+<p>判断矩阵的秩，<strong>先看行（或列）之间有没有倍数/线性组合关系</strong>，
+这比机械地做行变换快得多。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：相似变换<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(A = \begin{bmatrix} 4 &amp; 2 \\ 1 &amp; 3\end{bmatrix}\)</span>，取 <span class="arithmatex">\(P = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 1\end{bmatrix}\)</span>。</p>
+<p><strong>(a)</strong> 求 <span class="arithmatex">\(P^{-1}\)</span>。</p>
+<p><strong>(b)</strong> 计算 <span class="arithmatex">\(B = P^{-1}AP\)</span>。</p>
+<p><strong>&copy;</strong> 验证 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 的迹相等。</p>
+<details class="note">
+<summary>思路</summary>
+<p><span class="arithmatex">\(2\times2\)</span> 矩阵求逆用公式 <span class="arithmatex">\(\frac{1}{ad-bc}\begin{bmatrix}d&amp;-b\\-c&amp;a\end{bmatrix}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 求逆</strong></p>
+<div class="arithmatex">\[
+\det P = 2\cdot1 - 1\cdot1 = 1
+\]</div>
+<div class="arithmatex">\[
+P^{-1} = \frac{1}{1}\begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 2\end{bmatrix} = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 2\end{bmatrix}
+\]</div>
+<p><strong>(b) 计算 <span class="arithmatex">\(B = P^{-1}AP\)</span></strong></p>
+<p>先算 <span class="arithmatex">\(AP\)</span>：</p>
+<div class="arithmatex">\[
+AP = \begin{bmatrix}4&amp;2\\1&amp;3\end{bmatrix}\begin{bmatrix}2&amp;1\\1&amp;1\end{bmatrix}
+= \begin{bmatrix}4\cdot2+2\cdot1 &amp; 4\cdot1+2\cdot1\\ 1\cdot2+3\cdot1 &amp; 1\cdot1+3\cdot1\end{bmatrix}
+= \begin{bmatrix}10&amp;6\\5&amp;4\end{bmatrix}
+\]</div>
+<p>再左乘 <span class="arithmatex">\(P^{-1}\)</span>：</p>
+<div class="arithmatex">\[
+B = \begin{bmatrix}1&amp;-1\\-1&amp;2\end{bmatrix}\begin{bmatrix}10&amp;6\\5&amp;4\end{bmatrix}
+= \begin{bmatrix}10-5 &amp; 6-4\\ -10+10 &amp; -6+8\end{bmatrix}
+= \begin{bmatrix}5&amp;2\\0&amp;2\end{bmatrix}
+\]</div>
+<p><strong>&copy; 验证迹相等</strong></p>
+<div class="arithmatex">\[
+\operatorname{tr}(A) = 4+3 = 7, \qquad \operatorname{tr}(B) = 5+2 = 7 \;\checkmark
+\]</div>
+<p>更进一步，两者的行列式也相等（迹与行列式都是<strong>相似不变量</strong>）：</p>
+<div class="arithmatex">\[
+\det A = 12-2 = 10, \qquad \det B = 5\cdot2 - 2\cdot0 = 10 \;\checkmark
+\]</div>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">从这道题看到的</p>
+<p><span class="arithmatex">\(B\)</span> 是<strong>上三角矩阵</strong>，比 <span class="arithmatex">\(A\)</span> 更容易分析
+（对角元直接就是特征值：<span class="arithmatex">\(5\)</span> 与 <span class="arithmatex">\(2\)</span>）。</p>
+<p><strong>这正是「找一组好基把矩阵变简单」的动机</strong>——
+如果能让 <span class="arithmatex">\(B\)</span> 变成对角矩阵，问题就彻底简化了，
+这叫<strong>可对角化</strong>，是下一节（特征值）的主题。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：证明秩的对称性<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>证明：对任意 <span class="arithmatex">\(m\times n\)</span> 矩阵 <span class="arithmatex">\(A\)</span>，有 <span class="arithmatex">\(\operatorname{rank}(A) = \operatorname{rank}(A^\top)\)</span>。</p>
+<p>「行秩 = 列秩」。</p>
+<details class="note">
+<summary>思路</summary>
+<p>可以用「矩阵乘法不增加秩」这一事实：
+<span class="arithmatex">\(\operatorname{rank}(XY) \leq \min(\operatorname{rank}X, \operatorname{rank}Y)\)</span>。
+或者用线性映射论证。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>思路一（用线性映射的像与核）</strong></p>
+<p>考虑 <span class="arithmatex">\(A\)</span> 的列空间 <span class="arithmatex">\(\operatorname{col}(A) = \operatorname{range}A \subseteq \mathbb{R}^m\)</span>。
+按定义</p>
+<div class="arithmatex">\[
+\operatorname{rank}(A) = \dim\operatorname{col}(A)
+\]</div>
+<p>而 <span class="arithmatex">\(A^\top\)</span> 的列空间是 <span class="arithmatex">\(\mathbb{R}^n\)</span> 的子空间。关键观察是：</p>
+<div class="arithmatex">\[
+\operatorname{col}(A)^\perp = \operatorname{null}(A^\top)
+\]</div>
+<p><strong>验证</strong>：<span class="arithmatex">\(\boldsymbol{y} \in \operatorname{col}(A)^\perp\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\boldsymbol{y}\)</span> 与 <span class="arithmatex">\(A\)</span> 的每一列正交
+<span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(A^\top\boldsymbol{y} = \boldsymbol{0}\)</span> <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\boldsymbol{y} \in \operatorname{null}(A^\top)\)</span> ✓</p>
+<p>于是用上一节的正交补维数公式（<span class="arithmatex">\(A^\top: \mathbb{R}^m \to \mathbb{R}^n\)</span>）：</p>
+<div class="arithmatex">\[
+\dim\operatorname{col}(A)^\perp = m - \operatorname{rank}(A)
+\]</div>
+<p>另一方面</p>
+<div class="arithmatex">\[
+\dim\operatorname{null}(A^\top) = m - \operatorname{rank}(A^\top)
+\]</div>
+<p>（此处用秩-零化度定理，输入维数是 <span class="arithmatex">\(m\)</span>。）</p>
+<p>两式相等，得</p>
+<div class="arithmatex">\[
+m - \operatorname{rank}(A) = m - \operatorname{rank}(A^\top)
+\]</div>
+<p>故 <span class="arithmatex">\(\operatorname{rank}(A) = \operatorname{rank}(A^\top)\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个结论的实用价值</p>
+<p><strong>「行秩 = 列秩」让我们可以选好算的那一边。</strong></p>
+<ul>
+<li>求秩时，行变换（高斯消元）比列变换方便 → 用行秩</li>
+<li>但从几何意义看，<span class="arithmatex">\(\operatorname{rank}(A) = \dim\)</span>（值域），
+  是<strong>列</strong>张成的空间维数</li>
+</ul>
+<p>两者相等这件事本身不是显然的，它保证了「秩」这个概念是良定义的。</p>
+<p><strong>推论</strong>：<span class="arithmatex">\(\operatorname{rank}(A) \leq \min(m,n)\)</span> ——
+秩不会超过行数，也不会超过列数。这与图 4 的形状分析一致。</p>
+</div>
+<hr />
+<h2 id="_12">六、用在哪些课程里<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="_13">机器人学 · 雅可比矩阵与奇异位形<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>末端速度与关节速度的关系 <span class="arithmatex">\(\boldsymbol{v} = J(\boldsymbol{q})\dot{\boldsymbol{q}}\)</span>
+  就是一个线性映射（在某位形下），<span class="arithmatex">\(J\)</span> 是它的矩阵</li>
+<li><strong>奇异位形</strong>：<span class="arithmatex">\(\operatorname{rank}J &lt; \min(6,n)\)</span>，此时</li>
+<li>零空间非平凡 → 存在关节运动而末端不动（<strong>失去某些方向的控制</strong>）</li>
+<li>值域不能覆盖全部方向 → 某些末端运动<strong>无法实现</strong></li>
+<li>冗余机械臂（<span class="arithmatex">\(n &gt; 6\)</span>）的零空间被用来避障、避开关节极限</li>
+</ul>
+<h3 id="_14">模式识别 · 特征降维的线性映射视角<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>线性降维</strong>就是一个线性映射 <span class="arithmatex">\(T: \mathbb{R}^d \to \mathbb{R}^k\)</span>（<span class="arithmatex">\(k &lt; d\)</span>）</li>
+<li>由秩-零化度定理，必然有 <span class="arithmatex">\(d - k\)</span> 维信息被丢弃（零空间）</li>
+<li><strong>PCA</strong> 选择让「丢弃的信息尽可能少」的那个映射——
+  具体说，让投影后的方差最大</li>
+<li><strong>线性判别分析（LDA）</strong>则是希望<strong>类间散度大、类内散度小</strong></li>
+</ul>
+<h3 id="lti">现代数字信号处理 · LTI 系统是线性映射（而且是时不变的）<a class="headerlink" href="#lti" title="Permanent link">&para;</a></h3>
+<ul>
+<li>一个 LTI 系统的输入输出关系就是从输入信号空间到输出信号空间的一个<strong>线性映射</strong></li>
+<li><strong>卷积</strong>正是这个映射的显式形式：<span class="arithmatex">\(y = h * x\)</span></li>
+<li><strong>换到频域</strong>后，这个线性映射变成<strong>逐点相乘</strong>——
+  这就是「换一组基（复指数基）让映射变简单」的典型例子</li>
+<li>与矩阵的相似变换完全同构：<strong>同一个系统的不同表示</strong></li>
+</ul>
+<h3 id="_15">智能传感与信息处理 · 可观性与可控性<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>判据</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>可控性</strong></td>
+<td>可控性矩阵列满秩</td>
+<td>能否用输入把状态送到任意目标</td>
+</tr>
+<tr>
+<td><strong>可观性</strong></td>
+<td>可观性矩阵列满秩</td>
+<td>能否从输出推断出全部状态</td>
+</tr>
+<tr>
+<td><strong>不可观方向</strong></td>
+<td>可观性矩阵的零空间</td>
+<td>那些状态不产生任何输出</td>
+</tr>
+</tbody>
+</table>
+<p><strong>不可观 = 零空间非平凡</strong>，这与例题 2 的逻辑完全一样：
+「看不见的输入」对应「看不见的状态」。</p>
+<hr />
+<h2 id="_16">七、自测<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断 <span class="arithmatex">\(T(x,y) = (x^2,\ y)\)</span> 是否线性。</p>
+<details class="note">
+<summary>提示</summary>
+<p>取 <span class="arithmatex">\(\lambda = 2\)</span> 检验齐次性。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不是线性的。</strong></p>
+<p>检验齐次性：取 <span class="arithmatex">\((x,y)=(1,1)\)</span>，<span class="arithmatex">\(\lambda = 2\)</span>。</p>
+<p>左边：</p>
+<div class="arithmatex">\[
+T(2(1,1)) = T(2,2) = (2^2,\ 2) = (4, 2)
+\]</div>
+<p>右边：</p>
+<div class="arithmatex">\[
+2T(1,1) = 2(1^2, 1) = (2, 2)
+\]</div>
+<p><strong><span class="arithmatex">\((4,2) \neq (2,2)\)</span></strong> ✗ 齐次性不成立。</p>
+<p><strong>快速判据</strong>：输出分量里出现了输入的<strong>二次项</strong> <span class="arithmatex">\(x^2\)</span>，
+不可能是线性的。（线性映射的每个输出分量必须是输入的<strong>一次齐次</strong>组合。）</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(4\times 3\)</span> 矩阵，<span class="arithmatex">\(\operatorname{rank}(A) = 3\)</span>。求 <span class="arithmatex">\(\dim\operatorname{null}A\)</span>，并判断映射是否单射。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用 <span class="arithmatex">\(n = \dim\operatorname{null} + \operatorname{rank}\)</span>，其中 <span class="arithmatex">\(n\)</span> 是输入维数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>零空间维数</strong>：</p>
+<div class="arithmatex">\[
+\dim\operatorname{null}A = n - \operatorname{rank}(A) = 3 - 3 = 0
+\]</div>
+<p>所以 <span class="arithmatex">\(\operatorname{null}A = \{\boldsymbol{0}\}\)</span>。</p>
+<p><strong>单射</strong>：是。因为零空间只有零向量。</p>
+<p><strong>几何含义</strong>：3 维输入被<strong>完整地</strong>嵌入 4 维输出空间（没有信息损失）。
+值域是 <span class="arithmatex">\(\mathbb{R}^4\)</span> 中的一个 3 维子空间（超平面）。</p>
+<p><strong>注意</strong>：它是单射但<strong>不是满射</strong>（值域只有 3 维，填不满 4 维空间）。
+这说明「单射」与「满射」是独立的条件——只有方阵才可能两者兼得。</p>
+<p>从工程角度：这类映射对应<strong>超定方程组有唯一最小二乘解</strong>的情形
+（列满秩，<span class="arithmatex">\(A^\top A\)</span> 可逆）。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 设 <span class="arithmatex">\(T: \mathbb{R}^5 \to \mathbb{R}^5\)</span> 线性，且 <span class="arithmatex">\(\operatorname{null}T\)</span> 的维数是 2。<span class="arithmatex">\(T\)</span> 是否可逆？</p>
+<details class="note">
+<summary>提示</summary>
+<p>可逆要求单射且满射。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不可逆。</strong></p>
+<p><span class="arithmatex">\(\dim\operatorname{null}T = 2 &gt; 0\)</span>，说明零空间含非零向量，
+所以 <span class="arithmatex">\(T\)</span> <strong>不是单射</strong>，因而不可逆。</p>
+<p><strong>补充</strong>：值域维数</p>
+<div class="arithmatex">\[
+\dim\operatorname{range}T = 5 - 2 = 3
+\]</div>
+<p>值域只有 3 维（填不满 5 维空间），所以 <span class="arithmatex">\(T\)</span> <strong>也不是满射</strong>。</p>
+<p><strong>一般结论</strong>：对<strong>方阵</strong>（<span class="arithmatex">\(\dim V = \dim W\)</span>），
+「单射」「满射」「可逆」三者等价。所以检查任一条即可。</p>
+<p>但注意：<strong>这个等价性只对方阵成立</strong>。对非方阵，
+单射与满射可能一个成立一个不成立（见 Q2）。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 设 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span> 是相似矩阵（<span class="arithmatex">\(B = P^{-1}AP\)</span>）。证明它们的迹相等。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用迹的循环性质 <span class="arithmatex">\(\operatorname{tr}(XY) = \operatorname{tr}(YX)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>直接计算：</p>
+<div class="arithmatex">\[
+\operatorname{tr}(B) = \operatorname{tr}(P^{-1}AP)
+\]</div>
+<p>把 <span class="arithmatex">\(P^{-1}A\)</span> 看成一个整体 <span class="arithmatex">\(X\)</span>，<span class="arithmatex">\(P\)</span> 看成 <span class="arithmatex">\(Y\)</span>，用循环性质
+<span class="arithmatex">\(\operatorname{tr}(XY) = \operatorname{tr}(YX)\)</span>：</p>
+<div class="arithmatex">\[
+\operatorname{tr}(P^{-1}AP) = \operatorname{tr}\big((P^{-1}A)P\big) = \operatorname{tr}\big(P(P^{-1}A)\big)
+\]</div>
+<p>而</p>
+<div class="arithmatex">\[
+P(P^{-1}A) = (PP^{-1})A = A
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\operatorname{tr}(B) = \operatorname{tr}(A) \qquad\blacksquare
+\]</div>
+<p><strong>同样的方法可证</strong>：<span class="arithmatex">\(\det(A) = \det(B)\)</span>（用 <span class="arithmatex">\(\det(XY) = \det X\det Y\)</span>）。</p>
+<p><strong>为什么这些都相等</strong>：因为迹与行列式都是<strong>相似不变量</strong>——
+它们只依赖线性映射本身，不依赖基的选择。
+特征值也如此（下一节会证），这正是「相似矩阵特征值相同」的根源。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../basis-dimension/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 线性无关、张成与基">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                线性无关、张成与基
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../inner-product/" class="md-footer__link md-footer__link--next" aria-label="下一页: 范数与内积">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                范数与内积
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
