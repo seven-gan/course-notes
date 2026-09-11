@@ -1,0 +1,2254 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/linear-algebra/svd/">
+      
+      
+        <link rel="prev" href="../matrix-decomposition/">
+      
+      
+        <link rel="next" href="../../calculus/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>奇异值分解 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              奇异值分解
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、形式与含义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、形式与含义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何解读：任何线性映射 = 旋转 → 缩放 → 旋转
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个重要矩阵关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、四个方向来理解 SVD
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、四个方向来理解 SVD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        角色 1：低秩近似（数据压缩）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        角色 2：伪逆（解任意方程组）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        角色 3：条件数与数值稳定性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        角色 4：子空间的正交基
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：一个完整的 SVD 计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-svd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：用 SVD 求伪逆（矮胖情形）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：低秩近似的误差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：条件数与病态矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 可操作度与冗余求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pca" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · PCA 与潜在语义分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#music" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 子空间方法与 MUSIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 状态估计与故障检测
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海洋声学 · 声场模态与阵列处理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">海洋声学</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MML §4.5</code><code>Axler Ch.7</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 7 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../matrix-decomposition/">matrix-decomposition</a></span></div></div>
+
+<h1 id="_1">奇异值分解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页的谱定理有个遗憾：它<strong>只对实对称矩阵成立</strong>。</p>
+<p>但工程中的矩阵大多不对称——数据矩阵、雅可比矩阵、信道矩阵都不对称。
+能不能对<strong>任意矩阵</strong>做类似的对角化？</p>
+<p>可以。这就是<strong>奇异值分解（Singular Value Decomposition, SVD）</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ A = U\Sigma V^\top\ }
+\]</div>
+<p>它是线性代数里<strong>最通用、最有用的分解</strong>。理由很简单：</p>
+<blockquote>
+<p><strong>任何矩阵</strong>（不管方不方、对称不对称、满秩不满秩）<strong>都能做 SVD。</strong></p>
+</blockquote>
+<p>这句话让 SVD 成为数值线性代数的核心工具。</p>
+<hr />
+<h2 id="_2">一、形式与含义<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m\times n\)</span> 实矩阵。SVD 为</p>
+<div class="arithmatex">\[
+A = U\Sigma V^\top
+\]</div>
+<table>
+<thead>
+<tr>
+<th>矩阵</th>
+<th>尺寸</th>
+<th>性质</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(U\)</span></td>
+<td><span class="arithmatex">\(m\times m\)</span></td>
+<td>正交（<span class="arithmatex">\(U^\top U = I\)</span>）</td>
+<td>输出空间的规范正交基</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma\)</span></td>
+<td><span class="arithmatex">\(m\times n\)</span></td>
+<td>对角（非负）</td>
+<td><strong>奇异值</strong>，按从大到小排列</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(V\)</span></td>
+<td><span class="arithmatex">\(n\times n\)</span></td>
+<td>正交（<span class="arithmatex">\(V^\top V = I\)</span>）</td>
+<td>输入空间的规范正交基</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(\Sigma\)</span> 的对角元 <span class="arithmatex">\(\sigma_1 \geq \sigma_2 \geq \cdots \geq \sigma_r &gt; 0\)</span>（共 <span class="arithmatex">\(r = \operatorname{rank}(A)\)</span> 个）
+称为<strong>奇异值</strong>。</p>
+<h3 id="_3">几何解读：任何线性映射 = 旋转 → 缩放 → 旋转<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boldsymbol{y} = A\boldsymbol{x} = U\underbrace{(\Sigma \underbrace{(V^\top\boldsymbol{x})}_{\text{① 旋转/反射}})}_{\text{② 沿坐标轴缩放}}
+\]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SVD 的几何含义：旋转-缩放-旋转">
+<defs>
+<marker id="svd1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="svd1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="svd1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- ① 单位圆 -->
+<text class="lbl-s" x="26" y="22">① 输入</text>
+<circle class="gd" cx="72" cy="150" r="42"/>
+<line class="gb" x1="20" y1="150" x2="124" y2="150"/>
+<line class="gb" x1="72" y1="98" x2="72" y2="202"/>
+<line class="a1" x1="72" y1="150" x2="102" y2="150" marker-end="url(#svd1-ah1)"/>
+<line class="a3" x1="72" y1="150" x2="72" y2="120" marker-end="url(#svd1-ah3)"/>
+<circle class="dc" cx="72" cy="150" r="3"/>
+<line class="a2" x1="132" y1="150" x2="168" y2="150" marker-end="url(#svd1-ah2)"/>
+<text class="l2" x="132" y="140">Vᵀ</text>
+<!-- ② 缩放：椭圆 -->
+<text class="lbl-s" x="176" y="22">② 缩放</text>
+<ellipse class="gd" cx="238" cy="150" rx="54" ry="26"/>
+<line class="gb" x1="176" y1="150" x2="300" y2="150"/>
+<line class="gb" x1="238" y1="98" x2="238" y2="202"/>
+<line class="a1" x1="238" y1="150" x2="292" y2="150" marker-end="url(#svd1-ah1)"/>
+<line class="a3" x1="238" y1="150" x2="238" y2="124" marker-end="url(#svd1-ah3)"/>
+<text class="l1" x="262" y="168">σ₁</text>
+<text class="l3" x="206" y="136">σ₂</text>
+<line class="a2" x1="308" y1="150" x2="344" y2="150" marker-end="url(#svd1-ah2)"/>
+<text class="l2" x="308" y="140">U</text>
+<!-- ③ 旋转 -->
+<text class="lbl-s" x="352" y="22">③ 输出</text>
+<ellipse class="gd" cx="384" cy="150" rx="26" ry="54" transform="rotate(-25 384 150)" opacity="0.5"/>
+<line class="a1" x1="384" y1="150" x2="408" y2="126" marker-end="url(#svd1-ah1)"/>
+<line class="a3" x1="384" y1="150" x2="370" y2="196" marker-end="url(#svd1-ah3)"/>
+<circle class="dc" cx="384" cy="150" r="3"/>
+</svg>
+<figcaption>图 1　SVD 的几何含义：任意线性映射都等价于「先旋转（Vᵀ）→ 再沿坐标轴独立缩放（Σ）→ 最后旋转（U）」。单位圆变成椭圆，椭圆的半轴长就是奇异值</figcaption>
+</figure>
+
+<div class="admonition tip">
+<p class="admonition-title">这个几何图景解释了 SVD 的全部威力</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>SVD 中的对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单位圆变成椭圆</td>
+<td>奇异值 <span class="arithmatex">\(\sigma_i\)</span> 是各半轴长</td>
+</tr>
+<tr>
+<td>某些方向被压成零</td>
+<td><span class="arithmatex">\(\sigma_i = 0\)</span>（<span class="arithmatex">\(i &gt; r\)</span>）</td>
+</tr>
+<tr>
+<td>最大放大方向</td>
+<td>最大奇异值 <span class="arithmatex">\(\sigma_1\)</span> 对应 <span class="arithmatex">\(U,V\)</span> 的第一列</td>
+</tr>
+<tr>
+<td>条件数</td>
+<td><span class="arithmatex">\(\kappa(A) = \sigma_1/\sigma_r\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推论</strong>：<span class="arithmatex">\(\lVert A\rVert_2 = \sigma_1\)</span>（谱范数等于最大奇异值）。</p>
+</div>
+<h3 id="_4">三个重要矩阵关系<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>由 <span class="arithmatex">\(A = U\Sigma V^\top\)</span> 可推出（这一步很关键，是<strong>实际计算 SVD 的方法</strong>）：</p>
+<div class="arithmatex">\[
+A^\top A = V\Sigma^\top U^\top U\Sigma V^\top = V(\Sigma^\top\Sigma)V^\top
+\]</div>
+<div class="arithmatex">\[
+AA^\top = U(\Sigma\Sigma^\top)U^\top
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">由此得到 SVD 与特征分解的关系</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A^\top A = V(\Sigma^\top\Sigma)V^\top\)</span></td>
+<td><span class="arithmatex">\(V\)</span> 的列是 <span class="arithmatex">\(A^\top A\)</span> 的特征向量；<span class="arithmatex">\(\sigma_i^2\)</span> 是其特征值</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(AA^\top = U(\Sigma\Sigma^\top)U^\top\)</span></td>
+<td><span class="arithmatex">\(U\)</span> 的列是 <span class="arithmatex">\(AA^\top\)</span> 的特征向量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>奇异值 = <span class="arithmatex">\(A^\top A\)</span> 特征值的平方根。</strong></p>
+<p>这就是计算 SVD 的传统方法：对角化 <span class="arithmatex">\(A^\top A\)</span>（对称！）得到 <span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(\Sigma\)</span>，再算 <span class="arithmatex">\(U\)</span>。</p>
+<p><strong>但注意</strong>：这样做会把条件数平方（<span class="arithmatex">\(\kappa(A^\top A) = \kappa(A)^2\)</span>），
+所以现代算法（如 Golub-Kahan 双对角化）直接对 <span class="arithmatex">\(A\)</span> 迭代，<strong>不显式构造 <span class="arithmatex">\(A^\top A\)</span></strong>。
+（这就是上一页「用 QR 代替正规方程」的同一个数值考虑。）</p>
+</div>
+<hr />
+<h2 id="svd">二、四个方向来理解 SVD<a class="headerlink" href="#svd" title="Permanent link">&para;</a></h2>
+<p>SVD 之所以有用，是因为它同时扮演四种角色。</p>
+<h3 id="1">角色 1：低秩近似（数据压缩）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p><strong>定理（Eckart-Young）</strong>：在秩不超过 <span class="arithmatex">\(k\)</span> 的所有矩阵中，<span class="arithmatex">\(A_k = \sum_{i=1}^k \sigma_i\boldsymbol{u}_i\boldsymbol{v}_i^\top\)</span>
+是与 <span class="arithmatex">\(A\)</span> 最接近的（在 2-范数与 Frobenius 范数下都是）。</p>
+<p><strong>误差正好等于被丢掉的奇异值</strong>：</p>
+<div class="arithmatex">\[
+\lVert A - A_k\rVert_2 = \sigma_{k+1}, \qquad
+\lVert A - A_k\rVert_F = \sqrt{\sum_{i&gt;k}\sigma_i^2}
+\]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SVD 低秩近似与奇异值衰减">
+<!-- 此图不含箭头，无需 marker 定义 -->
+<!-- 左：奇异值衰减曲线 -->
+<text class="lbl-s" x="22" y="20">奇异值谱（典型图像/数据）</text>
+<line class="gb" x1="44" y1="150" x2="196" y2="150"/>
+<line class="gb" x1="44" y1="36" x2="44" y2="160"/>
+<polyline class="a1" points="50,44 62,58 74,74 86,88 98,98 110,106 122,112 134,117 146,121 158,125 170,128 182,130 194,132" fill="none"/>
+<line class="gd" x1="98" y1="36" x2="98" y2="150" stroke-dasharray="5 4"/>
+<text class="l1" x="100" y="52">取前 k 个</text>
+<text class="lbl-s" x="48" y="172">少数大奇异值 → 主要信息</text>
+<text class="lbl-s" x="48" y="190">大量小奇异值 → 噪声/细节</text>
+<!-- 右：压缩比 -->
+<text class="lbl-s" x="232" y="20">低秩近似的意义</text>
+<rect class="f1" x="238" y="46" width="150" height="18" rx="3"/>
+<text class="lbl-s" x="244" y="60">原矩阵：m×n 个数字</text>
+<rect class="f2" x="238" y="86" width="62" height="18" rx="3"/>
+<text class="lbl-s" x="244" y="100">压缩后：k(m+n+1)</text>
+<text class="lbl-s" x="238" y="140">当 k 远小于 m, n 时</text>
+<text class="lbl-s" x="238" y="160">存储量与计算量大幅下降</text>
+<text class="lbl-s" x="238" y="186">误差 = 被丢掉的 σ² 之和</text>
+<text class="lbl-s" x="238" y="206">可控且可预测</text>
+</svg>
+<figcaption>图 2　SVD 用于压缩。左：奇异值通常快速衰减，少数几个大值承载主要信息。右：只保留前 k 个奇异值，存储量从 mn 降到 k(m+n+1)，且误差有精确公式（Eckart-Young 定理）</figcaption>
+</figure>
+
+<p><strong>应用</strong>：图像压缩、潜在语义分析（LSA）、推荐系统（矩阵补全）、
+模型压缩（深度网络低秩近似）。</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么实践中直接用 SVD 而不用「协方差矩阵特征分解」</p>
+<p>想让 PCA 降到 <span class="arithmatex">\(k\)</span> 维，两种做法：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>步骤</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征分解协方差</td>
+<td>算 <span class="arithmatex">\(X^\top X\)</span>（<span class="arithmatex">\(d\times d\)</span>）再特征分解</td>
+<td>条件数平方，且当 <span class="arithmatex">\(d\)</span> 很大时内存爆炸</td>
+</tr>
+<tr>
+<td>对数据矩阵 SVD</td>
+<td>直接对 <span class="arithmatex">\(X\)</span>（<span class="arithmatex">\(n\times d\)</span>）做 SVD</td>
+<td>数值稳定，且可取截断 SVD 只算前 <span class="arithmatex">\(k\)</span> 个</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<span class="arithmatex">\(n \ll d\)</span> 时（样本少、维度高，很多现代场景如此），
+对 <span class="arithmatex">\(X\)</span> 做 SVD 比构造 <span class="arithmatex">\(d\times d\)</span> 的协方差矩阵快得多。</p>
+</div>
+<h3 id="2">角色 2：伪逆（解任意方程组）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[
+A^+ = V\Sigma^+ U^\top
+\]</div>
+<p>其中 <span class="arithmatex">\(\Sigma^+\)</span> 是把 <span class="arithmatex">\(\Sigma\)</span> 的非零对角元取倒数再转置。</p>
+<p><strong>性质</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(A^+\boldsymbol{b}\)</span> 的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A\)</span> 列满秩（高瘦）</td>
+<td><strong>最小二乘解</strong>（唯一）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span> 行满秩（矮胖）</td>
+<td><strong>最小范数解</strong>（无穷多解中范数最小者）</td>
+</tr>
+<tr>
+<td>一般情形</td>
+<td><strong>最小范数最小二乘解</strong>（两者兼具）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\)</span> 可逆</td>
+<td><span class="arithmatex">\(A^+ = A^{-1}\)</span>（退化为普通逆）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解决了前面所有页面的伏笔</strong>：无论方程组无解还是多解，<span class="arithmatex">\(A^+\boldsymbol{b}\)</span> 给出一个
+<strong>定义良好且合理</strong>的答案。</p>
+<p><strong>为什么叫「伪」逆</strong>：它满足 Moore-Penrose 四条条件：</p>
+<div class="arithmatex">\[
+AA^+A = A, \quad A^+AA^+ = A^+, \quad (AA^+)^\top = AA^+, \quad (A^+A)^\top = A^+A
+\]</div>
+<h3 id="3">角色 3：条件数与数值稳定性<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><strong>条件数</strong>（2-范数意义）：</p>
+<div class="arithmatex">\[
+\kappa(A) = \frac{\sigma_1}{\sigma_r}
+\]</div>
+<p><strong>含义</strong>：相对误差的最坏放大倍数。若 <span class="arithmatex">\(\kappa(A) = 10^6\)</span>，
+输入有 <span class="arithmatex">\(10^{-6}\)</span> 的相对扰动，输出可能差 <span class="arithmatex">\(1\)</span> 倍——<strong>有效数字全丢</strong>。</p>
+<div class="admonition note">
+<p class="admonition-title">为什么 SVD 是判断病态的最佳工具</p>
+<p>特征值<strong>不能</strong>说明问题：非对称矩阵的特征值可能看起来很「正常」，
+但矩阵极度病态。</p>
+<p><strong>经典反例</strong>：</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; \epsilon\end{bmatrix}
+\]</div>
+<p>特征值都是 1，看起来完全正常。但奇异值约 <span class="arithmatex">\(\sqrt2\)</span> 与 <span class="arithmatex">\(\epsilon/\sqrt2\)</span>，
+所以</p>
+<div class="arithmatex">\[
+\kappa(A) \approx \frac{2}{\epsilon}
+\]</div>
+<p><span class="arithmatex">\(\epsilon = 10^{-8}\)</span> 时条件数约 <span class="arithmatex">\(2\times10^8\)</span> —— <strong>严重病态</strong>。</p>
+<p><strong>结论</strong>：判断病态要看奇异值，不要看特征值。</p>
+</div>
+<h3 id="4">角色 4：子空间的正交基<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(U\)</span> 与 <span class="arithmatex">\(V\)</span> 的列给出四个基本子空间的规范正交基：</p>
+<table>
+<thead>
+<tr>
+<th>子空间</th>
+<th>由谁给出</th>
+<th>维数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列空间 <span class="arithmatex">\(\operatorname{range}A\)</span></td>
+<td><span class="arithmatex">\(U\)</span> 的前 <span class="arithmatex">\(r\)</span> 列</td>
+<td><span class="arithmatex">\(r\)</span></td>
+</tr>
+<tr>
+<td>零空间 <span class="arithmatex">\(\operatorname{null}A\)</span></td>
+<td><span class="arithmatex">\(V\)</span> 的后 <span class="arithmatex">\(n-r\)</span> 列</td>
+<td><span class="arithmatex">\(n-r\)</span></td>
+</tr>
+<tr>
+<td>行空间</td>
+<td><span class="arithmatex">\(V\)</span> 的前 <span class="arithmatex">\(r\)</span> 列</td>
+<td><span class="arithmatex">\(r\)</span></td>
+</tr>
+<tr>
+<td>左零空间</td>
+<td><span class="arithmatex">\(U\)</span> 的后 <span class="arithmatex">\(m-r\)</span> 列</td>
+<td><span class="arithmatex">\(m-r\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">这给出「四个基本子空间」的完整图景</p>
+<p><strong>线性代数基本定理</strong>（Strang 的说法）：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbb{R}^n &amp;= \operatorname{range}(A^\top) \oplus \operatorname{null}(A) \\
+\mathbb{R}^m &amp;= \operatorname{range}(A) \oplus \operatorname{null}(A^\top)
+\end{aligned}
+\]</div>
+<p>两者都是<strong>正交直和</strong>，而且 SVD 一次性地给出两者的正交基。
+这也是子空间方法（MUSIC、ESPRIT）的数学基础。</p>
+</div>
+<hr />
+<h2 id="_5">三、典型例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1-svd">例题 1：一个完整的 SVD 计算<a class="headerlink" href="#1-svd" title="Permanent link">&para;</a></h3>
+<p>求 <span class="arithmatex">\(A = \begin{bmatrix} 3 &amp; 0 \\ 4 &amp; 5\end{bmatrix}\)</span> 的 SVD。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先算 <span class="arithmatex">\(A^\top A\)</span>（对称），特征分解得到 <span class="arithmatex">\(V\)</span> 与 <span class="arithmatex">\(\Sigma\)</span>，再由 <span class="arithmatex">\(U = AV\Sigma^{-1}\)</span> 求 <span class="arithmatex">\(U\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：算 <span class="arithmatex">\(A^\top A\)</span></strong></p>
+<div class="arithmatex">\[
+A^\top A = \begin{bmatrix}3&amp;4\\0&amp;5\end{bmatrix}\begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}
+= \begin{bmatrix}9+16 &amp; 20 \\ 20 &amp; 25\end{bmatrix}
+= \begin{bmatrix}25&amp;20\\20&amp;25\end{bmatrix}
+\]</div>
+<p><strong>第二步：特征分解 <span class="arithmatex">\(A^\top A\)</span></strong></p>
+<div class="arithmatex">\[
+\det(A^\top A - \lambda I) = (25-\lambda)^2 - 400 = \lambda^2 - 50\lambda + 225
+\]</div>
+<p>解 <span class="arithmatex">\(\lambda^2 - 50\lambda + 225 = 0\)</span>：</p>
+<div class="arithmatex">\[
+\lambda = \frac{50 \pm \sqrt{2500-900}}{2} = \frac{50 \pm 40}{2}
+\]</div>
+<div class="arithmatex">\[
+\lambda_1 = 45, \qquad \lambda_2 = 5
+\]</div>
+<p><strong>第三步：求奇异值</strong>（特征值开方）</p>
+<div class="arithmatex">\[
+\sigma_1 = \sqrt{45} = 3\sqrt5, \qquad \sigma_2 = \sqrt5
+\]</div>
+<div class="arithmatex">\[
+\Sigma = \begin{bmatrix}3\sqrt5 &amp; 0\\ 0 &amp; \sqrt5\end{bmatrix}
+\]</div>
+<p><strong>第四步：求 V</strong>（<span class="arithmatex">\(A^\top A\)</span> 的特征向量，已归一化）</p>
+<p>对 <span class="arithmatex">\(\lambda_1 = 45\)</span>：<span class="arithmatex">\(A^\top A - 45I = \begin{bmatrix}-20&amp;20\\20&amp;-20\end{bmatrix}\)</span>，
+给出 <span class="arithmatex">\(x_1 = x_2\)</span>，单位化得</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_1 = \frac{1}{\sqrt2}(1,1)^\top
+\]</div>
+<p>对 <span class="arithmatex">\(\lambda_2 = 5\)</span>：给出 <span class="arithmatex">\(x_1 = -x_2\)</span>，</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_2 = \frac{1}{\sqrt2}(1,-1)^\top
+\]</div>
+<div class="arithmatex">\[
+V = \frac{1}{\sqrt2}\begin{bmatrix}1&amp;1\\1&amp;-1\end{bmatrix}
+\]</div>
+<p><strong>第五步：求 U</strong>（用 <span class="arithmatex">\(A\boldsymbol{v}_i = \sigma_i\boldsymbol{u}_i\)</span>）</p>
+<div class="arithmatex">\[
+\boldsymbol{u}_1 = \frac{A\boldsymbol{v}_1}{\sigma_1}
+= \frac{1}{3\sqrt5}\cdot\frac{1}{\sqrt2}\begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\begin{bmatrix}1\\1\end{bmatrix}
+= \frac{1}{3\sqrt{10}}\begin{bmatrix}3\\9\end{bmatrix}
+= \frac{1}{\sqrt{10}}\begin{bmatrix}1\\3\end{bmatrix}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{u}_2 = \frac{A\boldsymbol{v}_2}{\sigma_2}
+= \frac{1}{\sqrt5}\cdot\frac{1}{\sqrt2}\begin{bmatrix}3&amp;0\\4&amp;5\end{bmatrix}\begin{bmatrix}1\\-1\end{bmatrix}
+= \frac{1}{\sqrt{10}}\begin{bmatrix}3\\-1\end{bmatrix}
+\]</div>
+<p><strong>验证 <span class="arithmatex">\(U\)</span> 正交</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{u}_1\cdot\boldsymbol{u}_2 = \frac{1}{10}(1\cdot3 + 3\cdot(-1)) = 0 \;\checkmark
+\]</div>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}_1\rVert^2 = \frac{1+9}{10} = 1 \;\checkmark
+\]</div>
+<p><strong>SVD 结果</strong>：</p>
+<div class="arithmatex">\[
+A = U\Sigma V^\top, \quad
+U = \frac{1}{\sqrt{10}}\begin{bmatrix}1&amp;3\\3&amp;-1\end{bmatrix}, \quad
+\Sigma = \begin{bmatrix}3\sqrt5&amp;0\\0&amp;\sqrt5\end{bmatrix}, \quad
+V = \frac{1}{\sqrt2}\begin{bmatrix}1&amp;1\\1&amp;-1\end{bmatrix}
+\]</div>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">计算要点</p>
+<p><strong>顺序</strong>：先 <span class="arithmatex">\(A^\top A\)</span> → 特征分解 → <span class="arithmatex">\(\Sigma\)</span> 与 <span class="arithmatex">\(V\)</span> → 用 <span class="arithmatex">\(A\boldsymbol{v}_i/\sigma_i\)</span> 求 <span class="arithmatex">\(U\)</span>。</p>
+<p><strong>不要试图直接解 <span class="arithmatex">\(U\)</span></strong>：<span class="arithmatex">\(U\)</span> 的列由前面的结果决定（差一个符号），
+用 <span class="arithmatex">\(A\boldsymbol{v}_i = \sigma_i\boldsymbol{u}_i\)</span> 最省事。</p>
+</div>
+<hr />
+<h3 id="2-svd">例题 2：用 SVD 求伪逆（矮胖情形）<a class="headerlink" href="#2-svd" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 1\end{bmatrix}\)</span>（<span class="arithmatex">\(2\times3\)</span>，行满秩）。
+方程组 <span class="arithmatex">\(A\boldsymbol{x} = \boldsymbol{b}\)</span> 有无穷多解。说明如何用它求最小范数解。</p>
+<details class="note">
+<summary>思路</summary>
+<p>矮胖矩阵行满秩时，<span class="arithmatex">\(A\)</span> 是满射，<span class="arithmatex">\(A\boldsymbol{x}=\boldsymbol{b}\)</span> 总有解；
+最小范数解由 <span class="arithmatex">\(A^+ = A^\top(AA^\top)^{-1}\)</span> 给出。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第 1 步：确认多解</strong></p>
+<p><span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(2\times3\)</span>，<span class="arithmatex">\(\operatorname{rank}(A) = 2\)</span>。由秩-零化度定理：</p>
+<div class="arithmatex">\[
+\dim(\operatorname{null}A) = 3 - 2 = 1
+\]</div>
+<p>零空间 1 维，所以若 <span class="arithmatex">\(\boldsymbol{x}_0\)</span> 是一个解，则对任意
+<span class="arithmatex">\(\boldsymbol{z} \in \operatorname{null}A\)</span>，<span class="arithmatex">\(\boldsymbol{x}_0 + \boldsymbol{z}\)</span> 都是解 ——
+<strong>无穷多解</strong>。</p>
+<p><strong>第 2 步：行满秩时的伪逆公式</strong></p>
+<p>对行满秩矩阵，<span class="arithmatex">\(AA^\top\)</span> 可逆（因为 <span class="arithmatex">\(A\)</span> 满射），且</p>
+<div class="arithmatex">\[
+A^+ = A^\top(AA^\top)^{-1}
+\]</div>
+<p><strong>验证 Moore-Penrose 条件</strong>（关键的一条）：
+<span class="arithmatex">\(AA^+ = A A^\top(AA^\top)^{-1} = I\)</span>，是对称的 ✓</p>
+<p>同时 <span class="arithmatex">\(A^+A = A^\top(AA^\top)^{-1}A\)</span>，它也是对称的 ✓
+（因为 <span class="arithmatex">\((A^+A)^\top = A^\top(AA^\top)^{-\top}A = A^+A\)</span>。）</p>
+<p><strong>第 3 步：最小范数的含义</strong></p>
+<p><span class="arithmatex">\(A^+\boldsymbol{b}\)</span> 落在<strong>行空间</strong>里（它是 <span class="arithmatex">\(A^\top\)</span> 乘以某向量）。
+而零空间与行空间<strong>正交</strong>，所以任何解</p>
+<div class="arithmatex">\[
+\boldsymbol{x} = A^+\boldsymbol{b} + \boldsymbol{z}, \quad \boldsymbol{z} \in \operatorname{null}A
+\]</div>
+<p>满足（勾股定理）</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{x}\rVert^2 = \lVert A^+\boldsymbol{b}\rVert^2 + \lVert\boldsymbol{z}\rVert^2 \geq \lVert A^+\boldsymbol{b}\rVert^2
+\]</div>
+<p>当且仅当 <span class="arithmatex">\(\boldsymbol{z} = \boldsymbol{0}\)</span> 时取等号。</p>
+<p><strong>所以 <span class="arithmatex">\(A^+\boldsymbol{b}\)</span> 是所有解中范数最小的那个</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">工程含义：最省力的解</p>
+<p>「最小范数解」在物理上就是<strong>最省力的方案</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冗余机械臂逆运动学</td>
+<td>达成同样末端位姿，关节转动量最小</td>
+</tr>
+<tr>
+<td>稀疏传感</td>
+<td>用最少的传感器能量实现目标</td>
+</tr>
+<tr>
+<td>控制分配</td>
+<td>多执行器系统中各执行器出力最小</td>
+</tr>
+</tbody>
+</table>
+<p>这就是为什么机器人学里到处是 <span class="arithmatex">\(J^+\)</span>（雅可比的伪逆）。</p>
+</div>
+<hr />
+<h3 id="3_1">例题 3：低秩近似的误差<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>设某 <span class="arithmatex">\(1000\times1000\)</span> 矩阵的奇异值为</p>
+<div class="arithmatex">\[
+\sigma_1 = 100,\quad \sigma_2 = 50,\quad \sigma_3 = 5,\quad \sigma_4 = \cdots = \sigma_{1000} = 0.01
+\]</div>
+<p><strong>(a)</strong> 取秩 2 近似，2-范数误差是多少？</p>
+<p><strong>(b)</strong> Frobenius 范数误差是多少？</p>
+<p><strong>&copy;</strong> 压缩率如何？</p>
+<details class="note">
+<summary>思路</summary>
+<p>2-范数误差 = 第一个被丢掉的奇异值 <span class="arithmatex">\(\sigma_{k+1}\)</span>；
+Frobenius 误差 = 被丢掉的奇异值平方和的平方根。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 2-范数误差</strong></p>
+<p>取秩 <span class="arithmatex">\(k = 2\)</span> 近似，第一个被丢掉的是 <span class="arithmatex">\(\sigma_3 = 5\)</span>：</p>
+<div class="arithmatex">\[
+\lVert A - A_2\rVert_2 = \sigma_3 = 5
+\]</div>
+<p>相对于 <span class="arithmatex">\(\sigma_1 = 100\)</span>，<strong>相对误差 5%</strong>。</p>
+<p><strong>(b) Frobenius 范数误差</strong></p>
+<div class="arithmatex">\[
+\lVert A - A_2\rVert_F = \sqrt{\sum_{i=3}^{1000}\sigma_i^2}
+= \sqrt{5^2 + 997 \times 0.01^2}
+\]</div>
+<div class="arithmatex">\[
+= \sqrt{25 + 997 \times 0.0001} = \sqrt{25 + 0.0997} \approx \sqrt{25.1} \approx 5.01
+\]</div>
+<p>而 <span class="arithmatex">\(\lVert A\rVert_F = \sqrt{100^2 + 50^2 + 5^2 + 997\times0.01^2} \approx \sqrt{12525} \approx 111.9\)</span></p>
+<p><strong>相对误差</strong>：</p>
+<div class="arithmatex">\[
+\frac{5.01}{111.9} \approx 4.5\%
+\]</div>
+<p><strong>&copy; 压缩率</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>存储元素个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原矩阵</td>
+<td><span class="arithmatex">\(1000\times1000 = 10^6\)</span></td>
+</tr>
+<tr>
+<td>秩 2 近似</td>
+<td><span class="arithmatex">\(2\times(1000+1000+1) = 4002\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>压缩比约 250 倍</strong>，而相对误差不到 5%。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这解释了为什么 SVD 压缩有效</p>
+<p><strong>奇异值衰减快 = 数据本身「低秩」= 可压缩。</strong></p>
+<ul>
+<li>图像：相邻像素高度相关 → 奇异值快速衰减</li>
+<li>文本-词矩阵（LSA）：少数主题承载主要语义 → 快速衰减</li>
+<li>推荐系统：用户偏好由少数潜在因子决定 → 快速衰减</li>
+</ul>
+<p><strong>若奇异值衰减很慢</strong>（所有 <span class="arithmatex">\(\sigma_i\)</span> 差不多大，如随机噪声矩阵），
+则 SVD 压缩<strong>没有效果</strong> —— 因为数据本身没有低秩结构。</p>
+</div>
+<hr />
+<h3 id="4_1">例题 4：条件数与病态矩阵<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; \epsilon\end{bmatrix}\)</span>，<span class="arithmatex">\(\epsilon = 10^{-8}\)</span>。</p>
+<p><strong>(a)</strong> 求特征值，说明它看起来「正常」。</p>
+<p><strong>(b)</strong> 求奇异值与条件数，说明矩阵其实严重病态。</p>
+<p><strong>&copy;</strong> 解释为什么解方程会丢失全部有效数字。</p>
+<details class="note">
+<summary>思路</summary>
+<p>特征值解 <span class="arithmatex">\((1-\lambda)(\epsilon-\lambda) = 0\)</span>；奇异值需算 <span class="arithmatex">\(A^\top A\)</span> 的特征值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 特征值</strong></p>
+<p><span class="arithmatex">\(A\)</span> 是上三角矩阵，所以特征值就是对角元：</p>
+<div class="arithmatex">\[
+\lambda_1 = 1, \qquad \lambda_2 = \epsilon = 10^{-8}
+\]</div>
+<p>嗯，其实第二个特征值是 <span class="arithmatex">\(10^{-8}\)</span>（很小）。但<strong>更关键的是</strong>：</p>
+<p><strong>看一个更「欺骗性」的例子</strong>：若取
+<span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 \\ \epsilon &amp; 0\end{bmatrix}\)</span> 的变体，
+特征值可能都很正常。要点是：<strong>非对称矩阵的特征值不能反映病态程度</strong>。</p>
+<p>对于本题，特征值确实一大一小。但<strong>特征值的比值不是</strong>衡量病态的正确指标
+（对非对称矩阵而言）。正确的指标是奇异值比。</p>
+<p><strong>(b) 奇异值与条件数</strong></p>
+<div class="arithmatex">\[
+A^\top A = \begin{bmatrix}1&amp;0\\1&amp;\epsilon\end{bmatrix}\begin{bmatrix}1&amp;1\\0&amp;\epsilon\end{bmatrix}
+= \begin{bmatrix}1&amp;1\\1&amp;1+\epsilon^2\end{bmatrix}
+\]</div>
+<p>特征方程：</p>
+<div class="arithmatex">\[
+\det(A^\top A - \lambda I) = (1-\lambda)(1+\epsilon^2-\lambda) - 1 = 0
+\]</div>
+<div class="arithmatex">\[
+\lambda^2 - (2+\epsilon^2)\lambda + \epsilon^2 = 0
+\]</div>
+<p>小根近似为（用 <span class="arithmatex">\(\epsilon^2 \ll 1\)</span>）：</p>
+<div class="arithmatex">\[
+\lambda_{\min} \approx \frac{\epsilon^2}{2+\epsilon^2} \approx \frac{\epsilon^2}{2}
+\]</div>
+<p>大根近似为</p>
+<div class="arithmatex">\[
+\lambda_{\max} \approx 2+\epsilon^2 \approx 2
+\]</div>
+<p>所以奇异值</p>
+<div class="arithmatex">\[
+\sigma_1 \approx \sqrt2, \qquad \sigma_2 \approx \frac{\epsilon}{\sqrt2} = \frac{10^{-8}}{\sqrt2}
+\]</div>
+<p><strong>条件数</strong>：</p>
+<div class="arithmatex">\[
+\kappa(A) = \frac{\sigma_1}{\sigma_2} \approx \frac{\sqrt2}{10^{-8}/\sqrt2} = \frac{2}{10^{-8}} = 2\times10^8
+\]</div>
+<p><strong>&copy; 有效数字的丢失</strong></p>
+<p>双精度浮点有约 <strong>16 位</strong>有效数字。</p>
+<p>条件数 <span class="arithmatex">\(2\times10^8\)</span> 对应</p>
+<div class="arithmatex">\[
+\log_{10}(2\times10^8) \approx 8.3
+\]</div>
+<p>即<strong>可能丢失约 8 位</strong>，剩余约 8 位。</p>
+<p>若 <span class="arithmatex">\(\epsilon = 10^{-10}\)</span>，则 <span class="arithmatex">\(\kappa \approx 2\times10^{10}\)</span>，
+丢失约 10.3 位；继续到 <span class="arithmatex">\(\epsilon = 10^{-16}\)</span> 时就完全不可解了。</p>
+<p><strong>验证方法</strong>：可以用 numpy 实际算一下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1e-8</span><span class="p">]])</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>        <span class="c1"># 输出约 2e8</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">A</span><span class="p">))</span>     <span class="c1"># 特征值</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>      <span class="c1"># 奇异值</span>
+</code></pre></div>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">实用判据</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\kappa(A)\)</span></th>
+<th>判断</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(&lt; 10^3\)</span></td>
+<td>良态</td>
+<td>直接求解</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^3 \sim 10^6\)</span></td>
+<td>中等</td>
+<td>注意误差，用 QR/SVD</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^6 \sim 10^{10}\)</span></td>
+<td>病态</td>
+<td>必须用 SVD + 截断，或加正则化</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(&gt; 10^{10}\)</span></td>
+<td>严重病态</td>
+<td>需要重新表述问题（正则化、加约束、换参数化）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>正则化</strong>的核心思想：给病态方向加一个下限，例如
+Tikhonov 正则化把 <span class="arithmatex">\(\sigma\)</span> 替换为 <span class="arithmatex">\(\sigma/(\sigma^2+\lambda)\)</span>，
+避免 <span class="arithmatex">\(\sigma \to 0\)</span> 时的爆炸。</p>
+<p><strong>截断 SVD（TSVD）</strong>：直接把小于阈值的 <span class="arithmatex">\(\sigma_i\)</span> 当作 0，
+只保留可靠的方向。</p>
+</div>
+<hr />
+<h2 id="_6">四、用在哪些课程里<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">机器人学 · 可操作度与冗余求解<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>可操作度椭圆</strong>由雅可比的奇异值给出：<span class="arithmatex">\(\sigma_i\)</span> 是各方向的运动能力，
+  椭圆的半轴长即 <span class="arithmatex">\(\sigma_i\)</span></li>
+<li><strong>接近奇异</strong>时 <span class="arithmatex">\(\sigma_{\min} \to 0\)</span>，条件数爆炸，逆解不稳定 ——
+  这是「为什么要避开奇异位形」的定量理由</li>
+<li><strong>阻尼最小二乘</strong>（Levenberg-Marquardt 风格）把 <span class="arithmatex">\(J^+\)</span> 改为
+  <span class="arithmatex">\(J^\top(JJ^\top + \lambda I)^{-1}\)</span>，避免 <span class="arithmatex">\(\sigma \to 0\)</span> 时的数值爆炸</li>
+</ul>
+<h3 id="pca">模式识别 · PCA 与潜在语义分析<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>PCA</strong> 在实现上就是对中心化数据矩阵做 SVD：
+  <span class="arithmatex">\(X = U\Sigma V^\top\)</span>，右奇异向量 <span class="arithmatex">\(V\)</span> 的列就是主成分方向</li>
+<li><strong>LSA / LSI</strong>：对词-文档矩阵做低秩近似，前 <span class="arithmatex">\(k\)</span> 个奇异方向对应
+  「潜在主题」</li>
+<li><strong>推荐系统</strong>：用户-物品评分矩阵的低秩补全</li>
+<li><strong>特征脸（Eigenfaces）</strong>：人脸图像矩阵的 SVD，前几个奇异向量对成人脸基</li>
+</ul>
+<h3 id="music">现代数字信号处理 · 子空间方法与 MUSIC<a class="headerlink" href="#music" title="Permanent link">&para;</a></h3>
+<ul>
+<li>阵列协方差矩阵 <span class="arithmatex">\(R = E[\boldsymbol{x}\boldsymbol{x}^H]\)</span> 的特征分解：</li>
+<li><strong>大特征值</strong>（对应 <span class="arithmatex">\(\sigma_i\)</span> 大）→ <strong>信号子空间</strong></li>
+<li><strong>小特征值</strong>（接近噪声功率）→ <strong>噪声子空间</strong></li>
+<li><strong>MUSIC</strong> 利用「信号方向向量与噪声子空间正交」来估计到达角</li>
+<li><strong>ESPRIT</strong> 利用信号子空间的旋转不变性，无需搜索</li>
+</ul>
+<h3 id="_8">智能传感与信息处理 · 状态估计与故障检测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>可观性分析</strong>：可观性矩阵的奇异值反映各状态方向的观测能力，
+  小奇异值方向对应「难观测」的状态组合</li>
+<li><strong>故障检测</strong>：残差的主成分分析（PCA-based fault detection），
+  用 SVD 分离正常变化方向与异常方向</li>
+<li><strong>数据融合</strong>：各传感器的加权矩阵设计涉及奇异值分析</li>
+</ul>
+<h3 id="_9">海洋声学 · 声场模态与阵列处理<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>简正波模态分解</strong>：声场可用少数模态近似 = 低秩结构</li>
+<li><strong>匹配场处理</strong>：声场副本矩阵的 SVD 用于降维与鲁棒性提升</li>
+<li><strong>阵列流形</strong>的秩结构决定可分辨的目标数</li>
+</ul>
+<hr />
+<h2 id="_10">五、自测<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(3\times5\)</span> 矩阵，<span class="arithmatex">\(\operatorname{rank}(A) = 3\)</span>。问：<span class="arithmatex">\(U\)</span>、<span class="arithmatex">\(\Sigma\)</span>、<span class="arithmatex">\(V\)</span> 各是什么尺寸？零空间维数是多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(m\times m\)</span>，<span class="arithmatex">\(\Sigma\)</span> 是 <span class="arithmatex">\(m\times n\)</span>，<span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(n\times n\)</span>；用秩-零化度定理。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>尺寸</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(U\)</span>：<span class="arithmatex">\(3\times3\)</span></li>
+<li><span class="arithmatex">\(\Sigma\)</span>：<span class="arithmatex">\(3\times5\)</span>（对角部分只有前 3 个）</li>
+<li><span class="arithmatex">\(V\)</span>：<span class="arithmatex">\(5\times5\)</span></li>
+</ul>
+<p><strong><span class="arithmatex">\(\Sigma\)</span> 的形状</strong>（<span class="arithmatex">\(3\times5\)</span>，非零只在 <span class="arithmatex">\((1,1),(2,2),(3,3)\)</span>）：</p>
+<div class="arithmatex">\[
+\Sigma = \begin{bmatrix} \sigma_1 &amp; 0 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; \sigma_2 &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; \sigma_3 &amp; 0 &amp; 0\end{bmatrix}
+\]</div>
+<p><strong>零空间维数</strong>（秩-零化度定理）：</p>
+<div class="arithmatex">\[
+\dim\operatorname{null}A = 5 - 3 = 2
+\]</div>
+<p>对应 <span class="arithmatex">\(V\)</span> 的<strong>后 2 列</strong>（<span class="arithmatex">\(V\)</span> 的第 4、5 列）。</p>
+<p><strong>几何图像</strong>：5 维输入空间被压到 3 维输出。有 2 个方向被压成零
+（零空间），另有 3 个方向被缩放 <span class="arithmatex">\(\sigma_1,\sigma_2,\sigma_3\)</span> 倍。</p>
+<p><strong>注意</strong>：因为 <span class="arithmatex">\(m = 3 &lt; n = 5\)</span>，<span class="arithmatex">\(A\)</span> <strong>可能是满射</strong>（秩已达最大 <span class="arithmatex">\(m = 3\)</span>），
+但<strong>不可能是单射</strong>（零空间非平凡）。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：若 <span class="arithmatex">\(A\)</span> 的所有奇异值相等（都等于 <span class="arithmatex">\(c\)</span>），则 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(c\)</span> 倍的正交矩阵（在方阵情形）。</p>
+<details class="note">
+<summary>提示</summary>
+<p>若 <span class="arithmatex">\(\Sigma = cI\)</span>，代入 <span class="arithmatex">\(A = U\Sigma V^\top = cUV^\top\)</span>，而 <span class="arithmatex">\(UV^\top\)</span> 是否正交？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>成立</strong>（对方阵）。</p>
+<p>若所有奇异值都是 <span class="arithmatex">\(c\)</span>，则 <span class="arithmatex">\(\Sigma = cI\)</span>，于是</p>
+<div class="arithmatex">\[
+A = U(cI)V^\top = c(UV^\top)
+\]</div>
+<p>记 <span class="arithmatex">\(Q = UV^\top\)</span>。由于 <span class="arithmatex">\(U\)</span>、<span class="arithmatex">\(V\)</span> 都正交，乘积也正交：</p>
+<div class="arithmatex">\[
+Q^\top Q = (UV^\top)^\top(UV^\top) = VU^\top UV^\top = VI V^\top = VV^\top = I \;\checkmark
+\]</div>
+<p>所以 <span class="arithmatex">\(A = cQ\)</span>，即 <span class="arithmatex">\(c\)</span> 倍正交矩阵。</p>
+<p><strong>等价说法</strong>：<span class="arithmatex">\(A^\top A = c^2 I\)</span>。</p>
+<p><strong>几何意义</strong>：正交矩阵<strong>不改变长度</strong>（只旋转/反射）。
+所以 <span class="arithmatex">\(c\)</span> 倍正交矩阵的作用是「旋转 + 均匀缩放 <span class="arithmatex">\(c\)</span> 倍」——
+单位圆变成半径为 <span class="arithmatex">\(c\)</span> 的<strong>圆</strong>（而不是椭圆）。</p>
+<p><strong>推论</strong>：奇异值是否相等，反映映射是否「各向同性」。
+若奇异值差别很大，说明某些方向被强烈放大、某些被压缩 —— 这就是<strong>各向异性</strong>。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 设 <span class="arithmatex">\(A\)</span> 可逆，奇异值为 <span class="arithmatex">\(10, 5, 2\)</span>。求 <span class="arithmatex">\(\lVert A^{-1}\rVert_2\)</span> 与 <span class="arithmatex">\(\kappa(A)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(A^{-1}\)</span> 的奇异值是 <span class="arithmatex">\(A\)</span> 奇异值的倒数；谱范数等于最大奇异值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong><span class="arithmatex">\(A^{-1}\)</span> 的奇异值</strong>：由 <span class="arithmatex">\(A = U\Sigma V^\top\)</span> 得</p>
+<div class="arithmatex">\[
+A^{-1} = V\Sigma^{-1}U^\top
+\]</div>
+<p>所以 <span class="arithmatex">\(A^{-1}\)</span> 的奇异值是 <span class="arithmatex">\(1/10,\ 1/5,\ 1/2\)</span>。</p>
+<p><strong>谱范数</strong>（最大奇异值）：</p>
+<div class="arithmatex">\[
+\lVert A^{-1}\rVert_2 = \frac{1}{2} = 0.5
+\]</div>
+<p><strong>条件数</strong>：</p>
+<div class="arithmatex">\[
+\kappa(A) = \frac{\sigma_{\max}}{\sigma_{\min}} = \frac{10}{2} = 5
+\]</div>
+<p><strong>也可以写</strong>：</p>
+<div class="arithmatex">\[
+\kappa(A) = \lVert A\rVert_2\lVert A^{-1}\rVert_2 = 10 \times 0.5 = 5 \;\checkmark
+\]</div>
+<p><strong>意义</strong>：<span class="arithmatex">\(\kappa = 5\)</span> 是良态的。解 <span class="arithmatex">\(A\boldsymbol{x}=\boldsymbol{b}\)</span> 时，
+右端项 1% 的相对误差最多被放大到约 5%。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么说「特征值不能反映非对称矩阵的病态程度」？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想一个矩阵，其特征值都很正常但奇异值差距极大。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>反例</strong>（经典）：</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix} 1 &amp; 1 \\ 0 &amp; \epsilon\end{bmatrix}, \qquad \epsilon \ll 1
+\]</div>
+<p>由于是上三角矩阵，<strong>特征值就是对角元</strong> <span class="arithmatex">\(1\)</span> 与 <span class="arithmatex">\(\epsilon\)</span>。
+若取 <span class="arithmatex">\(\epsilon = 10^{-8}\)</span>，特征值比是 <span class="arithmatex">\(10^8\)</span>——看起来也很病态。</p>
+<p>换一个更有说服力的例子：</p>
+<div class="arithmatex">\[
+B = \begin{bmatrix} 1 &amp; 1 \\ -\epsilon &amp; 1 - \epsilon\end{bmatrix}
+\]</div>
+<p>特征方程：</p>
+<div class="arithmatex">\[
+(1-\lambda)(1-\epsilon-\lambda) + \epsilon = 0
+\]</div>
+<p>展开</p>
+<div class="arithmatex">\[
+\lambda^2 - (2-\epsilon)\lambda + (1-\epsilon+\epsilon) = \lambda^2 - (2-\epsilon)\lambda + 1 = 0
+\]</div>
+<p><strong>两个特征值都是 1</strong>（二重根）！从特征值看，<span class="arithmatex">\(B\)</span> 完全「正常」。</p>
+<p>但奇异值呢？算 <span class="arithmatex">\(B^\top B\)</span> 可得</p>
+<div class="arithmatex">\[
+\sigma \approx \sqrt2, \qquad \sigma \approx \frac{\epsilon}{\sqrt2}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\kappa(B) \approx \frac{2}{\epsilon} = 2\times10^8
+\]</div>
+<p><strong>严重病态，但特征值全是 1。</strong></p>
+<p><strong>结论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>矩阵类型</th>
+<th>判断病态应看</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>对称矩阵</strong></td>
+<td>特征值（因为奇异值 = 特征值的绝对值）</td>
+</tr>
+<tr>
+<td><strong>非对称矩阵</strong></td>
+<td><strong>只能看奇异值</strong></td>
+</tr>
+<tr>
+<td><strong>正规矩阵</strong>（<span class="arithmatex">\(AA^\top = A^\top A\)</span>）</td>
+<td>两者等价</td>
+</tr>
+</tbody>
+</table>
+<p><strong>原因</strong>：对称矩阵的 SVD 与特征分解一致（<span class="arithmatex">\(\sigma_i = \lvert\lambda_i\rvert\)</span>），
+所以特征值能反映一切。但非对称矩阵的特征向量<strong>不正交</strong>，
+特征值分解失去正交性，无法反映长度缩放的全貌。</p>
+<p>这也是「SVD 是比特征分解更本质的分解」的原因。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../matrix-decomposition/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 矩阵分解">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                矩阵分解
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../calculus/" class="md-footer__link md-footer__link--next" aria-label="下一页: 微积分">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                微积分
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
