@@ -1,0 +1,2626 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/signal-systems/quantization/">
+      
+      
+        <link rel="prev" href="../sampling/">
+      
+      
+        <link rel="next" href="../laplace/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>量化与信噪比 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              量化与信噪比
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、量化的数学模型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sqnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、量化信噪比（SQNR）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、量化信噪比（SQNR）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准假设
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        需要注意的偏差
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、量化噪声的频谱特性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、量化噪声的频谱特性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sigma-delta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        \(\Sigma\)-\(\Delta\) 调制：把过采样用到极致
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、动态范围与有效位数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1sqnr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：SQNR 计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：信号幅度不足的代价
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：过采样提高精度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：量化噪声与采样噪声的比较
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 数字化的精度界限
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 数据采集系统设计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海洋声学 · 水声信号采集
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MIT 6.003 Lec 22</code><code>通用数字信号处理教材</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>张贤达《现代信号处理》第 1 章（或同类中文教材）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../sampling/">sampling</a></span></div></div>
+
+<h1 id="_1">量化与信噪比<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>采样解决了<strong>时间</strong>上的离散化问题。但还有第二个问题：</p>
+<blockquote>
+<p><strong>采样得到的是实数，计算机只能存有限位数的二进制。</strong></p>
+</blockquote>
+<p>把连续幅值映射到有限个离散电平，这个操作叫<strong>量化</strong>。</p>
+<p>量化是<strong>不可逆</strong>的：一旦量化，原始精确值就永远丢失了。
+所以它是数字系统精度的<strong>根本限制</strong>——这一页给出它的定量分析。</p>
+<div class="admonition tip">
+<p class="admonition-title">采样与量化的分工</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>离散化对象</th>
+<th>误差来源</th>
+<th>能否避免</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>采样</strong></td>
+<td><strong>时间</strong></td>
+<td>混叠（高频折叠）</td>
+<td>可以（抗混叠滤波）</td>
+</tr>
+<tr>
+<td><strong>量化</strong></td>
+<td><strong>幅值</strong></td>
+<td>量化噪声</td>
+<td><strong>不能，只能减小</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区别</strong>：采样只要满足奈奎斯特条件就<strong>无损</strong>；
+而量化<strong>本质上一定有损</strong>——因为有限位表示不了无限精度。</p>
+<p>理解这一点，就能明白为什么「16 位音频」与「24 位音频」有可听差异，
+以及为什么 ADC 的位数是核心指标。</p>
+</div>
+<hr />
+<h2 id="_2">一、量化的数学模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设量化器有 <span class="arithmatex">\(2^B\)</span> 个电平（<span class="arithmatex">\(B\)</span> 是<strong>位数</strong>），量化步长</p>
+<div class="arithmatex">\[
+\Delta = \frac{V_{\text{FS}}}{2^B}
+\]</div>
+<p>其中 <span class="arithmatex">\(V_{\text{FS}}\)</span> 是<strong>满量程范围</strong>（full scale）。</p>
+<p><strong>量化操作</strong>：把输入 <span class="arithmatex">\(x\)</span> 映射到最近的量化电平</p>
+<div class="arithmatex">\[
+x_q = Q(x) = \left\lfloor \frac{x}{\Delta} \right\rfloor \Delta + \frac{\Delta}{2}
+\quad\text{（mid-rise 型）}
+\]</div>
+<p><strong>量化误差</strong>（噪声）：</p>
+<div class="arithmatex">\[
+e = x_q - x, \qquad \lvert e\rvert \leq \frac{\Delta}{2}
+\]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="量化器的阶梯特性与量化误差">
+<defs>
+<marker id="qt1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="qt1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：阶梯特性 -->
+<text class="lbl-s" x="14" y="18">量化器特性：阶梯状</text>
+<line class="gb" x1="26" y1="150" x2="196" y2="150" marker-end="url(#qt1-ah1)"/>
+<line class="gb" x1="110" y1="196" x2="110" y2="34" marker-end="url(#qt1-ah2)"/>
+<text class="lbl-s" x="186" y="142">输入 x</text>
+<text class="lbl-s" x="116" y="42">输出 x_q</text>
+<!-- 阶梯 -->
+<path class="a1" d="M60,176 L82,176 L82,152 L104,152 L104,128 L126,128 L126,104 L148,104 L148,80 L170,80 L170,56 L192,56" fill="none" stroke-width="2.2"/>
+<!-- 理想直线 -->
+<line class="gd" x1="60" y1="176" x2="192" y2="44" stroke-dasharray="5 4"/>
+<text class="lbl-s" x="60" y="212">理想转换（斜率 1）</text>
+<!-- 步长标注 -->
+<line class="a2" x1="82" y1="196" x2="104" y2="196" stroke-width="2"/>
+<line class="a2" x1="82" y1="190" x2="82" y2="202"/>
+<line class="a2" x1="104" y1="190" x2="104" y2="202"/>
+<text class="l2" x="82" y="216">Δ 量化步长</text>
+<!-- 右：量化误差 -->
+<text class="lbl-s" x="222" y="18">量化误差 e = x_q − x</text>
+<line class="gb" x1="234" y1="120" x2="412" y2="120" marker-end="url(#qt1-ah1)"/>
+<line class="gb" x1="322" y1="196" x2="322" y2="34" marker-end="url(#qt1-ah2)"/>
+<!-- 锯齿误差 -->
+<polyline class="a2" points="248,120 258,96 268,144 278,96 288,144 298,96 308,144 318,96 328,144 338,96 348,144 358,96 368,144 378,96 388,144 398,96" fill="none"/>
+<line class="gd" x1="248" y1="96" x2="412" y2="96" stroke-dasharray="4 4"/>
+<line class="gd" x1="248" y1="144" x2="412" y2="144" stroke-dasharray="4 4"/>
+<text class="l2" x="380" y="92">+Δ/2</text>
+<text class="l2" x="380" y="158">−Δ/2</text>
+<text class="lbl-s" x="234" y="212">误差在 ±Δ/2 内「锯齿」变化</text>
+</svg>
+<figcaption>图 1　量化器（左）把连续幅值映射到阶梯状的电平；量化误差（右）在 ±Δ/2 范围内呈锯齿状。误差的<b>范围</b>由位数决定，但误差的<b>分布</b>在均匀量化且信号足够「活跃」时近似均匀</figcaption>
+</figure>
+
+<hr />
+<h2 id="sqnr">二、量化信噪比（SQNR）<a class="headerlink" href="#sqnr" title="Permanent link">&para;</a></h2>
+<h3 id="_3">标准假设<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>若满足以下条件，可以推导出简洁的公式：</p>
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>误差<strong>均匀分布</strong>在 <span class="arithmatex">\([-\Delta/2,\Delta/2]\)</span></td>
+<td>信号变化足够「随机」</td>
+</tr>
+<tr>
+<td>误差与信号<strong>不相关</strong></td>
+<td>无相关性</td>
+</tr>
+<tr>
+<td>信号<strong>满量程</strong>利用</td>
+<td>不浪费动态范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">推导<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>误差的方差</strong>（量化噪声功率）：</p>
+<div class="arithmatex">\[
+\sigma_e^2 = \int_{-\Delta/2}^{\Delta/2}\frac{1}{\Delta}e^2\,\mathrm{d}e
+= \frac{\Delta^2}{12}
+\]</div>
+<p><strong>满量程正弦波的功率</strong>：幅度 <span class="arithmatex">\(V_{\text{FS}}/2\)</span>，所以</p>
+<div class="arithmatex">\[
+P_s = \frac{1}{2}\left(\frac{V_{\text{FS}}}{2}\right)^2 = \frac{V_{\text{FS}}^2}{8}
+\]</div>
+<p><strong>信噪比</strong>（用 <span class="arithmatex">\(\Delta = V_{\text{FS}}/2^B\)</span>）：</p>
+<div class="arithmatex">\[
+\text{SQNR} = \frac{P_s}{\sigma_e^2}
+= \frac{V_{\text{FS}}^2/8}{V_{\text{FS}}^2/(12\cdot 2^{2B})}
+= \frac{3}{2}\cdot 2^{2B}
+\]</div>
+<p>换成分贝：</p>
+<div class="arithmatex">\[
+\boxed{\ \text{SQNR} \approx 6.02B + 1.76\ \text{dB}\ }
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">这是数字系统里最该记住的公式之一</p>
+<p><strong>每增加 1 位，信噪比提高约 6 dB。</strong></p>
+<table>
+<thead>
+<tr>
+<th>位数 <span class="arithmatex">\(B\)</span></th>
+<th>理论 SQNR</th>
+<th>典型应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8</td>
+<td>50 dB</td>
+<td>电话（旧）、低端录音</td>
+</tr>
+<tr>
+<td>12</td>
+<td>74 dB</td>
+<td>一般数据采集</td>
+</tr>
+<tr>
+<td><strong>16</strong></td>
+<td><strong>98 dB</strong></td>
+<td><strong>CD 音频</strong></td>
+</tr>
+<tr>
+<td>20</td>
+<td>122 dB</td>
+<td>高精度测量</td>
+</tr>
+<tr>
+<td><strong>24</strong></td>
+<td><strong>146 dB</strong></td>
+<td><strong>专业录音、精密仪器</strong></td>
+</tr>
+<tr>
+<td>32</td>
+<td>194 dB</td>
+<td>浮点（实际受其它限制）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「6 dB 一位」这个经验值在工程中极其常用</strong>：
+需要 90 dB 动态范围？→ 算一下 <span class="arithmatex">\((90-1.76)/6.02 \approx 15\)</span>，取 16 位。</p>
+<p><strong>反向应用</strong>：看到 ADC 标称「16 位」，就知道它的理论 SNR 上限约 98 dB
+（实际通常只能做到 90 dB 左右，因为电路噪声更大）。</p>
+</div>
+<h3 id="_5">需要注意的偏差<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>上面的公式是<strong>理想情况</strong>。实际中会有偏差：</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>信号<strong>未满量程</strong>（幅度小）</td>
+<td>SQNR <strong>下降</strong>（见下）</td>
+</tr>
+<tr>
+<td>信号是<strong>简单波形</strong>（如直流、方波）</td>
+<td>误差不再是均匀分布，公式不适用</td>
+</tr>
+<tr>
+<td>有<strong>过载</strong>（超满量程）</td>
+<td>出现削波，误差大幅增加</td>
+</tr>
+<tr>
+<td>噪声整形（<span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span>）</td>
+<td>可以<strong>优于</strong>该公式</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">「未满量程」的代价很严重</p>
+<p>若信号只用了满量程的 <span class="arithmatex">\(1/k\)</span>，则信号功率降为 <span class="arithmatex">\(1/k^2\)</span>，
+SQNR 损失</p>
+<div class="arithmatex">\[
+20\log_{10}k \ \text{dB}
+\]</div>
+<p><strong>例</strong>：信号只用了一半量程（<span class="arithmatex">\(k=2\)</span>），损失 <strong>6 dB</strong>
+—— 相当于<strong>白白浪费了 1 位</strong>。</p>
+<p><strong>工程含义</strong>：</p>
+<ul>
+<li>前端<strong>增益要设对</strong>，让信号接近满量程但不削波</li>
+<li>这需要「自动增益控制（AGC）」或仔细的人工设置</li>
+<li>宁可小一点也不要过载（过载的失真远比损失 6 dB 严重）</li>
+</ul>
+</div>
+<hr />
+<h2 id="_6">三、量化噪声的频谱特性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>在标准假设下，量化噪声近似<strong>白噪声</strong>（功率谱平坦），功率均匀分布在整个频带 <span class="arithmatex">\([0, f_s/2]\)</span>。</p>
+<p><strong>噪声功率谱密度</strong>：</p>
+<div class="arithmatex">\[
+N_0 = \frac{\sigma_e^2}{f_s/2} = \frac{2\sigma_e^2}{f_s}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">关键推论：过采样可以降低带内噪声</p>
+<p>若信号带宽 <span class="arithmatex">\(B\)</span> 远小于 <span class="arithmatex">\(f_s/2\)</span>（即<strong>过采样</strong>），
+则落在<strong>信号带内</strong>的噪声只有</p>
+<div class="arithmatex">\[
+P_{e,\text{in-band}} = N_0\cdot B = \frac{2\sigma_e^2}{f_s}\cdot B
+= \sigma_e^2\cdot\frac{2B}{f_s}
+\]</div>
+<p><strong>带内信噪比</strong>：</p>
+<div class="arithmatex">\[
+\text{SNR}_{\text{in-band}} = \text{SQNR}\cdot\frac{f_s}{2B}
+\]</div>
+<p>即<strong>过采样率每提高 4 倍，带内 SNR 提高 6 dB（等效 1 位）</strong>。</p>
+<p><strong>这就是过采样的第二个好处</strong>（第一个是放宽抗混叠滤波器要求）：
+<strong>用速度换精度</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>过采样率</th>
+<th>等效增益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1×</td>
+<td>0 dB</td>
+</tr>
+<tr>
+<td>2×</td>
+<td>3 dB</td>
+</tr>
+<tr>
+<td><strong>4×</strong></td>
+<td><strong>6 dB（1 位）</strong></td>
+</tr>
+<tr>
+<td>16×</td>
+<td>12 dB（2 位）</td>
+</tr>
+<tr>
+<td>256×</td>
+<td>24 dB（4 位）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="sigma-delta"><span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> 调制：把过采样用到极致<a class="headerlink" href="#sigma-delta" title="Permanent link">&para;</a></h3>
+<p><strong>思路</strong>：既然过采样能降噪声，那就用<strong>极高的采样率</strong>（如 128×、256×），
+同时用<strong>噪声整形</strong>把量化噪声「推」到高频（信号带外），
+再用数字滤波去掉。</p>
+<p><strong>效果</strong>：用 1 位量化器可以达到 20 位以上的有效精度。</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结构</td>
+<td>1 位 ADC + 高过采样 + 噪声整形</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>精度高、模拟电路简单、抗混叠要求低</td>
+</tr>
+<tr>
+<td>缺点</td>
+<td>延迟较大（不适于快速瞬变）、需要数字滤波</td>
+</tr>
+<tr>
+<td>应用</td>
+<td><strong>音频 ADC/DAC 的主流方案</strong>、精密测量</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">噪声整形的基本思想</p>
+<p>普通量化的噪声均匀分布在整个频段。
+<span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> 用反馈把噪声「搬」到高频：</p>
+<div class="arithmatex">\[
+\text{噪声传递函数} = (1 - z^{-1})^n
+\]</div>
+<p>这是一阶（<span class="arithmatex">\(n=1\)</span>）或二阶差分，在低频处增益小、高频处增益大 ——
+于是<strong>信号带内的噪声被压制，带外的被放大</strong>，随后数字滤波一滤即可。</p>
+<p>类似「把垃圾扫到角落里」——只要角落不在我们需要看的地方。</p>
+</div>
+<hr />
+<h2 id="_7">四、动态范围与有效位数<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>动态范围</strong>：能同时处理的最大与最小信号之比。</p>
+<p>对 <span class="arithmatex">\(B\)</span> 位系统的<strong>理论动态范围</strong>约为 <span class="arithmatex">\(6.02B\)</span> dB。</p>
+<p><strong>有效位数（ENOB）</strong>：实际系统折算到理想系统的等效位数</p>
+<div class="arithmatex">\[
+\text{ENOB} = \frac{\text{SINAD} - 1.76}{6.02}
+\]</div>
+<p>其中 SINAD 是实测的信纳比（信号 /（噪声+失真））。</p>
+<div class="admonition note">
+<p class="admonition-title">为什么实际 ENOB 总小于标称位数</p>
+<table>
+<thead>
+<tr>
+<th>误差来源</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>量化噪声</td>
+<td>理论下限（<span class="arithmatex">\(6.02B\)</span>）</td>
+</tr>
+<tr>
+<td><strong>热噪声</strong></td>
+<td>电路固有，常成为主导</td>
+</tr>
+<tr>
+<td><strong>非线性/失真</strong></td>
+<td>谐波失真</td>
+</tr>
+<tr>
+<td><strong>时钟抖动</strong></td>
+<td>采样时刻不准（高频时严重）</td>
+</tr>
+<tr>
+<td><strong>参考电压噪声</strong></td>
+<td>直接进入量化结果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>典型值</strong>：一个「16 位」ADC 实际 ENOB 常为 14–15 位。
+所以看 datasheet 时要找 <strong>ENOB 或 SINAD</strong>，而不是只看「位数」。</p>
+<p><strong>时钟抖动的影响</strong>（高频时不可忽略）：</p>
+<div class="arithmatex">\[
+\text{SNR}_{\text{jitter}} \approx -20\log_{10}(2\pi f_{\text{in}}\sigma_t)
+\]</div>
+<p>可见输入频率 <span class="arithmatex">\(f_{\text{in}}\)</span> <strong>越高</strong>，抖动的影响<strong>越大</strong>。
+这解释了为什么高速 ADC 对时钟质量要求极高。</p>
+</div>
+<hr />
+<h2 id="_8">五、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1sqnr">例题 1：SQNR 计算<a class="headerlink" href="#1sqnr" title="Permanent link">&para;</a></h3>
+<p>一个 12 位 ADC，满量程 ±5 V，输入为满量程正弦波。</p>
+<p><strong>(a)</strong> 求量化步长 <span class="arithmatex">\(\Delta\)</span>。</p>
+<p><strong>(b)</strong> 求理论 SQNR。</p>
+<p><strong>&copy;</strong> 若要求 SQNR ≥ 80 dB，至少需要多少位？</p>
+<details class="note">
+<summary>思路</summary>
+<p>步长 <span class="arithmatex">\(\Delta = V_{\text{FS}}/2^B\)</span>；SQNR 用 <span class="arithmatex">\(6.02B+1.76\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 量化步长</strong></p>
+<p>满量程范围 <span class="arithmatex">\(V_{\text{FS}} = 10\)</span> V（从 <span class="arithmatex">\(-5\)</span> 到 <span class="arithmatex">\(+5\)</span>）。</p>
+<div class="arithmatex">\[
+\Delta = \frac{10}{2^{12}} = \frac{10}{4096} \approx 2.44 \text{ mV}
+\]</div>
+<p><strong>(b) 理论 SQNR</strong></p>
+<div class="arithmatex">\[
+\text{SQNR} = 6.02\times12 + 1.76 = 72.24 + 1.76 = 74.0 \text{ dB}
+\]</div>
+<p><strong>&copy; 需要多少位</strong></p>
+<p>解</p>
+<div class="arithmatex">\[
+6.02B + 1.76 \geq 80
+\implies
+B \geq \frac{80 - 1.76}{6.02} \approx 13.0
+\]</div>
+<p>所以至少需要 <strong>13 位</strong>（实际工程常取 14 或 16 位，留余量）。</p>
+<p><strong>注意</strong>：若取 13 位，SQNR 恰好 80.0 dB——<strong>没有任何余量</strong>。
+而实际系统的噪声远不止量化噪声，所以<strong>必须留足位数余量</strong>。</p>
+<p><strong>经验</strong>：按理论值算出后，<strong>再加 2–4 位</strong>作为工程余量。</p>
+</details>
+<hr />
+<h3 id="2">例题 2：信号幅度不足的代价<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>某 16 位系统，输入信号幅度只有满量程的 &#8539;。求实际 SQNR。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先算满量程时的 SQNR，再减去 <span class="arithmatex">\(20\log_{10}(8)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>满量程时的理论 SQNR</strong>：</p>
+<div class="arithmatex">\[
+6.02\times16 + 1.76 = 98.1 \text{ dB}
+\]</div>
+<p><strong>幅度损失</strong>（<span class="arithmatex">\(k = 8\)</span>）：</p>
+<div class="arithmatex">\[
+20\log_{10}8 = 18.06 \text{ dB}
+\]</div>
+<p><strong>实际 SQNR</strong>：</p>
+<div class="arithmatex">\[
+\text{SQNR} = 98.1 - 18.06 \approx 80.0 \text{ dB}
+\]</div>
+<p><strong>结论</strong>：16 位系统只发挥了 <strong>13 位</strong>的效果（<span class="arithmatex">\(80 \approx 6.02\times13+1.76\)</span>）。</p>
+<p><strong>等于浪费了 3 位</strong>（<span class="arithmatex">\(18/6 = 3\)</span>）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这是数字采集系统最常见的错误</p>
+<p><strong>现象</strong>：明明用了 16 位 ADC，实测精度却只有 13 位。</p>
+<p><strong>原因</strong>：信号没满量程，或<strong>传感器的输出范围与 ADC 量程不匹配</strong>。</p>
+<p><strong>对策</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>措施</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前端放大</td>
+<td>把信号放大到接近满量程</td>
+</tr>
+<tr>
+<td>选合适量程的 ADC</td>
+<td>量程不是越大越好</td>
+</tr>
+<tr>
+<td>自动增益控制</td>
+<td>适应信号幅度变化</td>
+</tr>
+<tr>
+<td>用更高位数</td>
+<td>但这是最贵的方式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>权衡</strong>：小幅过载（削波）比大幅欠载更糟——前者产生非线性失真，
+后者只是 SNR 下降。所以宁可让峰值略低于满量程（如 90%）。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：过采样提高精度<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>一个 12 位 ADC，信号带宽 1 kHz。若以 1 kHz × 2 = 2 kHz 采样（临界），
+SQNR 是多少？若改用 128 kHz 过采样并做理想数字滤波，带内 SQNR 是多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p>过采样率提高 N 倍，带内 SNR 提高 <span class="arithmatex">\(10\log_{10}(N/2)\cdot\ldots\)</span> 注意公式是 <span class="arithmatex">\(f_s/(2B)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>基准 SQNR</strong>（12 位）：</p>
+<div class="arithmatex">\[
+6.02\times12 + 1.76 = 74.0 \text{ dB}
+\]</div>
+<p><strong>过采样率计算</strong>：</p>
+<p>信号带宽 <span class="arithmatex">\(B = 1\)</span> kHz，需要 <span class="arithmatex">\(f_s \geq 2\)</span> kHz。实际取 <span class="arithmatex">\(f_s = 128\)</span> kHz，</p>
+<div class="arithmatex">\[
+\text{过采样率} = \frac{f_s}{2B} = \frac{128}{2} = 64
+\]</div>
+<p><strong>带内 SNR 提升</strong>：</p>
+<div class="arithmatex">\[
+10\log_{10}(64) = 18.06 \text{ dB}
+\]</div>
+<p><strong>新的带内 SQNR</strong>：</p>
+<div class="arithmatex">\[
+74.0 + 18.06 \approx 92.1 \text{ dB}
+\]</div>
+<p><strong>等效位数</strong>：</p>
+<div class="arithmatex">\[
+\frac{92.1 - 1.76}{6.02} \approx 15 \text{ 位}
+\]</div>
+<p><strong>结论</strong>：12 位 ADC + 64 倍过采样 ≈ <strong>15 位</strong>的效果（等效提高了 3 位）。</p>
+<p><strong>验证规律</strong>：过采样率每提高 4 倍增加 1 位。</p>
+<div class="arithmatex">\[
+\log_4(64) = 3 \text{ 位} \;\checkmark
+\]</div>
+<p>（<span class="arithmatex">\(4^3 = 64\)</span> ✓）</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">过采样的实际代价</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据率高 64 倍</td>
+<td>需要高速接口与存储</td>
+</tr>
+<tr>
+<td>功耗增加</td>
+<td>ADC 与数字电路的动态功耗随速率上升</td>
+</tr>
+<tr>
+<td>需要数字滤波</td>
+<td>抽取（decimation）滤波器</td>
+</tr>
+<tr>
+<td>延迟增加</td>
+<td>滤波器群延迟</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以「用速度换精度」有经济性上限</strong>：
+通常过采样 16–256 倍是合理范围，
+再高就该考虑直接用更高位数的 ADC。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：量化噪声与采样噪声的比较<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>某系统同时存在采样引起的混叠与量化噪声。若抗混叠滤波器不理想
+（残留 10% 的高频能量混叠进来），量化噪声为 <span class="arithmatex">\(-80\)</span> dB。
+问哪个是主要误差源？</p>
+<details class="note">
+<summary>提示</summary>
+<p>把混叠的影响折算成等效噪声电平，与量化噪声比较。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>量化噪声</strong>：<span class="arithmatex">\(-80\)</span> dB（相对信号）。</p>
+<p><strong>混叠的影响</strong>：</p>
+<p>若抗混叠滤波器残留 10% 的高频能量（即高频处的增益为 <span class="arithmatex">\(0.1\)</span>），
+且这些高频原本可能与信号同量级，则混叠进来的功率约为</p>
+<div class="arithmatex">\[
+0.1^2 = 0.01
+\]</div>
+<p>即 <span class="arithmatex">\(-20\)</span> dB（相对原始高频功率）。</p>
+<p>若原始信号在低频，高频只有噪声（假设噪声功率与信号同量级），
+则混叠噪声约为 <span class="arithmatex">\(-20\)</span> dB —— <strong>远大于 <span class="arithmatex">\(-80\)</span> dB 的量化噪声</strong>。</p>
+<p><strong>结论：混叠是主导误差，比量化噪声严重约 60 dB。</strong></p>
+<p><strong>工程启示</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>误差源</th>
+<th>相对电平</th>
+<th>严重性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>量化噪声</td>
+<td><span class="arithmatex">\(-80\)</span> dB</td>
+<td>次要</td>
+</tr>
+<tr>
+<td><strong>混叠（滤波器不理想）</strong></td>
+<td><span class="arithmatex">\(-20\)</span> dB</td>
+<td><strong>主要</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对策优先级</strong>：</p>
+<ol>
+<li><strong>先把抗混叠滤波做好</strong>（这是最关键的）</li>
+<li>再考虑提高位数</li>
+<li>最后考虑过采样</li>
+</ol>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个排序很重要（避免把资源投错地方）</p>
+<p>常见误区：<strong>花大钱买 24 位 ADC，却不认真设计抗混叠滤波器</strong>。</p>
+<p>结果：混叠噪声把系统实际性能限制在十几位，24 位的钱白花了。</p>
+<p><strong>正确的诊断顺序</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>混叠是否被有效抑制（用高频输入测试）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>信号是否满量程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>时钟抖动是否可接受</td>
+</tr>
+<tr>
+<td>4</td>
+<td>量化位数是否足够</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践方法</strong>：输入一个纯音，看频谱上是否有非谐波的杂散
+（混叠或杂散信号的特征）。</p>
+</div>
+<hr />
+<h2 id="_9">六、用在哪些课程里<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">现代数字信号处理 · 数字化的精度界限<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ADC/DAC 选型</td>
+<td>位数 ↔ 动态范围</td>
+</tr>
+<tr>
+<td>SQNR 预算</td>
+<td>用「6 dB 一位」快速估算</td>
+</tr>
+<tr>
+<td>定点实现</td>
+<td>系数量化误差对滤波器的影响</td>
+</tr>
+<tr>
+<td>过采样设计</td>
+<td>用速度换精度</td>
+</tr>
+<tr>
+<td>噪声整形</td>
+<td><span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> 调制</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">定点 DSP 中的量化误差还有一个特殊问题</p>
+<p>除了 ADC 量化，<strong>滤波器系数的量化</strong>也会引入误差：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系数误差</td>
+<td>频率响应偏移</td>
+</tr>
+<tr>
+<td>极点位置漂移</td>
+<td><strong>可能使稳定系统变得不稳定</strong>（前面 Z 变换那页提到）</td>
+</tr>
+<tr>
+<td>累加器溢出</td>
+<td>需要舍入/饱和处理</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对策</strong>：</p>
+<ul>
+<li>用<strong>级联二阶节</strong>（biquad）而非高阶直接型（对系数量化不敏感）</li>
+<li>分析<strong>系数量化灵敏度</strong>（极点越靠近单位圆越敏感）</li>
+<li>必要时用浮点或块浮点</li>
+</ul>
+</div>
+<h3 id="_11">智能传感与信息处理 · 数据采集系统设计<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ADC 位数与量程选择</strong>：匹配传感器输出范围</li>
+<li><strong>前端放大</strong>：让信号接近满量程（关键！）</li>
+<li><strong>抗混叠滤波 + 量化噪声的联合预算</strong></li>
+<li><strong>过采样</strong>降低对抗混叠滤波器的要求并提升有效位数</li>
+<li><strong>ENOB 实测</strong>：用正弦信号 + FFT 分析确定实际有效位数</li>
+</ul>
+<h3 id="_12">海洋声学 · 水声信号采集<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>动态范围要求高</strong>：弱目标回波与强混响共存，需要宽动态范围</li>
+<li><strong>低噪声前置放大</strong>决定系统噪声底</li>
+<li><strong>采样率与位数的权衡</strong>：受功耗、电缆带宽（拖曳阵）限制</li>
+<li><strong>时间同步与抖动</strong>：阵列信号处理对时钟质量敏感</li>
+</ul>
+<hr />
+<h2 id="_13">七、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 一个 8 位系统的理论 SQNR 是多少？若实际测得 45 dB，说明什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>套公式，然后比较理论与实测。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>理论值</strong>：</p>
+<div class="arithmatex">\[
+6.02\times8 + 1.76 = 49.9 \text{ dB}
+\]</div>
+<p><strong>实测 45 dB 的含义</strong>：</p>
+<p>折算有效位数</p>
+<div class="arithmatex">\[
+\text{ENOB} = \frac{45 - 1.76}{6.02} \approx 7.2 \text{ 位}
+\]</div>
+<p>即实际有效位数 <strong>7.2 位</strong>（标称 8 位）。</p>
+<p><strong>说明</strong>：有约 4.9 dB 的额外噪声/失真来源，可能是：</p>
+<table>
+<thead>
+<tr>
+<th>可能原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电路热噪声</td>
+<td>常见的限制因素</td>
+</tr>
+<tr>
+<td>电源噪声</td>
+<td>耦合到信号路径</td>
+</tr>
+<tr>
+<td>非线性失真</td>
+<td>谐波分量计入 SINAD</td>
+</tr>
+<tr>
+<td>信号未满量程</td>
+<td>每减半损失 6 dB</td>
+</tr>
+<tr>
+<td>时钟抖动</td>
+<td>高频输入时明显</td>
+</tr>
+</tbody>
+</table>
+<p><strong>诊断方法</strong>：输入纯正弦，做 FFT 看噪声底与谐波峰的位置
+—— 若只有平坦底噪则是噪声问题，若有离散谐波峰则是失真问题。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 若要设计一个动态范围 120 dB 的音频采集系统，至少需要多少位？
+实际应选多少位？</p>
+<details class="note">
+<summary>提示</summary>
+<p>用 <span class="arithmatex">\(6.02B+1.76 \geq 120\)</span> 算理论值，再考虑余量。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>理论下限</strong>：</p>
+<div class="arithmatex">\[
+B \geq \frac{120 - 1.76}{6.02} \approx 19.6
+\]</div>
+<p>所以理论至少 <strong>20 位</strong>。</p>
+<p><strong>实际应选 24 位</strong>，理由：</p>
+<table>
+<thead>
+<tr>
+<th>考虑</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>电路噪声</td>
+<td>实际 ENOB 比标称低 1–3 位</td>
+</tr>
+<tr>
+<td>信号不满量程</td>
+<td>留 3–6 dB 余量避免削波</td>
+</tr>
+<tr>
+<td>前端噪声</td>
+<td>前置放大器通常成为限制（24 位 ADC 前，模拟电路噪声往往已超过量化噪声）</td>
+</tr>
+<tr>
+<td>动态余量</td>
+<td>应付瞬态峰值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要提醒</strong>：<strong>24 位 ADC 的实际可用位数常由模拟前端决定</strong>。</p>
+<p>若前置放大器的等效输入噪声对应 18 位，那么用 24 位 ADC
+也只能获得 18 位的效果 —— <strong>模拟电路才是瓶颈</strong>。</p>
+<p><strong>设计原则</strong>：让<strong>量化噪声略低于</strong>模拟电路噪声底（不浪费），
+否则提高位数没有意义。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：过采样 4 倍可以把有效位数提高 2 位。对吗？</p>
+<details class="note">
+<summary>提示</summary>
+<p>过采样 4 倍带来多少 dB？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。过采样 4 倍提高 6 dB，即 1 位。</strong></p>
+<p><strong>推导</strong>：带内噪声功率与过采样率成反比（噪声总量固定但分布更宽），
+所以过采样率提高 <span class="arithmatex">\(N\)</span> 倍，带内 SNR 提高</p>
+<div class="arithmatex">\[
+10\log_{10}N \ \text{dB}
+\]</div>
+<p>取 <span class="arithmatex">\(N = 4\)</span>：</p>
+<div class="arithmatex">\[
+10\log_{10}4 \approx 6.02 \text{ dB} = \text{1 位}
+\]</div>
+<p><strong>正确规律</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>过采样率</th>
+<th>SNR 提升</th>
+<th>等效位数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2×</td>
+<td>3 dB</td>
+<td>0.5 位</td>
+</tr>
+<tr>
+<td><strong>4×</strong></td>
+<td><strong>6 dB</strong></td>
+<td><strong>1 位</strong></td>
+</tr>
+<tr>
+<td>16×</td>
+<td>12 dB</td>
+<td>2 位</td>
+</tr>
+<tr>
+<td>64×</td>
+<td>18 dB</td>
+<td>3 位</td>
+</tr>
+<tr>
+<td>256×</td>
+<td>24 dB</td>
+<td>4 位</td>
+</tr>
+</tbody>
+</table>
+<p><strong>记忆方法</strong>：<strong>「4 倍 = 1 位」</strong>（与「6 dB = 1 位」一致）。</p>
+<p><strong>提高 2 位需要 16 倍过采样</strong>（<span class="arithmatex">\(4^2 = 16\)</span>）。</p>
+<p><strong>实践含义</strong>：想把 12 位提升到 16 位，需要过采样 <span class="arithmatex">\(4^4 = 256\)</span> 倍
+—— 数据率暴增 256 倍，代价很大。这就是为什么 <span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span>
+要配合<strong>噪声整形</strong>（仅靠过采样不够经济）。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么 <span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> ADC 可以用 1 位量化器实现高精度？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想噪声整形把噪声搬到哪里去了。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>核心：噪声整形 + 高过采样</strong></p>
+<p><strong>1. 噪声整形</strong></p>
+<p><span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> 调制器用反馈使量化噪声的传递函数为</p>
+<div class="arithmatex">\[
+H_n(z) = (1-z^{-1})^n
+\]</div>
+<p>这是<strong>高通</strong>特性：在低频处增益很小，高频处增益大。</p>
+<p><strong>效果</strong>：把量化噪声从信号频带「推」到高频区。</p>
+<p><strong>2. 高过采样</strong></p>
+<p>采样率取远高于奈奎斯特（如 128×、256×），
+于是信号带（低频）之外有大片「空闲」频段用来存放被推出去的噪声。</p>
+<p><strong>3. 数字抽取滤波</strong></p>
+<p>把高频噪声滤掉，再降采样到目标速率。</p>
+<p><strong>结果</strong>：1 位量化器（理论上 SQNR 只有约 8 dB）
+经过二阶噪声整形 + 256 倍过采样后，可达 <strong>100 dB 以上</strong>。</p>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>所需位数</th>
+<th>模拟电路复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传统逐次逼近（SAR）</td>
+<td>高（如 18 位）</td>
+<td><strong>高</strong>（精密电阻/电容匹配）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span></td>
+<td>1 位</td>
+<td><strong>低</strong>（简单比较器）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这对集成电路特别友好</strong>：芯片上做<strong>精密匹配</strong>很难，
+但做<strong>高速逻辑</strong>很容易。<span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span> 正是用「速度」换「精度匹配」，
+与集成电路的工艺优势匹配。</p>
+<p><strong>代价</strong>：需要数字滤波（芯片面积）与延迟（不适合快速瞬变场合）。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../sampling/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 采样定理与混叠">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                采样定理与混叠
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../laplace/" class="md-footer__link md-footer__link--next" aria-label="下一页: 拉普拉斯变换">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                拉普拉斯变换
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

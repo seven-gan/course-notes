@@ -1,0 +1,2824 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/signal-systems/dft/">
+      
+      
+        <link rel="prev" href="../fourier/">
+      
+      
+        <link rel="next" href="../sampling/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>离散傅里叶变换与 FFT - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fft" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              离散傅里叶变换与 FFT
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、DFT 的定义与来源
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、DFT 的定义与来源">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么是这个形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、频率分辨率与物理频率
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、频谱泄漏与窗函数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、频谱泄漏与窗函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题的来源
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用窗函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        加窗的代价
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fft-on2-onlog-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、FFT：把 \(O(N^2)\) 降到 \(O(N\log N)\)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、FFT：把 \(O(N^2)\) 降到 \(O(N\log N)\)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DFT 的计算量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fft_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FFT 的核心思想：分治
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dft_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、DFT 的重要性质
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-4-dft" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：手算 4 点 DFT
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：确定频率分辨率
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：循环卷积与线性卷积的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：加窗的效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 数字频谱分析的核心工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 传感器信号分析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海洋声学 · 声信号处理链
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MIT 6.003 Lec 17–20</code><code>通用数字信号处理教材</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>张贤达《现代信号处理》第 1 章（或同类中文教材）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../fourier/">fourier</a><a href="../sampling/">sampling</a></span></div></div>
+
+<h1 id="fft">离散傅里叶变换与 FFT<a class="headerlink" href="#fft" title="Permanent link">&para;</a></h1>
+<p>傅里叶变换处理的是<strong>连续</strong>信号，但计算机只能处理<strong>有限长离散</strong>数据。</p>
+<p>这一页回答：<strong>给定 <span class="arithmatex">\(N\)</span> 个采样点，怎么算出它的频谱？</strong></p>
+<p>答案就是<strong>离散傅里叶变换（DFT）</strong>：</p>
+<div class="arithmatex">\[
+X[k] = \sum_{n=0}^{N-1} x[n]\,e^{-j2\pi kn/N},
+\qquad k = 0,1,\dots,N-1
+\]</div>
+<p>它是频谱分析与数字滤波的<strong>实际工具</strong>——也是 FFT 要加速的那个运算。</p>
+<div class="admonition tip">
+<p class="admonition-title">三种傅里叶变换的关系（先理清楚）</p>
+<p>这是最容易混淆的地方：</p>
+<table>
+<thead>
+<tr>
+<th>变换</th>
+<th>信号类型</th>
+<th>频谱类型</th>
+<th>计算方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTFT（连续时间傅里叶变换）</td>
+<td>连续、非周期</td>
+<td>连续、非周期</td>
+<td>积分</td>
+</tr>
+<tr>
+<td>DTFT</td>
+<td><strong>离散</strong>、非周期</td>
+<td>连续、<strong>周期</strong></td>
+<td>无穷求和</td>
+</tr>
+<tr>
+<td><strong>DFT</strong></td>
+<td>离散、<strong>有限长</strong></td>
+<td>离散、周期</td>
+<td><strong>有限求和</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两条规律</strong>（记这两条就够了）：</p>
+<table>
+<thead>
+<tr>
+<th>时域</th>
+<th>→ 频域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>离散（采样）</td>
+<td>频谱<strong>周期</strong>重复</td>
+</tr>
+<tr>
+<td>有限长（截断）</td>
+<td>频谱<strong>离散</strong>化</td>
+</tr>
+</tbody>
+</table>
+<p>所以：<strong>时域离散且有限 → 频域周期且离散</strong>，这正是 DFT。</p>
+</div>
+<hr />
+<h2 id="dft">一、DFT 的定义与来源<a class="headerlink" href="#dft" title="Permanent link">&para;</a></h2>
+<h3 id="_1">定义<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>对长度 <span class="arithmatex">\(N\)</span> 的序列 <span class="arithmatex">\(x[0],\dots,x[N-1]\)</span>，DFT 为</p>
+<div class="arithmatex">\[
+X[k] = \sum_{n=0}^{N-1} x[n]\,e^{-j2\pi kn/N},
+\qquad k = 0,1,\dots,N-1
+\]</div>
+<p><strong>逆变换（IDFT）</strong>：</p>
+<div class="arithmatex">\[
+x[n] = \frac{1}{N}\sum_{k=0}^{N-1} X[k]\,e^{j2\pi kn/N}
+\]</div>
+<p>两者形式对称，只差指数符号与前面的 <span class="arithmatex">\(1/N\)</span>。</p>
+<h3 id="_2">为什么是这个形式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>回忆「规范正交基下求坐标 = 内积」（线性代数模块）。</p>
+<p>基向量取</p>
+<div class="arithmatex">\[
+\boldsymbol{w}_k = \left(1,\ e^{j2\pi k/N},\ e^{j4\pi k/N},\ \dots,\ e^{j2\pi k(N-1)/N}\right)
+\]</div>
+<p>这 <span class="arithmatex">\(N\)</span> 个向量<strong>互相正交</strong>：</p>
+<div class="arithmatex">\[
+\sum_{n=0}^{N-1} e^{j2\pi (k-m)n/N} = \begin{cases} N, &amp; k = m \\ 0, &amp; k \neq m\end{cases}
+\]</div>
+<p>（这是几何级数求和的结果：公比 <span class="arithmatex">\(e^{j2\pi(k-m)/N} \neq 1\)</span> 时，<span class="arithmatex">\(N\)</span> 项之和为 0。）</p>
+<p>所以 <span class="arithmatex">\(X[k]\)</span> 就是 <span class="arithmatex">\(x\)</span> 在这组正交基上的<strong>投影系数</strong>——与傅里叶级数系数公式同源。</p>
+<div class="admonition note">
+<p class="admonition-title">与 DTFT 的关系：DFT 是 DTFT 的采样</p>
+<p>若把有限长序列补零成无限长（或视为一个周期的采样），则</p>
+<div class="arithmatex">\[
+X[k] = X(e^{j\omega})\Big|_{\omega = 2\pi k/N}
+\]</div>
+<p>即 <strong>DFT 就是 DTFT 在 <span class="arithmatex">\(N\)</span> 个等间隔频点上的采样值</strong>。</p>
+<p><strong>这解释了两件事</strong>：</p>
+<ol>
+<li><strong>DFT 的频域是周期的</strong>（周期 <span class="arithmatex">\(N\)</span>，因为 <span class="arithmatex">\(X[k+N] = X[k]\)</span>）</li>
+<li><strong>频率分辨率</strong>：相邻频点间隔 <span class="arithmatex">\(\Delta f = f_s/N\)</span></li>
+</ol>
+</div>
+<hr />
+<h2 id="_3">二、频率分辨率与物理频率<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>DFT 的第 <span class="arithmatex">\(k\)</span> 个点对应<strong>物理频率</strong></p>
+<div class="arithmatex">\[
+f_k = \frac{k}{N}f_s, \qquad k = 0,1,\dots,N-1
+\]</div>
+<p><strong>频率分辨率</strong>（能区分的最小频率间隔）：</p>
+<div class="arithmatex">\[
+\boxed{\ \Delta f = \frac{f_s}{N} = \frac{1}{NT_s} = \frac{1}{T_{\text{总}}}\ }
+\]</div>
+<p>其中 <span class="arithmatex">\(T_{\text{总}} = NT_s\)</span> 是<strong>总观测时长</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">关键认识：分辨率只取决于观测时长</p>
+<div class="arithmatex">\[
+\Delta f = \frac{1}{T_{\text{总}}}
+\]</div>
+<p><strong>与采样率无关</strong>（在 <span class="arithmatex">\(N\)</span> 固定时提高 <span class="arithmatex">\(f_s\)</span> 只会扩大频率范围，不会细化分辨率）。</p>
+<table>
+<thead>
+<tr>
+<th>想要的效果</th>
+<th>该怎么做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>看<strong>更高</strong>的频率</td>
+<td>提高<strong>采样率</strong> <span class="arithmatex">\(f_s\)</span></td>
+</tr>
+<tr>
+<td>分辨<strong>更近</strong>的两个频率</td>
+<td>增加<strong>观测时长</strong> <span class="arithmatex">\(T_{\text{总}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见误解</strong>：「补零能提高分辨率」。</p>
+<p><strong>实际上</strong>：补零只是让频点更密（曲线更光滑），
+<strong>不能</strong>区分原本分辨不出的两个频率——因为补零没有增加真实信息。</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>频点间隔</th>
+<th>真实分辨率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>补零（<span class="arithmatex">\(N\)</span> 增大，<span class="arithmatex">\(T\)</span> 不变）</td>
+<td>变密</td>
+<td><strong>不变</strong></td>
+</tr>
+<tr>
+<td>延长观测（<span class="arithmatex">\(T\)</span> 增大）</td>
+<td>变密</td>
+<td><strong>提高</strong></td>
+</tr>
+</tbody>
+</table>
+<p>验证方法：观察补零后的频谱，峰仍然「胖」（主瓣宽度由 <span class="arithmatex">\(T\)</span> 决定）。</p>
+</div>
+<hr />
+<h2 id="_4">三、频谱泄漏与窗函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">问题的来源<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>DFT 隐含假设：<strong>所取的那 <span class="arithmatex">\(N\)</span> 个点正好是一个周期</strong>（即信号在观测窗口内周期性延拓）。</p>
+<p>若信号频率不是 <span class="arithmatex">\(\Delta f\)</span> 的整数倍，这个假设不成立 →
+观测窗口的首尾<strong>接不上</strong> → 频谱出现<strong>虚假的旁瓣</strong>。这叫<strong>频谱泄漏</strong>。</p>
+<p><strong>从频域看</strong>：截断相当于乘以矩形窗，而矩形窗的频谱是 sinc（主瓣 + 无限旁瓣）。
+频域相乘 = 卷积，所以真实谱线被「抹开」成 sinc 形状。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="频谱泄漏的成因">
+<!-- 此图只画波形与窗口，不需要箭头 marker -->
+<!-- 上：整周期截断（无泄漏） -->
+<text class="l3" x="14" y="18">整周期截断：首尾相接，无泄漏</text>
+<line class="gb" x1="24" y1="76" x2="200" y2="76"/>
+<path class="a3" d="M30,76 C42,40 54,40 66,76 C78,112 90,112 102,76 C114,40 126,40 138,76 C150,112 162,112 174,76 C186,40 198,40 206,76" fill="none"/>
+<line class="gd" x1="30" y1="30" x2="30" y2="120" stroke-dasharray="4 4"/>
+<line class="gd" x1="198" y1="30" x2="198" y2="120" stroke-dasharray="4 4"/>
+<text class="lbl-s" x="26" y="136">窗口起点</text>
+<text class="lbl-s" x="166" y="136">窗口终点（相位对齐）</text>
+<!-- 下：非整周期截断（有泄漏） -->
+<text class="l2" x="14" y="176">非整周期截断：首尾不接，产生泄漏</text>
+<line class="gb" x1="24" y1="234" x2="200" y2="234"/>
+<path class="a2" d="M30,234 C42,198 54,198 66,234 C78,270 90,270 102,234 C114,198 126,198 138,234 C150,270 162,270 174,234 C186,198 200,206 206,222" fill="none"/>
+<line class="gd" x1="30" y1="188" x2="30" y2="272" stroke-dasharray="4 4"/>
+<line class="gd" x1="198" y1="188" x2="198" y2="272" stroke-dasharray="4 4"/>
+<text class="l2" x="26" y="288">起点与终点「错位」⟹ 频谱被抹开</text>
+<!-- 右侧说明 -->
+<text class="lbl-s" x="240" y="60">截断 = 乘以矩形窗</text>
+<text class="lbl-s" x="240" y="82">矩形窗频谱 = sinc</text>
+<text class="lbl-s" x="240" y="104">真实谱线 ⊛ sinc</text>
+<text class="l2" x="240" y="132">⟹ 主瓣变宽、出现旁瓣</text>
+<text class="lbl-s" x="240" y="178">对策：换窗函数</text>
+<text class="lbl-s" x="240" y="200">汉宁 / 汉明 / 布莱克曼</text>
+<text class="lbl-s" x="240" y="222">（旁瓣更低，但主瓣更宽）</text>
+<text class="lbl-s" x="240" y="248">这是「泄漏 vs 分辨率」的权衡</text>
+</svg>
+<figcaption>图 1　频谱泄漏的成因。信号频率是频率分辨率的整数倍时（上），窗口首尾恰好相接，无泄漏；否则（下）首尾错位，相当于乘了矩形窗，频谱被 sinc 抹开</figcaption>
+</figure>
+
+<h3 id="_6">常用窗函数<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>窗</th>
+<th>主瓣宽度</th>
+<th>最高旁瓣</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>矩形</strong></td>
+<td>最窄（最高分辨率）</td>
+<td><span class="arithmatex">\(-13\)</span> dB</td>
+<td>整周期截断、瞬态信号</td>
+</tr>
+<tr>
+<td><strong>汉宁（Hann）</strong></td>
+<td>2 倍</td>
+<td><span class="arithmatex">\(-31\)</span> dB</td>
+<td>通用频谱分析</td>
+</tr>
+<tr>
+<td><strong>汉明（Hamming）</strong></td>
+<td>2 倍</td>
+<td><span class="arithmatex">\(-43\)</span> dB</td>
+<td>需要低旁瓣</td>
+</tr>
+<tr>
+<td><strong>布莱克曼</strong></td>
+<td>3 倍</td>
+<td><span class="arithmatex">\(-58\)</span> dB</td>
+<td>大动态范围（弱信号检测）</td>
+</tr>
+<tr>
+<td><strong>平顶</strong></td>
+<td>最宽</td>
+<td>极低</td>
+<td><strong>幅度精度优先</strong>（校准）</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">窗函数的选择原则</p>
+<p><strong>权衡关系</strong>：<strong>主瓣越窄（分辨率好）↔ 旁瓣越低（泄漏小）</strong>，二者不可兼得。</p>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区分靠得很近的两个频率</td>
+<td>矩形 / 汉宁（主瓣窄）</td>
+</tr>
+<tr>
+<td>检测一个弱信号旁边有强信号</td>
+<td>布莱克曼（旁瓣低）</td>
+</tr>
+<tr>
+<td>准确测量幅度</td>
+<td>平顶窗</td>
+</tr>
+<tr>
+<td>分析瞬态/冲击</td>
+<td>矩形窗（不加窗）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么汉宁窗是「默认选择」</strong>：它在分辨率与泄漏之间取得较好的平衡，
+且首尾都趋零（天然缓解不连续）。</p>
+</div>
+<h3 id="_7">加窗的代价<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>加窗会改变信号的幅度与能量。<strong>修正方法</strong>：</p>
+<ul>
+<li><strong>幅度修正</strong>：除以窗函数的<strong>相干增益</strong>（<span class="arithmatex">\(\frac{1}{N}\sum_{n}w[n]\)</span>）</li>
+<li><strong>能量修正</strong>：除以窗的<strong>均方根增益</strong>（用它算功率谱时）</li>
+</ul>
+<p>忽略修正会导致幅度系统性偏小（例如汉宁窗约 <span class="arithmatex">\(-6\)</span> dB）。</p>
+<div class="admonition warning">
+<p class="admonition-title">这是实际频谱分析最容易犯的错误</p>
+<p>用示波器/频谱仪测出的谱线高度偏低，常见原因就是<strong>没做窗增益修正</strong>。</p>
+<p>此外还有「重叠处理」（overlap）：加窗会削弱窗口边缘的数据权重，
+所以实践中把相邻段<strong>重叠 50%</strong>，再用「重叠相加」保持总权重恒定。</p>
+<p>这就是 Welch 法的做法（工程上最常用的功率谱估计方法）。</p>
+</div>
+<hr />
+<h2 id="fft-on2-onlog-n">四、FFT：把 <span class="arithmatex">\(O(N^2)\)</span> 降到 <span class="arithmatex">\(O(N\log N)\)</span><a class="headerlink" href="#fft-on2-onlog-n" title="Permanent link">&para;</a></h2>
+<h3 id="dft_1">DFT 的计算量<a class="headerlink" href="#dft_1" title="Permanent link">&para;</a></h3>
+<p>直接计算：<span class="arithmatex">\(N\)</span> 个频点，每个需 <span class="arithmatex">\(N\)</span> 次复数乘加 →</p>
+<div class="arithmatex">\[
+O(N^2)
+\]</div>
+<p><span class="arithmatex">\(N = 10^6\)</span> 时需要约 <span class="arithmatex">\(10^{12}\)</span> 次运算——<strong>不可行</strong>。</p>
+<h3 id="fft_1">FFT 的核心思想：分治<a class="headerlink" href="#fft_1" title="Permanent link">&para;</a></h3>
+<p><strong>FFT</strong>（快速傅里叶变换）不是新的变换，而是<strong>计算 DFT 的快速算法</strong>。</p>
+<p><strong>关键观察</strong>：<span class="arithmatex">\(e^{-j2\pi kn/N}\)</span> 具有<strong>周期性</strong>与<strong>对称性</strong>：</p>
+<div class="arithmatex">\[
+W_N^{k(n+N)} = W_N^{kn}, \qquad W_N^{k(n+N/2)} = -W_N^{kn}
+\]</div>
+<p>（记 <span class="arithmatex">\(W_N = e^{-j2\pi/N}\)</span>。）</p>
+<p>利用这两条，可以把长度 <span class="arithmatex">\(N\)</span> 的 DFT <strong>拆成两个长度 <span class="arithmatex">\(N/2\)</span> 的 DFT</strong>：</p>
+<div class="arithmatex">\[
+X[k] = \underbrace{E[k]}_{\text{偶数项 DFT}} + W_N^k\underbrace{O[k]}_{\text{奇数项 DFT}},
+\qquad k = 0,\dots,\frac N2-1
+\]</div>
+<div class="arithmatex">\[
+X\left[k+\frac N2\right] = E[k] - W_N^k\,O[k]
+\]</div>
+<p><strong>第二个式子里的负号正是对称性带来的</strong>——所以算出一半的 <span class="arithmatex">\(E[k]\)</span> 与 <span class="arithmatex">\(O[k]\)</span> 后，
+另一半只需加减法。</p>
+<p><strong>递归下去</strong>，总计算量变为</p>
+<div class="arithmatex">\[
+O(N\log N)
+\]</div>
+<p><span class="arithmatex">\(N = 10^6\)</span> 时约 <span class="arithmatex">\(2\times10^7\)</span> 次——<strong>快 5 万倍</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FFT 的分治结构">
+<defs>
+<marker id="dft2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 顶层 -->
+<rect class="f1" x="24" y="24" width="76" height="30" rx="5"/>
+<text class="lbl" x="34" y="44">DFT(N)</text>
+<!-- 分两支 -->
+<line class="a1" x1="102" y1="39" x2="150" y2="39" marker-end="url(#dft2-ah1)"/>
+<line class="a1" x1="102" y1="39" x2="124" y2="39"/>
+<line class="a1" x1="124" y1="39" x2="124" y2="96"/>
+<line class="a1" x1="124" y1="96" x2="150" y2="96" marker-end="url(#dft2-ah1)"/>
+<rect class="f3" x="152" y="24" width="96" height="30" rx="5"/>
+<text class="lbl-s" x="158" y="43">DFT(N/2) 偶数项</text>
+<rect class="f3" x="152" y="81" width="96" height="30" rx="5"/>
+<text class="lbl-s" x="158" y="100">DFT(N/2) 奇数项</text>
+<!-- 继续分 -->
+<line class="a1" x1="250" y1="39" x2="284" y2="39" marker-end="url(#dft2-ah1)"/>
+<line class="a1" x1="250" y1="96" x2="284" y2="96" marker-end="url(#dft2-ah1)"/>
+<rect class="f4" x="286" y="14" width="120" height="26" rx="5"/>
+<text class="lbl-s" x="292" y="32">DFT(N/4) × 4 …</text>
+<rect class="f4" x="286" y="52" width="120" height="26" rx="5"/>
+<text class="lbl-s" x="292" y="70">直到长度 = 2</text>
+<rect class="f4" x="286" y="92" width="120" height="26" rx="5"/>
+<text class="lbl-s" x="292" y="110">再逐层合并</text>
+<!-- 复杂度对照 -->
+<text class="lbl-s" x="24" y="152">计算量对照：</text>
+<rect class="f2" x="24" y="164" width="180" height="20" rx="3"/>
+<text class="l2" x="30" y="179">直接 DFT：O(N²)</text>
+<rect class="f3" x="24" y="194" width="86" height="20" rx="3"/>
+<text class="l3" x="30" y="209">FFT：O(N log N)</text>
+<text class="lbl-s" x="220" y="172">N = 10⁶ 时：</text>
+<text class="lbl-s" x="220" y="192">直接 DFT ≈ 10¹² 次（不可行）</text>
+<text class="lbl-s" x="220" y="212">FFT ≈ 2×10⁷ 次（瞬间完成）</text>
+</svg>
+<figcaption>图 2　FFT 的分治结构：把长度 N 的 DFT 拆成两个 N/2 的 DFT，递归下去。利用旋转因子的对称性（W<sub>N</sub><sup>k+N/2</sup> = −W<sub>N</sub><sup>k</sup>），合并时只需加减。总复杂度从 O(N²) 降到 O(N log N)</figcaption>
+</figure>
+
+<div class="admonition tip">
+<p class="admonition-title">FFT 的意义超出算法本身</p>
+<p>FFT 让「频域方法」在工程上<strong>变得可用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>快速卷积</strong></td>
+<td>FFT → 相乘 → IFFT，<span class="arithmatex">\(O(N\log N)\)</span> 替代 <span class="arithmatex">\(O(N^2)\)</span></td>
+</tr>
+<tr>
+<td>实时频谱分析</td>
+<td>音频、振动、雷达</td>
+</tr>
+<tr>
+<td>OFDM 通信</td>
+<td>用 IFFT/FFT 实现多载波调制解调</td>
+</tr>
+<tr>
+<td>图像处理</td>
+<td>二维 FFT 做滤波与压缩</td>
+</tr>
+<tr>
+<td>快速大数乘法</td>
+<td>把乘法化为卷积</td>
+</tr>
+</tbody>
+</table>
+<p><strong>没有 FFT，现代数字通信与信号处理都不可能实现。</strong></p>
+</div>
+<hr />
+<h2 id="dft_2">五、DFT 的重要性质<a class="headerlink" href="#dft_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>时域</th>
+<th>频域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>线性</strong></td>
+<td><span class="arithmatex">\(ax_1+bx_2\)</span></td>
+<td><span class="arithmatex">\(aX_1+bX_2\)</span></td>
+</tr>
+<tr>
+<td><strong>循环移位</strong></td>
+<td><span class="arithmatex">\(x[(n-m)\bmod N]\)</span></td>
+<td><span class="arithmatex">\(X[k]e^{-j2\pi km/N}\)</span></td>
+</tr>
+<tr>
+<td><strong>循环卷积</strong></td>
+<td><span class="arithmatex">\(x\circledast h\)</span></td>
+<td><span class="arithmatex">\(X[k]H[k]\)</span></td>
+</tr>
+<tr>
+<td><strong>对偶</strong></td>
+<td><span class="arithmatex">\(X[n]\)</span></td>
+<td><span class="arithmatex">\(Nx[(-k)\bmod N]\)</span></td>
+</tr>
+<tr>
+<td><strong>帕塞瓦尔</strong></td>
+<td><span class="arithmatex">\(\sum_n\lvert x[n]\rvert^2\)</span></td>
+<td><span class="arithmatex">\(\frac1N\sum_k\lvert X[k]\rvert^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">注意「循环」卷积 —— 这是最容易出错的地方</p>
+<p>DFT 的卷积定理给出的是<strong>循环卷积</strong>（下标模 <span class="arithmatex">\(N\)</span>），
+而<strong>不是</strong>我们在线性系统里用的<strong>线性卷积</strong>。</p>
+<p><strong>区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>结果长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性卷积</td>
+<td><span class="arithmatex">\(M+N-1\)</span></td>
+<td>实际的系统响应（卷积那一页）</td>
+</tr>
+<tr>
+<td>循环卷积</td>
+<td><span class="arithmatex">\(\max(M,N)\)</span></td>
+<td>下标环绕，会产生<strong>混叠</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>后果</strong>：若直接用 FFT 做线性卷积而不处理，结果会<strong>首尾混叠</strong>（时域混叠）。</p>
+<p><strong>解决办法：补零</strong></p>
+<p>把两个序列都补零到长度 <span class="arithmatex">\(\geq M+N-1\)</span>，再做 DFT。
+此时循环卷积与线性卷积<strong>一致</strong>（因为不会有下标环绕）。</p>
+<div class="arithmatex">\[
+L \geq M+N-1
+\]</div>
+<p>这也是「用 FFT 做快速卷积」必须注意的第一个细节。</p>
+</div>
+<hr />
+<h2 id="_8">六、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1-4-dft">例题 1：手算 4 点 DFT<a class="headerlink" href="#1-4-dft" title="Permanent link">&para;</a></h3>
+<p>求 <span class="arithmatex">\(x = \{1, 1, 0, 0\}\)</span> 的 4 点 DFT。</p>
+<details class="note">
+<summary>思路</summary>
+<p>直接代入定义，用 <span class="arithmatex">\(W_4 = e^{-j2\pi/4} = -j\)</span> 化简。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>记 <span class="arithmatex">\(W_4 = e^{-j2\pi/4} = e^{-j\pi/2} = -j\)</span>。则 <span class="arithmatex">\(W_4^{kn}\)</span> 只有 <span class="arithmatex">\(1, -j, -1, j\)</span> 四种取值。</p>
+<p>代入 <span class="arithmatex">\(X[k] = \sum_{n=0}^{3}x[n]W_4^{kn}\)</span>（只有 <span class="arithmatex">\(n=0,1\)</span> 非零）：</p>
+<div class="arithmatex">\[
+X[k] = 1\cdot W_4^0 + 1\cdot W_4^{k} = 1 + (-j)^k
+\]</div>
+<p>逐个计算：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th><span class="arithmatex">\((-j)^k\)</span></th>
+<th><span class="arithmatex">\(X[k]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1+1 = 2\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(-j\)</span></td>
+<td><span class="arithmatex">\(1-j\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><span class="arithmatex">\(1-1 = 0\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(j\)</span></td>
+<td><span class="arithmatex">\(1+j\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+X = \{2,\ 1-j,\ 0,\ 1+j\}
+\]</div>
+<p><strong>验证共轭对称</strong>：<span class="arithmatex">\(X[1] = 1-j\)</span> 与 <span class="arithmatex">\(X[3] = 1+j\)</span> 互为共轭 ✓
+（因为 <span class="arithmatex">\(x\)</span> 是实序列，这正是前面讲的共轭对称性。）</p>
+<p><strong>验证帕塞瓦尔定理</strong>：</p>
+<p>时域能量：<span class="arithmatex">\(\lvert1\rvert^2+\lvert1\rvert^2 = 2\)</span></p>
+<p>频域能量：</p>
+<div class="arithmatex">\[
+\frac14\left(\lvert2\rvert^2+\lvert1-j\rvert^2+\lvert0\rvert^2+\lvert1+j\rvert^2\right)
+= \frac14(4+2+0+2) = \frac84 = 2 \;\checkmark
+\]</div>
+</details>
+<hr />
+<h3 id="2">例题 2：确定频率分辨率<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>某振动信号以 <span class="arithmatex">\(f_s = 1000\)</span> Hz 采样，采集 4096 点。</p>
+<p><strong>(a)</strong> 频率分辨率是多少？</p>
+<p><strong>(b)</strong> 能分析的最高频率？</p>
+<p><strong>&copy;</strong> 若信号含 100 Hz 与 103 Hz 两个成分，能区分吗？</p>
+<details class="note">
+<summary>思路</summary>
+<p>分辨率 <span class="arithmatex">\(\Delta f = f_s/N\)</span>；最高可分析频率由奈奎斯特定理给出。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 频率分辨率</strong></p>
+<div class="arithmatex">\[
+\Delta f = \frac{f_s}{N} = \frac{1000}{4096} \approx 0.244 \text{ Hz}
+\]</div>
+<p><strong>验证</strong>：观测时长 <span class="arithmatex">\(T = N/f_s = 4.096\)</span> s，所以 <span class="arithmatex">\(\Delta f = 1/T \approx 0.244\)</span> Hz ✓</p>
+<p><strong>(b) 最高频率</strong></p>
+<p>由奈奎斯特定理：</p>
+<div class="arithmatex">\[
+f_{\max} = \frac{f_s}{2} = 500 \text{ Hz}
+\]</div>
+<p><strong>&copy; 能否区分 100 与 103 Hz</strong></p>
+<p>两频率间隔 <span class="arithmatex">\(3\)</span> Hz，而分辨率 <span class="arithmatex">\(0.244\)</span> Hz。</p>
+<div class="arithmatex">\[
+3 \gg 0.244 \;\checkmark
+\]</div>
+<p><strong>可以区分</strong> ✓ 它们之间约有 <span class="arithmatex">\(3/0.244 \approx 12\)</span> 个频点，
+在频谱上会显示为两个独立的峰。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">反过来的问题：若分辨不出怎么办</p>
+<p>假设要分辨间隔 <span class="arithmatex">\(0.1\)</span> Hz 的两个成分。需要</p>
+<div class="arithmatex">\[
+\Delta f \leq 0.1 \implies T \geq 10 \text{ s}
+\]</div>
+<p>即<strong>至少观测 10 秒</strong>。</p>
+<p><strong>注意</strong>：提高采样率<strong>没用</strong>！</p>
+<p>若把 <span class="arithmatex">\(f_s\)</span> 提到 10000 Hz 而 <span class="arithmatex">\(N\)</span> 仍取 4096，则</p>
+<div class="arithmatex">\[
+\Delta f = \frac{10000}{4096} \approx 2.44 \text{ Hz}
+\]</div>
+<p><strong>分辨率反而变差了</strong>（因为观测时长缩短到 0.41 s）。</p>
+<p><strong>正确做法</strong>：保持采样率，<strong>增加点数 <span class="arithmatex">\(N\)</span></strong>（即延长观测时间）。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：循环卷积与线性卷积的区别<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(x = \{1,2,3\}\)</span>，<span class="arithmatex">\(h = \{1,1\}\)</span>。</p>
+<p><strong>(a)</strong> 求补零到 <span class="arithmatex">\(N=4\)</span> 后的循环卷积。</p>
+<p><strong>(b)</strong> 与线性卷积比较。</p>
+<details class="note">
+<summary>思路</summary>
+<p>循环卷积要对下标取模 <span class="arithmatex">\(N\)</span>；线性卷积不取模。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>已知线性卷积</strong>（前面算过）：</p>
+<div class="arithmatex">\[
+y_{\text{lin}} = \{1,\ 3,\ 5,\ 3\}
+\]</div>
+<p>长度 <span class="arithmatex">\(M+N-1 = 3+2-1 = 4\)</span>。</p>
+<p><strong>(a) <span class="arithmatex">\(N=4\)</span> 的循环卷积</strong></p>
+<p>把 <span class="arithmatex">\(x\)</span> 补零到 4 点：<span class="arithmatex">\(x = \{1,2,3,0\}\)</span>，<span class="arithmatex">\(h = \{1,1,0,0\}\)</span>。</p>
+<p>循环卷积定义：</p>
+<div class="arithmatex">\[
+y_c[n] = \sum_{k=0}^{3} h[k]\,x[(n-k)\bmod 4]
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>计算</th>
+<th><span class="arithmatex">\(y_c[n]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(h[0]x[0]+h[1]x[3] = 1\cdot1+1\cdot0\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(h[0]x[1]+h[1]x[0] = 2+1\)</span></td>
+<td>3</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(h[0]x[2]+h[1]x[1] = 3+2\)</span></td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(h[0]x[3]+h[1]x[2] = 0+3\)</span></td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+y_c = \{1,\ 3,\ 5,\ 3\}
+\]</div>
+<p><strong>(b) 比较</strong></p>
+<div class="arithmatex">\[
+y_c = \{1,3,5,3\} = y_{\text{lin}} \;\checkmark
+\]</div>
+<p><strong>完全一致！</strong></p>
+<p><strong>原因</strong>：我们选的 <span class="arithmatex">\(N = 4\)</span> 恰好等于 <span class="arithmatex">\(M+N-1 = 4\)</span>，
+满足「<span class="arithmatex">\(N \geq M+N_{\text{len}}-1\)</span>」的条件，所以没有下标环绕。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">若 N 选得太小会怎样</p>
+<p>取 <span class="arithmatex">\(N = 3\)</span>（小于 4）。此时下标要模 3，第 3 个输出会<strong>环绕</strong>回第 0 个位置：</p>
+<div class="arithmatex">\[
+y_c[0] = h[0]x[0]+h[1]x[2] = 1+3 = 4 \neq 1
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(y_c = \{4, 3, 5\}\)</span>——<strong>第 0 项被污染了</strong>（多了原本属于第 3 项的贡献）。</p>
+<p>这就是<strong>时域混叠</strong>。</p>
+<p><strong>结论（用 FFT 做线性卷积的规则）</strong>：</p>
+<div class="arithmatex">\[
+L \geq M + N - 1
+\]</div>
+<p><strong>其中 <span class="arithmatex">\(L\)</span> 是 FFT 长度</strong>。补零到 <span class="arithmatex">\(L\)</span> 后再做 FFT，结果才正确。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：加窗的效果<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>信号含一个强分量（幅度 1）与一个弱分量（幅度 0.001，即 <span class="arithmatex">\(-60\)</span> dB）。
+用矩形窗与布莱克曼窗分别分析，说明为什么必须用后者。</p>
+<details class="note">
+<summary>提示</summary>
+<p>矩形窗旁瓣约 <span class="arithmatex">\(-13\)</span> dB，布莱克曼约 <span class="arithmatex">\(-58\)</span> dB。强信号的旁瓣会掩盖弱信号。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>用矩形窗</strong></p>
+<p>强信号的<strong>旁瓣</strong>最高约 <span class="arithmatex">\(-13\)</span> dB（相对主瓣）。</p>
+<p>强信号幅度 1 的旁瓣泄漏到弱信号频点附近时，其幅度约为</p>
+<div class="arithmatex">\[
+10^{-13/20} \approx 0.22
+\]</div>
+<p>而弱信号本身只有 <span class="arithmatex">\(0.001\)</span>。</p>
+<div class="arithmatex">\[
+0.22 \gg 0.001 \;\times
+\]</div>
+<p><strong>弱信号完全被强信号的旁瓣掩盖</strong> —— 检测不到。</p>
+<p><strong>用布莱克曼窗</strong></p>
+<p>旁瓣约 <span class="arithmatex">\(-58\)</span> dB：</p>
+<div class="arithmatex">\[
+10^{-58/20} \approx 0.00126
+\]</div>
+<p>与弱信号幅度 0.001 同量级，仍然勉强。若用<strong>平顶窗</strong>或进一步降低旁瓣
+（如 Kaiser 窗调参数），可以让旁瓣低于 <span class="arithmatex">\(-80\)</span> dB，此时泄漏约 <span class="arithmatex">\(10^{-4}\)</span>，
+<strong>弱信号可以显现</strong> ✓</p>
+<p><strong>但代价是什么</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>窗</th>
+<th>主瓣宽度（相对矩形）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩形</td>
+<td>1 倍（最好分辨率）</td>
+</tr>
+<tr>
+<td>汉宁 / 汉明</td>
+<td>2 倍</td>
+</tr>
+<tr>
+<td>布莱克曼</td>
+<td>3 倍</td>
+</tr>
+<tr>
+<td>平顶</td>
+<td>约 4–5 倍</td>
+</tr>
+</tbody>
+</table>
+<p>布莱克曼的主瓣宽 3 倍，意味着<strong>频率分辨率降低 3 倍</strong>。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这就是「频谱分析」的核心权衡</p>
+<table>
+<thead>
+<tr>
+<th>想检测</th>
+<th>该怎么做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>靠得很近的两个<strong>强</strong>信号</td>
+<td>用<strong>窄主瓣</strong>窗（矩形/汉宁）</td>
+</tr>
+<tr>
+<td>强信号旁的<strong>弱</strong>信号</td>
+<td>用<strong>低旁瓣</strong>窗（布莱克曼/平顶）</td>
+</tr>
+<tr>
+<td>相位/频率精度优先</td>
+<td>汉宁</td>
+</tr>
+<tr>
+<td>幅度精度优先</td>
+<td>平顶</td>
+</tr>
+</tbody>
+</table>
+<p><strong>没有一种窗能同时做到「高分辨率」与「低泄漏」</strong>——
+这是不确定性原理在频谱分析中的体现。</p>
+<p>实际工作中通常<strong>同时用两种窗试算</strong>，对比结果来避免误判。</p>
+</div>
+<hr />
+<h2 id="_9">七、用在哪些课程里<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">现代数字信号处理 · 数字频谱分析的核心工具<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频谱分析</td>
+<td>加窗 + FFT + 取模</td>
+</tr>
+<tr>
+<td>功率谱估计</td>
+<td>Welch 法（分段、重叠 50%、平均）</td>
+</tr>
+<tr>
+<td>快速卷积</td>
+<td>补零 + FFT + 相乘 + IFFT</td>
+</tr>
+<tr>
+<td>频域滤波</td>
+<td>FFT → 乘 <span class="arithmatex">\(H[k]\)</span> → IFFT</td>
+</tr>
+<tr>
+<td>系统辨识</td>
+<td>用 <span class="arithmatex">\(H[k] = Y[k]/X[k]\)</span> 估计频率响应</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">关于频率分辨率的工程直觉</p>
+<p>「能分辨多近的两个频率」= 「看了多久」。</p>
+<p>这与<strong>傅里叶变换的时频不确定性</strong>是同一件事：</p>
+<div class="arithmatex">\[
+\Delta t\cdot\Delta f \gtrsim 1
+\]</div>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>观测时长</th>
+<th>分辨率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>语音一帧</td>
+<td>20 ms</td>
+<td>50 Hz</td>
+</tr>
+<tr>
+<td>音乐分析</td>
+<td>0.5 s</td>
+<td>2 Hz</td>
+</tr>
+<tr>
+<td>机械振动诊断</td>
+<td>10 s</td>
+<td>0.1 Hz</td>
+</tr>
+<tr>
+<td>精密频率计量</td>
+<td>1000 s</td>
+<td>1 mHz</td>
+</tr>
+</tbody>
+</table>
+<p><strong>想分辨更精细的频率结构，只能测更久。</strong></p>
+</div>
+<h3 id="_11">智能传感与信息处理 · 传感器信号分析<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>FFT 频谱分析</strong>是振动、声音、电流等传感信号的常规手段</li>
+<li><strong>加窗与重叠</strong>是工程实现的必备步骤（否则幅度出错）</li>
+<li><strong>实时 FFT</strong>（滑动窗）用于在线监测</li>
+<li><strong>分辨率选择</strong>取决于被测量的性质
+  （轴承故障特征频率间隔窄 → 需要长观测）</li>
+</ul>
+<h3 id="_12">海洋声学 · 声信号处理链<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>LOFAR 谱图</strong>：短时傅里叶变换得到的时频图，用于检测舰船线谱</li>
+<li><strong>宽带 vs 窄带处理</strong>：窄带需要长观测以分辨线谱</li>
+<li><strong>DEMON 分析</strong>：包络谱，用 FFT 提取螺旋桨调制特征</li>
+</ul>
+<hr />
+<h2 id="_13">八、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 求 <span class="arithmatex">\(x = \{1, 0, 1, 0\}\)</span> 的 4 点 DFT。</p>
+<details class="note">
+<summary>提示</summary>
+<p>只有 <span class="arithmatex">\(n = 0, 2\)</span> 非零，<span class="arithmatex">\(W_4^{2k} = (-1)^k\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+X[k] = 1\cdot W_4^0 + 1\cdot W_4^{2k} = 1 + (-1)^k
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th><span class="arithmatex">\((-1)^k\)</span></th>
+<th><span class="arithmatex">\(X[k]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+X = \{2,\ 0,\ 2,\ 0\}
+\]</div>
+<p><strong>解读</strong>：频谱只有 <span class="arithmatex">\(k=0\)</span>（直流）与 <span class="arithmatex">\(k=2\)</span>（奈奎斯特频率）两个非零分量——
+因为 <span class="arithmatex">\(x = \{1,0,1,0\}\)</span> 正是最高频序列 <span class="arithmatex">\((1,0)\)</span> 的重复，
+其频谱集中在 0 与 <span class="arithmatex">\(f_s/2\)</span> ✓ 这与直觉一致。</p>
+<p><strong>验证共轭对称</strong>：<span class="arithmatex">\(X[k]\)</span> 全为实数（虚部为 0），符合实偶序列的频谱为实偶函数 ✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：把 <span class="arithmatex">\(N\)</span> 点数据补零到 <span class="arithmatex">\(2N\)</span> 点做 FFT，频率分辨率提高一倍。对吗？</p>
+<details class="note">
+<summary>提示</summary>
+<p>分辨率公式 <span class="arithmatex">\(\Delta f = 1/T\)</span>，想想补零是否改变了 <span class="arithmatex">\(T\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。</strong></p>
+<p><strong>分辨率由观测时长决定</strong>：</p>
+<div class="arithmatex">\[
+\Delta f = \frac{1}{T}, \qquad T = N T_s
+\]</div>
+<p>补零<strong>不改变实际观测时长</strong>（补的是零，不是新数据），
+所以 <span class="arithmatex">\(T\)</span> 不变，<strong>真实分辨率不变</strong>。</p>
+<p><strong>补零的效果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>变化</th>
+<th>是否发生</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频点数变多（曲线更光滑）</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>频点间隔 <span class="arithmatex">\(\Delta f_{\text{grid}}\)</span> 变小</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>真实分辨能力</strong></td>
+<td>✗ <strong>不变</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>如何验证</strong>：观察两个邻近频率的峰。补零后峰的形状（主瓣宽度）
+<strong>没有变化</strong>，只是采样点更密。若原本分辨不出，补零后仍分辨不出。</p>
+<p><strong>正确提高分辨率的方法</strong>：延长观测时间（采集更多点）。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么 FFT 能加速 DFT？它改变了变换的结果吗？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想分治利用了频谱的什么性质。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>为什么能加速</strong>：</p>
+<p>利用旋转因子的<strong>周期性</strong>与<strong>对称性</strong>：</p>
+<div class="arithmatex">\[
+W_N^{k(n+N/2)} = -W_N^{kn}
+\]</div>
+<p>这条对称性让「后半段频谱」可以用「前半段」<strong>加减</strong>得到，
+不需要重新计算。于是每次把问题规模减半，递归下去得到 <span class="arithmatex">\(O(N\log N)\)</span>。</p>
+<p><strong>它不改变结果</strong>：</p>
+<p>FFT 与原 DFT 的<strong>数学定义完全相同</strong>，输出<strong>逐点一致</strong>（浮点误差范围内）。</p>
+<p>验证方法：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>               <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)])</span>   <span class="c1"># 直接 DFT</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                  <span class="c1"># FFT</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">))</span>          <span class="c1"># True</span>
+</code></pre></div>
+<p><strong>两者的区别只在计算速度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>复杂度</th>
+<th><span class="arithmatex">\(N = 10^6\)</span> 的运算量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接 DFT</td>
+<td><span class="arithmatex">\(O(N^2)\)</span></td>
+<td><span class="arithmatex">\(\approx 10^{12}\)</span></td>
+</tr>
+<tr>
+<td>FFT</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span></td>
+<td><span class="arithmatex">\(\approx 2\times10^7\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>所以 FFT 是<strong>算法</strong>，不是新的<strong>变换</strong>。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 用 FFT 计算两个长度 100 的序列的线性卷积，FFT 长度至少取多少？为什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>回忆线性卷积的长度公式，以及循环卷积产生混叠的条件。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>至少取 <span class="arithmatex">\(L = 100+100-1 = 199\)</span>。</strong></p>
+<p>通常取 <strong>2 的整数次幂</strong>（FFT 效率最高），所以实际取</p>
+<div class="arithmatex">\[
+L = 256
+\]</div>
+<p><strong>为什么必须满足 <span class="arithmatex">\(L \geq M+N-1\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>长度</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(L &lt; M+N-1\)</span></td>
+<td>循环卷积的下标环绕 → <strong>时域混叠</strong>，结果错误</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(L \geq M+N-1\)</span></td>
+<td>无环绕，循环卷积 = 线性卷积 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体做法</strong>：</p>
+<ol>
+<li>把 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(h\)</span> 都补零到长度 256</li>
+<li>分别做 256 点 FFT</li>
+<li>频域相乘</li>
+<li>IFFT 得到 199 个有效结果（后 57 个是零，因补零产生）</li>
+</ol>
+<p><strong>为什么值得这样做</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>复杂度（<span class="arithmatex">\(M=N=100\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接卷积</td>
+<td><span class="arithmatex">\(100\times100 = 10^4\)</span></td>
+</tr>
+<tr>
+<td>FFT 法</td>
+<td><span class="arithmatex">\(\approx 3\times256\log_2 256 \approx 6\times10^3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>本例优势不大（序列太短），但<strong>序列越长优势越明显</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(N\)</span></th>
+<th>直接 <span class="arithmatex">\(O(N^2)\)</span></th>
+<th>FFT <span class="arithmatex">\(O(N\log N)\)</span></th>
+<th>加速比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td><span class="arithmatex">\(10^4\)</span></td>
+<td><span class="arithmatex">\(6\times10^3\)</span></td>
+<td>1.7×</td>
+</tr>
+<tr>
+<td>1000</td>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><span class="arithmatex">\(10^4\)</span></td>
+<td>100×</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><span class="arithmatex">\(10^{12}\)</span></td>
+<td><span class="arithmatex">\(2\times10^7\)</span></td>
+<td><strong>5 万×</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程实践</strong>：超过约 50–100 点就改用 FFT 法（可用「重叠相加/重叠保留」
+处理超长序列的分段卷积）。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../fourier/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 傅里叶级数与变换">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                傅里叶级数与变换
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../sampling/" class="md-footer__link md-footer__link--next" aria-label="下一页: 采样定理与混叠">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                采样定理与混叠
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
