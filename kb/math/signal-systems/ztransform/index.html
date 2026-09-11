@@ -1,0 +1,2626 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/signal-systems/ztransform/">
+      
+      
+        <link rel="prev" href="../sampling/">
+      
+      
+        <link rel="next" href="../../../courses/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Z 变换与滤波器 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#z" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Z 变换与滤波器
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#z_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、Z 变换的定义
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、Z 变换的定义">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#z-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键理解：\(z^{-1}\) 是「延迟算子」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#roc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收敛域（ROC）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、常用变换对
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、常用变换对">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、由差分方程求系统函数
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、稳定性的几何判据（重点）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、稳定性的几何判据（重点）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        频率响应的几何求法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fir-iir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、两类滤波器：FIR 与 IIR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、两类滤波器：FIR 与 IIR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FIR 滤波器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两类滤波器的权衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：由差分方程求系统函数与稳定性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：判断极点位置与稳定性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3fir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：FIR 滤波器的频率响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-hz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：从 \(H(z)\) 读频率响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 系统分析与设计的核心工具
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 实时滤波与状态估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海洋声学 · 声信号处理链
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MIT 6.003 Lec 5, 9, 11</code><code>通用数字信号处理教材</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>张贤达《现代信号处理》第 1 章（或同类中文教材）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../sampling/">sampling</a></span></div></div>
+
+<h1 id="z">Z 变换与滤波器<a class="headerlink" href="#z" title="Permanent link">&para;</a></h1>
+<p>前面处理的是连续信号，用<strong>拉普拉斯变换</strong>与<strong>傅里叶变换</strong>。</p>
+<p>这一页引入离散信号对应的工具：<strong>Z 变换</strong>。它的地位与拉普拉斯变换相当，
+但更适合数字系统。</p>
+<p>先给对照表，建立整体认识：</p>
+<table>
+<thead>
+<tr>
+<th>连续时间</th>
+<th>离散时间</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拉普拉斯变换 <span class="arithmatex">\(s\)</span></td>
+<td><strong>Z 变换</strong> <span class="arithmatex">\(z\)</span></td>
+<td>复频域分析、稳定性判据</td>
+</tr>
+<tr>
+<td>傅里叶变换 <span class="arithmatex">\(\omega\)</span></td>
+<td>DTFT <span class="arithmatex">\(e^{j\omega}\)</span></td>
+<td>频域响应</td>
+</tr>
+<tr>
+<td>微分方程</td>
+<td><strong>差分方程</strong></td>
+<td>系统描述</td>
+</tr>
+<tr>
+<td>极点（左半平面）</td>
+<td><strong>极点（单位圆内）</strong></td>
+<td>稳定性</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">为什么需要 Z 变换（而不只用傅里叶变换）</p>
+<p><strong>傅里叶变换只处理「稳定」信号</strong>（要求积分/求和收敛）。</p>
+<p>例如 <span class="arithmatex">\(x[n] = 2^n u[n]\)</span> 增长，其傅里叶变换<strong>不收敛</strong>。
+但 Z 变换引入一个收敛因子 <span class="arithmatex">\(r^{-n}\)</span> 后仍可分析：</p>
+<div class="arithmatex">\[
+\mathcal{Z}\{x[n]\} = \sum_n x[n]z^{-n}, \qquad z = re^{j\omega}
+\]</div>
+<p><strong>这扩大了可分析的范围</strong>，也让「稳定性」有了清晰的几何判据（极点位置）。</p>
+</div>
+<hr />
+<h2 id="z_1">一、Z 变换的定义<a class="headerlink" href="#z_1" title="Permanent link">&para;</a></h2>
+<p><strong>双边 Z 变换</strong>：</p>
+<div class="arithmatex">\[
+X(z) = \sum_{n=-\infty}^{\infty} x[n]\,z^{-n}
+\]</div>
+<p><strong>单边 Z 变换</strong>（工程常用，从 <span class="arithmatex">\(n=0\)</span> 开始）：</p>
+<div class="arithmatex">\[
+X(z) = \sum_{n=0}^{\infty} x[n]\,z^{-n}
+\]</div>
+<p>其中 <span class="arithmatex">\(z\)</span> 是复变量。</p>
+<h3 id="z-1">关键理解：<span class="arithmatex">\(z^{-1}\)</span> 是「延迟算子」<a class="headerlink" href="#z-1" title="Permanent link">&para;</a></h3>
+<p>看一个简单情形：<span class="arithmatex">\(x[n] = \delta[n-k]\)</span>（在 <span class="arithmatex">\(n=k\)</span> 处为 1），则</p>
+<div class="arithmatex">\[
+X(z) = \sum_n \delta[n-k]z^{-n} = z^{-k}
+\]</div>
+<p><strong>所以「延迟 <span class="arithmatex">\(k\)</span> 个采样」对应「乘 <span class="arithmatex">\(z^{-k}\)</span>」</strong>。</p>
+<p>这解释了为什么差分方程能变成代数方程：</p>
+<div class="arithmatex">\[
+y[n] - 0.5y[n-1] = x[n]
+\quad\Longrightarrow\quad
+Y(z) - 0.5z^{-1}Y(z) = X(z)
+\]</div>
+<div class="arithmatex">\[
+\Longrightarrow\quad
+H(z) = \frac{Y(z)}{X(z)} = \frac{1}{1-0.5z^{-1}}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">这是 Z 变换最大的实用价值</p>
+<p><strong>差分方程（时域，递归）→ 代数方程（z 域，多项式）</strong></p>
+<table>
+<thead>
+<tr>
+<th>时域</th>
+<th>z 域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>卷积 <span class="arithmatex">\(y = h*x\)</span></td>
+<td>相乘 <span class="arithmatex">\(Y = HX\)</span></td>
+</tr>
+<tr>
+<td>差分方程</td>
+<td>有理函数 <span class="arithmatex">\(H(z)\)</span></td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>极点位置</td>
+</tr>
+</tbody>
+</table>
+<p>系统分析从「解递归方程」变成「分析多项式的根」——<strong>容易得多</strong>。</p>
+</div>
+<h3 id="roc">收敛域（ROC）<a class="headerlink" href="#roc" title="Permanent link">&para;</a></h3>
+<p>Z 变换是无穷级数，只在某些 <span class="arithmatex">\(z\)</span> 上收敛。这个集合叫<strong>收敛域</strong>。</p>
+<div class="admonition warning">
+<p class="admonition-title">同一个 X(z) 可能对应不同的 x[n]</p>
+<p><strong>Z 变换必须连同收敛域一起给出，否则不唯一。</strong></p>
+<p>例：<span class="arithmatex">\(x_1[n] = a^nu[n]\)</span>（右边序列）与 <span class="arithmatex">\(x_2[n] = -a^nu[-n-1]\)</span>（左边序列）
+给出<strong>同一个代数表达式</strong></p>
+<div class="arithmatex">\[
+X(z) = \frac{1}{1-az^{-1}}
+\]</div>
+<p>但收敛域不同：<span class="arithmatex">\(x_1\)</span> 的 ROC 是 <span class="arithmatex">\(\lvert z\rvert &gt; \lvert a\rvert\)</span>，
+<span class="arithmatex">\(x_2\)</span> 的是 <span class="arithmatex">\(\lvert z\rvert &lt; \lvert a\rvert\)</span>。</p>
+</div>
+<table>
+<thead>
+<tr>
+<th>序列类型</th>
+<th>收敛域形状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有限长</td>
+<td>整个 z 平面（可能除 0 或 ∞）</td>
+</tr>
+<tr>
+<td>右边（因果）</td>
+<td><span class="arithmatex">\(\lvert z\rvert &gt; r_0\)</span>（半径外的区域）</td>
+</tr>
+<tr>
+<td>左边（反因果）</td>
+<td><span class="arithmatex">\(\lvert z\rvert &lt; r_0\)</span>（半径内的区域）</td>
+</tr>
+<tr>
+<td>双边</td>
+<td>环形 <span class="arithmatex">\(r_1 &lt; \lvert z\rvert &lt; r_2\)</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_1">二、常用变换对<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x[n]\)</span></th>
+<th><span class="arithmatex">\(X(z)\)</span></th>
+<th>收敛域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\delta[n]\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td>全平面</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\delta[n-k]\)</span></td>
+<td><span class="arithmatex">\(z^{-k}\)</span></td>
+<td>全平面（除 0/∞）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(u[n]\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1}{1-z^{-1}}\)</span></td>
+<td><span class="arithmatex">\(\lvert z\rvert &gt; 1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a^nu[n]\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1}{1-az^{-1}}\)</span></td>
+<td><span class="arithmatex">\(\lvert z\rvert &gt; \lvert a\rvert\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(na^nu[n]\)</span></td>
+<td><span class="arithmatex">\(\dfrac{az^{-1}}{(1-az^{-1})^2}\)</span></td>
+<td><span class="arithmatex">\(\lvert z\rvert &gt; \lvert a\rvert\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\cos(\omega_0n)u[n]\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1-z^{-1}\cos\omega_0}{1-2z^{-1}\cos\omega_0+z^{-2}}\)</span></td>
+<td><span class="arithmatex">\(\lvert z\rvert &gt; 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<h3 id="_2">常用性质<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>时域</th>
+<th>z 域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>线性</strong></td>
+<td><span class="arithmatex">\(ax_1+bx_2\)</span></td>
+<td><span class="arithmatex">\(aX_1+bX_2\)</span></td>
+</tr>
+<tr>
+<td><strong>时移</strong></td>
+<td><span class="arithmatex">\(x[n-k]\)</span></td>
+<td><span class="arithmatex">\(z^{-k}X(z)\)</span></td>
+</tr>
+<tr>
+<td><strong>卷积</strong></td>
+<td><span class="arithmatex">\(x*h\)</span></td>
+<td><span class="arithmatex">\(X(z)H(z)\)</span></td>
+</tr>
+<tr>
+<td><strong>z 域微分</strong></td>
+<td><span class="arithmatex">\(nx[n]\)</span></td>
+<td><span class="arithmatex">\(-z\dfrac{\mathrm{d}X}{\mathrm{d}z}\)</span></td>
+</tr>
+<tr>
+<td><strong>初值</strong></td>
+<td><span class="arithmatex">\(x[0]\)</span></td>
+<td><span class="arithmatex">\(\lim_{z\to\infty}X(z)\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">由常用对得到「极点决定衰减速度」</p>
+<p>看 <span class="arithmatex">\(a^nu[n]\)</span> 的变换 <span class="arithmatex">\(1/(1-az^{-1})\)</span>：</p>
+<ul>
+<li><strong>极点</strong>在 <span class="arithmatex">\(z = a\)</span></li>
+<li>序列衰减速度由 <span class="arithmatex">\(\lvert a\rvert\)</span> 决定</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lvert a\rvert\)</span></th>
+<th>序列行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(&lt; 1\)</span></td>
+<td>衰减 → <strong>稳定</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(= 1\)</span></td>
+<td>不衰减（等幅）→ 临界</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(&gt; 1\)</span></td>
+<td>增长 → <strong>不稳定</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以「极点是否在单位圆内」就是稳定性判据</strong>（下面第四节详述）。</p>
+</div>
+<hr />
+<h2 id="_3">三、由差分方程求系统函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>一般形式</strong>（线性常系数差分方程）：</p>
+<div class="arithmatex">\[
+\sum_{k=0}^{N} a_k\,y[n-k] = \sum_{m=0}^{M} b_m\,x[n-m]
+\]</div>
+<p>两边取 Z 变换（用时移性质 <span class="arithmatex">\(x[n-k]\leftrightarrow z^{-k}X(z)\)</span>）：</p>
+<div class="arithmatex">\[
+\sum_k a_k z^{-k}Y(z) = \sum_m b_m z^{-m}X(z)
+\]</div>
+<p>于是<strong>系统函数</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ H(z) = \frac{Y(z)}{X(z)} = \frac{\sum_{m=0}^{M}b_mz^{-m}}{\sum_{k=0}^{N}a_kz^{-k}}\ }
+\]</div>
+<p><strong>这是两个多项式之比</strong>，所以：</p>
+<div class="arithmatex">\[
+H(z) = \frac{B(z)}{A(z)}
+\]</div>
+<ul>
+<li><strong>零点</strong>：<span class="arithmatex">\(B(z) = 0\)</span> 的根 → 该频率被<strong>抑制</strong></li>
+<li><strong>极点</strong>：<span class="arithmatex">\(A(z) = 0\)</span> 的根 → 该频率被<strong>放大</strong>（可能不稳定）</li>
+</ul>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="z 平面上的极点零点分布与稳定性">
+<defs>
+<marker id="zf1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 单位圆 -->
+<circle class="gd" cx="140" cy="150" r="86"/>
+<line class="gb" x1="34" y1="150" x2="252" y2="150" marker-end="url(#zf1-ah3)"/>
+<line class="gb" x1="140" y1="268" x2="140" y2="34" marker-end="url(#zf1-ah3)"/>
+<text class="lbl-s" x="238" y="142">Re</text>
+<text class="lbl-s" x="148" y="42">Im</text>
+<text class="lbl-s" x="146" y="164">1</text>
+<!-- 稳定极点（圆内） -->
+<circle class="d3" cx="184" cy="150" r="5"/>
+<text class="l3" x="192" y="170">极点（稳定）</text>
+<circle class="d3" cx="110" cy="112" r="5"/>
+<!-- 临界极点（圆上） -->
+<circle class="d2" cx="226" cy="150" r="5"/>
+<text class="l2" x="176" y="196">临界（单位圆上）</text>
+<!-- 不稳定极点（圆外） -->
+<circle class="d1" cx="278" cy="150" r="5"/>
+<text class="l1" x="272" y="122">不稳定（圆外）</text>
+<!-- 零点 -->
+<line class="a4" x1="98" y1="196" x2="108" y2="206" stroke-width="2.4"/>
+<line class="a4" x1="108" y1="196" x2="98" y2="206" stroke-width="2.4"/>
+<text class="l4" x="52" y="222">零点（抑制）</text>
+<text class="lbl-s" x="34" y="286">单位圆内 = 稳定；圆上 = 临界振荡；圆外 = 发散</text>
+</svg>
+<figcaption>图 1　z 平面上的极点零点。极点位置直接决定稳定性：<b>所有极点在单位圆内</b> ⟺ 系统稳定。零点所在频率被抑制，极点附近频率被放大</figcaption>
+</figure>
+
+<hr />
+<h2 id="_4">四、稳定性的几何判据（重点）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>定理</strong>：因果 LTI 系统稳定 <strong>当且仅当</strong>所有极点在<strong>单位圆内</strong>：</p>
+<div class="arithmatex">\[
+\lvert p_i\rvert &lt; 1 \quad \text{对每个极点 } p_i
+\]</div>
+<p><strong>直觉</strong>：由第二节，<span class="arithmatex">\(a^nu[n]\)</span> 的极点在 <span class="arithmatex">\(z=a\)</span>。
+所以「极点 <span class="arithmatex">\(a\)</span> 对应衰减 <span class="arithmatex">\(a^n\)</span>」——<span class="arithmatex">\(a\)</span> 在单位圆内就意味着衰减。</p>
+<div class="admonition note">
+<p class="admonition-title">对照连续时间：为什么是「左半平面」vs「单位圆内」</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>连续</th>
+<th>离散</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本衰减</td>
+<td><span class="arithmatex">\(e^{-\alpha t}\)</span>（<span class="arithmatex">\(\alpha &gt; 0\)</span>）</td>
+<td><span class="arithmatex">\(a^n\)</span>（<span class="arithmatex">\(\lvert a\rvert&lt;1\)</span>）</td>
+</tr>
+<tr>
+<td>映射</td>
+<td><span class="arithmatex">\(s = -\alpha\)</span>（左半平面）</td>
+<td><span class="arithmatex">\(z = a\)</span>（单位圆内）</td>
+</tr>
+<tr>
+<td>判据</td>
+<td><span class="arithmatex">\(\operatorname{Re}(s) &lt; 0\)</span></td>
+<td><span class="arithmatex">\(\lvert z\rvert &lt; 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者的关系</strong>：<span class="arithmatex">\(z = e^{sT_s}\)</span>。</p>
+<p>左半平面 <span class="arithmatex">\(s\)</span> 映射到单位圆内 <span class="arithmatex">\(z\)</span>（关键的保稳性映射）。</p>
+<p><strong>这也解释了傅里叶变换的地位</strong>：
+令 <span class="arithmatex">\(z = e^{j\omega}\)</span>（即 <span class="arithmatex">\(z\)</span> 在单位圆上），Z 变换就退化为 DTFT：</p>
+<div class="arithmatex">\[
+X(e^{j\omega}) = \sum_n x[n]e^{-j\omega n}
+\]</div>
+<p><strong>单位圆就是「频率轴」。</strong></p>
+</div>
+<h3 id="_5">频率响应的几何求法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>在单位圆上取 <span class="arithmatex">\(z = e^{j\omega}\)</span>，则</p>
+<div class="arithmatex">\[
+H(e^{j\omega}) = \frac{\prod_{m}(e^{j\omega}-z_m)}{\prod_{k}(e^{j\omega}-p_k)}
+\]</div>
+<p>（<span class="arithmatex">\(z_m\)</span> 为零点，<span class="arithmatex">\(p_k\)</span> 为极点。）</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(\lvert H\rvert\)</span> 是「到各零点的距离之积」除以「到各极点的距离之积」。</p>
+<table>
+<thead>
+<tr>
+<th>频率点靠近…</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>极点</strong></td>
+<td>分母小 → <strong>幅度大</strong>（峰）</td>
+</tr>
+<tr>
+<td><strong>零点</strong></td>
+<td>分子小 → <strong>幅度小</strong>（谷）</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">这给出了「凭图读频率响应」的技能</p>
+<p>看到极点零点图就能大致判断频率响应：</p>
+<ul>
+<li>极点在单位圆内靠近圆 → 该频率附近<strong>共振峰</strong></li>
+<li>零点在单位圆上 → 该频率<strong>完全阻断</strong></li>
+<li>极点在圆上 → <strong>临界振荡</strong>（不稳定）</li>
+</ul>
+<p>这是滤波器设计的基本直觉。</p>
+</div>
+<hr />
+<h2 id="fir-iir">五、两类滤波器：FIR 与 IIR<a class="headerlink" href="#fir-iir" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>全称</th>
+<th><span class="arithmatex">\(H(z)\)</span> 形式</th>
+<th>冲激响应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FIR</strong></td>
+<td>有限冲激响应</td>
+<td>只有分子（<span class="arithmatex">\(A(z)=1\)</span>）</td>
+<td>有限长</td>
+</tr>
+<tr>
+<td><strong>IIR</strong></td>
+<td>无限冲激响应</td>
+<td>有分母（极点）</td>
+<td>无限长</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fir">FIR 滤波器<a class="headerlink" href="#fir" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+H(z) = \sum_{m=0}^{M}b_mz^{-m}
+\]</div>
+<p><strong>时域实现</strong>（就是卷积）：</p>
+<div class="arithmatex">\[
+y[n] = \sum_{m=0}^{M}b_m\,x[n-m]
+\]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="FIR 与 IIR 滤波器的结构对比">
+<defs>
+<marker id="zf2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="zf2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 上：FIR -->
+<text class="l3" x="14" y="20">FIR：只有前馈（无反馈）</text>
+<line class="a3" x1="24" y1="62" x2="66" y2="62" marker-end="url(#zf2-ah1)"/>
+<rect class="f3" x="68" y="44" width="34" height="36" rx="4"/>
+<text class="lbl" x="80" y="67">z⁻¹</text>
+<line class="a3" x1="104" y1="62" x2="146" y2="62" marker-end="url(#zf2-ah1)"/>
+<rect class="f3" x="148" y="44" width="34" height="36" rx="4"/>
+<text class="lbl" x="160" y="67">z⁻¹</text>
+<line class="a3" x1="184" y1="62" x2="230" y2="62" marker-end="url(#zf2-ah1)"/>
+<text class="lbl-s" x="236" y="67">… 求和输出</text>
+<text class="lbl-s" x="24" y="96">y[n] = b₀x[n] + b₁x[n−1] + b₂x[n−2]  （只用输入的过去值）</text>
+<!-- 下：IIR -->
+<text class="l2" x="14" y="140">IIR：有反馈（输出回到输入）</text>
+<line class="a2" x1="24" y1="184" x2="66" y2="184" marker-end="url(#zf2-ah2)"/>
+<rect class="f2" x="68" y="166" width="34" height="36" rx="4"/>
+<text class="lbl" x="80" y="189">z⁻¹</text>
+<line class="a2" x1="104" y1="184" x2="146" y2="184" marker-end="url(#zf2-ah2)"/>
+<rect class="f2" x="148" y="166" width="34" height="36" rx="4"/>
+<text class="lbl" x="160" y="189">z⁻¹</text>
+<line class="a2" x1="184" y1="184" x2="230" y2="184" marker-end="url(#zf2-ah2)"/>
+<!-- 反馈回路 -->
+<line class="a2" x1="230" y1="184" x2="230" y2="216"/>
+<line class="a2" x1="230" y1="216" x2="46" y2="216"/>
+<line class="a2" x1="46" y1="216" x2="46" y2="184"/>
+<line class="a2" x1="46" y1="184" x2="24" y2="184" marker-end="url(#zf2-ah2)"/>
+<text class="l2" x="118" y="212">反馈支路（产生极点）</text>
+<text class="lbl-s" x="24" y="234">y[n] = a₁y[n−1] + b₀x[n]  （用到了自己的历史）</text>
+</svg>
+<figcaption>图 2　FIR（上）只有前馈支路，冲激响应有限长；IIR（下）有反馈支路，输出回到输入形成递归，冲激响应无限长</figcaption>
+</figure>
+
+<h3 id="_6">两类滤波器的权衡<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>FIR</th>
+<th>IIR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冲激响应</td>
+<td>有限长</td>
+<td>无限长</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td><strong>总是稳定</strong>（无极点，除 <span class="arithmatex">\(z=0\)</span>）</td>
+<td>需要检查极点位置</td>
+</tr>
+<tr>
+<td>实现</td>
+<td>直接卷积，需 <span class="arithmatex">\(M\)</span> 次乘法</td>
+<td>递归，乘法次数少</td>
+</tr>
+<tr>
+<td><strong>线性相位</strong></td>
+<td><strong>容易做到</strong>（系数对称即可）</td>
+<td>很难精确做到</td>
+</tr>
+<tr>
+<td>实现同性能的阶数</td>
+<td>较高</td>
+<td><strong>较低</strong>（更省算力）</td>
+</tr>
+<tr>
+<td>设计难度</td>
+<td>简单直观</td>
+<td>需要映射（如双线性变换）</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">选型建议</p>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>要求<strong>波形保真</strong>（线性相位）</td>
+<td><strong>FIR</strong></td>
+</tr>
+<tr>
+<td>算力/延迟受限（同等指标）</td>
+<td>IIR</td>
+</tr>
+<tr>
+<td>要求绝对稳定</td>
+<td>FIR</td>
+</tr>
+<tr>
+<td>需要极窄过渡带</td>
+<td>IIR（阶数低得多）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>音频</strong>通常用 FIR（相位失真可以听出来）；
+<strong>成本敏感的嵌入式</strong>常用 IIR。</p>
+</div>
+<hr />
+<h2 id="_7">六、典型例题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：由差分方程求系统函数与稳定性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>系统满足</p>
+<div class="arithmatex">\[
+y[n] = 0.8\,y[n-1] + x[n]
+\]</div>
+<p><strong>(a)</strong> 求 <span class="arithmatex">\(H(z)\)</span>。</p>
+<p><strong>(b)</strong> 求极点，判断稳定性。</p>
+<p><strong>&copy;</strong> 求 <span class="arithmatex">\(h[n]\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>两边取 Z 变换（用 <span class="arithmatex">\(y[n-1]\leftrightarrow z^{-1}Y(z)\)</span>），解出 <span class="arithmatex">\(H = Y/X\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 求系统函数</strong></p>
+<p>取 Z 变换：</p>
+<div class="arithmatex">\[
+Y(z) = 0.8z^{-1}Y(z) + X(z)
+\]</div>
+<p>移项：</p>
+<div class="arithmatex">\[
+Y(z)(1-0.8z^{-1}) = X(z)
+\]</div>
+<div class="arithmatex">\[
+H(z) = \frac{Y(z)}{X(z)} = \frac{1}{1-0.8z^{-1}}
+\]</div>
+<p><strong>还可以写成</strong>（分子分母乘 <span class="arithmatex">\(z\)</span>）：</p>
+<div class="arithmatex">\[
+H(z) = \frac{z}{z-0.8}
+\]</div>
+<p><strong>(b) 极点与稳定性</strong></p>
+<p>令分母为零：<span class="arithmatex">\(z - 0.8 = 0\)</span>，得<strong>极点</strong> <span class="arithmatex">\(z = 0.8\)</span>。</p>
+<p>因为 <span class="arithmatex">\(\lvert 0.8\rvert &lt; 1\)</span>，极点在单位圆内，所以<strong>稳定</strong> ✓</p>
+<p><strong>&copy; 冲激响应</strong></p>
+<p>对照常用变换对 <span class="arithmatex">\(a^nu[n]\leftrightarrow\frac{1}{1-az^{-1}}\)</span>，</p>
+<div class="arithmatex">\[
+\boxed{\ h[n] = (0.8)^n u[n]\ }
+\]</div>
+<p><strong>验证衰减</strong>：<span class="arithmatex">\(h[0]=1\)</span>，<span class="arithmatex">\(h[1]=0.8\)</span>，<span class="arithmatex">\(h[2]=0.64\)</span>… 确实衰减 ✓
+与稳定性结论一致。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个系统的实际意义</p>
+<p><span class="arithmatex">\(y[n] = 0.8y[n-1] + x[n]\)</span> 是<strong>一阶 IIR 低通滤波器</strong>（指数平滑）。</p>
+<p>用途：
+- <strong>传感器数据平滑</strong>（抑制噪声）
+- <strong>指数移动平均（EMA）</strong>（金融、监控指标）
+- <strong>一阶动态系统的离散化</strong></p>
+<p><span class="arithmatex">\(\lvert a\rvert\)</span> 越接近 1，平滑越强（但响应越慢）：
+- <span class="arithmatex">\(a = 0.8\)</span>：响应较快
+- <span class="arithmatex">\(a = 0.99\)</span>：很平滑但滞后明显</p>
+<p>这就是<strong>平滑度与响应延迟的权衡</strong>。</p>
+</div>
+<hr />
+<h3 id="2">例题 2：判断极点位置与稳定性<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>系统函数</p>
+<div class="arithmatex">\[
+H(z) = \frac{z+1}{z^2 - 0.9z + 0.2}
+\]</div>
+<p>判断稳定性。</p>
+<details class="note">
+<summary>提示</summary>
+<p>求分母的根，看模是否都小于 1。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>求极点</strong>（解 <span class="arithmatex">\(z^2-0.9z+0.2=0\)</span>）：</p>
+<div class="arithmatex">\[
+z = \frac{0.9 \pm \sqrt{0.81-0.8}}{2} = \frac{0.9\pm\sqrt{0.01}}{2} = \frac{0.9\pm0.1}{2}
+\]</div>
+<div class="arithmatex">\[
+p_1 = 0.5, \qquad p_2 = 0.4
+\]</div>
+<p><strong>判断</strong>：</p>
+<div class="arithmatex">\[
+\lvert p_1\rvert = 0.5 &lt; 1, \qquad \lvert p_2\rvert = 0.4 &lt; 1
+\]</div>
+<p>两个极点都在单位圆内 → <strong>稳定</strong> ✓</p>
+<p><strong>零点</strong>：<span class="arithmatex">\(z+1=0\)</span>，得 <span class="arithmatex">\(z = -1\)</span>（在<strong>单位圆上</strong>）。</p>
+<p><strong>频率响应特征</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>频率</th>
+<th>分析</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直流（<span class="arithmatex">\(z=1\)</span>）</td>
+<td><span class="arithmatex">\(\lvert H\rvert = \frac{2}{1-0.9+0.2} = \frac{2}{0.3} \approx 6.67\)</span>（<strong>大</strong>）</td>
+</tr>
+<tr>
+<td>奈奎斯特（<span class="arithmatex">\(z=-1\)</span>）</td>
+<td>分子为 0 → <span class="arithmatex">\(\lvert H\rvert = 0\)</span>（<strong>完全阻断</strong>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以这是一个低通滤波器</strong>，且在高频处完全阻断。</p>
+<p><strong>极点靠近单位圆的程度决定峰的高度</strong>：
+这里极点在 0.5、0.4（离圆较远），所以峰值不尖锐。
+若极点移到 0.95，直流附近会有很尖的共振峰。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">判断二阶系统稳定性的快速方法</p>
+<p>对 <span class="arithmatex">\(z^2 + a_1z + a_0 = 0\)</span>，稳定的充要条件（<strong>Jury 判据</strong>的 <span class="arithmatex">\(n=2\)</span> 情形）：</p>
+<div class="arithmatex">\[
+\lvert a_0\rvert &lt; 1, \qquad 1 + a_1 + a_0 &gt; 0, \qquad 1 - a_1 + a_0 &gt; 0
+\]</div>
+<p>本例中 <span class="arithmatex">\(a_1 = -0.9\)</span>，<span class="arithmatex">\(a_0 = 0.2\)</span>：</p>
+<ul>
+<li><span class="arithmatex">\(\lvert 0.2\rvert &lt; 1\)</span> ✓</li>
+<li><span class="arithmatex">\(1 + (-0.9) + 0.2 = 0.3 &gt; 0\)</span> ✓</li>
+<li><span class="arithmatex">\(1 - (-0.9) + 0.2 = 2.1 &gt; 0\)</span> ✓</li>
+</ul>
+<p>三条都满足 → 稳定 ✓ 与直接求根一致。</p>
+<p><strong>不用求根就能判断</strong>，这对高阶系统很有价值（求根可能数值不稳）。</p>
+</div>
+<hr />
+<h3 id="3fir">例题 3：FIR 滤波器的频率响应<a class="headerlink" href="#3fir" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(h[n] = \{0.5,\ 0.5\}\)</span>（<strong>两点滑动平均</strong>）。求 <span class="arithmatex">\(H(z)\)</span> 与频率响应，并说明其功能。</p>
+<details class="note">
+<summary>思路</summary>
+<p>求 Z 变换，代入 <span class="arithmatex">\(z=e^{j\omega}\)</span>，分析幅度响应。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>求 <span class="arithmatex">\(H(z)\)</span></strong>：</p>
+<div class="arithmatex">\[
+H(z) = 0.5 + 0.5z^{-1} = 0.5\frac{z+1}{z}
+\]</div>
+<p><strong>零点</strong>：<span class="arithmatex">\(z = -1\)</span>（单位圆上，对应奈奎斯特频率）。</p>
+<p><strong>极点在 <span class="arithmatex">\(z=0\)</span></strong>（由 <span class="arithmatex">\(1/z\)</span> 产生），在单位圆内 → 稳定。</p>
+<p><strong>频率响应</strong>（令 <span class="arithmatex">\(z = e^{j\omega}\)</span>）：</p>
+<div class="arithmatex">\[
+H(e^{j\omega}) = 0.5 + 0.5e^{-j\omega}
+\]</div>
+<p>提取相位因子：</p>
+<div class="arithmatex">\[
+= 0.5e^{-j\omega/2}\left(e^{j\omega/2}+e^{-j\omega/2}\right)
+= e^{-j\omega/2}\cos\!\left(\frac{\omega}{2}\right)
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\boxed{\ \lvert H(e^{j\omega})\rvert = \left\lvert\cos\frac{\omega}{2}\right\rvert\ }
+\]</div>
+<p><strong>频率响应分析</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>频率 <span class="arithmatex">\(\omega\)</span></th>
+<th><span class="arithmatex">\(\lvert H\rvert\)</span></th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span>（直流）</td>
+<td><span class="arithmatex">\(\lvert\cos 0\rvert = 1\)</span></td>
+<td><strong>完全通过</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi/2\)</span></td>
+<td><span class="arithmatex">\(\lvert\cos(\pi/4)\rvert = 0.707\)</span></td>
+<td>通过约 70%</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi\)</span>（奈奎斯特）</td>
+<td><span class="arithmatex">\(\lvert\cos(\pi/2)\rvert = 0\)</span></td>
+<td><strong>完全阻断</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>低通滤波器</strong>（通过低频，阻断高频）。</p>
+<p><strong>物理验证</strong>：</p>
+<ul>
+<li>输入常数 <span class="arithmatex">\(x[n]=C\)</span>：<span class="arithmatex">\(y[n] = 0.5C+0.5C = C\)</span> → 不变 ✓（直流通过）</li>
+<li>输入 <span class="arithmatex">\(x[n]=(-1)^n\)</span>：<span class="arithmatex">\(y[n] = 0.5(-1)^n + 0.5(-1)^{n-1} = 0.5(-1)^n - 0.5(-1)^n = 0\)</span> → 被消除 ✓</li>
+</ul>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这是最简单的平滑滤波器，但有相位延迟</p>
+<p>输出可以写成</p>
+<div class="arithmatex">\[
+y[n] = 0.5x[n]+0.5x[n-1]
+\]</div>
+<p><strong>注意相位</strong>：<span class="arithmatex">\(H = e^{-j\omega/2}\cos(\omega/2)\)</span> 中的 <span class="arithmatex">\(e^{-j\omega/2}\)</span>
+表示<strong>半个采样的延迟</strong>。所以输出相对输入<strong>滞后 0.5 个采样</strong>。</p>
+<p><strong>这是 FIR 的通病</strong>：对称 FIR 的延迟为 <span class="arithmatex">\((N-1)/2\)</span> 个采样
+（<span class="arithmatex">\(N\)</span> 为系数个数）。本例 <span class="arithmatex">\(N=2\)</span>，延迟 0.5 ✓</p>
+<p><strong>好处是线性相位</strong>：延迟对所有频率都一样，所以<strong>波形不失真</strong>
+（只是整体平移）。这正是一个采样、音频处理中重视的性质。</p>
+<p><strong>改进方向</strong>：为减少振铃，可以用加权平均（如高斯窗）代替等权平均。</p>
+</div>
+<hr />
+<h3 id="4-hz">例题 4：从 <span class="arithmatex">\(H(z)\)</span> 读频率响应<a class="headerlink" href="#4-hz" title="Permanent link">&para;</a></h3>
+<p>系统 <span class="arithmatex">\(H(z) = 1 - z^{-1}\)</span>（一阶差分）。求幅度响应，判断滤波器类型。</p>
+<details class="note">
+<summary>提示</summary>
+<p>代入 <span class="arithmatex">\(z = e^{j\omega}\)</span>，用三角函数化简。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+H(e^{j\omega}) = 1 - e^{-j\omega}
+\]</div>
+<p>提取因子：</p>
+<div class="arithmatex">\[
+= e^{-j\omega/2}\left(e^{j\omega/2}-e^{-j\omega/2}\right)
+= e^{-j\omega/2}\cdot 2j\sin\!\left(\frac{\omega}{2}\right)
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\lvert H(e^{j\omega})\rvert = 2\left\lvert\sin\frac{\omega}{2}\right\rvert
+\]</div>
+<p><strong>频率响应分析</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>频率</th>
+<th><span class="arithmatex">\(\lvert H\rvert\)</span></th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span>（直流）</td>
+<td><span class="arithmatex">\(2\lvert\sin 0\rvert = 0\)</span></td>
+<td><strong>完全阻断</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi/2\)</span></td>
+<td><span class="arithmatex">\(2\sin(\pi/4) \approx 1.41\)</span></td>
+<td>通过</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi\)</span>（奈奎斯特）</td>
+<td><span class="arithmatex">\(2\sin(\pi/2) = 2\)</span></td>
+<td><strong>最大增益</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>高通滤波器</strong>（阻断低频，通过高频）。</p>
+<p><strong>零点</strong>在 <span class="arithmatex">\(z = 1\)</span>（单位圆上）—— 对应 <span class="arithmatex">\(\omega = 0\)</span>，
+所以直流被完全阻断 ✓（零点位置与阻断频率对应。）</p>
+<p><strong>与上一题对照</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>滤波器</th>
+<th><span class="arithmatex">\(h[n]\)</span></th>
+<th>零点</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>滑动平均</td>
+<td><span class="arithmatex">\(\{0.5, 0.5\}\)</span></td>
+<td><span class="arithmatex">\(z=-1\)</span></td>
+<td>低通</td>
+</tr>
+<tr>
+<td>差分</td>
+<td><span class="arithmatex">\(\{1, -1\}\)</span></td>
+<td><span class="arithmatex">\(z=1\)</span></td>
+<td>高通</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者恰好互补</strong>：一个阻断高频、一个阻断低频。</p>
+<p><strong>组合起来</strong>：把两者级联（卷积），得</p>
+<div class="arithmatex">\[
+H_{\text{总}} = (0.5+0.5z^{-1})(1-z^{-1}) = 0.5 - 0.5z^{-2}
+\]</div>
+<p>即 <span class="arithmatex">\(h = \{0.5, 0, -0.5\}\)</span>，这是<strong>带通</strong>（<strong>回忆卷积那一页的例题 4</strong>，
+那里用的是未归一化的 <span class="arithmatex">\(\{1,1\}\)</span>，结论相同）。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">差分对噪声的影响</p>
+<p>差分是<strong>高通</strong>，所以它对<strong>高频噪声有放大作用</strong>：</p>
+<div class="arithmatex">\[
+\text{高频处增益} \to 2
+\]</div>
+<p>而噪声通常富含高频成分。这解释了前一页（傅里叶）提到的
+「数值微分对噪声敏感」。</p>
+<p><strong>实践做法</strong>：先低通（平滑）再差分，形成<strong>带通 + 平滑</strong>的组合。</p>
+</div>
+<hr />
+<h2 id="_8">七、用在哪些课程里<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="_9">现代数字信号处理 · 系统分析与设计的核心工具<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>Z 变换的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统分析</td>
+<td>由差分方程得 <span class="arithmatex">\(H(z)\)</span>，读极点零点</td>
+</tr>
+<tr>
+<td>稳定性判断</td>
+<td>极点是否都在单位圆内</td>
+</tr>
+<tr>
+<td>频率响应</td>
+<td>令 <span class="arithmatex">\(z=e^{j\omega}\)</span></td>
+</tr>
+<tr>
+<td>滤波器设计</td>
+<td>指定 <span class="arithmatex">\(H(z)\)</span> 的极点零点布局</td>
+</tr>
+<tr>
+<td>逆系统</td>
+<td><span class="arithmatex">\(1/H(z)\)</span>（注意零点变极点，可能不稳定）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_10">智能传感与信息处理 · 实时滤波与状态估计<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>嵌入式滤波器</strong>：传感器数据流上的一阶/二阶 IIR（计算量极小）</li>
+<li><strong>互补滤波</strong>：加速度计与陀螺仪的融合，
+  本质是「一个高通 + 一个低通」组合，与例题 4 同源</li>
+<li><strong>卡尔曼滤波的稳态形式</strong>：稳态时退化为一个固定的 IIR 滤波器</li>
+<li><strong>信号的动态补偿</strong>：传感器带宽不足时用逆系统部分补偿
+  （但要小心 <span class="arithmatex">\(1/H\)</span> 可能不稳定）</li>
+</ul>
+<h3 id="_11">海洋声学 · 声信号处理链<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>带通滤波</strong>：水声信号通常在特定频段，需滤除海洋环境噪声</li>
+<li><strong>匹配滤波器</strong>：与发射波形匹配，其 <span class="arithmatex">\(H(z)\)</span> 为时间反转共轭</li>
+<li><strong>混响抑制</strong>：利用信号的动态特性设计自适应滤波器</li>
+</ul>
+<hr />
+<h2 id="_12">八、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 求 <span class="arithmatex">\(x[n] = 0.5^nu[n]\)</span> 的 Z 变换与收敛域。</p>
+<details class="note">
+<summary>提示</summary>
+<p>这是几何级数，公比 <span class="arithmatex">\(0.5z^{-1}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+X(z) = \sum_{n=0}^{\infty}0.5^nz^{-n} = \sum_{n=0}^{\infty}\left(0.5z^{-1}\right)^n
+\]</div>
+<p>这是几何级数，公比 <span class="arithmatex">\(q = 0.5z^{-1}\)</span>，收敛条件 <span class="arithmatex">\(\lvert q\rvert &lt; 1\)</span>：</p>
+<div class="arithmatex">\[
+\lvert 0.5z^{-1}\rvert &lt; 1 \iff \lvert z\rvert &gt; 0.5
+\]</div>
+<p>求和：</p>
+<div class="arithmatex">\[
+\boxed{\ X(z) = \frac{1}{1-0.5z^{-1}}, \qquad \lvert z\rvert &gt; 0.5\ }
+\]</div>
+<p><strong>收敛域是半径 0.5 的圆外区域</strong> ✓</p>
+<p><strong>为什么 ROC 是这样的</strong>：序列是「右边序列」（<span class="arithmatex">\(n \geq 0\)</span>），
+所以 ROC 是「最外极点之外的区域」。</p>
+<p><strong>极点在 <span class="arithmatex">\(z = 0.5\)</span></strong>（分母为零处），ROC 的边界正是这个极点 ——
+<strong>ROC 从不包含极点</strong>（这是 Z 变换的一条基本性质）。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 系统 <span class="arithmatex">\(H(z) = \frac{1}{1-1.5z^{-1}}\)</span> 是否稳定？</p>
+<details class="note">
+<summary>提示</summary>
+<p>看极点模长。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不稳定。</strong></p>
+<p>极点在 <span class="arithmatex">\(z = 1.5\)</span>，<span class="arithmatex">\(\lvert 1.5\rvert &gt; 1\)</span>，在<strong>单位圆外</strong> ✗</p>
+<p>对应的冲激响应：</p>
+<div class="arithmatex">\[
+h[n] = (1.5)^n u[n]
+\]</div>
+<p>这是<strong>指数增长</strong>，显然不稳定 ✓ 与判据一致。</p>
+<p><strong>注意</strong>：这个系统的 <span class="arithmatex">\(H(z)\)</span> 代数表达式与
+<span class="arithmatex">\(H(z) = \frac{1}{1-0.5z^{-1}}\)</span> 形式相同（只是 <span class="arithmatex">\(a\)</span> 不同），
+但稳定性完全不同 —— <strong>所以判断稳定必须看极点的具体位置</strong>。</p>
+<p><strong>如果一定要用这个系统</strong>，可以：
+1. 减小增益（把极点移进单位圆）
+2. 加反馈补偿
+3. 用 FIR 近似期望特性</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：FIR 滤波器一定稳定吗？为什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>FIR 的 <span class="arithmatex">\(H(z)\)</span> 有没有非零极点？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>一定稳定。</strong></p>
+<p>FIR 的 <span class="arithmatex">\(H(z)\)</span> 形如</p>
+<div class="arithmatex">\[
+H(z) = \sum_{m=0}^{M}b_mz^{-m} = \frac{b_0z^M + b_1z^{M-1}+\cdots+b_M}{z^M}
+\]</div>
+<p><strong>极点全在 <span class="arithmatex">\(z = 0\)</span></strong>（分母 <span class="arithmatex">\(z^M = 0\)</span>）。</p>
+<p>而 <span class="arithmatex">\(\lvert 0\rvert = 0 &lt; 1\)</span>，所以所有极点都在单位圆内 → <strong>必然稳定</strong> ✓</p>
+<p><strong>直观理由</strong>：FIR 的冲激响应有限长（只有 <span class="arithmatex">\(M+1\)</span> 个非零值），
+所以</p>
+<div class="arithmatex">\[
+\sum_n\lvert h[n]\rvert = \sum_{m=0}^{M}\lvert b_m\rvert &lt; \infty
+\]</div>
+<p>（有限项之和必然有限）→ 满足 BIBO 稳定条件 ✓</p>
+<p><strong>这是 FIR 的一大优势</strong>：<strong>无需担心稳定性问题</strong>，
+调试时可以放心（不会因为参数不小心而发散）。</p>
+<p><strong>IIR 则相反</strong>：参数稍有偏差就可能让极点跑出单位圆。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 一个滤波器的极点在 <span class="arithmatex">\(z = 0.98\)</span>，零点在 <span class="arithmatex">\(z = -1\)</span>。
+预测它的频率响应特征。</p>
+<details class="note">
+<summary>提示</summary>
+<p>极点在单位圆内但很靠近圆（<span class="arithmatex">\(0.98\)</span>）；零点在单位圆上。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>极点靠近 <span class="arithmatex">\(z=0.98\)</span></strong>（正实轴，对应低频 <span class="arithmatex">\(\omega \approx 0\)</span>）：</p>
+<p>→ 低频处<strong>增益很大</strong>，形成<strong>尖锐的共振峰</strong></p>
+<p><strong>零点在 <span class="arithmatex">\(z = -1\)</span></strong>（对应奈奎斯特频率 <span class="arithmatex">\(\omega = \pi\)</span>）：</p>
+<p>→ 高频处<strong>完全阻断</strong></p>
+<p><strong>所以这是一个「窄带低通」滤波器</strong>（截止很陡，通带很窄）。</p>
+<p><strong>定量估计峰高</strong>：在 <span class="arithmatex">\(\omega=0\)</span> 处（<span class="arithmatex">\(z=1\)</span>）：</p>
+<div class="arithmatex">\[
+\lvert H(1)\rvert = \frac{\lvert 1+1\rvert}{\lvert 1-0.98\rvert} = \frac{2}{0.02} = 100
+\]</div>
+<p><strong>增益 100 倍</strong>（40 dB）—— 这是一个很强的共振。</p>
+<p><strong>实际影响</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>优点</td>
+<td>能强效提取低频信号</td>
+</tr>
+<tr>
+<td>风险</td>
+<td>对低频噪声同样放大 100 倍</td>
+</tr>
+<tr>
+<td>副作用</td>
+<td>响应很慢（时间常数 <span class="arithmatex">\(\approx 1/(1-0.98) = 50\)</span> 个采样）</td>
+</tr>
+<tr>
+<td>数值风险</td>
+<td>系数量化误差可能让极点移出单位圆</td>
+</tr>
+</tbody>
+</table>
+<p><strong>设计经验</strong>：极点越靠近单位圆，<strong>选择性越好但越危险</strong>。
+工程上通常限制 <span class="arithmatex">\(\lvert p\rvert \leq 0.99\)</span>，
+并检查定点实现下的精度影响。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../sampling/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 采样定理与混叠">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                采样定理与混叠
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../courses/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
