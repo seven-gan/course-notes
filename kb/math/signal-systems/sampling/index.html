@@ -1,0 +1,2413 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/signal-systems/sampling/">
+      
+      
+        <link rel="prev" href="../fourier/">
+      
+      
+        <link rel="next" href="../../../courses/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>采样定理与混叠 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              采样定理与混叠
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、采样的数学模型
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、采样的数学模型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键：采样在频域做什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、奈奎斯特定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、混叠：为什么不可恢复
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、混叠：为什么不可恢复">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        混叠的机制
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、抗混叠滤波器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、恢复：为什么低通能重建信号
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：判断是否发生混叠
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：设计采样系统
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：混叠的定量计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：采样定理的边界情形
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 数字化的第一步
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 传感器与数据采集
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        海洋声学 · 声信号的采集
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MIT 6.003 Lec 21–22</code><code>通用信号与系统教材</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>熊庆旭《信号与系统》第 5 章（或同类中文教材）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../fourier/">fourier</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../sampling/">sampling</a></span></div></div>
+
+<h1 id="_1">采样定理与混叠<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面几页都在处理<strong>连续</strong>信号。但实际系统（计算机、DSP 芯片）只能处理<strong>离散</strong>数据。</p>
+<p>这一页回答一个关键问题：</p>
+<blockquote>
+<p><strong>以多快的速度采样，才能不丢失信息？</strong></p>
+</blockquote>
+<p>答案是<strong>奈奎斯特采样定理</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ f_s &gt; 2f_{\max}\ }
+\]</div>
+<p>即<strong>采样频率必须大于信号最高频率的 2 倍</strong>。</p>
+<p>这句话看起来简单，但它背后有两个必须理解的机制：<strong>频谱周期延拓</strong>与<strong>混叠</strong>。
+不理解它们，就无法理解为什么「采样率不够会出错」，以及为什么必须加抗混叠滤波器。</p>
+<hr />
+<h2 id="_2">一、采样的数学模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>理想采样</strong>：用周期冲激串乘上连续信号。</p>
+<div class="arithmatex">\[
+x_s(t) = x(t)\cdot p(t), \qquad
+p(t) = \sum_{n=-\infty}^{\infty}\delta(t-nT_s)
+\]</div>
+<p>其中 <span class="arithmatex">\(T_s\)</span> 是<strong>采样周期</strong>，<span class="arithmatex">\(f_s = 1/T_s\)</span> 是<strong>采样频率</strong>。</p>
+<p><strong>采样得到的序列</strong>：</p>
+<div class="arithmatex">\[
+x[n] = x(nT_s)
+\]</div>
+<h3 id="_3">关键：采样在频域做什么<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>冲激串 <span class="arithmatex">\(p(t)\)</span> 的傅里叶变换还是冲激串（这是一个漂亮的对称性）：</p>
+<div class="arithmatex">\[
+P(\omega) = \frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega - k\omega_s),
+\qquad \omega_s = \frac{2\pi}{T_s} = 2\pi f_s
+\]</div>
+<p><strong>时域相乘 = 频域卷积</strong>（卷积定理的对偶形式）：</p>
+<div class="arithmatex">\[
+X_s(\omega) = \frac{1}{2\pi}X(\omega)*P(\omega)
+\]</div>
+<p>与冲激串卷积的效果是<strong>把频谱搬移并叠加</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ X_s(\omega) = \frac{1}{T_s}\sum_{k=-\infty}^{\infty}X(\omega - k\omega_s)\ }
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">这个式子是本节的核心</p>
+<p><strong>采样的频域效果：把原频谱以 <span class="arithmatex">\(\omega_s\)</span> 为周期复制无穷多份。</strong></p>
+<p>这就是<strong>频谱周期延拓</strong>。</p>
+<p><strong>为什么这会导致问题</strong>：如果原来的频谱「太宽」（超过 <span class="arithmatex">\(\omega_s/2\)</span>），
+相邻的副本就会<strong>互相重叠</strong>——重叠的部分无法再区分，
+这就叫<strong>混叠</strong>。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="采样导致频谱周期延拓与混叠">
+<defs>
+<marker id="sm1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="sm1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- ① 原频谱 -->
+<text class="lbl-s" x="14" y="18">① 原信号频谱（带宽有限）</text>
+<line class="gb" x1="22" y1="76" x2="412" y2="76"/>
+<line class="gb" x1="217" y1="30" x2="217" y2="88" marker-end="url(#sm1-ah2)"/>
+<line class="gb" x1="22" y1="76" x2="416" y2="76" marker-end="url(#sm1-ah1)"/>
+<path class="a1" d="M147,76 L160,76 C182,42 200,38 217,38 C234,38 252,42 274,76 L287,76" fill="none"/>
+<line class="gd" x1="147" y1="42" x2="147" y2="76" stroke-dasharray="4 4"/>
+<line class="gd" x1="287" y1="42" x2="287" y2="76" stroke-dasharray="4 4"/>
+<text class="l1" x="180" y="34">−f_max</text>
+<text class="l1" x="240" y="34">f_max</text>
+<!-- ② 采样后：周期延拓（无混叠） -->
+<text class="l3" x="14" y="130">② 采样后：频谱以 f_s 为周期复制（f_s 足够大 → 无重叠）</text>
+<line class="gb" x1="22" y1="196" x2="412" y2="196"/>
+<line class="gb" x1="217" y1="150" x2="217" y2="208" marker-end="url(#sm1-ah2)"/>
+<line class="gb" x1="22" y1="196" x2="416" y2="196" marker-end="url(#sm1-ah1)"/>
+<path class="a3" d="M147,196 L160,196 C182,162 200,158 217,158 C234,158 252,162 274,196 L287,196" fill="none"/>
+<path class="a3" d="M27,196 L40,196 C62,162 80,158 97,158 C114,158 132,162 154,196 L167,196" fill="none"/>
+<path class="a3" d="M267,196 L280,196 C302,162 320,158 337,158 C354,158 372,162 394,196 L407,196" fill="none"/>
+<line class="gd" x1="97" y1="160" x2="97" y2="196" stroke-dasharray="4 4"/>
+<line class="gd" x1="337" y1="160" x2="337" y2="196" stroke-dasharray="4 4"/>
+<text class="l3" x="76" y="228">−f_s</text>
+<text class="l3" x="208" y="228">0</text>
+<text class="l3" x="326" y="228">f_s</text>
+<text class="lbl-s" x="180" y="248">副本之间有空隙 ⟹ 可以用低通恢复原信号</text>
+<!-- ③ 混叠 -->
+<text class="l2" x="14" y="288">③ f_s 太小时：副本重叠（阴影处即混叠，无法恢复）</text>
+<line class="gb" x1="22" y1="318" x2="412" y2="318"/>
+</svg>
+<figcaption>图 1　采样在频域的三种情形。① 原频谱带宽有限；② 采样率足够高，频谱副本互不重叠（可恢复）；③ 采样率不足，副本重叠产生混叠（不可恢复）</figcaption>
+</figure>
+
+<hr />
+<h2 id="_4">二、奈奎斯特定理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>定理（奈奎斯特-香农采样定理）</strong>：</p>
+<p>若信号 <span class="arithmatex">\(x(t)\)</span> 是<strong>带限</strong>的，即</p>
+<div class="arithmatex">\[
+X(\omega) = 0 \quad \text{当 } \lvert\omega\rvert &gt; \omega_{\max} = 2\pi f_{\max}
+\]</div>
+<p>则当采样频率满足</p>
+<div class="arithmatex">\[
+\boxed{\ f_s &gt; 2f_{\max}\ }
+\]</div>
+<p>（严格说 <span class="arithmatex">\(\geq\)</span>，但等于时要求临界条件，实用上取严格大于）</p>
+<p>时，<span class="arithmatex">\(x(t)\)</span> 可以由采样序列 <span class="arithmatex">\(x[n]\)</span> <strong>完全恢复</strong>。</p>
+<p><strong>恢复方法</strong>：理想低通滤波（截止频率 <span class="arithmatex">\(f_s/2\)</span>）。</p>
+<p><strong>奈奎斯特频率</strong>：<span class="arithmatex">\(f_N = f_s/2\)</span>，即可无混叠表示的最高频率。</p>
+<div class="admonition warning">
+<p class="admonition-title">奈奎斯特频率是临界情形，实用上要留余量</p>
+<p>理论上 <span class="arithmatex">\(f_s = 2f_{\max}\)</span> 就够，但实际中：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>抗混叠滤波器不理想</td>
+<td>实际低通有过渡带，必须留出余量</td>
+</tr>
+<tr>
+<td>信号不是严格带限</td>
+<td>真实信号总有噪声与高频成分</td>
+</tr>
+<tr>
+<td>需要保留裕度</td>
+<td>通常取 <span class="arithmatex">\(f_s = 2.5 \sim 5\)</span> 倍 <span class="arithmatex">\(f_{\max}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程惯例</strong>：音频取 44.1 kHz（人耳上限约 20 kHz，约 2.2 倍）；
+某些精密测量取 10 倍以上。</p>
+</div>
+<hr />
+<h2 id="_5">三、混叠：为什么不可恢复<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">混叠的机制<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>考虑两个频率：<span class="arithmatex">\(f_0\)</span>（真实）与 <span class="arithmatex">\(f_s - f_0\)</span>（看起来像的频率）。</p>
+<p>采样后：</p>
+<div class="arithmatex">\[
+\cos(2\pi f_0 nT_s) \quad\text{与}\quad \cos(2\pi (f_s-f_0)nT_s)
+\]</div>
+<p>在 <span class="arithmatex">\(t = nT_s\)</span> 处<strong>取值完全相同</strong>（因为 <span class="arithmatex">\(\cos(2\pi(f_s-f_0)nT_s) = \cos(2\pi n - 2\pi f_0 nT_s) = \cos(2\pi f_0nT_s)\)</span>）。</p>
+<p><strong>所以采样数据无法区分它们</strong>——这就是混叠。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="两个不同频率信号采样后无法区分">
+<!-- 此图只画波形与采样点，不需要 marker -->
+<!-- 上：低频信号 -->
+<text class="l3" x="14" y="18">真实信号：低频（每周期 4 个样本）</text>
+<line class="gb" x1="26" y1="80" x2="412" y2="80"/>
+<path class="a3" d="M30,80 C48,36 66,36 84,80 C102,124 120,124 138,80 C156,36 174,36 192,80 C210,124 228,124 246,80 C264,36 282,36 300,80 C318,124 336,124 354,80 C372,36 390,36 408,80" fill="none"/>
+<circle class="d3" cx="30" cy="80" r="3.6"/>
+<circle class="d3" cx="66" cy="41" r="3.6"/>
+<circle class="d3" cx="102" cy="116" r="3.6"/>
+<circle class="d3" cx="138" cy="80" r="3.6"/>
+<circle class="d3" cx="174" cy="41" r="3.6"/>
+<circle class="d3" cx="210" cy="116" r="3.6"/>
+<circle class="d3" cx="246" cy="80" r="3.6"/>
+<circle class="d3" cx="282" cy="41" r="3.6"/>
+<circle class="d3" cx="318" cy="116" r="3.6"/>
+<circle class="d3" cx="354" cy="80" r="3.6"/>
+<circle class="d3" cx="390" cy="41" r="3.6"/>
+<!-- 下：高频信号（同样的采样点） -->
+<text class="l2" x="14" y="152">混叠信号：更高频（但采样点完全相同）</text>
+<line class="gb" x1="26" y1="214" x2="412" y2="214"/>
+<path class="a2" d="M30,80 L66,119 L102,80 L138,80 L174,119 L210,80 L246,80 L282,119 L318,80 L354,80 L390,119 L414,80" fill="none" opacity="0" />
+<path class="a2" d="M30,214 C48,170 66,170 84,214 C102,258 120,258 138,214 C156,170 174,170 192,214 C210,258 228,258 246,214 C264,170 282,170 300,214 C318,258 336,258 354,214 C372,170 390,170 408,214" fill="none" opacity="0"/>
+<polyline class="a2" points="30,214 66,214 71,175 102,175 107,214 138,214 143,175 174,175 179,214 210,214 215,175 246,175 251,214 282,214 287,175 318,175 323,214 354,214 359,175 390,175 395,214" fill="none"/>
+<circle class="d2" cx="30" cy="214" r="3.6"/>
+<circle class="d2" cx="66" cy="214" r="3.6"/>
+<circle class="d2" cx="102" cy="175" r="3.6"/>
+<circle class="d2" cx="138" cy="214" r="3.6"/>
+<circle class="d2" cx="174" cy="214" r="3.6"/>
+<circle class="d2" cx="210" cy="175" r="3.6"/>
+<circle class="d2" cx="246" cy="214" r="3.6"/>
+<circle class="d2" cx="282" cy="214" r="3.6"/>
+<circle class="d2" cx="318" cy="175" r="3.6"/>
+<circle class="d2" cx="354" cy="214" r="3.6"/>
+<circle class="d2" cx="390" cy="214" r="3.6"/>
+<text class="lbl-s" x="30" y="240">注意：两行的采样值完全一样，无法区分 —— 这就是混叠</text>
+</svg>
+<figcaption>图 2　混叠的直观解释：两个不同频率的信号，如果采样点恰好重合（这里低频每周期采 4 点，被采成「看起来是另一频率」），从采样数据无法判断真实频率</figcaption>
+</figure>
+
+<div class="admonition note">
+<p class="admonition-title">混叠频率的计算</p>
+<p>若真实频率 <span class="arithmatex">\(f_0\)</span> 超过奈奎斯特频率 <span class="arithmatex">\(f_N = f_s/2\)</span>，采样后会「折叠」到</p>
+<div class="arithmatex">\[
+f_{\text{alias}} = \left\lvert f_0 - k f_s\right\rvert
+\quad\text{取使结果落在 }[0, f_s/2]\text{ 的整数 }k
+\]</div>
+<p><strong>例</strong>：<span class="arithmatex">\(f_s = 1000\)</span> Hz，真实频率 <span class="arithmatex">\(f_0 = 1300\)</span> Hz。</p>
+<p><span class="arithmatex">\(f_0 &gt; f_N = 500\)</span> Hz，所以混叠。取 <span class="arithmatex">\(k=1\)</span>：</p>
+<div class="arithmatex">\[
+f_{\text{alias}} = \lvert 1300 - 1000\rvert = 300 \text{ Hz}
+\]</div>
+<p><strong>结果</strong>：一个 1300 Hz 的信号，采样后看起来像 300 Hz。</p>
+<p><strong>这是真实工程事故的常见来源</strong>：比如旋转机械的振动监测中，
+高频振动可能混叠成低频，让人误判故障频率。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">混叠的严重后果</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>不可恢复</strong></td>
+<td>混叠后两个频率无法区分，任何后处理都救不回来</td>
+</tr>
+<tr>
+<td><strong>虚假低频</strong></td>
+<td>高频信号伪装成低频，误导分析</td>
+</tr>
+<tr>
+<td><strong>拍频</strong></td>
+<td>多个混叠分量干涉，产生虚假的缓慢波动</td>
+</tr>
+</tbody>
+</table>
+<p><strong>唯一正确的对策：采样前先滤波</strong>（抗混叠滤波器）。
+采样之后再处理<strong>已经晚了</strong>。</p>
+</div>
+<hr />
+<h2 id="_7">四、抗混叠滤波器<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p><strong>做法</strong>：在采样器前面加一个模拟低通滤波器，截止频率设为 <span class="arithmatex">\(f_s/2\)</span>。</p>
+<div class="arithmatex">\[
+x(t) \xrightarrow{\ \text{抗混叠低通}\ } \tilde{x}(t) \xrightarrow{\ \text{采样}\ } x[n]
+\]</div>
+<p><strong>这样做的理由</strong>：</p>
+<ol>
+<li>把高于 <span class="arithmatex">\(f_s/2\)</span> 的成分<strong>在采样前去掉</strong>，避免它们混叠到低频</li>
+<li>代价是<strong>损失了高频信息</strong>——但这是必须接受的</li>
+<li>比「让高频混叠进来干扰低频」要好得多</li>
+</ol>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="抗混叠滤波器的作用">
+<defs>
+<marker id="sm3-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="sm3-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 信号链 -->
+<text class="l1" x="16" y="52">x(t)</text>
+<line class="a1" x1="46" y1="45" x2="82" y2="45" marker-end="url(#sm3-ah1)"/>
+<rect class="f3" x="84" y="26" width="106" height="38" rx="6"/>
+<text class="lbl" x="92" y="50">抗混叠低通</text>
+<line class="a3" x1="192" y1="45" x2="228" y2="45" marker-end="url(#sm3-ah2)"/>
+<rect class="f1" x="230" y="26" width="76" height="38" rx="6"/>
+<text class="lbl" x="248" y="50">采样器</text>
+<line class="a1" x1="308" y1="45" x2="344" y2="45" marker-end="url(#sm3-ah1)"/>
+<text class="l1" x="348" y="52">x[n]</text>
+<!-- 频率示意 -->
+<text class="lbl-s" x="16" y="96">滤波前频谱（含高频）</text>
+<line class="gb" x1="20" y1="140" x2="200" y2="140"/>
+<path class="a1" d="M60,140 C80,104 96,100 110,100 C124,100 140,104 160,140" fill="none"/>
+<path class="a2" d="M140,140 C156,120 166,116 176,116 C186,116 192,120 198,140" fill="none"/>
+<line class="gd" x1="140" y1="104" x2="140" y2="146" stroke-dasharray="4 4"/>
+<text class="l2" x="152" y="112">将被滤除</text>
+<text class="lbl-s" x="228" y="96">滤波后（只留带内）</text>
+<line class="gb" x1="232" y1="140" x2="412" y2="140"/>
+<path class="a3" d="M272,140 C292,104 308,100 322,100 C336,100 352,104 372,140" fill="none"/>
+<line class="gd" x1="352" y1="104" x2="352" y2="146" stroke-dasharray="4 4"/>
+<text class="l3" x="360" y="112">f_s/2</text>
+<text class="lbl-s" x="20" y="176">关键：必须在「采样之前」滤掉，采样之后无法补救</text>
+<text class="lbl-s" x="20" y="200">代价：损失 f_s/2 以上的真实信息（但比混叠污染低频好得多）</text>
+</svg>
+<figcaption>图 3　抗混叠滤波器的作用与位置。它必须在采样器之前，把超过 f_s/2 的成分滤掉。这是唯一能避免混叠的办法</figcaption>
+</figure>
+
+<div class="admonition tip">
+<p class="admonition-title">一个实用的类比：转动的车轮</p>
+<p><strong>电影里车轮看起来倒转</strong>，就是时间采样（每秒 24 帧）引起的混叠：</p>
+<ul>
+<li>真实转速很高（超过「帧率的一半」对应的转速）</li>
+<li>采样后看起来转速变慢，甚至反向</li>
+</ul>
+<p><strong>这解释了</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>车轮正转看起来反转</td>
+<td>频率折叠（<span class="arithmatex">\(f_0 &gt; f_s/2\)</span>）</td>
+</tr>
+<tr>
+<td>桨叶「停住」</td>
+<td>恰好混叠到 0（<span class="arithmatex">\(f_0 = f_s\)</span> 的整数倍）</td>
+</tr>
+</tbody>
+</table>
+<p>人眼无法「抗混叠」——因为我们无法在视网膜前加滤波器。
+这是采样理论在日常生活中的直观体现。</p>
+</div>
+<hr />
+<h2 id="_8">五、恢复：为什么低通能重建信号<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>采样后频谱是<strong>周期延拓</strong>的（图 1 情形②）。若没有混叠，
+则<strong>原频谱完整地保留在 <span class="arithmatex">\([-\omega_s/2, \omega_s/2]\)</span> 内</strong>。</p>
+<p>所以用一个<strong>理想低通滤波器</strong>（截止 <span class="arithmatex">\(\omega_s/2\)</span>）就能取出原频谱：</p>
+<div class="arithmatex">\[
+X(\omega) = T_s\,X_s(\omega)\cdot \operatorname{rect}\!\left(\frac{\omega}{\omega_s}\right)
+\]</div>
+<p>对应的<strong>时域恢复公式</strong>（惠特克-香农插值）：</p>
+<div class="arithmatex">\[
+x(t) = \sum_{n=-\infty}^{\infty} x[n]\,\operatorname{sinc}\!\left(\frac{t-nT_s}{T_s}\right)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">这个公式告诉我们什么</p>
+<p><strong>恢复不是「连线」</strong>，而是用 sinc 函数<strong>加权叠加</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>是否正确</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性插值（连线）</td>
+<td>✗ 只是近似，不是精确恢复</td>
+</tr>
+<tr>
+<td>零阶保持（阶梯）</td>
+<td>✗ 有高频失真</td>
+</tr>
+<tr>
+<td><strong>sinc 插值</strong></td>
+<td>✓ 理论精确恢复</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实用含义</strong>：</p>
+<ul>
+<li>数字示波器上的「平滑」不是插值，只是视觉美化</li>
+<li>音频 DAC 需要<strong>重建滤波器</strong>（接近 sinc 特性的低通）</li>
+<li>高质量重采样（如 44.1k → 48k）需要正确的插值算法</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">理想 sinc 插值不可实现</p>
+<p>sinc 函数在时间上<strong>无限延伸</strong>，且<strong>非因果</strong>。所以精确恢复需要：
+- 无限长的数据
+- 未来的样本</p>
+<p><strong>实际做法</strong>：用有限长、近似 sinc 的滤波器（如升余弦、窗函数法设计）。</p>
+</div>
+<hr />
+<h2 id="_9">六、典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：判断是否发生混叠<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>信号含频率成分 100 Hz、300 Hz、900 Hz。问：</p>
+<p><strong>(a)</strong> 采样率 1000 Hz 时是否混叠？混叠频率是多少？</p>
+<p><strong>(b)</strong> 采样率 2000 Hz 时呢？</p>
+<details class="note">
+<summary>思路</summary>
+<p>奈奎斯特频率 <span class="arithmatex">\(f_N = f_s/2\)</span>；超过 <span class="arithmatex">\(f_N\)</span> 的成分会折叠。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) <span class="arithmatex">\(f_s = 1000\)</span> Hz</strong></p>
+<p><span class="arithmatex">\(f_N = 500\)</span> Hz。</p>
+<table>
+<thead>
+<tr>
+<th>真实频率</th>
+<th>是否超限</th>
+<th>混叠后频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 Hz</td>
+<td>否</td>
+<td>100 Hz ✓</td>
+</tr>
+<tr>
+<td>300 Hz</td>
+<td>否</td>
+<td>300 Hz ✓</td>
+</tr>
+<tr>
+<td>900 Hz</td>
+<td><strong>是</strong></td>
+<td><span class="arithmatex">\(\lvert900-1000\rvert = 100\)</span> Hz ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>发生混叠</strong>：900 Hz 折叠到 <strong>100 Hz</strong>。</p>
+<p><strong>严重后果</strong>：原本 100 Hz 与 900 Hz 是两个不同成分，
+混叠后<strong>都显示为 100 Hz</strong>，幅度叠加 —— <strong>无法区分</strong>。</p>
+<p><strong>(b) <span class="arithmatex">\(f_s = 2000\)</span> Hz</strong></p>
+<p><span class="arithmatex">\(f_N = 1000\)</span> Hz。</p>
+<p>三个成分（100、300、900 Hz）<strong>都低于 1000 Hz</strong>，所以<strong>无混叠</strong> ✓</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(f_s = 2000\)</span> Hz 可以无失真表示这三个成分。</p>
+<p><strong>对比</strong>：<span class="arithmatex">\(f_s\)</span> 从 1000 提高到 2000，混叠问题消失。
+这也说明<strong>提高采样率可以解决混叠</strong>（前提是硬件允许）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">混叠的「对称」规律</p>
+<p>混叠后的频率关于 <span class="arithmatex">\(f_s/2\)</span> <strong>镜像折叠</strong>：</p>
+<div class="arithmatex">\[
+f_{\text{alias}} = \left\lvert f_0 - f_s\right\rvert \quad (\text{当 } f_s/2 &lt; f_0 &lt; f_s)
+\]</div>
+<p><strong>记忆方法</strong>：把频率想象成一张纸，在 <span class="arithmatex">\(f_s/2\)</span> 处折一下，
+超过的部分就「印」到低频区。</p>
+<p>若 <span class="arithmatex">\(f_0 &gt; f_s\)</span>，则反复折叠（取模）。</p>
+</div>
+<hr />
+<h3 id="2">例题 2：设计采样系统<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>要测量频率上限为 5 kHz 的振动信号，要求：</p>
+<ul>
+<li>无混叠</li>
+<li>抗混叠滤波器是非理想的，过渡带宽度为 1 kHz（即截止后还需要 1 kHz 才衰减到可忽略）</li>
+</ul>
+<p>求最小采样率。</p>
+<details class="note">
+<summary>思路</summary>
+<p>关键：抗混叠滤波器的「过渡带」意味着必须在截止频率之上再留余量，
+否则过渡带内的频率会混叠。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>分析</strong>：</p>
+<p>信号最高频率 <span class="arithmatex">\(f_{\max} = 5\)</span> kHz。</p>
+<p>滤波器在 5 kHz 处开始衰减，但在 6 kHz 之前还未完全衰减
+（过渡带宽度 1 kHz）。</p>
+<p><strong>关键约束</strong>：采样后，频率 <span class="arithmatex">\(f\)</span> 会与 <span class="arithmatex">\(\lvert f - f_s\rvert\)</span> 混叠。
+要求<strong>不低于 5 kHz 的任何频率</strong>都不能混叠到 5 kHz 以下。</p>
+<p>最危险的是滤波器过渡带上边缘 <span class="arithmatex">\(f = 6\)</span> kHz。要求它的混叠位置仍高于 5 kHz：</p>
+<div class="arithmatex">\[
+f_s - 6\text{ kHz} \geq 5\text{ kHz}
+\]</div>
+<p>即</p>
+<div class="arithmatex">\[
+f_s \geq 11 \text{ kHz}
+\]</div>
+<p><strong>所以最小采样率约 11 kHz</strong>（取 12 kHz 留余量）。</p>
+<p><strong>对比</strong>：若滤波器理想（过渡带为零），只需 <span class="arithmatex">\(f_s &gt; 10\)</span> kHz。</p>
+<p><strong>结论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>滤波器</th>
+<th>所需 <span class="arithmatex">\(f_s\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>理想（过渡带 0）</td>
+<td><span class="arithmatex">\(&gt; 2f_{\max} = 10\)</span> kHz</td>
+</tr>
+<tr>
+<td>实际（过渡带 1 kHz）</td>
+<td><span class="arithmatex">\(&gt; 2f_{\max}+\text{过渡带} = 11\)</span> kHz</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">实用的设计公式</p>
+<div class="arithmatex">\[
+f_s \geq 2\left(f_{\max} + \Delta f_{\text{过渡带}}\right)
+\]</div>
+<p>或者说：<strong>采样率必须高于「滤波器完全衰减点」的 2 倍。</strong></p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>典型选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>音频（20 kHz 上限）</td>
+<td>44.1 kHz（过渡带约 2 kHz）</td>
+</tr>
+<tr>
+<td>振动监测</td>
+<td>常取 <span class="arithmatex">\(2.5 \sim 5\)</span> 倍</td>
+</tr>
+<tr>
+<td>精密测量</td>
+<td>常取 10 倍以上</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价权衡</strong>：提高 <span class="arithmatex">\(f_s\)</span> 会增加数据量与功耗。
+所以实际设计要在「采样率」与「滤波器阶数」之间权衡：
+<strong>滤波器更陡（阶数高）→ 可以降低采样率</strong>。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：混叠的定量计算<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(f_s = 100\)</span> Hz。真实频率 30 Hz、70 Hz、130 Hz、230 Hz 采样后各显示为多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p>对每个频率，反复加/减 <span class="arithmatex">\(f_s\)</span> 直到落在 <span class="arithmatex">\([0, f_s/2] = [0,50]\)</span> Hz。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>逐一计算（目标区间 <span class="arithmatex">\([0, 50]\)</span> Hz）：</p>
+<p><strong>30 Hz</strong>：已在区间内 → <strong>30 Hz</strong> ✓</p>
+<p><strong>70 Hz</strong>：超过 50 Hz。<span class="arithmatex">\(\lvert70-100\rvert = 30\)</span> Hz → <strong>30 Hz</strong>（混叠 ✗）</p>
+<p><strong>130 Hz</strong>：超过。先减 <span class="arithmatex">\(f_s\)</span> 得 30 Hz，在区间内 → <strong>30 Hz</strong>（混叠 ✗）</p>
+<p><strong>230 Hz</strong>：减 <span class="arithmatex">\(2f_s\)</span> 得 <span class="arithmatex">\(230-200 = 30\)</span> Hz → <strong>30 Hz</strong>（混叠 ✗）</p>
+<p><strong>结果汇总</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>真实频率</th>
+<th>混叠后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30 Hz</td>
+<td>30 Hz</td>
+</tr>
+<tr>
+<td>70 Hz</td>
+<td><strong>30 Hz</strong></td>
+</tr>
+<tr>
+<td>130 Hz</td>
+<td><strong>30 Hz</strong></td>
+</tr>
+<tr>
+<td>230 Hz</td>
+<td><strong>30 Hz</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>四个完全不同的频率，采样后全部显示为 30 Hz！</strong></p>
+<p><strong>这是混叠最危险的形态</strong>：多个频率成分<strong>叠加到同一个频点</strong>，
+幅度相加，频谱上看起来只是一个强峰 ——
+<strong>完全无法知道真实有几个成分、分别在什么频率。</strong></p>
+<p><strong>规律</strong>：混叠频率满足</p>
+<div class="arithmatex">\[
+f_{\text{alias}} = \left\lvert f_0 \bmod f_s \right\rvert,\quad
+\text{再折叠到 }[0, f_s/2]
+\]</div>
+<p>本例中 <span class="arithmatex">\(70-100 = -30 \to 30\)</span>；<span class="arithmatex">\(130 \bmod 100 = 30\)</span>；<span class="arithmatex">\(230 \bmod 100 = 30\)</span>。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">工程教训</p>
+<p><strong>看到频谱上的强峰时，不能断定它就是真实的振动频率。</strong></p>
+<p>正确做法：</p>
+<ol>
+<li>检查采样率与信号带宽</li>
+<li><strong>改变采样率重测</strong>：若峰值位置随 <span class="arithmatex">\(f_s\)</span> 变化而移动，说明是混叠</li>
+<li>加抗混叠滤波器后重测</li>
+</ol>
+<p><strong>这就是为什么振动监测设备的技术指标里，
+抗混叠滤波器的性能与采样率同等重要。</strong></p>
+</div>
+<hr />
+<h3 id="4">例题 4：采样定理的边界情形<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>信号 <span class="arithmatex">\(x(t) = \cos(2\pi f_0 t)\)</span>，<span class="arithmatex">\(f_0 = 100\)</span> Hz。
+用 <span class="arithmatex">\(f_s = 200\)</span> Hz 采样（恰好 <span class="arithmatex">\(f_s = 2f_0\)</span>）。问采样序列是什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>代入 <span class="arithmatex">\(t = nT_s = n/200\)</span>，算 <span class="arithmatex">\(\cos(2\pi\cdot100\cdot n/200)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+x[n] = \cos\left(2\pi\cdot100\cdot\frac{n}{200}\right) = \cos(\pi n)
+\]</div>
+<p><strong>取值</strong>：</p>
+<div class="arithmatex">\[
+x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
+\]</div>
+<p><strong>结果</strong>：采样序列是 <span class="arithmatex">\((-1)^n\)</span>，即「最高频」的离散序列。</p>
+<p><strong>这意味着什么</strong>：在离散域里，<span class="arithmatex">\((-1)^n\)</span> 对应<strong>归一化频率 0.5</strong>
+（即 <span class="arithmatex">\(f = f_s/2\)</span>，奈奎斯特频率）。</p>
+<p><strong>问题</strong>：<span class="arithmatex">\((-1)^n\)</span> 也可以解释为 <span class="arithmatex">\(f = -f_s/2\)</span> 的正弦，
+两者在采样点上<strong>无法区分</strong>。</p>
+<p><strong>而且更进一步</strong>：若真实频率是 <span class="arithmatex">\(\pm100\)</span> Hz，
+采样结果都是 <span class="arithmatex">\((-1)^n\)</span> —— <strong>符号/相位信息丢失</strong>。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">为什么实际要「严格大于」</p>
+<p>临界情形（<span class="arithmatex">\(f_s = 2f_{\max}\)</span>）有三个麻烦：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>相位不确定</strong></td>
+<td><span class="arithmatex">\(\cos\)</span> 与 <span class="arithmatex">\(-\cos\)</span> 采样结果可能相同</td>
+</tr>
+<tr>
+<td><strong>幅度不确定</strong></td>
+<td>采样点可能恰好落在零点上，读出全零</td>
+</tr>
+<tr>
+<td><strong>抗混叠滤波器做不到理想</strong></td>
+<td>需要无限陡的截止</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三种最实际</strong>：若滤波器不是理想的矩形，
+<span class="arithmatex">\(f_0\)</span> 附近的成分会部分漏过并混叠，直接污染结果。</p>
+<p><strong>所以工程上取 <span class="arithmatex">\(f_s &gt; 2f_{\max}\)</span>，且留出余量。</strong>
+音频的 44.1 kHz（对 20 kHz 上限留了 2.2 倍）就是例证。</p>
+<p>顺便说明：44.1 kHz 这个「奇怪」的数字来自早期数字录音设备
+（PAL 制式的 44.1 = 588 × 75 行扫描频率），是历史沿革而非理论最优。</p>
+</div>
+<hr />
+<h2 id="_10">七、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">现代数字信号处理 · 数字化的第一步<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>采样定理是「模拟到数字」的理论基础，也是后续所有数字处理的前提：</p>
+<table>
+<thead>
+<tr>
+<th>后续内容</th>
+<th>与采样的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFT / FFT</td>
+<td><span class="arithmatex">\(N\)</span> 个采样点的频域表示</td>
+</tr>
+<tr>
+<td>频谱分析</td>
+<td>频率分辨率 <span class="arithmatex">\(= f_s/N\)</span></td>
+</tr>
+<tr>
+<td>多速率处理</td>
+<td>降采样必须重新考虑混叠</td>
+</tr>
+<tr>
+<td>重采样</td>
+<td>需插值 + 抗混叠</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">数字频率的两种常用记法</p>
+<table>
+<thead>
+<tr>
+<th>记法</th>
+<th>范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>归一化频率（<span class="arithmatex">\(\times\pi\)</span>）</td>
+<td><span class="arithmatex">\([-\pi, \pi]\)</span></td>
+<td>DSP 算法标准</td>
+</tr>
+<tr>
+<td>归一化频率（<span class="arithmatex">\(\times f_s\)</span>）</td>
+<td><span class="arithmatex">\([-0.5, 0.5]\)</span></td>
+<td>工程文档常用</td>
+</tr>
+<tr>
+<td>实际频率</td>
+<td><span class="arithmatex">\([-f_s/2, f_s/2]\)</span></td>
+<td>测量报告常用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>换算</strong>：<span class="arithmatex">\(\omega = 2\pi f/f_s\)</span>。所以 <span class="arithmatex">\(\omega = \pi\)</span> 对应 <span class="arithmatex">\(f = f_s/2\)</span>（奈奎斯特）。</p>
+</div>
+<h3 id="_12">智能传感与信息处理 · 传感器与数据采集<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>ADC 选型</strong>：采样率与位宽共同决定性能</li>
+<li><strong>抗混叠滤波是硬件必需</strong>：不能靠软件补救</li>
+<li><strong>传感器的带宽</strong>必须与采样率匹配：</li>
+<li>传感器带宽 &gt; 采样率一半 → 必然混叠</li>
+<li>若传感器本身是低通的（且截止合适），可省掉抗混叠滤波器</li>
+<li><strong>过采样</strong>：用远高于需求的采样率，可降低对抗混叠滤波器陡度的要求，
+  同时通过平均提升有效位数（<span class="arithmatex">\(\sigma\)</span>-<span class="arithmatex">\(\delta\)</span> ADC 的原理）</li>
+</ul>
+<h3 id="_13">海洋声学 · 声信号的采集<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>水下声信号带宽</strong>：常见工作频段几 Hz 到几百 kHz</li>
+<li><strong>采样率选择</strong>：需覆盖最高工作频率的 2 倍以上</li>
+<li><strong>混叠的特殊风险</strong>：海洋噪声宽带且强，
+  若不滤除，高频噪声会混叠进低频信号频段，严重降低检测性能</li>
+</ul>
+<hr />
+<h2 id="_14">八、自测<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断：若信号带宽为 4 kHz，用 8 kHz 采样能否无失真恢复？</p>
+<details class="note">
+<summary>提示</summary>
+<p>注意「等于」是临界情形。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>理论上可以，实践上不建议。</strong></p>
+<p><span class="arithmatex">\(f_s = 8\)</span> kHz，<span class="arithmatex">\(f_N = 4\)</span> kHz，恰好等于信号带宽上限。</p>
+<p><strong>理论</strong>：临界采样定理要求 <span class="arithmatex">\(f_s \geq 2f_{\max}\)</span>，所以理论上满足。</p>
+<p><strong>实践问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>抗混叠滤波器非理想</td>
+<td>4 kHz 附近的成分泄露，混叠进来</td>
+</tr>
+<tr>
+<td>4 kHz 处的分量</td>
+<td>相位/幅度不确定</td>
+</tr>
+<tr>
+<td>没有余量</td>
+<td>任何偏差都会导致混叠</td>
+</tr>
+</tbody>
+</table>
+<p><strong>建议</strong>：取 <span class="arithmatex">\(f_s = 10 \sim 20\)</span> kHz，留出余量。
+工程上通常取 <span class="arithmatex">\(2.5 \sim 5\)</span> 倍。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 某信号以 500 Hz 采样，在频谱上看到 50 Hz 处有一个峰。
+真实频率可能是多少？（列举三种）</p>
+<details class="note">
+<summary>提示</summary>
+<p>用混叠公式反推：真实频率可能是 <span class="arithmatex">\(f_s\)</span> 的整数倍加减 50。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>混叠到 50 Hz 的真实频率满足</p>
+<div class="arithmatex">\[
+\lvert f_0 - kf_s\rvert = 50 \quad\text{或}\quad f_0 = kf_s \pm 50
+\]</div>
+<p>取不同的 <span class="arithmatex">\(k\)</span>（<span class="arithmatex">\(f_s = 500\)</span> Hz）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>可能真实频率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><strong>50 Hz</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td>500 − 50 = <strong>450 Hz</strong>（500 + 50 = 550 折叠为 50）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1000 − 50 = <strong>950 Hz</strong></td>
+</tr>
+<tr>
+<td>3</td>
+<td>1500 − 50 = <strong>1450 Hz</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以至少三种可能：50 Hz、450 Hz、950 Hz（以及更高）</strong></p>
+<p><strong>如何确定真实值</strong>：</p>
+<ol>
+<li><strong>改变采样率</strong>：若峰位置随之变化，是混叠；真实频率位置不变</li>
+<li><strong>加抗混叠滤波器</strong>：滤掉高频后再测</li>
+<li><strong>提高采样率</strong>：直接消除混叠</li>
+</ol>
+<p><strong>这就是「频谱上的峰不一定可信」的原因。</strong></p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么不先采样、之后再数字滤波，来去除混叠？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想混叠发生在哪一步。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为混叠发生在「采样那一刻」，之后无法区分。</strong></p>
+<p>具体分析：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>发生了什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实信号</td>
+<td>含 100 Hz 与 900 Hz 两个成分</td>
+</tr>
+<tr>
+<td>以 1000 Hz 采样</td>
+<td>900 Hz 折叠到 100 Hz</td>
+</tr>
+<tr>
+<td>采样后的数据</td>
+<td>只有一个「100 Hz + 幅度更大的成分」</td>
+</tr>
+<tr>
+<td>数字滤波</td>
+<td><strong>无法区分原来的两个成分</strong> —— 它们已经合并了</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：混叠是<strong>信息丢失</strong>，不是「加上噪声」。
+丢失的信息<strong>不可能通过后处理恢复</strong>。</p>
+<p><strong>正确顺序</strong>：</p>
+<div class="arithmatex">\[
+\text{模拟信号} \xrightarrow{\ \text{抗混叠低通}\ }
+\text{带限信号} \xrightarrow{\ \text{采样}\ }
+\text{数字序列} \xrightarrow{\ \text{数字滤波}\ }
+\text{结果}
+\]</div>
+<p><strong>类比</strong>：这就像照片失焦（模拟域混叠）后无法用软件恢复清晰 ——
+信息已经在成像时丢失了。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 什么是「过采样」？它有什么好处？</p>
+<details class="note">
+<summary>提示</summary>
+<p>采样率远高于奈奎斯特要求的 2 倍。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>过采样</strong>：取 <span class="arithmatex">\(f_s \gg 2f_{\max}\)</span>（远大于奈奎斯特要求）。</p>
+<p><strong>好处一：降低对抗混叠滤波器的要求</strong></p>
+<p>过渡带可以更宽（从 <span class="arithmatex">\(f_{\max}\)</span> 到 <span class="arithmatex">\(f_s/2\)</span> 之间的空间变大），
+滤波器可以用更低阶实现 —— 成本更低、相位失真更小。</p>
+<p><strong>好处二：提高有效位数（信噪比）</strong></p>
+<p>过采样 + 平均（或低通数字滤波）可以降低量化噪声。
+理论上每提高 4 倍采样率可增加 1 位有效位数（6 dB 信噪比）。</p>
+<p><strong>好处三：简化重建滤波器</strong></p>
+<p>DAC 输出端的重建滤波器同样可以用更简单的设计。</p>
+<p><strong>代价</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据量大</td>
+<td>需要更快的处理与更多存储</td>
+</tr>
+<tr>
+<td>功耗高</td>
+<td>ADC 采样电路功耗随速率上升</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(\Sigma\)</span>-<span class="arithmatex">\(\Delta\)</span>（sigma-delta）ADC 就是过采样的极致应用</strong>：
+用极低位数（甚至 1 位）配合极高采样率，实现高分辨率。
+这是现代音频 ADC 的主流方案。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../fourier/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 傅里叶级数与变换">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                傅里叶级数与变换
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../courses/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
