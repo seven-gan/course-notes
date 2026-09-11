@@ -1,0 +1,2026 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/linear-algebra/determinant/">
+      
+      
+        <link rel="prev" href="../linear-map/">
+      
+      
+        <link rel="next" href="../inner-product/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>行列式 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              行列式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#2times2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、\(2\times2\)：从面积说起
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、\(2\times2\)：从面积说起">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正负号的含义
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ntimes-n" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、\(n\times n\)：体积缩放
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、\(n\times n\)：体积缩放">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        高维行列式怎么算
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、关键性质
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、关键性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质 1：乘法性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质 2：可加性与交错的组合（行列式的本质定义）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、伴随、逆矩阵与外积的统一
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、伴随、逆矩阵与外积的统一">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用行列式写逆矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        行列式与叉积
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：用行列式判断可逆性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：用行变换计算三阶行列式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：用行列式求面积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：证明「三角矩阵行列式 = 对角元之积」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 5：克拉默法则解方程组
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 雅可比的奇异性与体积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 多维高斯分布与体积
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 线性方程组与格
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 费舍尔信息矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">机器人机构学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Axler Ch.9</code><code>MML §4.1</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 9 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../linear-map/">linear-map</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../eigenvalue/">eigenvalue</a></span></div></div>
+
+<h1 id="_1">行列式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>如果问「矩阵的行列式是什么」，很多人会背出计算规则，却说不出它<strong>干什么用</strong>。</p>
+<p>这一页先给一个几何答案，再讲计算：</p>
+<blockquote>
+<p><strong>行列式是一个线性映射对「体积」的缩放倍数。</strong></p>
+<p>—— 更准确地说：它是该映射把单位体积变成多少体积的<strong>带符号</strong>倍数。</p>
+</blockquote>
+<p>有了这个理解，行列式的所有性质都不再需要死记：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>几何解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\det(AB) = \det A \det B\)</span></td>
+<td>两次变换的缩放倍数相乘</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\det A = 0 \iff\)</span> 不可逆</td>
+<td>体积被压成零（降维了）</td>
+</tr>
+<tr>
+<td>交换两行变号</td>
+<td>坐标系手性改变（左右手系互换）</td>
+</tr>
+<tr>
+<td>三角矩阵 <span class="arithmatex">\(\det =\)</span> 对角元之积</td>
+<td>各方向独立缩放</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">关于本书的处理顺序</p>
+<p>Axler 刻意把行列式安排在<strong>最后</strong>（第 9 章），理由是：
+<strong>特征值、可逆性等结论都可以不用行列式证明</strong>，先引入行列式会掩盖本质。</p>
+<p>本页遵循实用顺序：给出几何直觉 → 计算规则 → 关键性质 → 应用。
+但请记住 Axler 的提醒：<strong>行列式是工具，不是基础</strong>。</p>
+</div>
+<hr />
+<h2 id="2times2">一、<span class="arithmatex">\(2\times2\)</span>：从面积说起<a class="headerlink" href="#2times2" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(A = \begin{bmatrix} a &amp; b \\ c &amp; d\end{bmatrix}\)</span>。定义</p>
+<div class="arithmatex">\[
+\det A = ad - bc
+\]</div>
+<p><strong>这个数就是「面积缩放因子」</strong>。</p>
+<h3 id="_2">几何验证<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>矩阵 <span class="arithmatex">\(A\)</span> 的两列</p>
+<div class="arithmatex">\[
+\boldsymbol{u} = \begin{bmatrix} a\\c\end{bmatrix}, \qquad \boldsymbol{v} = \begin{bmatrix} b\\d\end{bmatrix}
+\]</div>
+<p>张成一个<strong>平行四边形</strong>。它的面积正是 <span class="arithmatex">\(\lvert ad - bc\rvert\)</span>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2x2 行列式的几何意义是平行四边形面积">
+<defs>
+<marker id="dt1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="dt1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 网格 -->
+<line class="gb" x1="50" y1="195" x2="400" y2="195"/>
+<line class="gb" x1="50" y1="30" x2="50" y2="205"/>
+<line class="gb" x1="120" y1="30" x2="120" y2="205"/>
+<line class="gb" x1="190" y1="30" x2="190" y2="205"/>
+<line class="gb" x1="260" y1="30" x2="260" y2="205"/>
+<line class="gb" x1="330" y1="30" x2="330" y2="205"/>
+<line class="gb" x1="50" y1="125" x2="400" y2="125"/>
+<line class="gb" x1="50" y1="55" x2="400" y2="55"/>
+<!-- 单位正方形（1x1） -->
+<rect class="f3" x="50" y="125" width="70" height="70"/>
+<text class="l3" x="60" y="168">单位面积 1</text>
+<!-- 列向量 -->
+<line class="a1" x1="50" y1="195" x2="330" y2="125" marker-end="url(#dt1-ah1)"/>
+<line class="a2" x1="50" y1="195" x2="190" y2="55" marker-end="url(#dt1-ah2)"/>
+<text class="l1" x="196" y="176">u = (a, c)</text>
+<text class="l2" x="120" y="72">v = (b, d)</text>
+<!-- 平行四边形 -->
+<polygon class="f1" points="50,195 330,125 470,55 190,125" opacity="0.10"/>
+<polygon class="f1" points="50,195 330,125 190,55" opacity="0.18"/>
+<circle class="dc" cx="50" cy="195" r="3.5"/>
+</svg>
+<figcaption>图 1　两列张成的平行四边形。矩阵 <b>A</b> 把单位正方形（面积 1）映射成这个平行四边形，面积变成 |det A|。若两列共线，平行四边形退化成一条线段，面积为零 —— 此时 det A = 0</figcaption>
+</figure>
+
+<h3 id="_3">正负号的含义<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(ad-bc\)</span> 可能为负。<strong>负号表示方向翻转</strong>（手性改变）：</p>
+<ul>
+<li><span class="arithmatex">\(\det A &gt; 0\)</span>：面积放大，<strong>方向不变</strong>（右手系仍是右手系）</li>
+<li><span class="arithmatex">\(\det A &lt; 0\)</span>：面积放大，<strong>方向翻转</strong>（右手系变左手系）</li>
+<li><span class="arithmatex">\(\lvert\det A\rvert\)</span> 才是纯粹的「面积倍数」</li>
+</ul>
+<p>这就是行列式的严谨定义（本页第五节）里会出现「交错」的原因——
+它必须能区分方向。</p>
+<div class="admonition tip">
+<p class="admonition-title">三个立刻可用的推论</p>
+<p>设 <span class="arithmatex">\(\det A = 0\)</span>。则两列 <span class="arithmatex">\(ad - bc = 0\)</span>，即 <span class="arithmatex">\(\frac{a}{c} = \frac{b}{d}\)</span>（若分母非零），
+<strong>两列成比例（共线）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两列共线</td>
+<td>平行四边形退化成线段，面积 0 → <span class="arithmatex">\(\det = 0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\det = 0\)</span></td>
+<td>列向量线性相关 → 矩阵<strong>不可逆</strong></td>
+</tr>
+<tr>
+<td>不可逆</td>
+<td>映射把平面压到一条线上（信息丢失）</td>
+</tr>
+</tbody>
+</table>
+<p>这三点是同一件事的三种说法。</p>
+</div>
+<hr />
+<h2 id="ntimes-n">二、<span class="arithmatex">\(n\times n\)</span>：体积缩放<a class="headerlink" href="#ntimes-n" title="Permanent link">&para;</a></h2>
+<p>对 <span class="arithmatex">\(n\)</span> 维空间，同样的直觉成立：</p>
+<blockquote>
+<p><strong><span class="arithmatex">\(\lvert\det A\rvert\)</span> = 单位超立方体被 <span class="arithmatex">\(A\)</span> 映射后的 <span class="arithmatex">\(n\)</span> 维体积。</strong></p>
+</blockquote>
+<p><strong>因此</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\det A\)</span></th>
+<th>几何含义</th>
+<th>代数含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\neq 0\)</span></td>
+<td>体积被正比例缩放，没有降维</td>
+<td>可逆（满秩）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(= 0\)</span></td>
+<td>体积被压成 0（降到更低维）</td>
+<td>不可逆（奇异）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">高维行列式怎么算<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(2\times2\)</span>、<span class="arithmatex">\(3\times3\)</span> 有公式：</p>
+<div class="arithmatex">\[
+\begin{vmatrix} a &amp; b &amp; c\\ d &amp; e &amp; f\\ g &amp; h &amp; i\end{vmatrix}
+= a(ei - fh) - b(di - fg) + c(dh - eg)
+\]</div>
+<p>（称为<strong>按第一行展开</strong>。）</p>
+<p>但 <span class="arithmatex">\(4\times4\)</span> 以上手工展开不现实。常用两种方法：</p>
+<p><strong>方法一：行变换化成三角矩阵</strong></p>
+<p>因为「三角矩阵的行列式 = 对角元之积」，用高斯消元把矩阵化成上三角即可。
+<strong>注意</strong>：交换两行会<strong>变号</strong>，所以每交换一次要记一个负号。</p>
+<p><strong>方法二：按行（列）展开</strong></p>
+<p>选一行（或一列）中零最多的，用<strong>代数余子式</strong>展开，递归降阶。</p>
+<div class="admonition warning">
+<p class="admonition-title">行变换对行列式的影响（必须记住）</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>对 <span class="arithmatex">\(\det\)</span> 的影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>某行乘以 <span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(\det\)</span> 变为原来的 <span class="arithmatex">\(\lambda\)</span> 倍</td>
+</tr>
+<tr>
+<td>交换两行</td>
+<td><strong>变号</strong></td>
+</tr>
+<tr>
+<td>某行加上另一行的倍数</td>
+<td><strong>不变</strong> ← 这是消元时最常用的</td>
+</tr>
+</tbody>
+</table>
+<p>第三条对消元特别重要：<strong>它让我们可以放心做「加上倍数」的运算而不影响行列式</strong>。</p>
+</div>
+<hr />
+<h2 id="_5">三、关键性质<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1">性质 1：乘法性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\det(AB) = \det(A)\det(B)
+\]</div>
+<p><strong>几何证明</strong>（一句话）：先做 <span class="arithmatex">\(B\)</span> 变换，体积缩放 <span class="arithmatex">\(\det B\)</span> 倍；
+再做 <span class="arithmatex">\(A\)</span> 变换，在当前基础上再缩放 <span class="arithmatex">\(\det A\)</span> 倍。总共缩放 <span class="arithmatex">\(\det A\det B\)</span> 倍。</p>
+<div class="admonition tip">
+<p class="admonition-title">由此立即得到几个结论</p>
+<p><strong>1. 可逆 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\det \neq 0\)</span>，且</strong></p>
+<div class="arithmatex">\[
+\det(A^{-1}) = \frac{1}{\det A}
+\]</div>
+<p>（因为 <span class="arithmatex">\(\det(A)\det(A^{-1}) = \det(AA^{-1}) = \det I = 1\)</span>。）</p>
+<p><strong>2. 相似矩阵行列式相同</strong>：</p>
+<div class="arithmatex">\[
+\det(P^{-1}AP) = \det(P^{-1})\det(A)\det(P) = \frac{1}{\det P}\det A\det P = \det A
+\]</div>
+<p>这印证了上一页的说法：行列式是<strong>相似不变量</strong>，只依赖映射本身。</p>
+<p><strong>3. 转置不改变行列式</strong>：<span class="arithmatex">\(\det(A^\top) = \det A\)</span>。</p>
+</div>
+<h3 id="2">性质 2：可加性与交错的组合（行列式的本质定义）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>行列式其实就是满足三条性质的<strong>唯一</strong>函数（把矩阵的列看成向量）：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>多重线性</strong></td>
+<td>对每一列线性（固定其它列时）</td>
+</tr>
+<tr>
+<td><strong>交错性</strong></td>
+<td>两列相同则值为 0（等价于交换两列变号）</td>
+</tr>
+<tr>
+<td><strong>归一化</strong></td>
+<td><span class="arithmatex">\(\det I = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这三条就唯一确定了行列式。</strong> 前面所有公式（包括 <span class="arithmatex">\(ad-bc\)</span>）都能从它们推出来。</p>
+<div class="admonition note">
+<p class="admonition-title">为什么「两列相同 → 值为 0」就等价于「交换变号」</p>
+<p>考虑两列相同的情形：设第 <span class="arithmatex">\(i\)</span> 列和第 <span class="arithmatex">\(j\)</span> 列都是 <span class="arithmatex">\(\boldsymbol{a}\)</span>。</p>
+<p>若交换这两列，矩阵其实<strong>没有变化</strong>，所以行列式的值不变；
+但交错性又要求交换后<strong>变号</strong>。一个数既等于自己又等于自己的相反数，
+只能为 <span class="arithmatex">\(0\)</span> ✓</p>
+<p>反过来，若「两列相同则值为 0」，对
+<span class="arithmatex">\(D(\dots,\boldsymbol{u}+\boldsymbol{v},\dots,\boldsymbol{u}+\boldsymbol{v},\dots) = 0\)</span>
+用多重线性展开，就能推出交换变号。</p>
+</div>
+<hr />
+<h2 id="_6">四、伴随、逆矩阵与外积的统一<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">用行列式写逆矩阵<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(2\times2\)</span>：</p>
+<div class="arithmatex">\[
+A^{-1} = \frac{1}{\det A}\begin{bmatrix} d &amp; -b \\ -c &amp; a\end{bmatrix}
+\]</div>
+<p>这个"交叉换位、副对角变号"的规则，就是<strong>伴随矩阵法</strong>的 <span class="arithmatex">\(2\times2\)</span> 特例。</p>
+<p><strong>一般形式</strong>（<span class="arithmatex">\(n\times n\)</span>）：</p>
+<div class="arithmatex">\[
+A^{-1} = \frac{1}{\det A}\,\operatorname{adj}(A)
+\]</div>
+<p>其中 <span class="arithmatex">\(\operatorname{adj}(A)\)</span> 是<strong>伴随矩阵</strong>：把 <span class="arithmatex">\(A\)</span> 的每个元素换成它的代数余子式，
+再转置。</p>
+<div class="admonition warning">
+<p class="admonition-title">伴随矩阵法在数值上不可取</p>
+<p>用伴随矩阵求逆需要算 <span class="arithmatex">\(n^2\)</span> 个 <span class="arithmatex">\((n-1)\times(n-1)\)</span> 行列式，复杂度约 <span class="arithmatex">\(O(n!)\)</span> ——
+<strong>对 <span class="arithmatex">\(n \geq 10\)</span> 就完全不可行</strong>。</p>
+<p>实际计算用<strong>高斯消元</strong>（<span class="arithmatex">\(O(n^3)\)</span>）。</p>
+<p>伴随矩阵的用途在<strong>理论推导</strong>：它给出 <span class="arithmatex">\(A^{-1}\)</span> 的显式公式，
+从而能推导出 <span class="arithmatex">\((A^{-1})_{ij} = C_{ji}/\det A\)</span> 这样的结论，
+也用来证明 <span class="arithmatex">\(\det A \neq 0 \Rightarrow A\)</span> 可逆。</p>
+</div>
+<h3 id="_8">行列式与叉积<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中的向量 <span class="arithmatex">\(\boldsymbol{u},\boldsymbol{v}\)</span>，<strong>叉积</strong>可以用行列式「形式地」写出：</p>
+<div class="arithmatex">\[
+\boldsymbol{u} \times \boldsymbol{v} =
+\begin{vmatrix}
+\boldsymbol{e}_1 &amp; \boldsymbol{e}_2 &amp; \boldsymbol{e}_3 \\
+u_1 &amp; u_2 &amp; u_3 \\
+v_1 &amp; v_2 &amp; v_3
+\end{vmatrix}
+\]</div>
+<p>（第一行放基向量，按第一行展开即得叉积公式。）</p>
+<p><strong>几何意义</strong>：<span class="arithmatex">\(\lVert\boldsymbol{u}\times\boldsymbol{v}\rVert\)</span> 等于两者张成的平行四边形面积，
+方向由右手定则确定。</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么叉积只在三维特别有用</p>
+<p>在三维里，「两个向量张成的面积元素」刚好可以被一个<strong>向量</strong>表示
+（方向垂直于张成的平面）。</p>
+<p>在二维里它是<strong>标量</strong>（就是 <span class="arithmatex">\(2\times2\)</span> 行列式）；
+在更高维里它需要反对称张量才能表示，<strong>不再是一个向量</strong>。</p>
+<p>这就是<strong>外代数（外积）</strong>的出发点，也是机器人学里旋量（twist/wrench）理论的语言基础。</p>
+</div>
+<hr />
+<h2 id="_9">五、典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">例题 1：用行列式判断可逆性<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>判断下列矩阵是否可逆：</p>
+<p><strong>(a)</strong> <span class="arithmatex">\(A = \begin{bmatrix} 2 &amp; 4 \\ 1 &amp; 2\end{bmatrix}\)</span></p>
+<p><strong>(b)</strong> <span class="arithmatex">\(B = \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4\end{bmatrix}\)</span></p>
+<details class="note">
+<summary>思路</summary>
+<p>算行列式，看是否为零。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a)</strong></p>
+<div class="arithmatex">\[
+\det A = 2\cdot2 - 4\cdot1 = 4-4 = 0
+\]</div>
+<p><strong>不可逆</strong>（奇异）。</p>
+<p><strong>几何解释</strong>：两列 <span class="arithmatex">\((2,1)\)</span> 与 <span class="arithmatex">\((4,2)\)</span> 成比例（后者是前者的 2 倍），
+共线 → 平行四边形退化成线段 → 面积为 0。</p>
+<p><strong>验证</strong>：确实 <span class="arithmatex">\(A = \begin{bmatrix}1\\\tfrac12\end{bmatrix}\begin{bmatrix}2 &amp; 4\end{bmatrix}\)</span>
+是秩 1 矩阵，不可逆。</p>
+<p><strong>(b)</strong></p>
+<div class="arithmatex">\[
+\det B = 1\cdot4 - 2\cdot3 = 4-6 = -2 \neq 0
+\]</div>
+<p><strong>可逆</strong>，且</p>
+<div class="arithmatex">\[
+B^{-1} = \frac{1}{-2}\begin{bmatrix} 4 &amp; -2 \\ -3 &amp; 1\end{bmatrix}
+= \begin{bmatrix} -2 &amp; 1 \\ \tfrac32 &amp; -\tfrac12\end{bmatrix}
+\]</div>
+<p><strong>验证</strong>：</p>
+<div class="arithmatex">\[
+BB^{-1} = \begin{bmatrix}1&amp;2\\3&amp;4\end{bmatrix}\begin{bmatrix}-2&amp;1\\ \tfrac32&amp;-\tfrac12\end{bmatrix}
+= \begin{bmatrix}-2+3 &amp; 1-1\\ -6+6 &amp; 3-2\end{bmatrix} = \begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix} \;\checkmark
+\]</div>
+<p><strong>注意负号</strong>：<span class="arithmatex">\(\det B = -2 &lt; 0\)</span> 说明这个变换<strong>翻转了方向</strong>（右手系→左手系）。</p>
+</details>
+<hr />
+<h3 id="2_1">例题 2：用行变换计算三阶行列式<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>计算</p>
+<div class="arithmatex">\[
+\det\begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 2 &amp; 5 &amp; 3 \\ 1 &amp; 0 &amp; 8 \end{bmatrix}
+\]</div>
+<details class="note">
+<summary>思路</summary>
+<p>用「某行加另一行的倍数不改变行列式」消元，化成上三角后取对角元之积。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>消元</strong>（目标：把左下角化为 0）。</p>
+<p><span class="arithmatex">\(R_2 \leftarrow R_2 - 2R_1\)</span>（行列式不变）：</p>
+<div class="arithmatex">\[
+\begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 1 &amp; -3 \\ 1 &amp; 0 &amp; 8\end{bmatrix}
+\]</div>
+<p><span class="arithmatex">\(R_3 \leftarrow R_3 - R_1\)</span>（行列式不变）：</p>
+<div class="arithmatex">\[
+\begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 1 &amp; -3 \\ 0 &amp; -2 &amp; 5\end{bmatrix}
+\]</div>
+<p><span class="arithmatex">\(R_3 \leftarrow R_3 + 2R_2\)</span>（行列式不变）：</p>
+<div class="arithmatex">\[
+\begin{bmatrix} 1 &amp; 2 &amp; 3 \\ 0 &amp; 1 &amp; -3 \\ 0 &amp; 0 &amp; -1\end{bmatrix}
+\]</div>
+<p><strong>化成上三角</strong>，取对角元之积：</p>
+<div class="arithmatex">\[
+\det = 1 \times 1 \times (-1) = -1
+\]</div>
+<p><strong>用按行展开展开验证</strong>（按第一行）：</p>
+<div class="arithmatex">\[
+\det = 1\begin{vmatrix}5&amp;3\\0&amp;8\end{vmatrix} - 2\begin{vmatrix}2&amp;3\\1&amp;8\end{vmatrix} + 3\begin{vmatrix}2&amp;5\\1&amp;0\end{vmatrix}
+\]</div>
+<div class="arithmatex">\[
+= 1(40-0) - 2(16-3) + 3(0-5) = 40 - 26 - 15 = -1 \;\checkmark
+\]</div>
+<p><strong>两种方法一致。</strong></p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">为什么消元法更快</p>
+<p>按行展开的计算量是 <span class="arithmatex">\(O(n!)\)</span>（<span class="arithmatex">\(n=3\)</span> 时要算 3 个二阶行列式，
+<span class="arithmatex">\(n=10\)</span> 时要算 <span class="arithmatex">\(10\times\)</span> 九个九阶行列式…）。</p>
+<p>消元法是 <span class="arithmatex">\(O(n^3)\)</span>。</p>
+<p><strong><span class="arithmatex">\(n=20\)</span> 时的对比</strong>：<span class="arithmatex">\(O(n!)\)</span> 约 <span class="arithmatex">\(2.4\times10^{18}\)</span> 次运算（不可行），
+<span class="arithmatex">\(O(n^3) = 8000\)</span> 次（瞬间）。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：用行列式求面积<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>求由向量 <span class="arithmatex">\(\boldsymbol{u} = (3,1)\)</span> 与 <span class="arithmatex">\(\boldsymbol{v} = (1,2)\)</span> 张成的平行四边形面积。</p>
+<details class="note">
+<summary>思路</summary>
+<p>面积 <span class="arithmatex">\(= \lvert \det[\boldsymbol{u}\ \boldsymbol{v}]\rvert\)</span>，注意取绝对值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>把两向量按列排成矩阵：</p>
+<div class="arithmatex">\[
+\det\begin{bmatrix} 3 &amp; 1 \\ 1 &amp; 2\end{bmatrix} = 3\cdot2 - 1\cdot1 = 6-1 = 5
+\]</div>
+<p>所以面积</p>
+<div class="arithmatex">\[
+S = \lvert 5\rvert = 5
+\]</div>
+<p><strong>注意符号</strong>：这里 <span class="arithmatex">\(\det = 5 &gt; 0\)</span>，说明 <span class="arithmatex">\((\boldsymbol{u},\boldsymbol{v})\)</span> 是<strong>逆时针</strong>顺序
+（保持定向）。若交换两列，<span class="arithmatex">\(\det\)</span> 变 <span class="arithmatex">\(-5\)</span>，面积仍是 5，
+但定向相反。</p>
+<p><strong>与叉积的联系</strong>：在三维中把两向量补成
+<span class="arithmatex">\(\boldsymbol{u} = (3,1,0)\)</span>、<span class="arithmatex">\(\boldsymbol{v} = (1,2,0)\)</span>，则</p>
+<div class="arithmatex">\[
+\boldsymbol{u}\times\boldsymbol{v} = (1\cdot0-0\cdot2,\ 0\cdot1-3\cdot0,\ 3\cdot2-1\cdot1) = (0,0,5)
+\]</div>
+<p>其模长 <span class="arithmatex">\(\lVert\boldsymbol{u}\times\boldsymbol{v}\rVert = 5\)</span>，与面积一致 ✓</p>
+</details>
+<hr />
+<h3 id="4">例题 4：证明「三角矩阵行列式 = 对角元之积」<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>证明上三角矩阵</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix} a_{11} &amp; a_{12} &amp; a_{13} \\ 0 &amp; a_{22} &amp; a_{23} \\ 0 &amp; 0 &amp; a_{33}\end{bmatrix}
+\]</div>
+<p>的行列式为 <span class="arithmatex">\(a_{11}a_{22}a_{33}\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>按第一列展开（第一列只有一个非零元）。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>按第一列展开</strong>（只有 <span class="arithmatex">\(a_{11}\)</span> 非零，其余为 0）：</p>
+<div class="arithmatex">\[
+\det A = a_{11}\begin{vmatrix} a_{22} &amp; a_{23} \\ 0 &amp; a_{33}\end{vmatrix} - 0 + 0
+\]</div>
+<p>（展开式中第 2、3 项系数为零，因为对应元素为 0。）</p>
+<p>对 <span class="arithmatex">\(2\times2\)</span> 上三角矩阵：</p>
+<div class="arithmatex">\[
+\begin{vmatrix} a_{22} &amp; a_{23} \\ 0 &amp; a_{33}\end{vmatrix} = a_{22}a_{33} - a_{23}\cdot0 = a_{22}a_{33}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\det A = a_{11}\cdot a_{22}a_{33} = a_{11}a_{22}a_{33} \qquad\blacksquare
+\]</div>
+<p><strong>递归推广</strong>：对 <span class="arithmatex">\(n\times n\)</span> 上三角矩阵同样按第一列展开，
+每次只留第一项，最终得对角元之积。</p>
+<p><strong>几何解释</strong>：上三角矩阵对第 <span class="arithmatex">\(k\)</span> 个坐标轴的作用只涉及前 <span class="arithmatex">\(k\)</span> 个方向
+（第 <span class="arithmatex">\(k\)</span> 列的前 <span class="arithmatex">\(k-1\)</span> 个分量为 0 意味着不引入新方向），
+所以体积缩放就是各方向独立缩放因子的乘积 <span class="arithmatex">\(a_{11}a_{22}\cdots a_{nn}\)</span>。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个结论的实际价值</p>
+<p>它让<strong>高斯消元法求行列式</strong>成为可能：</p>
+<p>任意矩阵 → （行变换）→ 上三角矩阵 → 对角元之积</p>
+<p>这是工程上计算行列式的标准方法。<strong>记住要追踪行交换带来的符号变化</strong>。</p>
+</div>
+<hr />
+<h3 id="5">例题 5：克拉默法则解方程组<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
+<p>用克拉默法则解</p>
+<div class="arithmatex">\[
+\begin{cases} 2x + y = 5 \\ x + 3y = 10\end{cases}
+\]</div>
+<details class="note">
+<summary>思路</summary>
+<p><span class="arithmatex">\(x = \det A_1/\det A\)</span>，其中 <span class="arithmatex">\(A_1\)</span> 是把 <span class="arithmatex">\(A\)</span> 的第一列换成右端项。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>系数矩阵</strong>：</p>
+<div class="arithmatex">\[
+A = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 3\end{bmatrix}, \qquad \det A = 6-1 = 5
+\]</div>
+<p><strong>把第一列换成右端项</strong> <span class="arithmatex">\((5,10)^\top\)</span>：</p>
+<div class="arithmatex">\[
+A_1 = \begin{bmatrix} 5 &amp; 1 \\ 10 &amp; 3\end{bmatrix}, \qquad \det A_1 = 15 - 10 = 5
+\]</div>
+<p><strong>把第二列换成右端项</strong>：</p>
+<div class="arithmatex">\[
+A_2 = \begin{bmatrix} 2 &amp; 5 \\ 1 &amp; 10\end{bmatrix}, \qquad \det A_2 = 20 - 5 = 15
+\]</div>
+<p><strong>解</strong>：</p>
+<div class="arithmatex">\[
+x = \frac{\det A_1}{\det A} = \frac55 = 1, \qquad
+y = \frac{\det A_2}{\det A} = \frac{15}{5} = 3
+\]</div>
+<p><strong>验证</strong>：代入原方程</p>
+<div class="arithmatex">\[
+2(1) + 3 = 5 \;\checkmark, \qquad 1 + 3(3) = 10 \;\checkmark
+\]</div>
+<p><strong>适用条件</strong>：<span class="arithmatex">\(\det A \neq 0\)</span>（否则公式无意义——那样方程要么无解，要么无穷多解）。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">克拉默法则不适合实际计算</p>
+<p>对 <span class="arithmatex">\(n\)</span> 元方程组，克拉默法则需要算 <span class="arithmatex">\(n+1\)</span> 个 <span class="arithmatex">\(n\)</span> 阶行列式，
+总复杂度 <span class="arithmatex">\(O(n\cdot n!)\)</span>，<strong>比高斯消元（<span class="arithmatex">\(O(n^3)\)</span>）慢得多</strong>。</p>
+<p><span class="arithmatex">\(n=20\)</span> 时：克拉默约 <span class="arithmatex">\(10^{20}\)</span> 次运算，高斯消元约 <span class="arithmatex">\(8000\)</span> 次。</p>
+<p><strong>它的价值在理论上</strong>：给出解的<strong>显式</strong>表达式，
+用于推导「解对系数的依赖关系」「灵敏度分析」等结论。
+实际求解请用高斯消元或 LU 分解。</p>
+</div>
+<hr />
+<h2 id="_10">六、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">机器人学 · 雅可比的奇异性与体积<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>雅可比行列式</strong> <span class="arithmatex">\(\det J\)</span> 表示关节空间微元到任务空间微元的<strong>体素缩放因子</strong>。
+  <span class="arithmatex">\(\det J \to 0\)</span> 表示接近<strong>奇异位形</strong></li>
+<li><strong>可达工作空间体积</strong>可用 <span class="arithmatex">\(\int \lvert\det J\rvert\,\mathrm{d}\boldsymbol{q}\)</span> 刻画</li>
+<li>在 6 自由度机械臂上，<span class="arithmatex">\(\det J = 0\)</span> 的位形就是「失去某个方向」的位置
+  （腕部奇异、肘部奇异、肩部奇异等）</li>
+</ul>
+<h3 id="_12">模式识别 · 多维高斯分布与体积<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>多维高斯分布的密度含因子</p>
+<div class="arithmatex">\[
+\frac{1}{\sqrt{(2\pi)^n\det\Sigma}}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\sqrt{\det\Sigma}\)</span> 与协方差椭球的<strong>体积</strong>成正比</li>
+<li><span class="arithmatex">\(\det\Sigma \to 0\)</span> 说明数据<strong>退化成低维</strong>（某些方向没有方差）——
+  此时密度表达式失效，需用伪逆</li>
+<li><strong>行列式在这里的作用就是「体积」</strong>，与第一节的几何解释完全对应</li>
+</ul>
+<h3 id="_13">现代数字信号处理 · 线性方程组与格<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>阵列处理中解线性方程组（如 MVDR 波束形成）需要 <span class="arithmatex">\(\det \neq 0\)</span></li>
+<li>在<strong>格（lattice）</strong> 理论中，<span class="arithmatex">\(\lvert\det A\rvert\)</span> 是基本胞元的体积，
+  与量化误差、球解码的复杂度有关</li>
+</ul>
+<h3 id="_14">智能传感与信息处理 · 费舍尔信息矩阵<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>可观测性/可辨识性</strong>判据涉及行列式：当相应的费舍尔信息矩阵
+  <span class="arithmatex">\(\det \to 0\)</span> 时，参数不可辨识</li>
+<li><strong>Cramér-Rao 下界</strong>含费舍尔信息矩阵的逆行列式</li>
+</ul>
+<hr />
+<h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(3\times3\)</span> 矩阵，<span class="arithmatex">\(\det A = 4\)</span>。求 <span class="arithmatex">\(\det(2A)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(2A\)</span> 是把 <span class="arithmatex">\(A\)</span> 的<strong>每一行</strong>都乘 2，共 3 行。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+\det(2A) = 2^3 \det A = 8 \times 4 = 32
+\]</div>
+<p><strong>关键</strong>：<span class="arithmatex">\(n\times n\)</span> 矩阵整体乘 <span class="arithmatex">\(\lambda\)</span> 时，相当于 <span class="arithmatex">\(\lambda I\)</span> 左乘，
+每行都缩放 <span class="arithmatex">\(\lambda\)</span> 倍，所以</p>
+<div class="arithmatex">\[
+\det(\lambda A) = \lambda^n \det A
+\]</div>
+<p><strong>常见错误</strong>：写成 <span class="arithmatex">\(\det(2A) = 2\det A = 8\)</span> ✗（漏了 <span class="arithmatex">\(n\)</span> 次方）。</p>
+<p><strong>几何解释</strong>：<span class="arithmatex">\(n\)</span> 维空间的每个方向都放大 2 倍，体积放大 <span class="arithmatex">\(2^n\)</span> 倍。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：<span class="arithmatex">\(\det(A+B) = \det A + \det B\)</span> 是否成立？</p>
+<details class="note">
+<summary>提示</summary>
+<p>取最简单的 <span class="arithmatex">\(2\times2\)</span> 例子试。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>一般不成立。</strong></p>
+<p>反例：取 <span class="arithmatex">\(A = I = \begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix}\)</span>，<span class="arithmatex">\(B = -I = \begin{bmatrix}-1&amp;0\\0&amp;-1\end{bmatrix}\)</span>。</p>
+<p>左边：</p>
+<div class="arithmatex">\[
+\det(A+B) = \det\begin{bmatrix}0&amp;0\\0&amp;0\end{bmatrix} = 0
+\]</div>
+<p>右边：</p>
+<div class="arithmatex">\[
+\det A + \det B = 1 + 1 = 2
+\]</div>
+<p><strong><span class="arithmatex">\(0 \neq 2\)</span></strong> ✗</p>
+<p><strong>原因</strong>：行列式对<strong>每一列</strong>线性，而不是对<strong>整个矩阵</strong>线性。</p>
+<p>具体说：对<strong>单独某一列</strong>成立</p>
+<div class="arithmatex">\[
+\det(\dots,\boldsymbol{a}_k+\boldsymbol{b}_k,\dots)
+= \det(\dots,\boldsymbol{a}_k,\dots) + \det(\dots,\boldsymbol{b}_k,\dots)
+\]</div>
+<p>——<strong>一次只替换一列</strong>才成立。</p>
+<p>这与「多重线性」的定义一致：它对每个自变量分别线性，
+但不是所有变量同时线性。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 设 <span class="arithmatex">\(A\)</span> 可逆，且 <span class="arithmatex">\(\det A = 3\)</span>，<span class="arithmatex">\(\det B = 5\)</span>。求 <span class="arithmatex">\(\det(A^{-1}B^\top A)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用乘法性逐项拆开，注意 <span class="arithmatex">\(\det(A^{-1}) = 1/\det A\)</span> 与 <span class="arithmatex">\(\det B^\top = \det B\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+\det(A^{-1}B^\top A) = \det(A^{-1})\det(B^\top)\det(A)
+\]</div>
+<div class="arithmatex">\[
+= \frac{1}{\det A}\cdot\det B\cdot\det A = \det B = 5
+\]</div>
+<p><strong>更简洁的看法</strong>：<span class="arithmatex">\(A^{-1}B^\top A\)</span> 与 <span class="arithmatex">\(B^\top\)</span> <strong>相似</strong>，
+而相似矩阵行列式相同；又 <span class="arithmatex">\(\det B^\top = \det B = 5\)</span>。</p>
+<p><strong>推广</strong>：对任意可逆 <span class="arithmatex">\(P\)</span>，<span class="arithmatex">\(\det(P^{-1}MP) = \det M\)</span> ——
+这就是第六节要用到的「行列式是相似不变量」。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 判断：若 <span class="arithmatex">\(A\)</span> 的某一行全为 0，则 <span class="arithmatex">\(\det A = 0\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>按这一行展开；或用体积角度思考。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>成立。</strong></p>
+<p><strong>代数证明</strong>：按该行展开，所有代数余子式的系数都是 0：</p>
+<div class="arithmatex">\[
+\det A = \sum_j a_{ij}C_{ij} = \sum_j 0 \cdot C_{ij} = 0
+\]</div>
+<p><strong>几何证明</strong>：该行全为 0 意味着矩阵的秩 <span class="arithmatex">\(&lt; n\)</span>（至少有一个方向没有贡献），
+所以映射把 <span class="arithmatex">\(n\)</span> 维体积压到更低维 —— 体积为 0。</p>
+<p><strong>更一般的结论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th><span class="arithmatex">\(\det\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>某行（列）全 0</td>
+<td><span class="arithmatex">\(= 0\)</span></td>
+</tr>
+<tr>
+<td>两行（列）相同或成比例</td>
+<td><span class="arithmatex">\(= 0\)</span></td>
+</tr>
+<tr>
+<td>有一行是其它行的线性组合</td>
+<td><span class="arithmatex">\(= 0\)</span></td>
+</tr>
+<tr>
+<td>秩 <span class="arithmatex">\(&lt; n\)</span></td>
+<td><span class="arithmatex">\(= 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>这些全都是「线性相关 → 体积退化 → 行列式为零」的表现。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../linear-map/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 线性映射与矩阵">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                线性映射与矩阵
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../inner-product/" class="md-footer__link md-footer__link--next" aria-label="下一页: 范数与内积">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                范数与内积
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
