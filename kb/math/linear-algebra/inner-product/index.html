@@ -1,0 +1,1987 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/linear-algebra/inner-product/">
+      
+      
+        <link rel="prev" href="../basis-dimension/">
+      
+      
+        <link rel="next" href="../eigenvalue/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>范数与内积 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              范数与内积
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、内积：给向量空间加上「角度」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、内积：给向量空间加上「角度」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两个标准例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、范数：内积给出的「长度」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、范数：内积给出的「长度」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么用平方根
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用范数（不限于内积诱导）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、两个基本不等式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、两个基本不等式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        柯西-施瓦茨不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角不等式
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、正交：内积给出的「垂直」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、正交：内积给出的「垂直」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        从内积还原「余弦」：为什么内积能定义角度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正交的性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、规范正交基：最好的坐标系
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、规范正交基：最好的坐标系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心优势：坐标无需解方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        勾股定理的推广
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：计算范数与夹角
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：柯西-施瓦茨取等号的时机
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：用正交性求坐标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：证明平行四边形法则（内积范数的特征）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 相关与匹配滤波
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 距离与相似度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 状态估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 运动学与优化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">机器人机构学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Axler Ch.6</code><code>MML §3.1–3.3</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 6 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../vector-space/">vector-space</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../eigenvalue/">eigenvalue</a></span></div></div>
+
+<h1 id="_1">范数与内积<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面讲的向量空间只有<strong>加法</strong>和<strong>数乘</strong>两种运算。但你可能已经注意到一个问题：</p>
+<blockquote>
+<p>在这样的空间里，<strong>说不出「两个向量有多接近」</strong>，也<strong>说不出「一个向量有多长」</strong>。</p>
+</blockquote>
+<p>「长度」「角度」「垂直」这些概念，需要<strong>额外</strong>的结构才能定义。这个结构就是<strong>内积</strong>。</p>
+<p>内积一旦引入，整个几何就长出来了：</p>
+<table>
+<thead>
+<tr>
+<th>引入的概念</th>
+<th>依赖</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>长度（范数）</td>
+<td>内积 <span class="arithmatex">\(\lVert\boldsymbol{v}\rVert = \sqrt{\langle\boldsymbol{v},\boldsymbol{v}\rangle}\)</span></td>
+</tr>
+<tr>
+<td>垂直（正交）</td>
+<td>内积 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span></td>
+</tr>
+<tr>
+<td>投影</td>
+<td>用内积把向量分解</td>
+</tr>
+<tr>
+<td>最佳逼近</td>
+<td>投影的推论</td>
+</tr>
+</tbody>
+</table>
+<p>对工科来说，这一页是<strong>最小二乘、PCA、相关分析、匹配滤波</strong>的共同基础。</p>
+<hr />
+<h2 id="_2">一、内积：给向量空间加上「角度」<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：向量空间 <span class="arithmatex">\(V\)</span> 上的<strong>内积</strong>是一个函数，把每对向量 <span class="arithmatex">\(\boldsymbol{u},\boldsymbol{v}\)</span> 映射为一个数
+<span class="arithmatex">\(\langle \boldsymbol{u},\boldsymbol{v}\rangle\)</span>，满足三条<strong>内积公理</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>公理</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(\langle \boldsymbol{u},\boldsymbol{v}\rangle = \overline{\langle \boldsymbol{v},\boldsymbol{u}\rangle}\)</span></td>
+<td>共轭对称</td>
+<td>交换后取共轭（实数为相等）</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(\langle \lambda\boldsymbol{u}+\mu\boldsymbol{w},\boldsymbol{v}\rangle = \lambda\langle \boldsymbol{u},\boldsymbol{v}\rangle + \mu\langle \boldsymbol{w},\boldsymbol{v}\rangle\)</span></td>
+<td>对第一元线性</td>
+<td>分配与齐次</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(\langle \boldsymbol{v},\boldsymbol{v}\rangle \geq 0\)</span>，且 <span class="arithmatex">\(=0\)</span> 当且仅当 <span class="arithmatex">\(\boldsymbol{v}=\boldsymbol{0}\)</span></td>
+<td>正定性</td>
+<td>自己和自己内积非负</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">第 1 条为什么要取共轭</p>
+<p>因为在复向量空间上，如果不取共轭，第 3 条就无法成立。</p>
+<p>试想复数向量 <span class="arithmatex">\(\boldsymbol{v} = (i)\)</span>（1 维复向量）。若定义
+<span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = \sum u_k v_k\)</span>（不取共轭），则</p>
+<div class="arithmatex">\[
+\langle \boldsymbol{v},\boldsymbol{v}\rangle = i \cdot i = -1 &lt; 0
+\]</div>
+<p><strong>出现了负的「长度平方」</strong>，与第 3 条矛盾。</p>
+<p>所以复内积约定第 2 个分量取共轭：</p>
+<div class="arithmatex">\[
+\langle \boldsymbol{u},\boldsymbol{v}\rangle = \sum_k u_k \overline{v_k}
+\]</div>
+<p>此时 <span class="arithmatex">\(\langle\boldsymbol{v},\boldsymbol{v}\rangle = i \cdot \overline{i} = i \cdot (-i) = 1 &gt; 0\)</span> ✓</p>
+<p>在实数域上 <span class="arithmatex">\(\overline{v_k} = v_k\)</span>，共轭无影响——<strong>因此本节所有结论对实向量空间都更简洁</strong>。</p>
+</div>
+<h3 id="_3">两个标准例子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>例 1：<span class="arithmatex">\(\mathbb{R}^n\)</span> 上的点积</strong></p>
+<div class="arithmatex">\[
+\langle \boldsymbol{u},\boldsymbol{v}\rangle = \sum_{k=1}^n u_k v_k
+\]</div>
+<p><strong>例 2：函数空间上的积分内积</strong></p>
+<p>在 <span class="arithmatex">\(C[0,1]\)</span>（区间 <span class="arithmatex">\([0,1]\)</span> 上的连续函数）上定义</p>
+<div class="arithmatex">\[
+\langle f,g\rangle = \int_0^1 f(x)g(x)\,\mathrm{d}x
+\]</div>
+<p>验证第 3 条：<span class="arithmatex">\(\langle f,f\rangle = \int_0^1 f(x)^2\,\mathrm{d}x \geq 0\)</span>，
+且等号只在 <span class="arithmatex">\(f \equiv 0\)</span> 时成立（因为非负连续函数的积分为零必然是恒零函数）✓</p>
+<div class="admonition tip">
+<p class="admonition-title">这个积分内积为什么重要</p>
+<p>它让<strong>函数也能谈「角度」和「垂直」</strong>。</p>
+<p>傅里叶分析的核心就是这个内积：不同频率的正弦波满足</p>
+<div class="arithmatex">\[
+\int_0^{T} \sin(2\pi m t/T)\sin(2\pi n t/T)\,\mathrm{d}t = 0 \quad (m \neq n)
+\]</div>
+<p>即<strong>不同频率互相正交</strong>。这正是傅里叶级数能「分解」信号的根源——
+在一组正交基上求坐标，就是投影。</p>
+</div>
+<hr />
+<h2 id="_4">二、范数：内积给出的「长度」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：由内积诱导的<strong>范数</strong>为</p>
+<div class="arithmatex">\[
+\lVert \boldsymbol{v}\rVert = \sqrt{\langle \boldsymbol{v},\boldsymbol{v}\rangle}
+\]</div>
+<p><strong>直观</strong>：这就是中学「长度」概念在一般向量空间上的推广。</p>
+<h3 id="_5">为什么用平方根<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>因为内积是<strong>双线性</strong>的，而长度应当是<strong>线性</strong>缩放的：</p>
+<div class="arithmatex">\[
+\langle \lambda\boldsymbol{v}, \lambda\boldsymbol{v}\rangle = \lambda\overline{\lambda}\langle \boldsymbol{v},\boldsymbol{v}\rangle = |\lambda|^2 \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>两边开方得 <span class="arithmatex">\(\lVert\lambda\boldsymbol{v}\rVert = |\lambda|\,\lVert\boldsymbol{v}\rVert\)</span>——
+<strong>数乘 <span class="arithmatex">\(|\lambda|\)</span> 倍，长度就变为 <span class="arithmatex">\(|\lambda|\)</span> 倍</strong> ✓ 这符合直觉。
+若不取平方根，缩放规律就变成 <span class="arithmatex">\(|\lambda|^2\)</span>，不再与几何一致。</p>
+<h3 id="_6">常用范数（不限于内积诱导）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>在 <span class="arithmatex">\(\mathbb{R}^n\)</span> 里还有几种常用范数，它们<strong>不由内积产生</strong>，但工程中同样重要：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>定义</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1-范数</td>
+<td><span class="arithmatex">\(\lVert\boldsymbol{v}\rVert_1 = \sum_i \lvert v_i\rvert\)</span></td>
+<td>稀疏性（lasso 正则）</td>
+</tr>
+<tr>
+<td>2-范数</td>
+<td><span class="arithmatex">\(\lVert\boldsymbol{v}\rVert_2 = \sqrt{\sum_i v_i^2}\)</span></td>
+<td>内积诱导，欧氏长度</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\infty\)</span>-范数</td>
+<td><span class="arithmatex">\(\lVert\boldsymbol{v}\rVert_\infty = \max_i \lvert v_i\rvert\)</span></td>
+<td>最坏情况</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">为什么只有 2-范数能由内积诱导</p>
+<p>内积范数必须满足<strong>平行四边形法则</strong>：</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 + \lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2 = 2\lVert\boldsymbol{u}\rVert^2 + 2\lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>验证方式：取 <span class="arithmatex">\(\boldsymbol{u}=(1,0)\)</span>，<span class="arithmatex">\(\boldsymbol{v}=(0,1)\)</span>。</p>
+<ul>
+<li>1-范数：左边 <span class="arithmatex">\(= \lVert(1,1)\rVert_1^2 + \lVert(1,-1)\rVert_1^2 = 4+4 = 8\)</span>，
+  右边 <span class="arithmatex">\(= 2\cdot 1 + 2 \cdot 1 = 4\)</span>。<strong><span class="arithmatex">\(8 \neq 4\)</span></strong> ✗</li>
+<li>2-范数：左边 <span class="arithmatex">\(= 2 + 2 = 4\)</span>，右边 <span class="arithmatex">\(= 2+2 = 4\)</span> ✓</li>
+</ul>
+<p>所以 1-范数<strong>不能</strong>写成 <span class="arithmatex">\(\sqrt{\langle\cdot,\cdot\rangle}\)</span> 的形式。</p>
+<p>这在优化里很关键：<strong>只有 2-范数对应的目标函数能化为简单的二次型</strong>。</p>
+</div>
+<hr />
+<h2 id="_7">三、两个基本不等式<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>内积空间里有两个几乎所有证明都会用到的不等式。</p>
+<h3 id="-">柯西-施瓦茨不等式<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\lvert \langle \boldsymbol{u},\boldsymbol{v}\rangle \rvert \leq \lVert\boldsymbol{u}\rVert\,\lVert\boldsymbol{v}\rVert
+\]</div>
+<p>等号成立当且仅当 <span class="arithmatex">\(\boldsymbol{u}\)</span> 与 <span class="arithmatex">\(\boldsymbol{v}\)</span> <strong>线性相关</strong>。</p>
+<p><strong>证明</strong>（实向量空间，思路是「构造一个非负的二次函数」）：</p>
+<p>若 <span class="arithmatex">\(\boldsymbol{v}=\boldsymbol{0}\)</span>，两边都是 0，平凡成立。设 <span class="arithmatex">\(\boldsymbol{v}\neq\boldsymbol{0}\)</span>。</p>
+<p>对任意实数 <span class="arithmatex">\(t\)</span>，由正定性</p>
+<div class="arithmatex">\[
+0 \leq \lVert \boldsymbol{u} - t\boldsymbol{v}\rVert^2 = \langle \boldsymbol{u}-t\boldsymbol{v},\boldsymbol{u}-t\boldsymbol{v}\rangle
+\]</div>
+<p>展开（实数情形内积对称）：</p>
+<div class="arithmatex">\[
+= \lVert\boldsymbol{u}\rVert^2 - 2t\langle \boldsymbol{u},\boldsymbol{v}\rangle + t^2\lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>这是关于 <span class="arithmatex">\(t\)</span> 的二次函数，开口向上（<span class="arithmatex">\(\lVert\boldsymbol{v}\rVert^2 &gt; 0\)</span>）且<strong>恒非负</strong>，
+所以判别式必须 <span class="arithmatex">\(\leq 0\)</span>：</p>
+<div class="arithmatex">\[
+\Delta = \left(2\langle\boldsymbol{u},\boldsymbol{v}\rangle\right)^2 - 4\lVert\boldsymbol{v}\rVert^2\lVert\boldsymbol{u}\rVert^2 \leq 0
+\]</div>
+<p>整理得 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle^2 \leq \lVert\boldsymbol{u}\rVert^2\lVert\boldsymbol{v}\rVert^2\)</span>，开方即得结论。<span class="arithmatex">\(\blacksquare\)</span></p>
+<div class="admonition tip">
+<p class="admonition-title">这个不等式在工程里的用途</p>
+<p><strong>相关系数的绝对值不超过 1</strong>，这就是柯西-施瓦茨不等式的直接推论：</p>
+<div class="arithmatex">\[
+\rho = \frac{\langle\boldsymbol{u},\boldsymbol{v}\rangle}{\lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert} \in [-1, 1]
+\]</div>
+<p>它还给出<strong>匹配滤波</strong>的上界：给定接收信号与模板，
+内积（相关值）的最大可能值就是两者范数之积。</p>
+</div>
+<h3 id="_8">三角不等式<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert \leq \lVert\boldsymbol{u}\rVert + \lVert\boldsymbol{v}\rVert
+\]</div>
+<p><strong>几何意义</strong>：三角形两边之和大于第三边（走直线最短）。</p>
+<p><strong>证明</strong>：</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 = \lVert\boldsymbol{u}\rVert^2 + 2\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>由柯西-施瓦茨，<span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle \leq \lvert\langle\boldsymbol{u},\boldsymbol{v}\rangle\rvert \leq \lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert\)</span>，所以</p>
+<div class="arithmatex">\[
+\leq \lVert\boldsymbol{u}\rVert^2 + 2\lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert + \lVert\boldsymbol{v}\rVert^2 = \left(\lVert\boldsymbol{u}\rVert+\lVert\boldsymbol{v}\rVert\right)^2
+\]</div>
+<p>开方即得。<span class="arithmatex">\(\blacksquare\)</span></p>
+<hr />
+<h2 id="_9">四、正交：内积给出的「垂直」<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：<span class="arithmatex">\(\boldsymbol{u} \perp \boldsymbol{v}\)</span> 当且仅当 <span class="arithmatex">\(\langle \boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="正交向量的夹角为直角">
+<defs>
+<marker id="ip1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ip1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<circle class="dc" cx="90" cy="150" r="3.5"/>
+<line class="a1" x1="90" y1="150" x2="250" y2="150" marker-end="url(#ip1-ah1)"/>
+<line class="a2" x1="90" y1="150" x2="90" y2="45" marker-end="url(#ip1-ah2)"/>
+<path class="a2" d="M90,130 L110,130 L110,150" fill="none" stroke-width="1.4" opacity="0.75"/>
+<text class="l1" x="180" y="170">u</text>
+<text class="l2" x="60" y="80">v</text>
+<text class="lbl-s" x="120" y="118">直角（内积 = 0）</text>
+<text class="lbl" x="300" y="90">u · v = 0</text>
+<text class="lbl-s" x="300" y="112">⟹ u ⟂ v</text>
+</svg>
+<figcaption>图 1　正交的定义：内积为零。图示为平面中两个垂直向量，内积 u₁v₁ + u₂v₂ = 0</figcaption>
+</figure>
+
+<h3 id="_10">从内积还原「余弦」：为什么内积能定义角度<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>中学的余弦定理给出</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2 = \lVert\boldsymbol{u}\rVert^2 + \lVert\boldsymbol{v}\rVert^2 - 2\lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert\cos\theta
+\]</div>
+<p>而在内积空间里，把左边展开：</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2 = \lVert\boldsymbol{u}\rVert^2 - 2\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p><strong>两式对比</strong>，立即看出</p>
+<div class="arithmatex">\[
+\langle \boldsymbol{u},\boldsymbol{v}\rangle = \lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert\cos\theta
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">这就是内积的几何本质</p>
+<p><strong>内积 = 长度之积 × 夹角余弦。</strong></p>
+<p>由柯西-施瓦茨知 <span class="arithmatex">\(\lvert\cos\theta\rvert \leq 1\)</span>，所以这个定义是自洽的——
+不等式的几何含义正是「余弦不能超过 1」。</p>
+<p>工程上的<strong>相关系数</strong>就是 <span class="arithmatex">\(\cos\theta\)</span>：
+<span class="arithmatex">\(\rho = 1\)</span> 表示两向量同向（完全正相关），<span class="arithmatex">\(\rho = 0\)</span> 表示正交（不相关），
+<span class="arithmatex">\(\rho = -1\)</span> 表示反向（完全负相关）。</p>
+</div>
+<h3 id="_11">正交的性质<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{0} \perp \boldsymbol{v}\)</span> 对一切 <span class="arithmatex">\(\boldsymbol{v}\)</span></td>
+<td>因 <span class="arithmatex">\(\langle\boldsymbol{0},\boldsymbol{v}\rangle = 0\)</span></td>
+</tr>
+<tr>
+<td>非零向量与自身不正交</td>
+<td><span class="arithmatex">\(\langle\boldsymbol{v},\boldsymbol{v}\rangle &gt; 0\)</span></td>
+</tr>
+<tr>
+<td>正交组必线性无关</td>
+<td>见下方证明</td>
+</tr>
+<tr>
+<td>勾股定理</td>
+<td><span class="arithmatex">\(\boldsymbol{u}\perp\boldsymbol{v} \Longrightarrow \lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 = \lVert\boldsymbol{u}\rVert^2+\lVert\boldsymbol{v}\rVert^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>「正交组必线性无关」的证明</strong>：</p>
+<p>设 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_m\}\)</span> 两两正交且都非零，并设</p>
+<div class="arithmatex">\[
+\lambda_1\boldsymbol{v}_1 + \cdots + \lambda_m\boldsymbol{v}_m = \boldsymbol{0}
+\]</div>
+<p>两边与 <span class="arithmatex">\(\boldsymbol{v}_k\)</span> 作内积。由正交性，除第 <span class="arithmatex">\(k\)</span> 项外全为零：</p>
+<div class="arithmatex">\[
+\lambda_k \langle\boldsymbol{v}_k,\boldsymbol{v}_k\rangle = 0
+\]</div>
+<p>而 <span class="arithmatex">\(\langle\boldsymbol{v}_k,\boldsymbol{v}_k\rangle = \lVert\boldsymbol{v}_k\rVert^2 &gt; 0\)</span>（非零向量），故 <span class="arithmatex">\(\lambda_k = 0\)</span>。
+对每个 <span class="arithmatex">\(k\)</span> 都成立，所以线性无关。<span class="arithmatex">\(\blacksquare\)</span></p>
+<div class="admonition warning">
+<p class="admonition-title">反过来不成立</p>
+<p>线性无关<strong>不蕴含</strong>正交。</p>
+<p>例如 <span class="arithmatex">\(\mathbb{R}^2\)</span> 中 <span class="arithmatex">\(\boldsymbol{v}_1 = (1,0)\)</span>、<span class="arithmatex">\(\boldsymbol{v}_2 = (1,1)\)</span>：
+线性无关（不成比例），但</p>
+<div class="arithmatex">\[
+\langle\boldsymbol{v}_1,\boldsymbol{v}_2\rangle = 1\cdot1 + 0\cdot1 = 1 \neq 0
+\]</div>
+<p><strong>不正交</strong>。这正是格拉姆-施密特正交化的用途——
+把线性无关组改造成正交组。</p>
+</div>
+<hr />
+<h2 id="_12">五、规范正交基：最好的坐标系<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：若 <span class="arithmatex">\(\{\boldsymbol{e}_1,\dots,\boldsymbol{e}_n\}\)</span> 满足</p>
+<div class="arithmatex">\[
+\langle \boldsymbol{e}_j,\boldsymbol{e}_k\rangle = \begin{cases} 1, &amp; j = k \\ 0, &amp; j \neq k \end{cases}
+\]</div>
+<p>即<strong>每个向量长度为 1，且两两正交</strong>，则称为<strong>规范正交基</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一般基与规范正交基的对比">
+<defs>
+<marker id="ip2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ip2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ip2-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：一般基（斜、不等长） -->
+<text class="lbl-s" x="20" y="22">一般基：求坐标要解方程组</text>
+<line class="gb" x1="40" y1="180" x2="200" y2="180"/>
+<line class="gb" x1="95" y1="40" x2="95" y2="192"/>
+<line class="a1" x1="95" y1="180" x2="178" y2="152" marker-end="url(#ip2-ah1)"/>
+<line class="a2" x1="95" y1="180" x2="133" y2="92" marker-end="url(#ip2-ah2)"/>
+<circle class="dc" cx="95" cy="180" r="3.5"/>
+<text class="l1" x="186" y="150">b₁</text>
+<text class="l2" x="112" y="112">b₂</text>
+<!-- 右：规范正交基 -->
+<text class="l3" x="240" y="22">规范正交基：坐标就是投影</text>
+<line class="gb" x1="245" y1="180" x2="415" y2="180"/>
+<line class="gb" x1="310" y1="40" x2="310" y2="192"/>
+<line class="a1" x1="310" y1="180" x2="380" y2="180" marker-end="url(#ip2-ah1)"/>
+<line class="a3" x1="310" y1="180" x2="310" y2="80" marker-end="url(#ip2-ah3)"/>
+<path class="a3" d="M310,160 L330,160 L330,180" fill="none" stroke-width="1.4" opacity="0.7"/>
+<circle class="dc" cx="310" cy="180" r="3.5"/>
+<text class="l1" x="358" y="200">e₁</text>
+<text class="l3" x="280" y="108">e₂</text>
+<text class="lbl-s" x="318" y="140">直角、单位长</text>
+</svg>
+<figcaption>图 2　规范正交基（右）比一般基（左）好用得多：垂直且等长的约束，让坐标可以直接用内积读出</figcaption>
+</figure>
+
+<h3 id="_13">核心优势：坐标无需解方程<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p><strong>一般基</strong>求坐标，要解线性方程组 <span class="arithmatex">\(P\boldsymbol{c} = \boldsymbol{x}\)</span>。</p>
+<p><strong>规范正交基</strong>求坐标，只需一个内积：</p>
+<div class="arithmatex">\[
+\boldsymbol{x} = \sum_{k=1}^n \langle \boldsymbol{x},\boldsymbol{e}_k\rangle\,\boldsymbol{e}_k
+\]</div>
+<p><strong>即第 <span class="arithmatex">\(k\)</span> 个坐标就是 <span class="arithmatex">\(\langle\boldsymbol{x},\boldsymbol{e}_k\rangle\)</span>。</strong></p>
+<p><strong>证明</strong>：设 <span class="arithmatex">\(\boldsymbol{x} = \sum_j c_j \boldsymbol{e}_j\)</span>，两边与 <span class="arithmatex">\(\boldsymbol{e}_k\)</span> 作内积：</p>
+<div class="arithmatex">\[
+\langle\boldsymbol{x},\boldsymbol{e}_k\rangle = \sum_j c_j \langle\boldsymbol{e}_j,\boldsymbol{e}_k\rangle = c_k \cdot 1 = c_k
+\]</div>
+<p>（用到了正交性：<span class="arithmatex">\(j \neq k\)</span> 的项全为零。）<span class="arithmatex">\(\blacksquare\)</span></p>
+<div class="admonition tip">
+<p class="admonition-title">这就是傅里叶变换的公式来源</p>
+<p>傅里叶级数</p>
+<div class="arithmatex">\[
+f(t) = \sum_n c_n e^{j2\pi n t/T}, \qquad c_n = \frac{1}{T}\int_0^T f(t) e^{-j2\pi n t/T}\,\mathrm{d}t
+\]</div>
+<p>正是<strong>在规范正交基下求坐标</strong>的公式。<span class="arithmatex">\(c_n\)</span> 就是内积 <span class="arithmatex">\(\langle f, e^{j2\pi n t/T}\rangle\)</span>
+（乘以归一化常数 <span class="arithmatex">\(1/T\)</span>）。</p>
+<p>「傅里叶变换把信号分解成频率分量」这句话的严格含义是：
+<strong>把信号投影到一组正交的复指数基上</strong>。</p>
+</div>
+<h3 id="_14">勾股定理的推广<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_m\}\)</span> 两两正交，则</p>
+<div class="arithmatex">\[
+\lVert \boldsymbol{v}_1+\cdots+\boldsymbol{v}_m\rVert^2 = \lVert\boldsymbol{v}_1\rVert^2 + \cdots + \lVert\boldsymbol{v}_m\rVert^2
+\]</div>
+<p><strong>证明</strong>：设 <span class="arithmatex">\(S = \sum_k \boldsymbol{v}_k\)</span>，则</p>
+<div class="arithmatex">\[
+\lVert S\rVert^2 = \sum_j\sum_k \langle\boldsymbol{v}_j,\boldsymbol{v}_k\rangle
+\]</div>
+<p>交叉项 <span class="arithmatex">\(j\neq k\)</span> 全为零（正交），只剩对角项 <span class="arithmatex">\(\langle\boldsymbol{v}_k,\boldsymbol{v}_k\rangle = \lVert\boldsymbol{v}_k\rVert^2\)</span>。<span class="arithmatex">\(\blacksquare\)</span></p>
+<div class="admonition tip">
+<p class="admonition-title">能量分解：工程解释</p>
+<p>在信号处理里，<span class="arithmatex">\(\lVert f\rVert^2 = \int \lvert f(t)\rvert^2\mathrm{d}t\)</span>
+常解释为<strong>能量</strong>。</p>
+<p>勾股定理的推广说：<strong>正交分解后，总能量等于各分量能量之和</strong>（帕塞瓦尔定理）。</p>
+<p>这就解释了为什么傅里叶分析「不丢信息」——
+能量可以分配到各个频率上，加起来仍等于原信号能量。</p>
+</div>
+<hr />
+<h2 id="_15">六、典型例题<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：计算范数与夹角<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\boldsymbol{u} = (1,2,2)\)</span>，<span class="arithmatex">\(\boldsymbol{v} = (2,1,-2)\)</span>（<span class="arithmatex">\(\mathbb{R}^3\)</span>，标准内积）。</p>
+<p><strong>(a)</strong> 求 <span class="arithmatex">\(\lVert\boldsymbol{u}\rVert\)</span>、<span class="arithmatex">\(\lVert\boldsymbol{v}\rVert\)</span>。</p>
+<p><strong>(b)</strong> 求 <span class="arithmatex">\(\boldsymbol{u}\)</span> 与 <span class="arithmatex">\(\boldsymbol{v}\)</span> 的夹角。</p>
+<p><strong>&copy;</strong> 验证柯西-施瓦茨不等式。</p>
+<details class="note">
+<summary>思路</summary>
+<p>范数是各分量平方和开方；夹角用 <span class="arithmatex">\(\cos\theta = \frac{\langle u,v\rangle}{\|u\|\|v\|}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 范数</strong></p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}\rVert = \sqrt{1^2+2^2+2^2} = \sqrt{9} = 3
+\]</div>
+<div class="arithmatex">\[
+\lVert\boldsymbol{v}\rVert = \sqrt{2^2+1^2+(-2)^2} = \sqrt{9} = 3
+\]</div>
+<p><strong>注意</strong>：两个向量长度相同，但方向完全不同。</p>
+<p><strong>(b) 夹角</strong></p>
+<p>先算内积：</p>
+<div class="arithmatex">\[
+\langle\boldsymbol{u},\boldsymbol{v}\rangle = 1\cdot2 + 2\cdot1 + 2\cdot(-2) = 2+2-4 = 0
+\]</div>
+<p>内积为零，所以<strong>两向量正交</strong>，夹角</p>
+<div class="arithmatex">\[
+\theta = 90^\circ
+\]</div>
+<p><strong>&copy; 验证柯西-施瓦茨</strong></p>
+<div class="arithmatex">\[
+\lvert\langle\boldsymbol{u},\boldsymbol{v}\rangle\rvert = 0, \qquad \lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert = 3\times3 = 9
+\]</div>
+<p>故 <span class="arithmatex">\(0 \leq 9\)</span> ✓ 不等式成立（此处是严格小于，因为两向量不相关）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">从这道题学到的</p>
+<p>内积为零是判断正交的<strong>充分必要条件</strong>，不需要算角度。</p>
+<p>实用技巧：<strong>先算内积，若为零就不用继续算范数了</strong>——
+正交是最强的「无关」信号。</p>
+</div>
+<hr />
+<h3 id="2-">例题 2：柯西-施瓦茨取等号的时机<a class="headerlink" href="#2-" title="Permanent link">&para;</a></h3>
+<p><strong>(a)</strong> 求 <span class="arithmatex">\(\boldsymbol{u}=(1,0)\)</span>、<span class="arithmatex">\(\boldsymbol{v}=(2,0)\)</span> 的内积与范数积，比较大小。</p>
+<p><strong>(b)</strong> 说明等号成立的条件。</p>
+<details class="note">
+<summary>思路</summary>
+<p>两个向量线性相关时（成比例）应当取等号。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 计算</strong></p>
+<div class="arithmatex">\[
+\langle\boldsymbol{u},\boldsymbol{v}\rangle = 1\cdot2+0\cdot0 = 2
+\]</div>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}\rVert = 1, \qquad \lVert\boldsymbol{v}\rVert = 2
+\]</div>
+<div class="arithmatex">\[
+\lvert\langle\boldsymbol{u},\boldsymbol{v}\rangle\rvert = 2 = 1\times2 = \lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert
+\]</div>
+<p><strong>取到等号</strong> ✓</p>
+<p><strong>(b) 条件</strong></p>
+<p>这里 <span class="arithmatex">\(\boldsymbol{v} = 2\boldsymbol{u}\)</span>，两向量<strong>线性相关</strong>（一个是另一个的倍数）。</p>
+<p>一般结论：柯西-施瓦茨取等号 <span class="arithmatex">\(\iff\)</span> 两向量线性相关。</p>
+<p><strong>几何解释</strong>：线性相关意味着夹角为 <span class="arithmatex">\(0^\circ\)</span> 或 <span class="arithmatex">\(180^\circ\)</span>，
+此时 <span class="arithmatex">\(|\cos\theta| = 1\)</span>，代入 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = \lVert\boldsymbol{u}\rVert\lVert\boldsymbol{v}\rVert\cos\theta\)</span> 即取等号。</p>
+<p><strong>工程含义</strong>：相关系数 <span class="arithmatex">\(|\rho| = 1\)</span> 表示完全线性相关（可以互相预测）。</p>
+</details>
+<hr />
+<h3 id="3">例题 3：用正交性求坐标<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>在 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中，取规范正交基</p>
+<div class="arithmatex">\[
+\boldsymbol{e}_1 = \frac{1}{\sqrt{2}}(1,1,0), \quad
+\boldsymbol{e}_2 = \frac{1}{\sqrt{2}}(1,-1,0), \quad
+\boldsymbol{e}_3 = (0,0,1)
+\]</div>
+<p>求 <span class="arithmatex">\(\boldsymbol{x} = (3,1,5)\)</span> 在这组基下的坐标。</p>
+<details class="note">
+<summary>思路</summary>
+<p>规范正交基下，坐标就是内积 <span class="arithmatex">\(\langle\boldsymbol{x},\boldsymbol{e}_k\rangle\)</span>，不用解方程组。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>直接算三个内积。</p>
+<div class="arithmatex">\[
+c_1 = \langle\boldsymbol{x},\boldsymbol{e}_1\rangle = \frac{1}{\sqrt{2}}(3\cdot1 + 1\cdot1 + 5\cdot0) = \frac{4}{\sqrt{2}} = 2\sqrt{2}
+\]</div>
+<div class="arithmatex">\[
+c_2 = \langle\boldsymbol{x},\boldsymbol{e}_2\rangle = \frac{1}{\sqrt{2}}(3\cdot1 + 1\cdot(-1) + 0) = \frac{2}{\sqrt{2}} = \sqrt{2}
+\]</div>
+<div class="arithmatex">\[
+c_3 = \langle\boldsymbol{x},\boldsymbol{e}_3\rangle = 3\cdot0 + 1\cdot0 + 5\cdot1 = 5
+\]</div>
+<p>所以坐标为</p>
+<div class="arithmatex">\[
+\boldsymbol{x} = 2\sqrt{2}\,\boldsymbol{e}_1 + \sqrt{2}\,\boldsymbol{e}_2 + 5\,\boldsymbol{e}_3
+\]</div>
+<p><strong>验证</strong>（把基向量展开还原）：</p>
+<div class="arithmatex">\[
+2\sqrt{2}\cdot\frac{1}{\sqrt{2}}(1,1,0) + \sqrt{2}\cdot\frac{1}{\sqrt{2}}(1,-1,0) + 5(0,0,1)
+\]</div>
+<div class="arithmatex">\[
+= (2,2,0) + (1,-1,0) + (0,0,5) = (3,1,5) \;\checkmark
+\]</div>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">对比：如果用一般基会怎样</p>
+<p>若基不正交（比如 <span class="arithmatex">\(\boldsymbol{b}_1=(1,1,0),\boldsymbol{b}_2=(2,0,0),\boldsymbol{b}_3=(0,0,1)\)</span>），
+直接算内积得到的<strong>不是</strong>坐标。</p>
+<p>例如 <span class="arithmatex">\(\langle\boldsymbol{x},\boldsymbol{b}_1\rangle = 4\)</span>，但坐标并不等于 4
+（因为 <span class="arithmatex">\(\boldsymbol{b}_1\)</span> 不是单位长，且与 <span class="arithmatex">\(\boldsymbol{b}_2\)</span> 不正交）。</p>
+<p>此时必须解方程组。<strong>规范正交基的全部价值就在于省掉这一步。</strong></p>
+</div>
+<hr />
+<h3 id="4">例题 4：证明平行四边形法则（内积范数的特征）<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>证明内积诱导的范数满足</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 + \lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2 = 2\lVert\boldsymbol{u}\rVert^2 + 2\lVert\boldsymbol{v}\rVert^2
+\]</div>
+<details class="note">
+<summary>思路</summary>
+<p>把两个范数都用内积展开，交叉项会相互抵消或加倍。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>分别展开。</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 = \langle\boldsymbol{u}+\boldsymbol{v},\boldsymbol{u}+\boldsymbol{v}\rangle
+= \lVert\boldsymbol{u}\rVert^2 + 2\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2 = \langle\boldsymbol{u}-\boldsymbol{v},\boldsymbol{u}-\boldsymbol{v}\rangle
+= \lVert\boldsymbol{u}\rVert^2 - 2\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>两式相加，交叉项 <span class="arithmatex">\(+2\langle\boldsymbol{u},\boldsymbol{v}\rangle\)</span> 与 <span class="arithmatex">\(-2\langle\boldsymbol{u},\boldsymbol{v}\rangle\)</span> <strong>正好抵消</strong>：</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 + \lVert\boldsymbol{u}-\boldsymbol{v}\rVert^2
+= 2\lVert\boldsymbol{u}\rVert^2 + 2\lVert\boldsymbol{v}\rVert^2
+\qquad\blacksquare
+\]</div>
+<p><strong>几何意义</strong>：平行四边形的两条对角线平方和 = 四条边的平方和。</p>
+<p><strong>用途</strong>：这是<strong>判定范数能否由内积诱导</strong>的标准工具。
+第一节里用它对 1-范数做出了否定判断（<span class="arithmatex">\(8 \neq 4\)</span>）。</p>
+</details>
+<hr />
+<h2 id="_16">七、用在哪些课程里<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<h3 id="_17">现代数字信号处理 · 相关与匹配滤波<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>互相关</strong>就是内积：<span class="arithmatex">\(R_{xy}(\tau) = \int x(t)y(t-\tau)\mathrm{d}t\)</span> 是 <span class="arithmatex">\(x\)</span> 与「平移后的 <span class="arithmatex">\(y\)</span>」的内积</li>
+<li><strong>匹配滤波</strong>：在白噪声中检测已知波形 <span class="arithmatex">\(s(t)\)</span>，最优滤波器是 <span class="arithmatex">\(h(t) = s(T-t)\)</span>。
+  其原理正是让输出信噪比最大，而最大值由柯西-施瓦茨给出——
+  <strong>在 <span class="arithmatex">\(h\)</span> 与 <span class="arithmatex">\(s\)</span> 成比例时取到</strong></li>
+<li><strong>正交频分复用（OFDM）</strong>：各子载波频率设计成互相正交，因此可以用内积直接分离</li>
+</ul>
+<h3 id="_18">模式识别 · 距离与相似度<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>欧氏距离</strong> <span class="arithmatex">\(d(\boldsymbol{x},\boldsymbol{y}) = \lVert\boldsymbol{x}-\boldsymbol{y}\rVert\)</span> 由内积定义</li>
+<li><strong>余弦相似度</strong> <span class="arithmatex">\(\cos\theta = \frac{\langle\boldsymbol{x},\boldsymbol{y}\rangle}{\lVert\boldsymbol{x}\rVert\lVert\boldsymbol{y}\rVert}\)</span>
+  常用于文本与高维特征（对长度不敏感，只看方向）</li>
+<li><strong>PCA</strong> 的第一步就是求协方差矩阵的主特征向量——
+  而协方差本身是<strong>中心化后的内积</strong></li>
+</ul>
+<h3 id="_19">智能传感与信息处理 · 状态估计<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>量测方程</strong> <span class="arithmatex">\(y = H\boldsymbol{x} + \boldsymbol{v}\)</span> 中的投影关系由内积刻画</li>
+<li><strong>卡尔曼滤波的更新步</strong>本质是把观测投影到状态空间上</li>
+<li><strong>多传感器融合</strong>：各传感器提供「方向」，加权融合是最小方差意义下的投影</li>
+</ul>
+<h3 id="_20">机器人学 · 运动学与优化<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>雅可比矩阵的行</strong>给出末端速度对关节速度的敏感方向</li>
+<li><strong>最小二乘逆运动学</strong>：在冗余机械臂上，用伪逆求模长最小的解，
+  而这个「最小」由范数定义</li>
+<li><strong>轨迹优化的代价函数</strong>通常是加速度的 2-范数平方</li>
+</ul>
+<hr />
+<h2 id="_21">八、自测<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断：若 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>，是否必有 <span class="arithmatex">\(\boldsymbol{u}=\boldsymbol{0}\)</span> 或 <span class="arithmatex">\(\boldsymbol{v}=\boldsymbol{0}\)</span>？</p>
+<details class="note">
+<summary>提示</summary>
+<p>找一个具体的反例，两个非零向量内积为零。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不一定。</strong> 反例：<span class="arithmatex">\(\boldsymbol{u}=(1,0)\)</span>，<span class="arithmatex">\(\boldsymbol{v}=(0,1)\)</span>，二者都非零，但</p>
+<div class="arithmatex">\[
+\langle\boldsymbol{u},\boldsymbol{v}\rangle = 1\cdot0 + 0\cdot1 = 0
+\]</div>
+<p>这正说明<strong>正交与「至少有一个是零向量」是两回事</strong>。</p>
+<p><strong>注意区分</strong>：<span class="arithmatex">\(\langle\boldsymbol{v},\boldsymbol{v}\rangle = 0\)</span> 才<strong>必然</strong>推出 <span class="arithmatex">\(\boldsymbol{v}=\boldsymbol{0}\)</span>
+（正定性公理）。这里讨论的是两个不同向量的内积。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 设 <span class="arithmatex">\(\lVert\boldsymbol{u}\rVert = 3\)</span>，<span class="arithmatex">\(\lVert\boldsymbol{v}\rVert = 4\)</span>，<span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = 6\)</span>。求 <span class="arithmatex">\(\lVert 2\boldsymbol{u} - \boldsymbol{v}\rVert\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先算 <span class="arithmatex">\(\lVert 2\boldsymbol{u}-\boldsymbol{v}\rVert^2\)</span>，用内积展开。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>展开：</p>
+<div class="arithmatex">\[
+\lVert 2\boldsymbol{u}-\boldsymbol{v}\rVert^2 = 4\lVert\boldsymbol{u}\rVert^2 - 4\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>代入数值：</p>
+<div class="arithmatex">\[
+= 4\cdot 9 - 4\cdot 6 + 16 = 36 - 24 + 16 = 28
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\lVert 2\boldsymbol{u}-\boldsymbol{v}\rVert = \sqrt{28} = 2\sqrt{7}
+\]</div>
+<p><strong>注意第一项系数</strong>：<span class="arithmatex">\(\lVert 2\boldsymbol{u}\rVert^2 = 4\lVert\boldsymbol{u}\rVert^2\)</span>（数乘提出要平方）；
+<strong>交叉项系数</strong>是 <span class="arithmatex">\(2\times2 = 4\)</span>（来自 <span class="arithmatex">\((a-b)^2\)</span> 展开的 <span class="arithmatex">\(-2ab\)</span>，其中 <span class="arithmatex">\(a\)</span> 带系数 2）。</p>
+<p>这是这类计算最容易出错的地方。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 证明：若 <span class="arithmatex">\(\lVert\boldsymbol{u}\rVert = \lVert\boldsymbol{v}\rVert\)</span>，则 <span class="arithmatex">\(\boldsymbol{u}+\boldsymbol{v}\)</span> 与 <span class="arithmatex">\(\boldsymbol{u}-\boldsymbol{v}\)</span> 正交。</p>
+<details class="note">
+<summary>提示</summary>
+<p>算内积 <span class="arithmatex">\(\langle\boldsymbol{u}+\boldsymbol{v}, \boldsymbol{u}-\boldsymbol{v}\rangle\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+\langle \boldsymbol{u}+\boldsymbol{v},\ \boldsymbol{u}-\boldsymbol{v}\rangle
+= \lVert\boldsymbol{u}\rVert^2 - \langle\boldsymbol{u},\boldsymbol{v}\rangle + \langle\boldsymbol{v},\boldsymbol{u}\rangle - \lVert\boldsymbol{v}\rVert^2
+\]</div>
+<p>（实数情形 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = \langle\boldsymbol{v},\boldsymbol{u}\rangle\)</span>，中间两项抵消。）</p>
+<div class="arithmatex">\[
+= \lVert\boldsymbol{u}\rVert^2 - \lVert\boldsymbol{v}\rVert^2 = 0
+\]</div>
+<p>（末步用了范数相等的条件。）故两者正交。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p><strong>几何意义</strong>：<strong>菱形的对角线互相垂直</strong>——
+因为 <span class="arithmatex">\(\boldsymbol{u}+\boldsymbol{v}\)</span> 与 <span class="arithmatex">\(\boldsymbol{u}-\boldsymbol{v}\)</span> 正好是菱形两条对角线方向。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 1-范数是否满足三角不等式？是否满足平行四边形法则？</p>
+<details class="note">
+<summary>提示</summary>
+<p>三角不等式代入 <span class="arithmatex">\(\boldsymbol{u}=(1,0)\)</span>、<span class="arithmatex">\(\boldsymbol{v}=(0,1)\)</span> 验证；
+平行四边形法则用同一组数验证。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>三角不等式：满足。</strong></p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}\rVert_1 = 1, \quad \lVert\boldsymbol{v}\rVert_1 = 1, \quad \lVert\boldsymbol{u}+\boldsymbol{v}\rVert_1 = \lvert1\rvert+\lvert1\rvert = 2
+\]</div>
+<p>有 <span class="arithmatex">\(2 \leq 1+1 = 2\)</span>，取等号 ✓（1-范数确实满足三角不等式，更一般的证明用逐分量三角不等式求和。）</p>
+<p><strong>平行四边形法则：不满足。</strong></p>
+<p>左边</p>
+<div class="arithmatex">\[
+\lVert\boldsymbol{u}+\boldsymbol{v}\rVert_1^2 + \lVert\boldsymbol{u}-\boldsymbol{v}\rVert_1^2 = 2^2 + 2^2 = 8
+\]</div>
+<p>右边</p>
+<div class="arithmatex">\[
+2\lVert\boldsymbol{u}\rVert_1^2 + 2\lVert\boldsymbol{v}\rVert_1^2 = 2\cdot1 + 2\cdot1 = 4
+\]</div>
+<p><strong><span class="arithmatex">\(8 \neq 4\)</span></strong> ✗</p>
+<p><strong>结论</strong>：1-范数满足三角不等式（所以它是合法的范数），
+但<strong>不满足平行四边形法则</strong>，因此<strong>不能由内积诱导</strong>。</p>
+<p>这解释了为什么 lasso 回归（<span class="arithmatex">\(\ell_1\)</span> 正则）的最优解<strong>没有闭式公式</strong>，
+而岭回归（<span class="arithmatex">\(\ell_2\)</span> 正则）有。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../basis-dimension/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 线性无关、张成与基">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                线性无关、张成与基
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../eigenvalue/" class="md-footer__link md-footer__link--next" aria-label="下一页: 特征值与特征向量">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                特征值与特征向量
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
