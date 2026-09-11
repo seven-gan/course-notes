@@ -1,0 +1,2382 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/signal-systems/fourier/">
+      
+      
+        <link rel="prev" href="../convolution/">
+      
+      
+        <link rel="next" href="../../../courses/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>傅里叶级数与变换 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              傅里叶级数与变换
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、为什么复指数是关键
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#homega" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、频率响应 \(H(\omega)\) 的含义
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、傅里叶级数：周期信号
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、傅里叶级数：周期信号">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        频谱：系数就是「频率含量」
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、傅里叶变换：非周期信号
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、傅里叶变换的性质（重点）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、傅里叶变换的性质（重点）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        卷积定理的意义（再强调一次）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：求矩形脉冲的频谱
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：用卷积定理求系统响应
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：时移与相移
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：帕塞瓦尔定理与能量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 整个频域方法的基础
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 噪声与滤波
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MIT 6.003 Lec 14–20</code><code>通用信号与系统教材</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>熊庆旭《信号与系统》第 3–4 章（或同类中文教材）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../convolution/">convolution</a></span></div></div>
+
+<h1 id="_1">傅里叶级数与变换<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页说：LTI 系统由冲激响应 <span class="arithmatex">\(h\)</span> 完全刻画，输出是卷积 <span class="arithmatex">\(y = h*x\)</span>。</p>
+<p>但卷积积分不容易算。这一页要引入一个「换一副眼镜」的方法：</p>
+<blockquote>
+<p><strong>把信号拆成不同频率的正弦波之和。</strong></p>
+</blockquote>
+<p>换到频域后，<strong>卷积变成乘法</strong>——这就是傅里叶分析的全部价值。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话版本</p>
+<p><strong>时域卷积 = 频域相乘</strong></p>
+<div class="arithmatex">\[
+y = h * x \qquad\Longleftrightarrow\qquad Y(\omega) = H(\omega)\,X(\omega)
+\]</div>
+<p><strong>这一个式子是信号处理中最重要的结论。</strong> 它把难以计算的卷积
+变成了简单的逐点乘法，也是 FFT 加速卷积、滤波器设计的理论基础。</p>
+</div>
+<hr />
+<h2 id="_2">一、为什么复指数是关键<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>回忆上一模块（线性代数）：特征向量是「被矩阵作用后方向不变」的向量。</p>
+<p>对 LTI 系统，「方向不变」意味着<strong>波形不变，只改变幅度与相位</strong>。
+满足这个条件的是<strong>复指数</strong> <span class="arithmatex">\(e^{j\omega t}\)</span>。验证一下：</p>
+<p>设输入 <span class="arithmatex">\(x(t) = e^{j\omega t}\)</span>，则</p>
+<div class="arithmatex">\[
+y(t) = \int_{-\infty}^{\infty}h(\tau)e^{j\omega(t-\tau)}\,\mathrm{d}\tau
+= e^{j\omega t}\underbrace{\int_{-\infty}^{\infty}h(\tau)e^{-j\omega\tau}\,\mathrm{d}\tau}_{\text{与 }t\text{ 无关}}
+\]</div>
+<p>记这个积分为 <span class="arithmatex">\(H(\omega)\)</span>，于是</p>
+<div class="arithmatex">\[
+\boxed{\ y(t) = H(\omega)\,e^{j\omega t}\ }
+\]</div>
+<p><strong>输入是复指数，输出还是同一个复指数，只是被乘了一个复数 <span class="arithmatex">\(H(\omega)\)</span>。</strong>
+这正是「特征函数」的含义，<span class="arithmatex">\(H(\omega)\)</span> 就是对应的「特征值」——
+在信号处理里称为<strong>频率响应</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>线性代数</th>
+<th>信号与系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩阵 <span class="arithmatex">\(A\)</span></td>
+<td>LTI 系统</td>
+</tr>
+<tr>
+<td>特征向量</td>
+<td>复指数 <span class="arithmatex">\(e^{j\omega t}\)</span></td>
+</tr>
+<tr>
+<td>特征值</td>
+<td>频率响应 <span class="arithmatex">\(H(\omega)\)</span></td>
+</tr>
+<tr>
+<td>特征分解</td>
+<td>傅里叶变换</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">整门课的结构由此清楚</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>想算卷积</td>
+<td>太难</td>
+</tr>
+<tr>
+<td>换一组「基」——用复指数表示信号</td>
+<td>傅里叶变换</td>
+</tr>
+<tr>
+<td>在这组基下系统作用是什么？</td>
+<td>逐点乘以 <span class="arithmatex">\(H(\omega)\)</span></td>
+</tr>
+<tr>
+<td>换回来</td>
+<td>逆傅里叶变换</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「用特征基把算子对角化」。</strong> 与线性代数里
+「相似变换使矩阵对角化」是同一件事。</p>
+</div>
+<hr />
+<h2 id="homega">二、频率响应 <span class="arithmatex">\(H(\omega)\)</span> 的含义<a class="headerlink" href="#homega" title="Permanent link">&para;</a></h2>
+<div class="arithmatex">\[
+H(\omega) = \int_{-\infty}^{\infty}h(t)e^{-j\omega t}\,\mathrm{d}t
+\]</div>
+<p>这就是 <span class="arithmatex">\(h(t)\)</span> 的<strong>傅里叶变换</strong>。</p>
+<p>把 <span class="arithmatex">\(H(\omega)\)</span> 写成极坐标形式：</p>
+<div class="arithmatex">\[
+H(\omega) = \lvert H(\omega)\rvert\,e^{j\angle H(\omega)}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\lvert H(\omega)\rvert\)</span></td>
+<td><strong>幅频响应</strong>（增益）</td>
+<td>该频率分量的放大倍数</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\angle H(\omega)\)</span></td>
+<td><strong>相频响应</strong></td>
+<td>该频率分量的相位偏移</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">物理意义：系统像一个「频率筛子」</p>
+<p><strong>每个频率分量被独立处理</strong>：</p>
+<ul>
+<li>幅度乘以 <span class="arithmatex">\(\lvert H(\omega)\rvert\)</span></li>
+<li>相位加上 <span class="arithmatex">\(\angle H(\omega)\)</span></li>
+</ul>
+<p><strong>「滤波」二字的来源</strong>：设计 <span class="arithmatex">\(H(\omega)\)</span> 让它对某些频率接近 1（通过）、
+对另一些接近 0（阻断）。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="幅频响应决定哪些频率通过">
+<defs>
+<marker id="ft1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ft1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：低通 -->
+<text class="lbl-s" x="14" y="18">低通：只让低频通过</text>
+<line class="gb" x1="22" y1="120" x2="196" y2="120"/>
+<line class="gb" x1="40" y1="30" x2="40" y2="132" marker-end="url(#ft1-ah2)"/>
+<line class="gb" x1="22" y1="120" x2="200" y2="120" marker-end="url(#ft1-ah1)"/>
+<path class="a3" d="M40,42 L96,42 C116,42 116,120 140,120 L196,120" fill="none" stroke-width="2.4"/>
+<line class="gd" x1="140" y1="42" x2="140" y2="120" stroke-dasharray="5 4"/>
+<text class="l3" x="60" y="36">通过</text>
+<text class="lbl-s" x="146" y="60">截止</text>
+<text class="lbl-s" x="20" y="150">低频 </text>
+<text class="lbl-s" x="164" y="150">高频</text>
+<text class="lbl-s" x="40" y="170">增益</text>
+<!-- 右：带通 -->
+<text class="lbl-s" x="228" y="18">带通：只让某段频率通过</text>
+<line class="gb" x1="236" y1="120" x2="412" y2="120"/>
+<line class="gb" x1="252" y1="30" x2="252" y2="132" marker-end="url(#ft1-ah2)"/>
+<line class="gb" x1="236" y1="120" x2="416" y2="120" marker-end="url(#ft1-ah1)"/>
+<path class="a1" d="M252,116 L296,116 C312,116 312,44 328,44 L352,44 C368,44 368,116 384,116 L412,116" fill="none" stroke-width="2.4"/>
+<text class="l1" x="316" y="38">通过</text>
+<text class="lbl-s" x="258" y="150">低频被抑制</text>
+<text class="lbl-s" x="360" y="150">高频被抑制</text>
+</svg>
+<figcaption>图 1　幅频响应 |H(ω)| 决定各频率分量的通过程度。左：低通滤波器；右：带通滤波器。纵轴是增益，横轴是频率</figcaption>
+</figure>
+
+<hr />
+<h2 id="_3">三、傅里叶级数：周期信号<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>周期信号</strong>（周期 <span class="arithmatex">\(T\)</span>，基频 <span class="arithmatex">\(\omega_0 = 2\pi/T\)</span>）可以展开为复指数之和：</p>
+<div class="arithmatex">\[
+x(t) = \sum_{n=-\infty}^{\infty} c_n\,e^{jn\omega_0 t}
+\]</div>
+<p><strong>系数由内积给出</strong>（这就是上一模块「规范正交基下坐标 = 内积」的应用）：</p>
+<div class="arithmatex">\[
+c_n = \frac{1}{T}\int_{T} x(t)\,e^{-jn\omega_0 t}\,\mathrm{d}t
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">为什么系数公式长这样（来自线性代数）</p>
+<p>复指数 <span class="arithmatex">\(\{e^{jn\omega_0 t}\}\)</span> 在区间 <span class="arithmatex">\([0,T]\)</span> 上<strong>互相正交</strong>：</p>
+<div class="arithmatex">\[
+\int_0^T e^{jm\omega_0t}\,\overline{e^{jn\omega_0t}}\,\mathrm{d}t
+= \int_0^T e^{j(m-n)\omega_0t}\,\mathrm{d}t
+= \begin{cases} T, &amp; m=n \\ 0, &amp; m\neq n\end{cases}
+\]</div>
+<p>这是一组<strong>正交基</strong>（差一个归一化常数 <span class="arithmatex">\(1/\sqrt T\)</span>）。</p>
+<p>所以求坐标只需<strong>做内积</strong>——系数公式正是</p>
+<div class="arithmatex">\[
+c_n = \frac{\langle x,\ e^{jn\omega_0t}\rangle}{\lVert e^{jn\omega_0t}\rVert^2}
+= \frac{1}{T}\int_T x(t)e^{-jn\omega_0t}\,\mathrm{d}t
+\]</div>
+<p><strong>不需要背这个公式</strong> —— 它就是「规范正交基下求坐标」的标准公式。</p>
+</div>
+<h3 id="_4">频谱：系数就是「频率含量」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>把 <span class="arithmatex">\(\lvert c_n\rvert\)</span> 按 <span class="arithmatex">\(n\)</span>（即频率 <span class="arithmatex">\(n\omega_0\)</span>）画出来，就是<strong>幅度谱</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="周期方波的频谱是离散谱线">
+<defs>
+<marker id="ft2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ft2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 上：时域方波 -->
+<text class="lbl-s" x="14" y="18">时域：周期方波</text>
+<line class="gb" x1="22" y1="90" x2="412" y2="90"/>
+<polyline class="a1" points="22,90 42,90 42,40 82,40 82,90 122,90 122,40 162,40 162,90 202,90 202,40 242,40 242,90 282,90 282,40 322,40 322,90 362,90 362,40 402,40 402,90 412,90" fill="none"/>
+<text class="lbl-s" x="26" y="112">周期 T</text>
+<!-- 下：频域谱线 -->
+<text class="lbl-s" x="14" y="146">频域：只有奇次谐波（离散谱线）</text>
+<line class="gb" x1="22" y1="212" x2="412" y2="212"/>
+<line class="gb" x1="217" y1="152" x2="217" y2="222" marker-end="url(#ft2-ah2)"/>
+<line class="gb" x1="22" y1="212" x2="416" y2="212" marker-end="url(#ft2-ah1)"/>
+<!-- 谱线：奇次谐波，幅度 1/n -->
+<line class="a4" x1="157" y1="212" x2="157" y2="180" stroke-width="3"/>
+<line class="a4" x1="277" y1="212" x2="277" y2="180" stroke-width="3"/>
+<line class="a4" x1="97" y1="212" x2="97" y2="190" stroke-width="3"/>
+<line class="a4" x1="337" y1="212" x2="337" y2="190" stroke-width="3"/>
+<line class="a4" x1="73" y1="212" x2="73" y2="198" stroke-width="3"/>
+<line class="a4" x1="361" y1="212" x2="361" y2="198" stroke-width="3"/>
+<text class="lbl-s" x="150" y="176">ω₀</text>
+<text class="lbl-s" x="268" y="176">3ω₀</text>
+<text class="lbl-s" x="82" y="186">5ω₀</text>
+<text class="l4" x="230" y="200">幅度正比于 1/n，只有奇次项</text>
+<text class="lbl-s" x="200" y="230">频率</text>
+</svg>
+<figcaption>图 2　周期方波的傅里叶级数：时域是方波（左/上），频域是离散谱线（下），只有奇次谐波且幅度按 1/n 衰减。周期信号 → 离散频谱</figcaption>
+</figure>
+
+<div class="admonition note">
+<p class="admonition-title">吉布斯现象：只用少数谐波会「振铃」</p>
+<p>用有限项 <span class="arithmatex">\(n \leq N\)</span> 近似方波时，在跳变点附近会出现<strong>过冲</strong>，
+且过冲幅度<strong>不随 N 增大而消失</strong>（约 9%）。这叫<strong>吉布斯现象</strong>。</p>
+<p><strong>工程含义</strong>：这是<strong>滤波与压缩的代价</strong> —— 带宽有限，就无法完美表示突变。
+这解释了为什么 MP3 等有损压缩在「瞬态」（鼓点）处容易出问题。</p>
+</div>
+<hr />
+<h2 id="_5">四、傅里叶变换：非周期信号<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>周期信号的频谱是<strong>离散</strong>的（只有 <span class="arithmatex">\(n\omega_0\)</span>）。
+让周期 <span class="arithmatex">\(T \to \infty\)</span>，谱线间隔 <span class="arithmatex">\(\omega_0 \to 0\)</span>，离散谱变成<strong>连续谱</strong>。</p>
+<p><strong>傅里叶变换对</strong>：</p>
+<div class="arithmatex">\[
+X(\omega) = \int_{-\infty}^{\infty}x(t)e^{-j\omega t}\,\mathrm{d}t
+\qquad\text{（正变换）}
+\]</div>
+<div class="arithmatex">\[
+x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}\,\mathrm{d}\omega
+\qquad\text{（逆变换）}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">直观理解正变换：与每个频率做内积</p>
+<p><span class="arithmatex">\(X(\omega) = \langle x(t), e^{j\omega t}\rangle\)</span> ——
+<strong>测出信号中频率 <span class="arithmatex">\(\omega\)</span> 的成分有多少</strong>。</p>
+<p>所以 <span class="arithmatex">\(X(\omega)\)</span> 称为<strong>频谱</strong>：它告诉你信号由哪些频率构成、各占多少。</p>
+</div>
+<hr />
+<h2 id="_6">五、傅里叶变换的性质（重点）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>时域</th>
+<th>频域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>线性</strong></td>
+<td><span class="arithmatex">\(ax_1+bx_2\)</span></td>
+<td><span class="arithmatex">\(aX_1+bX_2\)</span></td>
+</tr>
+<tr>
+<td><strong>时移</strong></td>
+<td><span class="arithmatex">\(x(t-t_0)\)</span></td>
+<td><span class="arithmatex">\(X(\omega)e^{-j\omega t_0}\)</span></td>
+</tr>
+<tr>
+<td><strong>频移</strong></td>
+<td><span class="arithmatex">\(x(t)e^{j\omega_0 t}\)</span></td>
+<td><span class="arithmatex">\(X(\omega-\omega_0)\)</span></td>
+</tr>
+<tr>
+<td><strong>卷积</strong></td>
+<td><span class="arithmatex">\(x*h\)</span></td>
+<td><span class="arithmatex">\(X(\omega)H(\omega)\)</span></td>
+</tr>
+<tr>
+<td><strong>相乘</strong></td>
+<td><span class="arithmatex">\(x\cdot h\)</span></td>
+<td><span class="arithmatex">\(\frac{1}{2\pi}X*H\)</span></td>
+</tr>
+<tr>
+<td><strong>微分</strong></td>
+<td><span class="arithmatex">\(\dfrac{\mathrm{d}x}{\mathrm{d}t}\)</span></td>
+<td><span class="arithmatex">\(j\omega X(\omega)\)</span></td>
+</tr>
+<tr>
+<td><strong>积分</strong></td>
+<td><span class="arithmatex">\(\displaystyle\int_{-\infty}^t x\)</span></td>
+<td><span class="arithmatex">\(\dfrac{X(\omega)}{j\omega}\)</span></td>
+</tr>
+<tr>
+<td><strong>尺度</strong></td>
+<td><span class="arithmatex">\(x(at)\)</span></td>
+<td><span class="arithmatex">\(\dfrac{1}{\lvert a\rvert}X\!\left(\dfrac{\omega}{a}\right)\)</span></td>
+</tr>
+<tr>
+<td><strong>对偶</strong></td>
+<td><span class="arithmatex">\(X(t)\)</span></td>
+<td><span class="arithmatex">\(2\pi x(-\omega)\)</span></td>
+</tr>
+<tr>
+<td><strong>帕塞瓦尔</strong></td>
+<td><span class="arithmatex">\(\int\lvert x\rvert^2\mathrm{d}t\)</span></td>
+<td><span class="arithmatex">\(\frac{1}{2\pi}\int\lvert X\rvert^2\mathrm{d}\omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">几个最容易出错的性质</p>
+<p><strong>1. 微分 = 乘 <span class="arithmatex">\(j\omega\)</span></strong></p>
+<p>这意味着<strong>微分是高频放大</strong>。噪声通常含大量高频，
+所以<strong>数值微分对噪声极敏感</strong>（差分放大噪声）。实践中的替代方案是
+先平滑再微分（如 Sobel 算子先做加权平均）。</p>
+<p><strong>2. 尺度变换要除以 <span class="arithmatex">\(\lvert a\rvert\)</span>（且频率反向缩放）</strong></p>
+<p><span class="arithmatex">\(x(at)\)</span> 在时域被压缩 <span class="arithmatex">\(a\)</span> 倍，频域就<strong>展宽</strong> <span class="arithmatex">\(a\)</span> 倍并除以 <span class="arithmatex">\(a\)</span>：</p>
+<div class="arithmatex">\[
+x(at) \longleftrightarrow \frac{1}{\lvert a\rvert}X\!\left(\frac{\omega}{a}\right)
+\]</div>
+<p><strong>含义</strong>：时域越窄，频域越宽（时间-带宽不确定性）。</p>
+<p><strong>3. 卷积定理只说「时域卷积 ↔ 频域相乘」</strong></p>
+<p>反过来「时域相乘」对应「频域卷积」（要除以 <span class="arithmatex">\(2\pi\)</span>）。
+这个对偶关系在<strong>调制</strong>里很关键：与载波相乘就是把频谱搬移。</p>
+</div>
+<h3 id="_7">卷积定理的意义（再强调一次）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y(t) = h(t)*x(t) \quad\Longleftrightarrow\quad Y(\omega) = H(\omega)X(\omega)
+\]</div>
+<p><strong>三条推论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>推论</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算卷积可用 FFT</td>
+<td><span class="arithmatex">\(O(N\log N)\)</span> 替代 <span class="arithmatex">\(O(N^2)\)</span></td>
+</tr>
+<tr>
+<td>滤波器设计在频域做</td>
+<td>直接用 <span class="arithmatex">\(H(\omega)\)</span> 描述「通过什么频率」</td>
+</tr>
+<tr>
+<td>级联系统响应相乘</td>
+<td><span class="arithmatex">\(H_{\text{总}} = H_1H_2\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">「相乘」比「卷积」容易得多</p>
+<p>这也是为什么工程师习惯在<strong>频域</strong>思考滤波器问题：</p>
+<ul>
+<li>时域：设计 <span class="arithmatex">\(h(t)\)</span>，卷积计算复杂</li>
+<li>频域：设计 <span class="arithmatex">\(H(\omega)\)</span>，直接画「增益 vs 频率」曲线</li>
+</ul>
+<p>两者由傅里叶变换联系，<strong>选方便的那一边</strong>。</p>
+</div>
+<hr />
+<h2 id="_8">六、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：求矩形脉冲的频谱<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(x(t) = \begin{cases}1, &amp; \lvert t\rvert \leq \tau/2 \\ 0, &amp; \text{其他}\end{cases}\)</span>（宽 <span class="arithmatex">\(\tau\)</span> 的矩形）。
+求 <span class="arithmatex">\(X(\omega)\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>直接代入变换积分；结果是 sinc 函数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>由定义：</p>
+<div class="arithmatex">\[
+X(\omega) = \int_{-\tau/2}^{\tau/2}1\cdot e^{-j\omega t}\,\mathrm{d}t
+\]</div>
+<p>（区间外被积函数为 0。）</p>
+<p>计算：</p>
+<div class="arithmatex">\[
+= \left[\frac{e^{-j\omega t}}{-j\omega}\right]_{-\tau/2}^{\tau/2}
+= \frac{e^{-j\omega\tau/2}-e^{j\omega\tau/2}}{-j\omega}
+\]</div>
+<p>用 <span class="arithmatex">\(e^{-j\theta}-e^{j\theta} = -2j\sin\theta\)</span>：</p>
+<div class="arithmatex">\[
+= \frac{-2j\sin(\omega\tau/2)}{-j\omega} = \frac{2\sin(\omega\tau/2)}{\omega}
+\]</div>
+<p>写成 sinc 形式：</p>
+<div class="arithmatex">\[
+\boxed{\ X(\omega) = \tau\,\operatorname{sinc}\!\left(\frac{\omega\tau}{2\pi}\right)\ }
+\quad\text{其中}\quad \operatorname{sinc}(u) = \frac{\sin(\pi u)}{\pi u}
+\]</div>
+<p><strong>性质分析</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\omega = 0\)</span> 处最大（<span class="arithmatex">\(= \tau\)</span>）</td>
+<td>直流分量等于脉冲面积</td>
+</tr>
+<tr>
+<td>过零点在 <span class="arithmatex">\(\omega = 2\pi k/\tau\)</span></td>
+<td>第一零点是 <span class="arithmatex">\(2\pi/\tau\)</span></td>
+</tr>
+<tr>
+<td><strong>脉宽 <span class="arithmatex">\(\tau\)</span> 越小，主瓣越宽</strong></td>
+<td>时间-带宽不确定性</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这是最常用的变换对之一</p>
+<p><strong>矩形 ↔ sinc</strong> 出现在大量场景：</p>
+<table>
+<thead>
+<tr>
+<th>时域</th>
+<th>频域</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>矩形脉冲</td>
+<td>sinc（无限延伸）</td>
+</tr>
+<tr>
+<td>sinc（理想低通滤波器冲激响应）</td>
+<td>矩形（理想低通）</td>
+</tr>
+<tr>
+<td>矩形窗</td>
+<td>频谱泄漏的来源</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要推论</strong>：理想低通滤波器（频域矩形）的冲激响应是 sinc，
+它在 <span class="arithmatex">\(t&lt;0\)</span> 时非零 —— <strong>不因果，物理上不可实现</strong>。
+这就是为什么实际滤波器只能近似理想特性。</p>
+</div>
+<hr />
+<h3 id="2">例题 2：用卷积定理求系统响应<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>输入 <span class="arithmatex">\(x(t) = e^{-2t}u(t)\)</span> 通过冲激响应 <span class="arithmatex">\(h(t) = e^{-3t}u(t)\)</span> 的 LTI 系统。
+用卷积定理求输出。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先求两者的傅里叶变换（常用变换对），相乘，再逆变换。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：查常用变换对</strong></p>
+<div class="arithmatex">\[
+e^{-at}u(t) \quad\longleftrightarrow\quad \frac{1}{a+j\omega} \qquad (a&gt;0)
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+X(\omega) = \frac{1}{2+j\omega}, \qquad H(\omega) = \frac{1}{3+j\omega}
+\]</div>
+<p><strong>第二步：频域相乘</strong></p>
+<div class="arithmatex">\[
+Y(\omega) = X(\omega)H(\omega) = \frac{1}{(2+j\omega)(3+j\omega)}
+\]</div>
+<p><strong>第三步：部分分式分解</strong></p>
+<p>把它拆成两个简单分式（这样才能逐项查表逆变换）：</p>
+<div class="arithmatex">\[
+Y(\omega) = \frac{1}{(2+j\omega)(3+j\omega)} = \frac{A}{2+j\omega} + \frac{B}{3+j\omega}
+\]</div>
+<p><strong>求系数</strong>（代入使分母为零的值）：</p>
+<p>令 <span class="arithmatex">\(j\omega = -2\)</span>（即 <span class="arithmatex">\(2+j\omega = 0\)</span>），则第一项的系数 <span class="arithmatex">\(A\)</span> 等于剩下部分在该点的值：</p>
+<div class="arithmatex">\[
+A = \left.\frac{1}{3+j\omega}\right|_{j\omega=-2} = \frac{1}{3-2} = 1
+\]</div>
+<p>同理令 <span class="arithmatex">\(j\omega = -3\)</span>：</p>
+<div class="arithmatex">\[
+B = \left.\frac{1}{2+j\omega}\right|_{j\omega=-3} = \frac{1}{2-3} = -1
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+Y(\omega) = \frac{1}{2+j\omega} - \frac{1}{3+j\omega}
+\]</div>
+<p><strong>第四步：逆变换</strong></p>
+<div class="arithmatex">\[
+\boxed{\ y(t) = \left(e^{-2t} - e^{-3t}\right)u(t)\ }
+\]</div>
+<p><strong>检验</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(t=0\)</span> 时 <span class="arithmatex">\(y = 1-1 = 0\)</span> ✓（两个指数起点抵消）</li>
+<li><span class="arithmatex">\(t \to \infty\)</span> 时 <span class="arithmatex">\(y \to 0\)</span> ✓（都衰减，<span class="arithmatex">\(e^{-2t}\)</span> 主导）</li>
+<li><span class="arithmatex">\(y(t) \geq 0\)</span>？对 <span class="arithmatex">\(t&gt;0\)</span>，<span class="arithmatex">\(e^{-2t} &gt; e^{-3t}\)</span>，所以 <span class="arithmatex">\(y&gt;0\)</span> ✓</li>
+</ul>
+<p>这是<strong>两个一阶系统的级联响应</strong>，物理上是「先充电再放电」的双指数过程。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个解法体现了频域方法的价值</p>
+<p><strong>时域做法</strong>：要算卷积 <span class="arithmatex">\(\int_0^t e^{-3\tau}e^{-2(t-\tau)}\mathrm{d}\tau\)</span>，
+需要展开并积分。</p>
+<p><strong>频域做法</strong>：两个分式相乘 → 部分分式 → 查表逆变换。</p>
+<p><strong>关键优势</strong>：<strong>乘法比卷积容易</strong>，部分分式是标准代数操作。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：时移与相移<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(x(t)\)</span> 的频谱为 <span class="arithmatex">\(X(\omega)\)</span>。求 <span class="arithmatex">\(x(t-t_0)\)</span> 的频谱，并说明其物理含义。</p>
+<details class="note">
+<summary>提示</summary>
+<p>在变换积分中做变量替换。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<div class="arithmatex">\[
+\mathcal{F}\{x(t-t_0)\} = \int_{-\infty}^{\infty}x(t-t_0)e^{-j\omega t}\,\mathrm{d}t
+\]</div>
+<p>令 <span class="arithmatex">\(\sigma = t-t_0\)</span>（则 <span class="arithmatex">\(t = \sigma+t_0\)</span>，<span class="arithmatex">\(\mathrm{d}t = \mathrm{d}\sigma\)</span>）：</p>
+<div class="arithmatex">\[
+= \int_{-\infty}^{\infty}x(\sigma)e^{-j\omega(\sigma+t_0)}\,\mathrm{d}\sigma
+= e^{-j\omega t_0}\int_{-\infty}^{\infty}x(\sigma)e^{-j\omega\sigma}\,\mathrm{d}\sigma
+\]</div>
+<div class="arithmatex">\[
+\boxed{\ \mathcal{F}\{x(t-t_0)\} = X(\omega)\,e^{-j\omega t_0}\ }
+\]</div>
+<p><strong>物理含义：时移只改变相位，不改变幅度谱</strong></p>
+<div class="arithmatex">\[
+\lvert X(\omega)e^{-j\omega t_0}\rvert = \lvert X(\omega)\rvert \qquad\checkmark
+\]</div>
+<p>（因为 <span class="arithmatex">\(\lvert e^{-j\omega t_0}\rvert = 1\)</span>。）</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>幅度谱完全不变</td>
+<td>「信号是什么」不因延迟而变</td>
+</tr>
+<tr>
+<td>相位线性增加 <span class="arithmatex">\(-\omega t_0\)</span></td>
+<td>延迟在频域表现为<strong>线性相位</strong></td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个性质有两个重要应用</p>
+<p><strong>1. 纯延迟的判据</strong></p>
+<p>若一个滤波器的相频响应是<strong>严格线性</strong>的（<span class="arithmatex">\(\angle H = -\omega t_0\)</span>），
+说明它只延迟、不改变波形 —— 这叫<strong>线性相位滤波器</strong>。
+波形保真是音频、通信中的关键要求。</p>
+<p><strong>2. 测距原理</strong></p>
+<p>发射信号与回波的时间差 <span class="arithmatex">\(t_0\)</span> 可从相位差读出。
+GPS、雷达、超声测距都基于此。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：帕塞瓦尔定理与能量<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(x(t) = e^{-t}u(t)\)</span>。用帕塞瓦尔定理求总能量 <span class="arithmatex">\(\int_{-\infty}^{\infty}x^2(t)\mathrm{d}t\)</span>，
+并与频域积分对照。</p>
+<details class="note">
+<summary>提示</summary>
+<p>时域积分直接算；频域用 <span class="arithmatex">\(X(\omega) = 1/(1+j\omega)\)</span> 与帕塞瓦尔关系。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>时域计算</strong>：</p>
+<div class="arithmatex">\[
+E = \int_0^{\infty}e^{-2t}\,\mathrm{d}t = \frac{1}{2}
+\]</div>
+<p><strong>频域计算</strong>（帕塞瓦尔定理）：</p>
+<div class="arithmatex">\[
+E = \frac{1}{2\pi}\int_{-\infty}^{\infty}\lvert X(\omega)\rvert^2\,\mathrm{d}\omega
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+\lvert X(\omega)\rvert^2 = \frac{1}{\lvert 1+j\omega\rvert^2} = \frac{1}{1+\omega^2}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+E = \frac{1}{2\pi}\int_{-\infty}^{\infty}\frac{\mathrm{d}\omega}{1+\omega^2}
+= \frac{1}{2\pi}\left[\arctan\omega\right]_{-\infty}^{\infty}
+= \frac{1}{2\pi}\left(\frac{\pi}{2}+\frac{\pi}{2}\right) = \frac{1}{2} \;\checkmark
+\]</div>
+<p><strong>两者一致。</strong></p>
+<p><strong>物理含义</strong>：<strong>能量可以按频率分配</strong></p>
+<div class="arithmatex">\[
+\lvert X(\omega)\rvert^2 \quad\text{称为能量谱密度}
+\]</div>
+<p>它告诉你「能量分布在哪些频率上」。对 <span class="arithmatex">\(x = e^{-t}u(t)\)</span>，
+能量主要集中在低频（<span class="arithmatex">\(\lvert X\rvert^2 = 1/(1+\omega^2)\)</span> 在低频大、高频小）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">帕塞瓦尔定理的工程含义</p>
+<p><strong>它保证「频域分析不丢信息」</strong>：时域能量 = 频域能量总和。</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>滤波器设计</td>
+<td>可计算「被滤掉的能量占比」</td>
+</tr>
+<tr>
+<td>压缩</td>
+<td>丢弃高频 σ 平方和就是误差能量（呼应 SVD 那页）</td>
+</tr>
+<tr>
+<td>信噪比</td>
+<td>信号能量与噪声能量可在频域分开计算</td>
+</tr>
+</tbody>
+</table>
+<p>这与线性代数里的「正交分解后能量相加」（勾股定理的推广）是同一个定理。</p>
+</div>
+<hr />
+<h2 id="_9">七、用在哪些课程里<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">现代数字信号处理 · 整个频域方法的基础<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>后续内容</th>
+<th>依赖这里</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频谱分析</td>
+<td>傅里叶变换</td>
+</tr>
+<tr>
+<td>滤波器设计</td>
+<td><span class="arithmatex">\(H(\omega)\)</span> 的幅度与相位</td>
+</tr>
+<tr>
+<td>FFT 快速算法</td>
+<td>离散傅里叶变换</td>
+</tr>
+<tr>
+<td>采样定理</td>
+<td>频谱搬移与混叠</td>
+</tr>
+<tr>
+<td>调制解调</td>
+<td>频移性质</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_11">智能传感与信息处理 · 噪声与滤波<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>噪声的频率特性</strong>：白噪声功率谱平坦，<span class="arithmatex">\(1/f\)</span> 噪声低频强</li>
+<li><strong>抗混叠滤波</strong>：采样前必须低通（下一页详述）</li>
+<li><strong>解调与同步</strong>：传感器的载波信号需要频移性质分析</li>
+<li><strong>动态特性</strong>：传感器的带宽就是其 <span class="arithmatex">\(\lvert H(\omega)\rvert\)</span> 的平坦范围</li>
+</ul>
+<hr />
+<h2 id="_12">八、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断：若 <span class="arithmatex">\(x(t)\)</span> 是实信号，其频谱 <span class="arithmatex">\(X(\omega)\)</span> 有什么对称性？</p>
+<details class="note">
+<summary>提示</summary>
+<p>用 <span class="arithmatex">\(X(-\omega)\)</span> 与 <span class="arithmatex">\(X(\omega)\)</span> 的共轭关系。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>对实信号，有<strong>共轭对称性</strong>：</p>
+<div class="arithmatex">\[
+X(-\omega) = \overline{X(\omega)}
+\]</div>
+<p><strong>推导</strong>：</p>
+<div class="arithmatex">\[
+\overline{X(\omega)} = \overline{\int x(t)e^{-j\omega t}\mathrm{d}t}
+= \int \overline{x(t)}\,\overline{e^{-j\omega t}}\,\mathrm{d}t
+= \int x(t)e^{j\omega t}\,\mathrm{d}t = X(-\omega)
+\]</div>
+<p>（第三步用了 <span class="arithmatex">\(x\)</span> 是实函数，故 <span class="arithmatex">\(\overline{x} = x\)</span>。）</p>
+<p><strong>推论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>对称性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实部 <span class="arithmatex">\(\operatorname{Re}X(\omega)\)</span></td>
+<td>偶函数</td>
+</tr>
+<tr>
+<td>虚部 <span class="arithmatex">\(\operatorname{Im}X(\omega)\)</span></td>
+<td>奇函数</td>
+</tr>
+<tr>
+<td>幅度 <span class="arithmatex">\(\lvert X(\omega)\rvert\)</span></td>
+<td><strong>偶函数</strong></td>
+</tr>
+<tr>
+<td>相位 <span class="arithmatex">\(\angle X(\omega)\)</span></td>
+<td><strong>奇函数</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>实用价值</strong>：<strong>只需画正频率部分的频谱</strong>（负频率由对称性决定）。
+这也是为什么工程上常说「带宽 <span class="arithmatex">\(B\)</span>」而只考虑正频率区间。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 已知 <span class="arithmatex">\(x(t)\)</span> 的带宽为 <span class="arithmatex">\(B\)</span>（即 <span class="arithmatex">\(X(\omega) = 0\)</span> 当 <span class="arithmatex">\(\lvert\omega\rvert &gt; 2\pi B\)</span>）。
+问 <span class="arithmatex">\(x(2t)\)</span> 的带宽是多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p>用尺度变换性质，注意频率反向缩放。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>带宽变为 <span class="arithmatex">\(2B\)</span>。</strong></p>
+<p>由尺度变换：</p>
+<div class="arithmatex">\[
+x(2t) \longleftrightarrow \frac{1}{2}X\!\left(\frac{\omega}{2}\right)
+\]</div>
+<p>当 <span class="arithmatex">\(\lvert\omega/2\rvert &gt; 2\pi B\)</span>，即 <span class="arithmatex">\(\lvert\omega\rvert &gt; 4\pi B\)</span> 时，<span class="arithmatex">\(X(\omega/2) = 0\)</span>。</p>
+<p>所以新频谱在 <span class="arithmatex">\(\lvert\omega\rvert &gt; 4\pi B\)</span> 处为零，对应带宽</p>
+<div class="arithmatex">\[
+B' = \frac{4\pi B}{2\pi} = 2B
+\]</div>
+<p><strong>规律：时域压缩 2 倍 → 频域展宽 2 倍。</strong></p>
+<p><strong>物理意义（时间-带宽不确定性）</strong>：</p>
+<div class="arithmatex">\[
+\Delta t \cdot \Delta f \geq \text{常数}
+\]</div>
+<p>想让脉冲更短（时间分辨率高），代价是占用更宽的频带。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>雷达短脉冲</td>
+<td>距离分辨率高，但需要大带宽</td>
+</tr>
+<tr>
+<td>窄带通信</td>
+<td>带宽省，但符号持续时间长（速率低）</td>
+</tr>
+<tr>
+<td>超声高分辨率成像</td>
+<td>需宽频换能器</td>
+</tr>
+</tbody>
+</table>
+</details>
+<hr />
+<p><strong>Q3</strong> 计算 <span class="arithmatex">\(x(t) = \cos(\omega_0 t)\)</span> 的频谱。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用欧拉公式写成两个复指数之和，再用频移性质（或直接用冲激的变换）。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p>用欧拉公式：</p>
+<div class="arithmatex">\[
+\cos(\omega_0 t) = \frac{e^{j\omega_0t}+e^{-j\omega_0t}}{2}
+\]</div>
+<p>而 <span class="arithmatex">\(\mathcal{F}\{1\} = 2\pi\delta(\omega)\)</span>，由<strong>频移性质</strong>：</p>
+<div class="arithmatex">\[
+\mathcal{F}\{e^{j\omega_0t}\} = 2\pi\delta(\omega-\omega_0)
+\]</div>
+<div class="arithmatex">\[
+\mathcal{F}\{e^{-j\omega_0t}\} = 2\pi\delta(\omega+\omega_0)
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\boxed{\ X(\omega) = \pi\left[\delta(\omega-\omega_0)+\delta(\omega+\omega_0)\right]\ }
+\]</div>
+<p><strong>含义</strong>：纯正弦的频谱是<strong>两个冲激</strong>（在 <span class="arithmatex">\(\pm\omega_0\)</span> 处）。</p>
+<p><strong>这与周期信号用傅里叶级数的结果一致</strong>：单频正弦只有一项（<span class="arithmatex">\(n = \pm1\)</span>）。</p>
+<p><strong>实用推论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>频谱是无限窄的谱线</td>
+<td>正弦是「最纯」的信号</td>
+</tr>
+<tr>
+<td>实际信号总有一定带宽</td>
+<td>因为不可能无限长（时域有限 → 频域展宽）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也是为什么「频谱泄漏」会发生</strong>：实际测量只能取有限时长，
+相当于乘了一个矩形窗，频谱就从冲激变成 sinc（主瓣展宽）。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么「微分对噪声敏感」？用傅里叶性质解释。</p>
+<details class="note">
+<summary>提示</summary>
+<p>看微分的频域效果：乘 <span class="arithmatex">\(j\omega\)</span>。噪声的频谱有什么特点？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>微分在频域是乘 <span class="arithmatex">\(j\omega\)</span></strong>：</p>
+<div class="arithmatex">\[
+\mathcal{F}\left\{\frac{\mathrm{d}x}{\mathrm{d}t}\right\} = j\omega X(\omega)
+\]</div>
+<p><strong>幅度增益随频率线性增长</strong>：<span class="arithmatex">\(\lvert j\omega\rvert = \lvert\omega\rvert\)</span>。</p>
+<p>而<strong>噪声（尤其白噪声）在高频处仍有显著能量</strong>。于是：</p>
+<table>
+<thead>
+<tr>
+<th>频率</th>
+<th>信号（通常低频）</th>
+<th>噪声</th>
+<th>微分后噪声的相对影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>低 <span class="arithmatex">\(\omega\)</span></td>
+<td>强</td>
+<td>弱</td>
+<td>小</td>
+</tr>
+<tr>
+<td>高 <span class="arithmatex">\(\omega\)</span></td>
+<td>弱</td>
+<td>强</td>
+<td><strong><span class="arithmatex">\(\omega\)</span> 倍放大</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：微分相当于一个<strong>高通滤波器</strong>，把高频噪声强力放大。</p>
+<p><strong>实践对策</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先平滑再微分</td>
+<td>高斯平滑 + 差分（Sobel、LoG 算子）</td>
+</tr>
+<tr>
+<td>正则化微分</td>
+<td>加阻尼项抑制高频</td>
+</tr>
+<tr>
+<td>使用积分形式</td>
+<td>转向利用积分（积分是低通，抑制噪声）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也解释了</strong>：为什么图像边缘检测（本质是微分）必须先做高斯模糊 ——
+直接用差分算子会把像素噪声当成边缘。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../convolution/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 卷积">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                卷积
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../../courses/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
