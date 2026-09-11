@@ -442,3 +442,96 @@
     overflow: visible;
   }
 }
+
+/* KB-FIG-CSS-START */
+/* =============================================================
+ * 图示系统（内联 SVG）
+ * -------------------------------------------------------------
+ * 设计要点：
+ * 1. 用内联 SVG 而非 <img src="x.svg">：
+ *    内联才能继承 currentColor 与 CSS 变量，随深色模式自动变色。
+ *    外部 SVG 文件无法响应 Material 的手动主题切换。
+ * 2. SVG 里只写 class 不写死颜色，所有颜色走 CSS 变量。
+ * 3. 响应式：width:100% + max-width，手机上自动缩小。
+ * 4. overflow:visible 防止箭头与标注被 viewBox 裁掉。
+ * ============================================================= */
+:root {
+  --kb-a1: #2b4ea2;   /* 蓝 */
+  --kb-a2: #b4530a;   /* 橙 */
+  --kb-a3: #2b8a3e;   /* 绿 */
+  --kb-a4: #8e44ad;   /* 紫 */
+}
+[data-md-color-scheme="slate"] {
+  --kb-a1: #7aa2f7;
+  --kb-a2: #f5a623;
+  --kb-a3: #4ade80;
+  --kb-a4: #c084fc;
+}
+
+.kb-fig {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+.kb-fig svg {
+  display: block;
+  width: 100%;
+  max-width: 540px;
+  height: auto;
+  margin: 0 auto;
+  color: var(--md-default-fg-color);
+  overflow: visible;
+}
+.kb-fig figcaption {
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  line-height: 1.65;
+  color: var(--md-default-fg-color--light);
+  text-align: center;
+}
+
+/* 坐标轴 / 网格 */
+.kb-fig .ax { stroke: var(--md-default-fg-color--light); stroke-width: 1.2; fill: none; }
+.kb-fig .gb { stroke: var(--md-default-fg-color--lightest); stroke-width: 1; fill: none; }
+.kb-fig .gd { stroke: var(--md-default-fg-color--lightest); stroke-width: 0.9; stroke-dasharray: 5 4; fill: none; }
+
+/* 强调线条（向量、集合边界等） */
+.kb-fig .a1 { stroke: var(--kb-a1); stroke-width: 2.2; fill: none; }
+.kb-fig .a2 { stroke: var(--kb-a2); stroke-width: 2.2; fill: none; }
+.kb-fig .a3 { stroke: var(--kb-a3); stroke-width: 2.2; fill: none; }
+.kb-fig .a4 { stroke: var(--kb-a4); stroke-width: 2.2; fill: none; }
+
+/* 半透明填充（子空间、区域） */
+.kb-fig .f1 { fill: var(--kb-a1); opacity: 0.14; stroke: none; }
+.kb-fig .f2 { fill: var(--kb-a2); opacity: 0.14; stroke: none; }
+.kb-fig .f3 { fill: var(--kb-a3); opacity: 0.14; stroke: none; }
+.kb-fig .f4 { fill: var(--kb-a4); opacity: 0.14; stroke: none; }
+
+/* 箭头填充色（配合 marker 使用） */
+.kb-fig .mk-a1 { fill: var(--kb-a1); }
+.kb-fig .mk-a2 { fill: var(--kb-a2); }
+.kb-fig .mk-a3 { fill: var(--kb-a3); }
+.kb-fig .mk-a4 { fill: var(--kb-a4); }
+.kb-fig .mk-c  { fill: var(--md-default-fg-color--light); }
+
+/* 文字标注 */
+.kb-fig .lbl { fill: var(--md-default-fg-color); font-size: 13px; font-weight: 600; }
+.kb-fig .lbl-s { fill: var(--md-default-fg-color--light); font-size: 11px; font-weight: 500; }
+.kb-fig .l1 { fill: var(--kb-a1); font-size: 13px; font-weight: 700; }
+.kb-fig .l2 { fill: var(--kb-a2); font-size: 13px; font-weight: 700; }
+.kb-fig .l3 { fill: var(--kb-a3); font-size: 13px; font-weight: 700; }
+.kb-fig .l4 { fill: var(--kb-a4); font-size: 13px; font-weight: 700; }
+
+/* 点 */
+.kb-fig .d1 { fill: var(--kb-a1); }
+.kb-fig .d2 { fill: var(--kb-a2); }
+.kb-fig .d3 { fill: var(--kb-a3); }
+.kb-fig .dc { fill: var(--md-default-fg-color--light); }
+
+/* 窄屏微调 */
+@media (max-width: 480px) {
+  .kb-fig svg { max-width: 100%; }
+  .kb-fig .lbl, .kb-fig .l1, .kb-fig .l2,
+  .kb-fig .l3, .kb-fig .l4 { font-size: 12px; }
+}
+/* KB-FIG-CSS-END */
+

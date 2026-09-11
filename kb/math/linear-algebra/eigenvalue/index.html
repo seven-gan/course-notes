@@ -1076,12 +1076,77 @@ A\boldsymbol{x} = \lambda \boldsymbol{x}, \qquad \boldsymbol{x} \neq \boldsymbol
 <p>因为 <span class="arithmatex">\(\boldsymbol{x}=\boldsymbol{0}\)</span> 时 <span class="arithmatex">\(A\boldsymbol{0}=\lambda\boldsymbol{0}\)</span> 对<strong>任何</strong> <span class="arithmatex">\(\lambda\)</span> 都成立，这个等式没有区分能力。排除零向量后，等式才有意义——它筛出的是"方向不变"的那些特殊方向。</p>
 <h3 id="_3">几何直觉<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>把矩阵 <span class="arithmatex">\(A\)</span> 看成对空间的变换：</p>
-<div class="kb-metacard">
-<div class="kb-meta-row"><span class="kb-meta-label">图示说明</span>
-<span>大多数向量 $\boldsymbol{x}$ 经 $A$ 作用后<b>既转向又伸缩</b>；只有特征向量保持方向不变，仅长度变为原来的 $|\lambda|$ 倍。若 $\lambda<0$，方向反向。</span></div>
-</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="特征向量方向不变，普通向量会转向">
+<defs>
+<marker id="ev1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ev1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ev1-ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a4" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="gb" x1="25" y1="215" x2="416" y2="215"/>
+<line class="gb" x1="215" y1="25" x2="215" y2="236"/>
+<line class="a1" x1="215" y1="215" x2="330" y2="215" marker-end="url(#ev1-ah1)"/>
+<text class="l1" x="336" y="219">特征方向 λ = 2</text>
+<line class="a3" x1="215" y1="215" x2="295" y2="145" marker-end="url(#ev1-ah3)"/>
+<text class="l3" x="256" y="134">另一个特征方向</text>
+<line class="gd" x1="215" y1="215" x2="160" y2="165"/>
+<text class="lbl-s" x="146" y="162">v</text>
+<line class="a4" x1="215" y1="215" x2="292" y2="178" marker-end="url(#ev1-ah4)"/>
+<text class="l4" x="298" y="174">A v（方向变了）</text>
+<circle class="dc" cx="215" cy="215" r="3.5"/>
+<text class="lbl-s" x="222" y="234">原点</text>
+</svg>
+<figcaption>图 6　矩阵 A 作用的效果。<b>蓝色</b>与<b>绿色</b>方向上，向量只被伸缩、方向不变（A x = λ x），是特征向量；<b>紫色</b>的普通向量 A v 方向变了，不是特征向量</figcaption>
+</figure>
 
+<p><strong>怎么读这张图</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>向量</th>
+<th>变换后</th>
+<th>是否特征向量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>蓝色 <span class="arithmatex">\(\boldsymbol{x}\)</span>（水平）</td>
+<td>仍在水平方向，长度 ×2</td>
+<td>✅ <span class="arithmatex">\(\lambda = 2\)</span></td>
+</tr>
+<tr>
+<td>绿色（斜向）</td>
+<td>仍在原斜向，长度变化</td>
+<td>✅ 另一个特征值</td>
+</tr>
+<tr>
+<td>紫色 <span class="arithmatex">\(\boldsymbol{v}\)</span></td>
+<td><strong>方向变了</strong></td>
+<td>❌ 不是</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：特征向量不是「特殊的位置」，而是「变换下方向不变的那些方向」。
+一旦找到这样的方向，矩阵在这个方向上的作用就简化成了<strong>一个数字的乘法</strong>。</p>
 <p>这一点在机器人学里非常直观：刚体绕某个轴旋转时，<strong>转轴上的向量方向不变</strong>——旋转矩阵的特征值 1 对应的特征向量，就是那个转轴。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="旋转矩阵的特征向量就是转轴">
+<defs>
+<marker id="ev2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ev2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ev2-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="a1" x1="215" y1="30" x2="215" y2="205" marker-end="url(#ev2-ah1)"/>
+<text class="l1" x="222" y="50">转轴：方向不变</text>
+<text class="l1" x="222" y="68">λ = 1</text>
+<ellipse class="gd" cx="215" cy="150" rx="80" ry="26"/>
+<line class="a2" x1="215" y1="150" x2="295" y2="150" marker-end="url(#ev2-ah2)"/>
+<text class="l2" x="246" y="142">旋转前</text>
+<line class="a3" x1="215" y1="150" x2="260.886" y2="171.298" marker-end="url(#ev2-ah3)"/>
+<text class="l3" x="268" y="190">旋转后</text>
+<circle class="dc" cx="215" cy="150" r="2.5"/>
+</svg>
+<figcaption>图 7　刚体绕轴旋转：<b>轴上</b>的向量方向完全不变（R u = u，即 λ = 1），轴<b>外</b>的向量被转到别处。这正是从旋转矩阵提取转轴的原理</figcaption>
+</figure>
+
 <hr />
 <h2 id="_4">二、怎么求：特征方程<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>由 <span class="arithmatex">\(A\boldsymbol{x} = \lambda\boldsymbol{x}\)</span> 移项：</p>
