@@ -1,0 +1,3741 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/information-theory/cross-entropy/">
+      
+      
+        <link rel="prev" href="../mutual-information/">
+      
+      
+        <link rel="next" href="../../signal-systems/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>交叉熵与 KL 散度 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kl" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              交叉熵与 KL 散度
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#kl_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、KL 散度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、KL 散度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kl_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        KL 散度的信息论解释
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、交叉熵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、交叉熵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三者关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器学习中的用法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、交叉熵与最大似然（第三次确认这个等价关系）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、交叉熵与最大似然（第三次确认这个等价关系）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么不用 MSE（复习「梯度」视角）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kl_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、KL 散度的方向问题（实用要点）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：计算交叉熵与 KL 散度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：KL 散度的不对称性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3one-hot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：one-hot 标签的交叉熵简化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：KL 散度与模型选择
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 5 讲 信息论」</code><code>MML §6.6</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《信息论基础》或《信息论与编码》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../entropy/">entropy</a><a href="../mutual-information/">mutual-information</a></span></div></div>
+
+<h1 id="kl">交叉熵与 KL 散度<a class="headerlink" href="#kl" title="Permanent link">&para;</a></h1>
+<p>这一页讲两个量——它们的关系是：</p>
+<blockquote>
+<p><strong>交叉熵 = 熵 + KL 散度</strong></p>
+</blockquote>
+<p><strong>这是机器学习中最重要的等式之一</strong> —— 它解释了「为什么用交叉熵做损失」。</p>
+<div class="admonition tip">
+<p class="admonition-title">三个量的关系图（记住这张图）</p>
+<div class="arithmatex">\[
+\underbrace{H(p,q)}_{\text{交叉熵}} = \underbrace{H(p)}_{\text{真实分布的熵（常数）}} + \underbrace{D_{KL}(p\|q)}_{\text{KL 散度（要最小化）}}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>含义</th>
+<th>训练中是否可变</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(p)\)</span></td>
+<td>真实数据的不确定性</td>
+<td><strong>不变</strong>（数据定了）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></td>
+<td>模型分布与真实的差距</td>
+<td><strong>可优化</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(p,q)\)</span></td>
+<td>交叉熵损失</td>
+<td>可优化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键推论</strong>：<strong>因为 <span class="arithmatex">\(H(p)\)</span> 是常数，所以</strong></p>
+<div class="arithmatex">\[
+\text{最小化交叉熵} \iff \text{最小化 KL 散度}
+\]</div>
+<p><strong>训练损失为什么用交叉熵</strong>：它与 KL 只差一个常数，
+但<strong>计算更简单</strong>（不需要知道 <span class="arithmatex">\(p\)</span> 的完整形式，
+只需样本）✓</p>
+</div>
+<hr />
+<h2 id="kl_1">一、KL 散度<a class="headerlink" href="#kl_1" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>（离散）：</p>
+<div class="arithmatex">\[
+\boxed{\ D_{KL}(p\|q) = \sum_x p(x)\log\frac{p(x)}{q(x)} = E_{x\sim p}\left[\log\frac{p(x)}{q(x)}\right]\ }
+\]</div>
+<p><strong>读法</strong>：「<span class="arithmatex">\(p\)</span> 相对于 <span class="arithmatex">\(q\)</span> 的 KL 散度」。</p>
+<p><strong>含义</strong>：<strong>用分布 <span class="arithmatex">\(q\)</span> 去近似真实分布 <span class="arithmatex">\(p\)</span> 时的「信息损失」</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>非负</strong></td>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\geq0\)</span></td>
+<td>来自 Jensen 不等式或 Gibbs 不等式</td>
+</tr>
+<tr>
+<td><strong>为零</strong></td>
+<td><span class="arithmatex">\(D_{KL} = 0\iff p = q\)</span>（几乎处处）</td>
+<td>完全一致时无损失</td>
+</tr>
+<tr>
+<td><strong>不对称</strong></td>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\neq D_{KL}(q\;\lvert\;p)\)</span></td>
+<td><strong>所以不是「距离」</strong> ✗</td>
+</tr>
+<tr>
+<td>不满足三角不等式</td>
+<td>——</td>
+<td>也不是度量</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">KL 散度不是「距离」——这是最重要的提醒</p>
+<p><strong>数学上「距离」（度量）需要三条</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>要求</th>
+<th>KL 是否满足</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非负</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>为零当且仅当相同</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>对称</strong></td>
+<td><strong>✗ 不满足</strong></td>
+</tr>
+<tr>
+<td>三角不等式</td>
+<td>✗ 不满足</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以 KL 是「散度」（divergence），不是「距离」（distance）。</strong></p>
+<p><strong>具体例子</strong>：设 <span class="arithmatex">\(p = (0.9,0.1)\)</span>、<span class="arithmatex">\(q = (0.5,0.5)\)</span></p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = 0.9\log_2\frac{0.9}{0.5}+0.1\log_2\frac{0.1}{0.5}
+= 0.9\times0.848+0.1\times(-2.322)
+\]</div>
+<div class="arithmatex">\[
+= 0.763-0.232 = 0.531\ \text{比特}
+\]</div>
+<div class="arithmatex">\[
+D_{KL}(q\|p) = 0.5\log_2\frac{0.5}{0.9}+0.5\log_2\frac{0.5}{0.1}
+= 0.5\times(-0.848)+0.5\times2.322
+\]</div>
+<div class="arithmatex">\[
+= -0.424+1.161 = 0.737\ \text{比特}
+\]</div>
+<p><strong>两者的值不同（0.531 vs 0.737）</strong> ✗ 所以不对称。</p>
+<p><strong>为什么这很重要</strong>：<strong>用哪个方向做优化，结果完全不同</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>名称</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span>（<span class="arithmatex">\(p\)</span> 在前）</td>
+<td><strong>前向 KL</strong></td>
+<td><strong>「零避免」（zero-avoiding）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span>（<span class="arithmatex">\(q\)</span> 在前）</td>
+<td><strong>反向 KL</strong></td>
+<td><strong>「零强迫」（zero-forcing）</strong></td>
+</tr>
+</tbody>
+</table>
+<p>这两种行为在后面「JS 散度」一页详述（涉及变分推断的模式选择问题）。</p>
+</div>
+<h3 id="kl_2">KL 散度的信息论解释<a class="headerlink" href="#kl_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = H(p,q)-H(p)
+\]</div>
+<p><strong>含义</strong>：<strong>「用错误的分布 <span class="arithmatex">\(q\)</span> 编码 <span class="arithmatex">\(p\)</span> 的数据时，
+平均多花的比特数」</strong> ✓</p>
+<div class="admonition note">
+<p class="admonition-title">这个「多花比特」的解释非常实用</p>
+<p><strong>设定</strong>：真实数据服从 <span class="arithmatex">\(p\)</span>，但你知道的（或模型的）分布是 <span class="arithmatex">\(q\)</span>。</p>
+<p><strong>熵编码的长度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>使用的分布</th>
+<th>平均码长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实分布 <span class="arithmatex">\(p\)</span></td>
+<td><span class="arithmatex">\(H(p)\)</span>（<strong>最优</strong>）</td>
+</tr>
+<tr>
+<td>错误分布 <span class="arithmatex">\(q\)</span></td>
+<td><span class="arithmatex">\(H(p,q)\)</span>（<strong>更长</strong>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>多花的部分</strong>：</p>
+<div class="arithmatex">\[
+H(p,q)-H(p) = D_{KL}(p\|q) \;\checkmark
+\]</div>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th><span class="arithmatex">\(D_{KL}\)</span> 的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据压缩</td>
+<td>用错模型的压缩效率损失</td>
+</tr>
+<tr>
+<td>机器学习</td>
+<td>模型与真实分布的差距</td>
+</tr>
+<tr>
+<td>模型选择</td>
+<td>比较不同模型的「失配程度」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「为什么最小化交叉熵 = 最小化模型失配」的严格解释。</strong></p>
+</div>
+<hr />
+<h2 id="_1">二、交叉熵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ H(p,q) = -\sum_x p(x)\log q(x) = E_{x\sim p}\left[-\log q(x)\right]\ }
+\]</div>
+<p><strong>读法</strong>：「<span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的交叉熵」。</p>
+<p><strong>注意不对称性</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p\)</span>（前）</td>
+<td><strong>用在加权（期望）上</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q\)</span>（后）</td>
+<td><strong>用在 log 里</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以 <span class="arithmatex">\(H(p,q)\neq H(q,p)\)</span></strong> —— 与 KL 一样不对称 ✓</p>
+<h3 id="_2">三者关系<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+H(p,q) = H(p)+D_{KL}(p\|q)
+\]</div>
+<p><strong>验证</strong>：</p>
+<div class="arithmatex">\[
+H(p)+D_{KL}(p\|q) = -\sum p\log p+\sum p\log\frac{p}{q}
+\]</div>
+<div class="arithmatex">\[
+= -\sum p\log p+\sum p\log p-\sum p\log q = -\sum p\log q = H(p,q) \;\checkmark
+\]</div>
+<h3 id="_3">机器学习中的用法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>关键转换</strong>：训练时 <span class="arithmatex">\(p\)</span> 是<strong>数据分布</strong>，<span class="arithmatex">\(q\)</span> 是<strong>模型分布</strong>。</p>
+<p><strong>但 <span class="arithmatex">\(H(p)\)</span> 与模型参数无关</strong>（数据固定），所以：</p>
+<div class="arithmatex">\[
+\min_\theta H(p,q_\theta) \iff \min_\theta D_{KL}(p\|q_\theta)
+\]</div>
+<p><strong>实践中直接用交叉熵</strong>，因为：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>计算更简单</strong></td>
+<td>只需 <span class="arithmatex">\(-\log q(y)\)</span>，不需要 <span class="arithmatex">\(p\)</span> 的完整形式</td>
+</tr>
+<tr>
+<td>等价性</td>
+<td>与 KL 只差常数</td>
+</tr>
+<tr>
+<td><strong>数值稳定</strong></td>
+<td>避免 <span class="arithmatex">\(p\log p\)</span> 中 <span class="arithmatex">\(p=0\)</span> 的处理</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">交叉熵损失的两种常见形式（与标签类型对应）</p>
+<p><strong>形式 1：one-hot 标签（硬标签）</strong></p>
+<p>若真实标签是 one-hot（只有一个类为 1）：</p>
+<div class="arithmatex">\[
+H(p,q) = -\sum_{c}p_c\log q_c = -\log q_{y}
+\]</div>
+<p>其中 <span class="arithmatex">\(y\)</span> 是真实类别。</p>
+<p><strong>所以简化成「负对数似然」</strong>：</p>
+<div class="arithmatex">\[
+\mathcal{L} = -\log q_y
+\]</div>
+<p><strong>含义</strong>：<strong>只惩罚「真实类别的预测概率」</strong> ✓</p>
+<p><strong>这就是「分类交叉熵」的实现形式</strong>（与「最大似然估计」一页完全一致）。</p>
+<p><strong>形式 2：软标签（label smoothing / 知识蒸馏）</strong></p>
+<p>真实标签是分布 <span class="arithmatex">\(\boldsymbol{p}\)</span>（不是 one-hot）：</p>
+<div class="arithmatex">\[
+\mathcal{L} = -\sum_c p_c\log q_c
+\]</div>
+<p><strong>用途</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标签平滑</strong></td>
+<td>把 one-hot 改成 <span class="arithmatex">\((1-\varepsilon, \varepsilon/(K-1),\dots)\)</span></td>
+</tr>
+<tr>
+<td><strong>知识蒸馏</strong></td>
+<td>用教师模型的软输出作为 <span class="arithmatex">\(p\)</span></td>
+</tr>
+<tr>
+<td><strong>软标签学习</strong></td>
+<td>标注不确定时的概率标签</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么软标签有用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>防止过度自信</td>
+<td>模型不会追求「概率 = 1」</td>
+</tr>
+<tr>
+<td>更好的泛化</td>
+<td>平滑的标签提供了更多信息</td>
+</tr>
+<tr>
+<td>缓解过拟合</td>
+<td>相当于正则化</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="交叉熵、熵与 KL 散度的关系">
+<defs>
+</defs>
+<!-- 两个柱状块 -->
+<rect class="f1" x="60" y="112" width="96" height="52" rx="4" opacity="0.55"/>
+<rect class="f2" x="156" y="112" width="128" height="52" rx="4" opacity="0.55"/>
+<text class="l1" x="76" y="142">H(p)</text>
+<text class="lbl-s" x="60" y="176">真实熵</text>
+<text class="l2" x="186" y="142">D_KL(p‖q)</text>
+<text class="lbl-s" x="160" y="176">模型失配</text>
+<!-- 大括号：交叉熵 -->
+<line class="gd" x1="60" y1="192" x2="284" y2="192" stroke-width="1.6"/>
+<line class="gd" x1="60" y1="188" x2="60" y2="196"/>
+<line class="gd" x1="284" y1="188" x2="284" y2="196"/>
+<text class="lbl-s" x="106" y="212">交叉熵 H(p,q)</text>
+<!-- 标注 -->
+<text class="lbl-s" x="60" y="50">训练时：</text>
+<text class="l1" x="60" y="72">H(p) 是常数（数据定了）</text>
+<text class="l2" x="60" y="92">D_KL 是可优化的部分</text>
+<text class="lbl-s" x="300" y="132">最小化交叉熵</text>
+<text class="lbl-s" x="300" y="152">等价于</text>
+<text class="lbl-s" x="300" y="172">最小化 KL</text>
+<text class="lbl-s" x="60" y="238">所以「用交叉熵做损失」与「让模型逼近真实分布」是同一件事</text>
+</svg>
+<figcaption>图 1　交叉熵 = 真实熵 + KL 散度。训练时真实分布 p 固定，所以 H(p) 是<b>常数</b>；优化只能改变 D_KL(p\|q)。因此「最小化交叉熵损失」等价于「最小化模型与真实分布的 KL 散度」——后者正是我们在做的事。这就是交叉熵成为分类标准损失的信息论依据</figcaption>
+</figure>
+
+<hr />
+<h2 id="_4">三、交叉熵与最大似然（第三次确认这个等价关系）<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>这是本知识库第三次给出这个结论</strong>（「最大似然估计」一页、
+「Logistic 与 Softmax 导数」一页、这里）——
+因为它是最重要的桥梁。</p>
+<p><strong>设定</strong>：<span class="arithmatex">\(n\)</span> 个独立样本，真实标签 <span class="arithmatex">\(y_i\)</span>，模型预测 <span class="arithmatex">\(q_\theta\)</span>。</p>
+<p><strong>负对数似然</strong>：</p>
+<div class="arithmatex">\[
+-\ell(\theta) = -\sum_i\log q_\theta(y_i)
+\]</div>
+<p><strong>交叉熵（用经验分布 <span class="arithmatex">\(\hat p\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+H(\hat p,q_\theta) = -\sum_c\hat p_c\log q_\theta(c)
+= -\frac{1}{n}\sum_i\log q_\theta(y_i)
+\]</div>
+<p><strong>两者只差常数因子 <span class="arithmatex">\(n\)</span></strong> ✓ 所以</p>
+<div class="arithmatex">\[
+\min H(\hat p,q_\theta) \iff \max\ell(\theta)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">三次出现这个结论的位置（便于回顾）</p>
+<table>
+<thead>
+<tr>
+<th>页面</th>
+<th>切入点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>最大似然估计</strong></td>
+<td>从「伯努利/多项分布的 MLE」推出交叉熵</td>
+</tr>
+<tr>
+<td><strong>Logistic 与 Softmax 导数</strong></td>
+<td>从「gradient = s−y 的极简形式」侧面说明</td>
+</tr>
+<tr>
+<td><strong>交叉熵与 KL 散度</strong>（本页）</td>
+<td>从「交叉熵 = 熵 + KL」给出信息论依据</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三个视角，同一个结论</strong>：</p>
+<div class="arithmatex">\[
+\text{交叉熵损失} = \text{负对数似然} = \text{模型失配（KL）}
+\]</div>
+<p><strong>这说明「交叉熵」这个选择不是经验性的，而是有理论基础的最优选择</strong> ✓</p>
+</div>
+<h3 id="mse">为什么不用 MSE（复习「梯度」视角）<a class="headerlink" href="#mse" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>损失</th>
+<th>梯度（softmax 输出层）</th>
+<th>训练表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>交叉熵</strong></td>
+<td><span class="arithmatex">\(\boldsymbol{s}-\boldsymbol{y}\)</span>（<strong>极简</strong>）</td>
+<td><strong>收敛快</strong> ✓</td>
+</tr>
+<tr>
+<td>MSE</td>
+<td>含 <span class="arithmatex">\(s_i(1-s_i)\)</span> 因子</td>
+<td>饱和时梯度消失 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>信息论的补充解释</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>交叉熵的优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>梯度</strong></td>
+<td>梯度形式简洁，不饱和</td>
+</tr>
+<tr>
+<td><strong>信息论</strong></td>
+<td>正确度量「分布差异」（<span class="arithmatex">\(D_{KL}\)</span>）</td>
+</tr>
+<tr>
+<td><strong>统计</strong></td>
+<td>等价于最大似然（有效估计）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三个视角都指向交叉熵</strong> —— 它不是「习惯」，而是<strong>最优选择</strong>。</p>
+<hr />
+<h2 id="kl_3">四、KL 散度的方向问题（实用要点）<a class="headerlink" href="#kl_3" title="Permanent link">&para;</a></h2>
+<p><strong>问题</strong>：<span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span> 与 <span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span> 哪个更好？</p>
+<p><strong>答案</strong>：<strong>取决于目标</strong> —— 两者的行为不同。</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>名称</th>
+<th>优化时的行为</th>
+<th>适用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\min_q D_{KL}(p\;\lvert\;q)\)</span></td>
+<td><strong>前向 KL</strong></td>
+<td><span class="arithmatex">\(q\)</span> 要覆盖 <span class="arithmatex">\(p\)</span> 的所有支撑</td>
+<td>需要「不遗漏」时</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\min_q D_{KL}(q\;\lvert\;p)\)</span></td>
+<td><strong>反向 KL</strong></td>
+<td><span class="arithmatex">\(q\)</span> 会集中在 <span class="arithmatex">\(p\)</span> 的某个峰</td>
+<td>需要「精确」时</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">前向 KL 的「零避免」与反向 KL 的「零强迫」</p>
+<p><strong>关键差别来自「KL 的定义中谁做权重」</strong>。</p>
+<p><strong>前向 KL</strong>：<span class="arithmatex">\(D_{KL}(p\;\lvert\;q) = \sum_x p(x)\log\frac{p(x)}{q(x)}\)</span></p>
+<p><strong>权重是 <span class="arithmatex">\(p(x)\)</span></strong> —— 所以关键约束是：</p>
+<div class="arithmatex">\[
+\text{若 }p(x)&gt;0\text{，则不能让 }q(x)\to0
+\]</div>
+<p>（否则 <span class="arithmatex">\(\log\frac{p}{q}\to\infty\)</span>，KL 爆炸。）</p>
+<p><strong>后果</strong>：<span class="arithmatex">\(q\)</span> 会<strong>覆盖</strong>所有 <span class="arithmatex">\(p\)</span> 有质量的地方 ——
+这叫<strong>「零避免」</strong>（zero-avoiding）✓</p>
+<p><strong>反向 KL</strong>：<span class="arithmatex">\(D_{KL}(q\;\lvert\;p) = \sum_x q(x)\log\frac{q(x)}{p(x)}\)</span></p>
+<p><strong>权重是 <span class="arithmatex">\(q(x)\)</span></strong> —— 关键约束变成：</p>
+<div class="arithmatex">\[
+\text{若 }q(x)&gt;0\text{，则不能让 }p(x)\to0
+\]</div>
+<p><strong>后果</strong>：<span class="arithmatex">\(q\)</span> 会<strong>主动避开</strong> <span class="arithmatex">\(p\)</span> 接近零的区域，
+可以集中在一个峰上 —— 这叫<strong>「零强迫」</strong>（zero-forcing）✓</p>
+<p><strong>图示化的差别</strong>（<span class="arithmatex">\(p\)</span> 是双峰分布）：</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th><span class="arithmatex">\(q\)</span> 的形状</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前向 KL</strong></td>
+<td><strong>铺开覆盖两个峰</strong>（可能因此变得很宽）</td>
+</tr>
+<tr>
+<td><strong>反向 KL</strong></td>
+<td><strong>只锁定一个峰</strong>（忽略另一个）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了两件重要事实</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>事实</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>变分推断（VI）常用反向 KL</strong></td>
+<td>想要「紧的」近似（锁定主要模式）</td>
+</tr>
+<tr>
+<td><strong>MLE / 交叉熵是前向 KL</strong></td>
+<td><span class="arithmatex">\(D_{KL}(p_{\text{data}}\;\lvert\;q_\theta)\)</span>，<span class="arithmatex">\(p\)</span> 在前</td>
+</tr>
+</tbody>
+</table>
+<p><strong>变分推断为什么接受「只锁一个峰」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>好处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>忽略其他模式（欠拟合）</td>
+<td>计算上可行（不需要覆盖全部）</td>
+</tr>
+<tr>
+<td>——</td>
+<td>近似更「锐利」，便于推断</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong>前向 KL「不能漏」，反向 KL「要精确」</strong>。</p>
+</div>
+<hr />
+<h2 id="_5">五、典型例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1-kl">例题 1：计算交叉熵与 KL 散度<a class="headerlink" href="#1-kl" title="Permanent link">&para;</a></h3>
+<p>设真实分布 <span class="arithmatex">\(p = (0.5, 0.5)\)</span>，模型分布 <span class="arithmatex">\(q = (0.9, 0.1)\)</span>。
+求 <span class="arithmatex">\(H(p)\)</span>、<span class="arithmatex">\(H(p,q)\)</span>、<span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span>，并验证三者关系。</p>
+<details class="note">
+<summary>思路</summary>
+<p>逐个算，再用 <span class="arithmatex">\(H(p,q) = H(p)+D_{KL}\)</span> 验证。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(H(p)\)</span></strong></p>
+<div class="arithmatex">\[
+H(p) = -0.5\log_2 0.5-0.5\log_2 0.5 = 0.5+0.5 = 1\ \text{比特}
+\]</div>
+<p><strong>第二步：交叉熵 <span class="arithmatex">\(H(p,q)\)</span></strong></p>
+<div class="arithmatex">\[
+H(p,q) = -0.5\log_2 0.9-0.5\log_2 0.1
+\]</div>
+<p>（<span class="arithmatex">\(\log_2 0.9 = -0.152\)</span>、<span class="arithmatex">\(\log_2 0.1 = -3.322\)</span>）</p>
+<div class="arithmatex">\[
+= 0.5\times0.152+0.5\times3.322 = 0.076+1.661 = 1.737\ \text{比特}
+\]</div>
+<p><strong>第三步：KL 散度</strong></p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = 0.5\log_2\frac{0.5}{0.9}+0.5\log_2\frac{0.5}{0.1}
+\]</div>
+<div class="arithmatex">\[
+= 0.5\times(-0.848)+0.5\times2.322 = -0.424+1.161 = 0.737\ \text{比特}
+\]</div>
+<p><strong>第四步：验证关系</strong></p>
+<div class="arithmatex">\[
+H(p)+D_{KL}(p\|q) = 1+0.737 = 1.737 = H(p,q) \;\checkmark
+\]</div>
+<p><strong>结果汇总</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(p)\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(p,q)\)</span></td>
+<td><span class="arithmatex">\(1.737\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></td>
+<td><span class="arithmatex">\(0.737\)</span> 比特</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程解读</strong>：<strong>模型「多花了 0.737 比特」</strong> ——
+即用错模型的编码效率损失约 74%（相对于最优的 1 比特）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个例子说明了「交叉熵为什么总是 ≥ 熵」</p>
+<div class="arithmatex">\[
+H(p,q)\geq H(p)
+\]</div>
+<p><strong>等号当且仅当 <span class="arithmatex">\(q = p\)</span></strong> ✓</p>
+<p><strong>理由</strong>：<span class="arithmatex">\(H(p,q) = H(p)+D_{KL}(p\;\lvert\;q)\)</span>，而 <span class="arithmatex">\(D_{KL}\geq0\)</span>。</p>
+<p><strong>实用含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>解读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交叉熵非常接近熵</td>
+<td><strong>模型很好</strong> ✓</td>
+</tr>
+<tr>
+<td>交叉熵远大于熵</td>
+<td>模型差 ✗</td>
+</tr>
+<tr>
+<td>交叉熵 = 熵</td>
+<td><strong>完美拟合</strong></td>
+</tr>
+<tr>
+<td>交叉熵 &lt; 熵</td>
+<td><strong>不可能</strong>（除非计算错误或过拟合）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践用法</strong>：<strong>把「熵」当作交叉熵损失的理论下界</strong> ——
+这给出了「还能改进多少」的参考。</p>
+<p><strong>注意过拟合的例外</strong>：在训练集上交叉熵可以低于真实数据的熵
+（因为模型可能「记住」了训练样本的标签，比真实分布更「确定」）。
+这就是为什么要在<strong>验证集</strong>上评估。</p>
+</div>
+<hr />
+<h3 id="2kl">例题 2：KL 散度的不对称性<a class="headerlink" href="#2kl" title="Permanent link">&para;</a></h3>
+<p>承上题。求 <span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span>，并与 <span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span> 比较。</p>
+<details class="note">
+<summary>思路</summary>
+<p>交换 <span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的角色，重新计算。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>计算 <span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span></strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(q\|p) = 0.9\log_2\frac{0.9}{0.5}+0.1\log_2\frac{0.1}{0.5}
+\]</div>
+<div class="arithmatex">\[
+= 0.9\times0.848+0.1\times(-2.322)
+\]</div>
+<div class="arithmatex">\[
+= 0.763-0.232 = 0.531\ \text{比特}
+\]</div>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span>（<span class="arithmatex">\(p\)</span> 在前）</td>
+<td><span class="arithmatex">\(0.737\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span>（<span class="arithmatex">\(q\)</span> 在前）</strong></td>
+<td><strong><span class="arithmatex">\(0.531\)</span></strong></td>
+</tr>
+<tr>
+<td>差异</td>
+<td><span class="arithmatex">\(0.206\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者不同</strong> ✓ <strong>所以 KL 不是距离</strong></p>
+<p><strong>为什么不同（直观解释）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>权重</th>
+<th>关键约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></td>
+<td><span class="arithmatex">\(p = (0.5,0.5)\)</span>（<strong>分散</strong>）</td>
+<td><span class="arithmatex">\(q\)</span> 不能在小概率处太小 → <strong>被迫覆盖</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span></td>
+<td><span class="arithmatex">\(q = (0.9,0.1)\)</span>（<strong>集中</strong>）</td>
+<td>主要看大权重处 → <strong>更宽容</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体点数</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span> 中 <span class="arithmatex">\(0.5\times\log_2\frac{0.5}{0.1} = 1.161\)</span>（<strong>大惩罚</strong>：
+  因为 <span class="arithmatex">\(p\)</span> 在第二项上有 0.5 的质量，而 <span class="arithmatex">\(q\)</span> 只给 0.1）</li>
+<li><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span> 中对应项 <span class="arithmatex">\(0.1\times\log_2\frac{0.1}{0.5} = -0.232\)</span>
+  （<strong>小权重</strong>，所以影响小）</li>
+</ul>
+<p><strong>所以「<span class="arithmatex">\(p\)</span> 更分散时，用 <span class="arithmatex">\(q\)</span> 编码它的代价更大」</strong> ✓</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">这个不对称性在实践中的后果</p>
+<p><strong>训练时的方向是固定的</strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(p_{\text{data}}\|q_\theta)
+\]</div>
+<p><strong>真实分布在</strong>前<strong>（因为要用数据做期望）</strong> ——
+这是<strong>前向 KL</strong>（零避免）。</p>
+<p><strong>这带来一个实际现象</strong>：<strong>生成模型倾向于「覆盖」数据的所有模式</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAN 早期易「模式崩塌」（只生成少数模式）</td>
+<td>但用 JS/其它目标</td>
+</tr>
+<tr>
+<td><strong>MLE 训练的模型不会漏掉模式</strong></td>
+<td>前向 KL 的零避免性质</td>
+</tr>
+<tr>
+<td>代价：可能生成一些「边缘」样本</td>
+<td>为了覆盖而牺牲精确性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>若要「只精确锁定主要模式」</strong>（放弃覆盖），
+则应优化<strong>反向 KL</strong> —— 这是<strong>变分推断</strong>的做法。</p>
+<p><strong>实践选择指南</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>方向</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不遗漏数据模式</td>
+<td><strong>前向</strong></td>
+<td>标准 MLE 训练（分类、密度估计）</td>
+</tr>
+<tr>
+<td>精确近似某个目标</td>
+<td><strong>反向</strong></td>
+<td>变分推断、某些强化学习</td>
+</tr>
+<tr>
+<td>需要对称</td>
+<td>用 <strong>JS 散度</strong></td>
+<td>GAN 的原始目标</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="3one-hot">例题 3：one-hot 标签的交叉熵简化<a class="headerlink" href="#3one-hot" title="Permanent link">&para;</a></h3>
+<p>设三分类任务，真实标签为第 2 类（one-hot：<span class="arithmatex">\(\boldsymbol{y} = (0,1,0)\)</span>），
+模型预测 <span class="arithmatex">\(\boldsymbol{q} = (0.1, 0.7, 0.2)\)</span>。
+求交叉熵损失。</p>
+<details class="note">
+<summary>思路</summary>
+<p>one-hot 时只有一项非零。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>用定义（3 项）</strong>：</p>
+<div class="arithmatex">\[
+H(p,q) = -\sum_c p_c\log q_c
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(c\)</span></th>
+<th><span class="arithmatex">\(p_c\)</span></th>
+<th><span class="arithmatex">\(q_c\)</span></th>
+<th>项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0\times(\cdots) = 0\)</span></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong><span class="arithmatex">\(1\)</span></strong></td>
+<td><strong><span class="arithmatex">\(0.7\)</span></strong></td>
+<td><span class="arithmatex">\(-\log_2 0.7\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>只有一项非零</strong>：</p>
+<div class="arithmatex">\[
+H(p,q) = -\log_2 0.7
+\]</div>
+<p><strong>计算</strong>（用自然对数换算，因为 ML 中常用 nat）：</p>
+<div class="arithmatex">\[
+-\ln 0.7 = 0.357\ \text{nat}
+\]</div>
+<p>或者用比特：</p>
+<div class="arithmatex">\[
+-\log_2 0.7 = 0.515\ \text{比特}
+\]</div>
+<p><strong>结果</strong>：损失约 <span class="arithmatex">\(0.357\)</span> nat（或 <span class="arithmatex">\(0.515\)</span> 比特）</p>
+<p><strong>这就是实现中的形式</strong>：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">q</span><span class="p">[</span><span class="n">y_true</span><span class="p">])</span>   <span class="c1"># 只取真实类别的预测概率</span>
+</code></pre></div>
+<p><strong>对比「预测完美」的情形</strong>（<span class="arithmatex">\(q = (0,1,0)\)</span>）：</p>
+<div class="arithmatex">\[
+-\log_2 1 = 0
+\]</div>
+<p><strong>损失为零</strong> ✓</p>
+<p><strong>对比「预测完全错误」</strong>（<span class="arithmatex">\(q = (0.4,0.05,0.55)\)</span>）：</p>
+<div class="arithmatex">\[
+-\ln 0.05 = 3.00\ \text{nat}
+\]</div>
+<p><strong>损失很大</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">为什么 one-hot 简化成「负对数概率」很有用</p>
+<p><strong>计算效率</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>形式</th>
+<th>计算量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完整交叉熵</td>
+<td><span class="arithmatex">\(O(K)\)</span>（<span class="arithmatex">\(K\)</span> 个类别）</td>
+</tr>
+<tr>
+<td><strong>one-hot 简化</strong></td>
+<td><strong><span class="arithmatex">\(O(1)\)</span></strong>（只需查一次）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数值稳定性</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\times\log 0\)</span></td>
+<td>one-hot 中 <span class="arithmatex">\(p_c = 0\)</span> 的项<strong>直接跳过</strong>，避免了这个约定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实现时的注意事项</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>错误做法</th>
+<th>正确做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先算 softmax 再取 log</td>
+<td>用 <strong>log-softmax</strong>（数值稳定）</td>
+</tr>
+<tr>
+<td><code>-log(0)</code> → <code>-inf</code></td>
+<td>加极小值 <span class="arithmatex">\(\varepsilon\)</span> 或用 log-sum-exp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就回到「Logistic 与 Softmax 导数」一页</strong>讲过的数值稳定技巧：
+减去最大值后再算指数。</p>
+<p><strong>工程提醒</strong>：<strong>框架中的 <code>CrossEntropyLoss</code> 通常内部做 log-softmax</strong> ——
+所以传入的是 <strong>logits</strong>（未归一化的分数），<strong>不要自己先做 softmax</strong> ✗
+（否则会「双重归一化」，导致梯度错误。）</p>
+</div>
+<hr />
+<h3 id="4kl">例题 4：KL 散度与模型选择<a class="headerlink" href="#4kl" title="Permanent link">&para;</a></h3>
+<p>某数据集的真实分布未知。两个候选模型给出不同的预测分布：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th>真实类型</th>
+<th>模型 A 的 <span class="arithmatex">\(q\)</span></th>
+<th>模型 B 的 <span class="arithmatex">\(q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>类 1</td>
+<td><span class="arithmatex">\(0.8\)</span></td>
+<td><span class="arithmatex">\(0.6\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>类 2</td>
+<td><span class="arithmatex">\(0.6\)</span></td>
+<td><span class="arithmatex">\(0.9\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>类 1</td>
+<td><span class="arithmatex">\(0.7\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>（表中的 <span class="arithmatex">\(q\)</span> 是「真实类别的预测概率」。）</p>
+<p>用交叉熵比较两个模型。</p>
+<details class="note">
+<summary>思路</summary>
+<p>交叉熵 = 各项 <span class="arithmatex">\(-\ln q\)</span> 的平均。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>模型 A 的交叉熵</strong>：</p>
+<div class="arithmatex">\[
+\mathcal{L}_A = -\frac13\left(\ln 0.8+\ln 0.6+\ln 0.7\right)
+\]</div>
+<p>逐项：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th><span class="arithmatex">\(q\)</span></th>
+<th><span class="arithmatex">\(-\ln q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(0.8\)</span></td>
+<td><span class="arithmatex">\(0.223\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0.6\)</span></td>
+<td><span class="arithmatex">\(0.511\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0.7\)</span></td>
+<td><span class="arithmatex">\(0.357\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\mathcal{L}_A = \frac{0.223+0.511+0.357}{3} = \frac{1.091}{3} = 0.364\ \text{nat}
+\]</div>
+<p><strong>模型 B 的交叉熵</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>样本</th>
+<th><span class="arithmatex">\(q\)</span></th>
+<th><span class="arithmatex">\(-\ln q\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(0.6\)</span></td>
+<td><span class="arithmatex">\(0.511\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0.9\)</span></td>
+<td><span class="arithmatex">\(0.105\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.693\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\mathcal{L}_B = \frac{0.511+0.105+0.693}{3} = \frac{1.309}{3} = 0.436\ \text{nat}
+\]</div>
+<p><strong>比较</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>交叉熵</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td><strong><span class="arithmatex">\(0.364\)</span></strong></td>
+<td><strong>更好</strong> ✓</td>
+</tr>
+<tr>
+<td>B</td>
+<td><span class="arithmatex">\(0.436\)</span></td>
+<td>较差</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>模型 A 更优</strong>（交叉熵更小）</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">一个需要注意的细节：样本数少时不可靠</p>
+<p><strong>本例题只用 3 个样本</strong> —— 结论<strong>可能是偶然的</strong>。</p>
+<p><strong>模型 B 的问题</strong>：它在样本 3 上预测 <span class="arithmatex">\(0.5\)</span>（很没把握），
+这一个「差样本」把平均拉高了。</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 的预测更「平稳」（0.6–0.8）</td>
+<td>交叉熵更均匀</td>
+</tr>
+<tr>
+<td>B 的预测波动大（0.5–0.9）</td>
+<td>有一个很差 → 惩罚大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程实践</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用<strong>验证集</strong>（足够大）</td>
+<td>减小偶然性</td>
+</tr>
+<tr>
+<td>用<strong>平均</strong>交叉熵（而非总和）</td>
+<td>便于跨数据集比较</td>
+</tr>
+<tr>
+<td>多次训练取平均</td>
+<td>减小初始化随机性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>交叉熵作为模型选择准则的理论依据</strong>：</p>
+<p>它与<strong>KL 散度</strong>单调对应（差一个 <span class="arithmatex">\(H(p)\)</span> 常数），
+而 KL 正是「模型失配」的度量 ✓</p>
+<p><strong>这也解释了「为什么用交叉熵而非准确率」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>准确率</td>
+<td>直观</td>
+<td><strong>对置信度不敏感</strong>（0.51 与 0.99 都算对）</td>
+</tr>
+<tr>
+<td><strong>交叉熵</strong></td>
+<td>反映<strong>置信度质量</strong></td>
+<td>数值不易直观理解</td>
+</tr>
+</tbody>
+</table>
+<p><strong>举例</strong>（同样的准确率）：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>准确率</th>
+<th>交叉熵</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高置信且正确（预测 0.99）</td>
+<td>都正确</td>
+<td><strong>小</strong> ✓</td>
+</tr>
+<tr>
+<td>低置信但正确（预测 0.51）</td>
+<td>都正确</td>
+<td><strong>大</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以在「模型校准」场景，交叉熵比准确率更能反映真实质量</strong> ✓</p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../mutual-information/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 互信息">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                互信息
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../signal-systems/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
