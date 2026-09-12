@@ -1,0 +1,2963 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/calculus/matrix-calculus/">
+      
+      
+        <link rel="prev" href="../integral/">
+      
+      
+        <link rel="next" href="../jacobian/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>矩阵微积分 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              矩阵微积分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、三种导数类型
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、标量对向量：梯度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、标量对向量：梯度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三个最基本的公式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复合运算的常用结果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、向量对向量：雅可比矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、向量对向量：雅可比矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最重要的一个：线性映射
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用结果表
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、逐元素函数的雅可比：对角矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、逐元素函数的雅可比：对角矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Softmax 的雅可比（非对角）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：求梯度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：最小二乘的梯度推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3sigmoid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：sigmoid 的导数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4softmax" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：softmax + 交叉熵的梯度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 神经网络的理论基础
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 最优控制与学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 雅可比矩阵的应用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 状态估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MML §5.4–5.6</code><code>现有讲义「第 2 讲 微积分」B.3–B.4 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《矩阵分析与应用》或同类中文教材（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../derivative/">derivative</a><a href="../chain-rule/">chain-rule</a></span></div></div>
+
+<h1 id="_1">矩阵微积分<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面讲的是标量函数的导数。但机器学习里的函数几乎都是<strong>向量到标量</strong>或
+<strong>向量到向量</strong>的——参数的个数是百万量级。</p>
+<blockquote>
+<p><strong>矩阵微积分把「对每个参数求导」这件事写成矩阵运算。</strong></p>
+</blockquote>
+<p>它的价值不只是记号简洁：<strong>写成矩阵形式后可以直接高效实现</strong>
+（一次矩阵乘法代替百万次循环）。</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么必须用矩阵形式</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>逐元素写法</th>
+<th>矩阵写法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>记号</td>
+<td><span class="arithmatex">\(10^6\)</span> 个偏导</td>
+<td>1 个梯度向量</td>
+</tr>
+<tr>
+<td>实现</td>
+<td>百万次循环</td>
+<td>一次矩阵乘法</td>
+</tr>
+<tr>
+<td>硬件利用</td>
+<td>无法并行</td>
+<td><strong>GPU 天然适配</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这不是「为了好看」</strong>——矩阵运算才能用上 BLAS、cuBLAS 等优化库，
+把计算速度提高几百倍。</p>
+</div>
+<hr />
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三种导数类型的形状对比">
+<defs>
+<marker id="mc1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="mc1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="mc1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<text class="lbl-s" x="14" y="18">① 标量对向量 → 梯度（向量）</text>
+<rect class="f3" x="24" y="34" width="54" height="18" rx="3"/>
+<text class="lbl-s" x="34" y="48">x (n)</text>
+<line class="a3" x1="82" y1="43" x2="114" y2="43" marker-end="url(#mc1-ah1)"/>
+<rect class="f4" x="118" y="34" width="42" height="18" rx="3"/>
+<text class="lbl-s" x="126" y="48">y (1)</text>
+<line class="a1" x1="164" y1="43" x2="198" y2="43" marker-end="url(#mc1-ah2)"/>
+<rect class="f1" x="202" y="28" width="22" height="30" rx="3"/>
+<text class="lbl-s" x="206" y="48">∇</text>
+<text class="lbl-s" x="232" y="48">形状与 x 相同</text>
+<text class="lbl-s" x="14" y="92">② 向量对标量 → 向量（切向量）</text>
+<rect class="f3" x="24" y="108" width="42" height="18" rx="3"/>
+<text class="lbl-s" x="34" y="122">t (1)</text>
+<line class="a3" x1="70" y1="117" x2="102" y2="117" marker-end="url(#mc1-ah1)"/>
+<rect class="f4" x="106" y="108" width="54" height="18" rx="3"/>
+<text class="lbl-s" x="114" y="122">y (m)</text>
+<line class="a1" x1="164" y1="117" x2="198" y2="117" marker-end="url(#mc1-ah3)"/>
+<rect class="f2" x="202" y="102" width="22" height="30" rx="3"/>
+<text class="lbl-s" x="206" y="122">∂</text>
+<text class="lbl-s" x="232" y="122">形状与 y 相同</text>
+<text class="lbl-s" x="14" y="166">③ 向量对向量 → 雅可比矩阵</text>
+<rect class="f3" x="24" y="182" width="54" height="18" rx="3"/>
+<text class="lbl-s" x="34" y="196">x (n)</text>
+<line class="a3" x1="82" y1="191" x2="114" y2="191" marker-end="url(#mc1-ah1)"/>
+<rect class="f4" x="118" y="182" width="54" height="18" rx="3"/>
+<text class="lbl-s" x="126" y="196">y (m)</text>
+<line class="a1" x1="176" y1="191" x2="210" y2="191" marker-end="url(#mc1-ah2)"/>
+<rect class="f1" x="212" y="172" width="46" height="38" rx="3"/>
+<text class="lbl-s" x="218" y="196">m×n</text>
+<text class="lbl-s" x="266" y="196">行 = 输出维，列 = 输入维</text>
+<text class="lbl-s" x="24" y="236">雅可比在机器人学中就是「关节速度 → 末端速度」的映射矩阵</text>
+</svg>
+<figcaption>图 1　三种导数类型的「输入—输出—形状」关系：标量对向量得到梯度（与输入同形）；向量对标量得到切向量（与输出同形）；向量对向量得到雅可比矩阵（行数 = 输出维、列数 = 输入维，按本文采用的分子布局）</figcaption>
+</figure>
+
+<hr />
+<h2 id="_2">一、三种导数类型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>按「输入」与「输出」的维度分类：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>输入</th>
+<th>输出</th>
+<th>导数形式</th>
+<th>记号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标量对向量</strong></td>
+<td><span class="arithmatex">\(\boldsymbol{x}\in\mathbb{R}^n\)</span></td>
+<td><span class="arithmatex">\(y\in\mathbb{R}\)</span></td>
+<td><strong>梯度</strong>（<span class="arithmatex">\(n\)</span> 维向量）</td>
+<td><span class="arithmatex">\(\nabla_{\boldsymbol{x}}y\)</span> 或 <span class="arithmatex">\(\frac{\partial y}{\partial\boldsymbol{x}}\)</span></td>
+</tr>
+<tr>
+<td><strong>向量对标量</strong></td>
+<td><span class="arithmatex">\(t\in\mathbb{R}\)</span></td>
+<td><span class="arithmatex">\(\boldsymbol{y}\in\mathbb{R}^m\)</span></td>
+<td><strong>切向量</strong>（<span class="arithmatex">\(m\)</span> 维向量）</td>
+<td><span class="arithmatex">\(\frac{\partial\boldsymbol{y}}{\partial t}\)</span></td>
+</tr>
+<tr>
+<td><strong>向量对向量</strong></td>
+<td><span class="arithmatex">\(\boldsymbol{x}\in\mathbb{R}^n\)</span></td>
+<td><span class="arithmatex">\(\boldsymbol{y}\in\mathbb{R}^m\)</span></td>
+<td><strong>雅可比矩阵</strong>（<span class="arithmatex">\(m\times n\)</span>）</td>
+<td><span class="arithmatex">\(\frac{\partial\boldsymbol{y}}{\partial\boldsymbol{x}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">「布局约定」不统一，是查资料时最大的坑</p>
+<p>向量对向量求导得到矩阵时，<strong>列/行的排列顺序有两种约定</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>约定</th>
+<th>分子布局（numerator layout）</th>
+<th>分母布局（denominator layout）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\frac{\partial\boldsymbol{y}}{\partial\boldsymbol{x}}\)</span> 的形状</td>
+<td><span class="arithmatex">\(m\times n\)</span></td>
+<td><span class="arithmatex">\(n\times m\)</span></td>
+</tr>
+<tr>
+<td>常见于</td>
+<td>数学教材、MML</td>
+<td>部分工程教材</td>
+</tr>
+<tr>
+<td>梯度 <span class="arithmatex">\(\nabla f\)</span></td>
+<td>列为向量</td>
+<td>也为向量（通常一致）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本文采用分子布局</strong>（结果的行数与输出维度一致），
+这也是 MML 与主流深度学习框架的约定。</p>
+<p><strong>实际影响</strong>：看别的资料时<strong>先确认它用哪种约定</strong>，
+否则转置关系会弄错。对 <span class="arithmatex">\(\frac{\partial y}{\partial\boldsymbol{x}}\)</span>
+（标量对向量）两种约定<strong>结果相同</strong>，所以最常见的梯度计算不受影响。</p>
+</div>
+<hr />
+<h2 id="_3">二、标量对向量：梯度<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(f : \mathbb{R}^n \to \mathbb{R}\)</span>，则<strong>梯度</strong>是</p>
+<div class="arithmatex">\[
+\nabla_{\boldsymbol{x}}f
+= \frac{\partial f}{\partial\boldsymbol{x}}
+= \begin{bmatrix}
+\dfrac{\partial f}{\partial x_1}\\[6pt]
+\vdots\\[2pt]
+\dfrac{\partial f}{\partial x_n}
+\end{bmatrix}
+\]</div>
+<p><strong>每个分量是对应变量的偏导数。</strong></p>
+<h3 id="_4">三个最基本的公式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>这三个必须背下来——几乎所有梯度计算都由它们组合而成。</p>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial}{\partial\boldsymbol{x}}\big(\boldsymbol{a}^\top\boldsymbol{x}\big) = \boldsymbol{a}\ }
+\]</div>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial}{\partial\boldsymbol{x}}\big(\boldsymbol{x}^\top\boldsymbol{x}\big) = 2\boldsymbol{x}\ }
+\]</div>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial}{\partial\boldsymbol{x}}\big(\boldsymbol{x}^\top A\boldsymbol{x}\big) = 2A\boldsymbol{x} \quad (A \text{ 对称})\ }
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">验证方法：逐分量展开</p>
+<p><strong>验证第二个</strong>（<span class="arithmatex">\(\boldsymbol{x}^\top\boldsymbol{x} = \sum_i x_i^2\)</span>）：</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial x_j}\sum_i x_i^2 = 2x_j
+\]</div>
+<p>所以整个梯度是 <span class="arithmatex">\(2\boldsymbol{x}\)</span> ✓ —— <strong>与标量情况 <span class="arithmatex">\((\boldsymbol{x}^2)' = 2x\)</span> 完全平行。</strong></p>
+<p><strong>验证第三个</strong>（设 <span class="arithmatex">\(A\)</span> 对称）：</p>
+<div class="arithmatex">\[
+\boldsymbol{x}^\top A\boldsymbol{x} = \sum_{i,j}A_{ij}x_ix_j
+\]</div>
+<p>对 <span class="arithmatex">\(x_k\)</span> 求偏导。含 <span class="arithmatex">\(x_k\)</span> 的项来自两处：</p>
+<ul>
+<li><span class="arithmatex">\(i=k\)</span>：<span class="arithmatex">\(\sum_j A_{kj}x_kx_j\)</span></li>
+<li><span class="arithmatex">\(j=k\)</span>：<span class="arithmatex">\(\sum_i A_{ik}x_ix_k\)</span></li>
+</ul>
+<p>两者相加（注意 <span class="arithmatex">\(A\)</span> 对称，<span class="arithmatex">\(A_{kj} = A_{jk}\)</span>）：</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial x_k} = 2\sum_j A_{kj}x_j = 2(A\boldsymbol{x})_k
+\]</div>
+<p>所以梯度是 <span class="arithmatex">\(2A\boldsymbol{x}\)</span> ✓</p>
+<p><strong>注意</strong>：<span class="arithmatex">\(A\)</span> <strong>不对称</strong>时公式变成</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial\boldsymbol{x}}\big(\boldsymbol{x}^\top A\boldsymbol{x}\big) = (A + A^\top)\boldsymbol{x}
+\]</div>
+<p>当 <span class="arithmatex">\(A\)</span> 对称时 <span class="arithmatex">\(A + A^\top = 2A\)</span>，回到上面的形式。
+机器学习中出现的二次型矩阵（如 Hessian、协方差）通常是对称的。</p>
+</div>
+<h3 id="_5">复合运算的常用结果<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{a}^\top\boldsymbol{x}\)</span></td>
+<td><span class="arithmatex">\(\boldsymbol{a}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{x}^\top\boldsymbol{a}\)</span></td>
+<td><span class="arithmatex">\(\boldsymbol{a}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{x}^\top\boldsymbol{x}\)</span></td>
+<td><span class="arithmatex">\(2\boldsymbol{x}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{x}^\top A\boldsymbol{x}\)</span>（<span class="arithmatex">\(A\)</span> 对称）</td>
+<td><span class="arithmatex">\(2A\boldsymbol{x}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\boldsymbol{x}\)</span> 的某个分量</td>
+<td>对应的行向量</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_6">三、向量对向量：雅可比矩阵<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>设 <span class="arithmatex">\(\boldsymbol{f}: \mathbb{R}^n \to \mathbb{R}^m\)</span>，则<strong>雅可比矩阵</strong>是</p>
+<div class="arithmatex">\[
+J = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{x}}
+= \begin{bmatrix}
+\dfrac{\partial f_1}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial x_n}\\[6pt]
+\vdots &amp; \ddots &amp; \vdots\\[4pt]
+\dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
+\end{bmatrix}
+\]</div>
+<p><strong>第 <span class="arithmatex">\(i\)</span> 行是第 <span class="arithmatex">\(i\)</span> 个输出对各输入的偏导。</strong></p>
+<h3 id="_7">最重要的一个：线性映射<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(\boldsymbol{f}(\boldsymbol{x}) = A\boldsymbol{x}\)</span>，则</p>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial(A\boldsymbol{x})}{\partial\boldsymbol{x}} = A\ }
+\]</div>
+<p><strong>线性映射的导数就是它自己的矩阵</strong>——这与标量情形 <span class="arithmatex">\((ax)' = a\)</span> 完全平行。</p>
+<div class="admonition note">
+<p class="admonition-title">雅可比矩阵的完整含义</p>
+<p><strong>1. 它是「局部线性化」的系数矩阵</strong></p>
+<p>由泰勒一阶展开：</p>
+<div class="arithmatex">\[
+\boldsymbol{f}(\boldsymbol{x}+\Delta\boldsymbol{x}) \approx \boldsymbol{f}(\boldsymbol{x}) + J\Delta\boldsymbol{x}
+\]</div>
+<p><strong>这就是机器人学里「关节速度 → 末端速度」的映射。</strong></p>
+<p><strong>2. 它给出体积缩放因子</strong></p>
+<div class="arithmatex">\[
+\lvert\det J\rvert = \text{局部体积缩放倍数}
+\]</div>
+<p>在多变量积分的换元公式中出现。<span class="arithmatex">\(\det J = 0\)</span> 表示映射降维。</p>
+<p><strong>3. 链式法则就是矩阵乘法</strong></p>
+<p>若 <span class="arithmatex">\(\boldsymbol{z} = \boldsymbol{g}(\boldsymbol{y})\)</span>，<span class="arithmatex">\(\boldsymbol{y} = \boldsymbol{f}(\boldsymbol{x})\)</span>，则</p>
+<div class="arithmatex">\[
+\frac{\partial\boldsymbol{z}}{\partial\boldsymbol{x}}
+= \frac{\partial\boldsymbol{z}}{\partial\boldsymbol{y}}\cdot\frac{\partial\boldsymbol{y}}{\partial\boldsymbol{x}}
+\qquad\text{（矩阵相乘）}
+\]</div>
+<p><strong>这解释了为什么深度学习框架用矩阵乘法实现反向传播。</strong></p>
+</div>
+<h3 id="_8">常用结果表<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>雅可比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A\boldsymbol{x}\)</span></td>
+<td><span class="arithmatex">\(A\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{a}^\top\boldsymbol{x}\)</span></td>
+<td><span class="arithmatex">\(\boldsymbol{a}^\top\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma(\boldsymbol{x})\)</span>（逐元素作用）</td>
+<td><span class="arithmatex">\(\operatorname{diag}(\sigma'(\boldsymbol{x}))\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{x}\)</span> 的某个线性组合</td>
+<td>对应的行/列向量</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_9">四、逐元素函数的雅可比：对角矩阵<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p>若 <span class="arithmatex">\(f\)</span> 逐元素作用于向量（如 sigmoid、ReLU）：</p>
+<div class="arithmatex">\[
+\boldsymbol{y} = \begin{bmatrix}\sigma(x_1)\\ \vdots\\ \sigma(x_n)\end{bmatrix}
+\]</div>
+<p>则每个 <span class="arithmatex">\(y_i\)</span> <strong>只依赖</strong> <span class="arithmatex">\(x_i\)</span>，所以</p>
+<div class="arithmatex">\[
+J = \operatorname{diag}\big(\sigma'(x_1),\dots,\sigma'(x_n)\big)
+\]</div>
+<p><strong>雅可比是对角矩阵</strong>——这意味着<strong>各分量互不影响</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么这个结构很关键</p>
+<p><strong>1. 计算极快</strong></p>
+<p>对角矩阵与向量相乘只需 <span class="arithmatex">\(O(n)\)</span>（而非 <span class="arithmatex">\(O(n^2)\)</span>），
+而且实践中<strong>根本不用构造矩阵</strong>，直接用逐元素乘法：</p>
+<div class="arithmatex">\[
+J\boldsymbol{v} = \sigma'(\boldsymbol{x})\odot\boldsymbol{v}
+\]</div>
+<p>（<span class="arithmatex">\(\odot\)</span> 是逐元素乘。）这正是深度学习框架的做法。</p>
+<p><strong>2. 解释了「激活函数影响梯度传播」</strong></p>
+<p>反向传播中要连乘各层的雅可比。逐元素函数的雅可比是对角的，
+所以连乘退化为<strong>逐元素连乘</strong>：</p>
+<div class="arithmatex">\[
+\prod_{\ell}\sigma'(\boldsymbol{z}^{(\ell)})
+\]</div>
+<table>
+<thead>
+<tr>
+<th>激活函数</th>
+<th><span class="arithmatex">\(\sigma'\)</span> 的范围</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sigmoid</td>
+<td><span class="arithmatex">\((0,\ 0.25]\)</span></td>
+<td><strong>连乘衰减快</strong> → 梯度消失</td>
+</tr>
+<tr>
+<td>tanh</td>
+<td><span class="arithmatex">\((0,\ 1]\)</span></td>
+<td>稍好，但仍会衰减</td>
+</tr>
+<tr>
+<td><strong>ReLU</strong></td>
+<td><span class="arithmatex">\(\{0,\ 1\}\)</span></td>
+<td>正区间不衰减 ✓</td>
+</tr>
+</tbody>
+</table>
+<p>这就是「为什么 ReLU 成为默认选择」的矩阵视角解释。</p>
+</div>
+<h3 id="softmax">Softmax 的雅可比（非对角）<a class="headerlink" href="#softmax" title="Permanent link">&para;</a></h3>
+<p>Softmax 是例外——每个输出依赖<strong>所有</strong>输入：</p>
+<div class="arithmatex">\[
+\sigma(\boldsymbol{z})_i = \frac{e^{z_i}}{\sum_j e^{z_j}}
+\]</div>
+<p>它的雅可比是</p>
+<div class="arithmatex">\[
+J = \operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top,
+\qquad \boldsymbol{s} = \sigma(\boldsymbol{z})
+\]</div>
+<p><strong>注意有非对角项</strong> <span class="arithmatex">\(\boldsymbol{s}\boldsymbol{s}^\top\)</span>，所以<strong>不是对角的</strong>。</p>
+<div class="admonition note">
+<p class="admonition-title">这个公式的推导要点</p>
+<p>记 <span class="arithmatex">\(s_i = \frac{e^{z_i}}{S}\)</span>，其中 <span class="arithmatex">\(S = \sum_j e^{z_j}\)</span>。</p>
+<p><strong>当 <span class="arithmatex">\(i = j\)</span></strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial s_i}{\partial z_i}
+= \frac{e^{z_i}S - e^{z_i}e^{z_i}}{S^2}
+= \frac{e^{z_i}}{S} - \left(\frac{e^{z_i}}{S}\right)^2
+= s_i - s_i^2 = s_i(1-s_i)
+\]</div>
+<p><strong>当 <span class="arithmatex">\(i \neq j\)</span></strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial s_i}{\partial z_j}
+= \frac{0\cdot S - e^{z_i}e^{z_j}}{S^2}
+= -s_is_j
+\]</div>
+<p><strong>合并成矩阵</strong>：对角线上是 <span class="arithmatex">\(s_i - s_i^2\)</span>，非对角线是 <span class="arithmatex">\(-s_is_j\)</span>，
+正好就是 <span class="arithmatex">\(\operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top\)</span> ✓</p>
+<p><strong>与交叉熵配合时的简化</strong>：softmax + 交叉熵的联合梯度是
+<span class="arithmatex">\(\boldsymbol{s} - \boldsymbol{y}\)</span>（极其简洁），
+因为这个复杂雅可比被交叉熵的梯度「抵消」了。
+这是 softmax 与交叉熵总是配对使用的原因之一。</p>
+</div>
+<hr />
+<h2 id="_10">五、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：求梯度<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(f(\boldsymbol{x}) = \boldsymbol{x}^\top A\boldsymbol{x} + \boldsymbol{b}^\top\boldsymbol{x}\)</span>，
+其中 <span class="arithmatex">\(A\)</span> 对称。求 <span class="arithmatex">\(\nabla f\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>拆成两项，分别用前面两个基本公式。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>拆成两项</strong>：</p>
+<div class="arithmatex">\[
+f(\boldsymbol{x}) = \underbrace{\boldsymbol{x}^\top A\boldsymbol{x}}_{\text{二次项}} + \underbrace{\boldsymbol{b}^\top\boldsymbol{x}}_{\text{一次项}}
+\]</div>
+<p><strong>第一项</strong>（<span class="arithmatex">\(A\)</span> 对称，用 <span class="arithmatex">\(\nabla(\boldsymbol{x}^\top A\boldsymbol{x}) = 2A\boldsymbol{x}\)</span>）：</p>
+<div class="arithmatex">\[
+\nabla(\boldsymbol{x}^\top A\boldsymbol{x}) = 2A\boldsymbol{x}
+\]</div>
+<p><strong>第二项</strong>（用 <span class="arithmatex">\(\nabla(\boldsymbol{b}^\top\boldsymbol{x}) = \boldsymbol{b}\)</span>）：</p>
+<div class="arithmatex">\[
+\nabla(\boldsymbol{b}^\top\boldsymbol{x}) = \boldsymbol{b}
+\]</div>
+<p><strong>相加</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ \nabla f = 2A\boldsymbol{x} + \boldsymbol{b}\ }
+\]</div>
+<p><strong>这就是「二次型目标函数」的梯度</strong>，
+令它为零得到正规方程的解</p>
+<div class="arithmatex">\[
+2A\boldsymbol{x} + \boldsymbol{b} = \boldsymbol{0}
+\implies
+\boldsymbol{x} = -\frac12 A^{-1}\boldsymbol{b}
+\]</div>
+<p>（当 <span class="arithmatex">\(A\)</span> 正定时这是极小点。）</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">与标量情形对照</p>
+<table>
+<thead>
+<tr>
+<th>标量</th>
+<th>向量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f = ax^2 + bx\)</span></td>
+<td><span class="arithmatex">\(f = \boldsymbol{x}^\top A\boldsymbol{x} + \boldsymbol{b}^\top\boldsymbol{x}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f' = 2ax + b\)</span></td>
+<td><span class="arithmatex">\(\nabla f = 2A\boldsymbol{x} + \boldsymbol{b}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f' = 0 \Rightarrow x = -\frac{b}{2a}\)</span></td>
+<td><span class="arithmatex">\(\nabla f = 0 \Rightarrow \boldsymbol{x} = -\frac12A^{-1}\boldsymbol{b}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结构完全一样</strong>（只是除法变成逆矩阵）。</p>
+<p><strong>注意</strong>：标量时若 <span class="arithmatex">\(a &gt; 0\)</span> 是极小；向量时需 <span class="arithmatex">\(A\)</span> <strong>正定</strong>才是极小。
+这就是「二阶条件」从「符号」推广到「正定性」的过程。</p>
+</div>
+<hr />
+<h3 id="2">例题 2：最小二乘的梯度推导<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>给定数据矩阵 <span class="arithmatex">\(X\)</span>（<span class="arithmatex">\(m\times n\)</span>）、目标 <span class="arithmatex">\(\boldsymbol{y}\)</span>（<span class="arithmatex">\(m\)</span> 维），
+最小二乘损失为</p>
+<div class="arithmatex">\[
+L(\boldsymbol{w}) = \lVert X\boldsymbol{w} - \boldsymbol{y}\rVert^2
+\]</div>
+<p>求 <span class="arithmatex">\(\nabla_{\boldsymbol{w}}L\)</span>，并求最优解。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先把范数平方写成 <span class="arithmatex">\(\boldsymbol{z}^\top\boldsymbol{z}\)</span> 的形式，再求导。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：展开成二次型</strong></p>
+<p>记残差 <span class="arithmatex">\(\boldsymbol{r} = X\boldsymbol{w} - \boldsymbol{y}\)</span>，则 <span class="arithmatex">\(L = \boldsymbol{r}^\top\boldsymbol{r}\)</span>。</p>
+<div class="arithmatex">\[
+L = (X\boldsymbol{w}-\boldsymbol{y})^\top(X\boldsymbol{w}-\boldsymbol{y})
+\]</div>
+<p>展开（注意 <span class="arithmatex">\((A\boldsymbol{w})^\top = \boldsymbol{w}^\top A^\top\)</span>）：</p>
+<div class="arithmatex">\[
+= \boldsymbol{w}^\top X^\top X\boldsymbol{w}
+- \boldsymbol{w}^\top X^\top\boldsymbol{y}
+- \boldsymbol{y}^\top X\boldsymbol{w}
++ \boldsymbol{y}^\top\boldsymbol{y}
+\]</div>
+<p><strong>中间两项相等</strong>（都是标量，转置后不变）：</p>
+<div class="arithmatex">\[
+\boldsymbol{y}^\top X\boldsymbol{w} = (\boldsymbol{y}^\top X\boldsymbol{w})^\top = \boldsymbol{w}^\top X^\top\boldsymbol{y}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+L = \boldsymbol{w}^\top X^\top X\boldsymbol{w} - 2\boldsymbol{w}^\top X^\top\boldsymbol{y} + \boldsymbol{y}^\top\boldsymbol{y}
+\]</div>
+<p><strong>第二步：求梯度</strong></p>
+<p>注意 <span class="arithmatex">\(X^\top X\)</span> 是<strong>对称</strong>矩阵，用例题 1 的公式（其中
+<span class="arithmatex">\(A = X^\top X\)</span>，<span class="arithmatex">\(\boldsymbol{b} = -2X^\top\boldsymbol{y}\)</span>）：</p>
+<div class="arithmatex">\[
+\nabla L = 2X^\top X\boldsymbol{w} - 2X^\top\boldsymbol{y}
+\]</div>
+<p>提取公因子：</p>
+<div class="arithmatex">\[
+\boxed{\ \nabla L = 2X^\top(X\boldsymbol{w} - \boldsymbol{y})\ }
+\]</div>
+<p><strong>第三步：令梯度为零</strong></p>
+<div class="arithmatex">\[
+X^\top X\boldsymbol{w} = X^\top\boldsymbol{y}
+\]</div>
+<p><strong>这就是「正规方程」</strong>（normal equation）。</p>
+<p><strong>若 <span class="arithmatex">\(X^\top X\)</span> 可逆</strong>，解为</p>
+<div class="arithmatex">\[
+\boldsymbol{w}^\star = (X^\top X)^{-1}X^\top\boldsymbol{y}
+\]</div>
+<p><strong>第四步：确认是最小值</strong></p>
+<p>Hessian 是</p>
+<div class="arithmatex">\[
+H = \nabla^2 L = 2X^\top X
+\]</div>
+<p>它<strong>总是半正定</strong>（因为 <span class="arithmatex">\(\boldsymbol{v}^\top X^\top X\boldsymbol{v} = \lVert X\boldsymbol{v}\rVert^2 \geq 0\)</span>）。
+当 <span class="arithmatex">\(X\)</span> 列满秩时<strong>正定</strong> → 严格极小 ✓</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">这里能用正规方程，但实践中常常不用</p>
+<p><strong>原因</strong>：计算 <span class="arithmatex">\((X^\top X)^{-1}\)</span> 的<strong>数值稳定性差</strong>，且代价高。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>复杂度</th>
+<th>数值稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正规方程</td>
+<td><span class="arithmatex">\(O(n^3)\)</span></td>
+<td>差（条件数被平方）</td>
+</tr>
+<tr>
+<td><strong>QR 分解</strong></td>
+<td><span class="arithmatex">\(O(mn^2)\)</span></td>
+<td><strong>好</strong></td>
+</tr>
+<tr>
+<td><strong>SVD</strong></td>
+<td><span class="arithmatex">\(O(mn^2)\)</span></td>
+<td><strong>最好</strong>（可处理秩亏）</td>
+</tr>
+<tr>
+<td>梯度下降</td>
+<td>迭代</td>
+<td>适合大规模</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：<span class="arithmatex">\(\kappa(X^\top X) = \kappa(X)^2\)</span>，
+所以条件数被<strong>平方</strong>（本知识库「矩阵分解」一节的例题量化过这一点）。
+条件数 <span class="arithmatex">\(10^4\)</span> 的 <span class="arithmatex">\(X\)</span> 会让 <span class="arithmatex">\(X^\top X\)</span> 变成 <span class="arithmatex">\(10^8\)</span>，求逆时精度损失严重。</p>
+<p><strong>实践建议</strong>：小规模用 QR 或 SVD；大规模用迭代法（共轭梯度、随机梯度）。</p>
+</div>
+<hr />
+<h3 id="3sigmoid">例题 3：sigmoid 的导数<a class="headerlink" href="#3sigmoid" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\sigma(x) = \frac{1}{1+e^{-x}}\)</span>（逐元素作用）。
+求它的导数，并说明为什么这对梯度传播不利。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用商法则求导，结果可以用 <span class="arithmatex">\(\sigma\)</span> 本身表示。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：求导</strong></p>
+<p>用商法则（分子 1，分母 <span class="arithmatex">\(1+e^{-x}\)</span>）：</p>
+<div class="arithmatex">\[
+\sigma'(x) = \frac{0\cdot(1+e^{-x}) - 1\cdot(-e^{-x})}{(1+e^{-x})^2}
+= \frac{e^{-x}}{(1+e^{-x})^2}
+\]</div>
+<p><strong>第二步：用 <span class="arithmatex">\(\sigma\)</span> 表示</strong></p>
+<p>注意</p>
+<div class="arithmatex">\[
+\sigma(x) = \frac{1}{1+e^{-x}}, \qquad 1 - \sigma(x) = \frac{e^{-x}}{1+e^{-x}}
+\]</div>
+<p>两者相乘：</p>
+<div class="arithmatex">\[
+\sigma(x)\big(1-\sigma(x)\big) = \frac{1}{1+e^{-x}}\cdot\frac{e^{-x}}{1+e^{-x}} = \frac{e^{-x}}{(1+e^{-x})^2}
+\]</div>
+<p><strong>与上面一致</strong> ✓ 所以</p>
+<div class="arithmatex">\[
+\boxed{\ \sigma'(x) = \sigma(x)\big(1-\sigma(x)\big)\ }
+\]</div>
+<p><strong>第三步：求最大值</strong></p>
+<p>设 <span class="arithmatex">\(s = \sigma(x) \in (0,1)\)</span>，则 <span class="arithmatex">\(\sigma' = s(1-s)\)</span>。</p>
+<p>这是开口向下的抛物线，最大值在 <span class="arithmatex">\(s = 1/2\)</span>：</p>
+<div class="arithmatex">\[
+\sigma'_{\max} = \frac12\times\frac12 = \frac14 = 0.25
+\]</div>
+<p><strong>边界情况</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(\sigma(x)\)</span></th>
+<th><span class="arithmatex">\(\sigma'(x)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(-\infty\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><strong><span class="arithmatex">\(0.25\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(+\infty\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第四步：为什么对梯度传播不利</strong></p>
+<p>反向传播中，梯度要连乘各层的雅可比（对角阵），即连乘 <span class="arithmatex">\(\sigma'\)</span>。</p>
+<div class="arithmatex">\[
+\sigma'(x) \leq 0.25
+\]</div>
+<p><span class="arithmatex">\(L\)</span> 层连乘的上界是</p>
+<div class="arithmatex">\[
+0.25^L
+\]</div>
+<table>
+<thead>
+<tr>
+<th>层数</th>
+<th><span class="arithmatex">\(0.25^L\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(9.8\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(9.5\times10^{-7}\)</span></td>
+</tr>
+<tr>
+<td>20</td>
+<td><span class="arithmatex">\(9.1\times10^{-13}\)</span></td>
+</tr>
+<tr>
+<td>50</td>
+<td><span class="arithmatex">\(7.9\times10^{-31}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>梯度会指数衰减到零</strong> → <strong>梯度消失</strong>。</p>
+<p>相比之下 ReLU 在正区间 <span class="arithmatex">\(\sigma' = 1\)</span>，连乘不衰减。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">sigmoid 的适用场景（不该完全弃用）</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>是否合适</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>深层网络的隐藏层</td>
+<td>✗</td>
+<td>梯度消失</td>
+</tr>
+<tr>
+<td><strong>二分类输出层</strong></td>
+<td>✓</td>
+<td>需要 <span class="arithmatex">\((0,1)\)</span> 概率，且只有一层</td>
+</tr>
+<tr>
+<td>LSTM 的门控</td>
+<td>✓</td>
+<td>门需要 <span class="arithmatex">\((0,1)\)</span> 的「开关」语义</td>
+</tr>
+<tr>
+<td>需要概率解释时</td>
+<td>✓</td>
+<td>输出天然是概率</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键区分</strong>：问题出在「<strong>多层堆叠</strong>」而不是 sigmoid 本身。
+输出层用一次没问题——因为<strong>只有一层</strong>，不存在连乘。</p>
+</div>
+<hr />
+<h3 id="4softmax">例题 4：softmax + 交叉熵的梯度<a class="headerlink" href="#4softmax" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\boldsymbol{s} = \operatorname{softmax}(\boldsymbol{z})\)</span>，
+交叉熵损失为</p>
+<div class="arithmatex">\[
+L = -\sum_i y_i\log s_i
+\]</div>
+<p>（<span class="arithmatex">\(\boldsymbol{y}\)</span> 是 one-hot 标签。）求 <span class="arithmatex">\(\frac{\partial L}{\partial\boldsymbol{z}}\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用链式法则：先对 <span class="arithmatex">\(\boldsymbol{s}\)</span> 求导，再乘 softmax 的雅可比。
+结果会非常简洁。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：对 <span class="arithmatex">\(\boldsymbol{s}\)</span> 求导</strong></p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial s_i}
+= -\frac{y_i}{s_i}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial\boldsymbol{s}} = -\frac{\boldsymbol{y}}{\boldsymbol{s}}
+\qquad\text{（逐元素相除）}
+\]</div>
+<p><strong>第二步：用链式法则乘雅可比</strong></p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial z_k}
+= \sum_i \frac{\partial L}{\partial s_i}\cdot\frac{\partial s_i}{\partial z_k}
+\]</div>
+<p>其中（上一节推出的 softmax 雅可比）</p>
+<div class="arithmatex">\[
+\frac{\partial s_i}{\partial z_k} = s_i(\delta_{ik} - s_k)
+\]</div>
+<p>（<span class="arithmatex">\(\delta_{ik}\)</span> 是 Kronecker 记号：<span class="arithmatex">\(i=k\)</span> 时为 1，否则为 0。）</p>
+<p><strong>第三步：代入求和</strong></p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial z_k}
+= \sum_i \left(-\frac{y_i}{s_i}\right)\cdot s_i(\delta_{ik}-s_k)
+= -\sum_i y_i(\delta_{ik}-s_k)
+\]</div>
+<p><strong>展开求和</strong>：</p>
+<div class="arithmatex">\[
+= -\sum_i y_i\delta_{ik} + s_k\sum_i y_i
+\]</div>
+<p><strong>第一项</strong>：<span class="arithmatex">\(\sum_i y_i\delta_{ik} = y_k\)</span></p>
+<p><strong>第二项</strong>：因为 <span class="arithmatex">\(\boldsymbol{y}\)</span> 是 one-hot（或概率分布），<span class="arithmatex">\(\sum_i y_i = 1\)</span></p>
+<p>所以</p>
+<div class="arithmatex">\[
+\frac{\partial L}{\partial z_k} = -y_k + s_k
+\]</div>
+<p><strong>写成向量形式</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial L}{\partial\boldsymbol{z}} = \boldsymbol{s} - \boldsymbol{y}\ }
+\]</div>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个「极简结果」是 softmax + 交叉熵配对的原因</p>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>组合</th>
+<th>梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>softmax + 交叉熵</td>
+<td><span class="arithmatex">\(\boldsymbol{s}-\boldsymbol{y}\)</span>（<strong>极简</strong>）</td>
+</tr>
+<tr>
+<td>softmax + 平方误差</td>
+<td>含完整雅可比，复杂且梯度小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么平方误差不好</strong>：当输出接近错误标签时
+（<span class="arithmatex">\(s_i\)</span> 很小但 <span class="arithmatex">\(y_i = 1\)</span>），平方误差的梯度会包含 <span class="arithmatex">\(s_i\)</span> 因子，
+<strong>反而更小</strong>——学习更慢。</p>
+<p>交叉熵则给出 <span class="arithmatex">\(s_i - y_i\)</span>，误差大时梯度也大，<strong>收敛更快</strong>。</p>
+<p><strong>数值上的好处</strong>：</p>
+<ul>
+<li>结果只需<strong>逐元素相减</strong>，不需要构造 <span class="arithmatex">\(n\times n\)</span> 的雅可比矩阵</li>
+<li>数值稳定（避免 <span class="arithmatex">\(\log 0\)</span>，实现时用 log-sum-exp 技巧）</li>
+</ul>
+<p><strong>这就是「分类任务用 softmax + 交叉熵」的数学理由</strong>——
+不只是习惯，而是梯度形式最优。</p>
+</div>
+<hr />
+<h2 id="_11">六、用在哪些课程里<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">模式识别 · 神经网络的理论基础<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>所有层的梯度都是矩阵形式</strong>，反向传播实现为矩阵乘法</li>
+<li><strong>softmax + 交叉熵</strong>是分类任务的标准组合</li>
+<li><strong>批归一化的梯度</strong>涉及对均值/方差的求导</li>
+<li><strong>注意力机制</strong>的梯度需要处理 softmax 雅可比</li>
+</ul>
+<h3 id="_13">无人系统自主决策与优化 · 最优控制与学习<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>线性二次调节器（LQR）</strong>：代价是二次型，梯度 <span class="arithmatex">\(2A\boldsymbol{x}+\boldsymbol{b}\)</span> 形式</li>
+<li><strong>模型预测控制</strong>：每步解一个二次规划</li>
+<li><strong>策略梯度</strong>：对策略参数求导，全用矩阵形式</li>
+<li><strong>Hessian 近似</strong>（高斯-牛顿法）用于快速收敛</li>
+</ul>
+<h3 id="_14">机器人学 · 雅可比矩阵的应用<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>速度运动学</strong>：<span class="arithmatex">\(\dot{\boldsymbol{x}} = J(\boldsymbol{q})\dot{\boldsymbol{q}}\)</span></li>
+<li><strong>静力分析</strong>：<span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span>（转置关系）</li>
+<li><strong>奇异位形</strong>：<span class="arithmatex">\(\det J = 0\)</span></li>
+<li><strong>冗余逆运动学</strong>：用伪逆 <span class="arithmatex">\(J^+\)</span>（本知识库「奇异值分解」一节的例题）</li>
+</ul>
+<h3 id="_15">智能传感与信息处理 · 状态估计<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>卡尔曼滤波</strong>的增益矩阵来自最小化协方差的矩阵求导</li>
+<li><strong>最小二乘标定</strong>：正规方程的解</li>
+<li><strong>信息滤波器</strong>：用精度矩阵（协方差之逆）的矩阵运算</li>
+</ul>
+<hr />
+<h2 id="_16">七、自测<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 求 <span class="arithmatex">\(f(\boldsymbol{x}) = \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span> 的梯度。</p>
+<details class="note">
+<summary>提示</summary>
+<p>与例题 2 结构相同。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>展开</strong>（记 <span class="arithmatex">\(\boldsymbol{r} = A\boldsymbol{x}-\boldsymbol{b}\)</span>）：</p>
+<div class="arithmatex">\[
+f = \boldsymbol{r}^\top\boldsymbol{r}
+= \boldsymbol{x}^\top A^\top A\boldsymbol{x} - 2\boldsymbol{b}^\top A\boldsymbol{x} + \boldsymbol{b}^\top\boldsymbol{b}
+\]</div>
+<p>（中间两项相等，因为都是标量。）</p>
+<p><strong>求梯度</strong>（<span class="arithmatex">\(A^\top A\)</span> 对称）：</p>
+<div class="arithmatex">\[
+\nabla f = 2A^\top A\boldsymbol{x} - 2A^\top\boldsymbol{b}
+\]</div>
+<p><strong>整理</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ \nabla f = 2A^\top(A\boldsymbol{x}-\boldsymbol{b})\ }
+\]</div>
+<p><strong>结构</strong>：<span class="arithmatex">\(2\times\)</span>(转置矩阵)<span class="arithmatex">\(\times\)</span>(残差) —— 与例题 2 完全一致
+（那里 <span class="arithmatex">\(X\)</span> 替代了 <span class="arithmatex">\(A\)</span>）。</p>
+<p><strong>记忆方法</strong>：</p>
+<div class="arithmatex">\[
+\nabla_{\boldsymbol{x}}\lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2
+= 2A^\top(A\boldsymbol{x}-\boldsymbol{b})
+\]</div>
+<p>与标量 <span class="arithmatex">\((ax-b)^2\)</span> 的导数 <span class="arithmatex">\(2a(ax-b)\)</span> 平行——<strong>只是 <span class="arithmatex">\(a\)</span> 变成 <span class="arithmatex">\(A^\top\)</span></strong>。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 求 <span class="arithmatex">\(\boldsymbol{y} = A\boldsymbol{x}\)</span> 对 <span class="arithmatex">\(\boldsymbol{x}\)</span> 的雅可比矩阵。</p>
+<details class="note">
+<summary>提示</summary>
+<p>逐个分量看 <span class="arithmatex">\(y_i\)</span> 依赖哪些 <span class="arithmatex">\(x_j\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>逐分量展开</strong>：</p>
+<div class="arithmatex">\[
+y_i = \sum_{j=1}^{n}A_{ij}x_j
+\]</div>
+<p><strong>求偏导</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial y_i}{\partial x_j} = A_{ij}
+\]</div>
+<p><strong>所以雅可比就是 <span class="arithmatex">\(A\)</span> 本身</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ \frac{\partial(A\boldsymbol{x})}{\partial\boldsymbol{x}} = A\ }
+\]</div>
+<p><strong>含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>线性映射</td>
+<td>它的导数就是它自己</td>
+</tr>
+<tr>
+<td>与标量对照</td>
+<td><span class="arithmatex">\((ax)' = a\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推论</strong>：线性映射在所有点处的雅可比都相同
+（没有「局部」的差异）——这正是「线性」的定义性特征。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：<span class="arithmatex">\(\frac{\partial(\boldsymbol{x}^\top A\boldsymbol{x})}{\partial\boldsymbol{x}} = 2A\boldsymbol{x}\)</span> 对任意方阵 <span class="arithmatex">\(A\)</span> 都成立。</p>
+<details class="note">
+<summary>提示</summary>
+<p>回顾推导中对 <span class="arithmatex">\(A\)</span> 对称性的使用。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对，只在 <span class="arithmatex">\(A\)</span> 对称时成立。</strong></p>
+<p><strong>正确的一般公式</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial(\boldsymbol{x}^\top A\boldsymbol{x})}{\partial\boldsymbol{x}}
+= (A + A^\top)\boldsymbol{x}
+\]</div>
+<p><strong>验证</strong>：展开成求和</p>
+<div class="arithmatex">\[
+\boldsymbol{x}^\top A\boldsymbol{x} = \sum_{i,j}A_{ij}x_ix_j
+\]</div>
+<p>对 <span class="arithmatex">\(x_k\)</span> 求偏导，含 <span class="arithmatex">\(x_k\)</span> 的项来自 <span class="arithmatex">\(i=k\)</span> 与 <span class="arithmatex">\(j=k\)</span> 两处：</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial x_k} = \sum_j A_{kj}x_j + \sum_i A_{ik}x_i
+= (A\boldsymbol{x})_k + (A^\top\boldsymbol{x})_k
+\]</div>
+<p>即 <span class="arithmatex">\(\big((A+A^\top)\boldsymbol{x}\big)_k\)</span> ✓</p>
+<p><strong>当 <span class="arithmatex">\(A\)</span> 对称</strong>时 <span class="arithmatex">\(A^\top = A\)</span>，得 <span class="arithmatex">\(2A\boldsymbol{x}\)</span> ✓</p>
+<p><strong>为什么实践中通常写 <span class="arithmatex">\(2A\boldsymbol{x}\)</span></strong>：
+机器学习中的二次型矩阵（Hessian、协方差、<span class="arithmatex">\(X^\top X\)</span>）
+<strong>都是对称的</strong>，所以简写形式足够。</p>
+<p><strong>但要注意</strong>：若代码里传入非对称矩阵而得错误结果，
+检查这一点能快速定位问题。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 设 <span class="arithmatex">\(\boldsymbol{s} = \operatorname{softmax}(\boldsymbol{z})\)</span>，且 <span class="arithmatex">\(\boldsymbol{z}\in\mathbb{R}^3\)</span>。
+若 <span class="arithmatex">\(\boldsymbol{s} = (0.2,\ 0.3,\ 0.5)^\top\)</span>，求 softmax 雅可比矩阵的对角线元素。</p>
+<details class="note">
+<summary>提示</summary>
+<p>对角线元素是 <span class="arithmatex">\(s_i(1-s_i)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>用公式</strong> <span class="arithmatex">\(J_{ii} = s_i(1-s_i)\)</span>：</p>
+<div class="arithmatex">\[
+J_{11} = 0.2\times0.8 = 0.16
+\]</div>
+<div class="arithmatex">\[
+J_{22} = 0.3\times0.7 = 0.21
+\]</div>
+<div class="arithmatex">\[
+J_{33} = 0.5\times0.5 = 0.25
+\]</div>
+<p><strong>非对角线元素</strong> <span class="arithmatex">\(J_{ij} = -s_is_j\)</span>（<span class="arithmatex">\(i\neq j\)</span>）：</p>
+<div class="arithmatex">\[
+J_{12} = J_{21} = -0.2\times0.3 = -0.06
+\]</div>
+<div class="arithmatex">\[
+J_{13} = J_{31} = -0.2\times0.5 = -0.10
+\]</div>
+<div class="arithmatex">\[
+J_{23} = J_{32} = -0.3\times0.5 = -0.15
+\]</div>
+<p><strong>完整矩阵</strong>：</p>
+<div class="arithmatex">\[
+J = \begin{bmatrix}
+0.16 &amp; -0.06 &amp; -0.10\\
+-0.06 &amp; 0.21 &amp; -0.15\\
+-0.10 &amp; -0.15 &amp; 0.25
+\end{bmatrix}
+\]</div>
+<p><strong>验证两个性质</strong>：</p>
+<p><strong>1. 每行之和为 0</strong>（因为 <span class="arithmatex">\(\sum_i s_i = 1\)</span> 恒成立，对 <span class="arithmatex">\(z_k\)</span> 求导得 0）：</p>
+<p>第一行：<span class="arithmatex">\(0.16 - 0.06 - 0.10 = 0\)</span> ✓</p>
+<p>第二行：<span class="arithmatex">\(-0.06+0.21-0.15 = 0\)</span> ✓</p>
+<p>第三行：<span class="arithmatex">\(-0.10-0.15+0.25 = 0\)</span> ✓</p>
+<p><strong>2. 各行元素符号</strong>：对角线为正，非对角线为负
+（提高某个 <span class="arithmatex">\(z_i\)</span> 会降低其它 <span class="arithmatex">\(s_j\)</span>）。</p>
+<p><strong>意义</strong>：softmax 的输出是「竞争」关系——
+一类概率上升，其它必然下降。这与 sigmoid（各元素独立）
+形成鲜明对比。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../integral/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 积分">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                积分
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../jacobian/" class="md-footer__link md-footer__link--next" aria-label="下一页: 雅可比矩阵">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                雅可比矩阵
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

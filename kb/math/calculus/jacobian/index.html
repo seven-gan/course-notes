@@ -1,0 +1,2994 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/calculus/jacobian/">
+      
+      
+        <link rel="prev" href="../matrix-calculus/">
+      
+      
+        <link rel="next" href="../logistic-softmax/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>雅可比矩阵 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              雅可比矩阵
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、定义：从关节空间到任务空间的线性化
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、二连杆机器人的雅可比（亲手推导）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、二连杆机器人的雅可比（亲手推导）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何设定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        求雅可比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        求行列式（判断奇异）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、雅可比的三类应用
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、雅可比的三类应用">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用 1：速度映射（正问题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用 2：逆速度映射（逆问题）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用 3：静力对偶（力传递）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、奇异值分解与雅可比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：二连杆雅可比的计算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：由末端速度求关节速度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：奇异位形的检测
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：力映射与对偶
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 运动学与力控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人机构学 · 机构的自由度与性能
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 反向传播与梯度流
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 轨迹跟踪
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">机器人机构学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MML §5.4（向量对向量求导）</code><code>现有讲义「第 2 讲 微积分」B.3 节（雅可比矩阵）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《机器人学导论》或《机器人机构学》雅可比章节（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../matrix-calculus/">matrix-calculus</a></span></div></div>
+
+<h1 id="_1">雅可比矩阵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页把雅可比矩阵定义成「向量函数的导数」。这一页专门讲它——</p>
+<blockquote>
+<p><strong>因为雅可比矩阵是把「数学」变成「工程」的那座桥。</strong></p>
+</blockquote>
+<p>在机器人学里，雅可比直接决定：<strong>关节怎么动，末端就怎么动</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">为什么机器人学必须掌握雅可比</p>
+<table>
+<thead>
+<tr>
+<th>工程问题</th>
+<th>雅可比的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>给定期望的末端速度，关节该转多快？</td>
+<td>解 <span class="arithmatex">\(J\dot{\boldsymbol{q}} = \dot{\boldsymbol{x}}\)</span></td>
+</tr>
+<tr>
+<td>末端能施加多大力？</td>
+<td><span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></td>
+</tr>
+<tr>
+<td>什么姿态下机器人「卡住」？</td>
+<td><span class="arithmatex">\(\det J = 0\)</span>（奇异）</td>
+</tr>
+<tr>
+<td>冗余机器人的最优解？</td>
+<td>用伪逆 <span class="arithmatex">\(J^+\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>没有雅可比，这些都没法算。</strong></p>
+</div>
+<hr />
+<h2 id="_2">一、定义：从关节空间到任务空间的线性化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>设机器人有 <span class="arithmatex">\(n\)</span> 个关节、末端有 <span class="arithmatex">\(m\)</span> 个自由度（任务空间维数）。</p>
+<p><strong>正运动学</strong>给出末端位姿与关节变量的关系：</p>
+<div class="arithmatex">\[
+\boldsymbol{x} = \boldsymbol{f}(\boldsymbol{q})
+\]</div>
+<p>其中 <span class="arithmatex">\(\boldsymbol{q}\in\mathbb{R}^n\)</span> 是关节变量，<span class="arithmatex">\(\boldsymbol{x}\in\mathbb{R}^m\)</span> 是末端位姿。</p>
+<p><strong>对时间求导</strong>（用链式法则）：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{x}} = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}\,\dot{\boldsymbol{q}} = J(\boldsymbol{q})\,\dot{\boldsymbol{q}}
+\]</div>
+<p><strong>雅可比矩阵</strong>即</p>
+<div class="arithmatex">\[
+J(\boldsymbol{q}) = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}
+= \begin{bmatrix}
+\dfrac{\partial f_1}{\partial q_1} &amp; \cdots &amp; \dfrac{\partial f_1}{\partial q_n}\\[6pt]
+\vdots &amp; \ddots &amp; \vdots\\[4pt]
+\dfrac{\partial f_m}{\partial q_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial q_n}
+\end{bmatrix}
+\]</div>
+<p><strong>形状是 <span class="arithmatex">\(m\times n\)</span></strong>（行 = 任务维度，列 = 关节数）。</p>
+<div class="admonition note">
+<p class="admonition-title">三个关键认识</p>
+<p><strong>1. 雅可比是「局部的」</strong></p>
+<p>它依赖当前位形 <span class="arithmatex">\(\boldsymbol{q}\)</span>。同一个机器人，
+不同姿态下的雅可比不同。</p>
+<p><strong>工程含义</strong>：控制律必须<strong>在每个控制周期重新计算雅可比</strong>
+（通常是实时计算，这是机器人控制器的计算负担之一）。</p>
+<p><strong>2. 它是「速度层面」的线性映射</strong></p>
+<p>位姿关系 <span class="arithmatex">\(\boldsymbol{x} = \boldsymbol{f}(\boldsymbol{q})\)</span> 是<strong>非线性</strong>的，
+但<strong>速度关系是线性</strong>的：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}
+\]</div>
+<p><strong>这就是「在工作点线性化」</strong>（回到泰勒展开那一页的思想）。</p>
+<p><strong>3. 行数可以少于/多于列数</strong></p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(m\)</span> 与 <span class="arithmatex">\(n\)</span></th>
+<th>含义</th>
+<th>求解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>非冗余</strong></td>
+<td><span class="arithmatex">\(m = n\)</span></td>
+<td>方阵</td>
+<td>直接求逆（若可逆）</td>
+</tr>
+<tr>
+<td><strong>冗余</strong></td>
+<td><span class="arithmatex">\(m &lt; n\)</span></td>
+<td>关节多于自由度</td>
+<td><strong>无穷多解</strong>（用伪逆取最小范数）</td>
+</tr>
+<tr>
+<td><strong>欠驱动</strong></td>
+<td><span class="arithmatex">\(m &gt; n\)</span></td>
+<td>自由度多于关节</td>
+<td>一般无解（只能最小二乘）</td>
+</tr>
+</tbody>
+</table>
+<p>冗余机器人的「无穷多解」是<strong>优点</strong>——可以在完成任务的同时
+用多余自由度避障、避奇异、优化姿态。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="二连杆机械臂与关节角到末端速度的映射">
+<defs>
+<marker id="jb1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="jb1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 基座 -->
+<rect class="f3" x="40" y="196" width="52" height="16" rx="3"/>
+<text class="lbl-s" x="42" y="226">基座（固定）</text>
+<!-- 连杆 1 -->
+<line class="a1" x1="66" y1="196" x2="146" y2="128" stroke-width="7" stroke-linecap="round"/>
+<circle class="d3" cx="66" cy="196" r="7"/>
+<text class="l3" x="34" y="184">关节 1</text>
+<text class="l1" x="86" y="176">连杆 1</text>
+<!-- 关节 2 + 连杆 2 -->
+<circle class="d3" cx="146" cy="128" r="7"/>
+<text class="l3" x="120" y="118">关节 2</text>
+<line class="a1" x1="146" y1="128" x2="242" y2="152" stroke-width="7" stroke-linecap="round"/>
+<text class="l1" x="176" y="126">连杆 2</text>
+<!-- 末端 -->
+<circle class="d2" cx="242" cy="152" r="7"/>
+<text class="l2" x="232" y="178">末端</text>
+<!-- 末端速度向量 -->
+<line class="a2" x1="242" y1="152" x2="330" y2="98" marker-end="url(#jb1-ah1)" stroke-width="2.4"/>
+<text class="l2" x="300" y="90">ẋ = J q̇</text>
+<text class="l2" x="300" y="112">末端速度</text>
+<!-- 关节角速度 -->
+<path class="a3" d="M86,180 A26,26 0 0 1 104,196" fill="none" stroke-width="2.2" marker-end="url(#jb1-ah3)"/>
+<text class="l3" x="66" y="244">q̇₁</text>
+<path class="a3" d="M164,110 A24,24 0 0 1 178,126" fill="none" stroke-width="2.2" marker-end="url(#jb1-ah3)"/>
+<text class="l3" x="152" y="102">q̇₂</text>
+<!-- 关系说明 -->
+<line class="gb" x1="30" y1="20" x2="400" y2="20"/>
+<text class="lbl-s" x="34" y="40">关节空间（n 维） —— J ——▶ 任务空间（m 维）</text>
+<text class="lbl-s" x="34" y="60">q̇（关节角速度）        J(q)         ẋ（末端速度）</text>
+<text class="lbl-s" x="286" y="200">J 依赖当前姿态 q</text>
+<text class="lbl-s" x="286" y="222">每个控制周期都要重算</text>
+</svg>
+<figcaption>图 1　二连杆机械臂的雅可比。关节角速度 q̇ 通过雅可比 J(q) 线性映射到末端速度 ẋ。注意 J 依赖当前位形 q——同一个机器人不同姿态下 J 不同，所以必须实时重算</figcaption>
+</figure>
+
+<hr />
+<h2 id="_3">二、二连杆机器人的雅可比（亲手推导）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>这是最经典的例子，值得完整算一遍。</p>
+<h3 id="_4">几何设定<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>两根连杆长度 <span class="arithmatex">\(l_1\)</span>、<span class="arithmatex">\(l_2\)</span>，关节角 <span class="arithmatex">\(q_1\)</span>、<span class="arithmatex">\(q_2\)</span>（都在平面内）。</p>
+<p><strong>末端位置</strong>：</p>
+<div class="arithmatex">\[
+x = l_1\cos q_1 + l_2\cos(q_1+q_2)
+\]</div>
+<div class="arithmatex">\[
+y = l_1\sin q_1 + l_2\sin(q_1+q_2)
+\]</div>
+<h3 id="_5">求雅可比<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>对两个关节角分别求偏导：</p>
+<div class="arithmatex">\[
+J = \begin{bmatrix}
+\dfrac{\partial x}{\partial q_1} &amp; \dfrac{\partial x}{\partial q_2}\\[6pt]
+\dfrac{\partial y}{\partial q_1} &amp; \dfrac{\partial y}{\partial q_2}
+\end{bmatrix}
+\]</div>
+<p><strong>逐项计算</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial x}{\partial q_1} = -l_1\sin q_1 - l_2\sin(q_1+q_2)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial x}{\partial q_2} = -l_2\sin(q_1+q_2)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial y}{\partial q_1} = l_1\cos q_1 + l_2\cos(q_1+q_2)
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial y}{\partial q_2} = l_2\cos(q_1+q_2)
+\]</div>
+<p><strong>所以</strong></p>
+<div class="arithmatex">\[
+J = \begin{bmatrix}
+-l_1\sin q_1 - l_2\sin(q_1+q_2) &amp; -l_2\sin(q_1+q_2)\\
+l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
+\end{bmatrix}
+\]</div>
+<h3 id="_6">求行列式（判断奇异）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\det J = \left(-l_1\sin q_1 - l_2\sin(q_1{+}q_2)\right)\cdot l_2\cos(q_1{+}q_2)
+- \left(-l_2\sin(q_1{+}q_2)\right)\cdot\left(l_1\cos q_1 + l_2\cos(q_1{+}q_2)\right)
+\]</div>
+<p>展开并整理：</p>
+<div class="arithmatex">\[
+= -l_1l_2\sin q_1\cos(q_1{+}q_2) - l_2^2\sin(q_1{+}q_2)\cos(q_1{+}q_2)
++ l_1l_2\sin(q_1{+}q_2)\cos q_1 + l_2^2\sin(q_1{+}q_2)\cos(q_1{+}q_2)
+\]</div>
+<p>中间两项相消（<span class="arithmatex">\(+l_2^2\)</span> 与 <span class="arithmatex">\(-l_2^2\)</span> 抵消）：</p>
+<div class="arithmatex">\[
+= l_1l_2\left[\sin(q_1{+}q_2)\cos q_1 - \sin q_1\cos(q_1{+}q_2)\right]
+\]</div>
+<p>用<strong>和角公式</strong> <span class="arithmatex">\(\sin A\cos B - \sin B\cos A = \sin(A-B)\)</span>，取 <span class="arithmatex">\(A = q_1+q_2\)</span>，<span class="arithmatex">\(B = q_1\)</span>：</p>
+<div class="arithmatex">\[
+\boxed{\ \det J = l_1l_2\sin q_2\ }
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">这个简洁结果有明确的物理含义</p>
+<div class="arithmatex">\[
+\det J = l_1l_2\sin q_2
+\]</div>
+<p><strong>奇异条件</strong>：<span class="arithmatex">\(\det J = 0 \iff \sin q_2 = 0 \iff q_2 = 0°\)</span> 或 <span class="arithmatex">\(180°\)</span></p>
+<table>
+<thead>
+<tr>
+<th>姿态</th>
+<th>物理含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(q_2 = 0°\)</span></td>
+<td>两连杆<strong>完全伸直</strong>（共线向外）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q_2 = 180°\)</span></td>
+<td>两连杆<strong>完全折叠</strong>（共线向内）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这两个姿态是奇异的</strong>：</p>
+<ul>
+<li><strong>完全伸直</strong>时，末端只能沿垂直方向运动——
+  <strong>沿连杆方向的自由度丢失了</strong></li>
+<li><strong>完全折叠</strong>时，末端位置与 <span class="arithmatex">\(q_1\)</span> 无关的变化被 <span class="arithmatex">\(q_2\)</span> 抵消</li>
+</ul>
+<p><strong>直观理解</strong>：伸直时，转动 <span class="arithmatex">\(q_2\)</span> 与转动 <span class="arithmatex">\(q_1\)</span> 在末端产生的
+速度方向<strong>重合</strong>（线性相关），雅可比的列不满秩。</p>
+<p><strong>工程后果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无法沿某方向运动</td>
+<td>该方向的速度要求无解</td>
+</tr>
+<tr>
+<td>求逆发散</td>
+<td><span class="arithmatex">\(J^{-1}\)</span> 不存在（或接近奇异时数值爆炸）</td>
+</tr>
+<tr>
+<td>关节速度爆炸</td>
+<td>微小的末端速度要求对应极大的关节速度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对策</strong>：阻尼最小二乘（DLS）——用
+<span class="arithmatex">\(J^\top(JJ^\top + \lambda^2I)^{-1}\)</span> 替代 <span class="arithmatex">\(J^{-1}\)</span>，
+在接近奇异时自动降低增益。</p>
+</div>
+<hr />
+<h2 id="_7">三、雅可比的三类应用<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="1">应用 1：速度映射（正问题）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>已知关节速度 <span class="arithmatex">\(\dot{\boldsymbol{q}}\)</span>，求末端速度：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}
+\]</div>
+<p><strong>总是可算</strong>（一次矩阵乘法）。</p>
+<h3 id="2">应用 2：逆速度映射（逆问题）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>已知期望的末端速度 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span>，求关节速度：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^{-1}\dot{\boldsymbol{x}} \quad (m = n)
+\]</div>
+<p><strong>冗余情形</strong>（<span class="arithmatex">\(m &lt; n\)</span>）用<strong>伪逆</strong>取最小范数解：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^{+}\dot{\boldsymbol{x}},
+\qquad
+J^{+} = J^\top(JJ^\top)^{-1}
+\]</div>
+<p>（这里 <span class="arithmatex">\(JJ^\top\)</span> 是 <span class="arithmatex">\(m\times m\)</span>，可逆性更好。）</p>
+<h3 id="3">应用 3：静力对偶（力传递）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>这是最容易被忽略却很重要的一点。</p>
+<p><strong>虚功原理</strong>：末端做的功 = 关节做的功</p>
+<div class="arithmatex">\[
+\boldsymbol{F}^\top\dot{\boldsymbol{x}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
+\]</div>
+<p>代入 <span class="arithmatex">\(\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}\)</span>：</p>
+<div class="arithmatex">\[
+\boldsymbol{F}^\top J\dot{\boldsymbol{q}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
+\]</div>
+<p>对任意 <span class="arithmatex">\(\dot{\boldsymbol{q}}\)</span> 成立，所以</p>
+<div class="arithmatex">\[
+\boxed{\ \boldsymbol{\tau} = J^\top\boldsymbol{F}\ }
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">为什么力映射用转置（而不是逆）</p>
+<p><strong>速度用 <span class="arithmatex">\(J\)</span>，力用 <span class="arithmatex">\(J^\top\)</span></strong>——这个「对偶」关系来自
+<strong>虚功原理</strong>（能量守恒）。</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>映射</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>速度</td>
+<td><span class="arithmatex">\(\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}\)</span></td>
+<td>运动学定义</td>
+</tr>
+<tr>
+<td><strong>力</strong></td>
+<td><span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></td>
+<td><strong>能量守恒</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证量纲</strong>：<span class="arithmatex">\(\boldsymbol{F}\)</span> 是力（<span class="arithmatex">\(m\)</span> 维），<span class="arithmatex">\(J^\top\)</span> 是 <span class="arithmatex">\(n\times m\)</span>，
+乘起来是 <span class="arithmatex">\(n\)</span> 维的力矩 ✓</p>
+<p><strong>工程含义</strong>：</p>
+<ul>
+<li>想让末端施加某个力，可由 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span> 算关节力矩</li>
+<li><strong>奇异位形下</strong>，某些方向的力需要无穷大力矩
+  （因为 <span class="arithmatex">\(J\)</span> 降秩，<span class="arithmatex">\(J^\top\)</span> 也降秩，无法产生某些方向的力）</li>
+</ul>
+<p><strong>这个对偶关系在「力控」「阻抗控制」中到处出现</strong>，
+也是为什么机器人控制里 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 总是成对出现。</p>
+</div>
+<hr />
+<h2 id="_8">四、奇异值分解与雅可比<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>雅可比的<strong>奇异值</strong>有直接的物理含义。</p>
+<div class="arithmatex">\[
+J = U\Sigma V^\top
+\]</div>
+<p><strong>奇异值 <span class="arithmatex">\(\sigma_i\)</span> 的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>奇异值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最大奇异值 <span class="arithmatex">\(\sigma_{\max}\)</span></td>
+<td>末端在某方向的<strong>最大速度放大倍数</strong></td>
+</tr>
+<tr>
+<td>最小奇异值 <span class="arithmatex">\(\sigma_{\min}\)</span></td>
+<td><strong>最弱方向</strong>的放大倍数</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma_{\min} = 0\)</span></td>
+<td><strong>奇异</strong>（该方向动不了）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>可操作度</strong>（manipulability）：</p>
+<div class="arithmatex">\[
+w = \sqrt{\det(JJ^\top)} = \prod_i\sigma_i
+\]</div>
+<p><strong>衡量机器人「离奇异有多远」</strong>：<span class="arithmatex">\(w\)</span> 大表示灵活，<span class="arithmatex">\(w\to0\)</span> 表示接近奇异。</p>
+<p><strong>条件数</strong>：</p>
+<div class="arithmatex">\[
+\kappa(J) = \frac{\sigma_{\max}}{\sigma_{\min}}
+\]</div>
+<p><span class="arithmatex">\(\kappa\)</span> 大表示各向异性强（某些方向容易动、某些方向难动）。</p>
+<div class="admonition note">
+<p class="admonition-title">这就是「奇异值和可操作度」在机器人学中的用法</p>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>避奇异路径规划</td>
+<td>最大化 <span class="arithmatex">\(w\)</span> 或最小化 <span class="arithmatex">\(\kappa\)</span></td>
+</tr>
+<tr>
+<td>奇异检测</td>
+<td>监控 <span class="arithmatex">\(\sigma_{\min}\)</span>，低于阈值就报警</td>
+</tr>
+<tr>
+<td>力/速度权衡</td>
+<td>由奇异值分布决定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这回到了线性代数模块的 SVD</strong>——那里讲的数学工具，
+在这里变成了机器人设计的定量指标。</p>
+</div>
+<hr />
+<h2 id="_9">五、典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="1_1">例题 1：二连杆雅可比的计算<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(l_1 = l_2 = 1\)</span>，<span class="arithmatex">\(q_1 = 0°\)</span>，<span class="arithmatex">\(q_2 = 90°\)</span>。
+求雅可比矩阵，并判断是否奇异。</p>
+<details class="note">
+<summary>思路</summary>
+<p>代入前面的公式，先算角度和，再代三角函数值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>准备三角函数值</strong>：</p>
+<div class="arithmatex">\[
+q_1 = 0, \qquad q_2 = \frac{\pi}{2}, \qquad q_1+q_2 = \frac{\pi}{2}
+\]</div>
+<div class="arithmatex">\[
+\sin q_1 = 0,\quad \cos q_1 = 1,\quad
+\sin(q_1+q_2) = 1,\quad \cos(q_1+q_2) = 0
+\]</div>
+<p><strong>代入雅可比公式</strong>（<span class="arithmatex">\(l_1 = l_2 = 1\)</span>）：</p>
+<div class="arithmatex">\[
+J = \begin{bmatrix}
+-1\cdot0 - 1\cdot1 &amp; -1\cdot1\\
+1\cdot1 + 1\cdot0 &amp; 1\cdot0
+\end{bmatrix}
+= \begin{bmatrix}
+-1 &amp; -1\\
+1 &amp; 0
+\end{bmatrix}
+\]</div>
+<p><strong>求行列式</strong>：</p>
+<div class="arithmatex">\[
+\det J = (-1)(0) - (-1)(1) = 1
+\]</div>
+<p><strong>交叉验证</strong>（用公式 <span class="arithmatex">\(\det J = l_1l_2\sin q_2\)</span>）：</p>
+<div class="arithmatex">\[
+\det J = 1\cdot1\cdot\sin\frac{\pi}{2} = 1 \;\checkmark
+\]</div>
+<p><strong>结论</strong>：<span class="arithmatex">\(\det J = 1 \neq 0\)</span> → <strong>非奇异</strong>，姿态可操作。</p>
+<p><strong>物理验证</strong>：<span class="arithmatex">\(q_2 = 90°\)</span> 是「垂直」，离奇异的
+<span class="arithmatex">\(q_2 = 0°\)</span> 与 <span class="arithmatex">\(180°\)</span> 都最远（<span class="arithmatex">\(90°\)</span> 处的 <span class="arithmatex">\(\lvert\sin q_2\rvert\)</span> 最大）。
+所以这是<strong>可操作度最大</strong>的姿态 ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">可操作度随第二关节角的变化</p>
+<div class="arithmatex">\[
+\lvert\det J\rvert = l_1l_2\lvert\sin q_2\rvert
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(q_2\)</span></th>
+<th><span class="arithmatex">\(\lvert\det J\rvert\)</span></th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0°\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>奇异</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(30°\)</span></td>
+<td><span class="arithmatex">\(0.5l_1l_2\)</span></td>
+<td>较差</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(60°\)</span></td>
+<td><span class="arithmatex">\(0.866l_1l_2\)</span></td>
+<td>较好</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(90°\)</span></strong></td>
+<td><span class="arithmatex">\(l_1l_2\)</span></td>
+<td><strong>最优</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(120°\)</span></td>
+<td><span class="arithmatex">\(0.866l_1l_2\)</span></td>
+<td>较好</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(180°\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>奇异</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以二连杆的最佳工作区间是 <span class="arithmatex">\(q_2\)</span> 在 <span class="arithmatex">\(60°\)</span>–<span class="arithmatex">\(120°\)</span></strong>。</p>
+<p>与 <span class="arithmatex">\(q_1\)</span> 无关（因为 <span class="arithmatex">\(\det J\)</span> 不含 <span class="arithmatex">\(q_1\)</span>）——
+这是二连杆平面臂的特殊性质（整个工作空间内径向对称）。</p>
+</div>
+<hr />
+<h3 id="2_1">例题 2：由末端速度求关节速度<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
+<p>承上例（<span class="arithmatex">\(J = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\)</span>）。
+要求末端速度为 <span class="arithmatex">\(\dot{\boldsymbol{x}} = (0, 1)^\top\)</span>，求关节速度。</p>
+<details class="note">
+<summary>思路</summary>
+<p>解线性方程组 <span class="arithmatex">\(J\dot{\boldsymbol{q}} = \dot{\boldsymbol{x}}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>列方程</strong>：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}
+\begin{bmatrix}\dot q_1\\ \dot q_2\end{bmatrix}
+= \begin{bmatrix}0\\1\end{bmatrix}
+\]</div>
+<p><strong>展开</strong>：</p>
+<div class="arithmatex">\[
+\begin{cases}
+-\dot q_1 - \dot q_2 = 0\\
+\dot q_1 = 1
+\end{cases}
+\]</div>
+<p><strong>求解</strong>：由第二式 <span class="arithmatex">\(\dot q_1 = 1\)</span>，代入第一式：</p>
+<div class="arithmatex">\[
+-1 - \dot q_2 = 0 \implies \dot q_2 = -1
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = (1,\ -1)^\top
+\]</div>
+<p><strong>验证</strong>：</p>
+<div class="arithmatex">\[
+J\dot{\boldsymbol{q}} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}1\\-1\end{bmatrix}
+= \begin{bmatrix}-1+1\\1\end{bmatrix} = \begin{bmatrix}0\\1\end{bmatrix} \;\checkmark
+\]</div>
+<p><strong>物理含义</strong>：关节 1 正向转、关节 2 反向转，
+两者配合使末端纯向上运动（水平分量恰好抵消）。</p>
+<p><strong>也可用逆矩阵直接算</strong>：</p>
+<div class="arithmatex">\[
+J^{-1} = \frac{1}{\det J}\begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
+= \begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
+\]</div>
+<p>（因为 <span class="arithmatex">\(\det J = 1\)</span>，逆矩阵就是伴随矩阵。）</p>
+<p>验证：</p>
+<div class="arithmatex">\[
+J^{-1}\dot{\boldsymbol{x}} = \begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix}
+= \begin{bmatrix}1\\-1\end{bmatrix} \;\checkmark
+\]</div>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">注意逆矩阵的推导顺序</p>
+<p><span class="arithmatex">\(2\times2\)</span> 矩阵的逆公式：</p>
+<div class="arithmatex">\[
+\begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}^{-1}
+= \frac{1}{ad-bc}\begin{bmatrix}d&amp;-b\\-c&amp;a\end{bmatrix}
+\]</div>
+<p><strong>注意对角元互换、非对角元变号</strong>——这个符号容易记错。</p>
+<p><strong>验证方法</strong>：算 <span class="arithmatex">\(J\cdot J^{-1}\)</span> 看是否得单位阵。</p>
+<p>在本例中：</p>
+<div class="arithmatex">\[
+J\cdot J^{-1} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
+= \begin{bmatrix}0+1 &amp; -1+1\\ 0+0 &amp; 1+0\end{bmatrix}
+= \begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix} \;\checkmark
+\]</div>
+</div>
+<hr />
+<h3 id="3_1">例题 3：奇异位形的检测<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(l_1 = 2\)</span>、<span class="arithmatex">\(l_2 = 1\)</span>。判断 <span class="arithmatex">\(q_2 = 5°\)</span> 时的可操作度，
+并说明为什么此时控制会出问题。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用 <span class="arithmatex">\(\det J = l_1l_2\sin q_2\)</span> 算可操作度。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>计算行列式</strong>：</p>
+<div class="arithmatex">\[
+\det J = l_1l_2\sin q_2 = 2\times1\times\sin 5° = 2\times0.0872 = 0.174
+\]</div>
+<p><strong>与最优姿态（<span class="arithmatex">\(q_2 = 90°\)</span>）对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>姿态</th>
+<th><span class="arithmatex">\(\det J\)</span></th>
+<th>相对最优</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(q_2 = 90°\)</span></td>
+<td><span class="arithmatex">\(2.0\)</span></td>
+<td><span class="arithmatex">\(100\%\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(q_2 = 5°\)</span></td>
+<td><span class="arithmatex">\(0.174\)</span></td>
+<td><strong><span class="arithmatex">\(8.7\%\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>可操作度只有最优时的 8.7%</strong> —— 接近奇异。</p>
+<p><strong>为什么控制会出问题</strong>：</p>
+<p><strong>1. 逆运动学的增益爆炸</strong></p>
+<div class="arithmatex">\[
+J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
+\]</div>
+<p><span class="arithmatex">\(\det J = 0.174\)</span> 时，逆矩阵的元素被放大 <span class="arithmatex">\(1/0.174 \approx 5.7\)</span> 倍。
+若 <span class="arithmatex">\(q_2 = 1°\)</span>（<span class="arithmatex">\(\det J = 0.035\)</span>），放大 29 倍；
+<span class="arithmatex">\(q_2 = 0.1°\)</span> 时放大 287 倍。</p>
+<p><strong>后果</strong>：末端要求一个微小的速度，关节就要转动极快——
+超出电机能力，或引起剧烈振动。</p>
+<p><strong>2. 微小误差被放大</strong></p>
+<p>控制中总有测量/计算误差。接近奇异时，</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^{-1}\dot{\boldsymbol{x}}
+\]</div>
+<p>会把 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span> 的小误差放大 <span class="arithmatex">\(1/\sigma_{\min}\)</span> 倍。
+当 <span class="arithmatex">\(\sigma_{\min}\to0\)</span>，误差被放大到无穷。</p>
+<p><strong>3. 某些方向完全动不了</strong></p>
+<p>奇异时 <span class="arithmatex">\(\det J = 0\)</span>，<span class="arithmatex">\(J\)</span> 降秩，
+存在非零向量 <span class="arithmatex">\(\boldsymbol{v}\)</span> 使 <span class="arithmatex">\(J\boldsymbol{v} = \boldsymbol{0}\)</span>。</p>
+<p><strong>物理含义</strong>：沿 <span class="arithmatex">\(\boldsymbol{v}\)</span> 方向转关节，末端<strong>不动</strong>——
+这部分「关节运动」被浪费了。</p>
+<p>在本例（完全伸直）中，这个方向就是「沿连杆轴向」的末端运动能力。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">工程对策一览</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>阻尼最小二乘</strong></td>
+<td>用 <span class="arithmatex">\(J^\top(JJ^\top+\lambda^2I)^{-1}\)</span></td>
+<td>引入位置误差</td>
+</tr>
+<tr>
+<td>关节限位</td>
+<td>限制 <span class="arithmatex">\(q_2\)</span> 不小于某个角度</td>
+<td>缩小工作空间</td>
+</tr>
+<tr>
+<td>任务空间缩放</td>
+<td>接近奇异时降低末端速度指令</td>
+<td>变慢</td>
+</tr>
+<tr>
+<td>避奇异路径规划</td>
+<td>规划时就绕开奇异区</td>
+<td>需要路径优化</td>
+</tr>
+<tr>
+<td>冗余机器人</td>
+<td>用多余自由度主动避开</td>
+<td>结构复杂</td>
+</tr>
+</tbody>
+</table>
+<p><strong>阻尼最小二乘的公式</strong>：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^\top\big(JJ^\top + \lambda^2I\big)^{-1}\dot{\boldsymbol{x}}
+\]</div>
+<p><strong>原理</strong>：加上 <span class="arithmatex">\(\lambda^2I\)</span> 使矩阵<strong>一定可逆</strong>（正定），
+在奇异附近自动「软化」——牺牲一些精度换取数值稳定。</p>
+<p><strong><span class="arithmatex">\(\lambda\)</span> 的选取</strong>：离奇异远时取小（精度优先），
+接近奇异时取大（稳定优先）。这就是<strong>变阻尼</strong>策略。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：力映射与对偶<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>承例 1（<span class="arithmatex">\(J = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\)</span>）。
+若末端要施加 <span class="arithmatex">\(\boldsymbol{F} = (0, 10)^\top\)</span>（向上 10 N），
+求需要的关节力矩，并验证能量守恒。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>求 <span class="arithmatex">\(J^\top\)</span></strong>（转置即行列互换）：</p>
+<div class="arithmatex">\[
+J^\top = \begin{bmatrix}-1&amp;1\\-1&amp;0\end{bmatrix}
+\]</div>
+<p><strong>计算关节力矩</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{\tau} = J^\top\boldsymbol{F}
+= \begin{bmatrix}-1&amp;1\\-1&amp;0\end{bmatrix}\begin{bmatrix}0\\10\end{bmatrix}
+= \begin{bmatrix}0+10\\0+0\end{bmatrix}
+= \begin{bmatrix}10\\0\end{bmatrix}
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(\boldsymbol{\tau} = (10,\ 0)^\top\)</span></p>
+<p><strong>物理解读</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>关节</th>
+<th>力矩</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关节 1</td>
+<td><span class="arithmatex">\(10\)</span> N·m</td>
+<td>需要驱动</td>
+</tr>
+<tr>
+<td>关节 2</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>不需要力矩</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么关节 2 不需要力矩</strong>：当前姿态（<span class="arithmatex">\(q_1 = 0\)</span>，<span class="arithmatex">\(q_2 = 90°\)</span>）下，
+关节 2 的轴线与所需的力方向「对齐」，
+或者更准确地说：<span class="arithmatex">\(\boldsymbol{F}\)</span> 在关节 2 「能产生的力」方向上的
+投影为零。</p>
+<p><strong>验证能量守恒（虚功）</strong>：</p>
+<p>设关节速度为 <span class="arithmatex">\(\dot{\boldsymbol{q}} = (1,-1)^\top\)</span>（例 2 的结果），
+则末端速度为 <span class="arithmatex">\(\dot{\boldsymbol{x}} = (0,1)^\top\)</span>。</p>
+<p><strong>末端功率</strong>：</p>
+<div class="arithmatex">\[
+P_{\text{末端}} = \boldsymbol{F}^\top\dot{\boldsymbol{x}} = (0,10)\cdot(0,1) = 10
+\]</div>
+<p><strong>关节功率</strong>：</p>
+<div class="arithmatex">\[
+P_{\text{关节}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}} = (10,0)\cdot(1,-1) = 10
+\]</div>
+<p><strong>两者相等</strong> ✓ 能量守恒成立。</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">这个「对偶」在控制中的核心地位</p>
+<table>
+<thead>
+<tr>
+<th>控制类型</th>
+<th>主控量</th>
+<th>用到的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>位置/速度控制</strong></td>
+<td>关节速度</td>
+<td><span class="arithmatex">\(\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}\)</span></td>
+</tr>
+<tr>
+<td><strong>力/阻抗控制</strong></td>
+<td>末端力</td>
+<td><span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></td>
+</tr>
+<tr>
+<td>混合控制</td>
+<td>两者</td>
+<td>按方向分解</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这个对偶必然成立</strong>：来自<strong>虚功原理</strong>（能量守恒），
+是物理定律，不是数学巧合。</p>
+<p><strong>这也解释了「奇异位形下不能施加某些方向的力」</strong>：
+<span class="arithmatex">\(J\)</span> 降秩 → <span class="arithmatex">\(J^\top\)</span> 也降秩 → <span class="arithmatex">\(\boldsymbol{\tau}\)</span> 张成的空间变小，
+有些 <span class="arithmatex">\(\boldsymbol{F}\)</span> 无法实现（无论给多大关节力矩）。</p>
+</div>
+<hr />
+<h2 id="_10">六、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">机器人学 · 运动学与力控<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>速度运动学</strong>：<span class="arithmatex">\(\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}\)</span>（核心方程）</li>
+<li><strong>静力分析</strong>：<span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></li>
+<li><strong>奇异位形</strong>：<span class="arithmatex">\(\det J = 0\)</span>，用 <span class="arithmatex">\(\sigma_{\min}\)</span> 或可操作度检测</li>
+<li><strong>逆运动学数值解</strong>：<span class="arithmatex">\(\Delta\boldsymbol{q} = J^{+}\Delta\boldsymbol{x}\)</span>（雅可比迭代）</li>
+<li><strong>阻抗/导纳控制</strong>：全建立在 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 之上</li>
+</ul>
+<h3 id="_12">机器人机构学 · 机构的自由度与性能<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>自由度分析</strong>：雅可比的秩给出瞬时自由度数</li>
+<li><strong>可操作度</strong> <span class="arithmatex">\(w = \sqrt{\det(JJ^\top)}\)</span> 作为机构设计指标</li>
+<li><strong>条件数</strong> <span class="arithmatex">\(\kappa(J)\)</span> 衡量灵活性</li>
+<li><strong>并联机构</strong>的雅可比分析与串联不同（含约束）</li>
+</ul>
+<h3 id="_13">模式识别 · 反向传播与梯度流<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>雅可比矩阵</strong>就是链式法则里的偏导矩阵</li>
+<li><strong>逐元素激活函数</strong>的雅可比是对角阵 → 高效计算</li>
+<li><strong>梯度消失</strong>的定量分析就是雅可比连乘的谱分析</li>
+</ul>
+<h3 id="_14">无人系统自主决策与优化 · 轨迹跟踪<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>微分平坦/反馈线性化</strong>：用雅可比的逆做精确线性化</li>
+<li><strong>轨迹跟踪控制</strong>：<span class="arithmatex">\(\dot{\boldsymbol{q}}_d = J^{+}\dot{\boldsymbol{x}}_d\)</span></li>
+<li><strong>模型预测控制</strong>：预测模型对状态/控制的雅可比</li>
+</ul>
+<hr />
+<h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 三连杆平面机械臂（<span class="arithmatex">\(n = 3\)</span>，末端位置 <span class="arithmatex">\(m = 2\)</span>）的雅可比是什么形状？
+如何求逆运动学解？</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑 <span class="arithmatex">\(m\)</span> 与 <span class="arithmatex">\(n\)</span> 的关系。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>雅可比形状</strong>：<span class="arithmatex">\(m\times n = 2\times3\)</span></p>
+<div class="arithmatex">\[
+J \in \mathbb{R}^{2\times3}
+\]</div>
+<p><strong>行列式不存在</strong>（非方阵）→ 不能直接求逆 ✗</p>
+<p><strong>这是冗余机器人</strong>（<span class="arithmatex">\(n &gt; m\)</span>：关节数多于任务维数）。</p>
+<p><strong>求逆解用伪逆</strong>（最小范数解）：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^{+}\dot{\boldsymbol{x}},
+\qquad
+J^{+} = J^\top\big(JJ^\top\big)^{-1}
+\]</div>
+<p><strong>这时 <span class="arithmatex">\(JJ^\top\)</span> 是 <span class="arithmatex">\(2\times2\)</span></strong>，可逆性较好 ✓</p>
+<p><strong>冗余的价值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>无穷多解</strong></td>
+<td><span class="arithmatex">\(3-2 = 1\)</span> 维的零空间</td>
+</tr>
+<tr>
+<td>可避障</td>
+<td>用零空间运动规避障碍</td>
+</tr>
+<tr>
+<td>可避奇异</td>
+<td>主动调整姿态远离奇异</td>
+</tr>
+<tr>
+<td>可优化次要目标</td>
+<td>如能耗最小、力矩最小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>零空间投影</strong>（利用冗余做次要任务）：</p>
+<div class="arithmatex">\[
+\dot{\boldsymbol{q}} = J^{+}\dot{\boldsymbol{x}} + \big(I - J^{+}J\big)\boldsymbol{z}
+\]</div>
+<p>第二项在零空间内（不影响末端），可用来优化次要目标 <span class="arithmatex">\(\boldsymbol{z}\)</span>。</p>
+<p><strong>验证</strong>：<span class="arithmatex">\(J(I - J^+J) = J - JJ^+J = J - J = 0\)</span> ✓
+（因为 <span class="arithmatex">\(JJ^+J = J\)</span> 是伪逆的定义性质之一。）</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 为什么 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span> 而不是 <span class="arithmatex">\(\boldsymbol{\tau} = J^{-1}\boldsymbol{F}\)</span>？</p>
+<details class="note">
+<summary>提示</summary>
+<p>从能量/虚功角度考虑，并检查量纲。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为来自虚功原理（能量守恒），不是运动学关系。</strong></p>
+<p><strong>推导</strong>：</p>
+<p>末端做功 = 关节做功</p>
+<div class="arithmatex">\[
+\boldsymbol{F}^\top\dot{\boldsymbol{x}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
+\]</div>
+<p>代入 <span class="arithmatex">\(\dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}\)</span>：</p>
+<div class="arithmatex">\[
+\boldsymbol{F}^\top J\dot{\boldsymbol{q}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
+\]</div>
+<p>对任意 <span class="arithmatex">\(\dot{\boldsymbol{q}}\)</span> 成立 →</p>
+<div class="arithmatex">\[
+\boldsymbol{\tau} = J^\top\boldsymbol{F}
+\]</div>
+<p><strong>为什么不能用 <span class="arithmatex">\(J^{-1}\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>形状不对</strong></td>
+<td><span class="arithmatex">\(J^{-1}\)</span> 是 <span class="arithmatex">\(n\times n\)</span>，<span class="arithmatex">\(\boldsymbol{F}\)</span> 是 <span class="arithmatex">\(m\)</span> 维；<span class="arithmatex">\(m \neq n\)</span> 时无法相乘</td>
+</tr>
+<tr>
+<td><strong>量纲不对</strong></td>
+<td><span class="arithmatex">\(\boldsymbol{F}\)</span>（力）乘 <span class="arithmatex">\(J^{-1}\)</span>（1/长度）得「力/长度」，不是力矩</td>
+</tr>
+<tr>
+<td><strong>物理含义不对</strong></td>
+<td>力映射是「对偶」，不是「逆」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>量纲验证（<span class="arithmatex">\(J^\top\)</span> 正确）</strong>：</p>
+<ul>
+<li><span class="arithmatex">\(\boldsymbol{F}\)</span> 各分量：力（N）</li>
+<li><span class="arithmatex">\(J\)</span> 各元素：长度（m）</li>
+<li><span class="arithmatex">\(J^\top\boldsymbol{F}\)</span>：N·m = <strong>力矩</strong> ✓</li>
+</ul>
+<p><strong>核心认识</strong>：<strong>速度用逆、力用转置</strong>，
+这与「线性代数的对偶空间」是同一件事——
+力是速度的对偶向量（属于对偶空间），
+所以变换用转置而非逆。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：<span class="arithmatex">\(\det J = 0\)</span> 时，机器人完全不能运动。</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑零空间的含义。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。不是「完全不能动」，而是「某个方向不能动」。</strong></p>
+<p><strong>准确表述</strong>：</p>
+<p><span class="arithmatex">\(\det J = 0\)</span> 表示 <span class="arithmatex">\(J\)</span> <strong>降秩</strong>——存在非零向量 <span class="arithmatex">\(\boldsymbol{v}\)</span> 使
+<span class="arithmatex">\(J\boldsymbol{v} = \boldsymbol{0}\)</span>。</p>
+<p><strong>含义分解</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>能否运动</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值域方向（<span class="arithmatex">\(J\)</span> 的列空间）</td>
+<td><strong>可以</strong>运动 ✓</td>
+</tr>
+<tr>
+<td>零空间方向</td>
+<td>关节动但末端<strong>不动</strong>（该运动被浪费）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>二连杆例子的具体情况</strong>（完全伸直，<span class="arithmatex">\(q_2 = 0°\)</span>）：</p>
+<ul>
+<li>末端<strong>可以</strong>沿垂直于连杆的方向运动（转 <span class="arithmatex">\(q_1\)</span>）</li>
+<li>末端<strong>不能</strong>沿连杆轴向运动（这个自由度丢失）</li>
+</ul>
+<p>所以是<strong>「丢失一个自由度」</strong>，不是「完全不能动」。</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>某些任务仍可完成</td>
+<td>只要不需要那个缺失的方向</td>
+</tr>
+<tr>
+<td>逆解不可靠</td>
+<td>需要该方向速度时无解或发散</td>
+</tr>
+<tr>
+<td>力控受限</td>
+<td>无法在该方向施加力</td>
+</tr>
+</tbody>
+</table>
+<p><strong>判据的精细程度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>判据</th>
+<th>能看出什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\det J = 0\)</span></td>
+<td>是否<strong>恰好</strong>奇异</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sigma_{\min}\)</span>（最小奇异值）</td>
+<td><strong>离奇异多近</strong>（更实用！）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践建议</strong>：不要只看 <span class="arithmatex">\(\det J\)</span> 是否为零，而要看
+<span class="arithmatex">\(\sigma_{\min}\)</span> 或 <span class="arithmatex">\(\kappa(J)\)</span> ——
+因为<strong>接近</strong>奇异（数值上）就已经有问题了。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../matrix-calculus/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 矩阵微积分">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                矩阵微积分
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../logistic-softmax/" class="md-footer__link md-footer__link--next" aria-label="下一页: Logistic 与 Softmax 导数">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                Logistic 与 Softmax 导数
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
