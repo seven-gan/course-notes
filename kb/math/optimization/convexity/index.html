@@ -1080,6 +1080,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1403,6 +1409,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1455,6 +1472,90 @@
     
   
     牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
   
 
     
@@ -2235,7 +2336,7 @@
 
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#2b8a3e">基础</span><span class="kb-imp-desc">入门必备</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 3 讲 数学优化」C.1–C.2 节</code><code>MML §7.1–7.2</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《凸优化》或《最优化理论与方法》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
-<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../gradient-descent/">gradient-descent</a></span></div></div>
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../gradient-descent/">gradient-descent</a><a href="../duality/">duality</a></span></div></div>
 
 <h1 id="_1">优化问题与凸性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>整门机器学习的训练过程，都可以写成一句话：</p>
@@ -3352,6 +3453,208 @@ e^t \geq 1+t \quad\text{（这是 }e^t\text{ 在 0 处一阶泰勒的下界）}
 <p>这与「正则化的概率解释」一页的结论呼应：
 L1 正则等价于拉普拉斯先验，天然倾向于产生稀疏解。</p>
 </div>
+<hr />
+<h2 id="_14">七、自测<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断 <span class="arithmatex">\(f(x) = \lvert x\rvert\)</span> 是否凸函数。</p>
+<details class="note">
+<summary>提示</summary>
+<p>可以直接用定义，或注意它可写成两个仿射函数的最大值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>方法一：用定义</strong></p>
+<p>对任意 <span class="arithmatex">\(x,y\)</span> 与 <span class="arithmatex">\(\theta\in[0,1]\)</span>，需验证</p>
+<div class="arithmatex">\[
+\lvert\theta x+(1-\theta)y\rvert \leq \theta\lvert x\rvert+(1-\theta)\lvert y\rvert
+\]</div>
+<p>由三角不等式（注意 <span class="arithmatex">\(\theta\geq0\)</span>、<span class="arithmatex">\(1-\theta\geq0\)</span>）：</p>
+<div class="arithmatex">\[
+\lvert\theta x+(1-\theta)y\rvert \leq \lvert\theta x\rvert+\lvert(1-\theta)y\rvert
+= \theta\lvert x\rvert+(1-\theta)\lvert y\rvert \;\checkmark
+\]</div>
+<p><strong>方法二：写成 max 形式</strong></p>
+<div class="arithmatex">\[
+\lvert x\rvert = \max\{x,\ -x\}
+\]</div>
+<p>而 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(-x\)</span> 都是<strong>仿射函数</strong>（既凸又凹），</p>
+<p><strong>max 保持凸性</strong>（前面「保持凸性的运算」表） → <strong>凸</strong> ✓</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(\lvert x\rvert\)</span> 是<strong>凸函数</strong>。</p>
+<p><strong>工程意义</strong>：这解释了为什么 L1 正则（<span class="arithmatex">\(\sum\lvert w_j\rvert\)</span>）
+是凸的 → Lasso 问题可可靠求解 ✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断集合 <span class="arithmatex">\(\{(x_1,x_2): x_1^2+x_2^2\geq1\}\)</span>（单位圆盘外部）是否凸。</p>
+<details class="note">
+<summary>提示</summary>
+<p>取两个离得很远的点看中点。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不是凸集。</strong></p>
+<p><strong>反例</strong>：取 <span class="arithmatex">\(\boldsymbol{x} = (1,0)\)</span> 与 <span class="arithmatex">\(\boldsymbol{y} = (-1,0)\)</span>。</p>
+<p>两者都满足 <span class="arithmatex">\(x_1^2+x_2^2 = 1\geq1\)</span> ✓ 都在集合内。</p>
+<p><strong>中点</strong>：</p>
+<div class="arithmatex">\[
+\frac{\boldsymbol{x}+\boldsymbol{y}}{2} = (0,0)
+\]</div>
+<p>检查：<span class="arithmatex">\(0^2+0^2 = 0 &lt; 1\)</span> → <strong>中点不在集合内</strong> ✗</p>
+<p><strong>违反凸集定义</strong> → <strong>非凸</strong> ✗</p>
+<p><strong>关键对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>集合</th>
+<th>形式</th>
+<th>是否凸</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>圆盘内部</td>
+<td><span class="arithmatex">\(x_1^2+x_2^2\leq1\)</span></td>
+<td>✓ 凸（子水平集）</td>
+</tr>
+<tr>
+<td><strong>圆盘外部</strong></td>
+<td><span class="arithmatex">\(x_1^2+x_2^2\geq1\)</span></td>
+<td>✗ <strong>非凸</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>规律</strong>：<strong>「<span class="arithmatex">\(\leq\)</span>」（凸函数的子水平集）给出凸集，
+「<span class="arithmatex">\(\geq\)</span>」一般不给</strong> ——
+因为 <span class="arithmatex">\(\geq\)</span> 对应「凸函数的上水平集」，
+而<strong>凸函数的上水平集不保证凸</strong>。</p>
+<p><strong>对应到滤波设计</strong>：若要求「某些频率的增益 <span class="arithmatex">\(\geq\)</span> 某值」（带通要求），
+可行集可能是非凸的 → 需要专门处理（如凸松弛）。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 设 <span class="arithmatex">\(f(\boldsymbol{x}) = \max\{2x_1+x_2,\ x_1-x_2+3,\ -x_1+1\}\)</span>。
+说明 <span class="arithmatex">\(f\)</span> 是凸函数，并求 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\boldsymbol{x} = (1,1)\)</span> 处的值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>max 保持凸性；直接代入三个仿射函数取最大。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>凸性</strong>：三项都是<strong>仿射函数</strong></p>
+<div class="arithmatex">\[
+g_1 = 2x_1+x_2,\qquad g_2 = x_1-x_2+3,\qquad g_3 = -x_1+1
+\]</div>
+<p><strong>仿射函数既凸又凹</strong> → <strong>max 保持凸性</strong> → <span class="arithmatex">\(f\)</span> <strong>凸</strong> ✓</p>
+<p><strong>求值</strong>（<span class="arithmatex">\(\boldsymbol{x} = (1,1)\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>计算</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(g_1\)</span></td>
+<td><span class="arithmatex">\(2(1)+1\)</span></td>
+<td><span class="arithmatex">\(3\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g_2\)</span></td>
+<td><span class="arithmatex">\(1-1+3\)</span></td>
+<td><span class="arithmatex">\(3\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(g_3\)</span></td>
+<td><span class="arithmatex">\(-1+1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+f(1,1) = \max\{3,\ 3,\ 0\} = 3
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(f(1,1) = 3\)</span></p>
+<p><strong>注意</strong>：<strong>两项同时取到最大值</strong>（<span class="arithmatex">\(g_1 = g_2 = 3\)</span>）——
+这对应「活跃约束不止一个」的情形
+（与 KKT 那一页的「角点」情形同源）。</p>
+<p><strong>工程含义</strong>：<strong>max 形式在鲁棒优化中很常见</strong> ——
+「在所有可能情形下满足要求」就是让每个情形的约束都成立，
+即取最大值 ≤ 0。而 max 保持凸性，所以<strong>鲁棒优化常常仍是凸问题</strong> ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么 <span class="arithmatex">\(\min\)</span> 不一定保持凸性？举反例。</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑两个凸函数的逐点最小值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为「取最小值」是「取上确界」的对偶操作，方向相反。</strong></p>
+<table>
+<thead>
+<tr>
+<th>运算</th>
+<th>是否保持</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\max\)</span>（或 <span class="arithmatex">\(\sup\)</span>）</td>
+<td><strong>保持凸性</strong> ✓</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\min\)</span>（或 <span class="arithmatex">\(\inf\)</span>）</strong></td>
+<td><strong>不保持</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>反例</strong>：取两个凸函数</p>
+<div class="arithmatex">\[
+f_1(x) = x^2, \qquad f_2(x) = (x-2)^2
+\]</div>
+<p><strong>逐点最小值</strong>：</p>
+<div class="arithmatex">\[
+g(x) = \min\{f_1(x),\ f_2(x)\}
+\]</div>
+<p>这个 <span class="arithmatex">\(g\)</span> 的形状是「两个抛物线各自的下半部分」——
+在 <span class="arithmatex">\(x = 1\)</span> 附近（两抛物线交点，<span class="arithmatex">\(f_1 = f_2 = 1\)</span>）
+<strong>出现一个「向上凸的尖峰」</strong>（严格说是<strong>非凸</strong>的转折）。</p>
+<p><strong>验证非凸性</strong>：取 <span class="arithmatex">\(x_1 = 0\)</span>、<span class="arithmatex">\(x_2 = 2\)</span>：</p>
+<div class="arithmatex">\[
+g(0) = \min\{0,\ 4\} = 0,\qquad g(2) = \min\{4,\ 0\} = 0
+\]</div>
+<p>中点：</p>
+<div class="arithmatex">\[
+g(1) = \min\{1,\ 1\} = 1
+\]</div>
+<p>凸性要求 <span class="arithmatex">\(g(1)\leq\frac{g(0)+g(2)}{2} = 0\)</span>，但实际 <span class="arithmatex">\(g(1) = 1 &gt; 0\)</span> ✗</p>
+<p><strong>违反凸性</strong> ✗</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>引入 max（最坏情况）</td>
+<td>通常<strong>仍凸</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>引入 min（选择最好的）</strong></td>
+<td><strong>可能破坏凸性</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了一件重要的事</strong>：<strong>「混合模型」常是非凸的</strong>。</p>
+<p>例如高斯混合模型（GMM）的似然：</p>
+<div class="arithmatex">\[
+p(x) = \sum_k\pi_k\mathcal{N}(x;\mu_k,\sigma_k)
+\]</div>
+<p>涉及「哪个分量更好」的选择，导致非凸 →
+所以 GMM 用 EM 算法（只能到局部最优）。</p>
+</details>
 
 
 

@@ -1080,6 +1080,12 @@
       
         
       
+        
+      
+        
+      
+        
+      
     
     
     
@@ -1448,6 +1454,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1472,6 +1489,90 @@
     
   
     牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
   
 
     
@@ -2252,7 +2353,7 @@
 
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 3 讲 数学优化」C.2.2 节</code><code>MML §7.2</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《凸优化》或《最优化理论与方法》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
-<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../convexity/">convexity</a></span></div></div>
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../convexity/">convexity</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../duality/">duality</a></span></div></div>
 
 <h1 id="_1">梯度下降与收敛<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>上一页讲了「什么是优化问题」和「凸性的意义」。这一页讲<strong>怎么解</strong>。</p>
@@ -3360,6 +3461,355 @@ B\to kB \implies \eta \to k\eta
 <p><strong>注意</strong>：大批量训练的<strong>泛化能力</strong>有时较差（即使训练损失相同）。
 这是「大批量训练的泛化差距」问题，通常用<strong>学习率预热</strong>缓解。</p>
 </div>
+<hr />
+<h2 id="_10">八、自测<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(f(x) = 5x^2\)</span>。用梯度下降（<span class="arithmatex">\(\eta = 0.05\)</span>）从 <span class="arithmatex">\(x_0 = 2\)</span> 出发，
+写出迭代式并算前两步。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(f'(x) = 10x\)</span>，所以 <span class="arithmatex">\(x_{k+1} = x_k(1-\eta\cdot10)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>确定系数</strong>：</p>
+<div class="arithmatex">\[
+f'(x) = 10x \implies \eta\lambda = 0.05\times10 = 0.5
+\]</div>
+<p><strong>迭代式</strong>：</p>
+<div class="arithmatex">\[
+x_{k+1} = x_k - 0.05\times(10x_k) = x_k(1-0.5) = 0.5x_k
+\]</div>
+<p><strong>计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th><span class="arithmatex">\(x_k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证收敛条件</strong>：</p>
+<div class="arithmatex">\[
+\lvert1-\eta\lambda\rvert = 0.5 &lt; 1 \;\checkmark
+\]</div>
+<p><strong>收敛</strong>，每步误差减半（收敛速率 <span class="arithmatex">\(\rho = 0.5\)</span>）。</p>
+<p><strong>最优学习率</strong>（这里 <span class="arithmatex">\(\lambda_{\max} = \lambda_{\min} = 10\)</span>，<span class="arithmatex">\(\kappa = 1\)</span>）：</p>
+<div class="arithmatex">\[
+\eta^* = \frac{2}{\lambda_{\max}+\lambda_{\min}} = \frac{2}{20} = 0.1
+\]</div>
+<p>取 <span class="arithmatex">\(0.1\)</span> 时 <span class="arithmatex">\(\lvert1-\eta\lambda\rvert = 0\)</span> → <strong>一步到位</strong> ✓</p>
+<p><strong>注意</strong>：一维问题条件数恒为 1，所以可以一步收敛。
+多维问题中只有「各方向曲率相同」（<span class="arithmatex">\(\kappa=1\)</span>）才能一步到位。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 某问题的 Hessian 特征值为 <span class="arithmatex">\(\{1, 9, 100\}\)</span>。
+求稳定学习率上界与最优学习率，并估计收敛速率。</p>
+<details class="note">
+<summary>提示</summary>
+<p>上界由最大特征值决定；最优值用公式 <span class="arithmatex">\(2/(\lambda_{\max}+\lambda_{\min})\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>特征值</strong>：</p>
+<div class="arithmatex">\[
+\lambda_{\max} = 100, \qquad \lambda_{\min} = 1
+\]</div>
+<p><strong>稳定上界</strong>：</p>
+<div class="arithmatex">\[
+\eta &lt; \frac{2}{\lambda_{\max}} = \frac{2}{100} = 0.02
+\]</div>
+<p><strong>最优学习率</strong>：</p>
+<div class="arithmatex">\[
+\eta^* = \frac{2}{100+1} = \frac{2}{101} \approx 0.0198
+\]</div>
+<p><strong>条件数</strong>：</p>
+<div class="arithmatex">\[
+\kappa = \frac{100}{1} = 100
+\]</div>
+<p><strong>收敛速率</strong>：</p>
+<div class="arithmatex">\[
+\rho = \frac{\kappa-1}{\kappa+1} = \frac{99}{101} \approx 0.980
+\]</div>
+<p><strong>达到 <span class="arithmatex">\(10^{-3}\)</span> 的步数</strong>：</p>
+<div class="arithmatex">\[
+k \geq \frac{\ln(10^{-3})}{\ln(0.980)} = \frac{-6.908}{-0.0202} \approx 345
+\]</div>
+<p><strong>结果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\eta\)</span> 上界</td>
+<td><span class="arithmatex">\(0.02\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\eta^*\)</span></td>
+<td><span class="arithmatex">\(0.0198\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\rho\)</span></td>
+<td><span class="arithmatex">\(0.980\)</span></td>
+</tr>
+<tr>
+<td>迭代数</td>
+<td><span class="arithmatex">\(\approx 345\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意中间那个特征值 9 不起作用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>特征值</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(100\)</span>（最大）</td>
+<td>决定学习率<strong>上界</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span>（最小）</td>
+<td>决定收敛<strong>速度</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(9\)</span>（中间）</td>
+<td><strong>不影响这两者</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程启示</strong>：<strong>改善条件数的重点是「拉近最大与最小」</strong>——
+中间的特征值怎么分布关系不大。</p>
+<p>所以数据标准化（把各维尺度拉近）直接命中要害 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：SGD 的学习率可以保持不变（不衰减）。</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑噪声的影响以及 Robbins-Monro 条件。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。SGD 的学习率必须衰减（至少在实际要达到精确解时）。</strong></p>
+<p><strong>原因</strong>：SGD 的梯度有<strong>噪声</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{x}_{k+1} = \boldsymbol{x}_k - \eta\nabla f_{i_k}(\boldsymbol{x}_k)
+\]</div>
+<p><strong>在最优解附近</strong>：真实梯度趋于零，但<strong>噪声不趋于零</strong>：</p>
+<div class="arithmatex">\[
+\nabla f_{i_k}(\boldsymbol{x}^*) \neq \boldsymbol{0}\quad\text{（单样本梯度非零）}
+\]</div>
+<p><strong>后果</strong>：更新量的方差 <span class="arithmatex">\(\approx\eta^2\sigma^2\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>学习率</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>固定 <span class="arithmatex">\(\eta\)</span></strong></td>
+<td>在最优点附近<strong>永久震荡</strong>，无法精确收敛 ✗</td>
+</tr>
+<tr>
+<td><strong>衰减 <span class="arithmatex">\(\eta_k\to0\)</span></strong></td>
+<td>震荡幅度减小 → 可以收敛 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Robbins-Monro 条件</strong>（收敛的充分条件）：</p>
+<div class="arithmatex">\[
+\sum_{k=1}^{\infty}\eta_k = \infty, \qquad \sum_{k=1}^{\infty}\eta_k^2 &lt; \infty
+\]</div>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>作用</th>
+<th>若违反</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\sum\eta_k = \infty\)</span></td>
+<td>能走任意远</td>
+<td>永远到不了最优点</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\sum\eta_k^2 &lt; \infty\)</span></td>
+<td>噪声累积有限</td>
+<td>无法收敛到精确解</td>
+</tr>
+</tbody>
+</table>
+<p><strong>典型衰减</strong>：<span class="arithmatex">\(\eta_k = \frac{\eta_0}{1+k\tau}\)</span>（<span class="arithmatex">\(O(1/k)\)</span>）满足两条件 ✓</p>
+<p><strong>实践中的折中</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场合</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追求最高精度</td>
+<td>严格衰减（如每若干轮减半）</td>
+</tr>
+<tr>
+<td>深度学习常规训练</td>
+<td><strong>阶梯/余弦衰减</strong>（不追求精确最优）</td>
+</tr>
+<tr>
+<td>大批量 + 好初始化</td>
+<td>可以较长时间保持大学习率</td>
+</tr>
+<tr>
+<td>需要「永远在线学习」</td>
+<td>保持小常数学习率（容忍震荡）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>深度学习中的常见做法</strong>：余弦退火到很小的值（不是严格 0），
+最后阶段近似「收敛」。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么动量的等效学习率放大倍数约为 <span class="arithmatex">\(1/(1-\beta)\)</span>？</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑梯度恒定不变时动量的累积效果。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为动量把历史梯度累积起来，稳定状态下累积的倍数是几何级数之和。</strong></p>
+<p><strong>设定</strong>：假设梯度恒定 <span class="arithmatex">\(\boldsymbol{g}_k = \boldsymbol{g}\)</span>（用于估计稳态）。</p>
+<p><strong>动量递推</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_{k+1} = \beta\boldsymbol{v}_k+\boldsymbol{g}
+\]</div>
+<p><strong>展开</strong>（从 <span class="arithmatex">\(\boldsymbol{v}_0 = \boldsymbol{0}\)</span> 出发）：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_1 = \boldsymbol{g}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{v}_2 = \beta\boldsymbol{g}+\boldsymbol{g} = (1+\beta)\boldsymbol{g}
+\]</div>
+<div class="arithmatex">\[
+\boldsymbol{v}_3 = \beta(1+\beta)\boldsymbol{g}+\boldsymbol{g} = (1+\beta+\beta^2)\boldsymbol{g}
+\]</div>
+<p><strong>一般形式</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_k = \left(\sum_{j=0}^{k-1}\beta^j\right)\boldsymbol{g}
+\]</div>
+<p><strong>稳态</strong>（<span class="arithmatex">\(k\to\infty\)</span>，<span class="arithmatex">\(\lvert\beta\rvert&lt;1\)</span>）：</p>
+<div class="arithmatex">\[
+\boldsymbol{v}_\infty = \frac{1}{1-\beta}\boldsymbol{g}
+\]</div>
+<p><strong>这就是放大倍数</strong> ✓</p>
+<p><strong>代入 <span class="arithmatex">\(\beta = 0.9\)</span></strong>：</p>
+<div class="arithmatex">\[
+\frac{1}{1-0.9} = 10 \;\checkmark
+\]</div>
+<p><strong>含义</strong>：<strong>动量让有效步长变成原来的 10 倍</strong>。</p>
+<p><strong>实践推论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>调整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>从无动量改为 <span class="arithmatex">\(\beta=0.9\)</span></td>
+<td><strong>学习率应减到约 1/10</strong></td>
+</tr>
+<tr>
+<td>否则</td>
+<td>有效步长过大 → 震荡或发散</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意这是「稳态」估计</strong>：初期（<span class="arithmatex">\(k\)</span> 小）放大倍数还没达到 10：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>累积倍数（<span class="arithmatex">\(\beta=0.9\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(1.9\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(4.10\)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(6.51\)</span></td>
+</tr>
+<tr>
+<td>20</td>
+<td><span class="arithmatex">\(8.78\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了两件事</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>动量初期「起步慢」</td>
+<td>放大倍数还未累积到 10</td>
+</tr>
+<tr>
+<td>用 Nesterov 或预热可缓解</td>
+<td>提前获得加速效果</td>
+</tr>
+</tbody>
+</table>
+<p><strong>也解释了「为什么需要学习率预热（warmup）」</strong>：
+训练初期梯度可能很大且不稳定，
+若此时已有 10 倍放大，容易发散。
+预热让学习率从小逐步升上去 ✓</p>
+</details>
 
 
 

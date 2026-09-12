@@ -1,0 +1,3571 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/optimization/lagrange/">
+      
+      
+        <link rel="prev" href="../newton/">
+      
+      
+        <link rel="next" href="../duality/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>拉格朗日乘数法 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              拉格朗日乘数法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、等式约束：几何推导
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、等式约束：几何推导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何直觉（最关键的部分）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        拉格朗日函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        多个等式约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、乘数的实际含义（工程解释）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kkt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、不等式约束：从等式到 KKT
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、不等式约束：从等式到 KKT">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        互补松弛条件
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：基础等式约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：乘数的经济含义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：多约束情形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：不等式约束与互补松弛
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 3 讲 数学优化」C.3.1 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《凸优化》或《最优化理论与方法》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../convexity/">convexity</a><a href="../gradient-descent/">gradient-descent</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../duality/">duality</a></span></div></div>
+
+<h1 id="_1">拉格朗日乘数法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面讲的都是<strong>无约束</strong>优化。实际工程问题几乎都有约束：</p>
+<blockquote>
+<p>「在<strong>满足这些条件</strong>的前提下，让目标最小。」</p>
+</blockquote>
+<p>拉格朗日乘数法把<strong>带约束问题</strong>转化成<strong>无约束问题</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">核心思想：把约束「折进」目标函数</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始</td>
+<td><span class="arithmatex">\(\min f(\boldsymbol{x})\)</span>，s.t. <span class="arithmatex">\(h_i(\boldsymbol{x}) = 0\)</span></td>
+</tr>
+<tr>
+<td><strong>转化后</strong></td>
+<td><span class="arithmatex">\(\min\ \mathcal{L}(\boldsymbol{x},\boldsymbol{\lambda}) = f(\boldsymbol{x}) + \sum_i\lambda_i h_i(\boldsymbol{x})\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>新变量 <span class="arithmatex">\(\lambda_i\)</span> 称为拉格朗日乘数</strong>，
+它们是要「求解」的——不是事先给定的。</p>
+<p><strong>得到的方程数与未知数个数正好匹配</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>未知数</th>
+<th>个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\boldsymbol{x}\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda\)</span></td>
+<td><span class="arithmatex">\(m\)</span>（约束个数）</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><span class="arithmatex">\(n+m\)</span></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>方程</th>
+<th>个数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\nabla_{\boldsymbol{x}}\mathcal{L} = 0\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(h_i = 0\)</span></td>
+<td><span class="arithmatex">\(m\)</span></td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td><span class="arithmatex">\(n+m\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>方程数 = 未知数个数</strong> ✓ 所以一般有唯一解（或有限个解）。</p>
+</div>
+<hr />
+<h2 id="_2">一、等式约束：几何推导<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p><strong>问题</strong>：</p>
+<div class="arithmatex">\[
+\min_{\boldsymbol{x}}f(\boldsymbol{x}) \quad\text{s.t.}\quad h(\boldsymbol{x}) = 0
+\]</div>
+<h3 id="_3">几何直觉（最关键的部分）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>在最优解处，两者的梯度必须平行</strong>：</p>
+<div class="arithmatex">\[
+\nabla f(\boldsymbol{x}^*) = \lambda\nabla h(\boldsymbol{x}^*)
+\]</div>
+<p><strong>为什么</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>若 <span class="arithmatex">\(\nabla f\)</span> <strong>不平行</strong>于 <span class="arithmatex">\(\nabla h\)</span></td>
+<td>则 <span class="arithmatex">\(\nabla f\)</span> 有沿约束曲面的分量 → 沿该方向移动<strong>既降低 <span class="arithmatex">\(f\)</span> 又保持约束</strong> → 不是最优 ✗</td>
+</tr>
+<tr>
+<td>若两者<strong>平行</strong></td>
+<td>沿曲面移动无法降低 <span class="arithmatex">\(f\)</span> → 可能是最优 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「拉格朗日乘数」的几何含义</strong>：
+<strong><span class="arithmatex">\(\lambda\)</span> 是让两个梯度对齐的缩放因子</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="拉格朗日乘数法的几何意义：目标梯度与约束梯度平行">
+<defs>
+<marker id="lg1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lg1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 目标函数等高线 -->
+<ellipse class="f0" cx="120" cy="80" rx="70" ry="48" transform="rotate(-20 120 80)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<ellipse class="f0" cx="120" cy="80" rx="46" ry="31" transform="rotate(-20 120 80)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<ellipse class="f0" cx="120" cy="80" rx="24" ry="16" transform="rotate(-20 120 80)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<circle class="d1" cx="120" cy="80" r="4"/>
+<text class="l1" x="104" y="70">f 的无约束极小</text>
+<!-- 约束曲线 -->
+<path class="a2" d="M60,220 C120,180 200,140 280,120 C330,108 370,104 400,104" fill="none" stroke-width="2.6"/>
+<text class="l2" x="290" y="96">约束 h(x)=0</text>
+<!-- 最优点 -->
+<circle class="d2" cx="196" cy="150" r="6"/>
+<text class="l2" x="176" y="176">最优解 x*</text>
+<!-- 两个梯度向量（平行） -->
+<line class="a3" x1="196" y1="150" x2="248" y2="118" marker-end="url(#lg1-ah3)" stroke-width="2.6"/>
+<text class="l3" x="250" y="118">∇h</text>
+<line class="a1" x1="196" y1="150" x2="174" y2="164" marker-end="url(#lg1-ah2)" stroke-width="2.6"/>
+<text class="l1" x="132" y="180">∇f = λ∇h</text>
+<text class="lbl-s" x="24" y="234">两者平行 ⟹ 沿约束移动无法再降低 f</text>
+<text class="lbl-s" x="24" y="248">若 ∇f 有沿约束的分量，则还能继续下降 → 未到最优</text>
+</svg>
+<figcaption>图 1　拉格朗日乘数法的几何含义。目标是找约束曲线上的最低点。在最优解处，目标函数的梯度 ∇f 与约束的梯度 ∇h <b>必须平行</b>——否则 ∇f 在约束方向上会有分量，沿该方向移动既能保持约束又能降低目标，说明还没到最优</figcaption>
+</figure>
+
+<h3 id="_4">拉格朗日函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>把上述条件写成方程，引入辅助变量 <span class="arithmatex">\(\lambda\)</span>：</p>
+<div class="arithmatex">\[
+\mathcal{L}(\boldsymbol{x},\lambda) = f(\boldsymbol{x}) + \lambda\,h(\boldsymbol{x})
+\]</div>
+<p><strong>必要条件</strong>（对 <span class="arithmatex">\(\boldsymbol{x}\)</span> 和 <span class="arithmatex">\(\lambda\)</span> 分别求偏导令零）：</p>
+<div class="arithmatex">\[
+\nabla_{\boldsymbol{x}}\mathcal{L} = \nabla f(\boldsymbol{x}) + \lambda\nabla h(\boldsymbol{x}) = \boldsymbol{0}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial\lambda} = h(\boldsymbol{x}) = 0
+\]</div>
+<p><strong>第二个方程正好就是原约束</strong> ✓ —— 这就是「约束被自动满足」的机制。</p>
+<h3 id="_5">多个等式约束<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\min f(\boldsymbol{x})\quad\text{s.t.}\quad h_i(\boldsymbol{x}) = 0,\ i=1,\dots,m
+\]</div>
+<div class="arithmatex">\[
+\mathcal{L} = f(\boldsymbol{x}) + \sum_{i=1}^{m}\lambda_ih_i(\boldsymbol{x})
+\]</div>
+<p><strong>几何含义</strong>：<span class="arithmatex">\(\nabla f\)</span> 必须落在 <span class="arithmatex">\(\{\nabla h_i\}\)</span> <strong>张成的空间</strong>里
+（即 <span class="arithmatex">\(\nabla f\)</span> 是各约束梯度的线性组合）。</p>
+<hr />
+<h2 id="_6">二、乘数的实际含义（工程解释）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>这是最容易被忽略、却最有工程价值的一点。</p>
+<p><strong><span class="arithmatex">\(\lambda^*\)</span> 的含义</strong>：<strong>约束放松一点，目标能改善多少</strong>。</p>
+<div class="arithmatex">\[
+\frac{\partial f^*}{\partial c} = -\lambda^*
+\]</div>
+<p>（对约束 <span class="arithmatex">\(h(\boldsymbol{x}) = c\)</span> 的情形。）</p>
+<div class="admonition note">
+<p class="admonition-title">「影子价格」的工程解读</p>
+<p><strong>结论</strong>：<span class="arithmatex">\(\lvert\lambda^*\rvert\)</span> 是约束的<strong>边际价值</strong>。</p>
+<p><strong>具体含义举例</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>约束</th>
+<th><span class="arithmatex">\(\lambda\)</span> 的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预算约束</td>
+<td>花费 ≤ 100 万</td>
+<td>多给 1 万预算能降低多少成本</td>
+</tr>
+<tr>
+<td>功率约束</td>
+<td>功率 ≤ 10 W</td>
+<td>多给 1 W 能提升多少性能</td>
+</tr>
+<tr>
+<td>时间约束</td>
+<td>历时 ≤ 5 s</td>
+<td>多给 1 s 能省多少能耗</td>
+</tr>
+<tr>
+<td>材料约束</td>
+<td>用钢 ≤ 1 t</td>
+<td>多 1 kg 钢能减轻多少重量</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(\lambda = 0\)</span> 的含义</strong>：<strong>约束不起作用</strong>（不「活跃」）——
+此时最优解与无约束最优相同，放松约束没有收益。</p>
+<p><strong><span class="arithmatex">\(\lvert\lambda\rvert\)</span> 大的含义</strong>：<strong>约束很「紧」</strong>——
+稍微放松就能显著改善目标。</p>
+<p><strong>工程用途</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>决策</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>是否值得花成本放松约束</td>
+<td>比较 <span class="arithmatex">\(\lvert\lambda\rvert\)</span> 与放松的成本</td>
+</tr>
+<tr>
+<td>资源该投在哪里</td>
+<td>投入 <span class="arithmatex">\(\lvert\lambda\rvert\)</span> 最大的约束</td>
+</tr>
+<tr>
+<td>为什么系统「卡」在某指标上</td>
+<td>找出 <span class="arithmatex">\(\lvert\lambda\rvert\)</span> 最大的约束</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是经济学中的「影子价格」</strong>，
+也是工程优化里最有实用价值的输出之一
+（通常优化求解器都会同时给出最优乘数）。</p>
+</div>
+<hr />
+<h2 id="kkt">三、不等式约束：从等式到 KKT<a class="headerlink" href="#kkt" title="Permanent link">&para;</a></h2>
+<p>若约束是 <span class="arithmatex">\(g(\boldsymbol{x})\leq0\)</span>，处理方式不同：</p>
+<div class="arithmatex">\[
+\mathcal{L}(\boldsymbol{x},\mu) = f(\boldsymbol{x}) + \mu\,g(\boldsymbol{x})
+\]</div>
+<p><strong>关键区别：符号条件</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>约束类型</th>
+<th>条件</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>等式 <span class="arithmatex">\(h=0\)</span></td>
+<td><span class="arithmatex">\(\lambda\)</span> <strong>任意符号</strong></td>
+<td>两个方向都能走</td>
+</tr>
+<tr>
+<td><strong>不等式 <span class="arithmatex">\(g\leq0\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\mu\geq0\)</span></strong></td>
+<td>约束「单侧限制」，乘数必须非负</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">为什么不等式约束的乘数必须 ≥ 0（直觉）</p>
+<p><strong>设定</strong>：约束 <span class="arithmatex">\(g(\boldsymbol{x})\leq0\)</span>，即 <span class="arithmatex">\(g\)</span> 越小越「安全」。</p>
+<p><strong>若 <span class="arithmatex">\(\mu &lt; 0\)</span></strong>：拉格朗日函数 <span class="arithmatex">\(\mathcal{L} = f + \mu g\)</span> 中，
+<strong>减小 <span class="arithmatex">\(g\)</span>（更满足约束）反而使 <span class="arithmatex">\(\mathcal{L}\)</span> 增大</strong> ——
+这与「约束应该惩罚违反」的直觉矛盾 ✗</p>
+<p><strong>因此必须 <span class="arithmatex">\(\mu\geq0\)</span></strong> ✓</p>
+<p><strong>另一个角度（等价于「梯度方向必须一致」）</strong>：</p>
+<p>最优处需要「目标想往哪里走」与「约束不允许往哪里走」<strong>对抗</strong>：</p>
+<div class="arithmatex">\[
+-\nabla f = \mu\nabla g, \quad \mu\geq0
+\]</div>
+<p><strong>含义</strong>：<strong>要降低 <span class="arithmatex">\(f\)</span> 就必须违反约束</strong>（两者方向相反）——
+这才说明约束真正起作用。</p>
+<p><strong>若约束不起作用</strong>：则 <span class="arithmatex">\(\mu = 0\)</span>，退化为无约束问题 ✓</p>
+</div>
+<h3 id="_7">互补松弛条件<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>最关键的一条</strong>：</p>
+<div class="arithmatex">\[
+\mu_i\,g_i(\boldsymbol{x}) = 0
+\]</div>
+<p><strong>含义</strong>：<strong>每个不等式约束只有两种状态</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>活跃</strong>（起作用）</td>
+<td><span class="arithmatex">\(g_i = 0\)</span> 且 <span class="arithmatex">\(\mu_i &gt; 0\)</span></td>
+<td>正好卡在边界上</td>
+</tr>
+<tr>
+<td><strong>不活跃</strong></td>
+<td><span class="arithmatex">\(g_i &lt; 0\)</span> 且 <span class="arithmatex">\(\mu_i = 0\)</span></td>
+<td>有富余，不影响最优解</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者不能同时非零</strong> —— 这就是「互补」。</p>
+<div class="admonition note">
+<p class="admonition-title">互补松弛条件的实用价值（大幅简化问题）</p>
+<p><strong>它告诉我们</strong>：<strong>不需要考虑所有约束</strong>——
+可以先猜哪些约束活跃，只处理那几个。</p>
+<p><strong>在支持向量机（SVM）中的经典应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>样本类型</th>
+<th>约束状态</th>
+<th><span class="arithmatex">\(\mu_i\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在间隔边界上（支持向量）</td>
+<td><strong>活跃</strong></td>
+<td><span class="arithmatex">\(&gt;0\)</span></td>
+</tr>
+<tr>
+<td>远离边界且分类正确</td>
+<td>不活跃</td>
+<td><span class="arithmatex">\(=0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>只有支持向量贡献于决策边界</strong> ✓</p>
+<p><strong>这解释了两件事</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>移动非支持向量的样本不改变模型</td>
+<td>它们的 <span class="arithmatex">\(\mu_i = 0\)</span></td>
+</tr>
+<tr>
+<td>稀疏性</td>
+<td>大部分样本 <span class="arithmatex">\(\mu_i = 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程意义</strong>：稀疏性使存储与预测只需保留支持向量 ——
+这是 SVM 高效的原因。</p>
+<p><strong>一般的工作流程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>猜一个活跃集（哪些约束 <span class="arithmatex">\(g_i = 0\)</span>）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>只对这些约束用拉格朗日法求解</td>
+</tr>
+<tr>
+<td>3</td>
+<td>检查得到的 <span class="arithmatex">\(\mu_i\)</span> 是否都 <span class="arithmatex">\(\geq0\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>若不满足，调整活跃集，重复</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「活跃集方法」</strong>，也是很多 QP 求解器的核心。</p>
+</div>
+<hr />
+<h2 id="_8">四、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：基础等式约束<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>求 <span class="arithmatex">\(f(x,y) = x^2+y^2\)</span> 在约束 <span class="arithmatex">\(x+y = 1\)</span> 下的最小值。</p>
+<details class="note">
+<summary>思路</summary>
+<p>写拉格朗日函数，对三个变量求偏导令零。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：写拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L}(x,y,\lambda) = x^2+y^2+\lambda(x+y-1)
+\]</div>
+<p><strong>第二步：求偏导并令零</strong></p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = 2x+\lambda = 0 \implies x = -\frac{\lambda}{2}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = 2y+\lambda = 0 \implies y = -\frac{\lambda}{2}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial\lambda} = x+y-1 = 0
+\]</div>
+<p><strong>第三步：解方程组</strong></p>
+<p>由前两式得 <span class="arithmatex">\(x = y\)</span>，代入约束：</p>
+<div class="arithmatex">\[
+2x = 1 \implies x = y = \frac12
+\]</div>
+<p>（可回代得 <span class="arithmatex">\(\lambda = -1\)</span>。）</p>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+f_{\min} = \left(\frac12\right)^2+\left(\frac12\right)^2 = \frac12
+\]</div>
+<p><strong>几何验证</strong>：这是「原点 <span class="arithmatex">\((0,0)\)</span> 到直线 <span class="arithmatex">\(x+y=1\)</span> 的距离平方的最小值」——</p>
+<p>距离：</p>
+<div class="arithmatex">\[
+d = \frac{\lvert0+0-1\rvert}{\sqrt{1^2+1^2}} = \frac{1}{\sqrt2}
+\]</div>
+<p>所以 <span class="arithmatex">\(d^2 = \frac12\)</span> ✓ 与上面一致。</p>
+<p><strong>验证梯度平行</strong>：</p>
+<div class="arithmatex">\[
+\nabla f = (2x,2y)\bigg|_{(1/2,1/2)} = (1,1)
+\]</div>
+<div class="arithmatex">\[
+\nabla h = (1,1)
+\]</div>
+<p>确实平行（<span class="arithmatex">\(\lambda = -1\)</span>）✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这道题也是「最小范数解」的原型</p>
+<div class="arithmatex">\[
+\min\lVert\boldsymbol{x}\rVert^2 \quad\text{s.t.}\quad \boldsymbol{a}^\top\boldsymbol{x} = b
+\]</div>
+<p>由拉格朗日法可得</p>
+<div class="arithmatex">\[
+\boldsymbol{x}^* = \frac{b}{\lVert\boldsymbol{a}\rVert^2}\boldsymbol{a}
+\]</div>
+<p><strong>即最优解沿约束法向</strong>（<span class="arithmatex">\(\boldsymbol{a}\)</span> 的方向）。</p>
+<p><strong>本知识库「正交性与投影」一页</strong>的投影公式与此同源 ——
+<strong>「投影」就是这类最小范数问题的解</strong>。</p>
+<p><strong>工程应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>冗余机器人的最小关节运动</td>
+<td>满足末端位移前提下关节移动最少</td>
+</tr>
+<tr>
+<td>神经网络的最小范数解</td>
+<td>满足拟合前提下权重最小（隐含正则化）</td>
+</tr>
+<tr>
+<td>最小能量控制</td>
+<td>达到目标所需能量最小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="2">例题 2：乘数的经济含义<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>某工厂生产两种产品，产量为 <span class="arithmatex">\(x,y\)</span>（单位：件）。
+成本函数</p>
+<div class="arithmatex">\[
+f(x,y) = x^2+2y^2
+\]</div>
+<p>产能约束：<span class="arithmatex">\(x+y = 100\)</span>。求最优产量与乘数，并解释乘数的含义。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用拉格朗日法求解，然后用「乘数 = 边际价值」解释。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = x^2+2y^2+\lambda(x+y-100)
+\]</div>
+<p><strong>第二步：求偏导</strong></p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = 2x+\lambda = 0 \implies x = -\frac{\lambda}{2}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = 4y+\lambda = 0 \implies y = -\frac{\lambda}{4}
+\]</div>
+<div class="arithmatex">\[
+x + y = 100
+\]</div>
+<p><strong>第三步：求解</strong></p>
+<p>由前两式：</p>
+<div class="arithmatex">\[
+x = 2y
+\]</div>
+<p>代入约束：</p>
+<div class="arithmatex">\[
+2y + y = 100 \implies y = \frac{100}{3},\quad x = \frac{200}{3}
+\]</div>
+<p><strong>乘数</strong>（回代）：</p>
+<div class="arithmatex">\[
+\lambda = -2x = -\frac{400}{3} \approx -133.33
+\]</div>
+<p><strong>最优成本</strong>：</p>
+<div class="arithmatex">\[
+f_{\min} = \left(\frac{200}{3}\right)^2 + 2\left(\frac{100}{3}\right)^2
+= \frac{40000}{9} + \frac{20000}{9} = \frac{60000}{9} \approx 6666.67
+\]</div>
+<p><strong>结果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(x^*\)</span></td>
+<td><span class="arithmatex">\(66.67\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y^*\)</span></td>
+<td><span class="arithmatex">\(33.33\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda^*\)</span></td>
+<td><span class="arithmatex">\(-133.33\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>乘数的含义（关键）</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial f^*}{\partial c} = -\lambda^* = 133.33
+\]</div>
+<p><strong>解读</strong>：<strong>产能每增加 1 件，成本可降低约 133.3</strong>。</p>
+<p><strong>为什么 <span class="arithmatex">\(x\)</span> 的产量是 <span class="arithmatex">\(y\)</span> 的两倍</strong>（<span class="arithmatex">\(x = 2y\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>产品</th>
+<th>成本系数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(x\)</span></td>
+<td><span class="arithmatex">\(x^2\)</span>（系数 1）</td>
+<td>边际成本 <span class="arithmatex">\(2x\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td><span class="arithmatex">\(2y^2\)</span>（系数 2）</td>
+<td>边际成本 <span class="arithmatex">\(4y\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>最优时两者边际成本相等</strong>（这正是次节要讲的原理）：</p>
+<div class="arithmatex">\[
+2x = 4y \implies x = 2y \;\checkmark
+\]</div>
+<p><strong>所以「成本系数小的多生产」</strong> ✓ 符合直觉。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">「边际成本相等」是最优分配的通则</p>
+<p><strong>在最优解处</strong>，所有被约束耦合的资源，其<strong>边际收益（或边际成本）必须相等</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial f}{\partial x_1} = \frac{\partial f}{\partial x_2} = \cdots = -\lambda
+\]</div>
+<p><strong>为什么</strong>：若某个方向的边际成本更低，则把资源从高成本方向
+移过来就能降低成本 → 还没到最优 ✓</p>
+<p><strong>这个原理的应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>最优条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生产分配</td>
+<td>各线边际成本相等</td>
+</tr>
+<tr>
+<td>功率分配</td>
+<td>各支路边际效率相等（等微增率准则）</td>
+</tr>
+<tr>
+<td>数据采样</td>
+<td>各点边际信息量相等（最优实验设计）</td>
+</tr>
+<tr>
+<td>投资组合</td>
+<td>各资产边际风险贡献相等（风险平价）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程价值</strong>：这给出了<strong>分配资源的定量判据</strong>，
+而不只是「凭经验分配」。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：多约束情形<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>求 <span class="arithmatex">\(f(x,y,z) = xyz\)</span> 在约束 <span class="arithmatex">\(x+y+z = 6\)</span>（<span class="arithmatex">\(x,y,z&gt;0\)</span>）下的最大值。</p>
+<details class="note">
+<summary>思路</summary>
+<p>这是「固定和求最大乘积」的经典问题，用拉格朗日法。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = xyz + \lambda(x+y+z-6)
+\]</div>
+<p><strong>第二步：三个偏导方程</strong></p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = yz + \lambda = 0 \implies yz = -\lambda
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = xz + \lambda = 0 \implies xz = -\lambda
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial z} = xy + \lambda = 0 \implies xy = -\lambda
+\]</div>
+<p><strong>第三步：比较三式</strong></p>
+<p>由 <span class="arithmatex">\(yz = xz\)</span>（两者都等于 <span class="arithmatex">\(-\lambda\)</span>）得</p>
+<div class="arithmatex">\[
+z(y-x) = 0 \implies x = y
+\]</div>
+<p>（因为 <span class="arithmatex">\(z &gt; 0\)</span>。）</p>
+<p>同样由 <span class="arithmatex">\(xz = xy\)</span> 得</p>
+<div class="arithmatex">\[
+x(z-y) = 0 \implies y = z
+\]</div>
+<p><strong>所以</strong></p>
+<div class="arithmatex">\[
+x = y = z
+\]</div>
+<p><strong>第四步：代入约束</strong></p>
+<div class="arithmatex">\[
+3x = 6 \implies x = y = z = 2
+\]</div>
+<p><strong>最大值</strong>：</p>
+<div class="arithmatex">\[
+f_{\max} = 2\times2\times2 = 8
+\]</div>
+<p><strong>结果</strong>：在 <span class="arithmatex">\(x=y=z=2\)</span> 处取得最大值 <span class="arithmatex">\(8\)</span></p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">这是「算术-几何平均不等式」的一个特例</p>
+<p><strong>AM-GM 不等式</strong>：</p>
+<div class="arithmatex">\[
+\sqrt[3]{xyz} \leq \frac{x+y+z}{3}
+\]</div>
+<p>在 <span class="arithmatex">\(x+y+z = 6\)</span> 时：</p>
+<div class="arithmatex">\[
+\sqrt[3]{xyz} \leq \frac63 = 2 \implies xyz \leq 8 \;\checkmark
+\]</div>
+<p><strong>等号条件正是 <span class="arithmatex">\(x=y=z\)</span></strong> —— 与拉格朗日法得到的结果一致 ✓</p>
+<p><strong>这说明拉格朗日乘数法能「顺便证明」许多经典不等式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>对应不等式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求和固定、求积最大</td>
+<td><strong>AM-GM</strong></td>
+</tr>
+<tr>
+<td>平方和固定、求积最大</td>
+<td>柯西-施瓦茨</td>
+</tr>
+<tr>
+<td>约束下求熵最大</td>
+<td>均匀分布最优</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程用途（等分原则）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>最优解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>给定总功率下的容量最大化</td>
+<td>各通道等功率（注水算法的简化情形）</td>
+</tr>
+<tr>
+<td>给定总比特下的失真最小</td>
+<td>各源等失真</td>
+</tr>
+<tr>
+<td>给定材料下的结构强度</td>
+<td>对称设计往往最优</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「往往最优」的例外</strong>：若各通道特性不同
+（信噪比不同），最优分配<strong>不再是等分</strong>，
+而是「注水算法」——好通道多分配资源。</p>
+<p>这是<strong>约束条件相同但系数不同</strong>的情形，
+与本节「系数相同所以等分」形成对比。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：不等式约束与互补松弛<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>求 <span class="arithmatex">\(\min f(x,y) = (x-2)^2 + (y-2)^2\)</span>，约束 <span class="arithmatex">\(x + y \leq 2\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先看无约束最优是否满足约束；若不满足，则约束活跃。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：先看无约束最优</strong></p>
+<p><span class="arithmatex">\(f\)</span> 的无约束极小在 <span class="arithmatex">\((2,2)\)</span>。</p>
+<p><strong>检查约束</strong>：</p>
+<div class="arithmatex">\[
+x+y = 4 &gt; 2 \quad\text{违反约束 ✗}
+\]</div>
+<p><strong>结论</strong>：无约束最优不可行 → <strong>约束必然活跃</strong>。</p>
+<p><strong>第二步：建立 KKT 条件</strong></p>
+<p>拉格朗日函数（注意形式 <span class="arithmatex">\(g(\boldsymbol{x}) = x+y-2\leq0\)</span>）：</p>
+<div class="arithmatex">\[
+\mathcal{L} = (x-2)^2+(y-2)^2+\mu(x+y-2)
+\]</div>
+<p><strong>条件</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = 2(x-2)+\mu = 0
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = 2(y-2)+\mu = 0
+\]</div>
+<div class="arithmatex">\[
+x+y = 2 \quad\text{（因为约束活跃）}
+\]</div>
+<div class="arithmatex">\[
+\mu \geq 0 \quad\text{（乘数非负）}
+\]</div>
+<p><strong>第三步：求解</strong></p>
+<p>由前两式：</p>
+<div class="arithmatex">\[
+x = 2-\frac{\mu}{2}, \qquad y = 2-\frac{\mu}{2}
+\]</div>
+<p>所以 <span class="arithmatex">\(x = y\)</span>。代入约束：</p>
+<div class="arithmatex">\[
+2x = 2 \implies x = y = 1
+\]</div>
+<p><strong>求 <span class="arithmatex">\(\mu\)</span></strong>：由 <span class="arithmatex">\(2(x-2)+\mu = 0\)</span>：</p>
+<div class="arithmatex">\[
+2(1-2)+\mu = 0 \implies -2+\mu = 0 \implies \mu = 2
+\]</div>
+<p><strong>检查符号</strong>：<span class="arithmatex">\(\mu = 2 \geq 0\)</span> ✓ 满足</p>
+<p><strong>第四步：验证互补松弛</strong></p>
+<div class="arithmatex">\[
+\mu\,g(\boldsymbol{x}) = 2\times(1+1-2) = 2\times0 = 0 \;\checkmark
+\]</div>
+<p><strong>结果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优点</td>
+<td><span class="arithmatex">\((1,1)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f_{\min}\)</span></td>
+<td><span class="arithmatex">\((1-2)^2+(1-2)^2 = 2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu^*\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>几何验证</strong>：<span class="arithmatex">\((2,2)\)</span> 到直线 <span class="arithmatex">\(x+y=2\)</span> 的距离是</p>
+<div class="arithmatex">\[
+\frac{\lvert2+2-2\rvert}{\sqrt2} = \frac{2}{\sqrt2} = \sqrt2
+\]</div>
+<p>所以距离平方 <span class="arithmatex">\(= 2\)</span> ✓ 与最优值一致。</p>
+<p><strong>乘数含义</strong>：约束 <span class="arithmatex">\(x+y\leq2\)</span> 的右端每增加 1，
+最优值下降约 <span class="arithmatex">\(\mu^* = 2\)</span>（更准确地，一阶近似）。</p>
+<p>验证：若约束变为 <span class="arithmatex">\(x+y\leq3\)</span>，则最优在 <span class="arithmatex">\((1.5,1.5)\)</span>，
+<span class="arithmatex">\(f = 2\times(0.5)^2 = 0.5\)</span>。从 2 降到 0.5，变化 <span class="arithmatex">\(-1.5\)</span>，
+与「<span class="arithmatex">\(\mu\times1 = 2\)</span>」量级相符（差值来自非线性，
+因为原来约束不够松，二阶效应显著）。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">注意这个例子揭示的「两种情况」</p>
+<p><strong>两种情形的处理完全不同</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>判据</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>约束活跃</strong></td>
+<td>无约束最优违反约束</td>
+<td><span class="arithmatex">\(g = 0\)</span>，<span class="arithmatex">\(\mu &gt; 0\)</span></td>
+</tr>
+<tr>
+<td><strong>约束不活跃</strong></td>
+<td>无约束最优满足约束</td>
+<td><span class="arithmatex">\(\mu = 0\)</span>，忽略约束</td>
+</tr>
+</tbody>
+</table>
+<p><strong>在本题中</strong>：无约束最优 <span class="arithmatex">\((2,2)\)</span> 违反约束 → 活跃情形 ✓</p>
+<p><strong>若改成约束 <span class="arithmatex">\(x+y\leq5\)</span></strong>：无约束最优 <span class="arithmatex">\((2,2)\)</span> 满足
+<span class="arithmatex">\(2+2=4\leq5\)</span> → <strong>不活跃</strong> → 最优仍是 <span class="arithmatex">\((2,2)\)</span>，
+且 <span class="arithmatex">\(\mu = 0\)</span> ✓</p>
+<p><strong>实用检查流程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>求无约束最优</td>
+</tr>
+<tr>
+<td>2</td>
+<td>检查是否满足所有约束</td>
+</tr>
+<tr>
+<td>3</td>
+<td>若全部满足 → 完成（<span class="arithmatex">\(\mu=0\)</span>）</td>
+</tr>
+<tr>
+<td>4</td>
+<td>若违反某个 → 把该约束设为活跃，重新求解</td>
+</tr>
+<tr>
+<td>5</td>
+<td>检查求得的 <span class="arithmatex">\(\mu\geq0\)</span>；若不满足，说明猜错了活跃集</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 5 步很关键</strong>：若算出 <span class="arithmatex">\(\mu&lt;0\)</span>，说明该约束<strong>不应该</strong>活跃
+——需要重新调整。这就是下一节「KKT 条件」要系统化的内容。</p>
+</div>
+<hr />
+<h2 id="_9">五、自测<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 求 <span class="arithmatex">\(f(x,y) = xy\)</span> 在约束 <span class="arithmatex">\(x+y = 4\)</span>（<span class="arithmatex">\(x,y&gt;0\)</span>）下的最大值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用拉格朗日法；这是「固定和求最大积」的二维版本。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = xy+\lambda(x+y-4)
+\]</div>
+<p><strong>第二步：偏导令零</strong></p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = y+\lambda = 0 \implies y = -\lambda
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = x+\lambda = 0 \implies x = -\lambda
+\]</div>
+<div class="arithmatex">\[
+x+y = 4
+\]</div>
+<p><strong>第三步：求解</strong></p>
+<p>由前两式 <span class="arithmatex">\(x = y\)</span>，代入约束：</p>
+<div class="arithmatex">\[
+2x = 4 \implies x = y = 2
+\]</div>
+<p><strong>最大值</strong>：</p>
+<div class="arithmatex">\[
+f_{\max} = 2\times2 = 4
+\]</div>
+<p><strong>验证（用 AM-GM）</strong>：对 <span class="arithmatex">\(x,y&gt;0\)</span>，</p>
+<div class="arithmatex">\[
+\sqrt{xy}\leq\frac{x+y}{2} = 2 \implies xy\leq4 \;\checkmark
+\]</div>
+<p>等号当且仅当 <span class="arithmatex">\(x = y = 2\)</span> ✓</p>
+<p><strong>验证梯度平行</strong>：</p>
+<div class="arithmatex">\[
+\nabla f = (y,x)\bigg|_{(2,2)} = (2,2),\qquad \nabla h = (1,1)
+\]</div>
+<p>平行 ✓（<span class="arithmatex">\(\lambda = -2\)</span>）</p>
+<p><strong>顺带得到乘数的含义</strong>：<span class="arithmatex">\(-\lambda = 2\)</span>，
+表示「和增加 1，乘积最多增加约 2」。
+验证：若约束改为 <span class="arithmatex">\(x+y = 4.1\)</span>，最优在 <span class="arithmatex">\((2.05,2.05)\)</span>，
+<span class="arithmatex">\(f = 4.2025\)</span> —— 增加约 <span class="arithmatex">\(0.2025\)</span>，
+与一阶估计 <span class="arithmatex">\(2\times0.1 = 0.2\)</span> 吻合 ✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 用拉格朗日法证明：固定周长下正方形面积最大。</p>
+<details class="note">
+<summary>提示</summary>
+<p>设矩形边长 <span class="arithmatex">\(x,y\)</span>，周长固定为 <span class="arithmatex">\(2(x+y) = P\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：建立问题</strong></p>
+<p>固定周长 <span class="arithmatex">\(P\)</span>，即约束</p>
+<div class="arithmatex">\[
+x+y = \frac{P}{2}
+\]</div>
+<p>目标：最大化面积</p>
+<div class="arithmatex">\[
+A = xy
+\]</div>
+<p><strong>第二步：拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = xy+\lambda\left(x+y-\frac{P}{2}\right)
+\]</div>
+<p><strong>第三步：求偏导</strong></p>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial x} = y+\lambda = 0
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial\mathcal{L}}{\partial y} = x+\lambda = 0
+\]</div>
+<p><strong>由两式相减</strong>：</p>
+<div class="arithmatex">\[
+y - x = 0 \implies x = y
+\]</div>
+<p><strong>第四步：代入约束</strong></p>
+<div class="arithmatex">\[
+2x = \frac{P}{2} \implies x = \frac{P}{4}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+x = y = \frac{P}{4}
+\]</div>
+<p><strong>即正方形</strong> ✓</p>
+<p><strong>最大面积</strong>：</p>
+<div class="arithmatex">\[
+A_{\max} = \left(\frac{P}{4}\right)^2 = \frac{P^2}{16}
+\]</div>
+<p><strong>验证（对比长方形）</strong>：</p>
+<p>设 <span class="arithmatex">\(x = \frac{P}{4}+d\)</span>、<span class="arithmatex">\(y = \frac{P}{4}-d\)</span>（保持周长）：</p>
+<div class="arithmatex">\[
+A = \left(\frac{P}{4}\right)^2-d^2 &lt; \frac{P^2}{16}
+\]</div>
+<p><strong>确实变小</strong>，且随 <span class="arithmatex">\(\lvert d\rvert\)</span> 增大而减小 ✓</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">这个结论的推广（值得记住）</p>
+<p><strong>「对称性最优」的模式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>最优解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定周长、最大面积</td>
+<td><strong>正方形</strong>（二维）、圆（连续自由形状）</td>
+</tr>
+<tr>
+<td>固定和、最大积</td>
+<td><strong>各量相等</strong>（AM-GM 等号条件）</td>
+</tr>
+<tr>
+<td>固定面积、最小周长</td>
+<td>正方形</td>
+</tr>
+<tr>
+<td>固定体积、最小表面积</td>
+<td>立方体</td>
+</tr>
+</tbody>
+</table>
+<p><strong>共同点</strong>：<strong>在对称性不被打破时，最优解也对称</strong>。</p>
+<p><strong>但要注意「系数不同」的情况</strong>：若目标改为 <span class="arithmatex">\(A = 2xy\)</span>
+（给 <span class="arithmatex">\(x\)</span> 加权），则最优不再是正方形 ——
+<strong>此时应按「边际量相等」求解</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial A}{\partial x} = \frac{\partial A}{\partial y} = -\lambda
+\]</div>
+<p>即 <span class="arithmatex">\(2y = 2x\)</span> 仍给出 <span class="arithmatex">\(x = y\)</span>（因为 <span class="arithmatex">\(2xy\)</span> 对 <span class="arithmatex">\(x,y\)</span> 对称）。</p>
+<p>若目标改为 <span class="arithmatex">\(A = x^2y\)</span>，则</p>
+<div class="arithmatex">\[
+2xy = x^2 \implies 2y = x
+\]</div>
+<p><strong>不再是正方形</strong> ✓ —— 这提醒我们「对称性来自目标的对称性」。</p>
+</div>
+<hr />
+<p><strong>Q3</strong> 求 <span class="arithmatex">\(\min f(x,y) = x^2+y^2\)</span> 在约束 <span class="arithmatex">\(x+2y = 5\)</span> 下的解。</p>
+<details class="note">
+<summary>提示</summary>
+<p>与例题 1 结构相同，只是约束系数不同。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：拉格朗日函数</strong></p>
+<div class="arithmatex">\[
+\mathcal{L} = x^2+y^2+\lambda(x+2y-5)
+\]</div>
+<p><strong>第二步：偏导令零</strong></p>
+<div class="arithmatex">\[
+2x+\lambda = 0 \implies x = -\frac{\lambda}{2}
+\]</div>
+<div class="arithmatex">\[
+2y+2\lambda = 0 \implies y = -\lambda
+\]</div>
+<div class="arithmatex">\[
+x+2y = 5
+\]</div>
+<p><strong>第三步：代入约束</strong></p>
+<div class="arithmatex">\[
+-\frac{\lambda}{2}+2(-\lambda) = 5
+\]</div>
+<div class="arithmatex">\[
+-\frac{\lambda}{2}-2\lambda = -\frac{5\lambda}{2} = 5
+\]</div>
+<div class="arithmatex">\[
+\lambda = -2
+\]</div>
+<p><strong>回代</strong>：</p>
+<div class="arithmatex">\[
+x = -\frac{-2}{2} = 1, \qquad y = -(-2) = 2
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\((x^*,y^*) = (1,2)\)</span>，<span class="arithmatex">\(f_{\min} = 1+4 = 5\)</span></p>
+<p><strong>几何验证</strong>：原点到直线 <span class="arithmatex">\(x+2y=5\)</span> 的距离：</p>
+<div class="arithmatex">\[
+d = \frac{\lvert0+0-5\rvert}{\sqrt{1^2+2^2}} = \frac{5}{\sqrt5} = \sqrt5
+\]</div>
+<p>距离平方 <span class="arithmatex">\(= 5\)</span> ✓ 与 <span class="arithmatex">\(f_{\min}\)</span> 一致。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">从这两道题看出的一般公式</p>
+<div class="arithmatex">\[
+\min\lVert\boldsymbol{x}\rVert^2\quad\text{s.t.}\quad\boldsymbol{a}^\top\boldsymbol{x} = b
+\]</div>
+<p><strong>最优解</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{x}^* = \frac{b}{\lVert\boldsymbol{a}\rVert^2}\boldsymbol{a}
+\]</div>
+<p><strong>验证本题</strong>：<span class="arithmatex">\(\boldsymbol{a} = (1,2)\)</span>、<span class="arithmatex">\(b = 5\)</span></p>
+<div class="arithmatex">\[
+\boldsymbol{x}^* = \frac{5}{5}(1,2) = (1,2) \;\checkmark
+\]</div>
+<p><strong>物理含义</strong>：<strong>最优解沿约束的法向</strong>（即 <span class="arithmatex">\(\boldsymbol{a}\)</span> 方向）。</p>
+<p>这与「投影」完全一致——投影就是「最短距离对应的点」，
+也就是这个最小范数问题的解。</p>
+</div>
+<hr />
+<p><strong>Q4</strong> 设约束 <span class="arithmatex">\(g(x) = x-3\leq0\)</span>，目标 <span class="arithmatex">\(f(x) = x^2\)</span>。
+求最优解与乘数，并说明约束是否活跃。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先看无约束最优是否满足约束。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：无约束最优</strong></p>
+<div class="arithmatex">\[
+f'(x) = 2x = 0 \implies x = 0
+\]</div>
+<p><strong>检查约束</strong>：</p>
+<div class="arithmatex">\[
+g(0) = 0-3 = -3 \leq0 \;\checkmark
+\]</div>
+<p><strong>满足</strong> → <strong>约束不活跃</strong> ✓</p>
+<p><strong>第二步：结论</strong></p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最优解</td>
+<td><span class="arithmatex">\(x^* = 0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f_{\min}\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu^*\)</span></td>
+<td><span class="arithmatex">\(0\)</span>（不活跃）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>验证 KKT</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>检验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平稳性</td>
+<td><span class="arithmatex">\(2(0)+\mu\cdot1 = 0 \Rightarrow \mu = 0\)</span> ✓</td>
+</tr>
+<tr>
+<td>原始可行</td>
+<td><span class="arithmatex">\(-3\leq0\)</span> ✓</td>
+</tr>
+<tr>
+<td>对偶可行</td>
+<td><span class="arithmatex">\(\mu = 0\geq0\)</span> ✓</td>
+</tr>
+<tr>
+<td>互补松弛</td>
+<td><span class="arithmatex">\(\mu\cdot g = 0\times(-3) = 0\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>全部满足</strong> ✓</p>
+<p><strong>对比：若约束改为 <span class="arithmatex">\(x+2\leq0\)</span></strong>（即要求 <span class="arithmatex">\(x\leq-2\)</span>）：</p>
+<ul>
+<li>无约束最优 <span class="arithmatex">\(x = 0\)</span> <strong>违反</strong>约束（<span class="arithmatex">\(0 &gt; -2\)</span>）✗</li>
+<li>约束<strong>活跃</strong>：<span class="arithmatex">\(x^* = -2\)</span></li>
+<li><span class="arithmatex">\(f_{\min} = 4\)</span></li>
+<li>求 <span class="arithmatex">\(\mu\)</span>：平稳性 <span class="arithmatex">\(2(-2)+\mu = 0 \Rightarrow \mu = 4\geq0\)</span> ✓</li>
+</ul>
+<p><strong>两种情况的核心区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(\mu\)</span></th>
+<th>约束状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无约束最优可行</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>不活跃</strong></td>
+</tr>
+<tr>
+<td>无约束最优不可行</td>
+<td><span class="arithmatex">\(&gt;0\)</span></td>
+<td><strong>活跃</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「互补松弛」的两种情形</strong>，
+也是实际求解时<strong>先检查无约束最优</strong>的依据
+（能省掉大量计算）。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../newton/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 牛顿法与二阶优化">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                牛顿法与二阶优化
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../duality/" class="md-footer__link md-footer__link--next" aria-label="下一页: 对偶问题">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                对偶问题
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
