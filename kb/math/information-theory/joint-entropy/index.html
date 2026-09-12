@@ -1966,6 +1966,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3446,6 +3457,271 @@ H(Y) = 1\ \text{比特}
 <li><strong>信念状态的熵</strong>：POMDP 中用它衡量「对环境的确定程度」</li>
 <li><strong>探索与利用</strong>：熵降低 = 探索获得的信息</li>
 </ul>
+<hr />
+<h2 id="_13">六、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(X\)</span> 等概取 <span class="arithmatex">\(\{0,1\}\)</span>，<span class="arithmatex">\(Y = X\)</span>。求 <span class="arithmatex">\(H(X,Y)\)</span>、<span class="arithmatex">\(H(Y\mid X)\)</span>、<span class="arithmatex">\(I(X;Y)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(Y\)</span> 完全由 <span class="arithmatex">\(X\)</span> 决定。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(H(X)\)</span></strong></p>
+<div class="arithmatex">\[
+H(X) = \log_2 2 = 1\ \text{比特}
+\]</div>
+<p><strong>第二步：<span class="arithmatex">\(H(Y\mid X)\)</span></strong></p>
+<p>给定 <span class="arithmatex">\(X\)</span> 后 <span class="arithmatex">\(Y\)</span> <strong>完全确定</strong>：</p>
+<div class="arithmatex">\[
+H(Y\mid X) = 0
+\]</div>
+<p><strong>第三步：<span class="arithmatex">\(H(X,Y)\)</span></strong>（链式法则）</p>
+<div class="arithmatex">\[
+H(X,Y) = H(X)+H(Y\mid X) = 1+0 = 1\ \text{比特}
+\]</div>
+<p><strong>验证</strong>：<span class="arithmatex">\((X,Y)\)</span> 只有两个可能取值 <span class="arithmatex">\((0,0)\)</span> 与 <span class="arithmatex">\((1,1)\)</span>，各 <span class="arithmatex">\(1/2\)</span>：</p>
+<div class="arithmatex">\[
+H(X,Y) = \log_2 2 = 1 \;\checkmark
+\]</div>
+<p><strong>第四步：<span class="arithmatex">\(I(X;Y)\)</span></strong></p>
+<div class="arithmatex">\[
+I(X;Y) = H(X)-H(X\mid Y) = 1-0 = 1\ \text{比特}
+\]</div>
+<p><strong>结果汇总</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(X) = H(Y)\)</span></td>
+<td><span class="arithmatex">\(1\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(X,Y)\)</span></td>
+<td><span class="arithmatex">\(1\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(Y\mid X)\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(I(X;Y)\)</span></td>
+<td><span class="arithmatex">\(1\)</span> 比特</td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察</strong>：<strong>联合熵等于单个变量的熵</strong>（因为两个变量携带<strong>完全相同</strong>的信息）——
+这就是「完全相关」的极端情形 ✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 设 <span class="arithmatex">\(X,Y\)</span> 独立，<span class="arithmatex">\(H(X) = 3\)</span>、<span class="arithmatex">\(H(Y) = 4\)</span> 比特。
+求 <span class="arithmatex">\(H(X,Y)\)</span> 与 <span class="arithmatex">\(H(X\mid Y)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>独立时条件熵与联合熵如何退化。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>独立时</strong>：</p>
+<div class="arithmatex">\[
+H(X,Y) = H(X)+H(Y) = 3+4 = 7\ \text{比特}
+\]</div>
+<div class="arithmatex">\[
+H(X\mid Y) = H(X) = 3\ \text{比特}
+\]</div>
+<p><strong>理由</strong>：独立意味着 <span class="arithmatex">\(p(x\mid y) = p(x)\)</span>，
+所以观测 <span class="arithmatex">\(Y\)</span> <strong>完全不改变</strong> <span class="arithmatex">\(X\)</span> 的不确定性。</p>
+<p><strong>验证链式法则</strong>：</p>
+<div class="arithmatex">\[
+H(Y)+H(X\mid Y) = 4+3 = 7 = H(X,Y) \;\checkmark
+\]</div>
+<p><strong>互信息</strong>：</p>
+<div class="arithmatex">\[
+I(X;Y) = H(X)-H(X\mid Y) = 3-3 = 0
+\]</div>
+<p><strong>符合预期</strong>：独立 ⟺ 互信息为零 ✓</p>
+<p><strong>工程含义</strong>：<strong>这两个变量「一起存」需要 7 比特，
+与「分开存」完全一样</strong>（3+4 = 7）——
+说明<strong>联合编码不能带来任何压缩收益</strong>（因为没有冗余）。</p>
+<p><strong>对比</strong>：若两者完全相关（<span class="arithmatex">\(H(X,Y) = 4\)</span>），则联合编码可省 3 比特 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 某传感器读数 <span class="arithmatex">\(X\)</span> 与真实状态 <span class="arithmatex">\(Y\)</span> 满足 <span class="arithmatex">\(H(Y) = 2\)</span> 比特，
+<span class="arithmatex">\(H(Y\mid X) = 0.3\)</span> 比特。该传感器提供了多少信息？还需要多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p>信息量就是互信息；「还需要」就是剩余的条件熵。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>传感器提供的信息</strong>（互信息）：</p>
+<div class="arithmatex">\[
+I(X;Y) = H(Y)-H(Y\mid X) = 2-0.3 = 1.7\ \text{比特}
+\]</div>
+<p><strong>剩余不确定性</strong>：</p>
+<div class="arithmatex">\[
+H(Y\mid X) = 0.3\ \text{比特}
+\]</div>
+<p><strong>相对有效性</strong>：</p>
+<div class="arithmatex">\[
+\frac{I(X;Y)}{H(Y)} = \frac{1.7}{2} = 85\%
+\]</div>
+<p><strong>结果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传感器提供</td>
+<td><span class="arithmatex">\(1.7\)</span> 比特</td>
+</tr>
+<tr>
+<td>剩余不确定</td>
+<td><span class="arithmatex">\(0.3\)</span> 比特</td>
+</tr>
+<tr>
+<td><strong>有效性</strong></td>
+<td><strong><span class="arithmatex">\(85\%\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程解读</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>有效性</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>接近 <span class="arithmatex">\(100\%\)</span></td>
+<td>传感器几乎完全确定状态 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(50\%\)</span> 左右</td>
+<td>一半有用</td>
+</tr>
+<tr>
+<td>接近 <span class="arithmatex">\(0\%\)</span></td>
+<td>传感器无效 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>如何进一步降低 <span class="arithmatex">\(H(Y\mid X)\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>手段</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提高传感器精度（降低噪声）</td>
+<td>直接有效</td>
+</tr>
+<tr>
+<td><strong>融合第二个独立传感器</strong></td>
+<td>用条件熵的链式法则</td>
+</tr>
+<tr>
+<td>利用时间相关性（滤波）</td>
+<td>用历史信息</td>
+</tr>
+</tbody>
+</table>
+<p><strong>融合的定量分析</strong>（用链式法则）：</p>
+<p>若加入 <span class="arithmatex">\(Z\)</span>，则</p>
+<div class="arithmatex">\[
+H(Y\mid X,Z) = H(Y\mid X)-\underbrace{I(Z;Y\mid X)}_{\text{Z 的增量价值}}
+\]</div>
+<p><strong>关键</strong>：新传感器的价值是<strong>条件互信息</strong> <span class="arithmatex">\(I(Z;Y\mid X)\)</span> ——
+它在<strong>已知 <span class="arithmatex">\(X\)</span> 的前提下</strong>衡量 <span class="arithmatex">\(Z\)</span> 的贡献。</p>
+<p><strong>这解释了「为什么要用不同类型的传感器」</strong>：
+若 <span class="arithmatex">\(Z\)</span> 与 <span class="arithmatex">\(X\)</span> 高度相关，则 <span class="arithmatex">\(I(Z;Y\mid X)\)</span> 很小（价值低）。
+用<strong>互补</strong>的传感器能获得更大增量 ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么「独立时联合熵最大」需要限定「在边缘分布固定时」？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想若不固定边缘分布，能不能让联合熵无限大。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为「联合熵」本身没有固定上界 —— 它随取值范围增大而增大。</strong></p>
+<p><strong>例子</strong>：设 <span class="arithmatex">\(X\)</span>、<span class="arithmatex">\(Y\)</span> 都取 <span class="arithmatex">\(\{1,\dots,n\}\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(H(X,Y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(n = 2\)</span>，均匀且独立</td>
+<td><span class="arithmatex">\(2\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n = 4\)</span>，均匀且独立</td>
+<td><span class="arithmatex">\(4\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n = 8\)</span>，均匀且独立</td>
+<td><span class="arithmatex">\(6\)</span> 比特</td>
+</tr>
+</tbody>
+</table>
+<p><strong>可见 <span class="arithmatex">\(H(X,Y)\)</span> 随 <span class="arithmatex">\(n\)</span> 增长</strong> —— 所以「比较联合熵的大小」
+<strong>必须固定取值范围或边缘分布</strong>，否则没有意义 ✗</p>
+<p><strong>加上限定后的正确陈述</strong>：</p>
+<blockquote>
+<p><strong>固定 <span class="arithmatex">\(p(x)\)</span> 与 <span class="arithmatex">\(p(y)\)</span> 时，使 <span class="arithmatex">\(H(X,Y)\)</span> 最大的是独立分布。</strong></p>
+</blockquote>
+<p><strong>证明</strong>（用互信息）：</p>
+<div class="arithmatex">\[
+H(X,Y) = H(X)+H(Y)-I(X;Y)
+\]</div>
+<p>由于 <span class="arithmatex">\(H(X)\)</span>、<span class="arithmatex">\(H(Y)\)</span> 已固定，<strong>最大化 <span class="arithmatex">\(H(X,Y)\)</span> 等价于最小化 <span class="arithmatex">\(I(X;Y)\)</span></strong> ——
+而 <span class="arithmatex">\(I(X;Y)\geq0\)</span>，等号在<strong>独立</strong>时成立 ✓</p>
+<p><strong>所以独立性使联合熵最大</strong> ∎</p>
+<p><strong>这个限定条件的实用价值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场合</th>
+<th>是否需要限定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>比较同一对变量的不同联合分布</td>
+<td>不需（边缘已隐含固定）</td>
+</tr>
+<tr>
+<td>比较不同变量的联合熵</td>
+<td><strong>需要</strong>（否则不可比）</td>
+</tr>
+<tr>
+<td>用「<span class="arithmatex">\(H(X,Y)\ll H(X)+H(Y)\)</span>」判冗余</td>
+<td>不需（两边同一对变量）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践提醒</strong>：<strong>不要用「联合熵的绝对值」比较不同数据集</strong> ——
+那会受类别数影响。应改用<strong>归一化</strong>的指标
+（如互信息归一化、或直接看互信息）。</p>
+</details>
 
 
 

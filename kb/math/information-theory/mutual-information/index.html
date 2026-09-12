@@ -1966,6 +1966,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3457,6 +3468,301 @@ R_{\max} \approx 0.531\ \text{比特/符号}
 <p><strong>这就是「现代编码（Turbo/LDPC/极化码）是 5G 基础」的原因</strong> ——
 它们把实际通信效率推到了接近香农限。</p>
 </div>
+<hr />
+<h2 id="_8">六、自测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(X\)</span> 等概取 <span class="arithmatex">\(\{0,1\}\)</span>，<span class="arithmatex">\(Y = X\)</span>（完全相关）。求 <span class="arithmatex">\(I(X;Y)\)</span> 与归一化互信息。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(Y\)</span> 完全决定 <span class="arithmatex">\(X\)</span>，所以 <span class="arithmatex">\(H(X\mid Y) = 0\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(H(X)\)</span></strong></p>
+<div class="arithmatex">\[
+H(X) = 1\ \text{比特}
+\]</div>
+<p><strong>第二步：<span class="arithmatex">\(H(X\mid Y)\)</span></strong></p>
+<p><span class="arithmatex">\(Y = X\)</span> 完全决定 <span class="arithmatex">\(X\)</span>：</p>
+<div class="arithmatex">\[
+H(X\mid Y) = 0
+\]</div>
+<p><strong>第三步：互信息</strong></p>
+<div class="arithmatex">\[
+I(X;Y) = H(X)-H(X\mid Y) = 1-0 = 1\ \text{比特}
+\]</div>
+<p><strong>第四步：归一化互信息</strong></p>
+<div class="arithmatex">\[
+\text{NMI} = \frac{I(X;Y)}{\min\{H(X),H(Y)\}} = \frac{1}{1} = 1
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(I = 1\)</span> 比特，<span class="arithmatex">\(\text{NMI} = 1\)</span>（最大值）</p>
+<p><strong>验证上界</strong>：<span class="arithmatex">\(I(X;Y)\leq\min\{H(X),H(Y)\} = 1\)</span> ✓ <strong>取到等号</strong></p>
+<p><strong>工程含义</strong>：<strong>NMI = 1 表示「一方完全包含另一方的信息」</strong> ✓</p>
+<p><strong>「取到等号」的条件</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(X\mid Y) = 0\)</span></td>
+<td><span class="arithmatex">\(Y\)</span> 完全决定 <span class="arithmatex">\(X\)</span></td>
+</tr>
+<tr>
+<td>或 <span class="arithmatex">\(H(Y\mid X) = 0\)</span></td>
+<td><span class="arithmatex">\(X\)</span> 完全决定 <span class="arithmatex">\(Y\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>两者任一成立即可（因为 <span class="arithmatex">\(I\)</span> 对称）✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：互信息越大，说明两个变量的取值越接近。</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想 <span class="arithmatex">\(Y = 1-X\)</span> 的情形。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。互信息度量的是「可预测性」，不是「相似性」。</strong></p>
+<p><strong>反例</strong>：<span class="arithmatex">\(X\)</span> 等概取 <span class="arithmatex">\(\{0,1\}\)</span>，<span class="arithmatex">\(Y = 1-X\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(X\)</span></th>
+<th><span class="arithmatex">\(Y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>取值完全「相反」</strong>（相似度为零），但：</p>
+<div class="arithmatex">\[
+I(X;Y) = H(X) = 1\ \text{比特} \quad\text{（取到最大值）}
+\]</div>
+<p><strong>因为知道 <span class="arithmatex">\(Y\)</span> 就能完全确定 <span class="arithmatex">\(X\)</span></strong> ✓</p>
+<p><strong>这说明互信息的本质</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>度量</th>
+<th>问的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相似度（如欧氏距离）</td>
+<td>「值有多接近？」</td>
+</tr>
+<tr>
+<td><strong>互信息</strong></td>
+<td><strong>「能互相预测吗？」</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>另一个例子</strong>（回到 BSC）：翻转概率 <span class="arithmatex">\(\varepsilon = 1\)</span>（必然翻转）时
+互信息<strong>最大</strong> —— 因为「必然翻转」也是确定性的规律 ✓</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>互信息的解读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征选择</td>
+<td>「能预测标签」而非「与标签同向」</td>
+</tr>
+<tr>
+<td>传感器融合</td>
+<td>「能互相推断」而非「读数相同」</td>
+</tr>
+<tr>
+<td>时序分析</td>
+<td>「有确定动态关系」（可反向）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践提醒</strong>：<strong>用互信息筛选特征时，不要期待「高互信息 = 正相关」</strong> ——
+一个与标签<strong>完全反相关</strong>的特征同样有价值。</p>
+<p><strong>如何区分方向</strong>：若需要方向信息，应配合相关系数或条件概率
+<span class="arithmatex">\(p(y\mid x)\)</span> 一起看 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 求 BSC 信道（翻转概率 <span class="arithmatex">\(\varepsilon = 0.2\)</span>）的容量。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(C = 1-H_b(\varepsilon)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>计算二元熵</strong>：</p>
+<div class="arithmatex">\[
+H_b(0.2) = -0.2\log_2 0.2-0.8\log_2 0.8
+\]</div>
+<p>逐项（<span class="arithmatex">\(\log_2 5 = 2.3219\)</span>、<span class="arithmatex">\(\log_2 1.25 = 0.3219\)</span>）：</p>
+<div class="arithmatex">\[
+= 0.2\times2.3219+0.8\times0.3219
+= 0.4644+0.2575 = 0.7219\ \text{比特}
+\]</div>
+<p><strong>容量</strong>：</p>
+<div class="arithmatex">\[
+C = 1-0.7219 = 0.2781\ \text{比特/符号}
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(C \approx 0.278\)</span> 比特/符号</p>
+<p><strong>与其他 <span class="arithmatex">\(\varepsilon\)</span> 的比较</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\varepsilon\)</span></th>
+<th><span class="arithmatex">\(H_b(\varepsilon)\)</span></th>
+<th>容量 <span class="arithmatex">\(C\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0.469\)</span></td>
+<td><span class="arithmatex">\(0.531\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(0.2\)</span></strong></td>
+<td><strong><span class="arithmatex">\(0.722\)</span></strong></td>
+<td><strong><span class="arithmatex">\(0.278\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.3\)</span></td>
+<td><span class="arithmatex">\(0.881\)</span></td>
+<td><span class="arithmatex">\(0.119\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察</strong>：<strong>容量随噪声急剧下降</strong> ——
+<span class="arithmatex">\(\varepsilon\)</span> 从 <span class="arithmatex">\(0.1\)</span> 增到 <span class="arithmatex">\(0.2\)</span>（翻倍），容量从 <span class="arithmatex">\(0.531\)</span> 降到 <span class="arithmatex">\(0.278\)</span>
+（<strong>几乎减半</strong>）✗</p>
+<p><strong>工程含义</strong>：<strong>降低误码率的收益是非线性的</strong> ——
+在低误码区，每降低一点误码率都能显著提升容量 ✓</p>
+<p>这解释了为什么通信系统在硬件上投入很大：
+<strong>把 <span class="arithmatex">\(\varepsilon\)</span> 从 <span class="arithmatex">\(0.2\)</span> 降到 <span class="arithmatex">\(0.05\)</span> 能让容量提升约 4 倍</strong>。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么用条件互信息（而非互信息）评估新传感器的价值？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想「已有传感器」的信息是否会被重复计算。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为互信息会「重复计算」已有传感器已提供的信息。</strong></p>
+<p><strong>问题场景</strong>：已有传感器 <span class="arithmatex">\(X\)</span>，考虑加入 <span class="arithmatex">\(Z\)</span>。</p>
+<p><strong>若用互信息 <span class="arithmatex">\(I(Z;Y)\)</span> 评估</strong>：</p>
+<div class="arithmatex">\[
+I(Z;Y) = H(Y)-H(Y\mid Z)
+\]</div>
+<p><strong>它忽略了一个事实</strong>：<span class="arithmatex">\(X\)</span> 已经提供了一部分信息，
+而 <span class="arithmatex">\(Z\)</span> 提供的信息可能与 <span class="arithmatex">\(X\)</span> <strong>重叠</strong> ✗</p>
+<p><strong>正确做法：用条件互信息</strong></p>
+<div class="arithmatex">\[
+I(Z;Y\mid X) = H(Y\mid X)-H(Y\mid X,Z)
+\]</div>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(Y\mid X)\)</span></td>
+<td>已有 <span class="arithmatex">\(X\)</span> 时的剩余不确定性</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(Y\mid X,Z)\)</span></td>
+<td>再加 <span class="arithmatex">\(Z\)</span> 后的剩余不确定性</td>
+</tr>
+<tr>
+<td><strong>差值</strong></td>
+<td><strong><span class="arithmatex">\(Z\)</span> 的「增量价值」</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>举例说明差异</strong>：</p>
+<p>假设 <span class="arithmatex">\(Z\)</span> 与 <span class="arithmatex">\(X\)</span> <strong>完全相同</strong>（同一型号的冗余传感器）：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(I(Z;Y)\)</span></td>
+<td><strong>大</strong>（<span class="arithmatex">\(Z\)</span> 本身很有用）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(I(Z;Y\mid X)\)</span></strong></td>
+<td><strong>0</strong>（<span class="arithmatex">\(X\)</span> 已提供全部）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>冗余传感器不该被计入价值</strong> ——
+而「互信息」会错误地给出高分。</p>
+<p><strong>推广（多传感器融合的顺序）</strong>：</p>
+<div class="arithmatex">\[
+I(X_1,X_2,\dots,X_n;Y) = \sum_{i=1}^{n}I(X_i;Y\mid X_1,\dots,X_{i-1})
+\]</div>
+<p><strong>含义</strong>：<strong>总信息 = 各传感器「按序加入时的增量」之和</strong> ✓</p>
+<p><strong>工程用途</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传感器选型</td>
+<td>选条件互信息最大的（而非互信息最大）</td>
+</tr>
+<tr>
+<td>冗余检测</td>
+<td>若 <span class="arithmatex">\(I(Z;Y\mid X)\approx0\)</span>，<span class="arithmatex">\(Z\)</span> 冗余</td>
+</tr>
+<tr>
+<td>排列优化</td>
+<td>先选信息量大的，再逐步补充</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也解释了 mRMR（最小冗余最大相关）的原理</strong>：
+它在选择第 <span class="arithmatex">\(k\)</span> 个特征时，隐式地考虑了
+「已知前 <span class="arithmatex">\(k-1\)</span> 个后的增量」，从而避免选到冗余特征 ✓</p>
+</details>
 
 
 

@@ -1916,6 +1916,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3430,6 +3441,223 @@ H(\text{后}) = \frac68H_A+\frac28H_B = 0.75\times0.65+0.25\times1.0
 <p><strong>这与「过拟合」是同一个问题的两种表现</strong>：
 用过于细分的特征 = 记住了训练数据的噪声。</p>
 </div>
+<hr />
+<h2 id="_8">六、自测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 某随机变量取三个值，概率为 <span class="arithmatex">\((0.5, 0.25, 0.25)\)</span>。
+求它的熵（比特），并验证不超过 <span class="arithmatex">\(\log_2 3\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>逐项算 <span class="arithmatex">\(p\cdot(-\log_2 p)\)</span> 再求和。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>逐项计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(p\)</span></th>
+<th><span class="arithmatex">\(-\log_2 p\)</span></th>
+<th>贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.25\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.25\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+H = 0.5+0.5+0.5 = 1.5\ \text{比特}
+\]</div>
+<p><strong>验证上界</strong>：</p>
+<div class="arithmatex">\[
+\log_2 3 \approx 1.585 &gt; 1.5 \;\checkmark
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(H = 1.5\)</span> 比特</p>
+<p><strong>能否用更短的码</strong>：注意到每个概率都是 <span class="arithmatex">\(2^{-k}\)</span> 形式，
+所以可以设计码长恰等于自信息的前缀码：</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>码字</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>0</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>10</code></td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>11</code></td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>平均码长</strong>：<span class="arithmatex">\(0.5+0.5+0.5 = 1.5\)</span> = 熵 ✓</p>
+<p><strong>这说明</strong>：<strong>当所有概率都是 <span class="arithmatex">\(2\)</span> 的负整数次幂时，
+霍夫曼编码能恰好达到熵下界</strong>（无「不足 1 比特」的浪费）。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：若某随机变量的熵为 0，则它一定是常数。</p>
+<details class="note">
+<summary>提示</summary>
+<p>回顾 <span class="arithmatex">\(H = 0\)</span> 与分布形状的关系。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>正确</strong>（在有限取值集合上）。</p>
+<p><strong>推导</strong>：由 <span class="arithmatex">\(H(X) = -\sum_x p(x)\log p(x) = 0\)</span>。</p>
+<p>每一项 <span class="arithmatex">\(p\log p\leq0\)</span>（因为 <span class="arithmatex">\(p\in[0,1]\)</span>，<span class="arithmatex">\(\log p\leq0\)</span>），
+所以各项之和为 0 要求<strong>每一项都为 0</strong>：</p>
+<div class="arithmatex">\[
+p(x)\log p(x) = 0 \quad\forall x
+\]</div>
+<p>由约定 <span class="arithmatex">\(0\log0 = 0\)</span>，以及 <span class="arithmatex">\(\log p = 0\)</span> 当且仅当 <span class="arithmatex">\(p = 1\)</span>：</p>
+<p>所以存在某个 <span class="arithmatex">\(x^*\)</span> 使 <span class="arithmatex">\(p(x^*) = 1\)</span>，其余为 0 ——
+即 <span class="arithmatex">\(X\)</span> <strong>几乎必然</strong>取 <span class="arithmatex">\(x^*\)</span> ✓</p>
+<p><strong>结论</strong>：<strong>熵为零 ⟺ 完全确定 ⟺ 退化分布（单点分布）</strong></p>
+<p><strong>注意「几乎必然」的用词</strong>：严格来说，若某取值概率为 0，
+那个取值仍是可能的取值（只是不发生）。
+在工程中视为「确定」即可。</p>
+<p><strong>工程含义</strong>：<strong>熵为零的数据不需要传输任何信息</strong> ✓
+（接收方已经知道内容 —— 这就是「可压到零」的情形。）</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 已知某离散随机变量取值范围是 <span class="arithmatex">\(\{0,1,2,3\}\)</span>，且 <span class="arithmatex">\(E[X] = 1.5\)</span>。
+按最大熵原理应假设什么分布？</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(E[X] = 1.5\)</span> 恰好是范围的中点，想想均匀分布是否满足。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>假设均匀分布</strong>：<span class="arithmatex">\(p(0) = p(1) = p(2) = p(3) = \frac14\)</span>。</p>
+<p><strong>验证均值</strong>：</p>
+<div class="arithmatex">\[
+E[X] = \frac{0+1+2+3}{4} = \frac64 = 1.5 \;\checkmark
+\]</div>
+<p><strong>满足约束</strong> ✓</p>
+<p><strong>结论</strong>：<strong>该约束不排除均匀分布，所以最大熵解仍是均匀分布</strong>。</p>
+<p><strong>熵</strong>：</p>
+<div class="arithmatex">\[
+H = \log_2 4 = 2\ \text{比特}
+\]</div>
+<p><strong>一般原理</strong>：<strong>只有「额外信息」才能改变最大熵解</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>额外信息</th>
+<th>是否改变解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>均值 = 1.5（恰在中点）</td>
+<td><strong>不改</strong>（均匀已满足）</td>
+</tr>
+<tr>
+<td>均值 = 1.0（≠1.5）</td>
+<td><strong>改</strong>（需要用指数族）</td>
+</tr>
+<tr>
+<td>方差已知</td>
+<td>改（趋于高斯）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践中要小心</strong>：如果你<strong>以为</strong>某个约束提供了信息，
+但实际没有（如本例），那么「用拉格朗日乘数法」会得到
+一个<strong>不确定的解</strong>（方程不足以确定参数）——
+这就是本例的表现。</p>
+<p><strong>判断方法</strong>：先检查均匀分布是否满足约束。若满足，
+则约束没有信息量 ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么压缩算法的极限是熵？</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑「编码长度」与「概率」的关系，以及可辨认编码的空间限制。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>核心：编码长度与概率的对应关系由「码字空间有限」决定。</strong></p>
+<p><strong>第一步：编码长度与自信息的关系</strong></p>
+<p>在<strong>最优编码</strong>中，概率为 <span class="arithmatex">\(p\)</span> 的符号，其码长约等于自信息：</p>
+<div class="arithmatex">\[
+L(x)\approx -\log_2 p(x)
+\]</div>
+<p><strong>理由</strong>：若某个符号的码更短，则必然有别的符号的码更长
+（因为前缀码要求码字之间不能有前缀关系，
+这限制了「短码」的总数量：长度为 <span class="arithmatex">\(k\)</span> 的码字最多 <span class="arithmatex">\(2^k\)</span> 个）。</p>
+<p><strong>第二步：前缀码的「Kraft 不等式」</strong></p>
+<p>对任何前缀码，码长必须满足</p>
+<div class="arithmatex">\[
+\sum_x 2^{-L(x)}\leq1
+\]</div>
+<p><strong>含义</strong>：所有码字在「二进制树」上占据的「概率质量」之和不超过 1。</p>
+<p><strong>第三步：求最小平均长度</strong></p>
+<p>问题化为：</p>
+<div class="arithmatex">\[
+\min\sum_x p(x)L(x)\quad\text{s.t.}\quad\sum_x2^{-L(x)}\leq1
+\]</div>
+<p><strong>用拉格朗日乘数法</strong>（回到优化那一页）可得最优解：</p>
+<div class="arithmatex">\[
+L(x) = -\log_2 p(x)
+\]</div>
+<p><strong>此时平均长度</strong>：</p>
+<div class="arithmatex">\[
+\bar L = \sum_x p(x)\left(-\log_2 p(x)\right) = H(X) \;\checkmark
+\]</div>
+<p><strong>结论</strong>：<strong>熵是平均码长的下界，且可达到</strong>（当 <span class="arithmatex">\(p(x)\)</span> 都是
+<span class="arithmatex">\(2\)</span> 的负整数次幂时恰好达到；一般情况下与熵的差小于 1 比特）。</p>
+<p><strong>实用提醒</strong>：<strong>「达到熵」需要理想编码</strong>。
+实际算法（Huffman、算术编码、LZ 系列）与熵的差距：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>与熵的差距</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Huffman</td>
+<td><span class="arithmatex">\(&lt;1\)</span> 比特/符号</td>
+</tr>
+<tr>
+<td><strong>算术编码</strong></td>
+<td>可达任意近 ✓</td>
+</tr>
+<tr>
+<td>LZ 系列（通用）</td>
+<td>取决于数据冗余度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义</strong>：<strong>熵给出了「还能压多少」的可靠标尺</strong> ——
+若某压缩算法比熵还小，说明它是<strong>有损的</strong>（丢了信息）。</p>
+</details>
 
 
 
