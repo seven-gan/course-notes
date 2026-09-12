@@ -1,0 +1,3391 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/probability/bayes/">
+      
+      
+        <link rel="prev" href="../random-variable/">
+      
+      
+        <link rel="next" href="../expectation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>贝叶斯定理 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              贝叶斯定理
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、连续情形的贝叶斯定理
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、共轭先验
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、三种估计的对比
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、朴素贝叶斯分类器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、朴素贝叶斯分类器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        朴素贝叶斯的假设
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        平滑（拉普拉斯平滑）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：连续情形的贝叶斯更新
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2beta-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：Beta-伯努利共轭
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：朴素贝叶斯分类
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：贝叶斯 vs 频率派——一个直观对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 分类与决策
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 状态估计与故障诊断
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 检测与估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 决策与学习
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">现代数字信号处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>MML §6.3</code><code>现有讲义「第 4 讲 概率论」D.3 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《概率论与数理统计》贝叶斯公式章节（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../sample-space/">sample-space</a><a href="../random-variable/">random-variable</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../expectation/">expectation</a></span></div></div>
+
+<h1 id="_1">贝叶斯定理<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页把贝叶斯定理作为条件概率的推论给出了。这一页把它<strong>当成一种思维方式</strong>来讲。</p>
+<blockquote>
+<p><strong>贝叶斯定理：新证据如何改变我们的判断。</strong></p>
+</blockquote>
+<p>它不是一条计算技巧，而是<strong>在不确定下做推理的通用框架</strong>——
+模式识别、状态估计、故障诊断、机器学习，全都建立在它之上。</p>
+<div class="admonition tip">
+<p class="admonition-title">贝叶斯思维的一句话概括</p>
+<div class="arithmatex">\[
+\text{后验} \propto \text{似然}\times\text{先验}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>成分</th>
+<th>含义</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>先验</strong></td>
+<td>看到数据前相信什么</td>
+<td>经验、历史数据</td>
+</tr>
+<tr>
+<td><strong>似然</strong></td>
+<td>若假设成立，数据有多可能</td>
+<td>物理模型、传感器特性</td>
+</tr>
+<tr>
+<td><strong>后验</strong></td>
+<td>看到数据后应相信什么</td>
+<td>两者相乘并归一化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心洞察</strong>：<strong>判断不只取决于证据，还取决于先验</strong>。
+这正是本知识库「样本空间」一页里假阳性问题的教训。</p>
+</div>
+<hr />
+<h2 id="_2">一、连续情形的贝叶斯定理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>对连续随机变量，把概率换成密度：</p>
+<div class="arithmatex">\[
+\boxed{\ f(\theta\mid \boldsymbol{x}) = \frac{f(\boldsymbol{x}\mid\theta)f(\theta)}{f(\boldsymbol{x})}\ }
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+f(\boldsymbol{x}) = \int f(\boldsymbol{x}\mid\theta)f(\theta)\,\mathrm{d}\theta
+\]</div>
+<p><strong>这是参数估计的起点</strong>：<span class="arithmatex">\(\theta\)</span> 是待估参数，<span class="arithmatex">\(\boldsymbol{x}\)</span> 是观测数据。</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f(\theta)\)</span></td>
+<td><strong>先验密度</strong></td>
+<td>对参数的事前信念</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(\boldsymbol{x}\mid\theta)\)</span></td>
+<td><strong>似然</strong></td>
+<td>参数为 <span class="arithmatex">\(\theta\)</span> 时观测到 <span class="arithmatex">\(\boldsymbol{x}\)</span> 的可能</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(\theta\mid\boldsymbol{x})\)</span></td>
+<td><strong>后验密度</strong></td>
+<td>观测后对参数的信念</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f(\boldsymbol{x})\)</span></td>
+<td><strong>证据</strong></td>
+<td>归一化常数（与 <span class="arithmatex">\(\theta\)</span> 无关）</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">为什么分母常常可以不管</p>
+<p>因为 <span class="arithmatex">\(f(\boldsymbol{x})\)</span> <strong>不含 <span class="arithmatex">\(\theta\)</span></strong>（它是对 <span class="arithmatex">\(\theta\)</span> 积分后得到的常数），
+所以在求「与 <span class="arithmatex">\(\theta\)</span> 有关的量」时常可忽略：</p>
+<div class="arithmatex">\[
+f(\theta\mid\boldsymbol{x}) \propto f(\boldsymbol{x}\mid\theta)f(\theta)
+\]</div>
+<p><strong>典型用法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>是否需要分母</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求最大后验估计（MAP）</td>
+<td><strong>不需要</strong>（只比较大小）</td>
+</tr>
+<tr>
+<td>求后验的期望</td>
+<td>需要（归一化）</td>
+</tr>
+<tr>
+<td>求后验的完整分布</td>
+<td>需要</td>
+</tr>
+</tbody>
+</table>
+<p><strong>MAP 估计</strong>就是</p>
+<div class="arithmatex">\[
+\hat\theta_{\text{MAP}} = \arg\max_\theta\big[f(\boldsymbol{x}\mid\theta)f(\theta)\big]
+\]</div>
+<p>这与「最大似然估计（MLE）」的关系是：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MLE</td>
+<td><span class="arithmatex">\(\arg\max f(\boldsymbol{x}\mid\theta)\)</span></td>
+</tr>
+<tr>
+<td><strong>MAP</strong></td>
+<td><span class="arithmatex">\(\arg\max f(\boldsymbol{x}\mid\theta)f(\theta)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>MLE 是 MAP 在「先验均匀」时的特例</strong>（因为均匀先验是常数，不影响极值位置）。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="贝叶斯更新：先验与似然相乘得到后验">
+<defs>
+<marker id="by1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="by1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="by1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 先验 -->
+<text class="lbl-s" x="14" y="18">① 先验 f(θ)：宽（不确定）</text>
+<line class="gb" x1="26" y1="66" x2="196" y2="66" marker-end="url(#by1-ah1)"/>
+<line class="gb" x1="26" y1="66" x2="26" y2="26" marker-end="url(#by1-ah2)"/>
+<path class="a4" d="M34,64 C58,62 68,40 86,32 C100,27 112,27 124,32 C142,40 152,62 176,64" fill="none" stroke-width="2.4"/>
+<text class="l4" x="92" y="52">宽峰</text>
+<!-- 似然 -->
+<text class="lbl-s" x="222" y="18">② 似然 f(x|θ)：数据说 θ 在此</text>
+<line class="gb" x1="234" y1="66" x2="404" y2="66" marker-end="url(#by1-ah1)"/>
+<line class="gb" x1="234" y1="66" x2="234" y2="26" marker-end="url(#by1-ah3)"/>
+<path class="a2" d="M254,64 C268,62 274,34 282,30 C290,27 296,27 304,30 C312,34 318,62 332,64" fill="none" stroke-width="2.4"/>
+<text class="l2" x="288" y="50">窄峰</text>
+<!-- 箭头 -->
+<line class="a1" x1="120" y1="86" x2="120" y2="112" marker-end="url(#by1-ah1)" opacity="0"/>
+<!-- 相乘 -->
+<text class="lbl-s" x="14" y="122">③ 相乘（逐点）</text>
+<line class="gb" x1="26" y1="176" x2="404" y2="176" marker-end="url(#by1-ah1)"/>
+<line class="gb" x1="26" y1="176" x2="26" y2="130" marker-end="url(#by1-ah2)"/>
+<path class="a4" d="M34,174 C58,172 68,150 86,142 C100,137 112,137 124,142 C142,150 152,172 176,174" fill="none" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="a2" d="M254,174 C268,172 274,144 282,140 C290,137 296,137 304,140 C312,144 318,172 332,174" fill="none" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.75"/>
+<path class="a1" d="M60,174 C110,170 150,140 240,120 C300,108 340,116 380,118" fill="none" stroke-width="2.8"/>
+<text class="l1" x="230" y="102">后验峰值</text>
+<text class="lbl-s" x="14" y="200">相乘后峰值介于两者之间，且比先验更陡</text>
+<text class="lbl-s" x="14" y="220">数据越多 → 似然越窄 → 后验越接近数据（先验影响越小）</text>
+<text class="lbl-s" x="14" y="244">这就是「贝叶斯学习」：数据逐步压过先验</text>
+</svg>
+<figcaption>图 1　贝叶斯更新的几何图像。先验（宽，表示不确定）与似然（窄，数据提供的信息）<b>逐点相乘</b>得到后验。后验的峰值介于两者之间，且比先验更尖锐——数据收窄了不确定性。数据量越大，似然越窄，后验越接近数据结论</figcaption>
+</figure>
+
+<hr />
+<h2 id="_3">二、共轭先验<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p><strong>问题</strong>：贝叶斯更新的分母 <span class="arithmatex">\(f(\boldsymbol{x}) = \int f(\boldsymbol{x}\mid\theta)f(\theta)\mathrm{d}\theta\)</span>
+<strong>常常积不出来</strong>。</p>
+<p><strong>解决</strong>：选择<strong>共轭先验</strong>——使后验与先验属于同一分布族，
+从而更新只改变参数，不需要做积分。</p>
+<p><strong>定义</strong>：若先验 <span class="arithmatex">\(f(\theta)\)</span> 与后验 <span class="arithmatex">\(f(\theta\mid\boldsymbol{x})\)</span> 属于同一分布族，
+则称该先验是似然的<strong>共轭先验</strong>。</p>
+<p><strong>常用共轭对</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>似然</th>
+<th>共轭先验</th>
+<th>后验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>伯努利 / 二项</td>
+<td><strong>Beta</strong></td>
+<td>Beta（参数累加）</td>
+</tr>
+<tr>
+<td>泊松</td>
+<td><strong>Gamma</strong></td>
+<td>Gamma</td>
+</tr>
+<tr>
+<td><strong>正态（已知方差）</strong></td>
+<td><strong>正态</strong></td>
+<td>正态</td>
+</tr>
+<tr>
+<td>正态（已知均值）</td>
+<td>逆 Gamma</td>
+<td>逆 Gamma</td>
+</tr>
+<tr>
+<td>多项</td>
+<td>Dirichlet</td>
+<td>Dirichlet</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">正态 + 正态 = 正态：这是最常用的一对</p>
+<p>设先验 <span class="arithmatex">\(\theta\sim N(\mu_0,\sigma_0^2)\)</span>，
+观测 <span class="arithmatex">\(x\mid\theta\sim N(\theta,\sigma^2)\)</span>（一次观测），则后验</p>
+<div class="arithmatex">\[
+\theta\mid x \sim N(\mu_1,\ \sigma_1^2)
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+\frac{1}{\sigma_1^2} = \frac{1}{\sigma_0^2} + \frac{1}{\sigma^2},
+\qquad
+\mu_1 = \sigma_1^2\left(\frac{\mu_0}{\sigma_0^2} + \frac{x}{\sigma^2}\right)
+\]</div>
+<p><strong>关键在于「精度的可加性」</strong>：定义<strong>精度</strong>（方差的倒数）</p>
+<div class="arithmatex">\[
+\tau = \frac{1}{\sigma^2}
+\]</div>
+<p>则</p>
+<div class="arithmatex">\[
+\tau_1 = \tau_0 + \tau_x
+\]</div>
+<p><strong>精度直接相加</strong> —— 这极其简洁。</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\tau_0\)</span></td>
+<td>先验提供的「信息量」</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tau_x\)</span></td>
+<td>数据提供的「信息量」</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\tau_1\)</span></td>
+<td>总的「信息量」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>后验均值是「加权平均」</strong>：</p>
+<div class="arithmatex">\[
+\mu_1 = \frac{\tau_0\mu_0 + \tau_x x}{\tau_0 + \tau_x}
+\]</div>
+<p><strong>谁的精度高，谁的话语权就大</strong> —— 这就是贝叶斯更新的直觉。</p>
+<p><strong>多次观测</strong>：<span class="arithmatex">\(n\)</span> 次独立观测的精度是 <span class="arithmatex">\(n\tau_x\)</span>（精度可加），
+所以</p>
+<div class="arithmatex">\[
+\tau_n = \tau_0 + n\tau_x
+\]</div>
+<p><span class="arithmatex">\(n\)</span> 很大时 <span class="arithmatex">\(\tau_0\)</span> 可忽略，后验完全由数据决定
+（回到「数据说话」）✓</p>
+</div>
+<hr />
+<h2 id="_4">三、三种估计的对比<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>估计值</th>
+<th>使用先验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MLE</strong>（最大似然）</td>
+<td><span class="arithmatex">\(\arg\max f(\boldsymbol{x}\mid\theta)\)</span></td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>MAP</strong>（最大后验）</td>
+<td><span class="arithmatex">\(\arg\max f(\boldsymbol{x}\mid\theta)f(\theta)\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>贝叶斯估计</strong></td>
+<td>后验的某个泛函（如均值 <span class="arithmatex">\(E[\theta\mid \boldsymbol{x}]\)</span>）</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">MLE 与 MAP 的关系（以及正则化的解释）</p>
+<p>取对数后：</p>
+<div class="arithmatex">\[
+\hat\theta_{\text{MAP}} = \arg\max_\theta\big[\log f(\boldsymbol{x}\mid\theta) + \log f(\theta)\big]
+\]</div>
+<p><strong>对比机器学习的损失函数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>贝叶斯项</th>
+<th>机器学习对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(-\log f(\boldsymbol{x}\mid\theta)\)</span></td>
+<td><strong>损失函数</strong>（如交叉熵）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(-\log f(\theta)\)</span></td>
+<td><strong>正则项</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了一件重要的事</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>先验</th>
+<th>对应的正则化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>高斯先验</strong> <span class="arithmatex">\(N(0,\sigma^2)\)</span></td>
+<td><strong>L2 正则</strong>（权重衰减）</td>
+</tr>
+<tr>
+<td><strong>拉普拉斯先验</strong></td>
+<td><strong>L1 正则</strong>（产生稀疏解）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推导（高斯先验 → L2）</strong>：</p>
+<div class="arithmatex">\[
+-\log f(\theta) = -\log\left[\frac{1}{\sqrt{2\pi}\sigma}e^{-\theta^2/(2\sigma^2)}\right]
+= \frac{\theta^2}{2\sigma^2} + \text{常数}
+\]</div>
+<p>这正是 L2 正则项 <span class="arithmatex">\(\frac{\lambda}{2}\lVert\theta\rVert^2\)</span>（取 <span class="arithmatex">\(\lambda = 1/\sigma^2\)</span>）✓</p>
+<p><strong>工程含义</strong>：<strong>正则化不是「技巧」，而是有概率意义的</strong>——
+它等价于对参数施加了先验信念。</p>
+<p>这也解释了为什么正则强度要与数据量匹配：
+数据越多，先验的相对影响越小。</p>
+</div>
+<hr />
+<h2 id="_5">四、朴素贝叶斯分类器<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>这是贝叶斯定理在模式识别中最直接的应用。</p>
+<h3 id="_6">问题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>给定特征 <span class="arithmatex">\(\boldsymbol{x} = (x_1,\dots,x_d)\)</span>，判断类别 <span class="arithmatex">\(c\)</span>：</p>
+<div class="arithmatex">\[
+P(c\mid\boldsymbol{x}) = \frac{P(\boldsymbol{x}\mid c)P(c)}{P(\boldsymbol{x})}
+\]</div>
+<p><strong>困难</strong>：<span class="arithmatex">\(P(\boldsymbol{x}\mid c)\)</span> 是 <span class="arithmatex">\(d\)</span> 维联合分布，<strong>需要估计的参数太多</strong>
+（<span class="arithmatex">\(d\)</span> 大时指数爆炸）。</p>
+<h3 id="_7">朴素贝叶斯的假设<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>假设特征在类别内条件独立</strong>：</p>
+<div class="arithmatex">\[
+P(\boldsymbol{x}\mid c) = \prod_{i=1}^{d}P(x_i\mid c)
+\]</div>
+<p><strong>于是</strong>：</p>
+<div class="arithmatex">\[
+P(c\mid\boldsymbol{x}) \propto P(c)\prod_{i=1}^{d}P(x_i\mid c)
+\]</div>
+<p><strong>分类决策</strong>：</p>
+<div class="arithmatex">\[
+\hat c = \arg\max_c\Big[P(c)\prod_{i=1}^{d}P(x_i\mid c)\Big]
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">「朴素」二字的含义与代价</p>
+<p><strong>「朴素」指的就是那个条件独立假设</strong>——
+它通常<strong>不成立</strong>（特征往往相关），所以叫「朴素」（naive）。</p>
+<p><strong>参数数量对比</strong>（<span class="arithmatex">\(d\)</span> 个特征、每个取 <span class="arithmatex">\(k\)</span> 个值）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完整联合分布</td>
+<td><span class="arithmatex">\(O(k^d)\)</span></td>
+</tr>
+<tr>
+<td><strong>朴素贝叶斯</strong></td>
+<td><span class="arithmatex">\(O(kd)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>指数级降到线性级</strong> —— 这就是它实用的原因。</p>
+<p><strong>为什么假设不成立却仍然有效</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分类只需要<strong>排序</strong>正确</td>
+<td>概率值不准也能选出最大者</td>
+</tr>
+<tr>
+<td>相关性会<strong>同时</strong>影响各候选类别</td>
+<td>部分抵消</td>
+</tr>
+<tr>
+<td>小样本下偏差-方差权衡有利</td>
+<td>参数少 → 方差小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>已知的失效情形</strong>：特征<strong>高度相关</strong>且各类别的相关性模式不同时，
+朴素贝叶斯会明显出错。</p>
+<p><strong>经典陷阱</strong>：若两个特征完全重复
+（<span class="arithmatex">\(x_2 = x_1\)</span>），则那个特征被<strong>计了两次</strong>，
+使后验过度自信——这是「双重计数」问题。</p>
+</div>
+<h3 id="_8">平滑（拉普拉斯平滑）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：若某特征值在某类别下从未出现，则</p>
+<div class="arithmatex">\[
+P(x_i\mid c) = 0 \implies \text{整个连乘} = 0
+\]</div>
+<p><strong>一个零概率抹掉了所有其它证据</strong> —— 这显然是错的。</p>
+<p><strong>解决（拉普拉斯平滑）</strong>：</p>
+<div class="arithmatex">\[
+P(x_i = v\mid c) = \frac{N_{i,v,c} + \alpha}{N_c + \alpha k}
+\]</div>
+<p>其中 <span class="arithmatex">\(N_{i,v,c}\)</span> 是计数，<span class="arithmatex">\(k\)</span> 是取值个数，<span class="arithmatex">\(\alpha\)</span> 通常取 1。</p>
+<p><strong>效果</strong>：从不出现的事件给一个<strong>很小的正概率</strong>，而非零。</p>
+<hr />
+<h2 id="_9">五、典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：连续情形的贝叶斯更新<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设参数 <span class="arithmatex">\(\theta\)</span> 的先验为 <span class="arithmatex">\(N(0, 4)\)</span>。
+观测到一次 <span class="arithmatex">\(x = 3\)</span>，观测模型为 <span class="arithmatex">\(x\mid\theta\sim N(\theta, 1)\)</span>。</p>
+<p><strong>(a)</strong> 求后验分布。<strong>(b)</strong> 求 MAP 估计。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用「精度可加」公式。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 后验</strong></p>
+<p><strong>精度</strong>：</p>
+<div class="arithmatex">\[
+\tau_0 = \frac{1}{\sigma_0^2} = \frac14 = 0.25
+\]</div>
+<div class="arithmatex">\[
+\tau_x = \frac{1}{\sigma^2} = \frac11 = 1
+\]</div>
+<p><strong>后验精度</strong>（可加）：</p>
+<div class="arithmatex">\[
+\tau_1 = \tau_0 + \tau_x = 0.25 + 1 = 1.25
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\sigma_1^2 = \frac{1}{1.25} = 0.8
+\]</div>
+<p><strong>后验均值</strong>（加权平均）：</p>
+<div class="arithmatex">\[
+\mu_1 = \frac{\tau_0\mu_0 + \tau_x x}{\tau_1} = \frac{0.25\times0 + 1\times3}{1.25} = \frac{3}{1.25} = 2.4
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+\theta\mid x \sim N(2.4,\ 0.8)
+\]</div>
+<p><strong>(b) MAP 估计</strong></p>
+<p>正态分布的众数就是均值，所以</p>
+<div class="arithmatex">\[
+\hat\theta_{\text{MAP}} = 2.4
+\]</div>
+<p><strong>对比 MLE</strong>：若忽略先验，MLE 就是 <span class="arithmatex">\(x = 3\)</span>。</p>
+<p><strong>贝叶斯估计把 3 向先验均值 0 拉近了</strong> → <span class="arithmatex">\(2.4\)</span> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个「拉近」效应的定量理解</p>
+<div class="arithmatex">\[
+\mu_1 = \frac{\tau_0\mu_0 + \tau_x x}{\tau_0+\tau_x}
+\]</div>
+<p>代入 <span class="arithmatex">\(\mu_0 = 0\)</span>、<span class="arithmatex">\(x = 3\)</span>、<span class="arithmatex">\(\tau_0 = 0.25\)</span>、<span class="arithmatex">\(\tau_x = 1\)</span>：</p>
+<div class="arithmatex">\[
+\mu_1 = \frac{1}{1.25}\times3 = 0.8\times3 = 2.4
+\]</div>
+<p><strong>比例 <span class="arithmatex">\(0.8\)</span> 的含义</strong>：数据占 <span class="arithmatex">\(80\%\)</span> 权重，先验占 <span class="arithmatex">\(20\%\)</span>。</p>
+<div class="arithmatex">\[
+\frac{\tau_x}{\tau_0+\tau_x} = \frac{1}{1.25} = 0.8
+\]</div>
+<p><strong>数据越多，这个比例越接近 1</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观测数 <span class="arithmatex">\(n\)</span></th>
+<th>后验精度</th>
+<th>数据权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(0.25+1 = 1.25\)</span></td>
+<td><span class="arithmatex">\(80\%\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(0.25+4 = 4.25\)</span></td>
+<td><span class="arithmatex">\(94\%\)</span></td>
+</tr>
+<tr>
+<td>100</td>
+<td><span class="arithmatex">\(0.25+100\)</span></td>
+<td><span class="arithmatex">\(99.75\%\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「贝叶斯更新会逐渐遗忘先验」的定量表现</strong>。</p>
+</div>
+<hr />
+<h3 id="2beta-">例题 2：Beta-伯努利共轭<a class="headerlink" href="#2beta-" title="Permanent link">&para;</a></h3>
+<p>某部件合格率 <span class="arithmatex">\(\theta\)</span> 未知。先验取 <span class="arithmatex">\(\text{Beta}(2,2)\)</span>。
+检验 10 件，其中 7 件合格。</p>
+<p><strong>(a)</strong> 求后验分布。<strong>(b)</strong> 求后验均值。</p>
+<details class="note">
+<summary>思路</summary>
+<p>Beta-伯努利共轭：后验参数 = 先验参数 + 成功/失败计数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 后验</strong></p>
+<p><strong>共轭规则</strong>：若先验为 <span class="arithmatex">\(\text{Beta}(\alpha,\beta)\)</span>，
+观测到 <span class="arithmatex">\(s\)</span> 次成功、<span class="arithmatex">\(f\)</span> 次失败，则后验为</p>
+<div class="arithmatex">\[
+\text{Beta}(\alpha + s,\ \beta + f)
+\]</div>
+<p>代入 <span class="arithmatex">\(\alpha = 2\)</span>、<span class="arithmatex">\(\beta = 2\)</span>、<span class="arithmatex">\(s = 7\)</span>、<span class="arithmatex">\(f = 3\)</span>：</p>
+<div class="arithmatex">\[
+\theta\mid \text{data} \sim \text{Beta}(2+7,\ 2+3) = \text{Beta}(9,\ 5)
+\]</div>
+<p><strong>(b) 后验均值</strong></p>
+<p>Beta 分布的均值是 <span class="arithmatex">\(\frac{\alpha}{\alpha+\beta}\)</span>：</p>
+<div class="arithmatex">\[
+E[\theta\mid\text{data}] = \frac{9}{9+5} = \frac{9}{14} \approx 0.643
+\]</div>
+<p><strong>对比 MLE</strong>：<span class="arithmatex">\(\frac{7}{10} = 0.7\)</span>。</p>
+<p><strong>对比先验均值</strong>：<span class="arithmatex">\(\frac{2}{2+2} = 0.5\)</span>。</p>
+<p><strong>后验均值介于两者之间</strong>（0.643），且更靠近数据（0.7）✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">Beta 先验的「虚拟样本」解释</p>
+<p><span class="arithmatex">\(\text{Beta}(\alpha,\beta)\)</span> 可以理解为<strong>已经看过 <span class="arithmatex">\(\alpha-1\)</span> 次成功、
+<span class="arithmatex">\(\beta-1\)</span> 次失败</strong>（或近似理解为 <span class="arithmatex">\(\alpha\)</span> 次成功、<span class="arithmatex">\(\beta\)</span> 次失败）。</p>
+<p><strong>于是后验均值就是「加了虚拟样本后的频率」</strong>：</p>
+<div class="arithmatex">\[
+E[\theta\mid\text{data}] = \frac{\alpha + s}{(\alpha+s)+(\beta+f)}
+= \frac{2+7}{(2+7)+(2+3)} = \frac{9}{14}
+\]</div>
+<p>本例如同「先验贡献 2 成功 2 失败，再加 7 成功 3 失败」。</p>
+<p><strong>先验强度的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>先验</th>
+<th><span class="arithmatex">\(\alpha+\beta\)</span></th>
+<th>相当于「先验样本数」</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\text{Beta}(1,1)\)</span>（均匀）</td>
+<td>2</td>
+<td>几乎没有先验信息</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\text{Beta}(2,2)\)</span></td>
+<td>4</td>
+<td>弱先验</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\text{Beta}(50,50)\)</span></td>
+<td>100</td>
+<td><strong>强先验</strong>（很难被数据改变）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程用途</strong>：想表达「我对这个参数有很强的历史经验」，
+就用大 <span class="arithmatex">\(\alpha+\beta\)</span>；想「让数据说话」，就用 <span class="arithmatex">\(\text{Beta}(1,1)\)</span>。</p>
+<p><strong>实践建议</strong>：一般先用弱先验，数据积累后再逐步调整。</p>
+</div>
+<hr />
+<h3 id="3">例题 3：朴素贝叶斯分类<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>用朴素贝叶斯判断一封邮件是否为垃圾邮件。</p>
+<p><strong>训练数据</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>邮件</th>
+<th>含「免费」</th>
+<th>含「会议」</th>
+<th>类别</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>是</td>
+<td>否</td>
+<td>垃圾</td>
+</tr>
+<tr>
+<td>2</td>
+<td>是</td>
+<td>是</td>
+<td>垃圾</td>
+</tr>
+<tr>
+<td>3</td>
+<td>否</td>
+<td>是</td>
+<td>正常</td>
+</tr>
+<tr>
+<td>4</td>
+<td>否</td>
+<td>是</td>
+<td>正常</td>
+</tr>
+<tr>
+<td>5</td>
+<td>否</td>
+<td>否</td>
+<td>正常</td>
+</tr>
+</tbody>
+</table>
+<p><strong>待分类邮件</strong>：含「免费」、不含「会议」。</p>
+<p>用拉普拉斯平滑（<span class="arithmatex">\(\alpha = 1\)</span>），判断类别。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先算先验与各特征的类条件概率（含平滑），再用朴素贝叶斯的乘积公式。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：先验</strong></p>
+<p>垃圾 2 封、正常 3 封，共 5 封：</p>
+<div class="arithmatex">\[
+P(\text{垃圾}) = \frac25 = 0.4, \qquad P(\text{正常}) = \frac35 = 0.6
+\]</div>
+<p><strong>第二步：类条件概率（含拉普拉斯平滑 <span class="arithmatex">\(\alpha=1\)</span>）</strong></p>
+<p>每个特征有 2 个取值（是/否），所以 <span class="arithmatex">\(k = 2\)</span>，
+平滑公式：<span class="arithmatex">\(P = \frac{\text{计数}+1}{\text{该类总数}+2}\)</span>。</p>
+<p><strong>垃圾类</strong>（2 封）：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>计数</th>
+<th>平滑后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「免费」= 是</td>
+<td>2</td>
+<td><span class="arithmatex">\(\frac{2+1}{2+2} = 0.75\)</span></td>
+</tr>
+<tr>
+<td>「免费」= 否</td>
+<td>0</td>
+<td><span class="arithmatex">\(\frac{0+1}{2+2} = 0.25\)</span></td>
+</tr>
+<tr>
+<td>「会议」= 是</td>
+<td>1</td>
+<td><span class="arithmatex">\(\frac{1+1}{2+2} = 0.5\)</span></td>
+</tr>
+<tr>
+<td>「会议」= 否</td>
+<td>1</td>
+<td><span class="arithmatex">\(\frac{1+1}{2+2} = 0.5\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>正常类</strong>（3 封）：</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>计数</th>
+<th>平滑后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「免费」= 是</td>
+<td>0</td>
+<td><span class="arithmatex">\(\frac{0+1}{3+2} = 0.2\)</span></td>
+</tr>
+<tr>
+<td>「免费」= 否</td>
+<td>3</td>
+<td><span class="arithmatex">\(\frac{3+1}{3+2} = 0.8\)</span></td>
+</tr>
+<tr>
+<td>「会议」= 是</td>
+<td>2</td>
+<td><span class="arithmatex">\(\frac{2+1}{3+2} = 0.6\)</span></td>
+</tr>
+<tr>
+<td>「会议」= 否</td>
+<td>1</td>
+<td><span class="arithmatex">\(\frac{1+1}{3+2} = 0.4\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三步：计算后验（未归一化）</strong></p>
+<p>待分类邮件：「免费」= 是、「会议」= 否。</p>
+<p><strong>垃圾</strong>：</p>
+<div class="arithmatex">\[
+P(\text{垃圾})\cdot P(\text{免费}\mid\text{垃圾})\cdot P(\text{无会议}\mid\text{垃圾})
+= 0.4\times0.75\times0.5 = 0.15
+\]</div>
+<p><strong>正常</strong>：</p>
+<div class="arithmatex">\[
+P(\text{正常})\cdot P(\text{免费}\mid\text{正常})\cdot P(\text{无会议}\mid\text{正常})
+= 0.6\times0.2\times0.4 = 0.048
+\]</div>
+<p><strong>第四步：比较并归一化</strong></p>
+<div class="arithmatex">\[
+0.15 &gt; 0.048 \implies \textbf{判为垃圾邮件}
+\]</div>
+<p><strong>归一化后的后验概率</strong>：</p>
+<div class="arithmatex">\[
+P(\text{垃圾}\mid \boldsymbol{x}) = \frac{0.15}{0.15+0.048} = \frac{0.15}{0.198} \approx 0.758
+\]</div>
+<p>即约 <strong><span class="arithmatex">\(75.8\%\)</span></strong></p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">没有平滑会怎样（关键检验）</p>
+<p><strong>若不做平滑</strong>，看看「正常」类的「免费 = 是」：</p>
+<p>训练数据中正常邮件<strong>从未</strong>含「免费」→ 计数为 0 →</p>
+<div class="arithmatex">\[
+P(\text{免费}\mid\text{正常}) = 0
+\]</div>
+<p>于是</p>
+<div class="arithmatex">\[
+P(\text{正常})\cdot 0\cdot P(\text{无会议}\mid\text{正常}) = 0
+\]</div>
+<p><strong>整个乘积变成 0</strong> —— 无论其它特征提供多少证据，
+正常类的得分都会被这一个零<strong>彻底抹掉</strong>。</p>
+<p><strong>后果</strong>：只要邮件含「免费」就<strong>必然</strong>判为垃圾——
+即使它是「会议免费」这类正常内容。</p>
+<p><strong>这就是「零概率问题」</strong>，拉普拉斯平滑正是为解决它而设计的。</p>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>垃圾得分</th>
+<th>正常得分</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无平滑</td>
+<td>0.15</td>
+<td>0</td>
+<td>垃圾（但理由不充分）</td>
+</tr>
+<tr>
+<td><strong>平滑后</strong></td>
+<td>0.15</td>
+<td>0.048</td>
+<td>垃圾（79% 置信）</td>
+</tr>
+</tbody>
+</table>
+<p>平滑后正常类有了「非零的发言机会」，判定才<strong>基于证据比较</strong>
+而不是「一票否决」。</p>
+</div>
+<hr />
+<h3 id="4-vs">例题 4：贝叶斯 vs 频率派——一个直观对比<a class="headerlink" href="#4-vs" title="Permanent link">&para;</a></h3>
+<p>某试验做了 5 次，全部成功。估计成功率 <span class="arithmatex">\(\theta\)</span>。</p>
+<p><strong>(a)</strong> MLE 给出的估计是多少？有什么问题？</p>
+<p><strong>(b)</strong> 用 <span class="arithmatex">\(\text{Beta}(1,1)\)</span> 先验，后验均值是多少？</p>
+<details class="note">
+<summary>思路</summary>
+<p>(a) 想想「5 次全成功」时的频率估计；(b) 用共轭规则。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) MLE</strong></p>
+<div class="arithmatex">\[
+\hat\theta_{\text{MLE}} = \frac{5}{5} = 1
+\]</div>
+<p><strong>问题</strong>：它断言成功率<strong>恰好是 100%</strong>，即「不可能失败」。</p>
+<p><strong>为什么这是问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>过于绝对</td>
+<td>5 次样本不足以支持「绝无失败」的结论</td>
+</tr>
+<tr>
+<td>预测失效</td>
+<td>说下一次必然成功，但若失败则模型完全错误</td>
+</tr>
+<tr>
+<td>零概率灾难</td>
+<td>若用于下游计算，出现 <span class="arithmatex">\(P(\text{失败}) = 0\)</span> 会导致 <span class="arithmatex">\(\log 0\)</span> 等</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本质</strong>：MLE 只看数据，<strong>不考虑样本量的说服力</strong>。</p>
+<p><strong>(b) 贝叶斯（Beta(1,1) 先验）</strong></p>
+<p><span class="arithmatex">\(\text{Beta}(1,1)\)</span> 是 <span class="arithmatex">\([0,1]\)</span> 上的<strong>均匀分布</strong>（最弱的先验）。</p>
+<p>后验：</p>
+<div class="arithmatex">\[
+\text{Beta}(1 + 5,\ 1 + 0) = \text{Beta}(6,\ 1)
+\]</div>
+<p>后验均值：</p>
+<div class="arithmatex">\[
+E[\theta\mid\text{data}] = \frac{6}{6+1} = \frac67 \approx 0.857
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(0.857\)</span> —— 比 MLE 的 <span class="arithmatex">\(1\)</span> 更保守、更合理 ✓</p>
+<p><strong>为什么更合理</strong>：它保留了「可能失败」的一丝可能
+（后验分布 <span class="arithmatex">\(\text{Beta}(6,1)\)</span> 在 <span class="arithmatex">\(\theta = 1\)</span> 附近有密度但非全部）。</p>
+<p><strong>注意这里先验极弱</strong>（<span class="arithmatex">\(\text{Beta}(1,1)\)</span> 几乎不含信息），
+可见「加一点点先验」就能避免极端的 <span class="arithmatex">\(1\)</span>。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">两种学派的差异与工程取向</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>频率派</th>
+<th>贝叶斯派</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\theta\)</span> 的性质</td>
+<td><strong>固定未知常数</strong></td>
+<td><strong>随机变量</strong>（有分布）</td>
+</tr>
+<tr>
+<td>概率的含义</td>
+<td>长期频率</td>
+<td>信念程度</td>
+</tr>
+<tr>
+<td>小样本</td>
+<td>容易给出极端估计</td>
+<td>有先验「托底」</td>
+</tr>
+<tr>
+<td>计算</td>
+<td>通常更快</td>
+<td>常需积分/MCMC</td>
+</tr>
+<tr>
+<td>先验</td>
+<td>不使用</td>
+<td><strong>需要指定</strong>（争议点）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程实践的常见做法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>倾向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据量大</td>
+<td>两者结果趋同（先验影响消失）</td>
+</tr>
+<tr>
+<td>数据量小</td>
+<td><strong>贝叶斯更稳</strong>（有先验正则）</td>
+</tr>
+<tr>
+<td>需要「不确定性量化」</td>
+<td><strong>贝叶斯</strong>（直接给出分布）</td>
+</tr>
+<tr>
+<td>实时嵌入式</td>
+<td>频率派/简单方法（贝叶斯可能太慢）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本知识库的信号与系统模块</strong>中，
+<strong>卡尔曼滤波正是贝叶斯方法</strong>：它维护状态的<strong>完整分布</strong>（均值+协方差），
+每次观测做一次「贝叶斯更新」。这就是它优于简单滤波器的原因。</p>
+</div>
+<hr />
+<h2 id="_10">六、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">模式识别 · 分类与决策<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>贝叶斯分类器</strong>：最小错误率决策的理论最优解</li>
+<li><strong>朴素贝叶斯</strong>：文本分类（垃圾邮件、情感分析）的基线方法</li>
+<li><strong>贝叶斯决策论</strong>：引入<strong>损失函数</strong>，做最小风险决策
+  （不只是最小错误率）</li>
+<li><strong>高斯判别分析</strong>：类条件分布取正态的贝叶斯分类器</li>
+</ul>
+<h3 id="_12">智能传感与信息处理 · 状态估计与故障诊断<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>卡尔曼滤波</strong>：贝叶斯递推更新（高斯情形）</li>
+<li><strong>粒子滤波</strong>：非高斯/非线性的贝叶斯近似</li>
+<li><strong>故障诊断</strong>：由症状推断故障原因（贝叶斯网络）</li>
+<li><strong>传感器融合</strong>：多源信息按精度加权（正是「精度可加」）</li>
+</ul>
+<h3 id="_13">现代数字信号处理 · 检测与估计<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>贝叶斯检测</strong>：引入先验概率与代价的最优检测器</li>
+<li><strong>MAP 估计</strong>：参数估计的贝叶斯框架</li>
+<li><strong>目标跟踪</strong>：状态的贝叶斯递推（预测 + 更新）</li>
+</ul>
+<h3 id="_14">无人系统自主决策与优化 · 决策与学习<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>部分可观测马尔可夫决策过程（POMDP）</strong>：用信念状态（后验分布）做决策</li>
+<li><strong>贝叶斯优化</strong>：用于超参数搜索（用高斯过程建模目标函数）</li>
+<li><strong>贝叶斯神经网络</strong>：对权重加先验，输出不确定性</li>
+</ul>
+<hr />
+<h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 先验 <span class="arithmatex">\(N(10, 1)\)</span>，观测 <span class="arithmatex">\(x = 13\)</span>，似然 <span class="arithmatex">\(x\mid\theta\sim N(\theta, 4)\)</span>。
+求后验均值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用精度可加与加权平均。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>精度</strong>：</p>
+<div class="arithmatex">\[
+\tau_0 = \frac{1}{1} = 1, \qquad \tau_x = \frac14 = 0.25
+\]</div>
+<p><strong>后验精度</strong>：</p>
+<div class="arithmatex">\[
+\tau_1 = 1 + 0.25 = 1.25
+\]</div>
+<p><strong>后验均值</strong>：</p>
+<div class="arithmatex">\[
+\mu_1 = \frac{1\times10 + 0.25\times13}{1.25} = \frac{10 + 3.25}{1.25} = \frac{13.25}{1.25} = 10.6
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(10.6\)</span></p>
+<p><strong>解读</strong>：先验（精度 1）比数据（精度 0.25）更「可信」，
+所以后验（10.6）<strong>更靠近先验</strong>（10）而不是数据（13）。</p>
+<p><strong>验证权重</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先验</td>
+<td><span class="arithmatex">\(\frac{1}{1.25} = 0.8\)</span></td>
+</tr>
+<tr>
+<td>数据</td>
+<td><span class="arithmatex">\(\frac{0.25}{1.25} = 0.2\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+0.8\times10 + 0.2\times13 = 8 + 2.6 = 10.6 \;\checkmark
+\]</div>
+<p><strong>这提醒我们</strong>：若先验很强（方差小），少量数据<strong>难以改变</strong>判断。
+实践中若怀疑先验有偏，应选<strong>弱先验</strong>（大方差）。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：MAP 估计总是比 MLE 更准确。</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想先验本身可能是错的。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。取决于先验是否正确。</strong></p>
+<p><strong>关键</strong>：贝叶斯方法<strong>把先验的假设引入了结果</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>先验情形</th>
+<th>MAP 相对 MLE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先验接近真值</td>
+<td>MAP <strong>更准</strong> ✓</td>
+</tr>
+<tr>
+<td>先验严重偏离</td>
+<td>MAP <strong>可能更差</strong> ✗</td>
+</tr>
+<tr>
+<td>数据充分</td>
+<td>两者接近（先验影响消失）</td>
+</tr>
+<tr>
+<td>数据稀少 + 好先验</td>
+<td>MAP <strong>明显更准</strong></td>
+</tr>
+<tr>
+<td>数据稀少 + 坏先验</td>
+<td>MAP <strong>明显更差</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体例子</strong>：设真值 <span class="arithmatex">\(\theta = 5\)</span>，数据倾向 <span class="arithmatex">\(\hat\theta_{\text{MLE}} = 5.2\)</span>。</p>
+<ul>
+<li>若先验 <span class="arithmatex">\(N(5, 1)\)</span>（对的）→ MAP 会拉向 5，<strong>更准</strong> ✓</li>
+<li>若先验 <span class="arithmatex">\(N(0, 1)\)</span>（错的）→ MAP 被拉向 0，<strong>更差</strong> ✗</li>
+</ul>
+<p><strong>工程启示</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>实践建议</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先验要<strong>有依据</strong></td>
+<td>来自历史数据或物理约束，别凭空设</td>
+</tr>
+<tr>
+<td>数据不足时用<strong>弱先验</strong></td>
+<td>避免坏先验主导</td>
+</tr>
+<tr>
+<td>数据充分时可放心用先验</td>
+<td>影响会被数据冲淡</td>
+</tr>
+<tr>
+<td><strong>做敏感性分析</strong></td>
+<td>换不同先验看结论是否稳定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「坏先验」在工程中的实际表现</strong>：系统在某环境下标定的参数，
+换到另一环境后可能失效——这本质上就是「先验不再适用」。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 朴素贝叶斯为什么能用于特征相关的数据？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想分类只需要什么。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为它只需要预测的「排序」正确，不需要概率值准确。</strong></p>
+<p><strong>详细解释</strong>：</p>
+<p><strong>1. 分类只比较大小</strong></p>
+<div class="arithmatex">\[
+\hat c = \arg\max_c P(c)\prod_i P(x_i\mid c)
+\]</div>
+<p>只需要<strong>选出最大者</strong>，不要求概率值本身是准确的。</p>
+<p>特征相关性会使概率值偏大或偏小（通常偏「自信」），
+但如果<strong>所有类别都同样受影响</strong>，排序可能仍然正确。</p>
+<p><strong>2. 偏差-方差权衡</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>参数数</th>
+<th>偏差</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完整贝叶斯</td>
+<td><span class="arithmatex">\(O(k^d)\)</span></td>
+<td>低</td>
+<td><strong>极高</strong>（数据不足）</td>
+</tr>
+<tr>
+<td><strong>朴素贝叶斯</strong></td>
+<td><span class="arithmatex">\(O(kd)\)</span></td>
+<td>高</td>
+<td><strong>低</strong></td>
+</tr>
+</tbody>
+</table>
+<p>小样本时，<strong>低方差的收益常超过高偏差的损失</strong>。</p>
+<p><strong>3. 什么时候会失效</strong></p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征<strong>高度冗余</strong>（如完全重复）</td>
+<td><strong>双重计数</strong> → 过度自信</td>
+</tr>
+<tr>
+<td>各类别的相关模式<strong>不同</strong></td>
+<td>排序出错</td>
+</tr>
+<tr>
+<td>特征间有<strong>强负相关</strong></td>
+<td>概率严重失真</td>
+</tr>
+</tbody>
+</table>
+<p><strong>缓解方法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征选择</td>
+<td>去掉冗余特征</td>
+</tr>
+<tr>
+<td>降维（PCA）</td>
+<td>先去相关</td>
+</tr>
+<tr>
+<td><strong>校准</strong>（calibration）</td>
+<td>后处理让概率变准</td>
+</tr>
+<tr>
+<td>改用<strong>半朴素贝叶斯</strong></td>
+<td>允许部分依赖（如 TAN）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践结论</strong>：朴素贝叶斯是<strong>极好的基线</strong>——
+快、稳定、参数量小。文本分类上常与复杂模型打平。
+但若要<strong>用它的概率值</strong>（如做风险决策），必须先做校准。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么「正则化」可以理解为贝叶斯先验？</p>
+<details class="note">
+<summary>提示</summary>
+<p>对 MAP 取对数，看剩余两项。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为 MAP 的对数形式正好是「负损失 + 负对数先验」。</strong></p>
+<p><strong>推导</strong>：</p>
+<div class="arithmatex">\[
+\hat\theta_{\text{MAP}} = \arg\max_\theta\big[f(\boldsymbol{x}\mid\theta)f(\theta)\big]
+\]</div>
+<p>取对数（<span class="arithmatex">\(\log\)</span> 单调，不改变极值位置）：</p>
+<div class="arithmatex">\[
+= \arg\max_\theta\big[\log f(\boldsymbol{x}\mid\theta) + \log f(\theta)\big]
+\]</div>
+<p>改为最小化（加负号）：</p>
+<div class="arithmatex">\[
+= \arg\min_\theta\underbrace{\big[-\log f(\boldsymbol{x}\mid\theta)\big]}_{\text{损失函数}}
++ \underbrace{\big[-\log f(\theta)\big]}_{\text{正则项}}
+\]</div>
+<p><strong>这就是「损失 + 正则」的形式</strong> ✓</p>
+<p><strong>两种常见对应的完整推导</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>先验</th>
+<th><span class="arithmatex">\(-\log f(\theta)\)</span></th>
+<th>正则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高斯 <span class="arithmatex">\(N(0,\sigma^2)\)</span></td>
+<td><span class="arithmatex">\(\frac{\lVert\theta\rVert^2}{2\sigma^2} + C\)</span></td>
+<td><strong>L2</strong>（权重衰减）</td>
+</tr>
+<tr>
+<td>拉普拉斯</td>
+<td><span class="arithmatex">\(\frac{\lVert\theta\rVert_1}{b} + C\)</span></td>
+<td><strong>L1</strong>（稀疏）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>拉普拉斯先验的推导</strong>：</p>
+<div class="arithmatex">\[
+f(\theta) = \frac{1}{2b}e^{-\lvert\theta\rvert/b}
+\implies
+-\log f(\theta) = \frac{\lvert\theta\rvert}{b} + C
+\]</div>
+<p>正是 L1 正则 ✓</p>
+<p><strong>为什么 L1 产生稀疏解（这个解释很漂亮）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>先验</th>
+<th>在 0 附近的密度形状</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高斯</td>
+<td><strong>光滑</strong>（顶点处导数为 0）</td>
+<td>参数靠近 0 但不为 0</td>
+</tr>
+<tr>
+<td><strong>拉普拉斯</strong></td>
+<td><strong>尖峰</strong>（0 处导数不为 0）</td>
+<td>参数<strong>容易被压到恰好 0</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>直观理解</strong>：拉普拉斯分布在 0 处有个「尖锐的峰」，
+意味着它<strong>强烈相信</strong>「很多参数应该恰好为 0」——
+这正是稀疏性的来源。</p>
+<p><strong>工程含义</strong>：正则化强度 <span class="arithmatex">\(\lambda\)</span> 就对应先验方差：</p>
+<div class="arithmatex">\[
+\lambda = \frac{1}{\sigma^2}
+\]</div>
+<p><strong>强正则 ⟺ 小方差先验 ⟺ 对参数「更有主见」</strong>。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../random-variable/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 随机变量与分布">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                随机变量与分布
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../expectation/" class="md-footer__link md-footer__link--next" aria-label="下一页: 期望与方差">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                期望与方差
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
