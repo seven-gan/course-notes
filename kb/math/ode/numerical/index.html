@@ -1,0 +1,5768 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/ode/numerical/">
+      
+      
+        <link rel="prev" href="../stability/">
+      
+      
+        <link rel="next" href="../../mdp/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>常微分方程的数值解法 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              常微分方程的数值解法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#euler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、初值问题与 Euler 法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、初值问题与 Euler 法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题形式
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#euler_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        显式 Euler 法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#euler-heun" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        改进 Euler 法（Heun 法）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#runge-kutta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、Runge-Kutta 方法
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Runge-Kutta 方法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rk4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RK4：经典的四阶方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rk45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自适应步长（RK45）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、稳定性与刚性方程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、稳定性与刚性方程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        稳定性的概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stiff" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        刚性方程（Stiff）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        隐式方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1euler-euler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：Euler 法与改进 Euler 法的精度对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2euler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：Euler 法的稳定性边界
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3rk4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：RK4 的精度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：刚性问题的诊断
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 动力学仿真
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 轨迹积分与最优控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 连续系统的离散化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mdp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">现代数字信号处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（Euler 法、Runge-Kutta、刚性方程等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../first-order/">first-order</a><a href="../stability/">stability</a></span></div></div>
+
+<h1 id="_1">常微分方程的数值解法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前四页讲的都是「能求出解析解」的情形。但实践中：</p>
+<blockquote>
+<p><strong>绝大多数 ODE 没有解析解，必须数值求解。</strong></p>
+</blockquote>
+<p>这一页讲数值解法，以及<strong>为什么它们会失败</strong>（这是更重要的部分）。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话抓住核心：精度与稳定性的双重约束</p>
+<p><strong>数值解法的两大要求</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>要求</th>
+<th>含义</th>
+<th>违反的后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>精度</strong>（精度阶）</td>
+<td>步长 <span class="arithmatex">\(h\to0\)</span> 时误差如何减小</td>
+<td>结果不准</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>步长过大时是否发散</td>
+<td><strong>结果爆炸</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键洞察</strong>：<strong>稳定性比精度更致命</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精度不足</td>
+<td>结果有小误差（可接受）</td>
+</tr>
+<tr>
+<td><strong>不稳定</strong></td>
+<td><strong>结果完全无意义（甚至溢出）</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本页的主线</strong>：<strong>从 Euler 到 RK4 再到隐式方法，
+每一步都在解决「精度」或「稳定性」的某个问题。</strong></p>
+</div>
+<hr />
+<h2 id="euler">一、初值问题与 Euler 法<a class="headerlink" href="#euler" title="Permanent link">&para;</a></h2>
+<h3 id="_2">问题形式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y' = f(t,y),\qquad y(t_0) = y_0
+\]</div>
+<p><strong>目标</strong>：求 <span class="arithmatex">\(y(t)\)</span> 在离散时刻 <span class="arithmatex">\(t_0,t_1,\dots\)</span> 的近似值。</p>
+<h3 id="euler_1">显式 Euler 法<a class="headerlink" href="#euler_1" title="Permanent link">&para;</a></h3>
+<p><strong>用一阶泰勒展开</strong>（回顾「泰勒展开」一页）：</p>
+<div class="arithmatex">\[
+y(t+h) = y(t)+hy'(t)+O(h^2)
+\]</div>
+<p><strong>代入 <span class="arithmatex">\(y' = f(t,y)\)</span></strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ y_{n+1} = y_n+h\,f(t_n,y_n)\ }
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Euler 法的几何含义与两个误差来源</p>
+<p><strong>几何含义</strong>：<strong>沿当前点的切线方向前进一步</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单步法</td>
+<td>只需 <span class="arithmatex">\(y_n\)</span></td>
+</tr>
+<tr>
+<td><strong>显式</strong></td>
+<td>可直接算出 <span class="arithmatex">\(y_{n+1}\)</span> ✓</td>
+</tr>
+<tr>
+<td>一阶精度</td>
+<td>局部误差 <span class="arithmatex">\(O(h^2)\)</span>，全局 <span class="arithmatex">\(O(h)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个误差来源</strong>（都要知道）：</p>
+<p><strong>来源 1：截断误差</strong>（方法本身的）</p>
+<div class="arithmatex">\[
+\text{局部截断误差} = \frac{h^2}{2}y''(\xi) = O(h^2)
+\]</div>
+<p><strong>全局误差</strong>（累积 <span class="arithmatex">\(n = T/h\)</span> 步）：</p>
+<div class="arithmatex">\[
+O(h^2)\times\frac{T}{h} = O(h)
+\]</div>
+<p><strong>所以 Euler 是「一阶方法」</strong> —— <strong><span class="arithmatex">\(h\)</span> 减半，误差也减半</strong> ✓</p>
+<p><strong>来源 2：舍入误差</strong>（浮点导致的）</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>截断误差</th>
+<th>舍入误差</th>
+<th>总误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大</td>
+<td><strong>大</strong> ✗</td>
+<td>小</td>
+<td>大</td>
+</tr>
+<tr>
+<td>小</td>
+<td>小</td>
+<td><strong>大</strong>（步数多，累积多）✗</td>
+<td>大</td>
+</tr>
+<tr>
+<td><strong>最优</strong></td>
+<td>——</td>
+<td>——</td>
+<td><strong>存在最优 <span class="arithmatex">\(h\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>舍入误差的量级</strong>：</p>
+<div class="arithmatex">\[
+\text{舍入误差}\sim\frac{\epsilon_{\text{mach}}}{h}
+\]</div>
+<p>（步数 <span class="arithmatex">\(\propto1/h\)</span>，每步舍入 <span class="arithmatex">\(\sim\epsilon_{\text{mach}}\)</span>。）</p>
+<p><strong>最优步长的估算</strong>（令两者平衡）：</p>
+<div class="arithmatex">\[
+h^*\sim\sqrt{\epsilon_{\text{mach}}}\approx10^{-8}\ \text{（双精度）}
+\]</div>
+<p><strong>含义</strong>：<strong><span class="arithmatex">\(h\)</span> 小到 <span class="arithmatex">\(10^{-8}\)</span> 以下时，
+舍入误差反而开始主导</strong> ✗</p>
+<p><strong>这与「数值计算」模块的「数值微分」一页是同一个权衡</strong> ✓</p>
+</div>
+<h3 id="euler-heun">改进 Euler 法（Heun 法）<a class="headerlink" href="#euler-heun" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：Euler 法只用起点斜率，忽略了这步中斜率的变化。</p>
+<p><strong>改进</strong>：<strong>用起点与终点斜率的平均</strong>：</p>
+<div class="arithmatex">\[
+\tilde y_{n+1} = y_n+hf(t_n,y_n)\quad\text{（预测）}
+\]</div>
+<div class="arithmatex">\[
+y_{n+1} = y_n+\frac h2\left[f(t_n,y_n)+f(t_{n+1},\tilde y_{n+1})\right]\quad\text{（校正）}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">「预测-校正」结构的价值</p>
+<p><strong>两步的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>预测</strong></td>
+<td>用 Euler 估一个终点</td>
+</tr>
+<tr>
+<td><strong>校正</strong></td>
+<td>用两点的斜率平均重新算</td>
+</tr>
+</tbody>
+</table>
+<p><strong>改进的效果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>精度阶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(O(h)\)</span></td>
+</tr>
+<tr>
+<td><strong>改进 Euler</strong></td>
+<td><strong><span class="arithmatex">\(O(h^2)\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么精度提高</strong>：<strong>梯形公式</strong>（对 <span class="arithmatex">\(y'\)</span> 的积分用梯形近似）</p>
+<div class="arithmatex">\[
+y(t+h)-y(t) = \int_t^{t+h}f\,\mathrm{d}s\approx\frac h2[f(t)+f(t+h)]
+\]</div>
+<p>梯形公式的误差是 <span class="arithmatex">\(O(h^3)\)</span>（局部）→ 全局 <span class="arithmatex">\(O(h^2)\)</span> ✓</p>
+<p><strong>代价</strong>：<strong>每步要算两次 <span class="arithmatex">\(f\)</span></strong>（起点与预测终点）。</p>
+<p><strong>一个重要的实用性质</strong>：<strong>改进 Euler 可以估计误差</strong></p>
+<div class="arithmatex">\[
+\text{误差}\approx\lvert y_{n+1}-\tilde y_{n+1}\rvert
+\]</div>
+<p><strong>这为「自适应步长」提供了依据</strong> ✓
+—— 若预测与校正差得多，就减小步长。</p>
+</div>
+<hr />
+<h2 id="runge-kutta">二、Runge-Kutta 方法<a class="headerlink" href="#runge-kutta" title="Permanent link">&para;</a></h2>
+<h3 id="rk4">RK4：经典的四阶方法<a class="headerlink" href="#rk4" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\boxed{\ y_{n+1} = y_n+\frac h6(k_1+2k_2+2k_3+k_4)\ }
+\]</div>
+<p>其中：</p>
+<div class="arithmatex">\[
+k_1 = f(t_n,\ y_n)
+\]</div>
+<div class="arithmatex">\[
+k_2 = f\left(t_n+\frac h2,\ y_n+\frac h2k_1\right)
+\]</div>
+<div class="arithmatex">\[
+k_3 = f\left(t_n+\frac h2,\ y_n+\frac h2k_2\right)
+\]</div>
+<div class="arithmatex">\[
+k_4 = f(t_n+h,\ y_n+hk_3)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">RK4 的「加权平均」结构（Simpson 法则的类比）</p>
+<p><strong>权重是 <span class="arithmatex">\(1:2:2:1\)</span></strong>（除以 6）——<strong>这正是 Simpson 法则的权重</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>权重模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形（改进 Euler）</td>
+<td><span class="arithmatex">\(1:1\)</span>（两点）</td>
+</tr>
+<tr>
+<td><strong>Simpson / RK4</strong></td>
+<td><strong><span class="arithmatex">\(1:4:1\)</span> 或 <span class="arithmatex">\(1:2:2:1\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>含义</strong>：<strong>RK4 与 Simpson 法则同源</strong> ——
+都在用「更多采样点 + 合适的权重」逼近积分 ✓</p>
+<p><strong>四个 <span class="arithmatex">\(k\)</span> 的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>在何处算斜率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(k_1\)</span></td>
+<td>起点</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k_2\)</span></td>
+<td>中点（用 <span class="arithmatex">\(k_1\)</span> 预测）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k_3\)</span></td>
+<td>中点（用 <span class="arithmatex">\(k_2\)</span> 预测）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k_4\)</span></td>
+<td>终点（用 <span class="arithmatex">\(k_3\)</span> 预测）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>精度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>每步 <span class="arithmatex">\(f\)</span> 求值次数</th>
+<th>全局精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(O(h)\)</span></td>
+</tr>
+<tr>
+<td>改进 Euler</td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(O(h^2)\)</span></td>
+</tr>
+<tr>
+<td><strong>RK4</strong></td>
+<td><strong><span class="arithmatex">\(4\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(h^4)\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「性价比」的对比（重要）</strong>：</p>
+<p>要把误差降到 <span class="arithmatex">\(10^{-6}\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>需要 <span class="arithmatex">\(h\)</span></th>
+<th>需要步数（<span class="arithmatex">\(T=1\)</span>）</th>
+<th>需要 <span class="arithmatex">\(f\)</span> 求值次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(10^{-6}\)</span></td>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><strong><span class="arithmatex">\(10^6\)</span></strong> ✗</td>
+</tr>
+<tr>
+<td>改进 Euler</td>
+<td><span class="arithmatex">\(10^{-3}\)</span></td>
+<td><span class="arithmatex">\(10^3\)</span></td>
+<td><span class="arithmatex">\(2\times10^3\)</span></td>
+</tr>
+<tr>
+<td><strong>RK4</strong></td>
+<td><span class="arithmatex">\(10^{-1.5}\approx0.032\)</span></td>
+<td><span class="arithmatex">\(\approx31\)</span></td>
+<td><strong><span class="arithmatex">\(4\times31 = 124\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>RK4 只需 124 次求值，Euler 要 <span class="arithmatex">\(10^6\)</span> 次</strong> ——
+<strong>效率差约 <span class="arithmatex">\(8000\)</span> 倍</strong> ✓</p>
+<p><strong>这就是「RK4 是工程标准选择」的原因</strong>：
+<strong>它在「每步成本」与「所需步数」之间取得很好的平衡</strong>。</p>
+</div>
+<h3 id="rk45">自适应步长（RK45）<a class="headerlink" href="#rk45" title="Permanent link">&para;</a></h3>
+<p><strong>思路</strong>：<strong>同时用 4 阶和 5 阶方法，用两者之差估计误差</strong>，
+据此调整 <span class="arithmatex">\(h\)</span>。</p>
+<div class="arithmatex">\[
+\text{误差}\approx\lvert y^{(5)}-y^{(4)}\rvert
+\]</div>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>调整</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>误差 &lt; 容差</td>
+<td><strong>增大 <span class="arithmatex">\(h\)</span></strong>（可以更大步）✓</td>
+</tr>
+<tr>
+<td>误差 &gt; 容差</td>
+<td><strong>减小 <span class="arithmatex">\(h\)</span></strong> 并重做本步 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程价值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>自适应步长的优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解变化平缓</td>
+<td><strong>用大步长</strong>（省时间）✓</td>
+</tr>
+<tr>
+<td><strong>解变化剧烈</strong>（如刚性问题、突跳）</td>
+<td><strong>自动用小步长</strong>（保精度）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「为什么现代 ODE 求解器都默认自适应」</strong> ✓</p>
+<hr />
+<h2 id="_3">三、稳定性与刚性方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4">稳定性的概念<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>用最简单的测试方程</strong>（这是标准做法）：</p>
+<div class="arithmatex">\[
+y' = \lambda y,\qquad \operatorname{Re}(\lambda)&lt;0
+\]</div>
+<p><strong>真解</strong>：<span class="arithmatex">\(y(t) = y_0e^{\lambda t}\)</span> → <strong>单调衰减到零</strong> ✓</p>
+<p><strong>数值解应该也衰减</strong>。若不衰减反而增长 → <strong>不稳定</strong> ✗</p>
+<p><strong>对 Euler 法</strong>：</p>
+<div class="arithmatex">\[
+y_{n+1} = y_n+h\lambda y_n = (1+h\lambda)y_n
+\]</div>
+<p><strong>稳定条件</strong>：</p>
+<div class="arithmatex">\[
+\lvert1+h\lambda\rvert&lt;1
+\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Euler 法的稳定区域很小（这是关键限制）</p>
+<p><strong>设 <span class="arithmatex">\(\lambda\)</span> 为负实数</strong>（<span class="arithmatex">\(\lambda = -a\)</span>，<span class="arithmatex">\(a&gt;0\)</span>）：</p>
+<div class="arithmatex">\[
+\lvert1-ha\rvert&lt;1 \implies 0&lt;ha&lt;2 \implies h&lt;\frac{2}{a}
+\]</div>
+<p><strong>所以步长受限于 <span class="arithmatex">\(2/\lvert\lambda\rvert\)</span></strong> ✗</p>
+<p><strong>若 <span class="arithmatex">\(\lambda\)</span> 很大（快速衰减的过程）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lvert\lambda\rvert\)</span></th>
+<th>允许的 <span class="arithmatex">\(h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(&lt;2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><span class="arithmatex">\(&lt;0.02\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><strong><span class="arithmatex">\(&lt;2\times10^{-6}\)</span></strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>后果</strong>：<strong>必须用极小步长，即使解本身变化很慢</strong> ✗</p>
+<p><strong>这就引出了「刚性」问题</strong>（下面详述）。</p>
+<p><strong>复平面的稳定区域</strong>：</p>
+<p><strong>Euler 的稳定区域</strong>是<strong>以 <span class="arithmatex">\((-1,0)\)</span> 为圆心、半径 1 的圆</strong>：</p>
+<div class="arithmatex">\[
+\lvert1+z\rvert&lt;1,\qquad z = h\lambda
+\]</div>
+<p><strong>它只覆盖左半平面的一小部分</strong> ✗</p>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>稳定区域</th>
+<th>性质</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显式 Euler</td>
+<td>单位圆（小）✗</td>
+<td>条件稳定</td>
+</tr>
+<tr>
+<td><strong>隐式 Euler</strong></td>
+<td><strong><span class="arithmatex">\(z\)</span> 平面中圆心 <span class="arithmatex">\((1,0)\)</span> 半径 1 的圆外</strong>（含整个左半平面）✓</td>
+<td><strong>A 稳定</strong></td>
+</tr>
+<tr>
+<td>RK4</td>
+<td>稍大（含 <span class="arithmatex">\([-2.78,0]\)</span>）</td>
+<td>条件稳定</td>
+</tr>
+<tr>
+<td>梯形法</td>
+<td>整个左半平面 ✓</td>
+<td>A 稳定</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="stiff">刚性方程（Stiff）<a class="headerlink" href="#stiff" title="Permanent link">&para;</a></h3>
+<p><strong>定义（实用版）</strong>：<strong>系统的特征值实部跨度极大</strong>（比值 <span class="arithmatex">\(\gg1\)</span>）。</p>
+<p><strong>经典例子</strong>：</p>
+<div class="arithmatex">\[
+y' = -1000(y-\cos t)-\sin t
+\]</div>
+<p><strong>真解</strong>：<span class="arithmatex">\(y(t) = \cos t + Ce^{-1000t}\)</span> ——
+<strong>快速瞬态（<span class="arithmatex">\(e^{-1000t}\)</span>）很快消失，之后只剩平滑的 <span class="arithmatex">\(\cos t\)</span></strong> ✓</p>
+<p><strong>问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>解的行为</th>
+<th>需要的 <span class="arithmatex">\(h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始瞬态（<span class="arithmatex">\(t\lesssim0.01\)</span>）</td>
+<td>剧烈变化</td>
+<td>需要小 <span class="arithmatex">\(h\)</span></td>
+</tr>
+<tr>
+<td><strong>之后（平滑段）</strong></td>
+<td>平滑</td>
+<td><strong>按理可以用大 <span class="arithmatex">\(h\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>但显式方法不允许</strong>：</p>
+<div class="arithmatex">\[
+h&lt;\frac{2}{1000} = 0.002
+\]</div>
+<p><strong>即使解已经平滑，也必须用小步长</strong> ✗</p>
+<div class="admonition note">
+<p class="admonition-title">刚性的「反直觉」之处（这是本页最重要的洞察）</p>
+<p><strong>刚性问题中，步长限制来自「稳定性」而非「精度」</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>来源</th>
+<th>是否可放松</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精度要求</td>
+<td>解的局部变化</td>
+<td>解平滑时可放松 ✓</td>
+</tr>
+<tr>
+<td><strong>稳定性要求</strong></td>
+<td><strong>最快的时间尺度</strong></td>
+<td><strong>始终存在，不可放松</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：<strong>最快的时间尺度即使已经衰减掉，
+仍然限制着显式方法的步长</strong> ✗</p>
+<p><strong>为什么</strong>：<strong>显式方法每步都要求 <span class="arithmatex">\(\lvert1+h\lambda\rvert&lt;1\)</span></strong> ——
+这个条件必须对<strong>全部</strong>特征值成立，
+包括那些已经「无关紧要」的快速衰减模式 ✓</p>
+<p><strong>后果（定量）</strong>：</p>
+<p>若 <span class="arithmatex">\(\operatorname{Re}\lambda_{\max} = -10^6\)</span>、<span class="arithmatex">\(\operatorname{Re}\lambda_{\min} = -1\)</span>，
+而想积分到 <span class="arithmatex">\(t = 100\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>需要的步数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显式（受 <span class="arithmatex">\(h&lt;2/10^6\)</span>）</td>
+<td><span class="arithmatex">\(\approx5\times10^7\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>隐式（可用 <span class="arithmatex">\(h\approx0.1\)</span>）</strong></td>
+<td><strong><span class="arithmatex">\(\approx10^3\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>差了 5 万倍</strong> ✗</p>
+<p><strong>这就是「处理刚性问题必须用隐式方法」的原因</strong> ✓</p>
+</div>
+<h3 id="_5">隐式方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>隐式 Euler</strong>：</p>
+<div class="arithmatex">\[
+y_{n+1} = y_n+h\,f(t_{n+1},y_{n+1})
+\]</div>
+<p><strong>注意右边含 <span class="arithmatex">\(y_{n+1}\)</span></strong> —— 需要<strong>解方程</strong>（可能是非线性的）✗</p>
+<p><strong>稳定条件</strong>：</p>
+<div class="arithmatex">\[
+\left\lvert\frac{1}{1-h\lambda}\right\rvert&lt;1 \quad\text{对任意 }\operatorname{Re}\lambda&lt;0\text{ 都成立} ✓
+\]</div>
+<p><strong>这就是「A 稳定」</strong> ✓ —— <strong>步长不受稳定性限制</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">隐式方法的代价与收益</p>
+<p><strong>收益</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>收益</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A 稳定</strong></td>
+<td>步长不受 <span class="arithmatex">\(\lambda_{\max}\)</span> 限制 ✓</td>
+</tr>
+<tr>
+<td>大步长可行</td>
+<td>刚性问题必需 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>每步要解方程</strong></td>
+<td>非线性时用牛顿法（回顾优化那页）✗</td>
+</tr>
+<tr>
+<td>实现复杂</td>
+<td>需要 Jacobian</td>
+</tr>
+<tr>
+<td>每步更贵</td>
+<td>但总步数可能少几个数量级 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>权衡</strong>：</p>
+<div class="arithmatex">\[
+\text{隐式：每步贵} \times \text{步数少} \quad\text{vs}\quad \text{显式：每步便宜} \times \text{步数极多}
+\]</div>
+<p><strong>对刚性问题，隐式完胜</strong> ✓</p>
+<p><strong>工程建议（选型指南）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题类型</th>
+<th>推荐方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>非刚性</strong></td>
+<td><strong>RK45（自适应显式）</strong> ✓</td>
+</tr>
+<tr>
+<td>中等刚性</td>
+<td>隐式 RK、Rosenbrock</td>
+</tr>
+<tr>
+<td><strong>强刚性</strong></td>
+<td><strong>BDF（如 MATLAB 的 <code>ode15s</code>）</strong> ✓</td>
+</tr>
+<tr>
+<td>守恒系统（长期积分）</td>
+<td><strong>辛方法（保持能量的结构）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个能自查的判据</strong>：</p>
+<p><strong>若显式求解器需要极小步长（远小于解的变化尺度），
+问题大概是刚性的</strong> ✓</p>
+<p><strong>具体表现</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>诊断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>步长被压到极小</td>
+<td>刚性</td>
+</tr>
+<tr>
+<td>略微放大 <span class="arithmatex">\(h\)</span> 就发散</td>
+<td><strong>刚性</strong> ✓</td>
+</tr>
+<tr>
+<td>求解时间远超预期</td>
+<td>刚性</td>
+</tr>
+</tbody>
+</table>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="显式与隐式方法的稳定区域对比">
+<defs>
+<marker id="st1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="st1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 坐标轴（z = hλ 平面） -->
+<line class="gb" x1="30" y1="126" x2="404" y2="126" marker-end="url(#st1-ah1)"/>
+<line class="gb" x1="218" y1="222" x2="218" y2="26" marker-end="url(#st1-ah2)"/>
+<text class="lbl-s" x="392" y="118">Re z</text>
+<text class="lbl-s" x="226" y="36">Im z</text>
+<!-- 虚轴加重 -->
+<line class="a3" x1="218" y1="222" x2="218" y2="26" stroke-width="2"/>
+<text class="lbl-s" x="150" y="238">左半平面：Re z &lt; 0（真解衰减）</text>
+<!-- 显式 Euler 稳定区域：以 (-1,0) 为圆心 r=1 -->
+<circle class="a2" cx="158" cy="126" r="52" fill="none" stroke-width="2.4"/>
+<text class="l2" x="96" y="82">显式 Euler</text>
+<text class="l2" x="104" y="98">（单位圆，很小）</text>
+<!-- 隐式 Euler 稳定区域：以 (1,0) 为圆心 r=1 的圆外 -->
+<circle class="a1" cx="278" cy="126" r="52" fill="none" stroke-width="2.4" stroke-dasharray="7 4"/>
+<text class="l1" x="316" y="82">隐式 Euler</text>
+<text class="l1" x="312" y="98">（圆外，覆盖整个左半平面）</text>
+<!-- 负实轴上的困难点 -->
+<circle class="d2" cx="62" cy="126" r="5"/>
+<text class="lbl-s" x="34" y="152">大负实部</text>
+<text class="lbl-s" x="34" y="168">（刚性来源）</text>
+<text class="lbl-s" x="30" y="190">显式方法在此不稳定 ✗</text>
+<text class="lbl-s" x="252" y="190">隐式方法在此稳定 ✓</text>
+</svg>
+<figcaption>图 1　显式与隐式方法的稳定区域（复平面 z=hλ）。<b>显式 Euler</b> 的稳定区域是以 (-1,0) 为圆心、半径 1 的圆——它只覆盖左半平面的一小部分：只要 |λ| 很大（大负实部，圆外），就必须把 h 压到极小。<b>隐式 Euler</b> 的稳定区域是这个圆的<b>外部</b>，覆盖了整个左半平面，因此对任意稳定的 λ 都稳定（A 稳定）——这正是处理刚性方程的必要条件</figcaption>
+</figure>
+
+<hr />
+<h2 id="_6">四、典型例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="1euler-euler">例题 1：Euler 法与改进 Euler 法的精度对比<a class="headerlink" href="#1euler-euler" title="Permanent link">&para;</a></h3>
+<p>用两种方法解 <span class="arithmatex">\(y' = -2y\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>（真解 <span class="arithmatex">\(y = e^{-2t}\)</span>），
+取 <span class="arithmatex">\(h = 0.1\)</span>，算到 <span class="arithmatex">\(t = 0.2\)</span>，比较误差。</p>
+<details class="note">
+<summary>思路</summary>
+<p>逐步计算；注意改进 Euler 需要预测再校正。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>真解</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span></th>
+<th><span class="arithmatex">\(y = e^{-2t}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0.81873075\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0.67032005\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Euler 法</strong>（<span class="arithmatex">\(f = -2y\)</span>）</p>
+<p><strong>第一步</strong>：<span class="arithmatex">\(t=0\)</span>，<span class="arithmatex">\(y_0 = 1\)</span></p>
+<div class="arithmatex">\[
+y_1 = 1+0.1\times(-2\times1) = 1-0.2 = 0.8
+\]</div>
+<p><strong>第二步</strong>：</p>
+<div class="arithmatex">\[
+y_2 = 0.8+0.1\times(-2\times0.8) = 0.8-0.16 = 0.64
+\]</div>
+<p><strong>误差</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span></th>
+<th>Euler</th>
+<th>真解</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0.800000\)</span></td>
+<td><span class="arithmatex">\(0.818731\)</span></td>
+<td><span class="arithmatex">\(1.873\times10^{-2}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0.640000\)</span></td>
+<td><span class="arithmatex">\(0.670320\)</span></td>
+<td><span class="arithmatex">\(3.032\times10^{-2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>改进 Euler 法</strong></p>
+<p><strong>第一步</strong>：<span class="arithmatex">\(t=0\)</span>、<span class="arithmatex">\(y_0 = 1\)</span></p>
+<p><strong>预测</strong>：</p>
+<div class="arithmatex">\[
+\tilde y_1 = 1+0.1\times(-2) = 0.8
+\]</div>
+<p><strong>校正</strong>（斜率平均）：</p>
+<div class="arithmatex">\[
+k_1 = -2\times1 = -2,\qquad k_2 = -2\times0.8 = -1.6
+\]</div>
+<div class="arithmatex">\[
+y_1 = 1+\frac{0.1}{2}(-2-1.6) = 1-0.18 = 0.82
+\]</div>
+<p><strong>第二步</strong>：</p>
+<div class="arithmatex">\[
+\tilde y_2 = 0.82+0.1\times(-2\times0.82) = 0.82-0.164 = 0.656
+\]</div>
+<div class="arithmatex">\[
+k_1 = -2\times0.82 = -1.64,\qquad k_2 = -2\times0.656 = -1.312
+\]</div>
+<div class="arithmatex">\[
+y_2 = 0.82+\frac{0.1}{2}(-1.64-1.312) = 0.82-0.1476 = 0.6724
+\]</div>
+<p><strong>误差</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span></th>
+<th>改进 Euler</th>
+<th>真解</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0.820000\)</span></td>
+<td><span class="arithmatex">\(0.818731\)</span></td>
+<td><span class="arithmatex">\(1.269\times10^{-3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0.672400\)</span></td>
+<td><span class="arithmatex">\(0.670320\)</span></td>
+<td><span class="arithmatex">\(2.080\times10^{-3}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比总结</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span></th>
+<th>Euler 误差</th>
+<th>改进 Euler 误差</th>
+<th>比值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(1.873\times10^{-2}\)</span></td>
+<td><span class="arithmatex">\(1.269\times10^{-3}\)</span></td>
+<td><strong><span class="arithmatex">\(14.8\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(3.032\times10^{-2}\)</span></td>
+<td><span class="arithmatex">\(2.080\times10^{-3}\)</span></td>
+<td><strong><span class="arithmatex">\(14.6\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>改进 Euler 的误差约小 15 倍</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">验证「二阶方法」的预期：误差应 h2</p>
+<p><strong>理论预期</strong>（<span class="arithmatex">\(h=0.1\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>阶</th>
+<th>预期误差量级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(O(h)\)</span></td>
+<td><span class="arithmatex">\(\sim h\times C = 0.1C\)</span></td>
+</tr>
+<tr>
+<td>改进 Euler</td>
+<td><span class="arithmatex">\(O(h^2)\)</span></td>
+<td><span class="arithmatex">\(\sim h^2\times C = 0.01C\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>比值应约为 <span class="arithmatex">\(1/h = 10\)</span></strong>。</p>
+<p><strong>实际比值约 15</strong> —— <strong>与理论量级相符</strong> ✓
+（常数因子不同，所以不是精确的 10。）</p>
+<p><strong>验证「阶」的方法（<span class="arithmatex">\(h\)</span> 减半）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(h\to h/2\)</span> 时误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler（一阶）</td>
+<td><strong>减半</strong></td>
+</tr>
+<tr>
+<td>改进 Euler（二阶）</td>
+<td><strong>降到 &frac14;</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这是数值方法中的一个基本自检手段</strong>：
+<strong>把 <span class="arithmatex">\(h\)</span> 减半，看误差降到多少 —— 由此反推阶数</strong> ✓</p>
+<p><strong>工程实践</strong>：<strong>这个技巧可以用来验证求解器是否按预期收敛</strong> ✓
+（若误差不按预期下降，可能是实现有错或步长已进入舍入误差主导区。）</p>
+</div>
+<hr />
+<h3 id="2euler">例题 2：Euler 法的稳定性边界<a class="headerlink" href="#2euler" title="Permanent link">&para;</a></h3>
+<p>用显式 Euler 解 <span class="arithmatex">\(y' = -20y\)</span>、<span class="arithmatex">\(y(0)=1\)</span>。
+分别取 <span class="arithmatex">\(h = 0.05\)</span>、<span class="arithmatex">\(0.1\)</span>、<span class="arithmatex">\(0.11\)</span>、<span class="arithmatex">\(0.2\)</span>，判断稳定性。</p>
+<details class="note">
+<summary>思路</summary>
+<p>稳定条件 <span class="arithmatex">\(\lvert1+h\lambda\rvert&lt;1\)</span>，这里 <span class="arithmatex">\(\lambda = -20\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>稳定条件</strong></p>
+<div class="arithmatex">\[
+\lvert1-20h\rvert&lt;1 \implies 0&lt;20h&lt;2 \implies h&lt;0.1
+\]</div>
+<p><strong>逐情形分析</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th><span class="arithmatex">\(1-20h\)</span></th>
+<th><span class="arithmatex">\(\lvert\cdot\rvert\)</span></th>
+<th>稳定性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.05\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0&lt;1\)</span></td>
+<td><strong>稳定（一步归零）</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.09\)</span></td>
+<td><span class="arithmatex">\(-0.8\)</span></td>
+<td><span class="arithmatex">\(0.8&lt;1\)</span></td>
+<td>稳定 ✓</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(0.1\)</span></strong></td>
+<td><strong><span class="arithmatex">\(-1\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1\)</span></strong></td>
+<td><strong>临界（振荡不衰减）</strong> ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.11\)</span></td>
+<td><span class="arithmatex">\(-1.2\)</span></td>
+<td><span class="arithmatex">\(1.2&gt;1\)</span></td>
+<td><strong>发散</strong> ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(-3\)</span></td>
+<td><span class="arithmatex">\(3&gt;1\)</span></td>
+<td><strong>严重发散</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体数值验证</strong></p>
+<p><strong><span class="arithmatex">\(h = 0.05\)</span></strong>：</p>
+<div class="arithmatex">\[
+y_1 = (1-1)\times1 = 0,\qquad y_2 = 0
+\]</div>
+<p><strong>一步归零</strong> ✓ —— 这是 <span class="arithmatex">\(h\lambda = -1\)</span> 的特殊情形。</p>
+<p><strong>注意「不发散」不等于「准确」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值解 <span class="arithmatex">\(y_1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td>真解 <span class="arithmatex">\(e^{-1}\)</span></td>
+<td><span class="arithmatex">\(0.368\)</span></td>
+</tr>
+<tr>
+<td><strong>误差</strong></td>
+<td><strong><span class="arithmatex">\(0.368\)</span>（很大！）</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以 <span class="arithmatex">\(h=0.05\)</span> 虽然稳定，精度却很差</strong> ✓
+（要精度需更小 <span class="arithmatex">\(h\)</span>，但那样又容易进入舍入误差区。）</p>
+<p><strong><span class="arithmatex">\(h = 0.1\)</span></strong>：</p>
+<div class="arithmatex">\[
+y_n = (-1)^n
+\]</div>
+<p><strong>符号交替、幅度不变</strong> —— <strong>不收敛也不发散</strong>（临界）✗</p>
+<p><strong><span class="arithmatex">\(h = 0.11\)</span></strong>：</p>
+<div class="arithmatex">\[
+y_n = (-1.2)^n
+\]</div>
+<p><strong>幅度指数增长</strong> —— <strong>发散</strong> ✗</p>
+<p><strong><span class="arithmatex">\(h = 0.2\)</span></strong>：</p>
+<div class="arithmatex">\[
+y_n = (-3)^n \implies \lvert y_5\rvert = 243
+\]</div>
+<p><strong>剧烈发散</strong> ✗</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">这个例子说明了「稳定性限制步长」的严重性</p>
+<p><strong>真解是 <span class="arithmatex">\(e^{-20t}\)</span>，衰减极快</strong> —— 它其实<strong>很容易数值求解</strong> ✓</p>
+<p><strong>但显式 Euler 要求 <span class="arithmatex">\(h&lt;0.1\)</span></strong> ——
+<strong>即使解在 <span class="arithmatex">\(t&gt;0.5\)</span> 后已经几乎为零，仍不能用大 <span class="arithmatex">\(h\)</span></strong> ✗</p>
+<p><strong>为什么</strong>：</p>
+<div class="arithmatex">\[
+\lvert1+h\lambda\rvert&lt;1 \quad\text{必须对 }\lambda = -20\text{ 成立}
+\]</div>
+<p><strong>这个条件与「解的大小」无关</strong> —— 它是<strong>方法本身</strong>的要求 ✓</p>
+<p><strong>这就是「刚性」的微观机制</strong>。</p>
+<p><strong>三种处理的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(h=0.1\)</span> 时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显式 Euler</td>
+<td>临界振荡 ✗</td>
+</tr>
+<tr>
+<td><strong>隐式 Euler</strong></td>
+<td><span class="arithmatex">\(y_{n+1} = \dfrac{y_n}{1+20h} = \dfrac{y_n}{3}\)</span>，<strong>稳定衰减</strong> ✓</td>
+</tr>
+<tr>
+<td>RK4</td>
+<td>稳定区域含 <span class="arithmatex">\([-2.78,0]\)</span>，<span class="arithmatex">\(h\lambda = -2\)</span> 稳定 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>隐式 Euler 的稳定性验证</strong>：</p>
+<div class="arithmatex">\[
+y_{n+1} = y_n+h\lambda y_{n+1} \implies y_{n+1} = \frac{y_n}{1-h\lambda}
+\]</div>
+<p><strong>对任意 <span class="arithmatex">\(\operatorname{Re}\lambda&lt;0\)</span> 与任意 <span class="arithmatex">\(h&gt;0\)</span></strong>：</p>
+<div class="arithmatex">\[
+\left\lvert\frac{1}{1-h\lambda}\right\rvert = \frac{1}{\lvert1+h\lvert\lambda\rvert\rvert}&lt;1 \;\checkmark
+\]</div>
+<p><strong>永远稳定</strong> ✓ —— 这就是 A 稳定的含义。</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>方法选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快速衰减的瞬态</td>
+<td>显式需要小 <span class="arithmatex">\(h\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>含快速瞬态的长时间仿真</strong></td>
+<td><strong>隐式</strong> ✓</td>
+</tr>
+<tr>
+<td>刚性化学反应、电路</td>
+<td>隐式（BDF、隐式 RK）</td>
+</tr>
+<tr>
+<td>平滑的机械系统</td>
+<td>显式（RK45）✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="3rk4">例题 3：RK4 的精度<a class="headerlink" href="#3rk4" title="Permanent link">&para;</a></h3>
+<p>用 RK4 解 <span class="arithmatex">\(y' = -2y\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>，<span class="arithmatex">\(h = 0.1\)</span>，算到 <span class="arithmatex">\(t=0.2\)</span>，
+与真解比较。</p>
+<details class="note">
+<summary>思路</summary>
+<p>只用一步算到 <span class="arithmatex">\(t=0.1\)</span>（<span class="arithmatex">\(h=0.1\)</span>），看四阶方法的威力。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(k\)</span> 值（<span class="arithmatex">\(t=0\)</span>，<span class="arithmatex">\(y=1\)</span>，<span class="arithmatex">\(f=-2y\)</span>）</strong></p>
+<div class="arithmatex">\[
+k_1 = -2\times1 = -2
+\]</div>
+<div class="arithmatex">\[
+k_2 = -2\times(1+0.05\times(-2)) = -2\times0.9 = -1.8
+\]</div>
+<div class="arithmatex">\[
+k_3 = -2\times(1+0.05\times(-1.8)) = -2\times0.91 = -1.82
+\]</div>
+<div class="arithmatex">\[
+k_4 = -2\times(1+0.1\times(-1.82)) = -2\times0.818 = -1.636
+\]</div>
+<p><strong>第二步：加权求和</strong></p>
+<div class="arithmatex">\[
+y_1 = 1+\frac{0.1}{6}(-2+2\times(-1.8)+2\times(-1.82)+(-1.636))
+\]</div>
+<p><strong>逐项</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(k_1\)</span></td>
+<td><span class="arithmatex">\(-2.000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2k_2\)</span></td>
+<td><span class="arithmatex">\(-3.600\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2k_3\)</span></td>
+<td><span class="arithmatex">\(-3.640\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(k_4\)</span></td>
+<td><span class="arithmatex">\(-1.636\)</span></td>
+</tr>
+<tr>
+<td><strong>和</strong></td>
+<td><strong><span class="arithmatex">\(-10.876\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+y_1 = 1+\frac{0.1}{6}\times(-10.876) = 1-0.181267 = 0.818733
+\]</div>
+<p><strong>第三步：比较</strong></p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RK4 的 <span class="arithmatex">\(y(0.1)\)</span></td>
+<td><span class="arithmatex">\(0.818733\)</span></td>
+</tr>
+<tr>
+<td>真解 <span class="arithmatex">\(e^{-0.2}\)</span></td>
+<td><span class="arithmatex">\(0.818731\)</span></td>
+</tr>
+<tr>
+<td><strong>误差</strong></td>
+<td><strong><span class="arithmatex">\(2\times10^{-6}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第四步：与前一例题对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(h=0.1\)</span> 时 <span class="arithmatex">\(y(0.1)\)</span> 的误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(1.87\times10^{-2}\)</span></td>
+</tr>
+<tr>
+<td>改进 Euler</td>
+<td><span class="arithmatex">\(1.27\times10^{-3}\)</span></td>
+</tr>
+<tr>
+<td><strong>RK4</strong></td>
+<td><strong><span class="arithmatex">\(2\times10^{-6}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>RK4 的误差比 Euler 小约 <span class="arithmatex">\(10^4\)</span> 倍</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">验证「四阶」：h 减半时误差应降到约 1/16</p>
+<p><strong>理论</strong>：四阶方法的全局误差 <span class="arithmatex">\(\propto h^4\)</span>：</p>
+<div class="arithmatex">\[
+h\to\frac h2 \implies \text{误差}\to\frac{\text{误差}}{2^4} = \frac{\text{误差}}{16}
+\]</div>
+<p><strong>本例题的验证思路</strong>（用 <span class="arithmatex">\(h = 0.05\)</span> 重算）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>预期误差</th>
+<th>实际</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td>——</td>
+<td><span class="arithmatex">\(2\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.05\)</span></td>
+<td><span class="arithmatex">\(1.25\times10^{-7}\)</span></td>
+<td>约 <span class="arithmatex">\(1.3\times10^{-7}\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>吻合</strong> ✓ —— 确认为四阶方法。</p>
+<p><strong>工程价值（为什么 RK4 成为默认选择）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>RK4 的表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>每步成本</td>
+<td>4 次 <span class="arithmatex">\(f\)</span> 求值</td>
+</tr>
+<tr>
+<td>精度</td>
+<td><span class="arithmatex">\(O(h^4)\)</span>（极高）✓</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>比 Euler 好得多</td>
+</tr>
+<tr>
+<td>实现难度</td>
+<td>中等（无需解方程）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>RK4 的「性价比」几乎是最优的</strong> ——
+更高阶的方法（如 RK8）每步要更多求值，
+而精度提升的收益有限 ✓</p>
+<p><strong>注意「精度」不解决「刚性」</strong>：</p>
+<p><strong>RK4 也是显式方法</strong> → <strong>仍有稳定性限制</strong> ✗</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>RK4 是否解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>精度不足</td>
+<td><strong>是</strong>（<span class="arithmatex">\(O(h^4)\)</span>）✓</td>
+</tr>
+<tr>
+<td><strong>刚性的稳定性限制</strong></td>
+<td><strong>否</strong>（稳定区域仍有限）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本例题中 RK4 在 <span class="arithmatex">\(h=0.1\)</span> 稳定</strong>（因为 <span class="arithmatex">\(h\lambda = -2\)</span> 在其稳定区域内），
+但若 <span class="arithmatex">\(\lambda = -10^6\)</span>，RK4 也不得不取极小 <span class="arithmatex">\(h\)</span> ✗</p>
+<p><strong>所以「精度」与「稳定性」是两个独立的问题</strong> ✓
+<strong>RK4 解决了前者，隐式方法解决后者</strong>。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：刚性问题的诊断<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>某系统有两个特征值 <span class="arithmatex">\(\lambda_1 = -1\)</span>、<span class="arithmatex">\(\lambda_2 = -10^4\)</span>，
+需要积分到 <span class="arithmatex">\(t = 10\)</span>。用显式 RK4 需要多少步？用隐式方法呢？</p>
+<details class="note">
+<summary>思路</summary>
+<p>显式的步长由 <span class="arithmatex">\(\lvert\lambda_{\max}\rvert\)</span> 限制；隐式只受精度限制。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：判断刚性</strong></p>
+<div class="arithmatex">\[
+\frac{\lvert\lambda_2\rvert}{\lvert\lambda_1\rvert} = \frac{10^4}{1} = 10^4
+\]</div>
+<p><strong>比值达 <span class="arithmatex">\(10^4\)</span></strong> → <strong>强刚性</strong> ✓</p>
+<p><strong>第二步：显式 RK4 的步长限制</strong></p>
+<p>RK4 的稳定区间（实轴部分）大约是</p>
+<div class="arithmatex">\[
+h\lambda\in[-2.78,\ 0]
+\]</div>
+<p><strong>由最快的模态 <span class="arithmatex">\(\lambda_2 = -10^4\)</span> 决定</strong>：</p>
+<div class="arithmatex">\[
+h_{\max} = \frac{2.78}{10^4} = 2.78\times10^{-4}
+\]</div>
+<p><strong>所需步数</strong>：</p>
+<div class="arithmatex">\[
+N = \frac{10}{2.78\times10^{-4}} \approx 36000
+\]</div>
+<p><strong>结果</strong>：<strong>约 <span class="arithmatex">\(3.6\times10^4\)</span> 步</strong></p>
+<p><strong>第三步：各模态的时间尺度对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>模态</th>
+<th>时间常数 <span class="arithmatex">\(1/\lvert\lambda\rvert\)</span></th>
+<th>在 <span class="arithmatex">\(t=10\)</span> 内的变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\lambda_1 = -1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td>显著（衰减到 <span class="arithmatex">\(e^{-10}\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda_2 = -10^4\)</span></td>
+<td><span class="arithmatex">\(10^{-4}\)</span></td>
+<td><strong>在 <span class="arithmatex">\(t&gt;0.001\)</span> 后已完全消失</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键观察</strong>：<strong><span class="arithmatex">\(t&gt;0.001\)</span> 之后，解完全由 <span class="arithmatex">\(\lambda_1\)</span> 主导，非常平滑</strong> ✓</p>
+<p><strong>但显式方法仍必须用 <span class="arithmatex">\(h\approx2.8\times10^{-4}\)</span></strong> ✗
+—— <strong>因为它还要「稳住」那个已经不存在的快模态</strong>。</p>
+<p><strong>第四步：隐式方法的步长</strong></p>
+<p>隐式方法（A 稳定）<strong>只受精度限制</strong>。</p>
+<p>解的特征时间是 <span class="arithmatex">\(1/\lvert\lambda_1\rvert = 1\)</span>，
+所以用 <span class="arithmatex">\(h\approx0.01\)</span>–<span class="arithmatex">\(0.1\)</span> 就能保证精度：</p>
+<div class="arithmatex">\[
+N = \frac{10}{0.05} = 200
+\]</div>
+<p><strong>结果</strong>：<strong>约 <span class="arithmatex">\(200\)</span> 步</strong></p>
+<p><strong>第五步：对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>步数</th>
+<th>每步成本</th>
+<th>总成本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显式 RK4</td>
+<td><span class="arithmatex">\(36000\)</span></td>
+<td><span class="arithmatex">\(4\)</span> 次 <span class="arithmatex">\(f\)</span></td>
+<td><span class="arithmatex">\(\approx1.4\times10^5\)</span></td>
+</tr>
+<tr>
+<td>隐式（每步解一次线性方程组）</td>
+<td><span class="arithmatex">\(200\)</span></td>
+<td>稍高</td>
+<td><strong><span class="arithmatex">\(\approx O(10^2)\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>效率差约三个数量级</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个例子揭示的「刚性问题」的核心</p>
+<p><strong>刚性 = 「最快模态限制了显式方法的步长，但它在解中已无关紧要」</strong> ✓</p>
+<p><strong>诊断步骤（实用流程）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+<th>判读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>尝试显式求解器（如 RK45）</td>
+<td>观察步长与耗时</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>若它把步长压得极小但仍满足容差</strong></td>
+<td>→ 可能刚性</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>若略微放大 <span class="arithmatex">\(h\)</span> 就发散</strong></td>
+<td>→ <strong>确诊刚性</strong> ✓</td>
+</tr>
+<tr>
+<td>4</td>
+<td>算出 Jacobian 的特征值，看实部跨度</td>
+<td>定量确认</td>
+</tr>
+<tr>
+<td>5</td>
+<td>换隐式求解器（BDF、隐式 RK）</td>
+<td>解决 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践中的表现（一个很实用的判据）</strong>：</p>
+<p>若求解器报告的<strong>实际步长远小于解的变化尺度</strong>，
+那基本就是刚性问题 ✓</p>
+<p><strong>具体例子</strong>：解看起来是「平滑的慢变化」，
+但求解器却需要 <span class="arithmatex">\(10^5\)</span> 步 —— <strong>矛盾就是线索</strong> ✓</p>
+<p><strong>工程建议（选型决策表）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>诊断</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>特征值跨度小、解平滑</td>
+<td>RK45（自适应显式）✓</td>
+</tr>
+<tr>
+<td><strong>特征值跨度大</strong></td>
+<td><strong>BDF / 隐式 RK</strong> ✓</td>
+</tr>
+<tr>
+<td>不确定</td>
+<td><strong>先用 RK45 试，观察步长</strong> ✓</td>
+</tr>
+<tr>
+<td>长期守恒系统</td>
+<td>辛方法（保能量）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「隐式方法也需要 Jacobian」</strong>：</p>
+<p>对 <span class="arithmatex">\(y' = f(t,y)\)</span>，隐式步需要解</p>
+<div class="arithmatex">\[
+y_{n+1}-y_n-hf(t_{n+1},y_{n+1}) = 0
+\]</div>
+<p><strong>用牛顿法</strong>（回顾优化那页）→ 需要 <span class="arithmatex">\(\partial f/\partial y\)</span> ✓</p>
+<p><strong>若 Jacobian 难算</strong>（如黑箱仿真）：</p>
+<table>
+<thead>
+<tr>
+<th>替代</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值差分</td>
+<td>每步多算 <span class="arithmatex">\(n\)</span> 次 <span class="arithmatex">\(f\)</span></td>
+</tr>
+<tr>
+<td><strong>无 Jacobian 的隐式方法</strong></td>
+<td>如 Jacobian-free Newton-Krylov ✓</td>
+</tr>
+<tr>
+<td>半隐式（IMEX）</td>
+<td>把刚性部分隐式、其余显式 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IMEX 值得特别一提</strong>：<strong>它把系统拆成「刚性部分 + 非刚性部分」，
+前者用隐式、后者用显式</strong> ——
+<strong>兼顾稳定性与效率</strong> ✓</p>
+<p><strong>典型应用</strong>：流体力学、等离子体、带快速化学反应的燃烧问题。</p>
+</div>
+<p>"""</p>
+<hr />
+<h2 id="_7">五、用在哪些课程里<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">机器人学 · 动力学仿真<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>机械臂、腿式机器人的动力学</strong>是刚性 ODE（关节刚度差异大）→ 用隐式方法 ✓</li>
+<li><strong>实时仿真</strong>要求每步极快，常在精度与速度间折中</li>
+<li><strong>接触/碰撞</strong>引入不连续的力 → 需要事件检测与步长重启</li>
+<li><strong>能量守恒检查</strong>：无阻尼系统的仿真必须验证能量漂移（长期积分的自检）</li>
+</ul>
+<h3 id="_9">无人系统自主决策与优化 · 轨迹积分与最优控制<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>轨迹预测</strong>（如卡尔曼滤波的预测步）本质是积分运动方程</li>
+<li><strong>直接配点法</strong>把最优控制离散为非线性规划，ODE 求解器是内层核心</li>
+<li><strong>长期任务</strong>（如轨道、巡航）用辛方法保持能量/动量守恒</li>
+<li><strong>刚性问题</strong>：无人机电机动态比机身动态快得多 → 需要隐式方法</li>
+</ul>
+<h3 id="_10">现代数字信号处理 · 连续系统的离散化<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>连续时间滤波器到数字滤波器</strong>的变换（双线性变换）与 ODE 数值方法同源</li>
+<li><strong>锁相环、自适应滤波器</strong>的连续模型离散化</li>
+<li><strong>模拟电路的仿真</strong>（SPICE）是刚性 ODE 的经典应用 ✓</li>
+<li><strong>状态空间模型的离散化</strong>用矩阵指数（回顾 ODE 模块第三页）</li>
+</ul>
+<hr />
+<h2 id="_11">六、自测<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 用 Euler 法解 <span class="arithmatex">\(y' = y\)</span>、<span class="arithmatex">\(y(0)=1\)</span>、<span class="arithmatex">\(h=0.1\)</span>，算 <span class="arithmatex">\(y(0.3)\)</span>，与真解比较。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(f = y\)</span>，所以 <span class="arithmatex">\(y_{n+1} = y_n(1+h)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>迭代公式</strong></p>
+<div class="arithmatex">\[
+y_{n+1} = y_n+0.1y_n = 1.1y_n
+\]</div>
+<p><strong>逐步计算</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th><span class="arithmatex">\(t\)</span></th>
+<th><span class="arithmatex">\(y_n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.0\)</span></td>
+<td><span class="arithmatex">\(1.000000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(1.100000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(1.210000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(0.3\)</span></td>
+<td><span class="arithmatex">\(1.331000\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>真解</strong></p>
+<div class="arithmatex">\[
+y(0.3) = e^{0.3} = 1.349859
+\]</div>
+<p><strong>误差</strong></p>
+<div class="arithmatex">\[
+\lvert1.331000-1.349859\rvert = 0.018859
+\]</div>
+<p><strong>结果</strong>：Euler 给 <span class="arithmatex">\(1.331\)</span>，真解 <span class="arithmatex">\(1.3499\)</span>，误差约 <strong><span class="arithmatex">\(1.89\times10^{-2}\)</span></strong></p>
+<p><strong>注意「误差随 <span class="arithmatex">\(t\)</span> 增大而增大」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(t\)</span></th>
+<th>Euler</th>
+<th>真解</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(1.1000\)</span></td>
+<td><span class="arithmatex">\(1.1052\)</span></td>
+<td><span class="arithmatex">\(5.2\times10^{-3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(1.2100\)</span></td>
+<td><span class="arithmatex">\(1.2214\)</span></td>
+<td><span class="arithmatex">\(1.14\times10^{-2}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.3\)</span></td>
+<td><span class="arithmatex">\(1.3310\)</span></td>
+<td><span class="arithmatex">\(1.3499\)</span></td>
+<td><span class="arithmatex">\(1.89\times10^{-2}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>误差近似线性增长</strong> ✓ —— 这是全局误差 <span class="arithmatex">\(O(h)\)</span> 的表现。</p>
+<p><strong>验证「一阶」</strong>：若 <span class="arithmatex">\(h\)</span> 减半，误差应减半：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th><span class="arithmatex">\(y(0.3)\)</span></th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(1.331\)</span></td>
+<td><span class="arithmatex">\(1.89\times10^{-2}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.05\)</span></td>
+<td><span class="arithmatex">\(1.3401\)</span></td>
+<td><span class="arithmatex">\(9.8\times10^{-3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.025\)</span></td>
+<td><span class="arithmatex">\(1.3450\)</span></td>
+<td><span class="arithmatex">\(4.9\times10^{-3}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>误差确实大致减半</strong> ✓ —— 确认是一阶方法。</p>
+<p><strong>另一个观察：Euler 系统性偏低</strong> ✓
+（因为 <span class="arithmatex">\(1.1^3 = 1.331 &lt; e^{0.3} = 1.3499\)</span>。）
+这是 Euler 法在「增长型」问题上的典型偏差方向。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：RK4 是四阶方法，所以它也能解决刚性问题。</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想「精度阶」与「稳定性」是不是同一件事。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。RK4 精度高，但仍是显式方法，仍有稳定性限制。</strong></p>
+<p><strong>两个独立的问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>关注点</th>
+<th>RK4 是否解决</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>精度</strong></td>
+<td><span class="arithmatex">\(h\to0\)</span> 时误差如何减小</td>
+<td><strong>✓ 解决</strong>（<span class="arithmatex">\(O(h^4)\)</span>）</td>
+</tr>
+<tr>
+<td><strong>稳定性</strong></td>
+<td>步长较大时是否发散</td>
+<td><strong>✗ 未解决</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>RK4 的稳定区间也是有限的</strong>：</p>
+<p>实轴上约</p>
+<div class="arithmatex">\[
+h\lambda\in[-2.78,\ 0]
+\]</div>
+<p><strong>对比各类方法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>实轴稳定区间</th>
+<th>刚性可用？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\([-2,0]\)</span></td>
+<td>✗</td>
+</tr>
+<tr>
+<td><strong>RK4</strong></td>
+<td><strong><span class="arithmatex">\([-2.78,0]\)</span></strong></td>
+<td><strong>✗</strong></td>
+</tr>
+<tr>
+<td>隐式 Euler</td>
+<td><span class="arithmatex">\((-\infty,0]\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>梯形法</td>
+<td><span class="arithmatex">\((-\infty,0]\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>BDF</td>
+<td>大部分左半平面</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「RK4 的稳定区间（2.78）只比 Euler（2）大一点」</strong> ✓</p>
+<p><strong>含义</strong>：<strong>RK4 的稳定性优势不大</strong> ——
+它的价值主要在<strong>精度</strong>，而非<strong>稳定性</strong> ✗</p>
+<p><strong>具体后果（刚性问题）</strong>：</p>
+<p>若 <span class="arithmatex">\(\lambda = -10^6\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>允许的 <span class="arithmatex">\(h\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Euler</td>
+<td><span class="arithmatex">\(2\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td>RK4</td>
+<td><span class="arithmatex">\(2.78\times10^{-6}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者几乎一样小</strong> ✗ —— <strong>RK4 完全没帮上忙</strong>。</p>
+<p><strong>正确的做法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高精度 + 非刚性</td>
+<td><strong>RK45</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>刚性问题</strong></td>
+<td><strong>隐式（BDF、隐式 RK）</strong> ✓</td>
+</tr>
+<tr>
+<td>既刚又需要精度</td>
+<td>高阶隐式方法</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong>「高阶」与「稳定」是两回事</strong> ——
+RK4 是前者，隐式方法是后者 ✓</p>
+<p><strong>实践判据</strong>：<strong>若 RK45 求解器报告步长被压得极小，
+换高阶显式方法也无济于事</strong> —— 必须换隐式 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 某刚性问题的特征值为 <span class="arithmatex">\(\lambda_1 = -1\)</span>、<span class="arithmatex">\(\lambda_2 = -5000\)</span>。
+用显式 Euler 求解需要多小的步长？若用隐式方法呢？</p>
+<details class="note">
+<summary>提示</summary>
+<p>显式 Euler 要求 <span class="arithmatex">\(h&lt;2/\lvert\lambda_{\max}\rvert\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：显式 Euler 的步长限制</strong></p>
+<div class="arithmatex">\[
+h&lt;\frac{2}{\lvert\lambda_{\max}\rvert} = \frac{2}{5000} = 4\times10^{-4}
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(h&lt;4\times10^{-4}\)</span></p>
+<p><strong>第二步：隐式方法的步长</strong></p>
+<p>隐式 Euler 是 A 稳定的 → <strong>不受稳定性限制</strong>，
+只受<strong>精度</strong>限制。</p>
+<p>解的变化由慢模态 <span class="arithmatex">\(\lambda_1 = -1\)</span> 主导（时间常数 <span class="arithmatex">\(1\)</span>），
+所以 <span class="arithmatex">\(h\)</span> 可与 <span class="arithmatex">\(1\)</span> 同量级（如 <span class="arithmatex">\(h = 0.05\)</span>）✓</p>
+<p><strong>第三步：对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>若积分到 <span class="arithmatex">\(t = 5\)</span>，需要步数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显式 Euler</td>
+<td><span class="arithmatex">\(4\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(\approx12500\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>隐式 Euler</strong></td>
+<td><span class="arithmatex">\(0.05\)</span></td>
+<td><strong><span class="arithmatex">\(100\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>效率差约 125 倍</strong> ✓</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">但从「精度」角度看，两者都不够</p>
+<p><strong>显式 Euler 是一阶</strong> → 即使 <span class="arithmatex">\(h = 4\times10^{-4}\)</span>，精度仍然一般 ✗</p>
+<p><strong>隐式 Euler 也是一阶</strong> ✗</p>
+<p><strong>所以更实用的组合</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>需求</th>
+<th>方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非刚性 + 高精度</td>
+<td>RK45</td>
+</tr>
+<tr>
+<td><strong>刚性 + 高精度</strong></td>
+<td><strong>BDF（变阶变步长）</strong> ✓</td>
+</tr>
+<tr>
+<td>刚性 + 中等精度</td>
+<td>隐式 RK、TR-BDF2</td>
+</tr>
+</tbody>
+</table>
+<p><strong>BDF 的核心优势</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A 稳定</strong>（低阶）/ A(α) 稳定（高阶）</td>
+<td>刚性可用 ✓</td>
+</tr>
+<tr>
+<td><strong>可变阶</strong>（1–5 阶）</td>
+<td>自动适应难度 ✓</td>
+</tr>
+<tr>
+<td><strong>可变步长</strong></td>
+<td>兼顾精度与效率 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「MATLAB <code>ode15s</code>、Python <code>scipy.integrate.solve_ivp(method='BDF')</code>
+是刚性问题的标准工具」的原因</strong> ✓</p>
+<p><strong>工程建议</strong>：<strong>先用 <code>RK45</code>，若它「卡住」（步长被压得极小、耗时远超预期），
+换 <code>BDF</code></strong> —— 这是最实用的诊断流程 ✓</p>
+</div>
+<hr />
+<p><strong>Q4</strong> 为什么数值方法存在「最优步长」而不能无限减小 <span class="arithmatex">\(h\)</span>？</p>
+<details class="note">
+<summary>提示</summary>
+<p>考虑截断误差与舍入误差的相反趋势。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为截断误差与舍入误差随 <span class="arithmatex">\(h\)</span> 的变化方向相反，两者之和存在最小值。</strong></p>
+<p><strong>两种误差的行为</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>误差</th>
+<th>量级</th>
+<th>随 <span class="arithmatex">\(h\)</span> 减小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>截断误差</strong></td>
+<td><span class="arithmatex">\(\sim Ch^p\)</span>（<span class="arithmatex">\(p\)</span> 是阶数）</td>
+<td><strong>减小</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>舍入误差</strong></td>
+<td><span class="arithmatex">\(\sim\dfrac{\epsilon_{\text{mach}}}{h}\)</span></td>
+<td><strong>增大</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么舍入误差随 <span class="arithmatex">\(h\)</span> 减小而增大</strong>：</p>
+<p>步数 <span class="arithmatex">\(\propto 1/h\)</span>，每步的舍入误差 <span class="arithmatex">\(\sim\epsilon_{\text{mach}}\)</span>
+→ 累积舍入误差 <span class="arithmatex">\(\propto\epsilon_{\text{mach}}/h\)</span> ✓</p>
+<p><strong>总误差</strong>：</p>
+<div class="arithmatex">\[
+E(h)\approx Ch^p+\frac{\epsilon_{\text{mach}}}{h}
+\]</div>
+<p><strong>求最优 <span class="arithmatex">\(h\)</span></strong>（令导数为零）：</p>
+<div class="arithmatex">\[
+Cp\,h^{p-1} = \frac{\epsilon_{\text{mach}}}{h^2} \implies h^{*}\sim\left(\frac{\epsilon_{\text{mach}}}{C}\right)^{1/(p+1)}
+\]</div>
+<p><strong>对一阶方法（<span class="arithmatex">\(p=1\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+h^*\sim\sqrt{\epsilon_{\text{mach}}}\approx\sqrt{2.2\times10^{-16}}\approx1.5\times10^{-8}
+\]</div>
+<p><strong>对四阶方法（<span class="arithmatex">\(p=4\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+h^*\sim\epsilon_{\text{mach}}^{1/5}\approx(2.2\times10^{-16})^{0.2}\approx7\times10^{-4}
+\]</div>
+<p><strong>重要的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法阶数</th>
+<th>最优 <span class="arithmatex">\(h\)</span></th>
+<th>最优 <span class="arithmatex">\(h\)</span> 处的误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p=1\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(p=4\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-3}\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-13}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>高阶方法能达到更高的最终精度</strong> ✓</p>
+<p><strong>因为 <span class="arithmatex">\(p\)</span> 大时最优 <span class="arithmatex">\(h\)</span> 也更大（<span class="arithmatex">\(h^*\)</span> 随 <span class="arithmatex">\(p\)</span> 增大）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(p\)</span></th>
+<th><span class="arithmatex">\(h^*\)</span> 的指数 <span class="arithmatex">\(1/(p+1)\)</span></th>
+<th><span class="arithmatex">\(h^*\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1/2\)</span></td>
+<td><span class="arithmatex">\(10^{-8}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(1/3\)</span></td>
+<td><span class="arithmatex">\(10^{-5.3}\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(4\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1/5\)</span></strong></td>
+<td><strong><span class="arithmatex">\(10^{-3.2}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「为什么高阶方法能同时更准更稳」的原因</strong> ✓</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>实践建议</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不要盲目用极小 <span class="arithmatex">\(h\)</span></td>
+<td>舍入误差会反超 ✗</td>
+</tr>
+<tr>
+<td>用自适应步长</td>
+<td>自动找到平衡点 ✓</td>
+</tr>
+<tr>
+<td><strong>观察误差是否随 <span class="arithmatex">\(h\)</span> 下降</strong></td>
+<td>若不再下降，已进入舍入主导区 ✓</td>
+</tr>
+<tr>
+<td>高精度需求用高阶方法</td>
+<td>而不是用极小 <span class="arithmatex">\(h\)</span> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个实用的自检</strong>：若把 <span class="arithmatex">\(h\)</span> 减半而误差不变或变大，
+说明已经到达舍入误差主导区 —— <strong>再减小 <span class="arithmatex">\(h\)</span> 是徒劳的</strong> ✓</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../stability/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 稳定性分析">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                稳定性分析
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../mdp/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

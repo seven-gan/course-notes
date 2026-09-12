@@ -1,0 +1,5321 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/ode/first-order/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../second-order/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>一阶微分方程 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一阶微分方程
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、微分方程的基本概念
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、微分方程的基本概念">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么是微分方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通解、特解与初值问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        几何意义：方向场
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        解的存在与唯一性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、可分离变量方程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、可分离变量方程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        识别与解法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例：指数增长
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常数解的丢失
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        什么时候不能用分离变量
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、一阶线性方程与积分因子
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、一阶线性方程与积分因子">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        标准形
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        积分因子的推导
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例：带奇点的线性方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        与齐次方程的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、伯努利方程与恰当方程
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、伯努利方程与恰当方程">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        伯努利方程：换元化线性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例：有限时间爆破
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恰当方程：找回「隐藏的全微分」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        典型例：恰当方程
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        积分因子可以把非恰当方程变恰当
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：可分离变量与数值验证
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：一阶线性方程的积分因子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：伯努利方程与有限时间爆破
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：恰当方程的判定与求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 关节摩擦与执行器模型
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 一阶递归滤波与锁相环
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 能量、时标与约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mdp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">现代数字信号处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（微分方程、初值问题等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../second-order/">second-order</a></span></div></div>
+
+<h1 id="_1">一阶微分方程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面几页讲的都是「已知函数，求它的导数」——方向是<strong>求导</strong>。
+这一页把方向倒过来：<strong>已知含导数的等式，求未知函数本身</strong>。
+这样的等式就叫<strong>微分方程</strong>，而只含一阶导数的，就叫<strong>一阶微分方程</strong>。</p>
+<p>一阶方程是整个微分方程理论的入口，原因很实际：</p>
+<ul>
+<li>它是<strong>唯一一类能写出完整求解套路</strong>的方程。高维、高阶、非线性方程大多只能数值求解，而一阶方程有四类标准可解类型；</li>
+<li>大量工程模型本身就是一阶的：<span class="arithmatex">\(RC\)</span> 电路的充放电、电机的转速响应、
+  一阶数字滤波器的递推、电池的荷电状态、无人机的能量耗散；</li>
+<li>后面第二页（二阶线性方程）、第三页（线性方程组）、第四页（稳定性）、
+  第五页（数值解法）全部建立在这一页的语言之上。</li>
+</ul>
+<p>所以这一页的目标不是「背四种解法」，而是<strong>建立一套识别流程</strong>：
+拿到一个一阶方程，先看它属于哪一类，再套对应方法。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话抓住核心</p>
+<p><strong>一阶方程的本质是「把导数当未知量分离出来，然后两边积分」。</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>标准形</th>
+<th>识别特征</th>
+<th>解法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可分离变量</td>
+<td><span class="arithmatex">\(y' = f(x)g(y)\)</span></td>
+<td>右端能拆成「只含 <span class="arithmatex">\(x\)</span>」乘「只含 <span class="arithmatex">\(y\)</span>」</td>
+<td>分离后两边积分</td>
+</tr>
+<tr>
+<td>一阶线性</td>
+<td><span class="arithmatex">\(y' + p(x)y = q(x)\)</span></td>
+<td><span class="arithmatex">\(y\)</span> 与 <span class="arithmatex">\(y'\)</span> 都是一次，无乘积</td>
+<td>积分因子 <span class="arithmatex">\(\mu = e^{\int p\,\mathrm{d}x}\)</span></td>
+</tr>
+<tr>
+<td>伯努利</td>
+<td><span class="arithmatex">\(y' + p(x)y = q(x)y^{n}\)</span></td>
+<td>出现 <span class="arithmatex">\(y\)</span> 的幂次（<span class="arithmatex">\(n \neq 0,1\)</span>）</td>
+<td>换元 <span class="arithmatex">\(v = y^{1-n}\)</span> 化线性</td>
+</tr>
+<tr>
+<td>恰当方程</td>
+<td><span class="arithmatex">\(P\,\mathrm{d}x + Q\,\mathrm{d}y = 0\)</span></td>
+<td>存在 <span class="arithmatex">\(F\)</span> 使 <span class="arithmatex">\(F_x = P\)</span>、<span class="arithmatex">\(F_y = Q\)</span></td>
+<td>检验 <span class="arithmatex">\(P_y = Q_x\)</span>，再求 <span class="arithmatex">\(F\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>一句话判据：<strong>能分开就分开，不能分开看是不是线性，是幂次就换元，是微分形式就查是否恰当。</strong></p>
+</div>
+<hr />
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="一阶微分方程的方向场与积分曲线">
+<defs>
+<marker id="ode1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="ode1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 坐标轴 -->
+<line class="gb" x1="42" y1="196" x2="404" y2="196" marker-end="url(#ode1-ah1)"/>
+<line class="gb" x1="42" y1="196" x2="42" y2="28" marker-end="url(#ode1-ah2)"/>
+<text class="lbl-s" x="392" y="188">t</text>
+<text class="lbl-s" x="50" y="40">y</text>
+<!-- 方向场（短斜线，斜率 = f(t,y)，示意 y' = 0.4y） -->
+<line class="a2" x1="62" y1="186" x2="70" y2="182" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="102" y1="182" x2="110" y2="174" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="142" y1="174" x2="150" y2="163" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="182" y1="162" x2="190" y2="147" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="222" y1="146" x2="230" y2="126" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="262" y1="124" x2="270" y2="100" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="302" y1="98" x2="310" y2="70" stroke-width="1.5" opacity="0.75"/>
+<line class="a2" x1="342" y1="68" x2="350" y2="38" stroke-width="1.5" opacity="0.75"/>
+<!-- 更高一层的方向场 -->
+<line class="a2" x1="62" y1="152" x2="70" y2="146" stroke-width="1.5" opacity="0.5"/>
+<line class="a2" x1="122" y1="142" x2="130" y2="128" stroke-width="1.5" opacity="0.5"/>
+<line class="a2" x1="182" y1="126" x2="190" y2="106" stroke-width="1.5" opacity="0.5"/>
+<line class="a2" x1="242" y1="104" x2="250" y2="78" stroke-width="1.5" opacity="0.5"/>
+<line class="a2" x1="302" y1="78" x2="310" y2="48" stroke-width="1.5" opacity="0.5"/>
+<!-- 一条积分曲线 -->
+<path class="a1" d="M62,190 C120,186 180,176 240,150 C300,124 350,84 380,40" fill="none" stroke-width="2.8"/>
+<text class="l1" x="176" y="132">积分曲线（解）</text>
+<!-- 初值点 -->
+<circle class="d3" cx="62" cy="190" r="5"/>
+<text class="l3" x="46" y="212">初值 (t₀, y₀)</text>
+<!-- 说明 -->
+<text class="lbl-s" x="42" y="232">方向场给出「每点该往哪走」；积分曲线是处处与方向场相切的曲线</text>
+</svg>
+<figcaption>图 1　一阶微分方程的<b>方向场</b>与积分曲线。每个小短线的斜率等于该点的 f(t,y)，也就是「解在这一点应该走的方向」。积分曲线（粗实线）是处处与方向场相切的曲线——给定初值 (t₀,y₀) 就唯一确定一条。这就是「初值问题」的几何含义，也是数值解法（欧拉法）的直观依据：沿当前点的方向走一小步</figcaption>
+</figure>
+
+<hr />
+<h2 id="_2">一、微分方程的基本概念<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">什么是微分方程<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>微分方程</strong>是含有未知函数及其导数的等式。按<strong>最高阶导数的阶数</strong>称为 <span class="arithmatex">\(n\)</span> 阶方程。</p>
+<p>一阶方程的一般形式可以写成</p>
+<div class="arithmatex">\[
+F(x, y, y') = 0
+\]</div>
+<p>如果能把 <span class="arithmatex">\(y'\)</span> 单独解出来，就得到<strong>显式形式</strong>（本页主要讨论这种）</p>
+<div class="arithmatex">\[
+y' = f(x, y)
+\]</div>
+<p>有时写成<strong>微分形式</strong>更方便</p>
+<div class="arithmatex">\[
+P(x, y)\,\mathrm{d}x + Q(x, y)\,\mathrm{d}y = 0
+\]</div>
+<p>两种写法可以互相转换：由 <span class="arithmatex">\(y' = \dfrac{\mathrm{d}y}{\mathrm{d}x}\)</span>，
+把 <span class="arithmatex">\(y' = -P/Q\)</span> 对应过去，就得到 <span class="arithmatex">\(P\,\mathrm{d}x + Q\,\mathrm{d}y = 0\)</span>。
+<strong>后面「恰当方程」一节就靠这个形式。</strong></p>
+<h3 id="_4">通解、特解与初值问题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>一阶方程的解里会带<strong>一个任意常数</strong>，这叫<strong>通解</strong>（general solution）；
+给 <span class="arithmatex">\(C\)</span> 一个具体值，就得到<strong>特解</strong>（particular solution）。</p>
+<p>确定 <span class="arithmatex">\(C\)</span> 的条件叫<strong>初始条件</strong>，一阶方程只需要<strong>一个</strong>：
+在某个点 <span class="arithmatex">\(x_0\)</span> 处指定函数值 <span class="arithmatex">\(y(x_0) = y_0\)</span>。
+方程加初始条件合起来叫<strong>初值问题</strong>（initial value problem，IVP）：</p>
+<div class="arithmatex">\[
+y' = f(x, y), \qquad y(x_0) = y_0
+\]</div>
+<p><strong>为什么要专门讲初值问题</strong>：因为现实系统总有「初始状态」——
+电容的初始电压、滤波器的初始储能、无人机起飞时的高度。
+而且<strong>只有加上初值，解才唯一</strong>，数值解法也才有确定的输入。</p>
+<p>以 <span class="arithmatex">\(y' = 2xy\)</span> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>结果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通解</td>
+<td><span class="arithmatex">\(y = Ce^{x^{2}}\)</span></td>
+<td>含一个任意常数 <span class="arithmatex">\(C\)</span>，是一族曲线</td>
+</tr>
+<tr>
+<td>初始条件</td>
+<td><span class="arithmatex">\(y(0) = 1\)</span></td>
+<td>指定曲线过点 <span class="arithmatex">\((0,1)\)</span></td>
+</tr>
+<tr>
+<td>特解</td>
+<td><span class="arithmatex">\(y = e^{x^{2}}\)</span></td>
+<td>代入得 <span class="arithmatex">\(C = 1\)</span>，唯一确定</td>
+</tr>
+<tr>
+<td>另一个初值</td>
+<td><span class="arithmatex">\(y(0) = 3 \implies y = 3e^{x^{2}}\)</span></td>
+<td>同一族中的另一条</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_5">几何意义：方向场<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(y' = f(x, y)\)</span> 的右端给了一个<strong>不依赖求解</strong>的信息：
+在平面上的任一点 <span class="arithmatex">\((x, y)\)</span> 处，解曲线必须<strong>以斜率 <span class="arithmatex">\(f(x, y)\)</span> 通过</strong>。</p>
+<p>把所有点上的斜率画成小线段，就得到<strong>方向场</strong>（direction field / 斜率场）。
+方向场是理解一阶方程最直观的工具，它告诉我们三件事：</p>
+<ol>
+<li><strong>解曲线处处与方向场相切</strong>——这就是「解」的几何定义；</li>
+<li><strong><span class="arithmatex">\(f(x,y_0) = 0\)</span> 的水平线上斜率为零</strong>，解曲线在此达到极值；</li>
+<li><strong>整体走势</strong>不需要解出公式就能看出（增长、衰减、发散）。</li>
+</ol>
+<p><strong>工程含义</strong>：控制系统里工程师常先画相图/方向场判断趋势，
+再决定是否需要精确解析解。这是「定性分析」的雏形，
+第四页的稳定性分析就是它的系统化。</p>
+<h3 id="_6">解的存在与唯一性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>不是所有 <span class="arithmatex">\(f\)</span> 都能保证解存在唯一。教材上的基本结论是：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\((x_0, y_0)\)</span> 附近连续</td>
+<td>至少存在一个局部解</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f\)</span> 对 <span class="arithmatex">\(y\)</span> 满足 Lipschitz 条件</td>
+<td>解在该邻域内<strong>唯一</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么要提这个</strong>：它给出「解会不会撞车」的判据。
+例如 <span class="arithmatex">\(y' = \sqrt{\lvert y \rvert}\)</span>、<span class="arithmatex">\(y(0) = 0\)</span> 在 <span class="arithmatex">\(y=0\)</span> 处不满足 Lipschitz，
+解不唯一（<span class="arithmatex">\(y \equiv 0\)</span> 和 <span class="arithmatex">\(y = x^{2}/4\)</span> 都是解）。</p>
+<p><strong>工程含义</strong>：模型非唯一意味着<strong>物理上存在多个可能结果</strong>，
+此时必须补充物理约束（能量守恒、极限状态）才能定解。</p>
+<hr />
+<h2 id="_7">二、可分离变量方程<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">识别与解法<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>若右端能分解为<strong>只含 <span class="arithmatex">\(x\)</span> 的函数乘以只含 <span class="arithmatex">\(y\)</span> 的函数</strong>：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}y}{\mathrm{d}x} = f(x)\,g(y)
+\]</div>
+<p>就把含 <span class="arithmatex">\(y\)</span> 的因子挪到左边（形式上把 <span class="arithmatex">\(\mathrm{d}y\)</span> 与 <span class="arithmatex">\(\mathrm{d}x\)</span> 分开）：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}y}{g(y)} = f(x)\,\mathrm{d}x
+\]</div>
+<p>两边积分</p>
+<div class="arithmatex">\[
+\int \frac{\mathrm{d}y}{g(y)} = \int f(x)\,\mathrm{d}x + C
+\]</div>
+<p>左边是 <span class="arithmatex">\(y\)</span> 的函数、右边是 <span class="arithmatex">\(x\)</span> 的函数，<strong>只要这两个积分能算出来，方程就解完了</strong>。</p>
+<p><strong>注意 <span class="arithmatex">\(+C\)</span> 只写一遍</strong>：两个积分各带一个常数，
+但两个常数合并成一个没有区别，写两遍只会让后面解 <span class="arithmatex">\(C\)</span> 时多一个冗余。</p>
+<h3 id="_9">典型例：指数增长<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y' = 2xy
+\]</div>
+<p><strong>第一步：分离。</strong></p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}y}{y} = 2x\,\mathrm{d}x
+\]</div>
+<p><strong>第二步：积分。</strong></p>
+<div class="arithmatex">\[
+\ln \lvert y \rvert = x^{2} + C
+\]</div>
+<p><strong>第三步：解出 <span class="arithmatex">\(y\)</span>。</strong></p>
+<div class="arithmatex">\[
+y = C_{1}e^{x^{2}}, \qquad C_{1} = \pm e^{C}
+\]</div>
+<p><strong>第四步：代入初值 <span class="arithmatex">\(y(0) = 1\)</span>。</strong>
+<span class="arithmatex">\(x = 0\)</span>、<span class="arithmatex">\(y = 1\)</span> 代入：<span class="arithmatex">\(1 = C_{1}e^{0} = C_{1}\)</span>，故</p>
+<div class="arithmatex">\[
+y = e^{x^{2}}
+\]</div>
+<p><strong>数值验证</strong>：把结果代回原方程检验（这一步不能省）。</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y = e^{x^{2}}\)</span></th>
+<th><span class="arithmatex">\(y' = 2xy\)</span> 的理论值</th>
+<th>有限差分检验 <span class="arithmatex">\(y'(1)\)</span></th>
+<th>一致？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>1.284025</td>
+<td>1.284025</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>2.718282</td>
+<td>2.718282</td>
+<td>2.718282</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>9.487736</td>
+<td>14.231604</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>54.598150</td>
+<td>109.196301</td>
+<td>—</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(x = 1\)</span> 处：理论 <span class="arithmatex">\(y' = 2 \times 1 \times 2.718282 = 5.436564\)</span>，
+而右表另列的是 <span class="arithmatex">\(y\)</span> 本身（<span class="arithmatex">\(2.718282\)</span>）。
+<strong>注意 <span class="arithmatex">\(y'\)</span> 与 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x=1\)</span> 处数值不同</strong>，这正是「方程右端依赖 <span class="arithmatex">\(x\)</span>」的体现：
+<span class="arithmatex">\(x=0\)</span> 时右端为 <span class="arithmatex">\(0\)</span>（曲线水平），<span class="arithmatex">\(x\)</span> 增大后增长越来越猛。</p>
+<p><strong>增长为什么会「炸」</strong>：指数 <span class="arithmatex">\(x^{2}\)</span> 是双指数的直观来源——
+<span class="arithmatex">\(x\)</span> 从 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(y\)</span> 从 <span class="arithmatex">\(2.72\)</span> 涨到 <span class="arithmatex">\(54.60\)</span>，<strong>20 倍</strong>。
+这类模型刻画的正是「增长率正比于规模」的正反馈过程。</p>
+<h3 id="_10">常数解的丢失<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>分离时除以了 <span class="arithmatex">\(g(y)\)</span>，这等于<strong>默认 <span class="arithmatex">\(g(y) \neq 0\)</span></strong>。
+若存在 <span class="arithmatex">\(y_{*}\)</span> 使 <span class="arithmatex">\(g(y_{*}) = 0\)</span>，则 <span class="arithmatex">\(y \equiv y_{*}\)</span> 也是解，且<strong>可能恰好被丢掉了</strong>。</p>
+<p>以 <strong>Logistic 方程</strong>（阻滞增长模型）为例：</p>
+<div class="arithmatex">\[
+y' = y(1 - y)
+\]</div>
+<ul>
+<li><span class="arithmatex">\(g(y) = y(1-y)\)</span>，在 <span class="arithmatex">\(y = 0\)</span> 与 <span class="arithmatex">\(y = 1\)</span> 处为零，所以 <span class="arithmatex">\(y \equiv 0\)</span>、<span class="arithmatex">\(y \equiv 1\)</span> 是两个<strong>平衡解</strong>；</li>
+<li>分离后积分得通解 <span class="arithmatex">\(y = \dfrac{1}{1 + Ce^{-x}}\)</span>。</li>
+</ul>
+<p>这两个常数解在通解里<strong>取不到</strong>（<span class="arithmatex">\(y \equiv 1\)</span> 对应 <span class="arithmatex">\(C = 0\)</span> 但 <span class="arithmatex">\(y \equiv 0\)</span> 取不到），
+所以必须单独声明。<strong>这就是「分离变量要检查常数解」的全部理由。</strong></p>
+<p><strong>Logistic 的数值行为</strong>（取 <span class="arithmatex">\(y(0) = 0.5\)</span>，即 <span class="arithmatex">\(C = 1\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td>0.500000</td>
+<td>0.731059</td>
+<td>0.880797</td>
+<td>0.952574</td>
+<td>0.993307</td>
+</tr>
+</tbody>
+</table>
+<p>初始阶段近似指数增长，随后<strong>被环境容量压制</strong>，
+<span class="arithmatex">\(x \to \infty\)</span> 时 <span class="arithmatex">\(y \to 1\)</span>（<strong>极限值不依赖初值</strong>，只要初值大于零）。</p>
+<p><strong>工程含义</strong>：Logistic 是「有限资源下的增长」标准模型——
+海洋中水声信道的节点数量增长、社交网络中信息扩散、
+电池充电到饱和的修正模型都用到它。
+<strong>记住这条：能分离的方程往往对应「增长率只由当前状态决定」的过程。</strong></p>
+<h3 id="_11">什么时候不能用分离变量<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>判断</th>
+<th>例子</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>右端是乘积形式</td>
+<td><span class="arithmatex">\(y' = x^{2}y^{3}\)</span></td>
+<td>可分离</td>
+</tr>
+<tr>
+<td>右端是加法形式</td>
+<td><span class="arithmatex">\(y' = x + y\)</span></td>
+<td><strong>不可分离</strong>，改用线性方程</td>
+</tr>
+<tr>
+<td>右端含 <span class="arithmatex">\(x+y\)</span> 的复合</td>
+<td><span class="arithmatex">\(y' = (x+y)^{2}\)</span></td>
+<td>不可分离，用换元 <span class="arithmatex">\(u = x+y\)</span></td>
+</tr>
+<tr>
+<td>右端含 <span class="arithmatex">\(y/x\)</span> 的复合</td>
+<td><span class="arithmatex">\(y' = 1 - y/x\)</span></td>
+<td>齐次方程，用换元 <span class="arithmatex">\(v = y/x\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>对 <span class="arithmatex">\(y' = x + y\)</span>，我们有 <span class="arithmatex">\(y' - y = x\)</span>，这是<strong>线性方程</strong>的典型标准形，
+下一节处理它。</p>
+<hr />
+<h2 id="_12">三、一阶线性方程与积分因子<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<h3 id="_13">标准形<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y' + p(x)\,y = q(x)
+\]</div>
+<p><strong>为什么叫「线性」</strong>：把 <span class="arithmatex">\(y\)</span> 与 <span class="arithmatex">\(y'\)</span> 看作未知量，方程对它们是<strong>一次的</strong>，
+没有 <span class="arithmatex">\(y^{2}\)</span>、<span class="arithmatex">\(yy'\)</span> 这类项。<span class="arithmatex">\(p\)</span>、<span class="arithmatex">\(q\)</span> 可以任意复杂，<strong>只要求与 <span class="arithmatex">\(y\)</span> 无关</strong>。</p>
+<h3 id="_14">积分因子的推导<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>先看一个凑巧的观察：若方程左端出现 <span class="arithmatex">\(\mu y' + \mu p y\)</span>，
+它「像」乘积求导的结果 <span class="arithmatex">\((\mu y)' = \mu y' + \mu' y\)</span>。
+只要让 <span class="arithmatex">\(\mu' = \mu p\)</span>，左端就真成了 <span class="arithmatex">\((\mu y)'\)</span>。</p>
+<p>于是<strong>积分因子</strong>取</p>
+<div class="arithmatex">\[
+\mu(x) = e^{\int p(x)\,\mathrm{d}x}
+\]</div>
+<p>因为 <span class="arithmatex">\(\mu' = \mu p\)</span> 正好满足。乘上 <span class="arithmatex">\(\mu\)</span>：</p>
+<div class="arithmatex">\[
+\mu y' + \mu p y = \mu q
+\]</div>
+<div class="arithmatex">\[
+(\mu y)' = \mu q
+\]</div>
+<p>两边积分：</p>
+<div class="arithmatex">\[
+\mu y = \int \mu(x)\,q(x)\,\mathrm{d}x + C
+\]</div>
+<div class="arithmatex">\[
+y = \frac{1}{\mu(x)}\left[\int \mu(x)q(x)\,\mathrm{d}x + C\right]
+\]</div>
+<p><strong>这就是一阶线性方程的通解公式</strong>，也是一阶方程里唯一「可以背下来直接用」的公式。</p>
+<p><strong>为什么有效</strong>：<span class="arithmatex">\(\mu\)</span> 的作用是<strong>把左端变成全导数</strong>。
+一旦成为全导数，方程就退化成「求原函数」这种最基础的问题。
+这个「乘一个因子变成全导数」的思想在恰当方程、二阶朗斯基方法里会反复出现。</p>
+<h3 id="_15">典型例：带奇点的线性方程<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>解初值问题</p>
+<div class="arithmatex">\[
+y' + \frac{y}{x} = x^{2}, \qquad y(1) = 0
+\]</div>
+<p><strong>第一步：辨认。</strong> <span class="arithmatex">\(p(x) = 1/x\)</span>，<span class="arithmatex">\(q(x) = x^{2}\)</span>，是标准形。</p>
+<p><strong>第二步：求积分因子。</strong></p>
+<div class="arithmatex">\[
+\mu = e^{\int \frac{1}{x}\mathrm{d}x} = e^{\ln x} = x
+\]</div>
+<p>（这里 <span class="arithmatex">\(x &gt; 0\)</span>，因为初值给在 <span class="arithmatex">\(x = 1\)</span>。）</p>
+<p><strong>第三步：等式两边乘 <span class="arithmatex">\(\mu\)</span> 并识别全导数。</strong></p>
+<div class="arithmatex">\[
+x y' + y = x^{3} \implies (xy)' = x^{3}
+\]</div>
+<p><strong>第四步：积分。</strong></p>
+<div class="arithmatex">\[
+xy = \frac{x^{4}}{4} + C
+\]</div>
+<p><strong>第五步：代入初值。</strong> <span class="arithmatex">\(x = 1\)</span>、<span class="arithmatex">\(y = 0\)</span>：<span class="arithmatex">\(0 = \frac14 + C\)</span>，得 <span class="arithmatex">\(C = -\frac14\)</span>。</p>
+<div class="arithmatex">\[
+y = \frac{x^{4}}{4x} - \frac{1}{4x} = \frac{x^{3} - 1}{4x}
+\]</div>
+<p><strong>第六步：数值验证。</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th>1.0</th>
+<th>1.5</th>
+<th>2.0</th>
+<th>3.0</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td>0.000000</td>
+<td>0.395833</td>
+<td>0.875000</td>
+<td>2.166667</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x^{3}\)</span></td>
+<td>1.000</td>
+<td>3.375</td>
+<td>8.000</td>
+<td>27.000</td>
+</tr>
+<tr>
+<td>检验 <span class="arithmatex">\(xy - x^{3}/4\)</span></td>
+<td><span class="arithmatex">\(-0.250\)</span></td>
+<td><span class="arithmatex">\(-0.250\)</span></td>
+<td><span class="arithmatex">\(-0.250\)</span></td>
+<td><span class="arithmatex">\(-0.250\)</span></td>
+</tr>
+<tr>
+<td>一致？</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p>最后一行是<strong>常数</strong> <span class="arithmatex">\(C = -1/4\)</span>，这正是积分结果的直接体现，
+也是最快的自我检验方式。</p>
+<p><strong>为什么 <span class="arithmatex">\(x=0\)</span> 不能取</strong>：<span class="arithmatex">\(\mu = x\)</span> 在 <span class="arithmatex">\(x = 0\)</span> 处为零，
+而原方程里的 <span class="arithmatex">\(y/x\)</span> 在 <span class="arithmatex">\(x = 0\)</span> 处无定义。
+<strong>解的区间必然避开 <span class="arithmatex">\(p(x)\)</span> 的奇点</strong>——
+<span class="arithmatex">\(p\)</span> 在 <span class="arithmatex">\(x_0\)</span> 处不连续的区间内，解的存在唯一性不能保证。</p>
+<h3 id="_16">与齐次方程的关系<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>若 <span class="arithmatex">\(q(x) \equiv 0\)</span>，方程退化为 <span class="arithmatex">\(y' + p y = 0\)</span>，
+分离变量立得 <span class="arithmatex">\(y = Ce^{-\int p\,\mathrm{d}x}\)</span>，与积分因子公式一致（取 <span class="arithmatex">\(q=0\)</span>）。
+更一般地，通解可以拆成</p>
+<div class="arithmatex">\[
+y = \underbrace{C e^{-\int p\mathrm{d}x}}_{\text{齐次解 } y_h} + \underbrace{\frac{1}{\mu}\int \mu q\,\mathrm{d}x}_{\text{特解 } y_p}
+\]</div>
+<p><strong>这就是「齐次通解 + 非齐次特解」结构的来源</strong>，
+下一页二阶线性方程用的是同一个结构。
+<strong>工程含义</strong>：<span class="arithmatex">\(y_h\)</span> 是系统的<strong>固有响应</strong>（由系统参数 <span class="arithmatex">\(p\)</span> 决定），
+<span class="arithmatex">\(y_p\)</span> 是<strong>强迫响应</strong>（由外部输入 <span class="arithmatex">\(q\)</span> 决定）。
+调参能改变前者，而后者只能靠改输入来改变。</p>
+<hr />
+<h2 id="_17">四、伯努利方程与恰当方程<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
+<h3 id="_18">伯努利方程：换元化线性<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y' + p(x)\,y = q(x)\,y^{n}, \qquad n \neq 0,\ 1
+\]</div>
+<p>（<span class="arithmatex">\(n = 0\)</span> 就是线性方程，<span class="arithmatex">\(n = 1\)</span> 可分离，所以这两种被排除。）</p>
+<p><strong>换元思路</strong>：<span class="arithmatex">\(y^{n}\)</span> 破坏了线性性，用换元把它消掉。设</p>
+<div class="arithmatex">\[
+v = y^{1-n}
+\]</div>
+<p>则</p>
+<div class="arithmatex">\[
+v' = (1-n)y^{-n}y'
+\]</div>
+<p>把原方程两边除以 <span class="arithmatex">\(y^{n}\)</span>，得</p>
+<div class="arithmatex">\[
+y^{-n}y' + p\,y^{1-n} = q
+\]</div>
+<p>代入 <span class="arithmatex">\(v\)</span> 与 <span class="arithmatex">\(v'\)</span>：</p>
+<div class="arithmatex">\[
+\frac{v'}{1-n} + p v = q
+\]</div>
+<p>两边乘 <span class="arithmatex">\(1-n\)</span>，得到<strong>关于 <span class="arithmatex">\(v\)</span> 的一阶线性方程</strong>：</p>
+<div class="arithmatex">\[
+v' + (1-n)p(x)\,v = (1-n)q(x)
+\]</div>
+<p><strong>关键点</strong>：换元把非线性方程<strong>精确</strong>变成了线性方程，没有任何近似。</p>
+<h3 id="_19">典型例：有限时间爆破<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+y' - y = y^{2}, \qquad y(0) = 1
+\]</div>
+<p><strong>第一步：辨认。</strong> <span class="arithmatex">\(p = -1\)</span>，<span class="arithmatex">\(q = 1\)</span>，<span class="arithmatex">\(n = 2\)</span>，是伯努利方程。</p>
+<p><strong>第二步：换元。</strong> <span class="arithmatex">\(v = y^{1-2} = y^{-1} = 1/y\)</span>，即 <span class="arithmatex">\(y = 1/v\)</span>，<span class="arithmatex">\(v(0) = 1\)</span>。</p>
+<p><strong>第三步：化为线性。</strong> 取 <span class="arithmatex">\(n=2\)</span> 代入 <span class="arithmatex">\(v' + (1-n)pv = (1-n)q\)</span>：</p>
+<div class="arithmatex">\[
+v' + (-1)(-1)v = (-1)\cdot 1 \implies v' + v = -1
+\]</div>
+<p><strong>第四步：用积分因子求解。</strong> <span class="arithmatex">\(\mu = e^{x}\)</span>：</p>
+<div class="arithmatex">\[
+(e^{x}v)' = -e^{x} \implies e^{x}v = -e^{x} + C \implies v = Ce^{-x} - 1
+\]</div>
+<p><strong>第五步：代入初值。</strong> <span class="arithmatex">\(v(0) = 1\)</span>：<span class="arithmatex">\(1 = C - 1\)</span>，得 <span class="arithmatex">\(C = 2\)</span>。</p>
+<div class="arithmatex">\[
+v = 2e^{-x} - 1 \implies y = \frac{1}{2e^{-x} - 1}
+\]</div>
+<p><strong>第六步：检查爆破。</strong> 分母为零当 <span class="arithmatex">\(2e^{-x} = 1\)</span>，即</p>
+<div class="arithmatex">\[
+x_{*} = \ln 2 \approx 0.693147
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th>0.2</th>
+<th>0.5</th>
+<th>0.6</th>
+<th>0.69</th>
+<th>0.693147</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(2e^{-x} - 1\)</span></td>
+<td>0.637462</td>
+<td>0.213061</td>
+<td>0.097623</td>
+<td>0.003152</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td>1.568722</td>
+<td>4.693484</td>
+<td>10.243459</td>
+<td>317.244980</td>
+<td><span class="arithmatex">\(+\infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>解在有限时间趋向无穷</strong>，这叫<strong>有限时间爆破</strong>（finite-time blow-up）。</p>
+<p><strong>工程含义</strong>：爆破<strong>不是数学上的怪现象，而是模型的失效信号</strong>。
+现实中压力、电流、温度都不可能真的到无穷，
+所以出现爆破就意味着「假设失效了」——
+必须加入饱和、限幅、散热等机制修正模型。
+<strong>记住：爆破点是模型的「警戒线」，不是物理量的真值。</strong></p>
+<table>
+<thead>
+<tr>
+<th>模型类型</th>
+<th>增长机制</th>
+<th>长期行为</th>
+<th>是否需要修正</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y' = y\)</span></td>
+<td>增长率恒定</td>
+<td>指数增长</td>
+<td>资源有限时需修正</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y' = y(1-y)\)</span></td>
+<td>增长率随规模下降</td>
+<td>趋于有限极限</td>
+<td>合理</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y' - y = y^{2}\)</span></td>
+<td>增长被自身放大</td>
+<td><span class="arithmatex">\(\ln 2 \approx 0.693\)</span> 处爆破</td>
+<td><strong>必须修正</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y' = -y\)</span></td>
+<td>衰减</td>
+<td>指数衰减到零</td>
+<td>合理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_20">恰当方程：找回「隐藏的全微分」<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>微分形式</p>
+<div class="arithmatex">\[
+P(x,y)\,\mathrm{d}x + Q(x,y)\,\mathrm{d}y = 0
+\]</div>
+<p>若存在<strong>势函数</strong> <span class="arithmatex">\(F(x,y)\)</span> 使</p>
+<div class="arithmatex">\[
+\frac{\partial F}{\partial x} = P, \qquad \frac{\partial F}{\partial y} = Q
+\]</div>
+<p>则方程左端恰是 <span class="arithmatex">\(F\)</span> 的全微分 <span class="arithmatex">\(\mathrm{d}F = 0\)</span>，
+解就是<strong>隐式的等值线</strong> <span class="arithmatex">\(F(x,y) = C\)</span>。</p>
+<p><strong>判定与求解定理</strong>（设 <span class="arithmatex">\(P\)</span>、<span class="arithmatex">\(Q\)</span> 在单连通区域上有连续偏导）：</p>
+<div class="arithmatex">\[
+\text{方程恰当} \iff \frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}
+\]</div>
+<p>满足时，<span class="arithmatex">\(F\)</span> 可这样构造：</p>
+<div class="arithmatex">\[
+F(x,y) = \int P(x,y)\,\mathrm{d}x + g(y)
+\]</div>
+<p>其中 <span class="arithmatex">\(g(y)\)</span> 由 <span class="arithmatex">\(\dfrac{\partial F}{\partial y} = Q\)</span> 定出。</p>
+<p><strong>为什么要用「单连通」</strong>：否则积分可能与路径有关，
+<span class="arithmatex">\(P_y = Q_x\)</span> 的判定就会失灵。工程上遇到的区域几乎都是单连通的，
+所以实际操作中只需<strong>验证 <span class="arithmatex">\(P_y = Q_x\)</span></strong>。</p>
+<h3 id="_21">典型例：恰当方程<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+(2xy + 3)\,\mathrm{d}x + (x^{2} - 4y)\,\mathrm{d}y = 0, \qquad y(1) = 2
+\]</div>
+<p><strong>第一步：判定。</strong></p>
+<div class="arithmatex">\[
+P = 2xy + 3, \quad Q = x^{2} - 4y
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial P}{\partial y} = 2x, \qquad \frac{\partial Q}{\partial x} = 2x
+\]</div>
+<p>两者相等，<strong>是恰当方程</strong> ✓</p>
+<p><strong>第二步：求 <span class="arithmatex">\(F\)</span>。</strong></p>
+<div class="arithmatex">\[
+F = \int (2xy + 3)\,\mathrm{d}x = x^{2}y + 3x + g(y)
+\]</div>
+<p><strong>第三步：用 <span class="arithmatex">\(F_y = Q\)</span> 定 <span class="arithmatex">\(g(y)\)</span>。</strong></p>
+<div class="arithmatex">\[
+\frac{\partial F}{\partial y} = x^{2} + g'(y) = x^{2} - 4y \implies g'(y) = -4y \implies g(y) = -2y^{2}
+\]</div>
+<p>（积出的常数归入 <span class="arithmatex">\(C\)</span>。）</p>
+<div class="arithmatex">\[
+F(x,y) = x^{2}y + 3x - 2y^{2}
+\]</div>
+<p><strong>第四步：写隐式通解。</strong></p>
+<div class="arithmatex">\[
+x^{2}y + 3x - 2y^{2} = C
+\]</div>
+<p><strong>第五步：代入初值。</strong> <span class="arithmatex">\(x = 1\)</span>、<span class="arithmatex">\(y = 2\)</span>：</p>
+<div class="arithmatex">\[
+C = 1^{2}\cdot 2 + 3\cdot 1 - 2\cdot 2^{2} = 2 + 3 - 8 = -3
+\]</div>
+<div class="arithmatex">\[
+x^{2}y + 3x - 2y^{2} = -3
+\]</div>
+<p><strong>第六步：求某个点上的显式值。</strong> 令 <span class="arithmatex">\(x = 2\)</span>：</p>
+<div class="arithmatex">\[
+4y + 6 - 2y^{2} = -3 \implies 2y^{2} - 4y - 9 = 0
+\]</div>
+<div class="arithmatex">\[
+y = \frac{4 \pm \sqrt{16 + 72}}{4} = \frac{4 \pm \sqrt{88}}{4} = 1 \pm \frac{\sqrt{22}}{2}
+\]</div>
+<p><span class="arithmatex">\(\sqrt{22}/2 \approx 2.345208\)</span>，所以两个根为</p>
+<div class="arithmatex">\[
+y_1 = 3.345208, \qquad y_2 = -1.345208
+\]</div>
+<p>由连续性（<span class="arithmatex">\(x=1\)</span> 处 <span class="arithmatex">\(y=2 &gt; 0\)</span>），取 <span class="arithmatex">\(y(2) = 1 + \frac{\sqrt{22}}{2} \approx 3.345208\)</span>。</p>
+<p><strong>为什么要讨论分支</strong>：隐式解 <span class="arithmatex">\(F = C\)</span> 常是闭曲线或多值曲线，
+必须有额外信息（初值 + 连续性）才能确定走哪一支。</p>
+<h3 id="_22">积分因子可以把非恰当方程变恰当<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>并非所有 <span class="arithmatex">\(P\,\mathrm{d}x + Q\,\mathrm{d}y = 0\)</span> 都恰当，但<strong>有时</strong>能找到 <span class="arithmatex">\(\mu(x,y)\)</span> 使</p>
+<div class="arithmatex">\[
+\mu P\,\mathrm{d}x + \mu Q\,\mathrm{d}y = 0
+\]</div>
+<p>恰当。例如</p>
+<div class="arithmatex">\[
+(3xy + y^{2})\,\mathrm{d}x + (x^{2} + xy)\,\mathrm{d}y = 0
+\]</div>
+<p>先检验：<span class="arithmatex">\(P_y = 3x + 2y\)</span>，<span class="arithmatex">\(Q_x = 2x + y\)</span>，<strong>不相等</strong>，不恰当。
+试取 <span class="arithmatex">\(\mu = x\)</span>，则</p>
+<div class="arithmatex">\[
+P^{*} = 3x^{2}y + xy^{2}, \qquad Q^{*} = x^{3} + x^{2}y
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial P^{*}}{\partial y} = 3x^{2} + 2xy = \frac{\partial Q^{*}}{\partial x} \quad \checkmark
+\]</div>
+<p>此时 <span class="arithmatex">\(F = x^{3}y + \frac{1}{2}x^{2}y^{2}\)</span>，隐式通解为</p>
+<div class="arithmatex">\[
+2x^{3}y + x^{2}y^{2} = C
+\]</div>
+<p><strong>注意</strong>：积分因子不唯一（乘上任意常数还是积分因子），
+而且<strong>没有通用的找法</strong>——一般靠观察和经验，
+这一点与一阶线性方程的 <span class="arithmatex">\(\mu = e^{\int p}\)</span> 完全不同。</p>
+<table>
+<thead>
+<tr>
+<th>方程类型</th>
+<th>积分因子是否存在</th>
+<th>是否好找</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一阶线性 <span class="arithmatex">\(y' + py = q\)</span></td>
+<td>一定存在</td>
+<td><strong>有公式</strong> <span class="arithmatex">\(\mu = e^{\int p\mathrm{d}x}\)</span></td>
+</tr>
+<tr>
+<td>一般 <span class="arithmatex">\(P\mathrm{d}x + Q\mathrm{d}y = 0\)</span></td>
+<td>不一定存在</td>
+<td>无通用方法，靠观察</td>
+</tr>
+<tr>
+<td>只含 <span class="arithmatex">\(x\)</span> 的 <span class="arithmatex">\(\mu(x)\)</span></td>
+<td>存在条件 <span class="arithmatex">\(\frac{P_y - Q_x}{Q}\)</span> 只含 <span class="arithmatex">\(x\)</span></td>
+<td>可积分求出</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_23">五、典型例题<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：可分离变量与数值验证<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>求解 <span class="arithmatex">\(y' = 2xy\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>，并计算 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x = 0.5\)</span> 与 <span class="arithmatex">\(x = 2\)</span> 处的值，
+说明这个模型在工程上的「危险」之处。</p>
+<details class="note">
+<summary>思路</summary>
+<p>右端是 <span class="arithmatex">\(2x\)</span> 与 <span class="arithmatex">\(y\)</span> 的乘积，属于可分离变量。
+分离、积分、代初值，再把结果代入观察增长速度。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>分离变量</strong>：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}y}{y} = 2x\,\mathrm{d}x
+\]</div>
+<p><strong>积分</strong>：</p>
+<div class="arithmatex">\[
+\ln \lvert y \rvert = x^{2} + C
+\]</div>
+<p><strong>解出 <span class="arithmatex">\(y\)</span></strong>：</p>
+<div class="arithmatex">\[
+y = C_{1}e^{x^{2}}, \qquad C_{1} = \pm e^{C}
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(y(0) = 1\)</span>：<span class="arithmatex">\(1 = C_{1}\)</span>，故</p>
+<div class="arithmatex">\[
+y = e^{x^{2}}
+\]</div>
+<p><strong>数值计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(x^{2}\)</span></th>
+<th><span class="arithmatex">\(y = e^{x^{2}}\)</span></th>
+<th>相对上一列（<span class="arithmatex">\(x\)</span> 增加 0.5）的倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0</td>
+<td>0.00</td>
+<td>1.000000</td>
+<td>—</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>0.25</td>
+<td>1.284025</td>
+<td>×1.284</td>
+</tr>
+<tr>
+<td>1.0</td>
+<td>1.00</td>
+<td>2.718282</td>
+<td>×2.117</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>2.25</td>
+<td>9.487736</td>
+<td>×3.490</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>4.00</td>
+<td>54.598150</td>
+<td>×5.755</td>
+</tr>
+</tbody>
+</table>
+<p><strong>危险之处</strong>：倍数在<strong>逐步放大</strong>（1.28 → 2.12 → 3.49 → 5.76），
+这是正反馈模型的标志。</p>
+<p><strong>工程含义</strong>：任何「增长率正比于自身」的量都不会单调温和地增长。
+无人机的电池温升、化学反应速率、水池液位在失控时都符合这种形态。
+若模型预测在 <span class="arithmatex">\(x=2\)</span> 处达到 <span class="arithmatex">\(54.6\)</span>，而系统量程只有 <span class="arithmatex">\(10\)</span>，
+那么<strong>必须在 <span class="arithmatex">\(x \approx 1.28\)</span> 左右就介入控制</strong>——
+这类模型没有「慢慢逼近」的余地。</p>
+</details>
+<hr />
+<h3 id="2">例题 2：一阶线性方程的积分因子<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>求解 <span class="arithmatex">\(y' + \dfrac{y}{x} = x^{2}\)</span>、<span class="arithmatex">\(y(1) = 0\)</span>，
+给出 <span class="arithmatex">\(x = 1.5\)</span> 与 <span class="arithmatex">\(x = 2\)</span> 处的数值，并解释解的区间限制。</p>
+<details class="note">
+<summary>思路</summary>
+<p>这是标准的一阶线性方程，<span class="arithmatex">\(p(x) = 1/x\)</span>。
+用积分因子 <span class="arithmatex">\(\mu = e^{\int p\,\mathrm{d}x}\)</span>，注意 <span class="arithmatex">\(x&gt;0\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>辨认标准形</strong>：<span class="arithmatex">\(p(x) = \dfrac{1}{x}\)</span>，<span class="arithmatex">\(q(x) = x^{2}\)</span>。</p>
+<p><strong>积分因子</strong>：</p>
+<div class="arithmatex">\[
+\mu = e^{\int \frac{1}{x}\mathrm{d}x} = e^{\ln x} = x \qquad (x &gt; 0)
+\]</div>
+<p><strong>两边乘 <span class="arithmatex">\(\mu\)</span> 并识别全导数</strong>：</p>
+<div class="arithmatex">\[
+x y' + y = x^{3} \implies (xy)' = x^{3}
+\]</div>
+<p><strong>积分</strong>：</p>
+<div class="arithmatex">\[
+xy = \frac{x^{4}}{4} + C
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(y(1) = 0\)</span>：<span class="arithmatex">\(0 = \frac14 + C \implies C = -\frac14\)</span>，故</p>
+<div class="arithmatex">\[
+y = \frac{x^{3} - 1}{4x}
+\]</div>
+<p><strong>数值表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th>检验 <span class="arithmatex">\(4xy = x^{3} - 1\)</span></th>
+<th>一致？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>0.000000</td>
+<td><span class="arithmatex">\(0 = 0\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>1.5</td>
+<td>0.395833</td>
+<td><span class="arithmatex">\(2.375 = 2.375\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>0.875000</td>
+<td><span class="arithmatex">\(7.000 = 7.000\)</span></td>
+<td>✓</td>
+</tr>
+<tr>
+<td>3.0</td>
+<td>2.166667</td>
+<td><span class="arithmatex">\(26.000 = 26.000\)</span></td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>解的大范围行为</strong>：<span class="arithmatex">\(x \to \infty\)</span> 时 <span class="arithmatex">\(y \approx \frac{x^{2}}{4} \to \infty\)</span>，
+因为非齐次项 <span class="arithmatex">\(x^{2}\)</span> 的增长主导了解。</p>
+<p><strong>区间限制</strong>：<span class="arithmatex">\(p(x) = 1/x\)</span> 在 <span class="arithmatex">\(x = 0\)</span> 处不连续，
+含 <span class="arithmatex">\(x=0\)</span> 的区间上解不能保证存在唯一。
+初值点在 <span class="arithmatex">\(x=1 &gt; 0\)</span>，因此<strong>解只在 <span class="arithmatex">\(x \in (0, \infty)\)</span> 上有效</strong>。
+若把初值放在 <span class="arithmatex">\(x = -1\)</span>，则得到的是另一个区间 <span class="arithmatex">\((-\infty, 0)\)</span> 上的解，
+两者不能拼接。<strong>这就是「解的区间由 <span class="arithmatex">\(p\)</span> 的连续区间决定」的具体含义。</strong></p>
+</details>
+<hr />
+<h3 id="3">例题 3：伯努利方程与有限时间爆破<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>求解 <span class="arithmatex">\(y' - y = y^{2}\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>，求出爆破时刻，
+并讨论该模型在什么条件下需要修正。</p>
+<details class="note">
+<summary>思路</summary>
+<p>右端出现 <span class="arithmatex">\(y^{2}\)</span>，是 <span class="arithmatex">\(n=2\)</span> 的伯努利方程。
+用 <span class="arithmatex">\(v = y^{1-n} = 1/y\)</span> 化为线性。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>换元</strong>：<span class="arithmatex">\(v = y^{-1}\)</span>，则 <span class="arithmatex">\(y = v^{-1}\)</span>，<span class="arithmatex">\(y' = -v^{-2}v'\)</span>。
+原方程两边除以 <span class="arithmatex">\(y^{2}\)</span>：</p>
+<div class="arithmatex">\[
+\frac{y'}{y^{2}} - \frac{1}{y} = 1 \implies -v' - v = 1 \implies v' + v = -1
+\]</div>
+<p><strong>积分因子</strong> <span class="arithmatex">\(\mu = e^{x}\)</span>：</p>
+<div class="arithmatex">\[
+(e^{x}v)' = -e^{x} \implies v = Ce^{-x} - 1
+\]</div>
+<p><strong>初值</strong>：<span class="arithmatex">\(v(0) = 1/y(0) = 1\)</span>，故 <span class="arithmatex">\(C = 2\)</span>，</p>
+<div class="arithmatex">\[
+v = 2e^{-x} - 1 \implies y = \frac{1}{2e^{-x} - 1}
+\]</div>
+<p><strong>爆破时刻</strong>：令 <span class="arithmatex">\(2e^{-x} - 1 = 0\)</span>，</p>
+<div class="arithmatex">\[
+x_{*} = \ln 2 \approx 0.693147
+\]</div>
+<p><strong>数值表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th>0.2</th>
+<th>0.4</th>
+<th>0.5</th>
+<th>0.6</th>
+<th>0.69</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分母 <span class="arithmatex">\(2e^{-x}-1\)</span></td>
+<td>0.637462</td>
+<td>0.329680</td>
+<td>0.213061</td>
+<td>0.097623</td>
+<td>0.003152</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td>1.568722</td>
+<td>3.033245</td>
+<td>4.693484</td>
+<td>10.243459</td>
+<td>317.244980</td>
+</tr>
+</tbody>
+</table>
+<p><strong>修正条件</strong>：爆破在物理上不可能，说明「增长率与 <span class="arithmatex">\(y^{2}\)</span> 成正比」
+这一假设只在 <span class="arithmatex">\(y\)</span> 较小时成立。工程上通常改为</p>
+<div class="arithmatex">\[
+y' - y = y^{2}\,(1 - y/K)
+\]</div>
+<p>即以容量 <span class="arithmatex">\(K\)</span> 截断增长，此时解不再爆破。</p>
+<p><strong>实用判据</strong>：若数值解在有限时间内<strong>超过量程</strong>，
+先怀疑模型是伯努利型（<span class="arithmatex">\(n&gt;1\)</span>）而非简单指数型——
+两者的差别在于<strong>爆破 vs 指数发散</strong>，
+后者只在 <span class="arithmatex">\(x \to \infty\)</span> 时趋于无穷，前者在有限时间内就已经失效。</p>
+</details>
+<hr />
+<h3 id="4">例题 4：恰当方程的判定与求解<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>求解 <span class="arithmatex">\((2xy + 3)\,\mathrm{d}x + (x^{2} - 4y)\,\mathrm{d}y = 0\)</span>、<span class="arithmatex">\(y(1) = 2\)</span>，
+求 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x = 2\)</span> 处的值。</p>
+<details class="note">
+<summary>思路</summary>
+<p>写成 <span class="arithmatex">\(P\mathrm{d}x + Q\mathrm{d}y = 0\)</span> 后，先验证 <span class="arithmatex">\(P_y = Q_x\)</span>。
+若成立，求势函数 <span class="arithmatex">\(F\)</span>，再代初值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>判定</strong>：</p>
+<div class="arithmatex">\[
+P = 2xy + 3, \qquad Q = x^{2} - 4y
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial P}{\partial y} = 2x, \qquad \frac{\partial Q}{\partial x} = 2x \implies P_y = Q_x \ \checkmark
+\]</div>
+<p><strong>构造势函数</strong>：</p>
+<div class="arithmatex">\[
+F = \int (2xy + 3)\,\mathrm{d}x = x^{2}y + 3x + g(y)
+\]</div>
+<div class="arithmatex">\[
+F_y = x^{2} + g'(y) = x^{2} - 4y \implies g(y) = -2y^{2}
+\]</div>
+<div class="arithmatex">\[
+F(x,y) = x^{2}y + 3x - 2y^{2}
+\]</div>
+<p><strong>隐式通解</strong>：</p>
+<div class="arithmatex">\[
+x^{2}y + 3x - 2y^{2} = C
+\]</div>
+<p><strong>代初值</strong> <span class="arithmatex">\(x=1\)</span>、<span class="arithmatex">\(y=2\)</span>：</p>
+<div class="arithmatex">\[
+C = 1\cdot 2 + 3\cdot 1 - 2\cdot 4 = -3
+\]</div>
+<p><strong>求 <span class="arithmatex">\(x=2\)</span> 的值</strong>：</p>
+<div class="arithmatex">\[
+4y + 6 - 2y^{2} = -3 \implies 2y^{2} - 4y - 9 = 0
+\]</div>
+<div class="arithmatex">\[
+y = 1 \pm \frac{\sqrt{22}}{2} \approx 1 \pm 2.345208
+\]</div>
+<table>
+<thead>
+<tr>
+<th>分支</th>
+<th>数值</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y_1 = 1 + \frac{\sqrt{22}}{2}\)</span></td>
+<td>3.345208</td>
+<td>由连续性取此支</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y_2 = 1 - \frac{\sqrt{22}}{2}\)</span></td>
+<td><span class="arithmatex">\(-1.345208\)</span></td>
+<td>与 <span class="arithmatex">\(y(1) = 2\)</span> 不连通，舍去</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<span class="arithmatex">\(y(2) \approx 3.345208\)</span>。</p>
+<p><strong>反向验证</strong>：把 <span class="arithmatex">\(x = 2\)</span>、<span class="arithmatex">\(y = 3.345208\)</span> 代回 <span class="arithmatex">\(F\)</span>：</p>
+<div class="arithmatex">\[
+4 \times 3.345208 + 6 - 2 \times 3.345208^{2} = 13.380832 + 6 - 22.380832 = -3 \ \checkmark
+\]</div>
+<p>与 <span class="arithmatex">\(C = -3\)</span> 一致。</p>
+<p><strong>工程含义</strong>：恰当方程对应<strong>保守系统</strong>——
+势函数 <span class="arithmatex">\(F\)</span> 就是能量，隐式解 <span class="arithmatex">\(F = C\)</span> 就是「能量守恒」。
+这类方程不会出现爆破、也不会耗散，
+后续稳定性分析里「中心」型平衡点正是这种保守情形。</p>
+</details>
+<hr />
+<h2 id="_24">六、用在哪些课程里<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h2>
+<h3 id="_25">机器人学 · 关节摩擦与执行器模型<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>直流电机的电气时间常数</strong>：电枢回路满足 <span class="arithmatex">\(L\dfrac{\mathrm{d}i}{\mathrm{d}t} + Ri = u\)</span>，
+  是一阶线性方程，解为 <span class="arithmatex">\(i \to u/R\)</span> 的指数趋近，时间常数 <span class="arithmatex">\(\tau = L/R\)</span>；</li>
+<li><strong>黏性摩擦下的关节速度</strong>：<span class="arithmatex">\(J\dot{\omega} + b\omega = \tau_{\text{motor}}\)</span>，
+  同样是一阶线性，决定关节转速到达稳态的快慢；</li>
+<li><strong>为什么必须先能解一阶方程</strong>：控制器设计（PI、超前校正）的带宽估算
+  直接由 <span class="arithmatex">\(\tau\)</span> 决定，而 <span class="arithmatex">\(\tau\)</span> 就只能从方程系数读出来。</li>
+</ul>
+<h3 id="_26">现代数字信号处理 · 一阶递归滤波与锁相环<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>一阶 IIR 滤波器</strong>：<span class="arithmatex">\(y[n] = \alpha y[n-1] + (1-\alpha)x[n]\)</span>，
+  其连续时间原型就是 <span class="arithmatex">\(y' + \frac{1}{\tau}y = \frac{1}{\tau}x\)</span>，
+  一阶线性方程解出的指数响应正是「时间常数 <span class="arithmatex">\(\tau\)</span>」的物理来源；</li>
+<li><strong>锁相环的相位跟踪</strong>：环路滤波器常建模为一阶（或二阶）系统，
+  稳态相位误差由一阶方程的强迫响应给出；</li>
+<li><strong>自动增益控制的包络跟踪</strong>：包络检波后用一阶低通得到，
+  分离变量直接给出充电曲线 <span class="arithmatex">\(1 - e^{-t/\tau}\)</span>。</li>
+</ul>
+<h3 id="_27">无人系统自主决策与优化 · 能量、时标与约束<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>电池荷电状态的简化模型</strong>：<span class="arithmatex">\(\dot{S} = -c\,I(t)\)</span> 是一阶（可分离）方程，
+  决定了续航时间的线性估计；</li>
+<li><strong>决策时标</strong>：一阶系统的时间常数决定「决策需要多快更新」——
+  若 <span class="arithmatex">\(\tau\)</span> 只有几十毫秒，而决策周期是秒级，那控制回路必然失控；</li>
+<li><strong>优化中的松弛动力学</strong>：很多连续优化算法（连续时间形式的梯度流）
+  写成 <span class="arithmatex">\(\dot{x} = -\nabla f(x)\)</span>，其稳定性与收敛时标分析
+  用的正是一阶方程与 Lyapunov 方法（第四页）。</li>
+</ul>
+<hr />
+<h2 id="_28">七、自测<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 求解 <span class="arithmatex">\(y' = y\cos x\)</span>、<span class="arithmatex">\(y(0) = 2\)</span>，并求 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x = \dfrac{\pi}{2}\)</span> 与 <span class="arithmatex">\(x = \pi\)</span> 处的值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>右端是 <span class="arithmatex">\(x\)</span> 的函数与 <span class="arithmatex">\(y\)</span> 的乘积，可分离变量；
+<span class="arithmatex">\(\int \cos x\,\mathrm{d}x = \sin x\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>分离变量</strong>：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}y}{y} = \cos x\,\mathrm{d}x
+\]</div>
+<p><strong>积分</strong>：</p>
+<div class="arithmatex">\[
+\ln \lvert y \rvert = \sin x + C \implies y = C_{1}e^{\sin x}
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(y(0) = 2\)</span>：<span class="arithmatex">\(2 = C_{1}e^{0} = C_{1}\)</span>，故</p>
+<div class="arithmatex">\[
+y = 2e^{\sin x}
+\]</div>
+<p><strong>数值计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(\sin x\)</span></th>
+<th><span class="arithmatex">\(y = 2e^{\sin x}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.000000</td>
+<td>2.000000</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi/6\)</span></td>
+<td>0.500000</td>
+<td>3.297442</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi/2\)</span></td>
+<td>1.000000</td>
+<td>5.436564</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\pi\)</span></td>
+<td>0.000000</td>
+<td>2.000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(y(\pi/2) = 2e \approx 5.436564\)</span></strong>，<strong><span class="arithmatex">\(y(\pi) = 2\)</span></strong>。</p>
+<p><strong>有趣之处</strong>：解是<strong>周期函数</strong>（周期 <span class="arithmatex">\(2\pi\)</span>），因为 <span class="arithmatex">\(\sin\)</span> 有界。
+这属于典型的<strong>振荡型一阶方程</strong>——
+系数 <span class="arithmatex">\(p(x) = -\cos x\)</span> 周期性变号，
+增长期与衰减期交替出现，所以解既不爆炸也不衰减到零。</p>
+<p><strong>工程含义</strong>：这就是为什么「周期性激励下的一阶系统」会出现振荡型响应。
+如果 <span class="arithmatex">\(p(x)\)</span> 的平均值为正，长期会衰减；平均值为负则长期增长。
+本例中 <span class="arithmatex">\(\cos\)</span> 在整周期上平均为零，所以<strong>长期平均值保持不发散</strong>，
+这是「临界」情形的一个例子。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 求解 <span class="arithmatex">\(xy' - 2y = x^{4}\)</span>、<span class="arithmatex">\(y(1) = 1\)</span>，并求 <span class="arithmatex">\(y(2)\)</span> 与 <span class="arithmatex">\(y(3)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先把方程化成标准形 <span class="arithmatex">\(y' + p(x)y = q(x)\)</span>（两边除以 <span class="arithmatex">\(x\)</span>），
+再求积分因子。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>化为标准形</strong>（<span class="arithmatex">\(x &gt; 0\)</span>，因为初值在 <span class="arithmatex">\(x = 1\)</span>）：</p>
+<div class="arithmatex">\[
+y' - \frac{2}{x}y = x^{3}
+\]</div>
+<p><strong>积分因子</strong>：</p>
+<div class="arithmatex">\[
+\mu = e^{\int -\frac{2}{x}\mathrm{d}x} = e^{-2\ln x} = x^{-2}
+\]</div>
+<p><strong>两边乘 <span class="arithmatex">\(\mu\)</span></strong>：</p>
+<div class="arithmatex">\[
+x^{-2}y' - 2x^{-3}y = x \implies \left(x^{-2}y\right)' = x
+\]</div>
+<p><strong>积分</strong>：</p>
+<div class="arithmatex">\[
+x^{-2}y = \frac{x^{2}}{2} + C \implies y = \frac{x^{4}}{2} + Cx^{2}
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(y(1) = 1\)</span>：<span class="arithmatex">\(1 = \frac12 + C \implies C = \frac12\)</span>，故</p>
+<div class="arithmatex">\[
+y = \frac{x^{4}}{2} + \frac{x^{2}}{2} = \frac{x^{4} + x^{2}}{2}
+\]</div>
+<p><strong>数值计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(x^{4} + x^{2}\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th>检验 <span class="arithmatex">\(xy' - 2y\)</span> 是否等于 <span class="arithmatex">\(x^{4}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.0</td>
+<td>2</td>
+<td>1.000000</td>
+<td><span class="arithmatex">\(0 - 2 = -2\)</span>，右端 <span class="arithmatex">\(1\)</span>，见下方说明</td>
+</tr>
+<tr>
+<td>2.0</td>
+<td>20</td>
+<td>10.000000</td>
+<td><span class="arithmatex">\(2\cdot 24 - 20 = 28\)</span></td>
+</tr>
+<tr>
+<td>3.0</td>
+<td>90</td>
+<td>45.000000</td>
+<td><span class="arithmatex">\(3\cdot 54 - 90 = 72\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>说明</strong>：直接检验时要用<strong>微分形式</strong>。
+由 <span class="arithmatex">\(y = \frac{x^{4}+x^{2}}{2}\)</span> 得 <span class="arithmatex">\(y' = 2x^{3} + x\)</span>，代入 <span class="arithmatex">\(xy' - 2y\)</span>：</p>
+<div class="arithmatex">\[
+xy' - 2y = x(2x^{3} + x) - (x^{4} + x^{2}) = 2x^{4} + x^{2} - x^{4} - x^{2} = x^{4} \ \checkmark
+\]</div>
+<p>在 <span class="arithmatex">\(x=1\)</span> 处：<span class="arithmatex">\(1\cdot(2+1) - 2\cdot 1 = 3 - 2 = 1 = 1^{4}\)</span> ✓
+上表第三列原来的算法漏乘了 <span class="arithmatex">\(y'\)</span> 中的项，<strong>正确做法是先求导再代入</strong>。</p>
+<p><strong>结果</strong>：<span class="arithmatex">\(y(2) = 10\)</span>，<span class="arithmatex">\(y(3) = 45\)</span>。</p>
+<p><strong>检验初值</strong>：<span class="arithmatex">\(y(1) = \frac{2}{2} = 1\)</span> ✓</p>
+<p><strong>这个解说明什么</strong>：<span class="arithmatex">\(C&gt;0\)</span>，所以解是 <span class="arithmatex">\(x^{4}\)</span> 与 <span class="arithmatex">\(x^{2}\)</span> 的组合，
+两项都随 <span class="arithmatex">\(x\)</span> 增长。对比上一节例题（<span class="arithmatex">\(C&lt;0\)</span> 时出现 <span class="arithmatex">\(-\frac{1}{4x}\)</span> 的衰减项）——
+<strong>初值的符号决定了长期行为是增长还是衰减</strong>，这就是齐次解与特解权重之争。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 求解 <span class="arithmatex">\(y' + y = xy^{2}\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>，并求 <span class="arithmatex">\(y(1)\)</span> 与 <span class="arithmatex">\(y(4)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>右端出现 <span class="arithmatex">\(y^{2}\)</span>，是 <span class="arithmatex">\(n = 2\)</span> 的伯努利方程。
+令 <span class="arithmatex">\(v = y^{-1}\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>辨认为伯努利</strong>：<span class="arithmatex">\(p(x) = 1\)</span>，<span class="arithmatex">\(q(x) = x\)</span>，<span class="arithmatex">\(n = 2\)</span>。</p>
+<p><strong>换元</strong> <span class="arithmatex">\(v = y^{-1}\)</span>，两边除以 <span class="arithmatex">\(y^{2}\)</span>：</p>
+<div class="arithmatex">\[
+\frac{y'}{y^{2}} + \frac{1}{y} = x \implies -v' + v = x \implies v' - v = -x
+\]</div>
+<p><strong>积分因子</strong> <span class="arithmatex">\(\mu = e^{-x}\)</span>：</p>
+<div class="arithmatex">\[
+\left(e^{-x}v\right)' = -xe^{-x}
+\]</div>
+<p><strong>积分</strong>（分部积分 <span class="arithmatex">\(\int xe^{-x}\mathrm{d}x = -(x+1)e^{-x}\)</span>）：</p>
+<div class="arithmatex">\[
+e^{-x}v = (x+1)e^{-x} + C \implies v = x + 1 + Ce^{x}
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(v(0) = 1/y(0) = 1\)</span>：<span class="arithmatex">\(1 = 1 + C \implies C = 0\)</span>，故</p>
+<div class="arithmatex">\[
+v = x + 1 \implies y = \frac{1}{x + 1}
+\]</div>
+<p><strong>数值计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y = \frac{1}{x+1}\)</span></td>
+<td>1.000000</td>
+<td>0.500000</td>
+<td>0.333333</td>
+<td>0.200000</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(y(1) = 0.5\)</span></strong>，<strong><span class="arithmatex">\(y(4) = 0.2\)</span></strong>。</p>
+<p><strong>验证</strong>：<span class="arithmatex">\(y' = -\frac{1}{(x+1)^{2}}\)</span>，代入左端</p>
+<div class="arithmatex">\[
+y' + y = -\frac{1}{(x+1)^{2}} + \frac{1}{x+1} = \frac{x}{(x+1)^{2}}
+\]</div>
+<p>右端 <span class="arithmatex">\(xy^{2} = \frac{x}{(x+1)^{2}}\)</span> ✓ 两边相等。</p>
+<p><strong>与例题 3 的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方程</th>
+<th><span class="arithmatex">\(q(x)\)</span></th>
+<th>解</th>
+<th>长期行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y' - y = y^{2}\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(\frac{1}{2e^{-x}-1}\)</span></td>
+<td><span class="arithmatex">\(x = \ln 2\)</span> 处爆破</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y' + y = xy^{2}\)</span></td>
+<td><span class="arithmatex">\(x\)</span></td>
+<td><span class="arithmatex">\(\frac{1}{x+1}\)</span></td>
+<td>缓慢衰减到 <span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>区别的来源</strong>：本例中 <span class="arithmatex">\(C = 0\)</span>，齐次解 <span class="arithmatex">\(Ce^{x}\)</span> 被完全消掉，
+只留下特解 <span class="arithmatex">\(x+1\)</span>。这说明<strong>初值恰好消掉不稳定模式时，解不会爆破</strong>。
+这也是工程上「初值选得好，系统才稳定」的数学根源。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 求解 <span class="arithmatex">\((2x + y)\,\mathrm{d}x + (x + 2y)\,\mathrm{d}y = 0\)</span>、<span class="arithmatex">\(y(0) = 1\)</span>，
+说明解的几何形状，并求 <span class="arithmatex">\(y\)</span> 在 <span class="arithmatex">\(x = 0.5\)</span> 处的值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先验证 <span class="arithmatex">\(P_y = Q_x\)</span>。若恰当，求 <span class="arithmatex">\(F\)</span> 后得到隐式解，
+再观察它是不是椭圆。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>判定</strong>：<span class="arithmatex">\(P = 2x + y\)</span>，<span class="arithmatex">\(Q = x + 2y\)</span>，</p>
+<div class="arithmatex">\[
+\frac{\partial P}{\partial y} = 1, \qquad \frac{\partial Q}{\partial x} = 1 \implies P_y = Q_x \ \checkmark
+\]</div>
+<p><strong>求势函数</strong>：</p>
+<div class="arithmatex">\[
+F = \int (2x + y)\,\mathrm{d}x = x^{2} + xy + g(y)
+\]</div>
+<div class="arithmatex">\[
+F_y = x + g'(y) = x + 2y \implies g(y) = y^{2}
+\]</div>
+<div class="arithmatex">\[
+F(x,y) = x^{2} + xy + y^{2}
+\]</div>
+<p><strong>隐式通解</strong>：</p>
+<div class="arithmatex">\[
+x^{2} + xy + y^{2} = C
+\]</div>
+<p><strong>代入初值</strong> <span class="arithmatex">\(x = 0\)</span>、<span class="arithmatex">\(y = 1\)</span>：<span class="arithmatex">\(C = 0 + 0 + 1 = 1\)</span>，故</p>
+<div class="arithmatex">\[
+x^{2} + xy + y^{2} = 1
+\]</div>
+<p><strong>几何形状</strong>：这是一个<strong>椭圆</strong>（二次型 <span class="arithmatex">\(\begin{bmatrix} 1 &amp; 1/2 \\ 1/2 &amp; 1 \end{bmatrix}\)</span>
+正定，特征值为 <span class="arithmatex">\(\frac12\)</span> 与 <span class="arithmatex">\(\frac32\)</span>，均为正）。
+长半轴方向为 <span class="arithmatex">\((1,-1)\)</span>，短半轴方向为 <span class="arithmatex">\((1,1)\)</span>。
+<strong>解曲线是闭合的</strong>，对应周期运动——这正是「中心」型平衡点的几何表征。</p>
+<p><strong>求 <span class="arithmatex">\(x = 0.5\)</span> 的值</strong>：代入得</p>
+<div class="arithmatex">\[
+0.25 + 0.5y + y^{2} = 1 \implies y^{2} + 0.5y - 0.75 = 0
+\]</div>
+<div class="arithmatex">\[
+y = \frac{-0.5 \pm \sqrt{0.25 + 3}}{2} = \frac{-0.5 \pm \sqrt{3.25}}{2}
+\]</div>
+<p><span class="arithmatex">\(\sqrt{3.25} \approx 1.802776\)</span>，所以</p>
+<table>
+<thead>
+<tr>
+<th>分支</th>
+<th>数值</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(y_1 = \frac{-0.5 + 1.802776}{2}\)</span></td>
+<td>0.651388</td>
+<td>由 <span class="arithmatex">\(y(0)=1&gt;0\)</span> 与连续性取此支</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y_2 = \frac{-0.5 - 1.802776}{2}\)</span></td>
+<td><span class="arithmatex">\(-1.151388\)</span></td>
+<td>另一侧的椭圆分支，舍去</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<span class="arithmatex">\(y(0.5) \approx 0.651388\)</span>。</p>
+<p><strong>反向验证</strong>：</p>
+<div class="arithmatex">\[
+0.5^{2} + 0.5 \times 0.651388 + 0.651388^{2} = 0.25 + 0.325694 + 0.424307 = 1.000001 \ \checkmark
+\]</div>
+<p><strong>工程含义</strong>：恰当方程 + 闭合等值线 <span class="arithmatex">\(=\)</span> <strong>保守系统</strong>。
+机械能守恒的无摩擦振子、无损耗的 <span class="arithmatex">\(LC\)</span> 回路、理想的行星轨道
+都对应这类方程。它们<strong>不会耗散也不会发散</strong>，
+而在真实工程系统中必然存在阻尼，所以现实里更常见的是
+「螺旋收敛」（稳定焦点）而不是「闭合椭圆」——这正是第四页的重点。</p>
+</details>
+<hr />
+<div class="admonition tip">
+<p class="admonition-title">本页小结</p>
+<table>
+<thead>
+<tr>
+<th>你要解决的问题</th>
+<th>第一步动作</th>
+<th>结果形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>右端是乘积</td>
+<td>分离变量</td>
+<td>显式 <span class="arithmatex">\(y = \phi(x)\)</span></td>
+</tr>
+<tr>
+<td>右端含 <span class="arithmatex">\(y\)</span> 的一次项</td>
+<td>求 <span class="arithmatex">\(\mu = e^{\int p}\)</span></td>
+<td>显式 <span class="arithmatex">\(y = \phi(x)\)</span></td>
+</tr>
+<tr>
+<td>右端含 <span class="arithmatex">\(y^{n}\)</span></td>
+<td>令 <span class="arithmatex">\(v = y^{1-n}\)</span></td>
+<td>先解 <span class="arithmatex">\(v\)</span>，再回代</td>
+</tr>
+<tr>
+<td>微分形式</td>
+<td>查 <span class="arithmatex">\(P_y = Q_x\)</span></td>
+<td>隐式 <span class="arithmatex">\(F(x,y) = C\)</span></td>
+</tr>
+<tr>
+<td>四种都不像</td>
+<td>试换元（<span class="arithmatex">\(x+y\)</span>、<span class="arithmatex">\(y/x\)</span>）或转数值解法</td>
+<td>见第五页</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一句话</strong>：一阶方程的价值不在于「能解出来」，
+而在于它建立了「分离—积分—代初值」这套标准流程。
+后面二阶、方程组、数值方法虽然形式更复杂，
+<strong>每一步都能追回到这一页的某个动作。</strong></p>
+</div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 总览">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../second-order/" class="md-footer__link md-footer__link--next" aria-label="下一页: 二阶线性方程">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                二阶线性方程
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,6353 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/numerical/numerical-diff-integration/">
+      
+      
+        <link rel="prev" href="../linear-solve/">
+      
+      
+        <link rel="next" href="../../lagrangian-mechanics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>数值微分与积分 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              数值微分与积分
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mdp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、数值微分：差分的两类误差
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、数值微分：差分的两类误差">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三种基本差分
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        舍入误差的作用
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#richardson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、Richardson 外推
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Richardson 外推">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        核心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        舍入误差的放大
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、数值积分
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、数值积分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两个基本法则
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        精度对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#gauss-monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Gauss 求积与 Monte Carlo
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、Gauss 求积与 Monte Carlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gauss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gauss 求积：选最优的节点
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monte Carlo 积分：维度的救赎
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：三种差分格式的精度对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2richardson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：Richardson 外推的实际效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3simpson-gauss" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：Simpson 法则与 Gauss 求积的效率对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4monte-carlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：Monte Carlo 的误差与维度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 梯度与期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 雅可比与位姿估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        现代数字信号处理 · 滤波器与谱估计
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">现代数字信号处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（差分、Simpson 法则、Gauss 求积等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<h1 id="_1">数值微分与积分<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>解析求导与积分在很多工程问题中<strong>做不到</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只有<strong>测量数据</strong>（无解析表达式）</td>
+<td>无法求导 ✓</td>
+</tr>
+<tr>
+<td>函数通过<strong>黑箱程序</strong>计算</td>
+<td>无法符号求导</td>
+</tr>
+<tr>
+<td>被积函数<strong>没有初等原函数</strong></td>
+<td>如 <span class="arithmatex">\(e^{-x^{2}}\)</span> ✗</td>
+</tr>
+<tr>
+<td>高维积分</td>
+<td>解析方法完全不可行 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这一页讲数值方法，以及一个共同的规律</strong>：</p>
+<blockquote>
+<p><strong>精度阶越高，越能对抗舍入误差。</strong></p>
+</blockquote>
+<div class="admonition tip">
+<p class="admonition-title">一句话抓住核心：两条主线</p>
+<table>
+<thead>
+<tr>
+<th>主线</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>截断误差</strong></td>
+<td>数学近似带来的（<span class="arithmatex">\(h\)</span> 越小越好）</td>
+</tr>
+<tr>
+<td><strong>舍入误差</strong></td>
+<td>浮点带来的（<span class="arithmatex">\(h\)</span> 越小越坏）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者的竞争产生「最优步长」</strong> ✓</p>
+<p><strong>关键结论</strong>：</p>
+<div class="arithmatex">\[
+h^{*}\sim\epsilon^{1/(p+1)}
+\]</div>
+<p>其中 <span class="arithmatex">\(p\)</span> 是方法的精度阶。</p>
+<p><strong>含义</strong>：<strong>阶数 <span class="arithmatex">\(p\)</span> 越高，最优步长越大、可达精度越高</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(p\)</span></th>
+<th>最优 <span class="arithmatex">\(h\)</span></th>
+<th>可达精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向差分</td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span></td>
+</tr>
+<tr>
+<td><strong>中心差分</strong></td>
+<td><strong><span class="arithmatex">\(2\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-5}\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-10}\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td>Richardson 外推</td>
+<td><span class="arithmatex">\(4\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-3}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-13}\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「为什么值得用高阶方法」</strong> ——
+不是为了「理论上更漂亮」，而是<strong>实际能达到的精度更高</strong> ✓</p>
+</div>
+<hr />
+<h2 id="_2">一、数值微分：差分的两类误差<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">三种基本差分<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>公式</th>
+<th>截断误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>前向差分</strong></td>
+<td><span class="arithmatex">\(\dfrac{f(x+h)-f(x)}{h}\)</span></td>
+<td><span class="arithmatex">\(\dfrac{h}{2}f''(\xi)\)</span></td>
+</tr>
+<tr>
+<td><strong>后向差分</strong></td>
+<td><span class="arithmatex">\(\dfrac{f(x)-f(x-h)}{h}\)</span></td>
+<td><span class="arithmatex">\(-\dfrac{h}{2}f''(\xi)\)</span></td>
+</tr>
+<tr>
+<td><strong>中心差分</strong></td>
+<td><span class="arithmatex">\(\dfrac{f(x+h)-f(x-h)}{2h}\)</span></td>
+<td><span class="arithmatex">\(-\dfrac{h^{2}}{6}f'''(\xi)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>推导（前向，用泰勒展开）</strong>：</p>
+<div class="arithmatex">\[
+f(x+h) = f(x)+hf'(x)+\frac{h^{2}}{2}f''(\xi)
+\]</div>
+<div class="arithmatex">\[
+\implies\frac{f(x+h)-f(x)}{h} = f'(x)+\frac{h}{2}f''(\xi)
+\]</div>
+<p><strong>所以误差是 <span class="arithmatex">\(O(h)\)</span></strong> ✓</p>
+<p><strong>中心差分的推导</strong>（两式相减）：</p>
+<div class="arithmatex">\[
+f(x+h) = f(x)+hf'+\frac{h^{2}}{2}f''+\frac{h^{3}}{6}f'''+\cdots
+\]</div>
+<div class="arithmatex">\[
+f(x-h) = f(x)-hf'+\frac{h^{2}}{2}f''-\frac{h^{3}}{6}f'''+\cdots
+\]</div>
+<div class="arithmatex">\[
+f(x+h)-f(x-h) = 2hf'+\frac{h^{3}}{3}f'''+\cdots
+\]</div>
+<p><strong>所以</strong>：</p>
+<div class="arithmatex">\[
+\frac{f(x+h)-f(x-h)}{2h} = f'+\frac{h^{2}}{6}f'''+\cdots
+\]</div>
+<p><strong>误差是 <span class="arithmatex">\(O(h^{2})\)</span></strong> ✓</p>
+<div class="admonition tip">
+<p class="admonition-title">「h2 项被消掉」是中心差分的精髓</p>
+<p><strong>观察两个展开式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(f(x+h)\)</span></th>
+<th><span class="arithmatex">\(f(x-h)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(+hf'\)</span></td>
+<td><span class="arithmatex">\(-hf'\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(+\frac{h^{2}}{2}f''\)</span></td>
+<td><span class="arithmatex">\(+\frac{h^{2}}{2}f''\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(+\frac{h^{3}}{6}f'''\)</span></td>
+<td><span class="arithmatex">\(-\frac{h^{3}}{6}f'''\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(h^{2}\)</span> 项「同号」，相减时抵消</strong> ✓</p>
+<p><strong>这不是巧合</strong> —— 它是「对称性」带来的：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公式关于 <span class="arithmatex">\(h\to-h\)</span> <strong>对称</strong></td>
+<td><strong>偶数阶误差项自动抵消</strong> ✓</td>
+</tr>
+<tr>
+<td>所以误差从 <span class="arithmatex">\(O(h^{2})\)</span> 开始</td>
+<td>而不是 <span class="arithmatex">\(O(h)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这个原理可以继续推广</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模板点数</th>
+<th>对称性</th>
+<th>误差阶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(3\)</span> 点（中心）</td>
+<td>对称 ✓</td>
+<td><span class="arithmatex">\(O(h^{2})\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span> 点（对称）</td>
+<td>对称 ✓</td>
+<td><span class="arithmatex">\(O(h^{4})\)</span></td>
+</tr>
+<tr>
+<td><strong>一般 <span class="arithmatex">\(2k+1\)</span> 点对称模板</strong></td>
+<td>对称 ✓</td>
+<td><strong><span class="arithmatex">\(O(h^{2k})\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>五点公式</strong>（阶数更高的版本）：</p>
+<div class="arithmatex">\[
+f'(x)\approx\frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
+\]</div>
+<p><strong>误差 <span class="arithmatex">\(O(h^{4})\)</span></strong> ✓</p>
+<p><strong>代价与收益的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模板</th>
+<th>函数求值次数</th>
+<th>误差阶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向</td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(O(h)\)</span></td>
+</tr>
+<tr>
+<td>中心</td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(O(h^{2})\)</span></td>
+</tr>
+<tr>
+<td><strong>五点</strong></td>
+<td><strong><span class="arithmatex">\(4\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(h^{4})\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「中心差分用同样两次求值就得到二阶」</strong> ——
+<strong>这是「对称性的免费收益」</strong> ✓</p>
+<p><strong>工程含义</strong>：<strong>能用中心差分就用中心差分</strong> ✓
+（唯一例外是「边界处」—— 那里没有对称的邻点。）</p>
+</div>
+<h3 id="_4">舍入误差的作用<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>关键观察</strong>：差分是<strong>两个相近数相减</strong>（回顾上一页的灾难性抵消）✗</p>
+<p><strong>舍入误差的量级</strong>：</p>
+<div class="arithmatex">\[
+\delta f\approx\epsilon\lvert f\rvert\implies\delta\left(\frac{\Delta f}{h}\right)\approx\frac{\epsilon\lvert f\rvert}{h}
+\]</div>
+<p><strong>所以总误差</strong>（以前向差分为例）：</p>
+<div class="arithmatex">\[
+E(h)\approx\underbrace{\frac{h}{2}\lvert f''\rvert}_{\text{截断}}+\underbrace{\frac{\epsilon\lvert f\rvert}{h}}_{\text{舍入}}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">求最优步长：两类误差的平衡点</p>
+<p><strong>令导数为零</strong>：</p>
+<div class="arithmatex">\[
+\frac{\mathrm{d}E}{\mathrm{d}h} = \frac{\lvert f''\rvert}{2}-\frac{\epsilon\lvert f\rvert}{h^{2}} = 0
+\]</div>
+<div class="arithmatex">\[
+h^{*} = \sqrt{\frac{2\epsilon\lvert f\rvert}{\lvert f''\rvert}}
+\]</div>
+<p><strong>量级</strong>（<span class="arithmatex">\(\epsilon = 2.22\times10^{-16}\)</span>、<span class="arithmatex">\(\lvert f\rvert\approx\lvert f''\rvert\)</span>）：</p>
+<div class="arithmatex">\[
+h^{*}\approx\sqrt{2\times2.22\times10^{-16}}\approx2.1\times10^{-8}
+\]</div>
+<p><strong>最小的可达误差</strong>：</p>
+<div class="arithmatex">\[
+E_{\min}\approx2\sqrt{\frac{\epsilon\lvert f\rvert\lvert f''\rvert}{2}}\sim\sqrt{\epsilon}\approx1.5\times10^{-8}
+\]</div>
+<p><strong>所以前向差分最多只能精确到 <span class="arithmatex">\(10^{-8}\)</span></strong> ✗</p>
+<p><strong>中心差分的对应公式</strong>：</p>
+<div class="arithmatex">\[
+E(h)\approx\frac{h^{2}}{6}\lvert f'''\rvert+\frac{\epsilon\lvert f\rvert}{h}
+\]</div>
+<div class="arithmatex">\[
+h^{*} = \left(\frac{3\epsilon\lvert f\rvert}{\lvert f'''\rvert}\right)^{1/3}
+\]</div>
+<p><strong>量级</strong>：<span class="arithmatex">\(\epsilon^{1/3}\approx6.1\times10^{-6}\)</span>；
+代入本例的 <span class="arithmatex">\(\lvert f\rvert = \sin1\)</span>、<span class="arithmatex">\(\lvert f'''\rvert = \cos1\)</span> 得</p>
+<div class="arithmatex">\[
+h^{*}\approx1.01\times10^{-5}
+\]</div>
+<p><strong>最小误差 <span class="arithmatex">\(\sim\epsilon^{2/3}\approx10^{-10}\)</span></strong> ✓</p>
+<p><strong>两法的对比（重要）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>最优 <span class="arithmatex">\(h\)</span></th>
+<th>可达精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向差分</td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-8}\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>中心差分</strong></td>
+<td><span class="arithmatex">\(\sim10^{-5}\)</span></td>
+<td><strong><span class="arithmatex">\(\sim10^{-10}\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td>五点公式</td>
+<td><span class="arithmatex">\(\sim10^{-3}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-13}\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三点重要结论</strong>：</p>
+<p><strong>结论 1：步长不能无限小</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span> 太小的问题</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f(x+h)\)</span> 与 <span class="arithmatex">\(f(x)\)</span> 几乎相等</td>
+<td>相减后有效数字全丢 ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(h\)</span> 与 <span class="arithmatex">\(\epsilon x\)</span> 同量级 → <strong><span class="arithmatex">\(x+h = x\)</span></strong></td>
+<td>差分为零 ✗✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论 2：<span class="arithmatex">\(h\)</span> 太小会「归零」而不是「更准」</strong></p>
+<p><strong>具体阈值</strong>：</p>
+<div class="arithmatex">\[
+h&lt; \epsilon\lvert x\rvert\implies x+h = x\implies\Delta f = 0
+\]</div>
+<p><strong>所以 <span class="arithmatex">\(h = 10^{-17}\)</span> 时，任何差分都给出 0</strong> ✗</p>
+<p><strong>结论 3：高精度求导应该用「复步长」或「自动微分」</strong></p>
+<p><strong>复步长方法</strong>（一个巧妙的技巧）：</p>
+<div class="arithmatex">\[
+f'(x)\approx\frac{\operatorname{Im}f(x+ih)}{h}
+\]</div>
+<p><strong>原理</strong>：由泰勒展开</p>
+<div class="arithmatex">\[
+f(x+ih) = f(x)+ihf'(x)-\frac{h^{2}}{2}f''(x)-\cdots
+\]</div>
+<p><strong>虚部恰好是 <span class="arithmatex">\(hf'(x)+O(h^{3})\)</span></strong> ✓</p>
+<p><strong>优点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>没有抵消</strong>（虚部与实部独立）</td>
+<td><strong>可以取极小 <span class="arithmatex">\(h\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td>精度可达<strong>机器精度</strong></td>
+<td><span class="arithmatex">\(\sim10^{-16}\)</span> ✓</td>
+</tr>
+<tr>
+<td>实现简单</td>
+<td>只需支持复数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价</strong>：需要复值函数求值（约慢 2–3 倍）。</p>
+<p><strong>自动微分（AD）则完全避免差分</strong> —— 它用链式法则<strong>精确</strong>求导 ✓
+（这就是深度学习框架的做法。）</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="截断误差与舍入误差的权衡及最优步长">
+<defs>
+<marker id="nd1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="nd1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 坐标轴（对数） -->
+<line class="gb" x1="46" y1="196" x2="404" y2="196" marker-end="url(#nd1-ah1)"/>
+<line class="gb" x1="46" y1="196" x2="46" y2="28" marker-end="url(#nd1-ah2)"/>
+<text class="lbl-s" x="386" y="188">h（对数轴）</text>
+<text class="lbl-s" x="54" y="40">误差</text>
+<!-- 截断误差：h 增大而增大 -->
+<path class="a1" d="M92,116 C130,104 180,78 260,44 C300,32 340,28 376,26" fill="none" stroke-width="2.4"/>
+<text class="l1" x="196" y="56">截断误差 ∝ h²</text>
+<!-- 舍入误差：h 减小而增大 -->
+<path class="a2" d="M92,30 C130,34 180,58 260,104 C300,124 340,150 376,168" fill="none" stroke-width="2.4"/>
+<text class="l2" x="106" y="24">舍入误差 ∝ ε/h</text>
+<!-- 总误差（U 形） -->
+<path class="a4" d="M100,110 C140,120 180,132 212,136 C250,140 300,126 372,84" fill="none" stroke-width="2.8" stroke-dasharray="7 4"/>
+<text class="l4" x="150" y="164">总误差（U 形）</text>
+<!-- 最优步长 -->
+<line class="a3" x1="212" y1="136" x2="212" y2="196" stroke-dasharray="5 4" stroke-width="2"/>
+<circle class="d3" cx="212" cy="136" r="5"/>
+<text class="l3" x="176" y="214">最优 h* ≈ ε^(1/3)</text>
+<!-- 说明 -->
+<text class="lbl-s" x="46" y="236">h 太大 → 截断误差主导；h 太小 → 舍入误差主导（甚至差分归零）</text>
+</svg>
+<figcaption>图 1　数值微分的两类误差与最优步长。横轴是步长 h（对数坐标），纵轴是误差。<b>截断误差</b>（实线，h^p）随 h 减小而下降；<b>舍入误差</b>（实线，/h）随 h 减小而<b>上升</b>。两者的和（虚线）呈 <b>U 形</b>，最低点给出最优步长 h^*¹/(p+1)。<b>关键：h 不能无限减小</b> —— 太小会导致差分归零，结果反而更差</figcaption>
+</figure>
+
+<hr />
+<h2 id="richardson">二、Richardson 外推<a class="headerlink" href="#richardson" title="Permanent link">&para;</a></h2>
+<h3 id="_5">核心思想<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><strong>若知道误差的「形状」，就能把它消掉</strong> ✓</p>
+<p><strong>设</strong>：</p>
+<div class="arithmatex">\[
+M(h) = M+\alpha_{1}h^{p}+\alpha_{2}h^{p+1}+\cdots
+\]</div>
+<p>（<span class="arithmatex">\(M\)</span> 是真值，<span class="arithmatex">\(M(h)\)</span> 是数值近似。）</p>
+<p><strong>用两个步长消掉 <span class="arithmatex">\(h^{p}\)</span> 项</strong>：</p>
+<div class="arithmatex">\[
+M(h/2) = M+\alpha_{1}\frac{h^{p}}{2^{p}}+\alpha_{2}\frac{h^{p+1}}{2^{p+1}}+\cdots
+\]</div>
+<p><strong>组合</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ M_{\text{Rich}} = \frac{2^{p}M(h/2)-M(h)}{2^{p}-1}\ }
+\]</div>
+<p><strong>误差变为 <span class="arithmatex">\(O(h^{p+1})\)</span></strong> ✓</p>
+<div class="admonition tip">
+<p class="admonition-title">验证「hp 项被消掉」</p>
+<p><strong>计算</strong>：</p>
+<div class="arithmatex">\[
+2^{p}M(h/2)-M(h) = 2^{p}\left(M+\alpha_{1}\frac{h^{p}}{2^{p}}+\cdots\right)-\left(M+\alpha_{1}h^{p}+\cdots\right)
+\]</div>
+<div class="arithmatex">\[
+= (2^{p}-1)M+\underbrace{\alpha_{1}h^{p}-\alpha_{1}h^{p}}_{=0}+\cdots
+\]</div>
+<p><strong>除以 <span class="arithmatex">\((2^{p}-1)\)</span></strong> 后：</p>
+<div class="arithmatex">\[
+M_{\text{Rich}} = M+\frac{\text{高阶项}}{2^{p}-1}
+\]</div>
+<p><strong><span class="arithmatex">\(h^{p}\)</span> 项恰好抵消</strong> ✓</p>
+<p><strong>对中心差分（<span class="arithmatex">\(p = 2\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+p = 2\implies2^{p}-1 = 3
+\]</div>
+<div class="arithmatex">\[
+M_{\text{Rich}} = \frac{4M(h/2)-M(h)}{3}
+\]</div>
+<p><strong>误差从 <span class="arithmatex">\(O(h^{2})\)</span> 提升到 <span class="arithmatex">\(O(h^{4})\)</span></strong> ✓</p>
+<p><strong>可以继续外推</strong>（用三个步长消掉 <span class="arithmatex">\(h^{4}\)</span> 项）：</p>
+<div class="arithmatex">\[
+M_{\text{Rich2}} = \frac{16M_{\text{Rich}}(h/2)-M_{\text{Rich}}(h)}{15}
+\]</div>
+<p><strong>误差 <span class="arithmatex">\(O(h^{6})\)</span></strong> ✓</p>
+<p><strong>这就是「Romberg 积分」的思想</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>级数</th>
+<th>得到的方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 列</td>
+<td>梯形法则</td>
+</tr>
+<tr>
+<td>第 2 列</td>
+<td>Simpson 法则 ✓</td>
+</tr>
+<tr>
+<td>第 3 列</td>
+<td>Boole 法则</td>
+</tr>
+<tr>
+<td>第 <span class="arithmatex">\(k\)</span> 列</td>
+<td><span class="arithmatex">\(2k\)</span> 阶方法 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「Simpson 法则 = 梯形的 Richardson 外推」</strong> ——
+这个对应关系非常漂亮 ✓</p>
+<p><strong>代价分析（重要）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>外推层数</th>
+<th>需要的新求值</th>
+<th>误差阶</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span>（梯形）</td>
+<td>——</td>
+<td><span class="arithmatex">\(O(h^{2})\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span>（Simpson）</td>
+<td><span class="arithmatex">\(+n/2\)</span></td>
+<td><span class="arithmatex">\(O(h^{4})\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span>（Boole）</td>
+<td><span class="arithmatex">\(+n/4\)</span></td>
+<td><span class="arithmatex">\(O(h^{6})\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键</strong>：<strong>每一层外推只需「更细一层的梯形」</strong> ——
+可以<strong>复用</strong>之前算过的函数值 ✓</p>
+<p><strong>这就是 Romberg 算法高效的原因</strong> ✓</p>
+</div>
+<h3 id="_6">舍入误差的放大<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>警告</strong>：<strong>Richardson 外推会放大舍入误差</strong> ✗</p>
+<p><strong>放大因子</strong>（对 <span class="arithmatex">\(p = 2\)</span>）：</p>
+<div class="arithmatex">\[
+\left\lvert\frac{4}{3}\right\rvert+\left\lvert\frac{1}{3}\right\rvert = \frac53
+\]</div>
+<p><strong>所以若原始舍入误差是 <span class="arithmatex">\(\delta\)</span>，外推后约 <span class="arithmatex">\(1.67\delta\)</span></strong> ⚠</p>
+<p><strong>含义</strong>：<strong>外推不能无限做下去</strong> ——
+到某一层后，舍入误差会超过截断误差的改善 ✗</p>
+<p><strong>实用的停止准则</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相邻两层的值接近</td>
+<td>可以停止 ✓</td>
+</tr>
+<tr>
+<td><strong>值开始震荡或不改善</strong></td>
+<td><strong>已到舍入极限</strong> ✗</td>
+</tr>
+<tr>
+<td>值突然大幅变化</td>
+<td>数值不稳定</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程建议</strong>：<strong>做 2–3 层外推就够了</strong> ✓
+（再多收益小于风险。）</p>
+<hr />
+<h2 id="_7">三、数值积分<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="_8">两个基本法则<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p><strong>梯形法则</strong>（用一次多项式拟合）：</p>
+<div class="arithmatex">\[
+T_{n} = h\left[\frac{f_0}{2}+f_1+\cdots+f_{n-1}+\frac{f_n}{2}\right],\qquad h = \frac{b-a}{n}
+\]</div>
+<p><strong>截断误差</strong>：</p>
+<div class="arithmatex">\[
+E_{T} = -\frac{(b-a)h^{2}}{12}f''(\xi)
+\]</div>
+<p><strong>Simpson 法则</strong>（用二次多项式拟合，<span class="arithmatex">\(n\)</span> 必须为偶数）：</p>
+<div class="arithmatex">\[
+S_{n} = \frac{h}{3}\left[f_0+4(f_1+f_3+\cdots)+2(f_2+f_4+\cdots)+f_n\right]
+\]</div>
+<p><strong>截断误差</strong>：</p>
+<div class="arithmatex">\[
+E_{S} = -\frac{(b-a)h^{4}}{180}f^{(4)}(\xi)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Simpson 法则的一个「惊人的」性质</p>
+<p><strong>定理</strong>：<strong>Simpson 法则对任意三次多项式精确</strong> ✓</p>
+<p><strong>为什么「惊人」</strong>：它只用二次插值，却对三次函数精确 ——
+<strong>误差项里没有 <span class="arithmatex">\(f'''\)</span>，直接从 <span class="arithmatex">\(f^{(4)}\)</span> 开始</strong> ✓</p>
+<p><strong>验证（对 <span class="arithmatex">\(f(x) = x^{3}\)</span>，区间 <span class="arithmatex">\([0,1]\)</span>，<span class="arithmatex">\(n=2\)</span>）</strong>：</p>
+<p><strong>真值</strong>：</p>
+<div class="arithmatex">\[
+\int_{0}^{1}x^{3}\mathrm{d}x = \frac14 = 0.25
+\]</div>
+<p><strong>Simpson（<span class="arithmatex">\(h = 0.5\)</span>）</strong>：</p>
+<div class="arithmatex">\[
+S = \frac{0.5}{3}\left[0^{3}+4(0.5)^{3}+1^{3}\right] = \frac{0.5}{3}[0+0.5+1] = \frac{0.75}{3} = 0.25 \;\checkmark
+\]</div>
+<p><strong>精确</strong> ✓</p>
+<p><strong>而梯形法则</strong>：</p>
+<div class="arithmatex">\[
+T = 0.5\left[\frac02+0.125+\frac12\right] = 0.5\times0.625 = 0.3125\;\times
+\]</div>
+<p><strong>误差 <span class="arithmatex">\(0.0625\)</span></strong> ✗</p>
+<p><strong>这个性质的实际意义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>应用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>被积函数在小区间上近似三次</td>
+<td>Simpson <strong>误差极小</strong> ✓</td>
+</tr>
+<tr>
+<td>光滑函数</td>
+<td>Simpson 通常足够</td>
+</tr>
+<tr>
+<td><strong>只有 <span class="arithmatex">\(2\)</span> 阶导数有奇点</strong></td>
+<td>Simpson 仍可能准（不被 <span class="arithmatex">\(f'''\)</span> 影响）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义</strong>：<strong>「Simpson 比梯形好得多」不只是「阶数高一阶」</strong> ——
+它还<strong>对三次以下精确</strong>，这对工程问题（分段光滑）非常有利 ✓</p>
+</div>
+<h3 id="_9">精度对比<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p><strong>对 <span class="arithmatex">\(\int_{0}^{1}e^{-x^{2}}\mathrm{d}x\)</span>（真值 <span class="arithmatex">\(0.7468241328\)</span>）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>梯形</th>
+<th>梯形误差</th>
+<th>Simpson</th>
+<th>Simpson 误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.731370\)</span></td>
+<td><span class="arithmatex">\(-1.55\times10^{-2}\)</span></td>
+<td><span class="arithmatex">\(0.747180\)</span></td>
+<td><span class="arithmatex">\(+3.56\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span></td>
+<td><span class="arithmatex">\(0.742984\)</span></td>
+<td><span class="arithmatex">\(-3.84\times10^{-3}\)</span></td>
+<td><span class="arithmatex">\(0.746855\)</span></td>
+<td><span class="arithmatex">\(+3.12\times10^{-5}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(8\)</span></td>
+<td><span class="arithmatex">\(0.745866\)</span></td>
+<td><span class="arithmatex">\(-9.58\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(0.746826\)</span></td>
+<td><span class="arithmatex">\(+1.95\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(16\)</span></td>
+<td><span class="arithmatex">\(0.746585\)</span></td>
+<td><span class="arithmatex">\(-2.39\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(0.746824\)</span></td>
+<td><span class="arithmatex">\(+1.22\times10^{-7}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>每次 <span class="arithmatex">\(n\)</span> 翻倍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>梯形误差</strong></td>
+<td><strong>降到 <span class="arithmatex">\(1/4\)</span></strong> ✓（<span class="arithmatex">\(O(h^{2})\)</span>）</td>
+</tr>
+<tr>
+<td><strong>Simpson 误差</strong></td>
+<td><strong>降到 <span class="arithmatex">\(1/16\)</span></strong> ✓（<span class="arithmatex">\(O(h^{4})\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这与理论完全一致</strong> ✓</p>
+<p><strong>同一精度的成本对比</strong>：</p>
+<p><strong>要把误差降到 <span class="arithmatex">\(10^{-6}\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>需要的 <span class="arithmatex">\(n\)</span></th>
+<th>需要的函数求值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形</td>
+<td><span class="arithmatex">\(\approx250\)</span></td>
+<td><span class="arithmatex">\(251\)</span></td>
+</tr>
+<tr>
+<td><strong>Simpson</strong></td>
+<td><strong><span class="arithmatex">\(\approx14\)</span></strong></td>
+<td><strong><span class="arithmatex">\(15\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Simpson 只需约 1/17 的计算量</strong> ✓</p>
+<div class="admonition tip">
+<p class="admonition-title">「自适应积分」：把点数花在难算的地方</p>
+<p><strong>基本想法</strong>：<strong>在小区间上比较两种方法，误差大就细分</strong> ✓</p>
+<p><strong>流程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>在某区间上用 Simpson 与两个半区间的 Simpson</td>
+</tr>
+<tr>
+<td>2</td>
+<td>比较两者之差作为误差估计</td>
+</tr>
+<tr>
+<td>3</td>
+<td>误差超限 → <strong>继续细分</strong> ✓</td>
+</tr>
+<tr>
+<td>4</td>
+<td>误差足够 → 接受</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这样有效</strong>：</p>
+<p>因为<strong>大多数被积函数在大部分区域是「平坦」的</strong> ——
+只有少数区域（陡变、奇点附近）需要细分 ✓</p>
+<p><strong>效果对比（陡变函数）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>达到 <span class="arithmatex">\(10^{-8}\)</span> 所需求值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>均匀 Simpson</td>
+<td><span class="arithmatex">\(10^{5}\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>自适应 Simpson</strong></td>
+<td><strong><span class="arithmatex">\(10^{3}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>自适应方法的意义在于「把计算资源按需分配」</strong> ——
+这也是现代积分器（如 QUADPACK）的标准做法 ✓</p>
+<p><strong>注意「奇点」的处理</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可去奇点</td>
+<td>在奇点处直接给极限值</td>
+</tr>
+<tr>
+<td>端点弱奇点</td>
+<td><strong>变量替换</strong>（如 <span class="arithmatex">\(x = t^{2}\)</span>）✓</td>
+</tr>
+<tr>
+<td>内部强奇点</td>
+<td>拆成两段分别处理</td>
+</tr>
+<tr>
+<td>无穷区间</td>
+<td>变换到有限区间（如 <span class="arithmatex">\(x = t/(1-t)\)</span>）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「变量替换消奇点」的一个经典例子</strong>：</p>
+<div class="arithmatex">\[
+\int_{0}^{1}\frac{1}{\sqrt{x}}\mathrm{d}x
+\]</div>
+<p><strong>被积函数在 <span class="arithmatex">\(x=0\)</span> 处发散</strong> ✗ 但积分有限（<span class="arithmatex">\(=2\)</span>）。</p>
+<p><strong>替换 <span class="arithmatex">\(x = t^{2}\)</span></strong>（<span class="arithmatex">\(\mathrm{d}x = 2t\,\mathrm{d}t\)</span>）：</p>
+<div class="arithmatex">\[
+\int_{0}^{1}\frac{1}{t}\cdot2t\,\mathrm{d}t = \int_{0}^{1}2\,\mathrm{d}t = 2 \;\checkmark
+\]</div>
+<p><strong>替换后被积函数变成常数 —— 奇点消失</strong> ✓</p>
+<p><strong>这是「用解析手段改善数值方法」的范例</strong> ✓
+（回顾「浮点数与误差」一页的「先变形再计算」原则。）</p>
+</div>
+<hr />
+<h2 id="gauss-monte-carlo">四、Gauss 求积与 Monte Carlo<a class="headerlink" href="#gauss-monte-carlo" title="Permanent link">&para;</a></h2>
+<h3 id="gauss">Gauss 求积：选最优的节点<a class="headerlink" href="#gauss" title="Permanent link">&para;</a></h3>
+<p><strong>前面所有方法的节点都是等距的</strong>。<strong>Gauss 求积改变这一点</strong>：</p>
+<blockquote>
+<p><strong>让节点与权重都「自由选择」，可以大幅提高精度。</strong></p>
+</blockquote>
+<p><strong><span class="arithmatex">\(n\)</span> 点 Gauss-Legendre 求积</strong>：</p>
+<div class="arithmatex">\[
+\int_{-1}^{1}f(x)\mathrm{d}x\approx\sum_{i=1}^{n}w_{i}f(x_{i})
+\]</div>
+<p><strong>节点是 Legendre 多项式的根</strong>，权重由积分条件确定。</p>
+<div class="admonition tip">
+<p class="admonition-title">「n 点 Gauss 精确到 2n-1 次多项式」——这个结果有多强</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>点数</th>
+<th>精确的多项式次数</th>
+<th>「效率」</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形</td>
+<td><span class="arithmatex">\(n+1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td>Simpson</td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><strong>Gauss（<span class="arithmatex">\(n\)</span> 点）</strong></td>
+<td><strong><span class="arithmatex">\(n\)</span></strong></td>
+<td><strong><span class="arithmatex">\(2n-1\)</span></strong></td>
+<td><strong>约 <span class="arithmatex">\(2\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「效率」的含义</strong>：<strong>精确阶数 ÷ 点数</strong></p>
+<p><strong>Gauss 的 <span class="arithmatex">\(2n-1\)</span> vs 点数的比接近 2</strong>，是<strong>理论上最优的</strong> ✓</p>
+<p><strong>常用节点与权重</strong>：</p>
+<p><strong>2 点</strong>（<span class="arithmatex">\(n=2\)</span>）：</p>
+<div class="arithmatex">\[
+x = \pm\frac{1}{\sqrt3},\qquad w = 1
+\]</div>
+<p><strong>3 点</strong>（<span class="arithmatex">\(n=3\)</span>）：</p>
+<div class="arithmatex">\[
+x = 0,\ \pm\sqrt{\frac35},\qquad w = \frac89,\ \frac59
+\]</div>
+<p><strong>换算到一般区间 <span class="arithmatex">\([a,b]\)</span></strong>：</p>
+<div class="arithmatex">\[
+\int_{a}^{b}f(x)\mathrm{d}x\approx\frac{b-a}{2}\sum_{i}w_{i}f\left(\frac{b-a}{2}x_{i}+\frac{a+b}{2}\right)
+\]</div>
+<p><strong>对 <span class="arithmatex">\(\int_{0}^{1}e^{-x^{2}}\mathrm{d}x\)</span> 的实际效果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>函数求值次数</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形（<span class="arithmatex">\(n=8\)</span>）</td>
+<td><span class="arithmatex">\(9\)</span></td>
+<td><span class="arithmatex">\(9.6\times10^{-4}\)</span> ✗</td>
+</tr>
+<tr>
+<td>Simpson（<span class="arithmatex">\(n=8\)</span>）</td>
+<td><span class="arithmatex">\(9\)</span></td>
+<td><span class="arithmatex">\(2.0\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><strong>Gauss 2 点</strong></td>
+<td><strong><span class="arithmatex">\(2\)</span></strong></td>
+<td><span class="arithmatex">\(2.29\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><strong>Gauss 3 点</strong></td>
+<td><strong><span class="arithmatex">\(3\)</span></strong></td>
+<td><strong><span class="arithmatex">\(9.55\times10^{-6}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Gauss 3 点（3 次求值）的精度接近 Simpson 9 次求值</strong> ✓</p>
+<p><strong>代价与限制</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>限制</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>节点需要预先算好</td>
+<td>已表格化</td>
+</tr>
+<tr>
+<td><strong>只能用于光滑函数</strong></td>
+<td>有奇点时优势尽失 ✗</td>
+</tr>
+<tr>
+<td>不利于自适应</td>
+<td><strong>节点不能递归细分</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一条是 Gauss 求积的主要局限</strong>：</p>
+<p><strong>它假设函数光滑</strong>，所以<strong>无法自适应</strong>（细分级联会打破「最优节点」）✗</p>
+<p><strong>所以实际积分器常用「Gauss-Kronrod」配对</strong> ——
+用两套嵌套节点同时给出结果与误差估计 ✓</p>
+</div>
+<h3 id="monte-carlo">Monte Carlo 积分：维度的救赎<a class="headerlink" href="#monte-carlo" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：<strong>高维积分时，网格法的代价爆炸</strong> ✗</p>
+<p><strong>若每维用 <span class="arithmatex">\(n\)</span> 个点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度 <span class="arithmatex">\(d\)</span></th>
+<th>总点数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(n\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(n^{3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(n^{10}\)</span> ✗✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(n = 10\)</span>、<span class="arithmatex">\(d = 10\)</span> 时已是 <span class="arithmatex">\(10^{10}\)</span> 个点</strong> ✗</p>
+<p><strong>Monte Carlo 的做法</strong>：<strong>随机采样</strong> ✓</p>
+<div class="arithmatex">\[
+\int_{D}f\,\mathrm{d}V\approx V\cdot\frac1{N}\sum_{i=1}^{N}f(\boldsymbol{x}_{i})
+\]</div>
+<p><strong>误差</strong>（由中心极限定理）：</p>
+<div class="arithmatex">\[
+\text{误差}\sim\frac{\sigma}{\sqrt N}
+\]</div>
+<div class="admonition tip">
+<p class="admonition-title">「/√ N 与维度无关」——这是 Monte Carlo 的全部价值</p>
+<p><strong>对比两种方法的误差随维度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>误差</th>
+<th><span class="arithmatex">\(d=10\)</span> 时要误差降 10 倍需</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网格法（Simpson）</td>
+<td><span class="arithmatex">\(O(h^{4}) = O(n^{-4/d})\)</span></td>
+<td>点数 <span class="arithmatex">\(\times 10^{d/4} = 10^{2.5}\)</span> 总点数 <span class="arithmatex">\(\times10^{25}\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>Monte Carlo</strong></td>
+<td><span class="arithmatex">\(O(N^{-1/2})\)</span></td>
+<td><strong>点数 <span class="arithmatex">\(\times100\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>网格法的误差指数含 <span class="arithmatex">\(1/d\)</span></strong> → <strong>维度高时几乎不收敛</strong> ✗</p>
+<p><strong>Monte Carlo 的 <span class="arithmatex">\(N^{-1/2}\)</span> 与维度无关</strong> ✓</p>
+<p><strong>「维度的诅咒」被 Monte Carlo 绕过了</strong> ——
+这是它<strong>唯一但决定性</strong>的优势 ✓</p>
+<p><strong>临界维度</strong>（粗略估计）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(d\)</span></th>
+<th>更好的方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span>–<span class="arithmatex">\(3\)</span></td>
+<td><strong>求积法（Gauss、Simpson）</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span>–<span class="arithmatex">\(6\)</span></td>
+<td>稀疏网格（Smolyak）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(&gt;10\)</span></strong></td>
+<td><strong>Monte Carlo / 拟蒙特卡罗</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monte Carlo 的两个缺点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>缺点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>收敛慢</strong>（<span class="arithmatex">\(N^{-1/2}\)</span>）</td>
+<td>要 2 位数字需 100 倍样本 ✗</td>
+</tr>
+<tr>
+<td>结果有随机误差</td>
+<td>需报告置信区间</td>
+</tr>
+</tbody>
+</table>
+<p><strong>改善手段</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>手段</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>重要性采样</strong></td>
+<td>在「重要区域」多采样 ✓</td>
+</tr>
+<tr>
+<td><strong>分层采样</strong></td>
+<td>降低方差 ✓</td>
+</tr>
+<tr>
+<td><strong>拟蒙特卡罗（QMC）</strong></td>
+<td>用低差异序列，误差可达 <span class="arithmatex">\(\sim N^{-1}\)</span> ✓</td>
+</tr>
+<tr>
+<td>控制变量的方法</td>
+<td>减去已知的相似函数 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「重要性采样」在处理稀有事件时是必需的</strong> ——
+因为均匀采样几乎采不到稀有事件 ✗</p>
+<p><strong>工程应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>用 Monte Carlo 的原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>金融衍生品定价</td>
+<td>维度高（多资产路径）✓</td>
+</tr>
+<tr>
+<td><strong>粒子滤波 / 贝叶斯推断</strong></td>
+<td>后验是高维积分 ✓</td>
+</tr>
+<tr>
+<td>辐射传输 / 渲染</td>
+<td>高维光路积分 ✓</td>
+</tr>
+<tr>
+<td><strong>风险评估</strong></td>
+<td>稀有事件 + 高维 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「深度学习中的 MC」</strong>：</p>
+<p><strong>dropout 的推理、变分推断的 ELBO 估计、
+策略梯度中的期望</strong> —— <strong>这些都是 Monte Carlo 积分</strong> ✓</p>
+</div>
+<p>"""</p>
+<hr />
+<h2 id="_10">五、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：三种差分格式的精度对比<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>用 <span class="arithmatex">\(f(x) = \sin x\)</span> 在 <span class="arithmatex">\(x = 1\)</span> 处求导（真值 <span class="arithmatex">\(\cos 1 = 0.5403023059\)</span>），
+比较前向、中心差分的误差随 <span class="arithmatex">\(h\)</span> 的变化。</p>
+<details class="note">
+<summary>思路</summary>
+<p>逐个 <span class="arithmatex">\(h\)</span> 计算，观察误差的下降速率；注意 <span class="arithmatex">\(h\)</span> 很小的时候舍入误差会反超。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：算几个典型 <span class="arithmatex">\(h\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>前向差分</th>
+<th>前向误差</th>
+<th>中心差分</th>
+<th>中心误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^{-1}\)</span></td>
+<td><span class="arithmatex">\(0.489536\)</span></td>
+<td><span class="arithmatex">\(5.08\times10^{-2}\)</span></td>
+<td><span class="arithmatex">\(0.539402\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-2}\)</span></td>
+<td><span class="arithmatex">\(0.535511\)</span></td>
+<td><span class="arithmatex">\(4.79\times10^{-3}\)</span></td>
+<td><span class="arithmatex">\(0.540293\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-3}\)</span></td>
+<td><span class="arithmatex">\(0.539881\)</span></td>
+<td><span class="arithmatex">\(4.21\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(0.540302\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-8}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-4}\)</span></td>
+<td><span class="arithmatex">\(0.540260\)</span></td>
+<td><span class="arithmatex">\(4.21\times10^{-5}\)</span></td>
+<td><span class="arithmatex">\(0.540302\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-10}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-5}\)</span></td>
+<td><span class="arithmatex">\(0.540298\)</span></td>
+<td><span class="arithmatex">\(4.21\times10^{-6}\)</span></td>
+<td><span class="arithmatex">\(0.540302\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-12}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二步：观察误差的下降</strong></p>
+<p><strong>前向差分</strong>（<span class="arithmatex">\(h\)</span> 从 <span class="arithmatex">\(10^{-1}\)</span> 到 <span class="arithmatex">\(10^{-5}\)</span>，即 <span class="arithmatex">\(h\)</span> 减小 <span class="arithmatex">\(10^{4}\)</span> 倍）：</p>
+<div class="arithmatex">\[
+\frac{5.08\times10^{-2}}{4.21\times10^{-6}}\approx1.21\times10^{4}
+\]</div>
+<p><strong>误差约减小 <span class="arithmatex">\(10^{4}\)</span> 倍</strong> → <strong>与 <span class="arithmatex">\(h\)</span> 成正比</strong> → <strong>一阶</strong> ✓</p>
+<p><strong>中心差分</strong>：</p>
+<div class="arithmatex">\[
+\frac{9.00\times10^{-4}}{9.00\times10^{-12}} = 10^{8}
+\]</div>
+<p><strong>误差减小 <span class="arithmatex">\(10^{8}\)</span> 倍</strong>，而 <span class="arithmatex">\(h\)</span> 减小 <span class="arithmatex">\(10^{4}\)</span> 倍 → <strong>与 <span class="arithmatex">\(h^{2}\)</span> 成正比</strong> → <strong>二阶</strong> ✓</p>
+<p><strong>第三步：验证理论系数</strong></p>
+<p><strong>前向差分</strong>（<span class="arithmatex">\(f''(1) = -\sin1 = -0.841471\)</span>）：</p>
+<div class="arithmatex">\[
+E\approx\frac{h}{2}f''(1)\implies\frac{0.1}{2}\times(-0.841471) = -0.042074
+\]</div>
+<p><strong>实测 <span class="arithmatex">\(-5.08\times10^{-2}\)</span></strong> —— 量级一致 ✓（高阶项有贡献。）✓</p>
+<p><strong>中心差分</strong>（<span class="arithmatex">\(f'''(1) = -\cos1 = -0.540302\)</span>）：</p>
+<div class="arithmatex">\[
+E\approx\frac{h^{2}}{6}\lvert f'''\rvert = \frac{0.01}{6}\times0.540302 = 9.005\times10^{-4}
+\]</div>
+<p><strong>实测 <span class="arithmatex">\(9.00\times10^{-4}\)</span></strong> —— <strong>精确吻合</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">「中心差分的误差系数可以精确验证」的原因</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>首项误差</th>
+<th>是否「精确」</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向差分</td>
+<td><span class="arithmatex">\(\frac{h}{2}f''(\xi)\)</span></td>
+<td><strong><span class="arithmatex">\(\xi\)</span> 未知</strong> → 只能估量级 ⚠</td>
+</tr>
+<tr>
+<td><strong>中心差分</strong></td>
+<td><span class="arithmatex">\(-\frac{h^{2}}{6}f'''(\xi)\)</span></td>
+<td>本例中恰好在 <span class="arithmatex">\(1\)</span> 处取值 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么中心差分更容易验证</strong>：</p>
+<p><strong>因为 <span class="arithmatex">\(\sin\)</span> 的高阶导数形式简单</strong>（<span class="arithmatex">\(f''' = -\cos\)</span>），
+且 <span class="arithmatex">\(x = 1\)</span> 处没有使高阶项抵消的特殊性 ✓</p>
+<p><strong>工程含义（一个实用的自检）</strong>：</p>
+<p><strong>若实测误差与理论系数差很多，说明 <span class="arithmatex">\(h\)</span> 还不够小</strong>
+（高阶项仍在起作用）✓</p>
+<p><strong>具体判据</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>误差 ≈ 理论首项</td>
+<td><span class="arithmatex">\(h\)</span> 已足够小 ✓</td>
+</tr>
+<tr>
+<td>误差远大于理论</td>
+<td><span class="arithmatex">\(h\)</span> 太大 ⚠</td>
+</tr>
+<tr>
+<td><strong>误差随 <span class="arithmatex">\(h\)</span> 减小而不再下降</strong></td>
+<td><strong>已到舍入极限</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三种情形就是本题的下一步</strong>：</p>
+<p><strong><span class="arithmatex">\(h&lt;10^{-8}\)</span> 时</strong>，前向差分会因 <span class="arithmatex">\(\sin(1+h)\)</span> 与 <span class="arithmatex">\(\sin(1)\)</span> 的两数相减
+而失去有效数字 ✗</p>
+<p><strong><span class="arithmatex">\(h&lt;2\times10^{-16}\)</span> 时</strong>，<span class="arithmatex">\(1+h\)</span> 在浮点中<strong>等于 <span class="arithmatex">\(1\)</span></strong>，
+差分给出<strong>恒为 <span class="arithmatex">\(0\)</span></strong> ✗✗</p>
+</div>
+<hr />
+<h3 id="2richardson">例题 2：Richardson 外推的实际效果<a class="headerlink" href="#2richardson" title="Permanent link">&para;</a></h3>
+<p>承例题 1，用 <span class="arithmatex">\(h = 0.1\)</span> 和 <span class="arithmatex">\(h = 0.05\)</span> 的中心差分做一次 Richardson 外推。</p>
+<details class="note">
+<summary>思路</summary>
+<p>中心差分的 <span class="arithmatex">\(p = 2\)</span>，所以外推公式是 <span class="arithmatex">\((4M(h/2)-M(h))/3\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：两个中心差分值</strong></p>
+<div class="arithmatex">\[
+M(0.1) = \frac{\sin(1.1)-\sin(0.9)}{0.2} = \frac{0.8912073601-0.7833269096}{0.2} = 0.5394022525
+\]</div>
+<div class="arithmatex">\[
+M(0.05) = \frac{\sin(1.05)-\sin(0.95)}{0.1} = \frac{0.8674232256-0.8134155048}{0.1} = 0.5400772080
+\]</div>
+<p><strong>第二步：Richardson 外推（<span class="arithmatex">\(p = 2\)</span>）</strong></p>
+<div class="arithmatex">\[
+M_{\text{Rich}} = \frac{4M(h/2)-M(h)}{3} = \frac{4(0.5400772080)-0.5394022525}{3}
+\]</div>
+<div class="arithmatex">\[
+= \frac{2.160308832-0.5394022525}{3} = \frac{1.6209065795}{3} = 0.5403021932
+\]</div>
+<p><strong>第三步：误差对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真值</td>
+<td><span class="arithmatex">\(0.5403023059\)</span></td>
+<td>——</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(M(0.1)\)</span></td>
+<td><span class="arithmatex">\(0.5394022525\)</span></td>
+<td><span class="arithmatex">\(9.00\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(M(0.05)\)</span></td>
+<td><span class="arithmatex">\(0.5400772080\)</span></td>
+<td><span class="arithmatex">\(2.25\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(M_{\text{Rich}}\)</span></strong></td>
+<td><strong><span class="arithmatex">\(0.5403021932\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.13\times10^{-7}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>外推把误差从 <span class="arithmatex">\(2.25\times10^{-4}\)</span> 降到 <span class="arithmatex">\(1.13\times10^{-7}\)</span></strong> ✓</p>
+<p><strong>改善了约 <span class="arithmatex">\(2000\)</span> 倍</strong> ✓</p>
+<p><strong>第四步：验证「四阶」的理论</strong></p>
+<p><strong>理论</strong>（用 <span class="arithmatex">\(f^{(5)}(1) = \sin1 = 0.841471\)</span>）：</p>
+<div class="arithmatex">\[
+E_{\text{Rich}}\approx-\frac{h^{4}}{4}\times\frac{f^{(5)}}{120} = -\frac{10^{-4}}{4}\times\frac{0.841471}{120} = -1.75\times10^{-7}
+\]</div>
+<p><strong>与实测 <span class="arithmatex">\(-1.13\times10^{-7}\)</span> 同量级</strong> ✓</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">「h = 0.1 的 Richardson 相当于多小的 h 的中心差分」</p>
+<p><strong>比较精度</strong>：</p>
+<p><strong>要求中心差分的误差等于 <span class="arithmatex">\(1.13\times10^{-7}\)</span></strong>：</p>
+<div class="arithmatex">\[
+\frac{h^{2}}{6}\times0.540302 = 1.13\times10^{-7}\implies h^{2} = 1.25\times10^{-6}\implies h = 1.12\times10^{-3}
+\]</div>
+<p><strong>所以 Richardson（用 <span class="arithmatex">\(h = 0.1\)</span> 与 <span class="arithmatex">\(0.05\)</span>，共 4 次函数求值）
+相当于 <span class="arithmatex">\(h = 1.12\times10^{-3}\)</span> 的中心差分（需要 2 次求值但精度只需 <span class="arithmatex">\(h\)</span> 很小）</strong> ✓</p>
+<p><strong>成本对比（同样是 4 次函数求值）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中心差分</td>
+<td><span class="arithmatex">\(1.12\times10^{-3}\)</span></td>
+<td><span class="arithmatex">\(1.13\times10^{-7}\)</span></td>
+</tr>
+<tr>
+<td><strong>Richardson</strong></td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><strong><span class="arithmatex">\(1.13\times10^{-7}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者精度相同</strong> —— 但 <strong>Richardson 用了更大的 <span class="arithmatex">\(h\)</span></strong> ✓</p>
+<p><strong>为什么「大 <span class="arithmatex">\(h\)</span>」是优势</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>舍入误差小</strong>（<span class="arithmatex">\(\propto\epsilon/h\)</span>）</td>
+<td>更接近理论极限 ✓</td>
+</tr>
+<tr>
+<td>可以外推更多层</td>
+<td>达到更高精度 ✓</td>
+</tr>
+<tr>
+<td>数值更稳定</td>
+<td>不易被抵消破坏 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「Richardson 外推的价值不只是省计算，更是提高可达精度」</strong> ✓</p>
+<p><strong>对积分同理</strong>：</p>
+<p><strong>Romberg 算法用 <span class="arithmatex">\(h = 1, 1/2, 1/4, \ldots\)</span> 的梯形值逐层外推</strong>，
+可以用<strong>很少的函数求值</strong>达到<strong>极高精度</strong> ✓</p>
+<p><strong>代价</strong>：<strong>舍入误差被放大 <span class="arithmatex">\(5/3\)</span> 倍</strong>（每层）⚠
+所以外推层数不宜太多（2–3 层最佳）。</p>
+</div>
+<hr />
+<h3 id="3simpson-gauss">例题 3：Simpson 法则与 Gauss 求积的效率对比<a class="headerlink" href="#3simpson-gauss" title="Permanent link">&para;</a></h3>
+<p>对 <span class="arithmatex">\(\int_{0}^{1}e^{-x^{2}}\mathrm{d}x\)</span>（真值 <span class="arithmatex">\(0.7468241328\)</span>），
+比较 Simpson（<span class="arithmatex">\(n = 8\)</span>）与 Gauss 3 点的结果与求值次数。</p>
+<details class="note">
+<summary>思路</summary>
+<p>Simpson 用 9 个节点，Gauss 3 点只用 3 个，看精度差别。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：Simpson（<span class="arithmatex">\(n = 8\)</span>，<span class="arithmatex">\(h = 0.125\)</span>）</strong></p>
+<p><strong>节点与函数值</strong>（<span class="arithmatex">\(f(x) = e^{-x^{2}}\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(i\)</span></th>
+<th><span class="arithmatex">\(x_{i}\)</span></th>
+<th><span class="arithmatex">\(f(x_{i})\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.000\)</span></td>
+<td><span class="arithmatex">\(1.0000000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.125\)</span></td>
+<td><span class="arithmatex">\(0.9844964\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.250\)</span></td>
+<td><span class="arithmatex">\(0.9394131\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(0.375\)</span></td>
+<td><span class="arithmatex">\(0.8688128\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span></td>
+<td><span class="arithmatex">\(0.500\)</span></td>
+<td><span class="arithmatex">\(0.7788008\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(0.625\)</span></td>
+<td><span class="arithmatex">\(0.6766341\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(6\)</span></td>
+<td><span class="arithmatex">\(0.750\)</span></td>
+<td><span class="arithmatex">\(0.5697828\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(7\)</span></td>
+<td><span class="arithmatex">\(0.875\)</span></td>
+<td><span class="arithmatex">\(0.4650434\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(8\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+<td><span class="arithmatex">\(0.3678794\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>加权求和</strong>：</p>
+<div class="arithmatex">\[
+f_0+f_8 = 1.3678794
+\]</div>
+<div class="arithmatex">\[
+4(f_1+f_3+f_5+f_7)\approx4\times2.9949881 = 11.9799524
+\]</div>
+<div class="arithmatex">\[
+2(f_2+f_4+f_6)\approx2\times2.2879951 = 4.5759902
+\]</div>
+<p><strong>总和</strong>：</p>
+<div class="arithmatex">\[
+1.3678794+11.9799524+4.5759902 = 17.9238220
+\]</div>
+<div class="arithmatex">\[
+S_{8} = \frac{0.125}{3}\times17.9238269 = 0.7468261205
+\]</div>
+<p><strong>误差</strong>：<span class="arithmatex">\(0.7468261205-0.7468241328 = +1.99\times10^{-6}\)</span> ⚠</p>
+<p><strong>第二步：Gauss 3 点</strong></p>
+<p><strong>节点与权重</strong>（映射到 <span class="arithmatex">\([0,1]\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(f(x)\)</span></th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.5000000\)</span></td>
+<td><span class="arithmatex">\(0.7788008\)</span></td>
+<td><span class="arithmatex">\(4/9\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(-\sqrt{3/5}\)</span></td>
+<td><span class="arithmatex">\(0.1127017\)</span></td>
+<td><span class="arithmatex">\(0.9873787\)</span></td>
+<td><span class="arithmatex">\(5/18\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(+\sqrt{3/5}\)</span></td>
+<td><span class="arithmatex">\(0.8872983\)</span></td>
+<td><span class="arithmatex">\(0.4550726\)</span></td>
+<td><span class="arithmatex">\(5/18\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>求和</strong>：</p>
+<div class="arithmatex">\[
+G_{3} = \frac49(0.7788008)+\frac{5}{18}(0.9873787+0.4550726)
+\]</div>
+<div class="arithmatex">\[
+= 0.3461337+0.2777778\times1.4424513
+\]</div>
+<div class="arithmatex">\[
+= 0.3461337+0.4006809 = 0.7468146
+\]</div>
+<p><strong>误差</strong>：<span class="arithmatex">\(0.7468146-0.7468241 = -9.5\times10^{-6}\)</span> ⚠</p>
+<p><strong>第三步：对比</strong></p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>求值次数</th>
+<th>结果</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Simpson（<span class="arithmatex">\(n=8\)</span>）</strong></td>
+<td><strong><span class="arithmatex">\(9\)</span></strong></td>
+<td><span class="arithmatex">\(0.7468261\)</span></td>
+<td><strong><span class="arithmatex">\(1.99\times10^{-6}\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td>Gauss 3 点</td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(0.7468146\)</span></td>
+<td><span class="arithmatex">\(9.5\times10^{-6}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>本例题中 Simpson 更准</strong> ⚠</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">「Gauss 不总是更好的」——这是一个重要的反直觉结论</p>
+<p><strong>理论预期</strong>：Gauss 3 点（<span class="arithmatex">\(2n-1 = 5\)</span> 次多项式精确）
+应该优于 Simpson（3 次多项式精确）✓</p>
+<p><strong>但实测 Simpson 误差更小</strong> ✗</p>
+<p><strong>为什么</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>精度阶的常数不同</strong></td>
+<td>Gauss 的误差系数含 <span class="arithmatex">\(f^{(6)}\)</span>，Simpson 含 <span class="arithmatex">\(f^{(4)}\)</span></td>
+</tr>
+<tr>
+<td><strong>本例 <span class="arithmatex">\(f^{(6)}\)</span> 很大</strong></td>
+<td><span class="arithmatex">\(e^{-x^{2}}\)</span> 的高阶导数增长快 ⚠</td>
+</tr>
+<tr>
+<td><strong>求值次数的对应关系不当</strong></td>
+<td>Gauss 3 点应对比 Simpson <span class="arithmatex">\(n=2\)</span>（3 次求值）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>正确的对比（同求值次数）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>求值次数</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simpson（<span class="arithmatex">\(n=2\)</span>）</td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(3.56\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><strong>Gauss 3 点</strong></td>
+<td><strong><span class="arithmatex">\(3\)</span></strong></td>
+<td><strong><span class="arithmatex">\(9.5\times10^{-6}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>同为 3 次求值时，Gauss 好约 37 倍</strong> ✓</p>
+<p><strong>这才是公平的比较</strong> ✓</p>
+<p><strong>结论（工程判断）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>同求值次数</strong></td>
+<td><strong>Gauss 更优</strong> ✓</td>
+</tr>
+<tr>
+<td>需要自适应细分</td>
+<td><strong>Simpson/梯形</strong>（Gauss 不宜细分）✗</td>
+</tr>
+<tr>
+<td>被积函数不光滑</td>
+<td><strong>低阶方法</strong>（Gauss 的优势消失）⚠</td>
+</tr>
+<tr>
+<td>节点需要复用</td>
+<td>复合 Newton-Cotes ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「可比性」的教训</strong>：</p>
+<p><strong>比较算法时必须「控制总成本相等」</strong> ——
+这是工程评估的基本原则 ✓</p>
+<p><strong>这与「梯度下降与收敛」一页的「比较总代价而非每步代价」是同一原则</strong> ✓</p>
+</div>
+<hr />
+<h3 id="4monte-carlo">例题 4：Monte Carlo 的误差与维度<a class="headerlink" href="#4monte-carlo" title="Permanent link">&para;</a></h3>
+<p>用 Monte Carlo 计算 <span class="arithmatex">\(\int_{0}^{1}e^{-x^{2}}\mathrm{d}x\)</span>，
+比较 <span class="arithmatex">\(N = 10^{3}\)</span>、<span class="arithmatex">\(10^{4}\)</span>、<span class="arithmatex">\(10^{5}\)</span> 的误差。</p>
+<details class="note">
+<summary>思路</summary>
+<p>用均匀随机样本；误差应大致按 <span class="arithmatex">\(N^{-1/2}\)</span> 减小。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>方法</strong>：</p>
+<div class="arithmatex">\[
+I\approx\frac1N\sum_{i=1}^{N}e^{-u_{i}^{2}},\qquad u_{i}\sim U(0,1)
+\]</div>
+<p><strong>真值</strong>：<span class="arithmatex">\(0.7468241328\)</span></p>
+<p><strong>用 <span class="arithmatex">\(N\)</span> 个样本的结果（示例）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(N\)</span></th>
+<th>估计值</th>
+<th>误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^{3}\)</span></td>
+<td><span class="arithmatex">\(0.7467\)</span></td>
+<td><span class="arithmatex">\(\approx1.2\times10^{-4}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{4}\)</span></td>
+<td><span class="arithmatex">\(0.746846\)</span></td>
+<td><span class="arithmatex">\(\approx2.2\times10^{-5}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{5}\)</span></td>
+<td><span class="arithmatex">\(0.7468186\)</span></td>
+<td><span class="arithmatex">\(\approx5.5\times10^{-6}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>误差随 <span class="arithmatex">\(N\)</span> 的变化</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(N\)</span> 之比</th>
+<th>误差之比（理论 <span class="arithmatex">\(\sqrt{N}\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^{4}/10^{3} = 10\)</span></td>
+<td><span class="arithmatex">\(\approx\sqrt{10} = 3.16\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{5}/10^{4} = 10\)</span></td>
+<td><span class="arithmatex">\(\approx3.16\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>实测误差比约 5–6 与 4.0</strong> —— <strong>与 <span class="arithmatex">\(\sqrt{N}\)</span> 的量级一致</strong> ✓
+（Monte Carlo 的误差本身有随机性，所以不会精确等于理论值。）</p>
+<p><strong>标准差的估计</strong>：</p>
+<p><strong>被积函数 <span class="arithmatex">\(f = e^{-x^{2}}\)</span> 在 <span class="arithmatex">\([0,1]\)</span> 上的方差</strong>：</p>
+<div class="arithmatex">\[
+E[f]\approx0.7468,\qquad E[f^{2}] = \int_{0}^{1}e^{-2x^{2}}\mathrm{d}x\approx0.5981
+\]</div>
+<div class="arithmatex">\[
+\sigma^{2} = 0.5981-0.7468^{2} = 0.5981-0.5577 = 0.0404\implies\sigma\approx0.2010
+\]</div>
+<p><strong><span class="arithmatex">\(N = 10^{5}\)</span> 的标准误</strong>：</p>
+<div class="arithmatex">\[
+\frac{\sigma}{\sqrt N} = \frac{0.2010}{316.2}\approx6.4\times10^{-4}
+\]</div>
+<p><strong>注意这个标准误远大于实测误差</strong>：</p>
+<p><strong><span class="arithmatex">\(6.4\times10^{-4}\)</span> vs 实测 <span class="arithmatex">\(5.5\times10^{-6}\)</span></strong> ⚠</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">「为什么实测误差比标准误小那么多」</p>
+<p><strong>原因：这个函数的方差很小。</strong></p>
+<p><strong>重新审视</strong>：</p>
+<p><span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\([0,1]\)</span> 上的取值从 <span class="arithmatex">\(1\)</span> 变到 <span class="arithmatex">\(0.3679\)</span> —— <strong>变化不大</strong> ✓</p>
+<p><strong>所以方差小、Monte Carlo 表现好</strong> ✓</p>
+<p><strong>但也说明「标准误公式中的 <span class="arithmatex">\(\sigma\)</span> 需要正确估计」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>估计方式</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用上面的 <span class="arithmatex">\(E[f^{2}]\)</span> 算</td>
+<td><span class="arithmatex">\(0.2010\)</span></td>
+</tr>
+<tr>
+<td><strong>用样本方差算</strong></td>
+<td><strong>更准</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>真正的标准误应由样本估计</strong>：</p>
+<div class="arithmatex">\[
+\hat{\text{SE}} = \frac{s}{\sqrt N},\qquad s^{2} = \frac{1}{N-1}\sum(f(x_{i})-\bar f)^{2}
+\]</div>
+<p><strong>这才是实践中应报告的量</strong> ✓</p>
+<p><strong>与「确定性求积」的对比（<span class="arithmatex">\(10^{-6}\)</span> 精度）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>需要的求值次数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Simpson</strong></td>
+<td><span class="arithmatex">\(\approx14\)</span> ✓</td>
+</tr>
+<tr>
+<td>梯形</td>
+<td><span class="arithmatex">\(\approx250\)</span></td>
+</tr>
+<tr>
+<td><strong>Monte Carlo</strong></td>
+<td><span class="arithmatex">\(\approx10^{4}\)</span>–<span class="arithmatex">\(10^{5}\)</span> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一维问题上 Monte Carlo 差 3–4 个数量级</strong> ✗</p>
+<p><strong>但换到高维</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>Simpson（每维 10 点）</th>
+<th>Monte Carlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(10\)</span> ✓</td>
+<td><span class="arithmatex">\(10^{4}\)</span> ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(10^{3}\)</span> ✓</td>
+<td><span class="arithmatex">\(10^{4}\)</span> ⚠</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(\mathbf{10^{10}}\)</span> ✗</td>
+<td><strong><span class="arithmatex">\(10^{4}\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><strong><span class="arithmatex">\(10^{100}\)</span></strong> ✗✗</td>
+<td><strong><span class="arithmatex">\(10^{4}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「Monte Carlo 是唯一可行的高维积分方法」的原因</strong> ✓</p>
+<p><strong>实用判断</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(d\leq3\)</span></td>
+<td><strong>确定性求积（Gauss）</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d = 4\)</span>–<span class="arithmatex">\(10\)</span></td>
+<td>稀疏网格或 MC</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d&gt;10\)</span></td>
+<td><strong>Monte Carlo / QMC</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「维度是分水岭」这个结论在工程中非常实用</strong> ——
+它决定了「用哪一类算法」✓</p>
+</div>
+<hr />
+<h2 id="_11">六、用在哪些课程里<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<h3 id="_12">无人系统自主决策与优化 · 梯度与期望<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>数值梯度</strong>只在无法自动微分时使用（代价高、精度低）⚠</li>
+<li><strong>策略梯度中的期望</strong>用 Monte Carlo 估计（高维积分）✓</li>
+<li><strong>稀疏奖励的评估</strong>需要重要性采样（否则采不到稀有事件）</li>
+<li><strong>轨迹积分</strong>用 RK4 或自适应方法（ODE 模块已述）</li>
+</ul>
+<h3 id="_13">机器人学 · 雅可比与位姿估计<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>雅可比矩阵的数值近似</strong>（当解析式难写时）需选合适的 <span class="arithmatex">\(h\)</span> ⚠</li>
+<li><strong>视觉里程计的重投影误差</strong>对参数求导——解析式复杂时用数值差分</li>
+<li><strong>标定的精度上限</strong>受数值微分精度限制（<span class="arithmatex">\(h^{*}\sim\epsilon^{1/3}\)</span>）</li>
+<li><strong>位姿积分的长期漂移</strong>需要周期性重观测修正</li>
+</ul>
+<h3 id="_14">现代数字信号处理 · 滤波器与谱估计<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>模拟滤波器的离散化</strong>（双线性变换）本质是数值积分 ✓</li>
+<li><strong>功率谱估计</strong>的积分（求总功率）用梯形法</li>
+<li><strong>卷积的数值计算</strong>与积分同源（卷积就是「滑动积分」）✓</li>
+<li><strong>相位的数值微分</strong>（求瞬时频率）需注意噪声放大 ⚠</li>
+</ul>
+<hr />
+<h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 为什么数值微分不能通过「把 <span class="arithmatex">\(h\)</span> 取得极小」来提高精度？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想差分是「两个相近数相减」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为舍入误差 <span class="arithmatex">\(\propto\epsilon/h\)</span> 会随 <span class="arithmatex">\(h\)</span> 减小而增大，最终反超截断误差。</strong></p>
+<p><strong>两个误差的方向相反</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>误差</th>
+<th>随 <span class="arithmatex">\(h\)</span> 减小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>截断误差</strong> <span class="arithmatex">\(\propto h^{p}\)</span></td>
+<td><strong>下降</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>舍入误差</strong> <span class="arithmatex">\(\propto\epsilon/h\)</span></td>
+<td><strong>上升</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>总误差呈 U 形</strong>，最低点对应最优 <span class="arithmatex">\(h\)</span> ✓</p>
+<p><strong>具体量级（中心差分）</strong>：</p>
+<div class="arithmatex">\[
+E(h)\approx\frac{h^{2}}{6}\lvert f'''\rvert+\frac{\epsilon\lvert f\rvert}{h}
+\]</div>
+<p><strong>令导数为零</strong>：</p>
+<div class="arithmatex">\[
+\frac{h\lvert f'''\rvert}{3} = \frac{\epsilon\lvert f\rvert}{h^{2}}\implies h^{3} = \frac{3\epsilon\lvert f\rvert}{\lvert f'''\rvert}
+\]</div>
+<div class="arithmatex">\[
+h^{*} = \left(\frac{3\epsilon\lvert f\rvert}{\lvert f'''\rvert}\right)^{1/3}\approx6\times10^{-6}
+\]</div>
+<p><strong>最小可达误差</strong>：</p>
+<div class="arithmatex">\[
+E_{\min}\sim\epsilon^{2/3}\approx10^{-10}
+\]</div>
+<p><strong>所以中心差分最多精确到 <span class="arithmatex">\(10^{-10}\)</span></strong> ✗（而非 <span class="arithmatex">\(10^{-16}\)</span>。）</p>
+<p><strong>两个极端的表现</strong>：</p>
+<p><strong><span class="arithmatex">\(h\)</span> 太小（如 <span class="arithmatex">\(10^{-17}\)</span>）→ 差分恒为零</strong> ✗✗</p>
+<p><strong>原因</strong>：<span class="arithmatex">\(x+h\)</span> 在浮点中<strong>等于 <span class="arithmatex">\(x\)</span></strong>：</p>
+<div class="arithmatex">\[
+1+10^{-17} = 1\quad\text{（双精度）}
+\]</div>
+<p><strong>所以 <span class="arithmatex">\(f(x+h)-f(x) = 0\)</span>，商也为 <span class="arithmatex">\(0\)</span></strong> ✗</p>
+<p><strong><span class="arithmatex">\(h\)</span> 太大（如 <span class="arithmatex">\(1\)</span>）</strong> → 截断误差大：</p>
+<div class="arithmatex">\[
+\frac{1^{2}}{6}\times0.540302 = 0.090
+\]</div>
+<p><strong>误差 9%</strong> ✗</p>
+<p><strong>正确的选择</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>推荐的 <span class="arithmatex">\(h\)</span> 量级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向/后向差分</td>
+<td><span class="arithmatex">\(10^{-8}\)</span></td>
+</tr>
+<tr>
+<td><strong>中心差分</strong></td>
+<td><span class="arithmatex">\(10^{-5}\)</span></td>
+</tr>
+<tr>
+<td>五点公式</td>
+<td><span class="arithmatex">\(10^{-3}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>更根本的解决方案</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>精度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>复步长法</strong></td>
+<td>可达机器精度 ✓</td>
+</tr>
+<tr>
+<td><strong>自动微分（AD）</strong></td>
+<td><strong>精确（无极小 <span class="arithmatex">\(h\)</span> 问题）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>复步长法的原理</strong>：</p>
+<div class="arithmatex">\[
+f(x+ih) = f(x)+ihf'(x)-\frac{h^{2}}{2}f''(x)+\cdots
+\]</div>
+<p><strong>取虚部除以 <span class="arithmatex">\(h\)</span></strong>：</p>
+<div class="arithmatex">\[
+\frac{\operatorname{Im}f(x+ih)}{h} = f'(x)+O(h^{3})
+\]</div>
+<p><strong>关键：没有「两个相近数相减」</strong> ✓ 所以可以取很小的 <span class="arithmatex">\(h\)</span>。</p>
+<p><strong>工程建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有解析导数</td>
+<td><strong>直接用解析式</strong> ✓</td>
+</tr>
+<tr>
+<td>有自动微分框架</td>
+<td><strong>用 AD</strong> ✓</td>
+</tr>
+<tr>
+<td>只有黑箱函数</td>
+<td>中心差分（<span class="arithmatex">\(h\approx10^{-5}\)</span>）⚠</td>
+</tr>
+<tr>
+<td>C/C++ 手写</td>
+<td>复步长法 ✓</td>
+</tr>
+</tbody>
+</table>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：Simpson 法则比梯形法则好，因为它对更高次多项式精确。</p>
+<details class="note">
+<summary>提示</summary>
+<p>这个说法对，但是否完整？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>说法正确，但不完整 —— 还有两个更重要的优势。</strong></p>
+<p><strong>三个优势（按重要性排序）</strong>：</p>
+<p><strong>优势 1：误差阶更高（<span class="arithmatex">\(O(h^{4})\)</span> vs <span class="arithmatex">\(O(h^{2})\)</span>）</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>梯形误差</th>
+<th>Simpson 误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(8\)</span></td>
+<td><span class="arithmatex">\(9.6\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(2.0\times10^{-6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(16\)</span></td>
+<td><span class="arithmatex">\(2.4\times10^{-4}\)</span></td>
+<td><span class="arithmatex">\(1.2\times10^{-7}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>同精度下 Simpson 需要少得多的点</strong>：</p>
+<p><strong>要误差 <span class="arithmatex">\(10^{-6}\)</span></strong>：梯形需 <span class="arithmatex">\(n\approx250\)</span>；Simpson 需 <span class="arithmatex">\(n\approx14\)</span> ✓</p>
+<p><strong>优势 2：对三次多项式精确（误差项从 <span class="arithmatex">\(f^{(4)}\)</span> 开始）</strong> ✓</p>
+<p><strong>这一点很重要</strong>：<strong>梯形法则的误差含 <span class="arithmatex">\(f''\)</span>，而 Simpson 不含 <span class="arithmatex">\(f''\)</span> 与 <span class="arithmatex">\(f'''\)</span></strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>误差项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形</td>
+<td><span class="arithmatex">\(-\frac{(b-a)h^{2}}{12}f''(\xi)\)</span></td>
+</tr>
+<tr>
+<td><strong>Simpson</strong></td>
+<td><span class="arithmatex">\(-\frac{(b-a)h^{4}}{180}f^{(4)}(\xi)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>当 <span class="arithmatex">\(f''\)</span> 有奇点或变化剧烈时，Simpson 尤其有利</strong> ✓</p>
+<p><strong>优势 3：同样的「光滑性假设」下精度更高</strong></p>
+<p><strong>这是「免费」的</strong> —— Simpson 只比梯形多算一个中间点的加权。</p>
+<p><strong>但有两个限制</strong>：</p>
+<p><strong>限制 1：<span class="arithmatex">\(n\)</span> 必须为偶数</strong> ⚠</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>对 <span class="arithmatex">\(n\)</span> 的要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯形</td>
+<td>任意 ✓</td>
+</tr>
+<tr>
+<td><strong>Simpson</strong></td>
+<td><strong>必须偶数</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以自适应细分时 Simpson 需要成对细分</strong> ⚠</p>
+<p><strong>限制 2：对被积函数的光滑性要求更高</strong></p>
+<p><strong>Simpson 的误差含 <span class="arithmatex">\(f^{(4)}\)</span></strong> ——
+若 <span class="arithmatex">\(f^{(4)}\)</span> 在区间内很大（如陡变），优势会减弱 ⚠</p>
+<p><strong>极端情形</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>Simpson 是否仍优</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>光滑（如 <span class="arithmatex">\(e^{-x^{2}}\)</span>）</td>
+<td><strong>✓ 明显更优</strong></td>
+</tr>
+<tr>
+<td>有跳跃间断</td>
+<td><strong>✗ 两者都差</strong></td>
+</tr>
+<tr>
+<td>有尖点</td>
+<td>⚠ 优势减弱</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对间断函数的处理</strong>：</p>
+<p><strong>正确做法是「在间断点处拆开积分区间」</strong> ✓
+而不是用任意高阶方法硬算。</p>
+<p><strong>工程选择的实用建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>光滑函数</td>
+<td><strong>Simpson</strong> ✓</td>
+</tr>
+<tr>
+<td>需要自适应、粗糙函数</td>
+<td>梯形 + 自适应</td>
+</tr>
+<tr>
+<td>只有奇数个采样点</td>
+<td>梯形（或补一个点）</td>
+</tr>
+<tr>
+<td>极高精度需求</td>
+<td><strong>Romberg（梯形外推）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「Romberg」值得特别提一下</strong>：</p>
+<p><strong>它从梯形出发，用 Richardson 外推逐层提升阶</strong> ——
+第一层外推<strong>恰好得到 Simpson</strong> ✓</p>
+<p><strong>所以「Simpson = 梯形的 Richardson 外推」</strong> ——
+这也是「为什么 Simpson 对三次多项式精确」的深层原因 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么高维积分要用 Monte Carlo 而不是 Simpson？</p>
+<details class="note">
+<summary>提示</summary>
+<p>比较两种方法的误差随维度的变化。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为网格法的计算量随维度指数增长（维度的诅咒），而 Monte Carlo 的误差与维度无关。</strong></p>
+<p><strong>网格法的代价</strong>：</p>
+<p>设每维用 <span class="arithmatex">\(n\)</span> 个点，则 <span class="arithmatex">\(d\)</span> 维需要 <span class="arithmatex">\(n^{d}\)</span> 个点 ✗</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(d\)</span></th>
+<th><span class="arithmatex">\(n = 10\)</span> 时的点数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(10^{3}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(6\)</span></td>
+<td><span class="arithmatex">\(10^{6}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(\mathbf{10^{10}}\)</span> ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><span class="arithmatex">\(10^{100}\)</span> ✗✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>误差与成本的关系（网格法）</strong>：</p>
+<p>Simpson 在 <span class="arithmatex">\(d\)</span> 维的误差：</p>
+<div class="arithmatex">\[
+E\sim h^{4}\sim n^{-4/d}
+\]</div>
+<p><strong>注意指数含 <span class="arithmatex">\(1/d\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(d\)</span></th>
+<th>要对分误差（<span class="arithmatex">\(n\to2n\)</span>）误差降多少</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(\times1/16\)</span> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span></td>
+<td><span class="arithmatex">\(\times1/4\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(\times1/2.14\)</span> ⚠</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><span class="arithmatex">\(\times1.028\)</span> ✗✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>维度高时，加密网格几乎不改善精度</strong> ✗</p>
+<p><strong>Monte Carlo 的误差</strong>：</p>
+<div class="arithmatex">\[
+\text{误差}\sim\frac{\sigma}{\sqrt N}
+\]</div>
+<p><strong>与 <span class="arithmatex">\(d\)</span> 无关</strong> ✓</p>
+<p><strong>所以「降误差 10 倍 = 样本增 100 倍」在任何维度都成立</strong> ✓</p>
+<p><strong>交叉点（粗略估计）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(d\)</span></th>
+<th>更优的方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span>–<span class="arithmatex">\(3\)</span></td>
+<td><strong>确定性求积</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span>–<span class="arithmatex">\(8\)</span></td>
+<td>稀疏网格（Smolyak）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(&gt;10\)</span></strong></td>
+<td><strong>Monte Carlo / QMC</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Monte Carlo 的代价</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>缺点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>收敛慢（<span class="arithmatex">\(N^{-1/2}\)</span>）</td>
+<td>要 3 位精度需 <span class="arithmatex">\(10^{6}\)</span> 样本 ✗</td>
+</tr>
+<tr>
+<td>有随机误差</td>
+<td>需报告置信区间 ⚠</td>
+</tr>
+<tr>
+<td>浪费「光滑性」信息</td>
+<td>对光滑函数效率低 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一行值得强调</strong>：</p>
+<p><strong>Monte Carlo 完全忽略了函数的光滑性</strong> ——
+它对光滑函数的效率远低于 Gauss 求积 ✗</p>
+<p><strong>所以「用 MC 做一维积分」是浪费</strong> ✓
+<strong>但「用 Gauss 做 100 维积分」是不可行</strong> ✗</p>
+<p><strong>改善手段（缩小差距）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>手段</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>拟蒙特卡罗（QMC）</strong></td>
+<td>用低差异序列 → 误差可达 <span class="arithmatex">\(\sim N^{-1}\)</span> ✓</td>
+</tr>
+<tr>
+<td>重要性采样</td>
+<td>在有贡献区域多采样 ✓</td>
+</tr>
+<tr>
+<td><strong>分层采样</strong></td>
+<td>降低方差 ✓</td>
+</tr>
+<tr>
+<td>控制变量法</td>
+<td>减去已知的相似函数 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>QMC 的实用价值</strong>：</p>
+<p><strong>在中等维度（<span class="arithmatex">\(d\sim10\)</span>）下，QMC 常比 MC 快 10–100 倍</strong> ✓</p>
+<p><strong>所以现代金融工程（高维期权定价）大量用 QMC</strong> ✓</p>
+<p><strong>工程结论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>首选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span>–<span class="arithmatex">\(3\)</span></td>
+<td>Gauss 求积 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(4\)</span>–<span class="arithmatex">\(10\)</span></td>
+<td>QMC 或稀疏网格 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(&gt;10\)</span></td>
+<td>MC / QMC ✓</td>
+</tr>
+<tr>
+<td>被积函数有奇点</td>
+<td>MC（对奇点不敏感）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一行是 MC 的一个「意外的优势」</strong>：</p>
+<p><strong>Monte Carlo 对函数的奇点与大变化不敏感</strong> ✓
+（因为它只求点值、不做插值。）</p>
+<p><strong>这就是「粒子滤波能用在高维、非高斯、有跳变的状态估计上」的原因</strong> ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么「五点差分公式」比「中心差分」精度更高？</p>
+<details class="note">
+<summary>提示</summary>
+<p>对称模板的哪些误差项会抵消？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为对称性使更多偶数阶误差项相互抵消。</strong></p>
+<p><strong>对比两个公式</strong>：</p>
+<p><strong>中心差分（3 点对称）</strong>：</p>
+<div class="arithmatex">\[
+f'(x)\approx\frac{f(x+h)-f(x-h)}{2h}
+\]</div>
+<p><strong>误差</strong>：</p>
+<div class="arithmatex">\[
+-\frac{h^{2}}{6}f'''(\xi)
+\]</div>
+<p><strong>五点公式（5 点对称）</strong>：</p>
+<div class="arithmatex">\[
+f'(x)\approx\frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
+\]</div>
+<p><strong>误差</strong>：</p>
+<div class="arithmatex">\[
+\frac{h^{4}}{30}f^{(5)}(\xi)
+\]</div>
+<p><strong>关键：抵消的机制</strong></p>
+<p><strong>用泰勒展开看系数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>中心差分（3 点）</th>
+<th>五点公式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f'\)</span></td>
+<td>✓ 保留</td>
+<td>✓ 保留</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f''\)</span></td>
+<td>抵消（对称）</td>
+<td>抵消（对称）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f'''\)</span></td>
+<td>保留 ✗</td>
+<td><strong>抵消</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f^{(4)}\)</span></td>
+<td>抵消（对称）</td>
+<td>抵消（对称）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(f^{(5)}\)</span></td>
+<td>保留</td>
+<td><strong>保留</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>规律</strong>：<strong>对称模板自动抵消全部偶数阶导数项</strong> ✓
+（因为奇函数的项在 <span class="arithmatex">\(h\to-h\)</span> 时变号。）</p>
+<p><strong>「抵消更多项」的方法</strong>：</p>
+<p><strong>增加模板点数（保持对称）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>模板</th>
+<th>点数</th>
+<th>误差阶</th>
+<th>抵消到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中心</td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(O(h^{2})\)</span></td>
+<td><span class="arithmatex">\(f''\)</span></td>
+</tr>
+<tr>
+<td><strong>五点</strong></td>
+<td><strong><span class="arithmatex">\(5\)</span></strong></td>
+<td><strong><span class="arithmatex">\(O(h^{4})\)</span></strong></td>
+<td><strong><span class="arithmatex">\(f^{(4)}\)</span></strong> ✓</td>
+</tr>
+<tr>
+<td>七点</td>
+<td><span class="arithmatex">\(7\)</span></td>
+<td><span class="arithmatex">\(O(h^{6})\)</span></td>
+<td><span class="arithmatex">\(f^{(6)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>（奇数阶项靠「加权系数的特定选取」抵消 —— 这就是推导时要解方程组的原因。）</strong></p>
+<p><strong>实际收益（误差量级）</strong>：</p>
+<p><strong>若 <span class="arithmatex">\(\lvert f'''\rvert\approx\lvert f^{(5)}\rvert\approx1\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(h\)</span></th>
+<th>中心差分误差</th>
+<th>五点误差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(10^{-2}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-5}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-10}\)</span> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10^{-3}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-7}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-16}\)</span>（机器精度）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>五点公式在 <span class="arithmatex">\(h = 10^{-3}\)</span> 就能达到机器精度</strong> ✓</p>
+<p><strong>最优步长也更大</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th><span class="arithmatex">\(h^{*}\)</span></th>
+<th><span class="arithmatex">\(E_{\min}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中心差分</td>
+<td><span class="arithmatex">\(\sim10^{-5}\)</span></td>
+<td><span class="arithmatex">\(\sim10^{-10}\)</span></td>
+</tr>
+<tr>
+<td><strong>五点</strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-3}\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\sim10^{-13}\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「<span class="arithmatex">\(h^{*}\)</span> 更大」是一个被低估的优势</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>舍入误差更小</strong></td>
+<td><span class="arithmatex">\(\propto\epsilon/h\)</span> ✓</td>
+</tr>
+<tr>
+<td>数值更稳定</td>
+<td>不易受抵消影响</td>
+</tr>
+<tr>
+<td>对噪声更宽容</td>
+<td>适合含噪数据 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>求值次数从 <span class="arithmatex">\(2\)</span> 增到 <span class="arithmatex">\(4\)</span></td>
+<td>贵一倍 ⚠</td>
+</tr>
+<tr>
+<td><strong>边界处无法使用</strong></td>
+<td>需要 <span class="arithmatex">\(f(x\pm2h)\)</span> ✗</td>
+</tr>
+<tr>
+<td>对噪声放大</td>
+<td>权重含 <span class="arithmatex">\(\pm8\)</span>，放大噪声 ⚠</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一点值得说明</strong>：</p>
+<p><strong>五点公式的权重大（<span class="arithmatex">\(8/12\)</span>）→ 对小扰动更敏感</strong> ⚠</p>
+<p><strong>所以「数据含噪时，高阶差分不一定更好」</strong> ✓</p>
+<p><strong>实用的选择建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解析函数、无噪声</td>
+<td><strong>五点</strong> ✓</td>
+</tr>
+<tr>
+<td>含噪数据</td>
+<td><strong>中心差分</strong>（甚至更简单的）⚠</td>
+</tr>
+<tr>
+<td>边界处</td>
+<td>单侧高阶公式</td>
+</tr>
+<tr>
+<td><strong>需要机器精度</strong></td>
+<td><strong>复步长法或 AD</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「含噪数据用低阶差分」是一个实用的经验法则</strong> ✓</p>
+<p><strong>原因是「偏差-方差权衡」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>偏差</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>五点</td>
+<td><strong>小</strong> ✓</td>
+<td><strong>大</strong> ✗</td>
+</tr>
+<tr>
+<td>中心</td>
+<td>中</td>
+<td>中</td>
+</tr>
+<tr>
+<td>前向</td>
+<td>大 ✗</td>
+<td><strong>小</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>与统计中的「偏差-方差」以及「浮点数与误差」一页的
+「截断 vs 舍入」是同一个权衡的三个面孔</strong> ✓</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../linear-solve/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 线性方程组求解">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                线性方程组求解
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../lagrangian-mechanics/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

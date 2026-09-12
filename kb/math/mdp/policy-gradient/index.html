@@ -1,0 +1,5604 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/mdp/policy-gradient/">
+      
+      
+        <link rel="prev" href="../td-learning/">
+      
+      
+        <link rel="next" href="../../graph-theory/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>策略梯度 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              策略梯度
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、目标函数与策略梯度定理
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、目标函数与策略梯度定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目标函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        策略梯度定理
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reinforce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、REINFORCE 算法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、基线与优势函数（降方差的核心）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、基线与优势函数（降方差的核心）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么可以减去基线
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        优势函数
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actor-critic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、Actor-Critic
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、Actor-Critic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gae-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GAE：偏差-方差的连续调节
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PPO：限制更新幅度
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：验证基线不改变期望
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-g_t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：优势函数比 \(G_t\) 更好的数值例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3gae-lambda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：GAE 的 \(\lambda\) 取值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4ppo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：PPO 裁剪的实际效果
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 连续控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 序列决策与生成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 运动与操作
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">机器人学</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材与经典论文术语撰写（策略梯度、REINFORCE 等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../td-learning/">td-learning</a></span></div></div>
+
+<h1 id="_1">策略梯度<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前面几页的强化学习方法都基于<strong>价值函数</strong>：先学 <span class="arithmatex">\(Q\)</span> 或 <span class="arithmatex">\(V\)</span>，再据此选动作。
+这一页走<strong>另一条路</strong>：</p>
+<blockquote>
+<p><strong>直接对策略参数求梯度，用梯度上升改进策略。</strong></p>
+</blockquote>
+<p>这就是<strong>策略梯度</strong>。它比价值方法更适合<strong>连续动作</strong>与<strong>随机策略</strong>。</p>
+<div class="admonition tip">
+<p class="admonition-title">两条技术路线的对比（这是理解本页的框架）</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>价值方法（Q-learning 等）</th>
+<th><strong>策略梯度</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学什么</td>
+<td><span class="arithmatex">\(Q(s,a)\)</span> 或 <span class="arithmatex">\(V(s)\)</span></td>
+<td><strong>直接学 <span class="arithmatex">\(\pi_\theta(a\mid s)\)</span></strong></td>
+</tr>
+<tr>
+<td>怎么选动作</td>
+<td><span class="arithmatex">\(\arg\max_a Q(s,a)\)</span></td>
+<td><strong>从 <span class="arithmatex">\(\pi_\theta\)</span> 采样</strong></td>
+</tr>
+<tr>
+<td>连续动作</td>
+<td><strong>困难</strong>（要搜索/近似优化）✗</td>
+<td><strong>自然支持</strong> ✓</td>
+</tr>
+<tr>
+<td>随机策略</td>
+<td>间接（如 <span class="arithmatex">\(\varepsilon\)</span>-贪心）</td>
+<td><strong>直接参数化</strong> ✓</td>
+</tr>
+<tr>
+<td>收敛性</td>
+<td>可能震荡（<span class="arithmatex">\(\arg\max\)</span> 不连续）</td>
+<td><strong>梯度上升，平滑</strong> ✓</td>
+</tr>
+<tr>
+<td>样本效率</td>
+<td>通常更高</td>
+<td>通常更低</td>
+</tr>
+<tr>
+<td>方差</td>
+<td>——</td>
+<td><strong>高</strong>（本页核心难题）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个最关键的优势</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>连续动作空间</strong></td>
+<td>不需要在连续空间上做 <span class="arithmatex">\(\arg\max\)</span> ✓</td>
+</tr>
+<tr>
+<td><strong>随机策略</strong></td>
+<td>可以直接参数化概率分布 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本页的主线</strong>：<strong>如何求梯度 → 如何降低方差 → Actor-Critic 与 PPO。</strong></p>
+</div>
+<hr />
+<h2 id="_2">一、目标函数与策略梯度定理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">目标函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>策略</strong>用参数化分布表示（如 softmax、高斯）：</p>
+<div class="arithmatex">\[
+\pi_\theta(a\mid s)
+\]</div>
+<p><strong>目标</strong>：最大化期望回报</p>
+<div class="arithmatex">\[
+J(\theta) = E_{\tau\sim\pi_\theta}[R(\tau)]
+\]</div>
+<p>其中 <span class="arithmatex">\(\tau = (s_0,a_0,s_1,a_1,\dots)\)</span> 是一条<strong>轨迹</strong>，
+<span class="arithmatex">\(R(\tau)\)</span> 是它的累积回报。</p>
+<p><strong>梯度上升</strong>：</p>
+<div class="arithmatex">\[
+\theta\leftarrow\theta+\alpha\nabla_\theta J(\theta)
+\]</div>
+<h3 id="_4">策略梯度定理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：<span class="arithmatex">\(J\)</span> 的期望<strong>依赖 <span class="arithmatex">\(\theta\)</span></strong>（因为轨迹分布依赖 <span class="arithmatex">\(\theta\)</span>），
+而轨迹是<strong>离散采样</strong>的 —— 怎么求导？</p>
+<p><strong>关键技巧：对数导数技巧（log-derivative trick）</strong></p>
+<div class="admonition note">
+<p class="admonition-title">「对数导数技巧」的完整推导（这是本页的数学核心）</p>
+<p><strong>恒等式</strong>：</p>
+<div class="arithmatex">\[
+\nabla_\theta p_\theta(\tau) = p_\theta(\tau)\nabla_\theta\log p_\theta(\tau)
+\]</div>
+<p><strong>验证</strong>：由 <span class="arithmatex">\(\nabla\log f = \frac{\nabla f}{f}\)</span> 得</p>
+<div class="arithmatex">\[
+p_\theta(\tau)\nabla_\theta\log p_\theta(\tau) = p_\theta(\tau)\cdot\frac{\nabla_\theta p_\theta(\tau)}{p_\theta(\tau)} = \nabla_\theta p_\theta(\tau) \;\checkmark
+\]</div>
+<p><strong>作用</strong>：<strong>把「对概率求导」变成「对对数求导再乘概率」</strong> ——
+这样就能写成<strong>期望</strong>形式，从而<strong>用采样估计</strong> ✓</p>
+<p><strong>代入目标函数</strong>：</p>
+<div class="arithmatex">\[
+\nabla_\theta J = \nabla_\theta\sum_\tau p_\theta(\tau)R(\tau) = \sum_\tau\nabla_\theta p_\theta(\tau)R(\tau)
+\]</div>
+<p><strong>用恒等式</strong>：</p>
+<div class="arithmatex">\[
+= \sum_\tau p_\theta(\tau)\nabla_\theta\log p_\theta(\tau)R(\tau) = E_{\tau}\big[R(\tau)\nabla_\theta\log p_\theta(\tau)\big]
+\]</div>
+<p><strong>这就是</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ \nabla_\theta J = E_{\tau\sim\pi_\theta}\Big[R(\tau)\sum_{t}\nabla_\theta\log\pi_\theta(a_t\mid s_t)\Big]\ }
+\]</div>
+<p><strong>两个关键点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>期望可以用采样估计</strong></td>
+<td>跑若干条轨迹求平均 ✓</td>
+</tr>
+<tr>
+<td><strong>不需要知道环境模型</strong></td>
+<td>梯度里没有转移概率 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二点极其重要</strong>：<strong>这就是「无模型」（model-free）的来源</strong> ✓</p>
+<p><strong>进一步的化简</strong>：可以证明（利用马尔可夫性）
+只有<strong>动作之后的回报</strong>才影响该动作的梯度：</p>
+<div class="arithmatex">\[
+\nabla_\theta J = E\Big[\sum_t\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot G_t\Big]
+\]</div>
+<p>其中 <span class="arithmatex">\(G_t\)</span> 是从 <span class="arithmatex">\(t\)</span> 开始的<strong>折扣累积回报</strong>：</p>
+<div class="arithmatex">\[
+G_t = \sum_{k=0}^{T-t-1}\gamma^k r_{t+k}
+\]</div>
+<p><strong>为什么可以只用 <span class="arithmatex">\(G_t\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>因果关系</strong></td>
+<td>过去的动作不能影响过去的奖励 ✓</td>
+</tr>
+<tr>
+<td><strong>马尔可夫性</strong></td>
+<td>给定当前状态后，未来与更早的历史条件独立</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这个化简既正确又降低方差</strong> ✓</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="策略梯度与价值方法两条技术路线">
+<defs>
+<marker id="pg1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="pg1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：价值方法 -->
+<rect class="f1" x="20" y="34" width="176" height="34" rx="6"/>
+<text class="lbl-s" x="34" y="55">学 Q(s,a) 或 V(s)</text>
+<line class="a1" x1="108" y1="70" x2="108" y2="90" marker-end="url(#pg1-ah1)"/>
+<rect class="f1" x="20" y="94" width="176" height="34" rx="6"/>
+<text class="lbl-s" x="34" y="115">a = argmax Q(s,a)</text>
+<line class="a1" x1="108" y1="130" x2="108" y2="150" marker-end="url(#pg1-ah1)"/>
+<text class="l1" x="34" y="168">问题：连续动作难 argmax ✗</text>
+<text class="l1" x="34" y="188">argmax 不连续 → 可能震荡 ✗</text>
+<!-- 右：策略梯度 -->
+<rect class="f2" x="228" y="34" width="182" height="34" rx="6"/>
+<text class="lbl-s" x="242" y="55">直接学 π_θ(a|s)</text>
+<line class="a2" x1="319" y1="70" x2="319" y2="90" marker-end="url(#pg1-ah2)"/>
+<rect class="f2" x="228" y="94" width="182" height="34" rx="6"/>
+<text class="lbl-s" x="242" y="115">θ ← θ + α ∇J(θ)</text>
+<line class="a2" x1="319" y1="130" x2="319" y2="150" marker-end="url(#pg1-ah2)"/>
+<text class="l2" x="242" y="168">支持连续动作 ✓</text>
+<text class="l2" x="242" y="188">自然支持随机策略 ✓</text>
+<!-- 底部：核心公式 -->
+<line class="gd" x1="14" y1="204" x2="416" y2="204" stroke-dasharray="4 4"/>
+<text class="lbl-s" x="14" y="222">∇J = E[ Σ ∇log π_θ(a|s) · G ]</text>
+<text class="lbl-s" x="14" y="240">对数导数技巧让「不可微的采样过程」变成可估计的期望</text>
+</svg>
+<figcaption>图 1　两条技术路线。左：价值方法先学 Q 或 V，再用 argmax 选动作——在连续动作空间中困难，且 argmax 的不连续性可能导致震荡。右：策略梯度直接对策略参数求梯度，天然支持连续动作与随机策略。底部的对数导数技巧是关键：它把「采样过程的不可微性」转化为「可用采样估计的期望」</figcaption>
+</figure>
+
+<hr />
+<h2 id="reinforce">二、REINFORCE 算法<a class="headerlink" href="#reinforce" title="Permanent link">&para;</a></h2>
+<p><strong>把梯度定理写成算法</strong>：</p>
+<div class="arithmatex">\[
+\nabla_\theta J\approx\frac1N\sum_{i=1}^{N}\sum_t\nabla_\theta\log\pi_\theta(a_{i,t}\mid s_{i,t})G_{i,t}
+\]</div>
+<p><strong>算法流程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>用当前 <span class="arithmatex">\(\pi_\theta\)</span> 跑 <span class="arithmatex">\(N\)</span> 条完整轨迹</td>
+</tr>
+<tr>
+<td>2</td>
+<td>算每条轨迹的 <span class="arithmatex">\(G_t\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>算梯度估计</td>
+</tr>
+<tr>
+<td>4</td>
+<td>梯度上升更新 <span class="arithmatex">\(\theta\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>重复</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">REINFORCE 的核心问题：方差极高</p>
+<p><strong>为什么方差高</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(G_t\)</span> 本身是<strong>随机变量</strong></td>
+<td>轨迹随机 → 回报波动大</td>
+</tr>
+<tr>
+<td><strong>只用一条轨迹估计期望</strong></td>
+<td>采样噪声大</td>
+</tr>
+<tr>
+<td>奖励的尺度</td>
+<td>若奖励 <span class="arithmatex">\(100\)</span> 量级，梯度也大</td>
+</tr>
+</tbody>
+</table>
+<p><strong>后果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>后果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>收敛极慢</td>
+<td>需要海量采样 ✗</td>
+</tr>
+<tr>
+<td>学习率难调</td>
+<td>太大学不收敛</td>
+</tr>
+<tr>
+<td>不同任务的梯度尺度差异大</td>
+<td>不能通用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「策略梯度样本效率低」的根源</strong> ✓</p>
+<p><strong>本页后续内容全部围绕「降低方差」展开</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>手段</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>基线（baseline）减方差</strong></td>
+<td>最基础、最有效 ✓</td>
+</tr>
+<tr>
+<td>优势函数 <span class="arithmatex">\(A_t\)</span></td>
+<td>比 <span class="arithmatex">\(G_t\)</span> 更准</td>
+</tr>
+<tr>
+<td>资格迹 / GAE</td>
+<td>偏差-方差折中</td>
+</tr>
+<tr>
+<td>Actor-Critic</td>
+<td>用 <span class="arithmatex">\(V\)</span> 估计基线</td>
+</tr>
+<tr>
+<td>PPO 的裁剪</td>
+<td>限制更新幅度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="_5">三、基线与优势函数（降方差的核心）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="_6">为什么可以减去基线<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><strong>关键结论</strong>：对<strong>任何</strong>只依赖状态 <span class="arithmatex">\(s_t\)</span> 的函数 <span class="arithmatex">\(b(s_t)\)</span>：</p>
+<div class="arithmatex">\[
+E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
+\]</div>
+<p><strong>所以减去它不改变期望</strong>，但<strong>能降低方差</strong> ✓</p>
+<div class="admonition note">
+<p class="admonition-title">「减去基线不改变期望」的证明（很短，值得看）</p>
+<p><strong>关键</strong>：<span class="arithmatex">\(b(s_t)\)</span> 只依赖 <span class="arithmatex">\(s_t\)</span>，而动作 <span class="arithmatex">\(a_t\)</span> 由 <span class="arithmatex">\(\pi_\theta\)</span> 采样。</p>
+<p><strong>计算期望</strong>（对 <span class="arithmatex">\(a_t\)</span> 求期望，<span class="arithmatex">\(s_t\)</span> 固定）：</p>
+<div class="arithmatex">\[
+E_{a_t\sim\pi_\theta}\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)b(s_t)\big]
+= b(s_t)\sum_{a}\pi_\theta(a\mid s_t)\frac{\nabla_\theta\pi_\theta(a\mid s_t)}{\pi_\theta(a\mid s_t)}
+\]</div>
+<p>（用了 <span class="arithmatex">\(\nabla\log\pi = \frac{\nabla\pi}{\pi}\)</span>。）</p>
+<p><strong>化简</strong>：</p>
+<div class="arithmatex">\[
+= b(s_t)\sum_a\nabla_\theta\pi_\theta(a\mid s_t) = b(s_t)\nabla_\theta\underbrace{\sum_a\pi_\theta(a\mid s_t)}_{=1}
+= b(s_t)\nabla_\theta 1 = 0 \;\checkmark
+\]</div>
+<p><strong>关键一步</strong>：<strong>概率之和恒为 1，其梯度为零</strong> ✓</p>
+<p><strong>这说明</strong>：<strong>减去基线是「免费的降方差手段」</strong> ——
+<strong>期望不变，方差变小</strong> ✓</p>
+<p><strong>最优基线的直观选择</strong>：<span class="arithmatex">\(b(s_t)\approx E[G_t\mid s_t] = V^{\pi}(s_t)\)</span> ——
+即「该状态下预期的回报」。</p>
+<p><strong>为什么它最优（直观）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(G_t-b(s_t)\)</span></th>
+<th>该动作的梯度贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回报<strong>高于</strong>平均</td>
+<td><strong>正</strong></td>
+<td><strong>增强该动作</strong> ✓</td>
+</tr>
+<tr>
+<td>回报<strong>低于</strong>平均</td>
+<td><strong>负</strong></td>
+<td><strong>削弱该动作</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这正是我们想要的信号：比平均好就加强，比平均差就削弱</strong> ✓</p>
+</div>
+<h3 id="_7">优势函数<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[
+A^{\pi}(s,a) = Q^{\pi}(s,a)-V^{\pi}(s)
+\]</div>
+<p><strong>含义</strong>：<strong>在状态 <span class="arithmatex">\(s\)</span> 下，选动作 <span class="arithmatex">\(a\)</span> 比「平均水平」好多少</strong> ✓</p>
+<p><strong>用优势替换 <span class="arithmatex">\(G_t\)</span></strong>：</p>
+<div class="arithmatex">\[
+\nabla_\theta J = E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot A^{\pi}(s_t,a_t)\big]
+\]</div>
+<p><strong>为什么优势比 <span class="arithmatex">\(G_t\)</span> 好</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>含义</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(G_t\)</span></td>
+<td>实际回报</td>
+<td>含「状态本身的难度」→ <strong>高</strong> ✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(A_t = G_t-V(s_t)\)</span></strong></td>
+<td><strong>相对优势</strong></td>
+<td><strong>去掉了状态难度</strong> → <strong>低</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体例子说明</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(G_t\)</span></th>
+<th><span class="arithmatex">\(V(s_t)\)</span></th>
+<th><span class="arithmatex">\(A_t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>简单状态下拿 <span class="arithmatex">\(10\)</span> 分（平均也是 <span class="arithmatex">\(10\)</span>）</td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><strong><span class="arithmatex">\(0\)</span></strong>（无优劣）</td>
+</tr>
+<tr>
+<td>困难状态下拿 <span class="arithmatex">\(5\)</span> 分（平均是 <span class="arithmatex">\(2\)</span>）</td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><strong><span class="arithmatex">\(+3\)</span></strong>（<strong>很好</strong>）✓</td>
+</tr>
+<tr>
+<td>简单状态下拿 <span class="arithmatex">\(8\)</span> 分（平均是 <span class="arithmatex">\(10\)</span>）</td>
+<td><span class="arithmatex">\(8\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><strong><span class="arithmatex">\(-2\)</span></strong>（<strong>较差</strong>）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用 <span class="arithmatex">\(G_t\)</span> 会怎么错</strong>：</p>
+<ul>
+<li>「困难状态拿 5 分」和「简单状态拿 5 分」的 <span class="arithmatex">\(G_t\)</span> <strong>相同</strong>，
+  但前者是<strong>很棒的决策</strong>，后者是<strong>很差的决策</strong> ✗</li>
+</ul>
+<p><strong>用优势函数就能区分</strong> ✓</p>
+<hr />
+<h2 id="actor-critic">四、Actor-Critic<a class="headerlink" href="#actor-critic" title="Permanent link">&para;</a></h2>
+<p><strong>核心思想</strong>：<strong>用 critic 估计 <span class="arithmatex">\(V(s)\)</span> 作为基线，减少方差</strong>。</p>
+<div class="arithmatex">\[
+A_t\approx r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
+\]</div>
+<p><strong>为什么这个形式好用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>只需一步</strong></td>
+<td>不需要等整条轨迹结束 ✓</td>
+</tr>
+<tr>
+<td>用 <span class="arithmatex">\(V_\phi\)</span> 引导</td>
+<td>用估计的「未来」代替真实未来</td>
+</tr>
+<tr>
+<td>偏差-方差折中</td>
+<td>有偏但方差小</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个网络的分工</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>角色</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Actor</strong> <span class="arithmatex">\(\pi_\theta\)</span></td>
+<td>决策</td>
+<td><strong>最大化 <span class="arithmatex">\(J\)</span></strong></td>
+</tr>
+<tr>
+<td><strong>Critic</strong> <span class="arithmatex">\(V_\phi\)</span></td>
+<td>评估</td>
+<td><strong>最小化 <span class="arithmatex">\(\delta_t^2\)</span>（TD 误差平方）</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这与「价值方法」的关系</strong>：</p>
+<p><strong>Actor-Critic 是两者的结合</strong> ——
+用价值方法（critic）来降低策略梯度的方差 ✓</p>
+<div class="admonition note">
+<p class="admonition-title">「TD 误差」的多重身份（一个重要洞察）</p>
+<div class="arithmatex">\[
+\delta_t = r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
+\]</div>
+<p><strong>它可以有三种解读</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>身份</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>优势的估计</strong></td>
+<td><span class="arithmatex">\(A_t\approx\delta_t\)</span> ✓</td>
+</tr>
+<tr>
+<td><strong>TD 误差</strong></td>
+<td>critic 的预测误差 ✓</td>
+</tr>
+<tr>
+<td><strong>更新的「意外程度」</strong></td>
+<td>实际比预期好多少</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三种解读都指向同一件事</strong>：</p>
+<div class="arithmatex">\[
+\delta_t = \underbrace{\text{实际得到的}}_{\text{现在}+\\text{折现的未来}} - \underbrace{\text{预期的}}_{\text{critic 的估计}}
+\]</div>
+<p><strong>所以「advantage ≈ TD 误差」是自然的</strong> ——
+两者都在度量「比预期好多少」。</p>
+<p><strong>这也解释了「为什么 Actor-Critic 比 REINFORCE 方差小」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>基线的来源</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REINFORCE</td>
+<td>无（或用 <span class="arithmatex">\(G_t\)</span> 的均值）</td>
+<td>高 ✗</td>
+</tr>
+<tr>
+<td><strong>Actor-Critic</strong></td>
+<td><strong><span class="arithmatex">\(V_\phi(s_t)\)</span>（学习得到）</strong></td>
+<td><strong>低</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价</strong>：<strong>引入偏差</strong>（因为 <span class="arithmatex">\(V_\phi\)</span> 是估计的，不完美）✗</p>
+<p><strong>这就是「偏差-方差权衡」在强化学习中的体现</strong> ✓</p>
+</div>
+<h3 id="gae-">GAE：偏差-方差的连续调节<a class="headerlink" href="#gae-" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：用一步 TD（偏差大）还是用完整 <span class="arithmatex">\(G_t\)</span>（方差大）？</p>
+<p><strong>GAE（广义优势估计）</strong>：</p>
+<div class="arithmatex">\[
+A^{\text{GAE}(\gamma,\lambda)}_t = \sum_{l=0}^{\infty}(\gamma\lambda)^l\delta_{t+l}
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lambda\)</span></th>
+<th>行为</th>
+<th>偏差</th>
+<th>方差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\lambda = 0\)</span></td>
+<td><strong>只用一步 TD</strong></td>
+<td>大</td>
+<td><strong>小</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lambda = 1\)</span></td>
+<td>退化为 <span class="arithmatex">\(G_t-V(s_t)\)</span></td>
+<td><strong>小</strong> ✓</td>
+<td>大</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0&lt;\lambda&lt;1\)</span></td>
+<td><strong>折中</strong>（通常 <span class="arithmatex">\(0.95\)</span>）✓</td>
+<td>中</td>
+<td>中</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「用 <span class="arithmatex">\(\lambda\)</span> 平滑地调节偏差-方差」</strong> ✓</p>
+<p><strong>与资格迹的关系</strong>：</p>
+<div class="arithmatex">\[
+\text{GAE 是「优势函数的资格迹形式」}
+\]</div>
+<p>两者都在做「多步信息的指数加权」。</p>
+<h3 id="ppo">PPO：限制更新幅度<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h3>
+<p><strong>问题</strong>：策略梯度更新可能<strong>步长过大</strong> → 策略突然变差 →
+<strong>训练崩溃</strong> ✗</p>
+<p><strong>PPO 的解决</strong>：<strong>限制新策略与旧策略的比率</strong>：</p>
+<div class="arithmatex">\[
+r_t(\theta) = \frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\text{old}}}(a_t\mid s_t)}
+\]</div>
+<p><strong>裁剪目标</strong>：</p>
+<div class="arithmatex">\[
+L^{\text{CLIP}} = E\Big[\min\big(r_t(\theta)A_t,\ \operatorname{clip}(r_t(\theta),1-\epsilon,1+\epsilon)A_t\big)\Big]
+\]</div>
+<p><strong>含义（关键）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>更新让好动作的概率<strong>增大</strong>（<span class="arithmatex">\(A_t&gt;0\)</span>，<span class="arithmatex">\(r&gt;1\)</span>）</td>
+<td>只允许到 <span class="arithmatex">\(1+\epsilon\)</span> ✗</td>
+</tr>
+<tr>
+<td>更新让坏动作的概率<strong>减小</strong>（<span class="arithmatex">\(A_t&lt;0\)</span>，<span class="arithmatex">\(r&lt;1\)</span>）</td>
+<td>只允许到 <span class="arithmatex">\(1-\epsilon\)</span> ✗</td>
+</tr>
+<tr>
+<td>更新在范围内</td>
+<td><strong>正常梯度</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「取 min」的作用</strong>：<strong>确保裁剪总是「悲观」的</strong> ——
+即使用户想更新更多，目标函数也不会奖励它 ✓</p>
+<p><strong>为什么 PPO 变得非常流行</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>简单</strong></td>
+<td>比 TRPO 简单得多（无需二阶优化）✓</td>
+</tr>
+<tr>
+<td><strong>有效</strong></td>
+<td>在实践中表现稳定</td>
+</tr>
+<tr>
+<td><strong>可复用数据</strong></td>
+<td>同一批数据可以更新多次（重要！）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「可复用数据」的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>每批数据的利用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>朴素策略梯度</td>
+<td><strong>用一次就丢</strong> ✗</td>
+</tr>
+<tr>
+<td><strong>PPO</strong></td>
+<td><strong>多次更新</strong>（因为裁剪限制了分布偏移）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这是 PPO 样本效率较高的关键原因之一</strong> ✓</p>
+<hr />
+<h2 id="_8">五、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：验证基线不改变期望<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设两动作问题，状态固定，<span class="arithmatex">\(\pi_\theta(a_1) = p\)</span>、<span class="arithmatex">\(\pi_\theta(a_2) = 1-p\)</span>。
+验证 <span class="arithmatex">\(E[\nabla_\theta\log\pi\cdot b] = 0\)</span>（<span class="arithmatex">\(b\)</span> 为常数）。</p>
+<details class="note">
+<summary>思路</summary>
+<p>直接算求和，注意 <span class="arithmatex">\(p+(1-p) = 1\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：写出对数梯度</strong></p>
+<p>记 <span class="arithmatex">\(\theta\)</span> 是 <span class="arithmatex">\(\log\frac{p}{1-p}\)</span> 形式的参数。用更直接的方式：
+设策略由 <span class="arithmatex">\(p\)</span> 参数化（<span class="arithmatex">\(\theta\)</span> 通过 <span class="arithmatex">\(p\)</span> 依赖它）。</p>
+<div class="arithmatex">\[
+\log\pi(a_1) = \log p,\qquad \log\pi(a_2) = \log(1-p)
+\]</div>
+<p><strong>第二步：对 <span class="arithmatex">\(p\)</span> 求导</strong></p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial p}\log p = \frac1p,\qquad
+\frac{\partial}{\partial p}\log(1-p) = \frac{-1}{1-p}
+\]</div>
+<p><strong>第三步：算加权和</strong></p>
+<div class="arithmatex">\[
+E\left[\frac{\partial}{\partial p}\log\pi\cdot b\right]
+= b\left[p\cdot\frac1p+(1-p)\cdot\frac{-1}{1-p}\right]
+\]</div>
+<div class="arithmatex">\[
+= b\,[1-1] = 0 \;\checkmark
+\]</div>
+<p><strong>结果</strong>：<strong>期望恰为零</strong> ✓</p>
+<p><strong>关键步骤</strong>：<strong><span class="arithmatex">\(p\cdot\frac1p = 1\)</span> 与 <span class="arithmatex">\((1-p)\cdot\frac{-1}{1-p} = -1\)</span> 恰好抵消</strong> ——
+这正是「概率之和为 1」的体现 ✓</p>
+<p><strong>更一般的形式</strong>（用 <span class="arithmatex">\(\theta\)</span> 而非 <span class="arithmatex">\(p\)</span>）：</p>
+<div class="arithmatex">\[
+\sum_a\pi_\theta(a)\nabla_\theta\log\pi_\theta(a) = \nabla_\theta\sum_a\pi_\theta(a) = \nabla_\theta 1 = 0
+\]</div>
+<p><strong>「概率之和恒为 1，其梯度为零」</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个「零期望」的两个重要推论</p>
+<p><strong>推论 1：基线是免费的降方差工具</strong></p>
+<div class="arithmatex">\[
+E[\nabla\log\pi\cdot(G_t-b(s_t))] = E[\nabla\log\pi\cdot G_t]-0
+\]</div>
+<p><strong>期望不变，但方差可以显著降低</strong> ✓</p>
+<p><strong>推论 2：可以「加」任意与动作无关的量</strong></p>
+<p>这不只是「减法」——<strong>加上任何 <span class="arithmatex">\(b(s_t)\)</span> 也允许</strong> ✓</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法的自由度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基线可以任意选</td>
+<td>只要不依赖动作</td>
+</tr>
+<tr>
+<td><strong>可以选使方差最小的</strong></td>
+<td>即 <span class="arithmatex">\(V(s_t)\)</span> ✓</td>
+</tr>
+<tr>
+<td>可以用任何估计器</td>
+<td>神经网络、蒙特卡洛均值、手工设计</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也解释了「为什么可以用 critic 估计的 <span class="arithmatex">\(V_\phi\)</span> 作基线」</strong> ——
+<strong>即使 <span class="arithmatex">\(V_\phi\)</span> 不准确，期望仍是无偏的</strong> ✓
+（不准确只影响方差降低的效果，不影响正确性。）</p>
+<p><strong>这是 Actor-Critic 理论上的「安全网」</strong> ——
+<strong>critic 学得不好，actor 仍然不会系统性地学错</strong> ✓</p>
+</div>
+<hr />
+<h3 id="2-g_t">例题 2：优势函数比 <span class="arithmatex">\(G_t\)</span> 更好的数值例子<a class="headerlink" href="#2-g_t" title="Permanent link">&para;</a></h3>
+<p>两个状态，各有两动作。数据如下：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>动作</th>
+<th><span class="arithmatex">\(G_t\)</span>（实际回报）</th>
+<th><span class="arithmatex">\(V(s)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s_1\)</span>（简单）</td>
+<td><span class="arithmatex">\(a_1\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_1\)</span>（简单）</td>
+<td><span class="arithmatex">\(a_2\)</span></td>
+<td><span class="arithmatex">\(9\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2\)</span>（困难）</td>
+<td><span class="arithmatex">\(a_1\)</span></td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2\)</span>（困难）</td>
+<td><span class="arithmatex">\(a_2\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>用 <span class="arithmatex">\(G_t\)</span> 与用 <span class="arithmatex">\(A_t\)</span> 分别会怎样更新？</p>
+<details class="note">
+<summary>思路</summary>
+<p>比较两个「都拿 5 分」但状态难度不同的情形。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：算优势</strong></p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>动作</th>
+<th><span class="arithmatex">\(G_t\)</span></th>
+<th><span class="arithmatex">\(V(s)\)</span></th>
+<th><span class="arithmatex">\(A_t = G_t-V\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s_1\)</span></td>
+<td><span class="arithmatex">\(a_1\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><strong><span class="arithmatex">\(0\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_1\)</span></td>
+<td><span class="arithmatex">\(a_2\)</span></td>
+<td><span class="arithmatex">\(9\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><strong><span class="arithmatex">\(-1\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2\)</span></td>
+<td><span class="arithmatex">\(a_1\)</span></td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><strong><span class="arithmatex">\(+3\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2\)</span></td>
+<td><span class="arithmatex">\(a_2\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><strong><span class="arithmatex">\(-1\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二步：用 <span class="arithmatex">\(G_t\)</span> 的更新信号</strong></p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>梯度权重 <span class="arithmatex">\(G_t\)</span></th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s_1,a_1\)</span>（回报 <span class="arithmatex">\(10\)</span>）</td>
+<td><span class="arithmatex">\(+10\)</span></td>
+<td><strong>强增强</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2,a_1\)</span>（回报 <span class="arithmatex">\(5\)</span>）</td>
+<td><span class="arithmatex">\(+5\)</span></td>
+<td><strong>增强（弱）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_1,a_2\)</span>（回报 <span class="arithmatex">\(9\)</span>）</td>
+<td><span class="arithmatex">\(+9\)</span></td>
+<td><strong>也增强</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题 1</strong>：<strong><span class="arithmatex">\(s_1,a_2\)</span> 明明比 <span class="arithmatex">\(a_1\)</span> 差（<span class="arithmatex">\(9&lt;10\)</span>），但 <span class="arithmatex">\(G_t=9&gt;0\)</span> 仍然增强了它</strong> ✗</p>
+<p><strong>问题 2</strong>：<strong><span class="arithmatex">\(s_2,a_1\)</span> 是很好的决策（<span class="arithmatex">\(5\)</span> 远高于平均 <span class="arithmatex">\(2\)</span>），
+但权重 <span class="arithmatex">\(5\)</span> 小于 <span class="arithmatex">\(s_1,a_1\)</span> 的 <span class="arithmatex">\(10\)</span></strong> ——
+<strong>强化学习会「更偏好简单的状态」而非「更好的决策」</strong> ✗</p>
+<p><strong>第三步：用 <span class="arithmatex">\(A_t\)</span> 的更新信号</strong></p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(A_t\)</span></th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s_1,a_1\)</span>（=平均）</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><strong>不更新</strong>（既不好也不坏）✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_1,a_2\)</span>（低于平均）</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><strong>削弱</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2,a_1\)</span>（远高于平均）</td>
+<td><strong><span class="arithmatex">\(+3\)</span></strong></td>
+<td><strong>强增强</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s_2,a_2\)</span>（低于平均）</td>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><strong>削弱</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>完美区分了「好坏」</strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个例子说明了「优势函数为什么必要」</p>
+<p><strong>核心区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>度量什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(G_t\)</span></td>
+<td><strong>绝对回报</strong>（混入了「状态本身有多容易」）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(A_t\)</span></strong></td>
+<td><strong>相对优势</strong>（纯化了「这个决策有多好」）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用 <span class="arithmatex">\(G_t\)</span> 的两个具体问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>好决策在易状态下的 <span class="arithmatex">\(G_t\)</span> 可能更大</td>
+<td><strong>学错优先级</strong> ✗</td>
+</tr>
+<tr>
+<td>差决策在易状态下 <span class="arithmatex">\(G_t\)</span> 仍为正</td>
+<td><strong>错误地增强</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用 <span class="arithmatex">\(A_t\)</span> 的好处</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>只关注决策质量</strong></td>
+<td>与状态难度解耦 ✓</td>
+</tr>
+<tr>
+<td>方差更小</td>
+<td>去掉了「状态难度」这个大变动源 ✓</td>
+</tr>
+<tr>
+<td>学习更稳</td>
+<td>信号更干净</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也解释了「为什么 Actor-Critic 效果好」</strong> ——
+它提供了一个<strong>学习得到的基线</strong> <span class="arithmatex">\(V_\phi\)</span>，
+从而得到接近优势函数的信号 ✓</p>
+<p><strong>工程含义（奖励设计）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只用绝对回报作为奖励</td>
+<td>学习信号被「状态难度」干扰</td>
+</tr>
+<tr>
+<td><strong>做奖励归一化 / 用优势</strong></td>
+<td>信号更纯粹 ✓</td>
+</tr>
+<tr>
+<td>奖励尺度不当（如全是 <span class="arithmatex">\(1000\)</span> 量级）</td>
+<td>梯度爆炸 ✗</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="3gae-lambda">例题 3：GAE 的 <span class="arithmatex">\(\lambda\)</span> 取值<a class="headerlink" href="#3gae-lambda" title="Permanent link">&para;</a></h3>
+<p>某轨迹的 TD 误差为 <span class="arithmatex">\(\delta_0 = 1.0\)</span>、<span class="arithmatex">\(\delta_1 = 0.5\)</span>、<span class="arithmatex">\(\delta_2 = 0.2\)</span>，
+<span class="arithmatex">\(\gamma = 0.9\)</span>。求 <span class="arithmatex">\(\lambda = 0\)</span>、<span class="arithmatex">\(0.95\)</span>、<span class="arithmatex">\(1\)</span> 时的 <span class="arithmatex">\(A_0^{\text{GAE}}\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p><span class="arithmatex">\(A_0 = \sum_l(\gamma\lambda)^l\delta_l\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(\lambda = 0\)</span></strong></p>
+<div class="arithmatex">\[
+A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(A_0 = 1.0\)</span>（<strong>只用第一步</strong>）</p>
+<p><strong>第二步：<span class="arithmatex">\(\lambda = 0.95\)</span></strong></p>
+<p>权重系数 <span class="arithmatex">\(\gamma\lambda = 0.9\times0.95 = 0.855\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(l\)</span></th>
+<th>系数 <span class="arithmatex">\((0.855)^l\)</span></th>
+<th><span class="arithmatex">\(\delta_l\)</span></th>
+<th>贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.855\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.4275\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.731\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0.1462\)</span></td>
+</tr>
+<tr>
+<td><strong>和</strong></td>
+<td></td>
+<td></td>
+<td><strong><span class="arithmatex">\(1.5737\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：<span class="arithmatex">\(A_0\approx1.574\)</span></p>
+<p><strong>第三步：<span class="arithmatex">\(\lambda = 1\)</span></strong></p>
+<p>系数 <span class="arithmatex">\(\gamma\lambda = 0.9\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(l\)</span></th>
+<th>系数 <span class="arithmatex">\((0.9)^l\)</span></th>
+<th><span class="arithmatex">\(\delta_l\)</span></th>
+<th>贡献</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.900\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.450\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.810\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+<td><span class="arithmatex">\(0.162\)</span></td>
+</tr>
+<tr>
+<td><strong>和</strong></td>
+<td></td>
+<td></td>
+<td><strong><span class="arithmatex">\(1.612\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：<span class="arithmatex">\(A_0\approx1.612\)</span></p>
+<p><strong>汇总对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lambda\)</span></th>
+<th><span class="arithmatex">\(A_0\)</span></th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+<td>偏差大、方差小</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(0.95\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.574\)</span></strong></td>
+<td><strong>常用折中</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1.612\)</span></td>
+<td>偏差小、方差大</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition note">
+<p class="admonition-title">从这个计算看  的作用</p>
+<p><strong>观察</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lambda\)</span></th>
+<th>用到的 <span class="arithmatex">\(\delta\)</span> 个数（有效）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span> 个</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.95\)</span></td>
+<td>约 <span class="arithmatex">\(1/(1-0.855)\approx7\)</span> 个</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td>约 <span class="arithmatex">\(1/(1-0.9) = 10\)</span> 个</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「有效视野」的公式</strong>：</p>
+<div class="arithmatex">\[
+\text{有效步数}\approx\frac{1}{1-\gamma\lambda}
+\]</div>
+<p><strong>验证</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\gamma\lambda\)</span></th>
+<th>有效步数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.855\)</span></td>
+<td><span class="arithmatex">\(6.9\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.9\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.99\)</span></td>
+<td><span class="arithmatex">\(100\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了「为什么 <span class="arithmatex">\(\lambda\)</span> 越小方差越小」</strong>：</p>
+<p><strong>用的 <span class="arithmatex">\(\delta\)</span> 越少 → 累积的随机性越少 → 方差越小</strong> ✓</p>
+<p><strong>工程建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th><span class="arithmatex">\(\lambda\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>快速实验</td>
+<td><span class="arithmatex">\(0.95\)</span>（通用默认值）✓</td>
+</tr>
+<tr>
+<td>长程依赖任务</td>
+<td><span class="arithmatex">\(0.99\)</span></td>
+</tr>
+<tr>
+<td>短程/信号强</td>
+<td><span class="arithmatex">\(0\)</span>–<span class="arithmatex">\(0.9\)</span></td>
+</tr>
+<tr>
+<td>理论分析</td>
+<td><span class="arithmatex">\(1\)</span>（无偏）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个重要提醒</strong>：<strong><span class="arithmatex">\(\lambda\)</span> 与 <span class="arithmatex">\(\gamma\)</span> 是耦合的</strong> ——
+关键是乘积 <span class="arithmatex">\(\gamma\lambda\)</span>。</p>
+<p>所以若 <span class="arithmatex">\(\gamma = 0.99\)</span>，则 <span class="arithmatex">\(\lambda = 0.95\)</span> 给的有效步数：</p>
+<div class="arithmatex">\[
+\frac{1}{1-0.99\times0.95} = \frac{1}{1-0.9405} = 16.8
+\]</div>
+<p><strong>比 <span class="arithmatex">\(\gamma=0.9\)</span> 时的 <span class="arithmatex">\(6.9\)</span> 长得多</strong> ✓</p>
+<p><strong>所以调参时要看「<span class="arithmatex">\(\gamma\lambda\)</span>」而非单独看 <span class="arithmatex">\(\lambda\)</span></strong> ✓</p>
+</div>
+<hr />
+<h3 id="4ppo">例题 4：PPO 裁剪的实际效果<a class="headerlink" href="#4ppo" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\epsilon = 0.2\)</span>、<span class="arithmatex">\(A_t = 1.0\)</span>（好动作）。
+分别计算 <span class="arithmatex">\(r_t = 0.5\)</span>、<span class="arithmatex">\(1.0\)</span>、<span class="arithmatex">\(1.5\)</span>、<span class="arithmatex">\(3.0\)</span> 时的 PPO 目标值。</p>
+<details class="note">
+<summary>思路</summary>
+<p><span class="arithmatex">\(L = \min(rA,\ \operatorname{clip}(r,1-\epsilon,1+\epsilon)A)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>参数</strong>：<span class="arithmatex">\(\epsilon = 0.2\)</span>，所以裁剪区间是 <span class="arithmatex">\([0.8,\ 1.2]\)</span>。</p>
+<p><strong>逐个计算</strong>（<span class="arithmatex">\(A = 1.0&gt;0\)</span>）：</p>
+<p><strong>情形 1：<span class="arithmatex">\(r = 0.5\)</span></strong></p>
+<div class="arithmatex">\[
+\operatorname{clip}(0.5,\ 0.8,\ 1.2) = 0.8
+\]</div>
+<div class="arithmatex">\[
+\min(0.5\times1,\ 0.8\times1) = \min(0.5,\ 0.8) = 0.5
+\]</div>
+<p><strong>情形 2：<span class="arithmatex">\(r = 1.0\)</span></strong>（未变）</p>
+<div class="arithmatex">\[
+\operatorname{clip}(1.0) = 1.0
+\]</div>
+<div class="arithmatex">\[
+\min(1.0,\ 1.0) = 1.0
+\]</div>
+<p><strong>情形 3：<span class="arithmatex">\(r = 1.5\)</span></strong></p>
+<div class="arithmatex">\[
+\operatorname{clip}(1.5,\ 0.8,\ 1.2) = 1.2
+\]</div>
+<div class="arithmatex">\[
+\min(1.5,\ 1.2) = 1.2 \;\checkmark
+\]</div>
+<p><strong>被裁剪限制了</strong> ✓（否则会是 <span class="arithmatex">\(1.5\)</span>，鼓励过大的更新。）</p>
+<p><strong>情形 4：<span class="arithmatex">\(r = 3.0\)</span></strong></p>
+<div class="arithmatex">\[
+\operatorname{clip}(3.0) = 1.2
+\]</div>
+<div class="arithmatex">\[
+\min(3.0,\ 1.2) = 1.2 \;\checkmark
+\]</div>
+<p><strong>完全被限制住</strong> ✓</p>
+<p><strong>汇总表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(r_t\)</span></th>
+<th><span class="arithmatex">\(\operatorname{clip}\)</span></th>
+<th><span class="arithmatex">\(\min\)</span></th>
+<th>是否被裁剪</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.8\)</span></td>
+<td><strong><span class="arithmatex">\(0.5\)</span></strong></td>
+<td>否（min 取了 <span class="arithmatex">\(rA\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td>否</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1.5\)</span></td>
+<td><span class="arithmatex">\(1.2\)</span></td>
+<td><strong><span class="arithmatex">\(1.2\)</span></strong></td>
+<td><strong>是</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3.0\)</span></td>
+<td><span class="arithmatex">\(1.2\)</span></td>
+<td><strong><span class="arithmatex">\(1.2\)</span></strong></td>
+<td><strong>是</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">「取 min」的巧妙之处（这是 PPO 的核心设计）</p>
+<p><strong>关键观察</strong>：<strong>对 <span class="arithmatex">\(r&gt;1.2\)</span> 的情形，目标值恒为 <span class="arithmatex">\(1.2\)</span>（不再增长）</strong> ✓</p>
+<p><strong>含义</strong>：<strong>进一步增大 <span class="arithmatex">\(r\)</span> 不会增加目标函数</strong> →
+<strong>梯度为零</strong> → <strong>不会鼓励「走得更远」</strong> ✓</p>
+<p><strong>为什么用 <span class="arithmatex">\(\min\)</span> 而不用 <span class="arithmatex">\(\operatorname{clip}\)</span> 单独</strong>：</p>
+<p>考虑 <strong><span class="arithmatex">\(A&lt;0\)</span></strong>（坏动作）的情形：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>想要的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>减小坏动作的概率</td>
+<td><span class="arithmatex">\(r\)</span> 应该<strong>变小</strong>（<span class="arithmatex">\(r&lt;1\)</span>）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>若只用 clip</strong>：当 <span class="arithmatex">\(r&lt;0.8\)</span> 时，<span class="arithmatex">\(\operatorname{clip}(r) = 0.8\)</span>，
+则目标是 <span class="arithmatex">\(0.8\times A\)</span>（<span class="arithmatex">\(A&lt;0\)</span> → 负值较小）——
+这会<strong>阻止 <span class="arithmatex">\(r\)</span> 继续减小</strong> ✓ 正确。</p>
+<p><strong>但若 <span class="arithmatex">\(r\)</span> 变得很大</strong>（<span class="arithmatex">\(r&gt;1.2\)</span>，即坏动作概率反而增加了）：</p>
+<table>
+<thead>
+<tr>
+<th>计算</th>
+<th>值（<span class="arithmatex">\(A = -1\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(rA\)</span></td>
+<td><span class="arithmatex">\(1.5\times(-1) = -1.5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{clip}(r)A\)</span></td>
+<td><span class="arithmatex">\(1.2\times(-1) = -1.2\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\min\)</span></strong></td>
+<td><strong><span class="arithmatex">\(-1.5\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>取 min 得到 <span class="arithmatex">\(-1.5\)</span></strong> —— <strong>保留了「惩罚」</strong> ✓</p>
+<p><strong>若只用 clip 会得到 <span class="arithmatex">\(-1.2\)</span></strong> —— <strong>削弱了惩罚</strong> ✗</p>
+<p><strong>所以「取 min」保证了「总是采取悲观（保守）的估计」</strong> ✓</p>
+<p><strong>「悲观」的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>悲观选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>好动作（<span class="arithmatex">\(A&gt;0\)</span>）被过度增强</td>
+<td>取较小的目标（限制收益）✓</td>
+</tr>
+<tr>
+<td>坏动作（<span class="arithmatex">\(A&lt;0\)</span>）被过度增强</td>
+<td><strong>取更负的目标（保留惩罚）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种情形都「不鼓励偏离旧策略太远」</strong> ✓</p>
+<p><strong>这就是「信赖域」思想的可实现形式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>实现方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TRPO</td>
+<td>硬约束 KL 散度（需二阶优化）✗</td>
+</tr>
+<tr>
+<td><strong>PPO</strong></td>
+<td><strong>裁剪比率（一阶，简单）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PPO 的成功很大程度来自这个「简单而有效」的设计</strong> ✓</p>
+</div>
+<p>"""</p>
+<hr />
+<h2 id="_9">六、用在哪些课程里<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10">无人系统自主决策与优化 · 连续控制<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>四旋翼姿态控制、机械臂轨迹跟踪</strong>都用连续动作空间的策略梯度</li>
+<li><strong>PPO</strong> 是机器人强化学习最常用的基线算法</li>
+<li><strong>从仿真到实物（sim-to-real）</strong>：策略梯度的随机策略天然支持域随机化 ✓</li>
+<li><strong>多智能体</strong>：MAPPO 等算法是 PPO 的多智能体扩展</li>
+</ul>
+<h3 id="_11">模式识别 · 序列决策与生成<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>序列生成</strong>（文本、语音）可视为 MDP，用策略梯度优化不可微指标</li>
+<li><strong>RLHF</strong>（人类反馈强化学习）用 PPO 微调大模型</li>
+<li><strong>不可微指标的优化</strong>：BLEU、WER 等无法反向传播，
+  用策略梯度的「对数导数技巧」可以得到无偏梯度 ✓</li>
+<li><strong>注意力/路由的随机性</strong>：Gumbel-Softmax 等与策略梯度同源</li>
+</ul>
+<h3 id="_12">机器人学 · 运动与操作<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>连续动作</strong>是机器人控制的常态 → 策略梯度比 DQN 更自然 ✓</li>
+<li><strong>模仿学习 + 策略梯度（GAIL）</strong>：用对抗方式学策略</li>
+<li><strong>PPO / SAC</strong> 是机械臂抓取、足式机器人行走的主流算法</li>
+<li><strong>安全约束</strong>：用约束策略梯度（CPO）保证不违反安全条件</li>
+</ul>
+<hr />
+<h2 id="_13">七、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 为什么策略梯度可以直接处理连续动作空间，而 Q-learning 不行？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想 Q-learning 需要做什么运算。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为 Q-learning 需要 <span class="arithmatex">\(\arg\max_a Q(s,a)\)</span>，而策略梯度不需要。</strong></p>
+<p><strong>Q-learning 的困难</strong>：</p>
+<div class="arithmatex">\[
+\pi(s) = \arg\max_a Q(s,a)
+\]</div>
+<table>
+<thead>
+<tr>
+<th>动作空间</th>
+<th>求 <span class="arithmatex">\(\arg\max\)</span> 的难度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>离散、小</td>
+<td>枚举，可行 ✓</td>
+</tr>
+<tr>
+<td><strong>连续</strong></td>
+<td><strong>需要解一个优化问题</strong> ✗</td>
+</tr>
+<tr>
+<td>高维（如 <span class="arithmatex">\(7\)</span> 自由度机械臂的力矩）</td>
+<td><strong>每步都要优化，代价极高</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>策略梯度的做法</strong>：</p>
+<p><strong>直接输出一个分布</strong>（如高斯）：</p>
+<div class="arithmatex">\[
+\pi_\theta(a\mid s) = N\big(\mu_\theta(s),\ \sigma_\theta^2(s)\big)
+\]</div>
+<p><strong>选动作就是采样</strong>：</p>
+<div class="arithmatex">\[
+a\sim N\big(\mu_\theta(s),\ \sigma_\theta^2(s)\big)
+\]</div>
+<p><strong>完全不需要 <span class="arithmatex">\(\arg\max\)</span></strong> ✓</p>
+<p><strong>对比总结</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>Q-learning</th>
+<th>策略梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>选动作</td>
+<td><span class="arithmatex">\(\arg\max\)</span>（需搜索）✗</td>
+<td><strong>采样</strong>（<span class="arithmatex">\(O(1)\)</span>）✓</td>
+</tr>
+<tr>
+<td>连续动作</td>
+<td>困难</td>
+<td><strong>自然支持</strong> ✓</td>
+</tr>
+<tr>
+<td>动作维度</td>
+<td>维数灾难（枚举）</td>
+<td><strong>不敏感</strong> ✓</td>
+</tr>
+<tr>
+<td>随机性</td>
+<td>需外部加（<span class="arithmatex">\(\varepsilon\)</span>-贪心）</td>
+<td><strong>内建</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>额外好处</strong>：<strong>动作维度增加时，策略梯度的难度增长平缓</strong> ——
+因为网络输出的维度增加是线性的，不需要指数级的枚举 ✓</p>
+<p><strong>代价</strong>：策略梯度<strong>样本效率更低</strong>（需要更多交互）✗ ——
+这就是「连续控制常用 PPO/SAC 而非 DQN」的原因。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 证明：减去只依赖状态 <span class="arithmatex">\(s_t\)</span> 的基线 <span class="arithmatex">\(b(s_t)\)</span> 不改变策略梯度的期望。</p>
+<details class="note">
+<summary>提示</summary>
+<p>对 <span class="arithmatex">\(a_t\)</span> 求期望，利用「概率之和为 1」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>要证的命题</strong>：</p>
+<div class="arithmatex">\[
+E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
+\]</div>
+<p><strong>第一步：写出期望形式</strong></p>
+<p>固定 <span class="arithmatex">\(s_t\)</span>，对 <span class="arithmatex">\(a_t\)</span> 求期望（<span class="arithmatex">\(a_t\sim\pi_\theta\)</span>）：</p>
+<div class="arithmatex">\[
+= \sum_a\pi_\theta(a\mid s_t)\cdot\nabla_\theta\log\pi_\theta(a\mid s_t)\cdot b(s_t)
+\]</div>
+<p><strong>第二步：用对数导数的逆恒等式</strong></p>
+<div class="arithmatex">\[
+\pi_\theta(a\mid s_t)\nabla_\theta\log\pi_\theta(a\mid s_t) = \nabla_\theta\pi_\theta(a\mid s_t)
+\]</div>
+<p><strong>代入</strong>：</p>
+<div class="arithmatex">\[
+= b(s_t)\sum_a\nabla_\theta\pi_\theta(a\mid s_t)
+\]</div>
+<p><strong>第三步：交换求和与求导</strong></p>
+<div class="arithmatex">\[
+= b(s_t)\nabla_\theta\sum_a\pi_\theta(a\mid s_t) = b(s_t)\nabla_\theta(1) = 0 \;\checkmark
+\]</div>
+<p><strong>证明完成</strong> ✓</p>
+<p><strong>关键一步的含义</strong>：</p>
+<div class="arithmatex">\[
+\sum_a\pi_\theta(a\mid s_t) = 1 \quad\text{对任意 }\theta\text{ 都成立}
+\]</div>
+<p><strong>所以它的梯度恒为零</strong> ✓
+（「常数函数的梯度为零」。）</p>
+<p><strong>推论：可以自由选择基线</strong> ✓</p>
+<p>若要用 <span class="arithmatex">\(b(s_t)\)</span>，则梯度估计变为：</p>
+<div class="arithmatex">\[
+\nabla_\theta J\approx\frac1N\sum_i\sum_t\nabla_\theta\log\pi_\theta(a_{i,t}\mid s_{i,t})\big(G_{i,t}-b(s_{i,t})\big)
+\]</div>
+<p><strong>期望无偏、方差更小</strong> ✓</p>
+<p><strong>工程含义（很重要）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>critic 估计不准也无害</strong></td>
+<td>期望仍无偏 ✓</td>
+</tr>
+<tr>
+<td>只影响方差降低的效果</td>
+<td>不影响正确性</td>
+</tr>
+<tr>
+<td>所以 Actor-Critic 是「安全」的</td>
+<td>有理论保证 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也是「Actor-Critic 中的 critic 可以很粗糙」的原因</strong> ——
+它只是一个「降方差工具」，不参与决定学习目标 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 某任务奖励量级为 <span class="arithmatex">\(1000\)</span>。直接用策略梯度会有什么问题？如何处理？</p>
+<details class="note">
+<summary>提示</summary>
+<p>梯度尺度与奖励尺度成正比。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>问题：梯度尺度过大</strong></p>
+<div class="arithmatex">\[
+\nabla_\theta J = E\big[\nabla_\theta\log\pi\cdot G_t\big]
+\]</div>
+<p><strong><span class="arithmatex">\(G_t\)</span> 是 <span class="arithmatex">\(1000\)</span> 量级 → 梯度也是 <span class="arithmatex">\(1000\)</span> 量级</strong> ✗</p>
+<p><strong>具体后果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>后果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>学习率必须极小</strong></td>
+<td><span class="arithmatex">\(10^{-6}\)</span> 量级，敏感难调 ✗</td>
+</tr>
+<tr>
+<td><strong>更新步长剧烈波动</strong></td>
+<td>不同轨迹的 <span class="arithmatex">\(G_t\)</span> 差异大</td>
+</tr>
+<tr>
+<td><strong>可能数值溢出</strong></td>
+<td>累积梯度可能很大</td>
+</tr>
+<tr>
+<td><strong>不同任务不能共用超参</strong></td>
+<td>奖励尺度一变就要重调 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比：若奖励是 <span class="arithmatex">\(1\)</span> 量级</strong></p>
+<table>
+<thead>
+<tr>
+<th>奖励尺度</th>
+<th>合适的学习率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(10^{-3}\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(1000\)</span></strong></td>
+<td><strong><span class="arithmatex">\(10^{-6}\)</span></strong>（小 1000 倍）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种处理方式</strong>：</p>
+<p><strong>方式 1：奖励缩放（reward scaling）</strong></p>
+<p>把奖励除以一个尺度因子（如 <span class="arithmatex">\(1000\)</span>）：</p>
+<div class="arithmatex">\[
+r' = \frac{r}{1000}
+\]</div>
+<p><strong>注意「不改变问题的最优解」</strong>：
+因为乘正常数不改变 <span class="arithmatex">\(\arg\max\)</span> ✓</p>
+<p><strong>方式 2：优势归一化（推荐）</strong></p>
+<p>对每个 batch 的优势做标准化：</p>
+<div class="arithmatex">\[
+\hat A_t = \frac{A_t-\overline{A}}{\operatorname{std}(A)}
+\]</div>
+<p><strong>好处</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>自动适应不同尺度</strong></td>
+<td>无需人工设常数 ✓</td>
+</tr>
+<tr>
+<td>与基线减方差协同</td>
+<td>双重降方差</td>
+</tr>
+<tr>
+<td>通用于不同任务</td>
+<td>超参可复用 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意优势归一化不改变期望</strong>（在 batch 内近似）——
+这与「减去基线」的论证类似：标准化的平移部分期望为零 ✓</p>
+<p><strong>工程实践要点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>奖励缩放 + 优势归一化</strong></td>
+<td>两者都可做 ✓</td>
+</tr>
+<tr>
+<td>检查梯度范数</td>
+<td>若 <span class="arithmatex">\(&gt;10\)</span> 应裁剪</td>
+</tr>
+<tr>
+<td><strong>梯度裁剪</strong></td>
+<td>限制 <span class="arithmatex">\(\lVert g\rVert\leq c\)</span>（如 <span class="arithmatex">\(0.5\)</span>）</td>
+</tr>
+<tr>
+<td>学习率与奖励尺度解耦</td>
+<td>归一化后学习率可通用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>梯度裁剪的公式</strong>：</p>
+<div class="arithmatex">\[
+g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
+\]</div>
+<p><strong>这是实现中的标准做法</strong> ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> PPO 的裁剪为什么用 <span class="arithmatex">\(\min\)</span> 而不是只对 <span class="arithmatex">\(r\)</span> 做 clip？</p>
+<details class="note">
+<summary>提示</summary>
+<p>分别考虑 <span class="arithmatex">\(A&gt;0\)</span> 与 <span class="arithmatex">\(A&lt;0\)</span>，看 <span class="arithmatex">\(r\)</span> 很大时两种做法有什么不同。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为「取 min」保证对两种符号的优势都采取「悲观」估计，
+而只用 clip 会在 <span class="arithmatex">\(A&lt;0\)</span> 时削弱惩罚。</strong></p>
+<p><strong>情形 1：<span class="arithmatex">\(A&gt;0\)</span>（好动作），<span class="arithmatex">\(r\)</span> 很大（如 <span class="arithmatex">\(r=3\)</span>）</strong></p>
+<table>
+<thead>
+<tr>
+<th>计算</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(rA\)</span></td>
+<td><span class="arithmatex">\(3A\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{clip}(r)A\)</span></td>
+<td><span class="arithmatex">\(1.2A\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\min\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.2A\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种做法结果相同</strong> —— 都限制在 <span class="arithmatex">\(1.2A\)</span> ✓</p>
+<p><strong>情形 2：<span class="arithmatex">\(A&lt;0\)</span>（坏动作），<span class="arithmatex">\(r\)</span> 很大（如 <span class="arithmatex">\(r=3\)</span>，即坏动作概率反而增大了）</strong></p>
+<p>设 <span class="arithmatex">\(A = -1\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>计算</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(rA\)</span></td>
+<td><span class="arithmatex">\(3\times(-1) = -3\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\operatorname{clip}(r)A\)</span></td>
+<td><span class="arithmatex">\(1.2\times(-1) = -1.2\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\min\)</span></strong></td>
+<td><strong><span class="arithmatex">\(-3\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>差别出现了</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>目标值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只用 clip</td>
+<td><span class="arithmatex">\(-1.2\)</span></td>
+<td><strong>惩罚被削弱</strong> ✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\min\)</span></strong></td>
+<td><strong><span class="arithmatex">\(-3\)</span></strong></td>
+<td><strong>保留完整惩罚</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么「保留惩罚」是对的</strong>：</p>
+<p><strong>我们要最大化目标</strong>。<span class="arithmatex">\(-3 &lt; -1.2\)</span>，
+所以 <span class="arithmatex">\(\min\)</span> 取了<strong>更负</strong>的值 → <strong>目标更小 → 优化会避开它</strong> ✓</p>
+<p><strong>含义</strong>：<strong>「坏动作概率增大」这件事必须被惩罚</strong> ——
+而 <span class="arithmatex">\(\min\)</span> 保住了这个惩罚 ✓</p>
+<p><strong>总结「取 min」在两个方向上的行为</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(\min\)</span> 的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>好动作被增强太多</td>
+<td><strong>限制收益上限</strong>（防止过度乐观）✓</td>
+</tr>
+<tr>
+<td><strong>坏动作被增强（<span class="arithmatex">\(A&lt;0\)</span>, <span class="arithmatex">\(r&gt;1\)</span>）</strong></td>
+<td><strong>保留惩罚</strong>（防止漏罚）✓</td>
+</tr>
+<tr>
+<td>好动作被削弱（<span class="arithmatex">\(A&gt;0\)</span>, <span class="arithmatex">\(r&lt;1\)</span>）</td>
+<td>取 <span class="arithmatex">\(rA\)</span>（不额外惩罚）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「悲观」的统一含义</strong>：</p>
+<div class="arithmatex">\[
+L^{\text{CLIP}}\leq \text{（未裁剪的目标）}
+\]</div>
+<p><strong>即「目标函数总是取较小的那个」</strong> ——
+<strong>绝不会因为裁剪而「奖励」偏离旧策略的行为</strong> ✓</p>
+<p><strong>这就是 PPO「信赖域」性质的实现机制</strong> ——
+<strong>它用「取 min」代替了 TRPO 的硬约束</strong> ✓</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../td-learning/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 时序差分学习">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                时序差分学习
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../graph-theory/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5291 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/mdp/markov-chain/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../mdp-basics/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>马尔可夫链 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              马尔可夫链
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、无后效性与转移矩阵
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、无后效性与转移矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 马尔可夫性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 转移矩阵
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 多步转移与分布的演化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.4 一个两状态的完整例子
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、状态分类与吸收链
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、状态分类与吸收链">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 可达、互通、不可约
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 常返、瞬态与周期
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 吸收态与吸收链
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、平稳分布与遍历性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、平稳分布与遍历性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 平稳分布的定义与求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 存在性、唯一性与细致平衡
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 遍历性：时间平均等于空间平均
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-pimcmc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.4 反问题：给定 \(\pi\)，怎么造一条链（MCMC）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pagerank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、PageRank：平稳分布的工程化身
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、PageRank：平稳分布的工程化身">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 从链接图到马尔可夫链
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 两个致命工程问题
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-google" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Google 矩阵：一个漂亮的修补
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.4 幂迭代：怎么真正算出来
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-pagerank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.5 PageRank 与本模块的关系
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：两状态链的平稳分布与收敛速度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：三状态生灭链的平稳分布
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：赌徒破产问题（吸收概率与期望步数）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-pagerank" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：三节点 PageRank
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 状态转移与值迭代的收敛性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mcmc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        模式识别 · 隐马尔可夫模型与 MCMC 采样
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#slam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 定位、SLAM 与可靠性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">机器人学</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（马尔可夫决策过程、值函数等为标准译法）</code><code>《概率论与数理统计》随机过程章节；PageRank 部分参照 Google 原始论文的技术报告</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../mdp-basics/">mdp-basics</a></span></div></div>
+
+<h1 id="_1">马尔可夫链<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p><strong>上一页（随机过程）讲的是「随机信号在时间上怎么变」；这一页只加一个假设，就得到整套序贯决策的数学骨架。</strong></p>
+<p>这个假设叫<strong>无后效性</strong>：系统下一步去哪，只取决于它现在在哪，与它怎么走到这里的无关。
+加上这一个条件，随机过程立刻变成可计算的——长期行为由一组线性方程唯一确定，
+「跑很多步之后会怎样」变成了「解一个特征向量」。</p>
+<p><strong>为什么强化学习必须从这一页开始</strong>：MDP、Bellman 方程、动态规划、时序差分，
+全部建立在这里定义的<strong>转移矩阵</strong>与<strong>平稳分布</strong>之上。看不懂马尔可夫链的收敛性，
+就永远说不清「为什么 Q-learning 会收敛」。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话抓住核心</p>
+<p>马尔可夫链的<strong>一步</strong>由转移矩阵 <span class="arithmatex">\(P\)</span> 描述，<strong>长期</strong>由平稳分布 <span class="arithmatex">\(\pi\)</span> 描述：</p>
+<div class="arithmatex">\[
+\pi_{n+1} = \pi_n P, \qquad \text{最终} \quad \pi P = \pi
+\]</div>
+<p>稳态只需满足两条：<span class="arithmatex">\(\pi P = \pi\)</span>（不动点）与 <span class="arithmatex">\(\sum_i \pi_i = 1\)</span>（归一化）。</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>由什么保证</th>
+<th>工程含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>平稳分布<strong>存在</strong></td>
+<td>有限状态链必有</td>
+<td>长期统计量不会发散</td>
+</tr>
+<tr>
+<td>平稳分布<strong>唯一</strong></td>
+<td>不可约</td>
+<td>极限与初值无关</td>
+</tr>
+<tr>
+<td>分布<strong>收敛</strong>到 <span class="arithmatex">\(\pi\)</span></td>
+<td>不可约 + 非周期</td>
+<td>迭代法一定跑得出来</td>
+</tr>
+<tr>
+<td>收敛<strong>速度</strong></td>
+<td>次大特征值模 <span class="arithmatex">\(\lvert\lambda_2\rvert\)</span></td>
+<td>谱隙决定要跑多少步</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="马尔可夫链的转移关系与平稳分布收敛">
+<defs>
+<marker id="mc1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="mc1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 两个状态 -->
+<circle class="d1" cx="96" cy="78" r="16"/>
+<text class="l1" x="90" y="84">s₁</text>
+<circle class="d2" cx="96" cy="182" r="16"/>
+<text class="l2" x="90" y="188">s₂</text>
+<!-- 自环 -->
+<path class="a1" d="M84,62 C70,40 122,40 108,62" fill="none" stroke-width="2.2" marker-end="url(#mc1-ah1)"/>
+<text class="l1" x="128" y="50">0.8</text>
+<path class="a2" d="M84,198 C70,220 122,220 108,198" fill="none" stroke-width="2.2" marker-end="url(#mc1-ah2)"/>
+<text class="l2" x="128" y="222">0.6</text>
+<!-- s1 -> s2 -->
+<line class="a1" x1="112" y1="88" x2="112" y2="166" marker-end="url(#mc1-ah1)" stroke-width="2.2"/>
+<text class="l1" x="118" y="132">0.2</text>
+<!-- s2 -> s1 -->
+<line class="a2" x1="80" y1="166" x2="80" y2="92" marker-end="url(#mc1-ah2)" stroke-width="2.2"/>
+<text class="l2" x="30" y="132">0.4</text>
+<!-- 平稳分布说明 -->
+<line class="gd" x1="180" y1="34" x2="180" y2="230" stroke-dasharray="4 4"/>
+<text class="lbl-s" x="190" y="56">平稳分布 π = (2/3, 1/3)</text>
+<text class="lbl-s" x="190" y="80">特征值 λ₂ = 0.4</text>
+<text class="lbl-s" x="190" y="104">故误差按 0.4ⁿ 衰减</text>
+<text class="lbl-s" x="190" y="128">约 0.76 步误差减半</text>
+<text class="lbl-s" x="190" y="164">|λ₂| 越小 → 收敛越快</text>
+<text class="lbl-s" x="190" y="188">λ₂ 决定「混合速度」</text>
+<text class="lbl-s" x="190" y="212">它是 MCMC 收敛速度的核心指标</text>
+</svg>
+<figcaption>图 1　马尔可夫链的两个状态与转移概率。自环表示「保持原状态」，交叉箭头表示状态切换。链条的长期行为由<b>平稳分布</b> π 描述，而<b>收敛到 π 的速度</b>由第二大特征值 λ₂ 决定——|λ₂| 越小，混合越快。这就是 MCMC 采样效率的核心指标（谱间隙 1-|λ₂|）</figcaption>
+</figure>
+
+<hr />
+<h2 id="_2">一、无后效性与转移矩阵<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 马尔可夫性<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(\{X_n, n\geq 0\}\)</span> 是取值于可数集合 <span class="arithmatex">\(S\)</span>（称为<strong>状态空间</strong>）的随机过程。若对任意 <span class="arithmatex">\(n\)</span> 与任意状态序列都有</p>
+<div class="arithmatex">\[
+P(X_{n+1}=j \mid X_n=i,\ X_{n-1}=i_{n-1},\ \dots,\ X_0=i_0) = P(X_{n+1}=j \mid X_n=i)
+\]</div>
+<p>则称它满足<strong>马尔可夫性</strong>（无后效性），是一个<strong>马尔可夫链</strong>。</p>
+<p><strong>把这条式子读成人话</strong>：给定「现在」<span class="arithmatex">\(X_n=i\)</span>，「过去」<span class="arithmatex">\(i_{n-1},\dots,i_0\)</span> 不提供任何额外信息。
+<strong>过去的所有信息都已经被现在这个状态 <span class="arithmatex">\(i\)</span> 打包吸收了</strong>。</p>
+<p>这一条式子的分量极重：它把「一个无穷长的历史」压缩成「一个指标 <span class="arithmatex">\(i\)</span>」。
+正是这个压缩，让后面的动态规划成为可能——否则值函数将依赖于整条轨迹，无从迭代。</p>
+<div class="admonition note">
+<p class="admonition-title">三个常见误解</p>
+<p><strong>误解一：马尔可夫性 = 独立性。</strong> 错。<span class="arithmatex">\(X_{n+1}\)</span> 与 <span class="arithmatex">\(X_n\)</span> <strong>不独立</strong>，
+而是「在给定 <span class="arithmatex">\(X_n\)</span> 下与更早的历史独立」（条件独立）。</p>
+<p><strong>误解二：马尔可夫性 = 一步记忆。</strong> 不完全。若状态定义为「位置 + 速度」，
+则二阶过程也被改造成一步记忆。「几步记忆」取决于<strong>状态怎么设计</strong>。</p>
+<p><strong>误解三：现实世界不满足马尔可夫性。</strong> 严格地说大多数系统不满足，
+工程的做法是<strong>扩状态</strong>：把足够的滞后信息塞进 <span class="arithmatex">\(X_n\)</span>，直到近似满足为止。
+状态设计的好坏，往往决定一个强化学习项目能否成功。</p>
+</div>
+<h3 id="12">1.2 转移矩阵<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p>若转移概率<strong>不随时间变化</strong>（时齐）：</p>
+<div class="arithmatex">\[
+P_{ij} = P(X_{n+1}=j \mid X_n=i), \qquad i,j \in S
+\]</div>
+<p>把所有 <span class="arithmatex">\(P_{ij}\)</span> 排成矩阵 <span class="arithmatex">\(P=(P_{ij})\)</span>，称为<strong>转移概率矩阵</strong>（简称转移矩阵）。</p>
+<p><strong>约定</strong>：本页与全模块统一采用 <span class="arithmatex">\(P_{ij} = P(\text{下一步}=j \mid \text{当前}=i)\)</span>，
+即<strong>行是当前状态、列是下一步状态</strong>。这叫<strong>行随机</strong>约定。必须强调这一点——</p>
+<div class="admonition warning">
+<p class="admonition-title">两种约定的坑</p>
+<table>
+<thead>
+<tr>
+<th>约定</th>
+<th>记法</th>
+<th>分布演化</th>
+<th>数值例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>行随机</strong>（本页采用）</td>
+<td><span class="arithmatex">\(P_{ij}=P(j\lvert i)\)</span></td>
+<td><span class="arithmatex">\(\pi_{n+1}=\pi_n P\)</span>，<span class="arithmatex">\(\pi\)</span> 是<strong>行</strong>向量</td>
+<td><span class="arithmatex">\(P=\begin{pmatrix} 0.8 &amp; 0.2 \\ 0.4 &amp; 0.6 \end{pmatrix}\)</span></td>
+</tr>
+<tr>
+<td>列随机</td>
+<td><span class="arithmatex">\(P_{ij}=P(i\lvert j)\)</span></td>
+<td><span class="arithmatex">\(\pi_{n+1}=P\pi_n\)</span>，<span class="arithmatex">\(\pi\)</span> 是<strong>列</strong>向量</td>
+<td>上面矩阵的转置</td>
+</tr>
+</tbody>
+</table>
+<p>两种约定算出来的 <span class="arithmatex">\(\pi\)</span> <strong>数值完全相同</strong>，但中间的矩阵不一样：
+行随机下求的是 <span class="arithmatex">\(P\)</span> 的<strong>左</strong>特征向量，列随机下求的是<strong>右</strong>特征向量。
+抄公式时若混用，平稳分布会算错。<strong>本文全篇使用行随机。</strong></p>
+</div>
+<p><strong>排版约定</strong>：本模块的矩阵一律写成列向量形式，例如
+<span class="arithmatex">\(P = \begin{pmatrix} 0.8 &amp; 0.2 \\ 0.4 &amp; 0.6 \end{pmatrix}\)</span>。
+这样写与「<span class="arithmatex">\(P_{ij}\)</span> = 第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列」的指标约定天然吻合，
+<strong>行就是当前状态 <span class="arithmatex">\(i\)</span>，列就是下一步状态 <span class="arithmatex">\(j\)</span></strong>，不用再记忆转置关系。</p>
+<p>转移矩阵有三个必须记住的性质：</p>
+<div class="arithmatex">\[
+P_{ij} \geq 0 \quad \text{对一切} \ i,j; \qquad \sum_{j \in S} P_{ij} = 1 \quad \text{对一切} \ i
+\]</div>
+<p><strong>「每行和为 1」是概率归一化的直接结果</strong>：从状态 <span class="arithmatex">\(i\)</span> 出发，下一步必然落在某个状态上。
+特别地，<span class="arithmatex">\(P\)</span> 一定以 <span class="arithmatex">\(1\)</span> 为特征值（因为 <span class="arithmatex">\(P\mathbf{1}=\mathbf{1}\)</span>，其中 <span class="arithmatex">\(\mathbf{1}\)</span> 是全 1 向量）。</p>
+<h3 id="13">1.3 多步转移与分布的演化<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>由全概率公式与马尔可夫性，</p>
+<div class="arithmatex">\[
+P_{ij}^{(2)} = P(X_{n+2}=j \mid X_n=i) = \sum_{k \in S} P_{ik} P_{kj} = (P^2)_{ij}
+\]</div>
+<p>归纳可得 <strong>Chapman–Kolmogorov 方程</strong>：<span class="arithmatex">\(n\)</span> 步转移概率就是矩阵幂</p>
+<div class="arithmatex">\[
+P^{(n)} = P^n
+\]</div>
+<p>设 <span class="arithmatex">\(\mu_n\)</span> 为 <span class="arithmatex">\(X_n\)</span> 的<strong>行向量</strong>分布，<span class="arithmatex">\(\mu_n(i) = P(X_n = i)\)</span>。则</p>
+<div class="arithmatex">\[
+\mu_{n+1}(j) = \sum_{i \in S} P(X_n=i) P(X_{n+1}=j \mid X_n=i) = \sum_{i \in S} \mu_n(i) P_{ij}
+\]</div>
+<p>即</p>
+<div class="arithmatex">\[
+\mu_{n+1} = \mu_n P \quad \Longrightarrow \quad \mu_n = \mu_0 P^n
+\]</div>
+<p><strong>这就是马尔可夫链的全部计算内容</strong>：给一个初值 <span class="arithmatex">\(\mu_0\)</span>，不断左乘 <span class="arithmatex">\(P\)</span>。</p>
+<h3 id="14">1.4 一个两状态的完整例子<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
+<p>考虑最常用的两状态链（例如「设备正常 / 故障」）：</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix} 0.8 &amp; 0.2 \\ 0.4 &amp; 0.6 \end{pmatrix}
+\]</div>
+<p>含义：状态 1 <strong>以 0.8 的概率留在状态 1</strong>、以 0.2 跳到状态 2；状态 2 以 0.4 回到状态 1、以 0.6 留在状态 2。</p>
+<p>取初值 <span class="arithmatex">\(\mu_0 = (1,0)\)</span>（确定在状态 1），逐步左乘：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(n\)</span></th>
+<th><span class="arithmatex">\(\mu_n(1)\)</span></th>
+<th><span class="arithmatex">\(\mu_n(2)\)</span></th>
+<th>与极限的偏差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1.000000</td>
+<td>0.000000</td>
+<td>0.333333</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.800000</td>
+<td>0.200000</td>
+<td>0.133333</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.720000</td>
+<td>0.280000</td>
+<td>0.053333</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.688000</td>
+<td>0.312000</td>
+<td>0.021333</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.675200</td>
+<td>0.324800</td>
+<td>0.008533</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.670080</td>
+<td>0.329920</td>
+<td>0.003413</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0.668032</td>
+<td>0.331968</td>
+<td>0.001365</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(2/3\)</span></td>
+<td><span class="arithmatex">\(1/3\)</span></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>观察偏差那一列</strong>：<span class="arithmatex">\(0.333333,\ 0.133333,\ 0.053333,\ 0.008533\)</span> ——
+每步精确地乘以 <span class="arithmatex">\(0.4\)</span>。这个 <span class="arithmatex">\(0.4\)</span> 就是 <span class="arithmatex">\(P\)</span> 的<strong>次大特征值</strong> <span class="arithmatex">\(\lambda_2\)</span>：</p>
+<div class="arithmatex">\[
+\operatorname{tr}(P) = 0.8+0.6 = 1.4, \qquad
+\det(P) = 0.8\times0.6 - 0.2\times0.4 = 0.40
+\]</div>
+<p>特征多项式 <span class="arithmatex">\(\lambda^2 - 1.4\lambda + 0.40 = (\lambda-1)(\lambda-0.4)\)</span>，
+故特征值为 <span class="arithmatex">\(1\)</span> 与 <span class="arithmatex">\(0.4\)</span>。于是偏差按 <span class="arithmatex">\(0.4^n\)</span> 衰减，
+<strong>误差减半只需要 <span class="arithmatex">\(\log 0.5 / \log 0.4 \approx 0.76\)</span> 步</strong>——收敛极快。</p>
+<p>这个「次大特征值决定收敛速度」的规律，是本页第四个要讲清楚的关键点，
+也是后面判断迭代算法要跑多少轮的依据。</p>
+<hr />
+<h2 id="_3">二、状态分类与吸收链<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>要从「一步步地乘矩阵」升级到「一眼看穿长期行为」，必须先给状态分类。
+分类只需要问三类问题：<strong>走得到吗？会回来吗？回来的步数有规律吗？</strong></p>
+<h3 id="21">2.1 可达、互通、不可约<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>定义</th>
+<th>直观理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>可达</strong> <span class="arithmatex">\(i\to j\)</span></td>
+<td>存在 <span class="arithmatex">\(n\geq 1\)</span> 使 <span class="arithmatex">\(P_{ij}^{(n)}&gt;0\)</span></td>
+<td>从 <span class="arithmatex">\(i\)</span> 出发有正概率某天到 <span class="arithmatex">\(j\)</span></td>
+</tr>
+<tr>
+<td><strong>互通</strong> <span class="arithmatex">\(i\leftrightarrow j\)</span></td>
+<td><span class="arithmatex">\(i\to j\)</span> 且 <span class="arithmatex">\(j\to i\)</span></td>
+<td>两个状态属于同一个「连通片」</td>
+</tr>
+<tr>
+<td><strong>不可约</strong></td>
+<td>全体状态两两互通</td>
+<td>整个链是一个连通片，走不散</td>
+</tr>
+</tbody>
+</table>
+<p><strong>不可约的工程含义</strong>：无论从哪个状态开始，长期来看<strong>每个状态都会被访问到</strong>。
+这保证了「用一条样本轨迹估计所有状态」这件事不是空想。</p>
+<h3 id="22">2.2 常返、瞬态与周期<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>记 <span class="arithmatex">\(f_i = P(\text{从 } i \text{ 出发，某时刻 } n\geq1 \text{ 回到 } i)\)</span>。</p>
+<ul>
+<li><strong>常返</strong>：<span class="arithmatex">\(f_i = 1\)</span>（必定回来，可能等很久）；</li>
+<li><strong>瞬态</strong>：<span class="arithmatex">\(f_i &lt; 1\)</span>（有一定概率一去不返）；</li>
+<li><strong>正常返</strong>：<span class="arithmatex">\(f_i=1\)</span> 且平均返回时间 <span class="arithmatex">\(m_i = E[\text{首次返回时刻}\mid X_0=i] &lt; \infty\)</span>。</li>
+</ul>
+<p><strong>判定标准（极其实用）</strong>：对不可约链，</p>
+<div class="arithmatex">\[
+\text{正常返} \iff \text{存在唯一的平稳分布} \iff \pi_i = \frac{1}{m_i} &gt; 0
+\]</div>
+<p>注意最后那个式子 <span class="arithmatex">\(m_i = 1/\pi_i\)</span> 的物理意义：
+<strong>平稳概率就是「长期待在该状态的时间占比」，其倒数就是平均返回时间</strong>。
+这个关系在排队论、可靠性、PageRank 里反复出现。</p>
+<p><strong>周期</strong>：记状态 <span class="arithmatex">\(i\)</span> 的周期为 <span class="arithmatex">\(d_i = \gcd\{n\geq1: P_{ii}^{(n)}&gt;0\}\)</span>。
+不可约链的所有状态周期相同，统称链的周期 <span class="arithmatex">\(d\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(d=1\)</span>：<strong>非周期</strong>（aperiodic）；</li>
+<li><span class="arithmatex">\(d\geq2\)</span>：<strong>周期链</strong>。例如 <span class="arithmatex">\(P=\begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}\)</span> 周期为 2。</li>
+</ul>
+<p><strong>周期性与收敛性的关系是本页最容易被忽略的坑</strong>，看下面对比：</p>
+<div class="arithmatex">\[
+P_{\text{非周期}} = \begin{pmatrix} 0.8 &amp; 0.2 \\ 0.4 &amp; 0.6 \end{pmatrix}, \qquad
+P_{\text{周期}} = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}
+\]</div>
+<p>对周期链，取 <span class="arithmatex">\(\mu_0=(1,0)\)</span>：<span class="arithmatex">\(\mu_1=(0,1)\)</span>，<span class="arithmatex">\(\mu_2=(1,0)\)</span>，<span class="arithmatex">\(\mu_3=(0,1)\)</span>……
+<strong>它永远在振荡，不收敛</strong>。但它仍然有平稳分布 <span class="arithmatex">\(\pi=(1/2,1/2)\)</span>！</p>
+<div class="admonition warning">
+<p class="admonition-title">「有平稳分布」不等于「会收敛到平稳分布」</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>平稳分布存在</th>
+<th>唯一</th>
+<th>分布收敛到 <span class="arithmatex">\(\pi\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>周期链 <span class="arithmatex">\((0,1;1,0)\)</span></td>
+<td>✓</td>
+<td>✓</td>
+<td>✗（永远振荡）</td>
+</tr>
+<tr>
+<td>可约链（两个吸收态）</td>
+<td>✓</td>
+<td>✗（无穷多个）</td>
+<td>依赖初值，不收敛到固定值</td>
+</tr>
+<tr>
+<td>不可约非周期链</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以「平稳分布」与「极限分布」是两个不同的概念。</strong>
+要它们相等，必须加上「不可约 + 非周期」这两条——这正是下一节<strong>遍历性</strong>的内容。</p>
+</div>
+<h3 id="23">2.3 吸收态与吸收链<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
+<p><strong>吸收态</strong>：满足 <span class="arithmatex">\(P_{ii}=1\)</span> 的状态——进去就出不来。</p>
+<p>若马尔可夫链至少有一个吸收态，且从任意状态出发最终必被某个吸收态吸收，
+则称<strong>吸收链</strong>。吸收链的状态可以重排成<strong>标准形</strong>：</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix} Q &amp; R \\ 0 &amp; I \end{pmatrix}
+\]</div>
+<p>其中 <span class="arithmatex">\(Q\)</span> 是 <span class="arithmatex">\(t\)</span> 个瞬态之间的转移（<span class="arithmatex">\(t\times t\)</span>），<span class="arithmatex">\(R\)</span> 是瞬态到吸收态的转移，
+<span class="arithmatex">\(I\)</span> 是吸收态之间的单位块（吸收态各占一行，且只指向自己）。</p>
+<p><strong>吸收链有闭式解</strong>，这是它值得单独讲的原因。记 <span class="arithmatex">\(N=(I-Q)^{-1}\)</span>，称为<strong>基本矩阵</strong>。则：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>公式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>期望访问次数</td>
+<td><span class="arithmatex">\(N=(I-Q)^{-1}\)</span></td>
+<td><span class="arithmatex">\(N_{ij}\)</span>：从 <span class="arithmatex">\(i\)</span> 出发在吸收前访问 <span class="arithmatex">\(j\)</span> 的期望次数</td>
+</tr>
+<tr>
+<td>吸收概率</td>
+<td><span class="arithmatex">\(B = NR\)</span></td>
+<td><span class="arithmatex">\(B_{ik}\)</span>：从 <span class="arithmatex">\(i\)</span> 出发最终被吸收态 <span class="arithmatex">\(k\)</span> 吸收的概率</td>
+</tr>
+<tr>
+<td>期望吸收时间</td>
+<td><span class="arithmatex">\(\boldsymbol{\tau} = N\mathbf{1}\)</span></td>
+<td><span class="arithmatex">\(\tau_i\)</span>：从 <span class="arithmatex">\(i\)</span> 出发到被吸收的期望步数</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(I-Q\)</span> <strong>一定可逆</strong>，理由很直观：<span class="arithmatex">\(Q^n \to 0\)</span>（瞬态最终会逃离），
+故 Neumann 级数 <span class="arithmatex">\(\sum_{n=0}^{\infty}Q^n = (I-Q)^{-1}\)</span> 收敛。</p>
+<p><strong>「赌徒破产」就是吸收链的经典实例</strong>，本页例题 3 会完整手算。
+它在工程上的对应物是：<strong>可靠性中的失效吸收、随机游走击中概率、
+强化学习里回合制任务的终止态</strong>。</p>
+<hr />
+<h2 id="_4">三、平稳分布与遍历性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 平稳分布的定义与求解<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p>若概率分布 <span class="arithmatex">\(\pi = (\pi_1,\pi_2,\dots)\)</span> 满足</p>
+<div class="arithmatex">\[
+\pi P = \pi \quad \text{（即} \ \sum_{i\in S} \pi_i P_{ij} = \pi_j \ \text{对一切} \ j\text{）},
+\qquad \sum_{i\in S} \pi_i = 1
+\]</div>
+<p>则称 <span class="arithmatex">\(\pi\)</span> 是该链的<strong>平稳分布</strong>（不变分布）。</p>
+<p><strong>为什么叫「平稳」</strong>：若 <span class="arithmatex">\(X_0 \sim \pi\)</span>，则 <span class="arithmatex">\(\mu_1 = \pi P = \pi\)</span>，
+归纳得 <span class="arithmatex">\(\mu_n = \pi\)</span> 对一切 <span class="arithmatex">\(n\)</span> 成立——<strong>整个过程的分布不随时间改变</strong>。</p>
+<p><strong>求解就是把特征值问题翻译成线性方程组</strong>。注意 <span class="arithmatex">\(\pi P=\pi\)</span> 等价于 <span class="arithmatex">\(\pi(P-I)=0\)</span>，
+即 <span class="arithmatex">\(\pi\)</span> 是 <span class="arithmatex">\(P\)</span> 关于特征值 <span class="arithmatex">\(1\)</span> 的<strong>左特征向量</strong>（行向量）。写成分量形式：</p>
+<div class="arithmatex">\[
+\sum_{i\in S} \pi_i (P_{ij} - \delta_{ij}) = 0, \qquad j \in S
+\]</div>
+<p>这 <span class="arithmatex">\(|S|\)</span> 个方程<strong>线性相关</strong>（因为把各行相加会全部消掉，本质上 <span class="arithmatex">\(P-I\)</span> 的秩至多 <span class="arithmatex">\(|S|-1\)</span>），
+必须<strong>丢掉其中一个，换成归一化条件</strong> <span class="arithmatex">\(\sum_i \pi_i = 1\)</span>，才能得到唯一解。
+这是手算时最容易出错的地方。</p>
+<div class="admonition tip">
+<p class="admonition-title">手算平稳分布的三步法</p>
+<p><strong>第一步</strong>：写出所有方程 <span class="arithmatex">\(\pi_j = \sum_i \pi_i P_{ij}\)</span>。</p>
+<p><strong>第二步</strong>：任取 <span class="arithmatex">\(|S|-1\)</span> 个方程，<strong>扔掉一个</strong>（通常扔掉最复杂的那个）。</p>
+<p><strong>第三步</strong>：补上 <span class="arithmatex">\(\sum_i \pi_i = 1\)</span>，解 <span class="arithmatex">\(|S|\)</span> 元线性方程组。</p>
+<p><strong>最后必须回代验证</strong>：算出 <span class="arithmatex">\(\pi\)</span> 后，把 <span class="arithmatex">\(\pi P\)</span> 重新乘一遍，
+确认每个分量都等于原值，且求和为 1。这一步能抓住绝大多数计算失误。</p>
+</div>
+<h3 id="32">3.2 存在性、唯一性与细致平衡<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p><strong>定理（存在性）</strong>：有限状态马尔可夫链必有至少一个平稳分布。
+证明思路：转移矩阵每行和为 1，<span class="arithmatex">\(P\mathbf{1}=\mathbf{1}\)</span>，故 <span class="arithmatex">\(1\)</span> 是 <span class="arithmatex">\(P\)</span> 的特征值，
+因此 <span class="arithmatex">\(P^{\top}\)</span> 也有特征值 1；相应的特征向量可归一化成一个概率分布。</p>
+<p><strong>定理（唯一性）</strong>：不可约链的平稳分布<strong>唯一</strong>，且全部分量严格为正。</p>
+<p><strong>实用捷径——细致平衡（detailed balance）</strong>：若存在分布 <span class="arithmatex">\(\pi\)</span> 使得</p>
+<div class="arithmatex">\[
+\pi_i P_{ij} = \pi_j P_{ji} \quad \text{对一切} \ i,j
+\]</div>
+<p>则 <span class="arithmatex">\(\pi\)</span> 必为平稳分布。验证只需一行：对 <span class="arithmatex">\(j\)</span> 求和，
+<span class="arithmatex">\(\sum_i \pi_i P_{ij} = \sum_i \pi_j P_{ji} = \pi_j \sum_i P_{ji} = \pi_j\)</span>。</p>
+<p>满足细致平衡的链称为<strong>可逆链</strong>。<strong>生灭链（birth–death chain）必然可逆</strong>：
+它只能左右移动到相邻状态，把所有相邻对的细致平衡方程串联起来就能解出 <span class="arithmatex">\(\pi\)</span>。
+这是工程中最常见的一类链，有闭式解：</p>
+<div class="arithmatex">\[
+\frac{\pi_i}{\pi_{i-1}} = \frac{p_{i-1}}{q_i}
+\quad \Longrightarrow \quad
+\pi_i = \pi_0 \prod_{k=1}^{i}\frac{p_{k-1}}{q_k}
+\]</div>
+<p>其中 <span class="arithmatex">\(p_i\)</span> 是 <span class="arithmatex">\(i\to i+1\)</span> 的概率，<span class="arithmatex">\(q_i\)</span> 是 <span class="arithmatex">\(i\to i-1\)</span> 的概率。</p>
+<div class="admonition warning">
+<p class="admonition-title">细致平衡是充分条件，不是必要条件</p>
+<p><strong>可逆 <span class="arithmatex">\(\Rightarrow\)</span> 有平稳分布</strong>，但<strong>有平稳分布 <span class="arithmatex">\(\not\Rightarrow\)</span> 可逆</strong>。
+反例：三状态循环链 <span class="arithmatex">\(1\to2\to3\to1\)</span>（每步概率各 <span class="arithmatex">\(1\)</span>）。
+其平稳分布是 <span class="arithmatex">\((1/3,1/3,1/3)\)</span>，但 <span class="arithmatex">\(\pi_1 P_{12} = 1/3\)</span> 而 <span class="arithmatex">\(\pi_2 P_{21} = 0\)</span>，
+细致平衡不成立。</p>
+<p>工程含义：<strong>只有可逆链才能用 MCMC 的 Metropolis 方法构造</strong>；
+对非可逆链，细致平衡式的构造会失效。</p>
+</div>
+<h3 id="33">3.3 遍历性：时间平均等于空间平均<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
+<p><strong>遍历定理（有限状态版本）</strong>：若链<strong>不可约且非周期</strong>，则对任意初始分布 <span class="arithmatex">\(\mu_0\)</span>，</p>
+<div class="arithmatex">\[
+\mu_n \to \pi \quad (\text{逐分量收敛}), \qquad
+\text{且} \quad
+\frac{1}{N}\sum_{n=0}^{N-1} \mathbf{1}\{X_n = i\} \to \pi_i \quad (\text{几乎必然})
+\]</div>
+<p>第一条是<strong>分布收敛</strong>，第二条是<strong>时间平均收敛</strong>（也称 Birkhoff 遍历定理的离散版本）。</p>
+<p><strong>第二条才是工程上真正值钱的一条</strong>：
+它说「只要样本轨迹足够长，一条轨迹的时间占比就能估计出平稳分布」。
+不用跑一万条平行轨迹，跑一条长的就够了。</p>
+<p><strong>收敛速度由谱隙决定</strong>。设 <span class="arithmatex">\(P\)</span> 的特征值为
+<span class="arithmatex">\(1=\lambda_1 &gt; \lvert\lambda_2\rvert \geq \dots \geq \lvert\lambda_m\rvert\)</span>（不可约非周期链的
+<span class="arithmatex">\(\lvert\lambda_2\rvert&lt;1\)</span>），则</p>
+<div class="arithmatex">\[
+\lVert \mu_n - \pi \rVert_{\infty} \leq C \lvert\lambda_2\rvert^{n}
+\]</div>
+<p>其中常数 <span class="arithmatex">\(C\)</span> 与初值有关。<strong>谱隙</strong> <span class="arithmatex">\(1-\lvert\lambda_2\rvert\)</span> 越大，收敛越快。</p>
+<table>
+<thead>
+<tr>
+<th>次大特征值模 <span class="arithmatex">\(\lvert\lambda_2\rvert\)</span></th>
+<th>收敛速度</th>
+<th>半衰期（步）</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0.4\)</span></td>
+<td>极快</td>
+<td><span class="arithmatex">\(0.76\)</span></td>
+<td>强混合的两状态链</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.9\)</span></td>
+<td>慢</td>
+<td><span class="arithmatex">\(6.6\)</span></td>
+<td>状态间转移困难</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.99\)</span></td>
+<td>很慢</td>
+<td><span class="arithmatex">\(69\)</span></td>
+<td>接近可约（准吸收）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.9999\)</span></td>
+<td>极慢</td>
+<td><span class="arithmatex">\(6931\)</span></td>
+<td>多峰、混合极差</td>
+</tr>
+</tbody>
+</table>
+<p><strong>表里的「半衰期」就是误差减半所需步数</strong> <span class="arithmatex">\(\log 0.5 / \log\lvert\lambda_2\rvert\)</span>。
+它给出一个非常实用的判断：
+<strong><span class="arithmatex">\(\lvert\lambda_2\rvert\)</span> 每接近 1 十倍，需要的迭代步数增加十倍以上。</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">为什么 PageRank 要加阻尼因子</p>
+<p>纯网页链接图往往是<strong>周期</strong>的（<span class="arithmatex">\(A\to B\to C\to A\)</span>）并且<strong>可约</strong>的（有「死胡同」页面），
+不满足遍历定理，幂迭代会振荡、不收敛。</p>
+<p>PageRank 的做法是强行让它不可约非周期——见下一节。
+这是「用工程手段修补数学前提」的典型范例，
+也是本页必须讲 PageRank 的原因：<strong>它是平稳分布最著名的落地应用</strong>。</p>
+</div>
+<h3 id="34-pimcmc">3.4 反问题：给定 <span class="arithmatex">\(\pi\)</span>，怎么造一条链（MCMC）<a class="headerlink" href="#34-pimcmc" title="Permanent link">&para;</a></h3>
+<p>前面三节解决的都是<strong>正问题</strong>：给一条链，求它的长期行为。
+工程中更常见的是<strong>反问题</strong>：目标分布 <span class="arithmatex">\(\pi\)</span> 已知（例如某个贝叶斯后验），
+但<strong>归一化常数算不出来</strong>，需要生成服从 <span class="arithmatex">\(\pi\)</span> 的样本。</p>
+<p><strong>基本思路</strong>：既然遍历定理说「不可约非周期链的样本时间占比趋于 <span class="arithmatex">\(\pi\)</span>」，
+那就<strong>反过来构造一条以 <span class="arithmatex">\(\pi\)</span> 为平稳分布的链</strong>，
+从任意初值出发跑足够多步，丢弃前面一段（称为 <strong>burn-in</strong>），
+之后的轨迹就是 <span class="arithmatex">\(\pi\)</span> 的近似样本。这就是<strong>马尔可夫链蒙特卡洛（MCMC）</strong>。</p>
+<p><strong>怎么构造</strong>：由 3.2 节的细致平衡，只要让 <span class="arithmatex">\(\pi\)</span> 满足 <span class="arithmatex">\(\pi_i Q_{ij}=\pi_j Q_{ji}\)</span> 即可。
+<strong>Metropolis–Hastings</strong> 的做法是：先选一个容易采样的<strong>提议分布</strong> <span class="arithmatex">\(q(j\mid i)\)</span>，
+从 <span class="arithmatex">\(q(\cdot\mid i)\)</span> 抽一个候选 <span class="arithmatex">\(j\)</span>，再以概率 <span class="arithmatex">\(\alpha(i,j)\)</span> <strong>接受</strong>它，
+否则<strong>留在原地</strong>（下一步状态仍为 <span class="arithmatex">\(i\)</span>）。接受率取为</p>
+<div class="arithmatex">\[
+\alpha(i,j) = \min\left\{1,\ \frac{\pi_j\,q(i\mid j)}{\pi_i\,q(j\mid i)}\right\}
+\]</div>
+<p><strong>验证细致平衡</strong>：不妨设 <span class="arithmatex">\(\pi_j q(i\mid j) \geq \pi_i q(j\mid i)\)</span>，此时 <span class="arithmatex">\(\alpha(i,j)=1\)</span>。则</p>
+<div class="arithmatex">\[
+\pi_i q(j\mid i)\,\alpha(i,j) = \pi_i q(j\mid i), \qquad
+\pi_j q(i\mid j)\,\alpha(j,i) = \pi_j q(i\mid j)\cdot\frac{\pi_i q(j\mid i)}{\pi_j q(i\mid j)} = \pi_i q(j\mid i)
+\]</div>
+<p><strong>两边相等，细致平衡成立</strong>；另一种情形由对称性同理。
+故 <span class="arithmatex">\(\pi\)</span> 是这条链的平稳分布 <span class="arithmatex">\(\checkmark\)</span>。</p>
+<p><strong>最关键的一点</strong>：接受率里只出现<strong>比值</strong> <span class="arithmatex">\(\pi_j/\pi_i\)</span>，
+<strong>未知的归一化常数被约掉了</strong>。这正是 MCMC 能处理「后验分布无法归一化」
+这一类问题的根本原因。</p>
+<table>
+<thead>
+<tr>
+<th>采样器</th>
+<th>提议分布</th>
+<th>接受率</th>
+<th>适用场景</th>
+<th>主要弱点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gibbs 采样</td>
+<td>逐维条件分布 <span class="arithmatex">\(p(x_k\lvert x_{-k})\)</span></td>
+<td>恒为 <span class="arithmatex">\(1\)</span></td>
+<td>条件分布易采样</td>
+<td>强相关维度下混合极慢</td>
+</tr>
+<tr>
+<td>随机游走 MH</td>
+<td>以当前点为中心的高斯</td>
+<td>由目标密度比决定</td>
+<td>通用</td>
+<td>步长难调，高维效率低</td>
+</tr>
+<tr>
+<td>独立采样 MH</td>
+<td>固定的 <span class="arithmatex">\(q(j)\)</span>，与位置无关</td>
+<td>由权重比决定</td>
+<td>已有好的近似分布</td>
+<td>近似差则拒绝率极高</td>
+</tr>
+<tr>
+<td>HMC / NUTS</td>
+<td>用梯度信息构造提议</td>
+<td>由能量差决定</td>
+<td>连续高维参数</td>
+<td>需可微目标函数</td>
+</tr>
+</tbody>
+</table>
+<p><strong>混合时间（mixing time）</strong> 就是从初值收敛到 <span class="arithmatex">\(\pi\)</span> 所需步数，
+由 3.3 节的谱隙 <span class="arithmatex">\(1-\lvert\lambda_2\rvert\)</span> 决定。
+<strong>混合时间过长时，MCMC 的样本不可信</strong>——这是实践中最大的风险。</p>
+<p><strong>与 MDP 的桥梁</strong>：MCMC 的「链没跑到平稳就不能用样本」，
+对应强化学习里的「探索不充分，值函数估计有偏」。
+两者都是<strong>用时间换分布</strong>的算法，都受「谱隙」这个量支配。
+把这条对应关系记住，后面讲 TD 学习时会反复用到。</p>
+<p><strong>工程上的三个实用判据</strong>（实践中必须看，不能凭感觉）：</p>
+<table>
+<thead>
+<tr>
+<th>判据</th>
+<th>做法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>轨迹图</td>
+<td>画出每个参数的样本序列</td>
+<td>若还在单调漂移，说明 burn-in 不够</td>
+</tr>
+<tr>
+<td>多链对比</td>
+<td>从不同初值跑多条链</td>
+<td>链条若聚到一起才算收敛</td>
+</tr>
+<tr>
+<td>有效样本量</td>
+<td>用自相关时间折算</td>
+<td>自相关越强，有效样本越少</td>
+</tr>
+</tbody>
+</table>
+<p><strong>自相关时间</strong> <span class="arithmatex">\(\tau\)</span> 与谱隙的关系是 <span class="arithmatex">\(\tau \approx 1/(1-\lvert\lambda_2\rvert)\)</span>——
+<strong>谱隙越窄，自相关时间越长，有效样本量越低</strong>。
+所以「跑了 10 万步」并不等于「有 10 万个独立样本」：
+若 <span class="arithmatex">\(\tau=1000\)</span>，实际只有约 100 个独立样本，推断结论会极不稳定。</p>
+<p><strong>一句话总结本节</strong>：正问题是「解 <span class="arithmatex">\(\pi P=\pi\)</span>」，反问题是「造 <span class="arithmatex">\(P\)</span> 使 <span class="arithmatex">\(\pi P=\pi\)</span>」。
+两者共用同一套收敛理论（不可约 + 非周期 + 谱隙），
+这正是本页把它放在 MDP 之前的原因——<strong>先掌握分布怎么收敛，再学价值怎么收敛</strong>。</p>
+<hr />
+<h2 id="pagerank">四、PageRank：平稳分布的工程化身<a class="headerlink" href="#pagerank" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 从链接图到马尔可夫链<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>把网页看作状态，超链接看作转移。设网页 <span class="arithmatex">\(i\)</span> 有 <span class="arithmatex">\(c_i\)</span> 条出链，
+「随机冲浪者」等概率点任意一条：</p>
+<div class="arithmatex">\[
+P_{ij} = \begin{cases} \dfrac{1}{c_i}, &amp; i \ \text{有链接指向} \ j \\ 0, &amp; \text{否则} \end{cases}
+\]</div>
+<p><strong>平稳分布 <span class="arithmatex">\(\pi\)</span> 就是网页的「重要性排序」</strong>：<span class="arithmatex">\(\pi_i\)</span> 越大，
+随机冲浪长期停留在 <span class="arithmatex">\(i\)</span> 的时间占比越高，即 <span class="arithmatex">\(i\)</span> 越重要。</p>
+<h3 id="42">4.2 两个致命工程问题<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<p><strong>问题一：死胡同（dangling node）。</strong> 若 <span class="arithmatex">\(c_i=0\)</span>，则 <span class="arithmatex">\(P\)</span> 的第 <span class="arithmatex">\(i\)</span> 行全为 0，
+<strong>不再是随机矩阵</strong>，平稳分布甚至可能不存在。</p>
+<p><strong>问题二：周期与可约。</strong> 纯链接图的链常常既不非周期也不不可约，
+前面的收敛定理直接失效。</p>
+<h3 id="43-google">4.3 Google 矩阵：一个漂亮的修补<a class="headerlink" href="#43-google" title="Permanent link">&para;</a></h3>
+<p>PageRank 的解决方案是把「随机冲浪者」改造成<strong>带瞬移的随机冲浪者</strong>：
+以概率 <span class="arithmatex">\(d\)</span> 沿链接走，以概率 <span class="arithmatex">\(1-d\)</span> <strong>完全不看图，随机跳到一个均匀选取的页面</strong>。</p>
+<div class="arithmatex">\[
+G = d P + \frac{1-d}{n}\mathbf{1}\mathbf{1}^{\top}, \qquad d \in [0,1)
+\]</div>
+<p>其中 <span class="arithmatex">\(n\)</span> 是页面数，<span class="arithmatex">\(\mathbf{1}\)</span> 是全 1 列向量，<span class="arithmatex">\(d\)</span> 称为<strong>阻尼因子</strong>，标准取 <span class="arithmatex">\(d=0.85\)</span>。</p>
+<p><strong>这个修改为什么有效</strong>：因为 <span class="arithmatex">\(G\)</span> 的每一项都满足</p>
+<div class="arithmatex">\[
+G_{ij} \geq \frac{1-d}{n} &gt; 0
+\]</div>
+<p><strong>矩阵每一项严格为正</strong>。这使得 <span class="arithmatex">\(G\)</span> 对应的链<strong>必然不可约</strong>（任意两状态一步可达）
+且<strong>必然非周期</strong>（对角元为正）。于是遍历定理的全部前提自动满足——
+<strong>极限分布存在、唯一、且与初值无关</strong>。</p>
+<div class="admonition warning">
+<p class="admonition-title">阻尼因子改变了答案</p>
+<p><span class="arithmatex">\(G\)</span> 的平稳分布<strong>一般不等于</strong> <span class="arithmatex">\(P\)</span> 的平稳分布（若后者存在）。
+可以严格证明：当 <span class="arithmatex">\(d\to1^{-}\)</span> 时，<span class="arithmatex">\(G\)</span> 的平稳分布才收敛到 <span class="arithmatex">\(P\)</span> 的平稳分布。</p>
+<p>所以 <span class="arithmatex">\(d=0.85\)</span> 不是「无偏的数学化简」，而是<strong>工程折中</strong>：
+牺牲一点「纯链接结构」的纯度，换取解的存在性、唯一性与可计算性。</p>
+</div>
+<h3 id="44">4.4 幂迭代：怎么真正算出来<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
+<p><span class="arithmatex">\(G\)</span> 的平稳分布用<strong>幂迭代</strong>求：</p>
+<div class="arithmatex">\[
+\pi^{(0)} = \frac{1}{n}\mathbf{1}, \qquad \pi^{(k+1)} = \pi^{(k)} G, \qquad \text{直到} \ \lVert \pi^{(k+1)}-\pi^{(k)}\rVert_1 &lt; \varepsilon
+\]</div>
+<p><strong>收敛速度由 <span class="arithmatex">\(G\)</span> 的谱隙决定</strong>。由 <span class="arithmatex">\(G\)</span> 的定义可证 <span class="arithmatex">\(G\)</span> 的次大特征值模至多 <span class="arithmatex">\(d\)</span>，
+于是误差按 <span class="arithmatex">\(d^k\)</span> 衰减。取 <span class="arithmatex">\(d=0.85\)</span>：约 <span class="arithmatex">\(\log 0.5/\log 0.85 \approx 4.3\)</span> 步误差减半，
+<strong>几十次迭代就足够</strong>。这就是 Google 每天能重排全网排名的原因。</p>
+<p><strong>为什么幂迭代这么便宜</strong>：<span class="arithmatex">\(P\)</span> 是<strong>极度稀疏</strong>的（每个网页平均只有十几个出链），
+一次 <span class="arithmatex">\(\pi P\)</span> 的复杂度是 <span class="arithmatex">\(O(\text{链接数})\)</span> 而不是 <span class="arithmatex">\(O(n^2)\)</span>；
+<span class="arithmatex">\((1-d)/n\)</span> 那一项甚至不需要构造矩阵，直接对结果加上常数即可。</p>
+<h3 id="45-pagerank">4.5 PageRank 与本模块的关系<a class="headerlink" href="#45-pagerank" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>马尔可夫链概念</th>
+<th>PageRank 中的对应物</th>
+<th>对本模块的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>状态</td>
+<td>网页</td>
+<td>类比 MDP 的状态 <span class="arithmatex">\(s\)</span></td>
+</tr>
+<tr>
+<td>转移矩阵</td>
+<td>链接结构（+ 阻尼）</td>
+<td>类比 MDP 的 <span class="arithmatex">\(P(s'\lvert s,a)\)</span></td>
+</tr>
+<tr>
+<td>平稳分布</td>
+<td>页面重要性排序</td>
+<td>类比 MDP 的价值函数</td>
+</tr>
+<tr>
+<td>幂迭代</td>
+<td>排名算法</td>
+<td>类比动态规划的值迭代</td>
+</tr>
+<tr>
+<td>谱隙</td>
+<td>收敛快慢</td>
+<td>决定迭代要跑多久</td>
+</tr>
+<tr>
+<td>不可约 + 非周期</td>
+<td>阻尼因子强制保证</td>
+<td>类比 MDP 需要「遍历性假设」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最后一行最关键</strong>：MDP 的收敛性证明同样依赖「链有唯一的平稳分布」。
+把这一列的对应关系记牢，下一页的 Bellman 方程就是水到渠成。</p>
+<hr />
+<h2 id="_5">五、典型例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：两状态链的平稳分布与收敛速度<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>设转移矩阵</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix} 0.8 &amp; 0.2 \\ 0.4 &amp; 0.6 \end{pmatrix}
+\]</div>
+<p>求平稳分布 <span class="arithmatex">\(\pi\)</span>，并求从 <span class="arithmatex">\(\mu_0=(1,0)\)</span> 出发时 <span class="arithmatex">\(\mu_n(1)-\pi_1\)</span> 的衰减规律。</p>
+<details class="note">
+<summary>思路</summary>
+<p>按「三步法」：先写 <span class="arithmatex">\(\pi P=\pi\)</span> 的两个方程，
+它们线性相关，扔掉一个，补 <span class="arithmatex">\(\pi_1+\pi_2=1\)</span>。
+衰减规律由次大特征值给出：先算 <span class="arithmatex">\(\operatorname{tr}(P)\)</span> 与 <span class="arithmatex">\(\det(P)\)</span> 再解特征方程。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：写方程。</strong> <span class="arithmatex">\(\pi P = \pi\)</span> 即</p>
+<div class="arithmatex">\[
+\begin{cases}
+0.8\pi_1 + 0.4\pi_2 = \pi_1 \\
+0.2\pi_1 + 0.6\pi_2 = \pi_2
+\end{cases}
+\]</div>
+<p>整理第一个式子：<span class="arithmatex">\(-0.2\pi_1 + 0.4\pi_2 = 0\)</span>，即 <span class="arithmatex">\(\pi_1 = 2\pi_2\)</span>。
+整理第二个式子：<span class="arithmatex">\(0.2\pi_1 - 0.4\pi_2 = 0\)</span>，即 <span class="arithmatex">\(\pi_1 = 2\pi_2\)</span>。
+<strong>两式完全相同</strong>——这就是前面说的「<span class="arithmatex">\(|S|\)</span> 个方程线性相关」，必须扔掉一个。</p>
+<p><strong>第二步：补归一化。</strong> 联立 <span class="arithmatex">\(\pi_1 = 2\pi_2\)</span> 与 <span class="arithmatex">\(\pi_1+\pi_2=1\)</span>，
+解得 <span class="arithmatex">\(3\pi_2 = 1\)</span>，故</p>
+<div class="arithmatex">\[
+\pi_2 = \frac{1}{3}, \qquad \pi_1 = \frac{2}{3}
+\]</div>
+<p><strong>第三步：回代验证。</strong> 逐分量验证 <span class="arithmatex">\(\pi P = \pi\)</span>：</p>
+<div class="arithmatex">\[
+(0.8)\cdot\frac{2}{3} + (0.4)\cdot\frac{1}{3} = \frac{1.6+0.4}{3} = \frac{2}{3} \quad \checkmark
+\]</div>
+<div class="arithmatex">\[
+(0.2)\cdot\frac{2}{3} + (0.6)\cdot\frac{1}{3} = \frac{0.4+0.6}{3} = \frac{1}{3} \quad \checkmark
+\]</div>
+<p>且 <span class="arithmatex">\(\frac{2}{3}+\frac{1}{3}=1\)</span>。<strong>验证通过，<span class="arithmatex">\(\pi = (2/3,\ 1/3)\)</span>。</strong></p>
+<p><strong>第四步：收敛速度。</strong> 先算迹与行列式：</p>
+<div class="arithmatex">\[
+\operatorname{tr}(P) = 0.8+0.6 = 1.4, \qquad
+\det(P) = 0.8\times0.6 - 0.2\times0.4 = 0.48-0.08 = 0.40
+\]</div>
+<p>特征方程 <span class="arithmatex">\(\lambda^2 - 1.4\lambda + 0.40 = 0\)</span>，即</p>
+<div class="arithmatex">\[
+(\lambda-1)(\lambda-0.4) = 0 \quad \Longrightarrow \quad \lambda_1 = 1, \ \lambda_2 = 0.4
+\]</div>
+<p>初值偏差为 <span class="arithmatex">\(\mu_0 - \pi = (1/3,\ -1/3)\)</span>，且它属于 <span class="arithmatex">\(\lambda_2=0.4\)</span> 的特征子空间
+（因为 <span class="arithmatex">\(\mu_0-\pi\)</span> 与 <span class="arithmatex">\(\pi\)</span> 的线性组合给出 <span class="arithmatex">\(\mu_0\)</span>，而 <span class="arithmatex">\(\mu_0\)</span> 是概率分布）。
+利用 <span class="arithmatex">\(\mu_n - \pi = (\mu_0-\pi)P^n\)</span>，得到</p>
+<div class="arithmatex">\[
+\mu_n(1) - \frac{2}{3} = \frac{1}{3}\cdot 0.4^n
+\]</div>
+<p><strong>数值核对</strong>：<span class="arithmatex">\(n=4\)</span> 时 <span class="arithmatex">\(\frac{1}{3}\cdot 0.4^4 = 0.0085333\)</span>，
+而表中 <span class="arithmatex">\(0.6752-0.6667 = 0.0085333\)</span>，完全一致 <span class="arithmatex">\(\checkmark\)</span>。</p>
+<p>误差减半所需步数：<span class="arithmatex">\(n_{1/2} = \dfrac{\log 0.5}{\log 0.4} \approx 0.756\)</span> 步。
+<strong>即每跑一步多一点，误差就减半。</strong></p>
+</details>
+<h3 id="2">例题 2：三状态生灭链的平稳分布<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>一个三状态生灭链，状态 <span class="arithmatex">\(0,1,2\)</span>，转移矩阵为</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix}
+0.5 &amp; 0.5 &amp; 0 \\
+0.25 &amp; 0.5 &amp; 0.25 \\
+0 &amp; 0.5 &amp; 0.5
+\end{pmatrix}
+\]</div>
+<p>求平稳分布 <span class="arithmatex">\(\pi\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>这是生灭链，直接对相邻对用细致平衡 <span class="arithmatex">\(\pi_0 P_{01} = \pi_1 P_{10}\)</span>，
+以及 <span class="arithmatex">\(\pi_1 P_{12} = \pi_2 P_{21}\)</span>，得到比例关系后再归一化。比解三元方程组快得多。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：写细致平衡方程。</strong> 对相邻对 <span class="arithmatex">\((0,1)\)</span>：</p>
+<div class="arithmatex">\[
+\pi_0 \cdot 0.5 = \pi_1 \cdot 0.25 \quad \Longrightarrow \quad \pi_1 = 2\pi_0
+\]</div>
+<p>对相邻对 <span class="arithmatex">\((1,2)\)</span>：</p>
+<div class="arithmatex">\[
+\pi_1 \cdot 0.25 = \pi_2 \cdot 0.5 \quad \Longrightarrow \quad \pi_2 = \frac{\pi_1}{2} = \pi_0
+\]</div>
+<p><strong>第二步：归一化。</strong></p>
+<div class="arithmatex">\[
+\pi_0 + \pi_1 + \pi_2 = \pi_0 + 2\pi_0 + \pi_0 = 4\pi_0 = 1 \quad \Longrightarrow \quad \pi_0 = \frac{1}{4}
+\]</div>
+<p>于是</p>
+<div class="arithmatex">\[
+\pi = \left(\frac{1}{4},\ \frac{1}{2},\ \frac{1}{4}\right)
+\]</div>
+<p><strong>第三步：回代验证 <span class="arithmatex">\(\pi P = \pi\)</span></strong>，逐分量算：</p>
+<div class="arithmatex">\[
+\frac{1}{4}(0.5) + \frac{1}{2}(0.25) + \frac{1}{4}(0) = 0.125+0.125 = 0.25 = \pi_0 \quad \checkmark
+\]</div>
+<div class="arithmatex">\[
+\frac{1}{4}(0.5) + \frac{1}{2}(0.5) + \frac{1}{4}(0.5) = 0.125+0.25+0.125 = 0.50 = \pi_1 \quad \checkmark
+\]</div>
+<div class="arithmatex">\[
+\frac{1}{4}(0) + \frac{1}{2}(0.25) + \frac{1}{4}(0.5) = 0.125+0.125 = 0.25 = \pi_2 \quad \checkmark
+\]</div>
+<p><strong>三个分量全部核对通过，且 <span class="arithmatex">\(\frac{1}{4}+\frac{1}{2}+\frac{1}{4}=1\)</span>。</strong></p>
+<p><strong>第四步：用闭式公式复核。</strong> 中间状态是「反射」的：<span class="arithmatex">\(p_0=0.5\)</span>，<span class="arithmatex">\(q_1=0.25\)</span>，
+<span class="arithmatex">\(p_1=0.25\)</span>，<span class="arithmatex">\(q_2=0.5\)</span>。按公式</p>
+<div class="arithmatex">\[
+\frac{\pi_1}{\pi_0} = \frac{p_0}{q_1} = \frac{0.5}{0.25} = 2, \qquad
+\frac{\pi_2}{\pi_1} = \frac{p_1}{q_2} = \frac{0.25}{0.5} = \frac{1}{2}
+\]</div>
+<p>与第一步结果一致 <span class="arithmatex">\(\checkmark\)</span>。<strong>平均返回时间</strong>：<span class="arithmatex">\(m_0 = 1/\pi_0 = 4\)</span> 步，
+<span class="arithmatex">\(m_1 = 1/\pi_1 = 2\)</span> 步，<span class="arithmatex">\(m_2 = 1/\pi_2 = 4\)</span> 步。
+中间状态最容易回到（因为两侧都能过来），这与直觉一致。</p>
+</details>
+<h3 id="3">例题 3：赌徒破产问题（吸收概率与期望步数）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>赌徒初始有 1 元，每局以概率 <span class="arithmatex">\(p=0.4\)</span> 赢 1 元、以概率 <span class="arithmatex">\(q=0.6\)</span> 输 1 元。
+当他拥有 3 元时停止（成功），拥有 0 元时也停止（破产）。
+求：<strong>(a)</strong> 从 1 元出发最终赢到 3 元的概率；<strong>(b)</strong> 从 1 元出发的期望赌博局数。</p>
+<details class="note">
+<summary>思路</summary>
+<p>这是三状态吸收链（瞬态 <span class="arithmatex">\(i=1,2\)</span>，吸收态 <span class="arithmatex">\(0\)</span> 与 <span class="arithmatex">\(3\)</span>）。
+<strong>(a)</strong> 对 <span class="arithmatex">\(h(i)=P(\text{先到}3\mid X_0=i)\)</span> 列一步方程 <span class="arithmatex">\(h(i)=p\,h(i+1)+q\,h(i-1)\)</span>，
+边界 <span class="arithmatex">\(h(0)=0,h(3)=1\)</span>。<strong>(b)</strong> 对 <span class="arithmatex">\(k(i)=E[\text{吸收时间}\mid X_0=i]\)</span>
+列 <span class="arithmatex">\(k(i)=1+p\,k(i+1)+q\,k(i-1)\)</span>，边界 <span class="arithmatex">\(k(0)=k(3)=0\)</span>。
+两题都是二元线性方程组，可用闭式公式复核。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 吸收概率。</strong> 记 <span class="arithmatex">\(h(i)\)</span> 为从 <span class="arithmatex">\(i\)</span> 元出发最终到达 3 的概率。对瞬态列方程：</p>
+<div class="arithmatex">\[
+h(1) = 0.4\,h(2) + 0.6\,h(0), \qquad h(2) = 0.4\,h(3) + 0.6\,h(1)
+\]</div>
+<p>代入边界 <span class="arithmatex">\(h(0)=0,\ h(3)=1\)</span>：</p>
+<div class="arithmatex">\[
+h(1) = 0.4\,h(2), \qquad h(2) = 0.4 + 0.6\,h(1)
+\]</div>
+<p>代入第一式入第二式：<span class="arithmatex">\(h(1) = 0.4(0.4+0.6\,h(1)) = 0.16 + 0.24\,h(1)\)</span>，故</p>
+<div class="arithmatex">\[
+0.76\,h(1) = 0.16 \quad \Longrightarrow \quad h(1) = \frac{0.16}{0.76} = \frac{4}{19} \approx 0.2105
+\]</div>
+<p>再由 <span class="arithmatex">\(h(2) = h(1)/0.4 = (4/19)/(0.4) = 10/19 \approx 0.5263\)</span>。</p>
+<p><strong>闭式公式复核</strong>（<span class="arithmatex">\(q/p = 0.6/0.4 = 1.5\)</span>）：</p>
+<div class="arithmatex">\[
+h(i) = \frac{1-(q/p)^i}{1-(q/p)^N}\Big|_{N=3} \quad \Longrightarrow \quad
+h(1) = \frac{1-1.5}{1-1.5^3} = \frac{-0.5}{-2.375} = 0.2105 \quad \checkmark
+\]</div>
+<p><strong>结论：从 1 元出发只有约 21% 的概率赢到 3 元，破产概率约 79%。</strong>
+即便把目标从 3 元降到「赢 1 元就走」，直觉告诉你胜率更高——
+这正是「赌徒的破产不可避免」的数学根源：<strong>期望收益为负的赌局，时间长了一定输。</strong></p>
+<p><strong>(b) 期望步数。</strong> 记 <span class="arithmatex">\(k(i)\)</span> 为从 <span class="arithmatex">\(i\)</span> 元出发到被吸收的期望局数。对瞬态列方程：</p>
+<div class="arithmatex">\[
+k(1) = 1 + 0.4\,k(2) + 0.6\,k(0), \qquad k(2) = 1 + 0.4\,k(3) + 0.6\,k(1)
+\]</div>
+<p>代入 <span class="arithmatex">\(k(0)=k(3)=0\)</span>：</p>
+<div class="arithmatex">\[
+k(1) = 1 + 0.4\,k(2), \qquad k(2) = 1 + 0.6\,k(1)
+\]</div>
+<p>代入：<span class="arithmatex">\(k(1) = 1 + 0.4(1+0.6\,k(1)) = 1.4 + 0.24\,k(1)\)</span>，故</p>
+<div class="arithmatex">\[
+0.76\,k(1) = 1.4 \quad \Longrightarrow \quad k(1) = \frac{1.4}{0.76} = \frac{35}{19} \approx 1.8421
+\]</div>
+<p>再由 <span class="arithmatex">\(k(2) = 1 + 0.6\cdot(35/19) = 1 + 21/19 = 40/19 \approx 2.1053\)</span>。</p>
+<p><strong>闭式公式复核</strong>：</p>
+<div class="arithmatex">\[
+k(i) = \frac{i}{q-p} - \frac{N}{q-p}\cdot\frac{1-(q/p)^i}{1-(q/p)^N}
+\]</div>
+<p>代入 <span class="arithmatex">\(N=3\)</span>，<span class="arithmatex">\(q-p=0.2\)</span>，<span class="arithmatex">\(q/p=1.5\)</span>：</p>
+<div class="arithmatex">\[
+k(1) = \frac{1}{0.2} - \frac{3}{0.2}\cdot\frac{1-1.5}{1-1.5^3}
+= 5 - 15\times 0.2105 = 5 - 3.158 = 1.842 \quad \checkmark
+\]</div>
+<p><strong>与解方程结果一致。答案：期望约 1.84 局。</strong></p>
+<p><strong>&copy; 用矩阵法复核（吸收链标准形）。</strong> 瞬态为 <span class="arithmatex">\(\{1,2\}\)</span>，故</p>
+<div class="arithmatex">\[
+Q = \begin{pmatrix} 0 &amp; 0.4 \\ 0.6 &amp; 0 \end{pmatrix}, \qquad
+R = \begin{pmatrix} 0.6 &amp; 0 \\ 0 &amp; 0.4 \end{pmatrix}
+\]</div>
+<p><span class="arithmatex">\(I-Q = \begin{pmatrix} 1 &amp; -0.4 \\ -0.6 &amp; 1 \end{pmatrix}\)</span>，<span class="arithmatex">\(\det = 1-0.24 = 0.76\)</span>，故</p>
+<div class="arithmatex">\[
+N = (I-Q)^{-1} = \frac{1}{0.76}\begin{pmatrix} 1 &amp; 0.4 \\ 0.6 &amp; 1 \end{pmatrix}
+= \begin{pmatrix} 1.3158 &amp; 0.5263 \\ 0.7895 &amp; 1.3158 \end{pmatrix}
+\]</div>
+<p>期望吸收时间 <span class="arithmatex">\(\boldsymbol{\tau} = N\mathbf{1}\)</span>：
+<span class="arithmatex">\(\tau_1 = 1.3158+0.5263 = 1.8421\ \checkmark\)</span>，
+<span class="arithmatex">\(\tau_2 = 0.7895+1.3158 = 2.1053\ \checkmark\)</span>——<strong>与 (b) 完全一致。</strong></p>
+<p>被吸收态 <span class="arithmatex">\(0\)</span>（破产）的概率 <span class="arithmatex">\(B = NR\)</span> 的第一行第一个元素：
+<span class="arithmatex">\(N_{11}\cdot 0.6 = 1.3158\times0.6 = 0.7895 = 15/19\ \checkmark\)</span>，
+即 <span class="arithmatex">\(1-h(1) = 1-4/19 = 15/19\)</span>。<strong>三条路线互相印证。</strong></p>
+</details>
+<h3 id="4-pagerank">例题 4：三节点 PageRank<a class="headerlink" href="#4-pagerank" title="Permanent link">&para;</a></h3>
+<p>三个网页的链接关系为：网页 1 链接到 2 和 3；网页 2 只链接到 3；网页 3 只链接到 1。
+取阻尼因子 <span class="arithmatex">\(d=0.85\)</span>，求各页面的 PageRank 值。</p>
+<details class="note">
+<summary>思路</summary>
+<p>先写纯链接转移矩阵 <span class="arithmatex">\(P\)</span>（行随机，每行按出链数均分），
+再构造 <span class="arithmatex">\(G = 0.85P + (0.15/3)\mathbf{1}\mathbf{1}^{\top}\)</span>，
+最后解 <span class="arithmatex">\(\pi G=\pi\)</span> 并回代验证。注意 <span class="arithmatex">\(G\)</span> 每项都含 <span class="arithmatex">\(0.05\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：纯链接矩阵。</strong> 出链数分别为 <span class="arithmatex">\(c_1=2,\ c_2=1,\ c_3=1\)</span>：</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix}
+0 &amp; 0.5 &amp; 0.5 \\
+0 &amp; 0 &amp; 1 \\
+1 &amp; 0 &amp; 0
+\end{pmatrix}
+\]</div>
+<p>可见 <span class="arithmatex">\(P\)</span> 是<strong>周期为 3 的循环链</strong>（<span class="arithmatex">\(1\to2\to3\to1\)</span> 与 <span class="arithmatex">\(1\to3\to1\)</span> 混合），
+且存在周期性——<strong>幂迭代会来回振荡</strong>，必须加阻尼。</p>
+<p><strong>第二步：构造 Google 矩阵。</strong> <span class="arithmatex">\((1-d)/n = 0.15/3 = 0.05\)</span>，故</p>
+<div class="arithmatex">\[
+G = 0.85\,P + 0.05\,\mathbf{1}\mathbf{1}^{\top}
+= \begin{pmatrix}
+0.05 &amp; 0.475 &amp; 0.475 \\
+0.05 &amp; 0.05 &amp; 0.90 \\
+0.90 &amp; 0.05 &amp; 0.05
+\end{pmatrix}
+\]</div>
+<p><strong>第三步：解 <span class="arithmatex">\(\pi G = \pi\)</span>。</strong> 逐列写方程（每列对应一个目标页）：</p>
+<div class="arithmatex">\[
+\pi_1 = 0.05\pi_1 + 0.05\pi_2 + 0.90\pi_3
+\]</div>
+<div class="arithmatex">\[
+\pi_2 = 0.475\pi_1 + 0.05\pi_2 + 0.05\pi_3
+\]</div>
+<div class="arithmatex">\[
+\pi_3 = 0.475\pi_1 + 0.90\pi_2 + 0.05\pi_3
+\]</div>
+<p>第一式整理：<span class="arithmatex">\(0.95\pi_1 = 0.05\pi_2 + 0.90\pi_3\)</span>，即 <span class="arithmatex">\(\pi_1 = \frac{0.05\pi_2+0.90\pi_3}{0.95}\)</span>。</p>
+<p>第二式整理：<span class="arithmatex">\(0.95\pi_2 = 0.475\pi_1 + 0.05\pi_3\)</span>。
+第三式整理：<span class="arithmatex">\(0.95\pi_3 = 0.475\pi_1 + 0.90\pi_2\)</span>。</p>
+<p>由第二式与第三式相减（注意 <span class="arithmatex">\(\pi_1+\pi_2+\pi_3=1\)</span> 会被自动用到）：
+把 <span class="arithmatex">\(\pi_3 = (0.475\pi_1+0.90\pi_2)/0.95\)</span> 代入第一式，得到一个关于
+<span class="arithmatex">\(\pi_1/\pi_2\)</span> 的比值方程。改用手算逐次代入：</p>
+<p>由第二式 <span class="arithmatex">\(0.05\pi_3 = 0.95\pi_2 - 0.475\pi_1\)</span>。
+由第三式 <span class="arithmatex">\(0.95\pi_3 = 0.475\pi_1 + 0.90\pi_2\)</span>。
+把第二式的 <span class="arithmatex">\(\pi_3\)</span> 代入第三式：</p>
+<div class="arithmatex">\[
+\frac{0.475\pi_1+0.90\pi_2}{0.95} = \frac{0.95\pi_2 - 0.475\pi_1}{0.05}
+\]</div>
+<p>两边乘 <span class="arithmatex">\(0.95\times0.05\)</span>：</p>
+<div class="arithmatex">\[
+0.05(0.475\pi_1+0.90\pi_2) = 0.95(0.95\pi_2-0.475\pi_1)
+\]</div>
+<div class="arithmatex">\[
+0.02375\pi_1 + 0.045\pi_2 = 0.9025\pi_2 - 0.45125\pi_1
+\]</div>
+<p>移项：<span class="arithmatex">\(0.475\pi_1 = 0.8575\pi_2\)</span>，即</p>
+<div class="arithmatex">\[
+\pi_1 = \frac{0.8575}{0.475}\,\pi_2 = 1.80526\,\pi_2
+\]</div>
+<p>再由第一式：<span class="arithmatex">\(0.90\pi_3 = 0.95\pi_1 - 0.05\pi_2 = 0.95(1.80526\pi_2) - 0.05\pi_2\)</span>
+<span class="arithmatex">\(= 1.71500\pi_2 - 0.05\pi_2 = 1.66500\pi_2\)</span>，故</p>
+<div class="arithmatex">\[
+\pi_3 = \frac{1.66500}{0.90}\,\pi_2 = 1.85000\,\pi_2
+\]</div>
+<p>归一化：<span class="arithmatex">\(\pi_2(1.80526 + 1 + 1.85000) = 1\)</span>，即 <span class="arithmatex">\(4.65526\,\pi_2 = 1\)</span>，得</p>
+<div class="arithmatex">\[
+\pi_2 = 0.214811, \qquad \pi_1 = 0.387790, \qquad \pi_3 = 0.397400
+\]</div>
+<p><strong>精确值</strong>（约分后）为 <span class="arithmatex">\(\pi = \left(\dfrac{686}{1769},\ \dfrac{380}{1769},\ \dfrac{703}{1769}\right)\)</span>，
+对应小数 <span class="arithmatex">\(0.387790,\ 0.214811,\ 0.397400\)</span>。</p>
+<p><strong>第四步：回代验证 <span class="arithmatex">\(\pi G = \pi\)</span></strong>（保留 6 位）：</p>
+<div class="arithmatex">\[
+0.05(0.387790) + 0.05(0.214811) + 0.90(0.397400) = 0.019390+0.010741+0.357660 = 0.387791 \ \checkmark
+\]</div>
+<div class="arithmatex">\[
+0.475(0.387790)+0.05(0.214811)+0.05(0.397400) = 0.184200+0.010741+0.019870 = 0.214811 \ \checkmark
+\]</div>
+<div class="arithmatex">\[
+0.475(0.387790)+0.90(0.214811)+0.05(0.397400) = 0.184200+0.193330+0.019870 = 0.397400 \ \checkmark
+\]</div>
+<p>且 <span class="arithmatex">\(0.387790+0.214811+0.397400 = 1.000001 \approx 1\ \checkmark\)</span>（舍入误差）。</p>
+<p><strong>第五步：结果解读。</strong> 排序为 <span class="arithmatex">\(\pi_3 &gt; \pi_1 &gt; \pi_2\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>页面</th>
+<th>出链数</th>
+<th>入链来源</th>
+<th>PageRank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2</td>
+<td>仅来自 3</td>
+<td>0.387790</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>仅来自 1</td>
+<td>0.214811</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>来自 1 与 2</td>
+<td>0.397400</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键洞察：页面 2 出链只有 1 条、且唯一的入链来自权重被稀释的页面 1，所以排名最低。</strong>
+页面 3 有两条入链（来自 1 和 2），排名最高。</p>
+<p><strong>第六步：幂迭代验证。</strong> 从 <span class="arithmatex">\(\pi^{(0)} = (1/3,1/3,1/3)\)</span> 出发：</p>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\pi_1\)</span></th>
+<th><span class="arithmatex">\(\pi_2\)</span></th>
+<th><span class="arithmatex">\(\pi_3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.333333</td>
+<td>0.333333</td>
+<td>0.333333</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.333333</td>
+<td>0.191667</td>
+<td>0.475000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.453750</td>
+<td>0.191667</td>
+<td>0.354583</td>
+</tr>
+<tr>
+<td>5</td>
+<td>0.394896</td>
+<td>0.217831</td>
+<td>0.387273</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0.388913</td>
+<td>0.214416</td>
+<td>0.396670</td>
+</tr>
+<tr>
+<td>30</td>
+<td>0.387790</td>
+<td>0.214811</td>
+<td>0.397400</td>
+</tr>
+</tbody>
+</table>
+<p><strong>30 步内收敛到 6 位有效数字。</strong> 收敛速率约 <span class="arithmatex">\(0.85^n\)</span>（<span class="arithmatex">\(\log 0.5/\log 0.85 \approx 4.3\)</span> 步误差减半），
+与理论一致。</p>
+<p><strong>反面验证：不加阻尼会发生什么？</strong> 对纯 <span class="arithmatex">\(P\)</span> 做幂迭代：</p>
+<table>
+<thead>
+<tr>
+<th>迭代</th>
+<th><span class="arithmatex">\(\pi_1\)</span></th>
+<th><span class="arithmatex">\(\pi_2\)</span></th>
+<th><span class="arithmatex">\(\pi_3\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.333333</td>
+<td>0.333333</td>
+<td>0.333333</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.333333</td>
+<td>0.166667</td>
+<td>0.500000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.500000</td>
+<td>0.166667</td>
+<td>0.333333</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0.333333</td>
+<td>0.250000</td>
+<td>0.416667</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.416667</td>
+<td>0.166667</td>
+<td>0.416667</td>
+</tr>
+</tbody>
+</table>
+<p><strong>数值在剧烈振荡，永不收敛。</strong> 这正是「周期链不满足遍历定理」的直接体现，
+也是 PageRank 必须引入阻尼因子的原因。</p>
+</details>
+<hr />
+<h2 id="_6">六、用在哪些课程里<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">无人系统自主决策与优化 · 状态转移与值迭代的收敛性<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>航迹/任务规划的随机建模</strong>：无人机在风场扰动下的位置演化建模为马尔可夫链，
+  转移矩阵由动力学与扰动分布离散化得到；平稳分布给出<strong>长期驻留概率</strong>，
+  用于评估巡逻策略的覆盖率。</li>
+<li><strong>值迭代为什么一定收敛</strong>：本模块后面会证明「Bellman 算子是 <span class="arithmatex">\(\gamma\)</span>-压缩」，
+  而压缩映射的收敛性论证与本节「谱隙决定收敛速度」是同一套数学。
+  本节的 <span class="arithmatex">\(\lvert\lambda_2\rvert\)</span> 换成 <span class="arithmatex">\(\gamma\)</span>，结论形式完全一样。</li>
+<li><strong>吸收态对应任务终止</strong>：到达目标区、电量耗尽、失联——都是吸收态。
+  例题 3 的「期望吸收时间」直接对应<strong>期望任务时长</strong>的估计，
+  「吸收概率」对应<strong>任务成功率</strong>。</li>
+<li><strong>收敛速度决定算力预算</strong>：机上算力有限，例题 4 的幂迭代表告诉我们
+  「迭代多少次够用」——谱隙越大，迭代次数越少，越适合嵌到实时系统里。</li>
+</ul>
+<h3 id="mcmc">模式识别 · 隐马尔可夫模型与 MCMC 采样<a class="headerlink" href="#mcmc" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>HMM 的骨架就是本页内容</strong>：语音识别、手势识别、序列标注里的
+  「状态转移矩阵」正是本页的 <span class="arithmatex">\(P\)</span>，「观测矩阵」是在 <span class="arithmatex">\(P\)</span> 之上再加一层发射概率。
+  Baum–Welch 算法求的就是带参数的平稳性估计。</li>
+<li><strong>平稳分布与类别先验</strong>：若把类别看成一个不可约链，平稳分布
+  <span class="arithmatex">\(\pi\)</span> 就是长期类别占比，可作为<strong>类别先验</strong>或<strong>重采样权重</strong>。</li>
+<li><strong>MCMC 采样</strong>：Gibbs 采样、Metropolis–Hastings 的构造必须满足
+  <strong>细致平衡</strong>（3.2 节）；不满足就采不到目标分布。
+  多峰分布对应「准可约链」，<span class="arithmatex">\(\lvert\lambda_2\rvert\to1\)</span>，混合极慢——这就是 MCMC 难用的根源。</li>
+<li><strong>谱聚类</strong>：转移矩阵的次大特征向量就是图划分的判别方向，
+  <span class="arithmatex">\(\lvert\lambda_2\rvert\)</span> 的谱隙反映簇结构是否清晰。</li>
+</ul>
+<h3 id="slam">机器人学 · 定位、SLAM 与可靠性<a class="headerlink" href="#slam" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>马尔可夫定位（Markov localization）</strong>：位姿空间被离散成网格，
+  转移矩阵由运动模型（含噪声）给出，观测模型做贝叶斯修正。
+  <strong>这一页的 <span class="arithmatex">\(\mu_{n+1}=\mu_n P\)</span> 正是「预测」步</strong>，而修正步是贝叶斯公式。
+  卡尔曼滤波是它的连续高斯版本。</li>
+<li><strong>SLAM 的回环与不确定性</strong>：可约链对应「环境被分成互不可达的区域」，
+  一旦走错就再也不会回来——体现在定位上就是<strong>粒子全部丢失（粒子匮乏）</strong>。</li>
+<li><strong>机械臂可靠性与马尔可夫链</strong>：关节状态（正常/退化/故障）构成马尔可夫链，
+  「故障」是吸收态；例题 3 的方法直接给出<strong>平均无故障时间（MTTF）</strong>。</li>
+<li><strong>谱隙与采样效率</strong>：机器人做随机探索时，<span class="arithmatex">\(\lvert\lambda_2\rvert\)</span> 越接近 1，
+  访问到全部区域需要的步数越多，探索成本越高。</li>
+</ul>
+<hr />
+<h2 id="_8">七、自测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 判断对错并说明理由：
+<strong>(a)</strong> 有限状态马尔可夫链一定存在平稳分布。
+<strong>(b)</strong> 若马尔可夫链存在平稳分布，则从任意初值出发的分布都收敛到它。
+<strong>&copy;</strong> 满足细致平衡的分布一定是平稳分布。
+<strong>(d)</strong> 平稳分布一定是细致平衡分布。</p>
+<details class="note">
+<summary>提示</summary>
+<p>逐个回到定义。难点在 (b)：想一想 <span class="arithmatex">\(P=(0,1;1,0)\)</span>。
+(d) 想一想三状态循环链 <span class="arithmatex">\(1\to2\to3\to1\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 正确。</strong> 有限状态的转移矩阵 <span class="arithmatex">\(P\)</span> 满足 <span class="arithmatex">\(P\mathbf{1}=\mathbf{1}\)</span>，
+故 <span class="arithmatex">\(1\)</span> 是特征值，<span class="arithmatex">\(P^{\top}\)</span> 也有特征值 <span class="arithmatex">\(1\)</span>。
+取对应的非负特征向量并归一化即得平稳分布（详细论证可用 Perron–Frobenius 定理或
+不动点定理）。</p>
+<p><strong>(b) 错误。</strong> 收敛还需要<strong>不可约 + 非周期</strong>。反例 <span class="arithmatex">\(P=\begin{pmatrix} 0&amp;1\\1&amp;0\end{pmatrix}\)</span>：
+平稳分布 <span class="arithmatex">\(\pi=(1/2,1/2)\)</span> 存在，但从 <span class="arithmatex">\(\mu_0=(1,0)\)</span> 出发，
+<span class="arithmatex">\(\mu_n\)</span> 永远在 <span class="arithmatex">\((1,0)\)</span> 与 <span class="arithmatex">\((0,1)\)</span> 之间振荡，<strong>不收敛</strong>。</p>
+<p><strong>&copy; 正确。</strong> 这正是 3.2 节的一行验证：
+对 <span class="arithmatex">\(j\)</span> 求和得 <span class="arithmatex">\(\sum_i \pi_i P_{ij} = \pi_j\sum_i P_{ji} = \pi_j\)</span>。</p>
+<p><strong>(d) 错误。</strong> 细致平衡是<strong>充分不必要</strong>条件。
+反例为三状态循环链 <span class="arithmatex">\(1\to2\to3\to1\)</span>（各步概率 <span class="arithmatex">\(1\)</span>），
+平稳分布 <span class="arithmatex">\(\pi=(1/3,1/3,1/3)\)</span>，但
+<span class="arithmatex">\(\pi_1 P_{12} = 1/3\)</span> 而 <span class="arithmatex">\(\pi_2 P_{21} = 0\)</span>，细致平衡不成立。
+<strong>结论：有平稳分布 <span class="arithmatex">\(\not\Rightarrow\)</span> 可逆。</strong></p>
+</details>
+<p><strong>Q2</strong> 已知两状态链</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix} 1-a &amp; a \\ b &amp; 1-b \end{pmatrix}, \qquad a,b \in (0,1)
+\]</div>
+<p>求一般形式的平稳分布，并写出次大特征值。</p>
+<details class="note">
+<summary>提示</summary>
+<p>解 <span class="arithmatex">\(\pi_1(1-a)+\pi_2 b = \pi_1\)</span> 得 <span class="arithmatex">\(\pi_1/\pi_2 = b/a\)</span>，再归一化。
+次大特征值用 <span class="arithmatex">\(\operatorname{tr}(P)\)</span> 减去 <span class="arithmatex">\(1\)</span> 即可。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>平稳分布。</strong> 第一个方程为</p>
+<div class="arithmatex">\[
+\pi_1(1-a) + \pi_2 b = \pi_1 \quad \Longrightarrow \quad b\pi_2 = a\pi_1 \quad \Longrightarrow \quad \pi_1 = \frac{b}{a}\pi_2
+\]</div>
+<p>归一化：<span class="arithmatex">\(\frac{b}{a}\pi_2 + \pi_2 = 1\)</span>，即 <span class="arithmatex">\(\pi_2\frac{a+b}{a} = 1\)</span>，故</p>
+<div class="arithmatex">\[
+\pi_2 = \frac{a}{a+b}, \qquad \pi_1 = \frac{b}{a+b}
+\]</div>
+<p><strong>回代验证</strong>：<span class="arithmatex">\(\pi_1+\pi_2 = \frac{b+a}{a+b}=1\ \checkmark\)</span>。
+再验证第一分量：<span class="arithmatex">\(\pi_1(1-a)+\pi_2 b = \frac{b(1-a)+ab}{a+b} = \frac{b-ab+ab}{a+b} = \frac{b}{a+b} = \pi_1\ \checkmark\)</span>。</p>
+<p><strong>次大特征值。</strong> <span class="arithmatex">\(\operatorname{tr}(P) = (1-a)+(1-b) = 2-a-b\)</span>。
+由于特征值之和等于迹，且 <span class="arithmatex">\(\lambda_1=1\)</span>，故</p>
+<div class="arithmatex">\[
+\lambda_2 = \operatorname{tr}(P) - 1 = 1-a-b
+\]</div>
+<p><strong>验证例题 1</strong>：<span class="arithmatex">\(a=0.2, b=0.4\)</span> 时 <span class="arithmatex">\(\pi = (0.4/0.6, 0.2/0.6) = (2/3,1/3)\ \checkmark\)</span>，
+<span class="arithmatex">\(\lambda_2 = 1-0.2-0.4 = 0.4\ \checkmark\)</span>——与例题 1 完全一致。</p>
+<p><strong>工程含义</strong>：收敛速度由 <span class="arithmatex">\(1-(a+b)\)</span> 决定。
+<span class="arithmatex">\(a+b\)</span> 是「每步跳出去的总概率」；<span class="arithmatex">\(a+b\)</span> 越小，链越「黏」，
+收敛越慢（<span class="arithmatex">\(\lambda_2\to1\)</span>）。极端情形 <span class="arithmatex">\(a+b\to0\)</span> 时链接近可约，
+<strong>每次实验几乎观测不到状态切换，需要极长的样本才能估计出 <span class="arithmatex">\(\pi\)</span>。</strong></p>
+</details>
+<p><strong>Q3</strong> 某设备的日状态转移矩阵为</p>
+<div class="arithmatex">\[
+P = \begin{pmatrix} 0.9 &amp; 0.1 \\ b &amp; 1-b \end{pmatrix}, \qquad 0 &lt; b \leq 1
+\]</div>
+<p>其中状态 1 是「正常」（每天以 0.1 的概率发生故障），状态 2 是「故障」
+（每天以 <span class="arithmatex">\(b\)</span> 的概率被修复回正常）。
+<strong>(a)</strong> 求平稳分布 <span class="arithmatex">\(\pi\)</span>；<strong>(b)</strong> 求平均无故障运行天数，并解释为什么它等于 <span class="arithmatex">\(1/b\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用 Q2 的通用公式，<span class="arithmatex">\(a=0.1\)</span>，参数 <span class="arithmatex">\(b\)</span> 保留为符号。
+平均无故障天数就是状态 1 的平均返回时间 <span class="arithmatex">\(m_1 = 1/\pi_1\)</span>。
+解释 <span class="arithmatex">\(1/b\)</span> 时，从「进入状态 1 之后要多久才离开」来想，
+注意故障发生前的天数服从几何分布。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 平稳分布。</strong> 直接代入 Q2 的结论：</p>
+<div class="arithmatex">\[
+\pi_1 = \frac{b}{a+b} = \frac{b}{0.1+b}, \qquad
+\pi_2 = \frac{a}{a+b} = \frac{0.1}{0.1+b}
+\]</div>
+<p><strong>回代验证 <span class="arithmatex">\(\pi P = \pi\)</span></strong>。第一分量：</p>
+<div class="arithmatex">\[
+\pi_1 P_{11} + \pi_2 P_{21}
+= \frac{b}{0.1+b}(0.9) + \frac{0.1}{0.1+b}(b)
+= \frac{0.9b + 0.1b}{0.1+b}
+= \frac{b}{0.1+b} = \pi_1 \ \checkmark
+\]</div>
+<p>第二分量：</p>
+<div class="arithmatex">\[
+\pi_1 P_{12} + \pi_2 P_{22}
+= \frac{0.1b}{0.1+b} + \frac{0.1(1-b)}{0.1+b}
+= \frac{0.1b + 0.1 - 0.1b}{0.1+b}
+= \frac{0.1}{0.1+b} = \pi_2 \ \checkmark
+\]</div>
+<p>且 <span class="arithmatex">\(\pi_1+\pi_2 = \frac{b+0.1}{0.1+b} = 1\ \checkmark\)</span>。<strong>全部验证通过。</strong></p>
+<p><strong>(b) 平均无故障运行天数。</strong> 它就是状态 1 的平均返回时间：</p>
+<div class="arithmatex">\[
+m_1 = \frac{1}{\pi_1} = \frac{0.1+b}{b} = 1 + \frac{0.1}{b} \ \text{天}
+\]</div>
+<p><strong>注意这里的返回值是「返回时间」而不是「停留时间」。</strong>
+状态 1 的停留时间 <span class="arithmatex">\(T_1\)</span> 是「从进入状态 1 到离开」的天数，
+即首次故障发生在第 <span class="arithmatex">\(t\)</span> 天，服从参数 <span class="arithmatex">\(0.1\)</span> 的几何分布：</p>
+<div class="arithmatex">\[
+P(T_1 = t) = (0.9)^{t-1}(0.1), \qquad t = 1,2,3,\dots
+\]</div>
+<p>故</p>
+<div class="arithmatex">\[
+E[T_1] = \frac{1}{0.1} = 10 \ \text{天}
+\]</div>
+<p>而状态 2 的停留时间 <span class="arithmatex">\(T_2\)</span> 服从参数 <span class="arithmatex">\(b\)</span> 的几何分布，<span class="arithmatex">\(E[T_2] = 1/b\)</span>。</p>
+<p><strong>验算平均返回时间</strong>：一个完整的「循环」是 <span class="arithmatex">\(T_1+T_2\)</span>，其期望为
+<span class="arithmatex">\(10 + 1/b\)</span>。按循环中状态 1 所占比例应为 <span class="arithmatex">\(\pi_1\)</span>：</p>
+<div class="arithmatex">\[
+\frac{E[T_1]}{E[T_1]+E[T_2]} = \frac{10}{10 + 1/b} = \frac{10b}{10b+1} = \frac{b}{b+0.1} = \pi_1 \ \checkmark
+\]</div>
+<p><strong>与 (a) 一致。</strong>（这一步用到几何分布的无记忆性，因此比值关系严格成立。）</p>
+<p><strong>工程含义：为什么「平均无故障天数」是 <span class="arithmatex">\(1/b\)</span> 而不是 <span class="arithmatex">\(10\)</span>？</strong></p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>表达式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单次正常停留期望 <span class="arithmatex">\(E[T_1]\)</span></td>
+<td><span class="arithmatex">\(10\)</span> 天</td>
+<td>一次故障循环里正常能撑多久</td>
+</tr>
+<tr>
+<td>状态 1 平均返回时间 <span class="arithmatex">\(m_1\)</span></td>
+<td><span class="arithmatex">\(1 + 10/b\)</span> 天</td>
+<td>从「刚进入状态 1」到「下一次刚进入状态 1」</td>
+</tr>
+<tr>
+<td>长期可用度 <span class="arithmatex">\(\pi_1\)</span></td>
+<td><span class="arithmatex">\(b/(b+0.1)\)</span></td>
+<td>长期看正常的比例</td>
+</tr>
+<tr>
+<td>长期故障占比 <span class="arithmatex">\(\pi_2\)</span></td>
+<td><span class="arithmatex">\(0.1/(b+0.1)\)</span></td>
+<td>长期看故障的比例</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(m_1\)</span> 里含有「修好要等多久」的 <span class="arithmatex">\(10/b\)</span></strong>：
+因为每次循环都要等故障被修复，修复越慢（<span class="arithmatex">\(b\)</span> 越小），
+<strong>平均无故障天数反而越长</strong>——这是一个反直觉但正确的结论：
+<span class="arithmatex">\(m_1\)</span> 是「故障之间的间隔」，把漫长的停机也算了进去。</p>
+<p><strong>若要看纯粹的正常运行能力，应该用 <span class="arithmatex">\(\pi_1\)</span>。</strong>
+例如取 <span class="arithmatex">\(b=1\)</span>（每天必修复）：<span class="arithmatex">\(\pi_1 = 1/1.1 = 10/11 \approx 90.9\%\)</span>，
+可用度 <span class="arithmatex">\(90.9\%\)</span>；取 <span class="arithmatex">\(b=0.5\)</span>（两天修一次）：<span class="arithmatex">\(\pi_1 = 0.5/0.6 \approx 83.3\%\)</span>。</p>
+<p><strong>要把可用度提到 99%</strong>，需 <span class="arithmatex">\(\frac{b}{b+0.1}\geq0.99\)</span>，
+即 <span class="arithmatex">\(b \geq 0.99b + 0.099\)</span>，<span class="arithmatex">\(0.01b \geq 0.099\)</span>，<span class="arithmatex">\(b \geq 9.9\)</span>。
+<strong>但 <span class="arithmatex">\(b\)</span> 是概率，最大只能到 1——所以提升可用度的唯一途径是把故障率 <span class="arithmatex">\(a\)</span> 降下来。</strong>
+令 <span class="arithmatex">\(a\)</span> 为变量：<span class="arithmatex">\(\frac{1}{1+a}\geq0.99 \implies a \leq 0.0101\)</span>。</p>
+<p><strong>结论：故障率必须降到约 1% 以下，才能实现 99% 可用度。</strong>
+这个换算关系是<strong>设备维护周期设计的直接依据</strong>，
+也是可靠性工程中「可用度—故障率」基本公式的最简形态：</p>
+<div class="arithmatex">\[
+A = \frac{MTBF}{MTBF + MTTR}
+\]</div>
+<p>其中 <span class="arithmatex">\(MTBF = 1/a\)</span>（平均无故障时间），<span class="arithmatex">\(MTTR = 1/b\)</span>（平均修复时间）。
+代入即得 <span class="arithmatex">\(A = \frac{1/a}{1/a+1/b} = \frac{b}{a+b} = \pi_1\)</span> ——<strong>与本页平稳分布完全一致</strong>。</p>
+<p><strong>本题的额外收获</strong>：平稳概率 <span class="arithmatex">\(\pi_i\)</span> 就是长期时间占比，
+而 <span class="arithmatex">\(m_i = 1/\pi_i\)</span> 是平均返回时间，<strong>两者互为倒数</strong>。
+但「平均返回时间」不等于「平均停留时间」，通信道容量与占用率的关系一样，
+这是可靠性计算中最常见的概念混淆点。</p>
+</details>
+<p><strong>Q4</strong> 本题考察「为什么 PageRank 要加阻尼因子」。
+<strong>(a)</strong> 证明 Google 矩阵 <span class="arithmatex">\(G = dP + \frac{1-d}{n}\mathbf{1}\mathbf{1}^{\top}\)</span> 的每一行和为 1。
+<strong>(b)</strong> 说明为什么 <span class="arithmatex">\(G\)</span> 一定不可约且非周期。
+<strong>&copy;</strong> 设 <span class="arithmatex">\(d=0.85\)</span>，估计误差减半所需迭代步数。</p>
+<details class="note">
+<summary>提示</summary>
+<p>(a) 用 <span class="arithmatex">\(P\)</span> 行随机（<span class="arithmatex">\(P\mathbf{1}=\mathbf{1}\)</span>）。
+(b) 指出 <span class="arithmatex">\(G\)</span> 每个元素都 <span class="arithmatex">\(\geq (1-d)/n &gt; 0\)</span>。
+&copy; 误差按 <span class="arithmatex">\(d^k\)</span> 衰减，解 <span class="arithmatex">\(0.85^k = 0.5\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 每行和为 1。</strong> 对第 <span class="arithmatex">\(i\)</span> 行求和：</p>
+<div class="arithmatex">\[
+\sum_{j=1}^{n} G_{ij}
+= d\sum_{j=1}^{n} P_{ij} + \frac{1-d}{n}\sum_{j=1}^{n}(\mathbf{1}\mathbf{1}^{\top})_{ij}
+\]</div>
+<p>第一项：由 <span class="arithmatex">\(P\)</span> 行随机，<span class="arithmatex">\(\sum_j P_{ij}=1\)</span>，故为 <span class="arithmatex">\(d\)</span>。
+第二项：<span class="arithmatex">\(\mathbf{1}\mathbf{1}^{\top}\)</span> 的每个元素都是 <span class="arithmatex">\(1\)</span>，故
+<span class="arithmatex">\(\sum_j (\mathbf{1}\mathbf{1}^{\top})_{ij} = n\)</span>，第二项为 <span class="arithmatex">\(\frac{1-d}{n}\cdot n = 1-d\)</span>。</p>
+<p>加起来：<span class="arithmatex">\(d + (1-d) = 1\ \checkmark\)</span>。<strong><span class="arithmatex">\(G\)</span> 是随机矩阵。</strong></p>
+<p><strong>(b) 不可约与非周期。</strong> 因为</p>
+<div class="arithmatex">\[
+G_{ij} = dP_{ij} + \frac{1-d}{n} \geq \frac{1-d}{n} = \frac{0.15}{n} &gt; 0
+\]</div>
+<p><strong>每一项严格为正。</strong>
+不可约：任意两个状态 <span class="arithmatex">\(i,j\)</span> 有 <span class="arithmatex">\(G_{ij}&gt;0\)</span>，即<strong>一步可达</strong>，故全体互通。
+非周期：特别地 <span class="arithmatex">\(G_{ii}&gt;0\)</span>，所以状态 <span class="arithmatex">\(i\)</span> 的周期 <span class="arithmatex">\(d_i = \gcd\{n: G_{ii}^{(n)}&gt;0\}\)</span>，
+由于 <span class="arithmatex">\(n=1\)</span> 就在集合里，<span class="arithmatex">\(d_i=1\)</span>，故链非周期。</p>
+<p><strong>两条同时成立，遍历定理的全部前提自动满足</strong>——
+极限分布存在、唯一、与初值无关。</p>
+<p><strong>&copy; 收敛步数。</strong> <span class="arithmatex">\(G\)</span> 的次大特征值 <span class="arithmatex">\(|\lambda_2^{(G)}| \leq d\)</span>（可由
+<span class="arithmatex">\(G-dP\)</span> 是秩 1 扰动这一事实证明：<span class="arithmatex">\(P\)</span> 的其余特征向量被
+<span class="arithmatex">\(\frac{1-d}{n}\mathbf{1}\mathbf{1}^{\top}\)</span> 压缩，特征值被乘上 <span class="arithmatex">\(d\)</span>）。
+误差按 <span class="arithmatex">\(d^k\)</span> 衰减，故</p>
+<div class="arithmatex">\[
+0.85^k = 0.5 \quad \Longrightarrow \quad
+k = \frac{\log 0.5}{\log 0.85} = \frac{-0.6931}{-0.1625} \approx 4.27
+\]</div>
+<p><strong>约 4.3 步误差减半。</strong> 要达到 <span class="arithmatex">\(10^{-6}\)</span> 精度：</p>
+<div class="arithmatex">\[
+k = \frac{\log 10^{-6}}{\log 0.85} = \frac{-13.8155}{-0.1625} \approx 85 \ \text{步}
+\]</div>
+<p><strong>约 85 次迭代即可，且每次迭代只需遍历一遍链接表。</strong>
+这就是「PageRank 能在全网规模上每天重算」的算力基础。</p>
+<p><strong>对比</strong>：若取 <span class="arithmatex">\(d=0.99\)</span>（更信任链接结构），
+误差减半需 <span class="arithmatex">\(k = \log 0.5/\log 0.99 \approx 69\)</span> 步，
+达到 <span class="arithmatex">\(10^{-6}\)</span> 需约 1376 步——<strong>整整慢 16 倍</strong>。
+这正是「精度」与「算力」之间的权衡曲线。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 总览">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../mdp-basics/" class="md-footer__link md-footer__link--next" aria-label="下一页: MDP 基础">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                MDP 基础
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

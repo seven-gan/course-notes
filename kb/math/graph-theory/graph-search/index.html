@@ -1,0 +1,6620 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/graph-theory/graph-search/">
+      
+      
+        <link rel="prev" href="../matrix-representation/">
+      
+      
+        <link rel="next" href="../../numerical/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>图上的算法 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              图上的算法
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../statistics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../statistics/regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mdp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#bfs-dfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、BFS 与 DFS：两种遍历骨架
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、BFS 与 DFS：两种遍历骨架">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        图的遍历要解决什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BFS：按层扩散
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DFS：一条路走到底
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bfs-dfs_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        BFS 与 DFS 的对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复杂度与工程取舍
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dijkstra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、Dijkstra：非负权图的最短路
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、Dijkstra：非负权图的最短路">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题与贪心思想
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法步骤
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复杂度
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        单向 vs 双向
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bellman-ford" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Bellman-Ford：处理负权与负环
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Bellman-Ford：处理负权与负环">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        为什么需要它
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#n-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        算法与"至多 \(n-1\) 轮"的道理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bellman-ford_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bellman-Ford 的工程价值：距离向量路由
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kruskal-prim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、最小生成树：Kruskal 与 Prim
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、最小生成树：Kruskal 与 Prim">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kruskal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kruskal：按边权从小到大挑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prim" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prim：从一个点"长"出去
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        两者对照与关键结论
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、最大流入门
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、最大流入门">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        问题与网络定义
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ford-fulkerson" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ford-Fulkerson 方法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        应用：二分图最大匹配
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1bfs-dfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：BFS 与 DFS 的访问顺序对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2dijkstra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：Dijkstra 逐步距离表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3bellman-ford" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：Bellman-Ford 与最小生成树
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：最大流与最小割
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、用在哪些课程里
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、用在哪些课程里">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        无人系统自主决策与优化 · 路由、任务分配与决策求解
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        机器人学 · 路径规划与图优化求解器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        智能传感与信息处理 · 网络流、调度与传感器分配
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">机器人学</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（图论、邻接矩阵等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../matrix-representation/">matrix-representation</a><a href="../graph-basics/">graph-basics</a></span></div></div>
+
+<h1 id="_1">图上的算法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>前两页把图变成了语言（顶点、边、连通）和矩阵（邻接、关联、拉普拉斯）。但真正让图论在工程里"能干活"的，是<strong>算法</strong>：怎么在一张图上从起点走到终点、怎么找出代价最小的路线、怎么用最少的线把所有点连起来、怎么把尽量多的货从源头送到出口。这些问题在日常生活中都以另一种面目出现——导航软件的最短路、电网的最小布线、物流网络的最大吞吐——它们的数学模型<strong>都是同一张图上的同一批算法</strong>。</p>
+<p>这一页覆盖五组算法：<strong>BFS / DFS</strong>（两种最基本的遍历骨架）、<strong>Dijkstra</strong>（非负权最短路）、<strong>Bellman-Ford</strong>（含负权最短路与负环检测）、<strong>Kruskal / Prim</strong>（最小生成树）、<strong>最大流</strong>（Ford-Fulkerson / Edmonds-Karp）。每一组都要讲清三件事：算法在做什么、复杂度是多少、什么时候会失效。</p>
+<div class="admonition tip">
+<p class="admonition-title">一句话抓住核心</p>
+<p>五组算法的适用边界与复杂度对照（<span class="arithmatex">\(n\)</span> 为顶点数、<span class="arithmatex">\(m\)</span> 为边数）：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>解决什么</th>
+<th>关键限制</th>
+<th>复杂度</th>
+<th>数据结构</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS</td>
+<td>无权图最短跳数、连通性</td>
+<td>只对<strong>无权</strong>（或等权）图最短</td>
+<td><span class="arithmatex">\(O(n+m)\)</span></td>
+<td>队列</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>连通性、拓扑排序、割点/桥</td>
+<td>不保证最短路径</td>
+<td><span class="arithmatex">\(O(n+m)\)</span></td>
+<td>栈</td>
+</tr>
+<tr>
+<td>Dijkstra</td>
+<td>单源最短路（非负权）</td>
+<td><strong>不能有负权边</strong></td>
+<td><span class="arithmatex">\(O(m\log n)\)</span></td>
+<td>优先队列</td>
+</tr>
+<tr>
+<td>Bellman-Ford</td>
+<td>单源最短路（可负权）</td>
+<td>无负环才收敛</td>
+<td><span class="arithmatex">\(O(nm)\)</span></td>
+<td>松弛迭代</td>
+</tr>
+<tr>
+<td>Kruskal</td>
+<td>最小生成树</td>
+<td>需连通图、按权排序</td>
+<td><span class="arithmatex">\(O(m\log m)\)</span></td>
+<td>并查集</td>
+</tr>
+<tr>
+<td>Prim</td>
+<td>最小生成树</td>
+<td>需连通图</td>
+<td><span class="arithmatex">\(O(m\log n)\)</span></td>
+<td>优先队列</td>
+</tr>
+<tr>
+<td>Ford-Fulkerson</td>
+<td>最大流</td>
+<td>容量须为整数时有限步</td>
+<td><span class="arithmatex">\(O(mF)\)</span> 最坏</td>
+<td>残量网络</td>
+</tr>
+<tr>
+<td>Edmonds-Karp</td>
+<td>最大流</td>
+<td>—</td>
+<td><span class="arithmatex">\(O(nm^2)\)</span></td>
+<td>BFS 增广</td>
+</tr>
+</tbody>
+</table>
+<p>最该背下来的一条分界线：<strong>Dijkstra 绝不能用于含负权边的图</strong>；只要可能出现负权，就必须换 Bellman-Ford。第二该背的是：<strong>最小生成树最小化的是"总边权"，不是"任意两点间距离"</strong>——它跟最短路是两回事。</p>
+</div>
+<hr />
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BFS 与 Dijkstra 的探索顺序对比">
+<!-- 左侧：BFS 的层次扩展 -->
+<text class="lbl-s" x="14" y="20">BFS：按「层」扩展（无权图最短）</text>
+<circle class="d2" cx="60" cy="60" r="7"/>
+<text class="lbl-s" x="54" y="64">s</text>
+<line class="gd" x1="60" y1="60" x2="140" y2="48" stroke-width="1.6"/>
+<line class="gd" x1="60" y1="60" x2="140" y2="92" stroke-width="1.6"/>
+<line class="gd" x1="60" y1="60" x2="140" y2="136" stroke-width="1.6"/>
+<circle class="d1" cx="140" cy="48" r="6"/>
+<circle class="d1" cx="140" cy="92" r="6"/>
+<circle class="d1" cx="140" cy="136" r="6"/>
+<text class="l1" x="150" y="52">第1层</text>
+<text class="l1" x="150" y="96">第1层</text>
+<text class="l1" x="150" y="140">第1层</text>
+<text class="lbl-s" x="14" y="166">用「队列」，先入先出</text>
+<text class="lbl-s" x="14" y="184">每层距离恰好 +1 ✓</text>
+<text class="lbl-s" x="14" y="204">复杂度 O(|V|+|E|)</text>
+<text class="lbl-s" x="14" y="224">用于无权最短路、连通分量、二分性判定</text>
+<!-- 右侧：Dijkstra 按代价扩展 -->
+<line class="gd" x1="214" y1="10" x2="214" y2="242" stroke-dasharray="4 4"/>
+<text class="lbl-s" x="228" y="20">Dijkstra：按「累计代价」扩展</text>
+<circle class="d2" cx="266" cy="60" r="7"/>
+<text class="lbl-s" x="260" y="64">s</text>
+<line class="a1" x1="266" y1="60" x2="352" y2="48" stroke-width="2"/>
+<text class="l1" x="298" y="44">4</text>
+<line class="a3" x1="266" y1="60" x2="352" y2="96" stroke-width="2"/>
+<text class="l3" x="300" y="92">1</text>
+<line class="a2" x1="352" y1="96" x2="352" y2="140" stroke-width="2"/>
+<text class="l2" x="356" y="122">2</text>
+<circle class="d1" cx="352" cy="48" r="6"/>
+<circle class="d3" cx="352" cy="96" r="6"/>
+<circle class="d3" cx="352" cy="140" r="6"/>
+<text class="lbl-s" x="228" y="166">用「优先队列」，每次取最小的 dist</text>
+<text class="lbl-s" x="228" y="184">贪心 + 非负权 ⟹ 正确 ✓</text>
+<text class="lbl-s" x="228" y="204">复杂度 O((|V|+|E|)log|V|)</text>
+<text class="lbl-s" x="228" y="224">负权边会失效 → 需用 Bellman-Ford</text>
+</svg>
+<figcaption>图 1　两种搜索策略的对比。左：<b>BFS</b> 用队列按「层」扩展，每层距离恰好加 1，因此直接给出无权图的最短路径。右：<b>Dijkstra</b> 用优先队列按「累计代价」扩展——它每次取出当前距离最小的未访问点并「锁定」。<b>「非负权」是 Dijkstra 正确性的前提</b>：若存在负权边，已锁定的点仍可能被后续更短的路径更新，贪心失效（此时须用 Bellman-Ford）</figcaption>
+</figure>
+
+<hr />
+<h2 id="bfs-dfs">一、BFS 与 DFS：两种遍历骨架<a class="headerlink" href="#bfs-dfs" title="Permanent link">&para;</a></h2>
+<h3 id="_2">图的遍历要解决什么<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>遍历就是"从起点出发，按某种规则系统地访问每个可达顶点，且每个顶点只访问一次"。两个基本要求：</p>
+<table>
+<thead>
+<tr>
+<th>要求</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完备性</td>
+<td>所有可达顶点都必须被访问到</td>
+</tr>
+<tr>
+<td>不重不漏</td>
+<td>每个顶点恰好入队/入栈一次，避免死循环</td>
+</tr>
+</tbody>
+</table>
+<p>防止重复访问靠一个 <strong>visited 标记</strong>（或距离数组）：这正是图遍历与树的遍历最大的不同——树没有圈，天然不会走回头路；图有圈，<strong>必须显式记标记</strong>，否则在任何一个环上就会无限绕。这个细节在工程实现里出错率极高，值得强调。</p>
+<h3 id="bfs">BFS：按层扩散<a class="headerlink" href="#bfs" title="Permanent link">&para;</a></h3>
+<p><strong>广度优先搜索</strong>（breadth-first search）用一个<strong>队列</strong>（先进先出）逐层推进：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>起点 <span class="arithmatex">\(s\)</span> 入队，标记 <span class="arithmatex">\(s\)</span> 已访问，<span class="arithmatex">\(d(s) = 0\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>队首 <span class="arithmatex">\(u\)</span> 出队</td>
+</tr>
+<tr>
+<td>3</td>
+<td>遍历 <span class="arithmatex">\(u\)</span> 的所有邻居 <span class="arithmatex">\(w\)</span>：若 <span class="arithmatex">\(w\)</span> 未访问，标记、记录 <span class="arithmatex">\(d(w) = d(u)+1\)</span> 与父节点 <span class="arithmatex">\(u\)</span>，并入队</td>
+</tr>
+<tr>
+<td>4</td>
+<td>队列空则结束</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么 BFS 给出无权图最短跳数</strong>：队列是先进先出的，所有距离为 <span class="arithmatex">\(k\)</span> 的顶点必然在所有距离为 <span class="arithmatex">\(k+1\)</span> 的顶点之前全部出队（这是"层"的含义）。因此第一次访问到某顶点 <span class="arithmatex">\(v\)</span> 时，用的路径长度一定是所有可能中最短的——若存在更短的路径，<span class="arithmatex">\(v\)</span> 本应在更早的层出现，矛盾。</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>BFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据结构</td>
+<td>队列</td>
+</tr>
+<tr>
+<td>空间</td>
+<td><span class="arithmatex">\(O(n)\)</span> 最坏（一层可能装下接近全部顶点）</td>
+</tr>
+<tr>
+<td>最短跳数</td>
+<td><strong>保证</strong>（无权/等权图）</td>
+</tr>
+<tr>
+<td>生成树</td>
+<td>BFS 树，树高 = 图的离心率</td>
+</tr>
+<tr>
+<td>典型用途</td>
+<td>最少跳数路由、连通分量、2-着色、无权最短路</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dfs">DFS：一条路走到底<a class="headerlink" href="#dfs" title="Permanent link">&para;</a></h3>
+<p><strong>深度优先搜索</strong>（depth-first search）用一个<strong>栈</strong>（后进先出）沿一条分支走到底再回溯。递归写法天然就是栈：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>起点 <span class="arithmatex">\(s\)</span> 入栈</td>
+</tr>
+<tr>
+<td>2</td>
+<td>栈顶 <span class="arithmatex">\(u\)</span> 出栈；若已访问则跳过</td>
+</tr>
+<tr>
+<td>3</td>
+<td>标记 <span class="arithmatex">\(u\)</span> 已访问，把 <span class="arithmatex">\(u\)</span> 所有<strong>未访问</strong>的邻居入栈</td>
+</tr>
+<tr>
+<td>4</td>
+<td>栈空则结束</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据结构</td>
+<td>栈（或递归调用栈）</td>
+</tr>
+<tr>
+<td>空间</td>
+<td><span class="arithmatex">\(O(n)\)</span>（栈深最坏为 <span class="arithmatex">\(n\)</span>，链式图）</td>
+</tr>
+<tr>
+<td>最短跳数</td>
+<td><strong>不保证</strong></td>
+</tr>
+<tr>
+<td>生成树</td>
+<td>DFS 树，树高可能远大于 BFS 树</td>
+</tr>
+<tr>
+<td>典型用途</td>
+<td>拓扑排序、强连通分量（Tarjan/Kosaraju）、找割点与桥、回溯搜索</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bfs-dfs_1">BFS 与 DFS 的对照<a class="headerlink" href="#bfs-dfs_1" title="Permanent link">&para;</a></h3>
+<p>两者的差别只在<strong>取出顺序</strong>，但结果差别很大：</p>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>BFS</th>
+<th>DFS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>取容器的哪一端</td>
+<td>队首（最早放入）</td>
+<td>栈顶（最晚放入）</td>
+</tr>
+<tr>
+<td>访问顺序的直观</td>
+<td>波纹扩散，一圈一圈</td>
+<td>沿一条路钻到尽头再回头</td>
+</tr>
+<tr>
+<td>生成树高度</td>
+<td>最小（等于最短跳数）</td>
+<td>可能最大</td>
+</tr>
+<tr>
+<td>非树边意味</td>
+<td>同层或相邻层之间的"横向边"</td>
+<td>指向祖先的"回边"</td>
+</tr>
+<tr>
+<td>无权最短路</td>
+<td>✓</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>递归实现</td>
+<td>不自然</td>
+<td>非常自然</td>
+</tr>
+</tbody>
+</table>
+<p><strong>重要提醒</strong>：在<strong>带权图</strong>上，BFS 给出的"最少边数路径"通常<strong>不是最少代价路径</strong>。例如 3 条边长 1 的路径总代价 3，1 条边长 5 的路径总代价 5——BFS 会选前者，但如果边长改成 <span class="arithmatex">\(1,1,1\)</span> 与 <span class="arithmatex">\(1\)</span>（其中后者更便宜），就要看具体权值。总之带权图必须用 Dijkstra 或 Bellman-Ford。</p>
+<h3 id="_3">复杂度与工程取舍<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>两者的时间都是 <span class="arithmatex">\(O(n + m)\)</span>（邻接表表示），因为每个顶点入容器一次、每条边被检查至多两次（无向图）。换成邻接矩阵表示则为 <span class="arithmatex">\(O(n^2)\)</span>——这就是<strong>为什么图上算法一律用邻接表</strong>：<span class="arithmatex">\(O(n+m)\)</span> 在稀疏图上远优于 <span class="arithmatex">\(O(n^2)\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无权图最短路、最坏跳数</td>
+<td>BFS</td>
+</tr>
+<tr>
+<td>判断两点是否连通</td>
+<td>两者皆可，BFS 常数更小</td>
+</tr>
+<tr>
+<td>需要拓扑序 / 强连通分量</td>
+<td>DFS</td>
+</tr>
+<tr>
+<td>需要找割点、桥</td>
+<td>DFS（配合 low 值）</td>
+</tr>
+<tr>
+<td>需要最短跳数又要低内存</td>
+<td>双向 BFS（从两端同时扩散）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="dijkstra">二、Dijkstra：非负权图的最短路<a class="headerlink" href="#dijkstra" title="Permanent link">&para;</a></h2>
+<h3 id="_4">问题与贪心思想<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>单源最短路</strong>（SSSP）：给定源点 <span class="arithmatex">\(s\)</span> 与每条边的非负权 <span class="arithmatex">\(w \ge 0\)</span>，求 <span class="arithmatex">\(s\)</span> 到所有顶点的最短路径长度 <span class="arithmatex">\(d(v)\)</span>。</p>
+<p>Dijkstra 的核心是<strong>贪心</strong>：每次都从"尚未确定"的顶点中挑出当前暂定距离最小的那个，宣布它的距离<strong>已经最终确定</strong>，然后用它去更新（<strong>松弛</strong>，relax）它的邻居。</p>
+<div class="arithmatex">\[
+\text{松弛操作：若 } d(u) + w(u,v) &lt; d(v), \text{ 则 } d(v) \leftarrow d(u) + w(u,v)
+\]</div>
+<p><strong>为什么贪心是正确的</strong>（关键一步）：设当前暂定距离最小的未确定顶点为 <span class="arithmatex">\(u\)</span>，其距离为 <span class="arithmatex">\(d(u)\)</span>。假设真实最短距离 <span class="arithmatex">\(\delta(u) &lt; d(u)\)</span>，那么从 <span class="arithmatex">\(s\)</span> 到 <span class="arithmatex">\(u\)</span> 的真实最短路径上必然存在一个"尚未确定的顶点"<span class="arithmatex">\(x\)</span>（因为 <span class="arithmatex">\(u\)</span> 之前至少经过 <span class="arithmatex">\(s\)</span> 之外的顶点），且该路径上 <span class="arithmatex">\(x\)</span> 之前的部分完全由已确定顶点组成。于是</p>
+<div class="arithmatex">\[
+\delta(x) = \delta(\text{前驱}) + w \ge d(\text{前驱}) \ge d(u)
+\]</div>
+<p>（第一处用"已确定顶点的距离是最终的"，第二处用"<span class="arithmatex">\(u\)</span> 是当前最小的"）。另一方面，<strong>所有边权非负</strong>意味着 <span class="arithmatex">\(\delta(u) \ge \delta(x)\)</span>。合起来 <span class="arithmatex">\(\delta(u) \ge d(u)\)</span>，与假设矛盾。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p>这个证明里"<strong>所有边权非负</strong>"只用在一处：<span class="arithmatex">\(\delta(u) \ge \delta(x)\)</span>。一旦允许负权，这条就断了——这正是 Dijkstra 不能处理负权边的根本原因，而不只是"实现上的疏忽"。</p>
+<h3 id="_5">算法步骤<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>初始化：<span class="arithmatex">\(d(s)=0\)</span>，其余 <span class="arithmatex">\(d(v)=\infty\)</span>；全部标为"未确定"</td>
+</tr>
+<tr>
+<td>2</td>
+<td>从未确定的顶点中取出 <span class="arithmatex">\(d\)</span> 最小的 <span class="arithmatex">\(u\)</span>（优先队列）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>标记 <span class="arithmatex">\(u\)</span> 为"已确定"</td>
+</tr>
+<tr>
+<td>4</td>
+<td>对 <span class="arithmatex">\(u\)</span> 的每个邻居 <span class="arithmatex">\(v\)</span>：若 <span class="arithmatex">\(d(u) + w(u,v) &lt; d(v)\)</span>，更新 <span class="arithmatex">\(d(v)\)</span> 并记录 <span class="arithmatex">\(v\)</span> 的前驱为 <span class="arithmatex">\(u\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>重复 2—4，直到所有顶点确定或剩余顶点距离均为 <span class="arithmatex">\(\infty\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td>从目标点沿前驱回溯即得最短路径</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_6">复杂度<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>实现方式</th>
+<th>取最小</th>
+<th>松弛</th>
+<th>总复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数组线性扫描</td>
+<td><span class="arithmatex">\(O(n)\)</span></td>
+<td><span class="arithmatex">\(O(1)\)</span></td>
+<td><span class="arithmatex">\(O(n^2 + m)\)</span> → 稠密图合适</td>
+</tr>
+<tr>
+<td>二叉堆</td>
+<td><span class="arithmatex">\(O(\log n)\)</span></td>
+<td><span class="arithmatex">\(O(\log n)\)</span></td>
+<td><span class="arithmatex">\(O((n+m)\log n) = O(m\log n)\)</span></td>
+</tr>
+<tr>
+<td>斐波那契堆</td>
+<td><span class="arithmatex">\(O(\log n)\)</span> 摊还</td>
+<td><span class="arithmatex">\(O(1)\)</span> 摊还</td>
+<td><span class="arithmatex">\(O(m + n\log n)\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>工程上一般用二叉堆版本 <span class="arithmatex">\(O(m \log n)\)</span>。还有一个实用技巧：<strong>带"懒惰删除"的堆</strong>——松弛时直接压入新值而不去修改旧值，出堆时若发现该值大于当前 <span class="arithmatex">\(d\)</span> 值就丢弃。这样实现简单（不需要"可减键"的堆），代价是最多压入 <span class="arithmatex">\(m\)</span> 个元素，复杂度仍为 <span class="arithmatex">\(O(m\log n)\)</span>。</p>
+<h3 id="vs">单向 vs 双向<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h3>
+<p>从源点到目标点只求一条路径时，可以用<strong>双向 Dijkstra</strong>：从 <span class="arithmatex">\(s\)</span> 正向、从 <span class="arithmatex">\(t\)</span> 反向同时搜索，两棵搜索树相遇时即得最短路径。平均能扩展的顶点数约为单向的平方根量级，路网上加速效果显著。条件是图必须能反向遍历（无向图天然满足；有向图需要反向边表）。</p>
+<hr />
+<h2 id="bellman-ford">三、Bellman-Ford：处理负权与负环<a class="headerlink" href="#bellman-ford" title="Permanent link">&para;</a></h2>
+<h3 id="_7">为什么需要它<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>现实中的权不总是正的：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>权为负的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>金融套利</td>
+<td>汇率取对数后，"负成本"表示这笔兑换赚了钱</td>
+</tr>
+<tr>
+<td>项目调度</td>
+<td>相对时间约束可整理成负权</td>
+</tr>
+<tr>
+<td>差分约束</td>
+<td>不等式组 <span class="arithmatex">\(x_j - x_i \le w\)</span> 转成图上的边</td>
+</tr>
+<tr>
+<td>势能/奖励塑形</td>
+<td>状态转移的奖励可为负</td>
+</tr>
+</tbody>
+</table>
+<p>Dijkstra 对负权失效，因为"贪心确定"的逻辑被破坏了：一个尚未确定的顶点，完全可能通过"绕一圈负权边"变得比当前最小还小。</p>
+<h3 id="n-1">算法与"至多 <span class="arithmatex">\(n-1\)</span> 轮"的道理<a class="headerlink" href="#n-1" title="Permanent link">&para;</a></h3>
+<p>Bellman-Ford 不贪心，而是<strong>反复松弛所有边</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>初始化 <span class="arithmatex">\(d(s)=0\)</span>，其余 <span class="arithmatex">\(\infty\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>重复 <span class="arithmatex">\(n-1\)</span> 轮：对本轮中<strong>每一条边</strong> <span class="arithmatex">\((u,v,w)\)</span> 做一次松弛</td>
+</tr>
+<tr>
+<td>3</td>
+<td>第 <span class="arithmatex">\(n-1\)</span> 轮结束后，<span class="arithmatex">\(d(v)\)</span> 即为最短距离</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>再跑第 <span class="arithmatex">\(n\)</span> 轮</strong>：若仍有边可以被松弛，说明存在<strong>负环</strong>，问题无解（最短路径无下界）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么是 <span class="arithmatex">\(n-1\)</span> 轮</strong>：任意一条不含重复顶点的最短路径至多有 <span class="arithmatex">\(n-1\)</span> 条边。每一轮松弛，至少能"确认"路径上再多一条边的结果（归纳可知：第 <span class="arithmatex">\(k\)</span> 轮后，所有至多 <span class="arithmatex">\(k\)</span> 条边的最短路径都已正确）。所以 <span class="arithmatex">\(n-1\)</span> 轮一定足够。反之，若第 <span class="arithmatex">\(n\)</span> 轮仍能松弛，说明存在一条含 <span class="arithmatex">\(n\)</span> 条边或更多边、且比现有更短的路径——它必然含环；而含环还能更短，只能是负环。<span class="arithmatex">\(\blacksquare\)</span></p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>复杂度</td>
+<td><span class="arithmatex">\(O(nm)\)</span></td>
+</tr>
+<tr>
+<td>支持负权</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>检测负环</td>
+<td>✓（第 <span class="arithmatex">\(n\)</span> 轮仍有松弛即存在）</td>
+</tr>
+<tr>
+<td>可提前终止</td>
+<td>✓ 若某一轮完全没有松弛，可立即结束</td>
+</tr>
+<tr>
+<td>分布式适用</td>
+<td>✓ 只需局部邻居信息（这是它在路由协议中的关键优势）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bellman-ford_1">Bellman-Ford 的工程价值：距离向量路由<a class="headerlink" href="#bellman-ford_1" title="Permanent link">&para;</a></h3>
+<p>Bellman-Ford 有一个 Dijkstra 没有的性质：<strong>每个顶点只需要知道自己的邻居的信息</strong>，就可以独立地更新自己的距离，不需要全局的优先队列。这正是<strong>距离向量路由协议</strong>（如 RIP）的基础：每台路由器周期性地把自己的距离表发给邻居，收到后做一轮松弛。</p>
+<div class="arithmatex">\[
+d_x(y) = \min_{v \in N(x)} \bigl\{ w(x,v) + d_v(y) \bigr\}
+\]</div>
+<p>代价也很明确：收敛慢（<span class="arithmatex">\(O(n)\)</span> 轮才能传遍全网），并且存在著名的<strong>计数到无穷</strong>问题（一条链路断开后，两端的错误估计会互相"扶高"，缓慢地涨向无穷）。工程上的对策是设置最大跳数上限、水平分割（split horizon）、毒性逆转（poison reverse）等。</p>
+<hr />
+<h2 id="kruskal-prim">四、最小生成树：Kruskal 与 Prim<a class="headerlink" href="#kruskal-prim" title="Permanent link">&para;</a></h2>
+<h3 id="_8">问题定义<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>给定<strong>连通带权无向图</strong>，找一棵包含所有顶点的生成树，使总边权最小：</p>
+<div class="arithmatex">\[
+\min_{T \text{ 生成树}} \sum_{e \in T} w(e)
+\]</div>
+<p><strong>必须把问题说清楚</strong>：最小生成树最小化的是<strong>所有选中边权的总和</strong>，而不是"某两点之间的最短距离"。这两件事完全不同——下面第五节的例题会给出一个具体反例，说明"某个点对在 MST 上的路径长度可能大于最短路"。</p>
+<p>MST 有两个支撑整个算法的基本性质：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>内容</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>割性质（cut property）</td>
+<td>对任意一个割，跨越该割的<strong>最小权边</strong>一定属于某棵 MST</td>
+<td>证明 Prim 正确</td>
+</tr>
+<tr>
+<td>环性质（cycle property）</td>
+<td>图中任意回路里<strong>最大权边</strong>（若唯一）一定不属于任何 MST</td>
+<td>证明 Kruskal 正确</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kruskal">Kruskal：按边权从小到大挑<a class="headerlink" href="#kruskal" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>把所有边按权<strong>升序</strong>排序</td>
+</tr>
+<tr>
+<td>2</td>
+<td>依次考察每条边 <span class="arithmatex">\((u,v)\)</span>：用并查集判断 <span class="arithmatex">\(u\)</span>、<span class="arithmatex">\(v\)</span> 是否已连通</td>
+</tr>
+<tr>
+<td>3</td>
+<td>若不连通（在不同集合），<strong>接受</strong>这条边并把两个集合合并</td>
+</tr>
+<tr>
+<td>4</td>
+<td>若已连通（加上会成环），<strong>拒绝</strong></td>
+</tr>
+<tr>
+<td>5</td>
+<td>接受满 <span class="arithmatex">\(n-1\)</span> 条边时停止</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么拒绝成环是安全的</strong>：由环性质，若加入边 <span class="arithmatex">\(e\)</span> 会形成一个回路，那么 <span class="arithmatex">\(e\)</span> 是这个回路中"最后被考虑"的边，即该回路上所有已接受的边权都不大于 <span class="arithmatex">\(e\)</span>。把 <span class="arithmatex">\(e\)</span> 换成回路上任一条边都能保持连通性且不增大总权，所以拒绝 <span class="arithmatex">\(e\)</span> 不会失去最优解。<span class="arithmatex">\(\blacksquare\)</span></p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>复杂度</td>
+<td><span class="arithmatex">\(O(m\log m)\)</span>（排序主导；并查集近似 <span class="arithmatex">\(O(m)\)</span>）</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>并查集（union-find）</td>
+</tr>
+<tr>
+<td>适合图</td>
+<td><strong>稀疏图</strong>（边少，排序便宜）</td>
+</tr>
+<tr>
+<td>特点</td>
+<td>可以在只读到部分边时<strong>增量</strong>进行；天然适合分布式（把图切成块各跑一遍再合并）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="prim">Prim：从一个点"长"出去<a class="headerlink" href="#prim" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>任取起点 <span class="arithmatex">\(s\)</span> 加入已选集合 <span class="arithmatex">\(S\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>把 <span class="arithmatex">\(S\)</span> 与外部之间的所有边压入优先队列（按权）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>弹出最小权边 <span class="arithmatex">\((u,v)\)</span>，其中 <span class="arithmatex">\(u \in S\)</span>、<span class="arithmatex">\(v \notin S\)</span>；若 <span class="arithmatex">\(S\)</span> 中已有该边两端则丢弃</td>
+</tr>
+<tr>
+<td>4</td>
+<td>把 <span class="arithmatex">\(v\)</span> 加入 <span class="arithmatex">\(S\)</span>，并把它到外部的边压入队列</td>
+</tr>
+<tr>
+<td>5</td>
+<td>重复直到 <span class="arithmatex">\(\lvert S\rvert = n\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么正确</strong>：每次选的都是"把 <span class="arithmatex">\(S\)</span> 和其补集分开"这个割的最小跨越边，由割性质它必属于某棵 MST。<span class="arithmatex">\(\blacksquare\)</span></p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>复杂度</td>
+<td><span class="arithmatex">\(O(m\log n)\)</span>（二叉堆）</td>
+</tr>
+<tr>
+<td>数据结构</td>
+<td>优先队列（配合"懒惰删除"）</td>
+</tr>
+<tr>
+<td>适合图</td>
+<td><strong>稠密图</strong>（优先队列操作次数少，<span class="arithmatex">\(m\)</span> 接近 <span class="arithmatex">\(n^2\)</span> 时比 Kruskal 的排序更划算）</td>
+</tr>
+<tr>
+<td>特点</td>
+<td>从一点扩张，中间结果始终是一棵"连通的树"</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">两者对照与关键结论<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>对比项</th>
+<th>Kruskal</th>
+<th>Prim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>增长方式</td>
+<td>按边权递增，维护<strong>森林</strong></td>
+<td>从一个点扩张，始终是<strong>单棵树</strong></td>
+</tr>
+<tr>
+<td>关键结构</td>
+<td>并查集</td>
+<td>优先队列</td>
+</tr>
+<tr>
+<td>复杂度</td>
+<td><span class="arithmatex">\(O(m\log m)\)</span></td>
+<td><span class="arithmatex">\(O(m\log n)\)</span></td>
+</tr>
+<tr>
+<td>稀疏图</td>
+<td>更优</td>
+<td>可用</td>
+</tr>
+<tr>
+<td>稠密图</td>
+<td>排序 <span class="arithmatex">\(m\)</span> 条边代价大</td>
+<td>更优</td>
+</tr>
+<tr>
+<td>中间状态</td>
+<td>可能有多棵不相连的子树</td>
+<td>始终连通</td>
+</tr>
+<tr>
+<td>并行/分布式</td>
+<td>容易分块</td>
+<td>较难</td>
+</tr>
+</tbody>
+</table>
+<p>三条必须记住的结论：</p>
+<table>
+<thead>
+<tr>
+<th>结论</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MST 的权是唯一的</td>
+<td>但 MST 本身<strong>可以不唯一</strong>（存在等权边时会多解）</td>
+</tr>
+<tr>
+<td>最大权边若唯一必不在 MST</td>
+<td>环性质的直接应用</td>
+</tr>
+<tr>
+<td>MST 不给出最短路径</td>
+<td><strong>"所有点对之间沿 MST 的路径"通常不是最短路</strong></td>
+</tr>
+</tbody>
+</table>
+<p>最后一条是极为常见的误解，本质上是因为：MST 优化的是"边权之和"，而最短路优化的是"每条路径上的边权之和"，两个目标函数不同。典型反例见第五节例题 3。</p>
+<hr />
+<h2 id="_10">五、最大流入门<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="_11">问题与网络定义<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>一个<strong>流网络</strong>是一个有向图 <span class="arithmatex">\(G=(V,A)\)</span>，每条弧有<strong>容量</strong> <span class="arithmatex">\(c(u,v) \ge 0\)</span>，指定<strong>源点</strong> <span class="arithmatex">\(s\)</span> 与<strong>汇点</strong> <span class="arithmatex">\(t\)</span>。一个<strong>流</strong> <span class="arithmatex">\(f\)</span> 需满足：</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>数学表述</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>容量约束</td>
+<td><span class="arithmatex">\(0 \le f(u,v) \le c(u,v)\)</span></td>
+<td>不能超过管道承载能力</td>
+</tr>
+<tr>
+<td>流量守恒</td>
+<td><span class="arithmatex">\(\sum_u f(u,v) = \sum_w f(v,w)\)</span>（对 <span class="arithmatex">\(v \ne s,t\)</span>）</td>
+<td>中间节点不产生、不消耗</td>
+</tr>
+<tr>
+<td>反对称约定</td>
+<td><span class="arithmatex">\(f(u,v) = -f(v,u)\)</span></td>
+<td>便于统一处理残量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流的值</strong>定义为净流出源点的流量 <span class="arithmatex">\(\lvert f\rvert = \sum_v f(s,v)\)</span>。目标是最大化 <span class="arithmatex">\(\lvert f\rvert\)</span>。</p>
+<p><strong>残量网络</strong> <span class="arithmatex">\(G_f\)</span>：对每条弧，残量容量为 <span class="arithmatex">\(c_f(u,v) = c(u,v) - f(u,v)\)</span>。注意当 <span class="arithmatex">\(f(u,v) &gt; 0\)</span> 时，反向弧有残量 <span class="arithmatex">\(c_f(v,u) = f(u,v)\)</span>，这就是<strong>撤销已有流量</strong>的能力——它是所有增广类算法的关键机制，没有反向残量就无法"反悔"。</p>
+<h3 id="ford-fulkerson">Ford-Fulkerson 方法<a class="headerlink" href="#ford-fulkerson" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>初始化所有 <span class="arithmatex">\(f(u,v) = 0\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>在残量网络 <span class="arithmatex">\(G_f\)</span> 中找一条 <span class="arithmatex">\(s \to t\)</span> 的路径（<strong>增广路</strong>）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>该路径的<strong>瓶颈容量</strong> <span class="arithmatex">\(\Delta = \min\{c_f(u,v)\}\)</span> 就是能增加的流量</td>
+</tr>
+<tr>
+<td>4</td>
+<td>沿路径每条弧 <span class="arithmatex">\(+ \Delta\)</span>（反向弧 <span class="arithmatex">\(- \Delta\)</span>），总流量 <span class="arithmatex">\(+ \Delta\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>若找不到增广路，则当前流已是最大流，结束</td>
+</tr>
+</tbody>
+</table>
+<p><strong>正确性（最大流最小割定理）</strong>：当残量网络中 <span class="arithmatex">\(s\)</span> 到 <span class="arithmatex">\(t\)</span> 不可达时，令 <span class="arithmatex">\(S\)</span> 为 <span class="arithmatex">\(s\)</span> 在残量网络中能到达的顶点集合，则 <span class="arithmatex">\((S, V \setminus S)\)</span> 是一个割，且所有跨越该割的原始弧<strong>都已饱和</strong>（否则残量网络里会有跨越弧，<span class="arithmatex">\(S\)</span> 会更大）。于是</p>
+<div class="arithmatex">\[
+\lvert f\rvert = \sum_{u \in S, v \notin S} c(u,v) = \operatorname{cap}(S, V\setminus S)
+\]</div>
+<p>即流量等于某个割的容量。而任何流的任何割都有 <span class="arithmatex">\(\lvert f\rvert \le \operatorname{cap}\)</span>，所以这个流就是最大流，这个割就是最小割。<span class="arithmatex">\(\blacksquare\)</span></p>
+<p>这个定理是<strong>对偶性</strong>的经典范例：<strong>最大流的数值恒等于最小割的容量</strong>。工程意义极强——它不仅给出最优值，还顺带给出了"瓶颈在哪里"（最小割的那些边）。</p>
+<table>
+<thead>
+<tr>
+<th>变体</th>
+<th>增广路选法</th>
+<th>复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ford-Fulkerson（朴素）</td>
+<td>任选（如 DFS）</td>
+<td><span class="arithmatex">\(O(mF)\)</span>，<span class="arithmatex">\(F\)</span> 为最大流值；容量为无理数时可能<strong>不终止</strong></td>
+</tr>
+<tr>
+<td>Edmonds-Karp</td>
+<td>每次选<strong>边数最少</strong>的增广路（BFS）</td>
+<td><span class="arithmatex">\(O(nm^2)\)</span>，与容量无关</td>
+</tr>
+<tr>
+<td>Dinic</td>
+<td>分层图 + 阻塞流</td>
+<td><span class="arithmatex">\(O(n^2m)\)</span>，实践中更快</td>
+</tr>
+</tbody>
+</table>
+<p><strong>朴素 Ford-Fulkerson 的风险</strong>：若每次都挑到"看起来很划算"的增广路，可能不断在两条并行的路径间来回"倒腾"，每条只增广 1 个单位，从而需要 <span class="arithmatex">\(F\)</span> 次迭代。经典的反例结构就是两条并联路径夹着一条中间弧。<strong>对策很简单：改用 BFS 找增广路（即 Edmonds-Karp）</strong>，复杂度立刻降到与流值无关的 <span class="arithmatex">\(O(nm^2)\)</span>。</p>
+<h3 id="_12">应用：二分图最大匹配<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>最大流有一个非常漂亮的应用——<strong>二分图最大匹配</strong>。构造方法：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>左侧每个顶点从源点 <span class="arithmatex">\(s\)</span> 接一条容量 1 的弧</td>
+</tr>
+<tr>
+<td>2</td>
+<td>右侧每个顶点向汇点 <span class="arithmatex">\(t\)</span> 接一条容量 1 的弧</td>
+</tr>
+<tr>
+<td>3</td>
+<td>原二分图的每条边改成从左到右、容量 1 的弧</td>
+</tr>
+<tr>
+<td>4</td>
+<td>求 <span class="arithmatex">\(s \to t\)</span> 的最大流</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么可行</strong>：容量 1 保证每个左侧、每个右侧顶点最多匹配一次；流量守恒保证"若 <span class="arithmatex">\(x\)</span> 匹配了 <span class="arithmatex">\(y\)</span>，则 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span> 的边都饱和"。于是每条有单位流量的中间弧就对应一条配对，<strong>最大流值 = 最大匹配大小</strong>。这个归约把匹配问题交给了通用的最大流算法，是"建模比实现更重要"的绝佳例子。</p>
+<hr />
+<h2 id="_13">六、典型例题<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
+<h3 id="1bfs-dfs">例题 1：BFS 与 DFS 的访问顺序对比<a class="headerlink" href="#1bfs-dfs" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：给定 8 顶点图 <span class="arithmatex">\(G_8\)</span>：</p>
+<div class="arithmatex">\[
+E_8 = \{12,\ 13,\ 24,\ 35,\ 45,\ 46,\ 57,\ 68,\ 78\}
+\]</div>
+<p>（1）写出邻接表（邻居按编号升序）；（2）从顶点 1 出发做 BFS，列出每次出队的顶点与队列状态，并给出层次与 BFS 树；（3）从顶点 1 出发做 DFS，给出访问顺序与 DFS 树；（4）BFS 树上从 1 到 8 的距离是多少？DFS 树上呢？</p>
+<details class="note">
+<summary>思路</summary>
+<p>BFS 用队列：出队时把未访问邻居按升序入队。DFS 用栈：出栈时把未访问邻居<strong>逆序</strong>压栈（这样弹出顺序才是升序）。BFS 树的深度即为无权最短跳数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）邻接表</strong>（升序）：</p>
+<table>
+<thead>
+<tr>
+<th>顶点</th>
+<th>邻居</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(2,\ 3\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(1,\ 4\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(1,\ 5\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(2,\ 5,\ 6\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(3,\ 4,\ 7\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(4,\ 8\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(5,\ 8\)</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\(6,\ 7\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>（2）BFS</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>出队顶点</th>
+<th>新发现</th>
+<th>出队后队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>2, 3</td>
+<td><span class="arithmatex">\([2,3]\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td><span class="arithmatex">\([3,4]\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>5</td>
+<td><span class="arithmatex">\([4,5]\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>4</td>
+<td>6</td>
+<td><span class="arithmatex">\([5,6]\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>5</td>
+<td>7</td>
+<td><span class="arithmatex">\([6,7]\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td>6</td>
+<td>8</td>
+<td><span class="arithmatex">\([7,8]\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td>7</td>
+<td>—（8 已访问）</td>
+<td><span class="arithmatex">\([8]\)</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td>8</td>
+<td>—</td>
+<td><span class="arithmatex">\([]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>访问顺序：<span class="arithmatex">\(1,2,3,4,5,6,7,8\)</span>。</p>
+<p>层次（距离）：</p>
+<table>
+<thead>
+<tr>
+<th>层次 <span class="arithmatex">\(k\)</span></th>
+<th>顶点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6, 7</td>
+</tr>
+<tr>
+<td>4</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>BFS 树的边：<span class="arithmatex">\(\{12,\ 13,\ 24,\ 35,\ 46,\ 57,\ 68\}\)</span>（非树边是 <span class="arithmatex">\(45\)</span> 与 <span class="arithmatex">\(78\)</span>）。</p>
+<p><strong>（3）DFS</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>出栈顶点</th>
+<th>压入的邻居</th>
+<th>出栈后栈（栈顶在右）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>3, 2（逆序压入）</td>
+<td><span class="arithmatex">\([3,2]\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td><span class="arithmatex">\([3,4]\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>6, 5</td>
+<td><span class="arithmatex">\([3,6,5]\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>5</td>
+<td>7, 3（3 已访问则跳过记父节点）</td>
+<td><span class="arithmatex">\([3,6,7]\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>7</td>
+<td>8</td>
+<td><span class="arithmatex">\([3,6,8]\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td>8</td>
+<td>6（已在栈中）</td>
+<td><span class="arithmatex">\([3,6]\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td>6</td>
+<td>—（邻居 4、8 均已访问）</td>
+<td><span class="arithmatex">\([3]\)</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td>3</td>
+<td>—（邻居 1、5 均已访问）</td>
+<td><span class="arithmatex">\([]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>访问顺序：<span class="arithmatex">\(1,2,4,5,3,7,8,6\)</span>。</p>
+<p>DFS 树的边：<span class="arithmatex">\(\{12,\ 13,\ 24,\ 45,\ 46,\ 57,\ 78\}\)</span>（非树边是 <span class="arithmatex">\(35\)</span> 与 <span class="arithmatex">\(68\)</span>）。</p>
+<p><strong>（4）从 1 到 8 的距离</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>树</th>
+<th>路径</th>
+<th>长度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS 树</td>
+<td><span class="arithmatex">\(1 \to 2 \to 4 \to 6 \to 8\)</span></td>
+<td><strong>4</strong>（也是全图无权最短跳数）</td>
+</tr>
+<tr>
+<td>DFS 树</td>
+<td><span class="arithmatex">\(1 \to 2 \to 4 \to 5 \to 7 \to 8\)</span></td>
+<td><strong>5</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：BFS 给出最短跳数 4，DFS 给出 5，<strong>DFS 不保证最短</strong>。这是两页开头那张对照表里"DFS 最短跳数：不保证"的具体体现。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">实用技巧</p>
+<p>DFS 用显式栈实现时，<strong>必须把邻居按逆序压栈</strong>，弹出顺序才与递归版本的升序一致。若忘记逆序，会得到"看起来对但顺序不同"的结果，调试验证时容易误判为 bug。</p>
+</div>
+<hr />
+<h3 id="2dijkstra">例题 2：Dijkstra 逐步距离表<a class="headerlink" href="#2dijkstra" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：给定 7 顶点带权无向图 <span class="arithmatex">\(G_9\)</span>：</p>
+<div class="arithmatex">\[
+E_9 = \{AB_4,\ AC_2,\ BC_5,\ BD_{10},\ CE_3,\ DE_4,\ DF_{11},\ EF_7,\ EG_3,\ FG_5\}
+\]</div>
+<p>（下标为边权。）从源点 <span class="arithmatex">\(A\)</span> 求到所有顶点的最短距离。
+（1）列出每一步的"确定顶点 + 松弛 + 距离表"；（2）给出各目标点的最短路径与长度；（3）给出确定顺序。</p>
+<details class="note">
+<summary>思路</summary>
+<p>每一步从未确定顶点中选 <span class="arithmatex">\(d\)</span> 最小的，宣布它确定，然后用它松弛邻居。距离表按 <span class="arithmatex">\(A..G\)</span> 顺序写出，<span class="arithmatex">\(\infty\)</span> 表示暂不可达。确定顺序即"每次被选中的顶点"。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>初始化</strong>：<span class="arithmatex">\(d(A) = 0\)</span>，其余 <span class="arithmatex">\(d(\cdot) = \infty\)</span>。</p>
+<p><strong>第 1 步</strong>：未确定顶点中 <span class="arithmatex">\(d(A) = 0\)</span> 最小，<strong>确定 <span class="arithmatex">\(A\)</span></strong>。松弛邻居：<span class="arithmatex">\(B\)</span>（<span class="arithmatex">\(0+4 = 4 &lt; \infty\)</span>，更新为 4）、<span class="arithmatex">\(C\)</span>（<span class="arithmatex">\(0+2 = 2 &lt; \infty\)</span>，更新为 2）。</p>
+<table>
+<thead>
+<tr>
+<th>已确定</th>
+<th><span class="arithmatex">\(d(A)\)</span></th>
+<th><span class="arithmatex">\(d(B)\)</span></th>
+<th><span class="arithmatex">\(d(C)\)</span></th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(E)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A\)</span></td>
+<td><strong>0</strong></td>
+<td>4</td>
+<td>2</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 2 步</strong>：未确定中 <span class="arithmatex">\(d(C) = 2\)</span> 最小，<strong>确定 <span class="arithmatex">\(C\)</span></strong>。松弛邻居：<span class="arithmatex">\(B\)</span>（<span class="arithmatex">\(2+5 = 7 &gt; 4\)</span>，不改）、<span class="arithmatex">\(E\)</span>（<span class="arithmatex">\(2+3 = 5 &lt; \infty\)</span>，更新为 5）。</p>
+<table>
+<thead>
+<tr>
+<th>已确定</th>
+<th><span class="arithmatex">\(d(A)\)</span></th>
+<th><span class="arithmatex">\(d(B)\)</span></th>
+<th><span class="arithmatex">\(d(C)\)</span></th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(E)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A, C\)</span></td>
+<td>0</td>
+<td>4</td>
+<td><strong>2</strong></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 3 步</strong>：未确定中 <span class="arithmatex">\(d(B) = 4\)</span> 最小，<strong>确定 <span class="arithmatex">\(B\)</span></strong>。松弛邻居：<span class="arithmatex">\(A\)</span>（已确定，跳过）、<span class="arithmatex">\(C\)</span>（已确定，跳过）、<span class="arithmatex">\(D\)</span>（<span class="arithmatex">\(4+10 = 14 &lt; \infty\)</span>，更新为 14）。</p>
+<table>
+<thead>
+<tr>
+<th>已确定</th>
+<th><span class="arithmatex">\(d(A)\)</span></th>
+<th><span class="arithmatex">\(d(B)\)</span></th>
+<th><span class="arithmatex">\(d(C)\)</span></th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(E)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A, C, B\)</span></td>
+<td>0</td>
+<td><strong>4</strong></td>
+<td>2</td>
+<td>14</td>
+<td>5</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 4 步</strong>：未确定中 <span class="arithmatex">\(d(E) = 5\)</span> 最小，<strong>确定 <span class="arithmatex">\(E\)</span></strong>。松弛邻居：<span class="arithmatex">\(C\)</span>（已确定）、<span class="arithmatex">\(D\)</span>（<span class="arithmatex">\(5+4 = 9 &lt; 14\)</span>，更新为 9）、<span class="arithmatex">\(F\)</span>（<span class="arithmatex">\(5+7 = 12 &lt; \infty\)</span>，更新为 12）、<span class="arithmatex">\(G\)</span>（<span class="arithmatex">\(5+3 = 8 &lt; \infty\)</span>，更新为 8）。</p>
+<table>
+<thead>
+<tr>
+<th>已确定</th>
+<th><span class="arithmatex">\(d(A)\)</span></th>
+<th><span class="arithmatex">\(d(B)\)</span></th>
+<th><span class="arithmatex">\(d(C)\)</span></th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(E)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(A, C, B, E\)</span></td>
+<td>0</td>
+<td>4</td>
+<td>2</td>
+<td>9</td>
+<td><strong>5</strong></td>
+<td>12</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 5 步</strong>：未确定中 <span class="arithmatex">\(d(G) = 8\)</span> 最小，<strong>确定 <span class="arithmatex">\(G\)</span></strong>。松弛邻居：<span class="arithmatex">\(E\)</span>（已确定）、<span class="arithmatex">\(F\)</span>（<span class="arithmatex">\(8+5 = 13 &gt; 12\)</span>，不改）。</p>
+<table>
+<thead>
+<tr>
+<th>已确定</th>
+<th><span class="arithmatex">\(d(A)\)</span></th>
+<th><span class="arithmatex">\(d(B)\)</span></th>
+<th><span class="arithmatex">\(d(C)\)</span></th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(E)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\dots, G\)</span></td>
+<td>0</td>
+<td>4</td>
+<td>2</td>
+<td>9</td>
+<td>5</td>
+<td>12</td>
+<td><strong>8</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 6 步</strong>：未确定中 <span class="arithmatex">\(d(D) = 9\)</span> 最小，<strong>确定 <span class="arithmatex">\(D\)</span></strong>。松弛邻居：<span class="arithmatex">\(B\)</span>（已确定）、<span class="arithmatex">\(E\)</span>（已确定）、<span class="arithmatex">\(F\)</span>（<span class="arithmatex">\(9+11 = 20 &gt; 12\)</span>，不改）。</p>
+<p><strong>第 7 步</strong>：未确定中 <span class="arithmatex">\(d(F) = 12\)</span>，<strong>确定 <span class="arithmatex">\(F\)</span></strong>。邻居 <span class="arithmatex">\(D\)</span>、<span class="arithmatex">\(E\)</span>、<span class="arithmatex">\(G\)</span> 都已确定，无松弛。</p>
+<p><strong>（3）确定顺序</strong>：<span class="arithmatex">\(A \to C \to B \to E \to G \to D \to F\)</span>，对应距离 <span class="arithmatex">\(0 \to 2 \to 4 \to 5 \to 8 \to 9 \to 12\)</span>。</p>
+<p><strong>（2）各目标点的最短路径</strong>：沿"前驱"回溯。</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>最短路径</th>
+<th>长度</th>
+<th>验算</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(B\)</span></td>
+<td><span class="arithmatex">\(A \to B\)</span></td>
+<td>4</td>
+<td>直接边权 4；走 <span class="arithmatex">\(A\!-\!C\!-\!B\)</span> 要 <span class="arithmatex">\(2+5=7\)</span>，更长</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(C\)</span></td>
+<td><span class="arithmatex">\(A \to C\)</span></td>
+<td>2</td>
+<td>直接边权 2，显然最短</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D\)</span></td>
+<td><span class="arithmatex">\(A \to C \to E \to D\)</span></td>
+<td>9</td>
+<td><span class="arithmatex">\(2+3+4 = 9\)</span>；走 <span class="arithmatex">\(A\!-\!B\!-\!D\)</span> 要 <span class="arithmatex">\(4+10=14\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(E\)</span></td>
+<td><span class="arithmatex">\(A \to C \to E\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(2+3=5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(F\)</span></td>
+<td><span class="arithmatex">\(A \to C \to E \to F\)</span></td>
+<td>12</td>
+<td><span class="arithmatex">\(2+3+7 = 12\)</span>；走 <span class="arithmatex">\(A\!-\!C\!-\!E\!-\!G\!-\!F\)</span> 要 <span class="arithmatex">\(2+3+3+5=13\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(G\)</span></td>
+<td><span class="arithmatex">\(A \to C \to E \to G\)</span></td>
+<td>8</td>
+<td><span class="arithmatex">\(2+3+3 = 8\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>两种独立验算</strong>：</p>
+<p>其一，<strong>手算所有 <span class="arithmatex">\(A \to F\)</span> 的简单路径</strong>：<span class="arithmatex">\(A\!-\!B\!-\!C\!-\!E\!-\!F\)</span> 为 <span class="arithmatex">\(4+5+3+7 = 19\)</span>；<span class="arithmatex">\(A\!-\!B\!-\!D\!-\!F\)</span> 为 <span class="arithmatex">\(4+10+11 = 25\)</span>；<span class="arithmatex">\(A\!-\!C\!-\!E\!-\!F\)</span> 为 <span class="arithmatex">\(12\)</span>；<span class="arithmatex">\(A\!-\!C\!-\!E\!-\!G\!-\!F\)</span> 为 <span class="arithmatex">\(13\)</span>；<span class="arithmatex">\(A\!-\!C\!-\!E\!-\!D\!-\!F\)</span> 为 <span class="arithmatex">\(2+3+4+11 = 20\)</span>。最小是 <span class="arithmatex">\(12\)</span> ✓，与表一致。</p>
+<p>其二，<strong>所有距离的三角不等式</strong>：对每条边 <span class="arithmatex">\((u,v,w)\)</span> 检查 <span class="arithmatex">\(d(v) \le d(u) + w\)</span>。例如边 <span class="arithmatex">\(EF\)</span>（权 7）：<span class="arithmatex">\(d(F) = 12 \le d(E) + 7 = 12\)</span> ✓（取等，说明 <span class="arithmatex">\(EF\)</span> 是最短路上的边）。边 <span class="arithmatex">\(DF\)</span>（权 11）：<span class="arithmatex">\(12 \le 9 + 11 = 20\)</span> ✓。边 <span class="arithmatex">\(FG\)</span>（权 5）：<span class="arithmatex">\(d(F) = 12 \le d(G) + 5 = 13\)</span> ✓。全部通过，说明这组距离满足最短路的最优性条件 ✓。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">实用技巧</p>
+<p>Dijkstra 算完一定要做<strong>三角不等式验算</strong>：对每条边 <span class="arithmatex">\((u,v,w)\)</span> 检查 <span class="arithmatex">\(d(v) \le d(u)+w\)</span> 与 <span class="arithmatex">\(d(u) \le d(v)+w\)</span>。只要有一步松弛写错，这条就会破。这是最快的手算自查手段。</p>
+</div>
+<hr />
+<h3 id="3bellman-ford">例题 3：Bellman-Ford 与最小生成树<a class="headerlink" href="#3bellman-ford" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：两部分。</p>
+<p>（甲）<strong>Bellman-Ford 与负环检测</strong>。有向图：弧集</p>
+<div class="arithmatex">\[
+\{s\to a:4,\quad s\to b:5,\quad a\to c:-3,\quad b\to c:2,\quad c\to d:4,\quad a\to d:6\}
+\]</div>
+<p>从 <span class="arithmatex">\(s\)</span> 出发求各点最短距离，列出每轮迭代后的距离表；若把 <span class="arithmatex">\(d \to a\)</span> 的权改为 <span class="arithmatex">\(-9\)</span>，会发生什么？</p>
+<p>（乙）<strong>最小生成树</strong>。对无向带权图 <span class="arithmatex">\(G_9\)</span>（边集同例题 2），分别用 Kruskal 与 Prim（从 <span class="arithmatex">\(A\)</span> 出发）求最小生成树，给出接受/拒绝过程与总权；并说明"<span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(F\)</span> 在 MST 上的路径长度"与例题 2 的最短路 12 是否相同。</p>
+<details class="note">
+<summary>思路</summary>
+<p>（甲）关系是 <span class="arithmatex">\(d(v) \leftarrow \min(d(v), d(u)+w)\)</span>，重复 <span class="arithmatex">\(n-1 = 4\)</span> 轮，每轮遍历所有弧。（乙）Kruskal 按权升序逐条判断是否成环；Prim 从 <span class="arithmatex">\(A\)</span> 出发每次选"连接已选集合与外部"的最小边。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（甲）Bellman-Ford</strong>。顶点集 <span class="arithmatex">\(\{s,a,b,c,d\}\)</span>，共 5 个顶点，故最多迭代 <span class="arithmatex">\(n-1 = 4\)</span> 轮。初始 <span class="arithmatex">\(d(s)=0\)</span>，其余 <span class="arithmatex">\(\infty\)</span>。</p>
+<p><strong>第 1 轮</strong>（遍历所有弧）：</p>
+<table>
+<thead>
+<tr>
+<th>弧</th>
+<th>松弛计算</th>
+<th><span class="arithmatex">\(d\)</span> 更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s\to a\)</span>（4）</td>
+<td><span class="arithmatex">\(0+4 = 4 &lt; \infty\)</span></td>
+<td><span class="arithmatex">\(d(a) = 4\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s\to b\)</span>（5）</td>
+<td><span class="arithmatex">\(0+5 = 5 &lt; \infty\)</span></td>
+<td><span class="arithmatex">\(d(b) = 5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\to c\)</span>（<span class="arithmatex">\(-3\)</span>）</td>
+<td><span class="arithmatex">\(4-3 = 1 &lt; \infty\)</span></td>
+<td><span class="arithmatex">\(d(c) = 1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\to c\)</span>（2）</td>
+<td><span class="arithmatex">\(5+2 = 7 &gt; 1\)</span></td>
+<td>不变</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\to d\)</span>（4）</td>
+<td><span class="arithmatex">\(1+4 = 5 &lt; \infty\)</span></td>
+<td><span class="arithmatex">\(d(d) = 5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\to d\)</span>（6）</td>
+<td><span class="arithmatex">\(4+6 = 10 &gt; 5\)</span></td>
+<td>不变</td>
+</tr>
+</tbody>
+</table>
+<p>第 1 轮后：<span class="arithmatex">\(d = (s:0,\ a:4,\ b:5,\ c:1,\ d:5)\)</span>。</p>
+<p><strong>第 2 轮</strong>：逐弧检查，<span class="arithmatex">\(s\to a\)</span>：<span class="arithmatex">\(0+4 = 4\)</span>，不变；<span class="arithmatex">\(s\to b\)</span>：不变；<span class="arithmatex">\(a\to c\)</span>：<span class="arithmatex">\(4-3 = 1\)</span>，不变；<span class="arithmatex">\(b\to c\)</span>：<span class="arithmatex">\(5+2 = 7 &gt; 1\)</span>，不变；<span class="arithmatex">\(c\to d\)</span>：<span class="arithmatex">\(1+4 = 5\)</span>，不变；<span class="arithmatex">\(a\to d\)</span>：<span class="arithmatex">\(10 &gt; 5\)</span>，不变。<strong>本轮无任何更新</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th><span class="arithmatex">\(d(s)\)</span></th>
+<th><span class="arithmatex">\(d(a)\)</span></th>
+<th><span class="arithmatex">\(d(b)\)</span></th>
+<th><span class="arithmatex">\(d(c)\)</span></th>
+<th><span class="arithmatex">\(d(d)\)</span></th>
+<th>本轮有更新？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0（初始）</td>
+<td>0</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>—</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+<td>是</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>4</td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+<td><strong>否</strong>（提前终止）</td>
+</tr>
+</tbody>
+</table>
+<p>由于第 2 轮无更新，算法<strong>提前终止</strong>（这正是"可提前终止"优化）。最终最短路（按前驱回溯）：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>最短路径</th>
+<th>长度</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td><span class="arithmatex">\(s \to a\)</span></td>
+<td>4</td>
+<td>—</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\)</span></td>
+<td><span class="arithmatex">\(s \to b\)</span></td>
+<td>5</td>
+<td>—</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td><span class="arithmatex">\(s \to a \to c\)</span></td>
+<td>1</td>
+<td>走负权边 <span class="arithmatex">\(a\to c\)</span> 把代价降到 <span class="arithmatex">\(4-3=1\)</span>，比 <span class="arithmatex">\(s\!-\!b\!-\!c\)</span> 的 7 短得多</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\)</span></td>
+<td><span class="arithmatex">\(s \to a \to c \to d\)</span></td>
+<td>5</td>
+<td>比 <span class="arithmatex">\(s\!-\!a\!-\!d\)</span> 的 10 更短</td>
+</tr>
+</tbody>
+</table>
+<p><strong>负环检验</strong>：再跑一轮，所有弧都无更新，故<strong>不存在负环</strong>，上述距离就是真正的最短距离 ✓。</p>
+<p><strong>若把 <span class="arithmatex">\(d\to a\)</span> 的权改为 <span class="arithmatex">\(-9\)</span></strong>：此时存在回路 <span class="arithmatex">\(a \to c \to d \to a\)</span>，其权为 <span class="arithmatex">\(-3 + 4 - 9 = -8 &lt; 0\)</span>，是<strong>负环</strong>。迭代会一直"降下去"：</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th><span class="arithmatex">\(d(a)\)</span></th>
+<th><span class="arithmatex">\(d(b)\)</span></th>
+<th><span class="arithmatex">\(d(c)\)</span></th>
+<th><span class="arithmatex">\(d(d)\)</span></th>
+<th>有更新？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(-4\)</span></td>
+<td>5</td>
+<td>1</td>
+<td>5</td>
+<td>是</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(-12\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(-7\)</span></td>
+<td><span class="arithmatex">\(-3\)</span></td>
+<td>是</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(-20\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(-15\)</span></td>
+<td><span class="arithmatex">\(-11\)</span></td>
+<td>是</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(-28\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(-23\)</span></td>
+<td><span class="arithmatex">\(-19\)</span></td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(n-1 = 4\)</span> 轮跑完后<strong>第 5 轮仍在更新</strong>，且数值每轮减小 8（正是负环的权），此时算法报告<strong>存在负环</strong>，最短路径问题<strong>无下界、无解</strong>。工程含义：最短路径长度会趋向 <span class="arithmatex">\(-\infty\)</span>，任何"最短距离"的数值都无意义。</p>
+<p><strong>（乙）最小生成树</strong>。边按权升序排列：</p>
+<table>
+<thead>
+<tr>
+<th>权</th>
+<th>边</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(AC\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(CE\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(EG\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(AB\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(DE\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(BC\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(FG\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(EF\)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(BD\)</span></td>
+</tr>
+<tr>
+<td>11</td>
+<td><span class="arithmatex">\(DF\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Kruskal 过程</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>序</th>
+<th>边</th>
+<th>权</th>
+<th>两端所属集合</th>
+<th>判定</th>
+<th>累计总权</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(AC\)</span></td>
+<td>2</td>
+<td><span class="arithmatex">\(\{A\}\)</span>、<span class="arithmatex">\(\{C\}\)</span> 不同</td>
+<td><strong>接受</strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(CE\)</span></td>
+<td>3</td>
+<td><span class="arithmatex">\(A,C\)</span> 与 <span class="arithmatex">\(E\)</span> 不同</td>
+<td><strong>接受</strong></td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(EG\)</span></td>
+<td>3</td>
+<td><span class="arithmatex">\(A,C,E\)</span> 与 <span class="arithmatex">\(G\)</span> 不同</td>
+<td><strong>接受</strong></td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(AB\)</span></td>
+<td>4</td>
+<td><span class="arithmatex">\(A,C,E,G\)</span> 与 <span class="arithmatex">\(B\)</span> 不同</td>
+<td><strong>接受</strong></td>
+<td>12</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(DE\)</span></td>
+<td>4</td>
+<td><span class="arithmatex">\(\{D\}\)</span> 与 <span class="arithmatex">\(A,B,C,E,G\)</span> 不同</td>
+<td><strong>接受</strong></td>
+<td>16</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(BC\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(B\)</span> 与 <span class="arithmatex">\(C\)</span> 已在同一集合</td>
+<td>拒绝（成环 <span class="arithmatex">\(A\!-\!B\!-\!C\!-\!A\)</span>）</td>
+<td>16</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(FG\)</span></td>
+<td>5</td>
+<td><span class="arithmatex">\(\{F\}\)</span> 与 <span class="arithmatex">\(\{G\}\)</span> 不同</td>
+<td><strong>接受</strong>（第 6 条边，<span class="arithmatex">\(n-1=6\)</span>）</td>
+<td>21</td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\(EF\)</span></td>
+<td>7</td>
+<td>已连通</td>
+<td>拒绝（成环）</td>
+<td>21</td>
+</tr>
+<tr>
+<td>9</td>
+<td><span class="arithmatex">\(BD\)</span></td>
+<td>10</td>
+<td>已连通</td>
+<td>拒绝（成环）</td>
+<td>21</td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(DF\)</span></td>
+<td>11</td>
+<td>已连通</td>
+<td>拒绝（成环）</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<p>Kruskal 结果：边集 <span class="arithmatex">\(\{AC(2),\ CE(3),\ EG(3),\ AB(4),\ DE(4),\ FG(5)\}\)</span>，<strong>总权 21</strong>。</p>
+<p><strong>Prim 过程</strong>（从 <span class="arithmatex">\(A\)</span> 出发，<span class="arithmatex">\(S\)</span> 为已选集合）：</p>
+<table>
+<thead>
+<tr>
+<th>步</th>
+<th>选中的边</th>
+<th>权</th>
+<th><span class="arithmatex">\(S\)</span></th>
+<th>新压入的候选边</th>
+<th>累计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(AC\)</span></td>
+<td>2</td>
+<td><span class="arithmatex">\(\{A,C\}\)</span></td>
+<td><span class="arithmatex">\(CB(5)\)</span>、<span class="arithmatex">\(CE(3)\)</span></td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(CE\)</span></td>
+<td>3</td>
+<td><span class="arithmatex">\(\{A,C,E\}\)</span></td>
+<td><span class="arithmatex">\(ED(4)\)</span>、<span class="arithmatex">\(EF(7)\)</span>、<span class="arithmatex">\(EG(3)\)</span></td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(EG\)</span></td>
+<td>3</td>
+<td><span class="arithmatex">\(\{A,C,E,G\}\)</span></td>
+<td><span class="arithmatex">\(GF(5)\)</span></td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(AB\)</span></td>
+<td>4</td>
+<td><span class="arithmatex">\(\{A,B,C,E,G\}\)</span></td>
+<td><span class="arithmatex">\(BD(10)\)</span></td>
+<td>12</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(ED\)</span></td>
+<td>4</td>
+<td><span class="arithmatex">\(\{A,B,C,D,E,G\}\)</span></td>
+<td><span class="arithmatex">\(DF(11)\)</span></td>
+<td>16</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(GF\)</span></td>
+<td>5</td>
+<td>全部 7 个顶点</td>
+<td>—</td>
+<td>21</td>
+</tr>
+</tbody>
+</table>
+<p>Prim 结果：边集 <span class="arithmatex">\(\{AC(2),\ CE(3),\ EG(3),\ AB(4),\ DE(4),\ GF(5)\}\)</span>，<strong>总权 21</strong> ✓。</p>
+<p>两法得到<strong>同一棵树</strong>（边集相同），总权都是 21。</p>
+<p><strong>"<span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(F\)</span> 在 MST 上的路径"</strong>：沿 MST 走 <span class="arithmatex">\(A \to C \to E \to G \to F\)</span>，长度为</p>
+<div class="arithmatex">\[
+2 + 3 + 3 + 5 = 13
+\]</div>
+<p>而例题 2 中 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(F\)</span> 的<strong>最短路长度是 12</strong>（<span class="arithmatex">\(A \to C \to E \to F\)</span>，<span class="arithmatex">\(2+3+7=12\)</span>）。</p>
+<p><strong>结论：MST 上的路径不一定是最短路</strong>（<span class="arithmatex">\(13 &gt; 12\)</span>）。原因是两者的目标函数不同：MST 只关心"选中边的总权最小"，不关心任何单对顶点的路径长度；而最短路只关心"这一对顶点之间的代价最小"。举例说，MST 为了连接 <span class="arithmatex">\(F\)</span> 只花了 5（选了 <span class="arithmatex">\(FG\)</span>），但代价是把 <span class="arithmatex">\(F\)</span> 挂在 <span class="arithmatex">\(G\)</span> 后面，使得到 <span class="arithmatex">\(A\)</span> 的路径变长。</p>
+<p><strong>两种结果的对照表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>最小生成树（MST）</th>
+<th>最短路</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>目标</td>
+<td>选中边的<strong>总权</strong>最小</td>
+<td>特定点对的<strong>路径权</strong>最小</td>
+</tr>
+<tr>
+<td>结果结构</td>
+<td>一棵树，含 <span class="arithmatex">\(n-1\)</span> 条边</td>
+<td>一棵以源点为根的路径树</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(A\!-\!F\)</span> 路径长</td>
+<td>13</td>
+<td>12</td>
+</tr>
+<tr>
+<td>边集</td>
+<td><span class="arithmatex">\(\{AC, CE, EG, AB, DE, FG\}\)</span></td>
+<td><span class="arithmatex">\(\{AB, AC, CE, EF, EG, DE\}\)</span></td>
+</tr>
+<tr>
+<td>总权</td>
+<td>21</td>
+<td>—（最短路无"总权"概念）</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">实用技巧</p>
+<p>两种问题<strong>不要混用</strong>：需要"把全网连通且布线成本最低"用 MST；需要"从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 走最短"用最短路。工程上常见的错误是拿 MST 当"通信路由树"用，结果发现某些点对时延明显偏大——这就是把"总成本最小"误当成"每对都最优"。</p>
+</div>
+<hr />
+<h3 id="4">例题 4：最大流与最小割<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p><strong>题目</strong>：流网络中源点 <span class="arithmatex">\(s\)</span>、汇点 <span class="arithmatex">\(t\)</span>，弧与容量为</p>
+<div class="arithmatex">\[
+\begin{aligned}
+s\to a &amp;: 16, \quad s\to b : 13 \\
+a\to c &amp;: 12, \quad a\to b : 4 \\
+b\to a &amp;: 10, \quad b\to d : 14 \\
+c\to d &amp;: 9, \quad c\to t : 20 \\
+d\to c &amp;: 7, \quad d\to t : 4
+\end{aligned}
+\]</div>
+<p>（1）用 Edmonds-Karp（每次 BFS 找增广路）求最大流，列出每次增广的路径与瓶颈；（2）给出各弧的最终流量表；（3）找出最小割并验证"最大流 = 最小割"；（4）说明如何用最大流求二分图最大匹配。</p>
+<details class="note">
+<summary>思路</summary>
+<p>每次在残量网络中 BFS 找 <span class="arithmatex">\(s \to t\)</span> 路径，取路径上的最小残量作为瓶颈，沿路径增广（正向减残量、反向加残量）。增广到无路可走时，从 <span class="arithmatex">\(s\)</span> 在残量网络里能到达的点构成 <span class="arithmatex">\(S\)</span>，跨越 <span class="arithmatex">\(S\)</span> 的弧集就是最小割。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）增广过程</strong>。</p>
+<p><strong>第 1 次增广</strong>：BFS 找到路径 <span class="arithmatex">\(s \to a \to c \to t\)</span>。瓶颈为</p>
+<div class="arithmatex">\[
+\min\{c(s,a),\ c(a,c),\ c(c,t)\} = \min\{16,\ 12,\ 20\} = 12
+\]</div>
+<p>沿路径各弧加 12（反向弧减 12），总流量 <span class="arithmatex">\(= 12\)</span>。此时残量：<span class="arithmatex">\(s\to a\)</span> 剩 <span class="arithmatex">\(4\)</span>，<span class="arithmatex">\(a\to c\)</span> 饱和（剩 0），<span class="arithmatex">\(c\to t\)</span> 剩 <span class="arithmatex">\(8\)</span>。</p>
+<p><strong>第 2 次增广</strong>：BFS 找到路径 <span class="arithmatex">\(s \to b \to d \to t\)</span>。瓶颈为</p>
+<div class="arithmatex">\[
+\min\{13,\ 14,\ 4\} = 4
+\]</div>
+<p>总流量 <span class="arithmatex">\(= 16\)</span>。此时残量：<span class="arithmatex">\(s\to b\)</span> 剩 <span class="arithmatex">\(9\)</span>，<span class="arithmatex">\(b\to d\)</span> 剩 <span class="arithmatex">\(10\)</span>，<span class="arithmatex">\(d\to t\)</span> 饱和。</p>
+<p><strong>第 3 次增广</strong>：BFS 找到路径 <span class="arithmatex">\(s \to b \to d \to c \to t\)</span>。瓶颈为</p>
+<div class="arithmatex">\[
+\min\{c_f(s,b),\ c_f(b,d),\ c_f(d,c),\ c_f(c,t)\} = \min\{9,\ 10,\ 7,\ 8\} = 7
+\]</div>
+<p>总流量 <span class="arithmatex">\(= 23\)</span>。此时 <span class="arithmatex">\(d\to c\)</span> 饱和，<span class="arithmatex">\(c\to t\)</span> 剩 <span class="arithmatex">\(1\)</span>，<span class="arithmatex">\(s\to b\)</span> 剩 <span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(b\to d\)</span> 剩 <span class="arithmatex">\(3\)</span>。注意 <span class="arithmatex">\(d \to c\)</span> 这条弧本身是原始弧，而这里的做法直接用了它，无须反向弧。</p>
+<p><strong>第 4 次尝试</strong>：BFS 从 <span class="arithmatex">\(s\)</span> 出发能否到 <span class="arithmatex">\(t\)</span>？<span class="arithmatex">\(s\to a\)</span> 剩 4、<span class="arithmatex">\(s\to b\)</span> 剩 2。从 <span class="arithmatex">\(a\)</span> 出发：<span class="arithmatex">\(a\to c\)</span> 已饱和，<span class="arithmatex">\(a\to b\)</span> 容量 4 但有残量；从 <span class="arithmatex">\(b\)</span> 出去 <span class="arithmatex">\(b\to d\)</span> 剩 3，但到达 <span class="arithmatex">\(d\)</span> 后 <span class="arithmatex">\(d\to c\)</span> 与 <span class="arithmatex">\(d\to t\)</span> 均已饱和，<span class="arithmatex">\(d\to b\)</span> 的反向残量 3 只能回到 <span class="arithmatex">\(b\)</span>。从 <span class="arithmatex">\(c\)</span> 出发 <span class="arithmatex">\(c\to t\)</span> 剩 1 但无法到达 <span class="arithmatex">\(c\)</span>（<span class="arithmatex">\(a\to c\)</span>、<span class="arithmatex">\(d\to c\)</span> 都饱和）。<strong><span class="arithmatex">\(s\)</span> 到 <span class="arithmatex">\(t\)</span> 已不可达</strong>，算法终止。</p>
+<p><strong>增广汇总表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>次序</th>
+<th>增广路径</th>
+<th>瓶颈</th>
+<th>累计流量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(s \to a \to c \to t\)</span></td>
+<td>12</td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(s \to b \to d \to t\)</span></td>
+<td>4</td>
+<td>16</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(s \to b \to d \to c \to t\)</span></td>
+<td>7</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最大流值 = 23</strong>。</p>
+<p><strong>（2）各弧的最终流量表</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>弧</th>
+<th>容量</th>
+<th>流量</th>
+<th>是否饱和</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s\to a\)</span></td>
+<td>16</td>
+<td>12</td>
+<td>否（剩 4）</td>
+<td>第 1 次增广</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s\to b\)</span></td>
+<td>13</td>
+<td>11</td>
+<td>否（剩 2）</td>
+<td>第 2、3 次增广（<span class="arithmatex">\(4+7\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\to c\)</span></td>
+<td>12</td>
+<td>12</td>
+<td><strong>是</strong></td>
+<td>第 1 次增广</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\to b\)</span></td>
+<td>4</td>
+<td>0</td>
+<td>否</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\to a\)</span></td>
+<td>10</td>
+<td>0</td>
+<td>否</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\to d\)</span></td>
+<td>14</td>
+<td>11</td>
+<td>否（剩 3）</td>
+<td>第 2、3 次增广（<span class="arithmatex">\(4+7\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\to d\)</span></td>
+<td>9</td>
+<td>0</td>
+<td>否</td>
+<td>未使用</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\to t\)</span></td>
+<td>20</td>
+<td>19</td>
+<td>否（剩 1）</td>
+<td>第 1、3 次增广（<span class="arithmatex">\(12+7\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to c\)</span></td>
+<td>7</td>
+<td>7</td>
+<td><strong>是</strong></td>
+<td>第 3 次增广</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to t\)</span></td>
+<td>4</td>
+<td>4</td>
+<td><strong>是</strong></td>
+<td>第 2 次增广</td>
+</tr>
+</tbody>
+</table>
+<p><strong>流量守恒验算</strong>（这是检查一切的关键）：</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>流入</th>
+<th>流出</th>
+<th>守恒？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td><span class="arithmatex">\(s\to a\)</span> 的 12</td>
+<td><span class="arithmatex">\(a\to c\)</span> 的 12</td>
+<td>12 = 12 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\)</span></td>
+<td><span class="arithmatex">\(s\to b\)</span> 的 11</td>
+<td><span class="arithmatex">\(b\to d\)</span> 的 11</td>
+<td>11 = 11 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td><span class="arithmatex">\(a\to c\)</span> 的 12 <span class="arithmatex">\(+\,d\to c\)</span> 的 7 <span class="arithmatex">\(= 19\)</span></td>
+<td><span class="arithmatex">\(c\to t\)</span> 的 19</td>
+<td>19 = 19 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\)</span></td>
+<td><span class="arithmatex">\(b\to d\)</span> 的 11</td>
+<td><span class="arithmatex">\(d\to c\)</span> 的 7 <span class="arithmatex">\(+\,d\to t\)</span> 的 4 <span class="arithmatex">\(= 11\)</span></td>
+<td>11 = 11 ✓</td>
+</tr>
+</tbody>
+</table>
+<p>源点净流出 <span class="arithmatex">\(= 12 + 11 = 23\)</span>；汇点净流入 <span class="arithmatex">\(= 19 + 4 = 23\)</span> ✓。四个中间节点全部守恒 ✓。</p>
+<p><strong>（3）最小割</strong>。终止时从 <span class="arithmatex">\(s\)</span> 在残量网络中能到达的顶点集合：</p>
+<table>
+<thead>
+<tr>
+<th>顶点</th>
+<th>从 <span class="arithmatex">\(s\)</span> 是否可达</th>
+<th>可达途径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s\)</span></td>
+<td>✓</td>
+<td>起点</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to a\)</span> 剩 4</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to b\)</span> 剩 2</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to b\to d\)</span> 剩 3</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>✗</td>
+<td><span class="arithmatex">\(a\to c\)</span>、<span class="arithmatex">\(d\to c\)</span> 都饱和</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t\)</span></td>
+<td>✗</td>
+<td>需先到 <span class="arithmatex">\(c\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>所以 <span class="arithmatex">\(S = \{s, a, b, d\}\)</span>，<span class="arithmatex">\(T = \{c, t\}\)</span>。跨越割 <span class="arithmatex">\((S,T)\)</span> 的<strong>原始弧</strong>有：</p>
+<table>
+<thead>
+<tr>
+<th>跨越弧</th>
+<th>容量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(a \to c\)</span></td>
+<td>12</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d \to c\)</span></td>
+<td>7</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d \to t\)</span></td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p>割容量为</p>
+<div class="arithmatex">\[
+\operatorname{cap}(S,T) = 12 + 7 + 4 = 23
+\]</div>
+<p><strong>注意方向</strong>：<span class="arithmatex">\(c \to d\)</span> 虽然连接 <span class="arithmatex">\(T\)</span> 中的 <span class="arithmatex">\(c\)</span> 与 <span class="arithmatex">\(S\)</span> 中的 <span class="arithmatex">\(d\)</span>，但它是"从 <span class="arithmatex">\(T\)</span> 指向 <span class="arithmatex">\(S\)</span>"的弧，按割容量的定义只统计"从 <span class="arithmatex">\(S\)</span> 指向 <span class="arithmatex">\(T\)</span>"的弧，所以不计入。</p>
+<p><strong>验证最大流最小割定理</strong>：</p>
+<div class="arithmatex">\[
+\lvert f\rvert = 23 = \operatorname{cap}(S,T)
+\]</div>
+<p>两者相等 ✓，并且跨越割的三条弧<strong>全部饱和</strong>（<span class="arithmatex">\(12/12\)</span>、<span class="arithmatex">\(7/7\)</span>、<span class="arithmatex">\(4/4\)</span>），这正是"割容量等于流量"的充要条件。</p>
+<p><strong>（4）用最大流求二分图最大匹配</strong>。以 4 个左侧点 <span class="arithmatex">\(x_1,\dots,x_4\)</span>、3 个右侧点 <span class="arithmatex">\(y_1,y_2,y_3\)</span> 为例，边为</p>
+<div class="arithmatex">\[
+x_1y_1,\ x_1y_2,\ x_2y_1,\ x_2y_3,\ x_3y_2,\ x_3y_3,\ x_4y_3
+\]</div>
+<p>构造网络：源点 <span class="arithmatex">\(S\)</span> 向每个 <span class="arithmatex">\(x_i\)</span> 接容量 1 的弧；每个 <span class="arithmatex">\(y_j\)</span> 向汇点 <span class="arithmatex">\(T\)</span> 接容量 1 的弧；原边改成 <span class="arithmatex">\(x_i \to y_j\)</span>、容量 1。求最大流，结果如下：</p>
+<table>
+<thead>
+<tr>
+<th>增广次序</th>
+<th>路径</th>
+<th>流量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(S \to x_1 \to y_1 \to T\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(S \to x_2 \to y_3 \to T\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(S \to x_3 \to y_2 \to T\)</span></td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>最大流值为 <strong>3</strong>，故最大匹配大小为 <strong>3</strong>，对应配对</p>
+<div class="arithmatex">\[
+x_1\!-\!y_1, \qquad x_2\!-\!y_3, \qquad x_3\!-\!y_2
+\]</div>
+<p>一共 3 对，正好等于右侧顶点个数，是<strong>完美匹配</strong>。<span class="arithmatex">\(x_4\)</span> 只能连 <span class="arithmatex">\(y_3\)</span>，而 <span class="arithmatex">\(y_3\)</span> 已被 <span class="arithmatex">\(x_2\)</span> 占用——为什么不能改派给 <span class="arithmatex">\(x_1\)</span> 呢？<span class="arithmatex">\(x_1\)</span> 还可以连 <span class="arithmatex">\(y_1\)</span> 和 <span class="arithmatex">\(y_2\)</span>，但 <span class="arithmatex">\(y_1\)</span> 给了 <span class="arithmatex">\(x_1\)</span>、<span class="arithmatex">\(y_2\)</span> 给了 <span class="arithmatex">\(x_3\)</span>，重新分配后 <span class="arithmatex">\(x_4\)</span> 仍配不上。所以 <span class="arithmatex">\(\lvert \{x_4\}\rvert = 1\)</span> 而它的邻居集 <span class="arithmatex">\(\Gamma(\{x_4\}) = \{y_3\}\)</span> 的规模恰为 1，不违反 Hall 定理；但把 <span class="arithmatex">\(\{x_2, x_4\}\)</span> 放在一起看，其邻居集是 <span class="arithmatex">\(\{y_1, y_3\}\)</span>，规模 <span class="arithmatex">\(2\)</span> 与 <span class="arithmatex">\(\lvert\{x_2,x_4\}\rvert = 2\)</span> 相等，同样不违反。<strong>结论：存在大小为 3 的匹配，但不存在让全部 4 个 <span class="arithmatex">\(x\)</span> 都匹配上的匹配</strong>（因为只有 3 个 <span class="arithmatex">\(y\)</span>）。</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">实用技巧</p>
+<p><strong>始终用"流量守恒"验算</strong>：每个中间节点的流入总量必须等于流出总量，源点净流出必须等于汇点净流入，且必须等于最大流值。这一步能抓住绝大多数手算错误。另外，最小割不一定唯一，但<strong>所有最小割的容量必然相等</strong>——这也是验证时的另一个抓手。</p>
+</div>
+<hr />
+<h2 id="_14">七、用在哪些课程里<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="_15">无人系统自主决策与优化 · 路由、任务分配与决策求解<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p><strong>通信路由</strong>是多机器人系统里最直接的落点。无人机编队要把消息从指挥节点送到某个末端节点，链路质量（时延、丢包率、带宽倒数）作为边权，就是<strong>非负权最短路</strong> —— Dijkstra。工程实现上通常用 A*（Dijkstra 加一个启发函数）加速；如果网络上可能出现"转发一次赚积分"这类等效负代价，就必须换用 Bellman-Ford。后者的分布式形态（距离向量协议）尤为重要：它只要求每个节点与邻居交换信息，不需要全局拓扑，正好契合编队通信的分布式要求。</p>
+<p><strong>任务分配</strong>对应最大流。<span class="arithmatex">\(n\)</span> 台机器人、<span class="arithmatex">\(m\)</span> 个任务，把"能胜任"建成二分图，用最大流求最大匹配，就得到了"最多能派出多少台"以及具体的派法。若有优先级或工作量约束，只需调整各弧的容量：让某个机器人接多条容量为 1 的弧（表示能接多个任务），或让某任务的弧容量大于 1（表示需要多台协作）。<strong>把约束翻译成容量</strong>是这类建模的核心技巧。</p>
+<p><strong>规划图上的搜索</strong>还要用 BFS / DFS。离散化后的状态空间常被建成图，其中 BFS 用于"最少动作数"的判定（如能否在 5 步内完成任务），DFS 用于穷举可行方案或构造拓扑序（任务依赖关系天然是一张有向无环图）。</p>
+<h3 id="_16">机器人学 · 路径规划与图优化求解器<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p><strong>栅格与拓扑图上的寻路</strong>是机器人学的日常任务。把自由空间离散成栅格或可视图，每个格子/顶点是节点、相邻关系是边，代价可以是距离、转向代价或风险代价，那么"A 到 B 的最优路径"就是<strong>最短路问题</strong>。工程上几乎都会用 A* 变体（Dijkstra + 启发式）在保证最优性的前提下大幅剪枝；若只要求次优且要更快，则用加权 A*（启发式稍放大）。</p>
+<p><strong>最小生成树</strong>在机器人学里有几处典型用途。一是<strong>探索与覆盖</strong>：把已探测的节点用 MST 串起来，得到最短的"巡视总路线"——虽然"走遍所有点的最短路线"其实是旅行商问题（TSP，NP 难），但 MST 常作为 TSP 的 2-近似的下界与构造基础。二是<strong>多机器人分区</strong>：先算 MST，再在"最长的边"处断开，就得到若干连通的子区域，是经典的控制区域划分启发式。三是<strong>建图与配准</strong>：把位姿图缩成一棵生成树，就能用"沿树传播"的方式快速得到全局一致的初始位姿，再在树上叠加回环约束做优化。</p>
+<p><strong>图上的搜索</strong>还支撑着 SLAM 后端。位姿图优化中的零空间诊断（见"图的矩阵表示"那一页）常借助 DFS 作为连通分量检测的实现手段；而稀疏求解器里的<strong>消元顺序</strong>则来自对图的消元排序（近似最小度排序），它直接决定了分解的填充量。</p>
+<h3 id="_17">智能传感与信息处理 · 网络流、调度与传感器分配<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p><strong>最大流</strong>在传感网中的第一个应用是<strong>吞吐量上界</strong>。把链路带宽当作容量、汇聚节点当作汇点，最大流值就给出"这张网络最多能把多少数据送到网关"。更值得注意的是<strong>最小割</strong>：那个割恰好指明了网络的瓶颈链路集合——想提升吞吐，就该在这几条边上加带宽，而不是盲目升级所有链路。这是"最大流最小割定理"最实用的工程价值。</p>
+<p><strong>多传感器多目标分配</strong>用二分图匹配建模最为自然：传感器一组、目标一组，边表示"能观测"，用最大流求最大匹配就得到"最多能同时跟踪多少个目标"。若要求"每个目标至少被 2 个传感器跟踪"（冗余观测以便剔除野值），只需把目标侧的弧容量改成 2；若某个传感器算力有限只能跟一个目标，则源侧弧容量保持 1。约束与容量的这种对应关系，让最大流成为传感网资源分配的通用工具。</p>
+<p><strong>调度与布站</strong>还常用最短路径的变形。例如多跳中继网络中选择中继节点位置，本质上是最小化"任意源到汇聚的最坏跳数"，即最小化图的直径——这是 BFS 反复运用的场景。而传感器采样时隙分配可以用 BFS/DFS 的染色思路，把"相邻传感器不能同时发送"翻译成图着色问题，二分图情形下 2-着色即为最优方案。</p>
+<hr />
+<h2 id="_18">八、自测<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 无权图 <span class="arithmatex">\(G_8\)</span>：<span class="arithmatex">\(E_8 = \{12, 13, 24, 35, 45, 46, 57, 68, 78\}\)</span>。
+（1）从顶点 1 到顶点 8 的最短跳数是多少？给出最短路径；（2）用 BFS 说明为什么不存在更少的跳数；（3）图中有多少条边是非树边（相对 BFS 树）？</p>
+<details class="note">
+<summary>提示</summary>
+<p>BFS 的层次即为最短跳数。<span class="arithmatex">\(n=8\)</span>、<span class="arithmatex">\(m=9\)</span>，BFS 树有 <span class="arithmatex">\(n-1=7\)</span> 条边，其余 <span class="arithmatex">\(m-(n-1)\)</span> 条为"使图有环"的非树边。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）最短跳数</strong>。从例题 1 的 BFS 层次表：</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>顶点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2, 3</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4, 5</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6, 7</td>
+</tr>
+<tr>
+<td>4</td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p>顶点 8 在第 4 层，故最短跳数 = <strong>4</strong>。最短路径为</p>
+<div class="arithmatex">\[
+1 \to 2 \to 4 \to 6 \to 8
+\]</div>
+<p>验证层次递进：<span class="arithmatex">\(1\)</span>（层 0）<span class="arithmatex">\(\to 2\)</span>（层 1）<span class="arithmatex">\(\to 4\)</span>（层 2）<span class="arithmatex">\(\to 6\)</span>（层 3）<span class="arithmatex">\(\to 8\)</span>（层 4）✓，每一步都跨一层。</p>
+<p><strong>（2）为什么不能更少</strong>。BFS 的正确性保证：队列的先进先出性质使得"距离为 <span class="arithmatex">\(k\)</span> 的顶点全部在距离为 <span class="arithmatex">\(k+1\)</span> 的顶点之前出队"，因此<strong>第一次访问到某顶点时，其距离就是最小值</strong>。既然首次访问 8 是在层 4，说明层 0、1、2、3 中都没有 8，也就是不存在长度 <span class="arithmatex">\(\le 3\)</span> 的路径。</p>
+<p>也可以直接手工排除：从 8 出发只有两个邻居 <span class="arithmatex">\(\{6, 7\}\)</span>，而 7 的另一个邻居是 5，6 的另一个邻居是 4。要走 3 步到 1，必须存在形如 <span class="arithmatex">\(1 - x - y - 8\)</span> 的路径，其中 <span class="arithmatex">\(y \in \{6,7\}\)</span>。<span class="arithmatex">\(y = 6\)</span> 时 <span class="arithmatex">\(x \in N(6) = \{4,8\}\)</span>，需 <span class="arithmatex">\(1 \in N(4) = \{2,5,6\}\)</span>——不成立。<span class="arithmatex">\(y = 7\)</span> 时 <span class="arithmatex">\(x \in N(7) = \{5,8\}\)</span>，需 <span class="arithmatex">\(1 \in N(5) = \{3,4,7\}\)</span>——也不成立。所以 3 步不可能，<strong>最少就是 4 步</strong> ✓。</p>
+<p><strong>（3）非树边条数</strong>。BFS 树含 <span class="arithmatex">\(n-1 = 7\)</span> 条边（例题 1 中为 <span class="arithmatex">\(\{12,13,24,35,46,57,68\}\)</span>），而</p>
+<div class="arithmatex">\[
+m - (n-1) = 9 - 7 = 2
+\]</div>
+<p>即为非树边，分别是</p>
+<div class="arithmatex">\[
+45 \quad \text{与} \quad 78
+\]</div>
+<p><strong>交叉验算</strong>：图 <span class="arithmatex">\(G_8\)</span> 的回路数（圈秩，cycle rank）等于 <span class="arithmatex">\(m - n + 1 = 9 - 8 + 1 = 2\)</span>，与"非树边数"一致——在图论中，"非树边条数 = 基本回路数 = 圈秩"是一条通用恒等式。</p>
+</details>
+<p><strong>Q2</strong> 带权图 <span class="arithmatex">\(G_9\)</span>（边集同例题 2）：从 <span class="arithmatex">\(A\)</span> 出发。
+（1）写出 <span class="arithmatex">\(d(F)\)</span> 的最终值与前驱链；（2）若把边 <span class="arithmatex">\(EG\)</span> 的权从 3 改成 12，<span class="arithmatex">\(d(F)\)</span> 与 <span class="arithmatex">\(d(G)\)</span> 会怎样变化？（3）说明为什么 Dijkstra 不能处理负权边。</p>
+<details class="note">
+<summary>提示</summary>
+<p>第（2）问要重新跑一遍 Dijkstra 的关键几步，注意 <span class="arithmatex">\(G\)</span> 的路径可能改走 <span class="arithmatex">\(F\)</span>。（3）问要从"贪心确定性"的逻辑论证。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）<span class="arithmatex">\(d(F)\)</span> 与前驱链</strong>。由例题 2：<span class="arithmatex">\(d(F) = 12\)</span>，前驱为 <span class="arithmatex">\(E\)</span>；<span class="arithmatex">\(d(E) = 5\)</span>，前驱为 <span class="arithmatex">\(C\)</span>；<span class="arithmatex">\(d(C) = 2\)</span>，前驱为 <span class="arithmatex">\(A\)</span>。故</p>
+<div class="arithmatex">\[
+A \to C \to E \to F, \qquad \text{长度} = 2 + 3 + 7 = 12
+\]</div>
+<p><strong>（2）把 <span class="arithmatex">\(EG\)</span> 的权改为 12</strong>。重新跑关键步骤（前 4 步不变，因为 <span class="arithmatex">\(EG\)</span> 只影响 <span class="arithmatex">\(G\)</span> 的候选值）：</p>
+<table>
+<thead>
+<tr>
+<th>步</th>
+<th>确定</th>
+<th><span class="arithmatex">\(d(D)\)</span></th>
+<th><span class="arithmatex">\(d(F)\)</span></th>
+<th><span class="arithmatex">\(d(G)\)</span></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(A\)</span>（0）</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>松弛 <span class="arithmatex">\(B=4\)</span>、<span class="arithmatex">\(C=2\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(C\)</span>（2）</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>松弛 <span class="arithmatex">\(E=5\)</span>（<span class="arithmatex">\(B\)</span> 保持 4）</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(B\)</span>（4）</td>
+<td>14</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>松弛 <span class="arithmatex">\(D=14\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(E\)</span>（5）</td>
+<td><strong>9</strong></td>
+<td><strong>12</strong></td>
+<td><strong>17</strong></td>
+<td>松弛 <span class="arithmatex">\(D=9\)</span>、<span class="arithmatex">\(F=12\)</span>、<span class="arithmatex">\(G=5+12=17\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(D\)</span>（9）</td>
+<td>—</td>
+<td>12（<span class="arithmatex">\(9+11=20\)</span> 不改）</td>
+<td>17</td>
+<td>—</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(F\)</span>（12）</td>
+<td>—</td>
+<td>—</td>
+<td><strong>17</strong>（<span class="arithmatex">\(12+5 = 17\)</span>，与当前相等，不改）</td>
+<td>松弛 <span class="arithmatex">\(G\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(G\)</span>（17）</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>结束</td>
+</tr>
+</tbody>
+</table>
+<p>所以变化如下：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>原值（<span class="arithmatex">\(EG = 3\)</span>）</th>
+<th>新值（<span class="arithmatex">\(EG = 12\)</span>）</th>
+<th>变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(d(F)\)</span></td>
+<td>12</td>
+<td>12</td>
+<td><strong>不变</strong>（仍为 <span class="arithmatex">\(A\!-\!C\!-\!E\!-\!F\)</span>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d(G)\)</span></td>
+<td>8</td>
+<td><strong>17</strong></td>
+<td>变大，路径改为 <span class="arithmatex">\(A \to C \to E \to F \to G\)</span>（<span class="arithmatex">\(2+3+7+5 = 17\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<p>注意 <span class="arithmatex">\(d(G)\)</span> 的新路径<strong>正好取等</strong>：<span class="arithmatex">\(A\!-\!C\!-\!E\!-\!G\)</span> 现在要 <span class="arithmatex">\(2+3+12 = 17\)</span>，而 <span class="arithmatex">\(A\!-\!C\!-\!E\!-\!F\!-\!G\)</span> 也要 <span class="arithmatex">\(2+3+7+5 = 17\)</span>。两条路径<strong>并列最短</strong>，说明此时该图的最短路（到 <span class="arithmatex">\(G\)</span>）<strong>不唯一</strong>。</p>
+<p><strong>（3）Dijkstra 为什么不能处理负权</strong>。核心在于第二节证明里的那一句：<strong>"所有边权非负"被用来推出 <span class="arithmatex">\(\delta(u) \ge \delta(x)\)</span></strong>，即"沿最短路往后走，距离不会变小"。允许负权后这句话就不成立了，于是贪心逻辑崩溃。</p>
+<p>具体反例：设 <span class="arithmatex">\(A \to B\)</span> 权 <span class="arithmatex">\(2\)</span>，<span class="arithmatex">\(A \to C\)</span> 权 <span class="arithmatex">\(5\)</span>，<span class="arithmatex">\(C \to B\)</span> 权 <span class="arithmatex">\(-4\)</span>。Dijkstra 第 1 步会选 <span class="arithmatex">\(B\)</span>（<span class="arithmatex">\(d = 2 &lt; 5\)</span>）并<strong>宣布 <span class="arithmatex">\(d(B) = 2\)</span> 最终确定</strong>。但实际最短是 <span class="arithmatex">\(A \to C \to B\)</span>，长度 <span class="arithmatex">\(5 - 4 = 1 &lt; 2\)</span>。错误一旦犯下就无法纠正，因为 Dijkstra 的"确定"是不可逆的。</p>
+<p>对比 Bellman-Ford：它反复松弛所有边，第 2 轮就会发现 <span class="arithmatex">\(d(B)\)</span> 可以更新为 1，最终得到正确答案。所以<strong>判断标准很简单</strong>：只要边权可能为负，就必须用 Bellman-Ford（或 Johnson 算法处理全源最短路）。</p>
+</details>
+<p><strong>Q3</strong> 带权图 <span class="arithmatex">\(G_9\)</span>（边集同例题 2）。
+（1）最小生成树的总权是多少？有哪些边被选入？（2）用"环性质"解释为什么边 <span class="arithmatex">\(BC\)</span>（权 5）不被选入；（3）若把 <span class="arithmatex">\(DE\)</span> 的权从 4 改成 6，最小生成树会变吗？</p>
+<details class="note">
+<summary>提示</summary>
+<p>MST 总权已由例题 3 算出为 21。环性质说回路中最大权边不属于任何 MST。第（3）问要注意 <span class="arithmatex">\(DE\)</span> 的权变成 6 后排序顺序改变。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）MST 总权与边集</strong>。由例题 3，Kruskal 与 Prim 都给出同一棵树：</p>
+<div class="arithmatex">\[
+T = \{AC(2),\ CE(3),\ EG(3),\ AB(4),\ DE(4),\ FG(5)\}
+\]</div>
+<p>总权</p>
+<div class="arithmatex">\[
+2 + 3 + 3 + 4 + 4 + 5 = 21
+\]</div>
+<p>含 6 条边，正好是 <span class="arithmatex">\(n - 1 = 7 - 1 = 6\)</span> ✓，且 7 个顶点全部连通（可由 <span class="arithmatex">\(A\)</span> 出发遍历验证：<span class="arithmatex">\(A\)</span> 连 <span class="arithmatex">\(B,C\)</span>；<span class="arithmatex">\(C\)</span> 连 <span class="arithmatex">\(E\)</span>；<span class="arithmatex">\(E\)</span> 连 <span class="arithmatex">\(D,G\)</span>；<span class="arithmatex">\(G\)</span> 连 <span class="arithmatex">\(F\)</span>）✓。</p>
+<p><strong>（2）为什么 <span class="arithmatex">\(BC\)</span>（权 5）不进 MST</strong>。考虑回路</p>
+<div class="arithmatex">\[
+B \to A \to C \to B
+\]</div>
+<p>它的三条边是 <span class="arithmatex">\(AB(4)\)</span>、<span class="arithmatex">\(AC(2)\)</span>、<span class="arithmatex">\(BC(5)\)</span>。这个回路上的<strong>最大权边是 <span class="arithmatex">\(BC\)</span>（权 5）</strong>。由<strong>环性质</strong>（回路中最大权边若唯一，则不属于任何最小生成树），<span class="arithmatex">\(BC\)</span> 必然不在 MST 中。加上 <span class="arithmatex">\(BC\)</span> 会形成回路，而回路里另两条边权都更小，用 <span class="arithmatex">\(BC\)</span> 替换任何一条都会让总权变大，所以一定不选。</p>
+<p>注意 Kruskal 的处理顺序恰好体现了这一点：<span class="arithmatex">\(AB\)</span>、<span class="arithmatex">\(AC\)</span> 先被接受（权 2、4 都小于 5），等轮到 <span class="arithmatex">\(BC\)</span> 时它两端已连通，<strong>直接拒绝</strong>。</p>
+<p><strong>（3）把 <span class="arithmatex">\(DE\)</span> 的权从 4 改成 6</strong>。重新按权排序：</p>
+<table>
+<thead>
+<tr>
+<th>权</th>
+<th>边（变化处标出）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(AC\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(CE\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(EG\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(AB\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(BC\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(FG\)</span></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong><span class="arithmatex">\(DE\)</span></strong>（原为 4）</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(EF\)</span></td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(BD\)</span></td>
+</tr>
+<tr>
+<td>11</td>
+<td><span class="arithmatex">\(DF\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>重新跑 Kruskal：</p>
+<table>
+<thead>
+<tr>
+<th>序</th>
+<th>边</th>
+<th>权</th>
+<th>判定</th>
+<th>累计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(AC\)</span></td>
+<td>2</td>
+<td>接受</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(CE\)</span></td>
+<td>3</td>
+<td>接受</td>
+<td>5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(EG\)</span></td>
+<td>3</td>
+<td>接受</td>
+<td>8</td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(AB\)</span></td>
+<td>4</td>
+<td>接受</td>
+<td>12</td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(BC\)</span></td>
+<td>5</td>
+<td>拒绝（<span class="arithmatex">\(A\!-\!B\!-\!C\)</span> 已成环）</td>
+<td>12</td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(FG\)</span></td>
+<td>5</td>
+<td>接受（<span class="arithmatex">\(F\)</span> 尚未接入）</td>
+<td>17</td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(DE\)</span></td>
+<td>6</td>
+<td><strong>接受</strong>（<span class="arithmatex">\(D\)</span> 尚未接入，<span class="arithmatex">\(S = \{A,B,C,E,F,G\}\)</span>，<span class="arithmatex">\(D \notin S\)</span>）</td>
+<td>23</td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\(EF\)</span></td>
+<td>7</td>
+<td>拒绝（<span class="arithmatex">\(E\)</span>、<span class="arithmatex">\(F\)</span> 已连通）</td>
+<td>23</td>
+</tr>
+<tr>
+<td>9</td>
+<td><span class="arithmatex">\(BD\)</span></td>
+<td>10</td>
+<td>拒绝</td>
+<td>23</td>
+</tr>
+<tr>
+<td>10</td>
+<td><span class="arithmatex">\(DF\)</span></td>
+<td>11</td>
+<td>拒绝</td>
+<td>23</td>
+</tr>
+</tbody>
+</table>
+<p>新 MST 为 <span class="arithmatex">\(\{AC(2),\ CE(3),\ EG(3),\ AB(4),\ FG(5),\ DE(6)\}\)</span>，<strong>总权变为 23</strong>（原为 21）。</p>
+<p><strong>结论</strong>：MST <strong>边集不变，但总权从 21 增到 23</strong>。虽然 <span class="arithmatex">\(DE\)</span> 的权变大了，它仍然是连接顶点 <span class="arithmatex">\(D\)</span> 的唯一可行选择——<span class="arithmatex">\(D\)</span> 的邻居只有 <span class="arithmatex">\(B\)</span>（权 10）、<span class="arithmatex">\(E\)</span>（权 6）、<span class="arithmatex">\(F\)</span>（权 11），其中 <span class="arithmatex">\(DE\)</span> 最便宜，必须入选。这正说明：<strong>MST 的选边只依赖权值的相对大小，一条边即使变贵也可能仍然非选不可</strong>。</p>
+</details>
+<p><strong>Q4</strong> 流网络：<span class="arithmatex">\(s\to a:16\)</span>，<span class="arithmatex">\(s\to b:13\)</span>，<span class="arithmatex">\(a\to c:12\)</span>，<span class="arithmatex">\(b\to d:14\)</span>，<span class="arithmatex">\(c\to t:20\)</span>，<span class="arithmatex">\(d\to t:4\)</span>，另有 <span class="arithmatex">\(d\to c:7\)</span>。
+（1）求最大流；（2）找出一个最小割并验证定理；（3）若把 <span class="arithmatex">\(c\to t\)</span> 的容量从 20 改成 14，最大流会变成多少？</p>
+<details class="note">
+<summary>提示</summary>
+<p>增广路径与例题 4 类似，但少了 <span class="arithmatex">\(a\to b\)</span> 与 <span class="arithmatex">\(b\to a\)</span> 两条弧，不影响结论。第（3）问要找割：<span class="arithmatex">\(\{c,t\}\)</span> 与其余部分的割容量是多少？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>（1）求最大流</strong>。</p>
+<p><strong>第 1 次增广</strong> <span class="arithmatex">\(s \to a \to c \to t\)</span>，瓶颈</p>
+<div class="arithmatex">\[
+\min\{16,\ 12,\ 20\} = 12 \quad \Rightarrow \quad \lvert f \rvert = 12
+\]</div>
+<p>此后 <span class="arithmatex">\(a\to c\)</span> 饱和，<span class="arithmatex">\(s\to a\)</span> 剩 4，<span class="arithmatex">\(c\to t\)</span> 剩 8。</p>
+<p><strong>第 2 次增广</strong> <span class="arithmatex">\(s \to b \to d \to t\)</span>，瓶颈</p>
+<div class="arithmatex">\[
+\min\{13,\ 14,\ 4\} = 4 \quad \Rightarrow \quad \lvert f \rvert = 16
+\]</div>
+<p>此后 <span class="arithmatex">\(d\to t\)</span> 饱和，<span class="arithmatex">\(s\to b\)</span> 剩 9，<span class="arithmatex">\(b\to d\)</span> 剩 10。</p>
+<p><strong>第 3 次增广</strong> <span class="arithmatex">\(s \to b \to d \to c \to t\)</span>，瓶颈</p>
+<div class="arithmatex">\[
+\min\{9,\ 10,\ 7,\ 8\} = 7 \quad \Rightarrow \quad \lvert f \rvert = 23
+\]</div>
+<p>此后 <span class="arithmatex">\(d\to c\)</span> 饱和，<span class="arithmatex">\(c\to t\)</span> 剩 1，<span class="arithmatex">\(s\to b\)</span> 剩 2，<span class="arithmatex">\(b\to d\)</span> 剩 3。</p>
+<p><strong>第 4 次尝试</strong>：从 <span class="arithmatex">\(s\)</span> 出发可达 <span class="arithmatex">\(\{s, a, b, d\}\)</span>（<span class="arithmatex">\(s\to a\)</span> 剩 4、<span class="arithmatex">\(s\to b\)</span> 剩 2、<span class="arithmatex">\(b\to d\)</span> 剩 3），但 <span class="arithmatex">\(d\)</span> 的所有出弧都饱和（<span class="arithmatex">\(d\to t\)</span> 剩 0、<span class="arithmatex">\(d\to c\)</span> 剩 0），<span class="arithmatex">\(c\)</span> 不可达，故 <span class="arithmatex">\(t\)</span> 不可达。算法终止。</p>
+<p><strong>最大流值 = 23</strong>。各弧流量表：</p>
+<table>
+<thead>
+<tr>
+<th>弧</th>
+<th>容量</th>
+<th>流量</th>
+<th>饱和？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s\to a\)</span></td>
+<td>16</td>
+<td>12</td>
+<td>否（剩 4）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(s\to b\)</span></td>
+<td>13</td>
+<td>11</td>
+<td>否（剩 2）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\to c\)</span></td>
+<td>12</td>
+<td>12</td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\to d\)</span></td>
+<td>14</td>
+<td>11</td>
+<td>否（剩 3）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\to t\)</span></td>
+<td>20</td>
+<td>19</td>
+<td>否（剩 1）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to t\)</span></td>
+<td>4</td>
+<td>4</td>
+<td><strong>是</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to c\)</span></td>
+<td>7</td>
+<td>7</td>
+<td><strong>是</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>守恒验算</strong>：节点 <span class="arithmatex">\(a\)</span>：流入 12 = 流出 12 ✓；节点 <span class="arithmatex">\(b\)</span>：流入 11 = 流出 11 ✓；节点 <span class="arithmatex">\(c\)</span>：流入 <span class="arithmatex">\(12 + 7 = 19\)</span> = 流出 19 ✓；节点 <span class="arithmatex">\(d\)</span>：流入 11 = 流出 <span class="arithmatex">\(7 + 4 = 11\)</span> ✓；源点净流出 <span class="arithmatex">\(12 + 11 = 23\)</span> = 汇点净流入 <span class="arithmatex">\(19 + 4 = 23\)</span> ✓。</p>
+<p><strong>（2）最小割</strong>。终止时残量网络从 <span class="arithmatex">\(s\)</span> 可达 <span class="arithmatex">\(\{s, a, b, d\}\)</span>，故</p>
+<div class="arithmatex">\[
+S = \{s, a, b, d\}, \qquad T = \{c, t\}
+\]</div>
+<p>跨越割 <span class="arithmatex">\((S,T)\)</span> 的原始弧及容量：</p>
+<table>
+<thead>
+<tr>
+<th>跨越弧</th>
+<th>容量</th>
+<th>是否饱和</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(a\to c\)</span></td>
+<td>12</td>
+<td>是（12/12）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to c\)</span></td>
+<td>7</td>
+<td>是（7/7）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\to t\)</span></td>
+<td>4</td>
+<td>是（4/4）</td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+\operatorname{cap}(S,T) = 12 + 7 + 4 = 23
+\]</div>
+<p><strong>验证</strong>：<span class="arithmatex">\(\lvert f\rvert = 23 = \operatorname{cap}(S,T)\)</span> ✓，三条跨越弧<strong>全部饱和</strong> ✓，与"最大流最小割定理"完全一致。</p>
+<p><strong>（3）把 <span class="arithmatex">\(c\to t\)</span> 的容量改为 14</strong>。先看上面的割 <span class="arithmatex">\((S,T)\)</span>：它的容量不依赖 <span class="arithmatex">\(c\to t\)</span>（<span class="arithmatex">\(c\to t\)</span> 两端都在 <span class="arithmatex">\(T\)</span> 内，不跨越割），所以这个割仍然是 23，<strong>最大流仍不超过 23</strong>。</p>
+<p>但换一个割看看。取 <span class="arithmatex">\(S' = \{s, a, b, d, c\}\)</span>、<span class="arithmatex">\(T' = \{t\}\)</span>，跨越弧只有 <span class="arithmatex">\(c\to t\)</span> 与 <span class="arithmatex">\(d\to t\)</span>，容量为</p>
+<div class="arithmatex">\[
+\operatorname{cap}(S',T') = 14 + 4 = 18
+\]</div>
+<p>于是最大流被压到 <strong>至多 18</strong>。重新增广：</p>
+<table>
+<thead>
+<tr>
+<th>次序</th>
+<th>路径</th>
+<th>瓶颈</th>
+<th>累计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(s \to a \to c \to t\)</span></td>
+<td><span class="arithmatex">\(\min\{16, 12, 14\} = 12\)</span></td>
+<td>12</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(s \to b \to d \to t\)</span></td>
+<td><span class="arithmatex">\(\min\{13, 14, 4\} = 4\)</span></td>
+<td>16</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(s \to b \to d \to c \to t\)</span></td>
+<td><span class="arithmatex">\(\min\{9, 10, 7, 14-12 = 2\} = 2\)</span></td>
+<td>18</td>
+</tr>
+</tbody>
+</table>
+<p>此后 <span class="arithmatex">\(c \to t\)</span> 饱和（<span class="arithmatex">\(12 + 2 = 14\)</span>），<span class="arithmatex">\(d\to c\)</span> 用掉 2（剩 5），<span class="arithmatex">\(s\to b\)</span> 剩 7，<span class="arithmatex">\(b\to d\)</span> 剩 8。</p>
+<p>再从 <span class="arithmatex">\(s\)</span> 出发看残量可达性：</p>
+<table>
+<thead>
+<tr>
+<th>顶点</th>
+<th>是否可达</th>
+<th>途径</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(s\)</span></td>
+<td>✓</td>
+<td>起点</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(a\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to a\)</span> 剩 4</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(b\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to b\)</span> 剩 7</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(d\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(s\to b\to d\)</span> 剩 8</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(c\)</span></td>
+<td>✓</td>
+<td><span class="arithmatex">\(d\to c\)</span> 剩 5</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(t\)</span></td>
+<td>✗</td>
+<td><span class="arithmatex">\(c\to t\)</span> 与 <span class="arithmatex">\(d\to t\)</span> 都已饱和</td>
+</tr>
+</tbody>
+</table>
+<p>所以残量可达集为 <span class="arithmatex">\(S' = \{s, a, b, d, c\}\)</span>，跨越到 <span class="arithmatex">\(T' = \{t\}\)</span> 的原始弧只有 <span class="arithmatex">\(c\to t\)</span> 与 <span class="arithmatex">\(d\to t\)</span>，割容量为</p>
+<div class="arithmatex">\[
+\operatorname{cap}(S',T') = 14 + 4 = 18 = \lvert f \rvert
+\]</div>
+<p>满足"最大流 = 最小割" ✓，算法终止。</p>
+<p><strong>最大流变为 18</strong>。</p>
+<p><strong>交叉验算（列出若干候选割，取最小）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>割 <span class="arithmatex">\(S\)</span></th>
+<th>跨越弧</th>
+<th>容量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\{s\}\)</span></td>
+<td><span class="arithmatex">\(s\to a,\ s\to b\)</span></td>
+<td><span class="arithmatex">\(16 + 13 = 29\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{s,a\}\)</span></td>
+<td><span class="arithmatex">\(s\to b,\ a\to c\)</span></td>
+<td><span class="arithmatex">\(13 + 12 = 25\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{s,a,b\}\)</span></td>
+<td><span class="arithmatex">\(a\to c,\ b\to d\)</span></td>
+<td><span class="arithmatex">\(12 + 14 = 26\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{s,a,b,d\}\)</span></td>
+<td><span class="arithmatex">\(a\to c,\ d\to c,\ d\to t\)</span></td>
+<td><span class="arithmatex">\(12+7+4 = 23\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{s,a,b,c\}\)</span></td>
+<td><span class="arithmatex">\(b\to d,\ c\to t\)</span></td>
+<td><span class="arithmatex">\(14 + 14 = 28\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\{s,a,b,d,c\}\)</span></td>
+<td><span class="arithmatex">\(c\to t,\ d\to t\)</span></td>
+<td><span class="arithmatex">\(14 + 4 = 18\)</span> ← 最小</td>
+</tr>
+</tbody>
+</table>
+<p>最小割容量为 <strong>18</strong>，故新最大流为 <strong>18</strong> ✓，与增广过程一致。对照原来的容量（<span class="arithmatex">\(c\to t\)</span> 为 20 时最小割为 23），扩容改动把瓶颈从"<span class="arithmatex">\(d\)</span> 的两条出弧"转移到了"<span class="arithmatex">\(c \to t\)</span> 这条汇点入口"。</p>
+<p><strong>工程结论</strong>：<strong>只加宽瓶颈之外的地方不会有任何收益</strong>——必须先找出最小割，再针对割上的弧扩容。这就是"最大流最小割定理"在实际容量规划中最大的价值。</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../matrix-representation/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 图的矩阵表示">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                图的矩阵表示
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../numerical/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>

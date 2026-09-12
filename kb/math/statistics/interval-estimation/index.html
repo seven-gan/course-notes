@@ -1,0 +1,5488 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/statistics/interval-estimation/">
+      
+      
+        <link rel="prev" href="../point-estimation/">
+      
+      
+        <link rel="next" href="../regression/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>区间估计与假设检验 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              区间估计与假设检验
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数理统计与估计
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数理统计与估计
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../point-estimation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    点估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    区间估计与假设检验
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、置信区间
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、置信区间">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本概念
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        正态均值区间的构造
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        区间宽度的影响因素
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、假设检验
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、假设检验">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基本框架
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#p" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        p 值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        常用检验
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、与区间估计的对偶关系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：构造置信区间
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-t" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：单样本 t 检验
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：检验功效与样本量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：配对检验与独立检验的区别
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    回归分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../ode/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    常微分方程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    常微分方程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/first-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    一阶方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/second-order/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    二阶线性方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/linear-systems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组与状态空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/stability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    稳定性分析
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ode/numerical/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值解法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../mdp/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫决策过程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    马尔可夫决策过程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/markov-chain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    马尔可夫链
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDP 基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    动态规划
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/td-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    时序差分学习
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    策略梯度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../graph-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    图论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的基本概念
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图的矩阵表示
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    图上的算法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../numerical/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值计算
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数值计算
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/floating-point/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    浮点数与误差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/linear-solve/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性方程组求解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数值微分与积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_11" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日力学
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_11_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_11">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    拉格朗日力学
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    广义坐标与 Euler-Lagrange 方程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_12" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../information-theory/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_12_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_12">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_13">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">智能传感与信息处理</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本地教材《数理统计与参数估计》（以实际资料为准）</code><code>与「概率论」模块的高斯分布一页衔接</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（置信区间、显著性水平、p 值、检验功效）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../point-estimation/">point-estimation</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../regression/">regression</a></span></div></div>
+
+<h1 id="_1">区间估计与假设检验<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>上一页的点估计给出<strong>一个数值</strong>。但它没回答一个关键问题：</p>
+<blockquote>
+<p><strong>这个估计有多准？</strong></p>
+</blockquote>
+<p>这一页给出两种回答方式，它们本质上是<strong>同一件事的两个视角</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>问题</th>
+<th>形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>区间估计</strong></td>
+<td>「真值大概在什么范围？」</td>
+<td>给出区间 <span class="arithmatex">\([\hat\theta_L,\hat\theta_U]\)</span></td>
+</tr>
+<tr>
+<td><strong>假设检验</strong></td>
+<td>「这个说法能被数据推翻吗？」</td>
+<td>接受/拒绝某个假设</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">两者的对偶关系（核心结论）</p>
+<p><strong>一个置信水平 <span class="arithmatex">\(1-\alpha\)</span> 的置信区间，
+恰好对应「所有不被水平 <span class="arithmatex">\(\alpha\)</span> 的检验拒绝的参数值」</strong> ✓</p>
+<div class="arithmatex">\[
+\theta_0\in\text{CI}_{1-\alpha} \iff \text{检验不拒绝 }H_0:\theta = \theta_0
+\]</div>
+<p><strong>所以两者是同一套数学的两种表述</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>说法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区间估计</td>
+<td>「<span class="arithmatex">\(\theta\)</span> 落在 <span class="arithmatex">\([a,b]\)</span> 内（置信度 <span class="arithmatex">\(95\%\)</span>）」</td>
+</tr>
+<tr>
+<td>假设检验</td>
+<td>「<span class="arithmatex">\(\theta = 0\)</span> 这个假设<strong>不能被拒绝</strong>」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践中按方便选一种表述</strong> —— 但理解它们的等价性能避免很多混淆。</p>
+</div>
+<hr />
+<h2 id="_2">一、置信区间<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">基本概念<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p><strong>置信水平 <span class="arithmatex">\(1-\alpha\)</span></strong> 的含义（这是最容易误解的地方）：</p>
+<blockquote>
+<p><strong>重复抽样很多次，每次构造一个区间，
+约 <span class="arithmatex">\(1-\alpha\)</span> 比例的区间会包含真值 <span class="arithmatex">\(\theta\)</span>。</strong></p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">置信区间的常见误解（必须澄清）</p>
+<p><strong>错误说法</strong>：「<span class="arithmatex">\(\theta\)</span> 有 <span class="arithmatex">\(95\%\)</span> 的概率落在 <span class="arithmatex">\([1.2, 3.4]\)</span> 内」</p>
+<p><strong>为什么错</strong>：<span class="arithmatex">\(\theta\)</span> 是<strong>固定常数</strong>（不是随机变量），
+所以「它落在某区间内」的概率只能是 0 或 1 ✗</p>
+<p><strong>正确说法</strong>：<strong>「区间 <span class="arithmatex">\([1.2,3.4]\)</span> 是用一个「<span class="arithmatex">\(95\%\)</span> 成功率的方法」构造出来的」</strong> ✓</p>
+<table>
+<thead>
+<tr>
+<th>主语</th>
+<th>谁在变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>区间</strong>是随机的（随样本变化）</td>
+<td><span class="arithmatex">\(\theta\)</span> 固定 ✓</td>
+</tr>
+<tr>
+<td><sub>~真值</sub>~不随机</td>
+<td>✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么这个区别重要</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>误解的后果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>以为「有 95% 概率在区间内」</td>
+<td>会把置信度当成后验概率 ✗</td>
+</tr>
+<tr>
+<td>想表达「后验概率」</td>
+<td>应改用<strong>贝叶斯可信区间</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者的区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>定义</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>置信区间</strong>（频率派）</td>
+<td><span class="arithmatex">\(\theta\)</span> 固定、区间随机</td>
+<td>长期覆盖率</td>
+</tr>
+<tr>
+<td><strong>可信区间</strong>（贝叶斯）</td>
+<td><span class="arithmatex">\(\theta\)</span> 随机、区间固定</td>
+<td><strong>「<span class="arithmatex">\(\theta\)</span> 有 95% 概率在此区间内」</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也解释了「为什么贝叶斯方法有时更受欢迎」</strong> ——
+可信区间的表述<strong>符合直觉</strong>。</p>
+</div>
+<h3 id="_4">正态均值区间的构造<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p><strong>情形 1：<span class="arithmatex">\(\sigma\)</span> 已知</strong>（用 Z 分布）</p>
+<div class="arithmatex">\[
+\bar X\pm z_{1-\alpha/2}\cdot\frac{\sigma}{\sqrt n}
+\]</div>
+<p><strong>情形 2：<span class="arithmatex">\(\sigma\)</span> 未知</strong>（用 t 分布）</p>
+<div class="arithmatex">\[
+\bar X\pm t_{1-\alpha/2,\,n-1}\cdot\frac{S}{\sqrt n}
+\]</div>
+<p><strong>为什么用 <span class="arithmatex">\(t\)</span> 分布</strong>：</p>
+<div class="arithmatex">\[
+\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}
+\]</div>
+<p><strong>多了一个「用 <span class="arithmatex">\(S\)</span> 代替 <span class="arithmatex">\(\sigma\)</span>」的不确定性</strong> → 尾部更厚 →
+<span class="arithmatex">\(t\)</span> 分位数比 <span class="arithmatex">\(z\)</span> 大 → 区间更宽 ✓ 更保守。</p>
+<div class="admonition note">
+<p class="admonition-title">常用临界值表（务必记住 z 的几个值）</p>
+<p><strong>正态（Z）临界值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>置信水平</th>
+<th><span class="arithmatex">\(\alpha\)</span></th>
+<th><span class="arithmatex">\(z_{1-\alpha/2}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(90\%\)</span></td>
+<td><span class="arithmatex">\(0.10\)</span></td>
+<td><span class="arithmatex">\(1.645\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(95\%\)</span></strong></td>
+<td><strong><span class="arithmatex">\(0.05\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.960\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(99\%\)</span></td>
+<td><span class="arithmatex">\(0.01\)</span></td>
+<td><span class="arithmatex">\(2.576\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(99.9\%\)</span></td>
+<td><span class="arithmatex">\(0.001\)</span></td>
+<td><span class="arithmatex">\(3.291\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>记忆要点</strong>：<strong>「95% 用 1.96」</strong> 是最常用的 ✓
+（这也印证了「约 2 倍标准差」的经验法则。）</p>
+<p><strong><span class="arithmatex">\(t\)</span> 分布临界值</strong>（<span class="arithmatex">\(1-\alpha/2 = 0.975\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>自由度 <span class="arithmatex">\(n-1\)</span></th>
+<th><span class="arithmatex">\(t_{0.975}\)</span></th>
+<th>与 <span class="arithmatex">\(z\)</span> 的比值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(12.706\)</span></td>
+<td><span class="arithmatex">\(6.5\)</span> 倍</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(2.571\)</span></td>
+<td><span class="arithmatex">\(1.31\)</span> 倍</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(2.228\)</span></td>
+<td><span class="arithmatex">\(1.14\)</span> 倍</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(30\)</span></td>
+<td><span class="arithmatex">\(2.042\)</span></td>
+<td><span class="arithmatex">\(1.04\)</span> 倍</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\infty\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.960\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.00\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>规律</strong>：<strong><span class="arithmatex">\(n\)</span> 大时 <span class="arithmatex">\(t\to z\)</span></strong> ——
+所以大样本时用哪个都行 ✓</p>
+<p><strong><span class="arithmatex">\(n\geq30\)</span> 时两者差异 &lt;5%</strong> —— 这就是「大样本用 Z 近似」的依据。</p>
+</div>
+<h3 id="_5">区间宽度的影响因素<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[
+\text{宽度} = 2\times\text{临界值}\times\frac{\text{标准差}}{\sqrt n}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>因素</th>
+<th>变化</th>
+<th>宽度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>置信水平</strong> <span class="arithmatex">\(1-\alpha\)</span> ↑</td>
+<td>更保险</td>
+<td><strong>变宽</strong> ✗</td>
+</tr>
+<tr>
+<td><strong>样本量</strong> <span class="arithmatex">\(n\)</span> ↑</td>
+<td>数据更多</td>
+<td><strong>变窄</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>总体方差</strong> <span class="arithmatex">\(\sigma^2\)</span> ↑</td>
+<td>数据更散</td>
+<td><strong>变宽</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">「n 要多大」的定量公式（实验设计必备）</p>
+<p>要求区间半宽 <span class="arithmatex">\(\leq d\)</span>，则</p>
+<div class="arithmatex">\[
+n\geq\left(\frac{z_{1-\alpha/2}\cdot\sigma}{d}\right)^2
+\]</div>
+<p><strong>代入常用数值</strong>（<span class="arithmatex">\(z = 1.96\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>目标半宽（以 <span class="arithmatex">\(\sigma\)</span> 为单位）</th>
+<th>需要的 <span class="arithmatex">\(n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1.0\sigma\)</span></td>
+<td><span class="arithmatex">\(4\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.5\sigma\)</span></td>
+<td><span class="arithmatex">\(16\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.2\sigma\)</span></td>
+<td><span class="arithmatex">\(97\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(0.1\sigma\)</span></strong></td>
+<td><strong><span class="arithmatex">\(385\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.01\sigma\)</span></td>
+<td><span class="arithmatex">\(38416\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「精度提高 10 倍，样本量要增 100 倍」</strong> ✗</p>
+<p><strong>这个「<span class="arithmatex">\(\sqrt n\)</span> 律」是实验设计的硬约束</strong> ——
+它解释了为什么「想要非常精确的估计」代价极高。</p>
+<p><strong>工程含义（几类典型场景）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>目标</th>
+<th>大致样本量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>粗略评估</td>
+<td>半宽 <span class="arithmatex">\(0.3\sigma\)</span></td>
+<td><span class="arithmatex">\(\approx44\)</span></td>
+</tr>
+<tr>
+<td>一般精度</td>
+<td>半宽 <span class="arithmatex">\(0.1\sigma\)</span></td>
+<td><span class="arithmatex">\(\approx385\)</span></td>
+</tr>
+<tr>
+<td>高精度</td>
+<td>半宽 <span class="arithmatex">\(0.02\sigma\)</span></td>
+<td><span class="arithmatex">\(\approx9600\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践建议</strong>：<strong>先想清楚「多准算够」</strong> ——
+否则容易做大量无效采样 ✗</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="置信区间的抽样覆盖率含义">
+<!-- 真值竖线 -->
+<line class="a3" x1="200" y1="24" x2="200" y2="200" stroke-dasharray="5 4" stroke-width="2.4"/>
+<text class="l3" x="204" y="20">真值 θ（固定）</text>
+<!-- 8 条区间 -->
+<line class="a1" x1="150" y1="40" x2="238" y2="40" stroke-width="2.4"/>
+<line class="a1" x1="132" y1="60" x2="216" y2="60" stroke-width="2.4"/>
+<line class="a2" x1="220" y1="80" x2="300" y2="80" stroke-width="2.4"/>
+<line class="a1" x1="164" y1="100" x2="252" y2="100" stroke-width="2.4"/>
+<line class="a1" x1="140" y1="120" x2="232" y2="120" stroke-width="2.4"/>
+<line class="a2" x1="104" y1="140" x2="188" y2="140" stroke-width="2.4"/>
+<line class="a1" x1="172" y1="160" x2="264" y2="160" stroke-width="2.4"/>
+<line class="a1" x1="128" y1="180" x2="220" y2="180" stroke-width="2.4"/>
+<!-- 命中标记 -->
+<circle class="d1" cx="194" cy="40" r="4"/>
+<circle class="d1" cx="174" cy="60" r="4"/>
+<circle class="d1" cx="208" cy="100" r="4"/>
+<circle class="d1" cx="186" cy="120" r="4"/>
+<circle class="d1" cx="218" cy="160" r="4"/>
+<circle class="d1" cx="174" cy="180" r="4"/>
+<!-- 未命中（红） -->
+<circle class="d2" cx="260" cy="80" r="4.5"/>
+<circle class="d2" cx="146" cy="140" r="4.5"/>
+<text class="l2" x="266" y="76">未覆盖 ✗</text>
+<text class="l2" x="60" y="152">未覆盖 ✗</text>
+<!-- 说明 -->
+<text class="lbl-s" x="14" y="216">每次抽样构造一个区间；θ 固定不动</text>
+<text class="lbl-s" x="14" y="234">约 95% 的区间覆盖 θ → 这就是 95% 置信水平的含义</text>
+</svg>
+<figcaption>图 1　置信区间的正确含义。竖直虚线是<b>固定的</b>真值 θ；每条横线是<b>一次抽样</b>构造的区间。约 95% 的区间覆盖了 θ（图中 8 条有 6 条覆盖）。关键：<b>随机的是区间，不是 θ</b>。所以不能说「θ 有 95% 概率落在此区间内」</figcaption>
+</figure>
+
+<hr />
+<h2 id="_6">二、假设检验<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">基本框架<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p><strong>两个假设</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>假设</th>
+<th>记号</th>
+<th>地位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>原假设</strong></td>
+<td><span class="arithmatex">\(H_0\)</span></td>
+<td>默认成立（要「保护」的）</td>
+</tr>
+<tr>
+<td><strong>备择假设</strong></td>
+<td><span class="arithmatex">\(H_1\)</span></td>
+<td>要「证明」的</td>
+</tr>
+</tbody>
+</table>
+<p><strong>检验逻辑</strong>（与反证法类比）：</p>
+<blockquote>
+<p><strong>假设 <span class="arithmatex">\(H_0\)</span> 成立，看观测数据是否「太不寻常」；
+若太不寻常，则拒绝 <span class="arithmatex">\(H_0\)</span>。</strong></p>
+</blockquote>
+<p><strong>两类错误</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><span class="arithmatex">\(H_0\)</span> 为真</th>
+<th><span class="arithmatex">\(H_0\)</span> 为假</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>不拒绝 <span class="arithmatex">\(H_0\)</span></strong></td>
+<td>✓ 正确</td>
+<td><strong>第二类错误（<span class="arithmatex">\(\beta\)</span>）</strong></td>
+</tr>
+<tr>
+<td><strong>拒绝 <span class="arithmatex">\(H_0\)</span></strong></td>
+<td><strong>第一类错误（<span class="arithmatex">\(\alpha\)</span>）</strong></td>
+<td>✓ 正确</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">两类错误的权衡（这是假设检验的核心张力）</p>
+<table>
+<thead>
+<tr>
+<th>错误</th>
+<th>名称</th>
+<th>严重性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>第一类</strong>（<span class="arithmatex">\(\alpha\)</span>）</td>
+<td>弃真（假阳性）</td>
+<td>通常更严重 ✗</td>
+</tr>
+<tr>
+<td>第二类（<span class="arithmatex">\(\beta\)</span>）</td>
+<td>取伪（假阴性）</td>
+<td>取决于场景</td>
+</tr>
+</tbody>
+</table>
+<p><strong>检验的标准做法</strong>：<strong>先固定 <span class="arithmatex">\(\alpha\)</span></strong>（如 0.05），
+然后在所有满足该 <span class="arithmatex">\(\alpha\)</span> 的检验中<strong>最小化 <span class="arithmatex">\(\beta\)</span></strong> ✓</p>
+<p><strong>为什么先固定 <span class="arithmatex">\(\alpha\)</span></strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两类错误不能同时最小</td>
+<td>减少 <span class="arithmatex">\(\alpha\)</span> 必然增大 <span class="arithmatex">\(\beta\)</span>（在 <span class="arithmatex">\(n\)</span> 固定时）</td>
+</tr>
+<tr>
+<td>需要明确的判据</td>
+<td>否则无法决断</td>
+</tr>
+<tr>
+<td><strong>惯例</strong></td>
+<td><span class="arithmatex">\(\alpha = 0.05\)</span> 是长期形成的平衡点</td>
+</tr>
+</tbody>
+</table>
+<p><strong>检验功效（power）</strong>：</p>
+<div class="arithmatex">\[
+\text{power} = 1-\beta
+\]</div>
+<p><strong>含义</strong>：<strong>当 <span class="arithmatex">\(H_0\)</span> 确实为假时，能正确检测出来的概率</strong> ✓</p>
+<p><strong>功效的三个影响因素</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>因素</th>
+<th>变化</th>
+<th>功效</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>样本量 <span class="arithmatex">\(n\)</span> ↑</td>
+<td>数据更多</td>
+<td><strong>↑</strong> ✓</td>
+</tr>
+<tr>
+<td>效应量（真实差异）↑</td>
+<td>差异更明显</td>
+<td><strong>↑</strong> ✓</td>
+</tr>
+<tr>
+<td>显著性水平 <span class="arithmatex">\(\alpha\)</span> ↑</td>
+<td>判据更宽松</td>
+<td><strong>↑</strong>（但牺牲第一类错误）✗</td>
+</tr>
+<tr>
+<td>噪声 <span class="arithmatex">\(\sigma\)</span> ↑</td>
+<td>数据更散</td>
+<td>↓ ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义</strong>：<strong>「检验不显著」不等于「没有效应」</strong> ——
+可能是<strong>样本量不足导致功效太低</strong> ✗</p>
+<p><strong>这就是「为什么做实验前要算样本量」</strong>：
+要保证功效足够（通常要求 <span class="arithmatex">\(80\%\)</span> 以上），否则白做 ✓</p>
+</div>
+<h3 id="p">p 值<a class="headerlink" href="#p" title="Permanent link">&para;</a></h3>
+<p><strong>定义</strong>：<strong>在 <span class="arithmatex">\(H_0\)</span> 成立下，观测到「至少与当前数据一样极端」的概率</strong>。</p>
+<div class="arithmatex">\[
+p = P(\text{比观测更极端的数据}\mid H_0)
+\]</div>
+<p><strong>判据</strong>：<span class="arithmatex">\(p&lt;\alpha\)</span> 则拒绝 <span class="arithmatex">\(H_0\)</span>。</p>
+<div class="admonition warning">
+<p class="admonition-title">p 值的常见误用（这一条必须记住）</p>
+<p><strong>p 值不是</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>错误理解</th>
+<th>为什么错</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「<span class="arithmatex">\(H_0\)</span> 为真的概率」</td>
+<td>p 值是<strong>在 <span class="arithmatex">\(H_0\)</span> 下</strong>算的数据概率，方向反了 ✗</td>
+</tr>
+<tr>
+<td>「效应的大小」</td>
+<td>p 小不代表效应大（<span class="arithmatex">\(n\)</span> 大时小效应也能显著）✗</td>
+</tr>
+<tr>
+<td>「结果的可靠性」</td>
+<td>它只反映「与 <span class="arithmatex">\(H_0\)</span> 的一致性」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>正确理解</strong>：<strong>p 值衡量「数据与 <span class="arithmatex">\(H_0\)</span> 的相容程度」</strong> ✓</p>
+<p><strong>具体对比（重要）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>p 值</th>
+<th>效应量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(n = 10\)</span>，差异 <span class="arithmatex">\(=1.0\)</span></td>
+<td><span class="arithmatex">\(0.20\)</span></td>
+<td>大但<strong>不显著</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n = 10^6\)</span>，差异 <span class="arithmatex">\(=0.001\)</span></td>
+<td><span class="arithmatex">\(0.001\)</span></td>
+<td><strong>极小但显著</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以「统计显著」不等于「实际重要」</strong> ✗</p>
+<p><strong>工程实践建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>同时报告效应量与置信区间</strong></td>
+<td>p 值信息不完整 ✓</td>
+</tr>
+<tr>
+<td>明确 <span class="arithmatex">\(\alpha\)</span> 与样本量</td>
+<td>便于判断功效</td>
+</tr>
+<tr>
+<td>避免「p 值钓鱼」</td>
+<td>反复换假设直到显著 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>「p 值钓鱼」（p-hacking）的危险</strong>：</p>
+<p>若做 20 次独立检验，即使<strong>全部 <span class="arithmatex">\(H_0\)</span> 为真</strong>，
+也约有 <span class="arithmatex">\(1-0.95^{20} \approx 64\%\)</span> 的概率<strong>至少出现一个</strong> <span class="arithmatex">\(p&lt;0.05\)</span> ✗</p>
+<p><strong>这就是「多重比较问题」</strong> —— 需要校正（如 Bonferroni）。</p>
+</div>
+<h3 id="_8">常用检验<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>检验</th>
+<th>用途</th>
+<th>统计量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单样本 Z 检验</strong></td>
+<td>均值（<span class="arithmatex">\(\sigma\)</span> 已知）</td>
+<td><span class="arithmatex">\(z = \frac{\bar X-\mu_0}{\sigma/\sqrt n}\)</span></td>
+</tr>
+<tr>
+<td><strong>单样本 t 检验</strong></td>
+<td>均值（<span class="arithmatex">\(\sigma\)</span> 未知）</td>
+<td><span class="arithmatex">\(t = \frac{\bar X-\mu_0}{S/\sqrt n}\)</span></td>
+</tr>
+<tr>
+<td><strong>配对 t 检验</strong></td>
+<td>前后对比</td>
+<td>对差值做单样本 t</td>
+</tr>
+<tr>
+<td><strong>双样本 t 检验</strong></td>
+<td>两组均值比较</td>
+<td><span class="arithmatex">\(t = \frac{\bar X_1-\bar X_2}{S_p\sqrt{1/n_1+1/n_2}}\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\chi^2\)</span> 检验</strong></td>
+<td>方差、拟合优度、独立性</td>
+<td><span class="arithmatex">\(\sum\frac{(O-E)^2}{E}\)</span></td>
+</tr>
+<tr>
+<td><strong>F 检验</strong></td>
+<td>方差比、ANOVA</td>
+<td><span class="arithmatex">\(S_1^2/S_2^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>「什么时候用哪个」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>检验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>一个均值是否等于某值</td>
+<td>单样本 t</td>
+</tr>
+<tr>
+<td>两组均值是否相等</td>
+<td>双样本 t</td>
+</tr>
+<tr>
+<td>同一组前后是否变化</td>
+<td><strong>配对 t</strong> ✓</td>
+</tr>
+<tr>
+<td>方差是否等于某值</td>
+<td><span class="arithmatex">\(\chi^2\)</span></td>
+</tr>
+<tr>
+<td>两组方差是否相等</td>
+<td>F</td>
+</tr>
+<tr>
+<td>多组均值是否全相等</td>
+<td><strong>ANOVA（F）</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_9">三、与区间估计的对偶关系<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>这是本页最重要的结构结论。</strong></p>
+<div class="admonition tip">
+<p class="admonition-title">对偶关系的具体形式</p>
+<p><strong>陈述</strong>：对同一个 <span class="arithmatex">\(\alpha\)</span>，</p>
+<div class="arithmatex">\[
+\theta_0\in\text{CI}_{1-\alpha} \iff \text{水平 }\alpha\text{ 的检验不拒绝 }H_0:\theta = \theta_0
+\]</div>
+<p><strong>推导（以均值检验为例）</strong>：</p>
+<p><strong>置信区间</strong>（<span class="arithmatex">\(\sigma\)</span> 已知）：</p>
+<div class="arithmatex">\[
+\bar X-z_{1-\alpha/2}\frac{\sigma}{\sqrt n} &lt; \mu &lt; \bar X+z_{1-\alpha/2}\frac{\sigma}{\sqrt n}
+\]</div>
+<p><strong>检验的接受域</strong>：解 <span class="arithmatex">\(H_0:\mu = \mu_0\)</span> 不被拒绝的条件</p>
+<div class="arithmatex">\[
+\left\lvert\frac{\bar X-\mu_0}{\sigma/\sqrt n}\right\rvert &lt; z_{1-\alpha/2}
+\]</div>
+<p><strong>两者是同一个不等式</strong> ✓</p>
+<p><strong>实用价值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>用哪个</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>想知道「大概范围」</td>
+<td><strong>区间估计</strong></td>
+</tr>
+<tr>
+<td>想知道「是否等于 0」</td>
+<td>假设检验</td>
+</tr>
+<tr>
+<td>报告结果</td>
+<td><strong>区间更完整</strong> ✓（含方向与大小）</td>
+</tr>
+<tr>
+<td>多重比较</td>
+<td>检验（有成熟的校正方法）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个重要的推论</strong>：<strong>「区间包含 0」等价于「不显著」</strong> ✓</p>
+<p><strong>所以报告置信区间比只报告 p 值更有信息量</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>报告内容</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p = 0.03\)</span></td>
+<td>只知道「显著」</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(95\%\)</span> CI <span class="arithmatex">\(= [0.2,\ 1.8]\)</span></strong></td>
+<td><strong>知道效应方向与大小范围</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是现代统计报告规范推荐「报区间」的原因</strong>。</p>
+</div>
+<hr />
+<h2 id="_10">四、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<h3 id="1">例题 1：构造置信区间<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>某零件长度测量 16 次，得 <span class="arithmatex">\(\bar x = 12.05\)</span> mm、<span class="arithmatex">\(s = 0.20\)</span> mm。
+设长度服从正态分布。求平均长度的 <span class="arithmatex">\(95\%\)</span> 置信区间。</p>
+<details class="note">
+<summary>思路</summary>
+<p><span class="arithmatex">\(\sigma\)</span> 未知 → 用 <span class="arithmatex">\(t\)</span> 分布；自由度 <span class="arithmatex">\(n-1 = 15\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：确定临界值</strong></p>
+<p>自由度 <span class="arithmatex">\(df = 16-1 = 15\)</span>，<span class="arithmatex">\(\alpha = 0.05\)</span>：</p>
+<div class="arithmatex">\[
+t_{0.975,\,15} = 2.131
+\]</div>
+<p><strong>第二步：计算标准误</strong></p>
+<div class="arithmatex">\[
+SE = \frac{s}{\sqrt n} = \frac{0.20}{\sqrt{16}} = \frac{0.20}{4} = 0.05
+\]</div>
+<p><strong>第三步：构造区间</strong></p>
+<div class="arithmatex">\[
+\bar x\pm t_{0.975,\,15}\cdot SE = 12.05\pm2.131\times0.05
+\]</div>
+<div class="arithmatex">\[
+= 12.05\pm0.10655
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+[11.943,\ 12.157]\ \text{mm}
+\]</div>
+<p><strong>完整解读</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>表述</th>
+<th>是否正确</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「<span class="arithmatex">\(\mu\)</span> 有 95% 概率在 <span class="arithmatex">\([11.94,12.16]\)</span> 内」</td>
+<td>✗（<span class="arithmatex">\(\mu\)</span> 固定）</td>
+</tr>
+<tr>
+<td><strong>「用此方法构造的区间有 95% 概率覆盖 <span class="arithmatex">\(\mu\)</span>」</strong></td>
+<td><strong>✓</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>进一步的问题</strong>：若要半宽 <span class="arithmatex">\(\leq0.05\)</span> mm，需要多少样本？</p>
+<p><strong>估算</strong>（用 <span class="arithmatex">\(s\)</span> 作为 <span class="arithmatex">\(\sigma\)</span> 的估计）：</p>
+<div class="arithmatex">\[
+n\geq\left(\frac{z_{0.975}\cdot s}{d}\right)^2 = \left(\frac{1.96\times0.20}{0.05}\right)^2 = 7.84^2 \approx 62
+\]</div>
+<p><strong>需要 <span class="arithmatex">\(n\geq62\)</span> 个样本</strong>（<span class="arithmatex">\(7.84^2 = 61.47\)</span> 向上取整；比现在的 16 个多近 4 倍）✓</p>
+<p><strong>注意「需要重新估计临界值」</strong>：
+实际计算时应用 <span class="arithmatex">\(t\)</span>，而 <span class="arithmatex">\(t\)</span> 依赖 <span class="arithmatex">\(n\)</span> ——
+所以通常先用 <span class="arithmatex">\(z\)</span> 估算，得到 <span class="arithmatex">\(n\)</span> 后再迭代一次 ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">标准误（SE）与标准差（SD）的区别（高频混淆点）</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>公式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>标准差（SD）</strong></td>
+<td><span class="arithmatex">\(s\)</span></td>
+<td><strong>单个观测</strong>的离散程度</td>
+</tr>
+<tr>
+<td><strong>标准误（SE）</strong></td>
+<td><span class="arithmatex">\(s/\sqrt n\)</span></td>
+<td><strong>均值估计</strong>的精度</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键差别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SD</th>
+<th>SE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>随 <span class="arithmatex">\(n\)</span> 变化</td>
+<td><strong>不随</strong>（描述数据本身）</td>
+<td><strong>随 <span class="arithmatex">\(n\)</span> 减小</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(n\to\infty\)</span></td>
+<td>趋于 <span class="arithmatex">\(\sigma\)</span></td>
+<td><strong>趋于 0</strong></td>
+</tr>
+<tr>
+<td>用途</td>
+<td>描述数据分散度</td>
+<td><strong>推断均值的精度</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>常见错误</strong>：在论文中「用 SD 冒充 SE」以显得更精确 ✗</p>
+<p><strong>判读原则</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>想说明</th>
+<th>用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「个体差异多大」</td>
+<td>SD</td>
+</tr>
+<tr>
+<td><strong>「均值估得多准」</strong></td>
+<td><strong>SE</strong> ✓</td>
+</tr>
+<tr>
+<td>「置信区间」</td>
+<td>SE（乘临界值）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本例题中</strong>：SD <span class="arithmatex">\(=0.20\)</span>、SE <span class="arithmatex">\(=0.05\)</span> —— <strong>差 4 倍</strong>（<span class="arithmatex">\(=\sqrt{16}\)</span>）✓</p>
+</div>
+<hr />
+<h3 id="2-t">例题 2：单样本 t 检验<a class="headerlink" href="#2-t" title="Permanent link">&para;</a></h3>
+<p>某工艺标称厚度为 5.00 mm。抽检 9 件，得 <span class="arithmatex">\(\bar x = 5.08\)</span>、<span class="arithmatex">\(s = 0.09\)</span>。
+在 <span class="arithmatex">\(\alpha = 0.05\)</span> 下检验厚度是否偏离标称值（双侧）。</p>
+<details class="note">
+<summary>思路</summary>
+<p>双侧检验，<span class="arithmatex">\(H_0:\mu = 5.00\)</span>；算 <span class="arithmatex">\(t\)</span> 统计量后与临界值比较。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：建立假设</strong></p>
+<div class="arithmatex">\[
+H_0:\mu = 5.00 \quad\text{vs}\quad H_1:\mu\neq5.00
+\]</div>
+<p>（双侧检验。）</p>
+<p><strong>第二步：计算检验统计量</strong></p>
+<div class="arithmatex">\[
+SE = \frac{0.09}{\sqrt9} = 0.03
+\]</div>
+<div class="arithmatex">\[
+t = \frac{\bar x-5.00}{SE} = \frac{5.08-5.00}{0.03} = \frac{0.08}{0.03} = 2.667
+\]</div>
+<p><strong>第三步：确定临界值</strong></p>
+<p><span class="arithmatex">\(df = 8\)</span>，双侧 <span class="arithmatex">\(\alpha = 0.05\)</span>：</p>
+<div class="arithmatex">\[
+t_{0.975,\,8} = 2.306
+\]</div>
+<p><strong>第四步：比较</strong></p>
+<div class="arithmatex">\[
+\lvert t\rvert = 2.667 &gt; 2.306 \implies \text{拒绝 } H_0 \;\checkmark
+\]</div>
+<p><strong>结论</strong>：<strong>在 <span class="arithmatex">\(\alpha = 0.05\)</span> 下，厚度显著偏离标称值</strong> ✓</p>
+<p><strong>补充：p 值</strong></p>
+<p><span class="arithmatex">\(df = 8\)</span> 时，<span class="arithmatex">\(P(\lvert t\rvert&gt;2.667) \approx 0.029\)</span></p>
+<div class="arithmatex">\[
+p\approx0.029 &lt; 0.05 \;\checkmark
+\]</div>
+<p><strong>与置信区间的一致性验证</strong>：</p>
+<p><span class="arithmatex">\(95\%\)</span> CI：</p>
+<div class="arithmatex">\[
+5.08\pm2.306\times0.03 = 5.08\pm0.069 = [5.011,\ 5.149]
+\]</div>
+<p><strong>区间不包含 5.00</strong> ✓ → 与「拒绝 <span class="arithmatex">\(H_0\)</span>」一致 ✓</p>
+<p>（这正是对偶关系的直接体现。）</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">这个例子的工程解读</p>
+<p><strong>统计显著 ≠ 实际重要</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>统计</strong>：<span class="arithmatex">\(p = 0.029 &lt; 0.05\)</span></td>
+<td><strong>显著偏离</strong> ✓</td>
+</tr>
+<tr>
+<td><strong>工程</strong>：偏移 <span class="arithmatex">\(0.08\)</span> mm，公差若为 <span class="arithmatex">\(\pm0.20\)</span> mm</td>
+<td><strong>仍在公差内，可接受</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者不矛盾</strong> —— 它们回答<strong>不同的问题</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「能否确信存在系统性偏移？」</td>
+<td>假设检验</td>
+</tr>
+<tr>
+<td><strong>「这个偏移是否影响使用？」</strong></td>
+<td><strong>工程公差判断</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>做法</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>报告 <span class="arithmatex">\(p\)</span> 值 + 效应量（偏移量）</td>
+<td>两者都说清</td>
+</tr>
+<tr>
+<td>结合工艺公差判断</td>
+<td>才是工程决策依据</td>
+</tr>
+<tr>
+<td>记录测量系统误差</td>
+<td>避免把仪器偏差当工艺偏移</td>
+</tr>
+</tbody>
+</table>
+<p><strong>进一步分析</strong>：若偏移被确认，应查<strong>系统性原因</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>可能原因</th>
+<th>检查方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仪器未校准</td>
+<td>用标准件核验</td>
+</tr>
+<tr>
+<td>刀具磨损</td>
+<td>观察随时间趋势</td>
+</tr>
+<tr>
+<td>温度漂移</td>
+<td>记录环境温度</td>
+</tr>
+<tr>
+<td>材料批次差异</td>
+<td>分批检验</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="3">例题 3：检验功效与样本量<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>承例题 2。若真实偏移为 <span class="arithmatex">\(0.08\)</span> mm（即 <span class="arithmatex">\(\mu = 5.08\)</span>）、<span class="arithmatex">\(\sigma = 0.09\)</span>，
+样本量 <span class="arithmatex">\(n = 9\)</span> 时的检验功效是多少？要把功效提到 <span class="arithmatex">\(0.90\)</span>，需要多少样本？</p>
+<details class="note">
+<summary>思路</summary>
+<p>功效 = <span class="arithmatex">\(P(\text{拒绝}H_0\mid H_1\text{为真})\)</span>。用非中心 t 或正态近似。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：功效的定义</strong></p>
+<div class="arithmatex">\[
+\text{power} = P(\lvert T\rvert&gt;t_{\text{crit}}\mid \mu = 5.08)
+\]</div>
+<p><strong>第二步：用正态近似计算（便于手算）</strong></p>
+<p><strong>临界值</strong>（用 <span class="arithmatex">\(z\)</span>）：</p>
+<div class="arithmatex">\[
+z_{0.975} = 1.96
+\]</div>
+<p><strong>非中心参数</strong>（效应量）：</p>
+<div class="arithmatex">\[
+\delta = \frac{\mu-\mu_0}{\sigma/\sqrt n} = \frac{0.08}{0.09/3} = \frac{0.08}{0.03} = 2.667
+\]</div>
+<p><strong>功效</strong>（双侧）：</p>
+<div class="arithmatex">\[
+\text{power} = P(\lvert Z+\delta\rvert&gt;1.96) = P(Z&gt;1.96-\delta)+P(Z&lt;-1.96-\delta)
+\]</div>
+<div class="arithmatex">\[
+= P(Z&gt;-0.707)+P(Z&lt;-4.627)
+\]</div>
+<div class="arithmatex">\[
+\approx 0.760+0.000 = 0.760
+\]</div>
+<p><strong>结果</strong>：<strong>功效约 <span class="arithmatex">\(76\%\)</span></strong></p>
+<p><strong>第三步：求达到 <span class="arithmatex">\(90\%\)</span> 功效的样本量</strong></p>
+<p>对双侧检验，忽略极小项，需要</p>
+<div class="arithmatex">\[
+\delta-z_{1-\alpha/2}\geq z_{1-\beta}
+\]</div>
+<div class="arithmatex">\[
+\delta\geq1.96+1.282 = 3.242
+\]</div>
+<p><strong>而</strong> <span class="arithmatex">\(\delta = \frac{\lvert\Delta\rvert}{\sigma/\sqrt n} = \frac{\lvert\Delta\rvert\sqrt n}{\sigma}\)</span>：</p>
+<div class="arithmatex">\[
+\frac{0.08\sqrt n}{0.09}\geq3.242 \implies \sqrt n\geq3.647 \implies n\geq13.3
+\]</div>
+<p><strong>结果</strong>：<strong>需要 <span class="arithmatex">\(n\geq14\)</span></strong></p>
+<p><strong>验证</strong>：<span class="arithmatex">\(n = 14\)</span> 时</p>
+<div class="arithmatex">\[
+\delta = \frac{0.08\sqrt{14}}{0.09} = \frac{0.08\times3.742}{0.09} = 3.326
+\]</div>
+<div class="arithmatex">\[
+\text{power} = P(Z&gt;1.96-3.326) = P(Z&gt;-1.366) = 0.914 \;\checkmark
+\]</div>
+<p><strong>确实超过 <span class="arithmatex">\(90\%\)</span></strong> ✓</p>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">样本量公式（记住这个通用形式）</p>
+<div class="arithmatex">\[
+n\geq\frac{(z_{1-\alpha/2}+z_{1-\beta})^2\sigma^2}{\Delta^2}
+\]</div>
+<p><strong>注意「<span class="arithmatex">\(\alpha\)</span> 与 <span class="arithmatex">\(\beta\)</span> 都要进公式」</strong> ——
+这与「只考虑置信区间」时只用 <span class="arithmatex">\(z_{1-\alpha/2}\)</span> 不同 ✓</p>
+<p><strong>常用数值</strong>（<span class="arithmatex">\(\alpha = 0.05\)</span>、功效 <span class="arithmatex">\(80\%\)</span> / <span class="arithmatex">\(90\%\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>功效</th>
+<th><span class="arithmatex">\(z_{1-\alpha/2}+z_{1-\beta}\)</span></th>
+<th>平方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(80\%\)</span></td>
+<td><span class="arithmatex">\(1.96+0.842 = 2.802\)</span></td>
+<td><span class="arithmatex">\(7.85\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(90\%\)</span></td>
+<td><span class="arithmatex">\(1.96+1.282 = 3.242\)</span></td>
+<td><span class="arithmatex">\(10.51\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(95\%\)</span></td>
+<td><span class="arithmatex">\(1.96+1.645 = 3.605\)</span></td>
+<td><span class="arithmatex">\(13.00\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比「只做区间估计」的样本量公式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>系数（<span class="arithmatex">\(\alpha=0.05\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>区间半宽 <span class="arithmatex">\(\leq\Delta\)</span></td>
+<td><span class="arithmatex">\(1.96^2 = 3.84\)</span></td>
+</tr>
+<tr>
+<td>检验功效 <span class="arithmatex">\(80\%\)</span></td>
+<td><span class="arithmatex">\(2.802^2 = 7.85\)</span></td>
+</tr>
+<tr>
+<td><strong>检验功效 <span class="arithmatex">\(90\%\)</span></strong></td>
+<td><strong><span class="arithmatex">\(3.242^2 = 10.51\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论</strong>：<strong>为「检测出效应」所需的样本量约是「估计区间」的 2-3 倍</strong> ✓</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>样本规划</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>想知道「大概多少」</td>
+<td>用区间公式</td>
+</tr>
+<tr>
+<td><strong>想知道「是否有差异」</strong></td>
+<td><strong>用功效公式（要求更多样本）</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这也是为什么「检验不显著」常常是样本不足</strong> ——
+很多人按区间公式算样本量，却想做检验，功效自然不够 ✗</p>
+</div>
+<hr />
+<h3 id="4">例题 4：配对检验与独立检验的区别<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>某方法改进前后各测 8 个样本（同一批样品）：</p>
+<table>
+<thead>
+<tr>
+<th>样品</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>改进前</td>
+<td>10.2</td>
+<td>11.5</td>
+<td>9.8</td>
+<td>12.1</td>
+<td>10.9</td>
+<td>11.8</td>
+<td>10.4</td>
+<td>12.3</td>
+</tr>
+<tr>
+<td>改进后</td>
+<td>10.0</td>
+<td>11.2</td>
+<td>9.6</td>
+<td>11.8</td>
+<td>10.6</td>
+<td>11.6</td>
+<td>10.2</td>
+<td>12.0</td>
+</tr>
+</tbody>
+</table>
+<p>检验改进是否有效（<span class="arithmatex">\(\alpha = 0.05\)</span>）。</p>
+<details class="note">
+<summary>思路</summary>
+<p>同一批样品 → <strong>配对检验</strong>（对差值做单样本 t 检验）。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：判断用哪种检验</strong></p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>检验</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两组的样本<strong>一一对应</strong>（同一批样品）</td>
+<td><strong>配对 t 检验</strong> ✓</td>
+</tr>
+<tr>
+<td>两组独立取样（不同样品）</td>
+<td>独立双样本 t 检验</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本例题是同一批样品</strong> → <strong>配对检验</strong> ✓</p>
+<p><strong>为什么重要</strong>：<strong>配对能消除「样品间差异」这个干扰因素</strong> ——
+检验更敏感 ✓</p>
+<p><strong>第二步：计算差值</strong></p>
+<table>
+<thead>
+<tr>
+<th>样品</th>
+<th>前</th>
+<th>后</th>
+<th>差值 <span class="arithmatex">\(d\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(10.2\)</span></td>
+<td><span class="arithmatex">\(10.0\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(11.5\)</span></td>
+<td><span class="arithmatex">\(11.2\)</span></td>
+<td><span class="arithmatex">\(0.3\)</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(9.8\)</span></td>
+<td><span class="arithmatex">\(9.6\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><span class="arithmatex">\(12.1\)</span></td>
+<td><span class="arithmatex">\(11.8\)</span></td>
+<td><span class="arithmatex">\(0.3\)</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><span class="arithmatex">\(10.9\)</span></td>
+<td><span class="arithmatex">\(10.6\)</span></td>
+<td><span class="arithmatex">\(0.3\)</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><span class="arithmatex">\(11.8\)</span></td>
+<td><span class="arithmatex">\(11.6\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+</tr>
+<tr>
+<td>7</td>
+<td><span class="arithmatex">\(10.4\)</span></td>
+<td><span class="arithmatex">\(10.2\)</span></td>
+<td><span class="arithmatex">\(0.2\)</span></td>
+</tr>
+<tr>
+<td>8</td>
+<td><span class="arithmatex">\(12.3\)</span></td>
+<td><span class="arithmatex">\(12.0\)</span></td>
+<td><span class="arithmatex">\(0.3\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第三步：算差值的均值与标准差</strong></p>
+<div class="arithmatex">\[
+\bar d = \frac{0.2+0.3+0.2+0.3+0.3+0.2+0.2+0.3}{8} = \frac{2.0}{8} = 0.250
+\]</div>
+<p><strong>差值平方和</strong>：</p>
+<div class="arithmatex">\[
+\sum(d_i-\bar d)^2 = 4\times(0.2-0.25)^2+4\times(0.3-0.25)^2
+\]</div>
+<div class="arithmatex">\[
+= 4\times0.0025+4\times0.0025 = 0.02
+\]</div>
+<div class="arithmatex">\[
+s_d = \sqrt{\frac{0.02}{7}} = \sqrt{0.002857} \approx 0.05345
+\]</div>
+<p><strong>第四步：检验统计量</strong></p>
+<div class="arithmatex">\[
+t = \frac{\bar d}{s_d/\sqrt n} = \frac{0.25}{0.05345/2.828} = \frac{0.25}{0.01890} \approx 13.23
+\]</div>
+<p><strong>第五步：临界值</strong></p>
+<p><span class="arithmatex">\(df = 7\)</span>，<span class="arithmatex">\(t_{0.975,7} = 2.365\)</span></p>
+<div class="arithmatex">\[
+13.23\gg2.365 \implies \text{拒绝 } H_0 \;\checkmark
+\]</div>
+<p><strong>结论</strong>：<strong>改进显著有效</strong>（<span class="arithmatex">\(p\ll0.001\)</span>）</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">对比：若误用「独立双样本 t 检验」会怎样</p>
+<p><strong>独立检验的公式</strong>：</p>
+<div class="arithmatex">\[
+t = \frac{\bar x_1-\bar x_2}{s_p\sqrt{\frac{1}{n_1}+\frac{1}{n_2}}}
+\]</div>
+<p><strong>两组的标准差</strong>：</p>
+<p>改进前：<span class="arithmatex">\(\bar x_1 = 11.125\)</span>，<span class="arithmatex">\(s_1\approx0.935\)</span>
+改进后：<span class="arithmatex">\(\bar x_2 = 10.875\)</span>，<span class="arithmatex">\(s_2\approx0.900\)</span></p>
+<p><strong>合并标准差</strong>：</p>
+<div class="arithmatex">\[
+s_p = \sqrt{\frac{(8-1)s_1^2+(8-1)s_2^2}{14}} \approx 0.918
+\]</div>
+<p><strong>统计量</strong>：</p>
+<div class="arithmatex">\[
+t = \frac{11.125-10.875}{0.918\times\sqrt{1/8+1/8}}
+= \frac{0.25}{0.918\times0.5} = \frac{0.25}{0.459} \approx 0.545
+\]</div>
+<p><strong>比较</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>检验</th>
+<th><span class="arithmatex">\(t\)</span> 值</th>
+<th>临界值</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>配对</strong>（<span class="arithmatex">\(df=7\)</span>）</td>
+<td><strong><span class="arithmatex">\(13.23\)</span></strong></td>
+<td><span class="arithmatex">\(2.365\)</span></td>
+<td><strong>显著</strong> ✓</td>
+</tr>
+<tr>
+<td>独立（<span class="arithmatex">\(df=14\)</span>）</td>
+<td><span class="arithmatex">\(0.545\)</span></td>
+<td><span class="arithmatex">\(2.145\)</span></td>
+<td><strong>不显著</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>结论完全相反！</strong> 为什么：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>样品间差异很大</strong>（10.2 到 12.3）</td>
+<td>独立检验把这个变异算进<strong>误差</strong> ✗</td>
+</tr>
+<tr>
+<td>改进效果一致（都是 <span class="arithmatex">\(0.2-0.3\)</span>）</td>
+<td>配对检验把样品差异<strong>消除</strong>了 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「配对设计」的价值</strong>：</p>
+<div class="arithmatex">\[
+\text{配对} \implies \text{消除个体差异} \implies \text{检验更敏感}
+\]</div>
+<p><strong>工程实践教训</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>应选设计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可配对（同一样品/同一受试者前后）</td>
+<td><strong>配对</strong> ✓</td>
+</tr>
+<tr>
+<td>不可配对（不同批次）</td>
+<td>独立</td>
+</tr>
+<tr>
+<td><strong>能配对却用独立</strong></td>
+<td><strong>浪费了信息</strong>（可能漏掉真实效应）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「实验设计」的重要性</strong> ——
+错误的检验方法可能导致完全相反的结论 ✓</p>
+</div>
+<hr />
+<h2 id="_11">七、自测<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 某测量 <span class="arithmatex">\(n = 25\)</span>、<span class="arithmatex">\(\bar x = 50.4\)</span>、<span class="arithmatex">\(s = 2.0\)</span>。求 <span class="arithmatex">\(\mu\)</span> 的 <span class="arithmatex">\(95\%\)</span> 置信区间。</p>
+<details class="note">
+<summary>提示</summary>
+<p><span class="arithmatex">\(\sigma\)</span> 未知用 <span class="arithmatex">\(t\)</span>；<span class="arithmatex">\(df = 24\)</span>，<span class="arithmatex">\(t_{0.975,24} = 2.064\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：标准误</strong></p>
+<div class="arithmatex">\[
+SE = \frac{s}{\sqrt n} = \frac{2.0}{\sqrt{25}} = \frac{2.0}{5} = 0.4
+\]</div>
+<p><strong>第二步：临界值</strong></p>
+<p><span class="arithmatex">\(df = 24\)</span>，<span class="arithmatex">\(\alpha = 0.05\)</span>（双侧）：</p>
+<div class="arithmatex">\[
+t_{0.975,\,24} = 2.064
+\]</div>
+<p><strong>第三步：区间</strong></p>
+<div class="arithmatex">\[
+50.4\pm2.064\times0.4 = 50.4\pm0.8256
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+[49.574,\ 51.226]
+\]</div>
+<p><strong>对比 <span class="arithmatex">\(z\)</span> 的近似</strong>：</p>
+<div class="arithmatex">\[
+50.4\pm1.96\times0.4 = [49.616,\ 51.184]
+\]</div>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>区间宽度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(t\)</span>（正确）</td>
+<td><span class="arithmatex">\(1.651\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(z\)</span>（近似）</td>
+<td><span class="arithmatex">\(1.568\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(t\)</span> 的区间更宽约 <span class="arithmatex">\(5.3\%\)</span></strong> —— 这是「用 <span class="arithmatex">\(s\)</span> 代替 <span class="arithmatex">\(\sigma\)</span>」的代价 ✓</p>
+<p><strong>何时可以用 <span class="arithmatex">\(z\)</span></strong>：<strong><span class="arithmatex">\(n\geq30\)</span> 时差别小于 5%</strong> ——
+本例题 <span class="arithmatex">\(n = 25\)</span>，用 <span class="arithmatex">\(t\)</span> 更稳妥 ✓</p>
+<p><strong>解读提醒</strong>：<strong>不能说「<span class="arithmatex">\(\mu\)</span> 有 <span class="arithmatex">\(95\%\)</span> 概率落在该区间内」</strong> ——
+<span class="arithmatex">\(\mu\)</span> 是固定常数，正确说法是「用此方法构造的区间有 95% 概率覆盖 <span class="arithmatex">\(\mu\)</span>」✓</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：<span class="arithmatex">\(p = 0.04\)</span> 表示「<span class="arithmatex">\(H_0\)</span> 为真的概率是 <span class="arithmatex">\(4\%\)</span>」。</p>
+<details class="note">
+<summary>提示</summary>
+<p>回顾 p 值的定义方向。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。方向反了。</strong></p>
+<p><strong>正确含义</strong>：<strong>在 <span class="arithmatex">\(H_0\)</span> 成立的条件下，观测到「至少与当前数据一样极端」的概率是 <span class="arithmatex">\(4\%\)</span></strong> ✓</p>
+<p><strong>符号化对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>说法</th>
+<th>数学形式</th>
+<th>是否正确</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「<span class="arithmatex">\(H_0\)</span> 为真的概率」</td>
+<td><span class="arithmatex">\(P(H_0\mid\text{data})\)</span></td>
+<td><strong>✗ 错</strong></td>
+</tr>
+<tr>
+<td><strong>p 值</strong></td>
+<td><strong><span class="arithmatex">\(P(\text{更极端数据}\mid H_0)\)</span></strong></td>
+<td><strong>✓ 对</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这两个概率可能相差极大</strong> （贝叶斯视角下）</p>
+<p><strong>具体说明</strong>：</p>
+<p>设某罕见病的先验患病率 <span class="arithmatex">\(P(H_0) = 0.001\)</span>（<span class="arithmatex">\(H_0\)</span> = 患病）。
+即便检测在患病时阳性率 99%，且假阳性率 5%：</p>
+<div class="arithmatex">\[
+P(H_0\mid+) = \frac{0.99\times0.001}{0.99\times0.001+0.05\times0.999} \approx 0.019
+\]</div>
+<p><strong>约 <span class="arithmatex">\(1.9\%\)</span></strong>，而「<span class="arithmatex">\(p\)</span> 值」是 <span class="arithmatex">\(5\%\)</span>（假阳性率）—— <strong>相差 2.6 倍</strong> ✗</p>
+<p>（这与「概率论」模块「贝叶斯定理」一页的疾病检测例子完全一致。）</p>
+<p><strong>工程含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>想知道</th>
+<th>用什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>「数据与 <span class="arithmatex">\(H_0\)</span> 有多不相容」</td>
+<td><strong>p 值</strong>（频率派）</td>
+</tr>
+<tr>
+<td><strong>「<span class="arithmatex">\(H_0\)</span> 有多大可能」</strong></td>
+<td><strong>后验概率（贝叶斯）</strong> ✓</td>
+</tr>
+<tr>
+<td>「效应的大小与范围」</td>
+<td>置信区间</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践建议</strong>：报告结果时<strong>同时给出效应量与区间</strong> ——
+单看 p 值容易误读 ✓</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 某检验 <span class="arithmatex">\(\alpha = 0.05\)</span>、功效 <span class="arithmatex">\(80\%\)</span>。若真实效应确实存在，
+大约多少次实验能检测出来？</p>
+<details class="note">
+<summary>提示</summary>
+<p>功效就是「有效应时检出的概率」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>直接由功效定义</strong>：</p>
+<div class="arithmatex">\[
+\text{power} = 1-\beta = 0.80
+\]</div>
+<p><strong>含义</strong>：<strong>每次实验有 <span class="arithmatex">\(80\%\)</span> 概率检出</strong>（检出 = 拒绝 <span class="arithmatex">\(H_0\)</span>）。</p>
+<p><strong>所以</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单次检出概率</td>
+<td><span class="arithmatex">\(0.80\)</span></td>
+</tr>
+<tr>
+<td>单次漏检概率</td>
+<td><span class="arithmatex">\(0.20\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>「做 <span class="arithmatex">\(k\)</span> 次至少检出一次」的概率</strong>：</p>
+<div class="arithmatex">\[
+P(\text{至少一次}) = 1-0.20^k
+\]</div>
+<p><strong>具体数值</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>至少检出一次</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.80\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(0.96\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(0.992\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(0.99968\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>结果</strong>：<strong>做 3 次几乎必然检出（99.2%）</strong></p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">但要小心「重复实验」的统计陷阱</p>
+<p><strong>若每次都检验并取「显著的那次」</strong> —— 这会<strong>严重抬高假阳性</strong> ✗</p>
+<p><strong>原因</strong>：每次独立检验的假阳性率是 <span class="arithmatex">\(\alpha = 0.05\)</span>，
+做 <span class="arithmatex">\(k\)</span> 次的至少一次假阳性率：</p>
+<div class="arithmatex">\[
+1-(1-0.05)^k = 1-0.95^k
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>假阳性率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(5.0\%\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(14.3\%\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(40.1\%\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(20\)</span></td>
+<td><strong><span class="arithmatex">\(64.2\%\)</span></strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以「反复做直到显著」是无效的做法</strong> ——
+它把 <span class="arithmatex">\(\alpha = 0.05\)</span> 实际变成了 <span class="arithmatex">\(0.64\)</span> ✗</p>
+<p><strong>正确处理方式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>确实要重复 <span class="arithmatex">\(k\)</span> 次</td>
+<td><strong>预先做多重比较校正</strong>（Bonferroni：<span class="arithmatex">\(\alpha/k\)</span>）✓</td>
+</tr>
+<tr>
+<td>想提高检出率</td>
+<td><strong>增加单次样本量</strong>（提高功效）✓</td>
+</tr>
+<tr>
+<td>已做多次后挑出显著的</td>
+<td>结果不可用 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Bonferroni 校正示例</strong>（<span class="arithmatex">\(k = 10\)</span>）：</p>
+<div class="arithmatex">\[
+\alpha_{\text{校正}} = \frac{0.05}{10} = 0.005
+\]</div>
+<p>每个检验的判据收紧到 <span class="arithmatex">\(0.005\)</span>，则总体假阳性率回到约 <span class="arithmatex">\(5\%\)</span> ✓</p>
+<p><strong>代价</strong>：<strong>判据变严 → 功效下降</strong> ——
+这就是「多重比较的代价」，需要在设计阶段就考虑 ✓</p>
+</div>
+<hr />
+<p><strong>Q4</strong> 为什么说「置信区间比只报 p 值更有信息量」？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想 p 值能告诉你什么、不能告诉你什么。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为置信区间同时包含「方向、大小、精度」三类信息，而 p 值只有「是否显著」。</strong></p>
+<p><strong>两类报告的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>报告</th>
+<th>能回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(p = 0.03\)</span></td>
+<td>「有统计显著差异」</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(95\%\)</span> CI <span class="arithmatex">\(= [0.2,\ 1.8]\)</span></td>
+<td>「效应为正、大约 <span class="arithmatex">\(0.2\)</span>–<span class="arithmatex">\(1.8\)</span>、精度如何」✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>用一个例子说明 p 值的不足</strong>：</p>
+<p>三种情形<strong>都是</strong> <span class="arithmatex">\(p = 0.03\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th><span class="arithmatex">\(n\)</span></th>
+<th>效应量</th>
+<th><span class="arithmatex">\(95\%\)</span> CI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td>大</td>
+<td><span class="arithmatex">\([0.5,\ 5.0]\)</span>（<strong>很宽</strong>）</td>
+</tr>
+<tr>
+<td>B</td>
+<td><span class="arithmatex">\(1000\)</span></td>
+<td>中</td>
+<td><span class="arithmatex">\([0.15,\ 0.45]\)</span></td>
+</tr>
+<tr>
+<td>C</td>
+<td><span class="arithmatex">\(10^6\)</span></td>
+<td><strong>极小</strong></td>
+<td><span class="arithmatex">\([0.0002,\ 0.0004]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>同样的 p 值，实际意义完全不同</strong> ✗</p>
+<table>
+<thead>
+<tr>
+<th>情形</th>
+<th>实际解读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>效应可能很大，但<strong>精度差</strong>（需更多数据）</td>
+</tr>
+<tr>
+<td>B</td>
+<td>效应中等且<strong>可信</strong> ✓</td>
+</tr>
+<tr>
+<td>C</td>
+<td>效应虽显著但<strong>可能毫无实际意义</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>与对偶关系的一致性</strong>：</p>
+<div class="arithmatex">\[
+\text{区间包含 }\theta_0 \iff \text{不拒绝 } H_0:\theta = \theta_0
+\]</div>
+<p><strong>所以区间本身就包含了检验的全部结论</strong> ——
+而且多了「范围」信息 ✓</p>
+<p><strong>现代报告规范的建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>应报告</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>效应量 + 置信区间</strong></td>
+<td>核心信息 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(p\)</span> 值</td>
+<td>辅助（说明是否显著）</td>
+</tr>
+<tr>
+<td>样本量、检验方法、前提检验</td>
+<td>可重复性</td>
+</tr>
+<tr>
+<td>多重比较校正（若适用）</td>
+<td>避免假阳性</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong>「显著」是二元判断，而「多大、多准」才是决策依据</strong> ✓</p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../point-estimation/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 点估计">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                点估计
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../regression/" class="md-footer__link md-footer__link--next" aria-label="下一页: 回归分析">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                回归分析
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
