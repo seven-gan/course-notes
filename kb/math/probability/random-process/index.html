@@ -1820,6 +1820,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3420,6 +3431,298 @@ S(\omega) = \frac{2a\sigma^2}{a^2+\omega^2}\bigg|_{a=5,\ \sigma^2=100} = \frac{1
 则在系统看来噪声「足够白」，可用白噪声模型简化分析 ——
 这正是工程中大量使用白噪声假设的原因。</p>
 </div>
+<hr />
+<h2 id="_12">八、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(X(t) = A\)</span>（常数），其中 <span class="arithmatex">\(A\sim N(0,1)\)</span>。
+判断是否为宽平稳、是否遍历。</p>
+<details class="note">
+<summary>提示</summary>
+<p>均值与自相关是否依赖于时间；再看时间平均能否代表集合平均。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>宽平稳性</strong>：</p>
+<p><strong>均值</strong>：</p>
+<div class="arithmatex">\[
+E[X(t)] = E[A] = 0 \quad\text{（常数 ✓）}
+\]</div>
+<p><strong>自相关</strong>：</p>
+<div class="arithmatex">\[
+R(t_1,t_2) = E[A\cdot A] = E[A^2] = 1 \quad\text{（只依赖 }\tau\text{ 为常数 ✓）}
+\]</div>
+<p><strong>是宽平稳过程</strong> ✓</p>
+<p><strong>遍历性</strong>：</p>
+<p><strong>时间平均</strong>（对任一实现，<span class="arithmatex">\(A\)</span> 固定）：</p>
+<div class="arithmatex">\[
+\lim_{T\to\infty}\frac{1}{2T}\int_{-T}^{T}A\,\mathrm{d}t = A
+\]</div>
+<p><strong>集合平均</strong>：</p>
+<div class="arithmatex">\[
+E[A] = 0
+\]</div>
+<p><strong>比较</strong>：<span class="arithmatex">\(A\neq 0\)</span>（概率为 1），所以</p>
+<div class="arithmatex">\[
+\text{时间平均} = A \neq 0 = \text{集合平均} \;\times
+\]</div>
+<p><strong>不遍历</strong> ✗</p>
+<p><strong>结论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>宽平稳</td>
+<td>✓</td>
+</tr>
+<tr>
+<td><strong>遍历</strong></td>
+<td><strong>✗</strong></td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这就是「平稳但不遍历」的标准反例</p>
+<p><strong>直觉理解</strong>：这个过程<strong>变化得太慢</strong>（根本不变）——
+在一次实验的有限观测时间内，看不到任何「统计涨落」，
+所以时间平均无法代表集合平均 ✗</p>
+<p><strong>遍历性的本质要求</strong>：<strong>过程要在观测时间内「充分游历」各种状态</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>过程</th>
+<th>游历程度</th>
+<th>遍历</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常数 <span class="arithmatex">\(A\)</span></td>
+<td>完全不游历</td>
+<td><strong>✗</strong></td>
+</tr>
+<tr>
+<td>高斯的白噪声</td>
+<td>充分游历</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>慢漂移（相关时间很长）</td>
+<td>观测期内未充分游历</td>
+<td><strong>✗（实际中）</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义（很重要）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>传感器零偏（视为常数）</td>
+<td><strong>不能*用时间平均估计其期望</strong> ✗</td>
+</tr>
+<tr>
+<td>需要多次上电测量</td>
+<td>每次是一个「新样本」</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这解释了为什么「零偏估计」需要多次开机</strong> ——
+单次开机内的平均只能给出该次的零偏值（时间平均 = 该次的值），
+而不会趋向总体期望。</p>
+<p><strong>实践建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目的</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>估计随机涨落</td>
+<td>单次记录内部的时间平均（若遍历）✓</td>
+</tr>
+<tr>
+<td><strong>估计系统性偏差</strong></td>
+<td><strong>需要多次独立实验</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<p><strong>Q2</strong> 某设备的转移矩阵</p>
+<div class="arithmatex">\[
+P = \begin{bmatrix}0.8&amp;0.2\\0.4&amp;0.6\end{bmatrix}
+\]</div>
+<p>求平稳分布。</p>
+<details class="note">
+<summary>提示</summary>
+<p>解 <span class="arithmatex">\(\boldsymbol{\pi}^\top P = \boldsymbol{\pi}^\top\)</span> 与 <span class="arithmatex">\(\sum\pi_i = 1\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>设 <span class="arithmatex">\(\boldsymbol{\pi} = (\pi_1,\pi_2)\)</span></strong>，方程为</p>
+<div class="arithmatex">\[
+\begin{cases}0.8\pi_1+0.4\pi_2 = \pi_1\\ 0.2\pi_1+0.6\pi_2 = \pi_2\\ \pi_1+\pi_2 = 1\end{cases}
+\]</div>
+<p><strong>由第一式</strong>：</p>
+<div class="arithmatex">\[
+0.4\pi_2 = 0.2\pi_1 \implies \pi_1 = 2\pi_2
+\]</div>
+<p><strong>代入归一化</strong>：</p>
+<div class="arithmatex">\[
+2\pi_2+\pi_2 = 1 \implies \pi_2 = \frac13,\quad \pi_1 = \frac23
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+\boldsymbol{\pi} = \left(\frac23,\ \frac13\right) \approx (0.667,\ 0.333)
+\]</div>
+<p><strong>验证（用第二式）</strong>：</p>
+<div class="arithmatex">\[
+0.2\times\frac23+0.6\times\frac13 = \frac{0.4}{3}+\frac{0.6}{3} = \frac13 \;\checkmark
+\]</div>
+<p><strong>长期含义</strong>：系统约 <span class="arithmatex">\(66.7\%\)</span> 的时间处于状态 1、<span class="arithmatex">\(33.3\%\)</span> 处于状态 2。</p>
+<p><strong>计算特征值</strong>（判断收敛速率）：</p>
+<div class="arithmatex">\[
+\operatorname{tr}(P) = 1.4,\qquad \det(P) = 0.8\times0.6-0.2\times0.4 = 0.48-0.08 = 0.40
+\]</div>
+<div class="arithmatex">\[
+\lambda^2-1.4\lambda+0.40 = 0 \implies (\lambda-1)(\lambda-0.4) = 0
+\]</div>
+<p><strong>第二大特征值 <span class="arithmatex">\(\lambda_2 = 0.4\)</span></strong> → 收敛较快 ✓
+（每步偏离平稳的幅度衰减到 <span class="arithmatex">\(0.4\)</span> 倍。）</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 某呼叫中心的来话服从泊松过程，平均每分钟 3 次。
+求 <strong>(a)</strong> 1 分钟内恰好 2 次的概率；<strong>(b)</strong> 相邻两次来话的平均间隔。</p>
+<details class="note">
+<summary>提示</summary>
+<p>计数服从 Poisson(λt)，间隔服从 Exp(λ)。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 计数概率</strong></p>
+<p>参数 <span class="arithmatex">\(\lambda t = 3\times1 = 3\)</span>：</p>
+<div class="arithmatex">\[
+P(N(1) = 2) = \frac{3^2e^{-3}}{2!} = \frac{9\times0.049787}{2} = 0.224
+\]</div>
+<p><strong>结果</strong>：约 <strong><span class="arithmatex">\(22.4\%\)</span></strong></p>
+<p><strong>(b) 平均间隔</strong></p>
+<p>间隔服从 <span class="arithmatex">\(\text{Exp}(3)\)</span>，均值为 <span class="arithmatex">\(1/\lambda\)</span>：</p>
+<div class="arithmatex">\[
+E[\text{间隔}] = \frac13\ \text{分钟} = 20\ \text{秒}
+\]</div>
+<p><strong>结果</strong>：<strong>20 秒</strong></p>
+<p><strong>一致性验证</strong>：每分钟 3 次 → 平均间隔 &#8531; 分钟 ✓</p>
+<p><strong>注意「间隔的分布是右偏的」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>统计量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>众数</td>
+<td><span class="arithmatex">\(0\)</span>（最短间隔最常见）</td>
+</tr>
+<tr>
+<td>中位数</td>
+<td><span class="arithmatex">\(\frac{\ln2}{3} \approx 0.231\)</span> 分钟 ≈ <strong>13.9 秒</strong></td>
+</tr>
+<tr>
+<td><strong>均值</strong></td>
+<td><span class="arithmatex">\(0.333\)</span> 分钟 = <strong>20 秒</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>中位数 &lt; 均值</strong> ✓ 符合指数分布的右偏特性。</p>
+<p><strong>工程含义（人员排班）</strong>：</p>
+<p>若按「平均间隔 20 秒」安排接线员，
+则有约 <span class="arithmatex">\(50\%\)</span> 的间隔<strong>短于 13.9 秒</strong> ——
+需要用「排队论」而非「平均值」来做容量规划 ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 已知某随机过程的 <span class="arithmatex">\(R(\tau) = 25e^{-10\lvert\tau\rvert}\)</span>。
+求 <strong>(a)</strong> 总功率；<strong>(b)</strong> 相关时间；<strong>&copy;</strong> 带宽。</p>
+<details class="note">
+<summary>提示</summary>
+<p>总功率是 <span class="arithmatex">\(R(0)\)</span>；相关时间由衰减到 <span class="arithmatex">\(1/e\)</span> 给出；带宽由谱降到一半给出。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>(a) 总功率</strong></p>
+<div class="arithmatex">\[
+P = R(0) = 25e^0 = 25
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(25\)</span></p>
+<p><strong>(b) 相关时间</strong></p>
+<p>定义 <span class="arithmatex">\(R(\tau_c) = R(0)/e\)</span>：</p>
+<div class="arithmatex">\[
+25e^{-10\tau_c} = \frac{25}{e} \implies 10\tau_c = 1 \implies \tau_c = 0.1
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(\tau_c = 0.1\)</span></p>
+<p><strong>&copy; 带宽</strong></p>
+<p><strong>谱</strong>（用 <span class="arithmatex">\(R = \sigma^2e^{-a\lvert\tau\rvert}\)</span> 的变换结果，<span class="arithmatex">\(a = 10\)</span>、<span class="arithmatex">\(\sigma^2 = 25\)</span>）：</p>
+<div class="arithmatex">\[
+S(\omega) = \frac{2a\sigma^2}{a^2+\omega^2} = \frac{2\times10\times25}{100+\omega^2} = \frac{500}{100+\omega^2}
+\]</div>
+<p><strong><span class="arithmatex">\(S(0) = 500/100 = 5\)</span></strong>。</p>
+<p>令 <span class="arithmatex">\(S(\omega_c) = S(0)/2 = 2.5\)</span>：</p>
+<div class="arithmatex">\[
+\frac{500}{100+\omega_c^2} = 2.5 \implies 100+\omega_c^2 = 200 \implies \omega_c = 10
+\]</div>
+<p><strong>结果</strong>：带宽 <span class="arithmatex">\(\omega_c = 10\)</span> rad/s</p>
+<p><strong>验证「时宽-带宽关系」</strong>：</p>
+<div class="arithmatex">\[
+\tau_c\cdot\omega_c = 0.1\times10 = 1 \;\checkmark
+\]</div>
+<p><strong>这正是不确定性原理的体现</strong> ✓</p>
+<p><strong>验证总功率（对谱积分）</strong>：</p>
+<div class="arithmatex">\[
+\frac{1}{2\pi}\int_{-\infty}^{\infty}\frac{500}{100+\omega^2}\mathrm{d}\omega
+= \frac{500}{2\pi}\cdot\frac{\pi}{10} = 25 \;\checkmark
+\]</div>
+<p><strong>结果汇总</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>总功率</td>
+<td><span class="arithmatex">\(25\)</span></td>
+</tr>
+<tr>
+<td>相关时间</td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+</tr>
+<tr>
+<td>带宽</td>
+<td><span class="arithmatex">\(10\)</span> rad/s</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程解读</strong>：<strong>相关时间短（0.1）↔ 带宽宽（10）</strong> ——
+这个噪声「变化快」（宽带噪声）。</p>
+<p><strong>实用判据</strong>：<strong>若系统带宽 <span class="arithmatex">\(\ll\)</span> 噪声带宽，可把噪声当白噪声处理</strong> ✓
+（此处噪声带宽 10 rad/s，若系统带宽只有 0.1 rad/s，
+则在系统看来噪声足够「白」。）</p>
+</details>
 
 
 

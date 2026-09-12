@@ -1781,6 +1781,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        八、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -3503,6 +3514,302 @@ f(x_1,x_2) = \underbrace{\frac{1}{\sqrt{2\pi}\cdot2}e^{-x_1^2/8}}_{N(0,4)}
 若实际数据有强非线性结构，应改用<strong>粒子滤波</strong>
 或先做非线性变换。</p>
 </div>
+<hr />
+<h2 id="_9">八、自测<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(X\sim N(2, 9)\)</span>（即 <span class="arithmatex">\(\mu = 2\)</span>、<span class="arithmatex">\(\sigma = 3\)</span>）。
+求 <span class="arithmatex">\(P(-1 &lt; X &lt; 5)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>标准化后看区间是否为 <span class="arithmatex">\(\mu\pm\sigma\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>标准化</strong>：</p>
+<div class="arithmatex">\[
+P(-1 &lt; X &lt; 5) = P\left(\frac{-1-2}{3} &lt; Z &lt; \frac{5-2}{3}\right) = P(-1 &lt; Z &lt; 1)
+\]</div>
+<p><strong>区间恰好是 <span class="arithmatex">\(\mu\pm\sigma\)</span></strong> ✓</p>
+<p><strong>用 3σ 法则</strong>：</p>
+<div class="arithmatex">\[
+P(-1 &lt; Z &lt; 1) = 0.6827
+\]</div>
+<p><strong>结果</strong>：约 <strong><span class="arithmatex">\(68.27\%\)</span></strong></p>
+<p><strong>验证（用对称性）</strong>：</p>
+<div class="arithmatex">\[
+P(-1&lt;Z&lt;1) = 2\Phi(1)-1 = 2\times0.8413-1 = 0.6827 \;\checkmark
+\]</div>
+<p><strong>注意区间的端点计算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>端点</th>
+<th>标准化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(-1\)</span></td>
+<td><span class="arithmatex">\(\frac{-1-2}{3} = -1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(\frac{5-2}{3} = 1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>正好是 <span class="arithmatex">\(\pm1\)</span></strong> —— 因为 <span class="arithmatex">\(\mu = 2\)</span>、<span class="arithmatex">\(\sigma = 3\)</span>，
+所以 <span class="arithmatex">\(\mu-\sigma = -1\)</span>、<span class="arithmatex">\(\mu+\sigma = 5\)</span> ✓</p>
+<p><strong>工程含义</strong>：<strong>若已知噪声是高斯且标准差为 3</strong>，
+则「观测值落在 <span class="arithmatex">\([\mu-3,\mu+3]\)</span> 之外」的概率约 <span class="arithmatex">\(31.7\%\)</span> ——
+这可以作为异常检测的初步判据。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 设二维高斯</p>
+<div class="arithmatex">\[
+\boldsymbol{x}\sim N\left(\begin{bmatrix}0\\0\end{bmatrix},\begin{bmatrix}4&amp;0\\0&amp;1\end{bmatrix}\right)
+\]</div>
+<details class="note">
+<summary>提示</summary>
+<p>对角协方差在高斯下意味着独立。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>判断独立性</strong>：</p>
+<p><span class="arithmatex">\(\Sigma\)</span> 是对角矩阵 → 分量<strong>不相关</strong>：</p>
+<div class="arithmatex">\[
+\operatorname{Cov}[x_1,x_2] = \Sigma_{12} = 0
+\]</div>
+<p><strong>联合高斯下不相关 ⟹ 独立</strong> ✓</p>
+<p><strong>所以 <span class="arithmatex">\(x_1\)</span> 与 <span class="arithmatex">\(x_2\)</span> 独立</strong></p>
+<p><strong>写出联合密度</strong>：</p>
+<p>行列式 <span class="arithmatex">\(\lvert\Sigma\rvert = 4\times1 = 4\)</span>，所以 <span class="arithmatex">\(\lvert\Sigma\rvert^{1/2} = 2\)</span>。</p>
+<p>二次型（<span class="arithmatex">\(\Sigma^{-1} = \operatorname{diag}(1/4, 1)\)</span>）：</p>
+<div class="arithmatex">\[
+\boldsymbol{x}^\top\Sigma^{-1}\boldsymbol{x} = \frac{x_1^2}{4}+x_2^2
+\]</div>
+<p><strong>联合密度</strong>：</p>
+<div class="arithmatex">\[
+f(\boldsymbol{x}) = \frac{1}{2\pi\cdot2}\exp\left(-\frac12\left(\frac{x_1^2}{4}+x_2^2\right)\right)
+= \frac{1}{4\pi}e^{-x_1^2/8}e^{-x_2^2/2}
+\]</div>
+<p><strong>验证分解</strong>：</p>
+<div class="arithmatex">\[
+\underbrace{\frac{1}{\sqrt{2\pi}\cdot2}e^{-x_1^2/8}}_{N(0,4)}
+\cdot\underbrace{\frac{1}{\sqrt{2\pi}\cdot1}e^{-x_2^2/2}}_{N(0,1)}
+\]</div>
+<p>两者相乘的常数部分：</p>
+<div class="arithmatex">\[
+\frac{1}{2\sqrt{2\pi}}\cdot\frac{1}{\sqrt{2\pi}} = \frac{1}{4\pi} \;\checkmark
+\]</div>
+<p><strong>与上面的归一化常数一致</strong> ✓ 所以密度确实分解为乘积形式
+—— <strong>这正是独立的等价条件</strong> ✓</p>
+<p><strong>等高线形状</strong>：<span class="arithmatex">\(\Sigma\)</span> 对角但特征值不同（4 与 1）→
+<strong>轴对齐的椭圆</strong>（半轴长比 <span class="arithmatex">\(2:1\)</span>，因为 <span class="arithmatex">\(\sqrt4:\sqrt1 = 2:1\)</span>）。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 判断：若 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 的<strong>边缘分布</strong>都是高斯，则 <span class="arithmatex">\((X,Y)\)</span> 联合高斯。</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想 <span class="arithmatex">\(Y = X^2\)</span> 这类非线性关系。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。边缘高斯不能保证联合高斯。</strong></p>
+<p><strong>反例构造</strong>：</p>
+<p>设联合密度为「两个不同高斯的混合」：</p>
+<div class="arithmatex">\[
+f(x,y) = \frac12 f_1(x,y)+\frac12 f_2(x,y)
+\]</div>
+<p>其中 <span class="arithmatex">\(f_1 = N(\boldsymbol{0}, I)\)</span>、<span class="arithmatex">\(f_2 = N(\boldsymbol{0},\ \operatorname{diag}(1,2))\)</span>。</p>
+<p><strong>边缘分布</strong>：混合的两项边缘都是高斯，混合后仍是高斯 ✓</p>
+<p><strong>但联合分布不是高斯</strong> ✗（它是双峰的混合）</p>
+<p><strong>另一个直观反例</strong>：</p>
+<p>设 <span class="arithmatex">\(X\sim N(0,1)\)</span>，<span class="arithmatex">\(Y = X\cdot S\)</span>，其中 <span class="arithmatex">\(S\)</span> 独立且取 <span class="arithmatex">\(\pm1\)</span> 各半。</p>
+<table>
+<thead>
+<tr>
+<th>变量</th>
+<th>分布</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(X\)</span></td>
+<td><span class="arithmatex">\(N(0,1)\)</span> ✓ 高斯</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(Y\)</span></td>
+<td><span class="arithmatex">\(N(0,1)\)</span> ✓ 高斯（对称化）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((X,Y)\)</span></td>
+<td><strong>不是联合高斯</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么</strong>：<span class="arithmatex">\(Y\)</span> 依赖 <span class="arithmatex">\(X\)</span> 的<strong>符号</strong>（非线性），
+而 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 的<strong>符号完全相同</strong>（<span class="arithmatex">\(Y\)</span> 与 <span class="arithmatex">\(X\)</span> 同号）——
+这产生了「取值限制在两个象限」的结构，不是椭圆等高线 ✗</p>
+<p><strong>验证协方差</strong>：</p>
+<div class="arithmatex">\[
+\operatorname{Cov}(X,Y) = E[XY]-E[X]E[Y] = E[X^2S]-0 = E[X^2]E[S] = 1\times0 = 0
+\]</div>
+<p><strong>协方差为零</strong>（不相关），但<strong>显然不独立</strong>（<span class="arithmatex">\(Y\)</span> 与 <span class="arithmatex">\(X\)</span> 同号）✗</p>
+<p><strong>这就是「不相关 ≠ 独立」在高斯情形下的一个陷阱</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>前提</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>联合</strong>高斯 + 不相关</td>
+<td>⟹ 独立 ✓</td>
+</tr>
+<tr>
+<td>仅<strong>边缘</strong>高斯 + 不相关</td>
+<td><strong>⟹ 不能推出独立</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践判据</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>检查</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>联合是否高斯</td>
+<td>画二维散点（应呈<strong>椭圆云</strong>）</td>
+</tr>
+<tr>
+<td>有弯曲/双峰结构</td>
+<td><strong>不是联合高斯</strong> ✗</td>
+</tr>
+<tr>
+<td>只用了边缘直方图</td>
+<td><strong>不足以判断</strong> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义</strong>：<strong>卡尔曼滤波依赖「联合高斯」假设</strong> ——
+不能只验证各个变量的边缘分布，必须检查联合结构 ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 设 <span class="arithmatex">\(x\sim N(0,1)\)</span>、<span class="arithmatex">\(y\sim N(1,1)\)</span>，且 <span class="arithmatex">\(\operatorname{Cov}(x,y) = 0.5\)</span>。
+求 <span class="arithmatex">\(x\mid y\)</span> 的均值与方差。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用条件分布的公式（卡尔曼滤波的形式）。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>识别参数</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\mu_x\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu_y\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_{xx}\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_{xy}\)</span></td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_{yy}\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>条件均值</strong>：</p>
+<div class="arithmatex">\[
+\mu_{x\mid y} = \mu_x+\Sigma_{xy}\Sigma_{yy}^{-1}(y-\mu_y) = 0+\frac{0.5}{1}(y-1) = 0.5(y-1)
+\]</div>
+<p><strong>条件方差</strong>：</p>
+<div class="arithmatex">\[
+\Sigma_{x\mid y} = \Sigma_{xx}-\Sigma_{xy}\Sigma_{yy}^{-1}\Sigma_{yx}
+= 1-\frac{0.5\times0.5}{1} = 1-0.25 = 0.75
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+x\mid y \sim N\big(0.5(y-1),\ 0.75\big)
+\]</div>
+<p><strong>验证「不确定性减少」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>观测前</th>
+<th>观测后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方差</td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><strong><span class="arithmatex">\(0.75\)</span></strong> ✓ 减少</td>
+</tr>
+</tbody>
+</table>
+<p><strong>减少比例 = 相关系数的平方</strong>：</p>
+<div class="arithmatex">\[
+\rho_{xy}^2 = \frac{\Sigma_{xy}^2}{\Sigma_{xx}\Sigma_{yy}} = \frac{0.25}{1} = 0.25
+\]</div>
+<p><strong>验证</strong>：</p>
+<div class="arithmatex">\[
+\Sigma_{x\mid y} = \Sigma_{xx}(1-\rho^2) = 1\times(1-0.25) = 0.75 \;\checkmark
+\]</div>
+<p><strong>这就是卡尔曼滤波的核心公式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th>卡尔曼滤波中的名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\Sigma_{xy}\Sigma_{yy}^{-1} = 0.5\)</span></td>
+<td><strong>卡尔曼增益 <span class="arithmatex">\(K\)</span></strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y-\mu_y\)</span></td>
+<td><strong>新息</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\mu_x+K\cdot\text{新息}\)</span></td>
+<td>状态更新</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\Sigma_{xx}-K\Sigma_{yx}\)</span></td>
+<td>协方差更新</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程含义</strong>：<strong>相关性越强（<span class="arithmatex">\(\rho\)</span> 越大），观测的价值越高</strong> ——
+若 <span class="arithmatex">\(\rho = 1\)</span>（完全相关），则条件方差降为 <span class="arithmatex">\(0\)</span>（完全确定）✓</p>
+<p><strong>这也解释了传感器选型的原则</strong>：
+<strong>优先选与被测量相关性高的传感器</strong> ✓</p>
+</details>
 
 
 
