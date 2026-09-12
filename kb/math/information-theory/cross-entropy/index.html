@@ -1630,6 +1630,8 @@
       
         
       
+        
+      
     
     
     
@@ -2004,6 +2006,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2028,6 +2041,34 @@
     
   
     JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
   
 
     
@@ -3658,6 +3699,350 @@ H(p,q) = -\log_2 0.7
 </table>
 <p><strong>所以在「模型校准」场景，交叉熵比准确率更能反映真实质量</strong> ✓</p>
 </div>
+<hr />
+<h2 id="_6">六、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设真实分布 <span class="arithmatex">\(p = (0.25, 0.75)\)</span>，模型分布 <span class="arithmatex">\(q = (0.5, 0.5)\)</span>。
+求 <span class="arithmatex">\(H(p)\)</span>、<span class="arithmatex">\(H(p,q)\)</span>、<span class="arithmatex">\(D_{KL}(p\|q)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先算两个熵，再用「交叉熵 = 熵 + KL」核对。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：<span class="arithmatex">\(H(p)\)</span></strong></p>
+<div class="arithmatex">\[
+H(p) = -0.25\log_2 0.25-0.75\log_2 0.75
+= 0.25\times2+0.75\times0.415
+\]</div>
+<div class="arithmatex">\[
+= 0.5+0.311 = 0.811\ \text{比特}
+\]</div>
+<p><strong>第二步：交叉熵</strong></p>
+<div class="arithmatex">\[
+H(p,q) = -0.25\log_2 0.5-0.75\log_2 0.5 = 0.25\times1+0.75\times1 = 1.0\ \text{比特}
+\]</div>
+<p>（因为 <span class="arithmatex">\(q\)</span> 均匀，<span class="arithmatex">\(-\log_2 0.5 = 1\)</span>。）</p>
+<p><strong>第三步：KL 散度</strong></p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = H(p,q)-H(p) = 1.0-0.811 = 0.189\ \text{比特}
+\]</div>
+<p><strong>验证（用定义）</strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = 0.25\log_2\frac{0.25}{0.5}+0.75\log_2\frac{0.75}{0.5}
+\]</div>
+<div class="arithmatex">\[
+= 0.25\times(-1)+0.75\times0.585 = -0.25+0.439 = 0.189 \;\checkmark
+\]</div>
+<p><strong>结果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(H(p)\)</span></td>
+<td><span class="arithmatex">\(0.811\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(H(p,q)\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></td>
+<td><span class="arithmatex">\(0.189\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>解读</strong>：模型 <span class="arithmatex">\(q\)</span> 是均匀的，而真实数据偏向第二类（0.75）。
+用均匀模型编码的代价是<strong>每个样本多花 <span class="arithmatex">\(0.189\)</span> 比特</strong> ✓</p>
+<p><strong>注意「交叉熵 ≥ 熵」</strong>：<span class="arithmatex">\(1.0 &gt; 0.811\)</span> ✓
+等号只在 <span class="arithmatex">\(q = p\)</span> 时成立。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 判断：<span class="arithmatex">\(D_{KL}(p\|q) = D_{KL}(q\|p)\)</span> 总是成立。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用上一页的数值例子。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不对。KL 散度不对称。</strong></p>
+<p><strong>反例</strong>：<span class="arithmatex">\(p = (0.5,0.5)\)</span>、<span class="arithmatex">\(q = (0.9,0.1)\)</span></p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></td>
+<td><span class="arithmatex">\(0.737\)</span> 比特</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span></td>
+<td><span class="arithmatex">\(0.531\)</span> 比特</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两者不同</strong> ✗</p>
+<p><strong>为什么不对称（结构上的原因）</strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = \sum_x \underbrace{p(x)}_{\text{权重}}\log\frac{p(x)}{q(x)}
+\]</div>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前面的分布</td>
+<td>提供<strong>权重</strong>（期望的基准）</td>
+</tr>
+<tr>
+<td>后面的分布</td>
+<td>出现在 <strong>log 里</strong>（被用来编码）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>两个角色不同</strong>，所以交换后有变化 ✓</p>
+<p><strong>具体的点数分析</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>项</th>
+<th><span class="arithmatex">\(D_{KL}(p\;\lvert\;q)\)</span></th>
+<th><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第一项权重</td>
+<td><span class="arithmatex">\(0.5\)</span>（分散）</td>
+<td><span class="arithmatex">\(0.9\)</span>（集中）</td>
+</tr>
+<tr>
+<td>第二项权重</td>
+<td><span class="arithmatex">\(0.5\)</span></td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>因为 <span class="arithmatex">\(p\)</span> 更分散，它在「小概率区域」（第二项）上仍有 <span class="arithmatex">\(0.5\)</span> 的质量
+→ 那里 <span class="arithmatex">\(\log\frac{0.5}{0.1} = 2.322\)</span> 的<strong>大惩罚</strong>被乘以 <span class="arithmatex">\(0.5\)</span>
+→ <span class="arithmatex">\(D_{KL}(p\|q)\)</span> 更大 ✓</p>
+<p><strong>工程后果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方向</th>
+<th>优化时的行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前向（<span class="arithmatex">\(p\)</span> 在前）</td>
+<td><strong>零避免</strong>：<span class="arithmatex">\(q\)</span> 要覆盖 <span class="arithmatex">\(p\)</span> 的所有支撑</td>
+</tr>
+<tr>
+<td>反向（<span class="arithmatex">\(q\)</span> 在前）</td>
+<td><strong>零强迫</strong>：<span class="arithmatex">\(q\)</span> 可集中于 <span class="arithmatex">\(p\)</span> 的某个峰</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以要明确「用哪个方向」</strong> —— 结果完全不同。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么训练的损失函数用交叉熵，而不是直接用 KL 散度？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想 KL 里需要什么信息。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为交叉熵不需要知道真实分布的完整形式，只需样本。</strong></p>
+<p><strong>对比两者的计算需求</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>公式</th>
+<th>需要什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL</td>
+<td><span class="arithmatex">\(\sum_x p(x)\log\frac{p(x)}{q(x)}\)</span></td>
+<td><strong><span class="arithmatex">\(p(x)\)</span> 的显式形式</strong> ✗</td>
+</tr>
+<tr>
+<td><strong>交叉熵</strong></td>
+<td><span class="arithmatex">\(-\sum_x p(x)\log q(x)\)</span></td>
+<td>只需在<strong>样本点</strong>上算 <span class="arithmatex">\(q\)</span> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键差别</strong>：<strong>KL 里的 <span class="arithmatex">\(\log p(x)\)</span> 项需要知道真实分布</strong> ——
+但训练时我们只有<strong>样本</strong>（不知道数据的真实密度）✗</p>
+<p><strong>展开验证</strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = \underbrace{\sum_x p(x)\log p(x)}_{-H(p)}-\underbrace{\sum_x p(x)\log q(x)}_{H(p,q)}
+\]</div>
+<p><strong>第一项 <span class="arithmatex">\(-H(p)\)</span> 与模型无关</strong>（数据固定）→ 优化时可忽略 →
+只剩交叉熵 ✓</p>
+<p><strong>所以「用交叉熵」是「用 KL」的等价简化</strong>：</p>
+<div class="arithmatex">\[
+\min_\theta D_{KL}(p\|q_\theta) \iff \min_\theta H(p,q_\theta)
+\]</div>
+<p><strong>工程上的三个好处</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只需样本</td>
+<td>用经验分布 <span class="arithmatex">\(\hat p\)</span> 代替 <span class="arithmatex">\(p\)</span></td>
+</tr>
+<tr>
+<td>计算便宜</td>
+<td>只需 <span class="arithmatex">\(-\log q(y)\)</span></td>
+</tr>
+<tr>
+<td>数值稳定</td>
+<td>避开 <span class="arithmatex">\(p=0\)</span> 时的 <span class="arithmatex">\(0\log 0\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong>交叉熵是「可在样本上直接算」的那个量</strong> ✓</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 什么是「标签平滑」？它为什么能防止模型过度自信？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想把 one-hot 的 <span class="arithmatex">\(1\)</span> 换成略小于 <span class="arithmatex">\(1\)</span> 的值。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>标签平滑</strong>：把 one-hot 标签替换为「接近 one-hot 但不过分极端」的软标签。</p>
+<p><strong>具体做法</strong>（<span class="arithmatex">\(K\)</span> 类，平滑参数 <span class="arithmatex">\(\varepsilon\)</span>）：</p>
+<div class="arithmatex">\[
+p_c = \begin{cases}1-\varepsilon, &amp; c = y\text{（真实类）}\\ \dfrac{\varepsilon}{K-1}, &amp; c\neq y\end{cases}
+\]</div>
+<p><strong>例</strong>（<span class="arithmatex">\(K=3\)</span>、<span class="arithmatex">\(\varepsilon = 0.1\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>one-hot</th>
+<th>平滑后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>真实类</td>
+<td><span class="arithmatex">\(1.0\)</span></td>
+<td><span class="arithmatex">\(0.9\)</span></td>
+</tr>
+<tr>
+<td>其它</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.05\)</span></td>
+</tr>
+<tr>
+<td>其它</td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0.05\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么防止过度自信</strong>：</p>
+<p><strong>若模型预测完美</strong>（<span class="arithmatex">\(q_y = 1\)</span>），交叉熵：</p>
+<table>
+<thead>
+<tr>
+<th>标签类型</th>
+<th>损失</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one-hot</td>
+<td><span class="arithmatex">\(-\log 1 = 0\)</span> ✓</td>
+</tr>
+<tr>
+<td><strong>平滑后</strong></td>
+<td><span class="arithmatex">\(-(0.9\log 1+0.05\log 0+\cdots)\to\)</span> <strong>需避免 <span class="arithmatex">\(\log0\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>实际上</strong>：模型无法让损失真正为零，因为平滑标签要求
+「其它类的概率是 <span class="arithmatex">\(0.05\)</span>」而不是 <span class="arithmatex">\(0\)</span>。</p>
+<p><strong>所以要最小化损失</strong>，模型被迫满足：</p>
+<div class="arithmatex">\[
+q(\text{其它类})\approx0.05 &gt; 0
+\]</div>
+<p><strong>即不能把概率全部堆到一个类上</strong> ✓</p>
+<p><strong>效果总结</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>置信度</td>
+<td>不会过度自信（防止 <span class="arithmatex">\(q\to1\)</span>）</td>
+</tr>
+<tr>
+<td>泛化</td>
+<td><strong>通常更好</strong>（相当于正则化）</td>
+</tr>
+<tr>
+<td>校准</td>
+<td>概率更接近真实频率</td>
+</tr>
+<tr>
+<td>知识蒸馏</td>
+<td>与此同源（用教师的软输出）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>代价</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>代价</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>训练损失不会到零</td>
+<td>因为有「故意的」混淆</td>
+</tr>
+<tr>
+<td>需要调 <span class="arithmatex">\(\varepsilon\)</span></td>
+<td>通常 <span class="arithmatex">\(0.05\)</span>–<span class="arithmatex">\(0.2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程提示</strong>：<strong>标签平滑是「免费的改进」</strong> ——
+一行代码，常能带来可观的泛化提升（尤其在数据量不大时）。</p>
+</details>
 
 
 

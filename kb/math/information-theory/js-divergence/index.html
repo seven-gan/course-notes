@@ -16,7 +16,7 @@
         <link rel="prev" href="../cross-entropy/">
       
       
-        <link rel="next" href="../../signal-systems/">
+        <link rel="next" href="../wasserstein/">
       
       
         
@@ -1630,6 +1630,8 @@
       
         
       
+        
+      
     
     
     
@@ -2004,10 +2006,49 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasserstein/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2464,7 +2505,7 @@
 
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 5 讲 信息论」</code><code>GAN 原始论文（Goodfellow et al., 2014）的目标函数</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《信息论基础》或《信息论与编码》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
-<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../cross-entropy/">cross-entropy</a></span></div></div>
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../cross-entropy/">cross-entropy</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../wasserstein/">wasserstein</a></span></div></div>
 
 <h1 id="js">JS 散度<a class="headerlink" href="#js" title="Permanent link">&para;</a></h1>
 <p>上一页的 KL 散度有个实用缺陷：<strong>它不对称</strong>。这一页讲一个简单的修正 —— <strong>JS 散度</strong>：</p>
@@ -3277,6 +3318,282 @@ JSD = \frac{0.198+0.359}{2} = 0.279\ \text{比特}
 </tbody>
 </table>
 </div>
+<hr />
+<h2 id="_4">五、自测<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(p = (0.5, 0.5)\)</span>、<span class="arithmatex">\(q = (0.6, 0.4)\)</span>。求 <span class="arithmatex">\(JSD(p\|q)\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>先取中点，再算两个 KL。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：中点</strong></p>
+<div class="arithmatex">\[
+m = \left(\frac{0.5+0.6}{2},\ \frac{0.5+0.4}{2}\right) = (0.55,\ 0.45)
+\]</div>
+<p><strong>第二步：两个 KL 散度</strong></p>
+<div class="arithmatex">\[
+D_{KL}(p\|m) = 0.5\log_2\frac{0.5}{0.55}+0.5\log_2\frac{0.5}{0.45}
+\]</div>
+<p>计算（<span class="arithmatex">\(\log_2 0.909 = -0.138\)</span>、<span class="arithmatex">\(\log_2 1.111 = 0.152\)</span>）：</p>
+<div class="arithmatex">\[
+= 0.5\times(-0.138)+0.5\times0.152 = -0.069+0.076 = 0.007\ \text{比特}
+\]</div>
+<div class="arithmatex">\[
+D_{KL}(q\|m) = 0.6\log_2\frac{0.6}{0.55}+0.4\log_2\frac{0.4}{0.45}
+\]</div>
+<p>（<span class="arithmatex">\(\log_2 1.091 = 0.126\)</span>、<span class="arithmatex">\(\log_2 0.889 = -0.170\)</span>）：</p>
+<div class="arithmatex">\[
+= 0.6\times0.126+0.4\times(-0.170) = 0.076-0.068 = 0.008\ \text{比特}
+\]</div>
+<p><strong>第三步：JS 散度</strong></p>
+<div class="arithmatex">\[
+JSD = \frac{0.007+0.008}{2} \approx 0.0075\ \text{比特}
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(JSD \approx 0.0075\)</span> 比特（<strong>很小</strong>）</p>
+<p><strong>解读</strong>：<span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 很接近（只差 0.1），所以 JS 很小 ✓</p>
+<p><strong>对比</strong>：上一页算过的 <span class="arithmatex">\(p=(0.5,0.5)\)</span> 与 <span class="arithmatex">\(q=(0.9,0.1)\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th>对比</th>
+<th><span class="arithmatex">\(JSD\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\((0.5,0.5)\)</span> vs <span class="arithmatex">\((0.6,0.4)\)</span></td>
+<td><span class="arithmatex">\(0.0075\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((0.5,0.5)\)</span> vs <span class="arithmatex">\((0.9,0.1)\)</span></td>
+<td><span class="arithmatex">\(0.147\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>差距约 20 倍</strong> —— JS 忠实反映了「分布差异的程度」✓</p>
+<p><strong>这也说明 JS 的数值有直观意义</strong>：<strong>越接近零说明分布越相似</strong>。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 求 <span class="arithmatex">\(JSD\)</span> 的上界，并说明何时取到。</p>
+<details class="note">
+<summary>提示</summary>
+<p>回忆有界性证明中用到的 <span class="arithmatex">\(p(x)/m(x)\leq2\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>上界</strong>：</p>
+<div class="arithmatex">\[
+JSD(p\|q)\leq\log 2
+\]</div>
+<p>（若对数底为 2，则上界为 <strong>1 比特</strong>。）</p>
+<p><strong>取到的条件</strong>：<strong><span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的支撑完全不重叠</strong> ✓</p>
+<p><strong>证明要点</strong>：</p>
+<p>由中点 <span class="arithmatex">\(m(x) = \frac{p(x)+q(x)}{2}\geq\frac{p(x)}{2}\)</span>，得</p>
+<div class="arithmatex">\[
+\frac{p(x)}{m(x)}\leq2 \implies \log\frac{p(x)}{m(x)}\leq\log2
+\]</div>
+<p>因此</p>
+<div class="arithmatex">\[
+D_{KL}(p\|m)\leq\sum_x p(x)\log2 = \log2
+\]</div>
+<p>两项目各 <span class="arithmatex">\(\leq\log2\)</span>，平均后仍 <span class="arithmatex">\(\leq\log2\)</span> ∎</p>
+<p><strong>取等号的例子</strong>：<span class="arithmatex">\(p = (1,0)\)</span>、<span class="arithmatex">\(q = (0,1)\)</span></p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(m\)</span></td>
+<td><span class="arithmatex">\((0.5,0.5)\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;m)\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(q\;\lvert\;m)\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(JSD\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1 = \log2\)</span></strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程意义（有界性的价值）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>梯度尺度稳定</td>
+<td>不会因分布差异大而爆炸</td>
+</tr>
+<tr>
+<td>学习率易调</td>
+<td>损失范围已知（<span class="arithmatex">\([0,1]\)</span>）</td>
+</tr>
+<tr>
+<td>可比性</td>
+<td>不同数据集之间的 JS 可比较</td>
+</tr>
+</tbody>
+</table>
+<p><strong>但有界也带来副作用</strong>：<strong>差异「饱和」后无法区分</strong>
+—— 这正是它被 Wasserstein 取代的原因 ✗</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么 GAN 的原始目标等价于最小化 JS 散度？</p>
+<details class="note">
+<summary>提示</summary>
+<p>最优判别器是 <span class="arithmatex">\(D^*(x) = p_{\text{data}}/(p_{\text{data}}+p_g)\)</span>。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为把最优判别器代入目标后，剩下的恰好是 JS 散度的形式。</strong></p>
+<p><strong>第一步：GAN 的目标</strong></p>
+<div class="arithmatex">\[
+\min_G\max_D\ E_{p_{\text{data}}}[\log D(x)]+E_{p_g}[\log(1-D(x))]
+\]</div>
+<p><strong>第二步：对固定的 <span class="arithmatex">\(G\)</span>，求最优 <span class="arithmatex">\(D\)</span></strong></p>
+<p>这是「在 <span class="arithmatex">\(D(x)\in[0,1]\)</span> 上最大化
+<span class="arithmatex">\(p_{\text{data}}\log D+p_g\log(1-D)\)</span>」（逐点）。</p>
+<p>求导令零：</p>
+<div class="arithmatex">\[
+\frac{p_{\text{data}}}{D}-\frac{p_g}{1-D} = 0
+\]</div>
+<p>解出：</p>
+<div class="arithmatex">\[
+D^*(x) = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}
+\]</div>
+<p><strong>第三步：代回目标</strong></p>
+<p>记 <span class="arithmatex">\(a = p_{\text{data}}\)</span>、<span class="arithmatex">\(b = p_g\)</span>，则</p>
+<div class="arithmatex">\[
+a\log\frac{a}{a+b}+b\log\frac{b}{a+b}
+\]</div>
+<p><strong>与 JS 的定义比较</strong>（<span class="arithmatex">\(m = \frac{a+b}{2}\)</span>）：</p>
+<div class="arithmatex">\[
+D_{KL}(a\|m) = a\log\frac{2a}{a+b}, \qquad D_{KL}(b\|m) = b\log\frac{2b}{a+b}
+\]</div>
+<div class="arithmatex">\[
+\frac12\left[D_{KL}(a\|m)+D_{KL}(b\|m)\right] + \log2 = -\left[a\log\frac{a}{a+b}+b\log\frac{b}{a+b}\right]
+\]</div>
+<p><strong>所以</strong></p>
+<div class="arithmatex">\[
+\max_D V(D,G) = 2\,JSD(p_{\text{data}}\|p_g)-\log4
+\]</div>
+<p><strong>因此生成器的目标等价于</strong></p>
+<div class="arithmatex">\[
+\min_G JSD(p_{\text{data}}\|p_g) \;\checkmark
+\]</div>
+<p><strong>这个等价性的两个重要推论</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>推论</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始 GAN 在理论上「最优」</td>
+<td>因为 JS 是合法度量</td>
+</tr>
+<tr>
+<td><strong>但 JS 有饱和问题</strong></td>
+<td>分布不重叠时梯度为零 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践中的补救</strong>：把 <span class="arithmatex">\(\log(1-D)\)</span> 改为 <span class="arithmatex">\(-\log D\)</span>（非饱和损失） ——
+但这<strong>不再等价于 JS</strong>，只是启发式 ✓</p>
+<p><strong>根本的解决</strong>：换成 Wasserstein 距离（下一节）。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 判断：<span class="arithmatex">\(JSD(p\|q) = 0\)</span> 意味着 <span class="arithmatex">\(p\)</span> 和 <span class="arithmatex">\(q\)</span> 完全相同。</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想「几乎处处相等」的情形。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>基本正确，但需注意「几乎处处」的细节。</strong></p>
+<p><strong>严格陈述</strong>：</p>
+<div class="arithmatex">\[
+JSD(p\|q) = 0 \iff p(x) = q(x) \text{ 对几乎所有的 }x
+\]</div>
+<p><strong>(「几乎处处」= 除测度为零的集合外)</strong></p>
+<p><strong>证明</strong>：</p>
+<p>由 <span class="arithmatex">\(JSD = \frac12D_{KL}(p\|m)+\frac12D_{KL}(q\|m)\)</span>，且 <span class="arithmatex">\(D_{KL}\geq0\)</span>：</p>
+<div class="arithmatex">\[
+JSD = 0 \implies D_{KL}(p\|m) = 0 \implies p = m \text{（几乎处处）}
+\]</div>
+<p>而 <span class="arithmatex">\(m = \frac{p+q}{2}\)</span>，所以 <span class="arithmatex">\(p = m\)</span> 意味着</p>
+<div class="arithmatex">\[
+p = \frac{p+q}{2} \implies 2p = p+q \implies p = q \;\checkmark
+\]</div>
+<p><strong>注意与 KL 的对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q) = 0\)</span></td>
+<td><span class="arithmatex">\(p = q\)</span>（几乎处处）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(D_{KL}(p\;\lvert\;q) &lt; \infty\)</span></td>
+<td><strong>需要 <span class="arithmatex">\(p\)</span> 的支撑包含于 <span class="arithmatex">\(q\)</span> 的支撑</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD(p\;\lvert\;q) &lt; \infty\)</span></td>
+<td><strong>总是成立</strong>（有界）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键差别</strong>：<strong>JS 的有限性是「无条件」的</strong> ——
+这正是它相对于 KL 的第一个改进 ✓</p>
+<p><strong>实践意义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>用 JS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支撑不重叠</td>
+<td>✓ 仍有限</td>
+</tr>
+<tr>
+<td>需要对称</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>需要「区分远距离」</td>
+<td>✗ 会饱和</td>
+</tr>
+<tr>
+<td><strong>需要「判断是否相同」</strong></td>
+<td>✓ 可以（零即相同）</td>
+</tr>
+</tbody>
+</table>
+</details>
 
 
 
@@ -3334,13 +3651,13 @@ JSD = \frac{0.198+0.359}{2} = 0.279\ \text{比特}
         
         
           
-          <a href="../../signal-systems/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+          <a href="../wasserstein/" class="md-footer__link md-footer__link--next" aria-label="下一页: Wasserstein 距离">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                总览
+                Wasserstein 距离
               </div>
             </div>
             <div class="md-footer__button md-icon">

@@ -1,0 +1,4161 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
+      
+      
+      
+        <link rel="canonical" href="https://seven-gan.github.io/course-notes/math/information-theory/wasserstein/">
+      
+      
+        <link rel="prev" href="../js-divergence/">
+      
+      
+        <link rel="next" href="../../signal-systems/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Wasserstein 距离 - 我的学习知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#wasserstein" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="我的学习知识库" class="md-header__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            我的学习知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Wasserstein 距离
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到深色"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="切换到深色" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="切换到浅色"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="切换到浅色" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  数学基础
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../courses/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  专业课程
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="我的学习知识库" class="md-nav__button md-logo" aria-label="我的学习知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m19 2-5 4.5v11l5-4.5zM6.5 5C4.55 5 2.45 5.4 1 6.5v14.66c0 .25.25.5.5.5.1 0 .15-.07.25-.07 1.35-.65 3.3-1.09 4.75-1.09 1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.31 4.75 1.06.1.05.15.03.25.03.25 0 .5-.25.5-.5V6.5c-.6-.45-1.25-.75-2-1V19c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V6.5C10.55 5.4 8.45 5 6.5 5"/></svg>
+
+    </a>
+    我的学习知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    首页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学基础
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学基础
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../linear-algebra/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性代数
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    线性代数
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    向量与向量空间
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性无关、张成与基
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    线性映射与矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    行列式
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    范数与内积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    正交性与投影
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    特征值与特征向量
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../linear-algebra/svd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    奇异值分解
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../calculus/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    微积分
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    微积分
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/derivative/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    导数与微分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/chain-rule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    链式法则与反向传播
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/taylor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    泰勒展开
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/integral/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    矩阵微积分
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/jacobian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    雅可比矩阵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logistic 与 Softmax 导数
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../optimization/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    数学优化
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    数学优化
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/convexity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    优化问题与凸性
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/gradient-descent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    梯度下降与收敛
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/newton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    牛顿法与二阶优化
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/lagrange/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉格朗日乘数法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/duality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对偶问题
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../optimization/kkt/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    KKT 条件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../probability/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    概率论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    概率论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/sample-space/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    样本空间与条件概率
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-variable/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机变量与分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/bayes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    贝叶斯定理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/expectation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    期望与方差
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/gaussian/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    高斯分布
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/mle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    最大似然估计
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../probability/random-process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机过程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信息论
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信息论
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自信息与熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../joint-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    联合熵与条件熵
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mutual-information/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    互信息
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cross-entropy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    交叉熵与 KL 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../js-divergence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JS 散度
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wasserstein 距离
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、直观定义：搬运土堆的成本
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、最简单的情形：一维「点分布」
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、最简单的情形：一维「点分布」">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一维一般情形（有闭式解）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kantorovich-rubinstein-wgan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、Kantorovich-Rubinstein 对偶（WGAN 的理论基础）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、Kantorovich-Rubinstein 对偶（WGAN 的理论基础）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lipschitz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        关键实现问题：如何保证 Lipschitz 约束
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、典型例题
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、典型例题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-wasserstein" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：点分布的 Wasserstein 距离
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-w_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：一维高斯分布的 \(W_1\)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-kl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：为什么 KL 在点分布上无穷大
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4wgan-gan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：WGAN 的判别器与 GAN 的对比
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、三个量的完整对比（总结表）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../signal-systems/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    信号与系统
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    信号与系统基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/convolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    卷积
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/fourier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    傅里叶级数与变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/dft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    离散傅里叶变换与 FFT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/sampling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    采样定理与混叠
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/quantization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    量化与信噪比
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/laplace/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    拉普拉斯变换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Z 变换与滤波器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    随机信号基础
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../../courses/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    专业课程
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    专业课程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#6b7280">了解</span><span class="kb-imp-desc">扩展阅读，不必深究</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>WGAN 论文（Arjovsky et al., 2017）</code><code>最优传输（Optimal Transport）简介资料</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《最优传输》或相关中文综述（术语通行一致：最优传输、推土机距离）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+
+<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../js-divergence/">js-divergence</a></span></div></div>
+
+<h1 id="wasserstein">Wasserstein 距离<a class="headerlink" href="#wasserstein" title="Permanent link">&para;</a></h1>
+<p>上一页看到 JS 散度的致命问题：<strong>分布不重叠时梯度消失</strong>。这一页讲一个
+从根本上解决该问题的度量。</p>
+<blockquote>
+<p><strong>Wasserstein 距离：把一个分布「搬运」成另一个所需的最小代价。</strong></p>
+</blockquote>
+<p>它也叫<strong>「推土机距离」（Earth Mover's Distance, EMD）</strong> ——
+这个名字很好地说明了它的直观含义。</p>
+<div class="admonition tip">
+<p class="admonition-title">Wasserstein 距离相对于 KL/JS 的两个关键优势</p>
+<table>
+<thead>
+<tr>
+<th>性质</th>
+<th>KL</th>
+<th>JS</th>
+<th><strong>Wasserstein</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对称</td>
+<td>✗</td>
+<td>✓</td>
+<td><strong>✓</strong></td>
+</tr>
+<tr>
+<td>有界</td>
+<td>✗</td>
+<td>✓</td>
+<td>✗（可无限大）</td>
+</tr>
+<tr>
+<td><strong>分布不重叠时有梯度</strong></td>
+<td>✓（但可能爆炸）</td>
+<td><strong>✗ 梯度为零</strong></td>
+<td><strong>✓ 梯度正常</strong></td>
+</tr>
+<tr>
+<td>反映「距离」的几何意义</td>
+<td>✗</td>
+<td>✗</td>
+<td><strong>✓（度量空间中的距离）</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>最关键的一行是第三行</strong>：<strong>Wasserstein 距离即使两个分布
+完全不重叠，也仍然给出「它们相距多远」的有意义数值</strong> ✓</p>
+<p>这正是 WGAN 稳定的根本原因。</p>
+</div>
+<hr />
+<h2 id="_1">一、直观定义：搬运土堆的成本<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><strong>设想</strong>：<span class="arithmatex">\(p\)</span> 是一堆土（形状由概率密度描述），<span class="arithmatex">\(q\)</span> 是另一堆土。</p>
+<p><strong>问题</strong>：把 <span class="arithmatex">\(p\)</span> 这堆土搬到 <span class="arithmatex">\(q\)</span> 的形状，<strong>最少需要做多少功</strong>？</p>
+<p><strong>定义</strong>：</p>
+<div class="arithmatex">\[
+W(p,q) = \inf_{\gamma\in\Pi(p,q)}\ \int\lvert x-y\rvert\,\mathrm{d}\gamma(x,y)
+\]</div>
+<p>其中 <span class="arithmatex">\(\Pi(p,q)\)</span> 是所有「以 <span class="arithmatex">\(p\)</span> 为边缘分布、以 <span class="arithmatex">\(q\)</span> 为另一边缘分布」的联合分布
+（称为<strong>传输方案</strong>或<strong>耦合</strong>）。</p>
+<p><strong>每项的含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\gamma(x,y)\)</span></td>
+<td>「把 <span class="arithmatex">\(x\)</span> 处的土搬到 <span class="arithmatex">\(y\)</span> 处」的方案</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\lvert x-y\rvert\)</span></td>
+<td>搬运距离</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\int\lvert x-y\rvert\mathrm{d}\gamma\)</span></td>
+<td><strong>总搬运成本</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\inf\)</span></td>
+<td><strong>取最省成本的方案</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">「最优传输」这个名字的来源</p>
+<p>这个 <span class="arithmatex">\(\inf\)</span> 是在<strong>所有可行的搬运方案</strong>中取最小 ——
+所以叫<strong>「最优传输」（Optimal Transport）</strong>。</p>
+<p><strong>工程类比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th><span class="arithmatex">\(p\)</span> 的含义</th>
+<th><span class="arithmatex">\(q\)</span> 的含义</th>
+<th><span class="arithmatex">\(W\)</span> 的含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>土方工程</td>
+<td>一堆土</td>
+<td>目标地形</td>
+<td>最小运输功</td>
+</tr>
+<tr>
+<td>物流</td>
+<td>仓库供货</td>
+<td>门店需求</td>
+<td>最小运费</td>
+</tr>
+<tr>
+<td><strong>生成模型</strong></td>
+<td>数据分布</td>
+<td>生成分布</td>
+<td><strong>最小「改造代价」</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键在于「距离」被赋予了物理意义</strong>：
+它不只是「差异多大」，而是<strong>「要花多少代价才能变成对方」</strong>。</p>
+<p><strong>这就是为什么它能反映「几何结构」</strong> ——
+而 KL/JS 只关心「概率值的差异」，不关心「分布之间的空间关系」✗</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wasserstein 距离的直观：搬运土堆的最小代价">
+<defs>
+<marker id="wa1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="wa1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 坐标轴 -->
+<line class="gb" x1="30" y1="180" x2="404" y2="180" marker-end="url(#wa1-ah1)"/>
+<line class="gb" x1="30" y1="180" x2="30" y2="30" marker-end="url(#wa1-ah2)"/>
+<text class="lbl-s" x="392" y="172">x</text>
+<!-- 分布 p（左小土堆） -->
+<path class="a1" d="M60,176 C80,172 92,120 110,88 C120,70 128,64 136,66 C146,70 158,110 172,150 C180,168 190,176 202,176" fill="none" stroke-width="2.6"/>
+<text class="l1" x="98" y="58">p</text>
+<!-- 分布 q（右大土堆，更宽） -->
+<path class="a2" d="M226,176 C246,172 258,140 276,110 C288,90 296,82 306,82 C318,84 330,110 344,140 C356,164 366,174 380,176" fill="none" stroke-width="2.6"/>
+<text class="l2" x="290" y="72">q</text>
+<!-- 搬运箭头 -->
+<line class="a3" x1="120" y1="196" x2="250" y2="196" marker-end="url(#wa1-ah2)" stroke-width="2.2"/>
+<text class="l3" x="140" y="214">把左边的土搬到右边</text>
+<line class="a3" x1="200" y1="208" x2="330" y2="208" marker-end="url(#wa1-ah2)" stroke-width="2.2"/>
+<text class="l3" x="240" y="228">成本 = Σ(搬运量 × 距离)，取最小</text>
+<text class="lbl-s" x="30" y="244">两个分布完全不重叠时，W 仍然给出「相隔多远」的有意义数值</text>
+</svg>
+<figcaption>图 1　Wasserstein 距离的「推土机」直观。把它想成「p 是一堆土，q 是目标形状」，W(p,q) 就是<b>把 p 搬成 q 的最小运输成本</b>（搬运量 × 距离，取最优方案）。关键：即使两个分布<b>完全不重叠</b>，W 仍然给出「它们相隔多远」——而 KL/JS 在这种情况下只会给出常数或无穷大</figcaption>
+</figure>
+
+<hr />
+<h2 id="_2">二、最简单的情形：一维「点分布」<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>先看最简例子，它揭示了核心特性。</p>
+<p><strong>设定</strong>：<span class="arithmatex">\(p = \delta_0\)</span>（质量全在 0）、<span class="arithmatex">\(q = \delta_\theta\)</span>（质量全在 <span class="arithmatex">\(\theta\)</span>）。</p>
+<p><strong>Wasserstein 距离</strong>：</p>
+<div class="arithmatex">\[
+W(\delta_0,\delta_\theta) = \lvert\theta\rvert
+\]</div>
+<p><strong>只有一个搬运方案</strong>（把 0 处的土全搬到 <span class="arithmatex">\(\theta\)</span>），成本就是距离 ✓</p>
+<p><strong>三个量的对比（关键表）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th><span class="arithmatex">\(W = \lvert\theta\rvert\)</span></th>
+<th><span class="arithmatex">\(D_{KL}\)</span></th>
+<th><span class="arithmatex">\(JSD\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(0.1\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\log2\)</span>（饱和）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><span class="arithmatex">\(\log2\)</span>（饱和）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><strong><span class="arithmatex">\(100\)</span></strong></td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td><strong><span class="arithmatex">\(\log2\)</span>（饱和）</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">这张表说明了「为什么 WGAN 稳定」（核心洞察）</p>
+<p><strong>观察三个量的行为</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>随 <span class="arithmatex">\(\theta\)</span> 增大</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}\)</span></td>
+<td>立刻 <span class="arithmatex">\(\to\infty\)</span>（<strong>完全无梯度信息</strong>）✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD\)</span></td>
+<td>立刻饱和到 <span class="arithmatex">\(\log2\)</span>（<strong>梯度为零</strong>）✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W\)</span></strong></td>
+<td><strong>线性增长</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么会这样</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>依据什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL/JS</td>
+<td><strong>概率值的重叠程度</strong>（不重叠就是「无穷大差异」）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W\)</span></strong></td>
+<td><strong>空间中的距离</strong>（能算「隔多远」）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>梯度行为</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial W}{\partial\theta} = \operatorname{sign}(\theta) = \pm1
+\]</div>
+<p><strong>梯度恒为 <span class="arithmatex">\(\pm1\)</span></strong> —— <strong>无论相隔多远，都有稳定的梯度指引方向</strong> ✓</p>
+<p><strong>这正是 WGAN 训练稳定的根本原因</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>分布不重叠时的梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>JS（原始 GAN）</td>
+<td><strong><span class="arithmatex">\(0\)</span></strong> → 学不动 ✗</td>
+</tr>
+<tr>
+<td><strong>Wasserstein（WGAN）</strong></td>
+<td><strong><span class="arithmatex">\(\pm1\)</span></strong> → 持续改进 ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong>Wasserstein 距离把「概率差异」换成了「空间距离」</strong>，
+从而在分布不重叠时仍保留有效信息。</p>
+</div>
+<h3 id="_3">一维一般情形（有闭式解）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>对一维分布，Wasserstein 距离有简洁的闭式表达。</p>
+<p><strong><span class="arithmatex">\(p\)</span> 和 <span class="arithmatex">\(q\)</span> 的 <span class="arithmatex">\(W_1\)</span> 距离</strong>：</p>
+<div class="arithmatex">\[
+W_1(p,q) = \int_0^1\lvert F_p^{-1}(u)-F_q^{-1}(u)\rvert\,\mathrm{d}u
+\]</div>
+<p>其中 <span class="arithmatex">\(F^{-1}\)</span> 是<strong>分位数函数</strong>（CDF 的逆）。</p>
+<p><strong>含义</strong>：<strong>把两个分布的「分位数」逐点相减再积分</strong> ✓</p>
+<div class="admonition note">
+<p class="admonition-title">这个公式的实用价值</p>
+<p><strong>它把「两个分布的差异」化为「分位数的差异」</strong> ——
+计算上只需排序（对样本）或求逆 CDF。</p>
+<p><strong>对比三个量的计算难度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>从样本估计</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL / JS</td>
+<td>需要<strong>密度估计</strong>（难，对分箱敏感）✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span>（一维）</strong></td>
+<td><strong>只需排序</strong>（<span class="arithmatex">\(O(n\log n)\)</span>）✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「Wasserstein 距离在实证中好用」的原因之一</strong>：
+它对<strong>样本</strong>就能直接估计，不需先估密度。</p>
+<p><strong>高维情形</strong>：没有简单闭式解（要用 Kantorovich-Rubinstein 对偶或
+Sinkhorn 算法），但一维的结果给了我们关于其性质的可靠理解。</p>
+</div>
+<hr />
+<h2 id="kantorovich-rubinstein-wgan">三、Kantorovich-Rubinstein 对偶（WGAN 的理论基础）<a class="headerlink" href="#kantorovich-rubinstein-wgan" title="Permanent link">&para;</a></h2>
+<p>高维 Wasserstein 距离的计算很困难。<strong>对偶形式</strong>给出了一个可用的替代：</p>
+<div class="arithmatex">\[
+\boxed{\ W_1(p,q) = \sup_{\lVert f\rVert_L\leq1}\ \Big[E_{x\sim p}[f(x)]-E_{x\sim q}[f(x)]\Big]\ }
+\]</div>
+<p>其中 <span class="arithmatex">\(\lVert f\rVert_L\leq1\)</span> 表示 <span class="arithmatex">\(f\)</span> 是 <strong>1-Lipschitz 函数</strong>：</p>
+<div class="arithmatex">\[
+\lvert f(x)-f(y)\rvert\leq\lvert x-y\rvert \quad\forall x,y
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">这个对偶形式是 WGAN 的全部理论基础</p>
+<p><strong>含义</strong>：<strong>在「斜率不超过 1」的所有函数中，
+找使「两个期望之差」最大的那个</strong> ✓</p>
+<p><strong>直观理解</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>选一个「测尺」<span class="arithmatex">\(f\)</span>（斜率受限）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>算 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 上的期望之差</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>取最大</strong> —— 这就是最「敏感」的测尺</td>
+</tr>
+</tbody>
+</table>
+<p><strong>与 GAN 的对应（这是关键）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>数学对象</th>
+<th>GAN 中的角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(f\)</span></td>
+<td><strong>判别器</strong>（critic）</td>
+</tr>
+<tr>
+<td>约束 <span class="arithmatex">\(\lVert f\rVert_L\leq1\)</span></td>
+<td>判别器的<strong>Lipschitz 约束</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(E_p[f]-E_q[f]\)</span></td>
+<td>判别器的<strong>目标</strong>（要最大化）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(W_1\)</span></td>
+<td>判别器能达到的最大值（<strong>就是 Wasserstein 距离</strong>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以 WGAN 的做法</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>训练一个「critic」<span class="arithmatex">\(f\)</span> 来最大化 <span class="arithmatex">\(E_p[f]-E_q[f]\)</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>它给出的值<strong>近似就是 <span class="arithmatex">\(W_1\)</span></strong>（有实际含义的数值）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>生成器最小化这个值（= 最小化 <span class="arithmatex">\(W_1\)</span>）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比原始 GAN</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>GAN（JS）</th>
+<th>WGAN（Wasserstein）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>判别器输出</td>
+<td>概率 <span class="arithmatex">\(\in[0,1]\)</span>（sigmoid）</td>
+<td><strong>实数（无 sigmoid）</strong></td>
+</tr>
+<tr>
+<td>损失的含义</td>
+<td>JS 的估计</td>
+<td><strong>Wasserstein 距离的估计</strong></td>
+</tr>
+<tr>
+<td>损失值可解释</td>
+<td>✗（只是对抗信号）</td>
+<td><strong>✓（就是距离，可监控训练）</strong></td>
+</tr>
+<tr>
+<td>不重叠时梯度</td>
+<td><span class="arithmatex">\(0\)</span> ✗</td>
+<td><strong>正常</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>WGAN 的一个额外好处</strong>：<strong>损失值有实际意义</strong> ——
+可以直接监控它是否下降来判断训练质量（原始 GAN 的损失没有这个性质）。</p>
+</div>
+<h3 id="lipschitz">关键实现问题：如何保证 Lipschitz 约束<a class="headerlink" href="#lipschitz" title="Permanent link">&para;</a></h3>
+<p>这是 WGAN 最棘手的工程细节。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>权重裁剪</strong>（原始 WGAN）</td>
+<td>每次更新后把权重裁到 <span class="arithmatex">\([-c,c]\)</span></td>
+<td><strong>会导致梯度消失或爆炸</strong>；<span class="arithmatex">\(c\)</span> 难调 ✗</td>
+</tr>
+<tr>
+<td><strong>梯度惩罚</strong>（WGAN-GP）</td>
+<td>加惩罚项 <span class="arithmatex">\(\lambda(E_{\hat x}[\lVert\nabla f(\hat x)\rVert-1]^2)\)</span></td>
+<td><strong>效果好</strong> ✓ 但需算二阶梯度（慢）</td>
+</tr>
+<tr>
+<td><strong>谱归一化</strong>（SNGAN）</td>
+<td>对每层权重做谱范数归一化</td>
+<td><strong>高效</strong> ✓ 计算便宜</td>
+</tr>
+<tr>
+<td>一致性项（CT-GAN）</td>
+<td>用有限差分近似 Lipschitz 约束</td>
+<td>折中</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">「权重裁剪」为什么会导致问题（值得理解）</p>
+<p><strong>做法</strong>：每步把所有权重限制在 <span class="arithmatex">\([-c,c]\)</span> 内。</p>
+<p><strong>问题 1：<span class="arithmatex">\(c\)</span> 很难选</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(c\)</span> 取值</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太小</td>
+<td>大部分权重被裁到边界 → <strong>梯度消失</strong> ✗</td>
+</tr>
+<tr>
+<td>太大</td>
+<td>Lipschitz 约束太松 → 训练不稳定 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>问题 2：权重集中在边界</strong></p>
+<p>若 <span class="arithmatex">\(c = 0.01\)</span>，许多权重会被反复裁到 <span class="arithmatex">\(\pm0.01\)</span> ——
+这使网络<strong>表达能力受限</strong>，且梯度也会被裁剪（<strong>梯度消失</strong>）✗</p>
+<p><strong>问题 3：与「保证 Lipschitz」的关系不直接</strong></p>
+<p>裁剪<strong>确实</strong>能给出 Lipschitz 上界（因为每层的 Lipschitz 常数有界），
+但<strong>上界很松</strong>，且<strong>牺牲了太多容量</strong>。</p>
+<p><strong>改进方案的核心思想</strong>：<strong>直接约束「梯度范数 ≈ 1」</strong> ——
+这正是 <strong>WGAN-GP 的梯度惩罚</strong>做的：</p>
+<div class="arithmatex">\[
+\mathcal{L}_{\text{GP}} = \lambda\,E_{\hat x}\big[(\lVert\nabla_{\hat x}f(\hat x)\rVert_2-1)^2\big]
+\]</div>
+<p>其中 <span class="arithmatex">\(\hat x\)</span> 是在 <span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的<strong>连线</strong>上采样的点。</p>
+<p><strong>为什么用「连线上的点」</strong>：</p>
+<p>最优的 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 之间的「传输路径」上梯度范数恰为 1
+（这是最优传输理论的结果）——
+所以只需在这条带上施加约束 ✓</p>
+<p><strong>代价</strong>：需要计算二阶导（对 <span class="arithmatex">\(\nabla f\)</span> 再求导），<strong>计算成本高</strong>。</p>
+<p><strong>所以实践中</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场合</th>
+<th>推荐</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追求效果</td>
+<td><strong>WGAN-GP</strong></td>
+</tr>
+<tr>
+<td>追求效率（大模型）</td>
+<td><strong>谱归一化（SNGAN）</strong></td>
+</tr>
+<tr>
+<td>简单实验</td>
+<td>权重裁剪（但注意调 <span class="arithmatex">\(c\)</span>）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="_4">四、典型例题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="1-wasserstein">例题 1：点分布的 Wasserstein 距离<a class="headerlink" href="#1-wasserstein" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(p = \delta_0\)</span>、<span class="arithmatex">\(q = \delta_3\)</span>。求 <span class="arithmatex">\(W_1(p,q)\)</span>，并说明梯度性质。</p>
+<details class="note">
+<summary>思路</summary>
+<p>点分布只有一种搬运方案。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>唯一的搬运方案</strong>：把 0 处的全部质量搬到 3。</p>
+<div class="arithmatex">\[
+W_1(\delta_0,\delta_3) = 1\times\lvert0-3\rvert = 3
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(W_1 = 3\)</span></p>
+<p><strong>梯度性质</strong>（把 <span class="arithmatex">\(q\)</span> 的参数化为 <span class="arithmatex">\(\theta\)</span>）：</p>
+<div class="arithmatex">\[
+W(\theta) = \lvert\theta\rvert
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial W}{\partial\theta} = \operatorname{sign}(\theta) = \begin{cases}+1, &amp; \theta&gt;0\\ -1, &amp; \theta&lt;0\end{cases}
+\]</div>
+<p><strong>梯度恒为 <span class="arithmatex">\(\pm1\)</span></strong> ✓ <strong>不饱和、不消失</strong></p>
+<p><strong>对比 JS 散度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+<th>梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(W_1\)</span></td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(\pm1\)</span> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD\)</span></td>
+<td><span class="arithmatex">\(\log2\)</span>（饱和）</td>
+<td><strong><span class="arithmatex">\(0\)</span></strong> ✗</td>
+</tr>
+</tbody>
+</table>
+</details>
+<div class="admonition tip">
+<p class="admonition-title">这个对比是「WGAN 优于 GAN」的最小说明</p>
+<p><strong>场景</strong>：初始时生成分布离数据分布很远（<span class="arithmatex">\(\theta = 3\)</span>）。</p>
+<p><strong>用 JS 训练</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial JSD}{\partial\theta} = 0
+\]</div>
+<p><strong>梯度为零 → 生成器得不到任何指引</strong> ✗
+（理论上它会「随机游走」直到碰巧重叠 —— 所以早期 GAN 训练极不稳定。）</p>
+<p><strong>用 Wasserstein 训练</strong>：</p>
+<div class="arithmatex">\[
+\frac{\partial W}{\partial\theta} = -1
+\]</div>
+<p><strong>梯度清晰指向「减小距离」的方向</strong> ✓
+<strong>而且距离越远，改进的绝对量越大</strong>（线性关系）。</p>
+<p><strong>这就是「WGAN 训练稳定、不需要精心平衡生成器与判别器」的原因</strong> ✓</p>
+<p><strong>实践观察</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>原始 GAN</th>
+<th>WGAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>早期生成质量</td>
+<td>随机/崩溃</td>
+<td>逐步改善</td>
+</tr>
+<tr>
+<td>损失曲线</td>
+<td>无意义（震荡）</td>
+<td><strong>单调下降（可监控）</strong></td>
+</tr>
+<tr>
+<td>超参数敏感性</td>
+<td>高</td>
+<td><strong>较低</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h3 id="2-w_1">例题 2：一维高斯分布的 <span class="arithmatex">\(W_1\)</span><a class="headerlink" href="#2-w_1" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(p = N(\mu_1,\sigma^2)\)</span>、<span class="arithmatex">\(q = N(\mu_2,\sigma^2)\)</span>（<strong>方差相同</strong>）。
+用分位数公式求 <span class="arithmatex">\(W_1\)</span>。</p>
+<details class="note">
+<summary>思路</summary>
+<p>同方差正态的分位数函数形状相同（只差平移），所以逐点差是常数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：分位数函数</strong></p>
+<p>正态 <span class="arithmatex">\(N(\mu,\sigma^2)\)</span> 的分位数函数：</p>
+<div class="arithmatex">\[
+F^{-1}(u) = \mu+\sigma\Phi^{-1}(u)
+\]</div>
+<p>其中 <span class="arithmatex">\(\Phi^{-1}\)</span> 是<strong>标准</strong>正态的分位数函数。</p>
+<p><strong>第二步：两点相减</strong></p>
+<div class="arithmatex">\[
+F_p^{-1}(u)-F_q^{-1}(u) = (\mu_1+\sigma\Phi^{-1}(u))-(\mu_2+\sigma\Phi^{-1}(u)) = \mu_1-\mu_2
+\]</div>
+<p><strong><span class="arithmatex">\(\Phi^{-1}(u)\)</span> 项完全抵消</strong> ✓（因为方差相同）</p>
+<p><strong>第三步：代入公式</strong></p>
+<div class="arithmatex">\[
+W_1 = \int_0^1\lvert\mu_1-\mu_2\rvert\,\mathrm{d}u = \lvert\mu_1-\mu_2\rvert
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+\boxed{\ W_1 = \lvert\mu_1-\mu_2\rvert\ }
+\]</div>
+<p><strong>含义</strong>：<strong>同方差下，<span class="arithmatex">\(W_1\)</span> 就等于均值之差的绝对值</strong> ——
+完全符合直觉 ✓</p>
+<p><strong>回到例题 1 的饱和对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\lvert\mu_1-\mu_2\rvert\)</span></th>
+<th><span class="arithmatex">\(W_1\)</span></th>
+<th><span class="arithmatex">\(JSD\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.161\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(0.975\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(1.000\)</span>（<strong>已饱和</strong>）</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><strong><span class="arithmatex">\(100\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.000\)</span>（不变！）</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比鲜明</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th><span class="arithmatex">\(\mu\)</span> 差从 5 增到 100（×20）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(W_1\)</span></td>
+<td><strong><span class="arithmatex">\(5\to100\)</span>（×20）</strong> ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD\)</span></td>
+<td><span class="arithmatex">\(0.975\to1.000\)</span>（<strong>仅 +2.6%</strong>）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(W_1\)</span> 忠实反映距离，而 <span class="arithmatex">\(JSD\)</span> 早已饱和</strong> ✓</p>
+<p><strong>注意「方差相同」这个前提</strong>：</p>
+<p>若方差不同，则分位数之差不再是常数 ——
+公式变为：</p>
+<div class="arithmatex">\[
+W_1 = \int_0^1\lvert(\mu_1-\mu_2)+(\sigma_1-\sigma_2)\Phi^{-1}(u)\rvert\,\mathrm{d}u
+\]</div>
+<p><strong>需要数值积分</strong>（没有简单的闭式解）。</p>
+<p><strong>两个高斯的一般 <span class="arithmatex">\(W_2\)</span>（二次型）</strong>：</p>
+<div class="arithmatex">\[
+W_2^2 = (\mu_1-\mu_2)^2+(\sigma_1-\sigma_2)^2
+\]</div>
+<p><strong>这个形式很漂亮</strong>：<strong>均值差 + 标准差差的平方和</strong> ✓
+（注意是 <span class="arithmatex">\(W_2\)</span> 的平方，<span class="arithmatex">\(W_2\)</span> 是其平方根。）</p>
+</details>
+<hr />
+<h3 id="3-kl">例题 3：为什么 KL 在点分布上无穷大<a class="headerlink" href="#3-kl" title="Permanent link">&para;</a></h3>
+<p>设 <span class="arithmatex">\(p = \delta_0\)</span>、<span class="arithmatex">\(q = \delta_1\)</span>。求 <span class="arithmatex">\(D_{KL}(p\|q)\)</span> 并解释。</p>
+<details class="note">
+<summary>思路</summary>
+<p>两个分布的支撑完全不重叠。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>计算</strong>：</p>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = \sum_x p(x)\log\frac{p(x)}{q(x)}
+\]</div>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(p(x)\)</span></th>
+<th><span class="arithmatex">\(q(x)\)</span></th>
+<th>项</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><strong><span class="arithmatex">\(0\)</span></strong></td>
+<td><span class="arithmatex">\(1\times\log\frac{1}{0} = \mathbf{+\infty}\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+</tbody>
+</table>
+<div class="arithmatex">\[
+D_{KL}(p\|q) = +\infty
+\]</div>
+<p><strong>结果</strong>：<span class="arithmatex">\(D_{KL} = +\infty\)</span></p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">为什么会无穷大（关键理解）</p>
+<p><strong>原因</strong>：<span class="arithmatex">\(p\)</span> 在 <span class="arithmatex">\(x=0\)</span> 处有<strong>全部质量</strong>，但 <span class="arithmatex">\(q(0) = 0\)</span> ——
+即<strong>「<span class="arithmatex">\(q\)</span> 认为这件事不可能，但 <span class="arithmatex">\(p\)</span> 说它是必然的」</strong>。</p>
+<p><strong>信息论解读</strong>：若用 <span class="arithmatex">\(q\)</span> 去编码由 <span class="arithmatex">\(p\)</span> 产生的数据点 <span class="arithmatex">\(x=0\)</span>，
+则 <span class="arithmatex">\(-\log q(0) = +\infty\)</span> —— 需要<strong>无限多比特</strong> ✗</p>
+<p><strong>这个「无穷大」在优化中的后果</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>后果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无法计算梯度</td>
+<td>无穷大处不可导</td>
+</tr>
+<tr>
+<td>无法比较不同距离</td>
+<td>都是 <span class="arithmatex">\(\infty\)</span>，分不出「近一点」和「远得多」</td>
+</tr>
+<tr>
+<td>训练完全停滞</td>
+<td>无信息可用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>而 <span class="arithmatex">\(W_1 = 1\)</span></strong>（例题 1 的方法）✓ —— <strong>有限、有意义、有梯度</strong></p>
+<p><strong>三个量在「完全不重叠」时的表现（总结）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+<th>可用性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(D_{KL}\)</span></td>
+<td><span class="arithmatex">\(+\infty\)</span></td>
+<td><strong>完全不可用</strong> ✗</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD\)</span></td>
+<td><span class="arithmatex">\(\log2\)</span>（常数）</td>
+<td><strong>无梯度</strong> ✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td><strong>有限且反映距离</strong></td>
+<td><strong>✓ 可用</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「Wasserstein 是三者中唯一在分布不重叠时仍然有效的
+优化目标」的完整说明</strong> ✓</p>
+<p><strong>实践中的缓解手段（若坚持用 KL）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加噪声</td>
+<td>对数据加小噪声，使支撑重叠</td>
+</tr>
+<tr>
+<td>标签平滑</td>
+<td>避免预测概率为 0 或 1</td>
+</tr>
+<tr>
+<td>用 <span class="arithmatex">\(\varepsilon\)</span> 平滑</td>
+<td><span class="arithmatex">\(q\to(1-\varepsilon)q+\varepsilon\cdot\text{uniform}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意「加噪声」的现实依据</strong>：<strong>真实数据本身总是有噪声的</strong> ——
+所以「完全不重叠」在实践中更多是<strong>高维稀疏性造成的数值问题</strong>，
+而不是物理事实。</p>
+</div>
+<hr />
+<h3 id="4wgan-gan">例题 4：WGAN 的判别器与 GAN 的对比<a class="headerlink" href="#4wgan-gan" title="Permanent link">&para;</a></h3>
+<p>说明 WGAN 与传统 GAN 在<strong>判别器设计</strong>上的三个关键差别。</p>
+<details class="note">
+<summary>思路</summary>
+<p>对照 Kantorovich-Rubinstein 对偶，看 <span class="arithmatex">\(f\)</span> 需要满足什么。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>差别 1：输出层去掉 sigmoid</strong></p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>输出</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAN 的判别器 <span class="arithmatex">\(D\)</span></td>
+<td><span class="arithmatex">\(\in[0,1]\)</span>（<strong>概率</strong>）</td>
+<td>「这张图多真」</td>
+</tr>
+<tr>
+<td><strong>WGAN 的 critic <span class="arithmatex">\(f\)</span></strong></td>
+<td><strong>实数</strong>（无激活）</td>
+<td><strong>万一个「分数」</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>为什么</strong>：对偶形式中的 <span class="arithmatex">\(f\)</span> 是<strong>任意实值函数</strong>（只受 Lipschitz 约束），
+不需要是概率 ✗</p>
+<p><strong>差别 2：目标函数不同</strong></p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAN 判别器</td>
+<td>最大化 <span class="arithmatex">\(\log D(x)+\log(1-D(G(z)))\)</span></td>
+</tr>
+<tr>
+<td><strong>WGAN critic</strong></td>
+<td><strong>最大化 <span class="arithmatex">\(E_{p}[f]-E_{q}[f]\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注意 WGAN 的目标里没有 log</strong> ✓ —— 这就是它能给出「距离」的原因。</p>
+<p><strong>差别 3：需要 Lipschitz 约束</strong></p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>约束</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAN</td>
+<td>无特别约束（sigmoid 天然有界）</td>
+</tr>
+<tr>
+<td><strong>WGAN</strong></td>
+<td><strong>必须加 Lipschitz 约束</strong>（否则 <span class="arithmatex">\(E_p[f]-E_q[f]\)</span> 可以无限大）✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>若不加约束会发生什么</strong>：</p>
+<div class="arithmatex">\[
+\sup_f\big[E_p[f]-E_q[f]\big] = +\infty
+\]</div>
+<p>（取 <span class="arithmatex">\(f\)</span> 斜率为任意大的线性函数即可。）</p>
+<p><strong>所以约束是必需的</strong>，这也是 WGAN 实现上的主要难点。</p>
+</details>
+<div class="admonition note">
+<p class="admonition-title">三个差别的「逻辑链」（这是理解 WGAN 的关键）</p>
+<p><strong>从「想要什么」推到「怎么做」</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. <strong>想要</strong></td>
+<td>一个「分布不重叠时也有梯度」的度量</td>
+</tr>
+<tr>
+<td>2. <strong>选择</strong></td>
+<td>Wasserstein 距离 <span class="arithmatex">\(W_1\)</span>（因为它反映几何距离）</td>
+</tr>
+<tr>
+<td>3. <strong>问题</strong></td>
+<td><span class="arithmatex">\(W_1\)</span> 的定义（最优化搬运方案）难以直接计算</td>
+</tr>
+<tr>
+<td>4. <strong>转机</strong></td>
+<td>Kantorovich-Rubinstein 对偶把它变成「求函数的最大期望差」</td>
+</tr>
+<tr>
+<td>5. <strong>实现</strong></td>
+<td>用一个神经网络 <span class="arithmatex">\(f\)</span> 来近似那个「最优函数」</td>
+</tr>
+<tr>
+<td>6. <strong>代价</strong></td>
+<td>必须保证 <span class="arithmatex">\(f\)</span> 是 1-Lipschitz（否则上确界无穷）</td>
+</tr>
+<tr>
+<td>7. <strong>方案</strong></td>
+<td>权重裁剪 / 梯度惩罚 / 谱归一化</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这条链说明了</strong>：<strong>WGAN 不是「随便改改」，而是从数学目标出发的严格设计</strong> ✓</p>
+<p><strong>与「对抗训练」的关系</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAN 的叙事</td>
+<td>「生成器与判别器对抗」</td>
+</tr>
+<tr>
+<td><strong>WGAN 的叙事</strong></td>
+<td><strong>「估计并用 Wasserstein 距离作为损失」</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>后者更清晰</strong> —— 因为 <span class="arithmatex">\(f\)</span> 的角色是「距离的估计器」，
+而不是「真假的裁判」✓</p>
+<p><strong>这也解释了 WGAN 的两个实践优势</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>优势</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>损失值可监控</td>
+<td>它<strong>就是</strong>距离的估计（有物理意义）</td>
+</tr>
+<tr>
+<td>不需要平衡两个网络</td>
+<td>目标清晰、梯度不饱和</td>
+</tr>
+</tbody>
+</table>
+<p><strong>工程建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>追求图像质量（有大量算力）</td>
+<td>原始 GAN + 各种技巧（StyleGAN 系列）</td>
+</tr>
+<tr>
+<td><strong>训练稳定性优先</strong></td>
+<td><strong>WGAN-GP</strong> ✓</td>
+</tr>
+<tr>
+<td>大模型、效率优先</td>
+<td>谱归一化 + Hinge 损失</td>
+</tr>
+<tr>
+<td>从零开始调试</td>
+<td><strong>WGAN</strong> 最容易调通 ✓</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr />
+<h2 id="_5">五、三个量的完整对比（总结表）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>这张表把信息论这一系列的核心结论汇总起来。</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>定义</th>
+<th>对称</th>
+<th>有界</th>
+<th>三角不等式</th>
+<th>不重叠时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>KL 散度</strong></td>
+<td><span class="arithmatex">\(\sum p\log\frac{p}{q}\)</span></td>
+<td>✗</td>
+<td>✗</td>
+<td>✗</td>
+<td><span class="arithmatex">\(+\infty\)</span> ✗</td>
+</tr>
+<tr>
+<td><strong>JS 散度</strong></td>
+<td>到中点的 KL 平均</td>
+<td>✓</td>
+<td>✓（<span class="arithmatex">\(\log2\)</span>）</td>
+<td>✗</td>
+<td><span class="arithmatex">\(\log2\)</span>（<strong>饱和，梯度为零</strong>）✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(\sqrt{JSD}\)</span></strong></td>
+<td>JS 开平方</td>
+<td>✓</td>
+<td>✓</td>
+<td><strong>✓</strong></td>
+<td>常数 ✗</td>
+</tr>
+<tr>
+<td><strong>总变差</strong></td>
+<td><span class="arithmatex">\(\frac12\sum\lvert p-q\rvert\)</span></td>
+<td>✓</td>
+<td>✓（<span class="arithmatex">\(1\)</span>）</td>
+<td>✓</td>
+<td><span class="arithmatex">\(1\)</span>（饱和）✗</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td>最优搬运成本</td>
+<td>✓</td>
+<td>✗</td>
+<td><strong>✓</strong></td>
+<td><strong>有限且反映距离</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition tip">
+<p class="admonition-title">选择指南（实用总结）</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th>推荐</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>分类/回归训练</strong></td>
+<td><strong>交叉熵</strong>（= 前向 KL）</td>
+<td>与 MLE 等价，梯度简洁</td>
+</tr>
+<tr>
+<td><strong>生成模型（求稳定）</strong></td>
+<td><strong>Wasserstein</strong></td>
+<td>不重叠时有梯度</td>
+</tr>
+<tr>
+<td><strong>需要严格度量</strong></td>
+<td><span class="arithmatex">\(\sqrt{JSD}\)</span> 或 <span class="arithmatex">\(W_1\)</span></td>
+<td>满足三角不等式</td>
+</tr>
+<tr>
+<td><strong>需要「覆盖所有模式」</strong></td>
+<td>前向 KL</td>
+<td>零避免性质</td>
+</tr>
+<tr>
+<td><strong>需要「精确锁定模式」</strong></td>
+<td>反向 KL</td>
+<td>零强迫性质</td>
+</tr>
+<tr>
+<td><strong>聚类/近邻搜索</strong></td>
+<td><span class="arithmatex">\(\sqrt{JSD}\)</span> 或 <span class="arithmatex">\(W_1\)</span></td>
+<td>度量空间算法适用</td>
+</tr>
+<tr>
+<td><strong>分布不重叠</strong></td>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td><strong>唯一有效的</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>一条实用的判断规则</strong>：</p>
+<div class="arithmatex">\[
+\text{若两个分布可能不重叠} \Rightarrow \text{优先考虑 Wasserstein}
+\]</div>
+<p><strong>这在实践中包括</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>为何容易不重叠</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高维生成模型</td>
+<td>低维流形在高维空间中几乎不相交</td>
+</tr>
+<tr>
+<td>稀疏/离散数据</td>
+<td>支撑是离散点集</td>
+</tr>
+<tr>
+<td>小样本</td>
+<td>经验分布支撑有限</td>
+</tr>
+</tbody>
+</table>
+<p><strong>而在「分类」这类任务中</strong>，交叉熵仍是首选 ——
+因为<strong>模型输出与标签都是同维概率向量，天然重叠</strong> ✓
+（softmax 输出永远不会恰好为零，除非数值下溢。）</p>
+</div>
+<hr />
+<h2 id="_6">六、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 设 <span class="arithmatex">\(p = \delta_0\)</span>、<span class="arithmatex">\(q = \delta_5\)</span>。求 <span class="arithmatex">\(W_1\)</span>，并与 <span class="arithmatex">\(JSD\)</span> 比较梯度性质。</p>
+<details class="note">
+<summary>提示</summary>
+<p>点分布只有一种搬运方案；梯度是 sign 函数。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>Wasserstein 距离</strong>：</p>
+<div class="arithmatex">\[
+W_1(\delta_0,\delta_5) = 1\times\lvert0-5\rvert = 5
+\]</div>
+<p><strong>梯度</strong>（把 <span class="arithmatex">\(q\)</span> 参数化为 <span class="arithmatex">\(\delta_\theta\)</span>）：</p>
+<div class="arithmatex">\[
+W(\theta) = \lvert\theta\rvert \implies \frac{\partial W}{\partial\theta} = \operatorname{sign}(\theta)
+\]</div>
+<p>在 <span class="arithmatex">\(\theta = 5\)</span> 处：</p>
+<div class="arithmatex">\[
+\frac{\partial W}{\partial\theta} = -1
+\]</div>
+<p>（负号表示「减小 <span class="arithmatex">\(\theta\)</span> 能减小 <span class="arithmatex">\(W\)</span>」——这正是优化方向。）</p>
+<p><strong>结果对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+<th>梯度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(W_1\)</span></td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(1\)</span>（<strong>恒定</strong>）✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(JSD\)</span></td>
+<td><span class="arithmatex">\(\log2 = 1\)</span>（<strong>饱和</strong>）</td>
+<td><span class="arithmatex">\(0\)</span> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键解读</strong>：</p>
+<p><strong><span class="arithmatex">\(W_1\)</span> 的数值随距离线性增长</strong>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th><span class="arithmatex">\(W_1\)</span></th>
+<th><span class="arithmatex">\(JSD\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(0.161\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(5\)</span></td>
+<td><span class="arithmatex">\(0.975\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(100\)</span></td>
+<td><strong><span class="arithmatex">\(100\)</span></strong></td>
+<td><strong><span class="arithmatex">\(1.000\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>即「<span class="arithmatex">\(W_1\)</span> 能区分 5 与 100，而 JSD 不能」</strong> ✓</p>
+<p><strong>工程含义</strong>：<strong>用 <span class="arithmatex">\(W_1\)</span> 训练时，即使生成分布离数据分布很远，
+梯度仍然清晰地指向「靠近」的方向</strong> ——
+这是 WGAN 训练稳定的根本原因。</p>
+</details>
+<hr />
+<p><strong>Q2</strong> 求两个同方差正态分布 <span class="arithmatex">\(N(0,1)\)</span> 与 <span class="arithmatex">\(N(3,1)\)</span> 的 <span class="arithmatex">\(W_1\)</span>。</p>
+<details class="note">
+<summary>提示</summary>
+<p>用分位数公式，注意同方差。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>分位数函数</strong>：</p>
+<div class="arithmatex">\[
+F_p^{-1}(u) = \mu_p+\sigma\Phi^{-1}(u)
+\]</div>
+<p><strong>逐点相减</strong>：</p>
+<div class="arithmatex">\[
+F_p^{-1}(u)-F_q^{-1}(u) = (0+\sigma\Phi^{-1}(u))-(3+\sigma\Phi^{-1}(u)) = -3
+\]</div>
+<p><strong><span class="arithmatex">\(\Phi^{-1}(u)\)</span> 项抵消</strong>（因为方差相同）✓</p>
+<p><strong>代入 <span class="arithmatex">\(W_1\)</span> 公式</strong>：</p>
+<div class="arithmatex">\[
+W_1 = \int_0^1\lvert-3\rvert\,\mathrm{d}u = 3
+\]</div>
+<p><strong>结果</strong>：</p>
+<div class="arithmatex">\[
+W_1 = \lvert\mu_1-\mu_2\rvert = 3
+\]</div>
+<p><strong>一般结论（同方差）</strong>：</p>
+<div class="arithmatex">\[
+W_1\big(N(\mu_1,\sigma^2),\ N(\mu_2,\sigma^2)\big) = \lvert\mu_1-\mu_2\rvert
+\]</div>
+<p><strong>为什么这么简单</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>原因</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>两个正态形状相同</td>
+<td>只差一个平移</td>
+</tr>
+<tr>
+<td>所以分位数只差常数</td>
+<td><span class="arithmatex">\(\Phi^{-1}(u)\)</span> 项抵消</td>
+</tr>
+<tr>
+<td>常数差积分就是它本身</td>
+<td><span class="arithmatex">\(W_1 = \lvert\Delta\mu\rvert\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比 <span class="arithmatex">\(W_2\)</span>（二次型）</strong>：</p>
+<div class="arithmatex">\[
+W_2^2 = (\mu_1-\mu_2)^2+(\sigma_1-\sigma_2)^2
+\]</div>
+<p>同方差时 <span class="arithmatex">\(\sigma_1 = \sigma_2\)</span>，所以 <span class="arithmatex">\(W_2 = \lvert\mu_1-\mu_2\rvert\)</span> ✓ ——
+<strong>与 <span class="arithmatex">\(W_1\)</span> 相同</strong>（对这个特殊情形）。</p>
+<p><strong>一般情形（方差不同）</strong> 需要数值积分，因为
+<span class="arithmatex">\((\sigma_1-\sigma_2)\Phi^{-1}(u)\)</span> 项不再抵消。</p>
+</details>
+<hr />
+<p><strong>Q3</strong> 为什么 Wasserstein 距离在分布「完全不重叠」时仍然有效？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想想它依据的是「概率重叠」还是「空间距离」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为它度量的是「搬运成本」（空间距离），而不是「概率重叠程度」。</strong></p>
+<p><strong>根本区别</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>依据什么</th>
+<th>不重叠时的表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL</td>
+<td><strong>概率值的比值</strong></td>
+<td><span class="arithmatex">\(+\infty\)</span></td>
+</tr>
+<tr>
+<td>JS</td>
+<td><strong>概率值的重叠</strong></td>
+<td><span class="arithmatex">\(\log2\)</span>（饱和）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td><strong>空间中的搬运距离</strong></td>
+<td><strong>有限，且反映距离</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>具体说明</strong>（<span class="arithmatex">\(p = \delta_0\)</span>、<span class="arithmatex">\(q = \delta_\theta\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>计算</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL</td>
+<td><span class="arithmatex">\(q(0) = 0\)</span> 而 <span class="arithmatex">\(p(0) = 1\)</span> → 除零</td>
+<td><span class="arithmatex">\(+\infty\)</span></td>
+</tr>
+<tr>
+<td>JS</td>
+<td>两分布「完全不重叠」→ 上界</td>
+<td><span class="arithmatex">\(\log2\)</span>（与 <span class="arithmatex">\(\theta\)</span> 无关）</td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td><strong>把 0 处的质量搬到 <span class="arithmatex">\(\theta\)</span></strong></td>
+<td><strong><span class="arithmatex">\(\lvert\theta\rvert\)</span></strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong><span class="arithmatex">\(W_1\)</span> 完全不关心「概率值是否重合」</strong> ——
+它只关心<strong>「这些质量需要搬多远」</strong> ✓</p>
+<p><strong>这个差异的深层含义</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>视角</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>KL/JS</td>
+<td><strong>「点对点」比较概率密度</strong></td>
+</tr>
+<tr>
+<td><strong><span class="arithmatex">\(W_1\)</span></strong></td>
+<td><strong>「整体搬移」的几何代价</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以 <span class="arithmatex">\(W_1\)</span> 能感知「分布之间的空间关系」</strong> ——
+而 KL/JS 不能 ✓</p>
+<p><strong>工程后果（这就是 WGAN 的动机）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>KL/JS</th>
+<th><span class="arithmatex">\(W_1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生成分布在数据分布旁边（很近但不重叠）</td>
+<td>梯度为零/无穷 ✗</td>
+<td><strong>距离很小，梯度正常</strong> ✓</td>
+</tr>
+<tr>
+<td>生成分布离得很远</td>
+<td>无法区分远近 ✗</td>
+<td><strong>距离大，梯度大</strong> ✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一句话</strong>：<strong><span class="arithmatex">\(W_1\)</span> 把「概率差异」换成了「空间距离」</strong>，
+从而在最有挑战的场景（高维不重叠）中仍保留有效信息。</p>
+</details>
+<hr />
+<p><strong>Q4</strong> 为什么 WGAN 必须对判别器加 Lipschitz 约束？</p>
+<details class="note">
+<summary>提示</summary>
+<p>看对偶形式 <span class="arithmatex">\(\sup_f[E_p[f]-E_q[f]]\)</span>，想想 <span class="arithmatex">\(f\)</span> 无约束会怎样。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为不加约束时，那个上确界是无穷大 —— 目标函数没有意义。</strong></p>
+<p><strong>对偶形式</strong>：</p>
+<div class="arithmatex">\[
+W_1(p,q) = \sup_{\lVert f\rVert_L\leq1}\big[E_{x\sim p}[f(x)]-E_{x\sim q}[f(x)]\big]
+\]</div>
+<p><strong>若去掉「<span class="arithmatex">\(\lVert f\rVert_L\leq1\)</span>」这个约束</strong>：</p>
+<p>取 <span class="arithmatex">\(f(x) = cx\)</span>（斜率 <span class="arithmatex">\(c\)</span> 任意大），则</p>
+<div class="arithmatex">\[
+E_p[f]-E_q[f] = c\,(\mu_p-\mu_q)
+\]</div>
+<p><strong>随 <span class="arithmatex">\(c\to\infty\)</span>，这个值 <span class="arithmatex">\(\to\infty\)</span></strong> ✗</p>
+<p><strong>具体数值</strong>（<span class="arithmatex">\(\mu_p = 1\)</span>、<span class="arithmatex">\(\mu_q = 0\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(c\)</span></th>
+<th><span class="arithmatex">\(E_p[f]-E_q[f]\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(1\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(1000\)</span></td>
+<td><span class="arithmatex">\(1000\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(\to\infty\)</span></td>
+<td><span class="arithmatex">\(\to\infty\)</span> ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>所以约束是「数学上必需的」</strong>（不是调参选择）✓</p>
+<p><strong>但约束的「紧度」也很关键</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>太松（<span class="arithmatex">\(L\)</span> 很大）</td>
+<td>上确界很大，训练不稳</td>
+</tr>
+<tr>
+<td><strong>恰好 <span class="arithmatex">\(L = 1\)</span></strong></td>
+<td><strong>上确界 = <span class="arithmatex">\(W_1\)</span>（正是我们要的）</strong> ✓</td>
+</tr>
+<tr>
+<td>太紧（<span class="arithmatex">\(L\)</span> 很小）</td>
+<td>表达能力受限，低估距离 ✗</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三种实现方式的比较</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>做法</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>权重裁剪</strong></td>
+<td>裁到 <span class="arithmatex">\([-c,c]\)</span></td>
+<td>简单</td>
+<td><span class="arithmatex">\(c\)</span> 难调，易梯度消失</td>
+</tr>
+<tr>
+<td><strong>梯度惩罚</strong></td>
+<td>加 <span class="arithmatex">\((\lVert\nabla f\rVert-1)^2\)</span> 项</td>
+<td><strong>效果好</strong> ✓</td>
+<td>需二阶导（慢）✗</td>
+</tr>
+<tr>
+<td><strong>谱归一化</strong></td>
+<td>归一化每层谱范数</td>
+<td><strong>高效</strong> ✓</td>
+<td>稍弱于 GP</td>
+</tr>
+</tbody>
+</table>
+<p><strong>梯度惩罚为什么用「连线上的点」</strong>：</p>
+<p>由最优传输理论，最优的 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 之间的<strong>传输路径</strong>上
+梯度范数恰为 1 —— 所以只需在这条带上施加约束 ✓</p>
+<p><strong>实践建议</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>目标</th>
+<th>选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>效果优先</td>
+<td>WGAN-GP</td>
+</tr>
+<tr>
+<td>效率优先（大模型）</td>
+<td>谱归一化</td>
+</tr>
+<tr>
+<td>快速原型</td>
+<td>权重裁剪（注意调 <span class="arithmatex">\(c\)</span>）</td>
+</tr>
+</tbody>
+</table>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../js-divergence/" class="md-footer__link md-footer__link--prev" aria-label="上一页: JS 散度">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                JS 散度
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../../signal-systems/" class="md-footer__link md-footer__link--next" aria-label="下一页: 总览">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                总览
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.indexes", "navigation.top", "navigation.footer", "navigation.tracking", "search.suggest", "search.highlight", "search.share", "toc.follow", "toc.integrate", "content.code.copy", "content.tabs.link", "content.tooltips", "header.autohide"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../javascripts/katex.min.js"></script>
+      
+        <script src="../../../javascripts/auto-render.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="../../../javascripts/highlight-reset.js"></script>
+      
+    
+  </body>
+</html>
