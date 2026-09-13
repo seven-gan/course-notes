@@ -535,3 +535,196 @@
 }
 /* KB-FIG-CSS-END */
 
+
+/* ============================================================
+   §6 编程基础：教学用样式
+   ------------------------------------------------------------
+   设计目标（针对「看代码学编程」场景）：
+     · 代码块：等宽字体、行号可定位、可横向滚动
+     · 输出块 ```output：明确区分「要敲的」与「机器给的」
+     · 终端块 ```term：深色，模拟真实命令行
+     · 关键字高亮：不同语义不同颜色
+     · 全部走 CSS 变量，浅色/深色主题自动适配
+   ------------------------------------------------------------
+   实测：自定义围栏的 class 加在 <pre> 上，
+   形如 <pre class="kb-output"><code>…</code></pre>，
+   所以选择器用 pre.kb-output（不是 .kb-output pre）。
+   ============================================================ */
+
+/* ---- 6.1 颜色变量（浅色主题）---- */
+:root {
+  --kb-out-bg: #eef8f1;
+  --kb-out-bd: #2b8a3e;
+  --kb-out-fg: #17401f;
+  --kb-term-bg: #16191d;
+  --kb-term-fg: #e8eef5;
+  --kb-term-bd: #333b44;
+  --kb-hl-bg: #fff3c4;
+  --kb-hl-fg: #6b4a00;
+  --kb-key: #b4530a;
+  --kb-fn: #2b4ea2;
+  --kb-str: #2b8a3e;
+  --kb-num: #8e44ad;
+  --kb-cmt: #6b7280;
+}
+
+/* ---- 6.2 颜色变量（深色主题）---- */
+[data-md-color-scheme="slate"] {
+  --kb-out-bg: #10231a;
+  --kb-out-bd: #4ade80;
+  --kb-out-fg: #cdeed6;
+  --kb-term-bg: #0d1014;
+  --kb-term-fg: #d8e3ee;
+  --kb-term-bd: #2b323a;
+  --kb-hl-bg: #4a3c14;
+  --kb-hl-fg: #ffe9a8;
+  --kb-key: #f5a623;
+  --kb-fn: #7aa2f7;
+  --kb-str: #4ade80;
+  --kb-num: #c084fc;
+  --kb-cmt: #8b95a5;
+}
+
+/* ---- 6.3 代码块整体外观 ---- */
+.md-typeset .highlight {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 7px;
+  overflow: hidden;
+}
+.md-typeset pre > code {
+  font-size: 0.76rem;
+  line-height: 1.66;
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas,
+               "Microsoft YaHei Mono", monospace;
+  tab-size: 4;
+}
+/* 行号：与代码之间加细线，便于「看第几行」 */
+.md-typeset .linenos {
+  border-right: 1px solid var(--md-default-fg-color--lightest);
+  padding-right: 0.55em;
+  margin-right: 0.7em;
+  opacity: 0.6;
+  user-select: none;
+}
+/* hl_lines 标记的行整行加底色，讲课时一眼定位 */
+.md-typeset .hll {
+  background: var(--kb-hl-bg);
+  display: block;
+  margin: 0 -0.6em;
+  padding: 0 0.6em;
+}
+
+/* ---- 6.4 输出块 ```output ---- */
+.md-typeset pre.kb-output {
+  background: var(--kb-out-bg);
+  color: var(--kb-out-fg);
+  border: 1px solid var(--kb-out-bd);
+  border-left-width: 4px;
+  border-radius: 0 7px 7px 0;
+  margin: 0.7rem 0 1.1rem;
+  padding: 0.55rem 0.75rem 0.55rem 0.85rem;
+  position: relative;
+  overflow-x: auto;
+}
+.md-typeset pre.kb-output > code {
+  background: transparent;
+  color: var(--kb-out-fg);
+  font-size: 0.75rem;
+  line-height: 1.62;
+  padding: 0;
+}
+.md-typeset pre.kb-output::before {
+  content: "运行输出";
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--kb-out-bd);
+  margin-bottom: 0.3rem;
+  font-family: system-ui, sans-serif;
+}
+
+/* ---- 6.5 终端块 ```term ---- */
+.md-typeset pre.kb-term {
+  background: var(--kb-term-bg);
+  border: 1px solid var(--kb-term-bd);
+  border-radius: 7px;
+  margin: 0.7rem 0 1.1rem;
+  padding: 0.55rem 0.75rem 0.55rem 0.85rem;
+  position: relative;
+  overflow-x: auto;
+}
+.md-typeset pre.kb-term > code {
+  background: transparent;
+  color: var(--kb-term-fg);
+  font-size: 0.75rem;
+  line-height: 1.62;
+  padding: 0;
+}
+.md-typeset pre.kb-term::before {
+  content: "命令行";
+  display: block;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #93a1b0;
+  margin-bottom: 0.3rem;
+  font-family: system-ui, sans-serif;
+}
+
+/* ---- 6.6 行内语义高亮 ---- */
+.md-typeset mark {
+  background: var(--kb-hl-bg);
+  color: var(--kb-hl-fg);
+  padding: 0.05em 0.3em;
+  border-radius: 3px;
+  box-shadow: none;
+}
+.md-typeset .kw-k { color: var(--kb-key); font-weight: 600; }
+.md-typeset .kw-f { color: var(--kb-fn);  font-weight: 600; }
+.md-typeset .kw-s { color: var(--kb-str); }
+.md-typeset .kw-n { color: var(--kb-num); }
+.md-typeset .kw-c { color: var(--kb-cmt); font-style: italic; }
+
+.md-typeset code {
+  border-radius: 4px;
+  padding: 0.1em 0.34em;
+  font-family: "Cascadia Code", "JetBrains Mono", Consolas,
+               "Microsoft YaHei Mono", monospace;
+}
+
+/* ---- 6.7 实操步骤编号列表 ---- */
+.md-typeset ol.kb-steps {
+  counter-reset: kbstp;
+  list-style: none;
+  padding-left: 0;
+}
+.md-typeset ol.kb-steps > li {
+  counter-increment: kbstp;
+  position: relative;
+  padding-left: 2.15rem;
+  margin: 0.55rem 0;
+}
+.md-typeset ol.kb-steps > li::before {
+  content: counter(kbstp);
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  border-radius: 50%;
+  background: var(--md-primary-fg-color);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* ---- 6.8 窄屏适配 ---- */
+@media screen and (max-width: 44.9375em) {
+  .md-typeset pre > code { font-size: 0.7rem; line-height: 1.56; }
+  .md-typeset pre.kb-output > code,
+  .md-typeset pre.kb-term > code { font-size: 0.68rem; }
+  .md-typeset ol.kb-steps > li { padding-left: 1.9rem; }
+}
