@@ -3692,13 +3692,13 @@
 <tr>
 <td>检验方式</td>
 <td>自测题</td>
-<td><strong>输出是否与讲解一致</strong>（本项目实跑比对）</td>
+<td><strong>输出是否与讲解一致</strong>（可亲自跑一遍核对）</td>
 </tr>
 </tbody>
 </table>
-<p><strong>所以这一层的每一段代码，你都可以直接复制到 VSCode 里按 <code>Ctrl+F5</code> 运行</strong>，
+<p><strong>所以这一层的每一段代码，你都可以直接复制到编辑器里运行</strong>，
 输出与页面所写<strong>完全一致</strong> —— 这不是「大概是这样」，
-而是<strong>发布前由脚本真跑过、逐行比对过的</strong> ✓</p>
+而是<strong>出版前逐段实跑核对过的</strong> ✓</p>
 </div>
 <hr />
 <h2 id="_2">为什么编程单独成层<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -3846,66 +3846,65 @@
 </div>
 <hr />
 <h2 id="_5">环境说明<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>本层所有代码都在以下环境实测通过：</p>
+<p>本层所有代码都在 <strong>Python 3.12</strong> 上实测通过，
+用到的库版本如下（版本略新略旧都不影响，差异会另作说明）：</p>
 <table>
 <thead>
 <tr>
-<th>项目</th>
-<th>版本</th>
+<th>库</th>
+<th>本层实测版本</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Python</td>
-<td>3.12.7（Anaconda）</td>
+<td>3.12</td>
 </tr>
 <tr>
 <td>NumPy</td>
-<td>1.26.4</td>
+<td>1.26</td>
 </tr>
 <tr>
 <td>pandas</td>
-<td>2.2.2</td>
+<td>2.2</td>
 </tr>
 <tr>
 <td>Matplotlib</td>
-<td>3.9.2</td>
-</tr>
-<tr>
-<td>编辑器</td>
-<td>VSCode（<code>.vscode/settings.json</code> 已配好解释器）</td>
+<td>3.9</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title">为什么用 Anaconda 的 Python 而不是系统自带的</p>
-<p>你的机器上有两个 Python：</p>
+<p class="admonition-title">你需要准备什么环境</p>
+<p><strong>只要满足两点，本层所有代码都能跑</strong>：</p>
 <table>
 <thead>
 <tr>
-<th>位置</th>
-<th>版本</th>
-<th>科学计算库</th>
+<th>要求</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>系统 PATH 里的</td>
-<td>3.14</td>
-<td><strong>一个都没有</strong> ✗</td>
+<td>Python <strong>3.9 或更高</strong></td>
+<td>本层用了 f-string、<code>dict.fromkeys</code> 保持顺序等特性</td>
 </tr>
 <tr>
-<td><strong>Anaconda 的</strong></td>
-<td><strong>3.12.7</strong></td>
-<td><strong>numpy/pandas/matplotlib/scipy/sympy/sklearn 全都有</strong> ✓</td>
+<td>装有 NumPy / pandas / Matplotlib</td>
+<td>第二页的核心内容</td>
 </tr>
 </tbody>
 </table>
-<p><strong>VSCode 默认可能选中第一个</strong> —— 那样 <code>import numpy</code> 会直接失败。</p>
-<p>所以 <code>.vscode/settings.json</code> 里写死了 Anaconda 路径，
-并在终端里设置了 UTF-8 编码（避免中文乱码）✓</p>
-<p><strong>自检方法</strong>：跑一次 <code>for_courses/python/env_check.py</code>，
-它会列出所有库的版本并告诉你哪个缺失 ✓</p>
+<p><strong>最省事的做法</strong>：装 <strong>Anaconda 发行版</strong> ——
+它把 Python 与科学计算生态打包在一起，
+上述库<strong>开箱即用</strong>，不用逐个安装 ✓</p>
+<p><strong>若已装官方 Python</strong>，一条命令补齐：</p>
+<pre class="kb-term"><code>pip install numpy pandas matplotlib scipy sympy scikit-learn</code></pre>
+<p><strong>务必确认编辑器用的是那个装了库的 Python</strong> ——
+机器上存在多个 Python 是新手最常踩的坑，
+症状是「代码没错却报 <code>No module named 'numpy'</code>」✗</p>
+<p>具体排查步骤见
+<a href="python/basics/">Python 编程基础</a> 第一节「先把环境跑起来」 ✓</p>
 </div>
 
 
