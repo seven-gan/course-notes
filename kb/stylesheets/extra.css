@@ -72,12 +72,19 @@
   margin: 1rem 0;
 }
 
-/* ---------- 2. 【关键】移动端公式处理 ---------- */
-/* 行内公式：允许换行，避免撑破容器 */
+/* ---------- 2. 【关键】公式的滚动与裁切 ----------
+ *
+ * ⚠ 经验教训（用户报告过「公式上下字符显示不全」）：
+ *   这几个容器**都不能写 `overflow-y: hidden`**。
+ *   KaTeX 的盒子高度是紧致的，而 \underbrace / \overbrace 的标注
+ *   会超出上下边界 2~3px，一旦纵向裁剪就被切掉一截。
+ *   **横向可以 auto（防超宽公式撑破页面），纵向必须 visible。**
+ */
+/* 行内公式：允许横向滚动，纵向不裁 */
 .md-typeset .arithmatex {
   max-width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   vertical-align: middle;
 }
 
@@ -86,7 +93,7 @@
   margin: 1.2em 0;
   padding: 0.4em 0.2em;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;      /* 同上的原因，不能 hidden */
   scrollbar-width: thin;
   -webkit-overflow-scrolling: touch;
 }
@@ -98,7 +105,18 @@
 .md-typeset .katex-display > .katex > .katex-html {
   max-width: 100%;
   overflow-x: auto;
-  overflow-y: hidden;
+  /* 【重要】不能写 overflow-y: hidden！
+   *
+   * KaTeX 的 .katex-html 高度往往是「按基线算出来的紧致高度」，
+   * 而 \underbrace / \overbrace 的中文标注（如「后验」「证据」）
+   * 会画在**上下方各 2~3px 之外**。
+   * 实测：盒高 78px、内容实高 82px → 标注被裁掉一截，看起来「显示不全」⚠
+   * （用户实际报告过这个现象）
+   *
+   * 改成 visible 让标注完整显示；横向滚动仍然保留，
+   * 保证超宽公式不会把页面撑开（配合 .arithmatex 的滚动）。 */
+  overflow-y: visible;
+  padding: 0.18em 0;
 }
 /* 矩阵（mtable）等宽结构：允许内部滚动 */
 .md-typeset .katex .mtable,
@@ -110,12 +128,14 @@
   max-width: 100%;
 }
 
-/* 移动端：让公式容器强制可滚动，并给出视觉提示 */
+/* 移动端：让公式容器强制可横向滚动（纵向**不能**裁剪，见上方说明） */
 @media (max-width: 768px) {
   .md-typeset .arithmatex > .katex-display,
   .md-typeset .katex-display > .katex > .katex-html {
     overflow-x: auto !important;
-    overflow-y: hidden !important;
+    /* 这里原来是 hidden —— 会把 underbrace 的中文标注裁掉 ⚠
+       改成 visible，只保留横向滚动 */
+    overflow-y: visible !important;
   }
   /* 右侧渐隐，暗示可横向滚动 */
   .md-typeset .arithmatex > .katex-display {
