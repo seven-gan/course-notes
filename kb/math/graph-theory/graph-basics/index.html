@@ -7691,6 +7691,214 @@ G = (V,\ E)
 </table>
 <p>再用 <span class="arithmatex">\((4,3,2,1,1)\)</span> 走一遍：和为 <span class="arithmatex">\(11\)</span> 为奇数，<strong>第一步就排除</strong>。即使忽略奇偶性硬走，取走 4 后只剩 4 个点却要连 4 条边，得到 <span class="arithmatex">\((2,1,0,0)\)</span>，下一轮取走 2 却只有 3 个数且需连 2 条，减完出现 <span class="arithmatex">\(-1\)</span>，同样失败。</p>
 <h3 id="_6">度序列丢失了什么信息<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<figure class="kb-fig">
+<svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="同一个度序列可以对应完全不同的图（度序列丢了结构）">
+
+
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="gt-basic-1-figure_1">
+  <g id="gt-basic-1-patch_1">
+   <path d="M 0 191.592 
+L 321.12 191.592 
+L 321.12 0 
+L 0 0 
+L 0 191.592 
+z
+" style="fill: none"/>
+  </g>
+  <g id="gt-basic-1-axes_1">
+   <g id="gt-basic-1-line2d_1">
+    <path d="M 34.366154 54.216 
+L 73.426154 54.216 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_2">
+    <path d="M 73.426154 54.216 
+L 53.896154 99.954 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_3">
+    <path d="M 53.896154 99.954 
+L 34.366154 54.216 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_4">
+    <path d="M 109.481538 54.216 
+L 148.541538 54.216 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_5">
+    <path d="M 148.541538 54.216 
+L 129.011538 99.954 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_6">
+    <path d="M 129.011538 99.954 
+L 109.481538 54.216 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_7">
+    <path d="M 241.684615 25.11 
+L 209.1587 51.0975 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_8">
+    <path d="M 209.1587 51.0975 
+L 209.1587 103.0725 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_9">
+    <path d="M 209.1587 103.0725 
+L 241.684615 129.06 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_10">
+    <path d="M 241.684615 129.06 
+L 274.210531 103.0725 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_11">
+    <path d="M 274.210531 103.0725 
+L 274.210531 51.0975 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_12">
+    <path d="M 274.210531 51.0975 
+L 241.684615 25.11 
+" clip-path="url(#gt-basic-1-pbbc843970e)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.6; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-1-line2d_13">
+    <defs>
+     <path id="gt-basic-1-m76426876af" d="M 0 13 
+C 3.44764 13 6.754538 11.630238 9.192388 9.192388 
+C 11.630238 6.754538 13 3.44764 13 0 
+C 13 -3.44764 11.630238 -6.754538 9.192388 -9.192388 
+C 6.754538 -11.630238 3.44764 -13 0 -13 
+C -3.44764 -13 -6.754538 -11.630238 -9.192388 -9.192388 
+C -11.630238 -6.754538 -13 -3.44764 -13 0 
+C -13 3.44764 -11.630238 6.754538 -9.192388 9.192388 
+C -6.754538 11.630238 -3.44764 13 0 13 
+z
+" style="stroke: #ffffff; stroke-width: 1.6"/>
+    </defs>
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="34.366154" y="54.216" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_14">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="73.426154" y="54.216" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_15">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="53.896154" y="99.954" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_16">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="109.481538" y="54.216" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_17">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="148.541538" y="54.216" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_18">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="129.011538" y="99.954" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-text_1">
+    <text style="fill: #555555; font: 9.5px sans-serif; text-anchor: middle" x="91.453846" y="139.455" transform="rotate(-0 91.453846 139.455)">两个三角形</text>
+   </g>
+   <g id="gt-basic-1-line2d_19">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="241.684615" y="25.11" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_20">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="209.1587" y="51.0975" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_21">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="209.1587" y="103.0725" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_22">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="241.684615" y="129.06" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_23">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="274.210531" y="103.0725" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-line2d_24">
+    <g clip-path="url(#gt-basic-1-pbbc843970e)">
+     <use xlink:href="#gt-basic-1-m76426876af" x="274.210531" y="51.0975" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-1-text_2">
+    <text style="fill: #555555; font: 9.5px sans-serif; text-anchor: middle" x="241.684615" y="139.455" transform="rotate(-0 241.684615 139.455)">六边形（一个环）</text>
+   </g>
+   <g id="gt-basic-1-text_3">
+    <text style="fill: var(--kb-a2); font: 9px sans-serif; text-anchor: middle" x="160.56" y="23.031" transform="rotate(-0 160.56 23.031)">两者度序列都是 (2,2,2,2,2,2)，但结构完全不同</text>
+   </g>
+   <g id="gt-basic-1-text_4">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="34.366154" y="56.474203" transform="rotate(-0 34.366154 56.474203)">1</text>
+   </g>
+   <g id="gt-basic-1-text_5">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="73.426154" y="56.474203" transform="rotate(-0 73.426154 56.474203)">2</text>
+   </g>
+   <g id="gt-basic-1-text_6">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="53.896154" y="102.212203" transform="rotate(-0 53.896154 102.212203)">3</text>
+   </g>
+   <g id="gt-basic-1-text_7">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="109.481538" y="56.474203" transform="rotate(-0 109.481538 56.474203)">4</text>
+   </g>
+   <g id="gt-basic-1-text_8">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="148.541538" y="56.474203" transform="rotate(-0 148.541538 56.474203)">5</text>
+   </g>
+   <g id="gt-basic-1-text_9">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="129.011538" y="102.212203" transform="rotate(-0 129.011538 102.212203)">6</text>
+   </g>
+   <g id="gt-basic-1-text_10">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="241.684615" y="27.368203" transform="rotate(-0 241.684615 27.368203)">1</text>
+   </g>
+   <g id="gt-basic-1-text_11">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="209.1587" y="53.355703" transform="rotate(-0 209.1587 53.355703)">2</text>
+   </g>
+   <g id="gt-basic-1-text_12">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="209.1587" y="105.330703" transform="rotate(-0 209.1587 105.330703)">3</text>
+   </g>
+   <g id="gt-basic-1-text_13">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="241.684615" y="131.318203" transform="rotate(-0 241.684615 131.318203)">4</text>
+   </g>
+   <g id="gt-basic-1-text_14">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="274.210531" y="105.330703" transform="rotate(-0 274.210531 105.330703)">5</text>
+   </g>
+   <g id="gt-basic-1-text_15">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="274.210531" y="53.355703" transform="rotate(-0 274.210531 53.355703)">6</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="gt-basic-1-pbbc843970e">
+   <rect x="4.32" y="4.32" width="312.48" height="182.952"/>
+  </clipPath>
+ </defs>
+
+</svg>
+<figcaption>同一个度序列可以对应完全不同的图（度序列丢了结构）</figcaption>
+</figure>
+
 <p>度序列是图的<strong>粗粒度指纹</strong>：它很便宜（排序即可），但<strong>远不足以确定一张图</strong>。最著名的例子就是本页第五节例题 4 会详细对比的一对：</p>
 <table>
 <thead>
@@ -7887,6 +8095,209 @@ G = (V,\ E)
 </table>
 <p>关系为：<strong>强连通 <span class="arithmatex">\(\Rightarrow\)</span> 单向连通 <span class="arithmatex">\(\Rightarrow\)</span> 弱连通</strong>，反向都不成立。工程上"路由可达"要求强连通，"能不能把消息传遍全网"只要弱连通就够——说错层次会直接导致设计错误。</p>
 <h3 id="_12">割点与桥<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<figure class="kb-fig">
+<svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="割点与桥：删掉它们就把连通图拆开了">
+
+
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="gt-basic-2-figure_1">
+  <g id="gt-basic-2-patch_1">
+   <path d="M 0 191.592 
+L 321.12 191.592 
+L 321.12 0 
+L 0 0 
+L 0 191.592 
+z
+" style="fill: none"/>
+  </g>
+  <g id="gt-basic-2-axes_1">
+   <g id="gt-basic-2-line2d_1">
+    <path d="M 31.361538 67.955478 
+L 64.412308 48.069391 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_2">
+    <path d="M 31.361538 67.955478 
+L 64.412308 91.818783 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_3">
+    <path d="M 64.412308 48.069391 
+L 64.412308 91.818783 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_4">
+    <path d="M 64.412308 48.069391 
+L 109.481538 69.944087 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_5">
+    <path d="M 64.412308 91.818783 
+L 109.481538 69.944087 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_6">
+    <path d="M 109.481538 69.944087 
+L 157.555385 69.944087 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_7">
+    <path d="M 157.555385 69.944087 
+L 202.624615 48.069391 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_8">
+    <path d="M 157.555385 69.944087 
+L 202.624615 91.818783 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_9">
+    <path d="M 202.624615 48.069391 
+L 235.675385 67.955478 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_10">
+    <path d="M 235.675385 67.955478 
+L 202.624615 91.818783 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--md-default-fg-color--lightest); stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_11">
+    <path d="M 124.504615 69.944087 
+L 154.550769 69.944087 
+" clip-path="url(#gt-basic-2-pc12a5988ff)" style="fill: none; stroke: var(--kb-a3); stroke-width: 3.4; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-line2d_12">
+    <defs>
+     <path id="gt-basic-2-m09fb03a799" d="M 0 13 
+C 3.44764 13 6.754538 11.630238 9.192388 9.192388 
+C 11.630238 6.754538 13 3.44764 13 0 
+C 13 -3.44764 11.630238 -6.754538 9.192388 -9.192388 
+C 6.754538 -11.630238 3.44764 -13 0 -13 
+C -3.44764 -13 -6.754538 -11.630238 -9.192388 -9.192388 
+C -11.630238 -6.754538 -13 -3.44764 -13 0 
+C -13 3.44764 -11.630238 6.754538 -9.192388 9.192388 
+C -6.754538 11.630238 -3.44764 13 0 13 
+z
+" style="stroke: #ffffff; stroke-width: 1.6"/>
+    </defs>
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="31.361538" y="67.955478" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_13">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="64.412308" y="48.069391" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_14">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="64.412308" y="91.818783" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_15">
+    <defs>
+     <path id="gt-basic-2-md5189f02c3" d="M 0 13 
+C 3.44764 13 6.754538 11.630238 9.192388 9.192388 
+C 11.630238 6.754538 13 3.44764 13 0 
+C 13 -3.44764 11.630238 -6.754538 9.192388 -9.192388 
+C 6.754538 -11.630238 3.44764 -13 0 -13 
+C -3.44764 -13 -6.754538 -11.630238 -9.192388 -9.192388 
+C -11.630238 -6.754538 -13 -3.44764 -13 0 
+C -13 3.44764 -11.630238 6.754538 -9.192388 9.192388 
+C -6.754538 11.630238 -3.44764 13 0 13 
+z
+" style="stroke: #ffffff; stroke-width: 1.6"/>
+    </defs>
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-md5189f02c3" x="109.481538" y="69.944087" style="fill: var(--kb-a2); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_16">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-md5189f02c3" x="157.555385" y="69.944087" style="fill: var(--kb-a2); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_17">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="202.624615" y="48.069391" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_18">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="235.675385" y="67.955478" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-line2d_19">
+    <g clip-path="url(#gt-basic-2-pc12a5988ff)">
+     <use xlink:href="#gt-basic-2-m09fb03a799" x="202.624615" y="91.818783" style="fill: var(--kb-a1); stroke: #ffffff; stroke-width: 1.6"/>
+    </g>
+   </g>
+   <g id="gt-basic-2-patch_2">
+    <path d="M 152.169011 93.151609 
+Q 146.32595 82.424646 141.071178 72.77769 
+" style="fill: none; stroke: var(--kb-a3); stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 141.209377 76.710743 
+L 141.071178 72.77769 
+L 144.30054 75.026962 
+" style="fill: none; stroke: var(--kb-a3); stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-text_1">
+    <text style="fill: var(--kb-a3); font: 8.8px sans-serif; text-anchor: start" x="121.527692" y="103.944087" transform="rotate(-0 121.527692 103.944087)">桥：删掉它就断开</text>
+   </g>
+   <g id="gt-basic-2-patch_3">
+    <path d="M 105.490902 45.70292 
+Q 114.381531 57.037855 122.513152 67.405109 
+" style="fill: none; stroke: var(--kb-a2); stroke-width: 1.1; stroke-linecap: round"/>
+    <path d="M 121.72558 63.549239 
+L 122.513152 67.405109 
+L 118.955913 65.721645 
+" style="fill: none; stroke: var(--kb-a2); stroke-width: 1.1; stroke-linecap: round"/>
+   </g>
+   <g id="gt-basic-2-text_2">
+    <text style="fill: var(--kb-a2); font: 8.8px sans-serif" transform="translate(68.504615 29.315062)">割点：删掉它</text>
+    <text style="fill: var(--kb-a2); font: 8.8px sans-serif" transform="translate(68.504615 39.944087)">连通分量变多</text>
+   </g>
+   <g id="gt-basic-2-text_3">
+    <text style="fill: #555555; font: 8.8px sans-serif; text-anchor: middle" x="160.56" y="157.44287" transform="rotate(-0 160.56 157.44287)">桥的两个端点一定是割点（除非只剩一条边）</text>
+   </g>
+   <g id="gt-basic-2-text_4">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="31.361538" y="70.213681" transform="rotate(-0 31.361538 70.213681)">1</text>
+   </g>
+   <g id="gt-basic-2-text_5">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="64.412308" y="50.327594" transform="rotate(-0 64.412308 50.327594)">2</text>
+   </g>
+   <g id="gt-basic-2-text_6">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="64.412308" y="94.076986" transform="rotate(-0 64.412308 94.076986)">3</text>
+   </g>
+   <g id="gt-basic-2-text_7">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="109.481538" y="72.20229" transform="rotate(-0 109.481538 72.20229)">4</text>
+   </g>
+   <g id="gt-basic-2-text_8">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="157.555385" y="72.20229" transform="rotate(-0 157.555385 72.20229)">5</text>
+   </g>
+   <g id="gt-basic-2-text_9">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="202.624615" y="50.327594" transform="rotate(-0 202.624615 50.327594)">6</text>
+   </g>
+   <g id="gt-basic-2-text_10">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="235.675385" y="70.213681" transform="rotate(-0 235.675385 70.213681)">7</text>
+   </g>
+   <g id="gt-basic-2-text_11">
+    <text style="fill: #ffffff; font: 700 8.2px sans-serif; text-anchor: middle" x="202.624615" y="94.076986" transform="rotate(-0 202.624615 94.076986)">8</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="gt-basic-2-pc12a5988ff">
+   <rect x="4.32" y="4.32" width="312.48" height="182.952"/>
+  </clipPath>
+ </defs>
+
+</svg>
+<figcaption>割点与桥：删掉它们就把连通图拆开了</figcaption>
+</figure>
+
 <p><strong>割点</strong>（cut vertex，又称割顶）：删去该顶点（连同它关联的边）后，连通分量个数<strong>增加</strong>。
 <strong>桥</strong>（bridge，又称割边）：删去该边后，连通分量个数<strong>增加</strong>。</p>
 <p>它们描述"网络的脆弱环节"，判定要点：</p>
@@ -8487,8 +8898,8 @@ uv \in E_1 \iff \varphi(u)\varphi(v) \in E_2
 </tbody>
 </table>
 </details>
-<div class="admonition tip">
-<p class="admonition-title">实用技巧</p>
+<div class="admonition warning">
+<p class="admonition-title">易错点</p>
 <p><strong>叶子边一定是桥，叶子端点（若其邻居度 <span class="arithmatex">\(\ge 2\)</span>）一定是割点</strong>。这是最快的手工识别法：先找所有叶子，它们的边全是桥，它们的父节点大概率是割点。</p>
 </div>
 <hr />
@@ -8803,8 +9214,8 @@ X = \{1,2,3\}, \qquad Y = \{4,5,6\}
 </table>
 <p>注意拉普拉斯谱那一行：<span class="arithmatex">\(G_a\)</span> 的零特征值只有 1 个，<span class="arithmatex">\(G_b\)</span> 有 2 个（与连通分量个数一致），这正是页首表格里"连通分量数 = 零特征值重数"的又一次验证。</p>
 </details>
-<div class="admonition tip">
-<p class="admonition-title">实用技巧</p>
+<div class="admonition warning">
+<p class="admonition-title">易错点</p>
 <p><strong>当 <span class="arithmatex">\(n\)</span>、<span class="arithmatex">\(m\)</span>、度序列都相同时，不要急着搜索双射</strong>：先比连通分量个数、三角形个数、二分性、直径这些便宜的结构不变量，往往一步就能定案。本例的 <span class="arithmatex">\(C_6\)</span> 与 <span class="arithmatex">\(2K_3\)</span> 是"度序列完全一样但结构完全不同"的标准反例。</p>
 </div>
 <hr />
