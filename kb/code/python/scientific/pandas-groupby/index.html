@@ -8700,6 +8700,171 @@
 版本不必与示例一致，这里讲的行为在这个量级的版本上是稳定的。</p>
 <hr />
 <h2 id="groupby">一、<code>groupby</code> 的心智模型：拆分 → 应用 → 合并<a class="headerlink" href="#groupby" title="Permanent link">&para;</a></h2>
+<figure class="kb-fig">
+<svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="groupby 是「拆分 → 应用 → 合并」三步">
+
+
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="py-pd-1-figure_1">
+  <g id="py-pd-1-patch_1">
+   <path d="M 0 191.592 
+L 321.12 191.592 
+L 321.12 0 
+L 0 0 
+L 0 191.592 
+z
+" style="fill: none"/>
+  </g>
+  <g id="py-pd-1-axes_1">
+   <g id="py-pd-1-patch_2">
+    <path d="M 13.163774 110.8242 
+L 89.809811 110.8242 
+Q 91.578566 110.8242 91.578566 108.864 
+L 91.578566 23.922 
+Q 91.578566 21.9618 89.809811 21.9618 
+L 13.163774 21.9618 
+Q 11.395019 21.9618 11.395019 23.922 
+L 11.395019 108.864 
+Q 11.395019 110.8242 13.163774 110.8242 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a1); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-patch_3">
+    <path d="M 113.393208 74.8872 
+L 184.143396 74.8872 
+Q 185.912151 74.8872 185.912151 72.927 
+L 185.912151 23.922 
+Q 185.912151 21.9618 184.143396 21.9618 
+L 113.393208 21.9618 
+Q 111.624453 21.9618 111.624453 23.922 
+L 111.624453 72.927 
+Q 111.624453 74.8872 113.393208 74.8872 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a2); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-patch_4">
+    <path d="M 113.393208 130.4262 
+L 184.143396 130.4262 
+Q 185.912151 130.4262 185.912151 128.466 
+L 185.912151 79.461 
+Q 185.912151 77.5008 184.143396 77.5008 
+L 113.393208 77.5008 
+Q 111.624453 77.5008 111.624453 79.461 
+L 111.624453 128.466 
+Q 111.624453 130.4262 113.393208 130.4262 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a2); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-patch_5">
+    <path d="M 213.622642 74.8872 
+L 307.956226 74.8872 
+Q 309.724981 74.8872 309.724981 72.927 
+L 309.724981 23.922 
+Q 309.724981 21.9618 307.956226 21.9618 
+L 213.622642 21.9618 
+Q 211.853887 21.9618 211.853887 23.922 
+L 211.853887 72.927 
+Q 211.853887 74.8872 213.622642 74.8872 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a3); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-patch_6">
+    <path d="M 213.622642 130.4262 
+L 307.956226 130.4262 
+Q 309.724981 130.4262 309.724981 128.466 
+L 309.724981 79.461 
+Q 309.724981 77.5008 307.956226 77.5008 
+L 213.622642 77.5008 
+Q 211.853887 77.5008 211.853887 79.461 
+L 211.853887 128.466 
+Q 211.853887 130.4262 213.622642 130.4262 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a3); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-patch_7">
+    <path d="M 113.393208 177.7977 
+L 307.956226 177.7977 
+Q 309.724981 177.7977 309.724981 175.8375 
+L 309.724981 144.801 
+Q 309.724981 142.8408 307.956226 142.8408 
+L 113.393208 142.8408 
+Q 111.624453 142.8408 111.624453 144.801 
+L 111.624453 175.8375 
+Q 111.624453 177.7977 113.393208 177.7977 
+z
+" clip-path="url(#py-pd-1-p4f5b4ef39a)" style="fill: var(--kb-a4); opacity: 0.11"/>
+   </g>
+   <g id="py-pd-1-text_1">
+    <text style="fill: var(--kb-a1); font: 700 9.2px sans-serif; text-anchor: middle" x="51.486792" y="36.99" transform="rotate(-0 51.486792 36.99)">原表</text>
+   </g>
+   <g id="py-pd-1-text_2">
+    <text style="fill: #555555; font: 8.4px sans-serif; text-anchor: start" x="20.533585" y="51.6915" transform="rotate(-0 20.533585 51.6915)">A  10</text>
+   </g>
+   <g id="py-pd-1-text_3">
+    <text style="fill: #555555; font: 8.4px sans-serif; text-anchor: start" x="20.533585" y="65.4129" transform="rotate(-0 20.533585 65.4129)">B  20</text>
+   </g>
+   <g id="py-pd-1-text_4">
+    <text style="fill: #555555; font: 8.4px sans-serif; text-anchor: start" x="20.533585" y="79.1343" transform="rotate(-0 20.533585 79.1343)">A  30</text>
+   </g>
+   <g id="py-pd-1-text_5">
+    <text style="fill: #555555; font: 8.4px sans-serif; text-anchor: start" x="20.533585" y="92.8557" transform="rotate(-0 20.533585 92.8557)">B  40</text>
+   </g>
+   <g id="py-pd-1-patch_8">
+    <path d="M 94.757085 66.393 
+Q 101.599606 66.393 106.429666 66.393 
+" style="fill: none; stroke: var(--md-default-fg-color--light); stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 102.429666 64.393 
+L 106.429666 66.393 
+L 102.429666 68.393 
+" style="fill: none; stroke: var(--md-default-fg-color--light); stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="py-pd-1-text_6">
+    <text style="fill: #777777; font: 8px sans-serif; text-anchor: start" x="101.601509" y="54.9585" transform="rotate(-0 101.601509 54.9585)">拆分</text>
+   </g>
+   <g id="py-pd-1-text_7">
+    <text style="fill: var(--kb-a2); font: 8.4px sans-serif; text-anchor: middle" x="148.768302" y="36.99" transform="rotate(-0 148.768302 36.99)">A 组：10, 30</text>
+   </g>
+   <g id="py-pd-1-text_8">
+    <text style="fill: var(--kb-a2); font: 8.4px sans-serif; text-anchor: middle" x="148.768302" y="92.529" transform="rotate(-0 148.768302 92.529)">B 组：20, 40</text>
+   </g>
+   <g id="py-pd-1-patch_9">
+    <path d="M 189.092109 66.393 
+Q 198.883584 66.393 206.662598 66.393 
+" style="fill: none; stroke: var(--md-default-fg-color--light); stroke-width: 1.8; stroke-linecap: round"/>
+    <path d="M 202.662598 64.393 
+L 206.662598 66.393 
+L 202.662598 68.393 
+" style="fill: none; stroke: var(--md-default-fg-color--light); stroke-width: 1.8; stroke-linecap: round"/>
+   </g>
+   <g id="py-pd-1-text_9">
+    <text style="fill: #777777; font: 8px sans-serif; text-anchor: start" x="198.883019" y="54.9585" transform="rotate(-0 198.883019 54.9585)">应用</text>
+   </g>
+   <g id="py-pd-1-text_10">
+    <text style="fill: var(--kb-a3); font: 8.4px sans-serif; text-anchor: middle" x="260.789434" y="36.99" transform="rotate(-0 260.789434 36.99)">A: sum → 40</text>
+   </g>
+   <g id="py-pd-1-text_11">
+    <text style="fill: var(--kb-a3); font: 8.4px sans-serif; text-anchor: middle" x="260.789434" y="92.529" transform="rotate(-0 260.789434 92.529)">B: sum → 60</text>
+   </g>
+   <g id="py-pd-1-text_12">
+    <text style="fill: var(--kb-a4); font: 700 9px sans-serif; text-anchor: middle" x="210.674717" y="160.4826" transform="rotate(-0 210.674717 160.4826)">合并 → 新表：A: 40, B: 60</text>
+   </g>
+   <g id="py-pd-1-text_13">
+    <text style="fill: #888888; font: 8.2px sans-serif; text-anchor: middle" x="51.486792" y="160.4826" transform="rotate(-0 51.486792 160.4826)">（原表不变）</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="py-pd-1-p4f5b4ef39a">
+   <rect x="4.32" y="4.32" width="312.48" height="182.952"/>
+  </clipPath>
+ </defs>
+
+</svg>
+<figcaption>groupby 是「拆分 → 应用 → 合并」三步</figcaption>
+</figure>
+
 <p><strong>先立一个心智模型，再讲 API。</strong></p>
 <p><code>groupby</code> 这三个字容易让人以为它是个「函数」，
 其实它是一个<strong>过程</strong>，分三步走，pandas 官方把它叫
