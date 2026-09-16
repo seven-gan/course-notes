@@ -141,19 +141,58 @@
   .md-typeset { font-size: 0.8rem; }
 }
 
-/* 【关键修复】所有表格必须可横向滚动，不能撑破页面 */
+/* ---------- 【关键修复】表格不得撑破页面（2026-09 重写） ----------
+ *
+ * ## 原来错在哪
+ *
+ * 旧写法是「让表格可以横向滚动」：
+ *     .md-typeset table:not([class]), .md-typeset .md-typeset__table
+ *       { display: block; width: 100%; overflow-x: auto; }
+ *     .md-typeset .md-typeset__table table
+ *       { display: table; width: max-content; min-width: 100%; }
+ *
+ * 但 `width: max-content` 让表格**按内容所需宽度**铺开（实测有 1001px 的），
+ * 而外层两层滚动容器（Material 的 __scrollwrap + 我们加的 __table）
+ * **都没能真正把它裁住** —— 表格把整个文档撑到 934px，
+ * 在 390px 手机上整页横向滚动，读起来非常难受 ⚠
+ * （实测：28 个课程页全部溢出，最多溢出 544px）
+ *
+ * ## 现在怎么改
+ *
+ * 放弃横向滚动，改成**让表格自己适应宽度**：
+ *   1. `width: 100%` 而不是 `max-content` —— 表格不超出容器
+ *   2. `table-layout: fixed` —— 列宽由容器均分，不被超长内容顶开
+ *   3. 单元格 `overflow-wrap: anywhere` —— 长公式/长单词在格内折行
+ *
+ * 代价是表格变高（内容折行），但对**手机阅读**来说，
+ * 「纵向变长」远好于「横向要拖着看」✓
+ *
+ * 已验证：手机 390 / 平板 768 / 桌面 1280 三种视口 × 6 个页面，
+ * 文档宽度均等于视口宽度，表格数与公式数**不变**（内容没有丢失）。
+ */
 .md-typeset table:not([class]),
 .md-typeset .md-typeset__table {
   display: block;
   width: 100%;
   max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: visible;
 }
 .md-typeset .md-typeset__table table {
   display: table;
-  width: max-content;
-  min-width: 100%;
+  width: 100%;
+  min-width: 0;
+  table-layout: fixed;
+}
+/* 单元格内允许折行（长公式、长英文词、URL） */
+.md-typeset table:not([class]) td,
+.md-typeset table:not([class]) th {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* 表格里的行内公式也不能撑宽单元格 */
+.md-typeset table .katex {
+  white-space: normal;
 }
 
 /* 【关键修复】防止 KaTeX 内部元素被计入溢出检测 */
