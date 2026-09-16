@@ -8256,84 +8256,87 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 <p>先算对数项：</p>
 <div class="arithmatex">\[\ln\frac{0.3}{0.7} = \ln 0.428571 = -0.847298\]</div>
 <p>再算系数：</p>
-</details>
 <div class="arithmatex">\[\frac{\sigma^2}{\mu_1-\mu_2} = \frac{36}{170-178} = \frac{36}{-8} = -4.5\]</div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code>代进公式：
-
-$$x_0 = 174 - (-4.5)\times(-0.847298) = 174 - 3.812841 = 170.187159$$
-
-**决策面移到 $x = 170.19$**（保留两位小数）✓
-
-**（c）移动方向**
-
-$$170.187159 - 174 = -3.812841$$
-
-也就是**向左移动了 $3.81$**，朝着**先验更小的第 1 类**（均值 $170$）那边。
-
-**一般规律**：**先验大的那一类，决策面向对方移动。**
+<p>代进公式：</p>
+<div class="arithmatex">\[x_0 = 174 - (-4.5)\times(-0.847298) = 174 - 3.812841 = 170.187159\]</div>
+<p><strong>决策面移到 <span class="arithmatex">\(x = 170.19\)</span></strong>（保留两位小数）✓</p>
+<p><strong>（c）移动方向</strong></p>
+<div class="arithmatex">\[170.187159 - 174 = -3.812841\]</div>
+<p>也就是<strong>向左移动了 <span class="arithmatex">\(3.81\)</span></strong>，朝着<strong>先验更小的第 1 类</strong>（均值 <span class="arithmatex">\(170\)</span>）那边。</p>
+<p><strong>一般规律</strong>：<strong>先验大的那一类，决策面向对方移动。</strong>
 因为先验大意味着它的判别函数被整体抬高、地盘变大，
 分界线自然要往对方那边让。
-反过来说，**先验小的那一类会被「牺牲」一部分地盘** ✓
-
-**把四组先验的手算结果列成对照表**（这就是原来「代码扫参数打印表」的位置）：
-
-| 先验 $(P_1, P_2)$ | $\ln(P_1/P_2)$ | $-\frac{\sigma^2}{\mu_1-\mu_2}\ln\frac{P_1}{P_2}$ | 决策面 $x_0$ | 相对中点 $174$ 的位移 |
-|---|---|---|---|---|
-| $(0.5, 0.5)$ | $0$ | $0$ | $174.000$ | $0$ |
-| $(0.4, 0.6)$ | $-0.405465$ | $-1.824593$ | $172.175$ | $-1.825$ |
-| $(0.3, 0.7)$ | $-0.847298$ | $-3.812841$ | $170.187$ | $-3.813$ |
-| $(0.2, 0.8)$ | $-1.386294$ | $-6.238324$ | $167.762$ | $-6.238$ |
-
-**读这张表的三个要点**：
-
-| 观察 | 结论 |
-|---|---|
-| 先验比越小（第 1 类越不受待见） | 决策面越往第 1 类中心靠，第 1 类地盘越小 |
-| 先验相等时位移恰好为 $0$ | 对称性：两类完全对称则分界居中 |
-| 位移与 $\ln(P_1/P_2)$ 成正比 | 因为公式里它就是**一次项**，没有高阶项 |
-
-**一个容易忽略的比例关系**：位移量 $= 4.5 \times \lvert\ln(P_1/P_2)\rvert$。
-这里的 $4.5 = \sigma^2/\lvert\mu_1-\mu_2\rvert = 36/8$，
+反过来说，<strong>先验小的那一类会被「牺牲」一部分地盘</strong> ✓</p>
+<p><strong>把四组先验的手算结果列成对照表</strong>（这就是原来「代码扫参数打印表」的位置）：</p>
+<table>
+<thead>
+<tr>
+<th>先验 <span class="arithmatex">\((P_1, P_2)\)</span></th>
+<th><span class="arithmatex">\(\ln(P_1/P_2)\)</span></th>
+<th><span class="arithmatex">\(-\frac{\sigma^2}{\mu_1-\mu_2}\ln\frac{P_1}{P_2}\)</span></th>
+<th>决策面 <span class="arithmatex">\(x_0\)</span></th>
+<th>相对中点 <span class="arithmatex">\(174\)</span> 的位移</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\((0.5, 0.5)\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+<td><span class="arithmatex">\(174.000\)</span></td>
+<td><span class="arithmatex">\(0\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((0.4, 0.6)\)</span></td>
+<td><span class="arithmatex">\(-0.405465\)</span></td>
+<td><span class="arithmatex">\(-1.824593\)</span></td>
+<td><span class="arithmatex">\(172.175\)</span></td>
+<td><span class="arithmatex">\(-1.825\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((0.3, 0.7)\)</span></td>
+<td><span class="arithmatex">\(-0.847298\)</span></td>
+<td><span class="arithmatex">\(-3.812841\)</span></td>
+<td><span class="arithmatex">\(170.187\)</span></td>
+<td><span class="arithmatex">\(-3.813\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((0.2, 0.8)\)</span></td>
+<td><span class="arithmatex">\(-1.386294\)</span></td>
+<td><span class="arithmatex">\(-6.238324\)</span></td>
+<td><span class="arithmatex">\(167.762\)</span></td>
+<td><span class="arithmatex">\(-6.238\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>读这张表的三个要点</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>观察</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>先验比越小（第 1 类越不受待见）</td>
+<td>决策面越往第 1 类中心靠，第 1 类地盘越小</td>
+</tr>
+<tr>
+<td>先验相等时位移恰好为 <span class="arithmatex">\(0\)</span></td>
+<td>对称性：两类完全对称则分界居中</td>
+</tr>
+<tr>
+<td>位移与 <span class="arithmatex">\(\ln(P_1/P_2)\)</span> 成正比</td>
+<td>因为公式里它就是<strong>一次项</strong>，没有高阶项</td>
+</tr>
+</tbody>
+</table>
+<p><strong>一个容易忽略的比例关系</strong>：位移量 <span class="arithmatex">\(= 4.5 \times \lvert\ln(P_1/P_2)\rvert\)</span>。
+这里的 <span class="arithmatex">\(4.5 = \sigma^2/\lvert\mu_1-\mu_2\rvert = 36/8\)</span>，
 完全由数据的尺度决定，与先验无关 ✓
-所以**先验每变化多少、边界移动多少，是可以快速口算的**。
-</code></pre></div></td></tr></table></div>
+所以<strong>先验每变化多少、边界移动多少，是可以快速口算的</strong>。</p>
+</details>
 <hr />
 <h2 id="_5">四、决策面与决策边界<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>前面讲的都是「给定一个 <span class="arithmatex">\(x\)</span>，怎么判」。

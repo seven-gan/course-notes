@@ -10136,83 +10136,85 @@ L 254.425781 37.659844
 </tbody>
 </table>
 <p><strong>所以</strong>：</p>
-</details>
 <div class="arithmatex">\[P(\text{error}) = \int_t^{\infty} w_1(x)\,dx + \int_{-\infty}^{t} w_2(x)\,dx\]</div>
 <div class="arithmatex">\[R = \lambda_{12}\int_{-\infty}^{t} w_2(x)\,dx + \lambda_{21}\int_{t}^{\infty} w_1(x)\,dx\]</div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
-<span class="normal">32</span>
-<span class="normal">33</span>
-<span class="normal">34</span>
-<span class="normal">35</span>
-<span class="normal">36</span>
-<span class="normal">37</span></pre></div></td><td class="code"><div><pre><span></span><code>**规则 A（$t = 19.134613$）**：
-
-| 量 | 值 |
-|---|---|
-| 错误率 | $0.145198$ |
-| 期望风险 | $0.346966$ |
-
-**规则 B（$t = 21.451049$）**：
-
-| 量 | 值 |
-|---|---|
-| 错误率 | $0.187627$ |
-| 期望风险 | $0.225460$ |
-
-**对比**：
-
-| | 规则 A（错误率最小）| 规则 B（风险最小）| 谁更好 |
-|---|---|---|---|
-| 错误率 | $0.145198$ ✓ | $0.187627$ | A |
-| 期望风险 | $0.346966$ | $0.225460$ ✓ | **B** |
-
-**哪个更合理：规则 B** ✓
-
-**理由**：代价是 $\lambda_{21} = 5$，即「把 $\omega_1$ 判成 $\omega_2$」
+<p><strong>规则 A（<span class="arithmatex">\(t = 19.134613\)</span>）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>错误率</td>
+<td><span class="arithmatex">\(0.145198\)</span></td>
+</tr>
+<tr>
+<td>期望风险</td>
+<td><span class="arithmatex">\(0.346966\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>规则 B（<span class="arithmatex">\(t = 21.451049\)</span>）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>量</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>错误率</td>
+<td><span class="arithmatex">\(0.187627\)</span></td>
+</tr>
+<tr>
+<td>期望风险</td>
+<td><span class="arithmatex">\(0.225460\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>规则 A（错误率最小）</th>
+<th>规则 B（风险最小）</th>
+<th>谁更好</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>错误率</td>
+<td><span class="arithmatex">\(0.145198\)</span> ✓</td>
+<td><span class="arithmatex">\(0.187627\)</span></td>
+<td>A</td>
+</tr>
+<tr>
+<td>期望风险</td>
+<td><span class="arithmatex">\(0.346966\)</span></td>
+<td><span class="arithmatex">\(0.225460\)</span> ✓</td>
+<td><strong>B</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>哪个更合理：规则 B</strong> ✓</p>
+<p><strong>理由</strong>：代价是 <span class="arithmatex">\(\lambda_{21} = 5\)</span>，即「把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」
 的错误贵 5 倍。
 规则 A 虽然总错误数更少，
-但它把大量**昂贵的错误**（真 $\omega_1$ 判成 $\omega_2$）留在里面 ——
-所以**总代价高出 $54\%$** ⚠
-
-**规则 B 的做法是主动多犯一些便宜的错**（真 $\omega_2$ 判成 $\omega_1$），
-以换取**少的昂贵的错** ✓
-
-**一句话总结**：
-
-&gt; **代价不对等时，应该比的是「代价」而不是「次数」。**
-
-**代码核对**：
-</code></pre></div></td></tr></table></div>
+但它把大量<strong>昂贵的错误</strong>（真 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>）留在里面 ——
+所以<strong>总代价高出 <span class="arithmatex">\(54\%\)</span></strong> ⚠</p>
+<p><strong>规则 B 的做法是主动多犯一些便宜的错</strong>（真 <span class="arithmatex">\(\omega_2\)</span> 判成 <span class="arithmatex">\(\omega_1\)</span>），
+以换取<strong>少的昂贵的错</strong> ✓</p>
+<p><strong>一句话总结</strong>：</p>
+<blockquote>
+<p><strong>代价不对等时，应该比的是「代价」而不是「次数」。</strong></p>
+</blockquote>
+<p><strong>代码核对</strong>：</p>
+</details>
 <hr />
 <h3 id="4">例题 4：损失估错的敏感度<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>真实代价比是 <span class="arithmatex">\(\lambda_{21} = 20\)</span>（即「把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」贵 20 倍）。

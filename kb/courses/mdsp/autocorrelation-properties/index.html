@@ -10402,58 +10402,54 @@ L 289.496367 54.738906
 <div class="arithmatex">\[\tau_c \text{（点数）} = \tau_c \times f_s = 4 \times 10^{-3}\,\text{s} \times 1000\,\text{Hz} = 4 \text{ 个采样点}\]</div>
 <p><strong>第二步：确定每段长度。</strong> 经验上每段至少要覆盖几十个相关时间，
 才能让段内的自相关估计稳定。取 <span class="arithmatex">\(50\tau_c\)</span>：</p>
-</details>
 <div class="arithmatex">\[L = 50 \times 4 = 200 \text{ 点}\]</div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
-<span class="normal"> 2</span>
-<span class="normal"> 3</span>
-<span class="normal"> 4</span>
-<span class="normal"> 5</span>
-<span class="normal"> 6</span>
-<span class="normal"> 7</span>
-<span class="normal"> 8</span>
-<span class="normal"> 9</span>
-<span class="normal">10</span>
-<span class="normal">11</span>
-<span class="normal">12</span>
-<span class="normal">13</span>
-<span class="normal">14</span>
-<span class="normal">15</span>
-<span class="normal">16</span>
-<span class="normal">17</span>
-<span class="normal">18</span>
-<span class="normal">19</span>
-<span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code>**第三步：验算频率分辨率。** 每段 $L = 200$ 点、$f_s = 1000$ Hz，
-所以每个谱线间隔是
-
-$$\Delta f = \frac{f_s}{L} = \frac{1000}{200} = 5 \text{ Hz}$$
-
-这个分辨率够不够用，取决于你要分辨的两个频率成分差多少：
-
-| 要分辨的最小频率间隔 | 够不够 |
-|---|---|
-| $\ge 5$ Hz | 够 ✓ |
-| $&lt; 5$ Hz | 不够，需要加长每段 ⚠ |
-
-**第四步：如果分辨率不够怎么办。** 加长 $L$，但**总数据量是有限的**，
-所以段数会变少，谱估计的方差会变大。这是一个**固定的权衡**：
-
-| 想要 | 代价 |
-|---|---|
-| 高频率分辨率（大 $L$） | 段数少，谱线抖动大 ⚠ |
-| 低方差（小 $L$，段数多） | 频率分辨率差 ⚠ |
-
-**相关时间在这里的作用**，是给 $L$ 划一条**下限**：
-$L$ 至少要有几十个 $\tau_c$，否则段内样本高度相关，
-「平均」这件事就起不到降方差的作用。
-
-一句话：**$\tau_c$ 决定下限，分辨率要求决定上限，在这两者之间选。**
-</code></pre></div></td></tr></table></div>
+<p><strong>第三步：验算频率分辨率。</strong> 每段 <span class="arithmatex">\(L = 200\)</span> 点、<span class="arithmatex">\(f_s = 1000\)</span> Hz，
+所以每个谱线间隔是</p>
+<div class="arithmatex">\[\Delta f = \frac{f_s}{L} = \frac{1000}{200} = 5 \text{ Hz}\]</div>
+<p>这个分辨率够不够用，取决于你要分辨的两个频率成分差多少：</p>
+<table>
+<thead>
+<tr>
+<th>要分辨的最小频率间隔</th>
+<th>够不够</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\ge 5\)</span> Hz</td>
+<td>够 ✓</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(&lt; 5\)</span> Hz</td>
+<td>不够，需要加长每段 ⚠</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第四步：如果分辨率不够怎么办。</strong> 加长 <span class="arithmatex">\(L\)</span>，但<strong>总数据量是有限的</strong>，
+所以段数会变少，谱估计的方差会变大。这是一个<strong>固定的权衡</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>想要</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高频率分辨率（大 <span class="arithmatex">\(L\)</span>）</td>
+<td>段数少，谱线抖动大 ⚠</td>
+</tr>
+<tr>
+<td>低方差（小 <span class="arithmatex">\(L\)</span>，段数多）</td>
+<td>频率分辨率差 ⚠</td>
+</tr>
+</tbody>
+</table>
+<p><strong>相关时间在这里的作用</strong>，是给 <span class="arithmatex">\(L\)</span> 划一条<strong>下限</strong>：
+<span class="arithmatex">\(L\)</span> 至少要有几十个 <span class="arithmatex">\(\tau_c\)</span>，否则段内样本高度相关，
+「平均」这件事就起不到降方差的作用。</p>
+<p>一句话：<strong><span class="arithmatex">\(\tau_c\)</span> 决定下限，分辨率要求决定上限，在这两者之间选。</strong></p>
+</details>
 <hr />
 <h2 id="_6">自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong>：一个零均值平稳序列在 <span class="arithmatex">\(m = 0\)</span> 处的自相关是 <span class="arithmatex">\(r(0) = 9.0\)</span>。
