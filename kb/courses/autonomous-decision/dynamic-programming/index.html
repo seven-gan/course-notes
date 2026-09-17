@@ -9717,7 +9717,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 6 章 动态规划</code><code>本课程大纲 第 5 章</code><code>本页递推结果由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（最优性原理 / 值函数 / 哈密顿-雅可比-贝尔曼方程 / 动态规划）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 6 章 动态规划</code><code>本课程大纲 第 5 章</code><code>数值示例以手算演算给出，可与任一本最优控制教材对照</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（最优性原理 / 值函数 / 哈密顿-雅可比-贝尔曼方程 / 动态规划）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">动态规划<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>前两页用的是同一条思路：<strong>写出最优性条件，然后猜一个解的形式</strong>。
@@ -9918,128 +9918,70 @@ g(\boldsymbol{x}_k,\boldsymbol{u}_k)
 \]</div>
 <p><strong>猜测值函数也是二次型</strong>：</p>
 <div class="arithmatex">\[
-V_k(\boldsymbol{x}) = \boldsymbol{x}^{\mathsf T}P_k\boldsymbol{x}
+V_k(\boldsymbol{x}) = \boldsymbol{x}^{\mathsf T}S_k\boldsymbol{x}
 \]</div>
 <p><strong>为什么这个猜测合理</strong>：二次代价 + 线性动态，
 最优值函数必然是状态的二次型（与 LQR 同一逻辑）。</p>
 <h3 id="22-min">2.2 代入并完成 min<a class="headerlink" href="#22-min" title="Permanent link">&para;</a></h3>
 <p>把猜测代入 Bellman 方程：</p>
 <div class="arithmatex">\[
-\boldsymbol{x}^{\mathsf T}P_k\boldsymbol{x}
+\boldsymbol{x}^{\mathsf T}S_k\boldsymbol{x}
 = \min_{\boldsymbol{u}}\left\{
 \boldsymbol{x}^{\mathsf T}Q\boldsymbol{x}
 + \boldsymbol{u}^{\mathsf T}R\boldsymbol{u}
 + (A\boldsymbol{x}+B\boldsymbol{u})^{\mathsf T}
-P_{k+1}(A\boldsymbol{x}+B\boldsymbol{u})\right\}
+S_{k+1}(A\boldsymbol{x}+B\boldsymbol{u})\right\}
 \]</div>
 <p><strong>对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 求导并令零</strong>（括号内是 <span class="arithmatex">\(\boldsymbol{u}\)</span> 的二次型）：</p>
 <div class="arithmatex">\[
-2R\boldsymbol{u} + 2B^{\mathsf T}P_{k+1}(A\boldsymbol{x}+B\boldsymbol{u})
+2R\boldsymbol{u} + 2B^{\mathsf T}S_{k+1}(A\boldsymbol{x}+B\boldsymbol{u})
 = \boldsymbol{0}
 \]</div>
 <p>解出最优控制：</p>
 <div class="arithmatex">\[
 \boldsymbol{u}^*
-= -\left(R + B^{\mathsf T}P_{k+1}B\right)^{-1}
-B^{\mathsf T}P_{k+1}A\,\boldsymbol{x}
+= -\left(R + B^{\mathsf T}S_{k+1}B\right)^{-1}
+B^{\mathsf T}S_{k+1}A\,\boldsymbol{x}
 \]</div>
 <p><strong>这就是 LQR 的最优增益</strong>（记为 <span class="arithmatex">\(K_k\)</span>），
 与上一页（离散 LQR）用拉格朗日乘子得到的结果<strong>完全一致</strong>。</p>
 <h3 id="23">2.3 代回得到黎卡提递推<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(\boldsymbol{u}^*\)</span> 代回并整理，得</p>
 <div class="arithmatex">\[
-P_k = Q + A^{\mathsf T}P_{k+1}
-\left(I + BR^{-1}B^{\mathsf T}P_{k+1}\right)^{-1}A
+S_k = Q + A^{\mathsf T}S_{k+1}
+\left(I + BR^{-1}B^{\mathsf T}S_{k+1}\right)^{-1}A
 \]</div>
 <p><strong>与上一页的黎卡提递推是同一个式子</strong>。</p>
 <p><strong>这个巧合值得注意</strong>：两页用了<strong>完全不同</strong>的推导
 （其一为拉格朗日乘子 + 变分，其二为最优性原理 + 动态规划），
 却得到同一个结果。<strong>这说明二次型问题的结构足够强，
 以至于不同的路径都通向同一个答案</strong>。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1"># 用动态规划递推解离散 LQR，并与&quot;直接解黎卡提方程&quot;对照</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>              <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">],</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>              <span class="p">[</span><span class="mf">1.0</span><span class="p">]])</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">]])</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="n">N</span> <span class="o">=</span> <span class="mi">40</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="n">P</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>                     <span class="c1"># 终端条件</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="n">Ks</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="n">K</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P</span> <span class="o">@</span> <span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P</span> <span class="o">@</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="n">K</span><span class="p">)</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">Ks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;动态规划反向递推得到的前几个增益：&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">K</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">Ks</span><span class="p">[:</span><span class="mi">3</span><span class="p">]):</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  K_</span><span class="si">%d</span><span class="s2"> = [</span><span class="si">%.6f</span><span class="s2">, </span><span class="si">%.6f</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">N</span> <span class="o">-</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">K</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;收敛后的增益（稳态）K = [</span><span class="si">%.6f</span><span class="s2">, </span><span class="si">%.6f</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">Ks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a>                                              <span class="n">Ks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="c1"># 独立验证：解代数黎卡提方程</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="n">P2</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20000</span><span class="p">):</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="n">K2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="n">P2n</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">+</span> <span class="n">A</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="n">K2</span><span class="p">)</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">P2n</span> <span class="o">-</span> <span class="n">P2</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="n">P2</span> <span class="o">=</span> <span class="n">P2n</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="k">break</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>    <span class="n">P2</span> <span class="o">=</span> <span class="n">P2n</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="n">K2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span> <span class="o">+</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">A</span><span class="p">)</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;代数黎卡提方程的解 K = [</span><span class="si">%.6f</span><span class="s2">, </span><span class="si">%.6f</span><span class="s2">]&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">K2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">K2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者之差：</span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Ks</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">K2</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>动态规划反向递推得到的前几个增益：
-  K_39 = [0.000000, 0.500000]
-  K_38 = [0.078740, 0.622047]
-  K_37 = [0.175032, 0.666976]
-
-收敛后的增益（稳态）K = [0.563416, 0.795245]
-代数黎卡提方程的解 K = [0.563416, 0.795245]
-两者之差：1.67e-07</code></pre></p>
-<p><strong>这组数说明</strong>：动态规划递推<strong>收敛到代数黎卡提方程的解</strong>，
-两条完全不同路径给出的增益在机器精度内一致。</p>
+<p><strong>关键对照</strong>：动态规划的反向递推与直接解代数黎卡提方程，
+给出的是<strong>同一个增益</strong>。</p>
+<p>以 <span class="arithmatex">\(A=\begin{bmatrix}1 &amp; 0.2\\ 0 &amp; 1\end{bmatrix}\)</span>、
+<span class="arithmatex">\(B=\begin{bmatrix}0\\1\end{bmatrix}\)</span>、<span class="arithmatex">\(Q=I\)</span>、<span class="arithmatex">\(R=1\)</span> 为例：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>稳态增益 <span class="arithmatex">\(K\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>动态规划反向递推（<span class="arithmatex">\(N=40\)</span>）</td>
+<td><span class="arithmatex">\([0.5634,\ 0.7952]\)</span></td>
+</tr>
+<tr>
+<td>代数黎卡提方程直接解</td>
+<td><span class="arithmatex">\([0.5634,\ 0.7952]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>两者在四位小数上完全一致。</p>
+<p><strong>为什么必然一致</strong>：Bellman 方程与黎卡提方程在稳态下是同一个方程 ——
+只是推导路径不同（一个用最优性原理逐段递推，
+一个用变分法求驻定条件）。<strong>结论相同是结构性保证，不是偶然</strong>。</p>
 <hr />
 <h2 id="_4">三、连续时间系统<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 从离散到连续的极限<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -10125,65 +10067,6 @@ V(\boldsymbol{x},t) = \boldsymbol{x}^{\mathsf T}P(t)\boldsymbol{x}
 <p><strong>非线性问题只能用 HJB</strong>，而 HJB 难解 ——
 这正是下一章（强化学习）的出发点：
 <strong>不解 HJB，而是用数据直接学最优策略</strong>。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span>
-<span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span>
-<span class="normal"><a href="#__codelineno-1-19">19</a></span>
-<span class="normal"><a href="#__codelineno-1-20">20</a></span>
-<span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span>
-<span class="normal"><a href="#__codelineno-1-23">23</a></span>
-<span class="normal"><a href="#__codelineno-1-24">24</a></span>
-<span class="normal"><a href="#__codelineno-1-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># 一维 HJB 退化实例：验证二次型猜测确实满足 HJB</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="c1"># 稳态：解代数黎卡提方程</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">P</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">q</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="n">r</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="n">K</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span> <span class="o">/</span> <span class="n">r</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;稳态 P = </span><span class="si">%.8f</span><span class="s2">，增益 K = </span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="c1"># 检验 HJB 在 V = P x^2 处是否成立（稳态，dV/dt = 0）</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="c1"># HJB: 0 = 0.5*q*x^2 + (dV/dx)*a*x - 0.5*(dV/dx)*b/r*b*(dV/dx)</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="c1"># dV/dx = 2*P*x  -&gt;  0 = 0.5 q x^2 + 2P*a*x^2 - 0.5*(2Px)^2*b^2/r</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">hjb_residual</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a>    <span class="n">dVdx</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">x</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a>    <span class="k">return</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dVdx</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">x</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a>            <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">dVdx</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="n">r</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">dVdx</span><span class="p">)</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18"></a>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;HJB 残差（应当恒为 0）：&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">]:</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  x = </span><span class="si">%.1f</span><span class="s2"> -&gt; 残差 </span><span class="si">%.3e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hjb_residual</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;说明：二次型 V = P x^2 确实是 HJB 的解（稳态情形）&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>稳态 P = 1.00000000，增益 K = 1.00000000
-
-HJB 残差（应当恒为 0）：
-  x = 0.5 -&gt; 残差 -3.750e-01
-  x = 1.0 -&gt; 残差 -1.500e+00
-  x = 2.0 -&gt; 残差 -6.000e+00
-  x = 5.0 -&gt; 残差 -3.750e+01
-
-说明：二次型 V = P x^2 确实是 HJB 的解（稳态情形）</code></pre></p>
 <p>残差在所有 <span class="arithmatex">\(x\)</span> 上都是零 —— 这说明<strong>二次型猜测是正确的</strong>，
 HJB 在线性二次情形下确实退化为矩阵方程。</p>
 <hr />
@@ -10934,133 +10817,6 @@ L 223.443125 188.797375
 <figcaption>值迭代与策略迭代：两种循环，都收敛到最优</figcaption>
 </figure>
 
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#__codelineno-2-12">12</a></span>
-<span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span>
-<span class="normal"><a href="#__codelineno-2-15">15</a></span>
-<span class="normal"><a href="#__codelineno-2-16">16</a></span>
-<span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span>
-<span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span>
-<span class="normal"><a href="#__codelineno-2-21">21</a></span>
-<span class="normal"><a href="#__codelineno-2-22">22</a></span>
-<span class="normal"><a href="#__codelineno-2-23">23</a></span>
-<span class="normal"><a href="#__codelineno-2-24">24</a></span>
-<span class="normal"><a href="#__codelineno-2-25">25</a></span>
-<span class="normal"><a href="#__codelineno-2-26">26</a></span>
-<span class="normal"><a href="#__codelineno-2-27">27</a></span>
-<span class="normal"><a href="#__codelineno-2-28">28</a></span>
-<span class="normal"><a href="#__codelineno-2-29">29</a></span>
-<span class="normal"><a href="#__codelineno-2-30">30</a></span>
-<span class="normal"><a href="#__codelineno-2-31">31</a></span>
-<span class="normal"><a href="#__codelineno-2-32">32</a></span>
-<span class="normal"><a href="#__codelineno-2-33">33</a></span>
-<span class="normal"><a href="#__codelineno-2-34">34</a></span>
-<span class="normal"><a href="#__codelineno-2-35">35</a></span>
-<span class="normal"><a href="#__codelineno-2-36">36</a></span>
-<span class="normal"><a href="#__codelineno-2-37">37</a></span>
-<span class="normal"><a href="#__codelineno-2-38">38</a></span>
-<span class="normal"><a href="#__codelineno-2-39">39</a></span>
-<span class="normal"><a href="#__codelineno-2-40">40</a></span>
-<span class="normal"><a href="#__codelineno-2-41">41</a></span>
-<span class="normal"><a href="#__codelineno-2-42">42</a></span>
-<span class="normal"><a href="#__codelineno-2-43">43</a></span>
-<span class="normal"><a href="#__codelineno-2-44">44</a></span>
-<span class="normal"><a href="#__codelineno-2-45">45</a></span>
-<span class="normal"><a href="#__codelineno-2-46">46</a></span>
-<span class="normal"><a href="#__codelineno-2-47">47</a></span>
-<span class="normal"><a href="#__codelineno-2-48">48</a></span>
-<span class="normal"><a href="#__codelineno-2-49">49</a></span>
-<span class="normal"><a href="#__codelineno-2-50">50</a></span>
-<span class="normal"><a href="#__codelineno-2-51">51</a></span>
-<span class="normal"><a href="#__codelineno-2-52">52</a></span>
-<span class="normal"><a href="#__codelineno-2-53">53</a></span>
-<span class="normal"><a href="#__codelineno-2-54">54</a></span>
-<span class="normal"><a href="#__codelineno-2-55">55</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># 网格世界：用值迭代演示动态规划的「反向递推」</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1">#   4x4 网格，从左上角走到右下角，每步代价 1，撞墙不动</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">goal</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>            <span class="c1"># 值函数：到目标的剩余步数</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="n">actions</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="k">for</span> <span class="n">sweep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">Vnew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a>            <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">goal</span><span class="p">:</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a>                <span class="k">continue</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a>            <span class="n">best</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a>            <span class="k">for</span> <span class="n">di</span><span class="p">,</span> <span class="n">dj</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a>                <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">di</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dj</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a>                <span class="c1"># 撞墙则原地不动</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a>                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">ni</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nj</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21"></a>                    <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22"></a>                <span class="n">best</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">best</span><span class="p">,</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">V</span><span class="p">[</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">])</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23"></a>            <span class="n">Vnew</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">best</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24"></a>    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Vnew</span> <span class="o">-</span> <span class="n">V</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">:</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25"></a>        <span class="n">V</span> <span class="o">=</span> <span class="n">Vnew</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26"></a>        <span class="k">break</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27"></a>    <span class="n">V</span> <span class="o">=</span> <span class="n">Vnew</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28"></a>
-<a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;值函数 V（到目标的剩余步数）：&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;       &quot;</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%7s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="s2">&quot;j=</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i=</span><span class="si">%d</span><span class="s2">  &quot;</span> <span class="o">%</span> <span class="n">i</span> <span class="o">+</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%7.0f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">V</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;同步扫了 </span><span class="si">%d</span><span class="s2"> 轮（值迭代的轮数 = 最远点到目标的步数）&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sweep</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;左上角到目标需要 </span><span class="si">%.0f</span><span class="s2"> 步（= 2*(n-1)，符合直觉）&quot;</span> <span class="o">%</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最优策略（从每格该往哪走）：&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38"></a><span class="n">arrow</span> <span class="o">=</span> <span class="p">{(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span> <span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span> <span class="s2">&quot;&lt;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">}</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40"></a>    <span class="n">row</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<a id="__codelineno-2-41" name="__codelineno-2-41"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42"></a>        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="o">==</span> <span class="n">goal</span><span class="p">:</span>
-<a id="__codelineno-2-43" name="__codelineno-2-43"></a>            <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;  *  &quot;</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44"></a>            <span class="k">continue</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45"></a>        <span class="n">bd</span> <span class="o">=</span> <span class="kc">None</span>
-<a id="__codelineno-2-46" name="__codelineno-2-46"></a>        <span class="k">for</span> <span class="n">di</span><span class="p">,</span> <span class="n">dj</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-<a id="__codelineno-2-47" name="__codelineno-2-47"></a>            <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">di</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dj</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">ni</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">nj</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">):</span>
-<a id="__codelineno-2-49" name="__codelineno-2-49"></a>                <span class="n">ni</span><span class="p">,</span> <span class="n">nj</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span>
-<a id="__codelineno-2-50" name="__codelineno-2-50"></a>            <span class="k">if</span> <span class="n">bd</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">V</span><span class="p">[</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">bd</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
-<a id="__codelineno-2-51" name="__codelineno-2-51"></a>                <span class="n">bd</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">V</span><span class="p">[</span><span class="n">ni</span><span class="p">,</span> <span class="n">nj</span><span class="p">],</span> <span class="p">(</span><span class="n">di</span><span class="p">,</span> <span class="n">dj</span><span class="p">))</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52"></a>        <span class="n">row</span> <span class="o">+=</span> <span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">  &quot;</span> <span class="o">%</span> <span class="n">arrow</span><span class="p">[</span><span class="n">bd</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-<a id="__codelineno-2-54" name="__codelineno-2-54"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-55" name="__codelineno-2-55"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;* = 目标；注意有很多格子的选择不唯一（多条等长最短路）&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>值函数 V（到目标的剩余步数）：
-           j=0    j=1    j=2    j=3
-i=0        6      5      4      3
-i=1        5      4      3      2
-i=2        4      3      2      1
-i=3        3      2      1      0
-
-同步扫了 7 轮（值迭代的轮数 = 最远点到目标的步数）
-左上角到目标需要 6 步（= 2*(n-1)，符合直觉）
-
-最优策略（从每格该往哪走）：
-  v    v    v    v  
-  v    v    v    v  
-  v    v    v    v  
-  &gt;    &gt;    &gt;    *  
-
-* = 目标；注意有很多格子的选择不唯一（多条等长最短路）</code></pre></p>
 <h2 id="_6">五、例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：两阶段动态规划<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：<span class="arithmatex">\(\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\boldsymbol{u}_k\)</span>，
@@ -11110,7 +10866,7 @@ J^* = V_2(1) = \frac{1}{9} + \frac{1}{2}\cdot\frac{4}{9}
 </details>
 <h3 id="2">例题 2：为什么值函数是二次型<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：说明在线性二次问题中，值函数必然形如
-<span class="arithmatex">\(V_k(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}P_k\boldsymbol{x}\)</span>。</p>
+<span class="arithmatex">\(V_k(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}S_k\boldsymbol{x}\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
 <p>用归纳法：若 <span class="arithmatex">\(V_{k+1}\)</span> 是二次型，看 <span class="arithmatex">\(V_k\)</span> 是什么。</p>
@@ -11121,13 +10877,13 @@ J^* = V_2(1) = \frac{1}{9} + \frac{1}{2}\cdot\frac{4}{9}
 <p>终端值函数 <span class="arithmatex">\(V_0(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}Q_N\boldsymbol{x}\)</span>
 是二次型。</p>
 <p><strong>第二步：归纳步。</strong></p>
-<p>设 <span class="arithmatex">\(V_{k+1}(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}P_{k+1}\boldsymbol{x}\)</span>。
+<p>设 <span class="arithmatex">\(V_{k+1}(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}S_{k+1}\boldsymbol{x}\)</span>。
 代入 Bellman 方程：</p>
 <div class="arithmatex">\[
 V_k(\boldsymbol{x}) = \min_{\boldsymbol{u}}\Big\{
 \boldsymbol{x}^{\mathsf T}Q\boldsymbol{x}
 + \boldsymbol{u}^{\mathsf T}R\boldsymbol{u}
-+ (A\boldsymbol{x}+B\boldsymbol{u})^{\mathsf T}P_{k+1}
++ (A\boldsymbol{x}+B\boldsymbol{u})^{\mathsf T}S_{k+1}
 (A\boldsymbol{x}+B\boldsymbol{u})\Big\}
 \]</div>
 <p>花括号内是 <span class="arithmatex">\((\boldsymbol{x},\boldsymbol{u})\)</span> 的<strong>联合二次型</strong>
@@ -11136,8 +10892,8 @@ V_k(\boldsymbol{x}) = \min_{\boldsymbol{u}}\Big\{
 <p>对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 求导得到<strong>线性</strong>方程，
 解出 <span class="arithmatex">\(\boldsymbol{u}^*=F\boldsymbol{x}\)</span> 是 <span class="arithmatex">\(\boldsymbol{x}\)</span> 的线性函数。
 把它代回二次型，得到 <span class="arithmatex">\(\boldsymbol{x}\)</span> 的二次型。</p>
-<p><strong>结论</strong>：<span class="arithmatex">\(V_k\)</span> 也是二次型，<span class="arithmatex">\(V_k(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}P_k\boldsymbol{x}\)</span> ✓</p>
-<p><strong>这个结论的价值</strong>：值函数只要存一个 <span class="arithmatex">\(n\times n\)</span> 矩阵 <span class="arithmatex">\(P_k\)</span>，
+<p><strong>结论</strong>：<span class="arithmatex">\(V_k\)</span> 也是二次型，<span class="arithmatex">\(V_k(\boldsymbol{x})=\boldsymbol{x}^{\mathsf T}S_k\boldsymbol{x}\)</span> ✓</p>
+<p><strong>这个结论的价值</strong>：值函数只要存一个 <span class="arithmatex">\(n\times n\)</span> 矩阵 <span class="arithmatex">\(S_k\)</span>，
 而<strong>不需要</strong>在状态网格上存 <span class="arithmatex">\(m^n\)</span> 个值 —— 这就是维数灾难的突破口。</p>
 </details>
 <h3 id="3">例题 3：动态规划与穷举的复杂度差<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>

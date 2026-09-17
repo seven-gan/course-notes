@@ -9639,7 +9639,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 1 章 静态优化</code><code>本课程大纲 第 2 章</code><code>本页最优解与数值迭代均由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（无约束优化 / 拉格朗日乘子 / 梯度下降 / 牛顿法）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 1 章 静态优化</code><code>本课程大纲 第 2 章</code><code>数值示例以手算演算给出，可与任一本最优控制教材对照</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（无约束优化 / 拉格朗日乘子 / 梯度下降 / 牛顿法）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">静态优化<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>最优控制的出发点是<strong>静态优化</strong>：系统没有时间演化，只求一个向量让标量代价最小。</p>
@@ -9735,62 +9735,6 @@ L(\boldsymbol{u}) = \frac{1}{2}\boldsymbol{u}^{\mathsf T}R\boldsymbol{u}
 后面的 LQR 里，代价函数正是二次型。</p>
 <p><strong><span class="arithmatex">\(R \succ 0\)</span> 的作用</strong>：它保证 <span class="arithmatex">\(L\)</span> 严格凸，
 所以驻点<strong>唯一</strong>且必为全局极小 —— 不需要再判断二阶条件。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1"># 二次型的闭式解：u* = -R^{-1} q</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">4.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>              <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">u_star</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R 的特征值：&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">R</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;（都为正 -&gt; R 正定）&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;闭式解 u* =&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">u_star</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="c1"># 用数值优化独立复核</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">L</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">u</span> <span class="o">@</span> <span class="n">R</span> <span class="o">@</span> <span class="n">u</span> <span class="o">+</span> <span class="n">q</span> <span class="o">@</span> <span class="n">u</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">grad</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="k">return</span> <span class="n">R</span> <span class="o">@</span> <span class="n">u</span> <span class="o">+</span> <span class="n">q</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">grad</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;梯度下降收敛到：&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者之差：      </span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_star</span><span class="p">))</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;L(u*) = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">L</span><span class="p">(</span><span class="n">u_star</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>R 的特征值： [2.382 4.618] （都为正 -&gt; R 正定）
-闭式解 u* = [0.454545 0.181818]
-梯度下降收敛到： [0.454545 0.181818]
-两者之差：      7.85e-17
-
-L(u*) = -0.545455</code></pre></p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 352.790313 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="无约束优化的三种驻点：极小、极大、鞍点">
@@ -12766,132 +12710,10 @@ L 356.742188 200.946
 </tr>
 </tbody>
 </table>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span>
-<span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span>
-<span class="normal"><a href="#__codelineno-1-19">19</a></span>
-<span class="normal"><a href="#__codelineno-1-20">20</a></span>
-<span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span>
-<span class="normal"><a href="#__codelineno-1-23">23</a></span>
-<span class="normal"><a href="#__codelineno-1-24">24</a></span>
-<span class="normal"><a href="#__codelineno-1-25">25</a></span>
-<span class="normal"><a href="#__codelineno-1-26">26</a></span>
-<span class="normal"><a href="#__codelineno-1-27">27</a></span>
-<span class="normal"><a href="#__codelineno-1-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># 用一个病态二次型对比梯度下降与牛顿法</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">],</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a>              <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]])</span>          <span class="c1"># 条件数 100</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">100.0</span><span class="p">])</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">u_star</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;条件数 = </span><span class="si">%.1f</span><span class="s2">，最优解 u* = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cond</span><span class="p">(</span><span class="n">R</span><span class="p">),</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a>                                        <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">u_star</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="c1"># 梯度下降（步长取稳定上界的一半）</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="n">alpha</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvalsh</span><span class="p">(</span><span class="n">R</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;梯度下降（步长 </span><span class="si">%.4f</span><span class="s2">）：&quot;</span> <span class="o">%</span> <span class="n">alpha</span><span class="p">)</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18"></a>    <span class="n">uu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a>        <span class="n">uu</span> <span class="o">=</span> <span class="n">uu</span> <span class="o">-</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">R</span> <span class="o">@</span> <span class="n">uu</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%3d</span><span class="s2"> 步后误差 </span><span class="si">%.3e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">uu</span> <span class="o">-</span> <span class="n">u_star</span><span class="p">)))</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22"></a>
-<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="c1"># 牛顿法</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">R</span> <span class="o">@</span> <span class="n">u</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;牛顿法：1 步后误差 </span><span class="si">%.3e</span><span class="s2">（二次型一击命中）&quot;</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28"></a>      <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">u_star</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>条件数 = 100.0，最优解 u* = [1. 1.]
-
-梯度下降（步长 0.0100）：
-    0 步后误差 1.414e+00
-    5 步后误差 9.510e-01
-   20 步后误差 8.179e-01
-   50 步后误差 6.050e-01
-  100 步后误差 3.660e-01
-
-牛顿法：1 步后误差 0.000e+00（二次型一击命中）</code></pre></p>
 <p><strong>这组数的对照</strong>：梯度下降在条件数 100 的问题上，
 100 步后误差仍在 <span class="arithmatex">\(10^{-2}\)</span> 量级；而牛顿法<strong>一步</strong>就到机器精度。
 病态程度每加一个量级，梯度下降就慢一个量级的步数。</p>
 <hr />
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#__codelineno-2-12">12</a></span>
-<span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span>
-<span class="normal"><a href="#__codelineno-2-15">15</a></span>
-<span class="normal"><a href="#__codelineno-2-16">16</a></span>
-<span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span>
-<span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span>
-<span class="normal"><a href="#__codelineno-2-21">21</a></span>
-<span class="normal"><a href="#__codelineno-2-22">22</a></span>
-<span class="normal"><a href="#__codelineno-2-23">23</a></span>
-<span class="normal"><a href="#__codelineno-2-24">24</a></span>
-<span class="normal"><a href="#__codelineno-2-25">25</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># 用拉格朗日乘子法解等式约束问题，并用数值优化复核</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1">#   min x^2 + y^2   s.t.  x + y = 4</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="c1"># 解析解为 x = y = 2</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>       <span class="c1"># dL/dx = 2x + lambda = 0</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a>              <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>       <span class="c1"># dL/dy = 2y + lambda = 0</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a>              <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>      <span class="c1"># 约束 x + y = 4</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">])</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="n">sol</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;拉格朗日方程组的解：&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  x = </span><span class="si">%.6f</span><span class="s2">, y = </span><span class="si">%.6f</span><span class="s2">, lambda = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sol</span><span class="p">))</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  目标值 L = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">sol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="c1"># 独立复核：沿约束方向做一维参数化搜索（y = 4 - x）</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">L_on_line</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a>
-<a id="__codelineno-2-21" name="__codelineno-2-21"></a><span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">14.0</span><span class="p">,</span> <span class="mi">400000</span><span class="p">)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22"></a><span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">L_on_line</span><span class="p">(</span><span class="n">xs</span><span class="p">)))</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;沿约束直接搜索的最优 x = </span><span class="si">%.4f</span><span class="s2">（网格精度 </span><span class="si">%.5f</span><span class="s2">）&quot;</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24"></a>      <span class="o">%</span> <span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;对应 y = </span><span class="si">%.4f</span><span class="s2">，L = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">L_on_line</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>拉格朗日方程组的解：
-  x = 2.000000, y = 2.000000, lambda = -4.000000
-  目标值 L = 8.000000
-
-沿约束直接搜索的最优 x = 2.0000（网格精度 0.00006）
-对应 y = 2.0000，L = 8.000000</code></pre></p>
 <h2 id="_5">四、例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：求二次型的最优解<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：<span class="arithmatex">\(L(u_1,u_2) = 2u_1^2 + u_1u_2 + u_2^2 - 4u_1 - 2u_2\)</span>。求最优解。</p>

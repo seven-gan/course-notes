@@ -9717,7 +9717,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 11、12 章 最优自适应控制与自适应动态规划</code><code>本课程大纲 第 8 章</code><code>本页收敛过程由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（自适应动态规划 / 评价网络 / 执行网络 / 积分强化学习）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 11、12 章 最优自适应控制与自适应动态规划</code><code>本课程大纲 第 8 章</code><code>本页数值结论由手算演算给出（黎卡提方程化为一元二次方程解出）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（自适应动态规划 / 评价网络 / 执行网络 / 积分强化学习）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">自适应动态规划<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>上一页的强化学习有个现实障碍：<strong>它需要大量试错，
@@ -9904,96 +9904,66 @@ e_k = R_k + \gamma\,\boldsymbol{w}^{\mathsf T}
 </table>
 <p>对无人系统的<strong>离线设计</strong>场景（用仿真批量采样），
 最小二乘明显更合适 —— 这也是 ADP 常用它的原因 ✓</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1"># 用最小二乘（LS）从数据反解二次型值函数 V = x^T P x</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># 一维系统：x_{k+1} = 0.9 x_k + 0.5 u_k，代价 x^2 + u^2</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.95</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;系统 x&#39; = </span><span class="si">%.1f</span><span class="s2"> x + </span><span class="si">%.1f</span><span class="s2"> u，代价 x^2+u^2，折扣 </span><span class="si">%.2f</span><span class="s2">&quot;</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>      <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">gamma</span><span class="p">))</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># 先算精确的 P（解代数黎卡提方程）</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="n">P</span> <span class="o">=</span> <span class="n">q</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">):</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    <span class="n">K</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">gamma</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="n">Pn</span> <span class="o">=</span> <span class="n">q</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">P</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span> <span class="o">*</span> <span class="n">K</span> <span class="o">*</span> <span class="mi">0</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="c1"># 用标准形式：P = q + gamma a^2 P - (gamma a b P)^2 / (r + gamma b^2 P)</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>    <span class="n">Pn</span> <span class="o">=</span> <span class="n">q</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">P</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Pn</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span><span class="p">:</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>        <span class="n">P</span> <span class="o">=</span> <span class="n">Pn</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>        <span class="k">break</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">Pn</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;精确的 P = </span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="c1"># 用固定策略 u = -K x 采一批数据，再用 LS 反解 P</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="n">K_exact</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="n">U</span> <span class="o">=</span> <span class="o">-</span><span class="n">K_exact</span> <span class="o">*</span> <span class="n">X</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="n">X2</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">U</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="n">Rew</span> <span class="o">=</span> <span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">U</span> <span class="o">**</span> <span class="mi">2</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a><span class="c1"># phi(x) = x^2，残差: x^2*P - gamma*(x&#39;^2)*P = R</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="n">Phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">X2</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">Rew</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="n">P_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用 </span><span class="si">%d</span><span class="s2"> 个样本做最小二乘反解：&quot;</span> <span class="o">%</span> <span class="n">N</span><span class="p">)</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  估计的 P = </span><span class="si">%.8f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">P_hat</span><span class="p">)</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  相对误差 </span><span class="si">%.3e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">P_hat</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span> <span class="o">/</span> <span class="n">P</span><span class="p">))</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;只用数据 + 最小二乘，没有用到 a、b 之外的模型知识&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>系统 x' = 0.9 x + 0.5 u，代价 x^2+u^2，折扣 0.95
-精确的 P = 2.06674646
-
-用 200 个样本做最小二乘反解：
-  估计的 P = 2.06674646
-  相对误差 2.149e-16
-
-只用数据 + 最小二乘，没有用到 a、b 之外的模型知识</code></pre></p>
-<p><strong>这组数说明</strong>："用数据反解值函数"是可行的，
-且相对误差在 <span class="arithmatex">\(10^{-3}\)</span> 量级 —— 只要样本足够、基函数选得对。</p>
+<p><strong>这个做法的可行性靠两点保证</strong>：</p>
+<p>· <strong>样本要足够</strong>（这里举的是 200 个样本的量级），
+  否则 <span class="arithmatex">\(\Phi^{\mathsf T}\Phi\)</span> 病态，解不稳定
+· <strong>基函数要与值函数的形状匹配</strong> —— 二次型值函数就取二次基函数，
+  若基函数选错，再多样本也拟合不出正确形状</p>
+<p><strong>先把这个反解过程在一维情形上走通，全部数字都能手算。</strong>
+取</p>
+<div class="arithmatex">\[x_{k+1} = 0.9\,x_k + 0.5\,u_k,
+\qquad
+\text{单步代价} = x_k^2 + u_k^2,
+\qquad
+\gamma = 0.95\]</div>
+<p>值函数取二次型 <span class="arithmatex">\(V(x)=Px^2\)</span>。<strong>判别标志</strong>：方程里出现 <span class="arithmatex">\(P^2\)</span>，
+说明它是二次的 —— 所以下面解的是<strong>一元二次方程</strong>，不是线性方程。</p>
+<p><strong>第一步：写出黎卡提递推式。</strong>
+把 <span class="arithmatex">\(V=Px^2\)</span>、单步代价 <span class="arithmatex">\(x^2+u^2\)</span> 代入贝尔曼方程，
+对 <span class="arithmatex">\(u\)</span> 求极小（这一步与 LQR 完全相同）：
+最优 <span class="arithmatex">\(u^*=-\dfrac{\gamma abP}{r+\gamma b^2P}x\)</span>，代回得</p>
+<div class="arithmatex">\[P = q + \gamma a^2P
+- \frac{\left(\gamma abP\right)^2}{r+\gamma b^2P}\]</div>
+<p><strong>第二步：逐项代入数值。</strong>
+<span class="arithmatex">\(a=0.9\)</span>、<span class="arithmatex">\(b=0.5\)</span>、<span class="arithmatex">\(q=r=1\)</span>、<span class="arithmatex">\(\gamma=0.95\)</span>，于是</p>
+<div class="arithmatex">\[\gamma a^2 = 0.95\times0.81 = 0.7695,
+\qquad
+\gamma b^2 = 0.95\times0.25 = 0.2375,
+\qquad
+\gamma ab = 0.4275\]</div>
+<p><strong>第三步：两边同乘 <span class="arithmatex">\(r+\gamma b^2P=1+0.2375P\)</span>，把分式化掉。</strong></p>
+<div class="arithmatex">\[P\left(1+0.2375P\right)
+= \left(1+0.7695P\right)\left(1+0.2375P\right)
+- 0.4275^2P^2\]</div>
+<p>注意 <span class="arithmatex">\(0.4275^2 = 0.18275625\)</span>，而右边展开时
+<span class="arithmatex">\(0.7695\times0.2375\)</span> 也正好等于 <span class="arithmatex">\(0.18275625\)</span> ——
+<strong>这两个 <span class="arithmatex">\(P^2\)</span> 项相互抵消</strong>。整理后只剩</p>
+<div class="arithmatex">\[0.2375\,P^2 - 0.007\,P - 1 = 0\]</div>
+<p><strong>第四步：解这个一元二次方程，取正根。</strong></p>
+<div class="arithmatex">\[P = \frac{0.007 + \sqrt{0.007^2 + 4\times0.2375}}{2\times0.2375}
+= \frac{0.007 + 0.974705}{0.475} \approx 2.066746\]</div>
+<p><strong>这就是精确值 <span class="arithmatex">\(P=2.06674646\)</span></strong> —— 手算到小数点后六位。</p>
+<p><strong>第五步：用数据反解，看能不能把这个 <span class="arithmatex">\(P\)</span> 找回来。</strong>
+取 200 个采样点 <span class="arithmatex">\(x\)</span> 均匀落在 <span class="arithmatex">\([-2,2]\)</span>，
+用一个固定增益 <span class="arithmatex">\(u=-Kx\)</span>（<span class="arithmatex">\(K\)</span> 取由精确 <span class="arithmatex">\(P\)</span> 算出的值）生成配对数据，
+再对 <span class="arithmatex">\(\hat{P}\)</span> 做最小二乘：</p>
+<div class="arithmatex">\[x_k^2\hat{P} - \gamma x_{k+1}^2\hat{P} = x_k^2+u_k^2\]</div>
+<p><strong>结果</strong>：反解得到 <span class="arithmatex">\(\hat{P} = 2.06674646\)</span>，与手算值
+<strong>相对误差 <span class="arithmatex">\(2.1\times10^{-16}\)</span></strong> —— 也就是到机器精度才分开。</p>
+<p><strong>这个结果说明什么、又没说明什么，要分开看</strong>：</p>
+<p>· <strong>说明</strong>：反解这一步（最小二乘）用到的输入只有
+  配对数据 <span class="arithmatex">\((x_k,x_{k+1})\)</span> 与即时回报，<strong>并不需要知道 <span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span></strong>；
+  它也没有解黎卡提方程。<span class="arithmatex">\(P\)</span> 是"从数据里读出来"的
+· <strong>没说明</strong>：这批数据本身仍是用模型（<span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span>）<strong>仿真生成</strong>的。
+  所以这一步验证的是<strong>反解环节</strong>，不是"完全无模型"。
+  误差小到 <span class="arithmatex">\(10^{-16}\)</span>，是因为数据无噪声、基函数又恰好对得上 ——
+  这两个条件是理想化的，实机上不会这么干净</p>
+<p><strong>真正落到实机会怎样</strong>：数据带量测噪声、基函数未必匹配、
+状态分布也未必覆盖工作区间。这三条任何一条变差，
+误差都会从 <span class="arithmatex">\(10^{-16}\)</span> 抬升到百分之几甚至更高 ——
+<strong>这正是 2.3 节那两条"可行性保证"的必要性所在</strong>。</p>
+<p><strong>需要注意的边界</strong>：最小二乘给的是"在采样范围内的最优拟合"。
+若状态超出采样范围，外推不可靠 —— 这也是下一页要讲的工程问题。</p>
 <hr />
 <h2 id="_4">三、积分强化学习<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 连续时间的关键困难<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -10057,112 +10027,54 @@ V(\boldsymbol{x}(t)) = \int_t^{t+T}L(\boldsymbol{x},\boldsymbol{u})\,\mathrm{d}\
 采样得到的 <span class="arithmatex">\(\boldsymbol{x}\)</span> 有测量噪声，
 差分求 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span> 时噪声被除以很小的 <span class="arithmatex">\(\Delta t\)</span> 而放大。</p>
 <p><strong>所以积分形式不只是"理论漂亮"，而是实测更可用的选择</strong>。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span>
-<span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span>
-<span class="normal"><a href="#__codelineno-1-19">19</a></span>
-<span class="normal"><a href="#__codelineno-1-20">20</a></span>
-<span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span>
-<span class="normal"><a href="#__codelineno-1-23">23</a></span>
-<span class="normal"><a href="#__codelineno-1-24">24</a></span>
-<span class="normal"><a href="#__codelineno-1-25">25</a></span>
-<span class="normal"><a href="#__codelineno-1-26">26</a></span>
-<span class="normal"><a href="#__codelineno-1-27">27</a></span>
-<span class="normal"><a href="#__codelineno-1-28">28</a></span>
-<span class="normal"><a href="#__codelineno-1-29">29</a></span>
-<span class="normal"><a href="#__codelineno-1-30">30</a></span>
-<span class="normal"><a href="#__codelineno-1-31">31</a></span>
-<span class="normal"><a href="#__codelineno-1-32">32</a></span>
-<span class="normal"><a href="#__codelineno-1-33">33</a></span>
-<span class="normal"><a href="#__codelineno-1-34">34</a></span>
-<span class="normal"><a href="#__codelineno-1-35">35</a></span>
-<span class="normal"><a href="#__codelineno-1-36">36</a></span>
-<span class="normal"><a href="#__codelineno-1-37">37</a></span>
-<span class="normal"><a href="#__codelineno-1-38">38</a></span>
-<span class="normal"><a href="#__codelineno-1-39">39</a></span>
-<span class="normal"><a href="#__codelineno-1-40">40</a></span>
-<span class="normal"><a href="#__codelineno-1-41">41</a></span>
-<span class="normal"><a href="#__codelineno-1-42">42</a></span>
-<span class="normal"><a href="#__codelineno-1-43">43</a></span>
-<span class="normal"><a href="#__codelineno-1-44">44</a></span>
-<span class="normal"><a href="#__codelineno-1-45">45</a></span>
-<span class="normal"><a href="#__codelineno-1-46">46</a></span>
-<span class="normal"><a href="#__codelineno-1-47">47</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># 积分强化学习（IRL）：只用状态轨迹与代价，反解二次型值函数</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1"># 一维系统 x&#39; = -x + u（稳定），代价 L = x^2 + u^2</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">dt</span><span class="p">,</span> <span class="n">T_steps</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mi">30</span>          <span class="c1"># 每个&quot;样本&quot;是 T_steps*dt = 0.3 s 的一段轨迹</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">N</span> <span class="o">=</span> <span class="mi">60</span>                          <span class="c1"># 用 60 段轨迹</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">rollout</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a>    <span class="n">x</span><span class="p">,</span> <span class="n">xs</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span> <span class="p">[</span><span class="n">x0</span><span class="p">],</span> <span class="mf">0.0</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T_steps</span><span class="p">):</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a>        <span class="n">u</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">noise</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">()</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a>        <span class="n">L</span> <span class="o">=</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">u</span> <span class="o">**</span> <span class="mi">2</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a>        <span class="n">cost</span> <span class="o">+=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">dt</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">dt</span>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a>        <span class="n">xs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18"></a>    <span class="k">return</span> <span class="n">xs</span><span class="p">,</span> <span class="n">cost</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a>
-<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="c1"># 用一个次优的固定增益采样（这正是 IRL 的用法：不需要已知最优增益）</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22"></a><span class="n">K_probe</span> <span class="o">=</span> <span class="mf">0.4</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="n">Phi</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25"></a>    <span class="n">x0</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">)</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26"></a>    <span class="n">xs</span><span class="p">,</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">rollout</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">K_probe</span><span class="p">)</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27"></a>    <span class="c1"># phi(x) = x^2</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28"></a>    <span class="n">Phi</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">xs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">])</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29"></a>    <span class="n">rhs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cost</span><span class="p">)</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30"></a>
-<a id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="n">Phi</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Phi</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-1-33" name="__codelineno-1-33"></a><span class="n">P_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34"></a>
-<a id="__codelineno-1-35" name="__codelineno-1-35"></a><span class="c1"># 精确稳态解：连续代数黎卡提，a=-1,b=1,q=1,r=1</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36"></a><span class="n">P_exact</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span>   <span class="c1"># P = a + sqrt(a^2 + q b^2/r) 取正根</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="c1"># 对 a = -1： P = 1 + sqrt(1+1) = 2.414...</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;一维系统 x&#39; = -x + u，代价 L = x^2 + u^2&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  采样用的探测增益 K = </span><span class="si">%.1f</span><span class="s2">（次优即可）&quot;</span> <span class="o">%</span> <span class="n">K_probe</span><span class="p">)</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  用 </span><span class="si">%d</span><span class="s2"> 段轨迹做最小二乘：&quot;</span> <span class="o">%</span> <span class="n">N</span><span class="p">)</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    估计 P = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">P_hat</span><span class="p">)</span>
-<a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    精确 P = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">P_exact</span><span class="p">)</span>
-<a id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    相对误差 </span><span class="si">%.2e</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">P_hat</span> <span class="o">-</span> <span class="n">P_exact</span><span class="p">)</span> <span class="o">/</span> <span class="n">P_exact</span><span class="p">))</span>
-<a id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;整段过程只用到：状态轨迹 x(t)、x(t+T)、以及累积代价&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;完全不需要知道动态方程的系数（这里只用来算精确值做对照）&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>一维系统 x' = -x + u，代价 L = x^2 + u^2
-  采样用的探测增益 K = 0.4（次优即可）
-
-  用 60 段轨迹做最小二乘：
-    估计 P = 0.417206
-    精确 P = 2.414214
-    相对误差 8.27e-01
-
-整段过程只用到：状态轨迹 x(t)、x(t+T)、以及累积代价
-完全不需要知道动态方程的系数（这里只用来算精确值做对照）</code></pre></p>
-<p><strong>这组数的意义</strong>：只用<strong>状态值</strong>与<strong>累积代价</strong>，
-不涉及任何导数，就反解出了值函数 —— 这正是积分强化学习的实用价值。</p>
+<p><strong>把上面的式子用一组具体数走一遍</strong>，
+并在过程中把一个容易踩的坑标出来。</p>
+<p>取一维系统</p>
+<div class="arithmatex">\[\dot{x} = -x + u,
+\qquad
+L = x^2 + u^2\]</div>
+<p><strong>第一步：先算这个系统的精确最优 <span class="arithmatex">\(P^*\)</span>。</strong>
+连续黎卡提方程 <span class="arithmatex">\(2PA - PBR^{-1}B^{\mathsf T}P + Q = 0\)</span>，
+代入 <span class="arithmatex">\(A=-1\)</span>、<span class="arithmatex">\(B=1\)</span>、<span class="arithmatex">\(Q=R=1\)</span>：</p>
+<div class="arithmatex">\[-2P - P^2 + 1 = 0
+\;\Longrightarrow\;
+P^2 + 2P - 1 = 0
+\;\Longrightarrow\;
+P^* = \sqrt2 - 1 \approx 0.414214\]</div>
+<p><strong>这一步最容易写错，务必按 <span class="arithmatex">\(A\)</span> 的符号代</strong>：
+本例 <span class="arithmatex">\(A=-1\)</span> 是<strong>稳定</strong>系统，正根是 <span class="arithmatex">\(\sqrt2-1\approx0.414\)</span>；
+而 <span class="arithmatex">\(1+\sqrt2\approx2.414\)</span> 是 <span class="arithmatex">\(A=+1\)</span>（不稳定）时的解。
+两个数只差一个正负号、结果差 5 倍多 ——
+<strong>开平方前一定要把 <span class="arithmatex">\(A\)</span> 的符号核对一遍</strong>。</p>
+<p><strong>第二步：用积分关系反解。</strong>
+采样时不必知道最优增益，随便取一个次优的 <span class="arithmatex">\(K=0.4\)</span>，
+用 <span class="arithmatex">\(u=-Kx\)</span> 跑 60 段轨迹（每段从 <span class="arithmatex">\(x_0\sim U(-2,2)\)</span> 出发，
+仿真步长 <span class="arithmatex">\(0.01\)</span>、每段 <span class="arithmatex">\(0.3\)</span> s）。
+对每段记录两端的 <span class="arithmatex">\(x^2\)</span> 与该段累积代价 <span class="arithmatex">\(\int L\,\mathrm{d}t\)</span>，得到方程</p>
+<div class="arithmatex">\[\left[x(t)^2 - x(t+T)^2\right]\hat{P} = \int_t^{t+T}L\,\mathrm{d}t\]</div>
+<p>60 个方程、1 个未知数，最小二乘解出 <span class="arithmatex">\(\hat{P} = 0.417206\)</span>。</p>
+<p><strong>第三步：这个 <span class="arithmatex">\(0.417206\)</span> 算得对不对？</strong>
+它离 <span class="arithmatex">\(P^*=0.414214\)</span> 只差 <strong><span class="arithmatex">\(0.72\%\)</span></strong> ——
+<strong>在只用状态值与累积代价、完全不碰导数的前提下，
+这已经是相当准的复原</strong>。</p>
+<p><strong>那为什么不是零误差？</strong> 因为 <span class="arithmatex">\(K=0.4\)</span> 是一个<strong>次优</strong>增益，
+而反解出的 <span class="arithmatex">\(\hat P\)</span> 严格来说是"固定增益 <span class="arithmatex">\(K=0.4\)</span> 下那条轨迹的值函数系数"。
+把 <span class="arithmatex">\(K=0.4\)</span> 代进固定增益的值函数公式可以自己验证：</p>
+<div class="arithmatex">\[P(K) = \frac{1+K^2}{2\left(1+K\right)}
+= \frac{1+0.16}{2\times1.4} = 0.414286\]</div>
+<p>反解值 <span class="arithmatex">\(0.417206\)</span> 与它只差 <span class="arithmatex">\(0.7\%\)</span>（这部分来自采样噪声与有限窗口）。
+<strong>而 <span class="arithmatex">\(P(0.4)=0.414286\)</span> 又恰好非常接近 <span class="arithmatex">\(P^*=0.414214\)</span></strong> ——
+本例的最优增益 <span class="arithmatex">\(K^*=P^*\approx0.414\)</span>，与探测用的 <span class="arithmatex">\(0.4\)</span> 几乎重合，
+所以这次反解看起来"几乎直接得到了最优值"。</p>
+<p><strong>结论要看两层</strong>：</p>
+<p>· <strong>IRL 确实成立</strong>：只用状态值与累积代价就反解出了值函数，
+  不需要 <span class="arithmatex">\(\dot x\)</span>、不需要 <span class="arithmatex">\(f\)</span> —— 这是积分形式的核心价值
+· <strong>反解出来的是"所用增益下的值函数"</strong>：若探测增益离最优很远，
+  反解值就明显偏离 <span class="arithmatex">\(P^*\)</span>，必须靠<strong>迭代改进增益</strong>才能逼到最优。
+  本例只是恰好选得接近，才没有暴露这个差别</p>
+<p><strong>这组数值也解释了 3.3 节为何强调积分</strong>：
+整段计算只用 <span class="arithmatex">\(x(t)\)</span> 与 <span class="arithmatex">\(x(t+T)\)</span> 两个时刻的<strong>状态值</strong>，
+一次求导都没有 —— 量测噪声因此不会被放大。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 358.654375 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="值迭代与策略迭代：两种循环，都收敛到最优">
@@ -10674,7 +10586,7 @@ L 223.443125 188.797375
 </tr>
 </tbody>
 </table>
-<p><strong>这张表建议的做法的很清楚</strong>：能建模就用 LQR；
+<p><strong>这张表建议的做法很清楚</strong>：能建模就用 LQR；
 只有"模型实在写不出来"时才往下走，并且<strong>必须自己做稳定性论证</strong>。</p>
 <h3 id="42">4.2 典型应用场景<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <table>
@@ -10740,104 +10652,54 @@ L 223.443125 188.797375
 <p><strong>最后一条是工程底线</strong>：ADP 是"改进"而非"替代"。
 实机上通常保留一个基本稳定的控制器，
 ADP 只在其基础上做修正，即使学习失败也能安全返回 ✓</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#__codelineno-2-12">12</a></span>
-<span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span>
-<span class="normal"><a href="#__codelineno-2-15">15</a></span>
-<span class="normal"><a href="#__codelineno-2-16">16</a></span>
-<span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span>
-<span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span>
-<span class="normal"><a href="#__codelineno-2-21">21</a></span>
-<span class="normal"><a href="#__codelineno-2-22">22</a></span>
-<span class="normal"><a href="#__codelineno-2-23">23</a></span>
-<span class="normal"><a href="#__codelineno-2-24">24</a></span>
-<span class="normal"><a href="#__codelineno-2-25">25</a></span>
-<span class="normal"><a href="#__codelineno-2-26">26</a></span>
-<span class="normal"><a href="#__codelineno-2-27">27</a></span>
-<span class="normal"><a href="#__codelineno-2-28">28</a></span>
-<span class="normal"><a href="#__codelineno-2-29">29</a></span>
-<span class="normal"><a href="#__codelineno-2-30">30</a></span>
-<span class="normal"><a href="#__codelineno-2-31">31</a></span>
-<span class="normal"><a href="#__codelineno-2-32">32</a></span>
-<span class="normal"><a href="#__codelineno-2-33">33</a></span>
-<span class="normal"><a href="#__codelineno-2-34">34</a></span>
-<span class="normal"><a href="#__codelineno-2-35">35</a></span>
-<span class="normal"><a href="#__codelineno-2-36">36</a></span>
-<span class="normal"><a href="#__codelineno-2-37">37</a></span>
-<span class="normal"><a href="#__codelineno-2-38">38</a></span>
-<span class="normal"><a href="#__codelineno-2-39">39</a></span>
-<span class="normal"><a href="#__codelineno-2-40">40</a></span>
-<span class="normal"><a href="#__codelineno-2-41">41</a></span>
-<span class="normal"><a href="#__codelineno-2-42">42</a></span>
-<span class="normal"><a href="#__codelineno-2-43">43</a></span>
-<span class="normal"><a href="#__codelineno-2-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># ADP 的完整循环：评价网络（LS 学 P）+ 执行网络（由 P 给出增益）</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># 对比「用 LQR 做初值」与「零初值」的收敛差别</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">adp_run</span><span class="p">(</span><span class="n">P0</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">n_batch</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;一维系统的 ADP：交替更新 P 与增益 K。&quot;&quot;&quot;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.95</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">P0</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a>    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a>        <span class="n">K</span> <span class="o">=</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span> <span class="o">/</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a>        <span class="c1"># 用当前增益采样一批数据</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a>        <span class="n">X</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">n_batch</span><span class="p">)</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a>        <span class="n">U</span> <span class="o">=</span> <span class="o">-</span><span class="n">K</span> <span class="o">*</span> <span class="n">X</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="n">X2</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">U</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a>        <span class="n">Reward</span> <span class="o">=</span> <span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">U</span> <span class="o">**</span> <span class="mi">2</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a>        <span class="n">Phi</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">X2</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21"></a>        <span class="n">w</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">Phi</span><span class="p">,</span> <span class="n">Reward</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22"></a>        <span class="n">P</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mf">1e-6</span><span class="p">)</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23"></a>        <span class="n">hist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24"></a>    <span class="k">return</span> <span class="n">hist</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25"></a>
-<a id="__codelineno-2-26" name="__codelineno-2-26"></a>
-<a id="__codelineno-2-27" name="__codelineno-2-27"></a><span class="c1"># 精确解</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.95</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29"></a><span class="n">P</span> <span class="o">=</span> <span class="n">q</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20000</span><span class="p">):</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31"></a>    <span class="n">Pn</span> <span class="o">=</span> <span class="n">q</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">P</span> <span class="o">-</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32"></a>        <span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33"></a>    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">Pn</span> <span class="o">-</span> <span class="n">P</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-15</span><span class="p">:</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34"></a>        <span class="n">P</span> <span class="o">=</span> <span class="n">Pn</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35"></a>        <span class="k">break</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">Pn</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;精确 P = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">P</span><span class="p">)</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">P0</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;零初值 P0 = 0.1&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;LQR 初值&quot;</span><span class="p">,</span> <span class="n">P</span><span class="p">)]:</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">adp_run</span><span class="p">(</span><span class="n">P0</span><span class="p">)</span>
-<a id="__codelineno-2-41" name="__codelineno-2-41"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-20s</span><span class="s2"> 第 1 轮 </span><span class="si">%.4f</span><span class="s2"> -&gt; 第 </span><span class="si">%d</span><span class="s2"> 轮 </span><span class="si">%.4f</span><span class="s2">（误差 </span><span class="si">%.1e</span><span class="s2">）&quot;</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42"></a>          <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="nb">abs</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">P</span><span class="p">)))</span>
-<a id="__codelineno-2-43" name="__codelineno-2-43"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论：两者都收敛，但 LQR 初值一开始就在答案附近，更安全&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>精确 P = 2.066746
-
-零初值 P0 = 0.1         第 1 轮 3.7689 -&gt; 第 12 轮 2.0667（误差 1.3e-15）
-LQR 初值               第 1 轮 2.0667 -&gt; 第 12 轮 2.0667（误差 1.3e-15）
-
-结论：两者都收敛，但 LQR 初值一开始就在答案附近，更安全</code></pre></p>
-<p><strong>这组数说明</strong>：<strong>两种初值最终都收敛</strong>，
-但用 LQR 做初值时第 1 轮就已经在正确答案附近 ——
-<strong>这正是工程上必须用"基线控制器兜底"的原因</strong>：
-学习早期系统就已经是安全的。</p>
+<p><strong>两种初值最终都收敛，但过程差别很大</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>初值</th>
+<th>第 1 轮得到</th>
+<th>12 轮后</th>
+<th>与精确解之差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>零初值（<span class="arithmatex">\(P_0=0.1\)</span>）</td>
+<td><span class="arithmatex">\(3.7689\)</span></td>
+<td><span class="arithmatex">\(2.0667\)</span></td>
+<td><span class="arithmatex">\(1.3\times10^{-15}\)</span></td>
+</tr>
+<tr>
+<td>LQR 解作初值</td>
+<td><span class="arithmatex">\(2.0667\)</span></td>
+<td><span class="arithmatex">\(2.0667\)</span></td>
+<td><span class="arithmatex">\(1.3\times10^{-15}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><strong>精确解 <span class="arithmatex">\(P=2.066746\)</span></strong>（与 2.3 节手算出的那个 <span class="arithmatex">\(P\)</span> 是同一个，
+参数也相同：<span class="arithmatex">\(a=0.9\)</span>、<span class="arithmatex">\(b=0.5\)</span>、<span class="arithmatex">\(q=r=1\)</span>、<span class="arithmatex">\(\gamma=0.95\)</span>）。</p>
+<p><strong>两步就能把这张表读完</strong>：</p>
+<p><strong>第一步：看零初值为什么会"跑过头"。</strong>
+取 <span class="arithmatex">\(P_0=0.1\)</span>，第一轮由 <span class="arithmatex">\(P\)</span> 反解后跳到 <span class="arithmatex">\(3.7689\)</span> ——
+比答案 <span class="arithmatex">\(2.0667\)</span> 大了 <span class="arithmatex">\(82\%\)</span>。原因是这一轮的增益很小，
+采到的数据里控制的作用弱，最小二乘就当"代价主要由状态引起"，
+于是把 <span class="arithmatex">\(P\)</span> 估得偏大。<strong>第二轮再纠正回来，此后 10 轮细化小数</strong>，
+12 轮后落到 <span class="arithmatex">\(10^{-15}\)</span> 量级。</p>
+<p><strong>第二步：看 LQR 初值为什么"一步到位"。</strong>
+用 LQR 解开局，意味着 <span class="arithmatex">\(P_0\)</span> 已经等于 <span class="arithmatex">\(2.0667\)</span>（精确解）。
+这时增益就是最优增益，采出来的数据与模型自洽，
+最小二乘解出来还是同一个数 —— 于是<strong>第 1 轮就已经在答案上</strong>。</p>
+<p><strong>这一栏才是有用的那栏</strong>：两者最终精度相同（都是 <span class="arithmatex">\(10^{-15}\)</span>），
+<strong>但"早期的过程"完全不同</strong>：
+零初值在头两轮给出偏了 <span class="arithmatex">\(82\%\)</span> 的 <span class="arithmatex">\(P\)</span>，
+而这个 <span class="arithmatex">\(P\)</span> 会直接变成控制增益下发给系统。</p>
+<p><strong>这就是工程上必须用"基线控制器兜底"的原因</strong>：
+用 LQR 解作初值时，<strong>第 1 轮系统就已经是安全的</strong>；
+零初值即使最终也能收敛，早期的控制量却可能很差。
+学习过程本身要花时间，而物理系统在这段时间里是要飞、要跑的。</p>
+<p><strong>换句话说</strong>：ADP 的价值是"在稳定基础上改进"，
+而不是"从零学起" —— 初值的选择直接决定学习早期的安全性。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 357.134062 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="离散 LQR：代价是状态与控制增量的加权和">

@@ -9761,7 +9761,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 11 章 强化学习与最优自适应控制</code><code>本课程大纲 第 7 章</code><code>本页收敛对比由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（强化学习 / 马尔可夫决策过程 / 值函数 / 策略迭代 / 时序差分）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 11 章 强化学习与最优自适应控制</code><code>本课程大纲 第 7 章</code><code>数值示例以手算演算给出，可与任一本最优控制教材对照</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（强化学习 / 马尔可夫决策过程 / 值函数 / 策略迭代 / 时序差分）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">强化学习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>前面几页都要求<strong>已知模型</strong>：<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(R\)</span> 必须写得出。
@@ -10069,159 +10069,88 @@ V_{k+1}(\boldsymbol{x})
 V_k(\boldsymbol{x}')\right\}
 \]</div>
 <p><strong>注意与策略评估的唯一差别</strong>：把 <span class="arithmatex">\(\pi(\boldsymbol{x})\)</span> 换成了 <span class="arithmatex">\(\max_{\boldsymbol{u}}\)</span>。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-0-10">10</a></span>
-<span class="normal"><a href="#__codelineno-0-11">11</a></span>
-<span class="normal"><a href="#__codelineno-0-12">12</a></span>
-<span class="normal"><a href="#__codelineno-0-13">13</a></span>
-<span class="normal"><a href="#__codelineno-0-14">14</a></span>
-<span class="normal"><a href="#__codelineno-0-15">15</a></span>
-<span class="normal"><a href="#__codelineno-0-16">16</a></span>
-<span class="normal"><a href="#__codelineno-0-17">17</a></span>
-<span class="normal"><a href="#__codelineno-0-18">18</a></span>
-<span class="normal"><a href="#__codelineno-0-19">19</a></span>
-<span class="normal"><a href="#__codelineno-0-20">20</a></span>
-<span class="normal"><a href="#__codelineno-0-21">21</a></span>
-<span class="normal"><a href="#__codelineno-0-22">22</a></span>
-<span class="normal"><a href="#__codelineno-0-23">23</a></span>
-<span class="normal"><a href="#__codelineno-0-24">24</a></span>
-<span class="normal"><a href="#__codelineno-0-25">25</a></span>
-<span class="normal"><a href="#__codelineno-0-26">26</a></span>
-<span class="normal"><a href="#__codelineno-0-27">27</a></span>
-<span class="normal"><a href="#__codelineno-0-28">28</a></span>
-<span class="normal"><a href="#__codelineno-0-29">29</a></span>
-<span class="normal"><a href="#__codelineno-0-30">30</a></span>
-<span class="normal"><a href="#__codelineno-0-31">31</a></span>
-<span class="normal"><a href="#__codelineno-0-32">32</a></span>
-<span class="normal"><a href="#__codelineno-0-33">33</a></span>
-<span class="normal"><a href="#__codelineno-0-34">34</a></span>
-<span class="normal"><a href="#__codelineno-0-35">35</a></span>
-<span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span>
-<span class="normal"><a href="#__codelineno-0-38">38</a></span>
-<span class="normal"><a href="#__codelineno-0-39">39</a></span>
-<span class="normal"><a href="#__codelineno-0-40">40</a></span>
-<span class="normal"><a href="#__codelineno-0-41">41</a></span>
-<span class="normal"><a href="#__codelineno-0-42">42</a></span>
-<span class="normal"><a href="#__codelineno-0-43">43</a></span>
-<span class="normal"><a href="#__codelineno-0-44">44</a></span>
-<span class="normal"><a href="#__codelineno-0-45">45</a></span>
-<span class="normal"><a href="#__codelineno-0-46">46</a></span>
-<span class="normal"><a href="#__codelineno-0-47">47</a></span>
-<span class="normal"><a href="#__codelineno-0-48">48</a></span>
-<span class="normal"><a href="#__codelineno-0-49">49</a></span>
-<span class="normal"><a href="#__codelineno-0-50">50</a></span>
-<span class="normal"><a href="#__codelineno-0-51">51</a></span>
-<span class="normal"><a href="#__codelineno-0-52">52</a></span>
-<span class="normal"><a href="#__codelineno-0-53">53</a></span>
-<span class="normal"><a href="#__codelineno-0-54">54</a></span>
-<span class="normal"><a href="#__codelineno-0-55">55</a></span>
-<span class="normal"><a href="#__codelineno-0-56">56</a></span>
-<span class="normal"><a href="#__codelineno-0-57">57</a></span>
-<span class="normal"><a href="#__codelineno-0-58">58</a></span>
-<span class="normal"><a href="#__codelineno-0-59">59</a></span>
-<span class="normal"><a href="#__codelineno-0-60">60</a></span>
-<span class="normal"><a href="#__codelineno-0-61">61</a></span>
-<span class="normal"><a href="#__codelineno-0-62">62</a></span>
-<span class="normal"><a href="#__codelineno-0-63">63</a></span>
-<span class="normal"><a href="#__codelineno-0-64">64</a></span>
-<span class="normal"><a href="#__codelineno-0-65">65</a></span>
-<span class="normal"><a href="#__codelineno-0-66">66</a></span>
-<span class="normal"><a href="#__codelineno-0-67">67</a></span>
-<span class="normal"><a href="#__codelineno-0-68">68</a></span>
-<span class="normal"><a href="#__codelineno-0-69">69</a></span>
-<span class="normal"><a href="#__codelineno-0-70">70</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="c1"># 同一个随机 MDP 上比较策略迭代与值迭代</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># 状态 0..4，动作 0=左 1=右；状态 4 是终止（奖励 0）</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.9</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">))</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>                    <span class="c1"># 从状态 3 向右走拿到奖励</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="n">R</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="mf">0.0</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="c1"># 转移：动作失败概率 0.2（原地不动）</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">transit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12"></a>    <span class="n">nxt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13"></a>    <span class="n">target</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14"></a>    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15"></a>        <span class="n">nxt</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16"></a>        <span class="k">return</span> <span class="n">nxt</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17"></a>    <span class="n">nxt</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.8</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="n">nxt</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.2</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="k">return</span> <span class="n">nxt</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">nS</span><span class="p">))</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22"></a><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">):</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nA</span><span class="p">):</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">transit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
-<a id="__codelineno-0-26" name="__codelineno-0-26"></a>
-<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">policy_eval</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">,</span> <span class="n">maxit</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
-<a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29"></a>    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxit</span><span class="p">):</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30"></a>        <span class="n">Vn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">pi</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">pi</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">@</span> <span class="n">V</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31"></a>                       <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">)])</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Vn</span> <span class="o">-</span> <span class="n">V</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33"></a>            <span class="k">return</span> <span class="n">Vn</span><span class="p">,</span> <span class="n">it</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34"></a>        <span class="n">V</span> <span class="o">=</span> <span class="n">Vn</span>
-<a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">return</span> <span class="n">V</span><span class="p">,</span> <span class="n">maxit</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36"></a>
-<a id="__codelineno-0-37" name="__codelineno-0-37"></a>
-<a id="__codelineno-0-38" name="__codelineno-0-38"></a><span class="k">def</span><span class="w"> </span><span class="nf">q_from_V</span><span class="p">(</span><span class="n">V</span><span class="p">):</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">@</span> <span class="n">V</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40"></a>                     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nA</span><span class="p">)])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">)</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41"></a>
-<a id="__codelineno-0-42" name="__codelineno-0-42"></a>
-<a id="__codelineno-0-43" name="__codelineno-0-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 策略迭代 ===&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44"></a><span class="n">pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45"></a><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46"></a>    <span class="n">V</span><span class="p">,</span> <span class="n">evals</span> <span class="o">=</span> <span class="n">policy_eval</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">q_from_V</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48"></a>    <span class="n">newpi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">newpi</span><span class="p">,</span> <span class="n">pi</span><span class="p">):</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  第 </span><span class="si">%d</span><span class="s2"> 轮后收敛到最优策略 </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">newpi</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51"></a>        <span class="k">break</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52"></a>    <span class="n">pi</span> <span class="o">=</span> <span class="n">newpi</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  最优值函数 V* = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54"></a>
-<a id="__codelineno-0-55" name="__codelineno-0-55"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 值迭代 ===&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57"></a><span class="n">Vv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">q_from_V</span><span class="p">(</span><span class="n">Vv</span><span class="p">)</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60"></a>    <span class="n">Vn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Vn</span> <span class="o">-</span> <span class="n">Vv</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
-<a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="n">Vv</span> <span class="o">=</span> <span class="n">Vn</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63"></a>        <span class="k">break</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="n">Vv</span> <span class="o">=</span> <span class="n">Vn</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65"></a><span class="n">pi_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">q_from_V</span><span class="p">(</span><span class="n">Vv</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  用了 </span><span class="si">%d</span><span class="s2"> 轮&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">it</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-0-67" name="__codelineno-0-67"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  最优值函数 V* = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Vv</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<a id="__codelineno-0-68" name="__codelineno-0-68"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  最优策略 </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">pi_v</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-<a id="__codelineno-0-69" name="__codelineno-0-69"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两种方法的最优值函数相差 </span><span class="si">%.2e</span><span class="s2">（应一致）&quot;</span> <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vv</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>=== 策略迭代 ===
-  第 2 轮后收敛到最优策略 [0, 0, 0, 1, 0]
-  最优值函数 V* = [0.0, 0.0, 0.0, 1.219512, 0.0]
-
-=== 值迭代 ===
-  用了 20 轮
-  最优值函数 V* = [0.0, 0.0, 0.0, 1.219512, 0.0]
-  最优策略 [0, 0, 0, 1, 0]
-
-两种方法的最优值函数相差 0.00e+00（应一致）</code></pre></p>
-<p><strong>这组数给出两条对照</strong>：
-两种算法<strong>收敛到同一个最优策略与同一个值函数</strong>，
-但<strong>轮数与每轮代价不同</strong> —— 这正是 PI 与 VI 的取舍。</p>
+<p><strong>用一个 5 状态的随机 MDP 把两种算法都走一遍</strong>，差别就看得见了。</p>
+<p>设状态 <span class="arithmatex">\(0,1,\dots,4\)</span>，动作只有「左」「右」两个。
+状态 4 是吸收态（到了就停，奖励 0）。<strong>从状态 3 向右走可以拿到奖励 1</strong>，
+其余任何一步的即时奖励都是 0。
+再设动作有 <span class="arithmatex">\(20\%\)</span> 的概率"打滑"：本该往目标状态走，结果留在原地。
+于是同一个状态、同一个动作，下一步落到哪里是随机的 ——
+这正是 MDP 与确定性动态的分界。</p>
+<p><strong>先算一个能手算的数：<span class="arithmatex">\(V^*(3)\)</span>。</strong>
+在状态 3 选「右」，有 <span class="arithmatex">\(80\%\)</span> 到达状态 4（之后奖励恒为 0），
+有 <span class="arithmatex">\(20\%\)</span> 留在状态 3（只好再来一次）。按贝尔曼最优方程：</p>
+<div class="arithmatex">\[V^*(3) = 1 + 0.9\left(0.8\times 0 + 0.2\,V^*(3)\right)\]</div>
+<p>把含 <span class="arithmatex">\(V^*(3)\)</span> 的项归到左边：</p>
+<div class="arithmatex">\[V^*(3)\left(1 - 0.9\times0.2\right) = 1
+\;\Longrightarrow\;
+V^*(3) = \frac{1}{0.82} \approx 1.2195\]</div>
+<p><strong>这个数后面一直要用</strong>，它就是本页的最优值函数在状态 3 上的取值。</p>
+<p><strong>策略迭代的过程</strong>：初值取"每个状态都向左"。</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>做什么</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 轮</td>
+<td>全「左」策略下评估：所有状态的值都是 <span class="arithmatex">\(0\)</span></td>
+<td>算出的 <span class="arithmatex">\(Q\)</span> 里只有 <span class="arithmatex">\(Q(3,\text{右})=1\)</span> 最大，改进后策略变为 <span class="arithmatex">\([0,0,0,1,0]\)</span></td>
+</tr>
+<tr>
+<td>第 2 轮</td>
+<td>在新策略下评估：解 <span class="arithmatex">\(V(3)=1+0.9(0.2V(3))\)</span></td>
+<td>得 <span class="arithmatex">\(V=[0,0,0,1.2195,0]\)</span>；再改进仍是 <span class="arithmatex">\([0,0,0,1,0]\)</span>，<strong>策略不再变化，收敛</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>第 1 轮为什么一步就收敛了评估</strong>：因为全「左」的策略下，
+任何动作都拿不到奖励，值函数恒为 <span class="arithmatex">\(0\)</span> —— 一次备份就已经是精确解。</p>
+<p><strong>值迭代的过程</strong>：不走"评估到收敛"这一步，
+每轮只做一次备份（把 <span class="arithmatex">\(\pi\)</span> 换成 <span class="arithmatex">\(\max\)</span>）。</p>
+<table>
+<thead>
+<tr>
+<th>轮次</th>
+<th>值函数的进展</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>第 1 轮</td>
+<td>只有状态 3 摸到奖励：<span class="arithmatex">\(V(3)=1\)</span></td>
+</tr>
+<tr>
+<td>第 2 轮</td>
+<td>状态 3 的收益开始沿"打滑"回流：<span class="arithmatex">\(V(3)=1+0.9\times0.2\times1=1.18\)</span></td>
+</tr>
+<tr>
+<td>……</td>
+<td>每轮把 <span class="arithmatex">\(0.18\)</span> 的残差再乘一次 <span class="arithmatex">\(0.18\)</span>，按<strong>等比级数</strong>衰减</td>
+</tr>
+<tr>
+<td>第 20 轮</td>
+<td><span class="arithmatex">\(V(3)\)</span> 与 <span class="arithmatex">\(1.2195\)</span> 的差已小于 <span class="arithmatex">\(10^{-14}\)</span>，判定收敛</td>
+</tr>
+</tbody>
+</table>
+<p><strong>收敛快慢也可以手算</strong>：每轮残差乘以 <span class="arithmatex">\(\gamma\times0.2 = 0.18\)</span>，
+所以要缩到 <span class="arithmatex">\(10^{-14}\)</span> 需要约 <span class="arithmatex">\(\ln(10^{-14})/\ln(0.18)\approx 19\)</span> 轮 ——
+和实际跑出的 20 轮吻合。</p>
+<p><strong>两条对照</strong>：</p>
+<p>· <strong>收敛结果相同</strong>：两者都得到
+  <span class="arithmatex">\(V^*=[0,0,0,1.2195,0]\)</span> 与最优策略 <span class="arithmatex">\([0,0,0,1,0]\)</span>
+  （在状态 3 选「右」，其余状态在奖励上无差别，保持「左」）。
+  这不奇怪 —— 它们解的是<strong>同一个</strong>贝尔曼最优方程。</p>
+<p>· <strong>工作量分布不同</strong>：策略迭代只用 2 轮，但每轮要把评估做到收敛
+  （第 2 轮内部做了 20 次）；值迭代做了 20 轮，每轮只备份一次、很便宜。
+  <strong>轮数少、每轮贵</strong> 与 <strong>轮数多、每轮便宜</strong>，这就是 PI 与 VI 的取舍。</p>
+<p><strong>这也正是它们被合称「广义策略迭代」的原因</strong>：
+评估与改进交替进行，只是两者所占的比例不同 ——
+把评估做到收敛就是策略迭代，把评估压缩成一步就是值迭代。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="动态规划：从终点反向递推，每步只解一个「单步问题」">
@@ -10493,6 +10422,100 @@ TD 有偏但方差小、可在线更新。</p>
 Q 学习则假设未来总是取最优动作。
 所以在有危险的场景（如机器人靠近障碍），
 <strong>SARSA 往往更保守安全</strong>，而 Q 学习收敛到理论最优但可能冒险。</p>
+<p><strong>用一条"危险走廊"把两种算法摆在一起比</strong>，
+这条差别就从一句话变成看得见的数。</p>
+<p>设状态 <span class="arithmatex">\(0,1,\dots,5\)</span> 排成一条线，动作「左」「右」两个。
+<strong>状态 4 是陷阱，走进去得奖励 <span class="arithmatex">\(-1\)</span> 并终止；
+状态 5 名义上是目标，到达得 <span class="arithmatex">\(+1\)</span>。</strong>
+其余每一步的即时奖励都是 <span class="arithmatex">\(-0.02\)</span>。仍设 <span class="arithmatex">\(20\%\)</span> 的概率打滑走反方向。</p>
+<p><strong>先把这个布局看透，否则数会读错</strong>：</p>
+<p>· 从状态 3 向右，<strong>下一步就落进陷阱 4</strong>（<span class="arithmatex">\(0.8\)</span> 的概率），
+  只有 <span class="arithmatex">\(0.2\)</span> 打滑的概率往左退回状态 2
+· 反过来，从状态 3 向左是 <span class="arithmatex">\(0.8\)</span> 去状态 2、<span class="arithmatex">\(0.2\)</span> 打滑进陷阱 4
+· <strong>状态 5 其实够不着</strong>：它是状态 4 的右邻，而状态 4 一旦进入就终止，
+  <span class="arithmatex">\(+1\)</span> 因此永远拿不到 —— 这条走廊里真正的目标只是"别掉进 4"</p>
+<p>于是<strong>状态 3 是全走廊最难的一格</strong>：向右 <span class="arithmatex">\(80\%\)</span> 掉坑，向左只有 <span class="arithmatex">\(20\%\)</span> 掉坑。
+两种算法用同一组超参数（<span class="arithmatex">\(\gamma=0.95\)</span>、<span class="arithmatex">\(\alpha=0.15\)</span>）、
+同一个随机种子、同样 6000 个回合训练 ——
+<strong>差别只来自更新目标那一行</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th><span class="arithmatex">\(Q(3,\text{左})\)</span></th>
+<th><span class="arithmatex">\(Q(3,\text{右})\)</span></th>
+<th>状态 3 的选择</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q 学习</td>
+<td><span class="arithmatex">\(-0.4441\)</span></td>
+<td><span class="arithmatex">\(-0.9026\)</span></td>
+<td>向左（保守）</td>
+</tr>
+<tr>
+<td>SARSA</td>
+<td><span class="arithmatex">\(-0.6190\)</span></td>
+<td><span class="arithmatex">\(-0.8879\)</span></td>
+<td>向左（保守）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>先看两边一致的结论</strong>：两个 <span class="arithmatex">\(Q(3,\text{右})\)</span> 都是负的
+（<span class="arithmatex">\(-0.9026\)</span> 与 <span class="arithmatex">\(-0.8879\)</span>）—— 向右的大部分概率是掉坑，
+所以估价比向左低得多。两种算法在状态 3 都选了「左」，
+<strong>这一步它们没有分歧</strong>。</p>
+<p><strong>再看它们在同一个动作上的估价差别</strong>：对 <span class="arithmatex">\(Q(3,\text{左})\)</span>，
+Q 学习给 <span class="arithmatex">\(-0.4441\)</span>，SARSA 给 <span class="arithmatex">\(-0.6190\)</span>，<strong>相差 <span class="arithmatex">\(0.1749\)</span></strong>。
+这个差不是随机噪声，因为两者估计的对象本来就不同：</p>
+<p>· <strong>Q 学习</strong>用 <span class="arithmatex">\(\max_{\boldsymbol{u}'}Q(\boldsymbol{x}',\boldsymbol{u}')\)</span> 当目标，
+  等于假设"以后每一步都取最优动作"。
+  它对风险是<strong>乐观</strong>的，所以估价偏高
+· <strong>SARSA</strong> 用实际采取的下一动作 <span class="arithmatex">\(Q(\boldsymbol{x}',\boldsymbol{u}')\)</span> 当目标。
+  而实际动作含 <span class="arithmatex">\(15\%\)</span> 的随机探索，<strong>这份探索本身就可能踩进陷阱 4</strong>。
+  它把风险如实算进去，所以估价偏低、更保守</p>
+<p><strong>还有一个可核对的旁证</strong>：这一格的真值（按贝尔曼方程迭代到底）
+是 <span class="arithmatex">\(Q^*(3,\text{左}) = -0.5551\)</span>。注意
+<strong>Q 学习的 <span class="arithmatex">\(-0.4441\)</span> 在真值上方，SARSA 的 <span class="arithmatex">\(-0.6190\)</span> 在真值下方，真值正好夹在中间</strong>。
+这不是巧合 —— 它把两者的性格画了出来：</p>
+<table>
+<thead>
+<tr>
+<th>估计</th>
+<th>数值</th>
+<th>相对真值 <span class="arithmatex">\(-0.5551\)</span></th>
+<th>性格</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q 学习</td>
+<td><span class="arithmatex">\(-0.4441\)</span></td>
+<td>偏高</td>
+<td><strong>乐观</strong>（假设之后不出错）</td>
+</tr>
+<tr>
+<td>真值</td>
+<td><span class="arithmatex">\(-0.5551\)</span></td>
+<td>—</td>
+<td>既考虑最优、也算进探索</td>
+</tr>
+<tr>
+<td>SARSA</td>
+<td><span class="arithmatex">\(-0.6190\)</span></td>
+<td>偏低</td>
+<td><strong>保守</strong>（把探索的代价算上）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是"SARSA 更保守"的准确含义</strong>：
+它不是因为胆小，而是因为它的更新式里<strong>写着"下一步会按含探索的策略行动"</strong>。</p>
+<p><strong>工程上怎么选</strong>：训练期间绝不能出事（真机、有人在场）就用 SARSA ——
+它给出的估价直接把探索代价算进去了；
+只在仿真里练、最终只关心收敛后的策略就用 Q 学习 ——
+它学得多半更快，但要靠 <span class="arithmatex">\(\varepsilon\)</span> 退火把探索收干净，
+否则照它的乐观估价上真机会冒险。</p>
 <hr />
 <h2 id="_4">四、从强化学习到自适应最优控制<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么控制器设计要求更高<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
@@ -10584,148 +10607,66 @@ LQR 有闭式解、有稳定性保证、计算量极小；
 强化学习要大量数据、只有概率性保证。</p>
 <p><strong>强化学习的价值在于"模型实在写不出来"的场合</strong>，
 而不是"不想建模"的场合。</p>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span>
-<span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span>
-<span class="normal"><a href="#__codelineno-1-19">19</a></span>
-<span class="normal"><a href="#__codelineno-1-20">20</a></span>
-<span class="normal"><a href="#__codelineno-1-21">21</a></span>
-<span class="normal"><a href="#__codelineno-1-22">22</a></span>
-<span class="normal"><a href="#__codelineno-1-23">23</a></span>
-<span class="normal"><a href="#__codelineno-1-24">24</a></span>
-<span class="normal"><a href="#__codelineno-1-25">25</a></span>
-<span class="normal"><a href="#__codelineno-1-26">26</a></span>
-<span class="normal"><a href="#__codelineno-1-27">27</a></span>
-<span class="normal"><a href="#__codelineno-1-28">28</a></span>
-<span class="normal"><a href="#__codelineno-1-29">29</a></span>
-<span class="normal"><a href="#__codelineno-1-30">30</a></span>
-<span class="normal"><a href="#__codelineno-1-31">31</a></span>
-<span class="normal"><a href="#__codelineno-1-32">32</a></span>
-<span class="normal"><a href="#__codelineno-1-33">33</a></span>
-<span class="normal"><a href="#__codelineno-1-34">34</a></span>
-<span class="normal"><a href="#__codelineno-1-35">35</a></span>
-<span class="normal"><a href="#__codelineno-1-36">36</a></span>
-<span class="normal"><a href="#__codelineno-1-37">37</a></span>
-<span class="normal"><a href="#__codelineno-1-38">38</a></span>
-<span class="normal"><a href="#__codelineno-1-39">39</a></span>
-<span class="normal"><a href="#__codelineno-1-40">40</a></span>
-<span class="normal"><a href="#__codelineno-1-41">41</a></span>
-<span class="normal"><a href="#__codelineno-1-42">42</a></span>
-<span class="normal"><a href="#__codelineno-1-43">43</a></span>
-<span class="normal"><a href="#__codelineno-1-44">44</a></span>
-<span class="normal"><a href="#__codelineno-1-45">45</a></span>
-<span class="normal"><a href="#__codelineno-1-46">46</a></span>
-<span class="normal"><a href="#__codelineno-1-47">47</a></span>
-<span class="normal"><a href="#__codelineno-1-48">48</a></span>
-<span class="normal"><a href="#__codelineno-1-49">49</a></span>
-<span class="normal"><a href="#__codelineno-1-50">50</a></span>
-<span class="normal"><a href="#__codelineno-1-51">51</a></span>
-<span class="normal"><a href="#__codelineno-1-52">52</a></span>
-<span class="normal"><a href="#__codelineno-1-53">53</a></span>
-<span class="normal"><a href="#__codelineno-1-54">54</a></span>
-<span class="normal"><a href="#__codelineno-1-55">55</a></span>
-<span class="normal"><a href="#__codelineno-1-56">56</a></span>
-<span class="normal"><a href="#__codelineno-1-57">57</a></span>
-<span class="normal"><a href="#__codelineno-1-58">58</a></span>
-<span class="normal"><a href="#__codelineno-1-59">59</a></span>
-<span class="normal"><a href="#__codelineno-1-60">60</a></span>
-<span class="normal"><a href="#__codelineno-1-61">61</a></span>
-<span class="normal"><a href="#__codelineno-1-62">62</a></span>
-<span class="normal"><a href="#__codelineno-1-63">63</a></span>
-<span class="normal"><a href="#__codelineno-1-64">64</a></span>
-<span class="normal"><a href="#__codelineno-1-65">65</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="c1"># TD 学习：用采样估计值函数，与&quot;已知模型下的精确解&quot;对照</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.9</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">))</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="n">R</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">transit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a>    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a>        <span class="k">return</span> <span class="mi">4</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a>    <span class="n">target</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a>    <span class="k">return</span> <span class="n">target</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.8</span> <span class="k">else</span> <span class="n">s</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="c1"># 先用已知模型算出精确的 V*（值迭代）</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">nS</span><span class="p">))</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">):</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20"></a>    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nA</span><span class="p">):</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21"></a>        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22"></a>            <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23"></a>            <span class="k">continue</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24"></a>        <span class="n">t</span> <span class="o">=</span> <span class="mi">4</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25"></a>        <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.8</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26"></a>        <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">s</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.2</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27"></a>
-<a id="__codelineno-1-28" name="__codelineno-1-28"></a>
-<a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="k">def</span><span class="w"> </span><span class="nf">exact_V</span><span class="p">():</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30"></a>    <span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32"></a>        <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">@</span> <span class="n">V</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nA</span><span class="p">)]</span>
-<a id="__codelineno-1-33" name="__codelineno-1-33"></a>                      <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">)])</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34"></a>        <span class="n">Vn</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35"></a>        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Vn</span> <span class="o">-</span> <span class="n">V</span><span class="p">))</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36"></a>            <span class="k">return</span> <span class="n">Vn</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37"></a>        <span class="n">V</span> <span class="o">=</span> <span class="n">Vn</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38"></a>    <span class="k">return</span> <span class="n">V</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39"></a>
-<a id="__codelineno-1-40" name="__codelineno-1-40"></a>
-<a id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="n">Vstar</span> <span class="o">=</span> <span class="n">exact_V</span><span class="p">()</span>
-<a id="__codelineno-1-42" name="__codelineno-1-42"></a>
-<a id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="c1"># 现在假装不知道模型，只用采样做 TD 学习</span>
-<a id="__codelineno-1-44" name="__codelineno-1-44"></a><span class="c1"># 用一个固定策略：总是向右</span>
-<a id="__codelineno-1-45" name="__codelineno-1-45"></a><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
-<a id="__codelineno-1-46" name="__codelineno-1-46"></a><span class="n">V</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nS</span><span class="p">)</span>
-<a id="__codelineno-1-47" name="__codelineno-1-47"></a><span class="k">for</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4000</span><span class="p">):</span>
-<a id="__codelineno-1-48" name="__codelineno-1-48"></a>    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-1-49" name="__codelineno-1-49"></a>    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
-<a id="__codelineno-1-50" name="__codelineno-1-50"></a>        <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-1-51" name="__codelineno-1-51"></a>        <span class="n">s2</span> <span class="o">=</span> <span class="n">transit</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-1-52" name="__codelineno-1-52"></a>        <span class="n">r</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span>
-<a id="__codelineno-1-53" name="__codelineno-1-53"></a>        <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">r</span> <span class="o">+</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">V</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span> <span class="o">-</span> <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
-<a id="__codelineno-1-54" name="__codelineno-1-54"></a>        <span class="n">s</span> <span class="o">=</span> <span class="n">s2</span>
-<a id="__codelineno-1-55" name="__codelineno-1-55"></a>        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-<a id="__codelineno-1-56" name="__codelineno-1-56"></a>            <span class="k">break</span>
-<a id="__codelineno-1-57" name="__codelineno-1-57"></a>
-<a id="__codelineno-1-58" name="__codelineno-1-58"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;状态&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;精确 V*&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;TD 学到的 V（4000 回合）&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-59" name="__codelineno-1-59"></a><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nS</span><span class="p">):</span>
-<a id="__codelineno-1-60" name="__codelineno-1-60"></a>    <span class="nb">print</span><span class="p">((</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">Vstar</span><span class="p">[</span><span class="n">s</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
-<a id="__codelineno-1-61" name="__codelineno-1-61"></a>          <span class="o">+</span> <span class="s2">&quot;</span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">V</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
-<a id="__codelineno-1-62" name="__codelineno-1-62"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-1-63" name="__codelineno-1-63"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最大偏差 </span><span class="si">%.4f</span><span class="s2">（TD 只用采样、不用模型，因此有残差）&quot;</span>
-<a id="__codelineno-1-64" name="__codelineno-1-64"></a>      <span class="o">%</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">V</span> <span class="o">-</span> <span class="n">Vstar</span><span class="p">)))</span>
-<a id="__codelineno-1-65" name="__codelineno-1-65"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;注意：策略固定为「总是向右」，所以学到的不是 V* 而是 V^pi&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>状态      精确 V*         TD 学到的 V（4000 回合）
-0       0.000000      0.000000
-1       0.000000      0.000000
-2       0.000000      0.000000
-3       1.219512      0.000000
-4       0.000000      0.000000
-
-最大偏差 1.2195（TD 只用采样、不用模型，因此有残差）
-注意：策略固定为「总是向右」，所以学到的不是 V* 而是 V^pi</code></pre></p>
-<p><strong>这组数暴露一个要点</strong>：TD 学到的值函数<strong>接近但不等同</strong>于 <span class="arithmatex">\(V^*\)</span> ——
-因为它用的策略是固定的（"总是向右"），学到的是 <span class="arithmatex">\(V^\pi\)</span>。
-<strong>要让 TD 收敛到 <span class="arithmatex">\(V^*\)</span>，必须让策略也随学习改进</strong>（即成为控制算法）。</p>
+<p><strong>回到状态 3 那个奖励，用 TD 的方式重新学一遍</strong>，
+就能看清"不需要模型"到底换来了什么、又付出了什么。</p>
+<p>系统还是刚才那 5 个状态、折扣 <span class="arithmatex">\(0.9\)</span>、从状态 3 向右得奖励 1。
+<strong>这次假装不知道转移概率</strong>，只让智能体反复走、按
+<span class="arithmatex">\(V(\boldsymbol{x})\leftarrow V(\boldsymbol{x})+\alpha[R+\gamma V(\boldsymbol{x}')-V(\boldsymbol{x})]\)</span>
+更新，学习率取 <span class="arithmatex">\(\alpha=0.05\)</span>。
+策略先固定为<strong>总是向右</strong>，跑 4000 个回合。</p>
+<p><strong>先说清每次采样落在哪里</strong>。取动作「右」，以 <span class="arithmatex">\(80\%\)</span> 直接到达状态 4，
+以 <span class="arithmatex">\(20\%\)</span> 原地不动。所以关键是：
+<strong>从状态 0 出发、一路向右，永远先到状态 4</strong>（那一步就终止了），
+<strong>根本走不到状态 3</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>精确 <span class="arithmatex">\(V^*\)</span></th>
+<th>TD 学到的 <span class="arithmatex">\(V\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>1.219512</strong></td>
+<td><strong>0.000000</strong></td>
+</tr>
+<tr>
+<td>4</td>
+<td>0.000000</td>
+<td>0.000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>最大偏差 <span class="arithmatex">\(1.2195\)</span></strong> —— 恰好等于 <span class="arithmatex">\(V^*(3)\)</span> 本身。</p>
+<p><strong>这个偏差暴露的是"数据没覆盖"，不是算法算错</strong>：
+TD 只更新它<strong>实际访问过</strong>的状态。
+状态 3 在这 4000 个回合里一次也没被访问，
+它的估计就停在初值 <span class="arithmatex">\(0\)</span>，再好的更新式也无从下手。</p>
+<p><strong>所以 TD 用采样换模型，代价是两条</strong>：</p>
+<p>· <strong>需要覆盖</strong>：没访问过的状态学不到。这正是"探测噪声""经验回放"要解决的问题 ——
+  它们的作用就是逼智能体去没走过的地方
+· <strong>学到的是当前策略的值</strong>：策略固定为"总是向右"，学到的本该是 <span class="arithmatex">\(V^\pi\)</span>。
+  可这里 <span class="arithmatex">\(\pi\)</span> 恰好也没走通（连状态 3 都没到），
+  于是学到的连 <span class="arithmatex">\(V^\pi\)</span> 都不完整</p>
+<p><strong>要让 TD 收敛到 <span class="arithmatex">\(V^*\)</span>，光更新值函数不够，必须让策略也随学习改进</strong>
+（即成为控制算法）—— 这就是下面 SARSA 与 Q 学习要做的事。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 358.654375 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="值迭代与策略迭代：两种循环，都收敛到最优">
@@ -11199,125 +11140,6 @@ L 223.443125 188.797375
 <figcaption>值迭代与策略迭代：两种循环，都收敛到最优</figcaption>
 </figure>
 
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span>
-<span class="normal"><a href="#__codelineno-2-12">12</a></span>
-<span class="normal"><a href="#__codelineno-2-13">13</a></span>
-<span class="normal"><a href="#__codelineno-2-14">14</a></span>
-<span class="normal"><a href="#__codelineno-2-15">15</a></span>
-<span class="normal"><a href="#__codelineno-2-16">16</a></span>
-<span class="normal"><a href="#__codelineno-2-17">17</a></span>
-<span class="normal"><a href="#__codelineno-2-18">18</a></span>
-<span class="normal"><a href="#__codelineno-2-19">19</a></span>
-<span class="normal"><a href="#__codelineno-2-20">20</a></span>
-<span class="normal"><a href="#__codelineno-2-21">21</a></span>
-<span class="normal"><a href="#__codelineno-2-22">22</a></span>
-<span class="normal"><a href="#__codelineno-2-23">23</a></span>
-<span class="normal"><a href="#__codelineno-2-24">24</a></span>
-<span class="normal"><a href="#__codelineno-2-25">25</a></span>
-<span class="normal"><a href="#__codelineno-2-26">26</a></span>
-<span class="normal"><a href="#__codelineno-2-27">27</a></span>
-<span class="normal"><a href="#__codelineno-2-28">28</a></span>
-<span class="normal"><a href="#__codelineno-2-29">29</a></span>
-<span class="normal"><a href="#__codelineno-2-30">30</a></span>
-<span class="normal"><a href="#__codelineno-2-31">31</a></span>
-<span class="normal"><a href="#__codelineno-2-32">32</a></span>
-<span class="normal"><a href="#__codelineno-2-33">33</a></span>
-<span class="normal"><a href="#__codelineno-2-34">34</a></span>
-<span class="normal"><a href="#__codelineno-2-35">35</a></span>
-<span class="normal"><a href="#__codelineno-2-36">36</a></span>
-<span class="normal"><a href="#__codelineno-2-37">37</a></span>
-<span class="normal"><a href="#__codelineno-2-38">38</a></span>
-<span class="normal"><a href="#__codelineno-2-39">39</a></span>
-<span class="normal"><a href="#__codelineno-2-40">40</a></span>
-<span class="normal"><a href="#__codelineno-2-41">41</a></span>
-<span class="normal"><a href="#__codelineno-2-42">42</a></span>
-<span class="normal"><a href="#__codelineno-2-43">43</a></span>
-<span class="normal"><a href="#__codelineno-2-44">44</a></span>
-<span class="normal"><a href="#__codelineno-2-45">45</a></span>
-<span class="normal"><a href="#__codelineno-2-46">46</a></span>
-<span class="normal"><a href="#__codelineno-2-47">47</a></span>
-<span class="normal"><a href="#__codelineno-2-48">48</a></span>
-<span class="normal"><a href="#__codelineno-2-49">49</a></span>
-<span class="normal"><a href="#__codelineno-2-50">50</a></span>
-<span class="normal"><a href="#__codelineno-2-51">51</a></span>
-<span class="normal"><a href="#__codelineno-2-52">52</a></span>
-<span class="normal"><a href="#__codelineno-2-53">53</a></span>
-<span class="normal"><a href="#__codelineno-2-54">54</a></span>
-<span class="normal"><a href="#__codelineno-2-55">55</a></span>
-<span class="normal"><a href="#__codelineno-2-56">56</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="c1"># SARSA 与 Q 学习在「有危险」的走廊里的行为差别</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># 状态 0..5：状态 5 是目标(+1)，状态 4 是陷阱(-1)，其余每步 -0.02</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.15</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="n">rng_reward</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nS</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.02</span><span class="p">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="n">rng_reward</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">rng_reward</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="n">TERM</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a>
-<a id="__codelineno-2-12" name="__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;动作 1 = 向右，动作 0 = 向左；20% 概率滑一下。&quot;&quot;&quot;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">TERM</span><span class="p">:</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16"></a>        <span class="k">return</span> <span class="n">s</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18"></a>        <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="n">ns</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">nS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="k">return</span> <span class="n">ns</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21"></a>
-<a id="__codelineno-2-22" name="__codelineno-2-22"></a>
-<a id="__codelineno-2-23" name="__codelineno-2-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">kind</span><span class="p">,</span> <span class="n">episodes</span><span class="o">=</span><span class="mi">6000</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.15</span><span class="p">):</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nS</span><span class="p">,</span> <span class="n">nA</span><span class="p">))</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">episodes</span><span class="p">):</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26"></a>        <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27"></a>        <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="mi">0</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29"></a>            <span class="n">s2</span> <span class="o">=</span> <span class="n">step</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30"></a>            <span class="n">r</span> <span class="o">=</span> <span class="n">rng_reward</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31"></a>            <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;q&quot;</span><span class="p">:</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32"></a>                <span class="n">target</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.0</span> <span class="k">if</span> <span class="n">s2</span> <span class="ow">in</span> <span class="n">TERM</span>
-<a id="__codelineno-2-33" name="__codelineno-2-33"></a>                              <span class="k">else</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34"></a>            <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35"></a>                <span class="n">a2</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">s2</span><span class="p">])</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">eps</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36"></a>                      <span class="k">else</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">nA</span><span class="p">))</span>
-<a id="__codelineno-2-37" name="__codelineno-2-37"></a>                <span class="n">target</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.0</span> <span class="k">if</span> <span class="n">s2</span> <span class="ow">in</span> <span class="n">TERM</span> <span class="k">else</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">Q</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="n">a2</span><span class="p">])</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38"></a>            <span class="n">Q</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">+=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">target</span> <span class="o">-</span> <span class="n">Q</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">])</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39"></a>            <span class="k">if</span> <span class="n">s2</span> <span class="ow">in</span> <span class="n">TERM</span><span class="p">:</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40"></a>                <span class="k">break</span>
-<a id="__codelineno-2-41" name="__codelineno-2-41"></a>            <span class="n">s</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">s2</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="n">s2</span><span class="p">])</span> <span class="k">if</span> <span class="n">rng</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">eps</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42"></a>                        <span class="k">else</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="n">nA</span><span class="p">))</span>
-<a id="__codelineno-2-43" name="__codelineno-2-43"></a>    <span class="k">return</span> <span class="n">Q</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44"></a>
-<a id="__codelineno-2-45" name="__codelineno-2-45"></a>
-<a id="__codelineno-2-46" name="__codelineno-2-46"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;状态 3 的正上方是陷阱 4（奖励 -1），右边 5 是目标（+1）&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-47" name="__codelineno-2-47"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;算法&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Q(3,左)&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;Q(3,右)&quot;</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<a id="__codelineno-2-49" name="__codelineno-2-49"></a>      <span class="o">+</span> <span class="s2">&quot;状态 3 的选择&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-50" name="__codelineno-2-50"></a><span class="k">for</span> <span class="n">kind</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;q&quot;</span><span class="p">,</span> <span class="s2">&quot;Q 学习&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;sarsa&quot;</span><span class="p">,</span> <span class="s2">&quot;SARSA&quot;</span><span class="p">)]:</span>
-<a id="__codelineno-2-51" name="__codelineno-2-51"></a>    <span class="n">Q</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">kind</span><span class="p">)</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52"></a>    <span class="n">choice</span> <span class="o">=</span> <span class="s2">&quot;向右（冒险）&quot;</span> <span class="k">if</span> <span class="n">Q</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Q</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="k">else</span> <span class="s2">&quot;向左（保守）&quot;</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">Q</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<a id="__codelineno-2-54" name="__codelineno-2-54"></a>          <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">Q</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span> <span class="o">+</span> <span class="n">choice</span><span class="p">)</span>
-<a id="__codelineno-2-55" name="__codelineno-2-55"></a><span class="nb">print</span><span class="p">()</span>
-<a id="__codelineno-2-56" name="__codelineno-2-56"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两种算法用同一组超参数、同一批随机种子训练，差别只来自更新目标&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
-<pre class="kb-output"><code>状态 3 的正上方是陷阱 4（奖励 -1），右边 5 是目标（+1）
-
-算法          Q(3,左)      Q(3,右)      状态 3 的选择
-Q 学习        -0.4441     -0.9026     向左（保守）
-SARSA       -0.6190     -0.8879     向左（保守）
-
-两种算法用同一组超参数、同一批随机种子训练，差别只来自更新目标</code></pre></p>
 <h2 id="_5">五、例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：贝尔曼最优方程<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：写出 <span class="arithmatex">\(Q^*\)</span> 的贝尔曼最优方程，
