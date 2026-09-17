@@ -8366,7 +8366,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本案例为教学用综合练习（数据为程序生成的模拟数据）</code><code>pandas / NumPy 官方文档</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="14">14 实战：成绩数据分析<a class="headerlink" href="#14" title="Permanent link">&para;</a></h1>
-<p><strong>前面 13 页讲的是零件，这一页把它们装成一台机器。</strong></p>
+<p>前面 13 页讲的是零件，这一页把它们装成一台机器。</p>
 <p>数据分析真正的难点不在「会不会用 <code>groupby</code>」，而在<strong>判断顺序</strong>：
 先看还是先改？缺失值填均值还是中位数？异常值是删掉还是保留标记？
 这些问题的答案不来自语法，来自<strong>你手上的任务</strong>。</p>
@@ -8401,7 +8401,7 @@
 </tr>
 </tbody>
 </table>
-<p>这三条在后面都有实测代码验证，不用背 ✓</p>
+<p>这三条在后面都有实测代码验证，不用背</p>
 </div>
 <p><strong>这页需要的库</strong>：NumPy、pandas、Matplotlib。
 版本不必与示例一致，行为在这个量级的版本上是稳定的。</p>
@@ -8537,13 +8537,13 @@
 </tbody>
 </table>
 <p>本案例采用的策略是：<strong>改格子，不改行</strong>。
-具体理由在第四节展开 ✓</p>
+具体理由在第四节展开</p>
 </div>
 <hr />
 <h2 id="_2">二、构造一份「脏」数据<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>为什么要自己造数据</strong>：真实成绩表涉及隐私，不能放进教学材料；
 而且真实数据每次都不一样，输出无法复核。
-<strong>造一份固定种子的模拟数据</strong>，既有真实的「脏」，又能保证每次跑出来完全一样 ✓</p>
+<strong>造一份固定种子的模拟数据</strong>，既有真实的「脏」，又能保证每次跑出来完全一样</p>
 <p>模拟数据里要埋进<strong>五类最常见的问题</strong>：</p>
 <table>
 <thead>
@@ -8700,11 +8700,11 @@
 本页每个代码块都要能<strong>独立运行</strong>，而它们又要共用同一份造数据逻辑。
 把模块内容单独放一个块并声明文件名，后面的块就能直接
 <code>from score_data import build_dirty</code> —— 既不重复贴十几行造数代码，
-又保证每个块单独复制出来还是能跑 ✓</p>
+又保证每个块单独复制出来还是能跑</p>
 <p><strong>为什么随机数要固定种子</strong>：<code>np.random.default_rng(42)</code> 之后，
 <code>rng.choice</code> / <code>rng.normal</code> 的每一次取值顺序都是确定的，
 所以「语文列缺失两个」这种细节在每台机器上都一样，
-本页所有输出才敢写成固定文本 ✓</p>
+本页所有输出才敢写成固定文本</p>
 <hr />
 <h2 id="_3">三、第一件事：看清数据<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><strong>为什么要先看清</strong>：清洗动作是<strong>不可逆</strong>的（<code>drop_duplicates</code> 之后
@@ -8847,7 +8847,7 @@
 ⑤ 完全重复的行数  : 1</code></pre>
 <p><strong>注意第 ④ 行</strong>：<code>max()</code> 给出 999.0 —— 它<strong>既不是缺失，也不是报错</strong>，
 <code>isna()</code> 查不到它，<code>mean()</code> 却会被它彻底带偏。
-这就是第四节要专门处理的「异常值」：<strong>填了，但不可信</strong> ✓</p>
+这就是第四节要专门处理的「异常值」：<strong>填了，但不可信</strong></p>
 <p><strong>第三步：<code>info()</code> 一眼看全。</strong>
 它把「非空个数」和「类型」放在同一张表里，
 是发现「某列悄悄变成文本」最快的手段：</p>
@@ -8904,9 +8904,9 @@ dtypes: float64(2), object(3)</code></pre>
 <p><strong>为什么 <code>object</code> 是危险信号</strong>：
 <code>object</code> 意味着「这一列装的是任意 Python 对象」。
 数学列里装的是字符串，所以 <code>df["数学"].sum()</code> 会得到一串拼接的字符，
-<code>df["数学"].mean()</code> 直接报错 —— 而它<strong>在体检之前完全看不出来</strong> ✓</p>
+<code>df["数学"].mean()</code> 直接报错 —— 而它<strong>在体检之前完全看不出来</strong></p>
 <p><code>info()</code> 只影响我们看清数据这件事，所以用 <code>memory_usage=False</code> 关掉内存列：
-内存数字随平台与版本变化，写进教学输出里既不必要也不稳定 ✓</p>
+内存数字随平台与版本变化，写进教学输出里既不必要也不稳定</p>
 <div class="admonition warning">
 <p class="admonition-title">不要用 <code>dropna()</code> 一把梭</p>
 <table>
@@ -8933,7 +8933,7 @@ dtypes: float64(2), object(3)</code></pre>
 </table>
 <p><strong>先看清，再决定</strong>：本案例缺的是「成绩」这种<strong>数值列</strong>，
 而数值列的缺失通常用<strong>该方法列的统计量</strong>去补，
-而不是把整行丢掉。理由见 4.5 节 ✓</p>
+而不是把整行丢掉。理由见 4.5 节</p>
 </div>
 <hr />
 <h2 id="_4">四、清洗：从脏到干净<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -8975,7 +8975,7 @@ dtypes: float64(2), object(3)</code></pre>
 </tbody>
 </table>
 <p>如果顺序反过来（先填充再去重、先置空不去重），
-你会得到「看起来也能跑」但数值悄悄错掉的结果 —— 这是最麻烦的一类错误 ✓</p>
+你会得到「看起来也能跑」但数值悄悄错掉的结果 —— 这是最麻烦的一类错误</p>
 <h3 id="41">4.1 列名去空格<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p><strong>为什么</strong>：列名里的空格是<strong>不可见字符</strong>，
 写代码时你看不出 <code>df["班级"]</code> 和实际列名 <code>"班级 "</code> 的差别，
@@ -9027,7 +9027,7 @@ dtypes: float64(2), object(3)</code></pre>
 </tbody>
 </table>
 <p><strong>判断依据</strong>：要处理的是「两端多余字符」→ 用 <code>strip</code>；
-要处理的是「所有空格」→ 才用 <code>replace</code> ✓</p>
+要处理的是「所有空格」→ 才用 <code>replace</code></p>
 <h3 id="42-errors">4.2 类型转换：先看不用 <code>errors</code> 会怎样<a class="headerlink" href="#42-errors" title="Permanent link">&para;</a></h3>
 <p><strong>为什么要专门演示报错</strong>：这样你才知道 <code>errors="coerce"</code> 到底救了什么。
 下面这段<strong>故意保留报错</strong>：</p>
@@ -9118,7 +9118,7 @@ dtype: object
 </table>
 <p><strong><code>"ignore"</code> 为什么危险</strong>：它看起来「温和」，
 但它是「整列不动」，于是你得到一列文本却以为自己已经转好了，
-bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了这里 ✓</p>
+bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了这里</p>
 <p><strong>这一步的结果要记住</strong>：数学列的缺失个数从 0 变成 1。
 后面的填充要补的是「本来就空」与「转类型时降级」这两类格子，
 所以<strong>类型转换必须在缺失值统计之前完成</strong>（否则你数出来的缺失个数是错的）✓</p>
@@ -9190,13 +9190,13 @@ bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了�
 <p><strong><code>reset_index(drop=True)</code> 为什么常跟在后面</strong>：
 删行之后索引会变成 <code>0, 1, 2, ...</code> 中间带缺口（比如少了 30）。
 留着的坏处是「按位置取第 5 行」和「索引是 5 的行」不再是同一行，
-而这类错位往往不报错 ⚠</p>
+而这类错位往往不报错</p>
 <p><strong>真实项目里更常见的判重口径</strong>是 <code>subset</code>：
 名字 + 班级相同就认为是同一个人。
 但要注意：<strong>两个同名学生会被误判成同一条记录</strong>，
 所以严格的做法是先用学号之类的唯一编号 —— 本案例的数据里没有编号，
 所以退而使用「所有列都相同」，代价是「同一个人两次录入分数不同」时判不出来。
-这两种口径的差别正是例题 2 的内容 ✓</p>
+这两种口径的差别正是例题 2 的内容</p>
 <h3 id="44">4.4 异常值：标记，而不是删除<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
 <p><strong>先按业务规则找出越界值</strong>。规则来自任务本身：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a>成绩必须在 0 到 100 之间（含端点） —— 这就是判定规则
@@ -9308,7 +9308,7 @@ bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了�
 </tbody>
 </table>
 <p>教学示例为了聚焦流程把这三步简化了，
-但<strong>你在真实项目里不要省</strong> ✓</p>
+但<strong>你在真实项目里不要省</strong></p>
 </div>
 <h3 id="45">4.5 缺失值填充：为什么选这一步的统计量<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
 <p><strong>先看清有哪些格子需要填</strong>。经过前面三步，
@@ -9371,7 +9371,7 @@ dtype: float64
 dtype: float64</code></pre>
 <p><strong>注意中位数与均值的差别</strong>：语文少了 999 之后，两者还算接近；
 但如果忘了先置空，均值会被 999 拉到 100 分以上，
-那时用它去填缺失，等于用一个<strong>被污染的数字</strong>去填另一个格子 ⚠</p>
+那时用它去填缺失，等于用一个<strong>被污染的数字</strong>去填另一个格子</p>
 <p><strong>为什么选「各列的中位数」</strong>：</p>
 <table>
 <thead>
@@ -9412,10 +9412,10 @@ dtype: float64</code></pre>
 <p><strong>判断依据</strong>：
 看缺失的<strong>比例</strong>与列的<strong>含义</strong>。</p>
 <ul>
-<li>缺失比例很低（本案例 30 人里 4 处）→ 填充即可，且对结论影响有限 ✓</li>
-<li>缺失比例很高（比如超过三成）→ <strong>填了也是在编数据</strong>，应当在报告里说明并考虑剔除该列 ⚠</li>
-<li>填分类列 → 用众数或用 <code>"未知"</code> 这种<strong>显式的缺失类别</strong> ✓</li>
-<li>填数值列 → 用中位数，通常比均值稳 ✓</li>
+<li>缺失比例很低（本案例 30 人里 4 处）→ 填充即可，且对结论影响有限</li>
+<li>缺失比例很高（比如超过三成）→ <strong>填了也是在编数据</strong>，应当在报告里说明并考虑剔除该列</li>
+<li>填分类列 → 用众数或用 <code>"未知"</code> 这种<strong>显式的缺失类别</strong></li>
+<li>填数值列 → 用中位数，通常比均值稳</li>
 </ul>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -9472,7 +9472,7 @@ dtype: float64</code></pre>
 3  学生04  一班  77.6  81.5  84.4</code></pre>
 <p><strong>最后一行 <code>df.shape</code> 是本节的结论</strong>：
 整个清洗过程<strong>没有删掉任何一个人</strong>。
-这正是「改格子不改行」的好处 —— 报告里说「30 人、一班 12 人、二班 18 人」是站得住的 ✓</p>
+这正是「改格子不改行」的好处 —— 报告里说「30 人、一班 12 人、二班 18 人」是站得住的</p>
 <div class="admonition warning">
 <p class="admonition-title">填充会让数据的离散程度偏小</p>
 <p>被填进去的是中位数，也就是该列的「中间值」。
@@ -9500,7 +9500,7 @@ dtype: float64</code></pre>
 </tbody>
 </table>
 <p><strong>所以要报数</strong>：在报告里写一句「填补缺失 4 处（占 4.4%）」，
-读者才知道这份结论的可信区间在哪 ✓</p>
+读者才知道这份结论的可信区间在哪</p>
 </div>
 <hr />
 <h2 id="_5">五、派生指标：让表长出新的列<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -9540,7 +9540,7 @@ dtype: float64</code></pre>
 </table>
 <p><strong>注意 <code>axis=1</code></strong>：求和、求平均都发生在<strong>每一行内部</strong>（横向），
 所以是 <code>axis=1</code>。写成 <code>axis=0</code> 会得到「每门课的总分」，
-那是一个完全不同的东西，而且<strong>不会报错</strong> ⚠</p>
+那是一个完全不同的东西，而且<strong>不会报错</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -9585,10 +9585,10 @@ dtype: float64</code></pre>
 总分均值 : 228.41
 手工核对第一行: 70.3 + 75.1 + 84.8 = 230.2</code></pre>
 <p><strong>最后一行是「小数据手工核验」</strong>：拿第一行手加一遍，
-和程序算出来的比对。这一步只要十秒，却能挡住「列取错了」这类错误 ✓</p>
+和程序算出来的比对。这一步只要十秒，却能挡住「列取错了」这类错误</p>
 <p><strong><code>.round(1)</code> 为什么跟在后面</strong>：
 浮点求和可能给出 <code>230.20000000000002</code> 这种结果，
-而成绩表保留一位小数是<strong>业务上合理</strong>的，也让输出稳定可控 ✓</p>
+而成绩表保留一位小数是<strong>业务上合理</strong>的，也让输出稳定可控</p>
 <h3 id="51-pdcut">5.1 用 <code>pd.cut</code> 分等级<a class="headerlink" href="#51-pdcut" title="Permanent link">&para;</a></h3>
 <p><strong>为什么用 <code>pd.cut</code> 而不是一串 <code>if</code></strong>：分档是一个<strong>映射</strong>，
 用 <code>pd.cut</code> 能一次表达「区间 → 标签」的全部边界，
@@ -9702,7 +9702,7 @@ Name: count, dtype: int64
 </tbody>
 </table>
 <p><strong>为什么默认要选 <code>right=True</code></strong>：成绩惯例是「60 分及格」，
-也就是「达到 60 就算过」→ 60 应当归到及格那一档 → 用默认值即可 ✓</p>
+也就是「达到 60 就算过」→ 60 应当归到及格那一档 → 用默认值即可</p>
 <p>而 <code>right=False</code> 那个坑在于：<strong>100 分会掉出去变成 <code>NaN</code></strong> ——
 因为 <code>(85, 100]</code> 变成 <code>[85, 100)</code> 之后不含 100。
 这就是上面边界演示里要注意的事，也是下面这条警告的内容。</p>
@@ -9735,10 +9735,10 @@ Name: count, dtype: int64
 </tbody>
 </table>
 <p><strong>自查办法</strong>：分完档立刻 <code>df["等级"].isna().sum()</code>，
-再确认各档人数之和等于总人数 ✓</p>
+再确认各档人数之和等于总人数</p>
 <p>这三条里，前两条都源于「边界」，第三条源于「顺序」，
 所以<strong>分档之后必须做一次人数核对</strong> —— 也就是上文那句
-<code>各等级总人数合计: 30</code> ✓</p>
+<code>各等级总人数合计: 30</code></p>
 </div>
 <h3 id="52">5.2 班级排名<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p><strong>为什么排名要「分班」</strong>：报告要的是「这个学生在<strong>自己班</strong>里排第几」。
@@ -9867,13 +9867,13 @@ Name: count, dtype: int64
 </table>
 <p><strong>默认的 <code>"average"</code> 给出 1.5 这种小数</strong>，
 所以排名列一定要显式写 <code>method</code>，
-否则你会得到一个「带小数点的名次」，转成整数时又悄悄截断 ⚠</p>
+否则你会得到一个「带小数点的名次」，转成整数时又悄悄截断</p>
 <hr />
 <h2 id="_6">六、分组统计<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>为什么要用一次 <code>agg</code> 拿到全部指标</strong>：
 新手常写成「求人数 <code>groupby().size()</code> 一次、求均分再来一次」，
 重复分组既慢又容易<strong>口径不一致</strong>（比如某次忘了先筛选有效数据）。
-一次 <code>agg</code> 在同一份数据上算出所有指标，口径天然一致 ✓</p>
+一次 <code>agg</code> 在同一份数据上算出所有指标，口径天然一致</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -9936,7 +9936,7 @@ Name: 平均分, dtype: float64</code></pre>
 <p><strong>为什么「人数」数的是姓名列而不是平均分列</strong>：
 两者在这里结果相同（都没有缺失），但<strong>用姓名更安全</strong>：
 如果哪天平均分列出现缺失，<code>count</code> 会漏掉那些人，
-而人数统计的语义应当是「有多少个人」，与成绩是否齐全无关 ✓</p>
+而人数统计的语义应当是「有多少个人」，与成绩是否齐全无关</p>
 <p><strong>结果怎么核对</strong>：</p>
 <table>
 <thead>
@@ -9966,7 +9966,7 @@ Name: 平均分, dtype: float64</code></pre>
 </table>
 <p><strong>再对比一下整体的数字</strong>：整体均分 76.14，
 而两班分别是 75.10 与 76.83 —— 整体均分<strong>不等于两班均分的平均</strong>
-（那是 <code>(75.10 + 76.83) / 2 = 75.97</code>）⚠
+（那是 <code>(75.10 + 76.83) / 2 = 75.97</code>）
 因为两个班<strong>人数不同</strong>，整体均值是按人数加权的。
 这个差别在报告里必须说清楚，否则「平均一下」会算错。</p>
 <div class="admonition warning">
@@ -9999,9 +9999,9 @@ Name: 平均分, dtype: float64</code></pre>
 </tbody>
 </table>
 <p><strong>正确表述</strong>是「二班的样本均分比一班高 1.73 分」——
-描述你<strong>实际算出来的量</strong>，而不是断言总体差异 ✓</p>
+描述你<strong>实际算出来的量</strong>，而不是断言总体差异</p>
 <p>「这个差异是否可信」属于统计推断的范围，需要额外的检验方法，
-不是本页的任务 —— 本页只负责把数字算对、算清 ✓</p>
+不是本页的任务 —— 本页只负责把数字算对、算清</p>
 </div>
 <hr />
 <h2 id="_7">七、找出关键对象<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -10113,12 +10113,12 @@ dtype: float64
 <p><strong>第二个要点：<code>df[SUBJECTS].idxmax()</code> 是逐列算的。</strong>
 它对每一门课各求一次 <code>idxmax</code>，于是返回三个索引（一门课一个）。
 所以 <code>df.loc[这三个索引]</code> 取出来的是<strong>三行不同的人</strong> ——
-这正是「各科最高分往往不是同一个人」的体现 ✓</p>
+这正是「各科最高分往往不是同一个人」的体现</p>
 <p><strong>注意语文最高分只比第二名高多少</strong>：97.3 是最高，
 而这位学生的数学只有 48.4 —— <strong>偏科现象明显</strong>。
 这类观察正是「找出关键对象」的价值：数字背后是具体的人 ✓</p>
 <h3 id="72">7.2 哪门课最不均衡：标准差与变异系数<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
-<p><strong>这是本页最需要「想清楚再算」的一步。</strong></p>
+<p>这是本页最需要「想清楚再算」的一步。</p>
 <p>问题在于：三科的<strong>均值不一样</strong>（语文 78.46、数学 71.34、英语 78.62），
 所以直接比标准差会<strong>混入「难度差异」的影响</strong>。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
@@ -10227,12 +10227,12 @@ dtype: float64
   这两科之间<strong>直接比标准差是公平的</strong> → 英语（5.18）比语文（6.43）更均衡。</li>
 <li><strong>数学的均值低了 7 分</strong> → 直接比标准差会把「难度」和「离散」混在一起。
   用变异系数（0.1551，接近英语的 <strong>2.4 倍</strong>）才能说清：
-  <strong>数学不只是难，而且差距特别大</strong> ✓</li>
+  <strong>数学不只是难，而且差距特别大</strong></li>
 </ul>
 <p><strong>结论</strong>：两把尺子指向同一个答案（数学最不均衡），
 但<strong>变异系数给出的倍数关系</strong>（约 2.4 倍）比标准差（约 2.1 倍）
 更接近「相对差距」的含义，而且它不受单位影响 ——
-换成百分制以外的计分方式时，标准差会变，变异系数不变 ✓</p>
+换成百分制以外的计分方式时，标准差会变，变异系数不变</p>
 <div class="admonition tip">
 <p class="admonition-title">变异系数什么时候<strong>不</strong>能用</p>
 <p>变异系数要除以均值，所以它<strong>只在均值明显大于 0 时有意义</strong>：</p>
@@ -10268,7 +10268,7 @@ dtype: float64
 </tbody>
 </table>
 <p><strong>判断依据</strong>：<strong>要比较的量纲或量级不同 → 用变异系数；
-量纲相同且均值接近 → 标准差更直观。</strong> ✓</p>
+量纲相同且均值接近 → 标准差更直观。</strong></p>
 </div>
 <hr />
 <h2 id="_8">八、可视化：画出来核对<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -10407,11 +10407,11 @@ dtype: float64
 <code>counts</code> 里的每个数字必须是 30（清洗后有 30 人）。
 如果某个直方图只统计到 29 个，说明数据里还有 <code>NaN</code> 混进去 ——
 <strong>这个数字是真正的核对手段</strong>，
-而「文件已写出」只说明程序没崩，不说明数据对 ✓</p>
+而「文件已写出」只说明程序没崩，不说明数据对</p>
 <p><strong><code>ax.hist</code> 的双重返回为什么这样用</strong>：
 它同时画图<strong>并</strong>返回 <code>(计数数组, 分箱边界, 图元)</code>。
 我们把第一项求和，就得到「有多少个样本落进了这些箱子」——
-只要它等于人数，就说明没有数据因为 <code>range</code> 设窄了而被漏掉 ✓</p>
+只要它等于人数，就说明没有数据因为 <code>range</code> 设窄了而被漏掉</p>
 <p><strong>接下来画班级均分柱状图与平均分箱线图</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
@@ -10506,16 +10506,16 @@ dtype: float64
 <p><strong>① <code>ax.set_ylim(0, 100)</code> 不能省。</strong>
 柱状图的纵轴默认从 0 开始，但如果你把下限设成 70，
 两班只差 1.73 分的柱子会被<strong>视觉放大成天壤之别</strong>。
-固定成 0–100 才是诚实画法 ⚠</p>
+固定成 0–100 才是诚实画法</p>
 <p><strong>② 箱线图比柱状图信息多</strong>，它一张图里给出五个数：
 下须、下四分位、中位数、上四分位、上须（以及须外的离群点）。
 所以「哪门课更分散」看箱子的<strong>高度</strong>，
-「哪门课偏难」看箱体的<strong>位置</strong> ✓</p>
+「哪门课偏难」看箱体的<strong>位置</strong></p>
 <p><strong>最后一行那句 <code>已清理</code></strong>：
 上面这个写法是「删完之后再判断文件是否存在」，
 所以它打印 <code>True</code> 是因为 <code>exists()</code> 全是 <code>False</code> —— 逻辑上确实对了，
 但读起来绕。<strong>更清楚的写法是直接把清理动作和判断分开</strong>：
-<code>shutil.rmtree(tmpdir)</code> 之后打个「已清理」就够了 ✓</p>
+<code>shutil.rmtree(tmpdir)</code> 之后打个「已清理」就够了</p>
 <hr />
 <h2 id="_9">九、导出报告<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p><strong>为什么要导出</strong>：
@@ -10545,7 +10545,7 @@ dtype: float64
 <p><strong>本页的输出里不打印路径</strong>，理由很实在：
 路径里含用户名、盘符、临时目录名，<strong>在不同机器上完全不同</strong>，
 写进教学材料既会让输出对不上，也没有必要。
-改成打印<strong>行数</strong>和<strong>布尔判断</strong>，输出就稳定了 ✓</p>
+改成打印<strong>行数</strong>和<strong>布尔判断</strong>，输出就稳定了</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -10674,17 +10674,17 @@ dtype: float64
 <p><strong>为什么「读回来核对」值得做</strong>：
 写文件时可能遇到编码错误、字段里含逗号、行数被截断等问题。
 把文件<strong>当作陌生文件读回来</strong>，用 <code>csv.reader</code> 数一遍列数与行数 ——
-这是最便宜的有效校验 ✓</p>
+这是最便宜的有效校验</p>
 <p><strong>上一段输出里的数字怎么读</strong>：
 表头列数 7 = 姓名 + 班级 + 3 门课 + 总分 + 平均分，
 数据行数 30 = 清洗后的人数。
-<strong>两个数字对不上就说明导出出了问题</strong> ✓</p>
+<strong>两个数字对不上就说明导出出了问题</strong></p>
 <hr />
 <h2 id="_10">十、清洗前后对比表<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p><strong>为什么一定要做这张表</strong>：
 报告里如果只给出结论，读者<strong>无法判断你动了多少数据</strong>。
 把「清洗前 → 清洗后」并排写出来，
-读者一眼就知道这份结论有多大的加工痕迹 ✓</p>
+读者一眼就知道这份结论有多大的加工痕迹</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -10825,7 +10825,7 @@ dtype: float64
 如果不清洗就直接算，报告会写「语文平均 111 分」，
 读者一眼就知道有问题；但如果你只打印了「平均分」而没做这张对比表，
 可能连自己都没注意到 ⚠</p>
-<p><strong>所以「清洗前后对比」不是形式主义，它是最后一道防线</strong> ✓</p>
+<p><strong>所以「清洗前后对比」不是形式主义，它是最后一道防线</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">别把「清洗前」的统计量当结论</p>
 <p>一个特别常见的事故：调试时打印了 <code>df.describe()</code>，
@@ -10850,7 +10850,7 @@ dtype: float64
 </table>
 <p><strong>防呆做法</strong>：给清洗后的表换个明确的变量名
 （<code>clean</code> / <code>df_clean</code>），并且在报告里只引用它。
-本页所有代码块都用 <code>build_clean()</code> 就是这个意思 ✓</p>
+本页所有代码块都用 <code>build_clean()</code> 就是这个意思</p>
 </div>
 <hr />
 <h2 id="_11">十一、如果要做真实项目，你会怎么改<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -10899,7 +10899,7 @@ dtype: float64
 </table>
 <p><strong>为什么把「参数化路径」排在第一位</strong>：
 它是唯一一个<strong>改完立刻能在别的数据上跑</strong>的改动。
-其他改动都是「更稳」，而它带来的是「能用」✓</p>
+其他改动都是「更稳」，而它带来的是「能用」</p>
 <p><strong>下面是一个可以按需改造的脚本骨架</strong>，体现上面几条中的三条
 （断言、日志、保留原始数据）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -11021,7 +11021,7 @@ dtype: float64
 </table>
 <p><strong>为什么 <code>assert</code> 值得写</strong>：它写起来只要一行，却能把
 「清洗后剩 0 行」「还有缺失没处理」这类<strong>静默错误</strong>变成响亮的中断。
-比起事后排查一份数字不对的报告，一行 <code>assert</code> 便宜得多 ✓</p>
+比起事后排查一份数字不对的报告，一行 <code>assert</code> 便宜得多</p>
 <p><strong>再往下还能做什么</strong>（超出本页范围，但值得知道方向）：</p>
 <table>
 <thead>
@@ -11334,7 +11334,7 @@ dtype: float64
 </table>
 <p><strong>两种 <code>keep</code> 的差别是这一题的重点</strong>：
 <code>keep="first"</code>（默认）留下 80.0，<code>keep="last"</code> 留下 92.0 ——
-<strong>同一份数据，去重后分数差 12 分</strong>，班级均分也就跟着差 ⚠</p>
+<strong>同一份数据，去重后分数差 12 分</strong>，班级均分也就跟着差</p>
 <p><strong>到底该选哪种</strong>：</p>
 <table>
 <thead>
@@ -11372,14 +11372,14 @@ dtype: float64
 </tr>
 </tbody>
 </table>
-<p><strong>关键认识：判重口径是业务决定，不是技术决定。</strong>
+<p>关键认识：判重口径是业务决定，不是技术决定。
 <code>drop_duplicates</code> 只负责执行你给的口径；
-选哪个口径，得看数据是怎么产生的、有谁能判断对错 ✓</p>
+选哪个口径，得看数据是怎么产生的、有谁能判断对错</p>
 <p><strong>一个实用的中间步骤</strong>：先看清重复组再决定。
 <code>df[df.duplicated(subset=[...], keep=False)]</code> 会把<strong>所有</strong>参与重复的记录都打出来
 （<code>keep=False</code> 的含义是「不标记任何一条为『首次出现』」），
 于是你能看到「甲 80 分」和「甲 92 分」这一对矛盾记录 ——
-这类记录本来就该被人看一眼再决定 ✓</p>
+这类记录本来就该被人看一眼再决定</p>
 </details>
 <hr />
 <h3 id="3">例题 3：换个统计量填缺失值，结论会变吗<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -11541,10 +11541,10 @@ dtype: float64
 </tbody>
 </table>
 <p><strong>一句话概括</strong>：<strong>填充不是「随便补个数」，而是往数据里注入一条信息；
-注入什么信息，取决于那个空格代表什么。</strong> ✓</p>
+注入什么信息，取决于那个空格代表什么。</strong></p>
 <p>（另外值得一提：均值填充还有个隐藏性质 ——
 它会让填充后的均值<strong>严格等于</strong>原来不含缺失时的均值。
-所以用均值填出来的数据「均值很好看」，但这是设计出来的，不是真实情况 ✓）</p>
+所以用均值填出来的数据「均值很好看」，但这是设计出来的，不是真实情况）</p>
 </details>
 <hr />
 <h3 id="4">例题 4：换一种「最不均衡」的判据<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -11629,7 +11629,7 @@ dtype: float64
 </tbody>
 </table>
 <p><strong>三个指标指向同一个答案</strong>，说明本案例的结论是稳的 ——
-这本身就是一条重要信息：<strong>结论不依赖你挑了哪个指标</strong> ✓</p>
+这本身就是一条重要信息：<strong>结论不依赖你挑了哪个指标</strong></p>
 <p>但换一份数据它们可能分道扬镳：</p>
 <table>
 <thead>
@@ -11675,7 +11675,7 @@ dtype: float64
 <p><strong>为什么四分位距最稳</strong>：
 它只看中间那 50% 的数据（第 25 到第 75 百分位之间），
 <strong>两端各扔掉四分之一</strong>，所以个别极端值动不了它。
-代价是它<strong>看不见</strong>两端的真实情况 —— 而有些任务恰恰要关心两端 ⚠</p>
+代价是它<strong>看不见</strong>两端的真实情况 —— 而有些任务恰恰要关心两端</p>
 <p><strong>三者的判断依据</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
@@ -11688,7 +11688,7 @@ dtype: float64
 <p><strong>最后的实用建议</strong>：
 <strong>同时打印两三个指标</strong>。它们一致 → 结论可信；
 它们打架 → 说明数据里有值得看一眼的东西（通常是离群点），
-这本身就是发现问题的线索 ✓</p>
+这本身就是发现问题的线索</p>
 </details>
 <hr />
 <h2 id="_13">十三、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
@@ -11836,12 +11836,12 @@ dtype: float64
 </tbody>
 </table>
 <p><strong><code>clip</code> 为什么是这里的正解</strong>：加分这件事<strong>逻辑上就该有上限</strong>
-（满分 100），所以「夹住」比「删掉」更符合业务含义 ✓</p>
+（满分 100），所以「夹住」比「删掉」更符合业务含义</p>
 <p>顺带记住一条通用规律：
 <strong><code>df[列] = 某个筛选结果</code> 这种写法几乎总是错的</strong>，
 因为 pandas 会按索引对齐，没对上的位置变成缺失值。
 要做「只改符合条件的格子」，用 <code>mask</code>、<code>where</code>、<code>clip</code>，
-或者用 <code>df.loc[条件, 列] = 值</code> ✓</p>
+或者用 <code>df.loc[条件, 列] = 值</code></p>
 </details>
 <hr />
 <p><strong>Q2</strong> 有一个函数要对每门课分别做标准化，
@@ -11917,11 +11917,11 @@ dtype: float64
 </tbody>
 </table>
 <p><strong>所以两个都对</strong> —— 那这一题在问什么？
-问的是：<strong>A 为什么「看起来理所当然」，而这恰恰是它危险的地方</strong> ⚠</p>
+问的是：<strong>A 为什么「看起来理所当然」，而这恰恰是它危险的地方</strong></p>
 <p>因为 A 能跑对，靠的是一个<strong>不成文的对齐规则</strong>：
 <code>DataFrame - Series</code> 时默认按<strong>列名</strong>对齐。列均值带着列名，正好对上。
 一旦场景换成「按行」，同一个写法会<strong>静默失败</strong>（结果全变缺失，且不报错）。
-这一点在下面实测 ✓</p>
+这一点在下面实测</p>
 <p>实测一下「按行标准化」长什么样 —— <strong>注意这里有个坑</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
@@ -12057,7 +12057,7 @@ dtype: float64
 <p><strong>规律</strong>：<code>DataFrame</code> 减去一个 <code>Series</code> 时，
 <strong>默认按列名对齐</strong>（相当于 <code>axis="columns"</code>）。
 列均值恰好带着列名，所以自动对上；
-而行均值带着的是行索引，拿去跟列名匹配，全部落空 → 全变缺失 ⚠</p>
+而行均值带着的是行索引，拿去跟列名匹配，全部落空 → 全变缺失</p>
 <p><strong>这就是「按列标准化看起来天然能跑、按行标准化必须显式写 <code>axis</code>」的原因</strong> ✓</p>
 <p><strong>两种标准化的区别</strong>：</p>
 <table>
@@ -12126,7 +12126,7 @@ dtype: float64
 </table>
 <p><strong>通用规律</strong>：<strong><code>DataFrame</code> 与 <code>Series</code> 做运算时，一定想清楚「按哪个轴对齐」，
 并且把 <code>axis</code> 显式写出来。</strong> 不写虽然常常也能对，
-但错的那一次不会给你任何提示 ✓</p>
+但错的那一次不会给你任何提示</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 下面的 <code>agg</code> 写法「能跑」，但结果里「人数」是错的。
@@ -12151,7 +12151,7 @@ dtype: float64
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong><code>count</code> 数的是「非空值个数」，不是「行数」。</strong></p>
+<p><code>count</code> 数的是「非空值个数」，不是「行数」。</p>
 <p>实测一下差别：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
@@ -12297,7 +12297,7 @@ dtype: float64
 <p><strong>判断依据</strong>：
 要「这个组有多少条记录」→ 用 <code>size</code>；
 要「这一列有多少个有效值」→ 用 <code>count</code>。
-两者在<strong>没有缺失时结果相同</strong>，所以在有缺失的数据上才需要刻意区分 ✓</p>
+两者在<strong>没有缺失时结果相同</strong>，所以在有缺失的数据上才需要刻意区分</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 报告里要写「本次处理共修改了多少个数据格」。
@@ -12448,10 +12448,10 @@ dtype: float64
 <p><strong>注意最后一行 <code>剩余缺失格子</code> 的意义</strong>：
 它是一道<strong>断言</strong>。如果它不等于 0，
 说明清洗流程有一步没覆盖到（比如某列被 <code>to_numeric</code> 新引入了缺失却没填）。
-这类检查比「清洗函数返回了」有意义得多 ✓</p>
+这类检查比「清洗函数返回了」有意义得多</p>
 <p><strong>为什么不能只报一个总数</strong>：
 「累计修改 7 次」这个数字<strong>没法判断严重程度</strong> ——
-7 次是 1 条重复 + 6 处缺失，还是 7 个人整行消失？含义完全不同 ⚠</p>
+7 次是 1 条重复 + 6 处缺失，还是 7 个人整行消失？含义完全不同</p>
 <p><strong>报告里的推荐表述</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
 <span class="normal"><a href="#__codelineno-44-2">2</a></span>
@@ -12461,7 +12461,7 @@ dtype: float64
 <a id="__codelineno-44-3" name="__codelineno-44-3"></a>         缺失成绩共 4 处，按各科中位数填补。
 <a id="__codelineno-44-4" name="__codelineno-44-4"></a>待改进：缺失与被修正的格子已加标记（真实项目中应当保留该列）。
 </code></pre></div></td></tr></table></div>
-<p><strong>一句话总结</strong>：<strong>报告里的每个数字，都要能让人反推出你是怎么算的</strong> ✓</p>
+<p><strong>一句话总结</strong>：<strong>报告里的每个数字，都要能让人反推出你是怎么算的</strong></p>
 </details>
 <hr />
 <h2 id="_14">小结<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
@@ -12563,7 +12563,7 @@ dtype: float64
 这一页处理的是<strong>不听话的表格</strong>，下一页换一种脏法：
 数据本身连续、干净，但<strong>被噪声盖住了</strong>。
 你会看到「看清数据」的手段从 <code>isna()</code> 换成频谱图，
-而「先看清再动手」这条原则完全不变 ✓</p>
+而「先看清再动手」这条原则完全不变</p>
 
 
 

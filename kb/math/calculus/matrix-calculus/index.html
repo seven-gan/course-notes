@@ -8419,7 +8419,7 @@
 \dfrac{\partial f}{\partial x_n}
 \end{bmatrix}
 \]</div>
-<p><strong>每个分量是对应变量的偏导数。</strong></p>
+<p>每个分量是对应变量的偏导数。</p>
 <h3 id="_4">三个最基本的公式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>这三个必须背下来——几乎所有梯度计算都由它们组合而成。</p>
 <div class="arithmatex">\[
@@ -8451,7 +8451,7 @@
 <div class="arithmatex">\[
 \frac{\partial}{\partial x_k} = 2\sum_j A_{kj}x_j = 2(A\boldsymbol{x})_k
 \]</div>
-<p>所以梯度是 <span class="arithmatex">\(2A\boldsymbol{x}\)</span> ✓</p>
+<p>所以梯度是 <span class="arithmatex">\(2A\boldsymbol{x}\)</span></p>
 <p><strong>注意</strong>：<span class="arithmatex">\(A\)</span> <strong>不对称</strong>时公式变成</p>
 <div class="arithmatex">\[
 \frac{\partial}{\partial\boldsymbol{x}}\big(\boldsymbol{x}^\top A\boldsymbol{x}\big) = (A + A^\top)\boldsymbol{x}
@@ -8501,7 +8501,7 @@ J = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{x}}
 \dfrac{\partial f_m}{\partial x_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial x_n}
 \end{bmatrix}
 \]</div>
-<p><strong>第 <span class="arithmatex">\(i\)</span> 行是第 <span class="arithmatex">\(i\)</span> 个输出对各输入的偏导。</strong></p>
+<p>第 <span class="arithmatex">\(i\)</span> 行是第 <span class="arithmatex">\(i\)</span> 个输出对各输入的偏导。</p>
 <h3 id="_7">最重要的一个：线性映射<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>若 <span class="arithmatex">\(\boldsymbol{f}(\boldsymbol{x}) = A\boldsymbol{x}\)</span>，则</p>
 <div class="arithmatex">\[
@@ -8510,12 +8510,14 @@ J = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{x}}
 <p><strong>线性映射的导数就是它自己的矩阵</strong>——这与标量情形 <span class="arithmatex">\((ax)' = a\)</span> 完全平行。</p>
 <div class="admonition note">
 <p class="admonition-title">雅可比矩阵的完整含义</p>
-<p><strong>1. 它是「局部线性化」的系数矩阵</strong></p>
+<ol>
+<li>它是「局部线性化」的系数矩阵</li>
+</ol>
 <p>由泰勒一阶展开：</p>
 <div class="arithmatex">\[
 \boldsymbol{f}(\boldsymbol{x}+\Delta\boldsymbol{x}) \approx \boldsymbol{f}(\boldsymbol{x}) + J\Delta\boldsymbol{x}
 \]</div>
-<p><strong>这就是机器人学里「关节速度 → 末端速度」的映射。</strong></p>
+<p>这就是机器人学里「关节速度 → 末端速度」的映射。</p>
 <p><strong>2. 它给出体积缩放因子</strong></p>
 <div class="arithmatex">\[
 \lvert\det J\rvert = \text{局部体积缩放倍数}
@@ -8528,7 +8530,7 @@ J = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{x}}
 = \frac{\partial\boldsymbol{z}}{\partial\boldsymbol{y}}\cdot\frac{\partial\boldsymbol{y}}{\partial\boldsymbol{x}}
 \qquad\text{（矩阵相乘）}
 \]</div>
-<p><strong>这解释了为什么深度学习框架用矩阵乘法实现反向传播。</strong></p>
+<p>这解释了为什么深度学习框架用矩阵乘法实现反向传播。</p>
 </div>
 <h3 id="_8">常用结果表<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <table>
@@ -8577,7 +8579,9 @@ J = \operatorname{diag}\big(\sigma'(x_1),\dots,\sigma'(x_n)\big)
 J\boldsymbol{v} = \sigma'(\boldsymbol{x})\odot\boldsymbol{v}
 \]</div>
 <p>（<span class="arithmatex">\(\odot\)</span> 是逐元素乘。）这正是深度学习框架的做法。</p>
-<p><strong>2. 解释了「激活函数影响梯度传播」</strong></p>
+<ol>
+<li>解释了「激活函数影响梯度传播」</li>
+</ol>
 <p>反向传播中要连乘各层的雅可比。逐元素函数的雅可比是对角的，
 所以连乘退化为<strong>逐元素连乘</strong>：</p>
 <div class="arithmatex">\[
@@ -8639,7 +8643,7 @@ J = \operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top,
 = -s_is_j
 \]</div>
 <p><strong>合并成矩阵</strong>：对角线上是 <span class="arithmatex">\(s_i - s_i^2\)</span>，非对角线是 <span class="arithmatex">\(-s_is_j\)</span>，
-正好就是 <span class="arithmatex">\(\operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top\)</span> ✓</p>
+正好就是 <span class="arithmatex">\(\operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top\)</span></p>
 <p><strong>与交叉熵配合时的简化</strong>：softmax + 交叉熵的联合梯度是
 <span class="arithmatex">\(\boldsymbol{s} - \boldsymbol{y}\)</span>（极其简洁），
 因为这个复杂雅可比被交叉熵的梯度「抵消」了。
@@ -8768,7 +8772,7 @@ X^\top X\boldsymbol{w} = X^\top\boldsymbol{y}
 H = \nabla^2 L = 2X^\top X
 \]</div>
 <p>它<strong>总是半正定</strong>（因为 <span class="arithmatex">\(\boldsymbol{v}^\top X^\top X\boldsymbol{v} = \lVert X\boldsymbol{v}\rVert^2 \geq 0\)</span>）。
-当 <span class="arithmatex">\(X\)</span> 列满秩时<strong>正定</strong> → 严格极小 ✓</p>
+当 <span class="arithmatex">\(X\)</span> 列满秩时<strong>正定</strong> → 严格极小</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">这里能用正规方程，但实践中常常不用</p>
@@ -8871,7 +8875,7 @@ H = \nabla^2 L = 2X^\top X
 </tr>
 </tbody>
 </table>
-<p><strong>第四步：为什么对梯度传播不利</strong></p>
+<p>第四步：为什么对梯度传播不利</p>
 <p>反向传播中，梯度要连乘各层的雅可比（对角阵），即连乘 <span class="arithmatex">\(\sigma'\)</span>。</p>
 <div class="arithmatex">\[
 \sigma'(x) \leq 0.25
@@ -8970,7 +8974,7 @@ L = -\sum_i y_i\log s_i
 \frac{\partial L}{\partial\boldsymbol{s}} = -\frac{\boldsymbol{y}}{\boldsymbol{s}}
 \qquad\text{（逐元素相除）}
 \]</div>
-<p><strong>第二步：用链式法则乘雅可比</strong></p>
+<p>第二步：用链式法则乘雅可比</p>
 <div class="arithmatex">\[
 \frac{\partial L}{\partial z_k}
 = \sum_i \frac{\partial L}{\partial s_i}\cdot\frac{\partial s_i}{\partial z_k}
@@ -9160,8 +9164,8 @@ y_i = \sum_{j=1}^{n}A_{ij}x_j
 \frac{\partial}{\partial x_k} = \sum_j A_{kj}x_j + \sum_i A_{ik}x_i
 = (A\boldsymbol{x})_k + (A^\top\boldsymbol{x})_k
 \]</div>
-<p>即 <span class="arithmatex">\(\big((A+A^\top)\boldsymbol{x}\big)_k\)</span> ✓</p>
-<p><strong>当 <span class="arithmatex">\(A\)</span> 对称</strong>时 <span class="arithmatex">\(A^\top = A\)</span>，得 <span class="arithmatex">\(2A\boldsymbol{x}\)</span> ✓</p>
+<p>即 <span class="arithmatex">\(\big((A+A^\top)\boldsymbol{x}\big)_k\)</span></p>
+<p><strong>当 <span class="arithmatex">\(A\)</span> 对称</strong>时 <span class="arithmatex">\(A^\top = A\)</span>，得 <span class="arithmatex">\(2A\boldsymbol{x}\)</span></p>
 <p><strong>为什么实践中通常写 <span class="arithmatex">\(2A\boldsymbol{x}\)</span></strong>：
 机器学习中的二次型矩阵（Hessian、协方差、<span class="arithmatex">\(X^\top X\)</span>）
 <strong>都是对称的</strong>，所以简写形式足够。</p>
@@ -9207,9 +9211,9 @@ J = \begin{bmatrix}
 \]</div>
 <p><strong>验证两个性质</strong>：</p>
 <p><strong>1. 每行之和为 0</strong>（因为 <span class="arithmatex">\(\sum_i s_i = 1\)</span> 恒成立，对 <span class="arithmatex">\(z_k\)</span> 求导得 0）：</p>
-<p>第一行：<span class="arithmatex">\(0.16 - 0.06 - 0.10 = 0\)</span> ✓</p>
-<p>第二行：<span class="arithmatex">\(-0.06+0.21-0.15 = 0\)</span> ✓</p>
-<p>第三行：<span class="arithmatex">\(-0.10-0.15+0.25 = 0\)</span> ✓</p>
+<p>第一行：<span class="arithmatex">\(0.16 - 0.06 - 0.10 = 0\)</span></p>
+<p>第二行：<span class="arithmatex">\(-0.06+0.21-0.15 = 0\)</span></p>
+<p>第三行：<span class="arithmatex">\(-0.10-0.15+0.25 = 0\)</span></p>
 <p><strong>2. 各行元素符号</strong>：对角线为正，非对角线为负
 （提高某个 <span class="arithmatex">\(z_i\)</span> 会降低其它 <span class="arithmatex">\(s_j\)</span>）。</p>
 <p><strong>意义</strong>：softmax 的输出是「竞争」关系——

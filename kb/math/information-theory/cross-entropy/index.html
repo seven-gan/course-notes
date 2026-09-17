@@ -8152,7 +8152,7 @@
 \]</div>
 <p><strong>训练损失为什么用交叉熵</strong>：它与 KL 只差一个常数，
 但<strong>计算更简单</strong>（不需要知道 <span class="arithmatex">\(p\)</span> 的完整形式，
-只需样本）✓</p>
+只需样本）</p>
 </div>
 <hr />
 <h2 id="kl_1">一、KL 散度<a class="headerlink" href="#kl_1" title="Permanent link">&para;</a></h2>
@@ -8268,7 +8268,7 @@ D_{KL}(q\|p) = 0.5\log_2\frac{0.5}{0.9}+0.5\log_2\frac{0.5}{0.1}
 D_{KL}(p\|q) = H(p,q)-H(p)
 \]</div>
 <p><strong>含义</strong>：<strong>「用错误的分布 <span class="arithmatex">\(q\)</span> 编码 <span class="arithmatex">\(p\)</span> 的数据时，
-平均多花的比特数」</strong> ✓</p>
+平均多花的比特数」</strong></p>
 <div class="admonition note">
 <p class="admonition-title">这个「多花比特」的解释非常实用</p>
 <p><strong>设定</strong>：真实数据服从 <span class="arithmatex">\(p\)</span>，但你知道的（或模型的）分布是 <span class="arithmatex">\(q\)</span>。</p>
@@ -8318,7 +8318,7 @@ H(p,q)-H(p) = D_{KL}(p\|q) \;\checkmark
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「为什么最小化交叉熵 = 最小化模型失配」的严格解释。</strong></p>
+<p>这就是「为什么最小化交叉熵 = 最小化模型失配」的严格解释。</p>
 </div>
 <hr />
 <h2 id="_1">二、交叉熵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -8346,7 +8346,7 @@ H(p,q)-H(p) = D_{KL}(p\|q) \;\checkmark
 </tr>
 </tbody>
 </table>
-<p><strong>所以 <span class="arithmatex">\(H(p,q)\neq H(q,p)\)</span></strong> —— 与 KL 一样不对称 ✓</p>
+<p><strong>所以 <span class="arithmatex">\(H(p,q)\neq H(q,p)\)</span></strong> —— 与 KL 一样不对称</p>
 <h3 id="_2">三者关系<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 H(p,q) = H(p)+D_{KL}(p\|q)
@@ -8399,7 +8399,7 @@ H(p,q) = -\sum_{c}p_c\log q_c = -\log q_{y}
 <div class="arithmatex">\[
 \mathcal{L} = -\log q_y
 \]</div>
-<p><strong>含义</strong>：<strong>只惩罚「真实类别的预测概率」</strong> ✓</p>
+<p><strong>含义</strong>：<strong>只惩罚「真实类别的预测概率」</strong></p>
 <p><strong>这就是「分类交叉熵」的实现形式</strong>（与「最大似然估计」一页完全一致）。</p>
 <p><strong>形式 2：软标签（label smoothing / 知识蒸馏）</strong></p>
 <p>真实标签是分布 <span class="arithmatex">\(\boldsymbol{p}\)</span>（不是 one-hot）：</p>
@@ -8528,7 +8528,7 @@ H(\hat p,q_\theta) = -\sum_c\hat p_c\log q_\theta(c)
 <div class="arithmatex">\[
 \text{交叉熵损失} = \text{负对数似然} = \text{模型失配（KL）}
 \]</div>
-<p><strong>这说明「交叉熵」这个选择不是经验性的，而是有理论基础的最优选择</strong> ✓</p>
+<p><strong>这说明「交叉熵」这个选择不是经验性的，而是有理论基础的最优选择</strong></p>
 </div>
 <h3 id="mse">为什么不用 MSE（复习「梯度」视角）<a class="headerlink" href="#mse" title="Permanent link">&para;</a></h3>
 <table>
@@ -8614,14 +8614,14 @@ H(\hat p,q_\theta) = -\sum_c\hat p_c\log q_\theta(c)
 \]</div>
 <p>（否则 <span class="arithmatex">\(\log\frac{p}{q}\to\infty\)</span>，KL 爆炸。）</p>
 <p><strong>后果</strong>：<span class="arithmatex">\(q\)</span> 会<strong>覆盖</strong>所有 <span class="arithmatex">\(p\)</span> 有质量的地方 ——
-这叫<strong>「零避免」</strong>（zero-avoiding）✓</p>
+这叫<strong>「零避免」</strong>（zero-avoiding）</p>
 <p><strong>反向 KL</strong>：<span class="arithmatex">\(D_{KL}(q\;\lvert\;p) = \sum_x q(x)\log\frac{q(x)}{p(x)}\)</span></p>
 <p><strong>权重是 <span class="arithmatex">\(q(x)\)</span></strong> —— 关键约束变成：</p>
 <div class="arithmatex">\[
 \text{若 }q(x)&gt;0\text{，则不能让 }p(x)\to0
 \]</div>
 <p><strong>后果</strong>：<span class="arithmatex">\(q\)</span> 会<strong>主动避开</strong> <span class="arithmatex">\(p\)</span> 接近零的区域，
-可以集中在一个峰上 —— 这叫<strong>「零强迫」</strong>（zero-forcing）✓</p>
+可以集中在一个峰上 —— 这叫<strong>「零强迫」</strong>（zero-forcing）</p>
 <p><strong>图示化的差别</strong>（<span class="arithmatex">\(p\)</span> 是双峰分布）：</p>
 <table>
 <thead>
@@ -8746,7 +8746,7 @@ H(p)+D_{KL}(p\|q) = 1+0.737 = 1.737 = H(p,q) \;\checkmark
 <div class="arithmatex">\[
 H(p,q)\geq H(p)
 \]</div>
-<p><strong>等号当且仅当 <span class="arithmatex">\(q = p\)</span></strong> ✓</p>
+<p><strong>等号当且仅当 <span class="arithmatex">\(q = p\)</span></strong></p>
 <p><strong>理由</strong>：<span class="arithmatex">\(H(p,q) = H(p)+D_{KL}(p\;\lvert\;q)\)</span>，而 <span class="arithmatex">\(D_{KL}\geq0\)</span>。</p>
 <p><strong>实用含义</strong>：</p>
 <table>
@@ -8853,7 +8853,7 @@ D_{KL}(q\|p) = 0.9\log_2\frac{0.9}{0.5}+0.1\log_2\frac{0.1}{0.5}
 <li><span class="arithmatex">\(D_{KL}(q\;\lvert\;p)\)</span> 中对应项 <span class="arithmatex">\(0.1\times\log_2\frac{0.1}{0.5} = -0.232\)</span>
   （<strong>小权重</strong>，所以影响小）</li>
 </ul>
-<p><strong>所以「<span class="arithmatex">\(p\)</span> 更分散时，用 <span class="arithmatex">\(q\)</span> 编码它的代价更大」</strong> ✓</p>
+<p><strong>所以「<span class="arithmatex">\(p\)</span> 更分散时，用 <span class="arithmatex">\(q\)</span> 编码它的代价更大」</strong></p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">这个不对称性在实践中的后果</p>
@@ -8981,12 +8981,12 @@ H(p,q) = -\log_2 0.7
 <div class="arithmatex">\[
 -\log_2 1 = 0
 \]</div>
-<p><strong>损失为零</strong> ✓</p>
+<p><strong>损失为零</strong></p>
 <p><strong>对比「预测完全错误」</strong>（<span class="arithmatex">\(q = (0.4,0.05,0.55)\)</span>）：</p>
 <div class="arithmatex">\[
 -\ln 0.05 = 3.00\ \text{nat}
 \]</div>
-<p><strong>损失很大</strong> ✓</p>
+<p><strong>损失很大</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">为什么 one-hot 简化成「负对数概率」很有用</p>
@@ -9226,7 +9226,7 @@ H(p,q) = -\log_2 0.7
 </table>
 <p><strong>交叉熵作为模型选择准则的理论依据</strong>：</p>
 <p>它与<strong>KL 散度</strong>单调对应（差一个 <span class="arithmatex">\(H(p)\)</span> 常数），
-而 KL 正是「模型失配」的度量 ✓</p>
+而 KL 正是「模型失配」的度量</p>
 <p><strong>这也解释了「为什么用交叉熵而非准确率」</strong>：</p>
 <table>
 <thead>
@@ -9271,7 +9271,7 @@ H(p,q) = -\log_2 0.7
 </tr>
 </tbody>
 </table>
-<p><strong>所以在「模型校准」场景，交叉熵比准确率更能反映真实质量</strong> ✓</p>
+<p><strong>所以在「模型校准」场景，交叉熵比准确率更能反映真实质量</strong></p>
 </div>
 <hr />
 <h2 id="_6">六、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -9331,7 +9331,7 @@ D_{KL}(p\|q) = 0.25\log_2\frac{0.25}{0.5}+0.75\log_2\frac{0.75}{0.5}
 </tbody>
 </table>
 <p><strong>解读</strong>：模型 <span class="arithmatex">\(q\)</span> 是均匀的，而真实数据偏向第二类（0.75）。
-用均匀模型编码的代价是<strong>每个样本多花 <span class="arithmatex">\(0.189\)</span> 比特</strong> ✓</p>
+用均匀模型编码的代价是<strong>每个样本多花 <span class="arithmatex">\(0.189\)</span> 比特</strong></p>
 <p><strong>注意「交叉熵 ≥ 熵」</strong>：<span class="arithmatex">\(1.0 &gt; 0.811\)</span> ✓
 等号只在 <span class="arithmatex">\(q = p\)</span> 时成立。</p>
 </details>
@@ -9386,7 +9386,7 @@ D_{KL}(p\|q) = \sum_x \underbrace{p(x)}_{\text{权重}}\log\frac{p(x)}{q(x)}
 </tr>
 </tbody>
 </table>
-<p><strong>两个角色不同</strong>，所以交换后有变化 ✓</p>
+<p><strong>两个角色不同</strong>，所以交换后有变化</p>
 <p><strong>具体的点数分析</strong>：</p>
 <table>
 <thead>
@@ -9411,7 +9411,7 @@ D_{KL}(p\|q) = \sum_x \underbrace{p(x)}_{\text{权重}}\log\frac{p(x)}{q(x)}
 </table>
 <p>因为 <span class="arithmatex">\(p\)</span> 更分散，它在「小概率区域」（第二项）上仍有 <span class="arithmatex">\(0.5\)</span> 的质量
 → 那里 <span class="arithmatex">\(\log\frac{0.5}{0.1} = 2.322\)</span> 的<strong>大惩罚</strong>被乘以 <span class="arithmatex">\(0.5\)</span>
-→ <span class="arithmatex">\(D_{KL}(p\|q)\)</span> 更大 ✓</p>
+→ <span class="arithmatex">\(D_{KL}(p\|q)\)</span> 更大</p>
 <p><strong>工程后果</strong>：</p>
 <table>
 <thead>
@@ -9441,7 +9441,7 @@ D_{KL}(p\|q) = \sum_x \underbrace{p(x)}_{\text{权重}}\log\frac{p(x)}{q(x)}
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为交叉熵不需要知道真实分布的完整形式，只需样本。</strong></p>
+<p>因为交叉熵不需要知道真实分布的完整形式，只需样本。</p>
 <p><strong>对比两者的计算需求</strong>：</p>
 <table>
 <thead>
@@ -9471,7 +9471,7 @@ D_{KL}(p\|q) = \sum_x \underbrace{p(x)}_{\text{权重}}\log\frac{p(x)}{q(x)}
 D_{KL}(p\|q) = \underbrace{\sum_x p(x)\log p(x)}_{-H(p)}-\underbrace{\sum_x p(x)\log q(x)}_{H(p,q)}
 \]</div>
 <p><strong>第一项 <span class="arithmatex">\(-H(p)\)</span> 与模型无关</strong>（数据固定）→ 优化时可忽略 →
-只剩交叉熵 ✓</p>
+只剩交叉熵</p>
 <p><strong>所以「用交叉熵」是「用 KL」的等价简化</strong>：</p>
 <div class="arithmatex">\[
 \min_\theta D_{KL}(p\|q_\theta) \iff \min_\theta H(p,q_\theta)
@@ -9499,7 +9499,7 @@ D_{KL}(p\|q) = \underbrace{\sum_x p(x)\log p(x)}_{-H(p)}-\underbrace{\sum_x p(x)
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：<strong>交叉熵是「可在样本上直接算」的那个量</strong> ✓</p>
+<p><strong>一句话</strong>：<strong>交叉熵是「可在样本上直接算」的那个量</strong></p>
 </details>
 <hr />
 <p><strong>Q4</strong> 什么是「标签平滑」？它为什么能防止模型过度自信？</p>

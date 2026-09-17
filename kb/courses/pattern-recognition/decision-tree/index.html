@@ -8166,7 +8166,7 @@ L 273.808457 111.171511
 </figure>
 
 <p><strong>关键问题</strong>：每一步该选<strong>哪个特征</strong>、<strong>哪个阈值</strong>？</p>
-<p><strong>答案</strong>：选能让子集<strong>尽可能"纯"</strong>的那一个 ✓</p>
+<p><strong>答案</strong>：选能让子集<strong>尽可能"纯"</strong>的那一个</p>
 <h3 id="12">1.2 "纯"怎么度量<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p><strong>三种常用判据</strong>，本质上都在度量"不纯度"：</p>
 <table>
@@ -8231,9 +8231,9 @@ L 273.808457 111.171511
 <p>考虑用"学号"这个特征分裂 —— 每个样本一个取值，
 于是每个子节点<strong>只有一个样本</strong>，纯度必然是 100%，
 <strong>信息增益达到最大</strong>。</p>
-<p><strong>但这个分裂完全没有泛化能力</strong> ⚠
+<p><strong>但这个分裂完全没有泛化能力</strong>
 <strong>信息增益率</strong>正是为了惩罚这种情形：
-它除以特征自身的熵（取值越多熵越大），把比值压下来 ✓</p>
+它除以特征自身的熵（取值越多熵越大），把比值压下来</p>
 <h3 id="13">1.3 三种经典算法的差别<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -8271,12 +8271,12 @@ L 273.808457 111.171511
 </table>
 <p><strong>CART 只用二叉树</strong>这一点很关键：
 它把多类别特征也拆成多次二分 ——
-这让后续的剪枝与集成处理都更简单 ✓</p>
+这让后续的剪枝与集成处理都更简单</p>
 <hr />
 <h2 id="_3">二、过拟合与剪枝<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 树为什么会过拟合<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>如果不加限制地长下去</strong>，树可以把<strong>每一个训练样本</strong>都分到自己的叶子里 ——
-训练误差为零，但<strong>泛化能力极差</strong> ⚠</p>
+训练误差为零，但<strong>泛化能力极差</strong></p>
 <p><strong>极端情形</strong>：每个叶子只有一个样本，那么"判别规则"就是
 "这个样本的每一个特征值都恰好等于训练时的值" —— 毫无意义。</p>
 <h3 id="22">2.2 两种剪枝<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
@@ -8312,29 +8312,29 @@ L 273.808457 111.171511
 <li>节点内<strong>所有样本同类</strong></li>
 </ul>
 <p><strong>后剪枝的思路</strong>：对每个内部节点，试着把它<strong>换成一个叶子</strong>，
-若换后（在验证集上）效果<strong>不下降</strong>就保留这个简化 ✓</p>
+若换后（在验证集上）效果<strong>不下降</strong>就保留这个简化</p>
 <p><strong>为什么后剪枝通常更好</strong>：预剪枝的停止是<strong>贪心</strong>的 ——
 当前这一步看着没用，但再分两步可能就很有用；
-预剪枝会错过这种情况 ⚠</p>
+预剪枝会错过这种情况</p>
 <div class="admonition warning">
 <p class="admonition-title">剪枝的三个常见误区</p>
 <p><strong>① 用训练集判断要不要剪枝</strong>。
 剪枝的目的是<strong>改善泛化</strong>，所以<strong>必须用验证集</strong>判断 ⚠
 用训练集的话，"剪掉"永远会让训练误差变大 → 永远不剪。</p>
 <p><strong>② 以为"树越深越准"</strong>。
-深处学到的往往是<strong>噪声</strong>。树深与准确率的关系是<strong>先升后降</strong>的 ⚠</p>
+深处学到的往往是<strong>噪声</strong>。树深与准确率的关系是<strong>先升后降</strong>的</p>
 <p><strong>③ 忘了类别不平衡的影响</strong>。
 若 99% 样本属于一类，一个"全判成该类"的单节点树准确率就有 99% ——
-剪枝可能会<strong>保留</strong>这种毫无意义的树 ⚠
+剪枝可能会<strong>保留</strong>这种毫无意义的树
 此时要用<strong>不纯度</strong>而不是准确率来判断。</p>
 </div>
 <hr />
 <h2 id="_4">三、集成学习：为什么"一群弱分类器"更强<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 核心思想<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p><strong>单个模型总有它的"盲区"</strong>。若把多个模型的判断<strong>综合</strong>起来，
-各自的错误可能<strong>互相抵消</strong> ✓</p>
+各自的错误可能<strong>互相抵消</strong></p>
 <p><strong>但有一个前提</strong>：各模型的错误必须<strong>不相关</strong>。
-若所有模型犯同样的错，综合起来还是错的 ⚠</p>
+若所有模型犯同样的错，综合起来还是错的</p>
 <p><strong>把这一点写成公式</strong>：设 <span class="arithmatex">\(M\)</span> 个模型各自方差为 <span class="arithmatex">\(\sigma^2\)</span>、
 两两相关系数为 <span class="arithmatex">\(\rho\)</span>，则平均后的方差是</p>
 <div class="arithmatex">\[
@@ -8365,7 +8365,7 @@ L 273.808457 111.171511
 <li><span class="arithmatex">\(M\)</span> 增大能消掉第二项 —— 所以<strong>模型多一点通常更好</strong></li>
 <li><strong>第一项消不掉</strong> —— 所以<strong>降低相关性 <span class="arithmatex">\(\rho\)</span> 才是关键</strong> ✓</li>
 </ul>
-<p><strong>这就解释了随机森林为什么要"随机"两次</strong> ✓</p>
+<p><strong>这就解释了随机森林为什么要"随机"两次</strong></p>
 <h3 id="32-bagging">3.2 装袋（Bagging）<a class="headerlink" href="#32-bagging" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：</p>
 <ol>
@@ -8374,13 +8374,13 @@ L 273.808457 111.171511
 <li>分类问题<strong>投票</strong>，回归问题<strong>平均</strong></li>
 </ol>
 <p><strong>为什么有效</strong>：每个子集不同 → 各模型学到的细节不同 →
-<strong>误差相关性降低</strong> ✓</p>
+<strong>误差相关性降低</strong></p>
 <p><strong>自助抽样的一个性质</strong>（值得知道）：
 从 <span class="arithmatex">\(n\)</span> 个样本中有放回抽 <span class="arithmatex">\(n\)</span> 次，<strong>约 <span class="arithmatex">\(1/e\approx36.8\%\)</span> 的样本抽不到</strong>。</p>
 <div class="arithmatex">\[
 \left(1-\frac1n\right)^n \xrightarrow{n\to\infty} \frac1e \approx 0.368
 \]</div>
-<p><strong>这些"袋外样本"</strong>（out-of-bag）可以<strong>免费</strong>当验证集用 ✓</p>
+<p><strong>这些"袋外样本"</strong>（out-of-bag）可以<strong>免费</strong>当验证集用</p>
 <h3 id="33">3.3 随机森林：两层随机<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="随机森林：样本抽样 + 特征抽样，多个树投票">
@@ -8602,9 +8602,9 @@ L 207.531018 158.78
 <p><strong>第二层才是随机森林的关键</strong> ✓</p>
 <p><strong>为什么</strong>：如果所有特征都参与竞争，那么当某个特征很强时，
 <strong>每棵树都会选它</strong> → 树与树结构相似 → 相关性 <span class="arithmatex">\(\rho\)</span> 高 →
-按 3.1 的公式，平均的收益被第一项卡住 ⚠</p>
+按 3.1 的公式，平均的收益被第一项卡住</p>
 <p><strong>限制特征子集</strong>迫使不同的树用不同的特征，
-<strong>让结构真正分化开来</strong> ✓</p>
+<strong>让结构真正分化开来</strong></p>
 <p><strong>常用设置</strong>：分类任务每次试 <span class="arithmatex">\(\sqrt{d}\)</span> 个特征，回归任务试 <span class="arithmatex">\(d/3\)</span> 个。</p>
 <p><strong>随机森林的三个额外好处</strong>：</p>
 <table>
@@ -8678,7 +8678,7 @@ L 207.531018 158.78
 错误率低于 0.5 时 <span class="arithmatex">\(\alpha_m \gt 0\)</span>（有发言权）；
 错误率<strong>恰好 0.5</strong> 时 <span class="arithmatex">\(\alpha_m = 0\)</span>（等于瞎猜，权重为零）；
 错误率<strong>高于 0.5</strong> 时 <span class="arithmatex">\(\alpha_m \lt 0\)</span> ——
-<strong>这意味着"反向投票"反而更好</strong> ✓</p>
+<strong>这意味着"反向投票"反而更好</strong></p>
 <figure class="kb-fig">
 <svg viewBox="0 0 356.735625 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="集成学习：弱学习器加权组合后误差大幅下降">
 
@@ -9102,15 +9102,15 @@ L 352.415625 200.946
 <p><strong>① 提升对噪声和离群点敏感</strong>。
 AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 ——
 而真正的离群点<strong>永远分不对</strong>，于是权重被无限放大，
-最终把模型带偏 ⚠</p>
+最终把模型带偏</p>
 <p><strong>② 树太深会让提升失去意义</strong>。
 提升的威力来自"用很多弱学习器"；
-若基学习器本身就过拟合，串行叠加只会<strong>更快过拟合</strong> ⚠</p>
+若基学习器本身就过拟合，串行叠加只会<strong>更快过拟合</strong></p>
 <p><strong>③ 随机森林的树太少时，方差仍然大</strong>。
-按 3.1 的公式，<span class="arithmatex">\(M\)</span> 小的时候第二项还很大 ⚠</p>
+按 3.1 的公式，<span class="arithmatex">\(M\)</span> 小的时候第二项还很大</p>
 <p><strong>④ 集成会牺牲可解释性</strong>。
 上百棵树的投票结果<strong>没法读成一条判别规则</strong> ——
-这正好丢掉了决策树最大的优点 ⚠
+这正好丢掉了决策树最大的优点
 需要可解释时，用<strong>单棵剪过枝的树</strong>，或用特征重要性做近似解释。</p>
 </div>
 <hr />
@@ -9121,7 +9121,7 @@ AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 —�
 \]</div>
 <p><strong>符号</strong>：<span class="arithmatex">\(D\)</span> 是当前节点样本集，<span class="arithmatex">\(A\)</span> 是候选特征，
 <span class="arithmatex">\(D_v\)</span> 是按 <span class="arithmatex">\(A\)</span> 取值 <span class="arithmatex">\(v\)</span> 划分出的子集。</p>
-<p><strong>读法</strong>：<strong>划分前的熵，减去划分后各子集熵的加权平均</strong> ✓</p>
+<p><strong>读法</strong>：<strong>划分前的熵，减去划分后各子集熵的加权平均</strong></p>
 <p><strong>下面把三种判据算出来对比</strong>：</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -9345,8 +9345,8 @@ AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 —�
 结论：学号的信息增益最大，但增益率被分裂熵除小了 ✓</code></pre></p>
 <p><strong>从这两组数看到的</strong>：</p>
 <ul>
-<li><strong>两种判据对不同分裂的偏好可能不同</strong> → 换判据就换树 ⚠</li>
-<li><strong>"学号"式特征的信息增益最大，但增益率把它压下去了</strong> ✓</li>
+<li><strong>两种判据对不同分裂的偏好可能不同</strong> → 换判据就换树</li>
+<li><strong>"学号"式特征的信息增益最大，但增益率把它压下去了</strong></li>
 </ul>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
@@ -9391,7 +9391,7 @@ M       rho=0.0     rho=0.3     rho=0.8     rho=1.0
 
 结论：rho = 1.0 时无论多少模型方差都不降 —— 所以降低相关性是关键 ✓</code></pre></p>
 <p><strong>最后一列最关键</strong>：<span class="arithmatex">\(M\)</span> 从 1 加到 100，方差<strong>一直是 1.0</strong> ——
-<strong>完全相关的模型再多也没用</strong> ⚠
+<strong>完全相关的模型再多也没用</strong>
 这正是随机森林要"第二层随机"的定量理由。</p>
 <hr />
 <h2 id="_6">五、例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -9423,9 +9423,9 @@ H(D_1) = 1,\qquad H(D_2) = 1
 <div class="arithmatex">\[
 \text{Gain} = 1 - 1 = 0
 \]</div>
-<p><strong>答案：信息增益为 0</strong> ✓</p>
+<p><strong>答案：信息增益为 0</strong></p>
 <p><strong>这说明什么</strong>：这个分裂<strong>完全没有信息量</strong> ——
-它没有让子集变得更"纯" ⚠</p>
+它没有让子集变得更"纯"</p>
 <p><strong>所以特征 <span class="arithmatex">\(A\)</span> 不会被选中</strong>（除非所有其他候选的增益也是 0）。
 这也说明一个直觉：<strong>分裂的价值在于"分开"，而不在于"切开"</strong>。</p>
 </details>
@@ -9454,11 +9454,11 @@ H = -0.9\log_2 0.9 - 0.1\log_2 0.1
 \text{Gini} = 1 - (0.81 + 0.01) = 0.18
 \]</div>
 <p><strong>答案：<span class="arithmatex">\((0.5,0.5)\)</span> 时熵 1.00、基尼 0.50；
-<span class="arithmatex">\((0.9,0.1)\)</span> 时熵 0.47、基尼 0.18</strong> ✓</p>
+<span class="arithmatex">\((0.9,0.1)\)</span> 时熵 0.47、基尼 0.18</strong></p>
 <p><strong>这说明什么</strong>：两个判据的<strong>数值不同但单调趋势一致</strong> ——
 都不纯度越高值越大。</p>
 <p><strong>实践中选哪个</strong>：<strong>基尼系数算得快</strong>（无对数运算），
-而且两者选出的树<strong>通常很接近</strong> ✓</p>
+而且两者选出的树<strong>通常很接近</strong></p>
 </details>
 <h3 id="3">例题 3：为什么随机森林要限制特征<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：设单个模型的方差为 1。用 20 个模型做平均。
@@ -9479,7 +9479,7 @@ H = -0.9\log_2 0.9 - 0.1\log_2 0.1
 <div class="arithmatex">\[
 \operatorname{Var} = 0.3 + \frac{0.7}{20} = 0.3 + 0.035 = 0.335
 \]</div>
-<p><strong>答案：<span class="arithmatex">\(0.81\)</span> 与 <span class="arithmatex">\(0.335\)</span></strong> ✓</p>
+<p><strong>答案：<span class="arithmatex">\(0.81\)</span> 与 <span class="arithmatex">\(0.335\)</span></strong></p>
 <p><strong>第三步：对比单模型。</strong></p>
 <table>
 <thead>
@@ -9507,9 +9507,9 @@ H = -0.9\log_2 0.9 - 0.1\log_2 0.1
 </tr>
 </tbody>
 </table>
-<p><strong>这说明什么</strong>：<strong>相关系数从 0.8 降到 0.3，收益翻了三倍多</strong> ⚠</p>
+<p><strong>这说明什么</strong>：<strong>相关系数从 0.8 降到 0.3，收益翻了三倍多</strong></p>
 <p>而"限制每次分裂的特征子集"正是降低 <span class="arithmatex">\(\rho\)</span> 的手段 ——
-这就是随机森林比普通装袋更有效的定量依据 ✓</p>
+这就是随机森林比普通装袋更有效的定量依据</p>
 </details>
 <h3 id="4">例题 4：判断该用什么方法<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：四个需求，分别选什么方法。
@@ -9525,23 +9525,23 @@ H = -0.9\log_2 0.9 - 0.1\log_2 0.1
 <summary>解答</summary>
 <p><strong>甲：单棵剪过枝的决策树。</strong></p>
 <p>· 要<strong>可读的规则</strong> → 只有单棵树能给
-· 集成方法虽然更准，但<strong>没法读成一条规则</strong> ⚠</p>
+· 集成方法虽然更准，但<strong>没法读成一条规则</strong></p>
 <p><strong>乙：梯度提升树或随机森林。</strong></p>
-<p>· 表格数据上这两类通常是<strong>最强基线</strong> ✓
+<p>· 表格数据上这两类通常是<strong>最强基线</strong>
 · 放弃可解释性，换精度</p>
 <p><strong>丙：随机森林。</strong></p>
 <p>· <strong>随机森林对离群点比提升方法稳健</strong> ——
   因为各棵树独立投票，单个离群点影响有限
 · 提升方法（如 AdaBoost）会给难分样本<strong>不断加权</strong>，
-  离群点会被越放越大 ⚠
-· 随机森林还能给出<strong>特征重要性</strong>，保留部分解释能力 ✓</p>
+  离群点会被越放越大
+· 随机森林还能给出<strong>特征重要性</strong>，保留部分解释能力</p>
 <p><strong>丁：随机森林。</strong></p>
-<p>· 每次只试 <span class="arithmatex">\(\sqrt{d}\)</span> 个特征 → <strong>高维下训练仍然可行</strong> ✓
-· 特征重要性排序正是它的自带功能 ✓
-· 对比：SVM 在万维上也可以，但<strong>不给特征重要性</strong> ⚠</p>
+<p>· 每次只试 <span class="arithmatex">\(\sqrt{d}\)</span> 个特征 → <strong>高维下训练仍然可行</strong>
+· 特征重要性排序正是它的自带功能
+· 对比：SVM 在万维上也可以，但<strong>不给特征重要性</strong></p>
 <p><strong>答案：甲用单棵剪枝树；乙用提升树/随机森林；
 丙用随机森林；丁用随机森林。</strong></p>
-<p><strong>这说明什么</strong>：<strong>可解释性与精度往往是取舍关系</strong> ⚠</p>
+<p><strong>这说明什么</strong>：<strong>可解释性与精度往往是取舍关系</strong></p>
 <p>选择顺序建议是：</p>
 <ol>
 <li>先明确<strong>是否必须可解释</strong>（这常常是硬约束）</li>
@@ -9605,13 +9605,13 @@ H = -0.9\log_2 0.9 - 0.1\log_2 0.1
 <p><strong>三条最该带走的结论</strong>：</p>
 <ol>
 <li><strong>分裂的价值在于"分得纯"，而不在于"切得开"</strong> ——
-   信息增益为零的分裂等于白切 ✓</li>
+   信息增益为零的分裂等于白切</li>
 <li><strong>集成的收益被"相关性"卡住</strong> ——
    公式里的 <span class="arithmatex">\(\rho\sigma^2\)</span> 那一项<strong>不会随模型增多而消失</strong>，
-   所以<strong>降低相关性比增加模型数更重要</strong> ⚠</li>
+   所以<strong>降低相关性比增加模型数更重要</strong></li>
 <li><strong>可解释性与精度常常冲突</strong> ——
    需要规则就给单棵树，需要精度就用集成，
-   两者不可兼得时<strong>先问清需求</strong> ⚠</li>
+   两者不可兼得时<strong>先问清需求</strong></li>
 </ol>
 <p><strong>上一页</strong>：<a href="../clustering/">聚类分析</a></p>
 <p><strong>返回</strong>：<a href="../">模式识别总目录</a> ——

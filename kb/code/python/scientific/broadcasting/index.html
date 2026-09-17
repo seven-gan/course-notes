@@ -8954,7 +8954,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>NumPy 官方文档</code><code>本页示例在 Python 3.9+ 与 NumPy 1.26 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="03">03 广播与向量化<a class="headerlink" href="#03" title="Permanent link">&para;</a></h1>
-<p><strong>这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。</strong></p>
+<p>这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。</p>
 <p>学完这一页，你将能够：</p>
 <table>
 <thead>
@@ -8992,7 +8992,7 @@
 真正会把内存撑爆的，是广播之后<strong>产生的那个新数组</strong>。</p>
 <p>所以看到 <code>(3, 4)</code> 与 <code>(3, 1)</code> 能相加，不要以为 NumPy 把 <code>(3, 1)</code>
 复制成了 <code>(3, 4)</code>；它给自己的例子加了个「步长为 0」的维度，
-<strong>反复读同一块内存</strong> ✓</p>
+<strong>反复读同一块内存</strong></p>
 <p>这一页后面会用 <code>view.strides</code> 把这件事直接打印出来。</p>
 </div>
 <hr />
@@ -9124,12 +9124,12 @@
 </code></pre></div></td></tr></table></div>
 <div class="admonition warning">
 <p class="admonition-title">别把「向量化更快」当成无条件真理</p>
-<p><strong>只有在「运算本身很简单」时，向量化的优势才明显。</strong></p>
+<p>只有在「运算本身很简单」时，向量化的优势才明显。</p>
 <p>如果每个元素要做的是「调一次网络请求」「写一个文件」「解析一段文本」，
 那么快的那部分根本不是循环开销，向量化也救不了你，
 <strong>反而会让代码更难读</strong> ✗</p>
 <p>判断依据：<strong>运算本身很轻（几次算术/比较）→ 向量化收益大；
-单元素工作量很重（I/O、复杂逻辑）→ 循环更清楚</strong> ✓</p>
+单元素工作量很重（I/O、复杂逻辑）→ 循环更清楚</strong></p>
 </div>
 <h3 id="14">1.4 与列表推导式对比<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>Python 的列表推导式已经比 <code>for</code> 循环快不少，但它仍然<strong>在 Python 层逐个元素执行</strong>。
@@ -9178,8 +9178,8 @@ NumPy 则把整个循环下推到 C 层。</p>
 </table>
 <p><strong>选择依据，记住三句话</strong>：</p>
 <ol>
-<li><strong>数值数组 + 简单运算 → 一律向量化</strong> ✓</li>
-<li><strong>对象不是数组（字典、类实例）或逻辑复杂 → 用循环</strong> ✓</li>
+<li><strong>数值数组 + 简单运算 → 一律向量化</strong></li>
+<li><strong>对象不是数组（字典、类实例）或逻辑复杂 → 用循环</strong></li>
 <li><strong>不确定时先写成循环跑通，再逐个替换成向量化</strong> ——
    不要一上来就追求炫技的写法。</li>
 </ol>
@@ -9411,7 +9411,7 @@ np.max(y, z) 报错: TypeError
 原因: 第二个参数被当成了轴号，而轴号必须是整数</code></pre>
 <p><strong>这就是两者的区别</strong>：<code>np.max</code> 的第二个位置参数是 <code>axis</code>，
 所以 <code>np.max(y, z)</code> 等于把数组 <code>z</code> 拿去当轴号，直接报错。
-在别的形状下它可能<strong>不报错却算出莫名其妙的结果</strong> ⚠
+在别的形状下它可能<strong>不报错却算出莫名其妙的结果</strong>
 <strong>两者名字只差两个字母，务必看清</strong>。</p>
 </div>
 <h3 id="24-out">2.4 <code>out</code> 参数：原地写入，省一次内存分配<a class="headerlink" href="#24-out" title="Permanent link">&para;</a></h3>
@@ -9478,7 +9478,7 @@ np.max(y, z) 报错: TypeError
 如果你后面还要用原来的 <code>a</code>，就等着出 bug ✗</p>
 <p>另外，<code>out</code> 的 <code>dtype</code> 必须能容纳结果。把浮点数写进整数数组时，
 NumPy 默认会<strong>直接报错拦住你</strong>（这是好事）；
-但如果图省事写了 <code>casting="unsafe"</code>，结果就会被<strong>静默截断</strong> ⚠
+但如果图省事写了 <code>casting="unsafe"</code>，结果就会被<strong>静默截断</strong>
 详见本页第九节的陷阱 3。</p>
 </div>
 <h3 id="25-where">2.5 <code>where</code> 参数：只对满足条件的位置做运算<a class="headerlink" href="#25-where" title="Permanent link">&para;</a></h3>
@@ -10059,8 +10059,8 @@ price * qty_col 的形状: (3, 3)
 <strong>所以不会有任何提示</strong>，但语义是「每一列乘一个学生系数」，
 和你想要的「每一行乘一个学生系数」正好差 90 度 ✗</p>
 <p><strong>自查口诀</strong>：
-<strong>「我是要每个行变，还是每个列变？」</strong>
-行变 → 用 <code>(n, 1)</code>；列变 → 用 <code>(n,)</code> ✓</p>
+「我是要每个行变，还是每个列变？」
+行变 → 用 <code>(n, 1)</code>；列变 → 用 <code>(n,)</code></p>
 <p>另外，养成习惯：<strong>算完看一眼 <code>.shape</code></strong> ——
 形状对不上时，结果往往一眼就能看出问题。</p>
 </div>
@@ -10212,7 +10212,7 @@ ValueError: operands could not be broadcast together with shapes (2,3) (2,)</cod
 </tbody>
 </table>
 <p><strong>配上 <code>keepdims=True</code>，被压掉的维度会变成 1，位置不变</strong> ——
-于是「一维的结果」能正确地对齐回原数组 ✓</p>
+于是「一维的结果」能正确地对齐回原数组</p>
 </div>
 <hr />
 <h2 id="_3">六、实际应用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -10453,9 +10453,9 @@ min-max 归一化:
 <div class="admonition tip">
 <p class="admonition-title"><code>np.newaxis</code> 就是「插入一个长度为 1 的维度」</p>
 <p><code>a[:, np.newaxis, :]</code> 与 <code>a.reshape(4, 1, 2)</code> 效果一样，
-但 <code>np.newaxis</code> 写法<strong>不用手算长度</strong>，改数据规模时不用动代码 ✓</p>
+但 <code>np.newaxis</code> 写法<strong>不用手算长度</strong>，改数据规模时不用动代码</p>
 <p><code>axis=-1</code> 表示<strong>最后一维</strong>，所以 <code>sum(axis=-1)</code> 总是对「坐标」求和，
-换到三维、四维数据都不用改 ✓</p>
+换到三维、四维数据都不用改</p>
 </div>
 <h3 id="64">6.4 图像 / 网格运算<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
 <p>图像在 NumPy 里就是数组：<code>(高, 宽, 通道)</code>。
@@ -10564,7 +10564,7 @@ patches.shape: (3, 3, 3, 3)
  [11. 12. 13.]
  [16. 17. 18.]]</code></pre>
 <p><strong>注意 <code>win.shape</code> 是 <code>(6, 3)</code></strong>：长度 8 的数组、窗口 3，共有 <code>8 - 3 + 1 = 6</code> 个窗口。
-滑动窗口视图<strong>不复制数据</strong>（它只是改了步长），所以内存开销很小 ✓</p>
+滑动窗口视图<strong>不复制数据</strong>（它只是改了步长），所以内存开销很小</p>
 <h3 id="66-npbroadcast_to">6.6 广播的内存代价与 <code>np.broadcast_to</code><a class="headerlink" href="#66-npbroadcast_to" title="Permanent link">&para;</a></h3>
 <p>广播本身不复制，但<strong>运算结果一定要分配内存</strong>。
 搞清楚这两件事，才算真的理解广播。</p>
@@ -10848,7 +10848,7 @@ c:
 一致吗  : [ True  True  True  True  True]</code></pre>
 <p><strong>注意 <code>np.select</code> 的匹配顺序</strong>：<strong>从上往下，第一个为真的条件生效</strong> ——
 所以条件一定要<strong>从严格到宽松</strong>排（先 <code>&gt;= 85</code> 再 <code>&gt;= 70</code>），
-这和 <code>if/elif</code> 的顺序要求完全一样 ✓</p>
+这和 <code>if/elif</code> 的顺序要求完全一样</p>
 <h3 id="73-bincount">7.3 计数与反查：循环计数 → 布尔掩码 + <code>bincount</code><a class="headerlink" href="#73-bincount" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
@@ -10910,7 +10910,7 @@ dog 出现次数: 2
 <pre class="kb-output"><code>男生比例  : 0.6
 男生平均身高: 178.3333
 女生平均身高: 162.5</code></pre>
-<p><code>~male</code> 是<strong>按位取反</strong>，也就是「不是男生」✓</p>
+<p><code>~male</code> 是<strong>按位取反</strong>，也就是「不是男生」</p>
 </div>
 <h3 id="74">7.4 累加到缓冲区：<code>+=</code> 也能向量化<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
 <p>如果循环是「把一列一列加进一个累加数组」，可以用矩阵乘法一次完成：</p>
@@ -11062,7 +11062,7 @@ cumsum 会给出 : [100.  70.  95.  15.  55.]
 </table>
 <div class="admonition tip">
 <p class="admonition-title">判断标准只有一句话</p>
-<p><strong>「这个计算能不能在不看其它元素的情况下，对每个元素独立完成？」</strong></p>
+<p>「这个计算能不能在不看其它元素的情况下，对每个元素独立完成？」</p>
 <p>能 → 向量化可行（还要看内存）；
 不能（依赖顺序、状态、提前退出）→ 老老实实写循环 ✓</p>
 </div>
@@ -11128,7 +11128,7 @@ cumsum 会给出 : [100.  70.  95.  15.  55.]
 <p class="admonition-title">陷阱 3：忘记 <code>keepdims</code>，或忘记检查 <code>dtype</code></p>
 <p><strong>忘记 <code>keepdims</code></strong>：聚合后维度少了一个，运气不好形状碰巧能广播，
 <strong>结果算错却不报错</strong> ⚠ 建议：<strong>只要聚合结果还要和原数组做运算，
-就写 <code>keepdims=True</code></strong> ✓</p>
+就写 <code>keepdims=True</code></strong></p>
 <p><strong>忘记检查 <code>dtype</code></strong>：把浮点结果写进整数 <code>out</code> 时，
 NumPy 默认<strong>会拦下来报错</strong>；一旦你图省事写了 <code>casting="unsafe"</code>，
 它就<strong>静默截断</strong>：</p>
@@ -11246,7 +11246,7 @@ ints // 2  : [0 1 2]  dtype: int32
 </tbody>
 </table>
 <p>如果去掉 <code>keepdims</code>，<code>(2, 3)</code> 减 <code>(2,)</code> 会直接报错 ——
-这个报错反而比默默算错好，因为 <code>2</code> 和 <code>3</code> 对不上 ✓</p>
+这个报错反而比默默算错好，因为 <code>2</code> 和 <code>3</code> 对不上</p>
 </details>
 <hr />
 <h3 id="2">例题 2：找出相距最远的一对点<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -11429,7 +11429,7 @@ adjusted.shape: (2, 2, 3)
 </table>
 <p><strong>记住</strong>：<strong>要把某个系数作用到「整张图/整行/整列」上，
 就把它写成「那个方向长度为 1、其它方向也是 1」的形状</strong>，
-再用 <code>np.newaxis</code> 或 <code>reshape</code> 摆正 ✓</p>
+再用 <code>np.newaxis</code> 或 <code>reshape</code> 摆正</p>
 </details>
 <hr />
 <h3 id="4">例题 4：把一段真实的循环改写成向量化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -11529,7 +11529,7 @@ adjusted.shape: (2, 2, 3)
 </tbody>
 </table>
 <p><strong>注意 <code>np.clip(..., None, 100.0)</code></strong>：<code>None</code> 表示「下界不限」，
-只封上界。这比写一个很负的常数更清楚 ✓</p>
+只封上界。这比写一个很负的常数更清楚</p>
 </details>
 <hr />
 <h2 id="_8">十一、自测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -11726,7 +11726,7 @@ adjusted.shape: (2, 2, 3)
 <p><strong>错在哪里</strong>：<code>stu_factor</code> 形状 <code>(2,)</code> 被补成 <code>(1, 2)</code> ——
 和<strong>最后一维（3 个科目）</strong>对齐，但长度 <code>2</code> 与 <code>3</code> 对不上，所以直接报错。
 更阴险的是：<strong>如果科目数恰好是 2，它就会默默按科目录广播</strong>，
-变成「每门课乘一个学生系数」，方向完全错却不出声 ⚠</p>
+变成「每门课乘一个学生系数」，方向完全错却不出声</p>
 <p>换成 <code>(2, 1)</code>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
@@ -11750,7 +11750,7 @@ adjusted.shape: (2, 2, 3)
  [[ 90.  80.  70.]
  [120. 140. 160.]]
 每行求和: [240. 420.]</code></pre>
-<p><strong>口诀</strong>：<strong>要「每个行变」，就把系数写成 <code>(n, 1)</code></strong> ✓</p>
+<p><strong>口诀</strong>：<strong>要「每个行变」，就把系数写成 <code>(n, 1)</code></strong></p>
 </details>
 <hr />
 <p><strong>Q4</strong> 用广播完成下面这个真实任务：</p>
@@ -11849,7 +11849,7 @@ adjusted.shape: (2, 2, 3)
 </tbody>
 </table>
 <p><strong>一句话总结</strong>：<strong>先用广播把「单价 × 数量」展开成矩阵，
-再用 <code>axis</code> 选择汇总口径</strong> —— 这是数据分析里最常见的两步组合 ✓</p>
+再用 <code>axis</code> 选择汇总口径</strong> —— 这是数据分析里最常见的两步组合</p>
 </details>
 <hr />
 <h2 id="_9">小结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>

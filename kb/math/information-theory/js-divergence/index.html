@@ -8082,7 +8082,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>有界这一点很重要</strong>：它让 JS 散度<strong>更适合作为优化目标</strong>（迭代更稳定）✓</p>
+<p><strong>有界这一点很重要</strong>：它让 JS 散度<strong>更适合作为优化目标</strong>（迭代更稳定）</p>
 <p><strong>这就是 GAN 原始论文用 JS 散度的原因</strong> ——
 但同时也埋下了它后来被 Wasserstein 距离取代的伏笔（下一节讲）。</p>
 </div>
@@ -8099,7 +8099,7 @@ m = \frac{p+q}{2}
 <p><strong>读法</strong>：「<span class="arithmatex">\(p\)</span> 和 <span class="arithmatex">\(q\)</span> 各自到它们的中间点的 KL 的平均」。</p>
 <div class="admonition note">
 <p class="admonition-title">这个定义的两点精心设计</p>
-<p><strong>设计 1：为什么取「到中点」而不是「互相之间」</strong></p>
+<p>设计 1：为什么取「到中点」而不是「互相之间」</p>
 <p><strong>若直接对称化</strong>（如 <span class="arithmatex">\(D_{KL}(p\|q)+D_{KL}(q\|p)\)</span>）：</p>
 <table>
 <thead>
@@ -8141,7 +8141,7 @@ m = \frac{p+q}{2}
 <p><strong>设计 2：为什么前面有 <span class="arithmatex">\(\frac12\)</span></strong></p>
 <p>这是<strong>归一化</strong>：使 JS 的上界恰好是 <span class="arithmatex">\(\log 2\)</span>（而非 <span class="arithmatex">\(2\log2\)</span>）。</p>
 <p><strong>物理含义</strong>：<span class="arithmatex">\(\log2\)</span> 比特正是「两个完全不同的分布之间」的距离
-—— 这与「1 比特 = 一个二值判断」的直觉一致 ✓</p>
+—— 这与「1 比特 = 一个二值判断」的直觉一致</p>
 </div>
 <h3 id="_1">有界性的证明<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
@@ -8330,7 +8330,7 @@ JSD = -\frac{H(p)+H(q)}{2}+H(m) \;\checkmark
 JSD = \underbrace{H(m)}_{\text{中点的熵}}-\underbrace{\frac{H(p)+H(q)}{2}}_{\text{两分布熵的平均}}
 \]</div>
 <p><strong>解读</strong>：<strong>「混合」使熵增加的部分</strong> ——
-两个分布混合后，如果不确定性增大了，说明它们<strong>有差异</strong> ✓</p>
+两个分布混合后，如果不确定性增大了，说明它们<strong>有差异</strong></p>
 <table>
 <thead>
 <tr>
@@ -8353,7 +8353,7 @@ JSD = \underbrace{H(m)}_{\text{中点的熵}}-\underbrace{\frac{H(p)+H(q)}{2}}_{
 </tbody>
 </table>
 <p><strong>工程用法</strong>：<strong>只需三个熵就能算 JS</strong> ——
-与「互信息 = 三个熵的组合」结构类似 ✓</p>
+与「互信息 = 三个熵的组合」结构类似</p>
 <p><strong>这也说明了 JS 与互信息的平行关系</strong>：</p>
 <table>
 <thead>
@@ -8376,7 +8376,7 @@ JSD = \underbrace{H(m)}_{\text{中点的熵}}-\underbrace{\frac{H(p)+H(q)}{2}}_{
 </tr>
 </tbody>
 </table>
-<p>两者都是「混合/联合后熵的变化量」的度量 ✓</p>
+<p>两者都是「混合/联合后熵的变化量」的度量</p>
 </div>
 <hr />
 <h2 id="js-gan">三、JS 散度在 GAN 中的角色（以及它的问题）<a class="headerlink" href="#js-gan" title="Permanent link">&para;</a></h2>
@@ -8393,7 +8393,7 @@ D^*(x) = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}
 <div class="arithmatex">\[
 \min_G\ 2\,JSD(p_{\text{data}}\|p_g)-\log 4
 \]</div>
-<p><strong>即「最小化数据分布与生成分布的 JS 散度」</strong> ✓</p>
+<p><strong>即「最小化数据分布与生成分布的 JS 散度」</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">这个等价性揭示了 GAN 训练困难的根源（关键洞察）</p>
 <p><strong>问题</strong>：<strong>当两个分布「不重叠」时，JS 散度为常数 <span class="arithmatex">\(\log2\)</span></strong> ——
@@ -8447,7 +8447,7 @@ D^*(x) = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x)+p_g(x)}
 <div class="arithmatex">\[
 \text{梯度消失} \implies \text{生成器学不到东西} ✗
 \]</div>
-<p><strong>这就是「GAN 难训练」的信息论解释</strong> ✓</p>
+<p><strong>这就是「GAN 难训练」的信息论解释</strong></p>
 <p><strong>原始 GAN 论文的补救</strong>：把生成器目标从 <span class="arithmatex">\(\log(1-D)\)</span>
 改为 <span class="arithmatex">\(-\log D\)</span>（「非饱和损失」）：</p>
 <table>
@@ -8572,7 +8572,7 @@ JSD = \frac{0.126+0.168}{2} = 0.147\ \text{比特}
 </tr>
 </tbody>
 </table>
-<p><strong>验证有界性</strong>：<span class="arithmatex">\(0.147 &lt; \log_2 2 = 1\)</span> ✓</p>
+<p><strong>验证有界性</strong>：<span class="arithmatex">\(0.147 &lt; \log_2 2 = 1\)</span></p>
 <p><strong>对比 KL 散度的值</strong>（上一页算过）：</p>
 <table>
 <thead>
@@ -8598,7 +8598,7 @@ JSD = \frac{0.126+0.168}{2} = 0.147\ \text{比特}
 </table>
 <p><strong>注意 JS 比两者都小得多</strong> ——
 这是因为它度量的是「到中点的距离」，
-而中点比任一端都更接近两者 ✓</p>
+而中点比任一端都更接近两者</p>
 <p><strong>这也说明</strong>：<strong>JS 与 KL 的数值不可直接比较</strong>（含义不同）。</p>
 </details>
 <div class="admonition tip">
@@ -8615,7 +8615,7 @@ H(p) = 1.0,\qquad H(q) = -0.9\log_2 0.9-0.1\log_2 0.1 = 0.137+0.332 = 0.469
 <div class="arithmatex">\[
 JSD = 0.881-\frac{1.0+0.469}{2} = 0.881-0.735 = 0.146 \;\checkmark
 \]</div>
-<p><strong>与前面的 <span class="arithmatex">\(0.147\)</span> 一致</strong>（差异来自舍入）✓</p>
+<p><strong>与前面的 <span class="arithmatex">\(0.147\)</span> 一致</strong>（差异来自舍入）</p>
 <p><strong>这验证了两种算法等价</strong> —— 实践中用熵形式更方便（只需三个熵）。</p>
 </div>
 <hr />
@@ -8642,8 +8642,8 @@ D_{KL}(q\|m) = 0+1\times\log_2\frac{1}{0.5} = 1\ \text{比特}
 <div class="arithmatex">\[
 JSD = \frac{1+1}{2} = 1\ \text{比特} = \log_2 2 \;\checkmark
 \]</div>
-<p><strong>结果</strong>：<span class="arithmatex">\(JSD = \log2 = 1\)</span> 比特 —— <strong>恰好取到上界</strong> ✓</p>
-<p><strong>验证上界</strong>：<span class="arithmatex">\(JSD\leq\log2\)</span>，此处<strong>取等号</strong> ✓</p>
+<p><strong>结果</strong>：<span class="arithmatex">\(JSD = \log2 = 1\)</span> 比特 —— <strong>恰好取到上界</strong></p>
+<p><strong>验证上界</strong>：<span class="arithmatex">\(JSD\leq\log2\)</span>，此处<strong>取等号</strong></p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">这个例子正是 GAN 训练困难的「教科书情形」</p>
@@ -8689,13 +8689,13 @@ JSD = \frac{1+1}{2} = 1\ \text{比特} = \log_2 2 \;\checkmark
 \frac{\partial JSD}{\partial \mu}\to0
 \]</div>
 <p><strong>梯度消失 → 无法用梯度下降把 <span class="arithmatex">\(q\)</span> 拉向 <span class="arithmatex">\(p\)</span></strong> ✗</p>
-<p><strong>这就是「JS 散度不适合作为远距离分布的优化目标」的原因</strong> ✓</p>
+<p><strong>这就是「JS 散度不适合作为远距离分布的优化目标」的原因</strong></p>
 <p><strong>Wasserstein 距离的对比</strong>（下一节）：</p>
 <p>对两个一维高斯 <span class="arithmatex">\(N(\mu_1,\sigma^2)\)</span> 与 <span class="arithmatex">\(N(\mu_2,\sigma^2)\)</span>：</p>
 <div class="arithmatex">\[
 W = \lvert\mu_1-\mu_2\rvert
 \]</div>
-<p><strong>无论距离多远，梯度都是常数 <span class="arithmatex">\(\pm1\)</span></strong> ✓
+<p><strong>无论距离多远，梯度都是常数 <span class="arithmatex">\(\pm1\)</span></strong>
 <strong>所以能持续改进</strong> —— 这就是 WGAN 的动机。</p>
 </div>
 <hr />
@@ -8767,7 +8767,7 @@ JSD = \frac{0.198+0.359}{2} = 0.279\ \text{比特}
 <p><strong>为什么 KL 这么大</strong>：</p>
 <p>因为 <span class="arithmatex">\(p\)</span> 在第二项上有 <span class="arithmatex">\(0.5\)</span> 的质量，而 <span class="arithmatex">\(q\)</span> 只给 <span class="arithmatex">\(0.01\)</span> ——
 这个「质量错配」导致 <span class="arithmatex">\(\log_2\frac{0.5}{0.01} = 5.644\)</span> 的大惩罚，
-乘以权重 <span class="arithmatex">\(0.5\)</span> 后贡献 <span class="arithmatex">\(2.822\)</span> ✓</p>
+乘以权重 <span class="arithmatex">\(0.5\)</span> 后贡献 <span class="arithmatex">\(2.822\)</span></p>
 <p><strong>而 JS 的「中点」机制把它「拉平」了</strong>：</p>
 <table>
 <thead>
@@ -8790,7 +8790,7 @@ JSD = \frac{0.198+0.359}{2} = 0.279\ \text{比特}
 </tr>
 </tbody>
 </table>
-<p><strong>中点提供了「共同的参照」</strong> → 惩罚不再爆炸 ✓</p>
+<p><strong>中点提供了「共同的参照」</strong> → 惩罚不再爆炸</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">这个对比说明了「有界性」的实用价值</p>
@@ -8897,7 +8897,7 @@ D_{KL}(q\|m) = 0.6\log_2\frac{0.6}{0.55}+0.4\log_2\frac{0.4}{0.45}
 JSD = \frac{0.007+0.008}{2} \approx 0.0075\ \text{比特}
 \]</div>
 <p><strong>结果</strong>：<span class="arithmatex">\(JSD \approx 0.0075\)</span> 比特（<strong>很小</strong>）</p>
-<p><strong>解读</strong>：<span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 很接近（只差 0.1），所以 JS 很小 ✓</p>
+<p><strong>解读</strong>：<span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 很接近（只差 0.1），所以 JS 很小</p>
 <p><strong>对比</strong>：上一页算过的 <span class="arithmatex">\(p=(0.5,0.5)\)</span> 与 <span class="arithmatex">\(q=(0.9,0.1)\)</span>：</p>
 <table>
 <thead>
@@ -8917,7 +8917,7 @@ JSD = \frac{0.007+0.008}{2} \approx 0.0075\ \text{比特}
 </tr>
 </tbody>
 </table>
-<p><strong>差距约 20 倍</strong> —— JS 忠实反映了「分布差异的程度」✓</p>
+<p><strong>差距约 20 倍</strong> —— JS 忠实反映了「分布差异的程度」</p>
 <p><strong>这也说明 JS 的数值有直观意义</strong>：<strong>越接近零说明分布越相似</strong>。</p>
 </details>
 <hr />
@@ -8933,7 +8933,7 @@ JSD = \frac{0.007+0.008}{2} \approx 0.0075\ \text{比特}
 JSD(p\|q)\leq\log 2
 \]</div>
 <p>（若对数底为 2，则上界为 <strong>1 比特</strong>。）</p>
-<p><strong>取到的条件</strong>：<strong><span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的支撑完全不重叠</strong> ✓</p>
+<p><strong>取到的条件</strong>：<strong><span class="arithmatex">\(p\)</span> 与 <span class="arithmatex">\(q\)</span> 的支撑完全不重叠</strong></p>
 <p><strong>证明要点</strong>：</p>
 <p>由中点 <span class="arithmatex">\(m(x) = \frac{p(x)+q(x)}{2}\geq\frac{p(x)}{2}\)</span>，得</p>
 <div class="arithmatex">\[
@@ -9005,7 +9005,7 @@ D_{KL}(p\|m)\leq\sum_x p(x)\log2 = \log2
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为把最优判别器代入目标后，剩下的恰好是 JS 散度的形式。</strong></p>
+<p>因为把最优判别器代入目标后，剩下的恰好是 JS 散度的形式。</p>
 <p><strong>第一步：GAN 的目标</strong></p>
 <div class="arithmatex">\[
 \min_G\max_D\ E_{p_{\text{data}}}[\log D(x)]+E_{p_g}[\log(1-D(x))]
@@ -9061,7 +9061,7 @@ D_{KL}(a\|m) = a\log\frac{2a}{a+b}, \qquad D_{KL}(b\|m) = b\log\frac{2b}{a+b}
 </tbody>
 </table>
 <p><strong>实践中的补救</strong>：把 <span class="arithmatex">\(\log(1-D)\)</span> 改为 <span class="arithmatex">\(-\log D\)</span>（非饱和损失） ——
-但这<strong>不再等价于 JS</strong>，只是启发式 ✓</p>
+但这<strong>不再等价于 JS</strong>，只是启发式</p>
 <p><strong>根本的解决</strong>：换成 Wasserstein 距离（下一节）。</p>
 </details>
 <hr />
@@ -9072,12 +9072,12 @@ D_{KL}(a\|m) = a\log\frac{2a}{a+b}, \qquad D_{KL}(b\|m) = b\log\frac{2b}{a+b}
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>基本正确，但需注意「几乎处处」的细节。</strong></p>
+<p>基本正确，但需注意「几乎处处」的细节。</p>
 <p><strong>严格陈述</strong>：</p>
 <div class="arithmatex">\[
 JSD(p\|q) = 0 \iff p(x) = q(x) \text{ 对几乎所有的 }x
 \]</div>
-<p><strong>(「几乎处处」= 除测度为零的集合外)</strong></p>
+<p>(「几乎处处」= 除测度为零的集合外)</p>
 <p><strong>证明</strong>：</p>
 <p>由 <span class="arithmatex">\(JSD = \frac12D_{KL}(p\|m)+\frac12D_{KL}(q\|m)\)</span>，且 <span class="arithmatex">\(D_{KL}\geq0\)</span>：</p>
 <div class="arithmatex">\[
@@ -9111,7 +9111,7 @@ p = \frac{p+q}{2} \implies 2p = p+q \implies p = q \;\checkmark
 </tbody>
 </table>
 <p><strong>关键差别</strong>：<strong>JS 的有限性是「无条件」的</strong> ——
-这正是它相对于 KL 的第一个改进 ✓</p>
+这正是它相对于 KL 的第一个改进</p>
 <p><strong>实践意义</strong>：</p>
 <table>
 <thead>

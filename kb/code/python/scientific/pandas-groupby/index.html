@@ -8950,7 +8950,7 @@
 分组是<strong>纵向压缩</strong>（多行变一行），合并是<strong>横向拼接</strong>（多列并过来）。
 真实的数据分析几乎每一步都在做这两件事之一——
 算各班平均分是分组，把班级均分接回每个人是「分组 + 合并」。</p>
-<p><strong>为什么这两件事值得单独一页：</strong></p>
+<p>为什么这两件事值得单独一页：</p>
 <table>
 <thead>
 <tr>
@@ -9036,7 +9036,7 @@
 </tr>
 </tbody>
 </table>
-<p>这三条本页都有实测代码，不用背，看一眼输出就明白 ✓</p>
+<p>这三条本页都有实测代码，不用背，看一眼输出就明白</p>
 </div>
 <p><strong>本页需要的库</strong>：NumPy 与 pandas。
 版本不必与示例一致，这里讲的行为在这个量级的版本上是稳定的。</p>
@@ -9300,7 +9300,7 @@ L 202.662598 68.393
 </tr>
 </tbody>
 </table>
-<p><strong>「等价于 SQL 的 <code>GROUP BY</code>」——这句话是最快的理解捷径。</strong></p>
+<p>「等价于 SQL 的 <code>GROUP BY</code>」——这句话是最快的理解捷径。</p>
 <p>同样的需求，两种写法几乎一一对应：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -9335,7 +9335,7 @@ L 202.662598 68.393
 <p><strong>一句话对照</strong>：SQL 里「不写 <code>GROUP BY</code> 就只能得到全体一个数」，
 在 pandas 里就是「不写 <code>groupby</code> 就只能得到全体一个数」。
 你已经会的 SQL 直觉，可以整块搬过来。</p>
-<p><strong>但有一个关键差别必须先说清：</strong></p>
+<p>但有一个关键差别必须先说清：</p>
 <table>
 <thead>
 <tr>
@@ -9457,10 +9457,10 @@ L 202.662598 68.393
 <p><strong>为什么要单独声明一个数据模块</strong>：本页每个代码块都要能<strong>独立运行</strong>，
 而它们又共用同一份数据。把造数据逻辑放进一个声明了文件名的块之后，
 后面的块只要 <code>from group_data import build_scores</code> 就能拿到数据 ——
-既不必重复贴十几行，又保证每一块单独复制出来仍然能跑 ✓</p>
+既不必重复贴十几行，又保证每一块单独复制出来仍然能跑</p>
 <p><strong>为什么随机数要固定种子</strong>：<code>np.random.default_rng(42)</code> 之后，
 每一次取值的顺序都是确定的，所以「第 4 行语文缺考」这种细节在
-任何机器上都一样，本页的输出才敢写成固定的文本 ✓</p>
+任何机器上都一样，本页的输出才敢写成固定的文本</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -9697,7 +9697,7 @@ Name: 语文, dtype: float64
 </table>
 <p><strong>注意 <code>numeric_only=True</code></strong>：数据表里往往混着文本列（这里是 <code>学号</code>、<code>性别</code>），
 不写这个参数，新版本 pandas 会直接报错，或者悄悄把非数值列丢掉。
-<strong>显式写出来，行为最清楚</strong> ✓</p>
+<strong>显式写出来，行为最清楚</strong></p>
 <h3 id="21">2.1 常用聚合函数速查<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><code>groupby</code> 之后可以直接接的「现成函数」，都是 pandas 已经实现好的统计量：</p>
 <table>
@@ -9875,7 +9875,7 @@ reset_index() 之后:
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>by_two.index.map(&quot;_&quot;.join)      → [&#39;一班_女&#39;, &#39;一班_男&#39;, ...]
 </code></pre></div></td></tr></table></div>
 <p>这在「给图表做标签」时很好用——标签里同时看到班级和性别，
-比只看到「女」清楚得多 ✓</p>
+比只看到「女」清楚得多</p>
 <h3 id="23-as_index">2.3 <code>as_index</code>：让分组键留在列里<a class="headerlink" href="#23-as_index" title="Permanent link">&para;</a></h3>
 <p><strong>这是最省事的一个参数</strong>，因为它免掉了 <code>reset_index()</code>：</p>
 <table>
@@ -9978,7 +9978,7 @@ sort=False（按出现顺序）:
 <p><strong><code>sort=False</code> 为什么有用</strong>：数据本来就是按时间或班级排好的时候，
 按字符编码重排会<strong>打乱你熟悉的顺序</strong>，看起来像「结果不对」。
 <code>sort=False</code> 保留「分组键第一次出现的顺序」，
-在时间序列（按月份分组）或人工排序的报表里特别顺手 ✓</p>
+在时间序列（按月份分组）或人工排序的报表里特别顺手</p>
 <p><strong>注意 <code>sort</code> 影响的是输出的排列，不影响分组本身</strong>——
 组还是那些组，算出来的数也一样，只是行的先后不同。</p>
 <p><strong>分组对象（<code>DataFrameGroupBy</code>）不是表</strong>，它是个「还没算」的中间状态。
@@ -10126,9 +10126,9 @@ agg(["count", "mean", "max"]):
 结果需要两个维度才能定位一个格子，所以列索引必须有两层。
 哪怕只选了一列，pandas 也保留了完整结构，好让代码在两种情形下写法一致。</p>
 <p><strong>「跳过缺失」在这里又一次出现</strong>：<code>count</code> 给出一班是 <code>5</code>，
-而 <code>一班</code> 实际有 6 行 —— 少的那个就是缺考的 <code>S04</code> ✓</p>
+而 <code>一班</code> 实际有 6 行 —— 少的那个就是缺考的 <code>S04</code></p>
 <h3 id="32">3.2 多级列索引怎么取、怎么压平<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p><strong>多级列索引不难，只是需要多给一个键。</strong></p>
+<p>多级列索引不难，只是需要多给一个键。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -10312,7 +10312,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 三班    80.94    66.0    89.5
 二班    77.60    74.7    91.6</code></pre>
 <p><strong>判断口诀</strong>：<strong>只要结果要离开 pandas（存文件、进数据库、给别人），
-就先压平再出门</strong> ✓</p>
+就先压平再出门</strong></p>
 </div>
 <h3 id="33">3.3 写法三：不同列用不同函数<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>这是 <code>agg</code> 最实用的形式</strong>，一次就能出一个完整报表：</p>
@@ -10377,7 +10377,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 一班  80.66  6.82
 三班  80.94  7.67
 二班  77.60  6.69</code></pre>
-<p><strong>字典的规则很简单：键是列名，值是「要算的东西」。</strong></p>
+<p>字典的规则很简单：键是列名，值是「要算的东西」。</p>
 <table>
 <thead>
 <tr>
@@ -10410,9 +10410,9 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 上面例子里的列索引是 <code>[('语文', 'mean'), ('数学', 'min'), ('数学', 'max'), ('学号', 'count')]</code>
 —— 四种需求拼在一张表里，<strong>列名自然就长成了四对键值</strong>。</p>
 <p><strong>报表场景的建议</strong>：与其用字典把四种口径塞在一起，
-不如用下面的「命名聚合」，列名是你自己起的，读起来清楚得多 ✓</p>
+不如用下面的「命名聚合」，列名是你自己起的，读起来清楚得多</p>
 <h3 id="34-lambda">3.4 写法四：自定义函数与 <code>lambda</code><a class="headerlink" href="#34-lambda" title="Permanent link">&para;</a></h3>
-<p><strong>内置函数不够用时，直接塞一个函数进去。</strong>
+<p>内置函数不够用时，直接塞一个函数进去。
 函数<strong>接收的是每一组的那个 Series</strong>，返回一个标量：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -10503,7 +10503,7 @@ Name: 语文, dtype: float64
 一班  80.660       0.219  94.4
 三班  80.938       0.293  89.5
 二班  77.600       0.256  91.6</code></pre>
-<p><strong>关于自定义函数的三条要点：</strong></p>
+<p>关于自定义函数的三条要点：</p>
 <table>
 <thead>
 <tr>
@@ -10637,7 +10637,7 @@ reset_index 之后就完全是一张普通表了:
 </tbody>
 </table>
 <p><strong>判断口诀</strong>：
-<strong>代码内部传递用字典（短），给人看的报表用命名聚合。</strong></p>
+代码内部传递用字典（短），给人看的报表用命名聚合。</p>
 <p><strong>命名聚合有一个必须遵守的规则</strong>：等号左边是<strong>新列名</strong>，
 不能跟已有的列名重名，也不能用关键字（比如 <code>from</code>）。
 如果非要用，写成 <code>**{"均值": ("语文", "mean")}</code> 这种解包形式。</p>
@@ -10664,7 +10664,7 @@ reset_index 之后就完全是一张普通表了:
 </tr>
 </tbody>
 </table>
-<p><strong>到这里，「把它压成几行」这件事就讲完了。</strong>
+<p>到这里，「把它压成几行」这件事就讲完了。
 但它有个天生的局限：<strong>结果一定比原来短</strong>。
 下一节要讲的 <code>transform</code> 恰好相反——它<strong>一点不缩短</strong>。</p>
 <hr />
@@ -10687,7 +10687,7 @@ reset_index 之后就完全是一张普通表了:
 <a id="__codelineno-16-6" name="__codelineno-16-6"></a>                          ...
 <a id="__codelineno-16-7" name="__codelineno-16-7"></a>「3 行」怎么贴到「22 行」上？→ 贴不上 ⚠
 </code></pre></div></td></tr></table></div>
-<p><strong><code>transform</code> 的做法是：算出组统计量之后，按原样的位置广播回去。</strong></p>
+<p><code>transform</code> 的做法是：算出组统计量之后，按原样的位置广播回去。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -10855,7 +10855,7 @@ pandas 会按索引对齐，对不上的位置全部变成 <code>NaN</code>。</
 Name: 语文, dtype: float64</code></pre>
 <p><strong>结论</strong>：<code>wrong</code> 的索引是 <code>'一班'</code> 这种字符串，
 而原表的索引是 <code>0..21</code> 这种整数——<strong>两边的索引没有任何重叠</strong>，
-所以新列<strong>整列都是 <code>NaN</code></strong>，而且<strong>不报任何错</strong> ⚠</p>
+所以新列<strong>整列都是 <code>NaN</code></strong>，而且<strong>不报任何错</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">用 <code>agg</code> 的结果赋值给原表，只会静默得到一列 <code>NaN</code></p>
 <table>
@@ -10884,7 +10884,7 @@ Name: 语文, dtype: float64</code></pre>
 两个词一个字母不差，后果差一整列数据。</p>
 </div>
 <h3 id="42">4.2 必掌握的示例：每行相对组均值的偏差<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p><strong>「偏离本组平均水平多少」是分组分析的第一个真正有用的指标。</strong></p>
+<p>「偏离本组平均水平多少」是分组分析的第一个真正有用的指标。</p>
 <p>它把「绝对分数」换成了「相对水平」，
 于是<strong>不同组之间可以比了</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
@@ -10971,7 +10971,7 @@ Name: 语文, dtype: float64</code></pre>
 <p><strong>第 ③ 步的「均值应当为 0」是一个非常实用的自检</strong>：
 偏差是围绕组均值算的，所以<strong>组内偏差的代数和必然为 0</strong>。
 如果算出来不是 0，说明分组、对齐或缺失处理有一处不对。
-<strong>这类「理论上应该等于某个数」的检查，比盯着输出看有效得多</strong> ✓</p>
+<strong>这类「理论上应该等于某个数」的检查，比盯着输出看有效得多</strong></p>
 <p><strong>但要小心缺失值那一行</strong>：<code>S04</code> 的语文是 <code>NaN</code>，
 它的偏差也是 <code>NaN</code>。这不是 bug，是正确的 —— 缺考的人
 谈不上「比班均高还是低」。<strong>上面的「均值应当为 0」会被它自动跳过。</strong></p>
@@ -11361,7 +11361,7 @@ Name: 语文, dtype: float64</code></pre>
 <p><strong><code>apply</code> 是「兜底工具」。</strong> 当 <code>agg</code>、<code>transform</code>、<code>filter</code> 都不够用时，
 它能做几乎任何事——因为它把<strong>整张子表</strong>交给你的函数，
 返回值是什么形状都由你决定。</p>
-<p><strong>三种分组方法的定位，一句话说清：</strong></p>
+<p>三种分组方法的定位，一句话说清：</p>
 <table>
 <thead>
 <tr>
@@ -11398,7 +11398,7 @@ Name: 语文, dtype: float64</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>先看一个 <code>agg</code> 与 <code>transform</code> 做不到的例子：每组取语文分最高的两行（整行）。</strong></p>
+<p>先看一个 <code>agg</code> 与 <code>transform</code> 做不到的例子：每组取语文分最高的两行（整行）。</p>
 <p>这个需求的特点是：<strong>既要「每组只留两行」（像 <code>filter</code>），
 又要「按分数挑」（像排序），还要「保留所有列」（像没有聚合）。</strong>
 三种现成方法都办不到，<code>apply</code> 可以：</p>
@@ -11533,7 +11533,7 @@ Name: 语文, dtype: float64</code></pre>
 <code>nlargest(2, ...)</code> 只有 1 行可取，所以那一组只返回 1 行。
 <strong>这正是 <code>apply</code> 的行为</strong>：每组返回多少行由你的函数说了算，
 pandas 只是把结果摞起来。</p>
-<p><strong>另一个 <code>agg</code> 做不到的例子：每组拟合一条直线。</strong></p>
+<p>另一个 <code>agg</code> 做不到的例子：每组拟合一条直线。</p>
 <p>这个需求要给每组算<strong>多个数</strong>（斜率、截距、样本数），
 <code>agg</code> 只能给每组一个数，<code>transform</code> 只能给等长的结果：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
@@ -11745,7 +11745,7 @@ pandas 只是把结果摞起来。</p>
 <p><strong><code>group_keys=False</code></strong> 解决另一个很烦的问题：
 默认情况下 <code>apply</code> 会把分组键<strong>塞回索引里</strong>，
 结果就变成一个多级索引的表。加上 <code>group_keys=False</code>，
-结果的索引保持原样，<strong>看起来就像是「给原表做了个操作」</strong> ✓</p>
+结果的索引保持原样，<strong>看起来就像是「给原表做了个操作」</strong></p>
 <p><strong><code>apply</code> 的正确使用清单</strong>：</p>
 <table>
 <thead>
@@ -11774,10 +11774,10 @@ pandas 只是把结果摞起来。</p>
 </tbody>
 </table>
 <p><strong>最后一句总结</strong>：
-<strong><code>apply</code> 是「能做一切」的那把瑞士军刀，但拧螺丝时请用螺丝刀。</strong></p>
+<code>apply</code> 是「能做一切」的那把瑞士军刀，但拧螺丝时请用螺丝刀。</p>
 <hr />
 <h2 id="_2">七、三种「数个数」：别把它们当成一回事<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>这一节只解决一个问题：<code>value_counts</code>、<code>size</code>、<code>count</code> 到底差在哪。</strong></p>
+<p>这一节只解决一个问题：<code>value_counts</code>、<code>size</code>、<code>count</code> 到底差在哪。</p>
 <p>它们的名字都像「数数」，但<strong>数的东西不是一回事</strong>：</p>
 <table>
 <thead>
@@ -11902,7 +11902,7 @@ pandas 只是把结果摞起来。</p>
   value_counts 结果: {80.0: 1, 70.0: 1, 60.0: 1, 65.0: 1}</code></pre>
 <p><strong>看输出的最后两行</strong>：<code>一班</code> 有 3 行，<code>value_counts</code> 在语文列上只数到 2 个
 （<code>80.0</code> 与 <code>70.0</code>），因为 <code>NaN</code> 被默认跳过了。
-<strong>如果你用 <code>value_counts</code> 去数「一班有几个人」，会少一个</strong> ⚠</p>
+<strong>如果你用 <code>value_counts</code> 去数「一班有几个人」，会少一个</strong></p>
 <h3 id="72-size-count">7.2 <code>size</code> 与 <code>count</code> 摆在同一个表里<a class="headerlink" href="#72-size-count" title="Permanent link">&para;</a></h3>
 <p><strong>这是报表里最实用的一行代码</strong>：一眼看出每组有多少行、多少个有效值、
 以及<strong>缺了几个</strong>：</p>
@@ -11974,7 +11974,7 @@ pandas 只是把结果摞起来。</p>
 （<code>学号</code> 这一列没有缺失，<code>size</code> 又本来就不看缺失，所以它等于人数）；
 <code>("语文", "count")</code> 数的是语文列的有效值。
 <strong>两个数相减，就是缺失的个数</strong> —— 这比单独去写一个 <code>isna().sum()</code> 更省事，
-而且两者互为验证 ✓</p>
+而且两者互为验证</p>
 <h3 id="73-value_counts">7.3 <code>value_counts</code> 的常用参数<a class="headerlink" href="#73-value_counts" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
@@ -12153,7 +12153,7 @@ bins 参数对数值列分箱（只对数值有意义）:
 </div>
 <hr />
 <h2 id="crosstab-pivot_table">八、<code>crosstab</code> 与 <code>pivot_table</code>：把长表压成二维表<a class="headerlink" href="#crosstab-pivot_table" title="Permanent link">&para;</a></h2>
-<p><strong>这两种工具回答的是同一个问题：怎么把「两列的交叉组合」变成一张格子表。</strong></p>
+<p>这两种工具回答的是同一个问题：怎么把「两列的交叉组合」变成一张格子表。</p>
 <p><code>crosstab</code>（交叉频数表，对应统计里的「列联表」）专门做<strong>计数与占比</strong>；
 <code>pivot_table</code>（透视表）是它的通行版本，<strong>能做任意聚合</strong>。</p>
 <p><strong>它们的共同点是「长表 → 宽表」</strong>：</p>
@@ -12391,7 +12391,7 @@ crosstab 还能顺便聚合别的列（values + aggfunc）:
 </tbody>
 </table>
 <p><strong>判断口诀</strong>：
-<strong>只数个数、要做列联表分析 → <code>crosstab</code>；要算别的统计量 → <code>pivot_table</code>。</strong></p>
+只数个数、要做列联表分析 → <code>crosstab</code>；要算别的统计量 → <code>pivot_table</code>。</p>
 <h3 id="83-pivot_table">8.3 <code>pivot_table</code>：五个参数讲清透视表<a class="headerlink" href="#83-pivot_table" title="Permanent link">&para;</a></h3>
 <p><strong><code>pivot_table</code> 的五个核心参数</strong>，记住这五个就够用了：</p>
 <table>
@@ -12514,7 +12514,7 @@ All  1040.6  631.0  1671.6
 二班     8  77.60</code></pre>
 <p><strong>注意第 ③ 段里 <code>All</code> 那一行</strong>：它<strong>不是</strong>各列均值再平均，
 而是<strong>用原始数据重新算一遍</strong>。所以行上的 <code>All</code> 是「不分班级的均值」，
-这在汇总报表里正是你要的口径 ✓</p>
+这在汇总报表里正是你要的口径</p>
 <p><strong>也用同一个数据看 <code>count</code> 与默认 <code>mean</code> 的差别</strong>：</p>
 <table>
 <thead>
@@ -12734,7 +12734,7 @@ All  1040.6  631.0  1671.6
 不确定就用 <code>pivot_table</code>——它多做一步聚合，但永远不会因为重复组合而报错。</strong></p>
 <hr />
 <h2 id="merge">九、<code>merge</code>：把两张表按「键」接起来（重点）<a class="headerlink" href="#merge" title="Permanent link">&para;</a></h2>
-<p><strong><code>merge</code> 是这一页最需要小心的部分，因为它是唯一会「悄悄改变行数」的操作。</strong></p>
+<p><code>merge</code> 是这一页最需要小心的部分，因为它是唯一会「悄悄改变行数」的操作。</p>
 <h3 id="91-inner-left-right-outer">9.1 四种连接方式：<code>inner</code> / <code>left</code> / <code>right</code> / <code>outer</code><a class="headerlink" href="#91-inner-left-right-outer" title="Permanent link">&para;</a></h3>
 <p><strong>先用同一对表把四种结果全跑一遍</strong>，这样差别就一目了然了。</p>
 <p>两张表的设计意图很明确：</p>
@@ -12969,7 +12969,7 @@ how="outer"（6 行）
 </tbody>
 </table>
 <p><strong>最后一行是下一小节的伏笔</strong>：本例成立，是因为城市表里
-每个城市只出现一次。<strong>如果右表同一个键有多行，<code>left</code> 的行数会超过左表</strong> ⚠</p>
+每个城市只出现一次。<strong>如果右表同一个键有多行，<code>left</code> 的行数会超过左表</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">「<code>left</code> 连接不会丢行」不等于「行数不变」</p>
 <table>
@@ -12990,7 +12990,7 @@ how="outer"（6 行）
 </tr>
 </tbody>
 </table>
-<p><strong>这两句话的差别就是无数「金额翻倍」事故的根源。</strong>
+<p>这两句话的差别就是无数「金额翻倍」事故的根源。
 下一小节用真实数据演示一遍。</p>
 </div>
 <h3 id="92-on-left_on-right_on-suffixes">9.2 <code>on</code> / <code>left_on</code> / <code>right_on</code> / <code>suffixes</code><a class="headerlink" href="#92-on-left_on-right_on-suffixes" title="Permanent link">&para;</a></h3>
@@ -13092,7 +13092,7 @@ how="outer"（6 行）
 </table>
 <p><strong><code>suffixes</code> 一定要显式写吗？</strong> 不写也能跑，pandas 会默认加上 <code>_x</code> 与 <code>_y</code>。
 <strong>但 <code>_x</code> 与 <code>_y</code> 毫无可读性</strong>，而且下次改列顺序就可能对调，
-所以实际项目里<strong>养成写 <code>suffixes</code> 的习惯</strong> ✓</p>
+所以实际项目里<strong>养成写 <code>suffixes</code> 的习惯</strong></p>
 <h3 id="93-indicator">9.3 <code>indicator</code>：把「匹配情况」变成一列<a class="headerlink" href="#93-indicator" title="Permanent link">&para;</a></h3>
 <p><strong><code>indicator=True</code> 会多出一列 <code>_merge</code></strong>，取值只有三种：</p>
 <table>
@@ -13198,12 +13198,12 @@ right_only    1
 <p><strong>为什么 <code>indicator</code> 值得单独学</strong>：合并出错时，
 你最先想知道的永远是「<strong>到底是哪几行没匹配上</strong>」。
 <code>indicator</code> 用一列把答案直接写进结果里，
-接着 <code>value_counts</code> 看数量、布尔索引看细节，两步定位 ✓</p>
+接着 <code>value_counts</code> 看数量、布尔索引看细节，两步定位</p>
 <p><strong>注意：<code>_merge</code> 是分类类型（<code>category</code>）</strong>，
 所以 <code>value_counts</code> 的输出里会带 <code>Name: count</code> 字样。
 这属于正常现象，不影响取值。</p>
 <h3 id="94-vs">9.4 合并后行数变化：一对一 vs 一对多<a class="headerlink" href="#94-vs" title="Permanent link">&para;</a></h3>
-<p><strong>现在讲本页最重要的警报：<code>merge</code> 之后行数可能变多。</strong></p>
+<p>现在讲本页最重要的警报：<code>merge</code> 之后行数可能变多。</p>
 <p>行数变化的规律只有一条：<strong>结果行数 = 左表每一行的「匹配到的右表行数」之和。</strong></p>
 <table>
 <thead>
@@ -13246,7 +13246,7 @@ right_only    1
 </tr>
 </tbody>
 </table>
-<p><strong>用真实数据看一遍「一对一」与「一对多」的差别：</strong></p>
+<p>用真实数据看一遍「一对一」与「一对多」的差别：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13421,7 +13421,7 @@ A03    2</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>这就是为什么「合并之后立刻检查 <code>shape</code>」是一条必须养成的习惯。</strong></p>
+<p>这就是为什么「合并之后立刻检查 <code>shape</code>」是一条必须养成的习惯。</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>merge</code> 之后第一件事：打印 <code>shape</code>，跟合并前比</p>
 <p>合并不报错，不代表结果对。<strong>行数变化必须被当场看见。</strong></p>
@@ -13487,7 +13487,7 @@ A03    2</code></pre>
 <p><strong>还有一种「行数变少」的情况</strong>：用了 <code>inner</code>（或 <code>right</code>），
 左表里匹配不上的行会被丢掉。<strong>同样是静默的</strong>，同样要靠 <code>shape</code> 发现。</p>
 <h3 id="95-nan">9.5 键不匹配：结果里会出现 <code>NaN</code><a class="headerlink" href="#95-nan" title="Permanent link">&para;</a></h3>
-<p><strong>这是合并的第二个坑：<code>NaN</code> 不一定来自原始数据，可能来自「没接上」。</strong></p>
+<p>这是合并的第二个坑：<code>NaN</code> 不一定来自原始数据，可能来自「没接上」。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -13556,7 +13556,7 @@ A03    2</code></pre>
 
 实付列有几个 NaN: 1</code></pre>
 <p><strong><code>NaN</code> 会顺着计算传染下去</strong>：<code>金额 * NaN = NaN</code>，
-所以「实付」也是 <code>NaN</code>。这不是 bug —— 缺了折扣率就真的算不实付 ✓
+所以「实付」也是 <code>NaN</code>。这不是 bug —— 缺了折扣率就真的算不实付
 <strong>但它必须被看见</strong>，不能让它默默污染后面的合计。</p>
 <p><strong>「键对不上」最常见的原因，按出现频率排</strong>：</p>
 <table>
@@ -13642,12 +13642,12 @@ A03    2</code></pre>
 0  北京  1.0   华北       both
 1  上海  2.0   华东       both
 2  广州  3.0  NaN  left_only</code></pre>
-<p><strong>这两个字符在屏幕上看起来完全一样，但它俩是不相等的字符串。</strong>
+<p>这两个字符在屏幕上看起来完全一样，但它俩是不相等的字符串。
 <code>repr()</code> 或者 <code>print(len(...))</code> 能把空格逼出来 ——
-<strong>排查「明明一样却匹配不上」，第一件事就是把值打印成 <code>repr</code> 看长度</strong> ✓</p>
+<strong>排查「明明一样却匹配不上」，第一件事就是把值打印成 <code>repr</code> 看长度</strong></p>
 <hr />
 <h2 id="concat">十、<code>concat</code>：不做匹配，直接拼起来<a class="headerlink" href="#concat" title="Permanent link">&para;</a></h2>
-<p><strong><code>merge</code> 的关键词是「按键匹配」，<code>concat</code> 的关键词是「直接拼」。</strong></p>
+<p><code>merge</code> 的关键词是「按键匹配」，<code>concat</code> 的关键词是「直接拼」。</p>
 <p>这个区别非常实用：</p>
 <table>
 <thead>
@@ -13909,7 +13909,7 @@ reset_index 之后（多出一列 level_0 就是来源）:
 </table>
 <p><strong>实用建议</strong>：<strong>要接着做分析（分组、筛选）→ 加列；只是临时看一眼 → 用 <code>keys</code>。</strong></p>
 <h3 id="102-axis1">10.2 <code>axis=1</code>：横向拼接（按索引对齐）<a class="headerlink" href="#102-axis1" title="Permanent link">&para;</a></h3>
-<p><strong>横向拼接最常见的用途：把几个「每组一行」的汇总表并排放成一张宽表。</strong></p>
+<p>横向拼接最常见的用途：把几个「每组一行」的汇总表并排放成一张宽表。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -13981,7 +13981,7 @@ axis=1 横向拼接（按索引对齐）:
 0  一班   6  80.66
 1  三班   8  80.94
 2  二班   8  77.60</code></pre>
-<p><strong><code>axis=1</code> 最容易出错的地方：它是按索引对齐的，不是按位置。</strong></p>
+<p><code>axis=1</code> 最容易出错的地方：它是按索引对齐的，不是按位置。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -14285,15 +14285,15 @@ S03  丙  NaN
 </tbody>
 </table>
 <p><strong>判断口诀</strong>：<strong>只要你觉得「这个键应该是唯一的」，就把 <code>validate="one_to_one"</code> 加上。</strong>
-它把「合并后才发现金额翻倍」提前成「当场报错」✓</p>
+它把「合并后才发现金额翻倍」提前成「当场报错」</p>
 <hr />
 <h2 id="_3">十二、实际应用：三个完整任务<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><strong>前面十一节讲的是零件，这一节把它们装成三台小机器。</strong>
+<p>前面十一节讲的是零件，这一节把它们装成三台小机器。
 三个任务覆盖了本页最核心的三种组合方式。</p>
 <h3 id="121">12.1 应用一：各组统计报表<a class="headerlink" href="#121" title="Permanent link">&para;</a></h3>
 <p><strong>任务</strong>：一次拿到「每个班几个人、两科的均分各多少」。</p>
 <p><strong>为什么用命名聚合</strong>：一次分组算出所有量，列名直接是中文表头，
-<code>reset_index()</code> 之后就是一张能直接存文件、直接交给别人的表 ✓</p>
+<code>reset_index()</code> 之后就是一张能直接存文件、直接交给别人的表</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -14387,7 +14387,7 @@ S03  丙  NaN
 <p><strong>为什么不分别调用 <code>.mean()</code> 和 <code>.max()</code></strong>：
 那样要写四行、分四次分组，<strong>而且四次的口径要人工保证一致</strong>
 （比如某次忘了先过滤缺失，均值和最大值就不是同一批人算的）。
-一次 <code>agg</code> 从根上避免这个问题 ✓</p>
+一次 <code>agg</code> 从根上避免这个问题</p>
 <h3 id="122-transform">12.2 应用二：把汇总信息加回明细表（<code>transform</code> 的典型用途）<a class="headerlink" href="#122-transform" title="Permanent link">&para;</a></h3>
 <p><strong>任务</strong>：给每个学生加一列「本班语文均分」，并标出「谁高于本班均分」。</p>
 <p><strong>为什么这里必须用 <code>transform</code></strong>：结果要<strong>贴在每一行上</strong>，
@@ -14477,7 +14477,7 @@ S03  丙  NaN
 <p><strong>第 ④ 步的「交叉核对」是这份代码最值钱的部分</strong>：
 它把「加进去的列」和「分组统计」放在一张表里对照。
 如果 <code>transform</code> 用错了（比如写成了 <code>agg</code>），
-<code>班均分</code> 那一列会全是 <code>NaN</code>，<strong>一眼就能看出来</strong> ✓</p>
+<code>班均分</code> 那一列会全是 <code>NaN</code>，<strong>一眼就能看出来</strong></p>
 <p><strong>一个必须知道的行为</strong>：<code>高于班均</code> 列在缺考那一行是 <code>False</code>，
 因为 <code>NaN &gt; 数字</code> 的结果是 <code>False</code>。
 <strong>这会让「缺考的人」被算进「不高于班均」那一堆</strong>，
@@ -14542,7 +14542,7 @@ S03  丙  NaN
   两者相加等于有效人数: True</code></pre>
 <p><strong>这两行输出把「<code>NaN</code> 比较永远是 <code>False</code>」这条规则钉死了</strong>：
 缺考的人既不是「高于」，也谈不上「低于」，
-<strong>它应该被排除，而不是被归到某一边</strong> ⚠</p>
+<strong>它应该被排除，而不是被归到某一边</strong></p>
 <h3 id="123">12.3 应用三：合并两张表补充信息<a class="headerlink" href="#123" title="Permanent link">&para;</a></h3>
 <p><strong>任务</strong>：订单表里有城市，但要看「大区」和「折扣率」，
 这些信息在另一张城市表里 —— 用 <code>left</code> 连接补齐。</p>
@@ -14671,10 +14671,10 @@ S03  丙  NaN
 </table>
 <p><strong>最后那行「金额合计合并前后一致」是最强的验证</strong>：
 在没有膨胀、没有重复行的情况下，合并<strong>不应该改变任何列的合计</strong>。
-这个等式一旦不成立，就说明行数或内容出了变化 ✓</p>
+这个等式一旦不成立，就说明行数或内容出了变化</p>
 <hr />
 <h2 id="_4">十三、常见陷阱汇总<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><strong>这一节把前面散落的坑集中到一张表里，当速查用。</strong></p>
+<p>这一节把前面散落的坑集中到一张表里，当速查用。</p>
 <h3 id="131">13.1 陷阱总表<a class="headerlink" href="#131" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -14791,7 +14791,7 @@ S03  丙  NaN
 </tbody>
 </table>
 <h3 id="132">13.2 三个最容易造成「静默错误」的陷阱展开<a class="headerlink" href="#132" title="Permanent link">&para;</a></h3>
-<p><strong>这三条的共同点是：代码能跑、不报警、结果看起来正常，但数字是错的。</strong></p>
+<p>这三条的共同点是：代码能跑、不报警、结果看起来正常，但数字是错的。</p>
 <h4 id="1merge">（1）<code>merge</code> 后行数变多<a class="headerlink" href="#1merge" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1">1</a></span>
 <span class="normal"><a href="#__codelineno-59-2">2</a></span>
@@ -14929,10 +14929,10 @@ S03  丙  NaN
 </table>
 <p><strong>这几行 print 加起来不到十秒</strong>，
 却能挡住前面那些「数字错了但页面看起来很干净」的事故。
-<strong>数据分析里，最贵的不是写得慢，而是算错了没人发现</strong> ✓</p>
+<strong>数据分析里，最贵的不是写得慢，而是算错了没人发现</strong></p>
 </div>
 <h3 id="133">13.3 一张「该用哪个工具」的决策表<a class="headerlink" href="#133" title="Permanent link">&para;</a></h3>
-<p><strong>遇到需求时，从这张表查，比回忆 API 快得多：</strong></p>
+<p>遇到需求时，从这张表查，比回忆 API 快得多：</p>
 <table>
 <thead>
 <tr>
@@ -15281,7 +15281,7 @@ S03  丙  NaN
 </table>
 <p><strong>为什么第二个需求不用 <code>filter</code></strong>：因为这里<strong>不打算删任何数据</strong>，
 只是想拿到一份「哪些批次有问题」的名单。
-用 <code>agg</code> 把结果整理成表，既能看到数字，又能一眼看出哪批有问题 ✓</p>
+用 <code>agg</code> 把结果整理成表，既能看到数字，又能一眼看出哪批有问题</p>
 <p><strong>一个容易踩的坑</strong>：<code>filter</code> 里的 <code>len(g)</code> 数的是<strong>行数</strong>，
 而 <code>g["语文"].count()</code> 数的是<strong>有效值个数</strong>。
 本题问的是「记录数少于 3 条」，所以要数<strong>行数</strong>（用 <code>len(g)</code>）；
@@ -15455,7 +15455,7 @@ outer + indicator:
 ② 没有员工的部门:
    部门   楼层
 3  财务  6.0</code></pre>
-<p><strong>预测依据（这是本题真正要练的）：</strong></p>
+<p>预测依据（这是本题真正要练的）：</p>
 <table>
 <thead>
 <tr>
@@ -15516,7 +15516,7 @@ outer + indicator:
 </table>
 <p><strong>最值得记住的一点</strong>：<code>right</code> 行数是 <strong>4</strong> 而不是 <strong>3</strong> ——
 因为「研发」在员工表里有 2 个人，<code>right</code> 会为这 2 个人各出一行。
-<strong>「右连接保留右表所有键」不等于「行数等于右表行数」</strong> ✓</p>
+<strong>「右连接保留右表所有键」不等于「行数等于右表行数」</strong></p>
 </details>
 <h3 id="4">例题 4：拼一张「月度 × 品类」的销售透视表<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：给定一张订单明细表（月份、品类、金额），要求输出：
@@ -15685,7 +15685,7 @@ All   5   6   6   17
 <p><strong>关于 <code>fill_value</code> 的一个提醒</strong>：
 本题用 <code>0</code> 是为了报表好看（空白格改成 0 更便于求和）。
 但如果下游要靠「有没有值」来判断「这个组合有没有数据」，
-<strong>填 0 之后这个信息就丢了</strong> ⚠
+<strong>填 0 之后这个信息就丢了</strong>
 那种场景应当保持 <code>NaN</code>，或者<strong>另外维护一张笔数表</strong>（就像本题的第二问）。</p>
 </details>
 <hr />
@@ -15905,7 +15905,7 @@ count() → 姓名非缺失个数 : {'一班': 3, '二班': 2}
 一班有 1 人缺考，所以比人数少 1。</p>
 <p><strong>两者相等的情形</strong>：当被 <code>count</code> 的那一列<strong>在每一组里都没有缺失值</strong>时，
 「非缺失值个数」就等于「行数」。例如 <code>姓名</code> 这一列没有缺失，
-所以数它时两者一致 —— 但<strong>这是巧合，不是规律</strong> ⚠</p>
+所以数它时两者一致 —— 但<strong>这是巧合，不是规律</strong></p>
 <p>推荐写法：<strong>一张表里同时给出两个数，让差值自己说话</strong>：</p>
 <table>
 <thead>
@@ -16121,7 +16121,7 @@ A03    2
 </tbody>
 </table>
 <p><strong>防身写法</strong>：合并时加 <code>validate="one_to_one"</code>，
-它会在键重复时<strong>当场报错</strong>，而不是静默地让金额翻倍 ✓</p>
+它会在键重复时<strong>当场报错</strong>，而不是静默地让金额翻倍</p>
 </details>
 <p><strong>Q4</strong> 下面这段代码想给每个学生加一列「本班语文均分」，
 但结果这一列全是 <code>NaN</code>。找出原因并改正。</p>
@@ -16246,7 +16246,7 @@ Name: 语文, dtype: float64
 <strong>只有 3 行</strong>、索引是 <code>"一班" / "二班" / "三班"</code>（字符串）的 Series。
 而原表的索引是 <code>0..21</code>（整数）。
 <code>df["新列"] = 值</code> 这一步是<strong>按索引对齐</strong>的，
-两边没有任何重叠，所以新列<strong>整列都是 <code>NaN</code></strong>，<strong>而且不报错</strong> ⚠</p>
+两边没有任何重叠，所以新列<strong>整列都是 <code>NaN</code></strong>，<strong>而且不报错</strong></p>
 <p><strong>改正</strong>：</p>
 <table>
 <thead>
@@ -16276,7 +16276,7 @@ Name: 语文, dtype: float64
 </table>
 <p><strong>最后一行输出的意义</strong>：<code>groupby("班级")["班均分"].unique()</code> 每个班只给出
 一个值，证明「同一组的广播值确实完全相同」——
-这是 <code>transform</code> 正确工作的直接证据 ✓</p>
+这是 <code>transform</code> 正确工作的直接证据</p>
 </details>
 <hr />
 <h2 id="_7">小结<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>

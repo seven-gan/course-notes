@@ -8571,7 +8571,7 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tr>
 </tbody>
 </table>
-<p><strong>只需 4 步</strong>就到达双精度极限 ✓</p>
+<p><strong>只需 4 步</strong>就到达双精度极限</p>
 <p><strong>对比</strong>：</p>
 <table>
 <thead>
@@ -8702,7 +8702,7 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tbody>
 </table>
 <p><strong><span class="arithmatex">\(n = 10^6\)</span> 时</strong>：<span class="arithmatex">\(O(n^3) = 10^{18}\)</span> —— <strong>完全不可行</strong> ✗</p>
-<p><strong>这是牛顿法在高维深度学习中被弃用的原因。</strong></p>
+<p>这是牛顿法在高维深度学习中被弃用的原因。</p>
 <h3 id="hessian">拟牛顿法：用梯度差近似 Hessian<a class="headerlink" href="#hessian" title="Permanent link">&para;</a></h3>
 <p><strong>核心思想</strong>：<strong>不显式算 Hessian，而是用它满足的性质来迭代更新近似</strong>。</p>
 <p><strong>割线条件（secant condition）</strong>：</p>
@@ -8718,7 +8718,7 @@ H_{k+1}\boldsymbol{s}_k = \boldsymbol{y}_k
 <div class="arithmatex">\[
 \boldsymbol{g}_{k+1}-\boldsymbol{g}_k \approx H(\boldsymbol{x}_{k+1}-\boldsymbol{x}_k)
 \]</div>
-<p>即 <span class="arithmatex">\(\boldsymbol{y}_k \approx H\boldsymbol{s}_k\)</span> ✓</p>
+<p>即 <span class="arithmatex">\(\boldsymbol{y}_k \approx H\boldsymbol{s}_k\)</span></p>
 <h3 id="bfgs">BFGS 更新公式<a class="headerlink" href="#bfgs" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\top\boldsymbol{s}_k} - \frac{H_k\boldsymbol{s}_k\boldsymbol{s}_k^\top H_k}{\boldsymbol{s}_k^\top H_k\boldsymbol{s}_k}
@@ -8746,7 +8746,7 @@ H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\t
 </tbody>
 </table>
 <p><strong>2. 保持对称正定</strong></p>
-<p>若 <span class="arithmatex">\(H_k\succ0\)</span> 且 <span class="arithmatex">\(\boldsymbol{y}_k^\top\boldsymbol{s}_k&gt;0\)</span>，则 <span class="arithmatex">\(H_{k+1}\succ0\)</span> ✓</p>
+<p>若 <span class="arithmatex">\(H_k\succ0\)</span> 且 <span class="arithmatex">\(\boldsymbol{y}_k^\top\boldsymbol{s}_k&gt;0\)</span>，则 <span class="arithmatex">\(H_{k+1}\succ0\)</span></p>
 <p><strong>第 2 点很重要</strong>：它保证每步方向都是<strong>下降方向</strong>，
 不需要额外检查。</p>
 <p><strong>保证 <span class="arithmatex">\(\boldsymbol{y}_k^\top\boldsymbol{s}_k&gt;0\)</span> 的条件</strong>：<span class="arithmatex">\(f\)</span> <strong>严格凸</strong>。</p>
@@ -8779,7 +8779,7 @@ H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\t
 </tr>
 </tbody>
 </table>
-<p><strong><span class="arithmatex">\(n = 10^6\)</span>、<span class="arithmatex">\(m = 10\)</span> 时</strong>：存储 <span class="arithmatex">\(10^7\)</span> 个数（可行 ✓）</p>
+<p><strong><span class="arithmatex">\(n = 10^6\)</span>、<span class="arithmatex">\(m = 10\)</span> 时</strong>：存储 <span class="arithmatex">\(10^7\)</span> 个数（可行）</p>
 <div class="admonition note">
 <p class="admonition-title">为什么深度学习不用 L-BFGS</p>
 <p><strong>理论上 L-BFGS 更省</strong>，但深度学习仍普遍用 SGD/Adam，原因有四：</p>
@@ -8877,7 +8877,7 @@ H \approx J^\top J
 <p><strong>所以方向总是下降方向</strong>（<span class="arithmatex">\(J\)</span> 列满秩时正定）。</p>
 <p><strong>3. 小残差时接近牛顿法</strong></p>
 <p>残差 <span class="arithmatex">\(\boldsymbol{r}\to\boldsymbol{0}\)</span> 时，忽略的二阶项也 <span class="arithmatex">\(\to0\)</span>
-→ 收敛速度接近二次 ✓</p>
+→ 收敛速度接近二次</p>
 <p><strong>这正是最小二乘问题的「天然结构优势」</strong>。</p>
 <p><strong>与最小二乘的闭环</strong>：<span class="arithmatex">\(J^\top J\)</span> 与 <span class="arithmatex">\(J^\top\boldsymbol{r}\)</span> 就是
 <strong>正规方程</strong>的两边（回到「矩阵微积分」一页）——
@@ -8921,7 +8921,7 @@ H \approx J^\top J
 <div class="arithmatex">\[
 \Delta\boldsymbol{x} \approx -\frac1\lambda J^\top\boldsymbol{r} = -\frac1\lambda\nabla f
 \]</div>
-<p><strong>正是梯度下降</strong>（步长 <span class="arithmatex">\(1/\lambda\)</span>）✓</p>
+<p><strong>正是梯度下降</strong>（步长 <span class="arithmatex">\(1/\lambda\)</span>）</p>
 <p><strong>自适应调整策略（LM 的核心）</strong>：</p>
 <table>
 <thead>
@@ -9005,7 +9005,7 @@ x_{k+1} = \frac{2x_k^2 - x_k^2 + 2}{2x_k} = \frac{x_k^2+2}{2x_k} = \frac12\left(
 </tbody>
 </table>
 <p><strong>验证</strong>：<span class="arithmatex">\(\sqrt2 = 1.41421356\ldots\)</span></p>
-<p><strong>第 3 步已精确到小数点后 6 位</strong> ✓</p>
+<p><strong>第 3 步已精确到小数点后 6 位</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">观察「有效数字翻倍」</p>
@@ -9040,7 +9040,7 @@ x_{k+1} = \frac{2x_k^2 - x_k^2 + 2}{2x_k} = \frac{x_k^2+2}{2x_k} = \frac12\left(
 <div class="arithmatex">\[
 (8.6\times10^{-2})^2 \approx 7.4\times10^{-3}
 \]</div>
-<p>（与实际 <span class="arithmatex">\(2.5\times10^{-3}\)</span> 量级一致 ✓）</p>
+<p>（与实际 <span class="arithmatex">\(2.5\times10^{-3}\)</span> 量级一致）</p>
 <p><strong>这就是二次收敛</strong>：<strong>有效数字位数每步翻倍</strong>
 （<span class="arithmatex">\(1\to2\to3\to6\to12\to\cdots\)</span>）。</p>
 <p><strong>工程意义</strong>：<strong>牛顿法是一种「极快的开方算法」</strong>——
@@ -9200,7 +9200,7 @@ x_{k+1} = x_k - x_k(x_k^2+1) = -x_k^3
 <p><strong>在这道题里</strong>：若加线搜索（要求 <span class="arithmatex">\(f\)</span> 下降），
 从 <span class="arithmatex">\(x_0=2\)</span> 出发时，第 1 步的 <span class="arithmatex">\(-8\)</span> 会让 <span class="arithmatex">\(f\)</span> 增大
 （<span class="arithmatex">\(f(2)=\sqrt5\approx2.236\)</span>，<span class="arithmatex">\(f(-8)=\sqrt{65}\approx8.06\)</span>）
-→ 线搜索会自动缩短步长，避免发散 ✓</p>
+→ 线搜索会自动缩短步长，避免发散</p>
 </div>
 <hr />
 <h3 id="3">例题 3：二次收敛速度的验证<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -9292,9 +9292,9 @@ x_{k+1} = x_k - \frac{x_k^3-2}{3x_k^2} = \frac{3x_k^3 - x_k^3 + 2}{3x_k^2} = \fr
 </tr>
 </tbody>
 </table>
-<p><strong>每步的 <span class="arithmatex">\(\varepsilon_{k+1}\)</span> 与 <span class="arithmatex">\(\varepsilon_k^2\)</span> 同量级</strong> ✓</p>
+<p><strong>每步的 <span class="arithmatex">\(\varepsilon_{k+1}\)</span> 与 <span class="arithmatex">\(\varepsilon_k^2\)</span> 同量级</strong></p>
 <p>比例常数约 <span class="arithmatex">\(C\approx0.5\)</span>（随步数趋于稳定）。</p>
-<p><strong>结论</strong>：<strong>二次收敛得到数值验证</strong> ✓</p>
+<p><strong>结论</strong>：<strong>二次收敛得到数值验证</strong></p>
 </details>
 <div class="admonition note">
 <p class="admonition-title">为什么是「有效数字翻倍」</p>
@@ -9333,7 +9333,7 @@ x_{k+1} = x_k - \frac{x_k^3-2}{3x_k^2} = \frac{3x_k^3 - x_k^3 + 2}{3x_k^2} = \fr
 </tr>
 </tbody>
 </table>
-<p><strong>达到双精度（约 16 位）只需约 5–6 步</strong> ✓</p>
+<p><strong>达到双精度（约 16 位）只需约 5–6 步</strong></p>
 <p><strong>对比二分法</strong>：每次误差减半 → 需要
 <span class="arithmatex">\(\log_2(10^{16}) \approx 53\)</span> 步。</p>
 <p><strong>牛顿法比二分法快约 10 倍</strong>（在光滑问题上前提下）。</p>
@@ -9418,7 +9418,7 @@ J_{i,\cdot} = \begin{bmatrix}-e^{bt_i} &amp; -a t_i e^{bt_i}\end{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>一次求解即可</strong>（无需迭代）✓</p>
+<p><strong>一次求解即可</strong>（无需迭代）</p>
 <p><strong>但要注意这个「取对数」的代价</strong>：</p>
 <table>
 <thead>
@@ -9551,7 +9551,7 @@ x_{k+1} = x_k - \frac{x_k^3-5}{3x_k^2}
 <div class="arithmatex">\[
 x_{k+1} = \frac{1}{n}\left((n-1)x_k + \frac{a}{x_k^{n-1}}\right)
 \]</div>
-<p><span class="arithmatex">\(n=2\)</span> 时就是例题 1 的巴比伦算法 ✓</p>
+<p><span class="arithmatex">\(n=2\)</span> 时就是例题 1 的巴比伦算法</p>
 <p><strong>这个结构说明</strong>：牛顿迭代常写成「旧值与新估计的加权平均」，
 权重由 <span class="arithmatex">\(n\)</span> 决定——<strong>直观上就是从两侧夹逼</strong>。</p>
 </details>
@@ -9687,7 +9687,7 @@ x_{k+1} = \frac{1}{n}\left((n-1)x_k + \frac{a}{x_k^{n-1}}\right)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为最小二乘的 Hessian 可分解，且二阶项在小残差时可忽略。</strong></p>
+<p>因为最小二乘的 Hessian 可分解，且二阶项在小残差时可忽略。</p>
 <p><strong>第一步：Hessian 的分解</strong></p>
 <p>对 <span class="arithmatex">\(f = \frac12\sum_i r_i^2\)</span> 求梯度：</p>
 <div class="arithmatex">\[
@@ -9783,7 +9783,7 @@ x_{k+1} = \frac{1}{n}\left((n-1)x_k + \frac{a}{x_k^{n-1}}\right)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为 LM 用阻尼项换来了稳健性。</strong></p>
+<p>因为 LM 用阻尼项换来了稳健性。</p>
 <p><strong>高斯-牛顿的三个失效情形</strong>：</p>
 <table>
 <thead>

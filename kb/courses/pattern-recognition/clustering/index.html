@@ -8057,7 +8057,7 @@ J = \sum_{k=1}^{K}\sum_{x_i \in C_k}
 \mu_k = \frac{1}{|C_k|}\sum_{x_i\in C_k}x_i
 \]</div>
 <p><strong>这个目标函数的直觉</strong>：每个点到它所属簇中心的距离平方和越小，
-簇就越"紧" ✓</p>
+簇就越"紧"</p>
 <h3 id="12">1.2 为什么必须迭代：两个耦合的未知量<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>目标是同时求<strong>簇划分</strong>和<strong>簇中心</strong>，但两者互相依赖：</p>
 <table>
@@ -8758,24 +8758,24 @@ L 348.470312 200.786125
 </tbody>
 </table>
 <p><strong>而 <span class="arithmatex">\(J\)</span> 只能取有限多个值</strong>（划分方案是有限的），
-所以<strong>不可能无限下降</strong> → <strong>必收敛</strong> ✓</p>
+所以<strong>不可能无限下降</strong> → <strong>必收敛</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">收敛 ≠ 全局最优</p>
 <p>K 均值收敛到的是<strong>局部最优</strong>，而且：</p>
-<p><strong>① 结果依赖初始化</strong>。不同初值可能给出完全不同的划分 ⚠
+<p><strong>① 结果依赖初始化</strong>。不同初值可能给出完全不同的划分
 → 标准做法：<strong>多次随机初始化，取 <span class="arithmatex">\(J\)</span> 最小的那次</strong></p>
 <p><strong>② <span class="arithmatex">\(K\)</span> 必须事先给定</strong>。给错了就是错的 ——
-而且<strong>没有客观方法知道 <span class="arithmatex">\(K\)</span> 对不对</strong> ⚠</p>
+而且<strong>没有客观方法知道 <span class="arithmatex">\(K\)</span> 对不对</strong></p>
 <p><strong>③ 只适合"球形、等大"的簇</strong>。因为用的距离是欧氏距离、
 且隐含假设各簇方差相同 ——
-遇到<strong>细长、大小悬殊、或套环状</strong>的簇会失败 ⚠</p>
+遇到<strong>细长、大小悬殊、或套环状</strong>的簇会失败</p>
 <p><strong>④ 对离群点敏感</strong>。均值不是稳健统计量，
-一个远离的离群点会把簇中心<strong>整体拉偏</strong> ⚠</p>
+一个远离的离群点会把簇中心<strong>整体拉偏</strong></p>
 </div>
 <h3 id="14-k">1.4 怎么选 K：肘部法与轮廓系数<a class="headerlink" href="#14-k" title="Permanent link">&para;</a></h3>
 <p><strong>肘部法</strong>：画出 <span class="arithmatex">\(J\)</span> 随 <span class="arithmatex">\(K\)</span> 的变化，看<strong>拐点</strong>。</p>
 <p><strong>为什么会有拐点</strong>：<span class="arithmatex">\(K\)</span> 增大时 <span class="arithmatex">\(J\)</span> 必然下降
-（<span class="arithmatex">\(K=n\)</span> 时 <span class="arithmatex">\(J=0\)</span>），但<strong>下降速度</strong>在真实簇数附近会明显变缓 ✓</p>
+（<span class="arithmatex">\(K=n\)</span> 时 <span class="arithmatex">\(J=0\)</span>），但<strong>下降速度</strong>在真实簇数附近会明显变缓</p>
 <p><strong>K 均值的目标函数随 K 的下降</strong>：</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -8876,7 +8876,7 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\,b(i)\}}
 </tbody>
 </table>
 <p><strong>读法</strong>：<span class="arithmatex">\(s(i)\)</span> 接近 1 说明"离本簇近、离别的簇远"（分得好）；
-接近 <span class="arithmatex">\(-1\)</span> 说明<strong>可能分错了簇</strong> ✓</p>
+接近 <span class="arithmatex">\(-1\)</span> 说明<strong>可能分错了簇</strong></p>
 <p><strong>两者的分工</strong>：</p>
 <table>
 <thead>
@@ -8899,7 +8899,7 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\,b(i)\}}
 </tr>
 </tbody>
 </table>
-<p><strong>实践建议</strong>：两个都算，再结合领域知识定 ⚠</p>
+<p><strong>实践建议</strong>：两个都算，再结合领域知识定</p>
 <p><strong>初值对结果的影响</strong>：</p>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -8986,7 +8986,7 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\,b(i)\}}
 但边界附近的点，它的归属其实<strong>是不确定的</strong>。</p>
 <p><strong>一个反直觉的例子</strong>：某个点恰好落在两个簇中间，
 K 均值会按"哪个中心近一点点"来决定 ——
-但下一次迭代中心一动，它可能就跳到另一簇去了 ⚠</p>
+但下一次迭代中心一动，它可能就跳到另一簇去了</p>
 <h3 id="22">2.2 引入隶属度<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>模糊 K 均值</strong>（FCM）用<strong>隶属度</strong> <span class="arithmatex">\(u_{ik}\in[0,1]\)</span> 替代 0/1 分配，
 满足归一化：</p>
@@ -9029,7 +9029,7 @@ u_{ik} = \frac{1}
 \left(\dfrac{\|x_i-\mu_k\|}{\|x_i-\mu_j\|}\right)^{\frac{2}{m-1}}}
 \]</div>
 <p><strong>怎么读这个式子</strong>：<strong>离谁近，谁的比例就大</strong> ——
-而且 <span class="arithmatex">\(u_{ik}\)</span> 是<strong>所有簇距离比值的函数</strong>，不是只看最近的那个 ✓</p>
+而且 <span class="arithmatex">\(u_{ik}\)</span> 是<strong>所有簇距离比值的函数</strong>，不是只看最近的那个</p>
 <p><strong>中心更新</strong>：</p>
 <div class="arithmatex">\[
 \mu_k = \frac{\sum_i u_{ik}^{m}x_i}{\sum_i u_{ik}^{m}}
@@ -9037,12 +9037,12 @@ u_{ik} = \frac{1}
 <p><strong>注意这是加权平均</strong>，权重是隶属度的 <span class="arithmatex">\(m\)</span> 次方 ✓</p>
 <p><strong>与 K 均值的关系</strong>：两者都是<strong>交替优化</strong>，
 FCM 只是把"硬分配"换成了"软权重" ——
-思想与 <a href="../../../math/statistics/em-algorithm/">EM 与混合模型</a> 完全一致 ✓</p>
+思想与 <a href="../../../math/statistics/em-algorithm/">EM 与混合模型</a> 完全一致</p>
 <hr />
 <h2 id="_2">三、层次聚类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="31-k">3.1 不需要预先定 K<a class="headerlink" href="#31-k" title="Permanent link">&para;</a></h3>
 <p><strong>这是它最大的优点</strong>：生成一棵<strong>聚类树</strong>，
-想要几个簇就在树上<strong>切一刀</strong> ✓</p>
+想要几个簇就在树上<strong>切一刀</strong></p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.94725" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="层次聚类：树状图记录「谁先跟谁合并」">
 
@@ -9199,7 +9199,7 @@ L 269.633208 138.267
 </tr>
 </tbody>
 </table>
-<p><strong>实践中最常用凝聚法</strong> ✓</p>
+<p><strong>实践中最常用凝聚法</strong></p>
 <h3 id="33">3.3 关键的歧义：两个簇之间"距离"怎么定义<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>这是层次聚类的核心设计选择</strong>，不同定义给出<strong>完全不同的结果</strong> ⚠</p>
 <table>
@@ -9234,7 +9234,7 @@ L 269.633208 138.267
 </tbody>
 </table>
 <p><strong>单链的"拉链效应"</strong>：只要两个簇各有一个点比较近，
-它们就会被合并 —— <strong>哪怕整体上两个簇离得很远</strong> ⚠</p>
+它们就会被合并 —— <strong>哪怕整体上两个簇离得很远</strong></p>
 <p><strong>这是层次聚类最容易踩的坑</strong>。</p>
 <h3 id="34-k">3.4 与 K 均值的对比<a class="headerlink" href="#34-k" title="Permanent link">&para;</a></h3>
 <table>
@@ -9274,12 +9274,12 @@ L 269.633208 138.267
 </tbody>
 </table>
 <p><strong>实践建议</strong>：数据量小时用层次聚类<strong>探索结构</strong>，
-确定 <span class="arithmatex">\(K\)</span> 之后再用 K 均值（或 GMM）做<strong>最终划分</strong> ✓</p>
+确定 <span class="arithmatex">\(K\)</span> 之后再用 K 均值（或 GMM）做<strong>最终划分</strong></p>
 <hr />
 <h2 id="_3">四、谱聚类：换到"图"上看问题<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么需要它<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>K 均值与层次聚类用<strong>欧氏距离</strong>，
-所以对<strong>非凸形状</strong>（套环、双月）的簇会失败 ⚠</p>
+所以对<strong>非凸形状</strong>（套环、双月）的簇会失败</p>
 <p><strong>关键思路转变</strong>：<strong>不比较"距离远近"，而比较"连接紧密程度"</strong> ✓</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="谱聚类：最小割把图切成两个紧密子图">
@@ -9524,15 +9524,15 @@ L = D - W
 <p><strong>为什么用拉普拉斯矩阵</strong>：它有两条极有用的性质 ——</p>
 <ul>
 <li><strong><span class="arithmatex">\(L\)</span> 的每一行和为 0</strong>（因为 <span class="arithmatex">\(d_i = \sum_j w_{ij}\)</span>）→
-  所以<strong>常数向量是零特征值对应的特征向量</strong> ✓</li>
-<li><strong><span class="arithmatex">\(L\)</span> 半正定</strong> → 所有特征值非负 ✓</li>
+  所以<strong>常数向量是零特征值对应的特征向量</strong></li>
+<li><strong><span class="arithmatex">\(L\)</span> 半正定</strong> → 所有特征值非负</li>
 </ul>
 <p><strong>二次型的形式</strong>很关键（后面要用）：</p>
 <div class="arithmatex">\[
 f^{\mathsf T}Lf
 = \frac12\sum_{i,j}w_{ij}(f_i-f_j)^2
 \]</div>
-<p><strong>怎么读</strong>：<strong>相邻节点如果标签差别大，代价就大</strong> ✓
+<p><strong>怎么读</strong>：<strong>相邻节点如果标签差别大，代价就大</strong>
 所以最小化这个二次型，就是让<strong>图上相邻的点标签尽量一致</strong>。</p>
 <h3 id="43">4.3 从最小割到特征向量<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>最朴素的聚类目标是最小化割：</p>
@@ -9540,7 +9540,7 @@ f^{\mathsf T}Lf
 \operatorname{cut}(A,B) = \sum_{i\in A,\,j\in B}w_{ij}
 \]</div>
 <p><strong>但它有个退化解</strong>：把<strong>孤立的一个点</strong>切出去，
-割就很小 —— 显然不是想要的 ⚠</p>
+割就很小 —— 显然不是想要的</p>
 <p><strong>修正办法</strong>：归一化割（Ncut），除以各子集的"体积"：</p>
 <div class="arithmatex">\[
 \operatorname{Ncut}(A,B)
@@ -9554,7 +9554,7 @@ f^{\mathsf T}Lf
 \]</div>
 <p><strong>取前 <span class="arithmatex">\(k\)</span> 个最小非零特征值对应的特征向量</strong>，
 每个样本在这 <span class="arithmatex">\(k\)</span> 个特征向量上的取值作为<strong>新坐标</strong>，
-再对它们做 K 均值 ✓</p>
+再对它们做 K 均值</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 343.216916 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="谱聚类：用拉普拉斯矩阵的前几个特征向量当坐标">
 
@@ -9972,19 +9972,19 @@ L 338.896916 200.786125
 
 <p><strong>这就解释了谱聚类为什么能处理非凸簇</strong>：
 它<strong>先把数据映射到"图结构"表示的新空间</strong>，
-在那个空间里，同类样本自然聚在一起 ✓</p>
+在那个空间里，同类样本自然聚在一起</p>
 <div class="admonition warning">
 <p class="admonition-title">谱聚类的三个实操注意点</p>
 <p><strong>① 相似度函数的尺度 <span class="arithmatex">\(\sigma\)</span> 极其关键</strong>。
 <span class="arithmatex">\(\sigma\)</span> 太小 → 图变成一堆孤立点（连自己都不连）；
-<span class="arithmatex">\(\sigma\)</span> 太大 → 图变成全连接（失去结构信息）⚠
+<span class="arithmatex">\(\sigma\)</span> 太大 → 图变成全连接（失去结构信息）
 常用做法：取到第 <span class="arithmatex">\(k\)</span> 近邻距离的某种统计量。</p>
 <p><strong>② 图应该是稀疏的</strong>。若用<strong>全部</strong>样本对建图，
-则为 <span class="arithmatex">\(O(n^2)\)</span> 的矩阵，<span class="arithmatex">\(n\)</span> 大时<strong>根本存不下</strong> ⚠
+则为 <span class="arithmatex">\(O(n^2)\)</span> 的矩阵，<span class="arithmatex">\(n\)</span> 大时<strong>根本存不下</strong>
 常用 <span class="arithmatex">\(k\)</span> 近邻图或 <span class="arithmatex">\(\epsilon\)</span> 邻域图。</p>
 <p><strong>③ 特征值分解的复杂度是 <span class="arithmatex">\(O(n^3)\)</span></strong>。
 即使建图稀疏，稠密特征分解也很贵。
-大 <span class="arithmatex">\(n\)</span> 时需用稀疏特征求解器或近似方法 ⚠</p>
+大 <span class="arithmatex">\(n\)</span> 时需用稀疏特征求解器或近似方法</p>
 </div>
 <hr />
 <h2 id="_4">五、聚类有效性：怎么判断"分得好不好"<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -10145,7 +10145,7 @@ K 均值划分为 2 簇后，簇内与真实结构一致的比例：0.500
 <div class="admonition warning">
 <p class="admonition-title">内部指标不能替代领域判断</p>
 <p>所有内部指标都<strong>隐含了某种"好簇"的定义</strong>
-（如紧扣、分离）。它们<strong>都会偏好凸形、等大的簇</strong> ⚠</p>
+（如紧扣、分离）。它们<strong>都会偏好凸形、等大的簇</strong></p>
 <p>后果：如果用轮廓系数去评价一个<strong>套环状</strong>的真实结构，
 谱聚类的正确答案可能得分<strong>低于</strong>错误的 K 均值结果。</p>
 <p><strong>所以指标只能作为参考</strong>，最终要靠：</p>
@@ -10215,10 +10215,10 @@ K 均值划分为 2 簇后，簇内与真实结构一致的比例：0.500
 <div class="arithmatex">\[
 \mu_2 = \frac{8+9}{2} = 8.50
 \]</div>
-<p><strong>答案：中心变为 <span class="arithmatex">\(2.33\)</span> 与 <span class="arithmatex">\(8.50\)</span></strong> ✓</p>
+<p><strong>答案：中心变为 <span class="arithmatex">\(2.33\)</span> 与 <span class="arithmatex">\(8.50\)</span></strong></p>
 <p><strong>这说明什么</strong>：一轮之后中心已经明显向左移动。
 下一轮会<strong>重新分配</strong>，这时 4 与 2.33 的距离是 1.67、
-与 8.50 的距离是 4.5 —— 仍然留在簇 1，说明这个划分会<strong>稳定下来</strong> ✓</p>
+与 8.50 的距离是 4.5 —— 仍然留在簇 1，说明这个划分会<strong>稳定下来</strong></p>
 </details>
 <h3 id="2">例题 2：算轮廓系数<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某个点 <span class="arithmatex">\(i\)</span> 到同簇其余点的平均距离 <span class="arithmatex">\(a(i)=2.0\)</span>，
@@ -10233,7 +10233,7 @@ K 均值划分为 2 簇后，簇内与真实结构一致的比例：0.500
 <div class="arithmatex">\[
 s(i) = \frac{6.0-2.0}{\max\{2.0,\ 6.0\}} = \frac{4.0}{6.0} \approx 0.667
 \]</div>
-<p><strong>答案：约 <span class="arithmatex">\(0.667\)</span></strong> ✓</p>
+<p><strong>答案：约 <span class="arithmatex">\(0.667\)</span></strong></p>
 <p><strong>第二步：解读。</strong></p>
 <p><span class="arithmatex">\(s(i)\)</span> 的取值范围是 <span class="arithmatex">\(-1\)</span> 到 <span class="arithmatex">\(1\)</span>：</p>
 <table>
@@ -10261,7 +10261,7 @@ s(i) = \frac{6.0-2.0}{\max\{2.0,\ 6.0\}} = \frac{4.0}{6.0} \approx 0.667
 <p><span class="arithmatex">\(0.667\)</span> 属于"分得不错"的范围。</p>
 <p><strong>这说明什么</strong>：轮廓系数是<strong>每个样本一个数</strong>，
 可以找出"最可疑的那些点"（<span class="arithmatex">\(s\)</span> 最小的），
-这对排查异常样本很有用 ✓</p>
+这对排查异常样本很有用</p>
 </details>
 <h3 id="3">例题 3：单链聚类的"拉链"效应<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：两个簇，簇 1 有点 <span class="arithmatex">\((0,0)\)</span>、<span class="arithmatex">\((1,0)\)</span>、<span class="arithmatex">\((2,0)\)</span>，
@@ -10287,12 +10287,12 @@ d_{\text{单链}} = 100 - 2 = 98
 <p><strong>第三步：判断合理性。</strong></p>
 <p>这<strong>看起来</strong>没问题（98 远大于 1）。
 但若簇 1 里再多一个点 <span class="arithmatex">\((99,0)\)</span>（离群点），
-单链距离就<strong>骤降到 1</strong>，两个簇会<strong>立刻合并</strong> ⚠</p>
+单链距离就<strong>骤降到 1</strong>，两个簇会<strong>立刻合并</strong></p>
 <p><strong>答案：本例合并距离 98；但单链对离群点极其敏感，
 一个"桥接点"就能让远处的簇被合并</strong>。</p>
 <p><strong>这说明什么</strong>：这就是<strong>拉链效应</strong>。
 改用<strong>全链</strong>或<strong>平均链</strong>可以避免
-（它们要看所有点对，单个桥接点影响有限）✓</p>
+（它们要看所有点对，单个桥接点影响有限）</p>
 </details>
 <h3 id="4">例题 4：判断该用哪种方法<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：三组数据，分别说明适合用哪种聚类方法并给出理由。
@@ -10306,16 +10306,16 @@ d_{\text{单链}} = 100 - 2 = 98
 <details class="success">
 <summary>解答</summary>
 <p><strong>甲：K 均值（或 GMM）。</strong></p>
-<p>· 球形、等大 → 正好符合 K 均值的隐含假设 ✓
-· 样本量大 → K 均值复杂度低（每次迭代 <span class="arithmatex">\(O(nKd)\)</span>）✓</p>
+<p>· 球形、等大 → 正好符合 K 均值的隐含假设
+· 样本量大 → K 均值复杂度低（每次迭代 <span class="arithmatex">\(O(nKd)\)</span>）</p>
 <p><strong>乙：层次聚类。</strong></p>
-<p>· 不用预先定 <span class="arithmatex">\(K\)</span> → 可以从树状图上观察结构 ✓
-· 数据量小 → <span class="arithmatex">\(O(n^2\log n)\)</span> 的复杂度可以接受 ✓</p>
+<p>· 不用预先定 <span class="arithmatex">\(K\)</span> → 可以从树状图上观察结构
+· 数据量小 → <span class="arithmatex">\(O(n^2\log n)\)</span> 的复杂度可以接受</p>
 <p><strong>丙：谱聚类。</strong></p>
-<p>· 同心圆环是<strong>非凸</strong>的 → K 均值/层次聚类必然失败 ⚠
-· 谱聚类先建图再谱分解，<strong>不依赖欧氏距离的凸性</strong> ✓</p>
-<p><strong>答案：甲用 K 均值，乙用层次聚类，丙用谱聚类。</strong></p>
-<p><strong>这说明什么</strong>：<strong>没有"最好的"聚类算法，只有"适合"的</strong> ⚠</p>
+<p>· 同心圆环是<strong>非凸</strong>的 → K 均值/层次聚类必然失败
+· 谱聚类先建图再谱分解，<strong>不依赖欧氏距离的凸性</strong></p>
+<p>答案：甲用 K 均值，乙用层次聚类，丙用谱聚类。</p>
+<p><strong>这说明什么</strong>：<strong>没有"最好的"聚类算法，只有"适合"的</strong></p>
 <p>选择依据是三条：</p>
 <table>
 <thead>
@@ -10396,10 +10396,10 @@ d_{\text{单链}} = 100 - 2 = 98
 <ol>
 <li><strong>聚类没有唯一正确答案</strong> ——
    没有标签就没有客观标准，指标只能参考，
-   最终要靠<strong>领域解释 + 稳定性 + 外部验证</strong> ✓</li>
+   最终要靠<strong>领域解释 + 稳定性 + 外部验证</strong></li>
 <li><strong>选算法先看簇的形状假设</strong> ——
    用欧氏距离的方法（K 均值、层次聚类）
-   在非凸结构上<strong>必然失败</strong>，这时要换谱聚类 ⚠</li>
+   在非凸结构上<strong>必然失败</strong>，这时要换谱聚类</li>
 <li><strong>K 均值的每一步都不让目标函数增大，所以必收敛</strong> ——
    但收敛到的是<strong>局部最优</strong>，
    必须<strong>多初值取最好</strong> ⚠</li>

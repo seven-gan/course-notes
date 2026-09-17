@@ -9080,7 +9080,7 @@
 
 <h1 id="_1">分类错误率分析<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>上一页 <a href="../bayes-min-error/">最小错误率决策</a> 已经证明了一件事：
-<strong>「判给后验概率最大的那一类」能让平均错误率最小。</strong>
+「判给后验概率最大的那一类」能让平均错误率最小。
 按照本站的写法，那个证明只需要一句话带过 ——
 <strong>本页不再重复「平均错误率的定义」与「逐点最优的证明」</strong>，
 需要的读者请回看那一页。</p>
@@ -9392,7 +9392,7 @@
 <p><strong>怎么读这个式子</strong>：赔率最小的那一边，就是「万一判错」时会踩到的那一边。
 判 <span class="arithmatex">\(\omega_1\)</span> 时错的可能只有「它其实是 <span class="arithmatex">\(\omega_2\)</span>」，概率是 <span class="arithmatex">\(P(\omega_2 \mid x)\)</span>；
 判 <span class="arithmatex">\(\omega_2\)</span> 时错的可能只有「它其实是 <span class="arithmatex">\(\omega_1\)</span>」，概率是 <span class="arithmatex">\(P(\omega_1 \mid x)\)</span>。
-所以条件错误率取两者中的<strong>较小值</strong> ✓</p>
+所以条件错误率取两者中的<strong>较小值</strong></p>
 <h3 id="23">2.3 从「条件错误率」到「平均错误率」<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(P(\text{error} \mid x)\)</span> 是<strong>在某个具体的 <span class="arithmatex">\(x\)</span> 上</strong>犯错的概率，它是一个<strong>随 <span class="arithmatex">\(x\)</span> 变化的函数</strong>。
 要知道总体错多少，还得把「出现这个 <span class="arithmatex">\(x\)</span> 的可能性」也算进去 ——
@@ -9408,10 +9408,10 @@
 因为 <span class="arithmatex">\(x\)</span> 有不可数无穷多个，谈不上「个数」。</p>
 <p><strong>第 3 步</strong>：正确的做法是把「条件错误率」按「<span class="arithmatex">\(x\)</span> 出现的概率密度 <span class="arithmatex">\(p(x)\)</span>」加权。
 密度大的地方（样本聚集的地方）权重大，密度小的地方权重小。
-这就是积分里乘 <span class="arithmatex">\(p(x)\)</span> 的来历 ✓</p>
+这就是积分里乘 <span class="arithmatex">\(p(x)\)</span> 的来历</p>
 <p>用 <span class="arithmatex">\(P(\text{error} \mid x) \cdot p(x) = \min\left[p(x \mid \omega_1)P(\omega_1),\, p(x \mid \omega_2)P(\omega_2)\right]\)</span>
 可以把上面两段合成一句（下一节要讲这条）：
-<strong>平均错误率是整个特征空间上条件错误概率按样本密度加权积分的结果</strong> ✓</p>
+<strong>平均错误率是整个特征空间上条件错误概率按样本密度加权积分的结果</strong></p>
 <h3 id="24">2.4 把积分按区域拆开<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>现在把上一小节的积分拆成两段 —— 一段在 <span class="arithmatex">\(R_1\)</span> 上，一段在 <span class="arithmatex">\(R_2\)</span> 上。
 在 <span class="arithmatex">\(R_1\)</span> 上判 <span class="arithmatex">\(\omega_1\)</span>，所以条件错误率是 <span class="arithmatex">\(P(\omega_2 \mid x)\)</span>；
@@ -9426,14 +9426,14 @@
 <div class="arithmatex">\[P(\omega_i \mid x)\, p(x) = p(x \mid \omega_i)\, P(\omega_i)\]</div>
 <p><strong>为什么能约</strong>：<span class="arithmatex">\(p(x) \gt 0\)</span>（密度非负，且高斯密度处处为正），
 所以 <span class="arithmatex">\(p(x)\)</span> 是<strong>非零的数</strong>，不是「除以零」。这一步没有任何新定理，
-只是把「后验 × 混合密度」换成等价的「类条件密度 × 先验」 ✓</p>
+只是把「后验 × 混合密度」换成等价的「类条件密度 × 先验」</p>
 <p><strong>第 3 步</strong>：把这条代入上一小节的积分。第一项里是 <span class="arithmatex">\(P(\omega_2 \mid x)p(x)\)</span>，
 换成 <span class="arithmatex">\(p(x \mid \omega_2)P(\omega_2)\)</span>；第二项同理换 <span class="arithmatex">\(P(\omega_1 \mid x)p(x)\)</span>。
 注意 <span class="arithmatex">\(P(\omega_i)\)</span> 与 <span class="arithmatex">\(x\)</span> 无关，是常数，可以<strong>提到积分号外面</strong>：</p>
 <div class="arithmatex">\[P(e) = P(\omega_2)\int_{R_1} p(x \mid \omega_2)\, dx + P(\omega_1)\int_{R_2} p(x \mid \omega_1)\, dx\]</div>
 <p><strong>这说明什么</strong>：后验概率从公式里<strong>完全消失了</strong>。
 错误率只由「类条件密度（分布的形状）」和「先验（各类有多常见）」决定 ——
-这正是「错误率是分布的性质，不是算法的性质」这句话的数学来源 ✓</p>
+这正是「错误率是分布的性质，不是算法的性质」这句话的数学来源</p>
 <h3 id="25">2.5 最终公式与逐项解释<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(R_1 = (-\infty, t)\)</span>、<span class="arithmatex">\(R_2 = (t, \infty)\)</span> 代进去，得到<strong>本页的第一个主角公式</strong>：</p>
 <div class="arithmatex">\[P(e) = P(\omega_1)\int_{t}^{\infty} p(x \mid \omega_1)\, dx \;+\; P(\omega_2)\int_{-\infty}^{t} p(x \mid \omega_2)\, dx\]</div>
@@ -9465,8 +9465,8 @@
 </tbody>
 </table>
 <p><strong>一句话记住这个公式</strong>：
-<strong>「本该长在右边的那部分左边尾巴」（第一项）加上「本该长在左边的那部分右边尾巴」（第二项）。</strong>
-每一条尾巴都要先乘上它自己的先验，因为尾巴里到底有多少样本，取决于这一类本来有多常见 ✓</p>
+「本该长在右边的那部分左边尾巴」（第一项）加上「本该长在左边的那部分右边尾巴」（第二项）。
+每一条尾巴都要先乘上它自己的先验，因为尾巴里到底有多少样本，取决于这一类本来有多常见</p>
 <div class="admonition warning">
 <p class="admonition-title">公式里两个积分限最容易对调</p>
 <p>第一项是 <span class="arithmatex">\(\int_{t}^{\infty}\)</span>，第二项是 <span class="arithmatex">\(\int_{-\infty}^{t}\)</span> ——
@@ -9474,7 +9474,7 @@
 <p>记忆方法：看<strong>积分限的对侧</strong>。
 第一项归 <span class="arithmatex">\(\omega_1\)</span> 管，可是它的积分区间 <span class="arithmatex">\([t, \infty)\)</span> 落在 <span class="arithmatex">\(\omega_2\)</span> 的地盘上，
 所以第一项积的一定是 <span class="arithmatex">\(\omega_1\)</span> 的<strong>错判</strong>部分。</p>
-<p>如果把两处积分限写成同一个方向，会算出一个看起来「合理」但其实毫无意义的数 ⚠</p>
+<p>如果把两处积分限写成同一个方向，会算出一个看起来「合理」但其实毫无意义的数</p>
 </div>
 <h3 id="26-t">2.6 先把判决边界 <span class="arithmatex">\(t\)</span> 算出来<a class="headerlink" href="#26-t" title="Permanent link">&para;</a></h3>
 <p>要算 <span class="arithmatex">\(P(e)\)</span>，得先知道 <span class="arithmatex">\(t\)</span>。上一页已经用二分法得到 <span class="arithmatex">\(t = 19.134613\)</span>，
@@ -9637,7 +9637,7 @@
 </table>
 <p><strong>怎么读这张表</strong>：每走一步，区间长度<strong>减半</strong>，根被夹得越来越紧。
 表里第 3 步已经接近 <span class="arithmatex">\(19.13\)</span>，再继续十几步就得到 <span class="arithmatex">\(19.134613\)</span>。
-这个手算过程说明：<strong>二分法不需要高深数学，只需要耐心</strong> ✓</p>
+这个手算过程说明：<strong>二分法不需要高深数学，只需要耐心</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">二分法只能求根，不能保证找到全部根</p>
 <p>二分法要求你<strong>先给出一个两端异号的区间</strong>。
@@ -9645,7 +9645,7 @@
 这是它比「网格扫描」更可靠的地方。</p>
 <p>但也要知道它的局限：抛物线是<strong>先减后增</strong>的，可能有两个零点。
 本页参数下两个零点分别是 <span class="arithmatex">\(19.134613\)</span> 与 <span class="arithmatex">\(-7.134613\)</span>，
-我们只关心落在两类均值之间的那一个 ✓</p>
+我们只关心落在两类均值之间的那一个</p>
 </div>
 <h3 id="27-pe">2.7 用数值积分把 <span class="arithmatex">\(P(e)\)</span> 算出来（区域分解式）<a class="headerlink" href="#27-pe" title="Permanent link">&para;</a></h3>
 <p>有了 <span class="arithmatex">\(t\)</span>，就可以直接照 2.5 节的公式做两个定积分。
@@ -9689,7 +9689,7 @@
 两类贡献之比 e2 / e1 = 1.878501</code></pre>
 <p><strong>输出怎么看</strong>：这就是本页的中心数字 ——
 <strong>平均错误率 <span class="arithmatex">\(P(e) = 0.145198\)</span></strong>，约等于「每 100 个样本里错 14.5 个」。
-这个数后面每一节都会反复用到，请记住它 ✓</p>
+这个数后面每一节都会反复用到，请记住它</p>
 <h3 id="28">2.8 手算核对：用标准正态分布表也能算出来<a class="headerlink" href="#28" title="Permanent link">&para;</a></h3>
 <p>数值积分是「算出来的」，还需要<strong>手算一遍去核对</strong>，
 否则公式写错了你也不会发现。</p>
@@ -9732,7 +9732,7 @@
 <p>第二项是 <span class="arithmatex">\(\omega_2\)</span> 落在 <span class="arithmatex">\((-\infty, t]\)</span> 的质量：</p>
 <div class="arithmatex">\[\int_{-\infty}^{t} p(x \mid \omega_2)\, dx = P(x \lt t \mid \omega_2) = \Phi(z_2)\]</div>
 <p><strong>注意这里没有用 <span class="arithmatex">\(1 - \Phi\)</span></strong>：因为 <span class="arithmatex">\(z_2\)</span> 是负的（<span class="arithmatex">\(-0.716347\)</span>），
-「小于 <span class="arithmatex">\(t\)</span>」直接就是 <span class="arithmatex">\(\Phi(z_2) \approx 0.236889\)</span> ✓</p>
+「小于 <span class="arithmatex">\(t\)</span>」直接就是 <span class="arithmatex">\(\Phi(z_2) \approx 0.236889\)</span></p>
 <p><strong>两项分别乘上先验，再加起来</strong>：</p>
 <table>
 <thead>
@@ -9774,7 +9774,7 @@
 说明 2.5 节的公式与代码都没有写错。
 <strong>这说明什么</strong>：整条推导链 ——
 「条件错误率 → 区域分解 → 标准化 → 查表」——
-每个环节都自洽，你可以放心地在考场上用同样的步骤手算出错误率 ✓</p>
+每个环节都自洽，你可以放心地在考场上用同样的步骤手算出错误率</p>
 <div class="admonition warning">
 <p class="admonition-title">两个尾巴里有一个要用 1 减</p>
 <p>第一项用 <span class="arithmatex">\(1 - \Phi(z_1)\)</span>，第二项用 <span class="arithmatex">\(\Phi(z_2)\)</span>，<strong>两项形式不同</strong>。</p>
@@ -9782,10 +9782,10 @@
 <span class="arithmatex">\(z_1 = 1.378\)</span> 是正的，说明边界 <span class="arithmatex">\(t\)</span> 在 <span class="arithmatex">\(\omega_1\)</span> 均值的右边，
 「大于 <span class="arithmatex">\(t\)</span>」是一条<strong>右尾</strong>，要用 <span class="arithmatex">\(1 - \Phi\)</span>；
 <span class="arithmatex">\(z_2 = -0.716\)</span> 是负的，说明 <span class="arithmatex">\(t\)</span> 在 <span class="arithmatex">\(\omega_2\)</span> 均值的左边，
-「小于 <span class="arithmatex">\(t\)</span>」是一条<strong>左尾</strong>，<span class="arithmatex">\(\Phi\)</span> 本身就已经是概率，不用再减 ⚠</p>
+「小于 <span class="arithmatex">\(t\)</span>」是一条<strong>左尾</strong>，<span class="arithmatex">\(\Phi\)</span> 本身就已经是概率，不用再减</p>
 <p>写成统一形式也可以：<span class="arithmatex">\(P(x \gt t \mid \omega_1) = 1 - \Phi(z_1)\)</span> 与
 <span class="arithmatex">\(P(x \lt t \mid \omega_2) = \Phi(z_2)\)</span> 其实都是 <span class="arithmatex">\(\Phi\)</span> 的组合，
-只要记住「<span class="arithmatex">\(\Phi\)</span> 是『小于』的概率」就不会搞反 ✓</p>
+只要记住「<span class="arithmatex">\(\Phi\)</span> 是『小于』的概率」就不会搞反</p>
 </div>
 <h3 id="29">2.9 两项的相对大小说明了什么<a class="headerlink" href="#29" title="Permanent link">&para;</a></h3>
 <p>两个数摆在一起非常值得琢磨：</p>
@@ -9891,7 +9891,7 @@
 <span class="arithmatex">\(t\)</span> 往左挪，第一项变大、第二项变小；<span class="arithmatex">\(t\)</span> 往右挪，反过来。
 <strong>总错误率是这两项之和，它的最小值出现在两项「变化速度相等」的地方</strong>，
 也就是贝叶斯边界处。所以调边界只能找到那个最小点，
-真正的<strong>下界</strong>由重叠程度决定 —— 下一节就来讲这件事 ✓</p>
+真正的<strong>下界</strong>由重叠程度决定 —— 下一节就来讲这件事</p>
 <h3 id="210">2.10 顺手看一眼：不同阈值下错误率长什么样<a class="headerlink" href="#210" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(t\)</span> 当成一个可以随便选的参数，直接扫一遍，
 就能看出「边界调在哪里」对错误率的影响。
@@ -10015,7 +10015,7 @@
 于是一半的 <span class="arithmatex">\(\omega_1\)</span> 样本（<span class="arithmatex">\(0.3 = 0.6 \times 0.5\)</span>）全被判错。
 这提醒我们：<strong>边界选错的代价可以非常大</strong>，
 「大致取在两类均值中间」这种经验做法在本页参数下会给出 <span class="arithmatex">\(t = 18.5\)</span>，
-错误率 <span class="arithmatex">\(0.149318\)</span>，比最优值高 <span class="arithmatex">\(0.004\)</span> —— 不算灾难性，但也确实更差 ✓</p>
+错误率 <span class="arithmatex">\(0.149318\)</span>，比最优值高 <span class="arithmatex">\(0.004\)</span> —— 不算灾难性，但也确实更差</p>
 <hr />
 <h2 id="_4">三、错误率的几何解释：重叠面积<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 换一个角度看同一个公式<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -10041,10 +10041,10 @@
 <div class="arithmatex">\[P(\text{error} \mid x)\, p(x) = \min\big[q_1(x),\; q_2(x)\big]\]</div>
 <p><strong>怎么读这一步</strong>：左边是「在 <span class="arithmatex">\(x\)</span> 处犯错、同时 <span class="arithmatex">\(x\)</span> 会出现的联合密度」，
 右边是「两条加权密度中较低的那一条」。
-<strong>条件错误率乘上混合密度，恰好等于两条加权密度里较小的那个</strong> ✓</p>
+<strong>条件错误率乘上混合密度，恰好等于两条加权密度里较小的那个</strong></p>
 <p><strong>第三步：对 <span class="arithmatex">\(x\)</span> 积分</strong>。</p>
 <div class="arithmatex">\[P(e) = \int_{-\infty}^{\infty} P(\text{error} \mid x)\, p(x)\, dx = \int_{-\infty}^{\infty} \min\big[q_1(x),\; q_2(x)\big]\, dx\]</div>
-<p>这就是要证的结论 ✓</p>
+<p>这就是要证的结论</p>
 <p><strong>第四步：与 2.5 节的公式对得上吗？</strong> 逐点看 <span class="arithmatex">\(q_1\)</span> 与 <span class="arithmatex">\(q_2\)</span> 谁大谁小。
 两个高斯型曲线最多有两个交点，本页参数下的两个交点是
 <span class="arithmatex">\(t = 19.134613\)</span>（主边界）与 <span class="arithmatex">\(-7.134613\)</span>（极左尾部，几乎不携带质量）：</p>
@@ -10076,11 +10076,11 @@
 </tbody>
 </table>
 <p><strong>怎么读这张表</strong>：在中心区域的左边，第二类的加权密度更低（因为第二类的中心在右边），
-所以 <span class="arithmatex">\(\min\)</span> 取的是 <span class="arithmatex">\(q_2\)</span>；在右边反之。两段一加，正好是 2.5 节的两个尾巴 ✓
-<strong>「重叠面积」和「两个尾巴之和」是同一个东西的两种说法。</strong></p>
+所以 <span class="arithmatex">\(\min\)</span> 取的是 <span class="arithmatex">\(q_2\)</span>；在右边反之。两段一加，正好是 2.5 节的两个尾巴
+「重叠面积」和「两个尾巴之和」是同一个东西的两种说法。</p>
 <p><strong>这说明什么</strong>：这个等价性把「错误率」从「一堆积分符号」
 翻译成了一句话 —— <strong>错误率就是两条曲线互相盖住的那片地有多大</strong>。
-看懂这句话，后面所有关于「什么决定错误率」的结论都能直接从图上读出来 ✓</p>
+看懂这句话，后面所有关于「什么决定错误率」的结论都能直接从图上读出来</p>
 <h3 id="33">3.3 几何图像<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>把上面四步画出来，就是下面这张图（注意竖虚线正是两条曲线的交点）：</p>
 <figure class="kb-fig">
@@ -12352,28 +12352,28 @@ L 358.279688 190.343531
 <p><strong>注意阴影区域的形状</strong>：它<strong>跨过</strong>了边界 <span class="arithmatex">\(t\)</span>，
 左边一瓣属于第二类的错判，右边一瓣属于第一类的错判。
 <strong>这两瓣的形状不一样大</strong> —— 左边那瓣（<span class="arithmatex">\(0.09475545\)</span>）明显更胖，
-正是 2.9 节说的「第二类贡献出错率的 <span class="arithmatex">\(65\%\)</span>」的几何样子 ✓</p>
+正是 2.9 节说的「第二类贡献出错率的 <span class="arithmatex">\(65\%\)</span>」的几何样子</p>
 <h3 id="34">3.4 一个重要推论：重叠面积就是错误率的下界<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>从几何图像可以直接读出一件事：
 <span class="arithmatex">\(\int \min[q_1, q_2]\,dx\)</span> <strong>完全与判决边界无关</strong>。</p>
 <ul>
 <li>如果我们把边界挪到别处，<span class="arithmatex">\(\min\)</span> 覆盖的区域<strong>一点都不会变小</strong>，
-  只会在某一段改用较高的那条曲线，于是总面积<strong>变大</strong> ✓</li>
+  只会在某一段改用较高的那条曲线，于是总面积<strong>变大</strong></li>
 <li>只有当边界恰好取在交点 <span class="arithmatex">\(t\)</span> 上时，<span class="arithmatex">\(\min\)</span> 才会在每一段都取到较低的那条曲线，
-  总面积取到最小值 ✓</li>
+  总面积取到最小值</li>
 </ul>
 <p><strong>这就是「贝叶斯边界最优」的几何证明</strong> ——
 它和上一页的逐点证明是同一件事的两个说法：
-逐点取后验最大 <span class="arithmatex">\(\Leftrightarrow\)</span> 逐点取较低包络 <span class="arithmatex">\(\Leftrightarrow\)</span> 总面积最小 ✓</p>
+逐点取后验最大 <span class="arithmatex">\(\Leftrightarrow\)</span> 逐点取较低包络 <span class="arithmatex">\(\Leftrightarrow\)</span> 总面积最小</p>
 <div class="admonition tip">
 <p class="admonition-title">错误率只由「重叠」决定，不由算法决定</p>
 <p>这句话是本页最重要的一句话：</p>
-<p><strong>两条加权密度曲线一旦定下来，最小错误率就是一个固定的数 <span class="arithmatex">\(0.145198\)</span>。</strong></p>
+<p>两条加权密度曲线一旦定下来，最小错误率就是一个固定的数 <span class="arithmatex">\(0.145198\)</span>。</p>
 <p>换分类器、换优化算法、换损失函数、把网络加深 —— 只要特征与分布没变，
-这个数就<strong>降不下去</strong> ⚠
+这个数就<strong>降不下去</strong>
 能降它的只有两件事：<strong>换特征</strong>（把两条曲线拉开）或<strong>改分布假设</strong>（比如知道更多先验信息）。</p>
 <p>本课程课件里对这一点有明确表述：贝叶斯错误率是理论下界，
-其他任何决策规则（最小距离、固定阈值、神经网络等）都不可能低于它 ✓</p>
+其他任何决策规则（最小距离、固定阈值、神经网络等）都不可能低于它</p>
 </div>
 <h3 id="35">3.5 用代码验证两种算法严格相等<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
 <p>把「区域分解式」与「重叠面积式」分别算一遍，看它们是不是同一个数。</p>
@@ -12507,7 +12507,7 @@ L 358.279688 190.343531
 而是<strong>较低那一条曲线下方的全部面积</strong>。</p>
 <p>这两种理解的差别很大：两条曲线之间夹出来的区域面积是
 <span class="arithmatex">\(\int |q_1 - q_2|\,dx\)</span>，而较低包络的面积是 <span class="arithmatex">\(\int \min[q_1,q_2]\,dx\)</span>，
-两者数值完全不同 ⚠</p>
+两者数值完全不同</p>
 <p>正确的记忆方法只有一句：<strong>「总质量减去较高那一条下方的面积」</strong>，
 或者更直观地 —— <strong>趴下去的那一条曲线，盖住了多少地 ✓</strong></p>
 </div>
@@ -12548,7 +12548,7 @@ L 358.279688 190.343531
 </table>
 <p><strong>这三条规律有一个共同的含义</strong>：错误率衡量的不是「分类器聪不聪明」，
 而是<strong>特征本身把两类分得开不开</strong>。
-分开就是 <span class="arithmatex">\(\Delta\)</span> 大、<span class="arithmatex">\(\sigma\)</span> 小 —— 这也是「特征工程」比「换模型」更值钱的原因 ✓</p>
+分开就是 <span class="arithmatex">\(\Delta\)</span> 大、<span class="arithmatex">\(\sigma\)</span> 小 —— 这也是「特征工程」比「换模型」更值钱的原因</p>
 <p>把这三条规律画在一张图上：横轴是「均值距离除以标准差」的比值（第 4.6 节会把它正式命名为 <span class="arithmatex">\(d'\)</span>），
 纵轴是贝叶斯错误率。曲线单调下降，而且下降越来越快 ——
 距离每拉开一点，错误率掉的幅度越来越大。</p>
@@ -12926,7 +12926,7 @@ L 358.279688 187.272
 和距离 <span class="arithmatex">\(7\)</span> 配 <span class="arithmatex">\(\sigma = 10\)</span>（比值 <span class="arithmatex">\(0.7\)</span>）的错误率差了几十倍（4.2、4.3 节会手算）。
 图上标的两条水平虚线分别是 <span class="arithmatex">\(1\%\)</span> 与 <span class="arithmatex">\(5\%\)</span> ——
 曲线穿过 <span class="arithmatex">\(5\%\)</span> 线的地方大约在比值 <span class="arithmatex">\(3.3\)</span> 处，
-这正是「要错误率低于 <span class="arithmatex">\(5\%\)</span>，比值至少要 3.3」的图形化说法 ✓</p>
+这正是「要错误率低于 <span class="arithmatex">\(5\%\)</span>，比值至少要 3.3」的图形化说法</p>
 <h3 id="42">4.2 规律一：均值距离变大，错误率下降<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>固定标准差与先验，只把两个均值拉开距离 <span class="arithmatex">\(\Delta = \lvert\mu_1 - \mu_2\rvert\)</span>，
 错误率会单调下降。</p>
@@ -13000,7 +13000,7 @@ L 358.279688 187.272
 </tbody>
 </table>
 <p><strong>为什么是指数级</strong>：错误率是高斯分布的<strong>尾部质量</strong>，
-而高斯尾部按 <span class="arithmatex">\(e^{-z^2/2}\)</span> 衰减 —— <span class="arithmatex">\(z\)</span> 变大一点，<span class="arithmatex">\(e^{-z^2/2}\)</span> 掉得飞快 ✓</p>
+而高斯尾部按 <span class="arithmatex">\(e^{-z^2/2}\)</span> 衰减 —— <span class="arithmatex">\(z\)</span> 变大一点，<span class="arithmatex">\(e^{-z^2/2}\)</span> 掉得飞快</p>
 <h3 id="43">4.3 规律二：标准差变大，错误率上升<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>固定均值与先验，只把标准差放大。</p>
 <p><strong>设定</strong>：<span class="arithmatex">\(\mu_1 = 15\)</span>、<span class="arithmatex">\(\mu_2 = 22\)</span>、先验各 <span class="arithmatex">\(0.5\)</span>。同样用闭式解手算，
@@ -13042,11 +13042,11 @@ L 358.279688 187.272
 </tbody>
 </table>
 <p><strong>怎么读这张表</strong>：<span class="arithmatex">\(\sigma\)</span> 从 <span class="arithmatex">\(1.0\)</span> 涨到 <span class="arithmatex">\(10.0\)</span>（<span class="arithmatex">\(10\)</span> 倍），
-<span class="arithmatex">\(P(e)\)</span> 从 <span class="arithmatex">\(0.000233\)</span> 涨到 <span class="arithmatex">\(0.363169\)</span>（约 <span class="arithmatex">\(1560\)</span> 倍）⚠</p>
+<span class="arithmatex">\(P(e)\)</span> 从 <span class="arithmatex">\(0.000233\)</span> 涨到 <span class="arithmatex">\(0.363169\)</span>（约 <span class="arithmatex">\(1560\)</span> 倍）</p>
 <p><strong>这里出现了一个关键量</strong>：第二列 <span class="arithmatex">\(\Delta/\sigma\)</span> 就是下一小节要讲的<strong>可分性判据</strong>。
 看它的作用 —— 它从 <span class="arithmatex">\(7.0\)</span> 掉到 <span class="arithmatex">\(0.7\)</span>，错误率就涨到天上去了。
 <strong><span class="arithmatex">\(\Delta/\sigma\)</span> 是错误率的唯一决定因素</strong>（先验相等时），
-<span class="arithmatex">\(\Delta\)</span> 和 <span class="arithmatex">\(\sigma\)</span> 各自单独的值反而不重要 ✓
+<span class="arithmatex">\(\Delta\)</span> 和 <span class="arithmatex">\(\sigma\)</span> 各自单独的值反而不重要
 （对照 4.2 与 4.3 两张表：<span class="arithmatex">\(\Delta = 7, \sigma = 3.5\)</span> 与 <span class="arithmatex">\(\Delta = 14, \sigma = 7\)</span>
 是同一个比值 <span class="arithmatex">\(2\)</span>，错误率必然都是 <span class="arithmatex">\(0.158655\)</span>。）</p>
 <h3 id="44">4.4 规律三：先验变悬殊，总错误率下降但少数类更惨<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
@@ -13160,10 +13160,10 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <p class="admonition-title">总错误率下降不等于分类器变好了</p>
 <p>看最后两行：当 <span class="arithmatex">\(P(\omega_1) = 0.99\)</span> 时，总错误率只有 <span class="arithmatex">\(0.008102\)</span> ——
 这个数字好看得不得了。但同一行的 <span class="arithmatex">\(P(\text{错}\mid\omega_2) = 0.7398\)</span>，
-意思是<strong><span class="arithmatex">\(\omega_2\)</span> 这个类有 <span class="arithmatex">\(74\%\)</span> 的样本被判错了</strong> ⚠</p>
+意思是<strong><span class="arithmatex">\(\omega_2\)</span> 这个类有 <span class="arithmatex">\(74\%\)</span> 的样本被判错了</strong></p>
 <p>这时边界跑到了 <span class="arithmatex">\(t = 24.57\)</span>，比 <span class="arithmatex">\(\omega_2\)</span> 的均值 <span class="arithmatex">\(22\)</span> <strong>还要靠右</strong>：
 只要样本落在 <span class="arithmatex">\(22\)</span> 附近，就被判成 <span class="arithmatex">\(\omega_1\)</span>。</p>
-<p><strong>这不是「分类器变准了」，而是「分类器学会了放弃少数类」</strong> ✓</p>
+<p><strong>这不是「分类器变准了」，而是「分类器学会了放弃少数类」</strong></p>
 <p>所以评估分类器时，<strong>只看总错误率会掉进坑里</strong>；
 类别不平衡的场景下（例如故障检测、罕见病筛查），
 必须<strong>分门别类地看</strong>每一类的错判率 ⚠</p>
@@ -13171,7 +13171,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 按先验加权的最小化目标确实变小了。
 问题在于：<strong>你的实际目标是不是「按先验加权的平均错误率」</strong>。
 如果少数类的一次错判代价特别高，标准答案就不是这一页的 <span class="arithmatex">\(P(e)\)</span>，
-而是下一页 <a href="../bayes-min-risk/">最小风险决策</a> 里的期望风险 ✓</p>
+而是下一页 <a href="../bayes-min-risk/">最小风险决策</a> 里的期望风险</p>
 </div>
 <h3 id="45">4.5 等方差等先验时的闭式解<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
 <p>前两个参数扫出来的规律很漂亮，但都是表格。<strong>能不能写出一个公式</strong>，
@@ -13221,22 +13221,22 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <div class="arithmatex">\[t = \frac{\mu_1 + \mu_2}{2}\]</div>
 <p><strong>怎么读这个结果</strong>：等方差等先验时，判决边界就是<strong>两个均值的中点</strong>。
 这就是「取中点」这个经验做法<strong>唯一正确</strong>的场合 ✓
-换成先验不等或方差不等（如 2.6 节的本页参数），中点就不再是边界了 ⚠</p>
-<p><strong>第二步：把两个标准化量算出来。</strong></p>
+换成先验不等或方差不等（如 2.6 节的本页参数），中点就不再是边界了</p>
+<p>第二步：把两个标准化量算出来。</p>
 <div class="arithmatex">\[z_1 = \frac{t - \mu_1}{\sigma} = \frac{\frac{\mu_1+\mu_2}{2} - \mu_1}{\sigma} = \frac{\frac{\mu_2-\mu_1}{2}}{\sigma} = \frac{\mu_2-\mu_1}{2\sigma} = \frac{\Delta}{2\sigma}\]</div>
 <div class="arithmatex">\[z_2 = \frac{t - \mu_2}{\sigma} = \frac{\frac{\mu_1+\mu_2}{2} - \mu_2}{\sigma} = \frac{\frac{\mu_1-\mu_2}{2}}{\sigma} = -\frac{\Delta}{2\sigma} = -z_1\]</div>
 <p><strong>关键观察</strong>：<span class="arithmatex">\(z_2 = -z_1\)</span>。也就是说，边界相对两类都在<strong>同样远</strong>的地方，
-只是方向相反 —— 这正是「中点 + 等方差」的结果 ✓</p>
-<p><strong>第三步：代进 2.8 节的两个尾巴公式。</strong></p>
+只是方向相反 —— 这正是「中点 + 等方差」的结果</p>
+<p>第三步：代进 2.8 节的两个尾巴公式。</p>
 <div class="arithmatex">\[P(e) = P(\omega_1)\big[1 - \Phi(z_1)\big] + P(\omega_2)\,\Phi(z_2)\]</div>
 <p>把 <span class="arithmatex">\(P(\omega_1) = P(\omega_2) = \frac{1}{2}\)</span>、<span class="arithmatex">\(z_2 = -z_1\)</span> 代进去：</p>
 <div class="arithmatex">\[P(e) = \frac{1}{2}\big[1 - \Phi(z_1)\big] + \frac{1}{2}\,\Phi(-z_1)\]</div>
-<p><strong>第四步：用 <span class="arithmatex">\(\Phi\)</span> 的对称性把两项合并。</strong></p>
+<p>第四步：用 <span class="arithmatex">\(\Phi\)</span> 的对称性把两项合并。</p>
 <p>标准正态分布关于 <span class="arithmatex">\(0\)</span> 对称，所以对任意实数 <span class="arithmatex">\(z\)</span> 都有</p>
 <div class="arithmatex">\[\Phi(-z) = 1 - \Phi(z)\]</div>
 <p><strong>为什么</strong>：<span class="arithmatex">\(\Phi(-z)\)</span> 是「标准正态小于 <span class="arithmatex">\(-z\)</span>」的概率，
 <span class="arithmatex">\(1-\Phi(z)\)</span> 是「标准正态大于 <span class="arithmatex">\(z\)</span>」的概率；
-由于左右对称，这两个概率<strong>完全相等</strong> ✓</p>
+由于左右对称，这两个概率<strong>完全相等</strong></p>
 <p>把这条对称关系用在上式第二项上（取 <span class="arithmatex">\(z = z_1\)</span>）：</p>
 <div class="arithmatex">\[\Phi(-z_1) = 1 - \Phi(z_1)\]</div>
 <p>代回去：</p>
@@ -13245,11 +13245,11 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <div class="arithmatex">\[\boxed{\;P(e) = \Phi\!\left(-\frac{\Delta}{2\sigma}\right)\;}\]</div>
 <p><strong>怎么读这个结果</strong>：等方差、等先验时，
 <strong>平均错误率就是「标准正态小于 <span class="arithmatex">\(-\frac{\Delta}{2\sigma}\)</span>」的概率</strong>。
-只有当两类距离 <span class="arithmatex">\(\Delta\)</span> 相对于散布 <span class="arithmatex">\(\sigma\)</span> 足够大时，这个概率才小 ✓</p>
+只有当两类距离 <span class="arithmatex">\(\Delta\)</span> 相对于散布 <span class="arithmatex">\(\sigma\)</span> 足够大时，这个概率才小</p>
 <p><strong>这说明什么</strong>：这个闭式解把 4.2、4.3 两张手算表<strong>合并成了一行公式</strong> ——
 表里的每一行都是往这个公式里代一个数。公式里只有比值 <span class="arithmatex">\(\Delta/\sigma\)</span> 一个量，
 所以「拉开距离」和「压小散布」对错误率的作用<strong>完全等价</strong>，
-这是后面可分性判据 <span class="arithmatex">\(d'\)</span> 的来源 ✓</p>
+这是后面可分性判据 <span class="arithmatex">\(d'\)</span> 的来源</p>
 <h3 id="46-d">4.6 可分性判据 <span class="arithmatex">\(d'\)</span><a class="headerlink" href="#46-d" title="Permanent link">&para;</a></h3>
 <p>把闭式解里的那个比值单独拎出来命名：</p>
 <div class="arithmatex">\[d' = \frac{\lvert\mu_1 - \mu_2\rvert}{\sigma} = \frac{\Delta}{\sigma}\]</div>
@@ -13258,7 +13258,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <p>闭式解用 <span class="arithmatex">\(d'\)</span> 写出来更简洁：</p>
 <div class="arithmatex">\[P(e) = \Phi\!\left(-\frac{d'}{2}\right)\]</div>
 <p><strong>怎么读这个式子</strong>：<span class="arithmatex">\(d'\)</span> 越大，<span class="arithmatex">\(-d'/2\)</span> 越负，<span class="arithmatex">\(\Phi\)</span> 的取值越接近 <span class="arithmatex">\(0\)</span>，
-错误率越小 ✓</p>
+错误率越小</p>
 <p><strong>与 4.2、4.3 节两张表对得上吗</strong>：对得上。</p>
 <table>
 <thead>
@@ -13298,7 +13298,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </table>
 <p><strong>注意后两行</strong>：<span class="arithmatex">\(\Delta\)</span> 完全没变（都是 <span class="arithmatex">\(7\)</span>），
 只因为 <span class="arithmatex">\(\sigma\)</span> 从 <span class="arithmatex">\(1.0\)</span> 换成 <span class="arithmatex">\(10.0\)</span>，错误率就从 <span class="arithmatex">\(0.000233\)</span> 变成 <span class="arithmatex">\(0.363169\)</span>。
-<strong>决定错误率的是比值 <span class="arithmatex">\(d'\)</span>，不是 <span class="arithmatex">\(\Delta\)</span> 本身</strong> ✓</p>
+<strong>决定错误率的是比值 <span class="arithmatex">\(d'\)</span>，不是 <span class="arithmatex">\(\Delta\)</span> 本身</strong></p>
 <p><strong>要错误率不超过某个目标，<span class="arithmatex">\(d'\)</span> 需要多大</strong>？
 把 <span class="arithmatex">\(P(e) = \Phi(-d'/2) \le p_0\)</span> 反解：</p>
 <div class="arithmatex">\[-\frac{d'}{2} \le \Phi^{-1}(p_0) \;\Longrightarrow\; d' \ge -2\,\Phi^{-1}(p_0)\]</div>
@@ -13407,7 +13407,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 形式2 与 数值积分之差 = -0.0</code></pre>
 <p><strong>输出怎么看</strong>：三种算法（数值积分、合并前的两项、合并后的闭式解）
 给出<strong>完全相同</strong>的 <span class="arithmatex">\(0.158655253931\)</span>，
-说明 4.5 节的四步推导没有跳步也没有算错 ✓
+说明 4.5 节的四步推导没有跳步也没有算错
 （这正是「<span class="arithmatex">\(d' = 2.0\)</span> 对应 <span class="arithmatex">\(P(e) = 0.158655\)</span>」这个设计闭环的数值证据。）</p>
 <div class="admonition tip">
 <p class="admonition-title">把 d 撇当成「信噪比」来用</p>
@@ -13417,10 +13417,10 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 - 分母 <span class="arithmatex">\(\sigma\)</span> 是「噪声」（类内波动，会把差别糊掉）</p>
 <p>所以 <span class="arithmatex">\(d'\)</span> 是一个<strong>无量纲的特征质量指标</strong>，
 比「错误率」本身更适合用来描述「这个特征好不好」：
-错误率还受先验影响，<span class="arithmatex">\(d'\)</span> 只取决于特征 ✓</p>
+错误率还受先验影响，<span class="arithmatex">\(d'\)</span> 只取决于特征</p>
 <p><strong>实践提醒</strong>：<span class="arithmatex">\(d'\)</span> 的推导用到了「等方差 + 等先验」两个假设。
 一般情形下（如本页的 <span class="arithmatex">\(\sigma_1 = 3, \sigma_2 = 4\)</span>）没有这么干净的闭式解，
-这时要回到数值积分或 4.2～4.4 节的做法 ⚠</p>
+这时要回到数值积分或 4.2～4.4 节的做法</p>
 </div>
 <h3 id="47">4.7 把三个规律放在一起对比<a class="headerlink" href="#47" title="Permanent link">&para;</a></h3>
 <table>
@@ -13466,7 +13466,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </table>
 <p><strong>最后一行要单独强调</strong>：在分布已知的前提下，
 <strong>换分类器不能让 <span class="arithmatex">\(P(e)\)</span> 变化</strong> —— 因为贝叶斯错误率已经是下界，
-任何分类器的错误率都 <span class="arithmatex">\(\ge\)</span> 它。这条结论本课程课件里说得很明确 ✓</p>
+任何分类器的错误率都 <span class="arithmatex">\(\ge\)</span> 它。这条结论本课程课件里说得很明确</p>
 <hr />
 <h2 id="x-x_b">五、错误率的最优性：<span class="arithmatex">\(X^*\)</span> 与 <span class="arithmatex">\(X_B\)</span> 是哪个点<a class="headerlink" href="#x-x_b" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 本课程课件里的那句话<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
@@ -13498,15 +13498,15 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </tbody>
 </table>
 <p><strong>下标 <span class="arithmatex">\(B\)</span> 的含义</strong>：<span class="arithmatex">\(B\)</span> 取自 Bayes（贝叶斯）。
-<span class="arithmatex">\(X_B\)</span> 就是<strong>贝叶斯边界</strong> —— 本页参数下它等于 <span class="arithmatex">\(t = 19.134613\)</span> ✓</p>
+<span class="arithmatex">\(X_B\)</span> 就是<strong>贝叶斯边界</strong> —— 本页参数下它等于 <span class="arithmatex">\(t = 19.134613\)</span></p>
 <h3 id="52-x">5.2 为什么 <span class="arithmatex">\(X^*\)</span> 不是最优的<a class="headerlink" href="#52-x" title="Permanent link">&para;</a></h3>
 <p>本课程课件为什么要在图上标一个「不是最优」的点？因为<strong>这是最容易犯的错</strong>。</p>
 <p>设想有人这样想：「既然要最小化总错误率，
 那就在两类分布的<strong>交叉区域</strong>里随便找个点当边界吧。」——
-这就是 <span class="arithmatex">\(X^*\)</span> 的来历：一个<strong>看起来在合理范围里</strong>的候选点 ⚠</p>
+这就是 <span class="arithmatex">\(X^*\)</span> 的来历：一个<strong>看起来在合理范围里</strong>的候选点</p>
 <p><strong>它为什么不对</strong>：从第三节的几何图像可以立刻看出来。
 错误率是 <span class="arithmatex">\(\int\min[q_1,q_2]\,dx\)</span>，它只在<strong>两条曲线的交点</strong>处取到最小值。
-只要边界偏离交点，就会有一段改用较高的那条曲线，面积必然变大 ✓</p>
+只要边界偏离交点，就会有一段改用较高的那条曲线，面积必然变大</p>
 <p>具体差多少？用 2.10 节的手算表：</p>
 <table>
 <thead>
@@ -13541,20 +13541,20 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </table>
 <p><strong>怎么读这张表</strong>：即使把边界放得<strong>很接近</strong>最优位置（<span class="arithmatex">\(19.0\)</span> 与 <span class="arithmatex">\(19.1346\)</span> 只差 <span class="arithmatex">\(0.13\)</span>），
 错误率也已经多出了 <span class="arithmatex">\(0.000180\)</span> —— 是<strong>最优错误率的 <span class="arithmatex">\(0.12\%\)</span></strong>。
-离得越远，代价越大 ⚠</p>
+离得越远，代价越大</p>
 <p><strong>这里有个很实际的教训</strong>：错误率在最优值附近是<strong>非常平坦</strong>的，
 所以「差不多就行了」在实用上往往可以接受；
 但「差不多」和「最优」之间的差距<strong>确实存在</strong>，
-而且 <span class="arithmatex">\(\min[q_1,q_2]\)</span> 的最小值只有一个点能达到 ✓</p>
+而且 <span class="arithmatex">\(\min[q_1,q_2]\)</span> 的最小值只有一个点能达到</p>
 <h3 id="53">5.3 用候选阈值扫描验证最优点就是贝叶斯边界<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p>口说无凭，把 2.10 节那张手算表再拿来看一遍：
 <strong>表里 <span class="arithmatex">\(P(e)\)</span> 最小的那一行，恰好就是 <span class="arithmatex">\(t = 19.134613\)</span></strong>。
 这就是「网格搜索」的思路 —— 把候选阈值都摆出来，逐个算 <span class="arithmatex">\(P(e)\)</span>，取最小的那个。
-2.10 节的表已经做到这一点，不需要再跑程序 ✓</p>
+2.10 节的表已经做到这一点，不需要再跑程序</p>
 <p>如果扫描得足够密（例如步长 <span class="arithmatex">\(0.0005\)</span> 从 <span class="arithmatex">\(17\)</span> 扫到 <span class="arithmatex">\(22\)</span>，共一万个点），
 网格上最小的点是 <span class="arithmatex">\(t = 19.1345\)</span>，与 <span class="arithmatex">\(X_B = 19.134613\)</span> 只差 <span class="arithmatex">\(0.000113\)</span>，
 网格最小错误率与贝叶斯错误率之差约 <span class="arithmatex">\(1.26\times10^{-10}\)</span>（这是网格步长带来的分辨率极限）。
-<strong>结论</strong>：纯网格搜索<strong>自己就能找到</strong>贝叶斯边界，不需要任何公式 ✓
+<strong>结论</strong>：纯网格搜索<strong>自己就能找到</strong>贝叶斯边界，不需要任何公式
 （这些数值已由本课程课件按网格扫描核对。）</p>
 <p><strong><span class="arithmatex">\(X_B\)</span> 与 <span class="arithmatex">\(X^*\)</span> 的判决总结</strong>：</p>
 <table>
@@ -13582,7 +13582,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 （第 3.5 节的代码输出 <span class="arithmatex">\(w_1(t) = w_2(t) = 0.0308660013\)</span>），
 意思是「在这里，判成哪一类，错判的概率一样大」——
 往任何一侧挪，都会让某一类的错判概率<strong>超过</strong>另一类，
-而总错误率的增加量大于减少量，于是总错误率上升 ✓</p>
+而总错误率的增加量大于减少量，于是总错误率上升</p>
 <hr />
 <h2 id="0-1">六、0-1 损失与最大后验决策的关系<a class="headerlink" href="#0-1" title="Permanent link">&para;</a></h2>
 <h3 id="61-0-1">6.1 0-1 损失矩阵<a class="headerlink" href="#61-0-1" title="Permanent link">&para;</a></h3>
@@ -13614,7 +13614,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </tbody>
 </table>
 <p><strong>读法</strong>：判对了不要钱（<span class="arithmatex">\(0\)</span>），判错了收 <span class="arithmatex">\(1\)</span> 元（<span class="arithmatex">\(1\)</span>）。
-<strong>「所有错误代价都一样」正是这个矩阵的全部含义</strong> ✓
+<strong>「所有错误代价都一样」正是这个矩阵的全部含义</strong>
 （多类的 0-1 损失矩阵就是把这张表扩成 <span class="arithmatex">\(c \times c\)</span>，对角线全是 <span class="arithmatex">\(0\)</span>、非对角线全是 <span class="arithmatex">\(1\)</span>。）</p>
 <h3 id="62">6.2 条件风险就是错误概率<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>下一页 <a href="../bayes-min-risk/">最小风险决策</a> 会把风险理论完整讲一遍，
@@ -13626,7 +13626,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <div class="arithmatex">\[R(\alpha_i \mid x) = \sum_{j \neq i} P(\omega_j \mid x) = 1 - P(\omega_i \mid x)\]</div>
 <p><strong>怎么读这一步</strong>：类条件概率对 <span class="arithmatex">\(j\)</span> 求和一定是 <span class="arithmatex">\(1\)</span>（<span class="arithmatex">\(x\)</span> 必属于某一类），
 所以「除第 <span class="arithmatex">\(i\)</span> 类以外的概率之和」<span class="arithmatex">\(= 1 - P(\omega_i \mid x)\)</span>。
-而这正是 2.2 节写的<strong>条件错误率</strong> ✓</p>
+而这正是 2.2 节写的<strong>条件错误率</strong></p>
 <table>
 <thead>
 <tr>
@@ -13648,7 +13648,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>所以「最小化风险」和「最小化错误率」在 0-1 损失下是同一个数学问题</strong> ✓</p>
+<p><strong>所以「最小化风险」和「最小化错误率」在 0-1 损失下是同一个数学问题</strong></p>
 <h3 id="63">6.3 三者合一<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
 <p>把上面几节串起来，就得到本页与上一页的<strong>核心等价链</strong>：</p>
 <table>
@@ -13680,7 +13680,7 @@ z_2 = \frac{20.5901 - 22}{4} = \frac{-1.4099}{4} \approx -0.3525\]</div>
 <p><strong>三者合一的完整链条</strong>：</p>
 <div class="arithmatex">\[\text{0-1 损失} \;\Longrightarrow\; \text{条件风险} = \text{条件错误率} \;\Longrightarrow\; \text{最小风险} = \text{最大后验} = \text{最小错误率}\]</div>
 <p><strong>怎么读这条链</strong>：三个名字听着像是三种不同的方法，
-在 0-1 损失这个前提下<strong>完全是同一件事</strong> ✓
+在 0-1 损失这个前提下<strong>完全是同一件事</strong>
 这也是为什么本页可以放心地把它们混着说 —— 前提不变。</p>
 <p><strong>总错误率的第三种写法</strong>（本课程课件在讲 0-1 cost 时给出的形式）：
 既然 MAP 判决在每个 <span class="arithmatex">\(x\)</span> 上取的都是<strong>最大的那个加权密度</strong> <span class="arithmatex">\(\max_i q_i(x)\)</span>，
@@ -15104,7 +15104,7 @@ z
 <p>这是本页最实用的一条结论，值得单独推一遍。</p>
 <p><strong>问题设定</strong>：模型 A 的真实错误率是 <span class="arithmatex">\(0.15\)</span>，模型 B 是 <span class="arithmatex">\(0.13\)</span>，
 <strong>B 真的更好</strong>。用 <span class="arithmatex">\(N = 100\)</span> 的测试集去比，能不能选对？</p>
-<p><strong>第一步：弄清楚两个估计值的抖动幅度。</strong>
+<p>第一步：弄清楚两个估计值的抖动幅度。
 两个模型在<strong>同一个测试集</strong>上评估，误差是相关的；
 但为了得到数量级上的直觉，先按<strong>独立</strong>来估（这给出一个乐观的上界）：</p>
 <div class="arithmatex">\[\text{SE}(\hat{p}_A) = \sqrt{\frac{0.15\times 0.85}{100}} \approx 0.0357, \qquad
@@ -15116,7 +15116,7 @@ z
 <div class="arithmatex">\[\frac{\text{真实差距}}{\text{差值的标准误}} \approx \frac{0.02}{0.0490} \approx 0.41\]</div>
 <p><strong>结论</strong>：真实差距只有噪声的<strong>不到一半</strong>。
 也就是说，<span class="arithmatex">\(\hat{p}_A - \hat{p}_B\)</span> 这个量很容易<strong>翻符号</strong> ——
-测试集上看起来 A 更好，完全是随机波动造成的 ⚠</p>
+测试集上看起来 A 更好，完全是随机波动造成的</p>
 <p><strong>8.3 节的实验给了一致的答案</strong>：<span class="arithmatex">\(2000\)</span> 次重复中，
 「测试集上表现更好的那个恰好是真正更好的 B」的比例只有 <span class="arithmatex">\(0.6295\)</span> ——
 <strong>有 <span class="arithmatex">\(37\%\)</span> 的概率选错</strong>。</p>
@@ -15249,7 +15249,7 @@ z
 <p><strong>怎么读这两行</strong>：第一行是「<span class="arithmatex">\(\omega_1\)</span> 的样本有多大比例跑到边界右边」，
 第二行是「<span class="arithmatex">\(\omega_2\)</span> 的样本有多大比例跑到边界左边」。
 第二行明显更大（<span class="arithmatex">\(0.2369\)</span> 对 <span class="arithmatex">\(0.0841\)</span>），约是它的 <span class="arithmatex">\(2.8\)</span> 倍。</p>
-<p><strong>第三步：乘先验，得到两项错判概率。</strong></p>
+<p>第三步：乘先验，得到两项错判概率。</p>
 <table>
 <thead>
 <tr>
@@ -15319,7 +15319,7 @@ z
 <summary>解答</summary>
 <p><strong>第一问第 1 步：求边界。</strong> 等方差等先验 → 边界在两个均值的中点：</p>
 <div class="arithmatex">\[t = \frac{\mu_1 + \mu_2}{2} = \frac{10 + 16}{2} = 13.000000\]</div>
-<p><strong>第一问第 2 步：算两个标准化量。</strong></p>
+<p>第一问第 2 步：算两个标准化量。</p>
 <div class="arithmatex">\[z_1 = \frac{13 - 10}{2} = 1.5, \qquad z_2 = \frac{13 - 16}{2} = -1.5\]</div>
 <p><strong>第一问第 3 步：算错误率。</strong></p>
 <div class="arithmatex">\[P(e) = \frac{1}{2}\big[1 - \Phi(1.5)\big] + \frac{1}{2}\Phi(-1.5) = \Phi(-1.5) \approx 0.066807\]</div>
@@ -15353,14 +15353,14 @@ z
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一问第 1 步：算先验比的对数。</strong></p>
+<p>第一问第 1 步：算先验比的对数。</p>
 <div class="arithmatex">\[\ln\frac{P(\omega_1)}{P(\omega_2)} = \ln\frac{0.75}{0.25} = \ln 3 \approx 1.098612\]</div>
 <p><strong>第一问第 2 步：代进边界公式。</strong> 等方差时 <span class="arithmatex">\(\sigma_1 = \sigma_2 = \sigma = 1\)</span>，
 <span class="arithmatex">\(\mu_2 - \mu_1 = 3\)</span>，所以修正项的系数是 <span class="arithmatex">\(\frac{\sigma^2}{\mu_2-\mu_1} = \frac{1}{3}\)</span>：</p>
 <div class="arithmatex">\[t = \frac{0 + 3}{2} + \frac{1}{3}\times 1.098612 = 1.5 + 0.366204 = 1.866204\]</div>
 <p><strong>检查方向</strong>：<span class="arithmatex">\(P(\omega_1) = 0.75\)</span> 更大，所以 <span class="arithmatex">\(\omega_1\)</span> 的区域应该更大，
 边界应该<strong>朝 <span class="arithmatex">\(\omega_2\)</span> 移动</strong>（往右）。<span class="arithmatex">\(t = 1.866204 \gt 1.5\)</span> ✓ 方向正确。</p>
-<p><strong>第一问第 3 步：算两个标准化量。</strong></p>
+<p>第一问第 3 步：算两个标准化量。</p>
 <div class="arithmatex">\[z_1 = \frac{1.866204 - 0}{1} = 1.866204, \qquad z_2 = \frac{1.866204 - 3}{1} = -1.133796\]</div>
 <p><strong>第一问第 4 步：算错误率。</strong></p>
 <div class="arithmatex">\[P(e) = 0.75\big[1 - \Phi(1.866204)\big] + 0.25\,\Phi(-1.133796)\]</div>
@@ -15429,7 +15429,7 @@ z
 <p>代入：<span class="arithmatex">\(\frac{\mu_1+\mu_2}{2} = 1\)</span>，<span class="arithmatex">\(\frac{\sigma^2}{\mu_2-\mu_1} = \frac{1}{2}\)</span>，
 <span class="arithmatex">\(\ln\frac{0.5}{0.3} = \ln 1.666667 \approx 0.510826\)</span></p>
 <div class="arithmatex">\[t_{12} = 1 + \frac{1}{2}\times 0.510826 = 1 + 0.255413 = 1.255413\]</div>
-<p><strong>第二步：求第二条边界（<span class="arithmatex">\(\omega_2\)</span> 与 <span class="arithmatex">\(\omega_3\)</span> 之间）。</strong>
+<p>第二步：求第二条边界（<span class="arithmatex">\(\omega_2\)</span> 与 <span class="arithmatex">\(\omega_3\)</span> 之间）。
 <span class="arithmatex">\(\frac{\mu_2+\mu_3}{2} = 3.5\)</span>，<span class="arithmatex">\(\frac{\sigma^2}{\mu_3-\mu_2} = \frac{1}{3}\)</span>，
 <span class="arithmatex">\(\ln\frac{0.3}{0.2} = \ln 1.5 \approx 0.405465\)</span></p>
 <div class="arithmatex">\[t_{23} = 3.5 + \frac{1}{3}\times 0.405465 = 3.5 + 0.135155 = 3.635155\]</div>
@@ -15762,16 +15762,16 @@ z
 <p>代入 <span class="arithmatex">\(p_1(1-p_1) = 0.1275\)</span>、<span class="arithmatex">\(p_2(1-p_2) = 0.1056\)</span>、<span class="arithmatex">\((p_1-p_2)^2 = 0.0009\)</span>：</p>
 <div class="arithmatex">\[N \ge \frac{4\times(0.1275 + 0.1056)}{0.0009} = \frac{4\times 0.2331}{0.0009} \approx 1036\]</div>
 <p><strong>结论</strong>：<span class="arithmatex">\(200\)</span> 个样本远远不够，至少要<strong>一千量级</strong>的测试集，
-才能有把握地说出「模型 1 比模型 2 差」✓</p>
+才能有把握地说出「模型 1 比模型 2 差」</p>
 <p>这也和第八节的实验对得上：那里用 <span class="arithmatex">\(100\)</span> 个样本比较
-真实差距 <span class="arithmatex">\(0.02\)</span> 的两个模型，选错的概率高达 <span class="arithmatex">\(37\%\)</span> ⚠</p>
+真实差距 <span class="arithmatex">\(0.02\)</span> 的两个模型，选错的概率高达 <span class="arithmatex">\(37\%\)</span></p>
 <p><strong>一个细节</strong>：如果图省事，把两个 <span class="arithmatex">\(p(1-p)\)</span> 都用较大的 <span class="arithmatex">\(p_1(1-p_1) = 0.1275\)</span> 代替，
 得到更保守的 <span class="arithmatex">\(N \ge \frac{8\,p_1(1-p_1)}{(p_1-p_2)^2} = \frac{8\times 0.1275}{0.0009} \approx 1134\)</span>。
 两种写法都是<strong>量级估计</strong>，结论完全一致：
-<strong>需要一个一千量级的测试集</strong> ✓</p>
+<strong>需要一个一千量级的测试集</strong></p>
 <p><strong>再强调一次</strong>：这些数字<strong>都建立在「测试集与分类器独立」的前提上</strong>。
 如果测试集被反复拿来调参，估计值会系统性偏乐观，
-增加 <span class="arithmatex">\(N\)</span> 也修不好 ⚠</p>
+增加 <span class="arithmatex">\(N\)</span> 也修不好</p>
 </details>
 <hr />
 <h2 id="_10">小结<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -15882,7 +15882,7 @@ z
 本页从头到尾都建立在 0-1 损失上：<strong>两种判错的代价都是 <span class="arithmatex">\(1\)</span></strong>。
 一旦代价不对称（漏诊与误诊、漏检与误报），
 「错误率最小」就不再是正确的目标，要换成<strong>最小化期望风险</strong>，
-判决边界也会随之移动 —— 那正是下一页要算的东西 ✓</p>
+判决边界也会随之移动 —— 那正是下一页要算的东西</p>
 
 
 

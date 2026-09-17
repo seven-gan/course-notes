@@ -8602,7 +8602,7 @@ TD 学习是「不知道模型时的 DP」，策略梯度是「不用值函数�
 <strong>右边的 <span class="arithmatex">\(V^{*}(s')\)</span> 已经内含了「后续最优」这个前提</strong>。</p>
 <div class="admonition note">
 <p class="admonition-title">最优性原理与马尔可夫性的关系</p>
-<p><strong>最优性原理只有在马尔可夫性成立时才成立。</strong>
+<p>最优性原理只有在马尔可夫性成立时才成立。
 否则「从 <span class="arithmatex">\(s'\)</span> 出发的最优后续决策」将取决于「怎么走到 <span class="arithmatex">\(s'\)</span> 的」，
 从而无法只用一个 <span class="arithmatex">\(V^{*}(s')\)</span> 表达。</p>
 <p><strong>这就是 MDP 必须是「马尔可夫」的根本原因</strong>——
@@ -8687,7 +8687,7 @@ V^{\pi'}(s) \geq Q^{\pi}(s,\pi'(s)) \geq V^{\pi}(s) \quad \blacksquare
 用的完全是同一招，只是把一步扩成完整轨迹。</p>
 <div class="admonition tip">
 <p class="admonition-title">策略改进定理的工程含义</p>
-<p><strong>「先评估、再贪心」这个循环永远不会让策略变差。</strong>
+<p>「先评估、再贪心」这个循环永远不会让策略变差。
 这一条保证了：</p>
 <table>
 <thead>
@@ -8893,7 +8893,7 @@ V^{*} = (20,\ 20), \qquad \pi^{*}=(\text{risky},\text{safe})
 <div class="arithmatex">\[
 \max\left\{2+0.9\times20,\ 2+0.45\times20+0.45\times20\right\} = \max\{20,\ 20\} = 20 = V^{*}(s_2)\ \checkmark
 \]</div>
-<p><strong>全部验证通过，只用了 1 轮策略改进。</strong></p>
+<p>全部验证通过，只用了 1 轮策略改进。</p>
 <p><strong>这个例子的两个关键收获</strong>：</p>
 <table>
 <thead>
@@ -10045,7 +10045,7 @@ L 70.399688 190.097312
 </table>
 <p><strong>这张表是本模块的路线图</strong>：从最上方的「完全依赖模型」，
 到最下方的「完全不依赖模型」，是一步一步放松假设的过程。
-<strong>每一行都保留了 GPI 的骨架，只是把「精确」换成了「近似」。</strong></p>
+每一行都保留了 GPI 的骨架，只是把「精确」换成了「近似」。</p>
 <p><strong>GPI 的收敛性直觉</strong>：
 评估步让 <span class="arithmatex">\(V\)</span> 更接近 <span class="arithmatex">\(V^{\pi}\)</span>，改进步让 <span class="arithmatex">\(\pi\)</span> 更接近 <span class="arithmatex">\(\text{greedy}(V)\)</span>。
 可以证明每个循环至少不会变差，
@@ -10061,7 +10061,7 @@ L 70.399688 190.097312
 \ \longrightarrow\
 \underbrace{\text{TD 学习}}_{\text{评估一步、用采样}}
 \]</div>
-<p><strong>越往右，假设越弱、越实用，但收敛保证越弱。</strong>
+<p>越往右，假设越弱、越实用，但收敛保证越弱。
 最左端要求「模型完全已知 + 计算量充足」，
 最右端只要求「能采样交互」——这就是为什么实际系统几乎都用 TD 类方法。</p>
 <hr />
@@ -10250,7 +10250,7 @@ V^{\pi} = (-10,\ -1.9,\ -1,\ 0)
 <p><strong>工程含义</strong>：策略评估的轮数对 <span class="arithmatex">\(\gamma\)</span> 极其敏感。
 <span class="arithmatex">\(\gamma=0.9\)</span> 时 153 轮尚可接受，<span class="arithmatex">\(\gamma=0.99\)</span> 时 682 轮
 乘以每个状态的动作数，成本就上不去了。
-<strong>这正是「实际系统用 <span class="arithmatex">\(\gamma\)</span> 不要随意取 0.99」的一个硬性理由。</strong></p>
+这正是「实际系统用 <span class="arithmatex">\(\gamma\)</span> 不要随意取 0.99」的一个硬性理由。</p>
 </details>
 <h3 id="2">例题 2：策略改进——从坏策略到好策略<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>沿用例题 1 的环境（同样 <span class="arithmatex">\(\gamma=0.9\)</span>，终止状态 4）。
@@ -10368,7 +10368,7 @@ V^{\pi_1} = (-2.71,\ -1.9,\ -1,\ 0)
 <div class="arithmatex">\[
 \max\{-2.71,\ -1\} = -1 = V^{\pi_1}(3)\ \checkmark
 \]</div>
-<p><strong>三个方程全部成立，故 <span class="arithmatex">\(V^{\pi_1}=V^{*}=(-2.71,-1.9,-1,0)\)</span>，<span class="arithmatex">\(\pi_1\)</span> 就是最优策略。</strong></p>
+<p>三个方程全部成立，故 <span class="arithmatex">\(V^{\pi_1}=V^{*}=(-2.71,-1.9,-1,0)\)</span>，<span class="arithmatex">\(\pi_1\)</span> 就是最优策略。</p>
 <p><strong>整个过程只用了 2 轮</strong>（第一轮：评估 <span class="arithmatex">\(\pi_0\)</span> + 改进；第二轮：确认不变）。
 这就是策略迭代「轮数极少」的典型表现。</p>
 </details>
@@ -10497,7 +10497,7 @@ V_3(1) = \max\{-1+0.9\times(-1.9),\ -1+0.9\times(-1.9)\} = -2.71
 <p><strong>注意理论界比实际误差宽得多</strong>（第 2 轮：界 2.195 而实际 0.81），
 原因是理论界用的是<strong>最坏情况</strong>——假设所有状态的误差同时按最坏方向叠加。
 实际上本例的误差是「<span class="arithmatex">\(V\)</span> 需要看到几步之外的终点」这一结构决定的，衰减更快。
-<strong>这提醒我们：理论界是充分条件，实际收敛常常快得多。</strong></p>
+这提醒我们：理论界是充分条件，实际收敛常常快得多。</p>
 <p><strong>&copy; 为什么第 3 轮后不再变化。</strong></p>
 <p><strong>关键概念：信息传播的步数。</strong> 在价值迭代中，
 「终止状态的奖励信息」每迭代一轮只能向外传播<strong>一步</strong>：</p>
@@ -10779,7 +10779,7 @@ V^{*}(s) = -\sum_{t=0}^{m-1}0.99^{t} = -\frac{1-0.99^{m}}{0.01} = -100\left(1-0.
 状态 <span class="arithmatex">\(s\)</span> 在第 <span class="arithmatex">\(m=6-s\)</span> 轮达到精确值，
 例如 <span class="arithmatex">\(V_5(1)=-4.90100\)</span> 与精确值 <span class="arithmatex">\(-4.900995\)</span> 舍入到 5 位后一致 <span class="arithmatex">\(\checkmark\)</span>。
 <strong>验算 <span class="arithmatex">\(V^{*}(1)\)</span></strong>：<span class="arithmatex">\(-\frac{1-0.99^{5}}{0.01} = -\frac{1-0.950990}{0.01} = -4.900995\ \checkmark\)</span>。</p>
-<p><strong>但「收敛到一个近似最优」的标准变严了。</strong>
+<p>但「收敛到一个近似最优」的标准变严了。
 比较「达到 <span class="arithmatex">\(\lvert V_k(s)-V^{*}(s)\rvert&lt;10^{-2}\)</span>」所需轮数
 （用最坏情形估计 <span class="arithmatex">\(10\gamma^{k}&lt;10^{-2}\)</span>，即 <span class="arithmatex">\(k&gt;\dfrac{\log 10^{-3}}{\log\gamma}\)</span>）：</p>
 <table>
@@ -10925,7 +10925,7 @@ V^{*}(s) = -\sum_{t=0}^{m-1}0.99^{t} = -\frac{1-0.99^{m}}{0.01} = -100\left(1-0.
   内核都是「在转移图上做动态规划」，与本页的算子迭代是同一套数学。</li>
 <li><strong>为什么这些算法能多项式求解</strong>：正是因为<strong>马尔可夫性</strong>把「路径空间」
   （指数级）压成了「状态空间上的递推」（多项式级）。
-  <strong>本页 1.1 节讲的「最优性原理」是这一切的共同根基。</strong></li>
+  本页 1.1 节讲的「最优性原理」是这一切的共同根基。</li>
 </ul>
 <h3 id="_10">机器人学 · 轨迹优化与实时规划<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <ul>
@@ -11193,10 +11193,10 @@ k &gt; \frac{\log 0.005556}{\log 0.9} = \frac{-5.19295}{-0.105361} \approx 49.29
 </tr>
 </tbody>
 </table>
-<p><strong>代价是轮数从 22 涨到 50（2.3 倍），换来的是精度从 0.886 提升到 0.046（19 倍）。</strong></p>
+<p>代价是轮数从 22 涨到 50（2.3 倍），换来的是精度从 0.886 提升到 0.046（19 倍）。</p>
 <p><strong>工程结论</strong>：<strong>不要用朴素准则。</strong> 它省下 2 倍算力，
 却让精度损失近 20 倍。在 <span class="arithmatex">\(\gamma\)</span> 更接近 1 的场景中，这个差距会继续放大——
-<strong>用错停止准则的代价，远大于多算几轮的代价。</strong></p>
+用错停止准则的代价，远大于多算几轮的代价。</p>
 </details>
 <p><strong>Q4</strong> 本题讨论 Bellman 算子的压缩性。
 <strong>(a)</strong> 证明 <span class="arithmatex">\(\max_a f_a - \max_a g_a \leq \max_a (f_a-g_a)\)</span>。
@@ -11261,7 +11261,7 @@ f_a - g_a = \gamma\sum_{s'}p(s'\mid s,a)\left[V_1(s')-V_2(s')\right]
 = \max_s\lvert(\mathcal{T}V_1)(s)-(\mathcal{T}V_2)(s)\rvert
 \leq\gamma\lVert V_1-V_2\rVert_{\infty}\ \blacksquare
 \]</div>
-<p><strong>完整证明只有这四步，没有用到任何超出「加权平均」的内容。</strong></p>
+<p>完整证明只有这四步，没有用到任何超出「加权平均」的内容。</p>
 <p><strong>&copy; <span class="arithmatex">\(\gamma=1\)</span> 时的情形。</strong></p>
 <p><strong>压缩性不再成立。</strong> 更准确地说：<span class="arithmatex">\(\gamma=1\)</span> 时上面的推导只能给出</p>
 <div class="arithmatex">\[

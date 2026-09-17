@@ -9552,7 +9552,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Python 官方文档（标准库 · pathlib / io / csv / json）</code><code>本页示例在 Python 3.9+ 上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="11">11 文件与路径<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
-<p><strong>这一页解决一个问题：让数据「活过程序结束」，并且能安全地读回来。</strong></p>
+<p>这一页解决一个问题：让数据「活过程序结束」，并且能安全地读回来。</p>
 <p>前面几页处理的数据都活在内存里：变量、列表、字典 —— 程序一退出，它们全部消失。
 要保存结果、要读别人给的数据、要批量处理一批文件，就必须<strong>读写磁盘上的文件</strong>。</p>
 <p>问题是，写文件比 <code>print</code> 危险得多。下面这些行都不是「写错了语法」，
@@ -9673,7 +9673,7 @@
 </tbody>
 </table>
 <p>另外记住一条<strong>排查口诀</strong>：
-<strong>文件读不出来，先查三件事 —— 路径对不对、编码对不对、模式对不对。</strong></p>
+文件读不出来，先查三件事 —— 路径对不对、编码对不对、模式对不对。</p>
 </div>
 <hr />
 <h2 id="_1">一、为什么把「文件与路径」单独作为一页<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -10455,7 +10455,7 @@ FileExistsError: [Errno 17] File exists: 'only_once.txt'</code></pre>
 <p><strong>最容易被忽略的是第一条</strong>：写文件时，Python 并不会每写一个字符就落盘，
 而是先攒在<strong>缓冲区</strong>里，够了再一次性写。<strong>关文件就是「最后一次强制落盘」</strong>。</p>
 <h3 id="32-close">3.2 手动 <code>close()</code> 的两个致命问题<a class="headerlink" href="#32-close" title="Permanent link">&para;</a></h3>
-<p><strong>问题一：中间抛异常，<code>close()</code> 那一行永远执行不到。</strong></p>
+<p>问题一：中间抛异常，<code>close()</code> 那一行永远执行不到。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -10498,7 +10498,7 @@ FileExistsError: [Errno 17] File exists: 'only_once.txt'</code></pre>
 在真实程序里，异常会沿着调用栈一路往上抛，
 真正处理它的地方可能离 <code>open()</code> 很远 ——
 <strong>你根本不知道还有一个文件没关</strong>。</p>
-<p><strong>问题二：忘记写 <code>close()</code> 时，Python 只能靠「回收对象」来补救。</strong>
+<p>问题二：忘记写 <code>close()</code> 时，Python 只能靠「回收对象」来补救。
 而这会触发一条 <code>ResourceWarning</code>（资源告警）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
@@ -12730,7 +12730,7 @@ Path 取扩展名: gz
 </table>
 <p>最后一条的理由：<strong>目录结构是会被别人改的</strong>。
 今天父目录存在，不代表明天交付到别的环境时还存在。
-<strong><code>parents=True</code> 的代价是零，收益是「不会再因为这个报错」。</strong></p>
+<code>parents=True</code> 的代价是零，收益是「不会再因为这个报错」。</p>
 </div>
 <h3 id="75">7.5 改名与移动<a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
 <table>
@@ -13120,7 +13120,7 @@ rglob *.py 相对路径:
 如果起点是绝对路径，结果的每一项<strong>也是绝对路径</strong>；
 想把结果打印成稳定的相对形式，用 <code>x.relative_to(起点).as_posix()</code>。
 <strong>不要直接打印完整路径</strong> —— 那是机器相关的信息，不值得进笔记、日志或输出。</p>
-<p><strong>坑 3：文件很多时不要一次读进列表。</strong></p>
+<p>坑 3：文件很多时不要一次读进列表。</p>
 <table>
 <thead>
 <tr>
@@ -13140,7 +13140,7 @@ rglob *.py 相对路径:
 </tbody>
 </table>
 <p>和「读大文件要用逐行迭代」是同一个道理：
-<strong>能流式处理就别一次性收集。</strong></p>
+能流式处理就别一次性收集。</p>
 </div>
 <h3 id="78">7.8 看文件的大小与时间<a class="headerlink" href="#78" title="Permanent link">&para;</a></h3>
 <p><code>p.stat()</code> 返回一个<strong>文件状态对象</strong>，字段名是固定的：</p>
@@ -14702,7 +14702,7 @@ loads 能解析字符串: True
 </tr>
 </tbody>
 </table>
-<p><strong>陷阱 2：读一个不存在的文件不会给你默认值。</strong></p>
+<p>陷阱 2：读一个不存在的文件不会给你默认值。</p>
 <table>
 <thead>
 <tr>
@@ -14845,7 +14845,7 @@ loads 能解析字符串: True
 <code>TemporaryDirectory</code> 内部用的正是你前面学过的 <code>with</code> 机制。</p>
 <p><strong>注意不要打印 <code>tmp</code> 本身</strong> ——
 它是一个机器相关的绝对路径，打印出来既不能复现，也没有信息量。
-<strong>需要看路径时，打印 <code>p.name</code> 或 <code>p.suffix</code> 这种稳定的部分。</strong></p>
+需要看路径时，打印 <code>p.name</code> 或 <code>p.suffix</code> 这种稳定的部分。</p>
 <h3 id="113-namedtemporaryfile">11.3 <code>NamedTemporaryFile</code>：要给别的程序用的时候<a class="headerlink" href="#113-namedtemporaryfile" title="Permanent link">&para;</a></h3>
 <p><code>TemporaryDirectory</code> 是「<strong>一个目录</strong>」，
 有时你只需要「<strong>一个临时文件</strong>」，而且可能需要<strong>知道它的文件名</strong>
@@ -15112,7 +15112,7 @@ base 末尾本来就有斜杠时:
   Path 解析后的一段数: 4</code></pre>
 <p><strong>输出里的对照说明一切</strong>：手工拼「斜杠 + 斜杠」得到 <code>result//scores.csv</code>，
 而 <code>Path</code> 会自动处理成单斜杠。
-<strong><code>Path</code> 不只是一个更方便的写法，它会把你没想到的规范化都做掉。</strong></p>
+<code>Path</code> 不只是一个更方便的写法，它会把你没想到的规范化都做掉。</p>
 <p><strong>陷阱二：忘写 <code>encoding</code>。</strong> 它的可怕之处是<strong>在写代码的环境里看不出问题</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
@@ -15166,7 +15166,7 @@ base 末尾本来就有斜杠时:
 <p><strong>为什么要这样写示例</strong>：不带 <code>encoding</code> 时，<strong>结果取决于运行环境</strong> ——
 本环境恰好用 UTF-8，所以看起来没问题；
 换到一个默认编码不是 UTF-8 的环境，同一行代码就会报错或乱码。
-<strong>这就是「必须显式写 <code>encoding</code>」的全部理由：让行为不随环境变化。</strong>
+这就是「必须显式写 <code>encoding</code>」的全部理由：让行为不随环境变化。
 最后一行只打印「编码名非空」，是为了<strong>不把机器相关的编码名写进输出</strong>。</p>
 <p><strong>陷阱三：相对路径依赖当前工作目录。</strong> 已经在第七节演示过，
 这里用一张表把结论钉住：</p>
@@ -15725,7 +15725,7 @@ base 末尾本来就有斜杠时:
 <p><strong>关于「不要打印绝对路径」</strong>：
 <code>x.relative_to(d)</code> 的结果<strong>只包含相对于起点的那几段</strong>，
 与目录建在哪里无关 —— 于是这段输出在谁的电脑上跑都长一样。
-<strong>需要把路径写进笔记、日志、报告时，都该这样处理。</strong></p>
+需要把路径写进笔记、日志、报告时，都该这样处理。</p>
 </details>
 <hr />
 <h3 id="4-json">例题 4：把一批记录存成 JSON 再读回来做统计<a class="headerlink" href="#4-json" title="Permanent link">&para;</a></h3>
@@ -16034,7 +16034,7 @@ FileExistsError: [Errno 17] File exists: 'mode.txt'</code></pre>
 </tbody>
 </table>
 <p><strong>一个稳妥的习惯</strong>：写结果文件前，先想一句
-<strong>「这个位置万一已经有别人的东西，我要不要保住它？」</strong>
+「这个位置万一已经有别人的东西，我要不要保住它？」
 要保住 → 用 <code>x</code> 或先检查 <code>exists()</code>；不保 → <code>w</code>。</p>
 </details>
 <hr />
@@ -16315,7 +16315,7 @@ readlines 类型: list 行数: 100
 </tr>
 </tbody>
 </table>
-<p><strong>问题二：按 <code>utf-8</code> 读带 BOM 的文件，第一个字符是不可见的 <code>\ufeff</code>。</strong></p>
+<p>问题二：按 <code>utf-8</code> 读带 BOM 的文件，第一个字符是不可见的 <code>\ufeff</code>。</p>
 <table>
 <thead>
 <tr>

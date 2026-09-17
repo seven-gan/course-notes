@@ -8668,7 +8668,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本案例为教学用综合练习（数据为程序生成的模拟信号）</code><code>NumPy / Matplotlib 官方文档</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="15">15 实战：信号去噪<a class="headerlink" href="#15" title="Permanent link">&para;</a></h1>
-<p><strong>前面十几页讲的是零件，这一页把它们装成一条完整的处理链。</strong></p>
+<p>前面十几页讲的是零件，这一页把它们装成一条完整的处理链。</p>
 <p>数据清洗那一页处理的是「不听话的表格」：格子空着、类型错了、数值荒谬。
 这一页换一种脏法 —— 数据本身是<strong>连续的、格式完全正确的</strong>，
 但它被噪声盖住了，而你手里<strong>没有任何一个格子是明显错的</strong>。</p>
@@ -8707,7 +8707,7 @@
 </tr>
 </tbody>
 </table>
-<p>这三条在后面都有实测代码验证，不用背 ✓</p>
+<p>这三条在后面都有实测代码验证，不用背</p>
 </div>
 <p><strong>这页需要的库</strong>：NumPy、Matplotlib，末尾一个小节用到 SciPy。
 版本不必与示例一致，行为在这个量级的版本上是稳定的。</p>
@@ -8828,11 +8828,11 @@
 <p><strong>「有没有标准答案」这一条是本页最大的便利</strong>：
 表格案例里我们永远不知道缺失的那个分数本来是多少；
 而这一页的噪声是我们自己加的，所以<strong>每一步都能算出真实误差</strong>。
-这就是为什么实战练习要先造数据 —— 没有标准答案，就无法评价方法好坏 ✓</p>
+这就是为什么实战练习要先造数据 —— 没有标准答案，就无法评价方法好坏</p>
 <div class="admonition warning">
 <p class="admonition-title">「看起来平滑了」不是证据</p>
 <p>把一段含噪信号做任何形式的平均，它都会变平滑。
-<strong>平滑是低通滤波的定义，不是成功的证据。</strong></p>
+平滑是低通滤波的定义，不是成功的证据。</p>
 <table>
 <thead>
 <tr>
@@ -8858,7 +8858,7 @@
 <p><strong>所以本页从头到尾都只认两个数字</strong>：
 与真实信号的<strong>均方误差</strong>（越小越保真）、
 以及 <strong>SNR</strong>（越大越干净）。
-眼睛只用来做最后一道「有没有离谱」的检查 ✓</p>
+眼睛只用来做最后一道「有没有离谱」的检查</p>
 </div>
 <hr />
 <h2 id="_2">二、构造一个「有标准答案」的信号<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -8925,7 +8925,7 @@
 </table>
 <p><strong>注意最后一行</strong>：噪声不是集中在一个频率上，
 而是<strong>在每一个频率上都有一点点</strong>。这是理解整个去噪思路的关键，
-后文还会专门算一次 ✓</p>
+后文还会专门算一次</p>
 <h3 id="22">2.2 把造数据封装成模块<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>本页每个代码块都要能<strong>独立运行</strong>，而它们又要共用同一份造数据逻辑。
 所以先把它单独放一个块，并声明文件名：</p>
@@ -9022,7 +9022,7 @@
 真实信号标准差 0.7906，含噪信号标准差 0.9239。
 两者<strong>差不多</strong> —— 噪声并没有把信号彻底淹没。</p>
 <p>这很符合直觉（毕竟噪声标准差只有 0.5），
-但也正是问题所在：<strong>这个量级差，靠眼睛是分不出来的</strong> ✓</p>
+但也正是问题所在：<strong>这个量级差，靠眼睛是分不出来的</strong></p>
 <h3 id="23">2.3 采样率、时长、点数：三个数互相牵制<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>去掉噪声这件事，前提是「信号被正确地记录下来了」。
 如果采样就有问题，后面所有处理都是在修复一个已经坏掉的东西。</p>
@@ -9138,14 +9138,14 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </table>
 <p><strong>为什么采样率必须大于两倍最高频率</strong>：
 本案例最高频率是 20 Hz，采样率 1000 Hz，比 40 Hz 高出很多 ——
-每个 20 Hz 周期被采到 50 个点，波形轮廓非常清楚 ✓</p>
+每个 20 Hz 周期被采到 50 个点，波形轮廓非常清楚</p>
 <p><strong>反过来，如果采样率只是「刚刚好」</strong>，会出现什么？
 这正是例题 4 的内容：那时候波形不但会失真，
-频谱上还会出现<strong>根本不存在</strong>的频率成分 ✓</p>
+频谱上还会出现<strong>根本不存在</strong>的频率成分</p>
 <p><strong>注意 <code>True</code> 这一行</strong>：它是一句断言，不是装饰。
 如果哪天把 20 Hz 改成 800 Hz，这一行会立刻变成 <code>False</code>，
 提醒你「后面的频谱分析已经没有意义了」——
-这比事后盯着一个诡异的频谱图猜半天要便宜得多 ✓</p>
+这比事后盯着一个诡异的频谱图猜半天要便宜得多</p>
 <hr />
 <h2 id="_3">三、时域观察：为什么「看不出来」<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 先量几个可以核对的数<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -9199,7 +9199,7 @@ Nyquist 频率 fs/2    : 500.0 Hz
 前十点的含噪值    : [0.152, -0.426, 0.562, 0.748, -0.609, -0.201, 0.594, 0.445, 0.662, 0.305]
 四段的局部标准差  : [0.8884, 0.9474, 0.949, 0.8665]
 四段的局部最大值  : [2.3262, 2.2515, 1.997, 2.3407]</code></pre>
-<p><strong>这四行数字讲了一件事：噪声是「均匀分布在整个时间轴上的」。</strong></p>
+<p>这四行数字讲了一件事：噪声是「均匀分布在整个时间轴上的」。</p>
 <table>
 <thead>
 <tr>
@@ -9229,14 +9229,14 @@ Nyquist 频率 fs/2    : 500.0 Hz
 <p><strong>这里的第一条观察就是时域方法的死穴</strong>：
 如果噪声只出现在某一小段时间里，那切开来看就能定位它；
 但白噪声是<strong>每一段都有、每一段都一样多</strong>的，
-所以「切段统计」完全帮不上忙 ✓</p>
+所以「切段统计」完全帮不上忙</p>
 <p><strong>第二条观察更关键</strong>：真实信号的峰值是 1.432，
 含噪信号的峰值是 2.8864，看上去差很多。
 可是「峰值变高了」这件事<strong>既可能是噪声叠加造成的，
-也可能是信号本身就在那里</strong> —— 时域数值无法区分这两者 ⚠</p>
+也可能是信号本身就在那里</strong> —— 时域数值无法区分这两者</p>
 <h3 id="32">3.2 为什么时域看不出「哪些是噪声」<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>把这个问题说得更准确一点：
-<strong>在时域里，「信号」和「噪声」不是两样东西，它们是加在一起的同一个数。</strong></p>
+在时域里，「信号」和「噪声」不是两样东西，它们是加在一起的同一个数。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -9359,7 +9359,7 @@ Nyquist 频率 fs/2    : 500.0 Hz
 <p><strong>这提示了一个重要事实</strong>：
 「平均幅度」这种统计量在频谱里同样不中用，
 真正有用的判据是<strong>「有没有一根突出的尖峰」</strong>。
-后文找峰值用的就是「远高于周围」这个思路 ✓</p>
+后文找峰值用的就是「远高于周围」这个思路</p>
 <h3 id="33">3.3 画出来看：只能看出「更乱」<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -9465,7 +9465,7 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </tbody>
 </table>
 <p><strong>为什么不打印路径</strong>：路径里含盘符、用户名、随机目录名，
-在不同环境下完全不同，写进教学材料既不稳定也没有信息量 ✓</p>
+在不同环境下完全不同，写进教学材料既不稳定也没有信息量</p>
 <p><strong>这段有三个工程要点</strong>：</p>
 <table>
 <thead>
@@ -9491,19 +9491,19 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </table>
 <p><strong>为什么用 <code>with</code> 而不是 <code>mkdtemp</code> + <code>rmtree</code></strong>：
 后者一旦中间抛异常，<code>rmtree</code> 那行就执行不到，临时文件会越堆越多。
-<code>with</code> 在<strong>异常路径上也会清理</strong> ✓</p>
+<code>with</code> 在<strong>异常路径上也会清理</strong></p>
 <p><strong>这一段画出来的图，只有两个用途</strong>：
 一是确认「真实信号确实在两个频率上振荡」，
 二是确认「含噪波形看起来确实很乱」。
 至于「哪些点被污染了」—— 图上完全看不出来，
-这正是下一步要转向频域的原因 ✓</p>
+这正是下一步要转向频域的原因</p>
 <hr />
 <h2 id="_4">四、频域分析：把「看不出」变成「看得出」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么换个坐标就能看出来<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>先把这件事的直觉说清楚，再上代码。</p>
 <p><strong>傅里叶变换做的事</strong>：把一段信号写成「一堆不同频率的正弦，各占多少」。
 它换的不是信息，是<strong>坐标</strong>。
-同一条曲线，横轴从「时间」变成「频率」，内容一个字没多、一个字没少 ✓</p>
+同一条曲线，横轴从「时间」变成「频率」，内容一个字没多、一个字没少</p>
 <p><strong>为什么换完就能分开了</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
@@ -9519,17 +9519,17 @@ Nyquist 频率 fs/2    : 500.0 Hz
 尖峰所在的位置是信号，其余位置是噪声。</p>
 <p><strong>这就是全部思路</strong>。剩下的问题只有两个：
 - 怎么把频谱算准（4.2–4.4）
-- 怎么把尖峰留下、草地去掉（第五节）✓</p>
+- 怎么把尖峰留下、草地去掉（第五节）</p>
 <p><strong>为什么这件事在时域办不到</strong>：
 时域里信号和噪声是<strong>逐点相加</strong>的 ——
 第 137 个采样点的值是「信号在 137 点的值」+「噪声在 137 点的值」，
-两者焊死在一起，没有任何局部特征能把它们分开 ⚠</p>
+两者焊死在一起，没有任何局部特征能把它们分开</p>
 <h3 id="42-npfftrfft">4.2 用 <code>np.fft.rfft</code> 算频谱<a class="headerlink" href="#42-npfftrfft" title="Permanent link">&para;</a></h3>
 <p><strong>为什么用 <code>rfft</code> 而不是 <code>fft</code></strong>：
 输入是实信号，那么频谱一定是<strong>共轭对称</strong>的 ——
 负频率那一半的信息和正频率完全重复。
 <code>rfft</code>（real FFT）只算正频率那一半，
-输出长度从 <code>n</code> 变成 <code>n // 2 + 1</code>，<strong>计算量减半且不丢任何信息</strong> ✓</p>
+输出长度从 <code>n</code> 变成 <code>n // 2 + 1</code>，<strong>计算量减半且不丢任何信息</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -9608,19 +9608,19 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </code></pre></div></td></tr></table></div>
 <p><code>rfftfreq(n, d)</code> 里的第二个参数 <code>d</code> 是<strong>采样间隔（秒）</strong>，
 也就是 <code>1 / fs</code>。这一步很容易写错，
-写错的后果在例题 1 里实测 ✓</p>
+写错的后果在例题 1 里实测</p>
 <p><strong>为什么 <code>rfft</code> 的下标和 <code>freq</code> 的下标天然对齐</strong>：
 两者都按「从 0 Hz 到 Nyquist」的顺序排列，
 第 k 个元素就是同一个频率 ——
-所以后文能直接写 <code>spec[freq &gt; 50.0] = 0.0</code>，靠的就是这个对齐关系 ✓</p>
+所以后文能直接写 <code>spec[freq &gt; 50.0] = 0.0</code>，靠的就是这个对齐关系</p>
 <h3 id="43">4.3 从频谱里找出信号频段<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p><strong>为什么要找峰，而不是找「最大值」</strong>：
 频谱里每个点都是复数，直接比大小没有物理意义，
-要比的是<strong>模长</strong>（幅度）✓</p>
+要比的是<strong>模长</strong>（幅度）</p>
 <p>还有一个细节：直接取模得到的数值不是正弦的幅度，
 需要<strong>除以 n 再乘 2</strong>（除直流与 Nyquist 点外）。
 本案例里两个正弦的幅度是 1.0 与 0.5，
-换算正确的话，频谱上就该读到 1.0 与 0.5 ✓</p>
+换算正确的话，频谱上就该读到 1.0 与 0.5</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -9745,11 +9745,11 @@ Nyquist 频率 fs/2    : 500.0 Hz
 <p><strong>「幅度 0.983 对上 1.0」这件事本身就是一次校验</strong>：
 它说明频谱的标定是对的。
 如果忘了那个「乘 2」，读出来会是 0.49 左右 —— 正好差一倍，
-这种错误非常隐蔽，因为频谱<strong>形状完全正确</strong>，只是整体矮了一半 ⚠</p>
+这种错误非常隐蔽，因为频谱<strong>形状完全正确</strong>，只是整体矮了一半</p>
 <p><strong>Parseval 那两行是第二道校验</strong>：
 「频域功率之和」必须等于「时域平方的均值」。
 本案例得到 0.8538 与 0.8537，差在小数第三位，
-原因是直流项的折半处理带来的微小偏差 ✓</p>
+原因是直流项的折半处理带来的微小偏差</p>
 <div class="admonition tip">
 <p class="admonition-title">怎么判断一个峰是「信号」还是「噪声堆的」</p>
 <p>两根假峰（171 Hz、82 Hz）的幅度在 0.077 上下，
@@ -9780,16 +9780,16 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </tr>
 </tbody>
 </table>
-<p><strong>最可靠的判据是最后一条：重跑一遍看峰在不在原位。</strong></p>
+<p>最可靠的判据是最后一条：重跑一遍看峰在不在原位。</p>
 <p>本案例的数据是模拟的，所以在同一段信号里没法「重跑」；
 但真实项目里可以<strong>换一段采集数据</strong>做同样的频谱 ——
-真信号的峰会稳稳待在原地，噪声峰则会到处乱跑 ✓</p>
+真信号的峰会稳稳待在原地，噪声峰则会到处乱跑</p>
 </div>
 <h3 id="44-50-hz">4.4 50 Hz 这条线画在哪里<a class="headerlink" href="#44-50-hz" title="Permanent link">&para;</a></h3>
 <p><strong>为什么要选一个截止频率，而不是「把噪声全去掉」</strong>：
 因为「噪声」和「信号」在频谱上是<strong>同一种东西</strong>（都是正弦分量），
 唯一能利用的区别是<strong>位置</strong>。
-所以去噪的第一步是<strong>划定一条界线</strong>，说清「界线哪边是信号」✓</p>
+所以去噪的第一步是<strong>划定一条界线</strong>，说清「界线哪边是信号」</p>
 <p><strong>这条线不能凭感觉画，要从峰的位置推出来</strong>：</p>
 <table>
 <thead>
@@ -9824,7 +9824,7 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </table>
 <p><strong>为什么 50 Hz 是一个舒服的选择</strong>：
 它离 20 Hz 有 30 Hz 余量，离最近的高频噪声带又足够远。
-<strong>「离信号峰远一点、离噪声带也远一点」</strong> 就是划线的通用原则 ✓</p>
+<strong>「离信号峰远一点、离噪声带也远一点」</strong> 就是划线的通用原则</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -9928,7 +9928,7 @@ Nyquist 频率 fs/2    : 500.0 Hz
 </table>
 <p><strong>注意 22 Hz 和 10 Hz 之间那个断崖</strong>：
 SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
-这就是「切到信号」的代价 —— 它比不去噪还糟（含噪是 4.074）⚠</p>
+这就是「切到信号」的代价 —— 它比不去噪还糟（含噪是 4.074）</p>
 <div class="admonition warning">
 <p class="admonition-title">「最优点」不是靠调参数调出来的</p>
 <p>上表里 22 Hz 看起来最优，但<strong>不要直接照抄这个数</strong>。</p>
@@ -9957,7 +9957,7 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 <p><strong>真实项目里的做法</strong>：画出频谱，从峰的位置往两边找余地，
 选一个「离信号峰足够远、离噪声带也足够远」的值，
 而不是去搜索一个评价值的最优解 ——
-因为你手上<strong>没有评价值</strong>（没有真实信号可以比）✓</p>
+因为你手上<strong>没有评价值</strong>（没有真实信号可以比）</p>
 <p><strong>那怎么知道选得对不对</strong>？靠两条：</p>
 <table>
 <thead>
@@ -9978,7 +9978,7 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 </tbody>
 </table>
 <p>本页能做后者，是因为我们<strong>自己造了数据</strong>。
-这件事本身就是「模拟练习」的价值所在 ✓</p>
+这件事本身就是「模拟练习」的价值所在</p>
 </div>
 <hr />
 <h2 id="_5">五、设计滤波：两种方案对比<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -9988,7 +9988,7 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 而置零操作直接把草地<strong>切掉了</strong>。</p>
 <p><strong>它的问题</strong>：截止频率处的「台阶」太陡，
 这个台阶在时域里对应一段<strong>会振铃的冲击响应</strong>，
-表现就是波形在跳变附近出现多余的上下起伏 ✓</p>
+表现就是波形在跳变附近出现多余的上下起伏</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -10081,7 +10081,7 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 它的可怕之处在于：<strong>不报错</strong>。
 你会得到一段长度不对、但仍能画出来的波形，
 直到拿它去和真实信号相减时才发现形状对不上。
-例题 3 专门实测了这件事 ✓</p>
+例题 3 专门实测了这件事</p>
 <p><strong>输出里那两行「最大偏差」也值得注意</strong>：</p>
 <table>
 <thead>
@@ -10107,16 +10107,16 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 </table>
 <p><strong>整段的最大偏差比两端都大</strong> —— 说明最大偏差出现在<strong>中间某处</strong>，
 而不是边界。这正是 FFT 滤波（隐含周期延拓）的一种表现：
-它假设信号两端接得上，接不上就会在接缝处出问题 ⚠</p>
+它假设信号两端接得上，接不上就会在接缝处出问题</p>
 <h3 id="52">5.2 「砖墙滤波」的副作用：振铃<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p><strong>为什么叫「砖墙」</strong>：这个滤波器的频率响应是一个理想的矩形 ——
 通带内增益严格为 1，阻带内严格为 0，中间没有任何过渡。</p>
-<p><strong>问题出在那个「没有任何过渡」上。</strong>
+<p>问题出在那个「没有任何过渡」上。
 时域与频域是互补的：频域里越陡峭的边沿，时域里对应的就越「拖尾」。</p>
 <p><strong>怎么把这件事演示清楚</strong>：不去看含噪信号，
 而是喂给它一个<strong>阶跃信号</strong>（前半段是 0，后半段是 1）。
 理想情况下滤波后仍然是一个干净的台阶；
-但实际会在跳变点附近<strong>冒出多余的上下起伏</strong> —— 这就是振铃 ✓</p>
+但实际会在跳变点附近<strong>冒出多余的上下起伏</strong> —— 这就是振铃</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -10202,7 +10202,7 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 <p><strong>最后一行最能说明问题</strong>：
 跳变之前三个点本来是精确的 0，现在成了 0.0251、0.0225、0.0176；
 跳变之后本该是精确的 1，现在成了 0.9824、0.9775、0.9749。
-<strong>台阶两侧的高低都错了</strong> ✓</p>
+<strong>台阶两侧的高低都错了</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">振铃不是「数值误差」，是砖墙滤波的固有代价</p>
 <p>很多人以为 8.87% 的过冲是浮点误差或者代码写错了，于是到处找 bug。
@@ -10255,12 +10255,12 @@ SNR 从 18.112 掉到 6.872，<strong>差了 11 dB</strong>。
 <p><strong>最重要的是先知道它存在</strong>：
 本案例的信号是连续正弦，没有突变，
 所以振铃表现在 5.1 节那个「整段最大偏差 0.4373」上 ——
-它不像阶跃例子那么刺眼，但确实是同一件事 ✓</p>
+它不像阶跃例子那么刺眼，但确实是同一件事</p>
 </div>
 <h3 id="53-b">5.3 方案 B：时域移动平均<a class="headerlink" href="#53-b" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：把每一个采样点，替换成「它和它前后几个点的平均值」。</p>
 <p><strong>为什么它也是低通</strong>：相邻点平均会抵消掉快速变化（高频），
-保留下缓慢变化（低频）。<strong>「平均」这个动作本身就是低通</strong> ✓</p>
+保留下缓慢变化（低频）。<strong>「平均」这个动作本身就是低通</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -10383,8 +10383,8 @@ k = 101      0.4523          0.9105              0.189392
 噪声和信号叠加时标准差会偏大（0.9239），
 如果去噪得当，它应该<strong>趋近</strong> 0.7906；
 一旦掉到明显低于 0.7906，说明不只是噪声被去掉，
-<strong>信号本身的起伏也被抹平了</strong> ⚠</p>
-<p>这就是「越长越平滑但越失真」这句话的量化版本 ✓</p>
+<strong>信号本身的起伏也被抹平了</strong></p>
+<p>这就是「越长越平滑但越失真」这句话的量化版本</p>
 <h3 id="54">5.4 两种方案并排比<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
 <p><strong>先把同一件事的两种做法放在一起跑一遍</strong>，
 再讨论它们各自的代价：</p>
@@ -10482,7 +10482,7 @@ k = 101      0.4523          0.9105              0.189392
 <p><strong>先看「信号的平均功率 0.625」这一行怎么来的</strong>：
 两个正弦的幅度是 1.0 与 0.5，
 正弦的平均功率分别是 <span class="arithmatex">\(1.0^2 / 2 = 0.5\)</span> 与 <span class="arithmatex">\(0.5^2 / 2 = 0.125\)</span>，
-相加恰好 0.625 ✓
+相加恰好 0.625
 <strong>这就是「能手工核对」的价值</strong> —— 它确认了我们不是在一堆错数上做分析。</p>
 <p><strong>两种方案的对比表</strong>：</p>
 <table>
@@ -10588,7 +10588,7 @@ k = 101      0.4523          0.9105              0.189392
 <p><strong>注意这里用了一个技巧</strong>：
 计算 SNR 时，把「输出 − 真实信号」当作噪声。
 这在教学里可行（因为我们知道真实信号），
-而在真实项目里<strong>做不到</strong> —— 后面 9.2 节会讲替代办法 ✓</p>
+而在真实项目里<strong>做不到</strong> —— 后面 9.2 节会讲替代办法</p>
 </div>
 <hr />
 <h2 id="_6">六、量化去噪效果<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -10598,11 +10598,11 @@ k = 101      0.4523          0.9105              0.189392
 </code></pre></div></td></tr></table></div>
 <p><strong>为什么取对数</strong>：
 功率比可以从 0.001 到 1000 跨越六个数量级，
-取对数之后压缩到 −30 到 +30 这一段，好读也好比 ✓</p>
+取对数之后压缩到 −30 到 +30 这一段，好读也好比</p>
 <p><strong>为什么乘 10 而不是 20</strong>：
 这里比的是<strong>功率</strong>（幅度的平方）。
 如果比的是<strong>幅度</strong>，才用 20。
-两者并不矛盾 —— <span class="arithmatex">\(20\log_{10}\sqrt{P} = 10\log_{10}P\)</span> ✓</p>
+两者并不矛盾 —— <span class="arithmatex">\(20\log_{10}\sqrt{P} = 10\log_{10}P\)</span></p>
 <p><strong>dB 值怎么快速估</strong>：</p>
 <table>
 <thead>
@@ -10635,11 +10635,11 @@ k = 101      0.4523          0.9105              0.189392
 </tbody>
 </table>
 <p><strong>本案例含噪信号是 4.074 dB</strong> —— 也就是说噪声功率大约是信号的一半。
-这属于「很脏但还能救」的区间 ✓</p>
+这属于「很脏但还能救」的区间</p>
 <h3 id="62-snr-mse">6.2 去噪前后的 SNR 与 MSE<a class="headerlink" href="#62-snr-mse" title="Permanent link">&para;</a></h3>
 <p><strong>「改善了多少 dB」比「现在的 dB 是多少」更有意义</strong>：
 因为原始数据的噪声水平是你没法选的，
-但<strong>你的算法能压低多少噪声</strong>是可以比较的 ✓</p>
+但<strong>你的算法能压低多少噪声</strong>是可以比较的</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -10743,13 +10743,13 @@ k = 201        0.272    0.587101
 </table>
 <p><strong>排序完全一致</strong> —— 这说明在本案例里两个指标没有矛盾。
 但这<strong>不是必然的</strong>：当去噪方法有系统性偏差时（比如把某个频段整体压低），
-SNR 可能还不错，而 MSE 会明显变差 ✓</p>
+SNR 可能还不错，而 MSE 会明显变差</p>
 <p><strong>注意 k = 201 那一行</strong>：SNR 只有 0.272 dB，
-<strong>比含噪信号本身（4.074 dB）还低</strong> ⚠
+<strong>比含噪信号本身（4.074 dB）还低</strong>
 也就是说这个参数下<strong>去噪是负收益</strong> ——
 它削掉的信号比它去掉的噪声更多。</p>
 <p><strong>这就是「去噪也有变坏的时候」</strong>：
-参数选错时，处理后的信号比处理前更难用 ✓</p>
+参数选错时，处理后的信号比处理前更难用</p>
 <div class="admonition warning">
 <p class="admonition-title">SNR 高不等于结果好：一个必须避开的陷阱</p>
 <p>设想一个极端做法：<strong>把信号整体乘以 0</strong>。
@@ -10758,7 +10758,7 @@ SNR 会变成 <strong>0 dB</strong> —— 看起来还行。</p>
 <p>再设想另一个做法：<strong>把信号整体乘以 0.5</strong>。
 「输出 − 真实信号」= 0.5 × 真实信号，
 SNR = <span class="arithmatex">\(10\log_{10}(1/0.25)\)</span> = <strong>6.02 dB</strong>，
-<strong>比含噪信号的 4.074 dB 还高</strong> ⚠</p>
+<strong>比含噪信号的 4.074 dB 还高</strong></p>
 <p>但这两段输出都<strong>毫无用处</strong> —— 一个全零，一个幅度减半。</p>
 <table>
 <thead>
@@ -10779,7 +10779,7 @@ SNR = <span class="arithmatex">\(10\log_{10}(1/0.25)\)</span> = <strong>6.02 dB<
 </tbody>
 </table>
 <p><strong>所以本页每个表都同时给 MSE。</strong>
-MSE 对<strong>幅度错误</strong>是敏感的，而 SNR 只在「信噪比」这个意义上有意义 ✓</p>
+MSE 对<strong>幅度错误</strong>是敏感的，而 SNR 只在「信噪比」这个意义上有意义</p>
 <p><strong>一句话记住</strong>：<strong>SNR 管「干净不干净」，MSE 管「像不像」，两个都要报。</strong></p>
 </div>
 <hr />
@@ -10819,15 +10819,15 @@ MSE 对<strong>幅度错误</strong>是敏感的，而 SNR 只在「信噪比」
 </table>
 <p><strong>关键认识</strong>：<span class="arithmatex">\(H(f)\)</span> <strong>不知道哪部分是噪声</strong>。
 它只知道频率。所以「把高频置零」这个动作
-<strong>必然同时削掉高频里的噪声和高频里的信号</strong> ✓</p>
+<strong>必然同时削掉高频里的噪声和高频里的信号</strong></p>
 <p><strong>这就是滤波的代价</strong>：噪声抑制与信号保真，
-<strong>由同一个动作同时决定，无法分开选择</strong> ⚠</p>
+<strong>由同一个动作同时决定，无法分开选择</strong></p>
 <p><strong>本案例为什么能成功</strong>：因为运气好 ——
 信号恰好只在低频（5、20 Hz），噪声恰好铺满全频段。
-换个信号（比如信号的频段和噪声完全重叠），低通就没用了 ✓</p>
+换个信号（比如信号的频段和噪声完全重叠），低通就没用了</p>
 <div class="admonition tip">
 <p class="admonition-title">判断「低通滤波能不能用」只看一件事</p>
-<p><strong>信号的能量和噪声的能量，在频率轴上分得开吗？</strong></p>
+<p>信号的能量和噪声的能量，在频率轴上分得开吗？</p>
 <table>
 <thead>
 <tr>
@@ -10856,7 +10856,7 @@ MSE 对<strong>幅度错误</strong>是敏感的，而 SNR 只在「信噪比」
 </table>
 <p><strong>做法顺序永远是</strong>：先画频谱 → 看两者在频率上分不分得开
 → 再决定用哪种滤波器。
-反过来（先定滤波器再看信号）会把明明能救的数据判成没救 ✓</p>
+反过来（先定滤波器再看信号）会把明明能救的数据判成没救</p>
 </div>
 <h3 id="72">7.2 为什么简单低通会带来相位延迟<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p><strong>先说清一个容易混淆的点</strong>：
@@ -10890,7 +10890,7 @@ MSE 对<strong>幅度错误</strong>是敏感的，而 SNR 只在「信噪比」
 <p><strong>为什么真实系统一定是「因果」的</strong>：
 实时采集时，第 <span class="arithmatex">\(t\)</span> 个采样点到达的那一刻，
 <strong>第 <span class="arithmatex">\(t+1\)</span> 个点还不存在</strong> —— 你不可能用未来的数据做平均。
-于是只能做成「当前点和前 <span class="arithmatex">\(k-1\)</span> 个点的平均」，延迟就出现了 ✓</p>
+于是只能做成「当前点和前 <span class="arithmatex">\(k-1\)</span> 个点的平均」，延迟就出现了</p>
 <p><strong>用因果卷积把延迟量出来</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
@@ -10990,10 +10990,10 @@ k = 101：整体延迟 49 点</code></pre>
 于是峰值位置不仅右移，还可能因为邻峰变高而<strong>前移</strong>。
 一个 5 Hz 的周期有 200 个采样点，
 相邻的两个峰离得很远，但滤波后的波形形状变了，
-<code>argmax</code> 取到的位置就不再是原来那个峰 ⚠</p>
+<code>argmax</code> 取到的位置就不再是原来那个峰</p>
 <p><strong>而互相关用的是「整段波形最相似的那个偏移量」</strong>，
 所以它稳定得多：k = 11 给 5 点、k = 51 给 23 点、k = 101 给 49 点，
-和理论值 5.0、25.0、50.0 都对得上（差的 1～2 点来自噪声影响）✓</p>
+和理论值 5.0、25.0、50.0 都对得上（差的 1～2 点来自噪声影响）</p>
 <p><strong>这条延迟的物理含义 —— 它等价于一个相位滞后</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
@@ -11039,11 +11039,11 @@ k = 101：整体延迟 49 点</code></pre>
 </tbody>
 </table>
 <p><strong>k = 11 时 20 Hz 已经落后 36°</strong>，而 <span class="arithmatex">\(k\)</span> = 51 时落后 <strong>180°</strong> ——
-<strong>波形反过来了</strong>（正弦落后半个周期就是取负）✓</p>
+<strong>波形反过来了</strong>（正弦落后半个周期就是取负）</p>
 <p><strong>这就是「越长越失真」的另一种解释</strong>：
 窗口变长不只是把波形压扁，
 它还让<strong>不同频率的分量落后不同的角度</strong>（这叫相位失真），
-于是叠加出来的波形形状与原来不再相似 ⚠</p>
+于是叠加出来的波形形状与原来不再相似</p>
 <p><strong>怎么消除这条延迟</strong>：</p>
 <table>
 <thead>
@@ -11073,7 +11073,7 @@ k = 101：整体延迟 49 点</code></pre>
 <p><strong>为什么最后要画这一张图</strong>：
 前面每一节的结论都是数字。
 把「真实信号 / 含噪信号 / 幅度谱 / 去噪后」四张放在一起，
-能<strong>一眼看出</strong>每个结论对应波形上的什么变化 ✓</p>
+能<strong>一眼看出</strong>每个结论对应波形上的什么变化</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -11212,7 +11212,7 @@ k = 101：整体延迟 49 点</code></pre>
 </table>
 <p><strong>注意「四个子图的数据点数」这一行的第三个值是 501</strong>。
 如果它显示 1000，说明不小心用了 <code>fft</code> 而不是 <code>rfft</code>，
-或者频率轴和频谱对不上 —— <strong>这个数字就是那道防线</strong> ✓</p>
+或者频率轴和频谱对不上 —— <strong>这个数字就是那道防线</strong></p>
 <h3 id="82">8.2 怎么看这四张图<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -11246,23 +11246,23 @@ k = 101：整体延迟 49 点</code></pre>
 </tbody>
 </table>
 <p><strong>四张图放一起，正好对应本页的四步</strong>：
-造数据 → 看时域局限 → 转向频域 → 回时域验证 ✓</p>
+造数据 → 看时域局限 → 转向频域 → 回时域验证</p>
 <div class="admonition tip">
 <p class="admonition-title">看图时只问两个问题</p>
 <ol>
 <li>
 <p><strong>第三张图的峰，与第四张图的波形对不对得上？</strong>
    本案例 5 Hz 的峰最高、20 Hz 次之，
-   那么第四张图里应该看到「低频分量幅度更大」的叠加形状 ✓</p>
+   那么第四张图里应该看到「低频分量幅度更大」的叠加形状</p>
 </li>
 <li>
 <p><strong>第一张图和第四张图差多少？</strong>
    如果两者几乎重合，说明去噪很成功；
    如果第四张明显比第一张「扁」或者「拖后」，
-   说明窗口/截止频率选得太狠 ⚠</p>
+   说明窗口/截止频率选得太狠</p>
 </li>
 </ol>
-<p><strong>不要问「第四张好不好看」</strong> —— 这是最没信息量的问题 ✓</p>
+<p><strong>不要问「第四张好不好看」</strong> —— 这是最没信息量的问题</p>
 </div>
 <hr />
 <h2 id="_9">九、如果要做真实项目，你会怎么改<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -11314,9 +11314,9 @@ k = 101：整体延迟 49 点</code></pre>
 它的频率响应是「三角形」的（近似 <code>sinc²</code>），
 <strong>通带里就开始往下掉</strong> —— 本案例 5.2 节那张表里，
 k = 51 时 20 Hz 只剩 0.4636（真实是 0.5），
-说明它<strong>连该留的成分都没完全留住</strong> ⚠</p>
+说明它<strong>连该留的成分都没完全留住</strong></p>
 <p><strong>设计好的滤波器能做到</strong>：通带内几乎平坦（不动信号），
-只在过渡带和阻带里下降（专门对付噪声）✓</p>
+只在过渡带和阻带里下降（专门对付噪声）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11418,7 +11418,7 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 </table>
 <p><strong>为什么 Butterworth 只是「略好」而不是「好很多」</strong>：
 本案例的信号和噪声<strong>在频率上分得很开</strong>，
-这种「容易题」里，粗糙的方法也能拿到接近最优的成绩 ✓</p>
+这种「容易题」里，粗糙的方法也能拿到接近最优的成绩</p>
 <p><strong>它的优势不体现在这几个数字上，而体现在两处</strong>：</p>
 <table>
 <thead>
@@ -11462,11 +11462,11 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 </table>
 <p><strong><code>filtfilt</code> 的代价</strong>：它需要<strong>整段数据</strong>（不能在线用），
 而且两端的边界处理会引入额外的暂态 ——
-上面输出里「截掉首尾各 100 点后最大偏差降到 0.4217」就是这个意思 ✓</p>
+上面输出里「截掉首尾各 100 点后最大偏差降到 0.4217」就是这个意思</p>
 <div class="admonition warning">
 <p class="admonition-title">真实项目里，你手上没有真实信号</p>
 <p>本页从头到尾能算 SNR 和 MSE，<strong>只因为数据是自己造的</strong>。
-真实项目里这两样东西都拿不到 —— 这正是本页最大的「练习题光环」⚠</p>
+真实项目里这两样东西都拿不到 —— 这正是本页最大的「练习题光环」</p>
 <table>
 <thead>
 <tr>
@@ -11495,10 +11495,10 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 </table>
 <p><strong>最实用的一条</strong>：把「去噪前 − 去噪后」当作估计出来的噪声，
 检查它<strong>是不是像白噪声</strong>（频谱平坦、自相关接近零）。
-如果残差里还有明显的周期成分，说明<strong>信号被一起削掉了</strong> ⚠</p>
+如果残差里还有明显的周期成分，说明<strong>信号被一起削掉了</strong></p>
 <p><strong>第二条</strong>：如果设备有机会采集一段「只开设备、不输入信号」的数据，
 那就拿到了真实的噪声样本 —— 这条噪声记录能用来估功率、
-定截止频率、甚至直接做仿真。<strong>很多工程现场会专门采这一段</strong> ✓</p>
+定截止频率、甚至直接做仿真。<strong>很多工程现场会专门采这一段</strong></p>
 </div>
 <h3 id="92">9.2 还能往下做什么<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
 <table>
@@ -11545,7 +11545,7 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 <p><strong>这些方法的共同点</strong>：都建立在「信号和噪声在某一个维度上可分」这个前提上。
 低通用<strong>频率</strong>分，中值滤波用<strong>幅度的分布</strong>分，
 多通道平均用<strong>测量的独立性</strong>分 ——
-<strong>先找到那个「可分」的维度，方法才有意义</strong> ✓</p>
+<strong>先找到那个「可分」的维度，方法才有意义</strong></p>
 <hr />
 <h2 id="_10">十、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：噪声不是高斯的，前面的结论还成立吗<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -11679,7 +11679,7 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 <p><strong>再看脉冲噪声的统计特征</strong>：
 1000 个点里只有 20 个非零，高度 5.0，
 标准差 0.706 —— 但<strong>均值只有 0.04</strong>。
-这说明它是<strong>稀疏的大偏离</strong>，而不是「持续的抖动」✓</p>
+这说明它是<strong>稀疏的大偏离</strong>，而不是「持续的抖动」</p>
 <p><strong>现在换成两种方法各跑一遍</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
@@ -11816,11 +11816,11 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 </tr>
 </tbody>
 </table>
-<p><strong>中值滤波比移动平均好 20.6 dB，MSE 小 115 倍</strong> ✓</p>
+<p><strong>中值滤波比移动平均好 20.6 dB，MSE 小 115 倍</strong></p>
 <p><strong>为什么中值滤波这么强</strong>：
 窗口 11 个点里最多只有 1 个尖峰，
 取中位数时，这个尖峰<strong>排在最大或最小那一端，被直接丢掉</strong>；
-而取平均时，它会按 1/11 的权重<strong>掺进结果</strong> ⚠</p>
+而取平均时，它会按 1/11 的权重<strong>掺进结果</strong></p>
 <p><strong>一句话概括两种方法的分工</strong>：</p>
 <table>
 <thead>
@@ -11850,7 +11850,7 @@ Butterworth 零相位    SNR  13.981 dB   MSE 0.024993   最大偏差 0.4686
 </table>
 <p><strong>所以本页的结论有一个前提条件</strong>：
 「低通滤波能救这个信号」，成立的前提是
-<strong>噪声近似高斯白噪声</strong> —— 换成脉冲噪声就要换武器 ✓</p>
+<strong>噪声近似高斯白噪声</strong> —— 换成脉冲噪声就要换武器</p>
 </details>
 <hr />
 <h3 id="2">例题 2：频率轴写错会怎样<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -11899,7 +11899,7 @@ rfftfreq(n, 1/fs): [0.0, 125.0, 250.0, 375.0, 500.0] → 单位才是 Hz
 两者相差 1000 倍 —— 差别只在于有没有把采样间隔传进去</code></pre>
 <p><strong><code>rfftfreq</code> 的默认参数 <code>d=1.0</code> 含义是「采样间隔为 1 个单位」</strong>，
 于是返回的频率单位是「每单位采样一次」，取值范围 <code>0</code> 到 <code>0.5</code>。
-乘上采样率才是 Hz ✓</p>
+乘上采样率才是 Hz</p>
 <p><strong>后果一览</strong>：</p>
 <table>
 <thead>
@@ -11928,7 +11928,7 @@ rfftfreq(n, 1/fs): [0.0, 125.0, 250.0, 375.0, 500.0] → 单位才是 Hz
 </code></pre></div></td></tr></table></div>
 <p>如果 <code>freq_hz</code> 的最大值只有 0.5，
 那么 <code>freq_hz &gt; 50.0</code> <strong>永远为假</strong> ——
-<strong>一行都没被置零，滤波等于没做，而且不报错</strong> ⚠</p>
+<strong>一行都没被置零，滤波等于没做，而且不报错</strong></p>
 <p><strong>顺带核一下幅度谱的标定</strong>，它和频率轴是同一类问题：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
@@ -12037,10 +12037,10 @@ rfftfreq(n, 1/fs): [0.0, 125.0, 250.0, 375.0, 500.0] → 单位才是 Hz
 <p><strong>方案 A 的成绩几乎是完美的</strong>：
 两个信号分量的幅度<strong>分毫未动</strong>（0.9831 与 0.5023 与含噪信号完全一样，
 因为置零操作根本碰不到这两个频点），
-而 50 Hz 以上的残留被切到 <strong>0.0000</strong> ✓</p>
+而 50 Hz 以上的残留被切到 <strong>0.0000</strong></p>
 <p><strong>方案 B 的 20 Hz 只剩 0.4636</strong> —— 比真值 0.5 低了 7.3%。
 这就是移动平均「通带本身就不平」的证据：
-<strong>它连该留的成分都在往下压</strong> ⚠</p>
+<strong>它连该留的成分都在往下压</strong></p>
 <p><strong>所以两个指标可以分开看</strong>：</p>
 <table>
 <thead>
@@ -12066,7 +12066,7 @@ rfftfreq(n, 1/fs): [0.0, 125.0, 250.0, 375.0, 500.0] → 单位才是 Hz
 <p><strong>这就是为什么本页强调「两个指标都要报」</strong>：
 只看 SNR，方案 B 略好（10.002 对 9.602 dB）；
 只看保真，方案 A 明显更好。
-<strong>哪个更合适取决于任务</strong> ✓</p>
+<strong>哪个更合适取决于任务</strong></p>
 </details>
 <hr />
 <h3 id="3-nyquist">例题 3：采样率降到刚好 Nyquist 会怎样<a class="headerlink" href="#3-nyquist" title="Permanent link">&para;</a></h3>
@@ -12221,13 +12221,13 @@ Nyquist 频率 fs / 2  : 20.0 Hz
 20 Hz 的正弦在这些时刻的值是：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a>sin(2π × 20 × k/40) = sin(π k) = 0      对所有整数 k
 </code></pre></div></td></tr></table></div>
-<p><strong>每一个采样点都恰好落在零点上</strong> ⚠
+<p><strong>每一个采样点都恰好落在零点上</strong>
 也就是说，<strong>采样后这段信号看起来就是一条 0 线</strong>，
-连「里面有个 20 Hz 分量」这个事实都记录不下来 ✓</p>
+连「里面有个 20 Hz 分量」这个事实都记录不下来</p>
 <p><strong>这就是 Nyquist 条件的真实含义</strong>：
 「采样率必须大于两倍最高频率」里的<strong>「大于」不是大于等于</strong>。
 刚好等于时，正弦正好踩在零点上（或正好踩在极值上，取决于相位），
-<strong>信息完全丢失，且无法从数据里恢复</strong> ⚠</p>
+<strong>信息完全丢失，且无法从数据里恢复</strong></p>
 <p><strong>还有第二重损失，与 Nyquist 无关</strong>：</p>
 <table>
 <thead>
@@ -12254,7 +12254,7 @@ Nyquist 频率 fs / 2  : 20.0 Hz
 <p><strong>所以「调低采样率」是双重损失</strong>：
 上限（Nyquist）变低 + 分辨率（fs/n）变差 ——
 而在本案例里，分辨率恰好没差（还是 1 Hz，因为时长也变成了 1 秒），
-<strong>真正致命的是 Nyquist 这一条</strong> ✓</p>
+<strong>真正致命的是 Nyquist 这一条</strong></p>
 <p><strong>工程上的规矩</strong>：</p>
 <table>
 <thead>
@@ -12284,7 +12284,7 @@ Nyquist 频率 fs / 2  : 20.0 Hz
 </table>
 <p><strong>如果采样率低于两倍最高频率会怎样</strong>（不是等于，而是低于）？
 那就会出现<strong>混叠</strong>：5 Hz 的信号可能被记录成 3 Hz，
-频谱上你的信号会<strong>跑到一个根本不存在的频率上</strong> ✓</p>
+频谱上你的信号会<strong>跑到一个根本不存在的频率上</strong></p>
 <p><strong>一个可以随时验证的小例子</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
@@ -12345,7 +12345,7 @@ Nyquist 频率  : 4.0 Hz  ← 5 Hz 已经越过它
 每个周期只剩 1.6 个采样点，正弦被采成了另一个正弦</code></pre>
 <p><strong>幅度谱里只有一个孤零零的 1.0，落在 3.0 Hz 上</strong>：
 这就是混叠的典型样子 ——
-<strong>信号看起来完全正常，只是它的频率是错的</strong> ⚠</p>
+<strong>信号看起来完全正常，只是它的频率是错的</strong></p>
 <p><strong>混叠为什么比「丢信号」更危险</strong>：</p>
 <table>
 <thead>
@@ -12369,11 +12369,11 @@ Nyquist 频率  : 4.0 Hz  ← 5 Hz 已经越过它
 </tbody>
 </table>
 <p><strong>「有一根峰」比「没有峰」难发现得多</strong> ——
-没有峰你会去查，有一根错位的峰你会以为是别的信号 ✓</p>
+没有峰你会去查，有一根错位的峰你会以为是别的信号</p>
 <p><strong>这就是硬件上必须加抗混叠滤波器的原因</strong>：
 它把超过 <code>fs/2</code> 的内容在采样<strong>之前</strong>就挡掉，
 于是混叠根本不会发生 ——
-因为在采样之后，混叠已经<strong>不可能被修复了</strong> ⚠</p>
+因为在采样之后，混叠已经<strong>不可能被修复了</strong></p>
 </details>
 <hr />
 <h3 id="4">例题 4：噪声变大时，两种方案还站得住吗<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -12521,8 +12521,8 @@ Nyquist 频率  : 4.0 Hz  ← 5 Hz 已经越过它
 它对「噪声功率」的削减比例<strong>只取决于噪声的频谱形状</strong>，
 与噪声多大无关。
 白噪声的频谱形状不随幅度变化，所以削减比例是恒定的，
-换算成 dB 就是<strong>一个常数</strong> ✓</p>
-<p><strong>② 噪声很大时，去噪后仍然救不回来。</strong></p>
+换算成 dB 就是<strong>一个常数</strong></p>
+<p>② 噪声很大时，去噪后仍然救不回来。</p>
 <table>
 <thead>
 <tr>
@@ -12555,7 +12555,7 @@ Nyquist 频率  : 4.0 Hz  ← 5 Hz 已经越过它
 </tbody>
 </table>
 <p><strong>这是一条非常重要的工程认识</strong>：
-<strong>去噪能改善信噪比，但不能凭空创造信息。</strong></p>
+去噪能改善信噪比，但不能凭空创造信息。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
 <span class="normal"><a href="#__codelineno-29-2">2</a></span>
 <span class="normal"><a href="#__codelineno-29-3">3</a></span>
@@ -12597,7 +12597,7 @@ Nyquist 频率  : 4.0 Hz  ← 5 Hz 已经越过它
 </table>
 <p><strong>一句话总结</strong>：<strong>滤波是「把已有的信号从噪声里捞出来」，
 不是「把噪声里的信号造出来」。</strong>
-捞得出来的前提是它还在那儿 ✓</p>
+捞得出来的前提是它还在那儿</p>
 </details>
 <hr />
 <h2 id="_11">十一、自测<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -12704,11 +12704,11 @@ B 与真实信号的最大偏差 : 0.5304
 <p><strong>为什么这个错误容易被忽略</strong>：
 波形<strong>形状完全正确</strong>，只是整体高了 11 倍。
 如果只画图看形状，一切正常；
-只有在拿数值去比较（算标准差、算误差）时才会暴露 ⚠</p>
+只有在拿数值去比较（算标准差、算误差）时才会暴露</p>
 <p><strong>判断核是否归一化的一句话</strong>：
 <strong>低通滤波器的增益应当是 1</strong> ——
 也就是说，直流分量（常数信号）通过后<strong>数值不变</strong>。
-验证办法：喂一个全 1 的信号进去，输出还应该是全 1 ✓</p>
+验证办法：喂一个全 1 的信号进去，输出还应该是全 1</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
 <span class="normal"><a href="#__codelineno-32-2">2</a></span>
 <span class="normal"><a href="#__codelineno-32-3">3</a></span>
@@ -12723,7 +12723,7 @@ B 与真实信号的最大偏差 : 0.5304
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>全 1 输入 → 段 A 输出: 11.0
 全 1 输入 → 段 B 输出: 1.0</code></pre>
-<p><strong>这个「喂常数」的测试只要两行，能挡住一整类增益错误</strong> ✓</p>
+<p><strong>这个「喂常数」的测试只要两行，能挡住一整类增益错误</strong></p>
 </details>
 <hr />
 <p><strong>Q2</strong> 计算 SNR 时，用「平方和之比」和用「平均值之比」结果一样吗？
@@ -12802,9 +12802,9 @@ B 与真实信号的最大偏差 : 0.5304
 <p><strong>第一个答案</strong>：<strong>两种写法数值完全相同</strong>（2.555175）。
 因为分子分母都是同一个长度 N 的数组，
 平方和与平均值之间只差一个「同时除以 N」的因子，
-<strong>约掉了</strong> ✓</p>
-<p><strong>所以选哪个只是习惯问题，结果不受影响。</strong>
-用平均值的好处是「它就是平均功率」，物理意义更直白 ✓</p>
+<strong>约掉了</strong></p>
+<p>所以选哪个只是习惯问题，结果不受影响。
+用平均值的好处是「它就是平均功率」，物理意义更直白</p>
 <p><strong>第二个问题才是关键</strong>：</p>
 <table>
 <thead>
@@ -12868,9 +12868,9 @@ B 与真实信号的最大偏差 : 0.5304
 </table>
 <p><strong>最后一条最坑</strong>：因为方向不变，
 你比较两个方案时仍然会得出正确排序，
-但你会以为「方案 B 比方案 A 好了 1.6 dB」，实际只好了 0.8 dB ⚠</p>
+但你会以为「方案 B 比方案 A 好了 1.6 dB」，实际只好了 0.8 dB</p>
 <p><strong>自查办法</strong>：算完想一句「我比的是功率还是幅度」。
-本页全程比的是功率，所以<strong>一律用 10</strong> ✓</p>
+本页全程比的是功率，所以<strong>一律用 10</strong></p>
 </details>
 <hr />
 <p><strong>Q3</strong> 用 <code>mode="valid"</code> 做移动平均后，输出长度变成了 990。
@@ -12955,13 +12955,13 @@ B 与真实信号的最大偏差 : 0.5304
 valid 模式只保留窗口完整的那些位置，所以两端各少 5 个点</code></pre>
 <p><strong>答案分三层</strong>：</p>
 <p><strong>① 不能直接减。</strong> 形状 <code>(990,)</code> 与 <code>(1000,)</code> 无法广播，
-NumPy 会抛 <code>ValueError</code> ✓</p>
+NumPy 会抛 <code>ValueError</code></p>
 <p><strong>② 这个报错其实是好事。</strong>
 形状对不上时<strong>报错</strong>远比<strong>悄悄算出一个数</strong>安全。
 设想另一种情况：如果长度恰好是 1 和 1000，
 广播会<strong>成功</strong>，把那个标量减去每一个元素 ——
-结果看起来是个数，但<strong>毫无意义</strong> ⚠</p>
-<p><strong>③ 对齐时必须知道 <code>valid</code> 输出的第一个点对应输入的哪个位置。</strong></p>
+结果看起来是个数，但<strong>毫无意义</strong></p>
+<p>③ 对齐时必须知道 <code>valid</code> 输出的第一个点对应输入的哪个位置。</p>
 <table>
 <thead>
 <tr>
@@ -13018,9 +13018,9 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 <p><strong>为什么是 5 点而不是 10 点</strong>：
 <code>valid</code> 模式下，<strong>第一个输出点用的是输入的 0～10 号点</strong>，
 它的「中心」在输入的 <strong>5 号点</strong> 上。
-所以正确的对齐是 <code>clean[5:5+990]</code> ✓</p>
+所以正确的对齐是 <code>clean[5:5+990]</code></p>
 <p><strong>「输出第 m 个点 = 输入第 m 到第 m+10 个点的平均」这句提示是关键</strong>：
-从这里能推出中心位置是 <span class="arithmatex">\(m + 5\)</span>，也就是偏移 5 点 ✓</p>
+从这里能推出中心位置是 <span class="arithmatex">\(m + 5\)</span>，也就是偏移 5 点</p>
 <p><strong>工程上的建议</strong>：</p>
 <table>
 <thead>
@@ -13048,7 +13048,7 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 它把两端的「不完整窗口」也算了进去 ——
 开头第 0 个输出点只用到了 6 个点（而不是 11 个），
 严格说结果不可信。
-所以对边界敏感的任务，要么用 <code>valid</code>，要么把两端截掉 ✓</p>
+所以对边界敏感的任务，要么用 <code>valid</code>，要么把两端截掉</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 下面这段想「只保留 50 Hz 以下的成分」。
@@ -13165,7 +13165,7 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 </tbody>
 </table>
 <p><strong>所以「不报错」完全是假象</strong> ——
-它不但没去噪，还<strong>让结果比不处理更糟</strong> ⚠</p>
+它不但没去噪，还<strong>让结果比不处理更糟</strong></p>
 <p><strong>修正写法</strong>：</p>
 <table>
 <thead>
@@ -13197,7 +13197,7 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1"></a>「我要留下的那一侧，条件应该为 False。」
 </code></pre></div></td></tr></table></div>
 <p>想留低频 → 条件写成 <code>freq &gt; 截止</code>（高频那侧为 True）
-→ 被置零的是高频 → 低频留下 ✓</p>
+→ 被置零的是高频 → 低频留下</p>
 <p><strong>一个更不容易写错的写法</strong>：直接用「保留」的语义写：
 （这段的缩进要跟着 admonition 走，所以整块左移了 4 格，内容与原位一致）</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
@@ -13266,9 +13266,9 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 <p><strong>这类「掩码写反」的错误为什么会在真实项目里发生</strong>：
 因为它<strong>没有任何反馈</strong> ——
 程序跑通了、图也画出来了、波形看着还挺「干净」（因为它把信号全切了），
-只有在<strong>有真值可比</strong>的时候才会暴露 ⚠</p>
+只有在<strong>有真值可比</strong>的时候才会暴露</p>
 <p><strong>这正是本页反复强调「自己造数据」的价值</strong>：
-没有标准答案，你连「我搞反了」都不知道 ✓</p>
+没有标准答案，你连「我搞反了」都不知道</p>
 </details>
 <hr />
 <h2 id="_12">小结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
@@ -13382,12 +13382,12 @@ NumPy 会抛 <code>ValueError</code> ✓</p>
 这一页处理的是<strong>被噪声污染的测量值</strong>，
 下一页处理的是<strong>一张要优化的目标函数</strong>：
 数据的脏法从「噪声叠加」换成「维数高、条件数差、有局部极小」，
-而「先看清再动手」这条原则完全不变 ✓</p>
+而「先看清再动手」这条原则完全不变</p>
 <p><strong>相关模块</strong>：<a href="../../../../math/signal-systems/">信号与系统</a> ——
 本页用到的采样、Nyquist、频谱、卷积、滤波器设计，
 在那一模块里有系统的推导与讨论。
 本页只做「用 Python 跑一遍」，
-<strong>想弄清公式从哪来，去看那一模块</strong> ✓</p>
+<strong>想弄清公式从哪来，去看那一模块</strong></p>
 
 
 

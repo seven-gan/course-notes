@@ -7956,16 +7956,16 @@
 <p><strong>怎么知道它到底好不好？</strong></p>
 </blockquote>
 <p><strong>为什么这件事容易出错</strong>：因为"好"的定义<strong>依赖场景</strong>。
-同一个分类器，用不同指标评价可能得到<strong>完全相反的结论</strong> ⚠
+同一个分类器，用不同指标评价可能得到<strong>完全相反的结论</strong>
 而选错指标会导致<strong>上线一个不该上线的系统</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">这一页要建立的两个观念</p>
 <p><strong>① 指标不是中性的</strong>
 每个指标都隐含地假设了"哪类错误更严重"。
-用错指标 = 用错误的标准做决策 ⚠</p>
+用错指标 = 用错误的标准做决策</p>
 <p><strong>② 评估本身会骗人</strong>
 信息泄露、测试集反复使用、类别不平衡 ——
-这些都会让报告的数字<strong>明显好于真实性能</strong> ⚠</p>
+这些都会让报告的数字<strong>明显好于真实性能</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、混淆矩阵：一切指标的来源<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -7993,7 +7993,7 @@
 </tbody>
 </table>
 <p><strong>为什么一切指标都要回到这张表</strong>：
-所有常用指标<strong>都是这四个数的不同组合</strong> ✓
+所有常用指标<strong>都是这四个数的不同组合</strong>
 理解了这张表，任何指标都能自己推出来。</p>
 <h3 id="12">1.2 两类错误的代价往往不同<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <table>
@@ -8019,7 +8019,7 @@
 </table>
 <p><strong>关键认识</strong>：<strong>这两类错误的代价几乎从不对等</strong>。</p>
 <p><strong>所以不存在"最好的指标"</strong> ——
-只有"与场景代价结构匹配的指标" ✓</p>
+只有"与场景代价结构匹配的指标"</p>
 <h3 id="13">1.3 四个基本指标<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -8065,8 +8065,8 @@
 </ul>
 <h3 id="14">1.4 精确率与召回率的权衡<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p><strong>这两者通常此消彼长</strong>：想让召回率高就得"宁可错判也不漏"，
-但这样精确率会降 ⚠</p>
-<p><strong>怎么调这个平衡</strong>：<strong>移动判决阈值</strong> ✓</p>
+但这样精确率会降</p>
+<p><strong>怎么调这个平衡</strong>：<strong>移动判决阈值</strong></p>
 <table>
 <thead>
 <tr>
@@ -8097,26 +8097,26 @@ F_1 = \frac{2\,\text{Precision}\cdot\text{Recall}}
 若一个指标很低，F1 就低。</p>
 <p><strong>这一点很重要</strong>：算术平均下 <span class="arithmatex">\((1.0,\ 0.0)\)</span> 会得到 0.5，
 看起来"还行"；而调和平均得 <strong>0</strong>，
-<strong>正确地反映了"有一个维度完全失效"</strong> ✓</p>
+<strong>正确地反映了"有一个维度完全失效"</strong></p>
 <p><strong>更一般的 <span class="arithmatex">\(F_\beta\)</span></strong>（<span class="arithmatex">\(\beta\)</span> 控制偏好）：</p>
 <div class="arithmatex">\[
 F_\beta = (1+\beta^2)\,\frac{\text{Precision}\cdot\text{Recall}}
 {\beta^2\,\text{Precision}+\text{Recall}}
 \]</div>
-<p><strong>读法</strong>：<span class="arithmatex">\(\beta \gt 1\)</span> <strong>偏向召回率</strong>，<span class="arithmatex">\(\beta \lt 1\)</span> <strong>偏向精确率</strong> ✓</p>
+<p><strong>读法</strong>：<span class="arithmatex">\(\beta \gt 1\)</span> <strong>偏向召回率</strong>，<span class="arithmatex">\(\beta \lt 1\)</span> <strong>偏向精确率</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">准确率在类别不平衡时几乎无用</p>
 <p>设某病患病率 1%。一个<strong>把所有样本都判为"没病"</strong>的分类器：</p>
 <div class="arithmatex">\[
 \text{准确率} = \frac{9900}{10000} = 99\%
 \]</div>
-<p><strong>它什么也没学到，准确率却有 99%</strong> ⚠</p>
+<p><strong>它什么也没学到，准确率却有 99%</strong></p>
 <p>更糟的是：看到"99% 准确率"的人<strong>会以为系统很好</strong>。</p>
 <p><strong>对策</strong>（至少用其一）：</p>
-<p>· 报告<strong>召回率与精确率</strong>（此时召回率是 0，问题立刻暴露）✓
+<p>· 报告<strong>召回率与精确率</strong>（此时召回率是 0，问题立刻暴露）
 · 用<strong>平衡准确率</strong>（召回率与特异度的平均）
 · 用 <strong>ROC 的 AUC</strong> 或 <strong>PR 的 AUC</strong>
-· 报告<strong>相对于基线的提升</strong>（而不是绝对准确率）⚠</p>
+· 报告<strong>相对于基线的提升</strong>（而不是绝对准确率）</p>
 </div>
 <hr />
 <h2 id="roc-pr">二、ROC 与 PR 曲线<a class="headerlink" href="#roc-pr" title="Permanent link">&para;</a></h2>
@@ -8181,9 +8181,9 @@ F_\beta = (1+\beta^2)\,\frac{\text{Precision}\cdot\text{Recall}}
 </tbody>
 </table>
 <p><strong>AUC 的一个重要含义</strong>：<strong>随机取一个正样本和一个负样本，
-分类器给正样本打分更高的概率</strong> ✓</p>
+分类器给正样本打分更高的概率</strong></p>
 <p><strong>这个解释很实用</strong>：它说明 AUC 衡量的是<strong>排序能力</strong>，
-<strong>与阈值无关</strong> ✓</p>
+<strong>与阈值无关</strong></p>
 <h3 id="22-pr">2.2 PR 曲线<a class="headerlink" href="#22-pr" title="Permanent link">&para;</a></h3>
 <p><strong>PR 曲线</strong>以<strong>召回率</strong>为横轴、<strong>精确率</strong>为纵轴。</p>
 <p><strong>ROC 与 PR 的适用场合</strong>：</p>
@@ -8216,9 +8216,9 @@ F_\beta = (1+\beta^2)\,\frac{\text{Precision}\cdot\text{Recall}}
 <p><strong>为什么正样本极少时要用 PR</strong>：</p>
 <p>因为 FPR 的分母是 <span class="arithmatex">\(FP+TN\)</span>，<strong>TN 极大</strong>，
 所以<strong>即使 FP 增加很多，FPR 也只涨一点点</strong> ——
-ROC 曲线看起来<strong>仍然很漂亮</strong>，掩盖了问题 ⚠</p>
+ROC 曲线看起来<strong>仍然很漂亮</strong>，掩盖了问题</p>
 <p>而 PR 曲线的分母含 <span class="arithmatex">\(TP+FP\)</span>，<strong>FP 的增加会直接压低精确率</strong>，
-问题暴露得很清楚 ✓</p>
+问题暴露得很清楚</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 354.327812 223.551375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="测试集错误率是随机变量：样本越少波动越大">
 
@@ -9201,7 +9201,7 @@ z
 <p class="admonition-title">不要反复用同一个测试集调参</p>
 <p>这是<strong>比信息泄露更隐蔽</strong>的一种错误。</p>
 <p><strong>机制</strong>：每次用测试集评估、根据结果调参、再评估……
-于是<strong>测试集的信息通过你的决策泄露进了模型</strong> ⚠</p>
+于是<strong>测试集的信息通过你的决策泄露进了模型</strong></p>
 <p>后果：报告的性能<strong>系统性偏高</strong>，
 换一个真正的独立测试集时会<strong>明显下降</strong>。</p>
 <p><strong>正确做法</strong>：</p>
@@ -9243,7 +9243,7 @@ z
 \text{判为正} \iff P(\text{正}\mid x) \gt
 \frac{c_{FP}}{c_{FP}+c_{FN}}
 \]</div>
-<p><strong>怎么读</strong>：<strong>阈值由代价比决定，而不是固定在 0.5</strong> ✓</p>
+<p><strong>怎么读</strong>：<strong>阈值由代价比决定，而不是固定在 0.5</strong></p>
 <p><strong>代入两个极端</strong>：</p>
 <table>
 <thead>
@@ -9267,17 +9267,17 @@ z
 </tbody>
 </table>
 <p><strong>这就是"阈值该定多少"这个问题的完整答案</strong> ——
-它不是一个技术选择，而是<strong>代价结构的直接体现</strong> ✓</p>
+它不是一个技术选择，而是<strong>代价结构的直接体现</strong></p>
 <h3 id="32-pr">3.2 从 PR 曲线上选工作点<a class="headerlink" href="#32-pr" title="Permanent link">&para;</a></h3>
 <p>既然代价比给出了阈值，那么：</p>
 <ol>
 <li>画出 PR 曲线（或 ROC 曲线）</li>
 <li>用代价比算出<strong>理论阈值</strong></li>
 <li>在曲线上找到<strong>对应的工作点</strong></li>
-<li>报告该点的精确率/召回率（<strong>而不是只报 AUC</strong>）⚠</li>
+<li>报告该点的精确率/召回率（<strong>而不是只报 AUC</strong>）</li>
 </ol>
 <p><strong>为什么不能只报 AUC</strong>：AUC 是<strong>全阈值平均</strong>，
-而实际系统<strong>只工作在一个阈值上</strong> ⚠
+而实际系统<strong>只工作在一个阈值上</strong>
 两个 AUC 相同的分类器，在<strong>你的工作点</strong>上可能差很多。</p>
 <h3 id="33">3.3 三种重采样的适用场合<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <table>
@@ -9312,7 +9312,7 @@ z
 <h2 id="_4">四、显著性检验：差的那一点是真的吗<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么需要检验<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>两个模型在测试集上得到 0.841 与 0.836。
-<strong>这 0.005 的差距是真实的，还是抽样噪声？</strong></p>
+这 0.005 的差距是真实的，还是抽样噪声？</p>
 <p><strong>不能凭"数字更大"就下结论</strong> ⚠</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 329.697009 192.834007" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="K 折交叉验证：轮流留一份做验证">
@@ -9777,10 +9777,10 @@ z
 t = \frac{\bar d}{s_d/\sqrt K}
 \]</div>
 <p><strong>为什么要"配对"</strong>：同一折上的两个误差<strong>面临同样的数据难度</strong>，
-配对后能把"折之间的难度差异"消掉，<strong>检验更灵敏</strong> ✓</p>
+配对后能把"折之间的难度差异"消掉，<strong>检验更灵敏</strong></p>
 <p><strong>注意 <span class="arithmatex">\(K\)</span> 折的数据不独立</strong>（训练集高度重叠），
 所以标准的 <span class="arithmatex">\(t\)</span> 检验<strong>偏乐观</strong> ——
-严格场合应使用修正方法或<strong>多次重复 K 折</strong> ⚠</p>
+严格场合应使用修正方法或<strong>多次重复 K 折</strong></p>
 <h3 id="43">4.3 实践建议<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -9809,20 +9809,20 @@ t = \frac{\bar d}{s_d/\sqrt K}
 </tbody>
 </table>
 <p><strong>最后一条尤其重要</strong>：如果跑了 10 个配置，
-只报最好的那个"±0.00x"，那就是<strong>把噪声当成了性能</strong> ⚠</p>
+只报最好的那个"±0.00x"，那就是<strong>把噪声当成了性能</strong></p>
 <hr />
 <h2 id="_5">五、一个完整的评估流程<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><strong>把前面的东西串成一个可执行的清单</strong>：</p>
 <ol>
 <li><strong>先确定代价结构</strong>：哪类错误更严重、严重多少倍
-   → 由此定阈值，而不是默认 0.5 ✓</li>
+   → 由此定阈值，而不是默认 0.5</li>
 <li><strong>选与该代价匹配的指标</strong>：
    平衡数据看准确率/ROC；不平衡数据看<strong>召回率/PR</strong></li>
 <li><strong>划分数据</strong>：训练 / 验证 / 测试三层；
-   所有预处理（标准化、特征选择、重采样）<strong>都包在折内</strong> ⚠</li>
+   所有预处理（标准化、特征选择、重采样）<strong>都包在折内</strong></li>
 <li><strong>调参只看验证集</strong>；<strong>测试集只碰一次</strong></li>
 <li><strong>报告时要给</strong>：均值、标准误、混淆矩阵、
-   以及<strong>相对于基线的提升</strong> ✓</li>
+   以及<strong>相对于基线的提升</strong></li>
 <li><strong>做显著性检验</strong>：差距是否超出噪声</li>
 </ol>
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
@@ -10090,10 +10090,10 @@ c_FP      c_FN      最优阈值          倾向
 F_1 = \frac{2\times0.6667\times0.75}{0.6667+0.75}
 = \frac{1.0}{1.4167} \approx 0.7059
 \]</div>
-<p><strong>答案：准确率 0.750、精确率 0.667、召回率 0.750、F1 0.706</strong> ✓</p>
+<p><strong>答案：准确率 0.750、精确率 0.667、召回率 0.750、F1 0.706</strong></p>
 <p><strong>这说明什么</strong>：准确率与召回率<strong>恰好相同</strong>（都是 0.75），
 这不是巧合 —— 因为 <span class="arithmatex">\(TP+FP = TP+FN\)</span>（90 vs 80）接近。
-两者相同意味着"判为正的个数"与"真实为正的个数"接近 ✓</p>
+两者相同意味着"判为正的个数"与"真实为正的个数"接近</p>
 </details>
 <h3 id="2-f1">例题 2：用 F1 揭穿一个假象<a class="headerlink" href="#2-f1" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：分类器甲得到 <span class="arithmatex">\((\text{Precision}, \text{Recall}) = (1.0,\ 0.02)\)</span>，
@@ -10146,8 +10146,8 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 <p><strong>答案：乙明显更好；算术平均掩盖了甲的严重缺陷</strong>。</p>
 <p><strong>这说明什么</strong>：甲"精确率 100%"听起来完美，
 但它<strong>几乎什么都不判为正</strong>（召回率 2%）——
-这样的分类器在实用上<strong>毫无价值</strong> ⚠</p>
-<p><strong>调和平均正确地把它压到了 0.039</strong> ✓
+这样的分类器在实用上<strong>毫无价值</strong></p>
+<p><strong>调和平均正确地把它压到了 0.039</strong>
 这就是为什么综合评价分类器时<strong>要用 F1 而不是算术平均</strong>。</p>
 </details>
 <h3 id="3">例题 3：不平衡数据下该用哪个指标<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -10163,7 +10163,7 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 <summary>解答</summary>
 <p><strong>第一步：分析 ROC 的问题。</strong></p>
 <p>FPR 的分母是 <span class="arithmatex">\(FP+TN\)</span>，而 <span class="arithmatex">\(TN\)</span> <strong>极大</strong>（99.5% 都是负样本）。
-所以<strong>即使 FP 涨得很多，FPR 也涨得很慢</strong> ⚠</p>
+所以<strong>即使 FP 涨得很多，FPR 也涨得很慢</strong></p>
 <p>结果：ROC 曲线看起来漂亮（AUC 0.94），
 但<strong>实际判为正的样本里可能大部分是误报</strong> ——
 这正是甲模型 PR-AUC 只有 0.12 的含义。</p>
@@ -10196,8 +10196,8 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 <p><strong>选乙</strong>。甲的 ROC-AUC 虽然更高，
 但那 0.02 的差距<strong>来自被 TN 稀释的 FPR</strong>，
 对实际业务没有意义。</p>
-<p><strong>答案：选乙，因为 PR 曲线更反映"判为正"的实际质量。</strong></p>
-<p><strong>这说明什么</strong>：<strong>极不平衡时，ROC-AUC 会给出误导性结论</strong> ⚠
+<p>答案：选乙，因为 PR 曲线更反映"判为正"的实际质量。</p>
+<p><strong>这说明什么</strong>：<strong>极不平衡时，ROC-AUC 会给出误导性结论</strong>
 判断规则很简单：</p>
 <div class="arithmatex">\[
 \text{正样本占比极低} \;\Longrightarrow\; \text{优先看 PR}
@@ -10218,17 +10218,17 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>错误 ①：标准化与特征选择用了全体数据。</strong></p>
-<p>验证折的信息通过"哪些特征重要"泄露进了训练过程 ⚠
+<p>错误 ①：标准化与特征选择用了全体数据。</p>
+<p>验证折的信息通过"哪些特征重要"泄露进了训练过程
 这会让验证误差<strong>偏低</strong>。</p>
 <p><strong>修正</strong>：把这两步<strong>放进每一折内部</strong>重新执行。</p>
 <p><strong>错误 ②：测试集被用了 20 次。</strong></p>
 <p>虽然第 ② 步只用验证集选模型（这一步是对的），
 但第 ③ 步在测试集上跑了<strong>20 个配置</strong>并<strong>取最小值</strong> ——
-这就是<strong>在测试集上做选择</strong> ⚠</p>
+这就是<strong>在测试集上做选择</strong></p>
 <p><strong>关键</strong>：取最小值的操作会让报告的数字<strong>系统性偏低</strong>，
 因为"20 个里的最小值"必然小于真实期望。</p>
-<p><strong>错误 ③：报最小值而不是预定模型的结果。</strong></p>
+<p>错误 ③：报最小值而不是预定模型的结果。</p>
 <p>正确的流程是：</p>
 <ol>
 <li>用验证集选出<strong>一个</strong>配置</li>
@@ -10237,7 +10237,7 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 </ol>
 <p><strong>答案：三处错误 —— ①折外做预处理、②测试集被反复使用、
 ③用测试集做选择并报最优值</strong>。</p>
-<p><strong>这说明什么</strong>：<strong>"多试几次取最好"是最常见的自欺方式</strong> ⚠</p>
+<p><strong>这说明什么</strong>：<strong>"多试几次取最好"是最常见的自欺方式</strong></p>
 <p>它几乎必然给出乐观的数字，
 而且<strong>你不会从数字本身看出问题</strong> ——
 只有独立的新数据才能揭穿它。</p>
@@ -10313,11 +10313,11 @@ F_1 = \frac{2\times0.7\times0.7}{1.4} = 0.70
 <ol>
 <li><strong>指标的选法由代价结构决定</strong> ——
    先回答"哪类错误更严重、严重多少倍"，
-   再定阈值、再选指标 ✓</li>
+   再定阈值、再选指标</li>
 <li><strong>类别不平衡时，准确率与 ROC 都会骗人</strong> ——
-   要改用<strong>召回率 / PR 曲线</strong>，并报告<strong>相对于基线的提升</strong> ⚠</li>
+   要改用<strong>召回率 / PR 曲线</strong>，并报告<strong>相对于基线的提升</strong></li>
 <li><strong>测试集只能碰一次</strong> ——
-   反复用它选模型是<strong>最隐蔽也最普遍</strong>的评估错误 ⚠</li>
+   反复用它选模型是<strong>最隐蔽也最普遍</strong>的评估错误</li>
 </ol>
 <p><strong>上一页</strong>：<a href="../feature-selection/">特征选择</a></p>
 <p><strong>下一页</strong>：<a href="../clustering/">聚类分析</a> ——

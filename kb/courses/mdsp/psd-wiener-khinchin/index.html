@@ -8709,7 +8709,7 @@
 </tbody>
 </table>
 <p>所以必须<strong>先严格定义</strong>，才能说「成立」——
-这就是<strong>谱分解定理</strong>与<strong>维纳–辛钦定理</strong>要解决的问题 ✓</p>
+这就是<strong>谱分解定理</strong>与<strong>维纳–辛钦定理</strong>要解决的问题</p>
 <p>本页的结构：</p>
 <table>
 <thead>
@@ -8781,17 +8781,17 @@
 <p><strong>关键观察</strong>：自相关其实是<strong>信号与自己的「时间反转共轭」做卷积</strong>：</p>
 <div class="arithmatex">\[R_{xx}(\tau) = x(\tau) * x^*(-\tau)\]</div>
 <p><strong>为什么</strong>：卷积的定义是 <span class="arithmatex">\(x(\tau)*x^*(-\tau) = \int x(\tau - t)x^*(-t)dt\)</span>，
-做变量替换 <span class="arithmatex">\(u = -t\)</span> 即可化成自相关的形式 ✓</p>
+做变量替换 <span class="arithmatex">\(u = -t\)</span> 即可化成自相关的形式</p>
 <p><strong>由卷积定理</strong>（时域卷积 ⟺ 频域相乘）：</p>
 <div class="arithmatex">\[\mathcal{F}[R_{xx}(\tau)] = X(f)\cdot \mathcal{F}[x^*(-\tau)]\]</div>
 <p>而 <span class="arithmatex">\(\mathcal{F}[x^*(-\tau)] = X^*(f)\)</span>，所以</p>
 <div class="arithmatex">\[\boxed{\;\mathcal{F}[R_{xx}(\tau)] = \lvert X(f)\rvert^2\;}\]</div>
-<p><strong>结论</strong>：<strong>能量信号的自相关的傅里叶变换，就是它的能量谱密度 <span class="arithmatex">\(\lvert X(f)\rvert^2\)</span></strong> ✓</p>
+<p><strong>结论</strong>：<strong>能量信号的自相关的傅里叶变换，就是它的能量谱密度 <span class="arithmatex">\(\lvert X(f)\rvert^2\)</span></strong></p>
 <p><strong>这说明什么</strong>：自相关把信号<strong>自己与自己</strong>的相关程度完整保留了下来——
 时间反转、卷积、取傅里叶变换，一路上信息都没有丢失。
 频域里那条 <span class="arithmatex">\(\lvert X(f)\rvert^2\)</span>，正是「每个频率上各带多少能量」。
 这一步正是课件说的「可以直接从卷积定理简单地证明」——
-上面三行就是那个证明，没有跳步 ✓</p>
+上面三行就是那个证明，没有跳步</p>
 <h3 id="13">1.3 数值验证：两条路径对得上<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -8850,22 +8850,22 @@
 逐点最大绝对差 = 3.411e-13
 → 两者相同 ⇒ 能量信号的自相关与能量谱是一对傅里叶变换 ✓</code></pre>
 <p><strong>看这个结果</strong>：两条路径前 6 个频点的幅度完全一致，
-逐点最大绝对差在 <span class="arithmatex">\(10^{-13}\)</span> 量级 —— 是机器精度，不是近似 ✓</p>
+逐点最大绝对差在 <span class="arithmatex">\(10^{-13}\)</span> 量级 —— 是机器精度，不是近似</p>
 <p><strong>离散采样下的一个细节</strong>：自相关序列的峰值不在数组起点，
 所以它的傅里叶变换带一个线性相位因子 <span class="arithmatex">\(e^{-j\omega(L-1)}\)</span>，
 <strong>幅度恰好等于 <span class="arithmatex">\(\lvert X(f)\rvert^2\)</span></strong>；
-所以比较时要比较幅度（或把序列循环移位对齐）⚠
+所以比较时要比较幅度（或把序列循环移位对齐）
 这个相位因子没有信息，真正要的是幅度谱。</p>
 <hr />
 <h2 id="_3">二、随机过程的困难<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 为什么不能照搬<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p><strong>平稳随机过程的自相关</strong>在 <span class="arithmatex">\((-\infty,\infty)\)</span> 上<strong>一般不是绝对可积的</strong> ⚠</p>
+<p><strong>平稳随机过程的自相关</strong>在 <span class="arithmatex">\((-\infty,\infty)\)</span> 上<strong>一般不是绝对可积的</strong></p>
 <p><strong>举两个例子看清楚麻烦在哪</strong>：</p>
 <p><strong>例一，白噪声</strong>：它的自相关是</p>
 <div class="arithmatex">\[R(\tau) = \sigma^2 \delta(\tau)\]</div>
 <p>它把全部功率压在一个瞬间。虽然 <span class="arithmatex">\(\int \sigma^2\delta(\tau)d\tau = \sigma^2\)</span> 有限，
 但白噪声的<strong>样本函数</strong>处处剧烈振荡，既不是能量有限信号、
-也不是绝对可积函数，直接对整条无穷长随机函数做傅里叶变换没有收敛的意义 ⚠</p>
+也不是绝对可积函数，直接对整条无穷长随机函数做傅里叶变换没有收敛的意义</p>
 <p><strong>例二，常值均值</strong>：如果过程有非零常数均值 <span class="arithmatex">\(\mu \ne 0\)</span>，
 那么自相关里会含一个<strong>不衰减的常数项</strong> <span class="arithmatex">\(\mu^2\)</span>：</p>
 <div class="arithmatex">\[R(\tau) = \mu^2 + C(\tau)\]</div>
@@ -8874,14 +8874,14 @@
 <p><strong>看右边</strong>：<span class="arithmatex">\(\mu^2\)</span> 是正常数，而区间的长度是无限的，
 这个「积分」没有任何有限的界 —— 发散 ✗</p>
 <p><strong>所以</strong>：<strong>「傅里叶变换的理论不能直接应用」</strong> ——
-这正是课件提出的问题前提 ✓</p>
+这正是课件提出的问题前提</p>
 <h3 id="22">2.2 问题的准确表述<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>课件把这个疑问提得很清楚：</p>
 <blockquote>
 <p><strong>「自相关的傅里叶变换等于功率谱」这个说法，还成立吗？</strong></p>
 </blockquote>
 <p><strong>要回答它，必须先把「随机过程的功率谱」定义清楚</strong> ——
-因为右边的对象本身还没有严格定义 ⚠</p>
+因为右边的对象本身还没有严格定义</p>
 <p><strong>直觉上应该怎么定义</strong>：随机过程能量无限、但功率有限，
 所以应当考虑「<strong>单位时间的能量</strong>」的期望。这个思路引出下一节的严格定义。</p>
 <p><strong>先看清两个「对手」</strong>：</p>
@@ -8918,8 +8918,8 @@
 <h3 id="31">3.1 第一步：截断<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：把信号在时间上「切一刀」，只看 <span class="arithmatex">\([-T/2, T/2]\)</span> 这一段：</p>
 <div class="arithmatex">\[X_T(f) = \int_{-T/2}^{T/2} x(t)\,e^{-j2\pi f t}\,dt\]</div>
-<p><strong>为什么要截断</strong>：因为<strong>不截断积分不收敛</strong>（上一节刚说明）⚠
-截断之后积分变成有限的，可以计算 ✓</p>
+<p><strong>为什么要截断</strong>：因为<strong>不截断积分不收敛</strong>（上一节刚说明）
+截断之后积分变成有限的，可以计算</p>
 <p><strong>代价要看清</strong>：<span class="arithmatex">\(X_T(f)\)</span> 依赖你<strong>切了多长、从哪开始切</strong> ——
 它本身是个随机变量 ✗</p>
 <h3 id="32">3.2 第二步：取期望<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
@@ -8927,7 +8927,7 @@
 <div class="arithmatex">\[\mathbb{E}\left[\lvert X_T(f)\rvert^2\right]\]</div>
 <p><strong>为什么要取期望</strong>：
 <span class="arithmatex">\(X_T(f)\)</span> 是随机的（依赖抽到哪条样本），
-<strong>取期望才能得到一个确定的、与「抽到哪条」无关的量</strong> ✓</p>
+<strong>取期望才能得到一个确定的、与「抽到哪条」无关的量</strong></p>
 <p><strong>注意取的是「模平方的期望」而不是「期望的模平方」</strong> ⚠
 两者完全不同：</p>
 <table>
@@ -8952,7 +8952,7 @@
 </tbody>
 </table>
 <p><strong>为什么前者会失败</strong>：零均值过程的 <span class="arithmatex">\(\mathbb{E}[X_T(f)] = 0\)</span>，
-再取模平方还是 0 —— 什么信息都没了 ⚠
+再取模平方还是 0 —— 什么信息都没了
 <strong>所以必须先平方、后平均</strong> ✓</p>
 <h3 id="33">3.3 第三步：除以时长再取极限<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：</p>
@@ -8961,9 +8961,9 @@
 <span class="arithmatex">\(\lvert X_T(f)\rvert^2\)</span> 的量纲是「<strong>能量</strong>」，
 它随截断长度 <span class="arithmatex">\(T\)</span> <strong>线性增长</strong>（切得越长，能量越多）。
 除以 <span class="arithmatex">\(T\)</span> 之后变成「<strong>单位时间的能量</strong>」——
-也就是「功率」✓</p>
+也就是「功率」</p>
 <p><strong>除以 <span class="arithmatex">\(T\)</span> 与除以 <span class="arithmatex">\(2T\)</span> 的区别</strong>：只是常数因子，
-不同教材约定不同，不影响结论的形状 ✓
+不同教材约定不同，不影响结论的形状
 （本页统一用 <span class="arithmatex">\(1/T\)</span>）</p>
 <p><strong>不除 <span class="arithmatex">\(T\)</span> 会怎样</strong>：<span class="arithmatex">\(S(f)\)</span> 会随 <span class="arithmatex">\(T\)</span> 一直增长、不存在极限 ✗</p>
 <p><strong>手算一遍「为什么能量与 <span class="arithmatex">\(T\)</span> 成正比」</strong>：
@@ -9003,7 +9003,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>第一列随 <span class="arithmatex">\(T\)</span> 线性增长、无极限；第二列稳定在 <span class="arithmatex">\(\sigma^2\)</span></strong> ✓
+<p><strong>第一列随 <span class="arithmatex">\(T\)</span> 线性增长、无极限；第二列稳定在 <span class="arithmatex">\(\sigma^2\)</span></strong>
 这就是「必须除以时长」的数理根据。</p>
 <h3 id="34">3.4 三个步骤的完整小结<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <table>
@@ -9041,7 +9041,7 @@
 <div class="arithmatex">\[\boxed{\;R(\tau) = \int_{-\infty}^{\infty} S(f)\,e^{j2\pi f\tau}\,df\;}\]</div>
 <p><strong>反过来</strong>（在适当条件下）：</p>
 <div class="arithmatex">\[S(f) = \int_{-\infty}^{\infty} R(\tau)\,e^{-j2\pi f\tau}\,d\tau\]</div>
-<p><strong>两条式子合起来说明</strong>：<span class="arithmatex">\(R(\tau)\)</span> 与 <span class="arithmatex">\(S(f)\)</span> <strong>构成一对傅里叶变换</strong> ✓</p>
+<p><strong>两条式子合起来说明</strong>：<span class="arithmatex">\(R(\tau)\)</span> 与 <span class="arithmatex">\(S(f)\)</span> <strong>构成一对傅里叶变换</strong></p>
 <p><strong>严格地说</strong>，谱分解定理的精确表述是一个<strong>斯蒂尔切斯积分</strong>：</p>
 <div class="arithmatex">\[R(\tau) = \int_{-\infty}^{\infty} e^{j2\pi f\tau}\,dF(f)\]</div>
 <p>其中 <span class="arithmatex">\(F(f)\)</span> 称为<strong>谱分布函数</strong>，是单调不减、非负的函数。
@@ -9049,7 +9049,7 @@
 因为 <span class="arithmatex">\(S(f)\)</span> 可能是冲激（如纯正弦过程），普通密度函数写不出来；
 用 <span class="arithmatex">\(dF(f)\)</span> 就能把「谱线」（<span class="arithmatex">\(F\)</span> 的跳变处）
 和「连续谱」（<span class="arithmatex">\(F\)</span> 平滑上升处）统一处理。
-<strong>当 <span class="arithmatex">\(R(\tau)\)</span> 绝对可积时</strong>，<span class="arithmatex">\(dF(f) = S(f)\,df\)</span>，就回到上面那对普通积分 ✓</p>
+<strong>当 <span class="arithmatex">\(R(\tau)\)</span> 绝对可积时</strong>，<span class="arithmatex">\(dF(f) = S(f)\,df\)</span>，就回到上面那对普通积分</p>
 <p><strong>逐项读谱分解式</strong>：</p>
 <table>
 <thead>
@@ -9074,14 +9074,14 @@
 </tbody>
 </table>
 <p><strong>这个式子的直观</strong>：
-自相关可以写成「<strong>各频率成分的叠加</strong>」，权重就是 <span class="arithmatex">\(S(f)\)</span> ✓
+自相关可以写成「<strong>各频率成分的叠加</strong>」，权重就是 <span class="arithmatex">\(S(f)\)</span>
 换句话说：<strong>自相关里含有哪些频率、各占多少功率，全在 <span class="arithmatex">\(S(f)\)</span> 里</strong>。</p>
 <p><strong>为什么这个定理不平凡</strong>：它把第三节的<strong>定义</strong>（截断 → 期望 → 极限）
 和「自相关是时域的、谱是频域的」这两件事<strong>接了起来</strong> ——
-你不必真的去截断无穷多次，只要知道自相关，谱就完全确定了 ✓</p>
+你不必真的去截断无穷多次，只要知道自相关，谱就完全确定了</p>
 <p><strong>为什么会有「谱分解」这个名字</strong>：把自相关看成「由各频率的幂指数装配而成」，
 就像把一个向量分解到一组基上；<span class="arithmatex">\(S(f)\)</span> 就是每个基方向上的「系数（功率）」。
-这跟傅里叶级数把周期函数分解成谐波，是同一个思想，只是基换成了连续频率 ✓</p>
+这跟傅里叶级数把周期函数分解成谐波，是同一个思想，只是基换成了连续频率</p>
 <p>下图用 AR(1) 过程把这对关系画出来：
 （AR(1) 的自相关按指数衰减、绝对可积，属于上面说的「可积情形」，
 其谱是连续谱，恰好落在可以画出来的范围里）</p>
@@ -9571,20 +9571,20 @@ L 289.496367 54.738906
 三条曲线对应三个不同的 AR(1) 参数 <span class="arithmatex">\(a\)</span>。
 <span class="arithmatex">\(a\)</span> 越大，自相关衰减越慢，谱就越高越尖 ——
 这正是后面第六节要讲的「时宽–带宽反比」规律
-（第四节先给出定理，第六节再讲这个规律）✓</p>
+（第四节先给出定理，第六节再讲这个规律）</p>
 <h3 id="42-sf-ge-0">4.2 为什么 <span class="arithmatex">\(S(f) \ge 0\)</span><a class="headerlink" href="#42-sf-ge-0" title="Permanent link">&para;</a></h3>
 <p><strong>这条性质来自自相关的非负定性</strong>（上一页
 <a href="../autocorrelation-properties/">自相关函数的性质</a> 讲过）：</p>
 <p><strong>思路</strong>：对任意频率 <span class="arithmatex">\(f_0\)</span>，考虑一个「只保留 <span class="arithmatex">\(f_0\)</span> 附近成分」的线性滤波。
 输出功率是非负的（功率不可能是负的），
 而这个输出功率正比于 <span class="arithmatex">\(S(f_0)\)</span>，
-所以 <span class="arithmatex">\(S(f_0) \ge 0\)</span> ✓</p>
-<p><strong>这说明什么</strong>：<strong>任何合法的自相关，其傅里叶变换都不可能出现负值</strong> ⚠
+所以 <span class="arithmatex">\(S(f_0) \ge 0\)</span></p>
+<p><strong>这说明什么</strong>：<strong>任何合法的自相关，其傅里叶变换都不可能出现负值</strong>
 如果一个估计算法给出的谱有负值，说明<strong>估计方法有问题</strong>（或样本不够）。
 第七节会用一个真实反例说明这件事。</p>
 <h3 id="43">4.3 遍历性定理的作用<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p><strong>困难</strong>：上面的定义里含有 <span class="arithmatex">\(\mathbb{E}[\cdot]\)</span> ——
-<strong>期望需要无穷多平行实验，物理上不可实现</strong> ⚠</p>
+<strong>期望需要无穷多平行实验，物理上不可实现</strong></p>
 <p><strong>课件给的逻辑链</strong>：<strong>由遍历性定理，立即得到</strong></p>
 <div class="arithmatex">\[S(f) = \lim_{T\to\infty}\frac{1}{T}\,\lvert X_T(f)\rvert^2
 \quad \text{（按概率 1）}\]</div>
@@ -9784,7 +9784,7 @@ L 289.496367 54.738906
 </table>
 <p><strong>这说明什么</strong>：维纳–辛钦定理不是一句空话 ——
 对可以解析的过程，从自相关求和得到的谱和闭式公式完全一致；
-后面的谱估计方法，都是在数据有限时「逼近」这个精确关系 ✓</p>
+后面的谱估计方法，都是在数据有限时「逼近」这个精确关系</p>
 <hr />
 <h2 id="_6">五、离散时间情形<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>本课程处理的实际是<strong>随机序列</strong>，所以要把上面的结论写成离散形式。</p>
@@ -9795,21 +9795,21 @@ L 289.496367 54.738906
 <div class="arithmatex">\[S(\omega) = \sum_{m=-\infty}^{\infty} R(m)\,e^{-j\omega m}\]</div>
 <p><strong>反变换</strong>：</p>
 <div class="arithmatex">\[R(m) = \frac{1}{2\pi}\int_{-\pi}^{\pi} S(\omega)\,e^{j\omega m}\,d\omega\]</div>
-<p><strong>这就是离散版本的维纳–辛钦定理</strong> ✓</p>
+<p><strong>这就是离散版本的维纳–辛钦定理</strong></p>
 <p><strong>注意频率变量用 <span class="arithmatex">\(\omega\)</span>（数字角频率）而不是 <span class="arithmatex">\(f\)</span>（物理频率）</strong> ⚠
 两者的关系是 <span class="arithmatex">\(\omega = 2\pi f / f_s\)</span>（<span class="arithmatex">\(f_s\)</span> 是采样率）。
 链接 <a href="../../../math/signal-systems/dft/">离散傅里叶变换与 FFT</a> 与
-<a href="../../../math/signal-systems/sampling/">采样定理与混叠</a> ✓</p>
+<a href="../../../math/signal-systems/sampling/">采样定理与混叠</a></p>
 <p><strong><span class="arithmatex">\(S(\omega)=\sum_m R(m)e^{-j\omega m}\)</span> 是怎么来的</strong>（与连续情形一一对应）：</p>
-<p><strong>第一步：写出有限长的截断变换。</strong></p>
+<p>第一步：写出有限长的截断变换。</p>
 <div class="arithmatex">\[X_N(\omega) = \sum_{n=0}^{N-1} x(n)\,e^{-j\omega n}\]</div>
-<p><strong>第二步：取模平方，把乘积写成二重求和。</strong></p>
+<p>第二步：取模平方，把乘积写成二重求和。</p>
 <div class="arithmatex">\[\lvert X_N(\omega)\rvert^2 = \sum_{n=0}^{N-1}\sum_{n'=0}^{N-1} x(n)\,x^*(n')\,e^{-j\omega(n-n')}\]</div>
-<p><strong>第三步：取期望，期望穿进求和。</strong>
-（交换顺序合法，因为求和只有有限项 ✓）</p>
+<p>第三步：取期望，期望穿进求和。
+（交换顺序合法，因为求和只有有限项）</p>
 <div class="arithmatex">\[\mathbb{E}\lvert X_N(\omega)\rvert^2 = \sum_{n=0}^{N-1}\sum_{n'=0}^{N-1} R(n-n')\,e^{-j\omega(n-n')}\]</div>
-<p><strong>这里用到平稳性</strong>：<span class="arithmatex">\(\mathbb{E}[x(n)x^*(n')] = R(n-n')\)</span> 只依赖差值 ✓</p>
-<p><strong>第四步：做变量替换 <span class="arithmatex">\(m = n-n'\)</span>，把二重求和化成单重求和。</strong>
+<p><strong>这里用到平稳性</strong>：<span class="arithmatex">\(\mathbb{E}[x(n)x^*(n')] = R(n-n')\)</span> 只依赖差值</p>
+<p>第四步：做变量替换 <span class="arithmatex">\(m = n-n'\)</span>，把二重求和化成单重求和。
 关键在<strong>数清楚次数</strong>：在 <span class="arithmatex">\(N\times N\)</span> 个格点里，
 差值 <span class="arithmatex">\(m = n-n'\)</span> 出现了<strong>恰好 <span class="arithmatex">\(N-\lvert m\rvert\)</span> 次</strong>
 （对角带上的格点数随 <span class="arithmatex">\(m\)</span> 线性减少）。于是</p>
@@ -9867,7 +9867,7 @@ L 289.496367 54.738906
 \qquad r_c(m) = \sum_{n=0}^{N-1} x(n)\,x^*\!\left((n+m) \bmod N\right)\]</div>
 <p><strong>注意「圆周」两个字</strong>：
 <span class="arithmatex">\(r_c(m)\)</span> 用的是<strong>循环移位</strong>（超出 <span class="arithmatex">\(N\)</span> 就绕回来），
-而不是真实的自相关（线性）⚠</p>
+而不是真实的自相关（线性）</p>
 <p><strong>为什么这个区别重要</strong>：</p>
 <table>
 <thead>
@@ -9891,7 +9891,7 @@ L 289.496367 54.738906
 这个量叫<strong>周期图（periodogram）</strong>，
 是<strong>最早的功率谱估计方法</strong>：</p>
 <div class="arithmatex">\[\hat{S}_{\text{per}}(k) = \frac{\lvert X(k)\rvert^2}{N}\]</div>
-<p><strong>除以 <span class="arithmatex">\(N\)</span> 是为了归一化</strong>（让量纲变成「功率」）✓</p>
+<p><strong>除以 <span class="arithmatex">\(N\)</span> 是为了归一化</strong>（让量纲变成「功率」）</p>
 <p><strong>用代码验证这个恒等</strong>（顺便验证谱非负与功率守恒）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -9993,7 +9993,7 @@ L 289.496367 54.738906
 </table>
 <div class="admonition warning">
 <p class="admonition-title">周期图有严重缺陷：方差大、且不随数据量下降</p>
-<p>周期图虽然是<strong>无偏</strong>的（期望等于真实谱），但它的<strong>方差极大</strong> ⚠</p>
+<p>周期图虽然是<strong>无偏</strong>的（期望等于真实谱），但它的<strong>方差极大</strong></p>
 <p><strong>为什么</strong>：它用了<strong>全部 <span class="arithmatex">\(N\)</span> 个自由度</strong>，但估计的是 <span class="arithmatex">\(\approx N/2\)</span> 个频率点。
 平均每个频点只用「约 2 个」自由度 → 估计值剧烈波动。</p>
 <p><strong>后果</strong>：<strong>增加数据长度不会让谱变光滑</strong>，
@@ -10002,7 +10002,7 @@ L 289.496367 54.738906
 分段平均（Welch 法）、加窗平滑、参数模型法、子空间法。
 它们的共同思路是「<strong>用偏差换方差</strong>」——
 这正是上一页 <a href="../parameter-estimation/">参数估计</a> 里讲的
-<strong>偏差–方差权衡</strong>的又一个实例 ✓</p>
+<strong>偏差–方差权衡</strong>的又一个实例</p>
 </div>
 <hr />
 <h2 id="_7">六、典型例子与「时宽–带宽反比」<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -10047,8 +10047,8 @@ L 289.496367 54.738906
 <p>代入得</p>
 <div class="arithmatex">\[S(\omega) = \frac{A^2\pi}{2}\sum_k\Big[\delta(\omega-\omega_0-2\pi k)
 + \delta(\omega+\omega_0-2\pi k)\Big]\]</div>
-<p><strong>即：功率全部集中在 <span class="arithmatex">\(\pm\omega_0\)</span> 两个频率上</strong>（再按 <span class="arithmatex">\(2\pi\)</span> 周期重复）✓</p>
-<p><strong>这就是「谱线」</strong> —— 离散的、尖锐的峰 ⚠</p>
+<p><strong>即：功率全部集中在 <span class="arithmatex">\(\pm\omega_0\)</span> 两个频率上</strong>（再按 <span class="arithmatex">\(2\pi\)</span> 周期重复）</p>
+<p><strong>这就是「谱线」</strong> —— 离散的、尖锐的峰</p>
 <p><strong>对比白噪声</strong>（这张表是本节的关键）：</p>
 <table>
 <thead>
@@ -10077,7 +10077,7 @@ L 289.496367 54.738906
 </tbody>
 </table>
 <p><strong>两者恰好互为「极端」</strong> —— 一个是「时域最窄、频域最宽」，
-另一个是「时域最宽、频域最窄」✓</p>
+另一个是「时域最宽、频域最窄」</p>
 <p>下图把这两个极端放在一起对照：
 左图是白噪声的冲激自相关（上）与常数谱（下），
 右图是正弦的余弦自相关（上）与一对谱线（下），
@@ -10463,7 +10463,7 @@ AR(1) 的自相关是 <span class="arithmatex">\(R(q) = \sigma^2 a^{q}/(1-a^2)\)
 由 <span class="arithmatex">\(\lvert 1-ae^{-j\omega}\rvert^2 = 1 - 2a\cos\omega + a^2\)</span>，</p>
 <div class="arithmatex">\[S(0) \propto \frac{1}{(1-a)^2} = \frac{1}{0.01} = 100, \qquad
 S(\pi) \propto \frac{1}{(1+a)^2} = \frac{1}{3.61} \approx 0.277\]</div>
-<p>比值 <span class="arithmatex">\(\approx 361\)</span>，对应表中的 <span class="arithmatex">\(361\)</span> ✓</p>
+<p>比值 <span class="arithmatex">\(\approx 361\)</span>，对应表中的 <span class="arithmatex">\(361\)</span></p>
 <p>下图把「衰减快慢 ⟺ 谱宽窄」的对应画出来：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 356.735625 223.551375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="自相关衰减快慢与功率谱宽窄的对应关系">
@@ -12457,7 +12457,7 @@ L 245.431172 28.947422
 
 <p><strong>读图</strong>：上面的曲线是自相关，下面的曲线是对应的功率谱。
 自相关衰减得越慢，谱就越尖、越窄；
-两条对角线恰好是「时宽–带宽反比」的图景 ✓</p>
+两条对角线恰好是「时宽–带宽反比」的图景</p>
 <div class="admonition warning">
 <p class="admonition-title">「时宽–带宽反比」是趋势，不是精确等式</p>
 <p>这个规律说的是<strong>趋势</strong>：自相关衰减越慢，谱越窄。</p>
@@ -12481,7 +12481,7 @@ L 245.431172 28.947422
 </table>
 <p>考试和工程里用它做<strong>定性判断</strong>；
 要算具体数字，必须用该模型的闭式谱
-（如 AR(1) 的 <span class="arithmatex">\(\lvert 1-ae^{-j\omega}\rvert^{-2}\)</span>）✓</p>
+（如 AR(1) 的 <span class="arithmatex">\(\lvert 1-ae^{-j\omega}\rvert^{-2}\)</span>）</p>
 </div>
 <p><strong>这个规律的实践意义</strong>（很重要）：</p>
 <table>
@@ -12508,7 +12508,7 @@ L 245.431172 28.947422
 </table>
 <h3 id="64">6.4 用真实数据「看」谱峰<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
 <p><strong>任务</strong>：一个正弦信号淹没在噪声里，怎么找出它的频率？
-<strong>答案</strong>：看功率谱的峰 ✓</p>
+<strong>答案</strong>：看功率谱的峰</p>
 <p><strong>为什么时域不行、频域行</strong>：正弦的功率集中在 <span class="arithmatex">\(\omega_0\)</span> 一条线上，
 而噪声的功率平摊到整个频段。
 于是「信噪比」在时域看是全局平均的，在 <span class="arithmatex">\(\omega_0\)</span> 处看却是局部的——
@@ -12516,20 +12516,20 @@ L 245.431172 28.947422
 <p>课件里用「正弦 50 Hz + 高斯噪声（标准差 0.3）」的例子，
 实测结果是：谱的峰/中位数约 <span class="arithmatex">\(748\)</span>，峰值频率 <span class="arithmatex">\(50.78\)</span> Hz，
 与真实值只差 <span class="arithmatex">\(0.78\)</span> Hz，小于频率分辨率
-<span class="arithmatex">\(f_s/N_\text{seg} = 1000/512 \approx 1.95\)</span> Hz ✓</p>
+<span class="arithmatex">\(f_s/N_\text{seg} = 1000/512 \approx 1.95\)</span> Hz</p>
 <p><strong>这说明什么</strong>：<strong>谱分析是一种「能量聚焦」工具</strong> ——
 把分散在整个频段的噪声能量、和集中在一条线上的信号能量分开来看，
-信号就「现形」了。这是谱估计在工程上最常用的理由 ✓</p>
+信号就「现形」了。这是谱估计在工程上最常用的理由</p>
 <h3 id="65">6.5 窄带滤波降低噪声功率<a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
 <p><strong>一条直接可用的推论</strong>：如果 <span class="arithmatex">\(\lvert H(\omega)\rvert^2\)</span> 只在很窄的频段非零，
-那么<strong>只有那一小段频率上的噪声能通过</strong> → 输出功率大幅下降 ✓</p>
+那么<strong>只有那一小段频率上的噪声能通过</strong> → 输出功率大幅下降</p>
 <p><strong>手算这个结论</strong>：若输入是白噪声（谱密度 <span class="arithmatex">\(\sigma^2\)</span>），
 滤波器的通带宽度为 <span class="arithmatex">\(B\)</span>，则输出功率近似为</p>
 <div class="arithmatex">\[P_y \approx \sigma^2 \cdot B\]</div>
 <p>（这其实是下一节「通过线性系统」的公式
 <span class="arithmatex">\(P_y = \frac{1}{2\pi}\int_{-\pi}^{\pi}\lvert H(\omega)\rvert^2 S_x(\omega)\,d\omega\)</span>
 在白噪声、窄带情形下的近似：<span class="arithmatex">\(\lvert H\rvert^2\)</span> 只在宽度 <span class="arithmatex">\(B\)</span> 的带上约为 1，
-积分约等于 <span class="arithmatex">\(S_x \cdot B\)</span> ✓）</p>
+积分约等于 <span class="arithmatex">\(S_x \cdot B\)</span>）</p>
 <p><strong>量化对照</strong>（输入白噪声功率归一化为 1，<span class="arithmatex">\(\sigma^2 = 1\)</span>）：</p>
 <table>
 <thead>
@@ -12563,18 +12563,18 @@ L 245.431172 28.947422
 </tbody>
 </table>
 <p><strong>读表</strong>：带宽从 <span class="arithmatex">\(0.50\)</span> 缩到 <span class="arithmatex">\(0.01\)</span>（缩 50 倍），
-输出功率也缩约 50 倍 —— <strong>输出功率与带宽近似成正比</strong> ✓
-（课件实测含滤波器过渡带的值是 <span class="arithmatex">\(0.50/0.21/0.047/0.010\)</span>，与近似一致 ✓）</p>
+输出功率也缩约 50 倍 —— <strong>输出功率与带宽近似成正比</strong>
+（课件实测含滤波器过渡带的值是 <span class="arithmatex">\(0.50/0.21/0.047/0.010\)</span>，与近似一致）</p>
 <p><strong>这说明什么</strong>：<strong>滤波器选得越窄，滤掉的噪声越多</strong>，
 代价是信号本身的带宽也被切掉。
 「用带宽换信噪比」是接收机设计的核心权衡之一，
-也是下一节「平稳序列通过线性系统」的直接应用 ✓</p>
+也是下一节「平稳序列通过线性系统」的直接应用</p>
 <hr />
 <h2 id="_8">七、一个反例与实用检查清单：截断自相关会算出负的谱<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="71">7.1 原理<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
 <p><strong>真实谱 <span class="arithmatex">\(S(\omega) \ge 0\)</span></strong>（4.2 节证明过）。
 但<strong>由有限数据估计</strong>时，如果处理不当，
-<strong>估出来的谱会出现负值</strong> —— 这在物理上是不可能的 ⚠</p>
+<strong>估出来的谱会出现负值</strong> —— 这在物理上是不可能的</p>
 <p><strong>为什么会出负值</strong>：估计谱的常见做法是
 「取样本自相关的前 <span class="arithmatex">\(M+1\)</span> 项、其余当作 0，再做变换」。
 这等于在时域<strong>乘了一个矩形窗</strong> <span class="arithmatex">\(w(m) = 1\)</span>（<span class="arithmatex">\(|m| \le M\)</span>）：</p>
@@ -12744,12 +12744,12 @@ L 245.431172 28.947422
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：利用线性性拆成两项。</strong></p>
+<p>第一步：利用线性性拆成两项。</p>
 <div class="arithmatex">\[S(\omega) = \sum_{m} \sigma^2\delta(m)e^{-j\omega m}
 + \frac{A^2}{2}\sum_{m}\cos(\omega_0 m)e^{-j\omega m}\]</div>
 <p><strong>第一项</strong>：<span class="arithmatex">\(\delta(m)\)</span> 只在 <span class="arithmatex">\(m=0\)</span> 时为 1，所以</p>
 <div class="arithmatex">\[\sum_{m}\sigma^2\delta(m)e^{-j\omega m} = \sigma^2 \cdot e^{0} = \sigma^2\]</div>
-<p><strong>这是一个常数</strong>（与频率无关）✓</p>
+<p><strong>这是一个常数</strong>（与频率无关）</p>
 <p><strong>第二步：算第二项。</strong> 用欧拉公式把余弦拆开：</p>
 <div class="arithmatex">\[\cos(\omega_0 m) = \frac{e^{j\omega_0 m} + e^{-j\omega_0 m}}{2}\]</div>
 <p>代进去：</p>
@@ -12758,7 +12758,7 @@ L 245.431172 28.947422
 <p><strong>用冲激的 DTFT 恒等式</strong>：对整数 <span class="arithmatex">\(m\)</span> 求和时，</p>
 <div class="arithmatex">\[\sum_{m=-\infty}^{\infty} e^{-j(\omega - \omega_0)m}
 = 2\pi\sum_{k}\delta(\omega - \omega_0 - 2\pi k)\]</div>
-<p><strong>即：一个复指数的「频谱」是在该频率处的一串等间隔冲激</strong> ✓
+<p><strong>即：一个复指数的「频谱」是在该频率处的一串等间隔冲激</strong>
 （间隔 <span class="arithmatex">\(2\pi\)</span>，因为离散时间信号的谱是周期的）</p>
 <p>所以第二项是<strong>四簇冲激</strong>（<span class="arithmatex">\(\pm\omega_0\)</span> 各一簇，每簇按 <span class="arithmatex">\(2\pi\)</span> 重复）。</p>
 <p><strong>第三步：合并结果。</strong></p>
@@ -12947,7 +12947,7 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>第三步：这解释了周期图的波动。</strong></p>
+<p>第三步：这解释了周期图的波动。</p>
 <p>真实谱是常数，但估计出的谱是「常数 × 窗谱」的形状 ——
 <strong>所以估计值在频率上剧烈起伏</strong> ⚠
 这就是上一节 5.3 节提到的「周期图方差大」的直观来源 ✓</p>
@@ -13034,9 +13034,9 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 = \int_{-T/2}^{T/2}0\,dt = 0\]</div>
 <p>所以<strong>「先取期望再取模平方」得到恒为 <span class="arithmatex">\(\mathbf{0}\)</span></strong> ——
 完全无法反映功率 ✗</p>
-<p><strong>而「先取模平方再取期望」保留了功率信息</strong> ✓
+<p><strong>而「先取模平方再取期望」保留了功率信息</strong>
 因为 <span class="arithmatex">\(\lvert X_T(f)\rvert^2\)</span> 是「能量」，
-它的期望就是「平均能量」，除以 <span class="arithmatex">\(T\)</span> 就是功率 ✓</p>
+它的期望就是「平均能量」，除以 <span class="arithmatex">\(T\)</span> 就是功率</p>
 <p><strong>两种顺序的对比表</strong>：</p>
 <table>
 <thead>
@@ -13082,7 +13082,7 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>所以「功率」这个词本身就要求先平方</strong> ✓</p>
+<p><strong>所以「功率」这个词本身就要求先平方</strong></p>
 </details>
 <hr />
 <p><strong>Q3</strong> 白噪声与正弦过程的功率谱各是什么形状？
@@ -13152,13 +13152,13 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>两者在「时宽–带宽反比」的两端</strong> ✓
+<p><strong>两者在「时宽–带宽反比」的两端</strong>
 —— 这正是「时域越集中、频域越分散」这条规律的<strong>两个极限情形</strong>。</p>
 <p><strong>中间的连续过渡</strong>：AR(1) 过程就是中间情形 ——
 自相关按指数衰减（既不立即到 0，也不永不衰减），
-谱是一个有宽度的峰（既不常数、也不是谱线）✓
+谱是一个有宽度的峰（既不常数、也不是谱线）
 参数 <span class="arithmatex">\(a\)</span> 控制它在这个「极端轴」上的位置：
-<span class="arithmatex">\(a \to 0\)</span> 接近白噪声，<span class="arithmatex">\(a \to 1\)</span> 接近正弦 ⚠</p>
+<span class="arithmatex">\(a \to 0\)</span> 接近白噪声，<span class="arithmatex">\(a \to 1\)</span> 接近正弦</p>
 <p><strong>对照数值</strong>（<span class="arithmatex">\(a\)</span> 越小谱越平、越大越尖）：</p>
 <table>
 <thead>
@@ -13192,7 +13192,7 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </tbody>
 </table>
 <p><strong>读表</strong>：<span class="arithmatex">\(a \to 0\)</span> 平坦度趋近 1（白噪声），
-<span class="arithmatex">\(a \to 1\)</span> 平坦度爆炸式增长（趋近谱线）✓</p>
+<span class="arithmatex">\(a \to 1\)</span> 平坦度爆炸式增长（趋近谱线）</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 为什么工程上「用一条实测数据算功率谱」是合法的？
@@ -13204,11 +13204,11 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>合法性的来源：遍历性</strong> ✓</p>
+<p><strong>合法性的来源：遍历性</strong></p>
 <p><strong>问题在哪</strong>：
 功率谱的<strong>严格定义</strong>里含期望：</p>
 <div class="arithmatex">\[S(f) = \lim_{T\to\infty}\frac{1}{T}\mathbb{E}\left[\lvert X_T(f)\rvert^2\right]\]</div>
-<p>而<strong>期望需要无穷多次平行实验</strong> —— 工程上根本做不到 ⚠</p>
+<p>而<strong>期望需要无穷多次平行实验</strong> —— 工程上根本做不到</p>
 <p><strong>遍历性给出的答案</strong>：
 如果过程是<strong>平稳且遍历</strong>的，
 <strong>时间平均收敛（按概率 1）于系综平均</strong>，于是可以把期望去掉：</p>
@@ -13293,7 +13293,7 @@ S(\pi) \propto \frac{1}{3.61} \approx 0.277\]</div>
 </table>
 <p><strong>说明什么</strong>：<strong>「一条数据算谱」不是免费的</strong> ——
 它隐含了平稳 + 遍历 + 有限二阶矩三个假设。
-考试答题时先写假设、再写结论，顺序对了就有分 ✓</p>
+考试答题时先写假设、再写结论，顺序对了就有分</p>
 </details>
 <hr />
 <h2 id="_11">小结<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>

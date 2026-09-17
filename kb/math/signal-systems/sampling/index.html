@@ -8216,7 +8216,7 @@ X_s(\omega) = \frac{1}{2\pi}X(\omega)*P(\omega)
 \]</div>
 <div class="admonition note">
 <p class="admonition-title">这个式子是本节的核心</p>
-<p><strong>采样的频域效果：把原频谱以 <span class="arithmatex">\(\omega_s\)</span> 为周期复制无穷多份。</strong></p>
+<p>采样的频域效果：把原频谱以 <span class="arithmatex">\(\omega_s\)</span> 为周期复制无穷多份。</p>
 <p>这就是<strong>频谱周期延拓</strong>。</p>
 <p><strong>为什么这会导致问题</strong>：如果原来的频谱「太宽」（超过 <span class="arithmatex">\(\omega_s/2\)</span>），
 相邻的副本就会<strong>互相重叠</strong>——重叠的部分无法再区分，
@@ -8566,7 +8566,7 @@ x(t) = \sum_{n=-\infty}^{\infty} x[n]\,\operatorname{sinc}\!\left(\frac{t-nT_s}{
 混叠后<strong>都显示为 100 Hz</strong>，幅度叠加 —— <strong>无法区分</strong>。</p>
 <p><strong>(b) <span class="arithmatex">\(f_s = 2000\)</span> Hz</strong></p>
 <p><span class="arithmatex">\(f_N = 1000\)</span> Hz。</p>
-<p>三个成分（100、300、900 Hz）<strong>都低于 1000 Hz</strong>，所以<strong>无混叠</strong> ✓</p>
+<p>三个成分（100、300、900 Hz）<strong>都低于 1000 Hz</strong>，所以<strong>无混叠</strong></p>
 <p><strong>结论</strong>：<span class="arithmatex">\(f_s = 2000\)</span> Hz 可以无失真表示这三个成分。</p>
 <p><strong>对比</strong>：<span class="arithmatex">\(f_s\)</span> 从 1000 提高到 2000，混叠问题消失。
 这也说明<strong>提高采样率可以解决混叠</strong>（前提是硬件允许）。</p>
@@ -8674,7 +8674,7 @@ f_s \geq 2\left(f_{\max} + \Delta f_{\text{过渡带}}\right)
 <details class="success">
 <summary>解答</summary>
 <p>逐一计算（目标区间 <span class="arithmatex">\([0, 50]\)</span> Hz）：</p>
-<p><strong>30 Hz</strong>：已在区间内 → <strong>30 Hz</strong> ✓</p>
+<p><strong>30 Hz</strong>：已在区间内 → <strong>30 Hz</strong></p>
 <p><strong>70 Hz</strong>：超过 50 Hz。<span class="arithmatex">\(\lvert70-100\rvert = 30\)</span> Hz → <strong>30 Hz</strong>（混叠 ✗）</p>
 <p><strong>130 Hz</strong>：超过。先减 <span class="arithmatex">\(f_s\)</span> 得 30 Hz，在区间内 → <strong>30 Hz</strong>（混叠 ✗）</p>
 <p><strong>230 Hz</strong>：减 <span class="arithmatex">\(2f_s\)</span> 得 <span class="arithmatex">\(230-200 = 30\)</span> Hz → <strong>30 Hz</strong>（混叠 ✗）</p>
@@ -8705,10 +8705,10 @@ f_s \geq 2\left(f_{\max} + \Delta f_{\text{过渡带}}\right)
 </tr>
 </tbody>
 </table>
-<p><strong>四个完全不同的频率，采样后全部显示为 30 Hz！</strong></p>
+<p>四个完全不同的频率，采样后全部显示为 30 Hz！</p>
 <p><strong>这是混叠最危险的形态</strong>：多个频率成分<strong>叠加到同一个频点</strong>，
 幅度相加，频谱上看起来只是一个强峰 ——
-<strong>完全无法知道真实有几个成分、分别在什么频率。</strong></p>
+完全无法知道真实有几个成分、分别在什么频率。</p>
 <p><strong>规律</strong>：混叠频率满足</p>
 <div class="arithmatex">\[
 f_{\text{alias}} = \left\lvert f_0 \bmod f_s \right\rvert,\quad
@@ -8718,7 +8718,7 @@ f_{\text{alias}} = \left\lvert f_0 \bmod f_s \right\rvert,\quad
 </details>
 <div class="admonition warning">
 <p class="admonition-title">工程教训</p>
-<p><strong>看到频谱上的强峰时，不能断定它就是真实的振动频率。</strong></p>
+<p>看到频谱上的强峰时，不能断定它就是真实的振动频率。</p>
 <p>正确做法：</p>
 <ol>
 <li>检查采样率与信号带宽</li>
@@ -8940,14 +8940,14 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 </tr>
 </tbody>
 </table>
-<p><strong>所以至少三种可能：50 Hz、450 Hz、950 Hz（以及更高）</strong></p>
+<p>所以至少三种可能：50 Hz、450 Hz、950 Hz（以及更高）</p>
 <p><strong>如何确定真实值</strong>：</p>
 <ol>
 <li><strong>改变采样率</strong>：若峰位置随之变化，是混叠；真实频率位置不变</li>
 <li><strong>加抗混叠滤波器</strong>：滤掉高频后再测</li>
 <li><strong>提高采样率</strong>：直接消除混叠</li>
 </ol>
-<p><strong>这就是「频谱上的峰不一定可信」的原因。</strong></p>
+<p>这就是「频谱上的峰不一定可信」的原因。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 为什么不先采样、之后再数字滤波，来去除混叠？</p>
@@ -8957,7 +8957,7 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为混叠发生在「采样那一刻」，之后无法区分。</strong></p>
+<p>因为混叠发生在「采样那一刻」，之后无法区分。</p>
 <p>具体分析：</p>
 <table>
 <thead>
@@ -9006,10 +9006,10 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 <details class="success">
 <summary>解答</summary>
 <p><strong>过采样</strong>：取 <span class="arithmatex">\(f_s \gg 2f_{\max}\)</span>（远大于奈奎斯特要求）。</p>
-<p><strong>好处一：降低对抗混叠滤波器的要求</strong></p>
+<p>好处一：降低对抗混叠滤波器的要求</p>
 <p>过渡带可以更宽（从 <span class="arithmatex">\(f_{\max}\)</span> 到 <span class="arithmatex">\(f_s/2\)</span> 之间的空间变大），
 滤波器可以用更低阶实现 —— 成本更低、相位失真更小。</p>
-<p><strong>好处二：提高有效位数（信噪比）</strong></p>
+<p>好处二：提高有效位数（信噪比）</p>
 <p>过采样 + 平均（或低通数字滤波）可以降低量化噪声。
 理论上每提高 4 倍采样率可增加 1 位有效位数（6 dB 信噪比）。</p>
 <p><strong>好处三：简化重建滤波器</strong></p>

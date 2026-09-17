@@ -9234,7 +9234,7 @@
 </table>
 <p><strong>这三条都能靠两个动作当场查出来</strong>：
 <strong>打印 <code>shape</code></strong>，以及 <strong>打印 <code>np.shares_memory(x, y)</code></strong>。
-本页会把这两个自查手段用在每一个知识点上 ✓</p>
+本页会把这两个自查手段用在每一个知识点上</p>
 </div>
 <hr />
 <h2 id="_1">一、为什么需要索引与切片<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -9513,7 +9513,7 @@ a[1] 与 a 共享内存: True</code></pre>
 </table>
 <p><strong><code>a[i][j]</code> 唯一合理的用法</strong>是「我就是要那整行」——
 这时应当<strong>显式写成 <code>row = a[i]</code></strong>，让别人一眼看出你是有意取整行的，
-而不是无意中多索引了一次 ✓</p>
+而不是无意中多索引了一次</p>
 </div>
 <p><strong>还有一个容易忽略的点</strong>：<code>a[i][j]</code> 能写成 <code>a[i, j]</code>，
 但<strong>切片时不能随便拆</strong>。例如 <code>a[:, 1]</code> 不能写成 <code>a[:][1]</code> ——
@@ -9654,7 +9654,7 @@ a[-3] = 100
 而索引的语义是「我要<strong>那一个</strong>元素」，它必须存在 ✓</p>
 <p><strong>实用影响</strong>：<code>a[10:20]</code> 得到空数组这件事，
 有时候是你在做「分批取数据」时想要的，有时候是<strong>下标算错了的信号</strong>。
-看到「怎么结果是空的」，先把 <code>start</code>/<code>stop</code> 打出来看看 ✓</p>
+看到「怎么结果是空的」，先把 <code>start</code>/<code>stop</code> 打出来看看</p>
 </div>
 <hr />
 <h2 id="_3">三、切片：取出连续的一段<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -9720,7 +9720,7 @@ a[2:8:2]    : [2 4 6]  ← 每 2 个取一个
 a[::2]      : [0 2 4 6 8]  ← 从头到尾，每 2 个取一个
 a[::3]      : [0 3 6 9]  ← 每 3 个取一个</code></pre>
 <p><strong>「含起点、不含终点」和 <code>range</code>、<code>arange</code> 完全一致</strong>，
-这条规律在 Python 生态里反复出现，放心套用直觉 ✓</p>
+这条规律在 Python 生态里反复出现，放心套用直觉</p>
 <p><strong>它带来的一个实用好处</strong>是「长度直接可算」：
 <code>a[2:5]</code> 的长度是 <code>5 - 2 = 3</code>，
 <code>a[i:j]</code> 的长度就是 <code>j - i</code>（步长为 1 时）。不用考虑 ±1 的边界。</p>
@@ -9855,7 +9855,7 @@ a[::2, ::2] 隔行隔列取:
 <a id="__codelineno-11-2" name="__codelineno-11-2"></a>a[:, 1:2]   →  shape (3, 1)   二维，3 行 1 列  ← 才是真正的「一列」
 </code></pre></div></td></tr></table></div>
 <p><strong>原因</strong>：只要在某个维度上写的是<strong>单个数字</strong>（<code>1</code>），
-那一维就被<strong>消掉了</strong>；写的是<strong>切片</strong>（<code>1:2</code>），那一维就被<strong>保留</strong>下来 ✓</p>
+那一维就被<strong>消掉了</strong>；写的是<strong>切片</strong>（<code>1:2</code>），那一维就被<strong>保留</strong>下来</p>
 <table>
 <thead>
 <tr>
@@ -9890,7 +9890,7 @@ a[::2, ::2] 隔行隔列取:
 <p><strong>什么时候会真的出事</strong>：把一列喂给要求 <code>(n, 1)</code> 或 <code>(n, features)</code> 的接口时，
 <code>(3,)</code> 会被当成「3 个样本各 1 个特征」还是「1 个样本 3 个特征」，
 取决于接口怎么理解 —— 这一步的差异，往往表现为
-<strong>运行不报错但结果完全不对</strong> ⚠</p>
+<strong>运行不报错但结果完全不对</strong></p>
 <p><strong>安全写法</strong>：明确你要的是什么形状 ——</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a>要一维:  a[:, 1]        或  a[:, 1].ravel()
@@ -10260,7 +10260,7 @@ sub 的 base 形状: (10,)
 </table>
 <p><strong>为什么首选 <code>np.shares_memory</code></strong>：<code>base</code> 只指向<strong>最初的归属</strong>，
 对「视图的视图」会一路指回最原始的数组，
-于是 <code>v.base is a</code> 可能是 <code>False</code>，但两者<strong>其实仍然共享内存</strong> ⚠</p>
+于是 <code>v.base is a</code> 可能是 <code>False</code>，但两者<strong>其实仍然共享内存</strong></p>
 <div class="admonition warning">
 <p class="admonition-title"><code>base</code> 判断视图不可靠，<code>shares_memory</code> 才可靠</p>
 <p><strong>对二维数组取一整行</strong>时，这个差别会直接显现出来：</p>
@@ -10286,14 +10286,14 @@ sub 的 base 形状: (10,)
 np.shares_memory(a, row): True
 row.base 的形状       : (12,)</code></pre>
 <p><strong>第一行打出 <code>False</code> 会让人以为「不共享内存」</strong> ——
-但第二行立刻纠正了这个判断 ✓
+但第二行立刻纠正了这个判断
 所以：<strong>判断视图只看 <code>np.shares_memory</code>，不要只看 <code>base</code>。</strong></p>
 </div>
 <p><strong>实际排查用哪一步</strong>：遇到「改了 A 结果 B 也变了」，第一件事就是</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a>print(np.shares_memory(A, B))
 </code></pre></div></td></tr></table></div>
 <p>打出 <code>True</code> 说明你改的是同一块内存，去查「哪一步产生了视图」；
-打出 <code>False</code> 说明问题不在内存共享上，去查别的地方 ✓</p>
+打出 <code>False</code> 说明问题不在内存共享上，去查别的地方</p>
 <hr />
 <h2 id="_5">五、视图与副本的完整规则（重点）<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 速查表<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
@@ -10438,7 +10438,7 @@ copy a.copy()           : False</code></pre>
 它取出来的是<strong>标量</strong>（一个 <code>np.int64</code> 值），根本不是数组，
 谈不上「共享内存」。
 要验证「基本索引在数组层面也是视图」，应当用 <code>a[3:4]</code>（长度 1 的切片），
-它打出 <code>True</code> ✓</p>
+它打出 <code>True</code></p>
 <p><strong>从这组布尔值能读出三条结论</strong>：</p>
 <table>
 <thead>
@@ -10516,7 +10516,7 @@ boolres.base is None: True
 改 boolres[0] = -2 后，a = [ 4 38 32 21 21 42  4 34]  ← 没变（副本）
 改 sub[0] = -3 之后， a = [ 4 -3 32 21 21 42  4 34]  ← 变了（视图）⚠</code></pre>
 <p><strong><code>.base is None</code> 在副本上是 <code>True</code></strong> ——
-因为副本是个「没有主人的数组」，它自己就是自己的归属 ✓</p>
+因为副本是个「没有主人的数组」，它自己就是自己的归属</p>
 <p><strong>三者的完整对照</strong>：</p>
 <table>
 <thead>
@@ -10627,7 +10627,7 @@ boolres.base is None: True
 还有负值吗: False  ← 清理干净了</code></pre>
 <p><strong>错在哪</strong>：<code>data[data &lt; 0]</code> 这一步<strong>已经产生了副本</strong>，
 后面的 <code>[:] = 0</code> 是在<strong>那个副本上</strong>写的，
-写完这个临时对象就被丢弃了 —— <strong>原数组一个字节都没动</strong> ⚠</p>
+写完这个临时对象就被丢弃了 —— <strong>原数组一个字节都没动</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
 <span class="normal"><a href="#__codelineno-23-3">3</a></span>
@@ -10640,7 +10640,7 @@ boolres.base is None: True
 </code></pre></div></td></tr></table></div>
 <p><strong>正确写法只有一步索引</strong>：<code>data[data &lt; 0] = 0</code>。
 这里 <code>data[...] =</code> 走的是<strong>赋值路径</strong>，
-NumPy 会<strong>直接把值写回原数组</strong>，不产生中间副本 ✓</p>
+NumPy 会<strong>直接把值写回原数组</strong>，不产生中间副本</p>
 <div class="admonition warning">
 <p class="admonition-title">区分「读」和「写」：<code>x[mask]</code> 是副本，<code>x[mask] = v</code> 是原地写</p>
 <p>同一个方括号，出现在<strong>等号左边</strong>和<strong>右边</strong>时含义完全不同：</p>
@@ -10691,7 +10691,7 @@ NumPy 会<strong>直接把值写回原数组</strong>，不产生中间副本 �
 </code></pre></div></td></tr></table></div>
 <p><strong>注意第四行</strong>：切片那条恰好能生效，因为视图再加一层还是视图。
 <strong>正是这个「有时能、有时不能」让人放松警惕</strong> ⚠
-统一按上面那句口诀写，就不会踩这个坑 ✓</p>
+统一按上面那句口诀写，就不会踩这个坑</p>
 </div>
 <h3 id="55-copy-npcopy">5.5 显式复制：<code>copy()</code> 与 <code>np.copy</code><a class="headerlink" href="#55-copy-npcopy" title="Permanent link">&para;</a></h3>
 <p><strong>当你确实需要一份独立的数据时，把意图写出来</strong>：</p>
@@ -10743,7 +10743,7 @@ b 的 base        : None
   c = [  0 200   2   3   4   5]</code></pre>
 <p><strong><code>a.copy()</code> 与 <code>np.copy(a)</code> 效果相同</strong>，
 <code>a.copy()</code> 更常见（方法调用读起来更顺），
-<code>np.copy(a)</code> 在需要「把函数当参数传」的场合更方便 ✓</p>
+<code>np.copy(a)</code> 在需要「把函数当参数传」的场合更方便</p>
 <p><strong>什么时候必须复制</strong>（本节最重要的实用结论）：</p>
 <table>
 <thead>
@@ -10784,14 +10784,14 @@ b 的 base        : None
 </code></pre></div></td></tr></table></div>
 <p><strong>修法</strong>：<code>small = big[0:1000].copy()</code> ——
 多花 1000 个元素的内存，但 <code>small</code> 从此独立，
-<code>del big</code> 能真正把 1 GB 还回去 ✓</p>
+<code>del big</code> 能真正把 1 GB 还回去</p>
 <p>判断依据：<strong>「这一小段要活得比大数组久吗？」</strong>
-要 → 复制；不要 → 保持视图更省 ✓</p>
+要 → 复制；不要 → 保持视图更省</p>
 </div>
 <hr />
 <h2 id="_6">六、布尔索引（掩码）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 比较运算产生布尔数组<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<p><strong>布尔索引的前提是：比较运算作用在整个数组上，产生一个同形状的布尔数组。</strong></p>
+<p>布尔索引的前提是：比较运算作用在整个数组上，产生一个同形状的布尔数组。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -10959,7 +10959,7 @@ a[a == 0]: [0]
 </table>
 <p><strong>筛选之后就没有「位置信息」了</strong>：如果你还需要知道
 「剩下的是第几个」，那就要把下标一起取出来 ——
-用第十节的 <code>np.nonzero</code> 或 <code>np.argwhere</code> ✓</p>
+用第十节的 <code>np.nonzero</code> 或 <code>np.argwhere</code></p>
 <h3 id="63-masksum-any-all">6.3 <code>mask.sum()</code> 计数、<code>any</code> / <code>all</code>、<code>~</code> 取反<a class="headerlink" href="#63-masksum-any-all" title="Permanent link">&para;</a></h3>
 <p><strong>布尔数组本身就是一组 0/1</strong>，所以可以直接做统计：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
@@ -11004,7 +11004,7 @@ a[~mask]        : [-5 -8  0]  ← 不满足条件的那些
 两个计数相加    : 6  而总数是: 6</code></pre>
 <p><strong><code>~</code> 是「按位取反」</strong>，用在布尔数组上就是逻辑取反。
 <strong>注意它不能写成 <code>!</code></strong> —— <code>!</code> 在 Python 里根本不是取反运算符，
-NumPy 也不接受这个写法 ⚠</p>
+NumPy 也不接受这个写法</p>
 <p><strong>常用方法速查</strong>：</p>
 <table>
 <thead>
@@ -11059,7 +11059,7 @@ NumPy 也不接受这个写法 ⚠</p>
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>打出 3   → 数据没问题，是后面的代码有问题
 </code></pre></div></td></tr></table></div>
 <p><strong>先数个数、再取值</strong>，能把「条件写错了」和「后续处理错了」
-这两类问题彻底分开，省掉一半排查时间 ✓</p>
+这两类问题彻底分开，省掉一半排查时间</p>
 </div>
 <hr />
 <h2 id="_7">七、多条件索引（重点）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -11081,9 +11081,9 @@ NumPy 也不接受这个写法 ⚠</p>
 <p><strong>为什么报错</strong>：Python 的 <code>and</code> / <code>or</code> 要求参与运算的对象能<strong>整体判真假</strong>
 （也就是能给出「这一个条件是 True 还是 False」）。
 可 <code>a &gt; 0</code> 是一个<strong>数组</strong>，里面有真有假，
-Python 没法替你决定「这算真还是算假」，于是直接报错 ✓</p>
+Python 没法替你决定「这算真还是算假」，于是直接报错</p>
 <p><strong>这个报错其实是在保护你</strong>：如果它随便挑一个「反正非空就算真」，
-你得到的就是<strong>完全错误但看起来正常</strong>的结果 ⚠</p>
+你得到的就是<strong>完全错误但看起来正常</strong>的结果</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -11145,13 +11145,13 @@ Python 没法替你决定「这算真还是算假」，于是直接报错 ✓</p
 </tbody>
 </table>
 <p><strong>为什么是这三个符号</strong>：它们本来是「按位与 / 按位或 / 按位非」，
-但用在<strong>布尔数组</strong>上时，逐元素的运算结果和「且 / 或 / 非」完全一致 ✓
+但用在<strong>布尔数组</strong>上时，逐元素的运算结果和「且 / 或 / 非」完全一致
 所以 NumPy 就直接借用了它们。</p>
 <p><strong>还有一条容易忘的</strong>：<strong>每个条件都必须是数组比较</strong>。
 <code>a[(a &gt; 0) &amp; 25]</code> 这种写法是错的 ——
-<code>25</code> 不是布尔数组，<code>&amp;</code> 会按整数位运算来算，结果无法预测 ⚠</p>
+<code>25</code> 不是布尔数组，<code>&amp;</code> 会按整数位运算来算，结果无法预测</p>
 <h3 id="72">7.2 每个条件<strong>必须加括号</strong><a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
-<p><strong>这是比上一节更隐蔽的坑：它不报错，只是给你一个错的结果。</strong></p>
+<p>这是比上一节更隐蔽的坑：它不报错，只是给你一个错的结果。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -11238,7 +11238,7 @@ Python 没法替你决定「这算真还是算假」，于是直接报错 ✓</p
 <a id="__codelineno-35-11" name="__codelineno-35-11"></a>又是整个数组 ⚠
 </code></pre></div></td></tr></table></div>
 <p><strong>两条错写法都得到「整个数组」</strong> —— 从结果上看，
-和「忘记筛选」一模一样，所以你根本想不到是括号的问题 ⚠</p>
+和「忘记筛选」一模一样，所以你根本想不到是括号的问题</p>
 <table>
 <thead>
 <tr>
@@ -11282,7 +11282,7 @@ Python 没法替你决定「这算真还是算假」，于是直接报错 ✓</p
 <a id="__codelineno-36-5" name="__codelineno-36-5"></a>✗  a[2 &lt; a &lt; 5]           ← 链式比较在 NumPy 里不成立 ⚠
 </code></pre></div></td></tr></table></div>
 <p><strong>链式比较要特别提一下</strong>：<code>2 &lt; a &lt; 5</code> 在 Python 里会被解释成
-<code>(2 &lt; a) and (a &lt; 5)</code>，于是又落回 <code>and</code> 的报错里 ⚠
+<code>(2 &lt; a) and (a &lt; 5)</code>，于是又落回 <code>and</code> 的报错里
 NumPy 里必须写成 <strong><code>(a &gt; 2) &amp; (a &lt; 5)</code></strong> ✓</p>
 </div>
 <div class="admonition tip">
@@ -11315,7 +11315,7 @@ NumPy 里必须写成 <strong><code>(a &gt; 2) &amp; (a &lt; 5)</code></strong> 
 </tbody>
 </table>
 <p><strong>「筛完之后一个没少」是括号 bug 的典型症状</strong>，
-见到就要回头看括号 ✓</p>
+见到就要回头看括号</p>
 </div>
 <hr />
 <h2 id="npwhere">八、<code>np.where</code> 的两种用法<a class="headerlink" href="#npwhere" title="Permanent link">&para;</a></h2>
@@ -11480,7 +11480,7 @@ np.where(scores &gt;= 80) = (array([2, 5], dtype=int64),)
 与 np.nonzero 结果相同 : True</code></pre>
 <p><strong>为什么返回的是「元组」</strong>：因为要能<strong>同时处理多维</strong>。
 对二维数组，<code>np.where</code> 会返回 <code>(行下标数组, 列下标数组)</code> 两个数组 ——
-这正是「元组里装着下标数组」的好处 ✓</p>
+这正是「元组里装着下标数组」的好处</p>
 <table>
 <thead>
 <tr>
@@ -11508,8 +11508,8 @@ np.where(scores &gt;= 80) = (array([2, 5], dtype=int64),)
 </tbody>
 </table>
 <p><strong>如果只想要「一维下标」，记得取 <code>[0]</code></strong>：
-<code>np.where(cond)[0]</code> ✓
-<strong>忘了 <code>[0]</code> 会得到一个元组</strong>，后续很多操作都会因此报错 ⚠</p>
+<code>np.where(cond)[0]</code>
+<strong>忘了 <code>[0]</code> 会得到一个元组</strong>，后续很多操作都会因此报错</p>
 <p><strong>与布尔索引的分工</strong>：</p>
 <table>
 <thead>
@@ -11614,7 +11614,7 @@ a[[-1, -2]]            : [60 50]  ← 也可以用负下标
 </table>
 <p><strong>「能重复取」这一点实际很有用</strong>：做自助抽样、随机重排时，
 都需要「从原数组里按随机下标取一批」，
-这正是花式索引的标准用途 ✓</p>
+这正是花式索引的标准用途</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -11773,7 +11773,7 @@ b[[0, 2]][:, [1, 3]] 才是「第 0、2 行的第 1、3 列」:
 </tbody>
 </table>
 <p><strong>判断依据</strong>：要「<strong>成对的几个点</strong>」用第一个写法；
-要「<strong>行集合 × 列集合</strong>」用后两个 ✓</p>
+要「<strong>行集合 × 列集合</strong>」用后两个</p>
 </div>
 <h3 id="93-nptake-npput">9.3 <code>np.take</code> 与 <code>np.put</code><a class="headerlink" href="#93-nptake-npput" title="Permanent link">&para;</a></h3>
 <p><strong>花式索引也能用函数形式写</strong>，函数形式额外的好处是<strong>能处理越界下标</strong>：</p>
@@ -11854,14 +11854,14 @@ c[[0, 4]] = [0, 0] 之后 c      = [  0 101 102 103   0]
 </table>
 <p><strong><code>np.put</code> 是原地操作、返回 <code>None</code></strong> ——
 和 <code>rng.shuffle</code>、<code>list.sort</code> 一样，
-<strong>不要写 <code>a = np.put(a, ...)</code></strong>，那会把 <code>a</code> 变成 <code>None</code> ⚠</p>
+<strong>不要写 <code>a = np.put(a, ...)</code></strong>，那会把 <code>a</code> 变成 <code>None</code></p>
 <p><strong><code>mode</code> 参数什么时候有用</strong>：处理「环形数据」（比如按小时循环的时间表），
 或者数据刚好在边界上、允许「绕一圈」的场景。
 <strong>如果越界一定是 bug，那就别用 <code>mode</code></strong> ——
-让 <code>IndexError</code> 报出来更安全 ✓</p>
+让 <code>IndexError</code> 报出来更安全</p>
 <hr />
 <h2 id="npnonzero-npargwhere">十、<code>np.nonzero</code> 与 <code>np.argwhere</code>：找出满足条件的位置<a class="headerlink" href="#npnonzero-npargwhere" title="Permanent link">&para;</a></h2>
-<p><strong>上一节的布尔索引只给你「值」，这两个函数给你「位置」。</strong></p>
+<p>上一节的布尔索引只给你「值」，这两个函数给你「位置」。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -12019,9 +12019,9 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 </tbody>
 </table>
 <p><strong>注意 <code>b[rows, cols]</code> 这个写法</strong>：它就是第九节的「多维花式索引配对」，
-<code>rows</code> 和 <code>cols</code> 长度相同、逐个配对，正好取到那些满足条件的元素 ✓
+<code>rows</code> 和 <code>cols</code> 长度相同、逐个配对，正好取到那些满足条件的元素
 <strong>这也是为什么 <code>np.nonzero</code> 返回「按轴分开的数组」</strong>：
-这样可以直接拿去做配对索引 ✓</p>
+这样可以直接拿去做配对索引</p>
 <hr />
 <h2 id="_8">十一、用索引修改数组<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="111">11.1 布尔掩码赋值<a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
@@ -12084,10 +12084,10 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 <p><strong>注意 <code>d[d &lt; 0] = np.abs(a[a &lt; 0])</code> 这一行</strong>：
 条件写在 <code>d</code> 上，取绝对值用的是 <code>a</code>。
 这次两者恰好等价（<code>d</code> 是 <code>a</code> 的副本、还没被改过），
-<strong>但当数据已经被改过一部分时，混用基准就会出错</strong> ⚠</p>
+<strong>但当数据已经被改过一部分时，混用基准就会出错</strong></p>
 <p><strong>判断依据</strong>：<strong>条件、取值、写入目标这三处，基准要么统一成同一个数组，
 要么先把「不变量」算出来存成变量</strong> ——
-不要让读代码的人去猜你用的是哪个 ✓</p>
+不要让读代码的人去猜你用的是哪个</p>
 <div class="admonition warning">
 <p class="admonition-title">整数数组里存不进 <code>nan</code></p>
 <p><code>np.nan</code> 是<strong>浮点数</strong>。往整型数组里写 <code>nan</code> 会直接报错：</p>
@@ -12100,7 +12100,7 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 </code></pre></div></td></tr></table></div>
 <p><strong>这也解释了一个常见困惑</strong>：「为什么读进来的整数列，
 一旦有了缺失值就变成小数了？」——
-因为整数装不下缺失值的标记，只能升成浮点 ✓</p>
+因为整数装不下缺失值的标记，只能升成浮点</p>
 </div>
 <p><strong>布尔掩码赋值的三个要点</strong>：</p>
 <table>
@@ -12126,7 +12126,7 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 </tbody>
 </table>
 <h3 id="112">11.2 花式索引赋值<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
-<p><strong>花式索引赋值和切片赋值一样，都是原地改原数组</strong></p>
+<p>花式索引赋值和切片赋值一样，都是原地改原数组</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -12171,14 +12171,14 @@ d[[4, 0]] = [...]   : [999  20  30  40 400  60]  ← 赋值按你给的顺序，
 三者都没有改变 a    : [10 20 30 40 50 60]</code></pre>
 <p><strong><code>d[[4, 0]] = [400, 999]</code> 是这一节的要点</strong>：
 赋值的顺序<strong>严格按索引数组的顺序</strong>，不做任何排序 ——
-第 4 个位置拿 <code>400</code>，第 0 个位置拿 <code>999</code> ✓
+第 4 个位置拿 <code>400</code>，第 0 个位置拿 <code>999</code>
 <strong>这一点和「先取出来、改完再写回去」的直觉不同</strong>，值得记住。</p>
 <p><strong>长这样的一行是错的</strong>（重复下标在赋值里的行为和你以为的不一样）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a>a[[1, 1]] = [10, 20]     最终 a[1] 是 10 —— 按顺序逐个写，后写的被覆盖 ⚠
 </code></pre></div></td></tr></table></div>
 <p><strong>判断依据</strong>：赋值时<strong>别让同一个位置出现两次</strong>。
 真需要「累加」这类语义，要用 <code>np.add.at(a, idx, v)</code>，
-它会把重复位置的贡献<strong>累加</strong>起来，而不是互相覆盖 ✓</p>
+它会把重复位置的贡献<strong>累加</strong>起来，而不是互相覆盖</p>
 <h3 id="113-buga0-10-9">11.3 经典 bug：<code>a[[0, 1]][0] = 9</code> 为什么不生效<a class="headerlink" href="#113-buga0-10-9" title="Permanent link">&para;</a></h3>
 <p><strong>这是花式索引是「副本」这件事造成的最经典的一个坑</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
@@ -12287,7 +12287,7 @@ a[[0, 1]][0] = 9 之后 a : [1 2 3 4 5]  ← 完全没变！⚠
 <span class="normal"><a href="#__codelineno-54-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1"></a>idx = np.nonzero(a &gt; 3)[0]      # 先算出下标数组
 <a id="__codelineno-54-2" name="__codelineno-54-2"></a>a[idx[0]] = 9                    # 再一次索引 → 原地写 ✓
 </code></pre></div></td></tr></table></div>
-<p>这样写既正确，又把「我在算什么」表达得很清楚 ✓</p>
+<p>这样写既正确，又把「我在算什么」表达得很清楚</p>
 </div>
 <hr />
 <h2 id="npclip-npselect">十二、<code>np.clip</code> 与 <code>np.select</code><a class="headerlink" href="#npclip-npselect" title="Permanent link">&para;</a></h2>
@@ -12476,7 +12476,7 @@ np.select 的分级结果: ['D' 'C' 'A' 'D' 'C' 'B']
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>从松到严排（错的顺序）: ['D' 'C' 'C' 'D' 'C' 'C']
 从严到松排（对的顺序）: ['D' 'C' 'A' 'D' 'C' 'B']</code></pre>
-<p><strong>95 分在「错的顺序」里被打成了 <code>C</code></strong> —— 因为 <code>&gt;= 60</code> 先被匹配上了 ⚠
+<p><strong>95 分在「错的顺序」里被打成了 <code>C</code></strong> —— 因为 <code>&gt;= 60</code> 先被匹配上了
 <code>np.where</code> 没这个问题（它只有一个条件），
 <strong>但 <code>np.select</code> 一定要从最严的条件开始写</strong> ✓</p>
 <p><strong>三种「按条件选值」工具的分工</strong>：</p>
@@ -12505,7 +12505,7 @@ np.select 的分级结果: ['D' 'C' 'A' 'D' 'C' 'B']
 <hr />
 <h2 id="argmax-argmin-argsort-max-min-sort">十三、<code>argmax</code> / <code>argmin</code> / <code>argsort</code> 与 <code>max</code> / <code>min</code> / <code>sort</code><a class="headerlink" href="#argmax-argmin-argsort-max-min-sort" title="Permanent link">&para;</a></h2>
 <p><strong>这一组函数的命名规律很值得记</strong>：
-<strong>带 <code>arg</code> 前缀的，返回「下标」；不带的，返回「值」。</strong></p>
+带 <code>arg</code> 前缀的，返回「下标」；不带的，返回「值」。</p>
 <table>
 <thead>
 <tr>
@@ -12614,7 +12614,7 @@ a 本身没被排序    : [30 10 50 20 40]  ← 上面全是只读操作</code><
 </code></pre></div></td></tr></table></div>
 <p><strong>为什么 <code>argsort</code> 比 <code>sort</code> 有用</strong>：因为它给出了<strong>「原来第几个排到第几位」</strong>，
 于是可以用<strong>同一组下标去重排别的数组</strong> ——
-这正是「按某一列排序整张表」的标准做法 ✓</p>
+这正是「按某一列排序整张表」的标准做法</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -12700,7 +12700,7 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
   用 np.unravel_index 还原坐标: (0, 1)</code></pre>
 <p><strong><code>argmax()</code> 不带 <code>axis</code> 时返回的是「展平后」的位置</strong>，
 二维坐标得用 <code>np.unravel_index</code> 还原 ——
-这一点上一页（数组基础）已经踩过一次，这里再确认一遍 ⚠</p>
+这一点上一页（数组基础）已经踩过一次，这里再确认一遍</p>
 <table>
 <thead>
 <tr>
@@ -12738,9 +12738,9 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 </code></pre></div></td></tr></table></div>
 <p><strong>关键点</strong>：<strong>下标是唯一被算出来的东西，
 其余的都用「花式索引 + 同一组下标」跟着走</strong>。
-这个套路对多列数据、多组标签同时有效 ✓</p>
+这个套路对多列数据、多组标签同时有效</p>
 <p><strong>要降序</strong>就在最后加 <code>[::-1]</code>：
-<code>order = keys.argsort()[::-1]</code> ✓
+<code>order = keys.argsort()[::-1]</code>
 （注意 <code>[::-1]</code> 是视图，加在这没问题；若要长期保存就 <code>.copy()</code> 一下。）</p>
 </div>
 <hr />
@@ -12846,7 +12846,7 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 </table>
 <p><strong>为什么保留 <code>np.where(mask)[0]</code></strong>：<strong>「哪一号样本有问题」
 往往比「问题样本的值是多少」更重要</strong> ——
-要回去查这条数据是怎么采的，就得知道它的编号 ✓</p>
+要回去查这条数据是怎么采的，就得知道它的编号</p>
 <h3 id="142">14.2 给缺失/异常值赋默认值<a class="headerlink" href="#142" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：数据里混着缺失值和明显的错误值，要统一填成默认值。
 这是真实项目里第一步要做的事。</p>
@@ -12971,10 +12971,10 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 </tbody>
 </table>
 <p><strong>实测对比</strong>（见下面的代码）：差距非常大，而且是<strong>静默的</strong> ——
-代码不会报错，只会给你一个 <code>nan</code>，然后一路传播下去 ⚠</p>
+代码不会报错，只会给你一个 <code>nan</code>，然后一路传播下去</p>
 <p><strong>实用习惯</strong>：<strong>任何统计计算之前，先 <code>print(np.isnan(a).sum())</code>。</strong>
 打出 0 就放心用普通函数；打出非 0 就要换 <code>nan</code> 版本，
-或者先把缺失值处理掉 ✓</p>
+或者先把缺失值处理掉</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
@@ -13017,7 +13017,7 @@ np.nanmean()     : -47.302
 np.nanmax / np.nanmin: 59.41 -999.0
   ↑ min 拿到的是 -999，因为它不是 nan，只是错值 ⚠</code></pre>
 <p><strong>最后一行值得特别记住</strong>：<strong><code>nan</code> 之外的「错值」是看不出来的</strong> ——
-<code>-999</code> 在数值上完全合法，<code>np.nanmin</code> 只会老老实实把它当成最小值 ⚠
+<code>-999</code> 在数值上完全合法，<code>np.nanmin</code> 只会老老实实把它当成最小值
 <strong>所以「异常值」必须靠业务规则去筛</strong>（比如「温度不可能小于 -50 度」），
 不能指望统计函数自己识别 ✓</p>
 <h3 id="143">14.3 按列选特征子集<a class="headerlink" href="#143" title="Permanent link">&para;</a></h3>
@@ -13092,7 +13092,7 @@ np.take(X, [0, 2, 5], axis=1) 结果相同: True
   X[:, [2]]      → shape: (5, 1)  ← 花式索引也保留该轴 ✓</code></pre>
 <p><strong>这是 <code>a[:, 1]</code> 那个坑的真实后果</strong>：喂给建模接口的数组
 必须是二维 <code>(样本数, 特征数)</code>。
-<code>X[:, 2]</code> 得到 <code>(5,)</code>，<strong>看起来只是少了一个 1，实际语义已经变了</strong> ⚠</p>
+<code>X[:, 2]</code> 得到 <code>(5,)</code>，<strong>看起来只是少了一个 1，实际语义已经变了</strong></p>
 <table>
 <thead>
 <tr>
@@ -13120,7 +13120,7 @@ np.take(X, [0, 2, 5], axis=1) 结果相同: True
 </tbody>
 </table>
 <p><strong>判断依据</strong>：<strong>只要下一步是「当成特征矩阵用」，就写 <code>2:3</code> 或 <code>[2]</code>；
-只有在「这一列是要被当成一维数组来算」时才写 <code>2</code></strong> ✓</p>
+只有在「这一列是要被当成一维数组来算」时才写 <code>2</code></strong></p>
 <hr />
 <h2 id="_10">十五、常见陷阱汇总<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="151-a-1">15.1 <code>a[:, 1]</code> 得到的是一维数组<a class="headerlink" href="#151-a-1" title="Permanent link">&para;</a></h3>
@@ -13217,7 +13217,7 @@ b[row_mask] 的 shape: (3, 4)  ← 保留了行这个维度 ✓
 <p><strong>这是布尔索引最容易被忽略的一条</strong>：
 <strong>结果永远是一维</strong>，行结构会丢掉 ⚠
 想保留行结构，就要先把掩码<strong>沿轴压缩</strong>成「每行一个布尔值」
-（用 <code>mask.any(axis=1)</code> 或 <code>mask.all(axis=1)</code>）✓</p>
+（用 <code>mask.any(axis=1)</code> 或 <code>mask.all(axis=1)</code>）</p>
 <h3 id="153">15.3 用列表索引与用元组索引的区别<a class="headerlink" href="#153" title="Permanent link">&para;</a></h3>
 <p><strong>这一条最隐蔽</strong>：<code>a[(0, 1)]</code> 与 <code>a[[0, 1]]</code> 只差一对括号，
 但一个是<strong>基本索引</strong>，一个是<strong>花式索引</strong>。</p>
@@ -13327,11 +13327,11 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 </tbody>
 </table>
 <p><strong>判断依据</strong>：<strong>方括号里最外层是「元组」就是逐维基本索引，
-是「列表或数组」就是花式索引</strong> ✓</p>
+是「列表或数组」就是花式索引</strong></p>
 <p><strong>为什么这个区别重要</strong>：在写「按一组下标取数据」的代码时，
 如果中间某一步把列表转成了元组（例如用了 <code>tuple(...)</code>、
 或者用了 <code>.tolist()</code> 再传进去），语义会<strong>整个改变</strong>，
-而代码<strong>照样跑得通</strong> ⚠</p>
+而代码<strong>照样跑得通</strong></p>
 <h3 id="154">15.4 陷阱汇总表<a class="headerlink" href="#154" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13431,7 +13431,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <span class="normal"><a href="#__codelineno-70-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1"></a>① print(x.shape)                     ← 形状对不对
 <a id="__codelineno-70-2" name="__codelineno-70-2"></a>② print(np.shares_memory(x, y))      ← 是不是同一块内存
 </code></pre></div></td></tr></table></div>
-<p><strong>任何「结果看着怪」的时刻，先打这两个。</strong> ✓</p>
+<p><strong>任何「结果看着怪」的时刻，先打这两个。</strong></p>
 <hr />
 <h2 id="_11">十六、典型例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：用布尔索引统计达标情况<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -13568,7 +13568,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <a id="__codelineno-73-5" name="__codelineno-73-5"></a>  → 人数变成 10 ⚠
 </code></pre></div></td></tr></table></div>
 <p><strong>这就是第七节强调括号的原因</strong>：
-多打两对括号，成本接近零；少打，代价是一次静默错误 ✓</p>
+多打两对括号，成本接近零；少打，代价是一次静默错误</p>
 <p><strong>顺带验证一下括号 bug</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-1">1</a></span>
 <span class="normal"><a href="#__codelineno-74-2">2</a></span>
@@ -13631,7 +13631,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>问题：<code>x[x &lt; 0]</code> 返回的是副本，<code>[:] = 0</code> 改的是那个临时副本。</strong></p>
+<p>问题：<code>x[x &lt; 0]</code> 返回的是副本，<code>[:] = 0</code> 改的是那个临时副本。</p>
 <p>逐步验证：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-76-2"> 2</a></span>
@@ -13777,7 +13777,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-78-2" name="__codelineno-78-2"></a>函数语义是「返回清洗后的新数据，别动我的输入」 → 修法 ② ✓
 </code></pre></div></td></tr></table></div>
 <p><strong>第二种语义在工程里更常见</strong>（不可变输入更好推理），
-但 <strong>① 更省内存</strong> —— 大数组上，<code>np.where</code> 会再复制一份 ⚠</p>
+但 <strong>① 更省内存</strong> —— 大数组上，<code>np.where</code> 会再复制一份</p>
 <p><strong>从这道题该记住的</strong>：</p>
 <table>
 <thead>
@@ -13957,7 +13957,7 @@ data[mask]     : [-3 -1 -7]
 </tbody>
 </table>
 <p><strong>注意「恰好一样的那些」</strong> —— 这让错误显得不那么明显，
-只看个别数字根本发现不了 ⚠</p>
+只看个别数字根本发现不了</p>
 <p><strong><code>np.select</code> 的三个要点</strong>：</p>
 <table>
 <thead>
@@ -14006,8 +14006,8 @@ dtype        : &lt;U3  ← 变成了字符串，0 被当成字符串 ⚠
 <p><strong>这是 <code>np.select</code> 最容易忽略的一处</strong>：
 不给 <code>default</code> 时，不匹配的位置填 <code>0</code>，
 而<strong>同一数组里不能混装字符串和数字</strong>，
-于是整个结果被提升成字符串数组，<code>0</code> 变成了字符串 <code>"0"</code> ⚠
-<strong>所有分支都要显式写出来</strong>，不要指望默认行为 ✓</p>
+于是整个结果被提升成字符串数组，<code>0</code> 变成了字符串 <code>"0"</code>
+<strong>所有分支都要显式写出来</strong>，不要指望默认行为</p>
 </details>
 <hr />
 <h3 id="4">例题 4：按列选特征 + 求每列最大值所在的行<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -14199,9 +14199,9 @@ sub 是视图吗: False  ← False，花式索引给的是副本
 <p><strong>注意 <code>sub[rows, np.arange(3)]</code> 这个写法</strong>：
 它就是第九节的「配对花式索引」——
 <code>(第0列的行号, 0)</code>、<code>(第1列的行号, 1)</code>、<code>(第2列的行号, 2)</code>，
-正好取到每一列的最大值 ✓
+正好取到每一列的最大值
 <strong>「一个轴给下标数组、另一个轴给序号」是这套用法的标准形态</strong>，
-值得记下来 ✓</p>
+值得记下来</p>
 </details>
 <hr />
 <h2 id="_12">十七、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
@@ -14324,7 +14324,7 @@ col2 打印:
 </tbody>
 </table>
 <p><strong>「元素个数相同、形状不同」正是这类 bug 难查的原因</strong> ——
-大多数接口只检查元素个数，于是错误被带到很远的地方才暴露 ⚠</p>
+大多数接口只检查元素个数，于是错误被带到很远的地方才暴露</p>
 <p><strong>什么时候非得是 <code>(3, 1)</code></strong>：</p>
 <table>
 <thead>
@@ -14354,8 +14354,8 @@ col2 打印:
 <a id="__codelineno-89-2" name="__codelineno-89-2"></a>(3,1) → 一维: col.reshape(-1)         或  col.ravel()          ✓
 </code></pre></div></td></tr></table></div>
 <p><strong>推荐用 <code>reshape(-1, 1)</code> 与 <code>ravel()</code></strong>：
-意图明确、不依赖「切片保留维度」这条容易被忘掉的规则 ✓</p>
-<p><strong>记住这句</strong>：<strong>「数字消维，切片保维。」</strong> ✓</p>
+意图明确、不依赖「切片保留维度」这条容易被忘掉的规则</p>
+<p><strong>记住这句</strong>：<strong>「数字消维，切片保维。」</strong></p>
 </details>
 <hr />
 <p><strong>Q2</strong> 下面两个筛选写法，一个是对的、一个是错的。请指出哪个错、
@@ -14382,7 +14382,7 @@ col2 打印:
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>写法二是错的：<code>&amp;</code> 的优先级高于比较运算符，<code>50 &amp; (data &lt; 90)</code> 会先算。</strong></p>
+<p>写法二是错的：<code>&amp;</code> 的优先级高于比较运算符，<code>50 &amp; (data &lt; 90)</code> 会先算。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-91-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-91-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-91-3"> 3</a></span>
@@ -14480,7 +14480,7 @@ col2 打印:
 </tbody>
 </table>
 <p><strong>为什么「报错反而好」</strong>：
-报错让你当场发现，静默错误会一路带到最终结论里 ⚠</p>
+报错让你当场发现，静默错误会一路带到最终结论里</p>
 <p><strong>正确的记法</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-1">1</a></span>
 <span class="normal"><a href="#__codelineno-93-2">2</a></span>
@@ -14512,7 +14512,7 @@ col2 打印:
 </tbody>
 </table>
 <p><strong>第三条在条件复杂时特别值得</strong> —— 变量名本身就能说明意图，
-也就不会再纠结括号 ✓</p>
+也就不会再纠结括号</p>
 </details>
 <hr />
 <p><strong>Q3</strong> <code>ravel()</code> 与切片都返回视图，但 <code>a[[0, 1]]</code> 是副本。
@@ -14648,7 +14648,7 @@ ravel 是视图吗      : True
 <p><strong>还有一条更实际的原因</strong>：<strong>布尔索引的结果长度不固定</strong>。
 <code>a[a &gt; 5]</code> 到底有几个元素，得先算完条件才知道。
 而视图的形状必须在创建时就定下来 ——
-所以从「形状可预知」这一点看，它也做不成视图 ⚠</p>
+所以从「形状可预知」这一点看，它也做不成视图</p>
 <p><strong>实用结论</strong>：</p>
 <table>
 <thead>
@@ -14673,7 +14673,7 @@ ravel 是视图吗      : True
 </tbody>
 </table>
 <p><strong>最后一条最重要</strong>：<code>copy()</code> 的意图最明确，
-读代码的人一眼就知道「这里是有意复制的」，不会怀疑你忘了什么 ✓</p>
+读代码的人一眼就知道「这里是有意复制的」，不会怀疑你忘了什么</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 请说明 <code>a.max()</code> 与 <code>a.argmax()</code>、<code>np.sort(a)</code> 与 <code>a.argsort()</code>、
@@ -14738,7 +14738,7 @@ b.max(axis=1)      : [9 8]  ← 每行的最大值
 b.argmax(axis=1)   : [1 0]  ← 每行最大值在哪一列
 b.argmax() 不带 axis: 1  ← 展平后的位置 ⚠
 还原成二维坐标     : (0, 1)</code></pre>
-<p><strong>第二组：<code>sort</code> 给排序后的值，<code>argsort</code> 给「排序用的下标」。</strong></p>
+<p>第二组：<code>sort</code> 给排序后的值，<code>argsort</code> 给「排序用的下标」。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-97-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-97-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-97-3"> 3</a></span>
@@ -14782,7 +14782,7 @@ names[order]      : ['第二组' '第四组' '第一组' '第五组' '第三组'
 <p><strong>必须用 <code>argsort</code> 的场景</strong>：
 <strong>「按某一列排序整张表」</strong> —— 因为表里的其他列必须跟着一起动，
 而 <code>np.sort</code> 只会把<strong>这一列</strong>排好，
-其他列的配对关系就乱了 ⚠</p>
+其他列的配对关系就乱了</p>
 <p><strong>第三组：<code>a.sort()</code> 原地（返回 <code>None</code>），<code>np.sort(a)</code> 返回副本。</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-98-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-98-2"> 2</a></span>
@@ -14911,7 +14911,7 @@ c.sort() 的返回值: None  ← None ⚠
 <p><strong>最后再强调一次</strong>：<code>a.sort()</code> 返回 <code>None</code>，
 所以 <code>a = a.sort()</code> 会把 <code>a</code> 变成 <code>None</code>，
 后续所有操作都会报 <code>AttributeError</code> ——
-这和 <code>rng.shuffle</code>、<code>list.sort</code>、<code>np.put</code> 是同一类坑 ⚠</p>
+这和 <code>rng.shuffle</code>、<code>list.sort</code>、<code>np.put</code> 是同一类坑</p>
 </details>
 <hr />
 <h2 id="_13">小结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
@@ -14997,13 +14997,13 @@ c.sort() 的返回值: None  ← None ⚠
 <strong>看到一段索引代码，能立刻回答「它给我的是值还是位置、
 是视图还是副本、形状是什么」。</strong></p>
 <p>这三个问题答得出来，NumPy 里九成以上的「莫名其妙的 bug」
-都会在写代码的当下被你拦住，而不是在三天后的结果里被发现 ✓</p>
+都会在写代码的当下被你拦住，而不是在三天后的结果里被发现</p>
 <p><strong>下一页</strong>：<a href="../broadcasting/">03 广播与向量化</a> ——
 取出来数据之后，接下来是<strong>让不同形状的数组一起参与运算</strong>。
 <code>a[:, None] - b[None, :]</code> 这种写法为什么能算出整个差矩阵？
 广播规则到底怎么对齐？
 以及<strong>「不报错但形状悄悄膨胀」</strong>这一类最危险的 bug 怎么防。
-本页讲的「形状敏感」习惯，正是下一章的前提 ✓</p>
+本页讲的「形状敏感」习惯，正是下一章的前提</p>
 
 
 

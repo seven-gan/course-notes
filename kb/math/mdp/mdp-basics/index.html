@@ -8710,7 +8710,7 @@ G_t = R_{t+1} + \gamma\left(R_{t+2}+\gamma R_{t+3}+\cdots\right) = R_{t+1} + \ga
 <p><strong>(3) 作为数学工具（本征参数）。</strong>
 取 <span class="arithmatex">\(\gamma&lt;1\)</span>，则 <span class="arithmatex">\(\gamma\)</span> 同时充当<strong>压缩映射的压缩系数</strong>——
 Bellman 算子是 <span class="arithmatex">\(\gamma\)</span>-压缩的，这是压缩映射原理能用的前提。
-<strong>若 <span class="arithmatex">\(\gamma=1\)</span>，收敛性需要额外假设，算法稳定性大幅下降。</strong></p>
+若 <span class="arithmatex">\(\gamma=1\)</span>，收敛性需要额外假设，算法稳定性大幅下降。</p>
 <div class="admonition tip">
 <p class="admonition-title">折扣因子的工程含义：它决定「眼光有多远」</p>
 <p><strong>有效视野长度</strong>可以取为 <span class="arithmatex">\(\dfrac{1}{1-\gamma}\)</span>：</p>
@@ -8908,7 +8908,7 @@ Q^{\pi}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\,V^{\pi}(s')
 <p><strong>Bellman 方程的全部技巧，就是把「无穷维的求和」压缩成「一个方程」。</strong></p>
 </blockquote>
 <p>这些方程被称为 Bellman 方程，即通过一个递归式来刻画无穷多个未来回报之和。
-<strong>它的价值在于：把「无穷求和」的计算问题，变成了「解方程组」的代数问题。</strong></p>
+它的价值在于：把「无穷求和」的计算问题，变成了「解方程组」的代数问题。</p>
 <h3 id="31-bellman">3.1 策略下的 Bellman 期望方程<a class="headerlink" href="#31-bellman" title="Permanent link">&para;</a></h3>
 <p>由 <span class="arithmatex">\(G_t = R_{t+1}+\gamma G_{t+1}\)</span> 两边取期望 <span class="arithmatex">\(\mathbb{E}_{\pi}[\cdot\mid S_t=s]\)</span>：</p>
 <div class="arithmatex">\[
@@ -8928,7 +8928,7 @@ V^{\pi}(s) = \mathbb{E}_{\pi}\left[R_{t+1}+\gamma G_{t+1}\mid S_t=s\right]
 <div class="arithmatex">\[
 \mathbb{E}_{\pi}[R_{t+1}\mid S_t=s] = \sum_{a}\pi(a\mid s)\sum_{s'}p(s'\mid s,a)\,r(s,a)
 \]</div>
-<p><strong>第三步：把第二项用 <span class="arithmatex">\(V^{\pi}\)</span> 表示——这一步是全推导的灵魂。</strong></p>
+<p>第三步：把第二项用 <span class="arithmatex">\(V^{\pi}\)</span> 表示——这一步是全推导的灵魂。</p>
 <div class="arithmatex">\[
 \mathbb{E}_{\pi}[G_{t+1}\mid S_t=s] = \sum_{a}\pi(a\mid s)\sum_{s'}p(s'\mid s,a)\,\mathbb{E}_{\pi}[G_{t+1}\mid S_{t+1}=s']
 \]</div>
@@ -8977,7 +8977,7 @@ P^{\pi}_{ss'} := \sum_{a}\pi(a\mid s)\,p(s'\mid s,a)
 <p>上一页我们算出「误差按 <span class="arithmatex">\(\lvert\lambda_2\rvert^n\)</span> 衰减」。
 在 MDP 里，迭代算子 <span class="arithmatex">\(\boldsymbol{v}\mapsto\boldsymbol{r}^{\pi}+\gamma P^{\pi}\boldsymbol{v}\)</span>
 的误差衰减率是 <strong><span class="arithmatex">\(\gamma\)</span></strong>（因为 <span class="arithmatex">\(P^{\pi}\)</span> 是随机矩阵，<span class="arithmatex">\(\lVert P^{\pi}\rVert_{\infty}=1\)</span>）。</p>
-<p><strong>所以：<span class="arithmatex">\(\gamma\)</span> 既控制「眼光多远」，又控制「收敛多快」，一个参数两个作用。</strong></p>
+<p>所以：<span class="arithmatex">\(\gamma\)</span> 既控制「眼光多远」，又控制「收敛多快」，一个参数两个作用。</p>
 <table>
 <thead>
 <tr>
@@ -9854,14 +9854,14 @@ L 70.399688 190.097312
 但保证存在一个策略同时对所有状态取到最大。</strong></p>
 <p>不能想当然地认为「每个状态各挑一个最优策略」能拼成一个合法策略——
 好在有一个定理（4.1 节）保证确实存在统一的 <span class="arithmatex">\(\pi^{*}\)</span>。</p>
-<p><strong>提醒二：在状态 <span class="arithmatex">\(s\)</span> 处最优的动作，不需要事先知道 <span class="arithmatex">\(V^{*}\)</span> 以外的信息。</strong></p>
+<p>提醒二：在状态 <span class="arithmatex">\(s\)</span> 处最优的动作，不需要事先知道 <span class="arithmatex">\(V^{*}\)</span> 以外的信息。</p>
 <div class="arithmatex">\[
 \pi^{*}(s) = \arg\max_{a}Q^{*}(s,a)
 \]</div>
 <p><strong>如果 <span class="arithmatex">\(Q^{*}\)</span> 已知，MDP 就彻底解决了</strong>——剩下的只是查表。
 这条式子把「求策略」化归为「求 <span class="arithmatex">\(Q^{*}\)</span>」，
 而 <span class="arithmatex">\(Q^{*}\)</span> 满足一个自洽方程，这就是所有强化学习算法的出发点：
-<strong>它们都在用不同的方式估计 <span class="arithmatex">\(Q^{*}\)</span>。</strong></p>
+它们都在用不同的方式估计 <span class="arithmatex">\(Q^{*}\)</span>。</p>
 <hr />
 <h2 id="_3">四、最优性的结构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 最优策略的存在性<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
@@ -10527,7 +10527,7 @@ Q^{*}(s_2,b) = 0 + 0.5\cdot\frac{8}{3} = \frac{4}{3} \approx 1.333333
 <p>故在 <span class="arithmatex">\(s_1\)</span> 处任何<strong>以概率 1 落在 <span class="arithmatex">\(\{b,c\}\)</span> 上</strong>的随机策略都是最优的——
 即 <span class="arithmatex">\(s_1\)</span> 处的选择有<strong>无穷多个</strong>（<span class="arithmatex">\(0\leq p\leq1\)</span> 的连续族）。
 整个 MDP 的最优策略共有<strong>无穷多个</strong>。</p>
-<p><strong>重要结论：最优策略一般不唯一。</strong>
+<p>重要结论：最优策略一般不唯一。
 这解释了为什么不同的强化学习算法（Q-learning、SARSA、策略梯度）
 在同一任务上会收敛到<strong>行为不同的策略</strong>——它们都对，只是选了并列解中的不同那个。</p>
 <p><strong>&copy; 混合策略的值。</strong> 设 <span class="arithmatex">\(s_1\)</span> 处选 <span class="arithmatex">\(b\)</span> 的概率为 <span class="arithmatex">\(p\)</span>，选 <span class="arithmatex">\(c\)</span> 的概率为 <span class="arithmatex">\(1-p\)</span>。
@@ -10885,7 +10885,7 @@ k = \frac{\log 0.1}{\log 0.9} = \frac{-2.302585}{-0.105361} \approx 21.85
 V(s) = r(s,a_0) + \gamma\sum_{s'}p(s'\mid s,a_0)V(s')
 \]</div>
 <p><strong>完全一致。</strong> 此时 MDP 退化成一个普通马尔可夫链——
-<strong>正好印证 1.2 节「固定策略后 MDP 就是马尔可夫链」的说法。</strong></p>
+正好印证 1.2 节「固定策略后 MDP 就是马尔可夫链」的说法。</p>
 <p><strong>(b) 线性 vs 非线性。</strong></p>
 <p><strong>期望方程</strong>中，把 <span class="arithmatex">\(V\)</span> 看作未知量，方程右边是</p>
 <div class="arithmatex">\[
@@ -10914,9 +10914,9 @@ V(s) = r(s,a_0) + \gamma\sum_{s'}p(s'\mid s,a_0)V(s')
 <p>一方面 <span class="arithmatex">\(V^{*}\)</span> 满足 Bellman 最优方程，即 <span class="arithmatex">\(\mathcal{T}V^{*}=V^{*}\)</span>，
 故 <span class="arithmatex">\(V^{*}\)</span> 是不动点。
 另一方面由不动点唯一性，任何满足 <span class="arithmatex">\(\mathcal{T}V=V\)</span> 的 <span class="arithmatex">\(V\)</span> 都等于 <span class="arithmatex">\(V^{*}\)</span>。</p>
-<p><strong>所以只要验证了 Bellman 最优方程，就能断定是 <span class="arithmatex">\(V^{*}\)</span>。</strong>
+<p>所以只要验证了 Bellman 最优方程，就能断定是 <span class="arithmatex">\(V^{*}\)</span>。
 这正是所有强化学习算法「收敛性验证」的统一套路：
-<strong>算法收敛 ⟹ 极限点满足方程 ⟹ 唯一 ⟹ 就是 <span class="arithmatex">\(V^{*}\)</span>。</strong></p>
+算法收敛 ⟹ 极限点满足方程 ⟹ 唯一 ⟹ 就是 <span class="arithmatex">\(V^{*}\)</span>。</p>
 <p><strong>因此「回代验证 Bellman 方程」是解 MDP 后的标准收尾动作</strong>，
 它的合法性就来自这个定理——这是本页最有用的一条方法论。</p>
 </details>

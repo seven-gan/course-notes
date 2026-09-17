@@ -8044,7 +8044,7 @@
 · <strong>这一页</strong>给<strong>含隐变量</strong>的做法（EM 的一般框架）
 · <a href="../em-algorithm/">EM 算法与混合模型</a> 给<strong>具体实现</strong></p>
 <p>三者是一条线：<strong>先把"为什么不能直接求导"讲清，
-再讲"用什么下界绕过去"，最后才落到具体算法</strong> ✓</p>
+再讲"用什么下界绕过去"，最后才落到具体算法</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、困境：对数里面有个求和<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -8058,7 +8058,7 @@ L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta)
 \ell(\theta) = \sum_{i=1}^{n} \ln p(x_i \mid \theta)
 \]</div>
 <p><strong>为什么取对数好用</strong>：求和与求导可以交换顺序 ——
-每一项单独求导再相加即可 ✓</p>
+每一项单独求导再相加即可</p>
 <h3 id="12">1.2 有隐变量时会发生什么<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>设每个样本背后有个看不见的 <span class="arithmatex">\(z_i\)</span>。观测数据的密度要对 <span class="arithmatex">\(z\)</span> 求和：</p>
 <div class="arithmatex">\[
@@ -8090,7 +8090,7 @@ p(x \mid \theta) = \sum_{z} p(x, z \mid \theta)
 <p>对数里面那个和，让 <span class="arithmatex">\(\ell\)</span> 对 <span class="arithmatex">\(\mu_k\)</span> 的导数是
 「<strong>以责任度为权重</strong>的加权和」——
 <strong>而责任度本身又依赖 <span class="arithmatex">\(\mu_k\)</span></strong>。</p>
-<p>求导结果里含有未知量，方程<strong>自己咬住了自己</strong> ⚠</p>
+<p>求导结果里含有未知量，方程<strong>自己咬住了自己</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">这不是"数学不够好"，而是结构性的困难</p>
 <p>有人会想：是不是换个求导技巧就能解出来？</p>
@@ -8099,7 +8099,7 @@ p(x \mid \theta) = \sum_{z} p(x, z \mid \theta)
 即使强行写出导数为零的方程，那也是一个<strong>高次耦合方程组</strong>，
 没有闭式解。</p>
 <p>所以正路不是"硬解"，而是<strong>构造一个可以解的替代问题</strong> ——
-这就是 EM 的思路：<strong>不直接爬原山，而是每轮造一个"下界山"再爬到它的顶</strong> ⚠</p>
+这就是 EM 的思路：<strong>不直接爬原山，而是每轮造一个"下界山"再爬到它的顶</strong></p>
 </div>
 <hr />
 <h2 id="jensen">二、用 Jensen 不等式造一个下界<a class="headerlink" href="#jensen" title="Permanent link">&para;</a></h2>
@@ -8112,7 +8112,7 @@ p(x_i \mid \theta)
 = \sum_z p(x_i, z \mid \theta)
 = \sum_z q_i(z)\,\frac{p(x_i, z \mid \theta)}{q_i(z)}
 \]</div>
-<p><strong>这一步是恒等变形，没有任何近似</strong> ✓</p>
+<p><strong>这一步是恒等变形，没有任何近似</strong></p>
 <h3 id="22-jensen">2.2 套 Jensen 不等式<a class="headerlink" href="#22-jensen" title="Permanent link">&para;</a></h3>
 <p><strong>Jensen 不等式</strong>（对凹函数 <span class="arithmatex">\(\ln\)</span>）：</p>
 <div class="arithmatex">\[
@@ -8123,7 +8123,7 @@ p(x_i \mid \theta)
 <span class="arithmatex">\(q_i(z)\ge 0\)</span>（即 <span class="arithmatex">\(q_i\)</span> 确实是概率分布）。</p>
 <p><strong>为什么凹函数是"小于等于"</strong>：加权平均的函数值，
 不小于函数值的加权平均 —— 把 <span class="arithmatex">\(\sum_z q_i(z)\cdot(\cdot)\)</span>
-就看成权重为 <span class="arithmatex">\(q_i(z)\)</span> 的加权平均 ✓</p>
+就看成权重为 <span class="arithmatex">\(q_i(z)\)</span> 的加权平均</p>
 <h3 id="23">2.3 得到下界<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>取 <span class="arithmatex">\(g_i(z) = \dfrac{p(x_i,z\mid\theta)}{q_i(z)}\)</span>，代入：</p>
 <div class="arithmatex">\[
@@ -8136,7 +8136,7 @@ p(x_i \mid \theta)
 \;:=\; \sum_{i=1}^{n}\sum_{z} q_i(z)
 \ln\frac{p(x_i, z \mid \theta)}{q_i(z)}
 \]</div>
-<p><strong>这个 <span class="arithmatex">\(\mathcal{L}\)</span> 常称变分下界</strong>（也叫 ELBO）✓</p>
+<p><strong>这个 <span class="arithmatex">\(\mathcal{L}\)</span> 常称变分下界</strong>（也叫 ELBO）</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 352.790313 237.38525" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EM 的两步：E 步算下界，M 步把下界推到最高">
 
@@ -8535,7 +8535,7 @@ L 59.190313 189.117125
 </ul>
 <p><strong>这两项的意义</strong>：第一项想让 <span class="arithmatex">\(q\)</span> 集中到「解释数据最好」的 <span class="arithmatex">\(z\)</span> 上，
 第二项想让 <span class="arithmatex">\(q\)</span> 别太极端 —— 两者拉锯，
-<strong>最优的 <span class="arithmatex">\(q\)</span> 就是后验分布</strong>（见下节）✓</p>
+<strong>最优的 <span class="arithmatex">\(q\)</span> 就是后验分布</strong>（见下节）</p>
 <hr />
 <h2 id="_3">三、下界什么时候最紧<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 下界与真值的差<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -8550,19 +8550,19 @@ L 59.190313 189.117125
 \]</div>
 <p><strong>两个立刻可得的推论</strong>：</p>
 <ul>
-<li>因为 KL 散度<strong>非负</strong>，所以 <span class="arithmatex">\(\mathcal{L} \le \ell\)</span> 恒成立（下界成立）✓</li>
+<li>因为 KL 散度<strong>非负</strong>，所以 <span class="arithmatex">\(\mathcal{L} \le \ell\)</span> 恒成立（下界成立）</li>
 <li><strong>当且仅当</strong> <span class="arithmatex">\(q_i(z) = p(z\mid x_i,\theta)\)</span> 时，每一项 KL 为零，
-  <strong>下界取到等号</strong> ✓</li>
+  <strong>下界取到等号</strong></li>
 </ul>
 <h3 id="32-q">3.2 最优的 q 就是后验<a class="headerlink" href="#32-q" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 q_i^{\star}(z) = p(z \mid x_i, \theta)
 \]</div>
 <p><strong>这就是 E 步的理论依据</strong>：给定当前参数 <span class="arithmatex">\(\theta\)</span>，
-<strong>把 <span class="arithmatex">\(q\)</span> 设成后验</strong>，下界就变紧（与真值相切）✓</p>
+<strong>把 <span class="arithmatex">\(q\)</span> 设成后验</strong>，下界就变紧（与真值相切）</p>
 <p><strong>为什么叫「期望」步</strong>：<span class="arithmatex">\(q_i^\star\)</span> 是后验，
 而下一节要最大化的第一项正是「在这个后验下的期望」 ——
-<strong>「期望最大化」这个名字就来自这里</strong> ✓</p>
+<strong>「期望最大化」这个名字就来自这里</strong></p>
 <h3 id="33">3.3 交替上升<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>M 步</strong>：固定 <span class="arithmatex">\(q\)</span>（刚设成后验），对 <span class="arithmatex">\(\theta\)</span> 最大化 <span class="arithmatex">\(\mathcal{L}\)</span>：</p>
 <div class="arithmatex">\[
@@ -8601,19 +8601,19 @@ q_i^{\star}(z) = p(z \mid x_i, \theta)
 <p><strong>逐步读这条链</strong>：</p>
 <ol>
 <li>第一个「大于等于」：下界永远不超过真值 ✓</li>
-<li>第二个「大于等于」：M 步的定义就是让 <span class="arithmatex">\(\mathcal{L}\)</span> 变大 ✓</li>
-<li><strong>最后的等号</strong>：上一轮 E 步已经让下界与真值相切 ✓</li>
+<li>第二个「大于等于」：M 步的定义就是让 <span class="arithmatex">\(\mathcal{L}\)</span> 变大</li>
+<li><strong>最后的等号</strong>：上一轮 E 步已经让下界与真值相切</li>
 </ol>
-<p><strong>这就是"单调不降"的完整证明</strong>，一步都没跳 ⚠</p>
+<p><strong>这就是"单调不降"的完整证明</strong>，一步都没跳</p>
 <div class="admonition warning">
 <p class="admonition-title">单调不降不等于能到全局最优</p>
 <p>EM 保证的是<strong>每一步都不变差</strong>，仅此而已。</p>
-<p>它停在<strong>哪个</strong>局部最优，完全由初值决定 ⚠
+<p>它停在<strong>哪个</strong>局部最优，完全由初值决定
 而且：</p>
 <p>· 收敛可能是<strong>很慢的</strong>（接近驻点时步长趋零）
 · 参数化不同（如协方差用 <span class="arithmatex">\(\Sigma\)</span> 还是 <span class="arithmatex">\(\Sigma^{-1}\)</span>）收敛速度差别很大
 · 对数似然有<strong>无界</strong>的情形（某个分量的方差塌到零、均值贴到一个样本上，
-  似然可以趋于无穷）—— 这时算法会"跑飞" ⚠</p>
+  似然可以趋于无穷）—— 这时算法会"跑飞"</p>
 </div>
 <hr />
 <h2 id="_4">四、两个必须自己算一遍的东西<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -8624,7 +8624,7 @@ q_i^{\star}(z) = p(z \mid x_i, \theta)
 = \frac{\pi_k\,\mathcal{N}(x_i \mid \mu_k, \Sigma_k)}
 {\displaystyle\sum_{j=1}^{K}\pi_j\,\mathcal{N}(x_i \mid \mu_j, \Sigma_j)}
 \]</div>
-<p><strong>怎么读</strong>：<strong>在解释 <span class="arithmatex">\(x_i\)</span> 这件事上，第 <span class="arithmatex">\(k\)</span> 个分量"认领"了多大比例</strong> ✓</p>
+<p><strong>怎么读</strong>：<strong>在解释 <span class="arithmatex">\(x_i\)</span> 这件事上，第 <span class="arithmatex">\(k\)</span> 个分量"认领"了多大比例</strong></p>
 <p><strong>分子分母都在说什么</strong>：</p>
 <ul>
 <li>分子：第 <span class="arithmatex">\(k\)</span> 个分量<strong>先验权重 × 它产生该样本的似然</strong></li>
@@ -8644,9 +8644,9 @@ N_k = \sum_i \gamma_{ik},
 <div class="arithmatex">\[
 \pi_k^{\text{new}} = \frac{N_k}{n}
 \]</div>
-<p><strong>三式的统一读法</strong>：<strong>把责任度当成"软计数"，一切都退化成加权版的参数估计</strong> ✓</p>
+<p><strong>三式的统一读法</strong>：<strong>把责任度当成"软计数"，一切都退化成加权版的参数估计</strong></p>
 <p><strong>这就是为什么说 GMM + EM ≈ "软"版 K 均值</strong>：
-K 均值是责任度退化成 0/1 的极限情形 ⚠</p>
+K 均值是责任度退化成 0/1 的极限情形</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 364.855355 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EM 拟合高斯混合：各分量逐渐就位">
 
@@ -9635,7 +9635,7 @@ L 358.279688 200.946
 <div class="arithmatex">\[
 q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \]</div>
-<p><strong>答案：<span class="arithmatex">\(q\)</span> 取后验时下界与真值相切</strong> ✓</p>
+<p><strong>答案：<span class="arithmatex">\(q\)</span> 取后验时下界与真值相切</strong></p>
 <p><strong>这说明什么</strong>：E 步不是在"猜"，而是<strong>精确地</strong>让下界贴住真值。
 这一点保证了 EM 的单调性。</p>
 </details>
@@ -9667,7 +9667,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <div class="arithmatex">\[
 \gamma_{2} = \frac{0.0540}{0.2420+0.0540} \approx 0.182
 \]</div>
-<p><strong>答案：责任度约 <span class="arithmatex">\((0.818,\ 0.182)\)</span></strong> ✓</p>
+<p><strong>答案：责任度约 <span class="arithmatex">\((0.818,\ 0.182)\)</span></strong></p>
 <p><strong>这说明什么</strong>：<span class="arithmatex">\(x=1\)</span> 离 <span class="arithmatex">\(\mu_1=0\)</span> 更近，
 所以主要由第 1 个分量"认领"，但<strong>不是 100%</strong> ——
 这正是「软分配」与 K 均值「硬分配」的区别 ⚠</p>
@@ -9687,7 +9687,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 = \frac{\pi_1\mathcal{N}(x\mid\mu_1,\sigma^2)}
 {\pi_2\mathcal{N}(x\mid\mu_2,\sigma^2)}
 \]</div>
-<p><strong>第二步：先验相同，约掉 <span class="arithmatex">\(\pi\)</span>；密度代入。</strong></p>
+<p>第二步：先验相同，约掉 <span class="arithmatex">\(\pi\)</span>；密度代入。</p>
 <div class="arithmatex">\[
 = \frac{\exp\!\left[-\dfrac{(x-\mu_1)^2}{2\sigma^2}\right]}
 {\exp\!\left[-\dfrac{(x-\mu_2)^2}{2\sigma^2}\right]}
@@ -9697,10 +9697,10 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <div class="arithmatex">\[
 (x-\mu_2)^2-(x-\mu_1)^2 = -2x(\mu_2-\mu_1) + (\mu_2^2-\mu_1^2)
 \]</div>
-<p><strong>答案：比值只依赖 <span class="arithmatex">\(x\)</span> 与两个均值的相对位置（即距离差）</strong> ✓</p>
+<p><strong>答案：比值只依赖 <span class="arithmatex">\(x\)</span> 与两个均值的相对位置（即距离差）</strong></p>
 <p><strong>这说明什么</strong>：只有当<strong>先验相同、方差相同</strong>时，
 责任度才可以简化成"按距离分配"。
-<strong>先验不同或方差不同时，这个简化就失效</strong> ⚠
+<strong>先验不同或方差不同时，这个简化就失效</strong>
 ——这是用 K 均值代替 GMM 时最常见的错误来源。</p>
 </details>
 <h3 id="4em">例题 4：EM 的单调性为什么撑不住"全局最优"<a class="headerlink" href="#4em" title="Permanent link">&para;</a></h3>
@@ -9717,19 +9717,19 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <p><strong>第一步：EM 保证的是「不降」。</strong></p>
 <p>EM 只保证<strong>从同一初值出发，每轮不变差</strong>。
 它<strong>不保证</strong>找到全局最优。</p>
-<p><strong>第二步：两个结果各自是什么。</strong></p>
+<p>第二步：两个结果各自是什么。</p>
 <p>两处梯度都接近零 → 两处都是<strong>驻点</strong>。
 <span class="arithmatex">\(-1200\)</span> 比 <span class="arithmatex">\(-1350\)</span> <strong>更大</strong>（对数似然越大越好），
-所以 <span class="arithmatex">\(-1200\)</span> 那个是<strong>更好的解</strong> ✓</p>
+所以 <span class="arithmatex">\(-1200\)</span> 那个是<strong>更好的解</strong></p>
 <p><strong>第三步：指出错误。</strong></p>
 <p>把「更小的数」当成更好的解，是把似然当成了损失。
-<strong>似然取的是大的，损失取的是小的</strong> ⚠
+<strong>似然取的是大的，损失取的是小的</strong>
 而且他也不该"调"到更差的那个解。</p>
 <p><strong>答案：判断错在两点 —— 方向搞反了，
 而且误以为 EM 应该收敛到全局最优</strong>。</p>
 <p><strong>这说明什么</strong>：EM 的结果<strong>依赖初值</strong>，
 实践中的标准做法是<strong>多跑几个初值取最好的</strong>，
-而不是指望单次运行到达全局最优 ✓</p>
+而不是指望单次运行到达全局最优</p>
 </details>
 <hr />
 <h2 id="em-k">六、EM 与 K 均值的确切关系<a class="headerlink" href="#em-k" title="Permanent link">&para;</a></h2>
@@ -9744,7 +9744,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 {\displaystyle\sum_j \exp\!\left(-\dfrac{\|x_i-\mu_j\|^2}{2\sigma^2}\right)}
 \]</div>
 <p><strong>注意分子分母的 <span class="arithmatex">\(1/(\sigma\sqrt{2\pi})^d\)</span> 因子全部约掉了</strong> ——
-这就是为什么 <span class="arithmatex">\(\sigma\)</span> 趋于零时形式还能保持 ✓</p>
+这就是为什么 <span class="arithmatex">\(\sigma\)</span> 趋于零时形式还能保持</p>
 <h3 id="62">6.2 取极限<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>记离 <span class="arithmatex">\(x_i\)</span> 最近的分量编号为 <span class="arithmatex">\(k^{\star}(i)\)</span>。把分子分母同除以
 最近那一项：</p>
@@ -9755,7 +9755,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \]</div>
 <p>其中 <span class="arithmatex">\(d_{ik}^2 = \|x_i-\mu_k\|^2\)</span>。</p>
 <p><strong>关键观察</strong>：对<strong>非最近</strong>的分量，<span class="arithmatex">\(d_{ik}^2 - d_{ik^\star}^2 &gt; 0\)</span>，
-所以当 <span class="arithmatex">\(\sigma \to 0\)</span> 时它的指数<strong>趋于零</strong> ✓
+所以当 <span class="arithmatex">\(\sigma \to 0\)</span> 时它的指数<strong>趋于零</strong>
 而最近那一项的指数趋于 1，分母也趋于 1。</p>
 <p><strong>于是</strong>：</p>
 <div class="arithmatex">\[
@@ -9771,7 +9771,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <div class="arithmatex">\[
 \mu_k = \frac{1}{N_k}\sum_{i\in\text{簇}\,k} x_i
 \]</div>
-<p><strong>这正是 K 均值的更新式</strong>：簇内样本的算术平均 ✓
+<p><strong>这正是 K 均值的更新式</strong>：簇内样本的算术平均
 而 E 步（把每个点分给最近的簇）也正好是 K 均值的「分配」步。</p>
 <table>
 <thead>
@@ -9812,7 +9812,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 方差为零时责任度必然是 0/1，不可能给出「这个点有六成属于簇一」。</p>
 <p><strong>③ 给出了初始化的好办法</strong> ——
 由于 GMM 是 K 均值的推广，<strong>用 K 均值的结果作为 GMM 的初值</strong>
-是标准做法（先粗定位，再细化）✓</p>
+是标准做法（先粗定位，再细化）</p>
 </div>
 <hr />
 <h2 id="em">七、EM 的收敛速率<a class="headerlink" href="#em" title="Permanent link">&para;</a></h2>
@@ -9824,7 +9824,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \approx J\,(\theta^{(t)} - \theta^{\star})
 \]</div>
 <p><strong>收敛速率由 <span class="arithmatex">\(J\)</span> 的谱半径决定</strong>：
-谱半径越小收敛越快，接近 1 就会<strong>非常慢</strong> ⚠</p>
+谱半径越小收敛越快，接近 1 就会<strong>非常慢</strong></p>
 <p><strong>关键事实</strong>：<strong>EM 的收敛速率由缺失信息比例决定</strong>。</p>
 <table>
 <thead>

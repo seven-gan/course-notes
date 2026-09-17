@@ -9286,7 +9286,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（Working with missing data / Duplicates）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="07">07 数据清洗<a class="headerlink" href="#07" title="Permanent link">&para;</a></h1>
-<p><strong>这一页解决一个问题：把一份「能用但不能信」的表，变成一份「敢拿去做结论」的表。</strong></p>
+<p>这一页解决一个问题：把一份「能用但不能信」的表，变成一份「敢拿去做结论」的表。</p>
 <p>真实数据几乎从来不是干净的。从 Excel 导出、从数据库拉、从别人手里接过来的表，
 几乎必然带着这几样东西：空的格子、被读成文本的数字、重复录入的行、
 以及「填了值但明显不可能」的记录。</p>
@@ -9396,7 +9396,7 @@
 </tr>
 </tbody>
 </table>
-<p>这五条后面都有实跑代码验证，不用背 ✓</p>
+<p>这五条后面都有实跑代码验证，不用背</p>
 </div>
 <p><strong>这一页的代码约定</strong>：所有示例共用一份固定种子的模拟数据，
 每个代码块都能<strong>独立复制出去运行</strong>；输出全部由程序实跑产生，不是手写的。</p>
@@ -9443,7 +9443,7 @@
 </table>
 <p><strong>注意这四类的排序不是随意的</strong>：缺失和类型错会<strong>互相伪装</strong>。
 一列数字如果混进一个 <code>"缺考"</code>，整列就被读成字符串，
-<code>isna().sum()</code> 报 0 —— 看起来一个缺失都没有，实际上缺了一个人 ⚠
+<code>isna().sum()</code> 报 0 —— 看起来一个缺失都没有，实际上缺了一个人
 这就是为什么后面的清洗顺序里，<strong>类型转换必须排在缺失统计之前</strong>。</p>
 <h3 id="12">1.2 先造一份「哪里都脏」的数据<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>为了让每个例子都有具体对象，先造一份模拟数据：
@@ -9795,7 +9795,7 @@
 </tbody>
 </table>
 <p><strong>对策</strong>：把 <code>count</code>、<code>mean</code>、<code>50%</code> 三行放在一起看。
-<code>count</code> 小于行数 → 有缺失；<code>mean</code> 与 <code>50%</code> 差得远 → 有偏斜或异常值 ✓</p>
+<code>count</code> 小于行数 → 有缺失；<code>mean</code> 与 <code>50%</code> 差得远 → 有偏斜或异常值</p>
 </div>
 <hr />
 <h2 id="_2">二、缺失值：检测与处理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -9934,7 +9934,7 @@
 </tbody>
 </table>
 <p><strong>三者的共同点</strong>：<code>pd.isna()</code> 都认定为缺失，<code>isna()</code> 也都报 <code>True</code>。
-<strong>所以检测时永远用 <code>pd.isna()</code> / <code>isna()</code>，不要用 <code>== None</code> 或 <code>== np.nan</code>。</strong></p>
+所以检测时永远用 <code>pd.isna()</code> / <code>isna()</code>，不要用 <code>== None</code> 或 <code>== np.nan</code>。</p>
 <p>为什么？因为缺失值<strong>不等于自己</strong>，用 <code>==</code> 判断会静默失败：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -10024,7 +10024,7 @@ pd.NA == pd.NA    : &lt;NA&gt;      ← 比出来的还是缺失值本身
 </tbody>
 </table>
 <p>后果是<strong>学号、人数、件数这类本该是整数的列全带上了 <code>.0</code></strong>，
-导出成 CSV 后下游系统可能读成小数 ⚠
+导出成 CSV 后下游系统可能读成小数
 要变成真正的题号式整数，用大写 <code>Int64</code>；但如果下游要喂给只认
 <code>float64</code> 的库（很多数值库都是），转 <code>Int64</code> 反而会出问题 ——
 <strong>先确认下游能不能吃，再决定转不转</strong> ✓</p>
@@ -10108,7 +10108,7 @@ dropna(subset=["数学","英语"], how="all") 行数: 3</code></pre>
 </tbody>
 </table>
 <p><strong><code>how</code> 与 <code>thresh</code> 会互相覆盖</strong>：同时写的时候 <code>thresh</code> 优先，
-<code>how</code> 被忽略 —— 所以<strong>一次只用一个</strong>，不要两个一起写 ⚠</p>
+<code>how</code> 被忽略 —— 所以<strong>一次只用一个</strong>，不要两个一起写</p>
 <p><strong>代价</strong>：删行是五种策略里<strong>信息损失最大</strong>的一种。
 一行只要有<strong>一个</strong>格子空着，默认写法就把整行的其余值一起丢掉：</p>
 <table>
@@ -10145,7 +10145,7 @@ dropna(subset=["数学","英语"], how="all") 行数: 3</code></pre>
 <div class="admonition warning">
 <p class="admonition-title"><code>dropna()</code> 的默认值是 <code>how=\"any\"</code>，这是最激进的删法</p>
 <p>上表第一行就是证据：一张 5 行的表，一句 <code>df.dropna()</code> 之后只剩 1 行。
-<strong>如果这行代码写在长流水线的中段，你可能要几天后才发现样本量掉了 80%。</strong></p>
+如果这行代码写在长流水线的中段，你可能要几天后才发现样本量掉了 80%。</p>
 <p>三条自保措施：</p>
 <table>
 <thead>
@@ -10239,13 +10239,13 @@ fillna(0) —— 两列都被填成 0:
   填 0 后语文均值: 63.25 ← 被显著拉低</code></pre>
 <p><strong>适用场景</strong>：<strong>「缺失」在业务上等价于「没有」</strong>。比如缺勤天数没登记，
 大概率就是没缺勤（0 天）；订单里没写折扣，就是没打折。
-<strong>只有在这种语义成立时，填 0 才是对的</strong> ✓</p>
+<strong>只有在这种语义成立时，填 0 才是对的</strong></p>
 <p><strong>代价</strong>：
 - 会<strong>改变均值与方差</strong>，把分布往 0 的方向拉（上面例子已经从 84.3 掉到 63.25）
-- 会让「没测」与「测了是 0」变成同一个值，<strong>两种情况再也分不开</strong> ⚠
+- 会让「没测」与「测了是 0」变成同一个值，<strong>两种情况再也分不开</strong>
 - 如果 0 本身是合法值，填 0 就制造了<strong>假数据</strong></p>
 <p><strong>填 0 的位置也很关键</strong>：成绩列填 0 <strong>等于把缺考按 0 分算</strong>，
-这会拉低班级均分，且可能不公平 —— <strong>这是业务决定，不是技术决定</strong> ⚠</p>
+这会拉低班级均分，且可能不公平 —— <strong>这是业务决定，不是技术决定</strong></p>
 <h3 id="26-fillna-fillna">2.6 策略三：填统计量 —— <code>fillna(均值)</code> / <code>fillna(中位数)</code><a class="headerlink" href="#26-fillna-fillna" title="Permanent link">&para;</a></h3>
 <p>这是最常用的填充方式，也最容易出错。先看一段<strong>并排对比</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
@@ -10346,7 +10346,7 @@ fillna(0) —— 两列都被填成 0:
   原始值（跳过缺失）→ 语文 84.33  数学 384.67</code></pre>
 <p><strong>为什么中位数在有异常值时更适合</strong>：看上面数学列 ——
 <code>999</code> 把均值拉到了 <code>384.67</code>，而中位数稳稳在 <code>77.5</code>。
-用均值填，等于<strong>用一个被异常值污染的数字去代表所有人</strong> ⚠</p>
+用均值填，等于<strong>用一个被异常值污染的数字去代表所有人</strong></p>
 <table>
 <thead>
 <tr>
@@ -10413,9 +10413,9 @@ fillna(0) —— 两列都被填成 0:
 </table>
 <p><strong>填均值/中位数最隐蔽的后果是「缩小方差」</strong>：
 填入的值全挤在中心，样本看起来比真实情况更一致。
-如果下游要做置信区间、做检验，<strong>这把方差人为压低会产生「显著」的假结论</strong> ⚠
+如果下游要做置信区间、做检验，<strong>这把方差人为压低会产生「显著」的假结论</strong>
 稳妥做法：填完之后，<strong>同时报出填充比例</strong>
-（「本列 12% 由中位数填充」），让读者知道这列数据里有多少是估算的 ✓</p>
+（「本列 12% 由中位数填充」），让读者知道这列数据里有多少是估算的</p>
 </div>
 <h3 id="27-ffill-bfill">2.7 策略四：用相邻值填 —— <code>ffill</code> / <code>bfill</code><a class="headerlink" href="#27-ffill-bfill" title="Permanent link">&para;</a></h3>
 <p>适合<strong>有顺序的数据</strong>：时间序列、按行排列的台账、传感器读数。
@@ -10504,7 +10504,7 @@ bfill()（向后填充，用下一个非缺失值往上灌）:
 <p><strong>代价</strong>：</p>
 <ul>
 <li><strong>最危险的是「一条值填到底」</strong>：如果缺失连续 200 行，
-  <code>ffill()</code> 会把第 1 行的值灌满 200 行，<strong>而正确值可能早就变了</strong> ⚠</li>
+  <code>ffill()</code> 会把第 1 行的值灌满 200 行，<strong>而正确值可能早就变了</strong></li>
 <li>首尾两端的缺失填不上：<code>ffill()</code> 处理不了开头，
   <code>bfill()</code> 处理不了结尾（要两头都补就 <code>ffill().bfill()</code>）</li>
 <li>会<strong>人为造出连续段</strong>，让方差看起来更小</li>
@@ -10645,10 +10645,10 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 <p><strong>代价</strong>：</p>
 <ul>
 <li><strong>插值会造出原始数据里根本不存在的值</strong>，比 <code>ffill</code> 更「像真的」，
-  也因此<strong>更危险</strong> —— 图上画出来是平滑曲线，看不出哪里是猜的 ⚠</li>
+  也因此<strong>更危险</strong> —— 图上画出来是平滑曲线，看不出哪里是猜的</li>
 <li>趋势不是线性时，线性插值会系统性偏高或偏低</li>
 <li><strong>缺失段越长，插出来的值越不可信</strong>：中间插一个值还说得过去，
-  插 50 个值就是「画出来的」而不是「测出来的」⚠</li>
+  插 50 个值就是「画出来的」而不是「测出来的」</li>
 </ul>
 <p><strong>自保做法</strong>：插值后<strong>额外存一列标记</strong>，注明哪些格子是插出来的：</p>
 <table>
@@ -11272,7 +11272,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </tbody>
 </table>
 <p><strong>判断一列到底转成功了没有，看 <code>dtype</code> 是不是 <code>datetime64[ns]</code></strong>，
-不要看打印出来的样子 —— 字符串日期和 <code>datetime</code> 打印得很像 ⚠</p>
+不要看打印出来的样子 —— 字符串日期和 <code>datetime</code> 打印得很像</p>
 </div>
 <h3 id="35-to_timedelta">3.5 时长：<code>to_timedelta</code><a class="headerlink" href="#35-to_timedelta" title="Permanent link">&para;</a></h3>
 <p>时间<strong>点</strong>用 <code>to_datetime</code>，时间<strong>长度</strong>用 <code>to_timedelta</code>。两者是一对：</p>
@@ -11652,7 +11652,7 @@ category 内部做了什么：每个取值只存一份，单元格里存的是�
 </tbody>
 </table>
 <p><strong>经验法则</strong>：只在「数据已经稳定、接下来只做查询与分组」时转 <code>category</code>。
-如果后面还要频繁改写这一列，先留在 <code>object</code>，等最后再转 ✓</p>
+如果后面还要频繁改写这一列，先留在 <code>object</code>，等最后再转</p>
 </div>
 <h3 id="38">3.8 类型转换速查表<a class="headerlink" href="#38" title="Permanent link">&para;</a></h3>
 <table>
@@ -11912,7 +11912,7 @@ keep=False 保留的行（只要重名就整组不要）:
 只要某个值出现过两次以上，<strong>这一组的全部记录都会被标记成重复</strong>。
 在这个例子里，<code>first</code> 与 <code>last</code> 各标记 2 条，<code>False</code> 标记 4 条。</p>
 <p><strong>怎么记住</strong>：<code>keep</code> 回答的是「<strong>这一组里留下哪一条</strong>」，
-<code>False</code> 的意思是「<strong>一条都不留</strong>」，而不是「不保留重复信息」⚠</p>
+<code>False</code> 的意思是「<strong>一条都不留</strong>」，而不是「不保留重复信息」</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -11981,7 +11981,7 @@ keep=False 保留的行（只要重名就整组不要）:
    重复条数 : 3 ← 去空格后多出来的，才是真正被漏掉的重复</code></pre>
 <p><strong>这段代码演示了「顺序」的重要性</strong>：③ 与 ④ 只差一步 <code>str.strip()</code>，
 判出来的重复条数就变了。<strong>文本清洗必须排在重复检测之前</strong>，
-否则带空格的脏文本会让 <code>duplicated()</code> 漏判 ⚠</p>
+否则带空格的脏文本会让 <code>duplicated()</code> 漏判</p>
 <h3 id="43-drop_duplicates">4.3 <code>drop_duplicates()</code>：真正删行<a class="headerlink" href="#43-drop_duplicates" title="Permanent link">&para;</a></h3>
 <p>它是 <code>duplicated()</code> 的「取反 + 筛选」两步的封装，
 参数完全一样（<code>subset</code>、<code>keep</code>）：</p>
@@ -12071,7 +12071,7 @@ keep=False 保留的行（只要重名就整组不要）:
 </table>
 <p>尤其第三项：去重后一定要跟一句 <code>.reset_index(drop=True)</code>，
 否则索引会变成 <code>0, 1, 3, 4, 6...</code> 这样带洞的序列，
-<strong>看起来无害，直到你用 <code>iloc[5]</code> 取第 6 个人</strong> ✓</p>
+<strong>看起来无害，直到你用 <code>iloc[5]</code> 取第 6 个人</strong></p>
 </div>
 <p><strong>关于「要不要用 <code>inplace=True</code>」</strong>：本页所有例子都不用，理由在第十节第一行。
 一句话版本：<code>inplace=True</code> 返回 <code>None</code>，<strong>它唯一的优势（省一次赋值）
@@ -12432,7 +12432,7 @@ IQR = Q3 - Q1  : 14.0
 </tbody>
 </table>
 <p><strong>一句话</strong>：IQR 帮你找到「值得看一眼的值」，
-「要不要动它」取决于业务含义，不取决于公式 ✓</p>
+「要不要动它」取决于业务含义，不取决于公式</p>
 </div>
 <h3 id="54-z-score">5.4 方法三：Z-score 法（假设近似正态）<a class="headerlink" href="#54-z-score" title="Permanent link">&para;</a></h3>
 <p>Z-score 回答「这个值离均值有几个标准差」：</p>
@@ -12741,7 +12741,7 @@ IQR = Q3 - Q1  : 14.0
 <a id="__codelineno-27-5" name="__codelineno-27-5"></a>⑤ 画图         —— 直方图/箱线图核对，看有没有前四步都漏掉的结构
 </code></pre></div></td></tr></table></div>
 <p><strong>注意顺序</strong>：先规则、后统计。<strong>如果先用 IQR 删掉一批，再拿业务规则查，
-就已经丢了证据。</strong> 反过来先按规则清理不可能的值，统计方法才不会被污染 ✓</p>
+就已经丢了证据。</strong> 反过来先按规则清理不可能的值，统计方法才不会被污染</p>
 <h3 id="56">5.6 四种处理策略<a class="headerlink" href="#56" title="Permanent link">&para;</a></h3>
 <p>找到异常值之后，有四种处理方式。<strong>优先选保留信息的那几种</strong>：</p>
 <h4 id="_6">策略一：删除<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
@@ -12807,7 +12807,7 @@ IQR = Q3 - Q1  : 14.0
 郑洁 95.0 93     0
 王芳 75.0 82     2</code></pre>
 <p><strong>代价</strong>：这是四种策略里唯一<strong>真的减少数据量</strong>的。
-本例只为了英语的一个越界值，就丢掉了这两个学生的<strong>全部</strong>信息 ⚠</p>
+本例只为了英语的一个越界值，就丢掉了这两个学生的<strong>全部</strong>信息</p>
 <table>
 <thead>
 <tr>
@@ -12893,7 +12893,7 @@ clip(0, 100) 之后：
 均值：146.6923 → 截断后 77.9231</code></pre>
 <p><strong>代价</strong>：<strong><code>-5</code> 变成 <code>0</code>、<code>999</code> 变成 <code>100</code></strong> ——
 这两个新值都是<strong>编造出来的，且看起来完全正常</strong>：
-下游拿到这份数据，<strong>没有任何迹象能看出哪里被截断过</strong> ⚠</p>
+下游拿到这份数据，<strong>没有任何迹象能看出哪里被截断过</strong></p>
 <table>
 <thead>
 <tr>
@@ -12996,7 +12996,7 @@ clip(0, 100) 之后：
    用均值 146.69 替换后均值 : 92.7988
    用中位数 88.0 替换后均值: 83.7692</code></pre>
 <p><strong>最推荐的是 ①「置空」</strong>，理由是它把问题<strong>转交给已经讲清楚的缺失值流程</strong>，
-而不是在这里临时决定填什么 ✓</p>
+而不是在这里临时决定填什么</p>
 <table>
 <thead>
 <tr>
@@ -13026,7 +13026,7 @@ clip(0, 100) 之后：
 <div class="admonition warning">
 <p class="admonition-title">用「已经被污染」的均值去替换异常值，是循环论证</p>
 <p>本例里 <code>s.mean()</code> 是 <code>146.69</code> —— 这个数字<strong>就是被 999 拉出来的</strong>。
-用它去替换 <code>999</code>，替换值是 <code>146.69</code>，比原来的错误更难被发现 ⚠</p>
+用它去替换 <code>999</code>，替换值是 <code>146.69</code>，比原来的错误更难被发现</p>
 <table>
 <thead>
 <tr>
@@ -13158,7 +13158,7 @@ clip(0, 100) 之后：
 </table>
 <p><strong>唯一代价</strong>：后续每一处统计都必须显式写出筛选条件，
 不能直接 <code>df["英语"].mean()</code> —— 但<strong>这个代价正是它的价值所在</strong>：
-它强迫你每次都在代码里明说「我要不要算上可疑值」⚠</p>
+它强迫你每次都在代码里明说「我要不要算上可疑值」</p>
 <h3 id="57">5.7 四种处理策略对比<a class="headerlink" href="#57" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13300,7 +13300,7 @@ clip(0, 100) 之后：
 </table>
 <p><strong>为什么必须用它而不是 <code>map(lambda x: x.strip())</code></strong>：
 <code>.str</code> 遇到缺失值会<strong>直接跳过</strong>（结果仍为缺失），而 <code>map</code> 里
-<code>None.strip()</code> 会直接报错 ⚠</p>
+<code>None.strip()</code> 会直接报错</p>
 <h3 id="62">6.2 三种最常用的清洗<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>本页脏表里 <code>姓名</code> 列带着前后空格（<code>" 李娜"</code>、<code>"李娜 "</code>、<code>" 王芳  "</code>）。
 <strong>这些空格在显示时几乎看不出来，但会让同一个名字被当成不同的人</strong>：</p>
@@ -13698,7 +13698,7 @@ clip(0, 100) 之后：
 <p><strong><code>0.0</code> 与 <code>NaN</code> 的区别非常关键</strong>：
 <code>0.0</code> 说明「这个格子有值，值就是空字符串」，
 <code>NaN</code> 说明「这个格子没有值」。前者是<strong>录入错误</strong>（该有内容却空了），
-后者是<strong>缺失</strong>（没录）。两者该用不同的处理方式 ⚠</p>
+后者是<strong>缺失</strong>（没录）。两者该用不同的处理方式</p>
 <p>常见检查写法：</p>
 <table>
 <thead>
@@ -13819,7 +13819,7 @@ clip(0, 100) 之后：
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>KeyError: '姓名'</code></pre>
 <p><strong>报错信息里那个 <code>[' 姓名 ', ' 班级 ', ...]</code> 就是答案</strong>：
-pandas 把候选列名都列了出来，<strong>只是空格在终端里太不显眼</strong> ⚠</p>
+pandas 把候选列名都列了出来，<strong>只是空格在终端里太不显眼</strong></p>
 <table>
 <thead>
 <tr>
@@ -13994,7 +13994,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 <div class="admonition warning">
 <p class="admonition-title">重命名前先查重名，否则两列会「合并」成一列</p>
 <p><code>rename</code> 之后如果产生了重名列，后面所有按名字取列的代码都会拿到
-<strong>一个 DataFrame 而不是 Series</strong>，错误会传播到很远 ⚠</p>
+<strong>一个 DataFrame 而不是 Series</strong>，错误会传播到很远</p>
 <table>
 <thead>
 <tr>
@@ -14021,7 +14021,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 </tr>
 </tbody>
 </table>
-<p>另外：<strong>重命名后要确认列数没变</strong>，<code>len(df.columns)</code> 前后应当相同 ✓</p>
+<p>另外：<strong>重命名后要确认列数没变</strong>，<code>len(df.columns)</code> 前后应当相同</p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
@@ -14101,7 +14101,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 </tbody>
 </table>
 <p>封装成函数后，同一份输入<strong>每次得到同一份输出</strong>，
-参数集中在签名里，清洗过程变成一句可读的 <code>clean(df)</code> ✓</p>
+参数集中在签名里，清洗过程变成一句可读的 <code>clean(df)</code></p>
 <h3 id="82">8.2 一份完整的清洗函数<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
@@ -14355,7 +14355,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 </tr>
 </tbody>
 </table>
-<p>在报告里贴两行日志，成本极低，可信度提升很多 ✓</p>
+<p>在报告里贴两行日志，成本极低，可信度提升很多</p>
 </div>
 <h3 id="83">8.3 调用演示：换个参数，结果跟着变<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
@@ -14513,7 +14513,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </table>
 <p><strong>这一步的必要性来自前面的坑</strong>：<code>to_numeric(errors="coerce")</code>
 会在你毫无察觉时把值变成缺失；<code>dropna()</code> 会在你毫无察觉时删掉大半数据。
-<strong>只有前后对比能把这两种「悄悄发生的事」变成数字</strong> ✓</p>
+<strong>只有前后对比能把这两种「悄悄发生的事」变成数字</strong></p>
 <h3 id="92">9.2 三张对照表<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
@@ -14777,7 +14777,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </table>
 <p><strong>「多出来的缺失」每一个都要能解释清来源</strong>。
 如果对不上，就说明有一步的行为和你以为的不一样 ——
-<strong>这时候的 10 分钟排查，能避免后面一整个结论作废</strong> ✓</p>
+<strong>这时候的 10 分钟排查，能避免后面一整个结论作废</strong></p>
 </div>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
@@ -14853,7 +14853,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 ⑤ 填充后                     0   -4</code></pre>
 <p><strong>这张「缺失数流水账」是清洗交付时最有说服力的东西</strong>：
 它一眼就能看出「多出来的缺失」出现在哪一步，
-也让人信服你不是在随手填数 ✓</p>
+也让人信服你不是在随手填数</p>
 <h3 id="94">9.4 对比结果写进报告<a class="headerlink" href="#94" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -14887,7 +14887,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </table>
 <p><strong>最后两行最容易被跳过，但它们是「可复核」的关键</strong>：
 说明「没做什么」能避免读者以为你删了数据；
-说明「遗留局限」能让结论的边界变清楚 ✓</p>
+说明「遗留局限」能让结论的边界变清楚</p>
 <hr />
 <h2 id="_13">十、常见陷阱汇总<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <h3 id="101">10.1 五个高频陷阱<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
@@ -14908,7 +14908,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>AttributeError: 'NoneType' object has no attribute 'reset_index'</code></pre>
 <p><strong>原因</strong>：<code>inplace=True</code> 表示「就地改，不返回值」，
-所以它返回的是 <code>None</code>，而 <code>None</code> 没有 <code>.reset_index()</code> ⚠</p>
+所以它返回的是 <code>None</code>，而 <code>None</code> 没有 <code>.reset_index()</code></p>
 <p><strong>更隐蔽的是「改了一半才报错」</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
@@ -14986,7 +14986,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </tbody>
 </table>
 <p>原因是切片拿到的是<strong>副本</strong>，<code>inplace</code> 改的是那个副本，改完就被丢掉了。
-<strong>这也正是「统一用赋值式」能同时避开两种坑的原因</strong> ✓</p>
+<strong>这也正是「统一用赋值式」能同时避开两种坑的原因</strong></p>
 </div>
 <h4 id="_14">陷阱二：填充时用错列<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
@@ -15059,7 +15059,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </tbody>
 </table>
 <p><strong>根因</strong>：<code>fillna</code> 收到一个<strong>标量</strong>时会把它用到<strong>所有列</strong>上，
-收到 <strong>Series</strong> 时才会按列名对齐。<code>df["数学"].mean()</code> 是标量，所以到处都填它 ⚠</p>
+收到 <strong>Series</strong> 时才会按列名对齐。<code>df["数学"].mean()</code> 是标量，所以到处都填它</p>
 <h4 id="_15">陷阱三：清洗后不复查<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
@@ -15142,7 +15142,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 </tbody>
 </table>
 <p><strong>不做复查最常见的结果，是「填错了却一路通过」</strong> ——
-就像上面把语文缺失填成 0，代码毫无异常，页面上也看不出问题 ⚠</p>
+就像上面把语文缺失填成 0，代码毫无异常，页面上也看不出问题</p>
 </div>
 <h4 id="dropna">陷阱四：<code>dropna()</code> 默认删整行<a class="headerlink" href="#dropna" title="Permanent link">&para;</a></h4>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
@@ -15190,7 +15190,7 @@ dropna(how='all') 后: 13
 
 → 它们只是有一门缺考，其他科目的成绩都是有效的</code></pre>
 <p><strong>记住这个默认值</strong>：<code>dropna()</code> 等价于 <code>dropna(how="any")</code>，
-意思是「只要有一格空，就把整行删掉」⚠</p>
+意思是「只要有一格空，就把整行删掉」</p>
 <table>
 <thead>
 <tr>
@@ -15279,7 +15279,7 @@ dropna(how='all') 后: 13
   干净中位数        填 88.0000</code></pre>
 <div class="admonition warning">
 <p class="admonition-title">均值填充的正确顺序：先剔异常，再算均值，最后填</p>
-<p>顺序错了就是循环论证 —— <strong>用被污染的值去填缺失，等于把错误扩散到更多格子</strong> ⚠</p>
+<p>顺序错了就是循环论证 —— <strong>用被污染的值去填缺失，等于把错误扩散到更多格子</strong></p>
 <table>
 <thead>
 <tr>
@@ -15302,7 +15302,7 @@ dropna(how='all') 后: 13
 </tr>
 </tbody>
 </table>
-<p>判断该用哪个的一条规则：<strong>报告里 <code>mean</code> 与 <code>50%</code> 差得多，就默认用中位数</strong> ✓</p>
+<p>判断该用哪个的一条规则：<strong>报告里 <code>mean</code> 与 <code>50%</code> 差得多，就默认用中位数</strong></p>
 </div>
 <h3 id="102">10.2 陷阱速查表<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
 <table>
@@ -15470,7 +15470,7 @@ dropna(how='all') 后: 13
 </code></pre></div></td></tr></table></div>
 <p><strong>第二句是本页最重要的一句</strong>：
 删行和截断都会<strong>永久性地毁掉原始信息</strong>，
-而加一列标记<strong>几乎不花成本</strong>。默认选标注 ✓</p>
+而加一列标记<strong>几乎不花成本</strong>。默认选标注</p>
 </div>
 <hr />
 <h2 id="_17">典型例题<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h2>
@@ -15681,7 +15681,7 @@ dropna(how='all') 后: 13
 </tbody>
 </table>
 <p><strong>必须写进报告的</strong>：这次总分里有 3 个格子是估算的，
-并且<strong>李娜的语文分是估算值</strong>，她的总分排序因此不可靠 ⚠</p>
+并且<strong>李娜的语文分是估算值</strong>，她的总分排序因此不可靠</p>
 </details>
 <h3 id="2">例题 2：找出重复并说明保留理由<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>下面这张表里，哪些记录是重复的？该删哪一条？</p>
@@ -15731,7 +15731,7 @@ dropna(how='all') 后: 13
 <p><strong>另外注意</strong>：<code>王芳</code> 的两条<strong>成绩不同</strong>（75 与 78），这不是「完全相同」的重复，
 而是「同一人同一科目录了两个分数」—— 这需要另外的决定：
 是取最新的一条，还是取平均，还是回去查原始卷子？</p>
-<p><strong>所以「重复」这个词必须先定义清楚，再谈删哪条。</strong></p>
+<p>所以「重复」这个词必须先定义清楚，再谈删哪条。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15886,7 +15886,7 @@ B2024-0003 王芳 语文  78 2024-03-06</code></pre>
 </tbody>
 </table>
 <p><strong>最该记住的一句</strong>：<code>duplicated()</code> 只是工具，
-<strong>真正的难点是「什么算重复」这个定义</strong> —— 定义错了，后面全错 ⚠</p>
+<strong>真正的难点是「什么算重复」这个定义</strong> —— 定义错了，后面全错</p>
 </details>
 <h3 id="3">例题 3：清洗一列混在文本里的数据<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><code>原始记录</code> 这一列里混着姓名、班级和分数，格式不统一。
@@ -16067,7 +16067,7 @@ NaN NaN  NaN 缺考或格式异常
 </tbody>
 </table>
 <p><strong>这个例子最能说明「正则 + 缺失数检查」这一对组合的威力</strong>：
-正则负责按结构精确抽取，缺失数负责告警「有几条没抽到」✓</p>
+正则负责按结构精确抽取，缺失数负责告警「有几条没抽到」</p>
 </details>
 <h3 id="4">例题 4：设计一份清洗检查清单<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>给定一份销售记录表，列出你的清洗步骤清单。
@@ -16123,7 +16123,7 @@ NaN NaN  NaN 缺考或格式异常
 </tbody>
 </table>
 <p><strong>这个例题的重点不在代码，而在「先分类，再决定动手」</strong> ——
-负金额如果按异常值一律删掉，<strong>退款业务就整片消失了</strong> ⚠</p>
+负金额如果按异常值一律删掉，<strong>退款业务就整片消失了</strong></p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -16397,7 +16397,7 @@ NaN NaN  NaN 缺考或格式异常
 </tr>
 </tbody>
 </table>
-<p><strong>一句总结</strong>：<strong>拿不准就用 C，然后用「缺失比例」这个数字把局限写清楚</strong> ✓</p>
+<p><strong>一句总结</strong>：<strong>拿不准就用 C，然后用「缺失比例」这个数字把局限写清楚</strong></p>
 </details>
 <p><strong>Q2</strong> 下面这段代码想做什么？它会成功吗？如果不会，错在哪里？怎么改？</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1"></a>df.dropna(inplace=True).reset_index(drop=True)
@@ -16415,7 +16415,7 @@ NaN NaN  NaN 缺考或格式异常
 </code></pre></div></td></tr></table></div>
 <p><strong>原因</strong>：<code>inplace=True</code> 的语义是「就地修改，不返回值」，
 所以 <code>df.dropna(inplace=True)</code> 返回 <code>None</code>，
-而 <code>None</code> 没有 <code>reset_index</code> 这个方法 ⚠</p>
+而 <code>None</code> 没有 <code>reset_index</code> 这个方法</p>
 <p><strong>更麻烦的是「已经改了一半」</strong>：</p>
 <table>
 <thead>
@@ -16439,7 +16439,7 @@ NaN NaN  NaN 缺考或格式异常
 </tr>
 </tbody>
 </table>
-<p>所以这个写法不是「什么都没做」，而是<strong>做了一半然后崩掉</strong> ⚠</p>
+<p>所以这个写法不是「什么都没做」，而是<strong>做了一半然后崩掉</strong></p>
 <p><strong>正确写法</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1">1</a></span>
 <span class="normal"><a href="#__codelineno-64-2">2</a></span>
@@ -16779,7 +16779,7 @@ IQR = Q3 - Q1   : 18.5
 </table>
 <p><strong>唯一的系统性防线</strong>：清洗完立刻做前后对照 ——
 <code>shape</code>、<code>isna().sum()</code>、<code>dtypes</code> 三张表一起看。
-上面四处问题，<strong>每一处都能被这三张表抓到</strong> ✓</p>
+上面四处问题，<strong>每一处都能被这三张表抓到</strong></p>
 </details>
 <hr />
 <h2 id="_19">小结<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>

@@ -9064,7 +9064,7 @@
 <div class="admonition tip">
 <p class="admonition-title">这一页的核心问题</p>
 <p>整页只围绕一句话展开：</p>
-<p><strong>判决只依赖判别函数之间的「序」，不依赖它们的「值」。</strong></p>
+<p>判决只依赖判别函数之间的「序」，不依赖它们的「值」。</p>
 <p>由此推出三件事：</p>
 <table>
 <thead>
@@ -9091,7 +9091,7 @@
 <p>这句话是整个模式识别里<strong>最省钱的一句话</strong>：
 它把「必须精确计算概率」降级成「只需要把顺序排对」。
 后面所有分类器 —— 线性、二次、神经网络 ——
-都是在这句话的框架里换一种 <span class="arithmatex">\(g_i\)</span> 的写法而已 ✓</p>
+都是在这句话的框架里换一种 <span class="arithmatex">\(g_i\)</span> 的写法而已</p>
 </div>
 <hr />
 <h2 id="_2">一、为什么需要「判别函数」这个概念<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -9206,7 +9206,7 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 <p><strong>「<span class="arithmatex">\(p(x)\)</span> 是正数」这件事必须先确认</strong>：
 <span class="arithmatex">\(p(x) = \sum_j p(x\mid\omega_j)P(\omega_j)\)</span> 是若干非负项之和。
 只要对<strong>至少一个</strong> <span class="arithmatex">\(x\)</span>、<strong>至少一个</strong>类，密度不为零，
-这个和就是严格正的 ✓
+这个和就是严格正的
 （只有全体密度在某点同时为 0 才例外，那种情况下任何判决规则都没有依据。）</p>
 <p><strong>结论</strong>：分母根本不用算。
 只有「需要报告一个具体的概率值」时，才需要回头除以 <span class="arithmatex">\(p(x)\)</span>。</p>
@@ -9238,7 +9238,7 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 </table>
 <p><strong>判别函数的写法省掉的是「分母那一圈求和」</strong> ——
 类别数 <span class="arithmatex">\(c\)</span> 越大，省下的计算越多。
-而两类情形的相减（第 4.3 节）还会再省掉<strong>一半</strong>的乘法 ✓</p>
+而两类情形的相减（第 4.3 节）还会再省掉<strong>一半</strong>的乘法</p>
 <h3 id="13">1.3 麻烦二：连乘会下溢，这是真正要命的地方<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>如果 <span class="arithmatex">\(d\)</span> 个特征<strong>相互独立</strong>，那么 <span class="arithmatex">\(d\)</span> 维的类条件密度可以拆成 <span class="arithmatex">\(d\)</span> 个一维密度相乘：</p>
 <div class="arithmatex">\[p(x \mid \omega_i) = \prod_{k=1}^{d} p(x_k \mid \omega_i)\]</div>
@@ -9275,7 +9275,7 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 </tbody>
 </table>
 <p>只要变成 0，<strong>所有类的判别函数值就都是 0</strong>，
-「谁大谁小」的信息全部丢失，判决直接失效 ⚠</p>
+「谁大谁小」的信息全部丢失，判决直接失效</p>
 <p><strong>「失真」和「变成 0」是两件不同的坏事，都值得说清</strong>：</p>
 <table>
 <thead>
@@ -9307,7 +9307,7 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 <span class="arithmatex">\(\ln \prod_k p_k = \sum_k \ln p_k\)</span>，
 把「<span class="arithmatex">\(d\)</span> 个小正数相乘」换成「<span class="arithmatex">\(d\)</span> 个负数相加」。
 加法不会把量级压到 <span class="arithmatex">\(10^{-320}\)</span> 那种地步，
-每一项还都能<strong>单独查看、单独检查</strong> ✓</p>
+每一项还都能<strong>单独查看、单独检查</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">取对数有一个前提：函数值必须是正数</p>
 <p><span class="arithmatex">\(\ln\)</span> 只在<strong>正数</strong>上有定义。<span class="arithmatex">\(p(x\mid\omega_i)\)</span> 是密度，恒为正，
@@ -9315,10 +9315,10 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 所以取对数在数学上是安全的。</p>
 <p>但如果你手里那个「判别函数」的值可能是负数或零，
 <strong>就不能对它取对数</strong>。此时可以改取 <span class="arithmatex">\(\ln(\cdot + C)\)</span> 这种平移形式，
-只要 <span class="arithmatex">\(C\)</span> 足够大使全体为正 —— 平移不改变大小关系 ✓</p>
+只要 <span class="arithmatex">\(C\)</span> 足够大使全体为正 —— 平移不改变大小关系</p>
 <p><strong>还有一个隐蔽的坑</strong>：先验恰好为 0 的那一类，
 <span class="arithmatex">\(\ln P(\omega_i)\)</span> 无定义。这类先验为 0 的类本来就<strong>不可能</strong>出现，
-正确做法是先把它从类别集合里删掉，再对剩下的类取对数 ✓</p>
+正确做法是先把它从类别集合里删掉，再对剩下的类取对数</p>
 </div>
 <h3 id="14">1.4 关键洞察：判决只需要「序」<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>把 1.2 和 1.3 两件事合起来看，会发现一个共同点：</p>
@@ -9353,9 +9353,9 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>这四种操作都用一个词概括：保序变换。</strong>
+<p>这四种操作都用一个词概括：保序变换。
 只要对<strong>所有类</strong>施加<strong>同一个</strong>保序变换，
-「谁最大」这个结论就完全不变 ✓</p>
+「谁最大」这个结论就完全不变</p>
 <p><strong>于是可以彻底换个说法</strong>：
 我们不需要那个具体是概率的函数，
 只需要一个<strong>能在各类之间保持同样先后次序</strong>的函数。
@@ -9783,7 +9783,7 @@ p(x) = \sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)\]</div>
 <div class="arithmatex">\[g_2 = -c - 1.28125 + \ln 0.4 = -c - 1.28125 - 0.916291 = -c - 2.197541\]</div>
 <p><strong>两类相减时 <span class="arithmatex">\(-c\)</span> 自动消掉</strong>：</p>
 <div class="arithmatex">\[g_1 - g_2 = (-c - 1.042076) - (-c - 2.197541) = 1.155465 \gt 0\]</div>
-<p><strong>判为 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</p>
+<p><strong>判为 <span class="arithmatex">\(\omega_1\)</span></strong></p>
 <p><strong>用形式二再算一遍，看能不能得到同一个结论</strong>。
 形式二要拿到具体的密度值，所以常数项这次不能丢：
 <span class="arithmatex">\(c\)</span> 的具体值是</p>
@@ -9838,14 +9838,14 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 </tbody>
 </table>
 <p><strong>三个形式给出的数值完全不同</strong>（一个是概率、一个是乘积、一个是负对数），
-<strong>但一致地指向第 1 类</strong> ✓</p>
+<strong>但一致地指向第 1 类</strong></p>
 <p><strong>还能再验证一件事</strong>：形式一与形式二的比值恒定。
 把两行相除，公共分母 <span class="arithmatex">\(p(x) = 0.018538\)</span> 正好约掉，所以两个比值必然相等 ——
 上面的 <span class="arithmatex">\(3.144\)</span> 与 <span class="arithmatex">\(3.145\)</span> 就是这么来的。</p>
 <p><strong>这说明什么</strong>：以后看到「同一个样本、三种不同的数」不要慌，
 只要把它们都看成对同一个序的三种编码，判决就一定一致。
 <strong>考试里真正会被考的只有两件事</strong>：
-形式之间怎么互相推、以及哪些项可以丢 ✓</p>
+形式之间怎么互相推、以及哪些项可以丢</p>
 <div class="admonition warning">
 <p class="admonition-title">三个形式等价，不等于可以随便混着用</p>
 <p>三条必须守住的规矩：</p>
@@ -9874,7 +9874,7 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 <p>第三条在实现时特别要注意：<strong>规则必须先定下来</strong>。
 要么定一个容差 <span class="arithmatex">\(\varepsilon\)</span>，两个值之差小于 <span class="arithmatex">\(\varepsilon\)</span> 时按固定规则裁决；
 要么干脆规定「并列时判给下标最小的类」。
-不写这条规则，同一个样本换台机器可能得到不同结果 ⚠</p>
+不写这条规则，同一个样本换台机器可能得到不同结果</p>
 </div>
 <p><strong>下面这段代码把三者的等价性实跑核对一遍</strong>（手算与代码逐项对照）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
@@ -9951,7 +9951,7 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 </tbody>
 </table>
 <p><strong>和手算对一眼</strong>：形式三的两个值 <span class="arithmatex">\(-4.266247\)</span> 与 <span class="arithmatex">\(-5.421712\)</span> 之差是 <span class="arithmatex">\(1.155465\)</span>，
-<strong>与手算的 <span class="arithmatex">\(g_1 - g_2 = 1.155465\)</span> 完全一致</strong> ✓
+<strong>与手算的 <span class="arithmatex">\(g_1 - g_2 = 1.155465\)</span> 完全一致</strong>
 形式二的两个数与手算的 <span class="arithmatex">\(0.014065\)</span>、<span class="arithmatex">\(0.004473\)</span> 也吻合到第 5 位有效数字
 （手算中间步骤保留了 6 位，这一点小差异是正常的）。</p>
 <h3 id="1">例题 1：三种形式的等价性证明<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -9976,13 +9976,13 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 <div class="arithmatex">\[0.5\,p(x\mid\omega_1) \gt 0.5\,p(x\mid\omega_2)\]</div>
 <p>两边同除以正数 <span class="arithmatex">\(0.5\)</span>，得</p>
 <div class="arithmatex">\[p(x\mid\omega_1) \gt p(x\mid\omega_2)\]</div>
-<p><strong>所以判决退化成「谁的类条件密度大就判谁」</strong> ✓
+<p><strong>所以判决退化成「谁的类条件密度大就判谁」</strong>
 这就是<strong>最大似然判决</strong>：先验不提供任何偏向时，只能听数据的。</p>
 <p><strong>（b）取对数不改变判决</strong></p>
 <p><span class="arithmatex">\(\ln\)</span> 在正数上严格单调增，而 <span class="arithmatex">\(g_i \gt 0\)</span>（密度与先验都为正），
 所以对两个类<strong>同时</strong>取对数是一个保序变换：</p>
 <div class="arithmatex">\[g_1 \gt g_2 \ \Longleftrightarrow\ \ln g_1 \gt \ln g_2\]</div>
-<p>由第 2.2 节的性质，判决<strong>完全不变</strong> ✓</p>
+<p>由第 2.2 节的性质，判决<strong>完全不变</strong></p>
 <p><strong>（c）只对第 1 类取对数会出问题</strong></p>
 <p>这时新的判别函数是</p>
 <div class="arithmatex">\[\tilde g_1 = \ln g_1, \qquad \tilde g_2 = g_2\]</div>
@@ -9994,7 +9994,7 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 而 <span class="arithmatex">\(g_2\)</span> 还留在 <span class="arithmatex">\((0,1)\)</span> —— 一边被压到负数区、一边留在正数区，
 大小关系当然被破坏。</p>
 <p><strong>这个结论说明什么</strong>：等价性从来不是「某个函数的性质」，
-而是「<strong>同一变换同时施加于所有类</strong>」这条纪律的性质 ⚠</p>
+而是「<strong>同一变换同时施加于所有类</strong>」这条纪律的性质</p>
 </details>
 <h3 id="2">例题 2：先验变化怎么推动决策面（一维手算）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>题目：一维两类问题，两类都服从等方差正态分布，
@@ -10107,7 +10107,7 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 <h2 id="_5">四、决策面与决策边界<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p>前面讲的都是「给定一个 <span class="arithmatex">\(x\)</span>，怎么判」。
 这一节换个视角问一个<strong>几何问题</strong>：</p>
-<p><strong>特征空间里的点被分成几块？它们之间的分界线长什么样？</strong></p>
+<p>特征空间里的点被分成几块？它们之间的分界线长什么样？</p>
 <p>这个问题看起来只是「换个说法」，其实很有用 ——
 它让我们能<strong>画图</strong>、能<strong>预判形状</strong>、能一眼看出某个分类器的能力上限。</p>
 <h3 id="41">4.1 决策区域：把特征空间切块<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
@@ -10202,7 +10202,7 @@ P(\omega_2\mid x) = \frac{0.004473}{0.018538} = 0.241287\]</div>
 g(x) \lt 0 \ \Rightarrow\ \text{判为 } \omega_2; \qquad
 g(x) = 0 \ \Rightarrow\ \text{落在决策面上}\]</div>
 <p><strong>怎么读</strong>：<span class="arithmatex">\(g \gt 0\)</span> 就是 <span class="arithmatex">\(g_1 \gt g_2\)</span>，也就是第 1 类赢。
-把「比较两个数」变成「看一个数的符号」，实现上更省事 ✓</p>
+把「比较两个数」变成「看一个数的符号」，实现上更省事</p>
 <p><strong>两类与多类的差别一张表说清</strong>：</p>
 <table>
 <thead>
@@ -10238,7 +10238,7 @@ g(x) = 0 \ \Rightarrow\ \text{落在决策面上}\]</div>
 <p><strong>关于「最多 <span class="arithmatex">\(c(c-1)/2\)</span> 对」</strong>：<span class="arithmatex">\(c\)</span> 个类两两配对共有
 <span class="arithmatex">\(C_c^2 = c(c-1)/2\)</span> 种组合，
 但是否每一对都真的形成一段边界，要看这两个类的区域是否相邻。
-很多对其实被第三个类隔开，<strong>不出现在最终的分界图上</strong> ✓</p>
+很多对其实被第三个类隔开，<strong>不出现在最终的分界图上</strong></p>
 <p>把几种常见的 <span class="arithmatex">\(g(x)\)</span> 写出来：</p>
 <table>
 <thead>
@@ -10269,7 +10269,7 @@ g(x) = 0 \ \Rightarrow\ \text{落在决策面上}\]</div>
 <p><strong>注意最后一行</strong>：用风险之差时，<span class="arithmatex">\(g(x)\)</span> 越小越好
 （风险越小越好），所以判决规则变成「<span class="arithmatex">\(g(x) \lt 0\)</span> 判 <span class="arithmatex">\(\omega_1\)</span>」。
 它和前三行<strong>符号习惯相反</strong>。
-这两种习惯在文献里都有人用，<strong>看公式时先确认大者判哪一类</strong> ⚠</p>
+这两种习惯在文献里都有人用，<strong>看公式时先确认大者判哪一类</strong></p>
 <p><strong>「几个判别函数」与「一个差式」的对应关系</strong>：</p>
 <table>
 <thead>
@@ -10649,7 +10649,7 @@ L 348.820312 187.272
 </tbody>
 </table>
 <p><strong>必须强调的一点</strong>：决策面只由「<span class="arithmatex">\(g(x) = 0\)</span>」这个方程决定，
-与 <span class="arithmatex">\(g(x)\)</span> 在别处的<strong>具体数值完全无关</strong> ⚠</p>
+与 <span class="arithmatex">\(g(x)\)</span> 在别处的<strong>具体数值完全无关</strong></p>
 <p><strong>为什么能这么说</strong>：判别函数的职责只是「比大小」，
 换成 <span class="arithmatex">\(50g(x)\)</span>、<span class="arithmatex">\(g(x)+7\)</span>、<span class="arithmatex">\(e^{g(x)}\)</span>（前提还有零点的位置），
 决策区域一个点都不会变。
@@ -10659,7 +10659,7 @@ L 348.820312 187.272
 <span class="arithmatex">\(g_1\)</span> 与 <span class="arithmatex">\(g_2\)</span>，而决策面方程写的是 <span class="arithmatex">\(g_1 = g_2\)</span>，
 这时<strong>没有单独的 <span class="arithmatex">\(g\)</span></strong>，就不能写成 <span class="arithmatex">\(g(x) = 0\)</span>。</p>
 <p><strong>安全写法</strong>：先定义差式 <span class="arithmatex">\(g = g_1 - g_2\)</span>，
-再写 <span class="arithmatex">\(g(x) = 0\)</span>。这样零水平集与决策面必然重合 ✓</p>
+再写 <span class="arithmatex">\(g(x) = 0\)</span>。这样零水平集与决策面必然重合</p>
 <p><strong>一维情形的手算</strong>：两类都是一维正态，均值 <span class="arithmatex">\(170\)</span> 与 <span class="arithmatex">\(178\)</span>，
 共用标准差 <span class="arithmatex">\(6\)</span>（这就是例题 2 的数据）。
 把取对数后的差式写出来：</p>
@@ -10673,7 +10673,7 @@ g(x) &amp;= g_1(x) - g_2(x) \\
 \end{aligned}\]</div>
 <p><strong>第二步做了两件事</strong>：
 两个 <span class="arithmatex">\(-c\)</span> 相互抵消（<span class="arithmatex">\(c\)</span> 与类别无关），
-先验相等所以 <span class="arithmatex">\(\ln P\)</span> 那两项也抵消 ✓</p>
+先验相等所以 <span class="arithmatex">\(\ln P\)</span> 那两项也抵消</p>
 <p><strong>代入 <span class="arithmatex">\(x = 174\)</span> 验证决策面</strong>：</p>
 <div class="arithmatex">\[g(174) = -\tfrac{1}{2}\Bigl(\tfrac{174-170}{6}\Bigr)^2
 + \tfrac{1}{2}\Bigl(\tfrac{174-178}{6}\Bigr)^2
@@ -10724,7 +10724,7 @@ g(x) &amp;= g_1(x) - g_2(x) \\
 <strong>与类别下标 <span class="arithmatex">\(i\)</span> 无关</strong>，对所有类都是同一个值，
 比大小时自动抵消 ✓</p>
 <p>所以看到两个判别函数「长得不一样」时，
-<strong>第一件事是问：差的那一项与类别有关吗？</strong>
+第一件事是问：差的那一项与类别有关吗？
 与类别无关就是等价的。</p>
 <p><strong>一个可以随手用的检查</strong>：把两个待比较的式子相减，
 如果结果恒等于 0（对任意 <span class="arithmatex">\(x\)</span>），
@@ -10846,11 +10846,11 @@ g(x) &amp;= \ln p(x \mid \omega_1) + \ln P(\omega_1)
 <p>再算指数：</p>
 <div class="arithmatex">\[\tfrac{1}{2}(-1.302140)^2 - \tfrac{1}{2}(0.031193)^2
 = 0.847784 - 0.000487 = 0.847297\]</div>
-<p>取指数：<span class="arithmatex">\(e^{0.847297} = 2.333333\)</span> ✓</p>
-<p><strong>与阈值 <span class="arithmatex">\(2.333333\)</span> 完全一致</strong> —— 这就是「似然比等于先验反比」的数值证据 ✓</p>
+<p>取指数：<span class="arithmatex">\(e^{0.847297} = 2.333333\)</span></p>
+<p><strong>与阈值 <span class="arithmatex">\(2.333333\)</span> 完全一致</strong> —— 这就是「似然比等于先验反比」的数值证据</p>
 <h3 id="55">5.5 关键一步：只要知道密度形式，就能化简成几何形状<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
 <p>上面那个式子还是「密度之比」这种抽象形式。
-<strong>要把它变成直线、曲线这样的几何对象，必须把密度的具体形式代进去。</strong></p>
+要把它变成直线、曲线这样的几何对象，必须把密度的具体形式代进去。</p>
 <p>这是本节最重要的一句话：</p>
 <blockquote>
 <p><strong>决策面的形状完全由类条件密度的形式决定。</strong>
@@ -10886,7 +10886,7 @@ g(x) &amp;= \ln p(x \mid \omega_1) + \ln P(\omega_1)
 本节先把「化简是可能的」这件事说清楚：
 因为正态密度的对数里只有 <span class="arithmatex">\(x\)</span> 的<strong>二次项</strong>、<strong>一次项</strong>和<strong>常数项</strong>，
 两类相减时<strong>二次项可能消掉、也可能不消掉</strong> ——
-这正是上面表格前两行的来源 ✓</p>
+这正是上面表格前两行的来源</p>
 <p><strong>把「二次项消不消掉」这件事提前说透</strong>（这是下一节的主线索）：</p>
 <table>
 <thead>
@@ -10915,7 +10915,7 @@ g(x) &amp;= \ln p(x \mid \omega_1) + \ln P(\omega_1)
 <p><strong>为什么协方差相同时这一项会完全相同</strong>：
 它是 <span class="arithmatex">\(x\)</span> 的二次型，系数矩阵就是 <span class="arithmatex">\(\Sigma^{-1}\)</span>。
 两类共用同一个 <span class="arithmatex">\(\Sigma\)</span>，于是系数矩阵也同一个，
-<strong>整个二次型逐项相同</strong>，做差时自然消失 ✓</p>
+<strong>整个二次型逐项相同</strong>，做差时自然消失</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么还要专门去求决策面？</p>
 <p>既然有了判别函数就能分类，决策面似乎是多余的 —— <strong>不是</strong>。
@@ -10944,7 +10944,7 @@ g(x) &amp;= \ln p(x \mid \omega_1) + \ln P(\omega_1)
 </table>
 <p>尤其第三点：<strong>很多实用算法根本不估计概率密度，
 而是直接找一个决策面</strong> —— 这条路叫判别式方法，
-和「先估密度再用贝叶斯」这条生成式方法<strong>是两条平行的路线</strong> ✓</p>
+和「先估密度再用贝叶斯」这条生成式方法<strong>是两条平行的路线</strong></p>
 <p><strong>两条路线的差别一张表</strong>：</p>
 <table>
 <thead>
@@ -11006,7 +11006,7 @@ g(x) &amp;= \ln p(x \mid \omega_1) + \ln P(\omega_1)
 </tbody>
 </table>
 <p>第三条是最实用的：<strong>如果你只知道均值和方差，
-选正态分布是最「不武断」的选择</strong>（熵最大意味着最少额外假设）✓</p>
+选正态分布是最「不武断」的选择</strong>（熵最大意味着最少额外假设）</p>
 <h3 id="61">6.1 单变量正态密度<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>随机变量 <span class="arithmatex">\(x\)</span> 服从均值为 <span class="arithmatex">\(\mu\)</span>、方差为 <span class="arithmatex">\(\sigma^2\)</span> 的正态分布，记作</p>
 <div class="arithmatex">\[x \sim N(\mu, \sigma^2)\]</div>
@@ -11155,7 +11155,7 @@ p(mu + 1 sigma)                   : 0.040328
 exp(-1/2)                          : 0.606531
 在 (mu - sigma, mu + sigma) 上的积分 : 0.682689</code></pre>
 <p><strong>这就是「<span class="arithmatex">\(\pm 1\sigma\)</span> 约 <span class="arithmatex">\(68.3\%\)</span>」的来历</strong>。
-同理两个标准差内约 <span class="arithmatex">\(95.4\%\)</span>、三个标准差内约 <span class="arithmatex">\(99.7\%\)</span> ✓</p>
+同理两个标准差内约 <span class="arithmatex">\(95.4\%\)</span>、三个标准差内约 <span class="arithmatex">\(99.7\%\)</span></p>
 <p><strong>把这些数收成一张表</strong>：</p>
 <table>
 <thead>
@@ -11196,7 +11196,7 @@ exp(-1/2)                          : 0.606531
 <p><strong>这张表在考试里的用法</strong>：
 给你一个点和一组 <span class="arithmatex">\((\mu, \sigma)\)</span>，
 先用 <span class="arithmatex">\(z = (x-\mu)/\sigma\)</span> 折算出「几个标准差」，
-上面三行立刻给出「这个点有多罕见」的判断 ✓</p>
+上面三行立刻给出「这个点有多罕见」的判断</p>
 <h3 id="62">6.2 多元正态密度<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>现在把维数升到 <span class="arithmatex">\(d\)</span> 维。<span class="arithmatex">\(x\)</span> 是一个 <span class="arithmatex">\(d\)</span> 维列向量：</p>
 <div class="arithmatex">\[x = (x_1, x_2, \dots, x_d)^{\mathsf{T}}\]</div>
@@ -11356,7 +11356,7 @@ exp(-1/2)                          : 0.606531
 = \begin{pmatrix}0.200001\\ 0.200001\end{pmatrix}\]</div>
 <p>再左乘 <span class="arithmatex">\((x-\mu)^{\mathsf{T}} = (1, 2)\)</span>：</p>
 <div class="arithmatex">\[r^2 = 1\times 0.200001 + 2\times 0.200001 = 0.200001 + 0.400002 = 0.600003\]</div>
-<p><strong>与表中的 <span class="arithmatex">\(0.6\)</span> 一致</strong>（微小差异来自中间步骤只保留 6 位小数）✓</p>
+<p><strong>与表中的 <span class="arithmatex">\(0.6\)</span> 一致</strong>（微小差异来自中间步骤只保留 6 位小数）</p>
 <p><strong>这项的名字就是马氏距离的平方</strong>：</p>
 <div class="arithmatex">\[\underbrace{(x-\mu_i)^{\mathsf{T}}\Sigma_i^{-1}(x-\mu_i)}_{r^2}
 = \bigl[d_M(x, \mu_i)\bigr]^2\]</div>
@@ -11399,7 +11399,7 @@ exp(-1/2)                          : 0.606531
 \ \Longrightarrow\ \exp(-r_1^2/2) = \exp(-r_2^2/2)
 \ \Longrightarrow\ r_1^2 = r_2^2\]</div>
 <p><strong>中间那一步两边同除以正数 <span class="arithmatex">\(K\)</span></strong>，
-<strong>最后那一步用了指数函数的单调性</strong>（严格增，所以一一对应）✓</p>
+<strong>最后那一步用了指数函数的单调性</strong>（严格增，所以一一对应）</p>
 <p>于是<strong>等密度轨迹的方程</strong>是：</p>
 <div class="arithmatex">\[(x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu) = \text{const}\]</div>
 <p><strong>几何形状</strong>：这是一个<strong>超椭球面</strong>。特殊情况下（各方向扩散程度相同）
@@ -11427,7 +11427,7 @@ exp(-1/2)                          : 0.606531
 等密度方程里出现的是 <span class="arithmatex">\(r^2\)</span>，沿着第 <span class="arithmatex">\(i\)</span> 个主轴走，
 二次型等于 <span class="arithmatex">\((t^2/\lambda_i)\)</span>（<span class="arithmatex">\(t\)</span> 是沿该轴的位移长度）。
 令它等于常数 <span class="arithmatex">\(c\)</span>，得 <span class="arithmatex">\(t = \sqrt{\lambda_i c}\)</span>，
-所以<strong>长度与 <span class="arithmatex">\(\sqrt{\lambda_i}\)</span> 成正比</strong> ✓</p>
+所以<strong>长度与 <span class="arithmatex">\(\sqrt{\lambda_i}\)</span> 成正比</strong></p>
 <p><strong>用具体数字感受一下</strong>：取一个两维协方差矩阵，
 长短轴之比取 <span class="arithmatex">\(3:1\)</span>，长轴方向与水平成 <span class="arithmatex">\(0.7\)</span> 弧度。
 沿三个方向各取一个点，看它们的<strong>欧氏距离</strong>与<strong>马氏距离</strong>：</p>
@@ -11495,12 +11495,12 @@ exp(-1/2)                          : 0.606531
 但对这个高斯分布而言，<strong>两个点的密度一模一样</strong>。</p>
 <p><strong>原因</strong>：椭圆的长轴方向「宽敞」，沿这个方向走很远密度才下降；
 短轴方向「狭窄」，稍微偏离密度就掉下来。</p>
-<p><strong>欧氏距离不知道这个差别，马氏距离知道</strong> —— 这就是下一节的主题 ✓</p>
+<p><strong>欧氏距离不知道这个差别，马氏距离知道</strong> —— 这就是下一节的主题</p>
 <p><strong>考试里这条最常见的考法</strong>：
 给一个对角协方差矩阵、给两个候选点，
 问「按欧氏距离谁近、按马氏距离谁近」。
 正确的做法是<strong>逐维算偏差除以该维标准差、再求平方和</strong>，
-不要只看坐标差的大小 ⚠</p>
+不要只看坐标差的大小</p>
 </div>
 <h3 id="65">6.5 协方差矩阵的性质<a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
 <p>本课程课件专门列了协方差矩阵的性质，这里逐条说清。</p>
@@ -11551,14 +11551,14 @@ exp(-1/2)                          : 0.606531
 <p><strong>逐条解释</strong>：</p>
 <p><strong>性质 1（实对称）</strong>怎么来的：协方差阵的元素满足</p>
 <div class="arithmatex">\[\sigma_{ij} = E\{(x_i-\mu_i)(x_j-\mu_j)\} = E\{(x_j-\mu_j)(x_i-\mu_i)\} = \sigma_{ji}\]</div>
-<p><strong>交换两个实数的乘法顺序不影响结果</strong>，所以矩阵必然对称 ✓</p>
+<p><strong>交换两个实数的乘法顺序不影响结果</strong>，所以矩阵必然对称</p>
 <p><strong>性质 2（正定）</strong>：把二次型展开，它可以写成
 <span class="arithmatex">\(E\{\bigl(v^{\mathsf{T}}(x-\mu)\bigr)^2\}\)</span>，
 <strong>是一个平方的期望，所以非负</strong>；
-只要 <span class="arithmatex">\(x-\mu\)</span> 不会恒垂直于 <span class="arithmatex">\(v\)</span>，它就是严格正的 ✓</p>
+只要 <span class="arithmatex">\(x-\mu\)</span> 不会恒垂直于 <span class="arithmatex">\(v\)</span>，它就是严格正的</p>
 <p><strong>为什么正定很重要</strong>：
 密度公式里出现了 <span class="arithmatex">\(|\Sigma|\)</span> 和 <span class="arithmatex">\(\Sigma^{-1}\)</span>。
-<strong>正定保证 <span class="arithmatex">\(|\Sigma| \gt 0\)</span>（可逆），也保证密度不会退化到低维面上</strong> ⚠
+<strong>正定保证 <span class="arithmatex">\(|\Sigma| \gt 0\)</span>（可逆），也保证密度不会退化到低维面上</strong>
 如果 <span class="arithmatex">\(\Sigma\)</span> 只是半正定（某个特征值为 0），
 说明数据其实被限制在一个低维子空间里，此时 <span class="arithmatex">\(d\)</span> 维密度无定义。</p>
 <p><strong>性质 3、6（对角化与求和式）</strong>：<span class="arithmatex">\(\Sigma = \Phi\Lambda\Phi^{\mathsf{T}}\)</span>，
@@ -11569,7 +11569,7 @@ exp(-1/2)                          : 0.606531
 <p><strong>怎么读</strong>：每一项 <span class="arithmatex">\(\lambda_i\varphi_i\varphi_i^{\mathsf{T}}\)</span>
 是一个<strong>只指向 <span class="arithmatex">\(\varphi_i\)</span> 方向的秩 1 矩阵</strong>，
 前乘系数 <span class="arithmatex">\(\lambda_i\)</span> 就是那个方向的「强度」。
-<strong>所以协方差矩阵是 <span class="arithmatex">\(d\)</span> 个正交方向的强度叠加</strong> ✓</p>
+<strong>所以协方差矩阵是 <span class="arithmatex">\(d\)</span> 个正交方向的强度叠加</strong></p>
 <p><strong>性质 4、5 的矩阵化写法</strong>：</p>
 <div class="arithmatex">\[\Phi^{\mathsf{T}}\Phi = I \quad\Longrightarrow\quad \Phi^{-1} = \Phi^{\mathsf{T}}\]</div>
 <div class="arithmatex">\[\Sigma\varphi_i = \lambda_i\varphi_i,
@@ -11626,7 +11626,7 @@ exp(-1/2)                          : 0.606531
 <div class="arithmatex">\[\lambda_1(7-\lambda_1) = 8 \ \Longrightarrow\ \lambda_1^2 - 7\lambda_1 + 8 = 0\]</div>
 <div class="arithmatex">\[ \lambda_1 = \frac{7 \pm \sqrt{49-32}}{2} = \frac{7 \pm \sqrt{17}}{2}
 = 5.561553 \ \text{或}\ 1.438447\]</div>
-<p><strong>两个都是正数 → 矩阵正定</strong> ✓</p>
+<p><strong>两个都是正数 → 矩阵正定</strong></p>
 <p><strong>第三步，核对两条数值关系</strong>：</p>
 <div class="arithmatex">\[5.561553 + 1.438447 = 7.000000 = \operatorname{tr}(\Sigma) ✓\]</div>
 <div class="arithmatex">\[5.561553 \times 1.438447 = 8.000000 = \lvert\Sigma\rvert ✓\]</div>
@@ -11642,10 +11642,10 @@ W\Sigma W^{\mathsf{T}}
 &amp;= \Lambda^{-1/2}\,\Lambda\,\Lambda^{-1/2} = I
 \end{aligned}\]</div>
 <p><strong>关键的两步</strong>：<span class="arithmatex">\(\Phi^{\mathsf{T}}\Phi = I\)</span>（正交性），
-以及对角阵的转置是自己（<span class="arithmatex">\(\Lambda^{\mathsf{T}} = \Lambda\)</span>）✓</p>
+以及对角阵的转置是自己（<span class="arithmatex">\(\Lambda^{\mathsf{T}} = \Lambda\)</span>）</p>
 <p><strong>这就解释了前面那句「特征值决定轴长」</strong>：
 在 <span class="arithmatex">\(\Lambda\)</span> 的坐标系里，各轴的标准差正好是 <span class="arithmatex">\(\sqrt{\lambda_i}\)</span>。
-所以<strong>特征值越大，那个方向的分布越宽</strong> ✓
+所以<strong>特征值越大，那个方向的分布越宽</strong>
 本例里两个方向的标准差是 <span class="arithmatex">\(\sqrt{5.561553} = 2.358\)</span> 与 <span class="arithmatex">\(\sqrt{1.438447} = 1.199\)</span>，
 <strong>长短之比约 <span class="arithmatex">\(1.97:1\)</span></strong> —— 椭圆已经相当扁了。</p>
 <hr />
@@ -11686,7 +11686,7 @@ W\Sigma W^{\mathsf{T}}
 </tbody>
 </table>
 <p><strong>核心直觉</strong>：马氏距离是<strong>用数据自身的形状当尺子</strong>量出来的距离。
-<span class="arithmatex">\(\Sigma^{-1}\)</span> 起的作用，就是<strong>把各维的尺度差异和相关性都折算掉</strong> ✓</p>
+<span class="arithmatex">\(\Sigma^{-1}\)</span> 起的作用，就是<strong>把各维的尺度差异和相关性都折算掉</strong></p>
 <h3 id="72">7.2 为什么不用欧氏距离<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p>欧氏距离的定义是</p>
 <div class="arithmatex">\[d_E(x, \mu) = \sqrt{(x-\mu)^{\mathsf{T}}(x-\mu)}
@@ -11836,7 +11836,7 @@ W\Sigma W^{\mathsf{T}}
 <p>把 <span class="arithmatex">\(\Sigma = I\)</span> 代入马氏距离定义：</p>
 <div class="arithmatex">\[d_M(x,\mu) = \sqrt{(x-\mu)^{\mathsf{T}}I^{-1}(x-\mu)}
 = \sqrt{(x-\mu)^{\mathsf{T}}(x-\mu)} = d_E(x,\mu)\]</div>
-<p><strong>因为</strong> <span class="arithmatex">\(I^{-1} = I\)</span>，单位阵乘任何向量都不变 ✓</p>
+<p><strong>因为</strong> <span class="arithmatex">\(I^{-1} = I\)</span>，单位阵乘任何向量都不变</p>
 <p><strong>这句话的完整含义</strong>：</p>
 <div class="arithmatex">\[\Sigma = I \quad\Longleftrightarrow\quad
 \text{各维方差都是 } 1 \text{ 且互不相关} \quad\Longrightarrow\quad
@@ -11892,8 +11892,8 @@ d_M^2(y, \mu_y)
 \end{aligned}\]</div>
 <p><strong>中间两个约掉的地方很重要</strong>：
 <span class="arithmatex">\(A^{\mathsf{T}}(A^{\mathsf{T}})^{-1} = I\)</span>，
-<span class="arithmatex">\(A^{-1}A = I\)</span>，两处都约掉单位阵 ✓</p>
-<p><strong>结论：开方后 <span class="arithmatex">\(d_M(y,\mu_y) = d_M(x,\mu)\)</span>，马氏距离不变</strong> ✓</p>
+<span class="arithmatex">\(A^{-1}A = I\)</span>，两处都约掉单位阵</p>
+<p><strong>结论：开方后 <span class="arithmatex">\(d_M(y,\mu_y) = d_M(x,\mu)\)</span>，马氏距离不变</strong></p>
 <p><strong>欧氏距离在同样变换下的表现</strong>：</p>
 <div class="arithmatex">\[\begin{aligned}
 d_E^2(y, \mu_y)
@@ -11913,15 +11913,15 @@ d_E^2(y, \mu_y)
 <div class="arithmatex">\[d_E^2(y) = 2^2 + 0^2 = 4 \quad (\text{放大到 } 4 \text{ 倍，即长度 } 2 \text{ 倍}) ✗\]</div>
 <div class="arithmatex">\[d_M^2(y) = 2^2 \times \tfrac{1}{4} + 0^2 \times \tfrac{1}{4} = 1 ✓\]</div>
 <p><strong>马氏距离一点没变，欧氏距离翻了两倍</strong> ——
-这就是「谁度量的是数据的内部结构」的分水岭 ✓</p>
+这就是「谁度量的是数据的内部结构」的分水岭</p>
 <p><strong>为什么「不变性」这么重要</strong>：它意味着
 <strong>马氏距离对特征做线性变换是稳健的</strong>。
 在实际问题里，「换一组特征」通常就是一次线性变换
 （比如旋转、缩放、坐标变换），
-用马氏距离做的判断<strong>不会因为换了特征表示就翻案</strong> ✓</p>
+用马氏距离做的判断<strong>不会因为换了特征表示就翻案</strong></p>
 <p><strong>欧氏距离就做不到这一点</strong> —— 稍微换个特征组合，
 最近邻可能就变成另一个点了，
-这说明它度量的<strong>不是数据本身的内在结构</strong>，而是<strong>坐标系统的偶然选择</strong> ⚠</p>
+这说明它度量的<strong>不是数据本身的内在结构</strong>，而是<strong>坐标系统的偶然选择</strong></p>
 <p><strong>「<span class="arithmatex">\(A^{\mathsf{T}}A\)</span> 到底把向量放大多少倍」也要说清</strong>：
 对任意向量 <span class="arithmatex">\(d\)</span>，</p>
 <div class="arithmatex">\[\lVert Ad\rVert^2 = (Ad)^{\mathsf{T}}(Ad) = d^{\mathsf{T}}A^{\mathsf{T}}Ad\]</div>
@@ -11952,7 +11952,7 @@ d_E^2(y, \mu_y)
 <span class="arithmatex">\(A\)</span> 对不同方向的放大倍数不一样（受 <span class="arithmatex">\(A^{\mathsf{T}}A\)</span> 的特征值控制），
 所以 <span class="arithmatex">\(\lVert Ax-A\mu\rVert\)</span> 和 <span class="arithmatex">\(\lVert x-\mu\rVert\)</span> 一般不会相等 ✗</p>
 <p><strong>而马氏距离用 <span class="arithmatex">\(\Sigma^{-1}\)</span> 把这个「方向差异」恰好抵消掉了</strong>，
-所以它不变 ✓</p>
+所以它不变</p>
 <h3 id="76">7.6 一张对照表总结欧氏与马氏<a class="headerlink" href="#76" title="Permanent link">&para;</a></h3>
 <p>把这一节的内容收成一张表：</p>
 <table>
@@ -12009,13 +12009,13 @@ d_E^2(y, \mu_y)
 <p><strong>最后一行值得单独说</strong>：马氏距离的等值面
 <span class="arithmatex">\((x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu) = c^2\)</span>
 和正态分布的等密度轨迹<strong>是同一族椭球</strong>。
-所以「马氏距离相等的点」正好就是「密度相等的点」✓
+所以「马氏距离相等的点」正好就是「密度相等的点」
 这就是为什么高斯密度里的二次型必须是马氏距离，
 而不能换成欧氏距离。</p>
 <hr />
 <h2 id="_9">八、决策面形状预览：三种情形<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>把前面所有线索合起来，就能回答一个<strong>预测性</strong>的问题：
-<strong>假设各类都服从正态分布，决策面会是什么形状？</strong></p>
+假设各类都服从正态分布，决策面会是什么形状？</p>
 <p>答案<strong>取决于协方差矩阵怎么假设</strong>。三种情形如下：</p>
 <table>
 <thead>
@@ -12093,7 +12093,7 @@ w_0 = -\frac{1}{2}\bigl(\mu_1^{\mathsf{T}}\Sigma^{-1}\mu_1
 - \mu_2^{\mathsf{T}}\Sigma^{-1}\mu_2\bigr)
 + \ln\frac{P(\omega_1)}{P(\omega_2)}\]</div>
 <p><strong>因为二次项消掉了，剩下的只有 <span class="arithmatex">\(x\)</span> 的一次项和常数项，
-所以 <span class="arithmatex">\(g\)</span> 是线性的，决策面 <span class="arithmatex">\(g(x)=0\)</span> 是一张超平面</strong> ✓</p>
+所以 <span class="arithmatex">\(g\)</span> 是线性的，决策面 <span class="arithmatex">\(g(x)=0\)</span> 是一张超平面</strong></p>
 <p><strong>情形三为什么是二次的</strong>：两类协方差不同时，
 <span class="arithmatex">\(-\frac{1}{2}x^{\mathsf{T}}\Sigma_1^{-1}x\)</span> 与 <span class="arithmatex">\(+\frac{1}{2}x^{\mathsf{T}}\Sigma_2^{-1}x\)</span>
 <strong>不再抵消</strong>，二次项留在 <span class="arithmatex">\(g(x)\)</span> 里，所以 <span class="arithmatex">\(g\)</span> 是二次函数，
@@ -12103,7 +12103,7 @@ w_0 = -\frac{1}{2}\bigl(\mu_1^{\mathsf{T}}\Sigma^{-1}\mu_1
 <div class="arithmatex">\[w_0 \text{ 中多出 } -\frac{1}{2}\ln\frac{\lvert\Sigma_1\rvert}{\lvert\Sigma_2\rvert}\]</div>
 <p><strong>具体是哪种二次曲面，取决于 <span class="arithmatex">\(\Sigma_1\)</span>、<span class="arithmatex">\(\Sigma_2\)</span>、
 <span class="arithmatex">\(\mu_1\)</span>、<span class="arithmatex">\(\mu_2\)</span> 和两个先验</strong> ——
-可以是<strong>超椭球面</strong>、<strong>超双曲面</strong>，也可能退化成<strong>超球面</strong>甚至<strong>超平面</strong> ✓
+可以是<strong>超椭球面</strong>、<strong>超双曲面</strong>，也可能退化成<strong>超球面</strong>甚至<strong>超平面</strong>
 <strong>具体推导留到下一节</strong>。</p>
 <p><strong>三种情形一张对照表</strong>：</p>
 <table>
@@ -12155,7 +12155,7 @@ w_0 = -\frac{1}{2}\bigl(\mu_1^{\mathsf{T}}\Sigma^{-1}\mu_1
 </tbody>
 </table>
 <p><strong>最后一行是「为什么不要轻易用情形三」的经济学理由</strong>：
-参数个数随 <span class="arithmatex">\(d^2\)</span> 增长，样本不够时估计出来的协方差矩阵会很不可靠 ⚠</p>
+参数个数随 <span class="arithmatex">\(d^2\)</span> 增长，样本不够时估计出来的协方差矩阵会很不可靠</p>
 <h3 id="81">8.1 「决策面垂直于均值连线」到底什么时候成立<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
 <p>这是本节最容易被记错的一条，务必分清。</p>
 <div class="admonition warning">
@@ -12165,13 +12165,13 @@ w_0 = -\frac{1}{2}\bigl(\mu_1^{\mathsf{T}}\Sigma^{-1}\mu_1
 所以<strong>决策面垂直于两类均值的连线</strong>，
 <span class="arithmatex">\(w\)</span> 确实指向「从第 2 类均值指向第 1 类均值」的方向。</p>
 <p><strong>但协方差矩阵是普通矩阵时，<span class="arithmatex">\(w = \Sigma^{-1}(\mu_1-\mu_2)\)</span>
-与 <span class="arithmatex">\(\mu_1-\mu_2\)</span> 一般不再同向</strong> ⚠
+与 <span class="arithmatex">\(\mu_1-\mu_2\)</span> 一般不再同向</strong>
 因为 <span class="arithmatex">\(\Sigma^{-1}\)</span> 会把向量「扭转」一下。</p>
 <p><strong>记住这个结论</strong>：<strong>决策面垂直于 <span class="arithmatex">\(w\)</span>，而不是垂直于均值连线。</strong>
 只有在 <span class="arithmatex">\(\Sigma \propto I\)</span> 时两者才重合。</p>
 <p><strong>一个容易被误导的说法</strong>：「协方差相同 → 决策面垂直于均值连线」。
 这句只在<strong>协方差是球形</strong>时才对。
-协方差相同但一般时，决策面仍然垂直于连线的情况<strong>只是巧合</strong> ✓</p>
+协方差相同但一般时，决策面仍然垂直于连线的情况<strong>只是巧合</strong></p>
 </div>
 <p><strong>下面这张图画的正是「协方差是球形」这一最简单的情形</strong>，
 请重点看：连线（虚线）与决策面（实线）<strong>互相垂直</strong>，
@@ -12505,7 +12505,7 @@ L 344.14375 187.272
 <p>把 <span class="arithmatex">\(\Sigma = I\)</span> 代入 <span class="arithmatex">\(w = \Sigma^{-1}(\mu_1-\mu_2)\)</span>：</p>
 <div class="arithmatex">\[w = (-3, 0)^{\mathsf{T}}\]</div>
 <p><strong><span class="arithmatex">\(w\)</span> 与 <span class="arithmatex">\(\mu_1-\mu_2\)</span> 完全相同</strong>（因为 <span class="arithmatex">\(\Sigma^{-1} = I\)</span> 什么也没改），
-所以决策面作为 <span class="arithmatex">\(w\)</span> 的垂面，当然也垂直于均值连线 ✓</p>
+所以决策面作为 <span class="arithmatex">\(w\)</span> 的垂面，当然也垂直于均值连线</p>
 <p><strong>再看一般协方差时这个关系怎么被破坏</strong>。
 取 <span class="arithmatex">\(\mu_A = (1,1)\)</span>、<span class="arithmatex">\(\mu_B = (4,3)\)</span>、
 <span class="arithmatex">\(\Sigma = \begin{pmatrix}2 &amp; 0.5\\ 0.5 &amp; 1.5\end{pmatrix}\)</span>，先验相等。</p>
@@ -12545,7 +12545,7 @@ L 344.14375 187.272
 </tbody>
 </table>
 <p><strong>两个斜率不一样</strong>（<span class="arithmatex">\(0.6667\)</span> 与 <span class="arithmatex">\(0.7143\)</span>），
-<strong>所以决策面不垂直于均值连线</strong> ✓
+<strong>所以决策面不垂直于均值连线</strong>
 差别的来源就是 <span class="arithmatex">\(\Sigma^{-1}\)</span> —— 它把连线方向「扭转」了一点。</p>
 <p><strong>决策面经过哪里</strong>：先验相等时经过两点中点</p>
 <div class="arithmatex">\[x_0 = \frac{\mu_A+\mu_B}{2} = (2.5,\ 2.0)^{\mathsf{T}}\]</div>
@@ -12692,7 +12692,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一列才是「判决有多可靠」的度量</strong> ⚠</p>
+<p><strong>最后一列才是「判决有多可靠」的度量</strong></p>
 <table>
 <thead>
 <tr>
@@ -12717,7 +12717,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 <p><strong>注意 <span class="arithmatex">\(\arg\max\)</span> 与「最大值本身」是两件不同的事</strong>：
 我们需要的只有 <span class="arithmatex">\(\arg\max\)</span>（类别标号），
 最大值的<strong>具体大小完全不重要</strong> ——
-这正是本页第一节说的「只需要序」在实现层面的体现 ✓</p>
+这正是本页第一节说的「只需要序」在实现层面的体现</p>
 <p><strong>逐行读这张表</strong>：</p>
 <table>
 <thead>
@@ -12770,7 +12770,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 <div class="arithmatex">\[g(x) = r_0^2 - (x_1^2 + x_2^2)\]</div>
 <p><strong>注意 <span class="arithmatex">\(g\)</span> 里出现了 <span class="arithmatex">\(x_1^2\)</span>、<span class="arithmatex">\(x_2^2\)</span> 这样的乘积/平方项</strong> ——
 它在原空间里不是线性的，但<strong>如果把这些项看成新的坐标</strong>，
-它就是线性的了 ✓</p>
+它就是线性的了</p>
 <h3 id="92">9.2 定义与逐步推导<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：定义一组<strong>基函数</strong>（记作 <span class="arithmatex">\(\phi_k(x)\)</span>），
 把 <span class="arithmatex">\(d\)</span> 维的 <span class="arithmatex">\(x\)</span> 映射成 <span class="arithmatex">\(m\)</span> 维的新向量</p>
@@ -12779,7 +12779,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 <div class="arithmatex">\[g(x) = a^{\mathsf{T}}y + a_0 = \sum_{k=1}^{m} a_k\,\phi_k(x) + a_0\]</div>
 <p><strong>它就是「广义线性判别函数」</strong> ——
 名字里带「线性」，指的是<strong>对系数 <span class="arithmatex">\(a_k\)</span> 线性</strong>，
-不是对原始特征 <span class="arithmatex">\(x\)</span> 线性 ✓</p>
+不是对原始特征 <span class="arithmatex">\(x\)</span> 线性</p>
 <p><strong>「二次判别函数是它的特例」这一步不跳步地展开</strong>。
 取 <span class="arithmatex">\(d = 2\)</span>，原始特征 <span class="arithmatex">\((x_1, x_2)\)</span>。
 把下面这 <span class="arithmatex">\(6\)</span> 个量当新坐标：</p>
@@ -12828,7 +12828,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>所以二次判别函数 = 在 <span class="arithmatex">\(6\)</span> 维新空间里的线性判别函数</strong> ✓</p>
+<p><strong>所以二次判别函数 = 在 <span class="arithmatex">\(6\)</span> 维新空间里的线性判别函数</strong></p>
 <p><strong>一般 <span class="arithmatex">\(d\)</span> 维时新坐标有多少个</strong>：
 <span class="arithmatex">\(1\)</span>（常数项）+ <span class="arithmatex">\(d\)</span>（一次项）+ <span class="arithmatex">\(d\)</span>（平方项）+ <span class="arithmatex">\(d(d-1)/2\)</span>（交叉项）</p>
 <div class="arithmatex">\[m = 1 + 2d + \frac{d(d-1)}{2} = \frac{(d+1)(d+2)}{2}\]</div>
@@ -12871,7 +12871,7 @@ g_i(x) = \max_{j=1,\dots,c} g_j(x)\]</div>
 </table>
 <p><strong>这张表说明什么</strong>：把边界「掰直」的代价是<strong>维数按平方增长</strong>。
 维数一高，参数估计所需的样本量也跟着暴涨 ——
-这正是「维数灾难」的一个具体表现 ⚠</p>
+这正是「维数灾难」的一个具体表现</p>
 <h3 id="93">9.3 图：弯曲边界怎么变成超平面<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
 <p><strong>下图把这件事画出来了</strong>：原始空间里那条弯曲（圆形）的边界，
 在做完特征映射之后变成了一张直的超平面：</p>
@@ -13245,7 +13245,7 @@ L 227.211663 200.866062
 <p><strong>「变成超平面」这件事的关键在哪</strong>：
 新坐标 <span class="arithmatex">\(y\)</span> 与原坐标 <span class="arithmatex">\(x\)</span> 之间是<strong>非线性</strong>关系（<span class="arithmatex">\(y_4 = x_1^2\)</span>），
 所以「原空间里的一条曲线」在 <span class="arithmatex">\(y\)</span> 空间里可以是「平的」。
-<strong>判别函数对新坐标 <span class="arithmatex">\(y\)</span> 是线性的，对原坐标 <span class="arithmatex">\(x\)</span> 是二次的</strong> ✓</p>
+<strong>判别函数对新坐标 <span class="arithmatex">\(y\)</span> 是线性的，对原坐标 <span class="arithmatex">\(x\)</span> 是二次的</strong></p>
 <p><strong>这一节的完整链条，可以用一张表串起来</strong>：</p>
 <table>
 <thead>
@@ -13285,7 +13285,7 @@ L 227.211663 200.866062
 <p><strong>这一节还回答了一个常被问的问题</strong>：
 「非线性分类是不是一定要用神经网络？」
 <strong>不是</strong>。给特征加上二次项，就已经能画出相当复杂的边界；
-神经网络的不同之处在于<strong>它把「加哪些项」这件事也交给数据去学</strong> ✓</p>
+神经网络的不同之处在于<strong>它把「加哪些项」这件事也交给数据去学</strong></p>
 <p><strong>最后要留一句给下一节一个引子</strong>：
 如果不需要显式写出 <span class="arithmatex">\(y\)</span>，只需要 <span class="arithmatex">\(y\)</span> 之间的<strong>内积</strong>，
 那么可以只写出内积的表达式（记作 <span class="arithmatex">\(K(x, x')\)</span>），
@@ -13389,7 +13389,7 @@ L 227.211663 200.866062
 <div class="arithmatex">\[\bigl(-0.347222 + 0.125000\bigr) + \bigl(-0.510826 + 0.916291\bigr)
 = -0.222222 + 0.405465 = 0.183243 ✓\]</div>
 <p><strong>两次数值完全一致</strong> —— 常数项 <span class="arithmatex">\(c\)</span> 在做差时确实消失了 ✓</p>
-<p><strong>这个「先写出来、再让它消掉」的手法，下一节会反复使用。</strong>
+<p>这个「先写出来、再让它消掉」的手法，下一节会反复使用。
 多维情形下会消掉的项更多（比如整个 <span class="arithmatex">\(x^{\mathsf{T}}\Sigma^{-1}x\)</span>），
 但只要记住一条原则就不会错：</p>
 <blockquote>
@@ -13852,13 +13852,13 @@ x_1 = 2.549306\]</div>
 <p><strong>看标准差个数</strong>：第 1 维只偏了 <span class="arithmatex">\(1\)</span> 个标准差（很平常），
 第 2 维偏了 <span class="arithmatex">\(3\)</span> 个标准差（<strong>非常罕见</strong>）。</p>
 <p><strong>在正态假设下，<span class="arithmatex">\(3\)</span> 个标准差以外的概率约 <span class="arithmatex">\(0.3\%\)</span></strong> ——
-这个点主要是被第 2 维「拉远」的 ✓</p>
+这个点主要是被第 2 维「拉远」的</p>
 <p><strong>两个距离差在哪</strong>：就差在「要不要除以标准差」这一件事上。
 欧氏距离把两维的偏移都当成「同样的距离」，
 马氏距离把每一维都换算成「几个标准差」之后才相加。</p>
 <p><strong>这个结论说明什么</strong>：看到协方差矩阵的对角元相差很大时，
 <strong>第一反应应该是「欧氏距离会误判」</strong>，
-而不是直接用坐标差的大小做判断 ✓</p>
+而不是直接用坐标差的大小做判断</p>
 </details>
 <p><strong>Q4</strong> 某两类问题的协方差矩阵是
 <span class="arithmatex">\(\Sigma = \begin{pmatrix}9 &amp; 0\\ 0 &amp; 4\end{pmatrix}\)</span>。</p>
@@ -13919,26 +13919,26 @@ x_1 = 2.549306\]</div>
 <p><strong>是椭圆</strong>（不是圆）</p>
 <p><strong>判据</strong>：等密度轨迹退化为圆（球面）的条件是
 <strong>各方向扩散程度相同</strong>，也就是 <span class="arithmatex">\(\Sigma\)</span> 的特征值<strong>全部相等</strong>。
-这里 <span class="arithmatex">\(9 \neq 4\)</span>，所以是椭圆 ✓</p>
+这里 <span class="arithmatex">\(9 \neq 4\)</span>，所以是椭圆</p>
 <p><strong>（c）轴长与方向</strong></p>
 <p>等密度轨迹的方程是</p>
 <div class="arithmatex">\[\frac{x_1^2}{9} + \frac{x_2^2}{4} = \text{const}\]</div>
 <p>把它写成标准椭圆形式（两边同除以 const）：</p>
 <div class="arithmatex">\[\frac{x_1^2}{9c} + \frac{x_2^2}{4c} = 1, \qquad c \gt 0\]</div>
 <p>所以<strong>半轴长分别是 <span class="arithmatex">\(3\sqrt{c}\)</span> 与 <span class="arithmatex">\(2\sqrt{c}\)</span></strong> ——
-<strong>正比于 <span class="arithmatex">\(\sqrt{\lambda_1} = 3\)</span> 与 <span class="arithmatex">\(\sqrt{\lambda_2} = 2\)</span></strong> ✓
+<strong>正比于 <span class="arithmatex">\(\sqrt{\lambda_1} = 3\)</span> 与 <span class="arithmatex">\(\sqrt{\lambda_2} = 2\)</span></strong>
 这与「主轴长度与特征值有关」的结论对应
 （注意严格说轴长与特征值的<strong>平方根</strong>成正比，
 因为密度里是 <span class="arithmatex">\(r^2\)</span> 而不是 <span class="arithmatex">\(r\)</span>）。</p>
 <p><strong>方向</strong>：本例 <span class="arithmatex">\(\Sigma\)</span> 是对角阵，
 特征向量就是坐标轴方向 <span class="arithmatex">\((1,0)\)</span> 与 <span class="arithmatex">\((0,1)\)</span>；
-长轴沿第 1 维（<span class="arithmatex">\(\lambda_1 = 9\)</span> 对应的方向）✓</p>
+长轴沿第 1 维（<span class="arithmatex">\(\lambda_1 = 9\)</span> 对应的方向）</p>
 <p><strong>长短轴之比</strong>：<span class="arithmatex">\(\sqrt{9/4} = 1.5\)</span>。</p>
 <p><strong>这个结论说明什么</strong>：
 对角协方差矩阵的几何含义非常直白 ——
 <strong>对角元就是各维的方差，特征向量就是坐标轴</strong>。
 遇到非对角元不为零的矩阵时才需要真正做特征分解；
-对角情形可以直接读出来 ✓</p>
+对角情形可以直接读出来</p>
 </details>
 <hr />
 <h2 id="_14">小结<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>

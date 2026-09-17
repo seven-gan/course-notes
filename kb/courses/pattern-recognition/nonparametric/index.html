@@ -8067,7 +8067,7 @@
 只需要估计几个参数。</p>
 </blockquote>
 <p><strong>但这个前提常常不成立</strong>。真实数据的分布可能<strong>双峰、偏斜、有界</strong>，
-硬套一个高斯会<strong>系统性地错</strong> ⚠</p>
+硬套一个高斯会<strong>系统性地错</strong></p>
 <p>这一页讲<strong>不假设分布形状</strong>的做法 —— 名字就叫<strong>非参数方法</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">「非参数」不是「没有参数」</p>
@@ -8115,7 +8115,7 @@
 <div class="arithmatex">\[
 \hat p(x) = \frac{1}{nh}\times(\text{落入}x\text{所在 bin 的样本数})
 \]</div>
-<p>其中 <span class="arithmatex">\(h\)</span> 是 bin 宽。<strong>除以 <span class="arithmatex">\(n h\)</span> 是为了让面积为 1</strong> ✓</p>
+<p>其中 <span class="arithmatex">\(h\)</span> 是 bin 宽。<strong>除以 <span class="arithmatex">\(n h\)</span> 是为了让面积为 1</strong></p>
 <h3 id="12">1.2 直方图的三个毛病<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -8139,10 +8139,10 @@
 </tr>
 </tbody>
 </table>
-<p><strong>第一与第二条是结构性的</strong> —— 不管样本多少都存在 ⚠</p>
+<p><strong>第一与第二条是结构性的</strong> —— 不管样本多少都存在</p>
 <p><strong>怎么绕开</strong>：<strong>不要让每个点只落在一个 bin 里，
-而是让每个点对周围所有位置都贡献一点"密度"</strong> ✓</p>
-<p><strong>这就自然过渡到核密度估计。</strong></p>
+而是让每个点对周围所有位置都贡献一点"密度"</strong></p>
+<p>这就自然过渡到核密度估计。</p>
 <hr />
 <h2 id="parzen">二、Parzen 窗（核密度估计）<a class="headerlink" href="#parzen" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 构造<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -8181,7 +8181,7 @@
 <h3 id="22-1hd">2.2 那个 <span class="arithmatex">\(1/h^d\)</span> 是从哪来的<a class="headerlink" href="#22-1hd" title="Permanent link">&para;</a></h3>
 <p><strong>这是本节最该讲清的一步。</strong> 用一维（<span class="arithmatex">\(d=1\)</span>）来看。</p>
 <p><strong>要求</strong>：估计出的 <span class="arithmatex">\(\hat p\)</span> 必须是<strong>概率密度</strong>，
-也就是 <span class="arithmatex">\(\int \hat p(x)\,\mathrm dx = 1\)</span> ✓</p>
+也就是 <span class="arithmatex">\(\int \hat p(x)\,\mathrm dx = 1\)</span></p>
 <p><strong>代入检验</strong>：</p>
 <div class="arithmatex">\[
 \int \hat p(x)\,\mathrm dx
@@ -8195,12 +8195,12 @@
 \]</div>
 <p>（最后一步用了核函数<strong>本身积分为 1</strong> 的性质。）</p>
 <p><strong>所以有 <span class="arithmatex">\(1/h\)</span> 才能让每一项积分为 1</strong>，
-从而 <span class="arithmatex">\(\hat p\)</span> 的积分等于 <span class="arithmatex">\(\frac1n\times n = 1\)</span> ✓</p>
+从而 <span class="arithmatex">\(\hat p\)</span> 的积分等于 <span class="arithmatex">\(\frac1n\times n = 1\)</span></p>
 <p><strong><span class="arithmatex">\(d\)</span> 维的情形</strong>：换元时 <span class="arithmatex">\(\mathrm d\boldsymbol x = h^d\,\mathrm d\boldsymbol u\)</span>，
 所以归一化因子必须是 <span class="arithmatex">\(1/h^d\)</span> ⚠</p>
 <p><strong>一个直观理解</strong>：<span class="arithmatex">\(h\)</span> 变大时土堆变胖（宽 <span class="arithmatex">\(\propto h\)</span>），
 高度必须按 <span class="arithmatex">\(1/h\)</span>（高维是 <span class="arithmatex">\(1/h^d\)</span>）往下压，
-<strong>这样土堆的体积才守恒</strong> ✓</p>
+<strong>这样土堆的体积才守恒</strong></p>
 <h3 id="23">2.3 核函数的要求与常见选择<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p><strong>要求只有两条</strong>：</p>
 <div class="arithmatex">\[
@@ -8238,7 +8238,7 @@ K(u) \ge 0,\qquad \int K(u)\,\mathrm du = 1
 </tr>
 </tbody>
 </table>
-<p><strong>重要事实</strong>：<strong>核的形状影响不大，窗宽 <span class="arithmatex">\(h\)</span> 的影响大得多</strong> ⚠
+<p><strong>重要事实</strong>：<strong>核的形状影响不大，窗宽 <span class="arithmatex">\(h\)</span> 的影响大得多</strong>
 所以实践中选高斯核基本就够，<strong>精力应花在调 <span class="arithmatex">\(h\)</span> 上</strong>。</p>
 <h3 id="24-">2.4 窗宽的偏差-方差权衡<a class="headerlink" href="#24-" title="Permanent link">&para;</a></h3>
 <p>这是本节的核心机制：</p>
@@ -8273,9 +8273,9 @@ K(u) \ge 0,\qquad \int K(u)\,\mathrm du = 1
 </tbody>
 </table>
 <p><strong>为什么 <span class="arithmatex">\(h\)</span> 小会方差大</strong>：每个位置的密度只由<strong>极少数</strong>样本贡献
-（甚至一个），所以估计随样本波动剧烈 ✓</p>
+（甚至一个），所以估计随样本波动剧烈</p>
 <p><strong>为什么 <span class="arithmatex">\(h\)</span> 大会偏差大</strong>：核太胖，把远处样本的贡献也算了进来，
-于是<strong>局部结构被平均掉</strong> ✓</p>
+于是<strong>局部结构被平均掉</strong></p>
 <figure class="kb-fig">
 <svg viewBox="0 0 356.735625 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Parzen 窗：窗宽决定估计的光滑程度">
 
@@ -9099,7 +9099,7 @@ L 293.544375 53.5565
 <div class="arithmatex">\[
 h \to 0,\qquad nh^d \to \infty
 \]</div>
-<p>则 <span class="arithmatex">\(\hat p\)</span> 依概率收敛到真实密度 <span class="arithmatex">\(p\)</span> ✓</p>
+<p>则 <span class="arithmatex">\(\hat p\)</span> 依概率收敛到真实密度 <span class="arithmatex">\(p\)</span></p>
 <p><strong>两条各自的含义</strong>：</p>
 <table>
 <thead>
@@ -9120,7 +9120,7 @@ h \to 0,\qquad nh^d \to \infty
 </tbody>
 </table>
 <p><strong>注意这是一对矛盾的要求</strong>：<span class="arithmatex">\(h\)</span> 要变小，但<strong>不能变得太快</strong>
-（否则 <span class="arithmatex">\(nh^d\)</span> 不趋于无穷）⚠</p>
+（否则 <span class="arithmatex">\(nh^d\)</span> 不趋于无穷）</p>
 <p><strong>典型取法</strong>：<span class="arithmatex">\(h \propto n^{-1/(d+4)}\)</span>。</p>
 <p><strong>这个指数透露了一个坏消息</strong>：<span class="arithmatex">\(d\)</span> 越大，<span class="arithmatex">\(h\)</span> 下降越慢 ——
 <strong>高维需要更多样本</strong> ✓ 这正是维数灾难（第五节）。</p>
@@ -9128,9 +9128,9 @@ h \to 0,\qquad nh^d \to \infty
 <h2 id="k">三、K 近邻估计：反过来固定点数<a class="headerlink" href="#k" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 想法的转变<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p><strong>Parzen 窗</strong>：<strong>固定体积</strong>（窗宽 <span class="arithmatex">\(h\)</span>），数里面有多少点。
-→ 稀疏区域窗内可能<strong>一个点都没有</strong>，估计为零 ⚠</p>
+→ 稀疏区域窗内可能<strong>一个点都没有</strong>，估计为零</p>
 <p><strong>K 近邻</strong>：<strong>固定点数</strong>（<span class="arithmatex">\(k\)</span> 个），让体积变。
-→ 每个位置都有 <span class="arithmatex">\(k\)</span> 个样本参与估计，<strong>稀疏区域自动用更大的体积</strong> ✓</p>
+→ 每个位置都有 <span class="arithmatex">\(k\)</span> 个样本参与估计，<strong>稀疏区域自动用更大的体积</strong></p>
 <p><strong>这解决了稀疏区域的问题</strong>，代价是体积不再一致。</p>
 <h3 id="32">3.2 估计式<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
@@ -9138,10 +9138,10 @@ h \to 0,\qquad nh^d \to \infty
 \]</div>
 <p>其中 <span class="arithmatex">\(V_k(x)\)</span> 是<strong>包含离 <span class="arithmatex">\(x\)</span> 最近的 <span class="arithmatex">\(k\)</span> 个样本的最小体积</strong>。</p>
 <p><strong>读法</strong>：密度 = 点数 / (总数 × 体积)。
-<strong>点密说明密度高</strong> ✓</p>
+<strong>点密说明密度高</strong></p>
 <p><strong>为什么这个式子自洽</strong>：如果真实密度大，
 那么包围 <span class="arithmatex">\(k\)</span> 个点所需的体积就<strong>小</strong>，
-于是 <span class="arithmatex">\(\hat p\)</span> 大 ✓</p>
+于是 <span class="arithmatex">\(\hat p\)</span> 大</p>
 <h3 id="33">3.3 两个超参数的作用<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -9164,14 +9164,14 @@ h \to 0,\qquad nh^d \to \infty
 </tr>
 </tbody>
 </table>
-<p><strong>所以 K 近邻与 Parzen 在"平滑程度"上是同一件事的两种控制方式</strong> ✓</p>
+<p><strong>所以 K 近邻与 Parzen 在"平滑程度"上是同一件事的两种控制方式</strong></p>
 <p><strong>一致性条件</strong>同样是一对：<span class="arithmatex">\(k\to\infty\)</span> 且 <span class="arithmatex">\(k/n\to 0\)</span>。</p>
 <hr />
 <h2 id="_3">四、最近邻分类器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 直接拿来分类<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p><strong>不做密度估计，直接投票</strong>：<span class="arithmatex">\(x\)</span> 的类别 = 离它最近的 <span class="arithmatex">\(k\)</span> 个训练样本中<strong>多数</strong>的类 ✓</p>
+<p><strong>不做密度估计，直接投票</strong>：<span class="arithmatex">\(x\)</span> 的类别 = 离它最近的 <span class="arithmatex">\(k\)</span> 个训练样本中<strong>多数</strong>的类</p>
 <p><strong>为什么这合法</strong>：可以证明它等价于"用 K 近邻估计各类密度，
-再比后验" —— 只是把除法约掉了 ✓</p>
+再比后验" —— 只是把除法约掉了</p>
 <h3 id="42-1-">4.2 1-近邻的错误率上界<a class="headerlink" href="#42-1-" title="Permanent link">&para;</a></h3>
 <p><strong>这是本节最重要的理论结果</strong>。</p>
 <p>设贝叶斯最优错误率为 <span class="arithmatex">\(R^{*}\)</span>（任何分类器能达到的最低错误率）。
@@ -9199,7 +9199,7 @@ R^{*} \le R \le 2R^{*} - \frac{R^{*}}{c}\,R^{*}
 </tbody>
 </table>
 <p><strong><span class="arithmatex">\(2R^{*}\)</span> 这个上界很惊人</strong>：1-近邻<strong>几乎不学任何东西</strong>
-（只存下所有训练样本），却能达到最优性能的<strong>两倍以内</strong> ⚠</p>
+（只存下所有训练样本），却能达到最优性能的<strong>两倍以内</strong></p>
 <p><strong>为什么上界是 2 而不是 1</strong>：1-近邻用的是"最近那个点"的标签，
 而该点标签与真实后验<strong>有概率不一致</strong>；
 在样本无穷多时最近邻趋于重合，但它<strong>仍是随机抽出的标签</strong>。</p>
@@ -9942,15 +9942,15 @@ L 348.470312 201.105875
 <p class="admonition-title">K 近邻的四个实践陷阱</p>
 <p><strong>① 特征尺度没统一</strong>。
 若一个特征取值 0～1、另一个 0～10000，
-距离<strong>完全由后者决定</strong> —— 前者等于没用到 ⚠
+距离<strong>完全由后者决定</strong> —— 前者等于没用到
 <strong>必须标准化</strong>。</p>
 <p><strong>② 用整数 <span class="arithmatex">\(k\)</span> 处理二分类的平票</strong>。
-<span class="arithmatex">\(k\)</span> 取偶数时可能平票，一般<strong>取奇数</strong> ✓</p>
+<span class="arithmatex">\(k\)</span> 取偶数时可能平票，一般<strong>取奇数</strong></p>
 <p><strong>③ 维度没降就硬上</strong>。
-高维下近邻不再"近"（第五节），<span class="arithmatex">\(k\)</span> 近邻会失效 ⚠</p>
+高维下近邻不再"近"（第五节），<span class="arithmatex">\(k\)</span> 近邻会失效</p>
 <p><strong>④ 预测阶段慢</strong>。
 K 近邻是<strong>懒惰学习</strong>：训练几乎不花时间，
-但每次预测都要<strong>遍历全部训练样本</strong> ⚠
+但每次预测都要<strong>遍历全部训练样本</strong>
 大数据量时要用 KD 树、球树等索引加速。</p>
 </div>
 <hr />
@@ -10000,22 +10000,22 @@ d_M^2 = (\boldsymbol x-\boldsymbol y)^{\mathsf T}\Sigma^{-1}(\boldsymbol x-\bold
 \]</div>
 <p><strong>它做了两件事</strong>：</p>
 <ul>
-<li><strong>按各方向的标准差缩放</strong> → 消除尺度差异 ✓</li>
-<li><strong>消除特征间的相关性</strong> → 把椭球状的分布"拉圆" ✓</li>
+<li><strong>按各方向的标准差缩放</strong> → 消除尺度差异</li>
+<li><strong>消除特征间的相关性</strong> → 把椭球状的分布"拉圆"</li>
 </ul>
 <p><strong>什么时候必须用马氏距离</strong>：特征间<strong>强相关</strong>时。
 用欧氏距离会把"相关的两个特征"当成两个独立信息，
-<strong>重复计算了同一份信息</strong> ⚠</p>
+<strong>重复计算了同一份信息</strong></p>
 <h3 id="53">5.3 余弦距离的适用场合<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p><strong>它只看方向、不看长度</strong>。
 所以适合<strong>长度不重要、方向（比例）才重要</strong>的场合，
-例如<strong>文本的词频向量</strong>（长文档和短文档只要主题相同就该算近）✓</p>
+例如<strong>文本的词频向量</strong>（长文档和短文档只要主题相同就该算近）</p>
 <p><strong>要小心</strong>：若长度本身有意义（如物理量），
-用余弦距离会<strong>丢掉重要信息</strong> ⚠</p>
+用余弦距离会<strong>丢掉重要信息</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">距离度量选错，整个算法就错了</p>
 <p>距离是近邻法的<strong>唯一信息来源</strong>。
-度量不对，无论 <span class="arithmatex">\(k\)</span> 怎么调都没有用 ⚠</p>
+度量不对，无论 <span class="arithmatex">\(k\)</span> 怎么调都没有用</p>
 <p>三个最常见的错误：</p>
 <table>
 <thead>
@@ -10040,7 +10040,7 @@ d_M^2 = (\boldsymbol x-\boldsymbol y)^{\mathsf T}\Sigma^{-1}(\boldsymbol x-\bold
 </tbody>
 </table>
 <p><strong>正确的第一步</strong>：先问"两个样本在什么意义上算相似"，
-<strong>再</strong>去选距离 —— 而不是默认用欧氏 ⚠</p>
+<strong>再</strong>去选距离 —— 而不是默认用欧氏</p>
 </div>
 <hr />
 <h2 id="_5">六、维数灾难对近邻法的冲击<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -10052,7 +10052,7 @@ d_M^2 = (\boldsymbol x-\boldsymbol y)^{\mathsf T}\Sigma^{-1}(\boldsymbol x-\bold
 \quad (d\to\infty)
 \]</div>
 <p><strong>后果</strong>：<strong>"最近邻"和"最远邻"变得没有区别</strong> ——
-近邻法赖以立足的基础<strong>被抽掉了</strong> ⚠</p>
+近邻法赖以立足的基础<strong>被抽掉了</strong></p>
 <figure class="kb-fig">
 <svg viewBox="0 0 363.299688 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="维数灾难：要覆盖同样密度，样本量随维数指数增长">
 
@@ -10427,11 +10427,11 @@ L 358.979688 200.946
 \]</div>
 <p><strong>含义</strong>：高维空间的体积<strong>几乎全在"角落"</strong>，
 所以样本总是落在稀疏的边角，
-<strong>局部密度估计极不稳定</strong> ⚠</p>
+<strong>局部密度估计极不稳定</strong></p>
 <h3 id="63">6.3 数据量与维数的关系<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
 <p><strong>要维持同样的"采样密度"</strong>，样本量必须随维数<strong>指数增长</strong>。</p>
 <p><strong>粗略估计</strong>：若每维要 10 个网格点覆盖，
-<span class="arithmatex">\(d\)</span> 维就需要 <span class="arithmatex">\(10^d\)</span> 个样本 —— <span class="arithmatex">\(d=10\)</span> 时是 100 亿 ⚠</p>
+<span class="arithmatex">\(d\)</span> 维就需要 <span class="arithmatex">\(10^d\)</span> 个样本 —— <span class="arithmatex">\(d=10\)</span> 时是 100 亿</p>
 <h3 id="64">6.4 出路<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -10721,20 +10721,20 @@ L 358.979688 200.946
 <summary>解答</summary>
 <p><strong>第一步：判断覆盖。</strong></p>
 <p>对 <span class="arithmatex">\(x_1=0\)</span>：<span class="arithmatex">\(u=(1-0)/1=1\)</span>，
-而 <span class="arithmatex">\(\lvert u\rvert\le1\)</span> 成立（边界算在内），<strong>覆盖到</strong> ✓</p>
-<p>对 <span class="arithmatex">\(x_2=2\)</span>：<span class="arithmatex">\(u=(1-2)/1=-1\)</span>，同样<strong>覆盖到</strong> ✓</p>
+而 <span class="arithmatex">\(\lvert u\rvert\le1\)</span> 成立（边界算在内），<strong>覆盖到</strong></p>
+<p>对 <span class="arithmatex">\(x_2=2\)</span>：<span class="arithmatex">\(u=(1-2)/1=-1\)</span>，同样<strong>覆盖到</strong></p>
 <p><strong>第二步：算贡献。</strong></p>
 <p>每个点的贡献是 <span class="arithmatex">\(\frac{1}{nh}K(u)=\frac{1}{2\times1}\times\frac12=\frac14\)</span>。</p>
 <p><strong>第三步：求和。</strong></p>
 <div class="arithmatex">\[
 \hat p(1) = \frac14 + \frac14 = 0.5
 \]</div>
-<p><strong>答案：<span class="arithmatex">\(0.5\)</span></strong> ✓</p>
+<p><strong>答案：<span class="arithmatex">\(0.5\)</span></strong></p>
 <p><strong>这说明什么</strong>：两个点都在 <span class="arithmatex">\(x=1\)</span> 的影响范围内。
 注意 <span class="arithmatex">\(x=1\)</span> 处<strong>没有数据点</strong>，但估计值不为零 ——
-这正是核方法的用意：<strong>让密度在数据点之间也是连续的</strong> ✓</p>
+这正是核方法的用意：<strong>让密度在数据点之间也是连续的</strong></p>
 <p>（对比直方图：若 bin 边界恰好切在 <span class="arithmatex">\(x=1\)</span>，
-则可能两个点落在不同 bin，结果会很不一样 ⚠）</p>
+则可能两个点落在不同 bin，结果会很不一样）</p>
 </details>
 <h3 id="2">例题 2：窗宽让双峰消失<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某双峰分布，两峰分别位于 <span class="arithmatex">\(-2\)</span> 与 <span class="arithmatex">\(+2\)</span>，
@@ -10771,7 +10771,7 @@ L 358.979688 200.946
 </table>
 <p><strong>第二步：看核的作用范围。</strong></p>
 <p>高斯核在 <span class="arithmatex">\(h=3\)</span> 时，有效影响范围约 <span class="arithmatex">\(\pm3h = \pm9\)</span>。
-这个范围<strong>远大于两峰间距 4</strong> ⚠</p>
+这个范围<strong>远大于两峰间距 4</strong></p>
 <p><strong>第三步：结论。</strong></p>
 <p>每个样本的核都会<strong>同时覆盖两个峰的区域</strong> ——
 于是叠加后<strong>两个峰被糊成一个宽包</strong>。</p>
@@ -10832,10 +10832,10 @@ R \to 2(0.5-\epsilon)(0.5+\epsilon) = 2(0.25-\epsilon^2)
 \epsilon = 0.01:\quad \frac{0.4998}{0.49} \approx 1.02
 \]</div>
 <p><strong>答案：比值随 <span class="arithmatex">\(\epsilon\to 0\)</span> 趋于 1；
-而 <span class="arithmatex">\(R \le 2R^*\)</span> 是因为 <span class="arithmatex">\(2R^*(1-R^*)\le 2R^*\)</span> 总成立</strong> ✓</p>
+而 <span class="arithmatex">\(R \le 2R^*\)</span> 是因为 <span class="arithmatex">\(2R^*(1-R^*)\le 2R^*\)</span> 总成立</strong></p>
 <p><strong>这说明什么</strong>：<strong>上界 <span class="arithmatex">\(2R^*\)</span> 是一个宽松的界</strong>，
 在最坏情形（后验接近 0.5）附近取得，
-而实际比值在典型情形下<strong>远小于 2</strong> ✓</p>
+而实际比值在典型情形下<strong>远小于 2</strong></p>
 <p>这也解释了为什么 1-近邻在实际中往往表现不错 ——
 <strong>它的最坏情形比它的典型表现差得多</strong>。</p>
 </details>
@@ -10848,7 +10848,7 @@ R \to 2(0.5-\epsilon)(0.5+\epsilon) = 2(0.25-\epsilon^2)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：看两个特征的取值范围。</strong></p>
+<p>第一步：看两个特征的取值范围。</p>
 <table>
 <thead>
 <tr>
@@ -10878,14 +10878,14 @@ d^2 = \underbrace{(\Delta h)^2}_{\approx 25\sim100}
 \]</div>
 <p>（单位分别取 cm 与万元。）</p>
 <p><strong>第三步：结论。</strong></p>
-<p>收入项的贡献是身高项的<strong>10～100 倍</strong> ⚠</p>
+<p>收入项的贡献是身高项的<strong>10～100 倍</strong></p>
 <p>所以这个"2 近邻"<strong>实际上只用了收入这一个特征</strong>，
 身高几乎不起作用。</p>
 <p><strong>答案：量纲未统一，距离被收入特征独占；
 必须先标准化（如 z-score）</strong>。</p>
-<p><strong>这说明什么</strong>：<strong>标准化不是可选的预处理，而是近邻法的必要前提</strong> ⚠</p>
+<p><strong>这说明什么</strong>：<strong>标准化不是可选的预处理，而是近邻法的必要前提</strong></p>
 <p>一个自检办法：<strong>把某个特征的单位从"元"换成"万元"，
-看结果会不会变</strong> —— 如果会变，说明标准化没做对 ✓</p>
+看结果会不会变</strong> —— 如果会变，说明标准化没做对</p>
 </details>
 <hr />
 <h2 id="_7">八、自测<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -10938,13 +10938,13 @@ d^2 = \underbrace{(\Delta h)^2}_{\approx 25\sim100}
 <p><strong>三条最该带走的结论</strong>：</p>
 <ol>
 <li><strong>「非参数」是不假设形状，不是没有参数</strong> ——
-   代价是<strong>需要更多数据</strong>，收益是<strong>能逼近任意分布</strong> ✓</li>
+   代价是<strong>需要更多数据</strong>，收益是<strong>能逼近任意分布</strong></li>
 <li><strong>窗宽（或 <span class="arithmatex">\(k\)</span>）是唯一的平滑控制</strong> ——
    太小出毛刺、太大抹平结构，
-   <strong>它决定了你能分辨多细的结构</strong> ⚠</li>
+   <strong>它决定了你能分辨多细的结构</strong></li>
 <li><strong>距离度量是近邻法的唯一信息来源</strong> ——
    不标准化、特征强相关仍用欧氏距离，
-   都会让算法<strong>实际上只用了部分特征</strong> ⚠</li>
+   都会让算法<strong>实际上只用了部分特征</strong></li>
 </ol>
 <p><strong>上一页</strong>：<a href="../density-estimation/">概率密度估计与最大似然</a></p>
 <p><strong>下一页</strong>：<a href="../linear-classifier/">线性分类器设计</a> ——

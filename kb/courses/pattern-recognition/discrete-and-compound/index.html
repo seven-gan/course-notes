@@ -8682,8 +8682,8 @@
 
 <h1 id="_1">离散特征与复合模式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><strong>这一页解决两个问题：</strong>
-<strong>（1）特征不是连续数值，而是一堆「是 / 否」时，前面那套判决规则还能不能用？</strong>
-<strong>（2）一个样本由很多部分组成、每个部分各自有一个判决结果时，怎么把它们合起来判？</strong></p>
+（1）特征不是连续数值，而是一堆「是 / 否」时，前面那套判决规则还能不能用？
+（2）一个样本由很多部分组成、每个部分各自有一个判决结果时，怎么把它们合起来判？</p>
 <p>前一页的判别函数、决策面、马氏距离，
 全都建立在一个共同前提上：<strong>特征 <span class="arithmatex">\(x\)</span> 是一个连续向量</strong>，
 描述它的是<strong>概率密度</strong> <span class="arithmatex">\(p(x\mid\omega_i)\)</span>。
@@ -8755,7 +8755,7 @@
 </tbody>
 </table>
 <p>所以第二部分的本质是：<strong>把第一部分的方法，
-套在第一层的输出上</strong>，做一次「判决的判决」 ✓</p>
+套在第一层的输出上</strong>，做一次「判决的判决」</p>
 </div>
 <hr />
 <h2 id="_2">一、为什么要把离散特征单独拿出来讲<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -8773,7 +8773,7 @@
 所以比较 <span class="arithmatex">\(P(\omega_i\mid x)\)</span> 的大小，
 等价于比较分子 <span class="arithmatex">\(p(x\mid\omega_i)P(\omega_i)\)</span> 的大小。
 分母可以整项丢掉 —— 这一点在判别函数那一页已经彻底讲透了。</p>
-<p><strong>丢掉分母之后，规则里只剩下密度和先验的乘积。</strong>
+<p>丢掉分母之后，规则里只剩下密度和先验的乘积。
 于是问题来了：<strong>如果 <span class="arithmatex">\(x\)</span> 是离散的，这个乘积怎么写？</strong></p>
 <h3 id="12">1.2 离散特征长什么样<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>课件把离散特征归纳成两类典型场合，
@@ -8806,7 +8806,7 @@
 只需要把每个取值组合上的概率数出来就行。</strong>
 这比连续情形更朴素，但代价立刻在下一小节出现。</p>
 <h3 id="13">1.3 记号必须改：概率用大写，密度用小写<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>这是全页最容易搞混、也最容易被扣分的一点 ⚠</p>
+<p>这是全页最容易搞混、也最容易被扣分的一点</p>
 <table>
 <thead>
 <tr>
@@ -8863,10 +8863,10 @@
 </tr>
 </tbody>
 </table>
-<p>这一页之后统一用<strong>大写 <span class="arithmatex">\(P\)</span> 表示离散概率、小写 <span class="arithmatex">\(p\)</span> 表示连续密度</strong> ✓</p>
+<p>这一页之后统一用<strong>大写 <span class="arithmatex">\(P\)</span> 表示离散概率、小写 <span class="arithmatex">\(p\)</span> 表示连续密度</strong></p>
 </div>
 <p><strong>用具体数字手算一遍上面两条结论。</strong> 手算比跑代码更能暴露「密度不是概率」这件事的关键。</p>
-<p><strong>手算 1：标准正态在中心处的密度。</strong></p>
+<p>手算 1：标准正态在中心处的密度。</p>
 <p>标准正态的密度函数是</p>
 <div class="arithmatex">\[p(t) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{t^{2}}{2}\right)\]</div>
 <p>把 <span class="arithmatex">\(t = 0\)</span> 代进去：指数部分是 <span class="arithmatex">\(\exp(0) = 1\)</span>，前面的系数是</p>
@@ -8877,11 +8877,11 @@
 <div class="arithmatex">\[p(t) = \frac{1}{s\sqrt{2\pi}}\exp\left(-\frac{(t - m)^{2}}{2s^{2}}\right)\]</div>
 <p>取 <span class="arithmatex">\(m = 0\)</span>、<span class="arithmatex">\(s = 0.2\)</span>，仍然看 <span class="arithmatex">\(t = 0\)</span>：指数部分还是 <span class="arithmatex">\(\exp(0) = 1\)</span>，只剩前面的系数</p>
 <div class="arithmatex">\[p(0) = \frac{1}{s\sqrt{2\pi}} = \frac{1}{0.2 \times 2.506628} = \frac{1}{0.501326} = 1.994711\]</div>
-<p><strong><span class="arithmatex">\(1.994711 \gt 1\)</span></strong> —— 一个「概率」绝不可能大于 <span class="arithmatex">\(1\)</span>，所以它只能叫<strong>密度</strong> ⚠</p>
+<p><strong><span class="arithmatex">\(1.994711 \gt 1\)</span></strong> —— 一个「概率」绝不可能大于 <span class="arithmatex">\(1\)</span>，所以它只能叫<strong>密度</strong></p>
 <p><strong>为什么密度可以这么大</strong>：分布越集中，曲线就抬得越高越窄。
 总面积恒为 <span class="arithmatex">\(1\)</span> 这条约束管的是<strong>曲线下面的面积</strong>，不是<strong>曲线的高度</strong>。
-把同样多的面积挤进更窄的横轴区间里，高度自然就上去了 ✓</p>
-<p><strong>手算 3：密度乘上区间长度，才得到概率。</strong></p>
+把同样多的面积挤进更窄的横轴区间里，高度自然就上去了</p>
+<p>手算 3：密度乘上区间长度，才得到概率。</p>
 <p>在 <span class="arithmatex">\(t = 0\)</span> 附近取一小段宽度 <span class="arithmatex">\(\Delta\)</span>，这一段的面积近似就是「高 <span class="arithmatex">\(\times\)</span> 宽」：</p>
 <table>
 <thead>
@@ -9402,15 +9402,15 @@ L 261.394688 31.306588
 唯一的区别是位置（一个中心在 <span class="arithmatex">\(0\)</span>，一个中心在 <span class="arithmatex">\(2.6\)</span>）。
 方差一旦不同，两条曲线连<strong>胖瘦</strong>都不一样，判决面就会变复杂 ——
 这正是后面「高斯密度下的判别函数」那一页要处理的事情。</p>
-<p><strong>手算 4：离散情形根本不需要这一步。</strong></p>
+<p>手算 4：离散情形根本不需要这一步。</p>
 <p>若某个二值特征在第 1 类上 <span class="arithmatex">\(P(x = 1\mid\omega_1) = 0.7\)</span>，
 那么 <span class="arithmatex">\(P(x = 0\mid\omega_1)\)</span> 由归一化条件立即得到：</p>
 <div class="arithmatex">\[P(x = 0\mid\omega_1) = 1 - P(x = 1\mid\omega_1) = 1 - 0.7 = 0.3\]</div>
-<p>核对：<span class="arithmatex">\(0.3 + 0.7 = 1\)</span> ✓</p>
+<p>核对：<span class="arithmatex">\(0.3 + 0.7 = 1\)</span></p>
 <p>这个 <span class="arithmatex">\(0.7\)</span> <strong>本身就是一个概率</strong>，它不需要乘任何长度。
 理由很朴素：<strong>一个离散取值点没有「长度」可言</strong> ——
 <span class="arithmatex">\(x\)</span> 要么取 <span class="arithmatex">\(1\)</span>、要么取 <span class="arithmatex">\(0\)</span>，中间不存在「介于两者之间的取值」，
-谈不上「落在 <span class="arithmatex">\(1\)</span> 附近多宽的一小段里」 ✓</p>
+谈不上「落在 <span class="arithmatex">\(1\)</span> 附近多宽的一小段里」</p>
 <p><strong>把两条路线并排放在一起看</strong>：</p>
 <table>
 <thead>
@@ -9532,7 +9532,7 @@ L 261.394688 31.306588
 </tbody>
 </table>
 <p><strong>一句话总结</strong>：离散情形<strong>比连续情形更简单</strong> ——
-少了一步「乘区间长度」，因为离散概率本来就是概率 ✓</p>
+少了一步「乘区间长度」，因为离散概率本来就是概率</p>
 <div class="admonition warning">
 <p class="admonition-title">别把两个记号写反</p>
 <p>这两种错误都会实际造成算错：</p>
@@ -9560,7 +9560,7 @@ L 261.394688 31.306588
 </div>
 <h3 id="24">2.4 同两组数字，两种口径各手算一遍<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>下面的对照不用代码，全部手算，目的是看清一件事：
-<strong>两种口径的判决结论完全一致，差别只在连续口径里多乘了一个 <span class="arithmatex">\(\Delta\)</span>。</strong></p>
+两种口径的判决结论完全一致，差别只在连续口径里多乘了一个 <span class="arithmatex">\(\Delta\)</span>。</p>
 <p><strong>第一组：连续口径。</strong></p>
 <p>设定：两类都是一维正态，均值 <span class="arithmatex">\(\mu_1 = 160\)</span>、<span class="arithmatex">\(\mu_2 = 172\)</span>，共用标准差 <span class="arithmatex">\(s = 5\)</span>，
 先验 <span class="arithmatex">\(P(\omega_1) = P(\omega_2) = 0.5\)</span>，区间宽度取 <span class="arithmatex">\(\Delta = 0.02\)</span>。</p>
@@ -9834,7 +9834,7 @@ L 261.394688 31.306588
 <p><strong>「自由参数」这个词要抠一下</strong>：它数的是<strong>可以独立变动的数</strong>的个数，
 不是「纸上写下来的符号」的个数。
 最后一个符号当然还是要写出来的，但它只是一个由前面推出来的结果，
-<strong>不占用一个自由度</strong> ✓</p>
+<strong>不占用一个自由度</strong></p>
 <p><strong>手算核对 <span class="arithmatex">\(d = 3\)</span>（<span class="arithmatex">\(8\)</span> 种组合的情形）</strong>。设八个概率分别是</p>
 <div class="arithmatex">\[a_{000},\ a_{001},\ a_{010},\ a_{011},\ a_{100},\ a_{101},\ a_{110},\ a_{111}\]</div>
 <p>前七个随便取，比如都取 <span class="arithmatex">\(0.1\)</span>（和是 <span class="arithmatex">\(0.7\)</span>），那么第八个只能是</p>
@@ -9854,7 +9854,7 @@ L 261.394688 31.306588
 而不假设独立时两类合计是 <span class="arithmatex">\(2(2^{d} - 1)\)</span>。</p>
 <p><strong>关键对比</strong>：不假设独立时，自由度在 <span class="arithmatex">\(d\)</span> 的<strong>指数</strong>上；
 假设独立之后，自由度落在 <span class="arithmatex">\(d\)</span> 的<strong>一次项</strong>上。
-从「<span class="arithmatex">\(2^{d} - 1\)</span>」到「<span class="arithmatex">\(d\)</span>」这一步，就是维数灾难被压回去的那一刀 ✓</p>
+从「<span class="arithmatex">\(2^{d} - 1\)</span>」到「<span class="arithmatex">\(d\)</span>」这一步，就是维数灾难被压回去的那一刀</p>
 <table>
 <thead>
 <tr>
@@ -10785,7 +10785,7 @@ L 66.649687 28.947422
 <p><strong>看图要看的三个地方</strong>：</p>
 <ul>
 <li>那条<strong>陡直的线</strong>（一般情形 <span class="arithmatex">\(2^{d} - 1\)</span>）在纵轴取了对数之后仍然是直线，
-  说明原函数就是<strong>指数</strong>：<span class="arithmatex">\(d\)</span> 每加 <span class="arithmatex">\(1\)</span>，高度就翻一倍 ⚠</li>
+  说明原函数就是<strong>指数</strong>：<span class="arithmatex">\(d\)</span> 每加 <span class="arithmatex">\(1\)</span>，高度就翻一倍</li>
 <li>那条<strong>几乎躺平、缓慢抬头的线</strong>（条件独立假设 <span class="arithmatex">\(d\)</span>）在对数刻度上几乎不动，
   说明原函数只是<strong>线性</strong>；</li>
 <li>两条线在 <span class="arithmatex">\(d\)</span> 很小时几乎重合（<span class="arithmatex">\(d = 1\)</span> 时都是 <span class="arithmatex">\(1\)</span>、<span class="arithmatex">\(d = 2\)</span> 时是 <span class="arithmatex">\(3\)</span> 与 <span class="arithmatex">\(2\)</span>），
@@ -10867,7 +10867,7 @@ d = 20 时要估 1048575 个参数
 <span class="arithmatex">\(d = 11\)</span> 时是 <span class="arithmatex">\(2^{11} - 1 = 2047\)</span>，比值是</p>
 <div class="arithmatex">\[\frac{2047}{1023} = 2.0010\]</div>
 <p>只比 <span class="arithmatex">\(2\)</span> 大了一丁点 —— 那一丁点来自被减掉的那个 <span class="arithmatex">\(1\)</span>。
-维数越高，减 <span class="arithmatex">\(1\)</span> 越可以忽略，比值就越贴近 <span class="arithmatex">\(2\)</span> ✓</p>
+维数越高，减 <span class="arithmatex">\(1\)</span> 越可以忽略，比值就越贴近 <span class="arithmatex">\(2\)</span></p>
 <p><strong>手算核对样本需求</strong>。<span class="arithmatex">\(d = 20\)</span> 时要估 <span class="arithmatex">\(1048575\)</span> 个参数。
 若要求每个参数平均见到 <span class="arithmatex">\(10\)</span> 个样本才算估得靠谱，需要的样本数是</p>
 <div class="arithmatex">\[1048575 \times 10 = 10485750\]</div>
@@ -10876,7 +10876,7 @@ d = 20 时要估 1048575 个参数
 <p><strong>两百个</strong>。两者差了 <span class="arithmatex">\(52428\)</span> 倍 —— 这就是「同一个问题，换一条假设，可行性完全不同」。</p>
 <p><strong>这说明什么</strong>：<span class="arithmatex">\(2^{d} - 1\)</span> 与 <span class="arithmatex">\(d\)</span> 的差别不是修辞上的夸张，
 它直接决定了<strong>你要准备多少数据</strong>。
-当数据量和参数个数对不上时，模型不是「不太准」，而是<strong>根本估不出来</strong> ⚠
+当数据量和参数个数对不上时，模型不是「不太准」，而是<strong>根本估不出来</strong>
 这就是<strong>维数灾难</strong>最直观的样子，也是下一页所有讨论的起点。</p>
 <h3 id="33">3.3 参数估不出来的具体后果<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>课件明确指出：<span class="arithmatex">\(d\)</span> 一高，参数的<strong>存储和估计</strong>都会出问题。
@@ -10890,7 +10890,7 @@ d = 20 时要估 1048575 个参数
 <p>更糟的是：那些<strong>很少出现</strong>的取值组合，
 要么一次都没见到（概率被估成 <span class="arithmatex">\(0\)</span>），
 要么只见到一两次（概率被估得离谱）。
-这两件事都会让判决严重出错 ⚠</p>
+这两件事都会让判决严重出错</p>
 <div class="admonition warning">
 <p class="admonition-title">维数灾难不是「算得慢」，而是「根本没法估」</p>
 <p>初学者常以为维数高只是「计算量大一点」。
@@ -10919,7 +10919,7 @@ d = 20 时要估 1048575 个参数
 </tbody>
 </table>
 <p>独立假设就是用来<strong>把指数级需求压回线性级</strong>的那一刀。
-它是一笔明确的交易：<strong>用「模型可能不准」换「参数估得出来」</strong> ✓</p>
+它是一笔明确的交易：<strong>用「模型可能不准」换「参数估得出来」</strong></p>
 </div>
 <p><strong>这就是朴素贝叶斯分类器的由来</strong>。
 它的核心假设只有一条：<strong>在给定类别的条件下，各维特征相互独立</strong>。
@@ -10927,20 +10927,20 @@ d = 20 时要估 1048575 个参数
 <h3 id="34">3.4 似然比：从连乘推到线性判别函数<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>现在把独立假设代进判决规则，看它化简成什么样子。
 课件给的路线是<strong>似然比</strong>（likelihood ratio）。</p>
-<p><strong>第一步：写出两个类的类条件概率。</strong></p>
+<p>第一步：写出两个类的类条件概率。</p>
 <p>利用独立性，把 <span class="arithmatex">\(d\)</span> 维的联合概率拆成 <span class="arithmatex">\(d\)</span> 个单独的乘积。
 对第 <span class="arithmatex">\(k\)</span> 维，如果 <span class="arithmatex">\(x_k = 1\)</span>，它贡献因子 <span class="arithmatex">\(p_k\)</span>；
 如果 <span class="arithmatex">\(x_k = 0\)</span>，它贡献因子 <span class="arithmatex">\(1 - p_k\)</span>。用一个式子统一写出来：</p>
 <div class="arithmatex">\[P(x_k\mid\omega_1) = p_k^{\,x_k}\,(1 - p_k)^{\,1 - x_k}\]</div>
-<p><strong>检验一下这个写法</strong>：把 <span class="arithmatex">\(x_k = 1\)</span> 代进去，指数变成 <span class="arithmatex">\(p_k^{1}(1-p_k)^{0} = p_k\)</span> ✓；
-把 <span class="arithmatex">\(x_k = 0\)</span> 代进去，得到 <span class="arithmatex">\(p_k^{0}(1-p_k)^{1} = 1 - p_k\)</span> ✓。
+<p><strong>检验一下这个写法</strong>：把 <span class="arithmatex">\(x_k = 1\)</span> 代进去，指数变成 <span class="arithmatex">\(p_k^{1}(1-p_k)^{0} = p_k\)</span>；
+把 <span class="arithmatex">\(x_k = 0\)</span> 代进去，得到 <span class="arithmatex">\(p_k^{0}(1-p_k)^{1} = 1 - p_k\)</span>。
 所以这个「指数技巧」把两种情况合成了一行 ——
 <span class="arithmatex">\(x_k\)</span> 在指数位置上当开关用。</p>
 <p>于是两个类的类条件概率是：</p>
 <div class="arithmatex">\[P(x\mid\omega_1) = \prod_{k=1}^{d} p_k^{\,x_k}\,(1 - p_k)^{\,1 - x_k},
 \qquad
 P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
-<p><strong>第二步：写出两类情形的判决量。</strong></p>
+<p>第二步：写出两类情形的判决量。</p>
 <p>两类情形只需要一个判别函数，取两个「似然乘先验」的比值再取对数：</p>
 <div class="arithmatex">\[g(x) = \ln\frac{P(x\mid\omega_1)\,P(\omega_1)}{P(x\mid\omega_2)\,P(\omega_2)}\]</div>
 <p><span class="arithmatex">\(g(x) \gt 0\)</span> 判 <span class="arithmatex">\(\omega_1\)</span>，<span class="arithmatex">\(g(x) \lt 0\)</span> 判 <span class="arithmatex">\(\omega_2\)</span>。
@@ -10956,13 +10956,13 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <p>取对数后，连乘变成连加：</p>
 <div class="arithmatex">\[\ln\frac{P(x\mid\omega_1)}{P(x\mid\omega_2)}
 = \sum_{k=1}^{d} \ln\frac{p_k^{\,x_k}(1-p_k)^{1-x_k}}{q_k^{\,x_k}(1-q_k)^{1-x_k}}\]</div>
-<p><strong>第四步：把每一项按 <span class="arithmatex">\(x_k\)</span> 是 <span class="arithmatex">\(0\)</span> 还是 <span class="arithmatex">\(1\)</span> 拆开。</strong></p>
+<p>第四步：把每一项按 <span class="arithmatex">\(x_k\)</span> 是 <span class="arithmatex">\(0\)</span> 还是 <span class="arithmatex">\(1\)</span> 拆开。</p>
 <p>当 <span class="arithmatex">\(x_k = 1\)</span> 时，这一项是 <span class="arithmatex">\(\ln(p_k/q_k)\)</span>；
 当 <span class="arithmatex">\(x_k = 0\)</span> 时，这一项是 <span class="arithmatex">\(\ln\bigl((1-p_k)/(1-q_k)\bigr)\)</span>。
 用和前面同一个技巧（<span class="arithmatex">\(x_k\)</span> 当开关）：</p>
 <div class="arithmatex">\[\ln\frac{p_k^{\,x_k}(1-p_k)^{1-x_k}}{q_k^{\,x_k}(1-q_k)^{1-x_k}}
 = x_k \ln\frac{p_k}{q_k} + (1 - x_k)\ln\frac{1-p_k}{1-q_k}\]</div>
-<p><strong>第五步：把所有项加起来，按 <span class="arithmatex">\(x_k\)</span> 归并。</strong></p>
+<p>第五步：把所有项加起来，按 <span class="arithmatex">\(x_k\)</span> 归并。</p>
 <p>把第 <span class="arithmatex">\(k\)</span> 项拆成「含 <span class="arithmatex">\(x_k\)</span> 的部分」与「不含 <span class="arithmatex">\(x_k\)</span> 的部分」：</p>
 <div class="arithmatex">\[x_k \ln\frac{p_k}{q_k} + \ln\frac{1-p_k}{1-q_k} - x_k\ln\frac{1-p_k}{1-q_k}\]</div>
 <p>（因为 <span class="arithmatex">\((1-x_k)\ln\frac{1-p_k}{1-q_k} = \ln\frac{1-p_k}{1-q_k} - x_k\ln\frac{1-p_k}{1-q_k}\)</span>。）</p>
@@ -11147,13 +11147,13 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <li><span class="arithmatex">\(\sum x_k = 1\)</span> 时 <span class="arithmatex">\(g = -1.362578\)</span>，仍然是 <span class="arithmatex">\(\omega_2\)</span>，但后验升到 <span class="arithmatex">\(0.203822\)</span>；</li>
 <li><span class="arithmatex">\(\sum x_k = 2\)</span> 时 <span class="arithmatex">\(g = 0.023717\)</span>，<strong>刚刚翻转成正</strong>，后验 <span class="arithmatex">\(0.505929\)</span>，
   判 <span class="arithmatex">\(\omega_1\)</span>；</li>
-<li><span class="arithmatex">\(\sum x_k = 3\)</span> 时 <span class="arithmatex">\(g = 1.410011\)</span>，后验 <span class="arithmatex">\(0.803768\)</span>，稳定的 <span class="arithmatex">\(\omega_1\)</span> ✓</li>
+<li><span class="arithmatex">\(\sum x_k = 3\)</span> 时 <span class="arithmatex">\(g = 1.410011\)</span>，后验 <span class="arithmatex">\(0.803768\)</span>，稳定的 <span class="arithmatex">\(\omega_1\)</span></li>
 </ul>
 <p><strong>这组数字有一处值得停下来看</strong>：从 <span class="arithmatex">\(\sum x_k = 2\)</span> 起判决就翻过来了，
 也就是说这个分类器在 <span class="arithmatex">\(\sum x_k = 2\)</span> 处做了一个<strong>非常勉强的</strong>决定 ——
 <span class="arithmatex">\(g = 0.023717\)</span> 只比 <span class="arithmatex">\(0\)</span> 大一点点（后验 <span class="arithmatex">\(0.5059\)</span>）。
 这说明 <span class="arithmatex">\(p_k = 0.8\)</span> 与 <span class="arithmatex">\(q_k = 0.5\)</span> 的差距并不算大，
-<strong>三维还不够让判决变得果断</strong> ⚠</p>
+<strong>三维还不够让判决变得果断</strong></p>
 <p><strong>边界情况要说清</strong>：如果 <span class="arithmatex">\(g(x)\)</span> 恰好等于 <span class="arithmatex">\(0\)</span>，
 就说明两个类的后验相等，<strong>判哪一类都可以</strong>（在最小错误率意义下两者等价）。
 习惯上判给编号小的那一类，但这不是规则要求的。</p>
@@ -11190,7 +11190,7 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <p>第一条尤其要紧。如果直接连乘 <span class="arithmatex">\(d\)</span> 个概率，
 当 <span class="arithmatex">\(d\)</span> 大、每个概率又都小于 <span class="arithmatex">\(1\)</span> 时，乘积会<strong>迅速掉到下溢区</strong>，
 最后变成 <span class="arithmatex">\(0\)</span>。变成 <span class="arithmatex">\(0\)</span> 之后两个类比大小就毫无意义了 ——
-<strong>两边都是 <span class="arithmatex">\(0\)</span>，谁大谁小看不出来</strong> ⚠</p>
+<strong>两边都是 <span class="arithmatex">\(0\)</span>，谁大谁小看不出来</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">下溢不是「精度不够」，而是「判决失效」</p>
 <p>数值下溢最容易被低估的地方在于：它看起来只是「数变小了」，
@@ -11278,12 +11278,12 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 </tbody>
 </table>
 <p><strong>怎么读这张表</strong>：右边两列是<strong>同一件事</strong>的两种写法 ——
-左边那列掉得吓人，右边那列只是普通的负数，量级完全可控 ✓</p>
-<p><strong>手算二：什么时候连乘值被舍成 <span class="arithmatex">\(0\)</span>。</strong></p>
+左边那列掉得吓人，右边那列只是普通的负数，量级完全可控</p>
+<p>手算二：什么时候连乘值被舍成 <span class="arithmatex">\(0\)</span>。</p>
 <p>双精度浮点数能表示的最小正数约为 <span class="arithmatex">\(4.94 \times 10^{-324}\)</span>。
 让指数掉到这个位置以下，连乘值就被舍成 <span class="arithmatex">\(0\)</span>。解一下：</p>
 <div class="arithmatex">\[0.0457575\,d \geq 323.31 \quad\Longrightarrow\quad d \geq 7066\]</div>
-<p>所以<strong>从 <span class="arithmatex">\(d\)</span> 约为 <span class="arithmatex">\(7066\)</span> 起，<span class="arithmatex">\(0.9^{d}\)</span> 在双精度下直接变成 <span class="arithmatex">\(0\)</span></strong> ⚠</p>
+<p>所以<strong>从 <span class="arithmatex">\(d\)</span> 约为 <span class="arithmatex">\(7066\)</span> 起，<span class="arithmatex">\(0.9^{d}\)</span> 在双精度下直接变成 <span class="arithmatex">\(0\)</span></strong></p>
 <p>同样的办法算另外两个底数：</p>
 <table>
 <thead>
@@ -11313,14 +11313,14 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 </table>
 <p><strong>注意第二行</strong>：每维概率只要 <span class="arithmatex">\(0.1\)</span>，<span class="arithmatex">\(324\)</span> 维就连乘归零了。
 而稀疏的二值特征（某维上「取 <span class="arithmatex">\(1\)</span>」本来就很罕见）恰恰会出现很小的概率，
-<strong>这种数据最容易撞上下溢</strong> ⚠</p>
+<strong>这种数据最容易撞上下溢</strong></p>
 <p><strong>手算三：稀疏情形更极端。</strong> 设每维概率都是 <span class="arithmatex">\(10^{-4}\)</span>、<span class="arithmatex">\(d = 100\)</span>：</p>
 <div class="arithmatex">\[\lg\left(10^{-4 \times 100}\right) = -400 \quad\Longrightarrow\quad \left(10^{-4}\right)^{100} = 10^{-400}\]</div>
 <p><span class="arithmatex">\(10^{-400}\)</span> 远小于 <span class="arithmatex">\(10^{-324}\)</span>，<strong>直接就是 <span class="arithmatex">\(0\)</span></strong>。
 而取对数那边是</p>
 <div class="arithmatex">\[100 \times \ln\left(10^{-4}\right) = 100 \times (-9.210340) = -921.034037\]</div>
-<p>一个完全正常的负数 ✓</p>
-<p><strong>手算四：连乘被压平之后，两个类还能不能比大小。</strong></p>
+<p>一个完全正常的负数</p>
+<p>手算四：连乘被压平之后，两个类还能不能比大小。</p>
 <p>这是全页最要紧的一处对比。设两个类很接近：第 1 类每维概率 <span class="arithmatex">\(0.90\)</span>，
 第 2 类每维概率 <span class="arithmatex">\(0.91\)</span>。它们的<strong>对数差</strong>是</p>
 <div class="arithmatex">\[\ln\frac{P(x\mid\omega_2)}{P(x\mid\omega_1)}
@@ -11380,7 +11380,7 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <p><strong>这说明什么</strong>：取对数不是为了「写得好看」，也不是单纯的省事，
 它是在<strong>保住判决本身</strong>。只要还在用「比较两个得分的大小」这套逻辑，
 就必须保证两个得分没有同时被压成同一个数。</p>
-<p><strong>取对数为什么不会改变判决：一句话的代数证明。</strong></p>
+<p>取对数为什么不会改变判决：一句话的代数证明。</p>
 <p>设两类的「似然乘先验」分别是 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(B\)</span>，且 <span class="arithmatex">\(A \gt B \gt 0\)</span>。
 因为 <span class="arithmatex">\(\ln\)</span> 是<strong>单调递增</strong>函数，所以</p>
 <div class="arithmatex">\[A \gt B \quad\Longleftrightarrow\quad \ln A \gt \ln B\]</div>
@@ -11415,10 +11415,10 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 = \ln\frac{0.01287}{0.003898125} = \ln 3.301530 = 1.194403\]</div>
 <p>而路径二的两个得分之差是</p>
 <div class="arithmatex">\[g_1 - g_2 = -4.352857 - (-5.547260) = 1.194403\]</div>
-<p><strong>完全相等</strong>，最后一位也对得上 ✓</p>
+<p><strong>完全相等</strong>，最后一位也对得上</p>
 <p><strong>这就是推导无误的证据</strong>：「先连乘再取对数」与「先逐项取对数再相加」
 是同一件事的两种写法，判决量一个字都没变。</p>
-<p><strong>再核对一件事：取对数之后，每一项的量级是不是真的相近。</strong></p>
+<p>再核对一件事：取对数之后，每一项的量级是不是真的相近。</p>
 <p>把若干典型概率取自然对数，做成一张手算表：</p>
 <table>
 <thead>
@@ -11501,7 +11501,7 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <p><strong>关键区别在最后一行</strong>：乘法会把量级往 <span class="arithmatex">\(0\)</span> 压，而且是<strong>指数地</strong>压；
 加法只会把量级往负数方向<strong>线性</strong>拉。
 <span class="arithmatex">\(d = 8000\)</span> 时，<span class="arithmatex">\(8000\)</span> 个 <span class="arithmatex">\([-3,0]\)</span> 里的数相加，最坏也只是 <span class="arithmatex">\(-24000\)</span> ——
-一个完全正常的双精度数；而同样 <span class="arithmatex">\(8000\)</span> 个小于 <span class="arithmatex">\(1\)</span> 的数相乘，早就归零了 ✓</p>
+一个完全正常的双精度数；而同样 <span class="arithmatex">\(8000\)</span> 个小于 <span class="arithmatex">\(1\)</span> 的数相乘，早就归零了</p>
 <p><strong>这说明什么</strong>：取对数不只是为了防下溢，它还顺带把「每一项的量级彼此相当、
 不会有一项独大」这个性质送给了我们。
 这一条又直接带来两个实用后果：
@@ -11518,7 +11518,7 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 如果第 <span class="arithmatex">\(k\)</span> 维没测到，那就<strong>跳过求和里的第 <span class="arithmatex">\(k\)</span> 项</strong>，
 其余各项照常算。这比「随便填一个平均数」要克制得多 ——
 因为跳过等于承认「这一维不表态」，而填值等于<strong>假造了一个证据</strong> ⚠</p>
-<p><strong>用一个 <span class="arithmatex">\(8\)</span> 维的例子把「每一维单独投票」这件事手算出来。</strong></p>
+<p>用一个 <span class="arithmatex">\(8\)</span> 维的例子把「每一维单独投票」这件事手算出来。</p>
 <p>取一个整齐的设定：第 1 类每一维取 <span class="arithmatex">\(1\)</span> 的概率从 <span class="arithmatex">\(0.60\)</span> 递增到 <span class="arithmatex">\(0.95\)</span>，
 第 2 类从 <span class="arithmatex">\(0.50\)</span> 递减到 <span class="arithmatex">\(0.15\)</span>：</p>
 <table>
@@ -11650,15 +11650,15 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 <span class="arithmatex">\(+0.559616 = 0.289938\)</span>；<span class="arithmatex">\(+0.762140 = 1.052078\)</span>；
 <span class="arithmatex">\(-1.252763 = -0.200685\)</span>；<span class="arithmatex">\(+1.223775 = 1.023090\)</span>；
 <span class="arithmatex">\(+1.504077 = 2.527167\)</span>；<span class="arithmatex">\(-2.833213 = -0.306046\)</span>。</p>
-<p><strong>似然比的对数是 <span class="arithmatex">\(-0.306046 \lt 0\)</span>，判 <span class="arithmatex">\(\omega_2\)</span></strong> ✓</p>
+<p><strong>似然比的对数是 <span class="arithmatex">\(-0.306046 \lt 0\)</span>，判 <span class="arithmatex">\(\omega_2\)</span></strong></p>
 <p><strong>每一项的量级都在个位数以内</strong>，没有哪一项压倒性地大 ——
-这正是前面说的「各项量级相近、可以单独比较」的意思 ✓</p>
+这正是前面说的「各项量级相近、可以单独比较」的意思</p>
 <p><strong>再看「跳过缺失维」会发生什么。</strong> 假设第 <span class="arithmatex">\(4\)</span> 维没测到，
 按前面的说法，把它的贡献<strong>整项拿掉</strong>，其余七项照算：</p>
 <div class="arithmatex">\[-0.306046 - 0.762140 = -1.068186\]</div>
 <p><strong>两个数的差恰好是被拿掉那一维的贡献</strong>：</p>
 <div class="arithmatex">\[(-0.306046) - (-1.068186) = 0.762140\]</div>
-<p>与上表第 <span class="arithmatex">\(4\)</span> 行的 <span class="arithmatex">\(+0.762140\)</span> 逐位相同 ✓</p>
+<p>与上表第 <span class="arithmatex">\(4\)</span> 行的 <span class="arithmatex">\(+0.762140\)</span> 逐位相同</p>
 <p><strong>这个差值说明了两件事</strong>：</p>
 <table>
 <thead>
@@ -11686,7 +11686,7 @@ P(x\mid\omega_2) = \prod_{k=1}^{d} q_k^{\,x_k}\,(1 - q_k)^{\,1 - x_k}\]</div>
 更强烈地支持 <span class="arithmatex">\(\omega_2\)</span>）。所以「跳过」不是免费的 ——
 它等价于<strong>假设缺失的那一维平均而言不提供任何信息</strong>。
 如果某一维的缺失本身就和类别相关（比如病情重的人更少做某项检查），
-这个假设就会引入偏差 ⚠</p>
+这个假设就会引入偏差</p>
 <h3 id="37">3.7 独立性假设不成立时会怎样<a class="headerlink" href="#37" title="Permanent link">&para;</a></h3>
 <p>前面所有推导都挂在一个假设上：<strong>给定类别后，各维特征相互独立</strong>。
 这个假设什么时候会不成立？</p>
@@ -11833,13 +11833,13 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
   所以把它们当独立证据在逻辑上就是错的；</li>
 <li><span class="arithmatex">\(x = (1,1)\)</span> 时，两列口径给出的后验是 <span class="arithmatex">\(0.828256\)</span>，
   而正确做法只有 <span class="arithmatex">\(0.332061\)</span> ——
-  <strong>两倍以上的过度自信</strong> ⚠
+  <strong>两倍以上的过度自信</strong>
   （<span class="arithmatex">\(0.332061\)</span> 超过 <span class="arithmatex">\(0.5\)</span> 吗？没有，
   所以两列口径会把这一样本判成第 1 类，而正确口径会判成第 2 类，
   <strong>判决方向直接相反</strong>）</li>
 <li><span class="arithmatex">\(x = (0,0)\)</span> 时反过来：两列口径 <span class="arithmatex">\(0.000720\)</span>，一列口径 <span class="arithmatex">\(0.006041\)</span> ——
   同样是两列口径更极端；</li>
-<li>最后一行是量化结果：<strong>测试集错误率被放大了 <span class="arithmatex">\(2.0\)</span> 倍</strong> ✓</li>
+<li>最后一行是量化结果：<strong>测试集错误率被放大了 <span class="arithmatex">\(2.0\)</span> 倍</strong></li>
 </ul>
 <p><strong>结论</strong>：独立性假设<strong>不是形式上的装饰</strong>，
 它一旦不成立，朴素贝叶斯会给出<strong>系统性偏向极端</strong>的后验，
@@ -11848,7 +11848,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p>一个实用的自检办法：如果两个特征之间的相关性很强，
 或者本来就是从同一个源派生出来的，
 <strong>就不要把它们当成两个独立证据</strong> ——
-要么合并成一个，要么只保留一个 ✓</p>
+要么合并成一个，要么只保留一个</p>
 <h3 id="38">3.8 一个完整的二值特征手算例子<a class="headerlink" href="#38" title="Permanent link">&para;</a></h3>
 <p>前面都是拿课件的例子。这里从头设计一个，<strong>每一步都手算到底</strong>，
 每一步都写清用了哪条公式。</p>
@@ -11909,7 +11909,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 </tr>
 </tbody>
 </table>
-<p><strong>先验与类条件概率都定完了，接下来纯手算。</strong></p>
+<p>先验与类条件概率都定完了，接下来纯手算。</p>
 <p><strong>第一步：算每一维的权。</strong></p>
 <div class="arithmatex">\[w_1 = \ln\frac{p_1(1 - q_1)}{q_1(1 - p_1)}
 = \ln\frac{0.9 \times 0.5}{0.5 \times 0.1}
@@ -11931,7 +11931,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p><strong>怎么读</strong>：<span class="arithmatex">\(w_0 = -3.267666\)</span> 是<strong>负数且绝对值很大</strong>。
 它意味着：如果两个特征都不表态（都不取 <span class="arithmatex">\(1\)</span>），
 <span class="arithmatex">\(g(x) = -3.267666 \lt 0\)</span>，<strong>判「不出门」</strong>。
-这与先验一致 —— 「不出门」的先验是 <span class="arithmatex">\(0.6\)</span>，占多数 ✓</p>
+这与先验一致 —— 「不出门」的先验是 <span class="arithmatex">\(0.6\)</span>，占多数</p>
 <p><strong>第三步：逐个组合手算判决。</strong></p>
 <p>判别函数是</p>
 <div class="arithmatex">\[g(x) = 2.197225\,x_1 + 2.233592\,x_2 - 3.267666\]</div>
@@ -11946,8 +11946,8 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p><strong>判「不出门」</strong>。（晴天一个人也不够。）</p>
 <p><strong>组合四</strong>：<span class="arithmatex">\(x = (1, 1)\)</span>，晴天且周末</p>
 <div class="arithmatex">\[g = 2.197225 + 2.233592 - 3.267666 = 1.163151 \gt 0\]</div>
-<p><strong>判「出门」</strong> ✓</p>
-<p><strong>第四步：验一个后验概率，把「判决」和「概率」对上。</strong></p>
+<p><strong>判「出门」</strong></p>
+<p>第四步：验一个后验概率，把「判决」和「概率」对上。</p>
 <p>再看 <span class="arithmatex">\(x = (1, 1)\)</span>。先算两个类的类条件概率（用独立假设）：</p>
 <div class="arithmatex">\[P(x\mid\omega_1) = p_1^{1}(1-p_1)^{0} \cdot p_2^{1}(1-p_2)^{0}
 = 0.9 \times 0.8 = 0.72\]</div>
@@ -11959,7 +11959,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p><strong>怎么读</strong>：看到「晴天且周末」之后，「出门」的概率从先验的 <span class="arithmatex">\(0.4\)</span>
 升到 <span class="arithmatex">\(0.761905\)</span> —— <strong>两个证据把它推过了 <span class="arithmatex">\(0.5\)</span> 这条线</strong> ✓</p>
 <p><strong>第五步：核对。</strong>
-<strong>第五步：把四个组合排成一张表，并核对三条路径是否给出同一个数。</strong></p>
+第五步：把四个组合排成一张表，并核对三条路径是否给出同一个数。</p>
 <p>上面每一步都是手算的。把四个组合的类条件概率、后验、判别函数值列在一起：</p>
 <table>
 <thead>
@@ -12014,7 +12014,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <div class="arithmatex">\[P(\omega_1\mid x) = \frac{a}{a + b} = \frac{0.288}{0.288 + 0.09} = \frac{0.288}{0.378} = 0.761905\]</div>
 <p><strong>判决函数值 <span class="arithmatex">\(g\)</span> 是怎么手算的</strong>：<span class="arithmatex">\(g = \ln(a/b)\)</span>，</p>
 <div class="arithmatex">\[g = \ln\frac{0.288}{0.09} = \ln 3.2 = 1.163151\]</div>
-<p><strong>现在证明「后验」和「判别函数」本来就是一回事。</strong>
+<p>现在证明「后验」和「判别函数」本来就是一回事。
 把上面两个式子放在一起看：</p>
 <div class="arithmatex">\[P = \frac{a}{a + b}, \qquad g = \ln\frac{a}{b}\]</div>
 <p>先算几率（后验除以「非后验」）：</p>
@@ -12241,7 +12241,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 再往前的就不管了。这就是「一阶马尔可夫假设」。
 它把 <span class="arithmatex">\(P(\boldsymbol{\omega})\)</span> 需要的参数从「所有 <span class="arithmatex">\(c^{n}\)</span> 种序列的组合」
 压回到「<span class="arithmatex">\(c\)</span> 个初始概率 <span class="arithmatex">\(+\)</span> <span class="arithmatex">\(c \times c\)</span> 个转移概率」——
-又是一次「用假设换可行性」的交易 ✓</p>
+又是一次「用假设换可行性」的交易</p>
 <p><strong>路线二是本页后半部分的重点</strong>，课件对它的原话是
 「<strong>多个分类器的决策当作多维特征，Bayes 方法重新分类</strong>」。
 这条路线的输入不是原始观测，而是<strong>第一层的判决结果</strong>。
@@ -12277,7 +12277,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p><strong>第二层</strong>：把第一层的 <span class="arithmatex">\(K\)</span> 个判决结果 <span class="arithmatex">\(e_1, \dots, e_K\)</span>
 拼成一个 <span class="arithmatex">\(K\)</span> 维<strong>离散</strong>特征向量，再套一次贝叶斯判决。</p>
 <p><strong>为什么这一步能套前面的方法</strong>：因为 <span class="arithmatex">\(e_k\)</span> 是<strong>离散</strong>的
-（取值就是类别标号），正好对上本页第一部分讲的内容 ✓</p>
+（取值就是类别标号），正好对上本页第一部分讲的内容</p>
 <h3 id="52">5.2 关键：这是「判决的融合」，不是「数据的融合」<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p>这一点<strong>必须讲清，否则整个框架会被理解偏</strong> ⚠</p>
 <table>
@@ -12305,7 +12305,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 </tbody>
 </table>
 <p><strong>两层结构做的是决策融合</strong> —— 数据在第一层就已经被消化成判决了。
-课件的表述是「多个分类器的决策当作多维特征」，说的正是这件事 ✓</p>
+课件的表述是「多个分类器的决策当作多维特征」，说的正是这件事</p>
 <p>课件在这一点上还给了一句重要的<strong>限定</strong>：
 多分类器融合（Ensemble learning）与复合模式识别类似，
 但要<strong>注意「通常情况下，这是同一个模式的不同分类结果，而不是多个模式」</strong>。</p>
@@ -12389,7 +12389,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 另一个是「<span class="arithmatex">\(99\%\)</span> 几乎肯定是第 1 类」。
 <strong>硬判决把两者完全等同</strong> —— 都只是一票。
 而如果第一层输出的是后验概率，
-第二层就能知道「这一票的份量有多重」 ✓</p>
+第二层就能知道「这一票的份量有多重」</p>
 <p>课件也提示了这个改进方向：
 多分类器融合还可以<strong>把分类器输出的判别函数值或排序作为重新分类的特征</strong>，
 设计一个新的分类器（Meta-classifier）。
@@ -12423,7 +12423,7 @@ x = [0, 0]：两列当独立证据 → 后验 0.000720；只用一列 → 后验
 <p>判断标准：<strong>第二层的特征维数应该等于「部分的个数」，
 而不是「每个部分的特征个数」</strong>。</p>
 <p>还有一个相关的误区：以为分层一定能提高准确率。
-这也不是自动成立的 —— 见下一节 ✓</p>
+这也不是自动成立的 —— 见下一节</p>
 </div>
 <hr />
 <h2 id="_6">六、第二层的贝叶斯判决<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -12631,14 +12631,14 @@ K = 12 时，完全联合要估 531440 个参数
 <p><strong>待判样本</strong>：五个部分的判决向量是</p>
 <div class="arithmatex">\[e = (0, 0, 2, 0, 0)\]</div>
 <p>（用 <span class="arithmatex">\(0,1,2\)</span> 表示三个类别标号。注意<strong>第 3 部分投的是第 3 类</strong>，与其余四个都不同。）</p>
-<p><strong>手算第一步：把连乘换成连加。</strong>
+<p>手算第一步：把连乘换成连加。
 第二层的判决规则里是「先验 <span class="arithmatex">\(\times\)</span> 各部分似然」的连乘。
 对每个类别取对数，连乘就变成连加：</p>
 <div class="arithmatex">\[G(\omega_i) = \ln P(\omega_i) + \sum_{k=1}^{5}\ln P(e_k \mid \omega_i)\]</div>
 <p><strong>手算起点（先验的对数）</strong>：</p>
 <div class="arithmatex">\[\ln 0.5 = -0.693147, \qquad \ln 0.3 = -1.203973, \qquad \ln 0.2 = -1.609438\]</div>
 <p>四舍五入到 4 位是 <span class="arithmatex">\(-0.6931\)</span>、<span class="arithmatex">\(-1.2040\)</span>、<span class="arithmatex">\(-1.6094\)</span>。</p>
-<p><strong>手算第二步：一项一项往上加。</strong>
+<p>手算第二步：一项一项往上加。
 每一步要加的三个数就是 <span class="arithmatex">\(\ln P(e_k \mid \omega_i)\)</span>，<span class="arithmatex">\(i = 1,2,3\)</span>。
 这些数值同样是<strong>已给定</strong>的（由上面那张混淆矩阵取对数得到）：</p>
 <table>
@@ -12967,7 +12967,7 @@ K = 12 时，完全联合要估 531440 个参数
 <span class="arithmatex">\(\mathrm{logit}\)</span> 把「概率」翻译成「证据强度」，<span class="arithmatex">\(0.5\)</span> 对应 <span class="arithmatex">\(0\)</span>（不表态），
 越靠近 <span class="arithmatex">\(1\)</span> 越正、越靠近 <span class="arithmatex">\(0\)</span> 越负；
 <span class="arithmatex">\(\sigma\)</span> 是它的反函数，把证据强度换回概率 ✓</p>
-<p><strong>先手算几个对数几率，后面三个情形都要用到它们。</strong></p>
+<p>先手算几个对数几率，后面三个情形都要用到它们。</p>
 <p>对数几率定义为 <span class="arithmatex">\(\mathrm{logit}(v) = \ln\frac{v}{1 - v}\)</span>，逐个数手算：</p>
 <table>
 <thead>
@@ -13014,7 +13014,7 @@ K = 12 时，完全联合要估 531440 个参数
 越靠近 <span class="arithmatex">\(1\)</span> 越正，越靠近 <span class="arithmatex">\(0\)</span> 越负；
 而且<strong>远离 <span class="arithmatex">\(0.5\)</span> 一点点，对数几率变化很小</strong>（<span class="arithmatex">\(0.48\)</span> 只有 <span class="arithmatex">\(-0.080043\)</span>），
 <strong>远离得多了才迅速变大</strong>（<span class="arithmatex">\(0.99\)</span> 达到 <span class="arithmatex">\(4.595120\)</span>）✓</p>
-<p><strong>情形一：五个部分全都只是勉强支持第 1 类（后验都是 <span class="arithmatex">\(0.55\)</span>）。</strong></p>
+<p>情形一：五个部分全都只是勉强支持第 1 类（后验都是 <span class="arithmatex">\(0.55\)</span>）。</p>
 <p>软判决把五个对数几率相加（先验相等，起点为 <span class="arithmatex">\(0\)</span>）：</p>
 <div class="arithmatex">\[z = 5 \times 0.200671 = 1.003353\]</div>
 <p>再用 <span class="arithmatex">\(\sigma(z) = \frac{1}{1 + e^{-z}}\)</span> 换回概率。先算 <span class="arithmatex">\(e^{-1.003353}\)</span>：</p>
@@ -13025,7 +13025,7 @@ K = 12 时，完全联合要估 531440 个参数
 <strong>但票数看不出这五份证据每一份都很弱</strong> ⚠
 五份「<span class="arithmatex">\(0.55\)</span>」的证据加在一起，只把后验推到 <span class="arithmatex">\(0.73\)</span>，
 离「<span class="arithmatex">\(5\)</span> 票对 <span class="arithmatex">\(0\)</span> 票」给人的印象差得很远。</p>
-<p><strong>情形二：一个部分很自信（<span class="arithmatex">\(0.99\)</span>），两个部分几乎不表态（<span class="arithmatex">\(0.48\)</span>）。</strong></p>
+<p>情形二：一个部分很自信（<span class="arithmatex">\(0.99\)</span>），两个部分几乎不表态（<span class="arithmatex">\(0.48\)</span>）。</p>
 <p>这一例最精彩 —— 两种做法会给出<strong>相反</strong>的判决。</p>
 <p>软判决：先把三个后验换成对数几率，</p>
 <div class="arithmatex">\[\mathrm{logit}(0.99) = 4.595120, \qquad
@@ -13060,13 +13060,13 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>同一个输入，两种做法判决相反。</strong></p>
+<p>同一个输入，两种做法判决相反。</p>
 <p>哪一个更可信？<strong>软判决</strong> ——
 因为那两份 <span class="arithmatex">\(0.48\)</span> 的证据几乎不表态。
 <span class="arithmatex">\(0.48\)</span> 对应的对数几率只有 <span class="arithmatex">\(-0.080043\)</span>，非常接近 <span class="arithmatex">\(0\)</span>，
 它们与「不表态」（<span class="arithmatex">\(0.5\)</span>）的差距小得可以忽略。
 把它们当成两张<strong>坚定的反对票</strong>，显然曲解了原意 ⚠</p>
-<p><strong>情形三：硬判决要把一票折算成证据强度，必须先假定一个准确率。</strong></p>
+<p>情形三：硬判决要把一票折算成证据强度，必须先假定一个准确率。</p>
 <p>硬判决只知道「投了 <span class="arithmatex">\(\omega_1\)</span>」这一件事，想知道这一票有多重，
 就得额外假定「这个分类器的准确率是多少」：</p>
 <table>
@@ -13169,7 +13169,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p><strong>判 <span class="arithmatex">\(\omega_1\)</span></strong>。</p>
 <p><strong>这一问最值得注意</strong>：依然是判 <span class="arithmatex">\(\omega_1\)</span>，
 但 <span class="arithmatex">\(g\)</span> 从原来的 <span class="arithmatex">\(1.410011\)</span> 掉到 <span class="arithmatex">\(0.023717\)</span> ——
-<strong>几乎贴在决策面上</strong> ⚠
+<strong>几乎贴在决策面上</strong>
 也就是说，先验把 <span class="arithmatex">\(\omega_1\)</span> 压到 <span class="arithmatex">\(0.2\)</span> 之后，
 「三维全取 <span class="arithmatex">\(1\)</span>」这个相当强的证据才<strong>刚刚够</strong>翻过判决线。</p>
 <p><strong>(d) 对判决面的影响</strong></p>
@@ -13200,7 +13200,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p>因为 <span class="arithmatex">\(\ln\frac{P(\omega_1)}{P(\omega_2)}\)</span> 从 <span class="arithmatex">\(0\)</span> 变成 <span class="arithmatex">\(-1.386294\)</span>，
 相当于给 <span class="arithmatex">\(\omega_1\)</span> 的得分<strong>扣掉 <span class="arithmatex">\(1.386294\)</span> 分</strong>，
 那么 <span class="arithmatex">\(\omega_1\)</span> 就必须靠更多的 <span class="arithmatex">\(x_k = 1\)</span> 才能补回来 ✓</p>
-<p><strong>用一张手算对照表把两种先验下的结果并排看。</strong></p>
+<p>用一张手算对照表把两种先验下的结果并排看。</p>
 <p>表里每一格都写清算法，方便逐项核对：</p>
 <table>
 <thead>
@@ -13326,7 +13326,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p>再加先验、归一化：</p>
 <div class="arithmatex">\[P(\omega_1\mid x) = \frac{0.324 \times 0.7}{0.324 \times 0.7 + 0.024 \times 0.3}
 = \frac{0.2268}{0.2268 + 0.0072} = \frac{0.2268}{0.234} = 0.969231\]</div>
-<p><strong>后验 <span class="arithmatex">\(0.969231 \gt 0.5\)</span>，判 <span class="arithmatex">\(\omega_1\)</span></strong>，与 (b) 一致 ✓</p>
+<p><strong>后验 <span class="arithmatex">\(0.969231 \gt 0.5\)</span>，判 <span class="arithmatex">\(\omega_1\)</span></strong>，与 (b) 一致</p>
 <p><strong>核对两个口径的关系</strong>：对数几率应当等于 <span class="arithmatex">\(g(x)\)</span>。检验：</p>
 <div class="arithmatex">\[\ln\frac{0.969231}{1 - 0.969231} = \ln\frac{0.969231}{0.030769}
 = \ln 31.5 = 3.449988\]</div>
@@ -13338,7 +13338,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p>再加上先验比</p>
 <div class="arithmatex">\[\ln\frac{0.7}{0.3} = \ln 2.333333 = 0.847298\]</div>
 <div class="arithmatex">\[2.602690 + 0.847298 = 3.449988\]</div>
-<p><strong>三条路径（线性形式、后验反推、似然比 <span class="arithmatex">\(+\)</span> 先验比）给出同一个数</strong> ✓
+<p><strong>三条路径（线性形式、后验反推、似然比 <span class="arithmatex">\(+\)</span> 先验比）给出同一个数</strong>
 这就是判别函数推导正确的最直接证据。</p>
 <p><strong>(d) 哪一维判别能力最强</strong></p>
 <p>看权的绝对值：</p>
@@ -13370,10 +13370,10 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </table>
 <p><strong>第 1 维最强</strong>：<span class="arithmatex">\(p_1 = 0.9\)</span> 与 <span class="arithmatex">\(q_1 = 0.2\)</span> 差了 <span class="arithmatex">\(0.7\)</span>，
 是三维里两类差距最大的。而且 <span class="arithmatex">\(w_1 \gt 0\)</span>，
-说明<strong>第 1 维取 <span class="arithmatex">\(1\)</span> 强烈支持 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</p>
+说明<strong>第 1 维取 <span class="arithmatex">\(1\)</span> 强烈支持 <span class="arithmatex">\(\omega_1\)</span></strong></p>
 <p><strong>第 2 维是负的</strong>，这一点要特别说明：
 <span class="arithmatex">\(p_2 = 0.4 \lt q_2 = 0.6\)</span>，
-所以<strong>第 2 维取 <span class="arithmatex">\(1\)</span> 反而支持 <span class="arithmatex">\(\omega_2\)</span></strong> ⚠
+所以<strong>第 2 维取 <span class="arithmatex">\(1\)</span> 反而支持 <span class="arithmatex">\(\omega_2\)</span></strong>
 如果只看「取 <span class="arithmatex">\(1\)</span> 的个数」不加权，就会把这一维的方向完全搞反。</p>
 <p><strong>一般规律</strong>：</p>
 <table>
@@ -13402,7 +13402,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>把三条路径的数值排成一张手算对照表，逐项核对。</strong></p>
+<p>把三条路径的数值排成一张手算对照表，逐项核对。</p>
 <p>先算每一维各自的<strong>贡献</strong>（对数似然比在该维上的份额）：</p>
 <table>
 <thead>
@@ -13453,7 +13453,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p><strong>注意第 2 维</strong>：<span class="arithmatex">\(x_2 = 0\)</span>，所以用的是「取 <span class="arithmatex">\(0\)</span>」的比值 <span class="arithmatex">\((1-p_2)/(1-q_2)\)</span>，
 而不是 <span class="arithmatex">\(p_2/q_2\)</span>。它的贡献<strong>是正的</strong>，因为
 <span class="arithmatex">\(1-p_2 = 0.6 \gt 1-q_2 = 0.4\)</span> ——
-<strong>第 2 维「不出现」反而支持 <span class="arithmatex">\(\omega_1\)</span></strong> ⚠
+<strong>第 2 维「不出现」反而支持 <span class="arithmatex">\(\omega_1\)</span></strong>
 （这一点与 <span class="arithmatex">\(w_2 \lt 0\)</span> 并不矛盾：<span class="arithmatex">\(w_2\)</span> 衡量的是「取 <span class="arithmatex">\(1\)</span>」的方向，
 而这里算的是「取 <span class="arithmatex">\(0\)</span>」的贡献，两者方向本来就相反。）</p>
 <p>加上先验比 <span class="arithmatex">\(\ln\frac{0.7}{0.3} = 0.847298\)</span>：</p>
@@ -13486,12 +13486,12 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tbody>
 </table>
 <p><strong>三条路径给出同一个数</strong>（末位差 <span class="arithmatex">\(10^{-6}\)</span> 来自四舍五入），
-这就是判别函数推导正确的最直接证据 ✓</p>
+这就是判别函数推导正确的最直接证据</p>
 <p><strong>为什么必然一致</strong>：后两行算的都是 <span class="arithmatex">\(\ln\frac{a}{b}\)</span>（<span class="arithmatex">\(a\)</span>、<span class="arithmatex">\(b\)</span> 是两类的似然乘先验），
 而第一行的 <span class="arithmatex">\(g\)</span> 本来就是这个对数比的展开式 ——
 两者相等是恒等式，不是巧合。</p>
 <p><strong>归纳出一条通用结论</strong>：逐维贡献相加就等于总的似然比对数。
-所以<strong>不需要先连乘再比较</strong>，把每一维的贡献算出来加起来就够了 ✓</p>
+所以<strong>不需要先连乘再比较</strong>，把每一维的贡献算出来加起来就够了</p>
 </details>
 <h3 id="3">例题 3：多数表决什么时候会帮倒忙<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>某任务需要融合 <span class="arithmatex">\(n\)</span> 个判决。</p>
@@ -13557,18 +13557,18 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>整体正确率 <span class="arithmatex">\(0.682560\)</span></strong> —— 又涨了 <span class="arithmatex">\(0.03456\)</span> ✓</p>
+<p><strong>整体正确率 <span class="arithmatex">\(0.682560\)</span></strong> —— 又涨了 <span class="arithmatex">\(0.03456\)</span></p>
 <p>对比一下：<span class="arithmatex">\(0.6 \to 0.648 \to 0.682560\)</span>，
 <strong>确实随 <span class="arithmatex">\(n\)</span> 上升</strong>，而且上升的幅度在变小。</p>
 <p><strong>&copy; 完全相关、<span class="arithmatex">\(n = 101\)</span></strong></p>
-<p><strong>整体正确率仍然是 <span class="arithmatex">\(0.6\)</span></strong>，与 <span class="arithmatex">\(n = 1\)</span> 完全一样 ⚠</p>
+<p><strong>整体正确率仍然是 <span class="arithmatex">\(0.6\)</span></strong>，与 <span class="arithmatex">\(n = 1\)</span> 完全一样</p>
 <p>理由：完全相关意味着 <span class="arithmatex">\(101\)</span> 个判决<strong>永远给出同一个答案</strong>。
 要么 <span class="arithmatex">\(101\)</span> 票全对，要么 <span class="arithmatex">\(101\)</span> 票全错。
 多数表决的结果就是那唯一的一个答案，
 所以正确率就是单个判决的正确率 <span class="arithmatex">\(0.6\)</span>。
 <strong><span class="arithmatex">\(n\)</span> 从 <span class="arithmatex">\(1\)</span> 涨到 <span class="arithmatex">\(101\)</span>，一点改善都没有。</strong></p>
 <p><strong>(d) <span class="arithmatex">\(p = 0.45 \lt 0.5\)</span> 时会怎样</strong></p>
-<p><strong>越来越差</strong> ⚠</p>
+<p><strong>越来越差</strong></p>
 <p>直觉：多数表决放大的是「群体的倾向」。
 <span class="arithmatex">\(p = 0.45\)</span> 说明群体整体偏错，
 放大之后整体正确率<strong>趋向 <span class="arithmatex">\(0\)</span></strong>。</p>
@@ -13627,7 +13627,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>把三种 <span class="arithmatex">\(p\)</span> 在同一批 <span class="arithmatex">\(n\)</span> 上的结果手算出来，并排比较。</strong></p>
+<p>把三种 <span class="arithmatex">\(p\)</span> 在同一批 <span class="arithmatex">\(n\)</span> 上的结果手算出来，并排比较。</p>
 <p><span class="arithmatex">\(p = 0.45\)</span> 这一列的每一格都用同一个公式
 <span class="arithmatex">\(P = \sum_{k=\lceil n/2\rceil}^{n}\binom{n}{k}p^{k}(1-p)^{n-k}\)</span> 手算，
 只是代入的 <span class="arithmatex">\(p\)</span> 不同：</p>
@@ -13751,7 +13751,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>(a) 按朴素贝叶斯融合会发生什么</strong></p>
+<p>(a) 按朴素贝叶斯融合会发生什么</p>
 <p>朴素贝叶斯会把 <span class="arithmatex">\(4\)</span> 项<strong>全部</strong>当成独立证据连乘：</p>
 <div class="arithmatex">\[P(\omega_i)\prod_{k=1}^{4}P(e_k\mid\omega_i)\]</div>
 <p>问题在于那 <span class="arithmatex">\(2\)</span> 个高度相关的读数：
@@ -13888,7 +13888,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>把上面的判断用具体数字手算一遍。</strong></p>
+<p>把上面的判断用具体数字手算一遍。</p>
 <p>设从验证数据上估出三个数（已给定）：</p>
 <div class="arithmatex">\[P(\omega_1) = 0.05, \qquad P(e = 1\mid\omega_1) = 0.9, \qquad P(e = 1\mid\omega_2) = 0.1\]</div>
 <p>前两项是同一台仪器的相近读数（记为 <span class="arithmatex">\(s\)</span>，两列完全相同），
@@ -13973,10 +13973,10 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p><span class="arithmatex">\(P(x\mid\omega_1)\)</span> 在连续情形下是<strong>概率密度</strong>，
 它<strong>不是概率</strong>，可以大于 <span class="arithmatex">\(1\)</span>。</p>
 <p>举个算过的例子：标准差 <span class="arithmatex">\(0.2\)</span> 的正态分布在中心处的密度是 <span class="arithmatex">\(1.994711\)</span>。
-一个「概率」不可能大于 <span class="arithmatex">\(1\)</span>，所以它显然不是概率 ✓</p>
+一个「概率」不可能大于 <span class="arithmatex">\(1\)</span>，所以它显然不是概率</p>
 <p>要说成「概率」，必须写成「<span class="arithmatex">\(x\)</span> 落在某个小区间里的概率」，
 也就是 <span class="arithmatex">\(p(x\mid\omega_1)\Delta\)</span>。</p>
-<p><strong>(b) 离散情形：说法对</strong> ✓</p>
+<p><strong>(b) 离散情形：说法对</strong></p>
 <p>离散时 <span class="arithmatex">\(P(x\mid\omega_1)\)</span> 就是「变量取到<strong>这一个具体值</strong>的概率」，
 它确实是一个概率，必在 <span class="arithmatex">\([0,1]\)</span> 之间，
 而且对同一变量的所有取值求和必须等于 <span class="arithmatex">\(1\)</span>。</p>
@@ -14007,20 +14007,20 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p><strong>为什么</strong>：<span class="arithmatex">\(g(x)\)</span> 是「<span class="arithmatex">\(\omega_1\)</span> 的得分除以 <span class="arithmatex">\(\omega_2\)</span> 的得分」再取对数。
 若 <span class="arithmatex">\(g(x) \gt 0\)</span>，说明分子大于分母，即
 <span class="arithmatex">\(P(x\mid\omega_1)P(\omega_1) \gt P(x\mid\omega_2)P(\omega_2)\)</span>，
-按判决规则应判 <span class="arithmatex">\(\omega_1\)</span> ✓</p>
-<p><strong>把三小问的判据手算列成一张表。</strong></p>
+按判决规则应判 <span class="arithmatex">\(\omega_1\)</span></p>
+<p>把三小问的判据手算列成一张表。</p>
 <p><strong>(a) 连续情形</strong>：密度能不能大于 <span class="arithmatex">\(1\)</span>，手算一个就够。
 取 <span class="arithmatex">\(m = 0\)</span>、<span class="arithmatex">\(s = 0.2\)</span>、<span class="arithmatex">\(t = 0\)</span>：</p>
 <div class="arithmatex">\[p(0) = \frac{1}{0.2 \times \sqrt{2\pi}} = \frac{1}{0.2 \times 2.506628} = 1.994711\]</div>
 <p><span class="arithmatex">\(1.994711 \gt 1\)</span>，<strong>所以它不可能是概率</strong> ✗
 要变成概率还得乘区间长度，例如乘 <span class="arithmatex">\(\Delta = 0.01\)</span>：</p>
 <div class="arithmatex">\[1.994711 \times 0.01 = 0.019947\]</div>
-<p>这才是一个合法的概率值 ✓</p>
+<p>这才是一个合法的概率值</p>
 <p><strong>(b) 离散情形</strong>：手算一个二值分布。
 设 <span class="arithmatex">\(P(x=0\mid\omega_1) = 0.3\)</span>、<span class="arithmatex">\(P(x=1\mid\omega_1) = 0.7\)</span>，则</p>
 <div class="arithmatex">\[0.3 + 0.7 = 1.0\]</div>
 <p>两个数都在 <span class="arithmatex">\([0,1]\)</span> 内、加起来等于 <span class="arithmatex">\(1\)</span> ——
-<strong>它本身就是概率</strong> ✓</p>
+<strong>它本身就是概率</strong></p>
 <p><strong>&copy; 判决规则</strong>：<span class="arithmatex">\(g(x)\)</span> 的符号与判类一一对应：</p>
 <table>
 <thead>
@@ -14050,7 +14050,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </table>
 <p><strong>中间那一行最容易被忽略</strong>：<span class="arithmatex">\(g = 0\)</span> 意味着 <span class="arithmatex">\(\frac{a}{b} = e^{0} = 1\)</span>，
 也就是 <span class="arithmatex">\(a = b\)</span>，两类后验都是 <span class="arithmatex">\(0.5\)</span>，
-在最小错误率意义下<strong>判哪一类都等价</strong> ⚠
+在最小错误率意义下<strong>判哪一类都等价</strong>
 习惯上判编号小的那一类，但这不是规则的要求。</p>
 </details>
 <p><strong>Q2</strong> 某两类问题，<span class="arithmatex">\(d = 3\)</span> 个二值特征，
@@ -14083,12 +14083,12 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 令 <span class="arithmatex">\(g \gt 0\)</span>：</p>
 <div class="arithmatex">\[1.252763\sum_k x_k \gt 2.079442
 \quad\Longrightarrow\quad \sum_k x_k \gt \frac{2.079442}{1.252763} = 1.659884\]</div>
-<p>所以需要 <span class="arithmatex">\(\sum_k x_k \geq 2\)</span>，也就是<strong>至少两维取 <span class="arithmatex">\(1\)</span></strong> ✓</p>
+<p>所以需要 <span class="arithmatex">\(\sum_k x_k \geq 2\)</span>，也就是<strong>至少两维取 <span class="arithmatex">\(1\)</span></strong></p>
 <p>验证一下 <span class="arithmatex">\(\sum_k x_k = 2\)</span>：</p>
 <div class="arithmatex">\[g = 1.252763 \times 2 - 2.079442 = 2.505526 - 2.079442 = 0.426084 \gt 0\]</div>
 <p>确实翻正。再验证 <span class="arithmatex">\(\sum_k x_k = 1\)</span>：</p>
 <div class="arithmatex">\[g = 1.252763 - 2.079442 = -0.826679 \lt 0\]</div>
-<p>仍然判 <span class="arithmatex">\(\omega_2\)</span> ✓</p>
+<p>仍然判 <span class="arithmatex">\(\omega_2\)</span></p>
 <p><strong>(d) <span class="arithmatex">\(d = 20\)</span> 时的阈值</strong></p>
 <p>一般地，<span class="arithmatex">\(d\)</span> 维对称情形下：<span class="arithmatex">\(w_k\)</span> 都等于 <span class="arithmatex">\(w\)</span>，
 <span class="arithmatex">\(w_0 = d\ln\frac{1-p}{1-q} + \ln\frac{P(\omega_1)}{P(\omega_2)}\)</span>。</p>
@@ -14102,7 +14102,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 = \frac{0.693147\,d}{1.252763} = 0.553292\,d\]</div>
 <p><span class="arithmatex">\(d = 20\)</span> 时：</p>
 <div class="arithmatex">\[\text{阈值} = 0.553292 \times 20 = 11.065895\]</div>
-<p>也就是需要 <span class="arithmatex">\(\sum_k x_k \geq 12\)</span> —— <strong><span class="arithmatex">\(20\)</span> 维里至少要 <span class="arithmatex">\(12\)</span> 维取 <span class="arithmatex">\(1\)</span></strong> ✓</p>
+<p>也就是需要 <span class="arithmatex">\(\sum_k x_k \geq 12\)</span> —— <strong><span class="arithmatex">\(20\)</span> 维里至少要 <span class="arithmatex">\(12\)</span> 维取 <span class="arithmatex">\(1\)</span></strong></p>
 <p><strong>怎么读这个结果</strong>：</p>
 <table>
 <thead>
@@ -14128,8 +14128,8 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p>占比<strong>基本稳定在 <span class="arithmatex">\(55\%\)</span> 左右</strong>（理论值就是 <span class="arithmatex">\(0.553292\)</span>）。
 这说明：<strong>对称情形下，「需要多少比例的证据」与维数无关</strong> ——
 它只由 <span class="arithmatex">\(p\)</span>、<span class="arithmatex">\(q\)</span> 决定。维数增加不会让阈值的<strong>比例</strong>变苛刻，
-但会让「达到这个比例」越来越难（因为要求更多维正好取 <span class="arithmatex">\(1\)</span>）⚠</p>
-<p><strong>把不同 <span class="arithmatex">\(d\)</span> 下的阈值做成手算对照表。</strong></p>
+但会让「达到这个比例」越来越难（因为要求更多维正好取 <span class="arithmatex">\(1\)</span>）</p>
+<p>把不同 <span class="arithmatex">\(d\)</span> 下的阈值做成手算对照表。</p>
 <p>对称情形的阈值公式是</p>
 <div class="arithmatex">\[\text{阈值} = \frac{-w_0}{w} = \frac{-d \times \ln\frac{1-p}{1-q}}{w}
 = \frac{0.693147\,d}{1.252763} = 0.553294\,d\]</div>
@@ -14349,7 +14349,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
    这时该做的是<strong>改进单个分类器</strong>或<strong>增加真正独立的证据源</strong>，
    而不是继续堆数量。</li>
 </ol>
-<p><strong>三小问的手算过程与结果并排放在一张表里。</strong></p>
+<p>三小问的手算过程与结果并排放在一张表里。</p>
 <p><strong>(a) 完全独立、<span class="arithmatex">\(p = 0.8\)</span>、<span class="arithmatex">\(n = 5\)</span></strong> 的手算在上面的表里已经逐步列出，
 三项乘积是 <span class="arithmatex">\(0.204800 + 0.409600 + 0.327680 = 0.942080\)</span> ✓</p>
 <p><strong>&copy; 完全独立、<span class="arithmatex">\(p = 0.4\)</span>、<span class="arithmatex">\(n = 5\)</span></strong> 同样三步，
@@ -14465,7 +14465,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 <p><strong>后验恰好是 <span class="arithmatex">\(0.9\)</span></strong> —— 也就是<strong>等于最有信心的那个分类器的判断</strong>，
 因为另外两个正好互相抵消了 ✓</p>
 <p><strong>判 <span class="arithmatex">\(\omega_1\)</span></strong>，与 (a) 一致。</p>
-<p><strong>&copy; 为什么两种做法不同（这次结果相同，但一般会不同）</strong></p>
+<p>&copy; 为什么两种做法不同（这次结果相同，但一般会不同）</p>
 <p><strong>这一问的结果恰好相同，是有原因的</strong>：
 这里三个概率正好满足「另外两个对数几率互为相反数」，
 所以它们相抵之后只剩下第一个的贡献，
@@ -14522,7 +14522,7 @@ P(\omega_1\mid x) = \frac{1}{1 + 0.011855} = 0.988284\]</div>
 </table>
 <p><strong>所以</strong>：只要第一层能给出概率，
 <strong>就用软判决</strong> —— 它信息更多、少一个假设、通常也更准 ✓</p>
-<p><strong>把三小问的数值手算列出来。</strong></p>
+<p>把三小问的数值手算列出来。</p>
 <p><strong>(a) 硬判决</strong>：把三个后验过一遍 <span class="arithmatex">\(0.5\)</span> 这条线：</p>
 <table>
 <thead>
