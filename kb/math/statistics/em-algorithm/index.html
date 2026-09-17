@@ -8468,7 +8468,7 @@ p(x) = \sum_{k=1}^{K}\pi_k\,\mathcal{N}(x\mid\mu_k,\Sigma_k),
 = \frac{\pi_k\,\mathcal{N}(x_i\mid\mu_k,\Sigma_k)}
 {\displaystyle\sum_{j=1}^{K}\pi_j\,\mathcal{N}(x_i\mid\mu_j,\Sigma_j)}
 \]</div>
-<p><strong>读法</strong>：<strong>第 <span class="arithmatex">\(k\)</span> 个分量"认领"了样本 <span class="arithmatex">\(i\)</span> 的多大比例</strong></p>
+<p><strong>要点</strong>：<strong>第 <span class="arithmatex">\(k\)</span> 个分量"认领"了样本 <span class="arithmatex">\(i\)</span> 的多大比例</strong></p>
 <p><strong>注意：这里算的是一个"分配"</strong> —— 但它<strong>不是 0/1</strong>，
 而是 0 到 1 之间的连续值。</p>
 <h3 id="23-m">2.3 M 步：更新参数<a class="headerlink" href="#23-m" title="Permanent link">&para;</a></h3>
@@ -9667,7 +9667,7 @@ Q(\theta\mid\theta^{(t)})
 \gamma_2 = \frac{0.0090}{0.1058} \approx 0.085
 \]</div>
 <p><strong>答案：责任度约 <span class="arithmatex">\((0.915,\ 0.085)\)</span></strong></p>
-<p><strong>这说明什么</strong>：<span class="arithmatex">\(x=1\)</span> 离 <span class="arithmatex">\(\mu_1=0\)</span> 更近，
+<p><span class="arithmatex">\(x=1\)</span> 离 <span class="arithmatex">\(\mu_1=0\)</span> 更近，
 且第 1 个分量先验更小（0.4），两者<strong>部分抵消</strong> ——
 最终仍是第 1 个分量主导。</p>
 <p>注意这里<strong>恰好</strong>接近"按距离分配"：
@@ -9699,7 +9699,7 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 \pi_1 = \frac{0.915}{1} = 0.915,\qquad \pi_2 = 0.085
 \]</div>
 <p><strong>答案：两个均值都跑到了 1.00，权重变成 <span class="arithmatex">\((0.915,0.085)\)</span></strong></p>
-<p><strong>这说明什么</strong>：<strong>只用一个样本时，EM 会把所有分量都拉到这个点上</strong>
+<p><strong>只用一个样本时，EM 会把所有分量都拉到这个点上</strong>
 ⚠ 这不是 bug，而是必然结果 —— 单个样本无法区分分量，
 所以每个分量"认领"了它的一部分责任，各自朝它移动。</p>
 <p>这提醒我们：<strong>EM 需要足够多的样本</strong>才能把分量分开。</p>
@@ -9731,7 +9731,7 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 <p>该分量的似然 <span class="arithmatex">\(\to\infty\)</span> → 总似然 <span class="arithmatex">\(\to\infty\)</span> →
 <strong>算法认为找到了完美解，实际是把一个点当成了整个分量</strong></p>
 <p><strong>答案：方差会变成 0，似然发散，算法"跑飞"</strong>。</p>
-<p><strong>这说明什么</strong>：这是 EM 在 GMM 上的<strong>病态解</strong>。
+<p>这是 EM 在 GMM 上的<strong>病态解</strong>。
 应对办法：给 <span class="arithmatex">\(\Sigma_k\)</span> 设一个正的下限，
 或对协方差加正则项（相当于加先验）。</p>
 </details>
@@ -9791,7 +9791,7 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 · 若明知有结构信息，把它用进初始化</p>
 <p><strong>答案：EM 只保证单调不降，不保证全局最优；
 "多初值取最好"是实践标准做法，但仍不能证明最优</strong>。</p>
-<p><strong>这说明什么</strong>：这是一种"<strong>没有最优性证书</strong>"的优化 ——
+<p>这是一种"<strong>没有最优性证书</strong>"的优化 ——
 与凸问题不同，你<strong>永远无法确认</strong>是否已经到达全局最优 ⚠</p>
 </details>
 <hr />
