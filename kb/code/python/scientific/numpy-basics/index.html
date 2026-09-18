@@ -10454,6 +10454,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>NumPy 官方文档</code><code>本页示例在 Python 3.9+ 与 NumPy 1.26 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="01-numpy">01 NumPy 数组基础<a class="headerlink" href="#01-numpy" title="Permanent link">&para;</a></h1>
@@ -10531,12 +10539,14 @@
 <h3 id="11-list">1.1 用 list 会怎样<a class="headerlink" href="#11-list" title="Permanent link">&para;</a></h3>
 <p>先看一个具体场景：<strong>给 200 万个数据求平方</strong>。</p>
 <p>用 list，你得写推导式或循环，逐个元素处理：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;list 的写法:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">v</span> <span class="o">*</span> <span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>list 的写法: [0, 1, 4, 9, 16]</code></pre>
 <p>用 NumPy，一行搞定，没有任何 <code>for</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
@@ -10550,6 +10560,7 @@
 <h3 id="12">1.2 速度实测<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>计时结果<strong>每次运行都不同</strong>（受机器负载影响），所以下面的输出是用
 <code>text</code> 围栏给出的<strong>示意</strong>，只保证量级：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10648,6 +10659,7 @@ ndarray 直接按偏移量算地址，一次内存访问拿到数值。
 <h3 id="14">1.4 内存占用实测<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>两者在内存上的差距可以<strong>直接量出来</strong>。</p>
 <p>方法一：用 <code>nbytes</code> 看数组占多少字节。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -10684,6 +10696,7 @@ float64 每个元素: 8 字节</code></pre>
 把 <code>float64</code> 换成 <code>float32</code>，<strong>内存直接减半</strong>，代价是精度从约 16 位有效数字
 降到约 7 位（见第五节的精度演示）</p>
 <p>方法二：用 <code>sys.getsizeof</code> 把 list 的开销也算出来。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10856,6 +10869,7 @@ list 合计            : 36056 字节
 </tbody>
 </table>
 <h3 id="21">2.1 五个核心属性<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -11099,6 +11113,7 @@ NumPy 两种都接受</p>
 </tbody>
 </table>
 <h3 id="31">3.1 从列表、元组、嵌套列表造<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
@@ -11140,6 +11155,7 @@ NumPy 两种都接受</p>
 如果打出 <code>object</code> 而你以为在算数字，就是这里出问题了</p>
 </div>
 <h3 id="32-0-1">3.2 全 0 / 全 1 / 全填某值<a class="headerlink" href="#32-0-1" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11188,6 +11204,7 @@ empty 的内容是未初始化内存，不可预测，故不打印</code></pre>
 <h3 id="33-zeros_like-ones_like">3.3 <code>zeros_like</code> / <code>ones_like</code>：形状类型照抄<a class="headerlink" href="#33-zeros_like-ones_like" title="Permanent link">&para;</a></h3>
 <p>写数值算法时经常需要「造一个和输入形状完全相同、但全为 0 的数组」
 来存结果 —— 这时用 <code>_like</code> 系列，不用手写形状。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11256,6 +11273,7 @@ zeros_like 会保持形状: (3,)</code></pre>
 <h3 id="34-arange">3.4 <code>arange</code>：给定步长，自己算个数<a class="headerlink" href="#34-arange" title="Permanent link">&para;</a></h3>
 <p><code>arange</code> 的三个常用形式：<code>arange(stop)</code>、<code>arange(start, stop)</code>、
 <code>arange(start, stop, step)</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
 <span class="normal"><a href="#__codelineno-15-3">3</a></span>
@@ -11306,6 +11324,7 @@ arange 也能指定 dtype: float32</code></pre>
 <h3 id="35-linspace">3.5 <code>linspace</code>：给定个数，自己算步长<a class="headerlink" href="#35-linspace" title="Permanent link">&para;</a></h3>
 <p><code>linspace(start, stop, num)</code> 的含义是
 「<strong>把 <code>start</code> 到 <code>stop</code> 之间等分成 <code>num</code> 个点</strong>」（linearly spaced）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11404,6 +11423,7 @@ linspace 可以不要终点:
 </code></pre></div></td></tr></table></div>
 <p><strong>用 <code>arange</code> 配浮点步长时，个数会因浮点舍入而「多一个」</strong>。
 下面这个例子值得记住：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -11452,6 +11472,7 @@ linspace(0, 0.3, 3) = [0.   0.15 0.3 ]</code></pre>
 <h3 id="37-logspace">3.7 <code>logspace</code>：等比数列<a class="headerlink" href="#37-logspace" title="Permanent link">&para;</a></h3>
 <p><code>logspace(start, stop, num)</code> 在<strong>指数</strong>上等分，
 返回的是 <span class="arithmatex">\(10^{\text{start}}\)</span> 到 <span class="arithmatex">\(10^{\text{stop}}\)</span> 之间的等比数列。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
 <span class="normal"><a href="#__codelineno-20-3">3</a></span>
@@ -11526,6 +11547,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 于是「上次明明跑通了」的代码这次又不对，
 或者数字对不上、没法截图、没法写测试。</p>
 <p><strong>新式写法（推荐）</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
 <span class="normal"><a href="#__codelineno-21-3">3</a></span>
@@ -11535,13 +11557,14 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 <a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>          <span class="c1"># 42 是种子，随便给个整数</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">rng</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>                <span class="c1"># 拿到的是生成器对象</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">))</span>       <span class="c1"># 之后所有的随机数都从它来</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>Generator
 [0 7 6 4]</code></pre>
 <p><strong>旧的 <code>np.random.seed(42)</code> + <code>np.random.xxx()</code> 写法仍能用</strong>，
 但新代码应当用 <code>default_rng</code>：它的随机数质量更好，
 而且<strong>把生成器对象拿在手里</strong>，不会污染全局状态</p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
 <span class="normal"><a href="#__codelineno-22-2">2</a></span>
 <span class="normal"><a href="#__codelineno-22-3">3</a></span>
@@ -11716,6 +11739,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 </code></pre></div></td></tr></table></div>
 <h3 id="42">4.2 类型推断规则<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>不写 <code>dtype</code> 时，NumPy <strong>从数据本身推断</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
@@ -11808,6 +11832,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 <p>原因是 NumPy 的默认整数类型跟 <strong>C 语言的 <code>long</code> 类型</strong>走，
 而 <code>long</code> 在不同平台上的宽度不一样。</p>
 <p><strong>所以不要写这种断言</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -11827,7 +11852,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 <a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="c1"># ✓ 改成判断「类别」，跨平台稳定</span>
 <a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="k">assert</span> <span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;i&quot;</span>
 <a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtype.kind =&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span><span class="p">,</span> <span class="s2">&quot;→ 确实是有符号整数&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>dtype.kind = i → 确实是有符号整数</code></pre>
 <p><code>dtype.kind</code> 是一个<strong>类别字符</strong>，跨平台稳定</p>
 </div>
@@ -11870,6 +11895,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
 <span class="normal"><a href="#__codelineno-27-2">2</a></span>
 <span class="normal"><a href="#__codelineno-27-3">3</a></span>
@@ -11947,6 +11973,7 @@ identity(3) 与 eye(3) 相同: True</code></pre>
 <h3 id="45">4.5 整数溢出演示<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
 <p><strong>固定宽度的整数会在越界时「绕回去」</strong>，
 而且<strong>不报错</strong>——这是最危险的一类错误。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12057,6 +12084,7 @@ int16 的范围: -32768 到 32767</code></pre>
 <strong>这是「快」的代价</strong> —— 要快就得让每个元素大小固定、能放在寄存器里</p>
 </div>
 <h3 id="46-astype">4.6 <code>astype</code>：类型转换<a class="headerlink" href="#46-astype" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12124,6 +12152,7 @@ astype(np.int32)  : [1 2]
    大数组上反复 <code>astype</code> 会明显变慢，能一次转完就别在循环里转。</li>
 </ol>
 <h3 id="47">4.7 浮点精度实测<a class="headerlink" href="#47" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -12188,6 +12217,7 @@ float64 数组求和: 0.6000000163912773</code></pre>
 <p>这一节是 NumPy 报错的头号来源，值得慢慢看。</p>
 <h3 id="51-6-1-6-6-1">5.1 <code>(6,)</code> 与 <code>(1, 6)</code> 与 <code>(6, 1)</code> 的区别<a class="headerlink" href="#51-6-1-6-6-1" title="Permanent link">&para;</a></h3>
 <p>这三者<strong>元素个数相同、形状不同、含义完全不同</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -12290,6 +12320,7 @@ col 打印:
 逐元素运算 → 得到 <code>(6, 6)</code>。
 <strong>它不报错</strong>，只是给你一个 36 个元素的矩阵，而你以为是 6 个</p>
 <p><strong>自查办法</strong>：只要结果形状不符合预期，<strong>先打印两边形状</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
@@ -12301,7 +12332,7 @@ col 打印:
 <a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>          <span class="c1"># (6, 1)</span>
 <a id="__codelineno-37-5" name="__codelineno-37-5"></a>
 <a id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>     <span class="c1"># 一眼看出谁被广播了</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>(6,) (6, 1) (6, 6)</code></pre>
 <p><strong><code>(6, 6)</code> 就是证据</strong>：两边的长度本来都是 6，
 结果却变成了 6 行 6 列，说明 <code>a</code> 被当成了行向量去和列向量配对</p>
@@ -12311,6 +12342,7 @@ col 打印:
 （广播规则的细节见下一章。）</p>
 </div>
 <h3 id="52-reshape">5.2 <code>reshape</code>：换形状，元素总数必须对上<a class="headerlink" href="#52-reshape" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -12342,6 +12374,7 @@ a.reshape(2, 3, 2) 的形状: (2, 3, 2)
 reshape 之后原数组形状不变: (12,)</code></pre>
 <p><strong>三个要点</strong>：</p>
 <p><strong>① 元素总数必须严格相等。</strong> 否则报错：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
 <span class="normal"><a href="#__codelineno-39-3">3</a></span>
@@ -12398,6 +12431,7 @@ reshape 之后原数组形状不变: (12,)</code></pre>
 </tbody>
 </table>
 <h3 id="53-transpose-t">5.3 <code>transpose</code> / <code>.T</code>：转置<a class="headerlink" href="#53-transpose-t" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -12449,6 +12483,7 @@ T 是视图吗: True</code></pre>
 <p><strong>「长度为 1 的维度」本身不装数据，只是形状上的一个记号</strong>，
 但在实际代码里它常常造成麻烦（比如 <code>(1, 6)</code> 和 <code>(6,)</code> 不能直接相减）。
 <code>squeeze</code> 用来删掉它，<code>expand_dims</code> / <code>newaxis</code> 用来加上它。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -12577,6 +12612,7 @@ b.reshape(1, -1) : (1, 3)</code></pre>
 </table>
 <p>一句话：<strong><code>flatten</code> 多了个 <code>f</code>，就是「fork 了一份」，所以是副本。</strong></p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -12660,6 +12696,7 @@ r.base is a : True
 （如果是「视图的视图」，<code>base</code> 会指向最初的数组，
 所以更稳的判断是 <code>np.shares_memory</code>。）</p>
 <p><strong>用 <code>np.shares_memory</code> 更可靠</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
 <span class="normal"><a href="#__codelineno-44-2">2</a></span>
 <span class="normal"><a href="#__codelineno-44-3">3</a></span>
@@ -12741,6 +12778,7 @@ a 与 a 自己: True</code></pre>
 <h2 id="_3">六、数组的打印格式<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="61-list-ndarray">6.1 数组没有逗号（区分 list 与 ndarray）<a class="headerlink" href="#61-list-ndarray" title="Permanent link">&para;</a></h3>
 <p>这是<strong>一眼分辨 list 和数组的最快方法</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -12801,6 +12839,7 @@ a 与 a 自己: True</code></pre>
 列对齐才能看出数量级差异。这也提示你：<strong>数组是「表格」，list 是「清单」</strong></p>
 <h3 id="62">6.2 大数组的省略显示<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>元素很多时，NumPy <strong>不会全部打印</strong>，而是用 <code>...</code> 省略中间部分：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -12835,6 +12874,7 @@ threshold=20, edgeitems=2 时的 100 个元素:
 <p>写教学示例、写测试、或对比数值时，
 <strong>默认的打印精度往往不够稳定</strong>（浮点末位会跳）。
 用 <code>set_printoptions</code> 把它固定下来</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -12963,6 +13003,7 @@ suppress=True（小数列不用科学计数法）:
 <p><strong>第二条尤其重要</strong>：<code>arr.mean()</code> 可能打印出
 <code>0.20000000000000004</code> 这种末位误差，
 而 <code>.round(4)</code> 之后就是干净的 <code>0.2</code></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1">1</a></span>
 <span class="normal"><a href="#__codelineno-51-2">2</a></span>
 <span class="normal"><a href="#__codelineno-51-3">3</a></span>
@@ -13005,6 +13046,7 @@ round(4) 之后: 0.2
 <h3 id="71-list">7.1 把 list 当数组用<a class="headerlink" href="#71-list" title="Permanent link">&para;</a></h3>
 <p><strong>最典型的一类错误</strong>：从别处拿到一个 list，
 忘了转成数组就直接做数学运算。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1">1</a></span>
 <span class="normal"><a href="#__codelineno-52-2">2</a></span>
 <span class="normal"><a href="#__codelineno-52-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="c1"># @expect-error</span>
@@ -13012,6 +13054,7 @@ round(4) 之后: 0.2
 <a id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">data</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>TypeError: can only concatenate list (not "int") to list</code></pre>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-53-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-53-3"> 3</a></span>
@@ -13100,6 +13143,7 @@ list 加 1 也会报错，见上一段
 <h3 id="72-npempty">7.2 <code>np.empty</code> 不会初始化<a class="headerlink" href="#72-npempty" title="Permanent link">&para;</a></h3>
 <p><code>np.empty</code> 只是<strong>申请一块内存</strong>，<strong>不往里写任何值</strong>，
 所以它的内容是该内存位置<strong>之前残留的字节</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1">1</a></span>
 <span class="normal"><a href="#__codelineno-54-2">2</a></span>
 <span class="normal"><a href="#__codelineno-54-3">3</a></span>
@@ -13176,6 +13220,7 @@ zeros(5) 则是确定的: [0. 0. 0. 0. 0.]
 不确定就换成 <code>np.zeros</code></p>
 </div>
 <h3 id="73">7.3 浮点不要用 <code>==</code> 比较<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1">1</a></span>
 <span class="normal"><a href="#__codelineno-56-2">2</a></span>
 <span class="normal"><a href="#__codelineno-56-3">3</a></span>
@@ -13294,6 +13339,7 @@ np.isclose(a, 0.3): True
 <p><strong>注意</strong>：真实数据里常混着不能用的东西（空串、<code>"缺考"</code>、
 中文全角数字），<strong>直接 <code>np.array</code> 会把整列变成字符串数组</strong> ——
 这时所有数值运算都失效。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1">1</a></span>
 <span class="normal"><a href="#__codelineno-58-2">2</a></span>
 <span class="normal"><a href="#__codelineno-58-3">3</a></span>
@@ -13354,6 +13400,7 @@ np.isclose(a, 0.3): True
 <h3 id="82">8.2 一维读数重排成「天 × 小时」表<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：传感器每<strong>小时</strong>记录一次气温，数据是一长串一维数组。
 按小时统计没有意义，要按<strong>天</strong>统计，就得先重排成二维。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -13445,6 +13492,7 @@ np.isclose(a, 0.3): True
 <h3 id="83-_like">8.3 用 <code>_like</code> 造输出容器<a class="headerlink" href="#83-_like" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：写一个函数，要对每门课的成绩做标准化，
 输出必须和输入<strong>形状相同</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
@@ -13544,6 +13592,7 @@ np.isclose(a, 0.3): True
 <details class="success">
 <summary>解答</summary>
 <p><strong>思路</strong>：标准化是逐元素运算，可以整体做，不需要循环。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-62-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-62-3"> 3</a></span>
@@ -13565,7 +13614,7 @@ np.isclose(a, 0.3): True
 <a id="__codelineno-62-9" name="__codelineno-62-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;标准化后（前 4 个）:&quot;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <a id="__codelineno-62-10" name="__codelineno-62-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;标准化后的均值:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">normalized</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">10</span><span class="p">))</span>
 <a id="__codelineno-62-11" name="__codelineno-62-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;标准化后的标准差:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">normalized</span><span class="o">.</span><span class="n">std</span><span class="p">()),</span> <span class="mi">4</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原始分数: [88 92 79 95 60 73 85 91]
 个数 size: 8  类型 dtype: int64
 标准化后（前 4 个）: [ 0.467  0.832 -0.353  1.105]
@@ -13650,6 +13699,7 @@ np.isclose(a, 0.3): True
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-64-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-64-3"> 3</a></span>
@@ -13689,7 +13739,7 @@ np.isclose(a, 0.3): True
 <a id="__codelineno-64-18" name="__codelineno-64-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;输出 dtype:&quot;</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 <a id="__codelineno-64-19" name="__codelineno-64-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;每列均值（取绝对值后应接近 0）:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
 <a id="__codelineno-64-20" name="__codelineno-64-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;每列标准差（应为 1）:&quot;</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>输入形状: (4, 3)  输出形状: (4, 3)
 输出 dtype: float64
 每列均值（取绝对值后应接近 0）: [0. 0. 0.]
@@ -13771,6 +13821,7 @@ np.isclose(a, 0.3): True
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-68-3"> 3</a></span>
@@ -13808,7 +13859,7 @@ np.isclose(a, 0.3): True
 <a id="__codelineno-68-17" name="__codelineno-68-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全表最大值  :&quot;</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
 <a id="__codelineno-68-18" name="__codelineno-68-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最大值的位置(展平后):&quot;</span><span class="p">,</span> <span class="n">table</span><span class="o">.</span><span class="n">argmax</span><span class="p">())</span>
 <a id="__codelineno-68-19" name="__codelineno-68-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用 unravel_index 还原成二维坐标:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">table</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原始一维形状: (24,)  元素个数: 24
 重排后形状  : (3, 8)
 重排后的表:
@@ -13908,6 +13959,7 @@ np.isclose(a, 0.3): True
 <p><strong>题目</strong>：下面这段代码<strong>不报错</strong>，但结果不符合预期 ——
 它本想算出「三种商品各买若干件的总金额」。
 请找出问题、解释原因，并给出至少两种修法。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1">1</a></span>
 <span class="normal"><a href="#__codelineno-71-2">2</a></span>
 <span class="normal"><a href="#__codelineno-71-3">3</a></span>
@@ -13943,6 +13995,7 @@ np.isclose(a, 0.3): True
 <summary>解答</summary>
 <p><strong>问题：<code>prices</code> 是 <code>(3,)</code>，<code>counts</code> 是 <code>(3, 1)</code>，相乘被广播成了 <code>(3, 3)</code>。</strong></p>
 <p>先诊断：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-72-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-72-3"> 3</a></span>
@@ -13974,7 +14027,7 @@ np.isclose(a, 0.3): True
 <a id="__codelineno-72-14" name="__codelineno-72-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;乘积 =&quot;</span><span class="p">)</span>
 <a id="__codelineno-72-15" name="__codelineno-72-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 <a id="__codelineno-72-16" name="__codelineno-72-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;求和 =&quot;</span><span class="p">,</span> <span class="n">total</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>prices.shape = (3,)  ndim = 1
 counts.shape = (3, 1)  ndim = 2
 prices 打印: [10. 20. 30.]
@@ -14055,6 +14108,7 @@ counts 打印:
 </tbody>
 </table>
 <p>验证修法 ①：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-74-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-74-3"> 3</a></span>
@@ -14074,7 +14128,7 @@ counts 打印:
 <a id="__codelineno-74-8" name="__codelineno-74-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;每种商品的总价:&quot;</span><span class="p">,</span> <span class="n">fixed</span><span class="p">)</span>
 <a id="__codelineno-74-9" name="__codelineno-74-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总金额:&quot;</span><span class="p">,</span> <span class="n">fixed</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <a id="__codelineno-74-10" name="__codelineno-74-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;手工核对: 10*2 + 20*3 + 30*5 =&quot;</span><span class="p">,</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">30</span> <span class="o">*</span> <span class="mi">5</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>修好后形状: (3,)
 每种商品的总价: [ 20.  60. 150.]
 总金额: 230.0
@@ -14084,6 +14138,7 @@ counts 打印:
 <p>其实「单价 × 数量再求和」在数学上就是<strong>点积</strong>，
 可以直接写 <code>prices @ counts.ravel()</code>，一句话得到 230，
 <strong>不用先算 3 个乘积再求和</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1">1</a></span>
 <span class="normal"><a href="#__codelineno-75-2">2</a></span>
 <span class="normal"><a href="#__codelineno-75-3">3</a></span>
@@ -14099,7 +14154,7 @@ counts 打印:
 <a id="__codelineno-75-6" name="__codelineno-75-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;点积（一步得到总金额）:&quot;</span><span class="p">,</span> <span class="n">prices</span> <span class="o">@</span> <span class="n">counts</span><span class="p">)</span>
 <a id="__codelineno-75-7" name="__codelineno-75-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;等价写法 np.dot       :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">prices</span><span class="p">,</span> <span class="n">counts</span><span class="p">))</span>
 <a id="__codelineno-75-8" name="__codelineno-75-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;先乘再求和            :&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">prices</span> <span class="o">*</span> <span class="n">counts</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>点积（一步得到总金额）: 230.0
 等价写法 np.dot       : 230.0
 先乘再求和            : 230.0</code></pre>
@@ -14142,6 +14197,7 @@ counts 打印:
 <p><strong>Q1</strong> 下面三个数组 <code>x</code>、<code>y</code>、<code>z</code> 的元素个数都是 6，
 但形状不同。请分别写出它们的 <code>ndim</code>，
 并说明 <code>x + y</code> 与 <code>x + z</code> 的结果形状。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1">1</a></span>
 <span class="normal"><a href="#__codelineno-76-2">2</a></span>
 <span class="normal"><a href="#__codelineno-76-3">3</a></span>
@@ -14166,6 +14222,7 @@ counts 打印:
 <details class="success">
 <summary>解答</summary>
 <p><strong>先看维数和形状</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-77-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-77-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-77-3"> 3</a></span>
@@ -14189,7 +14246,7 @@ counts 打印:
 <a id="__codelineno-77-10" name="__codelineno-77-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + y 的形状:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-77-11" name="__codelineno-77-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + z 的形状:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-77-12" name="__codelineno-77-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x + x 的形状:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>x.shape = (6,)  ndim = 1
 y.shape = (1, 6)  ndim = 2
 z.shape = (6, 1)  ndim = 2
@@ -14281,6 +14338,7 @@ x + x 的形状: (6,)</code></pre>
 </tbody>
 </table>
 <p><strong>实用建议</strong>：不确定时<strong>主动对齐形状</strong>，别依赖广播：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-80-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-80-3"> 3</a></span>
@@ -14310,7 +14368,7 @@ x + x 的形状: (6,)</code></pre>
 <a id="__codelineno-80-13" name="__codelineno-80-13"></a><span class="n">result2</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span>
 <a id="__codelineno-80-14" name="__codelineno-80-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x.reshape(1,-1) + y 的形状:&quot;</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-80-15" name="__codelineno-80-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>x.reshape(-1,1) + z 的形状: (6, 1)
 [[ 0]
  [ 2]
@@ -14339,6 +14397,7 @@ x.reshape(1,-1) + y 的形状: (1, 6)
 <details class="success">
 <summary>解答</summary>
 <p><strong>应当用 <code>linspace</code></strong> —— 因为题目给的是<strong>点的个数</strong>，不是步长。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-81-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-81-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-81-3"> 3</a></span>
@@ -14366,7 +14425,7 @@ x.reshape(1,-1) + y 的形状: (1, 6)
 <a id="__codelineno-81-12" name="__codelineno-81-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;个数       :&quot;</span><span class="p">,</span> <span class="n">bad</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 <a id="__codelineno-81-13" name="__codelineno-81-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最后一个是 1:&quot;</span><span class="p">,</span> <span class="n">bad</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-81-14" name="__codelineno-81-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;它的最后一个是:&quot;</span><span class="p">,</span> <span class="n">bad</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>linspace(0, 1, 11) = [0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1. ]
 个数       : 11
 第一个是 0 : True
@@ -14462,6 +14521,7 @@ arange(0, 1, 0.1)  = [0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
 <p><strong>Q3</strong> 下面代码的输出中，<code>float64</code> 数组求和的结果反而
 「看起来更不整齐」。请解释原因，并说明这段代码能不能用来
 证明「<code>float32</code> 更精确」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-1">1</a></span>
 <span class="normal"><a href="#__codelineno-84-2">2</a></span>
 <span class="normal"><a href="#__codelineno-84-3">3</a></span>
@@ -14540,6 +14600,7 @@ float64 数组求和: 0.6000000163912773</code></pre>
 </tbody>
 </table>
 <p><strong>验证一下「float32 只是误差被隐藏」</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-86-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-86-3"> 3</a></span>
@@ -14561,7 +14622,7 @@ float64 数组求和: 0.6000000163912773</code></pre>
 <a id="__codelineno-86-9" name="__codelineno-86-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;与 0.6 的差         :&quot;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">total64</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.6</span><span class="p">))</span>
 <a id="__codelineno-86-10" name="__codelineno-86-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;float32 的有效位数约为:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
 <a id="__codelineno-86-11" name="__codelineno-86-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;float64 的有效位数约为:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span><span class="o">.</span><span class="n">precision</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>float32 求和        : 0.6
 转 float64 再看这个值: 0.6000000163912773
 与 0.6 的差         : 1.6391277335436882e-08
@@ -14613,6 +14674,7 @@ float64 的有效位数约为: 15</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p>核心区别：<code>ravel</code> 尽量返回视图，<code>flatten</code> 总是返回副本。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-87-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-87-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-87-3"> 3</a></span>
@@ -14640,7 +14702,7 @@ float64 的有效位数约为: 15</code></pre>
 <a id="__codelineno-87-12" name="__codelineno-87-12"></a>
 <a id="__codelineno-87-13" name="__codelineno-87-13"></a><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span>
 <a id="__codelineno-87-14" name="__codelineno-87-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;改 f 之后 a :&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;← 副本，原数组不受影响&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>shares_memory(a, r): True
 shares_memory(a, f): False
 改 r 之后 a : [100   1   2   3   4   5] ← 视图，原数组被改
@@ -14739,6 +14801,7 @@ shares_memory(a, f): False
 </table>
 <p><strong>两个典型代码场景</strong>：</p>
 <p>场景 A（该用 <code>flatten</code>）—— 一个「不能污染输入」的归一化函数：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-88-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-88-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-88-3"> 3</a></span>
@@ -14770,7 +14833,7 @@ shares_memory(a, f): False
 <a id="__codelineno-88-14" name="__codelineno-88-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <a id="__codelineno-88-15" name="__codelineno-88-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原数组没被改动:&quot;</span><span class="p">)</span>
 <a id="__codelineno-88-16" name="__codelineno-88-16"></a><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>归一化结果:
 [[0.   0.5 ]
  [0.25 1.  ]]
@@ -14783,6 +14846,7 @@ shares_memory(a, f): False
 （原地赋值），视图就会<strong>直接把调用方的数据改掉</strong>
 所以「返回值的函数」用 <code>flatten</code> 更稳妥</p>
 <p>场景 B（该用 <code>ravel</code>）—— 只读统计：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-89-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-89-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-89-3"> 3</a></span>
@@ -14812,7 +14876,7 @@ shares_memory(a, f): False
 <a id="__codelineno-89-13" name="__codelineno-89-13"></a>
 <a id="__codelineno-89-14" name="__codelineno-89-14"></a>
 <a id="__codelineno-89-15" name="__codelineno-89-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;统计结果:&quot;</span><span class="p">,</span> <span class="n">describe</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">11.0</span><span class="p">]])))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>统计结果: {'个数': 4, '最小': 3.0, '最大': 11.0, '均值': 6.5}</code></pre>
 <p><strong>注意返回的字典里没有数组</strong> —— 全是标量。
 这正是「只读统计」的特点：拿进来的数组<strong>从头到尾没被复制过</strong>，
@@ -14821,6 +14885,7 @@ shares_memory(a, f): False
 它只在「内存本来就是连续排布」时才能给出视图。
 如果数组<strong>不连续</strong>（比如转置后的数组），
 <code>ravel</code> <strong>无法</strong>返回视图，只能悄悄复制一份：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-1">1</a></span>
 <span class="normal"><a href="#__codelineno-90-2">2</a></span>
 <span class="normal"><a href="#__codelineno-90-3">3</a></span>
@@ -14832,7 +14897,7 @@ shares_memory(a, f): False
 <a id="__codelineno-90-4" name="__codelineno-90-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;连续数组 ravel 是视图:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
 <a id="__codelineno-90-5" name="__codelineno-90-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;转置后 ravel 是视图  :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
 <a id="__codelineno-90-6" name="__codelineno-90-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;转置后 flatten 是视图:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>连续数组 ravel 是视图: True
 转置后 ravel 是视图  : False
 转置后 flatten 是视图: False</code></pre>

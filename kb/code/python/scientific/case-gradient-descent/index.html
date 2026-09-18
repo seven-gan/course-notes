@@ -9958,6 +9958,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本案例为教学用综合练习（用 NumPy 手写优化算法）</code><code>NumPy 官方文档</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="16">16 实战：优化实验<a class="headerlink" href="#16" title="Permanent link">&para;</a></h1>
@@ -10217,6 +10225,7 @@
 <p><strong>为什么"对角"这个限制是重要的</strong>：对一般矩阵，
 特征值要解特征方程才能得到，而「条件数」这个词在非对称矩阵上还有别的含义。
 对角矩阵把这件事变得完全透明 —— 你能看着 <code>np.diag(A)</code> 就说出条件数</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10396,6 +10405,7 @@
 <h3 id="23">2.3 验算：函数值与梯度<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>写完定义之后，<strong>第一件事是验算</strong>。
 下面这段用两种独立方式算同一个 <code>f(x)</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10529,6 +10539,7 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 所以「沿负梯度走」是在一阶信息下最贪心的选择</p>
 <p>推导细节在 <a href="../../../../math/optimization/gradient-descent/">梯度下降</a> 那一页，
 这里直接看它在代码里长什么样 —— <strong>关键是每一步都要留下记录</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10614,6 +10625,7 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <h3 id="32">3.2 完整实现：记录、判定、对比<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>上面那段只跑了 6 步。要回答「多少步收敛」，
 需要一个会自己判断停下的版本 —— 就是模块里的 <code>gd</code> 函数。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11210,6 +11222,7 @@ L 144.859063 66.26
 <h3 id="42">4.2 扫一遍学习率<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>固定 κ = 10（于是 <code>λ_max = 10</code>、<code>λ_min = 1</code>），
 只改学习率，看迭代次数怎么变：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11400,6 +11413,7 @@ L 144.859063 66.26
 <h3 id="43">4.3 越过上界之后：误差长什么样<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>上表的最后两行只给了 <code>—</code>。
 真正要知道的是「发散时误差怎么动」—— 它<strong>不是乱涨，而是规规矩矩地等比增长</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11545,6 +11559,7 @@ L 144.859063 66.26
 <h3 id="51">5.1 固定学习率，只改条件数<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>实验一说明了学习率的重要性。现在把学习率<strong>固定</strong>在 <code>1/λ_max</code>（安全但保守），
 只让条件数变化 —— 这样才能单独看清条件数的作用：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11679,6 +11694,7 @@ L 144.859063 66.26
 两者只差常数倍（1.12）本身就说明模型抓住了主要矛盾</p>
 <h3 id="52-10">5.2 前 10 步为什么「看起来很快」<a class="headerlink" href="#52-10" title="Permanent link">&para;</a></h3>
 <p>一个非常容易误判的地方：<strong>慢的迭代，前几十步往往看着不慢</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11827,6 +11843,7 @@ L 144.859063 66.26
 Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a>x_new = x - A⁻¹ (A x - b) = A⁻¹ b = x*      一步就是最优解
 </code></pre></div></td></tr></table></div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -12038,6 +12055,7 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 </div>
 <h3 id="62">6.2 与解析解交叉验证<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>自己写的迭代器必须被<strong>独立路径</strong>验证过。这里用两条独立路径：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -12165,6 +12183,7 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -12333,6 +12352,7 @@ BFGS 在解处的梯度范数  : 2.665e-15
 <p><strong>接下来画二维情形下的迭代轨迹</strong>。
 一维的收敛曲线看不出「不同方向速度不同」，
 降到二维画到等高线上，这件事才第一次<strong>可见</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -12483,6 +12503,7 @@ BFGS 在解处的梯度范数  : 2.665e-15
 <p><strong>前两张图都还缺一件事：当「条件数大」和「学习率接近上界」同时出现时，
 轨迹会变成什么样子</strong>。上面那张图用的是 <code>lr = 0.1</code>，离上界还远，
 轨迹是一条干净的「L 形」。把学习率推到上界附近，形状会彻底变掉：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -12821,6 +12842,7 @@ BFGS 在解处的梯度范数  : 2.665e-15
 在「一直朝同一个方向走」的慢方向上速度被放大，
 在「来回震荡」的快方向上正负相消被抑制 ——
 恰好是条件数带来的两个症状</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -13100,6 +13122,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </code></pre></div></td></tr></table></div>
 <p>早期 <code>lr</code> 大 → 快速推进；后期 <code>lr</code> 小 → 稳定收尾。
 代价是引入一个 <code>decay</code> 参数，而且它也不是随便设的</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -13271,6 +13294,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <h3 id="92">9.2 一个可以按需改造的脚本骨架<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
 <p>把本页的零件拼成一个能复用的优化实验函数，
 体现上面几条里的三条（<strong>结构诊断、输入标准化、现成库对照</strong>）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -13643,6 +13667,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong>取两个函数做对照</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -13754,7 +13779,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-26-54" name="__codelineno-26-54"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   lr=2.1 在三个起点上都发散 —— 虽然 x=0.2 处的局部上界是 1.79&quot;</span><span class="p">)</span>
 <a id="__codelineno-26-55" name="__codelineno-26-55"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   原因是它第一步就把点甩到 |x|&gt;1 的地方，那里的 Hessian 已经大于 4&quot;</span><span class="p">)</span>
 <a id="__codelineno-26-56" name="__codelineno-26-56"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   → 局部上界只管「当前这一步」，点一动，上界就变了&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>① 二次函数 f = x^2/2（Hessian 恒为 1，上界 = 2/1 = 2）
 学习率      x=1 出发         x=2 出发        
 1.9      0.000000       0.000000      
@@ -13869,6 +13894,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -13948,7 +13974,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-27-38" name="__codelineno-27-38"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  → 缩放后 </span><span class="si">%d</span><span class="s2"> 步，加速 </span><span class="si">%s</span><span class="s2"> 倍&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n_r2</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">n_rot</span> <span class="o">/</span> <span class="n">n_r2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 <a id="__codelineno-27-39" name="__codelineno-27-39"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-27-40" name="__codelineno-27-40"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论：对角缩放只修「量纲不一致」，修不了「方向之间强相关」&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>情形 A（对角，条件数 1000.0）: GD 需要 12312 步
   对角缩放后：对角元全为 True ，条件数 1.0
   → 缩放后 1 步，加速 12312.0 倍
@@ -14191,6 +14217,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -14302,7 +14329,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-30-54" name="__codelineno-30-54"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-30-55" name="__codelineno-30-55"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;注意：精确一维搜索每一步都要多算一次 A@g，&quot;</span><span class="p">)</span>
 <a id="__codelineno-30-56" name="__codelineno-30-56"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     步数少了，但每步更贵 —— 不是纯粹的「更快」&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>精确一维搜索（无需手选学习率）:
   状态        : 已收敛
   步数        : 62
@@ -14432,6 +14459,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </code></pre></div></td></tr></table></div>
 <p>所以 <code>0.19</code> 和 <code>0.2</code> 都挤在「最优值」和「上界」之间 ——
 这是最有意思的一段。实测：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -14473,7 +14501,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-33-19" name="__codelineno-33-19"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-33-20" name="__codelineno-33-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;注意：0.2 恰好等于上界，实测进入「停滞」而不是「发散」——&quot;</span><span class="p">)</span>
 <a id="__codelineno-33-21" name="__codelineno-33-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     因为二维以上只有 λ=λ_max 的那个方向在震荡，其余方向仍在收敛&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>lam_min = 0.2  lam_max = 10.0
 稳定上界 2/lam_max      = 0.2
 最优学习率 2/(sum)      = 0.196078
@@ -14567,6 +14595,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -14624,7 +14653,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-35-27" name="__codelineno-35-27"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-35-28" name="__codelineno-35-28"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论：整体放大只是换了个「单位」，条件数没变，&quot;</span><span class="p">)</span>
 <a id="__codelineno-35-29" name="__codelineno-35-29"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;     所以迭代次数不变 —— 前提是你把学习率同步缩小同样的倍数&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原问题   : lam_max = 10.0  上界 2/lam_max = 0.2
 放大 100 倍: lam_max = 1000.0  上界 2/lam_max = 0.002
 
@@ -14720,6 +14749,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -14765,7 +14795,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最优学习率确实最快，但它离上界太近，实际训练里没人敢这么取&quot;</span><span class="p">)</span>
 <a id="__codelineno-37-22" name="__codelineno-37-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者之差: &quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
 <a id="__codelineno-37-23" name="__codelineno-37-23"></a>    <span class="n">gd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr_opt</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])),</span> <span class="mi">10</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>lam_min / lam_max = 0.01 / 10.0
 最优学习率 2/(sum) = 0.1998
 1/lam_max          = 0.1
@@ -14888,6 +14918,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -14927,7 +14958,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <a id="__codelineno-39-18" name="__codelineno-39-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tol 每缩小 10 倍，步数增加约 </span><span class="si">%s</span><span class="s2"> 步&quot;</span>
 <a id="__codelineno-39-19" name="__codelineno-39-19"></a>      <span class="o">%</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">factor</span><span class="p">)),</span> <span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-39-20" name="__codelineno-39-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;也就是「精度多要一位小数」的代价是固定的常数步数 ✓&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>kappa = 10，学习率 = 0.1，理论收敛因子 = 0.9
 tol        实测步数         理论上界           差值          
 1e-02      30           44             14          

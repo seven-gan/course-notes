@@ -10500,6 +10500,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（Indexing and selecting data / Reshaping）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="06">06 筛选与变换<a class="headerlink" href="#06" title="Permanent link">&para;</a></h1>
@@ -10598,6 +10606,7 @@
 <h3 id="11">1.1 先造一张能反复用的表<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>后面所有例子都围绕一张小表展开。为了让你能照着敲一遍，
 每个例子都<strong>自带数据、能独立运行</strong>（不依赖前面例子的变量）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -10627,6 +10636,7 @@
   赵六   北京     77      9</code></pre>
 <h3 id="12">1.2 布尔索引：用一个「真 / 假 序列」去挑行<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>先看一个不涉及任何筛选事实本身的操作：<strong>把比较结果单独拿出来看</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10679,6 +10689,7 @@
 布尔序列（<code>Series</code>，<code>dtype</code> 为 <code>bool</code>）</strong> ——
 下标和原表一一对应，值就是「这一行该不该留下」。</p>
 <p>这正是「布尔索引」的全部含义：<strong>把这个真假序列塞进方括号</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10745,6 +10756,7 @@ name city  score  hours
 </table>
 <h3 id="13">1.3 它返回的是「子集」，不是原表<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>初学者最常问的是：<strong>「我改了筛选结果，为什么原表没变？」</strong> 答案是筛选返回的是<strong>新的对象</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10785,6 +10797,7 @@ name city  score  hours
 但它必须<strong>长度一致</strong>，或者<strong>索引能对齐</strong>，否则报错。这两种报错差一个词，
 但原因完全不同，值得分别看一眼。</p>
 <p>长度不对（最常见的错误，通常是手工写了掩码却数错了个数）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -10799,6 +10812,7 @@ name city  score  hours
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>ValueError: Item wrong length 3 instead of 6.</code></pre>
 <p>索引对不上（长度都是 4，但布尔序列的索引和表的索引没有交集）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -10871,6 +10885,7 @@ name city  score  hours
 <p>原因：<code>and</code> / <code>or</code> / <code>not</code> 是<strong>Python 语言的关键字，它们要求左边和右边各是一个「单个的真假值」</strong>，
 而 <code>df["score"] &gt; 60</code> 给出的是一整串真假值（一个序列），
 于是 Python 只能反问一句「这么多真假值，你到底要我按哪个算？」——然后报错。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10899,6 +10914,7 @@ name city  score  hours
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>ValueError: The truth value of a Series is ambiguous.
 </code></pre></div></td></tr></table></div>
 <p>正确写法是逐元素运算的 <code>&amp;</code> / <code>|</code> / <code>~</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -10991,6 +11007,7 @@ name city  score  hours
 <p>也就是说，<strong>它把 <code>60</code> 当成了一个「只有一位的掩码」去和后面的条件做按位与</strong>，
 再把结果拿去和分数比较 —— 算出来的是<strong>完全不同的东西</strong>。
 下面把它完整跑一遍，你会看到它不报错、但选出 6 行（全部）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11045,6 +11062,7 @@ name city  score  hours
 这就是传说中的「不报错、结果错」：如果你不手工核对行数，会一直以为自己筛对了。</p>
 <p>同一个坑还有两种<strong>会报错</strong>的变体，特点是报错信息更怪，
 初次见几乎猜不出原因，所以也放在这里备查：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span>
@@ -11067,6 +11085,7 @@ name city  score  hours
 <p>最后是 <code>~</code> 的漏括号。<code>~</code> 的优先级<strong>低于比较</strong>，所以 <code>~df["score"] &gt; 60</code>
 会先算 <code>~df["score"]</code>（对整数取按位非，得到一串负数），
 再拿负数和 60 比 —— 结果<strong>全是 <code>False</code></strong>，同样是静默错误。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -11148,6 +11167,7 @@ name city  score  hours
 </tbody>
 </table>
 <h3 id="31-isin">3.1 <code>isin</code>：值在不在一个集合里<a class="headerlink" href="#31-isin" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11184,6 +11204,7 @@ name city  score
 
 也能用在数值列上: [True, False, False, True, False, False]</code></pre>
 <h3 id="32-between">3.2 <code>between</code>：闭区间，两端都算<a class="headerlink" href="#32-between" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11248,6 +11269,7 @@ between(70, 85, neither): [False, True, False, False, False, True]
 </tbody>
 </table>
 <h3 id="33-isna-notna">3.3 <code>isna</code> / <code>notna</code>：处理缺失<a class="headerlink" href="#33-isna-notna" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11309,6 +11331,7 @@ value    2
 </div>
 <h3 id="34-strcontains-na-regex">3.4 <code>str.contains</code>：文本包含，注意 <code>na</code> 与 <code>regex</code><a class="headerlink" href="#34-strcontains-na-regex" title="Permanent link">&para;</a></h3>
 <p>先看默认行为与一个真实的报错：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -11333,6 +11356,7 @@ value    2
 <p>原因很简单：<code>str.contains</code> 遇到缺失值时<strong>不知道该答真还是假，
 于是返回缺失</strong>；而筛选要求一个纯粹的真假序列，它就拒绝了。
 解决办法就是显式告诉它「缺失算假」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -11368,6 +11392,7 @@ value    2
   4 A-03</code></pre>
 <p>第二个参数是 <code>regex</code>。<code>str.contains</code> 的<strong>默认值是 <code>regex=True</code></strong>，
 也就是说传入的字符串会被当成<strong>正则表达式</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11443,6 +11468,7 @@ caseless 用 case=False           : [True, True, True, True]
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a>students.query(&quot;score &gt;= 75 and city == &#39;北京&#39;&quot;)
 </code></pre></div></td></tr></table></div>
 <h3 id="42">4.2 基本用法<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -11541,6 +11567,7 @@ name city  score  hours
 <p>这是 <code>query()</code> 最实用的一个能力。条件里的阈值往往来自外部 ——
 用户在界面上填的数字、上一步算出的统计量、配置项。
 <code>@</code> 就是「请到这里之外去找这个名字」的意思：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -11637,6 +11664,7 @@ name city  score  hours
 <h3 id="44">4.4 与布尔索引的取舍：同一个任务写两遍<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
 <p>下面把<strong>完全相同的筛选任务</strong>用两种方式各写一遍，
 并用 <code>equals</code> 验证结果一致 —— 这样你就能把注意力放在「哪种更好读」上。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -11726,6 +11754,7 @@ query  选出的学生: ['陈二', '张三', '王五', '赵六']
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
@@ -11755,6 +11784,7 @@ query  选出的学生: ['陈二', '张三', '王五', '赵六']
 <hr />
 <h2 id="_3">五、排序与排名<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="51-sort_values">5.1 <code>sort_values</code>：按值排<a class="headerlink" href="#51-sort_values" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -11802,6 +11832,7 @@ name city  score
   王五   上海    NaN</code></pre>
 <h3 id="52">5.2 多列排序，且每列升降序不同<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p><code>ascending</code> 不止能收一个布尔值，还能收<strong>一个列表</strong>，与 <code>by</code> 一一对应：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -11867,6 +11898,7 @@ name city  score
 只要各列方向不同，就必须把 <code>ascending</code> 写成与 <code>by</code> <strong>等长的列表</strong>。</p>
 </div>
 <h3 id="53-na_position">5.3 <code>na_position</code>：缺失值排在哪<a class="headerlink" href="#53-na_position" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -11904,6 +11936,7 @@ na_position='first'       : ['王五', '林一', '陈二']
 <h3 id="54-sort_index">5.4 <code>sort_index</code>：按索引排<a class="headerlink" href="#54-sort_index" title="Permanent link">&para;</a></h3>
 <p>值排序用 <code>sort_values</code>，<strong>索引排序用 <code>sort_index</code></strong>。两者不能混用，
 因为索引未必是数字，也未必有意义：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -11977,6 +12010,7 @@ sort_index(ascending=False): ['c', 'b', 'a']</code></pre>
 对于有并列值的数据，这两个问题的答案不一样，而 <code>rank</code> 还要再问你一句：
 <strong>并列的那几个人，名次怎么分？</strong> 这就是 <code>method</code> 参数。</p>
 <p>下面用一份<strong>有大量并列</strong>的数据把四种 <code>method</code> 全部跑出来对照：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12122,6 +12156,7 @@ sort_index(ascending=False): ['c', 'b', 'a']</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12176,6 +12211,7 @@ name  score  名次
 <h2 id="_4">六、列运算与变换<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 整列算术：不写循环<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>pandas 的列是 <code>Series</code>，<strong>整列运算会逐元素生效</strong>，不需要 <code>for</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
 <span class="normal"><a href="#__codelineno-33-2">2</a></span>
 <span class="normal"><a href="#__codelineno-33-3">3</a></span>
@@ -12201,6 +12237,7 @@ name  score  名次
 这些运算都不改变原表: [58, 72, 85, 91, 66, 77]</code></pre>
 <h3 id="62">6.2 列与列运算：靠索引自动对齐<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>两个列相加减时，pandas <strong>按索引对齐</strong>、逐行配对 —— 不是按「第几行」硬凑：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -12268,6 +12305,7 @@ hours     53.00
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
 <span class="normal"><a href="#__codelineno-35-2">2</a></span>
 <span class="normal"><a href="#__codelineno-35-3">3</a></span>
@@ -12293,6 +12331,7 @@ clip(0,10): [1.5678, 0.0, 10.0, 0.4, 10.0]</code></pre>
 <p>用 <code>clip</code> 处理异常值时，最容易出的事故是<strong>改完就不管了</strong> ——
 报告里的数字已经不是你测到的数字，但没人知道。
 一个成本极低的好习惯是<strong>顺手数一下被改动的行数</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
 <span class="normal"><a href="#__codelineno-36-2">2</a></span>
 <span class="normal"><a href="#__codelineno-36-3">3</a></span>
@@ -12310,7 +12349,7 @@ clip(0,10): [1.5678, 0.0, 10.0, 0.4, 10.0]</code></pre>
 <a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;clip 后     :&quot;</span><span class="p">,</span> <span class="n">fixed</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-36-8" name="__codelineno-36-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;被改动的个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">fixed</span> <span class="o">!=</span> <span class="n">raw</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 <a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;被改动的位置:&quot;</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">fixed</span> <span class="o">!=</span> <span class="n">raw</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>clip 前     : [-5.0, 1.0, 3.0, 200.0, 7.0]
 clip 后     : [0.0, 1.0, 3.0, 10.0, 7.0]
 被改动的个数: 2
@@ -12322,6 +12361,7 @@ clip 后     : [0.0, 1.0, 3.0, 10.0, 7.0]
 <h3 id="64-npwhere">6.4 <code>np.where</code>：向量化的条件赋值<a class="headerlink" href="#64-npwhere" title="Permanent link">&para;</a></h3>
 <p>「满足条件填 A、否则填 B」是最常见的派生需求。
 可以写循环，但更好的做法是 <code>np.where(条件, 真时取值, 假时取值)</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -12350,6 +12390,7 @@ clip 后     : [0.0, 1.0, 3.0, 10.0, 7.0]
   王五     66  未达标
   赵六     77   达标</code></pre>
 <p>需要<strong>多档</strong>时，把 <code>np.where</code> 套起来即可（从最严格的条件往下写）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -12448,6 +12489,7 @@ clip 后     : [0.0, 1.0, 3.0, 10.0, 7.0]
 <p>用一句话就能测出方向：<strong>函数里写 <code>col.max()</code> 能跑通，说明拿到的是「一列」</strong>；
 而 <code>row["a"] + row["b"]</code> 这种「同时用到两个列名」的写法，
 只可能出现在 <code>axis=1</code> 里。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -12603,6 +12645,7 @@ y    2
 函数里只要有一条分支返回字符串、另一条返回数字，
 整列就会变成 <code>object</code> 类型，后续运算既慢又容易出错。</p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -12678,6 +12721,7 @@ y    2
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -12716,6 +12760,7 @@ map 函数  : ['a-01', 'b-02', 'a-01', 'c-03']
 <strong>它不报错，只是安静地变成空值</strong>。如果这类数据会被下游拿去算平均值，
 结果就会悄悄少了几个样本。</p>
 <p>两个自查动作（各 5 秒）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1">1</a></span>
 <span class="normal"><a href="#__codelineno-42-2">2</a></span>
 <span class="normal"><a href="#__codelineno-42-3">3</a></span>
@@ -12733,7 +12778,7 @@ map 函数  : ['a-01', 'b-02', 'a-01', 'c-03']
 <a id="__codelineno-42-7" name="__codelineno-42-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;映射结果      :&quot;</span><span class="p">,</span> <span class="n">mapped</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;有多少个没匹配上:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">mapped</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 <a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;是哪些值      :&quot;</span><span class="p">,</span> <span class="n">codes</span><span class="p">[</span><span class="n">mapped</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>映射结果      : ['电子', '机械', nan]
 有多少个没匹配上: 1
 是哪些值      : ['D-99']</code></pre>
@@ -12768,6 +12813,7 @@ map 函数  : ['a-01', 'b-02', 'a-01', 'c-03']
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -12881,6 +12927,7 @@ B C</code></pre>
 </tbody>
 </table>
 <h3 id="92-cut">9.2 <code>cut</code>：自定义边界<a class="headerlink" href="#92-cut" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -12963,6 +13010,7 @@ B C</code></pre>
 </table>
 <p>这两件事都不报错，结果是「原本 100 个人，分完箱只剩 97 个」。
 所以分箱后必须查一次缺失个数：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
@@ -12986,7 +13034,7 @@ B C</code></pre>
 <a id="__codelineno-45-10" name="__codelineno-45-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;include_lowest=True:&quot;</span><span class="p">,</span> <span class="n">fixed</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  缺失个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">fixed</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
 <a id="__codelineno-45-12" name="__codelineno-45-12"></a>      <span class="s2">&quot;→ 只剩超过上界的 120 仍为空&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>默认（左开右闭）: [nan, Interval(0.0, 60.0, closed='right'), Interval(60.0, 100.0, closed='right'), nan]
   缺失个数: 2 → 0 和 120 都被丢掉了
 include_lowest=True: [Interval(-0.001, 60.0, closed='right'), Interval(-0.001, 60.0, closed='right'), Interval(60.0, 100.0, closed='right'), nan]
@@ -13000,6 +13048,7 @@ include_lowest=True: [Interval(-0.001, 60.0, closed='right'), Interval(-0.001, 6
 <p><code>qcut</code> 不理解「60 分及格」这类业务边界，
 它只做一件事：<strong>把数据从小到大排好，按分位数切成若干等份</strong>。
 所以它适合「把人群按消费额分成四组，每组人数大致相同」这种需求。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -13081,6 +13130,7 @@ qcut 自己算出的分界点: [61.5, 74.5, 84.5, 95.0]</code></pre>
 </div>
 <h3 id="94-value_counts">9.4 用 <code>value_counts</code> 看各组人数<a class="headerlink" href="#94-value_counts" title="Permanent link">&para;</a></h3>
 <p>分箱之后<strong>第一件要做的事就是数人数</strong>。这一步能同时抓到「边界设错」和「数据偏斜」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -13171,6 +13221,7 @@ score
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -13211,6 +13262,7 @@ order city  amount  items
  订单04   上海     807     16
 总行数: 12</code></pre>
 <p>第一步筛选时顺手 <code>copy()</code>，这一步不是可有可无的 —— 它决定了下一步能不能安全地新增列：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -13310,6 +13362,7 @@ order city  amount  items  per_item
 </code></pre></div></td></tr></table></div>
 <p>翻译过来就是：<strong>你正在对一个「从别的表切出来的副本」写入数据，
 这次写入可能不会影响到你想要的那个表。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -13370,6 +13423,7 @@ order city  amount  items  per_item
 <div class="admonition warning">
 <p class="admonition-title">最坑的一种写法：链式赋值看起来像生效了，其实丢了</p>
 <p>比新增列更隐蔽的是<strong>链式赋值</strong>（在一条链的末尾赋值）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -13393,7 +13447,7 @@ order city  amount  items  per_item
 <a id="__codelineno-52-10" name="__codelineno-52-10"></a>
 <a id="__codelineno-52-11" name="__codelineno-52-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;触发的警告:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">type</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">message</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">caught</span><span class="p">])</span>
 <a id="__codelineno-52-12" name="__codelineno-52-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原表的 d 真的变了吗:&quot;</span><span class="p">,</span> <span class="n">base</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>触发的警告: ['SettingWithCopyWarning']
 原表的 d 真的变了吗: [5, 6, 7, 8]</code></pre>
 <p><code>base[base["a"] &gt; 1]</code> 先造出一个临时表，
@@ -13405,6 +13459,7 @@ order city  amount  items  per_item
 <p><strong>写法一：用 <code>.loc</code> 一步到位</strong>（推荐用于「改原表」）</p>
 <p><code>.loc[行条件, 列名] = 值</code> 把「选出哪些行」和「写入哪一列」
 放在<strong>同一次操作</strong>里，pandas 明确知道你要写回原表，因此不会再猜：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>
@@ -13426,6 +13481,7 @@ order city  amount  items  per_item
  3 99
  4 99</code></pre>
 <p><strong>写法二：先 <code>.copy()</code>，再当成普通表改</strong>（推荐用于「改筛选结果」）</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -13634,6 +13690,7 @@ order city  amount  items  per_item
 <p class="admonition-title"><code>inplace</code> 与链式调用的冲突，值得单独记一句</p>
 <p><code>inplace=True</code> 的含义是「<strong>就地修改，不返回新对象</strong>」，
 所以它的返回值是 <code>None</code>。这与链式调用<strong>天生矛盾</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -13659,7 +13716,7 @@ order city  amount  items  per_item
 <a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="n">s2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
 <a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="n">returned</span> <span class="o">=</span> <span class="n">s2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <a id="__codelineno-55-13" name="__codelineno-55-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  返回值:&quot;</span><span class="p">,</span> <span class="n">returned</span><span class="p">,</span> <span class="s2">&quot;  原对象已被就地改好:&quot;</span><span class="p">,</span> <span class="n">s2</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>sort_values 不写 inplace，返回新对象:
   新对象: [1, 2, 3]   原对象: [3, 1, 2]
 
@@ -13717,6 +13774,7 @@ order city  amount  items  per_item
 <details class="success">
 <summary>解答</summary>
 <p>先看正确写法与结果：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -13746,7 +13804,7 @@ order city  amount  items  per_item
 <a id="__codelineno-56-13" name="__codelineno-56-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;掩码:&quot;</span><span class="p">,</span> <span class="n">cond</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-56-14" name="__codelineno-56-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;选中行数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">students</span><span class="p">))</span>
 <a id="__codelineno-56-15" name="__codelineno-56-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">students</span><span class="p">[</span><span class="n">cond</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>掩码: [False, True, True, False, False, True]
 选中行数: 3 / 6
 name city  score  hours
@@ -13754,6 +13812,7 @@ name city  score  hours
   张三   北京     85     12
   赵六   北京     77      9</code></pre>
 <p>再用 <code>query</code> 写一遍，验证结果一致：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-57-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-57-3"> 3</a></span>
@@ -13787,7 +13846,7 @@ name city  score  hours
 <a id="__codelineno-57-15" name="__codelineno-57-15"></a>
 <a id="__codelineno-57-16" name="__codelineno-57-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两种写法结果一致:&quot;</span><span class="p">,</span> <span class="n">by_mask</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">by_query</span><span class="p">))</span>
 <a id="__codelineno-57-17" name="__codelineno-57-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;选中的学生:&quot;</span><span class="p">,</span> <span class="n">by_query</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>两种写法结果一致: True
 选中的学生: ['陈二', '张三', '赵六']</code></pre>
 <p><strong>关键点</strong>：</p>
@@ -13839,6 +13898,7 @@ name city  score  hours
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -13886,7 +13946,7 @@ name city  score  hours
 <a id="__codelineno-58-22" name="__codelineno-58-22"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-58-23" name="__codelineno-58-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;没登记上的编码个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">missing</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 <a id="__codelineno-58-24" name="__codelineno-58-24"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;是哪些编码:&quot;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">picked</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">missing</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">])))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>① 筛选结果:
  tag model
 A-01    M1
@@ -13952,6 +14012,7 @@ A-03    M9 NaN
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-59-3"> 3</a></span>
@@ -13999,7 +14060,7 @@ A-03    M9 NaN
 <a id="__codelineno-59-22" name="__codelineno-59-22"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-59-23" name="__codelineno-59-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;③ 各等级人数:&quot;</span><span class="p">)</span>
 <a id="__codelineno-59-24" name="__codelineno-59-24"></a><span class="nb">print</span><span class="p">(</span><span class="n">scores</span><span class="p">[</span><span class="s2">&quot;等级&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>① 分箱结果（前 5 行）:
 name  score  等级
    A     58 不及格
@@ -14139,6 +14200,7 @@ name  score  等级   名次
 </tbody>
 </table>
 <p>向量化写法：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-62-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-62-3"> 3</a></span>
@@ -14160,7 +14222,7 @@ name  score  等级   名次
 <a id="__codelineno-62-9" name="__codelineno-62-9"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">5000</span><span class="p">)</span>
 <a id="__codelineno-62-10" name="__codelineno-62-10"></a>
 <a id="__codelineno-62-11" name="__codelineno-62-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code> price level   tax
    0.0    便宜  -3.0
   80.0    便宜   4.8
@@ -14217,6 +14279,7 @@ name  score  等级   名次
 <a id="__codelineno-64-2" name="__codelineno-64-2"></a>  → df[&quot;a&quot;] &gt; (60 &amp; df[&quot;b&quot;].notna())      ← 先把 60 和布尔列做按位与
 </code></pre></div></td></tr></table></div>
 <p>下面用一段代码把中间结果打出来，你就能看到它算的是什么：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -14244,7 +14307,7 @@ name  score  等级   名次
 <a id="__codelineno-65-12" name="__codelineno-65-12"></a><span class="n">right</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">())</span>
 <a id="__codelineno-65-13" name="__codelineno-65-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;写法 A 的掩码:&quot;</span><span class="p">,</span> <span class="n">right</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-65-14" name="__codelineno-65-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;写法 A 选出:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="n">right</span><span class="p">][</span><span class="s2">&quot;a&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;共&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">right</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="s2">&quot;行&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>60 &amp; notna() 得到: [False, False, False, False]
 写法 B 的掩码: [True, True, True, True]
 写法 B 选出: [30, 45, 70, 85] 共 4 行
@@ -14301,6 +14364,7 @@ name  score  等级   名次
 <summary>解答</summary>
 <p><strong>第一部分：为什么必须 <code>na=False</code>。</strong></p>
 <p>先看 <code>str.contains</code> 单独跑时返回什么：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1">1</a></span>
 <span class="normal"><a href="#__codelineno-67-2">2</a></span>
 <span class="normal"><a href="#__codelineno-67-3">3</a></span>
@@ -14312,11 +14376,12 @@ name  score  等级   名次
 <a id="__codelineno-67-4" name="__codelineno-67-4"></a><span class="n">mask</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;A-&quot;</span><span class="p">)</span>
 <a id="__codelineno-67-5" name="__codelineno-67-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;掩码       :&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-67-6" name="__codelineno-67-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;掩码 dtype :&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>掩码       : [True, None, False]
 掩码 dtype : object</code></pre>
 <p>缺失位置返回的是 <strong><code>None</code>（缺失）</strong>，而不是 <code>False</code>。
 于是整列 <code>dtype</code> 变成 <code>object</code>，不能当作索引器使用：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1">1</a></span>
 <span class="normal"><a href="#__codelineno-68-2">2</a></span>
 <span class="normal"><a href="#__codelineno-68-3">3</a></span>
@@ -14326,11 +14391,12 @@ name  score  等级   名次
 <a id="__codelineno-68-3" name="__codelineno-68-3"></a>
 <a id="__codelineno-68-4" name="__codelineno-68-4"></a><span class="n">tags</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s2">&quot;A-01&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;B-02&quot;</span><span class="p">])</span>
 <a id="__codelineno-68-5" name="__codelineno-68-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">tags</span><span class="p">[</span><span class="n">tags</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;A-&quot;</span><span class="p">)])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>ValueError: Cannot mask with non-boolean array containing NA / NaN values</code></pre>
 <p>第二部分：如果想让缺失也算匹配。</p>
 <p>那就得显式补一个条件 —— 注意<strong>不是</strong>把 <code>na=True</code>
 （<code>na=True</code> 是把缺失一律当作「匹配」，而不是把原有匹配结果保留）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-1">1</a></span>
 <span class="normal"><a href="#__codelineno-69-2">2</a></span>
 <span class="normal"><a href="#__codelineno-69-3">3</a></span>
@@ -14348,7 +14414,7 @@ name  score  等级   名次
 <a id="__codelineno-69-7" name="__codelineno-69-7"></a>
 <a id="__codelineno-69-8" name="__codelineno-69-8"></a><span class="n">a_or_na</span> <span class="o">=</span> <span class="n">tags</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="s2">&quot;A-&quot;</span><span class="p">,</span> <span class="n">na</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">|</span> <span class="n">tags</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span>
 <a id="__codelineno-69-9" name="__codelineno-69-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;含 A- 的或缺失的行:&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="p">[</span><span class="n">a_or_na</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>只匹配含 A- 的   : ['A-01']
 含 A- 的或缺失的行: ['A-01', None]</code></pre>
 <table>
@@ -14400,6 +14466,7 @@ name  score  等级   名次
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-70-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-70-3"> 3</a></span>
@@ -14431,7 +14498,7 @@ name  score  等级   名次
 <a id="__codelineno-70-14" name="__codelineno-70-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;名次 &lt;= 2 会拿到几个人:&quot;</span><span class="p">,</span>
 <a id="__codelineno-70-15" name="__codelineno-70-15"></a>      <span class="nb">int</span><span class="p">((</span><span class="n">tie</span><span class="p">[</span><span class="s2">&quot;名次_min&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
 <a id="__codelineno-70-16" name="__codelineno-70-16"></a>      <span class="s2">&quot;（而 head(2) 一定只给 2 行）&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>name  score  名次_average  名次_min  名次_max  名次_first
   林一     90         1.5     1.0     2.0       1.0
   陈二     90         1.5     1.0     2.0       2.0
@@ -14473,6 +14540,7 @@ name  score  等级   名次
 </table>
 <p><strong>回到问题</strong>：「分数最高的 2 个人」这个需求，
 <strong>不要用 <code>rank</code></strong> —— 直接用排序加 <code>head</code> 最清楚：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1">1</a></span>
 <span class="normal"><a href="#__codelineno-71-2">2</a></span>
 <span class="normal"><a href="#__codelineno-71-3">3</a></span>
@@ -14488,7 +14556,7 @@ name  score  等级   名次
 <a id="__codelineno-71-6" name="__codelineno-71-6"></a><span class="p">})</span>
 <a id="__codelineno-71-7" name="__codelineno-71-7"></a>
 <a id="__codelineno-71-8" name="__codelineno-71-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">tie</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;score&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>name  score
   林一     90
   陈二     90</code></pre>
@@ -14540,6 +14608,7 @@ name  score  等级   名次
 <details class="success">
 <summary>解答</summary>
 <p>下面这段代码把其中两种原因放在一起跑了一遍：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-72-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-72-3"> 3</a></span>
@@ -14583,7 +14652,7 @@ name  score  等级   名次
 <a id="__codelineno-72-20" name="__codelineno-72-20"></a><span class="n">sub</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">99</span>
 <a id="__codelineno-72-21" name="__codelineno-72-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;③ 改的是副本：副本 d:&quot;</span><span class="p">,</span> <span class="n">sub</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
 <a id="__codelineno-72-22" name="__codelineno-72-22"></a>      <span class="s2">&quot;原表 d:&quot;</span><span class="p">,</span> <span class="n">df3</span><span class="p">[</span><span class="s2">&quot;d&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>① 链式赋值后，原表 d: [5, 6, 7, 8] 警告数: 1
 ② 条件没命中的行数: 0 ，d 仍是: [5, 6, 7, 8]
 ③ 改的是副本：副本 d: [99, 99, 99] 原表 d: [5, 6, 7, 8]</code></pre>

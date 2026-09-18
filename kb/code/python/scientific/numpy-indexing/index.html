@@ -10612,6 +10612,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>NumPy 官方文档（Indexing on ndarrays / Copies and views）</code><code>本页示例在 NumPy 1.26 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="02">02 索引与切片<a class="headerlink" href="#02" title="Permanent link">&para;</a></h1>
@@ -10754,6 +10762,7 @@
 <p><strong>「视图还是副本」这一列就是本页的重点</strong>，因为它决定了
 「我改了它，原数据会不会变」—— 这个问题在真实代码里经常是致命的。</p>
 <p>用一段对比感受一下「有索引」和「没索引」的差距：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -10794,6 +10803,7 @@
 <h2 id="_2">二、基本索引：取出单个元素<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21-list">2.1 一维数组：和 list 长得一样<a class="headerlink" href="#21-list" title="Permanent link">&para;</a></h3>
 <p>一维数组的下标从 <code>0</code> 开始，这一点和 list 完全一致：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10844,6 +10854,7 @@ py[0] 的类型: int
 这也是为什么有时候 <code>type()</code> 打出来的名字带 <code>64</code>。</p>
 <h3 id="22-ai-j-aij">2.2 多维数组：<code>a[i, j]</code> 比 <code>a[i][j]</code> 更高效<a class="headerlink" href="#22-ai-j-aij" title="Permanent link">&para;</a></h3>
 <p>二维数组有两种写法取出同一个元素：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10957,6 +10968,7 @@ a[1] 与 a 共享内存: True</code></pre>
 后面会看到这两者的结果完全不同。</p>
 <h3 id="23">2.3 负索引：从末尾往回数<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>负索引让「最后一个元素」这件事不再依赖长度：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11020,6 +11032,7 @@ a[-5]    : 100  ← 第一个
 超出这个范围一样会报错，见下一节。</p>
 <h3 id="24-indexerror">2.4 索引越界会报 <code>IndexError</code><a class="headerlink" href="#24-indexerror" title="Permanent link">&para;</a></h3>
 <p><strong>Python 的索引是有边界检查的</strong>，越界一定报错，不会给你一个垃圾值：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -11038,6 +11051,7 @@ a[-5]    : 100  ← 第一个
 IndexError: index 3 is out of bounds for axis 0 with size 3</code></pre>
 <p><strong>这条错误是「好错误」</strong>：它当场告诉你下标不合法，
 比「悄悄算错」强一万倍。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
@@ -11123,6 +11137,7 @@ a[-3] = 100
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -11162,6 +11177,7 @@ a[::3]      : [0 3 6 9]  ← 每 3 个取一个</code></pre>
 <code>a[2:5]</code> 的长度是 <code>5 - 2 = 3</code>，
 <code>a[i:j]</code> 的长度就是 <code>j - i</code>（步长为 1 时）。不用考虑 ±1 的边界。</p>
 <h3 id="32">3.2 省略写法与负步长<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11233,6 +11249,7 @@ a[-5:-2]  : [5 6 7]  ← 倒数第 5 到倒数第 3
 但要注意它返回的是<strong>视图</strong>（本节第四条），原数组的<strong>内存并没有被倒着重排</strong>。</p>
 <h3 id="33-a-1a1-2">3.3 多维切片：<code>a[:, 1]</code>、<code>a[1:, 2:]</code><a class="headerlink" href="#33-a-1a1-2" title="Permanent link">&para;</a></h3>
 <p>多维切片的规则很简单：<strong>逗号分隔每一个维度，每个维度各自写一个切片</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -11337,6 +11354,7 @@ a[::2, ::2] 隔行隔列取:
 </div>
 <h3 id="34">3.4 切片越界<strong>不报错</strong><a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>这是索引与切片最大的行为差异，一定要亲自看一眼：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -11592,6 +11610,7 @@ L 91.809811 98.726607
 
 <h3 id="41">4.1 改切片会影响原数组<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p><strong>这一条是本节的核心</strong>，请亲自看一遍输出：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11637,6 +11656,7 @@ L 91.809811 98.726607
 一个 8 GB 的数组切出 1 GB 的一段，<strong>额外内存开销接近 0</strong>。</p>
 <h3 id="42-npshares_memory-base">4.2 用 <code>np.shares_memory()</code> 与 <code>.base</code> 验证<a class="headerlink" href="#42-npshares_memory-base" title="Permanent link">&para;</a></h3>
 <p>「是不是共享内存」这件事<strong>不要靠猜，直接问 NumPy</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11703,6 +11723,7 @@ sub 的 base 形状: (10,)
 <p><strong>对二维数组取一整行</strong>时，这个差别会直接显现出来：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a>a[1]      →  base 指向的是「被展平后的大数组」，不是 a 本身
 </code></pre></div></td></tr></table></div>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -11718,7 +11739,7 @@ sub 的 base 形状: (10,)
 <a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;row.base is a        :&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">base</span> <span class="ow">is</span> <span class="n">a</span><span class="p">)</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;np.shares_memory(a, row):&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">row</span><span class="p">))</span>
 <a id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;row.base 的形状       :&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>row.base is a        : False
 np.shares_memory(a, row): True
 row.base 的形状       : (12,)</code></pre>
@@ -11827,6 +11848,7 @@ row.base 的形状       : (12,)</code></pre>
 不是随便定的，而是由「能不能用步长描述」这个技术事实决定的 ✓</p>
 <h3 id="52-npshares_memory">5.2 用 <code>np.shares_memory</code> 逐个验证<a class="headerlink" href="#52-npshares_memory" title="Permanent link">&para;</a></h3>
 <p><strong>不用背，打一遍就记住了</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -11901,6 +11923,7 @@ copy a.copy()           : False</code></pre>
 </table>
 <h3 id="53">5.3 三条路的实测对比<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p>看一遍「改谁会影响谁」，比读十遍表都有效：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12001,6 +12024,7 @@ boolres.base is None: True
 <p><strong>这是真实项目里最常见的一类 bug</strong>：想「就地」修改数据，
 但中间那一步返回的其实是副本，
 于是修改<strong>写进了一个马上就被丢掉的临时对象</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12132,6 +12156,7 @@ NumPy 会<strong>直接把值写回原数组</strong>，不产生中间副本</p
 </div>
 <h3 id="55-copy-npcopy">5.5 显式复制：<code>copy()</code> 与 <code>np.copy</code><a class="headerlink" href="#55-copy-npcopy" title="Permanent link">&para;</a></h3>
 <p><strong>当你确实需要一份独立的数据时，把意图写出来</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12229,6 +12254,7 @@ b 的 base        : None
 <h2 id="_6">六、布尔索引（掩码）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 比较运算产生布尔数组<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>布尔索引的前提是：比较运算作用在整个数组上，产生一个同形状的布尔数组。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -12331,6 +12357,7 @@ a != 21      : [ True  True  True  True  True False]
 </tbody>
 </table>
 <h3 id="62">6.2 用掩码筛选<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12399,6 +12426,7 @@ a[a == 0]: [0]
 用第十节的 <code>np.nonzero</code> 或 <code>np.argwhere</code></p>
 <h3 id="63-masksum-any-all">6.3 <code>mask.sum()</code> 计数、<code>any</code> / <code>all</code>、<code>~</code> 取反<a class="headerlink" href="#63-masksum-any-all" title="Permanent link">&para;</a></h3>
 <p><strong>布尔数组本身就是一组 0/1</strong>，所以可以直接做统计：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -12502,6 +12530,7 @@ NumPy 也不接受这个写法</p>
 <h2 id="_7">七、多条件索引（重点）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="71-and-or">7.1 必须用 <code>&amp;</code> <code>|</code> <code>~</code>，<strong>不能用 <code>and</code> / <code>or</code></strong><a class="headerlink" href="#71-and-or" title="Permanent link">&para;</a></h3>
 <p><strong>这是 NumPy 里最著名的坑之一</strong>，先看它怎么报错：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
 <span class="normal"><a href="#__codelineno-31-3">3</a></span>
@@ -12521,6 +12550,7 @@ NumPy 也不接受这个写法</p>
 Python 没法替你决定「这算真还是算假」，于是直接报错</p>
 <p><strong>这个报错其实是在保护你</strong>：如果它随便挑一个「反正非空就算真」，
 你得到的就是<strong>完全错误但看起来正常</strong>的结果</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12589,6 +12619,7 @@ Python 没法替你决定「这算真还是算假」，于是直接报错</p>
 <code>25</code> 不是布尔数组，<code>&amp;</code> 会按整数位运算来算，结果无法预测</p>
 <h3 id="72">7.2 每个条件<strong>必须加括号</strong><a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p>这是比上一节更隐蔽的坑：它不报错，只是给你一个错的结果。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -12779,6 +12810,7 @@ NumPy 里必须写成 <strong><code>(a &gt; 2) &amp; (a &lt; 5)</code></strong> 
 </tbody>
 </table>
 <h3 id="81">8.1 三参数：条件取值的「如果……则……」写法<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -12870,6 +12902,7 @@ dtype 会跟着取值走: int32</code></pre>
 </tbody>
 </table>
 <h3 id="82">8.2 单参数：返回满足条件的下标<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -12979,6 +13012,7 @@ np.where(scores &gt;= 80) = (array([2, 5], dtype=int64),)
 <h3 id="91">9.1 用整数数组或列表索引<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
 <p><strong>花式索引</strong>指：方括号里给的不是数字、也不是切片，
 而是<strong>一组下标</strong>（整数数组或列表）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -13052,6 +13086,7 @@ a[[-1, -2]]            : [60 50]  ← 也可以用负下标
 <p><strong>「能重复取」这一点实际很有用</strong>：做自助抽样、随机重排时，
 都需要「从原数组里按随机下标取一批」，
 这正是花式索引的标准用途</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -13092,6 +13127,7 @@ a[[-1, -2]]            : [60 50]  ← 也可以用负下标
 重排后元素和不变: 210 == 210</code></pre>
 <p><strong>结果形状规则</strong>：<strong>结果形状 = 索引数组的形状</strong>（一维时就是索引数组的长度）。</p>
 <h3 id="92">9.2 多维花式索引<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -13214,6 +13250,7 @@ b[[0, 2]][:, [1, 3]] 才是「第 0、2 行的第 1、3 列」:
 </div>
 <h3 id="93-nptake-npput">9.3 <code>np.take</code> 与 <code>np.put</code><a class="headerlink" href="#93-nptake-npput" title="Permanent link">&para;</a></h3>
 <p><strong>花式索引也能用函数形式写</strong>，函数形式额外的好处是<strong>能处理越界下标</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13299,6 +13336,7 @@ c[[0, 4]] = [0, 0] 之后 c      = [  0 101 102 103   0]
 <hr />
 <h2 id="npnonzero-npargwhere">十、<code>np.nonzero</code> 与 <code>np.argwhere</code>：找出满足条件的位置<a class="headerlink" href="#npnonzero-npargwhere" title="Permanent link">&para;</a></h2>
 <p>上一节的布尔索引只给你「值」，这两个函数给你「位置」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -13376,6 +13414,7 @@ np.argwhere(mask) =
 </tbody>
 </table>
 <p><strong>二维场景最能看出差别</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
@@ -13463,6 +13502,7 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 <h2 id="_8">十一、用索引修改数组<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="111">11.1 布尔掩码赋值<a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
 <p><strong>这是数据清洗里最常用的一个动作</strong>：把不合适的值统一换成合适的值。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -13564,6 +13604,7 @@ np.nonzero(b &gt; 0)   : (array([0, 1, 1], dtype=int64), array([1, 0, 2], dtype=
 </table>
 <h3 id="112">11.2 花式索引赋值<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
 <p>花式索引赋值和切片赋值一样，都是原地改原数组</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -13618,6 +13659,7 @@ d[[4, 0]] = [...]   : [999  20  30  40 400  60]  ← 赋值按你给的顺序，
 它会把重复位置的贡献<strong>累加</strong>起来，而不是互相覆盖</p>
 <h3 id="113-buga0-10-9">11.3 经典 bug：<code>a[[0, 1]][0] = 9</code> 为什么不生效<a class="headerlink" href="#113-buga0-10-9" title="Permanent link">&para;</a></h3>
 <p><strong>这是花式索引是「副本」这件事造成的最经典的一个坑</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -13730,6 +13772,7 @@ a[[0, 1]][0] = 9 之后 a : [1 2 3 4 5]  ← 完全没变！⚠
 <h2 id="npclip-npselect">十二、<code>np.clip</code> 与 <code>np.select</code><a class="headerlink" href="#npclip-npselect" title="Permanent link">&para;</a></h2>
 <h3 id="121-npclip">12.1 <code>np.clip</code>：把数值截断到区间内<a class="headerlink" href="#121-npclip" title="Permanent link">&para;</a></h3>
 <p><strong>「超过上限就按下限算」这种事，不用写条件判断</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -13824,6 +13867,7 @@ clip 会新建数组     : False</code></pre>
 </table>
 <h3 id="122-npselect">12.2 <code>np.select</code>：多条件选值<a class="headerlink" href="#122-npselect" title="Permanent link">&para;</a></h3>
 <p><strong>两个以上分支时，<code>np.where</code> 就不够用了</strong>（除非嵌套，但可读性很差）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -13893,6 +13937,7 @@ np.select 的分级结果: ['D' 'C' 'A' 'D' 'C' 'B']
 </tbody>
 </table>
 <p><strong>第一条最容易错</strong>。如果把条件顺序倒过来：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1">1</a></span>
 <span class="normal"><a href="#__codelineno-57-2">2</a></span>
 <span class="normal"><a href="#__codelineno-57-3">3</a></span>
@@ -13998,6 +14043,7 @@ np.select 的分级结果: ['D' 'C' 'A' 'D' 'C' 'B']
 </tbody>
 </table>
 <p><strong>这六个函数都支持 <code>axis</code> 参数</strong>，这是多维场景的关键：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -14052,6 +14098,7 @@ a 本身没被排序    : [30 10 50 20 40]  ← 上面全是只读操作</code><
 <p><strong>为什么 <code>argsort</code> 比 <code>sort</code> 有用</strong>：因为它给出了<strong>「原来第几个排到第几位」</strong>，
 于是可以用<strong>同一组下标去重排别的数组</strong> ——
 这正是「按某一列排序整张表」的标准做法</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -14090,6 +14137,7 @@ argsort 得到的顺序: [1 3 0 4 2]
 
 从大到小只要再反转: ['第三组' '第五组' '第一组' '第四组' '第二组'] [50 40 30 20 10]</code></pre>
 <p><strong>多维场景下的 <code>axis</code></strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
@@ -14185,6 +14233,7 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 <h3 id="141">14.1 按阈值挑出异常样本<a class="headerlink" href="#141" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：一批测量数据，要找出明显偏离的样本。
 常用判据是「离均值超过 3 倍标准差」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-63-3"> 3</a></span>
@@ -14287,6 +14336,7 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 <h3 id="142">14.2 给缺失/异常值赋默认值<a class="headerlink" href="#142" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：数据里混着缺失值和明显的错误值，要统一填成默认值。
 这是真实项目里第一步要做的事。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-64-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-64-3"> 3</a></span>
@@ -14413,6 +14463,7 @@ a.argmax(axis=1)   每一行最大在哪: [1 0]
 打出 0 就放心用普通函数；打出非 0 就要换 <code>nan</code> 版本，
 或者先把缺失值处理掉</p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -14460,6 +14511,7 @@ np.nanmax / np.nanmin: 59.41 -999.0
 <h3 id="143">14.3 按列选特征子集<a class="headerlink" href="#143" title="Permanent link">&para;</a></h3>
 <p><strong>场景</strong>：一张特征表，只需要其中几列参与建模。
 <strong>选列要用二维切片或花式索引，别用一维索引</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-66-3"> 3</a></span>
@@ -14561,6 +14613,7 @@ np.take(X, [0, 2, 5], axis=1) 结果相同: True
 <hr />
 <h2 id="_10">十五、常见陷阱汇总<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="151-a-1">15.1 <code>a[:, 1]</code> 得到的是一维数组<a class="headerlink" href="#151-a-1" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-67-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-67-3"> 3</a></span>
@@ -14612,6 +14665,7 @@ a[:, 1:2] →
  [ 6]
  [10]]</code></pre>
 <h3 id="152">15.2 布尔索引结果的形状<a class="headerlink" href="#152" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-68-3"> 3</a></span>
@@ -14658,6 +14712,7 @@ b[row_mask] 的 shape: (3, 4)  ← 保留了行这个维度 ✓
 <h3 id="153">15.3 用列表索引与用元组索引的区别<a class="headerlink" href="#153" title="Permanent link">&para;</a></h3>
 <p><strong>这一条最隐蔽</strong>：<code>a[(0, 1)]</code> 与 <code>a[[0, 1]]</code> 只差一对括号，
 但一个是<strong>基本索引</strong>，一个是<strong>花式索引</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-69-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-69-3"> 3</a></span>
@@ -14894,6 +14949,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-72-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-72-3"> 3</a></span>
@@ -14935,7 +14991,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <a id="__codelineno-72-19" name="__codelineno-72-19"></a><span class="n">both</span> <span class="o">=</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">)</span>
 <a id="__codelineno-72-20" name="__codelineno-72-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;及格且低于 80 分的人数:&quot;</span><span class="p">,</span> <span class="n">both</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <a id="__codelineno-72-21" name="__codelineno-72-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这些成绩是:&quot;</span><span class="p">,</span> <span class="n">scores</span><span class="p">[</span><span class="n">both</span><span class="p">])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>成绩: [58 73 91 45 66 82 77 95 39 88]
 
 平均分: 71.4
@@ -15007,6 +15063,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <p><strong>这就是第七节强调括号的原因</strong>：
 多打两对括号，成本接近零；少打，代价是一次静默错误</p>
 <p><strong>顺带验证一下括号 bug</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-1">1</a></span>
 <span class="normal"><a href="#__codelineno-74-2">2</a></span>
 <span class="normal"><a href="#__codelineno-74-3">3</a></span>
@@ -15018,7 +15075,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <a id="__codelineno-74-4" name="__codelineno-74-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;正确写法人数:&quot;</span><span class="p">,</span> <span class="p">((</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 <a id="__codelineno-74-5" name="__codelineno-74-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;错写法人数  :&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="mi">60</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">scores</span> <span class="o">&lt;</span> <span class="mi">80</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot; ← 全选了 ⚠&quot;</span><span class="p">)</span>
 <a id="__codelineno-74-6" name="__codelineno-74-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总数        :&quot;</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>正确写法人数: 3
 错写法人数  : 10  ← 全选了 ⚠
 总数        : 10</code></pre>
@@ -15027,6 +15084,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <h3 id="2-bug">例题 2：诊断一个「改了不生效」的 bug<a class="headerlink" href="#2-bug" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：下面这个函数本想<strong>把数组里的小于 0 的值全部改成 0</strong>，
 但运行之后原数组一点没变。请找出问题、解释原因，并给出修法。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-75-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-75-3"> 3</a></span>
@@ -15070,6 +15128,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <summary>解答</summary>
 <p>问题：<code>x[x &lt; 0]</code> 返回的是副本，<code>[:] = 0</code> 改的是那个临时副本。</p>
 <p>逐步验证：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-76-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-76-3"> 3</a></span>
@@ -15093,7 +15152,7 @@ a[0, 1] 与 a[[0, 1]] 不同: [[ True False  True  True]
 <a id="__codelineno-76-10" name="__codelineno-76-10"></a><span class="n">tmp</span><span class="p">[:]</span> <span class="o">=</span> <span class="mi">0</span>
 <a id="__codelineno-76-11" name="__codelineno-76-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;改 tmp 之后 data:&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="s2">&quot; ← data 没变&quot;</span><span class="p">)</span>
 <a id="__codelineno-76-12" name="__codelineno-76-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;改 tmp 之后 tmp :&quot;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>mask           : [False  True False  True False False  True]
 data[mask]     : [-3 -1 -7]
 是视图吗       : False  ← False，是副本 ⚠
@@ -15128,6 +15187,7 @@ data[mask]     : [-3 -1 -7]
 </tbody>
 </table>
 <p><strong>修法（推荐第一种）</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-77-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-77-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-77-3"> 3</a></span>
@@ -15175,7 +15235,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-77-22" name="__codelineno-77-22"></a><span class="n">out</span> <span class="o">=</span> <span class="n">clean_v2</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
 <a id="__codelineno-77-23" name="__codelineno-77-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;修法二 结果:&quot;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
 <a id="__codelineno-77-24" name="__codelineno-77-24"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;修法二 原数组没变:&quot;</span><span class="p">,</span> <span class="n">data2</span><span class="p">,</span> <span class="s2">&quot; ← np.where 返回新数组&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>修法一 之前: [ 5 -3  8 -1  0  9 -7]
 修法一 之后: [5 0 8 0 0 9 0]  还有负值: False
 
@@ -15262,6 +15322,7 @@ data[mask]     : [-3 -1 -7]
 <details class="success">
 <summary>解答</summary>
 <p><strong>条件必须「从最严到最松」排</strong>，所以顺序是 <code>&gt;= 90</code>、<code>&gt;= 80</code>、<code>&gt;= 60</code>。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-80-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-80-3"> 3</a></span>
@@ -15293,7 +15354,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-80-14" name="__codelineno-80-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">grades</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="s2">&quot;人&quot;</span><span class="p">)</span>
 <a id="__codelineno-80-15" name="__codelineno-80-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;人数合计:&quot;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">((</span><span class="n">grades</span> <span class="o">==</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">]))</span>
 <a id="__codelineno-80-16" name="__codelineno-80-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总人数  :&quot;</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="s2">&quot; ← 必须相等 ✓&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>成绩: [ 58  73  91  45  66  82  77  95  39  88  60 100]
 
 分级结果: ['D' 'C' 'A' 'D' 'C' 'B' 'C' 'A' 'D' 'B' 'C' 'A']
@@ -15321,6 +15382,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-81-7" name="__codelineno-81-7"></a>  [scores &gt;= 60, scores &gt;= 80, scores &gt;= 90]     ✗ 95 分会被 &gt;= 60 先截走
 </code></pre></div></td></tr></table></div>
 <p><strong>跑一遍错顺序，看它怎么错</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-82-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-82-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-82-3"> 3</a></span>
@@ -15344,7 +15406,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-82-10" name="__codelineno-82-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;不同的位置:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">wrong</span> <span class="o">!=</span> <span class="n">right</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-82-11" name="__codelineno-82-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这些位置的分: &quot;</span><span class="p">,</span> <span class="n">scores</span><span class="p">[</span><span class="n">wrong</span> <span class="o">!=</span> <span class="n">right</span><span class="p">])</span>
 <a id="__codelineno-82-12" name="__codelineno-82-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ↑ 全是 90 分以上的，却被打成了 C ⚠&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>错顺序: ['D' 'C' 'C' 'D' 'C' 'C' 'C' 'C' 'D' 'C' 'C' 'C']
 对顺序: ['D' 'C' 'A' 'D' 'C' 'B' 'C' 'A' 'D' 'B' 'C' 'A']
 不同的位置: [ 2  5  7  9 11]
@@ -15419,6 +15481,7 @@ data[mask]     : [-3 -1 -7]
 </tbody>
 </table>
 <p><strong><code>default</code> 的影响值得亲眼看一眼</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-83-1">1</a></span>
 <span class="normal"><a href="#__codelineno-83-2">2</a></span>
 <span class="normal"><a href="#__codelineno-83-3">3</a></span>
@@ -15436,7 +15499,7 @@ data[mask]     : [-3 -1 -7]
 <a id="__codelineno-83-7" name="__codelineno-83-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtype        :&quot;</span><span class="p">,</span> <span class="n">no_default</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s2">&quot; ← 变成了字符串，0 被当成字符串 ⚠&quot;</span><span class="p">)</span>
 <a id="__codelineno-83-8" name="__codelineno-83-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;有 default   :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">select</span><span class="p">([</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">,</span> <span class="n">scores</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">],</span>
 <a id="__codelineno-83-9" name="__codelineno-83-9"></a>                                 <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">],</span> <span class="n">default</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>不给 default: ['0' '0' 'A' '0' '0' 'B' '0' 'A' '0' 'B' '0' 'A']
 dtype        : &lt;U3  ← 变成了字符串，0 被当成字符串 ⚠
 有 default   : ['C' 'C' 'A' 'C' 'C' 'B' 'C' 'A' 'C' 'B' 'C' 'A']</code></pre>
@@ -15467,6 +15530,7 @@ dtype        : &lt;U3  ← 变成了字符串，0 被当成字符串 ⚠
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-84-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-84-3"> 3</a></span>
@@ -15522,7 +15586,7 @@ dtype        : &lt;U3  ← 变成了字符串，0 被当成字符串 ⚠
 <a id="__codelineno-84-26" name="__codelineno-84-26"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;sub 是视图吗:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">sub</span><span class="p">),</span> <span class="s2">&quot; ← False，花式索引给的是副本&quot;</span><span class="p">)</span>
 <a id="__codelineno-84-27" name="__codelineno-84-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;想验证切片是视图，用 X[:, 0:2]:&quot;</span><span class="p">,</span>
 <a id="__codelineno-84-28" name="__codelineno-84-28"></a>      <span class="n">np</span><span class="o">.</span><span class="n">shares_memory</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>X 的 shape: (6, 5)
 [[ 8 77 65 43 43]
  [85  8 69 20  9]
@@ -15610,6 +15674,7 @@ sub 是视图吗: False  ← False，花式索引给的是副本
 <a id="__codelineno-85-2" name="__codelineno-85-2"></a>axis=1  →  沿第 1 轴（列）压缩  →  结果是「每一行一个值」
 </code></pre></div></td></tr></table></div>
 <p><strong>把 <code>argmax(axis=0)</code> 的结果拿去交叉验证</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-86-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-86-3"> 3</a></span>
@@ -15629,7 +15694,7 @@ sub 是视图吗: False  ← False，花式索引给的是副本
 <a id="__codelineno-86-8" name="__codelineno-86-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用这套下标取出来的值:&quot;</span><span class="p">,</span> <span class="n">sub</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
 <a id="__codelineno-86-9" name="__codelineno-86-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;和 sub.max(axis=0) 相同吗:&quot;</span><span class="p">,</span>
 <a id="__codelineno-86-10" name="__codelineno-86-10"></a>      <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="n">rows</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sub</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])],</span> <span class="n">sub</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>每一列最大值所在行: [1 2 4]
 用这套下标取出来的值: [85 97 78]
 和 sub.max(axis=0) 相同吗: True</code></pre>
@@ -15644,6 +15709,7 @@ sub 是视图吗: False  ← False，花式索引给的是副本
 <h2 id="_12">十七、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 下面这段代码里，<code>col1</code> 和 <code>col2</code> 的元素个数相同，
 但形状不同。请分别说出它们的形状，并解释为什么会不同。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-87-1">1</a></span>
 <span class="normal"><a href="#__codelineno-87-2">2</a></span>
 <span class="normal"><a href="#__codelineno-87-3">3</a></span>
@@ -15670,6 +15736,7 @@ col2 的 shape: (3, 1)</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong><code>col1</code> 是 <code>(3,)</code>（一维），<code>col2</code> 是 <code>(3, 1)</code>（二维）。</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-88-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-88-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-88-3"> 3</a></span>
@@ -15707,7 +15774,7 @@ col2 的 shape: (3, 1)</code></pre>
 <a id="__codelineno-88-17" name="__codelineno-88-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  写法二 a[:, 1:2].shape          :&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-88-18" name="__codelineno-88-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  两者数值相同吗:&quot;</span><span class="p">,</span>
 <a id="__codelineno-88-19" name="__codelineno-88-19"></a>      <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">col1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">a</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>a 的 shape   : (3, 4)
 col1.shape   : (3,)  ndim: 1
 col2.shape   : (3, 1)  ndim: 2
@@ -15797,6 +15864,7 @@ col2 打印:
 <hr />
 <p><strong>Q2</strong> 下面两个筛选写法，一个是对的、一个是错的。请指出哪个错、
 说明它会得到什么结果，并解释原因。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-1">1</a></span>
 <span class="normal"><a href="#__codelineno-90-2">2</a></span>
 <span class="normal"><a href="#__codelineno-90-3">3</a></span>
@@ -15820,6 +15888,7 @@ col2 打印:
 <details class="success">
 <summary>解答</summary>
 <p>写法二是错的：<code>&amp;</code> 的优先级高于比较运算符，<code>50 &amp; (data &lt; 90)</code> 会先算。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-91-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-91-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-91-3"> 3</a></span>
@@ -15849,7 +15918,7 @@ col2 打印:
 <a id="__codelineno-91-13" name="__codelineno-91-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  50 &amp; (data &lt; 90) =&quot;</span><span class="p">,</span> <span class="n">inner</span><span class="p">,</span> <span class="s2">&quot;  dtype:&quot;</span><span class="p">,</span> <span class="n">inner</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 <a id="__codelineno-91-14" name="__codelineno-91-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  data &gt; 上面这个   =&quot;</span><span class="p">,</span> <span class="n">data</span> <span class="o">&gt;</span> <span class="n">inner</span><span class="p">)</span>
 <a id="__codelineno-91-15" name="__codelineno-91-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ↑ 全是 True，所以一个不少地全取出来了 ⚠&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>data              : [85 42 67 91 55 78 30 88]
 
 正确写法          : [85 67 55 78 88]
@@ -15968,6 +16037,7 @@ col2 打印:
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-94-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-94-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-94-3"> 3</a></span>
@@ -16005,7 +16075,7 @@ col2 打印:
 <a id="__codelineno-94-17" name="__codelineno-94-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  改视图后 a :&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot; ← 变了 ⚠&quot;</span><span class="p">)</span>
 <a id="__codelineno-94-18" name="__codelineno-94-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  改副本后 c :&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 <a id="__codelineno-94-19" name="__codelineno-94-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  a 还是     :&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot; ← 副本的改动没进去&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>a = [0 1 2 3 4 5 6 7 8 9]
 
 ravel 是视图吗      : True
@@ -16128,6 +16198,7 @@ ravel 是视图吗      : True
 <details class="success">
 <summary>解答</summary>
 <p><strong>第一组：<code>max</code> / <code>min</code> 给值，<code>argmax</code> / <code>argmin</code> 给下标。</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-96-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-96-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-96-3"> 3</a></span>
@@ -16161,7 +16232,7 @@ ravel 是视图吗      : True
 <a id="__codelineno-96-15" name="__codelineno-96-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b.argmax(axis=1)   :&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s2">&quot; ← 每行最大值在哪一列&quot;</span><span class="p">)</span>
 <a id="__codelineno-96-16" name="__codelineno-96-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;b.argmax() 不带 axis:&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="s2">&quot; ← 展平后的位置 ⚠&quot;</span><span class="p">)</span>
 <a id="__codelineno-96-17" name="__codelineno-96-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;还原成二维坐标     :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>a = [30 10 50 20 40]
 a.max()    = 50   ← 值
 a.argmax() = 2    ← 下标（a[2] 是 50）
@@ -16176,6 +16247,7 @@ b.argmax(axis=1)   : [1 0]  ← 每行最大值在哪一列
 b.argmax() 不带 axis: 1  ← 展平后的位置 ⚠
 还原成二维坐标     : (0, 1)</code></pre>
 <p>第二组：<code>sort</code> 给排序后的值，<code>argsort</code> 给「排序用的下标」。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-97-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-97-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-97-3"> 3</a></span>
@@ -16205,7 +16277,7 @@ b.argmax() 不带 axis: 1  ← 展平后的位置 ⚠
 <a id="__codelineno-97-13" name="__codelineno-97-13"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-97-14" name="__codelineno-97-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;要降序: order[::-1] =&quot;</span><span class="p">,</span> <span class="n">order</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <a id="__codelineno-97-15" name="__codelineno-97-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;按降序排列的组名:&quot;</span><span class="p">,</span> <span class="n">names</span><span class="p">[</span><span class="n">order</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>values            : [30 10 50 20 40]
 np.sort(values)   : [10 20 30 40 50]  ← 排好的值
 values.argsort()  : [1 3 0 4 2]  ← 排好序的下标顺序
@@ -16221,6 +16293,7 @@ names[order]      : ['第二组' '第四组' '第一组' '第五组' '第三组'
 而 <code>np.sort</code> 只会把<strong>这一列</strong>排好，
 其他列的配对关系就乱了</p>
 <p><strong>第三组：<code>a.sort()</code> 原地（返回 <code>None</code>），<code>np.sort(a)</code> 返回副本。</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-98-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-98-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-98-3"> 3</a></span>
@@ -16250,7 +16323,7 @@ names[order]      : ['第二组' '第四组' '第一组' '第五组' '第三组'
 <a id="__codelineno-98-13" name="__codelineno-98-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;c.sort() 的返回值:&quot;</span><span class="p">,</span> <span class="n">ret</span><span class="p">,</span> <span class="s2">&quot; ← None ⚠&quot;</span><span class="p">)</span>
 <a id="__codelineno-98-14" name="__codelineno-98-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;但 c 本身变成了  :&quot;</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="s2">&quot; ← 原地排好了&quot;</span><span class="p">)</span>
 <a id="__codelineno-98-15" name="__codelineno-98-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ↑ 千万不要写 a = a.sort()，那会把 a 变成 None ⚠&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原数组 a       : [30 10 50 20 40]
 
 np.sort(a) 结果: [10 20 30 40 50]

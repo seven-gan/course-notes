@@ -10090,6 +10090,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本案例为教学用综合练习（数据为程序生成的模拟数据）</code><code>NumPy / SciPy 官方文档</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="17">17 实战：回归建模<a class="headerlink" href="#17" title="Permanent link">&para;</a></h1>
@@ -10359,6 +10367,7 @@
 </div>
 <p><strong>先把造数据与拟合的工具封装成模块</strong>，后面每个代码块都能直接调用。
 这顺便演示一个工程习惯：<strong>把重复逻辑写成函数，主流程只做编排</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10466,6 +10475,7 @@
 <p>所以纪律是：<strong>先把数据的形状看清楚，再决定要不要拟合</strong>。
 这一步不花什么时间，却决定了后面所有工作有没有意义。</p>
 <p>体检从描述统计开始。用 <code>describe()</code> 一次拿到八个量：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -10526,6 +10536,7 @@ max     9.7562  23.0986</code></pre>
 <strong>数据里没有 <span class="arithmatex">\(x=0\)</span>，截距就是外推量</strong></p>
 <p>接下来看两个变量<strong>一起</strong>变化的方式。相关系数是最省事的抓手，
 但它的公式值得写开看一遍：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10638,6 +10649,7 @@ Cov/Var 算出的斜率 : 1.9948
 <p>数字看完，最后一定要<strong>画出来</strong>。散点图能暴露统计量说不出的东西：
 弯曲、分群、异常点、方差不齐。本页的画图代码只打印<strong>可核对的量</strong>，
 图本身写到临时目录并在退出时自动清理：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10751,6 +10763,7 @@ y 轴显示范围 : [0.336, 24.1825]
 自己拼一次矩阵、算一次转置乘积，你才会对
 「设计矩阵为什么要加一列 1」「系数顺序是截距在前还是斜率在前」
 这类问题形成肌肉记忆 —— 这几处恰恰是抄别人代码时最容易错的地方。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -10857,6 +10870,7 @@ cond(X^T X)  : 161.2</code></pre>
 数据本来有点相关性，这条链子就断了。</p>
 <p>下面故意造一个病态例子：把第二个特征设成「第一个特征加一丁点噪声」，
 然后<strong>同时</strong>用求逆和 <code>lstsq</code> 解同一个方程组。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10958,6 +10972,7 @@ lstsq 得到的系数: [2.8201, 6695.7138, -6693.7193]
 这样做的价值不在于「哪个更快」，而在于<strong>互相印证</strong>：
 如果某个库的结果和别人差很多，先怀疑自己的用法，
 而不是怀疑库</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -11134,6 +11149,7 @@ lstsq 返回元素个数 : 4
 </table>
 <h3 id="52">5.2 与真值对账<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p>固定种子的好处在这里体现出来：真值已知，可以<strong>直接对账</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11276,6 +11292,7 @@ x = 5 处的预测值 : 12.7939
 系数不是玄学，它是「比值」，所以<strong>带着 <span class="arithmatex">\(y\)</span> 的单位除以 <span class="arithmatex">\(x\)</span> 的单位</strong>。</p>
 <p>下面把同一个 <span class="arithmatex">\(x\)</span> 从「原单位」换算成「千米」（即除以 1000），
 重跑一遍拟合：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -11357,6 +11374,7 @@ x = 5 千米的预测     : 9976.741999</code></pre>
 <p>构造一个场景：存在一个<strong>共同原因</strong> <span class="arithmatex">\(z\)</span>，
 它同时影响 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>。真实机制是 <span class="arithmatex">\(y = 3 + 2x + 5z + 噪声\)</span>，
 也就是说<strong>真实的 <span class="arithmatex">\(x\)</span> 系数确实是 2</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11482,6 +11500,7 @@ x = 5 千米的预测     : 9976.741999</code></pre>
 只能用拟合出来的残差去猜误差长什么样。
 诊断的全部逻辑就建立在这个替身上</p>
 <h3 id="61">6.1 打印可核对量：残差的第一批体检指标<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11584,6 +11603,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 <h3 id="62-vs">6.2 残差图：残差 vs 拟合值<a class="headerlink" href="#62-vs" title="Permanent link">&para;</a></h3>
 <p><strong>残差图是回归诊断里信息量最大的一张图</strong>：
 横轴放拟合值、纵轴放残差，再画一条 <span class="arithmatex">\(y=0\)</span> 的水平参考线。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11668,6 +11688,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 <p><strong>这是本节的核心判据</strong>。把残差按照拟合值从小到大分成几箱，
 看每箱的<strong>平均残差</strong>是否稳定地围着 0 打转。</p>
 <p>先看本案例（数据真的是一条直线）的分箱结果：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11715,6 +11736,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 而且第 2 箱只有 12 个点，标准误约为 <span class="arithmatex">\(0.8037/\sqrt{12} \approx 0.23\)</span>，
 所以 0.42 这个偏离约等于 1.8 个标准误，属于正常波动范围</p>
 <p>现在换成一组<strong>真正弯曲</strong>的数据，看同样的诊断会给出什么：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11867,6 +11889,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 一个点在 <span class="arithmatex">\(x\)</span> 方向的中间位置，残差再大也拉不动整条直线；
 一个点在 <span class="arithmatex">\(x\)</span> 的两端，即使残差中等，也能让斜率明显改变</p>
 <p>下面直接在数据里<strong>注入</strong>一个异常点，看斜率怎么动：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -12005,6 +12028,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 <p>做法是自己控制「相关程度」：
 把 <span class="arithmatex">\(x_2\)</span> 设成 <span class="arithmatex">\(x_1\)</span> 加上一点噪声，<strong>噪声越小，相关越强</strong>。
 然后逐档跑二元回归，看系数怎么变。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -12120,6 +12144,7 @@ X^T e 的绝对值     : [0.0, 1e-12]
 {\lVert X^{\mathsf T}y \rVert}\]</div>
 <p><strong>读法</strong>：右边那个相对扰动再小，也会被 <span class="arithmatex">\(\kappa\)</span> 倍放大。
 <span class="arithmatex">\(\kappa = 10^6\)</span> 意味着<strong>输入的第 6 位小数都会污染系数的第 1 位</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -12214,6 +12239,7 @@ cond 相差倍数              : 457.4064
 <h3 id="73">7.3 去掉一个特征，系数立刻稳定<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
 <p><strong>遇到共线性有两条路</strong>：要么删特征，要么用正则化。
 这里先做最简单、效果也最直观的 —— <strong>删掉一个</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -12315,6 +12341,7 @@ cond 相差倍数              : 457.4064
 </tbody>
 </table>
 <p><strong>「预测力不损失」这一条必须实测确认</strong>，不能想当然：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12428,6 +12455,7 @@ RMSE 之差        : 0.0
 参数一多，训练误差可以压到几乎为 0 ⚠</p>
 <p><strong>划分的一条纪律</strong>：用固定种子做随机置换，
 这样「哪些点进了训练集」在每台机器上都一样，输出可复核 ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12553,6 +12581,7 @@ RMSE 之差        : 0.0
 <p><strong>RMSE 与 MAE 一起看很有用</strong>：
 两者接近，说明残差比较均匀；
 RMSE 明显大于 MAE，说明<strong>有几个点误差特别大</strong> ⚠</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12671,6 +12700,7 @@ RMSE 占均值比例  : 5.1028 %</code></pre>
 <p><strong>为什么基线必须是均值</strong>：
 因为 <span class="arithmatex">\(R^2\)</span> 的定义里，分母用的正是「围绕均值的总平方和」。
 也就是说 <strong><span class="arithmatex">\(R^2 = 0\)</span> 恰好等于「跟均值一样好」</strong> ⚠</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12846,6 +12876,7 @@ MAE 降低幅度   : 87.2595 %
 但那个解穿过每一个观测点的同时，也在点与点之间<strong>疯狂摆动</strong> ⚠</p>
 <p><strong>用一个能看清的实验</strong>：真实关系是一条<strong>正弦曲线</strong>（不是多项式），
 只有 30 个点，然后拿 1 次到 15 次多项式去拟合同一个训练集。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -13024,6 +13055,7 @@ MAE 降低幅度   : 87.2595 %
 「运气好」和「运气差」能造成很大差别。
 <strong>交叉验证</strong>的做法是：轮流把数据切成若干折，
 每一折都当一次测试集，最后把结果汇总 ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -13134,6 +13166,7 @@ MAE 降低幅度   : 87.2595 %
 <p><strong>为什么正则化能治共线性</strong>：共线性让某些系数可以取任意大的值
 而不影响拟合效果；加了惩罚之后，
 「系数很大」本身就有代价，那个平坦方向被填上了 ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -13345,6 +13378,7 @@ MAE 降低幅度   : 87.2595 %
 <p><strong>为什么要用两个库互相印证</strong>：
 手写的矩阵代码如果拼错一列，结果会「看起来合理但整体偏掉」。
 拿现成库对一遍，几秒钟就能发现系统性偏差 ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -13656,6 +13690,7 @@ sklearn R^2 / RMSE / MAE : 0.9829 / 0.7766 / 0.623
 只要模型里有截距，这个相关系数就恒为 0，
 <strong>它对二次形态的模式完全不敏感</strong> ⚠</p>
 <p>下面是完整的对照实验：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -13753,7 +13788,7 @@ sklearn R^2 / RMSE / MAE : 0.9829 / 0.7766 / 0.623
 <a id="__codelineno-29-47" name="__codelineno-29-47"></a>      <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">((</span><span class="n">y_curved</span> <span class="o">-</span> <span class="n">design</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span>
 <a id="__codelineno-29-48" name="__codelineno-29-48"></a>          <span class="n">design</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="n">y_curved</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">2</span><span class="p">)),</span> <span class="mi">4</span><span class="p">),</span>
 <a id="__codelineno-29-49" name="__codelineno-29-49"></a>      <span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">resid2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">3</span><span class="p">)),</span> <span class="mi">4</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>【直线数据 + 直线模型】
   残差与拟合值相关系数 : -0.0
   五分箱残差均值       : [-0.1005, 0.4187, -0.3451, 0.026, 0.0009]
@@ -13861,6 +13896,7 @@ sklearn R^2 / RMSE / MAE : 0.9829 / 0.7766 / 0.623
 <p><strong><code>np.polyfit(x, y, 1)</code> 返回的数组是「高次项在前」</strong>，
 也就是 <code>[斜率, 截距]</code>。这与「截距、斜率」的直觉顺序相反。</p>
 <p>正确算法与错误算法差多少，实测如下：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -13906,7 +13942,7 @@ sklearn R^2 / RMSE / MAE : 0.9829 / 0.7766 / 0.623
 <a id="__codelineno-31-21" name="__codelineno-31-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者之差         :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">right</span> <span class="o">-</span> <span class="n">wrong</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
 <a id="__codelineno-31-22" name="__codelineno-31-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;polyval([斜率, 截距], 5) :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">],</span> <span class="n">xq</span><span class="p">)),</span> <span class="mi">6</span><span class="p">))</span>
 <a id="__codelineno-31-23" name="__codelineno-31-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;polyval([截距, 斜率], 5) :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">([</span><span class="n">intercept</span><span class="p">,</span> <span class="n">slope</span><span class="p">],</span> <span class="n">xq</span><span class="p">)),</span> <span class="mi">6</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>polyfit 返回的第一个数是斜率 : 1.994784
 polyfit 返回的第二个数是截距 : 2.820023
 lstsq 的截距 / 斜率          : 2.820023 / 1.994784
@@ -14004,6 +14040,7 @@ polyval([截距, 斜率], 5) : 16.094899</code></pre>
 每次重新拟合，收集系数的分布 ✓</p>
 <p><strong>它对共线性特别有用</strong>，因为它直接暴露了
 「系数在平坦方向上能滑多远」：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -14091,7 +14128,7 @@ polyval([截距, 斜率], 5) : 16.094899</code></pre>
 <a id="__codelineno-32-42" name="__codelineno-32-42"></a>      <span class="o">%</span> <span class="p">(</span><span class="n">one</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">one</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">one</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">one</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
 <a id="__codelineno-32-43" name="__codelineno-32-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  两特征时 x1 的标准差 / 只留 x1 时的标准差 :&quot;</span><span class="p">,</span>
 <a id="__codelineno-32-44" name="__codelineno-32-44"></a>      <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">arr</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">one</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)),</span> <span class="mi">4</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>两特征模型，200 次自助重采样：
   x1 系数  均值  2.2380  标准差  2.1723  范围 [-3.8148,  7.4486]
   x2 系数  均值 -0.2501  标准差  2.1794  范围 [-5.4456,  5.8044]
@@ -14171,6 +14208,7 @@ polyval([截距, 斜率], 5) : 16.094899</code></pre>
 <summary>解答</summary>
 <p><strong>先看一组实测对比</strong>。真实关系 <span class="arithmatex">\(y = 1 + 3x - 0.22x^2 + 噪声\)</span>，
 观测区间是 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(9.76\)</span>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -14258,7 +14296,7 @@ polyval([截距, 斜率], 5) : 16.094899</code></pre>
 <a id="__codelineno-33-42" name="__codelineno-33-42"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;二次模型系数 </span><span class="si">%s</span><span class="s2">  （真值 1, 3, -0.22）&quot;</span> <span class="o">%</span> <span class="n">beta_quad</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-33-43" name="__codelineno-33-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;二次模型 x=10 / 12 / 15 的预测：&quot;</span><span class="p">,</span>
 <a id="__codelineno-33-44" name="__codelineno-33-44"></a>      <span class="p">[</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">beta_quad</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">v</span><span class="p">)),</span> <span class="mi">4</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mf">15.0</span><span class="p">)])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>全区间直线模型：截距 4.6236  斜率 0.7887  R^2 0.6500
 x 的观测范围：0.0736 ~ 9.7562
 只用 x &lt;= 5 的 30 个点：截距 1.9711  斜率 1.8274  区间内 RMSE 0.7769
@@ -14397,6 +14435,7 @@ x 取值       真实关系           全区间模型          小样本模型
 它对二次形态（U 形）本身完全不敏感 ——
 U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来 ✓</p>
 <p><strong>验证代码</strong>（跑完之后看「分箱极差」这一行）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -14462,7 +14501,7 @@ U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来
 <a id="__codelineno-34-31" name="__codelineno-34-31"></a><span class="n">bins2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">r2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">v2</span> <span class="o">@</span> <span class="n">c2</span><span class="p">),</span> <span class="mi">5</span><span class="p">)]</span>
 <a id="__codelineno-34-32" name="__codelineno-34-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;二次模型 分箱极差 </span><span class="si">%8.4f</span><span class="s2">  残差标准差 </span><span class="si">%8.4f</span><span class="s2">&quot;</span>
 <a id="__codelineno-34-33" name="__codelineno-34-33"></a>      <span class="o">%</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">bins2</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">bins2</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">r2</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">3</span><span class="p">))))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>直线数据     相关系数 -0.0000000000  分箱极差   0.7638  残差标准差   0.7606
          分箱均值 [-0.1005, 0.4187, -0.3451, 0.026, 0.0009]
 弯曲数据     相关系数 0.0000000000  分箱极差   4.2963  残差标准差   2.1289
@@ -14553,6 +14592,7 @@ U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来
 <strong><span class="arithmatex">\(R^2\)</span> 可以为负</strong>，含义是「比用均值预测还差」。
 只有在用测试集均值构造基线时，它才恰好是 0 ✓</p>
 <p>实测：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -14616,7 +14656,7 @@ U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来
 <a id="__codelineno-35-30" name="__codelineno-35-30"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基线(测试均值) R^2 </span><span class="si">%8.4f</span><span class="s2">  RMSE </span><span class="si">%8.4f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">r2_b2</span><span class="p">,</span> <span class="n">rmse_b2</span><span class="p">))</span>
 <a id="__codelineno-35-31" name="__codelineno-35-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基线(测试均值)的 R^2 是否精确为 0 :&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">r2_b2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-12</span><span class="p">))</span>
 <a id="__codelineno-35-32" name="__codelineno-35-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;基线(训练均值)的 R^2 是否为负     :&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">r2_b1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>训练集均值 / 测试集均值 : 12.8928 / 13.8805
 线性模型     R^2   0.9838  RMSE   0.7083
 基线(训练均值) R^2  -0.0316  RMSE   5.6448
@@ -14700,6 +14740,7 @@ U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来
 <p><strong>这就是第五节的结论「不能凭系数大小比较特征重要性」的数学根源</strong>：
 系数等于「相关系数 × 量纲比」，<strong>量纲混在里面</strong> ⚠</p>
 <p><strong>想让系数可比，正确做法是把特征都标准化再拟合</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -14773,7 +14814,7 @@ U 形残差可以和拟合值正交，同时把两头的系统性偏差藏起来
 <a id="__codelineno-36-35" name="__codelineno-36-35"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;原始斜率 / 标准化斜率 = </span><span class="si">%.6f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">float</span><span class="p">(</span><span class="n">beta_1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">beta_z</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
 <a id="__codelineno-36-36" name="__codelineno-36-36"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;标准差之比 s_y / s_x  = </span><span class="si">%.6f</span><span class="s2">&quot;</span>
 <a id="__codelineno-36-37" name="__codelineno-36-37"></a>      <span class="o">%</span> <span class="nb">float</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原始尺度   截距   2.8201   x1   2.1298   x2  -0.1353
 标准化尺度 截距   0.0000   z1   1.0583   z2  -0.0671
 原始尺度两系数之和   : 1.9945
@@ -14860,6 +14901,7 @@ RMSE 分别是 0.7083、1.0450、0.7757。
 <p><strong>注意第一层</strong>：不只是「换了一批点来考核」，
 连<strong>模型本身</strong>都变了。所以两次的 <span class="arithmatex">\(R^2\)</span> <strong>不是同一个模型的两个成绩</strong> ⚠</p>
 <p>实测：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -14901,7 +14943,7 @@ RMSE 分别是 0.7083、1.0450、0.7757。
 <a id="__codelineno-37-19" name="__codelineno-37-19"></a>
 <a id="__codelineno-37-20" name="__codelineno-37-20"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全样本系数 :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">lstsq</span><span class="p">(</span><span class="n">design</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">,</span> <span class="n">rcond</span><span class="o">=</span><span class="kc">None</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>seed 0  截距  2.7600  斜率  1.9959  测试 R^2  0.9838  测试 RMSE  0.7083
 seed 1  截距  3.1618  斜率  1.9686  测试 R^2  0.9701  测试 RMSE  1.0450
 seed 2  截距  2.7859  斜率  2.0041  测试 R^2  0.9825  测试 RMSE  0.7757

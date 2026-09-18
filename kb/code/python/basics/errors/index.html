@@ -10732,6 +10732,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Python 官方文档（语言参考 · 异常处理 / 标准库 · logging）</code><code>本页示例在 Python 3.9+ 上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="10">10 异常与调试<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
@@ -10802,6 +10810,7 @@
 <p>Python 执行一个文件分两步：<strong>先整体编译，再逐行执行</strong>。
 只要编译不通过，<strong>一行代码都不会运行</strong> —— 连第一句 <code>print</code> 都不会执行。</p>
 <p>先看一段正常代码作为对照：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
@@ -10812,6 +10821,7 @@
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>循环跑完了，total = 10</code></pre>
 <p>现在把 <code>for</code> 语句结尾的冒号删掉，并在最前面加一句 <code>print</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -10860,6 +10870,7 @@
 <h3 id="12">1.2 异常：程序跑起来之后才出事<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>第二类错误发生在<strong>运行过程中</strong>：代码本身写得没问题，编译也通过了，
 但<strong>运行到某一行时它发现这件事做不到</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -10930,6 +10941,7 @@ IndexError: list index out of range</code></pre>
 <p class="admonition-title"><code>try</code> 抓不住语法错误</p>
 <p>很多人的直觉是「把可能出错的代码用 <code>try</code> 包起来就安全了」。
 但语法错误发生在编译阶段，那时 <code>try</code> 还不存在：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -10941,7 +10953,7 @@ IndexError: list index out of range</code></pre>
 <a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;抓住了&quot;</span><span class="p">)</span>
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a>  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这一行的缩进是 2 个空格&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>IndentationError: unindent does not match any outer indentation level</code></pre>
 <p>程序<strong>根本没有走到 <code>try</code></strong>，所以 <code>except</code> 里那句永远等不到执行 ✓</p>
 <p><strong>判断依据</strong>：
@@ -11063,6 +11075,7 @@ IndexError: list index out of range</code></pre>
   这里把它滤掉，让输出在不同版本上都一致。</li>
 </ul>
 <p><strong>其余部分（行号、函数名、类型、消息）都是真实的实跑结果</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11626,6 +11639,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="31-nameerror">3.1 <code>NameError</code>：这个名字根本没定义过<a class="headerlink" href="#31-nameerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">score</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -11657,6 +11671,7 @@ L 135.502642 160.400925
 <p><strong>最容易忽略的情况是「执行顺序」</strong>：
 定义语句在出错行的<strong>下面</strong> —— 代码从上往下跑，还没跑到定义就用，一样报 <code>NameError</code>。</p>
 <h3 id="32-typeerror">3.2 <code>TypeError</code>：类型对不上<a class="headerlink" href="#32-typeerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;年龄: &quot;</span> <span class="o">+</span> <span class="mi">18</span><span class="p">)</span>
@@ -11715,6 +11730,7 @@ L 135.502642 160.400925
 <code>int("十二")</code> 报 <code>ValueError</code>（字符串可以转，但「十二」不是个数字）</strong></p>
 </div>
 <h3 id="33-valueerror">3.3 <code>ValueError</code>：类型没问题，但内容不行<a class="headerlink" href="#33-valueerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;十二&quot;</span><span class="p">)</span>
@@ -11746,6 +11762,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="34-indexerror">3.4 <code>IndexError</code>：下标越界<a class="headerlink" href="#34-indexerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># @expect-error</span>
@@ -11808,6 +11825,7 @@ L 135.502642 160.400925
 <p><strong>记忆诀窍</strong>：<strong>位置找不着 → <code>IndexError</code>；名字找不着 → <code>KeyError</code>。</strong></p>
 </div>
 <h3 id="35-keyerror">3.5 <code>KeyError</code>：字典里没有这个键<a class="headerlink" href="#35-keyerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
 <span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="c1"># @expect-error</span>
@@ -11867,6 +11885,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="36-attributeerror">3.6 <code>AttributeError</code>：对象没有这个属性<a class="headerlink" href="#36-attributeerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="c1"># @expect-error</span>
@@ -11901,6 +11920,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="37-zerodivisionerror">3.7 <code>ZeroDivisionError</code>：除数为零<a class="headerlink" href="#37-zerodivisionerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="nb">print</span><span class="p">(</span><span class="mi">10</span> <span class="o">/</span> <span class="mi">0</span><span class="p">)</span>
@@ -11954,6 +11974,7 @@ L 135.502642 160.400925
 </table>
 </div>
 <h3 id="38-filenotfounderror">3.8 <code>FileNotFoundError</code>：文件不在这儿<a class="headerlink" href="#38-filenotfounderror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
 <span class="normal"><a href="#__codelineno-16-2">2</a></span>
 <span class="normal"><a href="#__codelineno-16-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="c1"># @expect-error</span>
@@ -11985,6 +12006,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="39-importerror">3.9 <code>ImportError</code>：导入的东西不存在<a class="headerlink" href="#39-importerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">no_such_name</span>
@@ -12036,6 +12058,7 @@ L 135.502642 160.400925
 </tbody>
 </table>
 <h3 id="310-indentationerror">3.10 <code>IndentationError</code>：缩进不合法<a class="headerlink" href="#310-indentationerror" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -12104,6 +12127,7 @@ L 135.502642 160.400925
 <h3 id="311">3.11 异常也有「族谱」：一眼看清继承关系<a class="headerlink" href="#311" title="Permanent link">&para;</a></h3>
 <p>看见 <code>KeyError</code> 时，你大概会想「它算不算 <code>LookupError</code>」。
 下面这段代码直接打印每种异常的祖先链，把族谱摊开：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
 <span class="normal"><a href="#__codelineno-19-3">3</a></span>
@@ -12212,6 +12236,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <h3 id="41">4.1 完整形态与「记录执行顺序」的验证方法<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>光看表容易记混。<strong>最可靠的验证方式是往列表里 append 标记，最后把列表打出来</strong>——
 执行顺序一目了然。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12325,6 +12350,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <p><strong>这条性质让 <code>else</code> 有了真正的用途</strong>，
 第五节和例题里会各给一个具体场景</p>
 <h3 id="42-else">4.2 <code>else</code> 的实际用途：把「可能出错的转换」和「后续处理」分开<a class="headerlink" href="#42-else" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12387,6 +12413,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <h3 id="43-finally">4.3 <code>finally</code>：无论如何都要执行<a class="headerlink" href="#43-finally" title="Permanent link">&para;</a></h3>
 <p><code>finally</code> 是唯一<strong>「<code>try</code> 里发生什么都会执行」</strong>的子句。
 下面用「记录执行顺序」的方式把它的行为展示清楚：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12449,6 +12476,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <p>上面两个例子里，<code>return</code> 都写在 <code>try</code> / <code>except</code> / <code>else</code> 里，
 而 <code>finally</code> 只做了 append —— 所以返回值都是预期的。</p>
 <p>但如果在 <code>finally</code> 里也写 <code>return</code>，它会<strong>覆盖</strong>之前决定的返回值：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12484,7 +12512,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <a id="__codelineno-25-16" name="__codelineno-25-16"></a>
 <a id="__codelineno-25-17" name="__codelineno-25-17"></a>
 <a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;拿到的:&quot;</span><span class="p">,</span> <span class="n">g</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>finally 在 return 之前执行
 拿到的: try 里的返回值
 拿到的: finally 覆盖了它</code></pre>
@@ -12519,6 +12547,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <p>日常写文件时，我们更常看到的是 <code>with</code> 而不是手写 <code>finally</code>。
 它们的关系是：<strong><code>with</code> 在内部替你做了 <code>finally</code> 该做的事。</strong></p>
 <p>用 <code>with</code> 的真实行为来验证这一点：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -12639,6 +12668,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 </table>
 <h3 id="52-except-exception-as-e-e">5.2 <code>except Exception as e</code> 的写法与 <code>e</code> 的取值<a class="headerlink" href="#52-except-exception-as-e-e" title="Permanent link">&para;</a></h3>
 <p><code>as e</code> 把<strong>异常对象本身</strong>接住，于是你能从它身上读出信息：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -12738,6 +12768,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 <h3 id="53-except">5.3 多个 <code>except</code> 的顺序：子类必须写在前面<a class="headerlink" href="#53-except" title="Permanent link">&para;</a></h3>
 <p>多个 <code>except</code> 是<strong>从上往下依次匹配，第一个匹配上的就被采用</strong>，后面的<strong>再也不会被执行</strong>。</p>
 <p>先看顺序<strong>错了</strong>会怎样（这里用 <code>Exception</code> 和一个更具体的类型对比）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12766,6 +12797,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 而专门为它准备的那一支<strong>一次都没被执行</strong> ✗</p>
 <p><strong>而且这件事不报错</strong> —— 代码照样跑，只是那几行成了死代码。</p>
 <p>把顺序换过来就对了：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -12860,6 +12892,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 </table>
 <h3 id="54">5.4 一次处理多种异常：写成一个元组<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
 <p>两种异常的处理方式<strong>完全一样</strong>时，可以合并：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12979,6 +13012,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 <p>前面都是「被动的」：出了错才去接。
 <code>raise</code> 让你<strong>主动</strong>说「这里就是不对」。</p>
 <h3 id="61">6.1 主动抛出：把错误在最合适的地方说清<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -13043,6 +13077,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 </table>
 <h3 id="62-raise">6.2 只写 <code>raise</code>：重新抛出同一个异常<a class="headerlink" href="#62-raise" title="Permanent link">&para;</a></h3>
 <p>在 <code>except</code> 块里<strong>只写一个 <code>raise</code></strong>，表示「把这个异常原样继续往上抛」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -13104,6 +13139,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 <h3 id="63-raise-from">6.3 <code>raise ... from ...</code>：保留因果链<a class="headerlink" href="#63-raise-from" title="Permanent link">&para;</a></h3>
 <p>有时你既想让错误「换个更贴近业务的名字」，又不想丢掉底层原因。
 <code>raise NewError(...) from old_error</code> 就是干这个的：<strong>它建立一条因果链</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -13252,6 +13288,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 <h3 id="64">6.4 自定义异常类：让错误带上结构化信息<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
 <p>内置异常够用的时候不要自己造。但当一个错误<strong>需要携带好几个字段</strong>时，
 自定义异常让调用方可以「按类型捕获、按属性取值」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -13368,6 +13405,7 @@ limit  : 250.0</code></pre>
 <span class="normal"><a href="#__codelineno-36-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a>if not 条件:
 <a id="__codelineno-36-2" name="__codelineno-36-2"></a>    raise AssertionError(消息)
 </code></pre></div></td></tr></table></div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
@@ -13385,6 +13423,7 @@ limit  : 250.0</code></pre>
 <pre class="kb-output"><code>2.0
 正常路径通过</code></pre>
 <p>条件不成立时：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
 <span class="normal"><a href="#__codelineno-38-2">2</a></span>
 <span class="normal"><a href="#__codelineno-38-3">3</a></span>
@@ -13405,6 +13444,7 @@ limit  : 250.0</code></pre>
 但因为非空元组恒为真，所以<strong>只要写成逗号形式，消息就只在条件为假时才生效</strong></p>
 <p>（不加消息时，输出里只有光秃秃的 <code>AssertionError</code>，看不出原因：
 下面这段就没有消息。）</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
 <span class="normal"><a href="#__codelineno-39-3">3</a></span>
@@ -13465,6 +13505,7 @@ limit  : 250.0</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -13539,6 +13580,7 @@ limit  : 250.0</code></pre>
 在优化模式下，<strong>所有 <code>assert</code> 语句会被整句删除</strong>。</p>
 <p>下面这段代码把要检查的程序写进临时文件，然后<strong>分别用「不加参数」和「加 <code>-O</code>」
 两种方式各跑一次</strong>，把最后一行输出打出来对比：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -13678,6 +13720,7 @@ limit  : 250.0</code></pre>
 </table>
 <h3 id="81-print-r">8.1 <code>print</code> 调试：加标记 + <code>!r</code> + 打印中间量<a class="headerlink" href="#81-print-r" title="Permanent link">&para;</a></h3>
 <p>方法一：在关键位置插入带标记的 <code>print</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1">1</a></span>
 <span class="normal"><a href="#__codelineno-42-2">2</a></span>
 <span class="normal"><a href="#__codelineno-42-3">3</a></span>
@@ -13726,6 +13769,7 @@ limit  : 250.0</code></pre>
 <p>方法二：用 <code>!r</code> 看隐藏字符与真实类型。</p>
 <p>这是 <code>print</code> 调试里<strong>最关键的一招</strong>。
 不带 <code>!r</code> 时，字符串 <code>"3"</code> 和数字 <code>3</code> 打印出来<strong>一模一样</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13755,6 +13799,7 @@ limit  : 250.0</code></pre>
 str int</code></pre>
 <p><strong><code>'3'</code> 带引号，说明它是字符串</strong> —— 这就是全部的区别 ✓</p>
 <p>为什么这件事能造成真实事故？看一个后果：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
 <span class="normal"><a href="#__codelineno-44-2">2</a></span>
 <span class="normal"><a href="#__codelineno-44-3">3</a></span>
@@ -13772,6 +13817,7 @@ repr 一眼看出是字符串: ['3', '4']</code></pre>
 字符串的 <code>+</code> 是<strong>拼接</strong>，数字的 <code>+</code> 才是<strong>相加</strong>。
 两个结果都不会报错，所以<strong>只能靠 <code>!r</code> 发现</strong> ✗</p>
 <p><strong>方法三：用 <code>!r</code> 抓「看不见的字符」。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
 <span class="normal"><a href="#__codelineno-45-2">2</a></span>
 <span class="normal"><a href="#__codelineno-45-3">3</a></span>
@@ -13812,6 +13858,7 @@ strip 后 : '25.4'</code></pre>
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1">1</a></span>
 <span class="normal"><a href="#__codelineno-46-2">2</a></span>
 <span class="normal"><a href="#__codelineno-46-3">3</a></span>
@@ -13819,7 +13866,7 @@ strip 后 : '25.4'</code></pre>
 <a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]:</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3"></a>    <span class="n">total</span> <span class="o">+=</span> <span class="n">i</span>
 <a id="__codelineno-46-4" name="__codelineno-46-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">total</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>i=1, total=1
 i=2, total=3
 i=3, total=6</code></pre>
@@ -13827,6 +13874,7 @@ i=3, total=6</code></pre>
 比 <code>print(i, total)</code> 有用得多</p>
 </div>
 <p><strong>一次性抓到出错现场</strong>：把标记加在函数入口，出错时就能看到「收到的是什么」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1">1</a></span>
 <span class="normal"><a href="#__codelineno-47-2">2</a></span>
 <span class="normal"><a href="#__codelineno-47-3">3</a></span>
@@ -14106,6 +14154,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
 </table>
 <p><strong>一条关键规则</strong>：
 设置 <code>level</code> 之后，低于该级别的消息会被直接丢弃。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -14141,6 +14190,7 @@ CRITICAL|root|致命：无法继续</code></pre>
 <p><strong>注意第一行 <code>DEBUG</code> 那句话没有出现</strong> —— 因为 <code>level=logging.INFO</code>，
 比 <code>INFO</code> 低的都被丢掉了</p>
 <p>把级别调成 <code>DEBUG</code> 后，同一句话就出现了：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -14171,6 +14221,7 @@ INFO|root|正常：开始处理</code></pre>
 <p><strong>输出到文件：换一个 <code>Handler</code> 就行。</strong></p>
 <p>下面这段把日志写进一个临时文件，然后<strong>读回来打印</strong>，
 这样既能验证内容，又不会污染程序自己的标准输出：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
@@ -14287,6 +14338,7 @@ WARNING|demo|警告：第 2 行缺字段</code></pre>
 </div>
 <p><strong>只对日志说「出错时带上完整轨迹」</strong>：<code>exc_info=True</code>
 （路径已替换为占位符、并滤掉版本相关的定位行）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -14368,6 +14420,7 @@ ValueError: invalid literal for int() with base 10: 'abc'</code></pre>
 同时把<strong>完整的技术细节</strong>（类型、消息、位置）也一起留在了日志里，
 之后排查时两样都有</p>
 <p><strong>把「跳过」这类事记成 WARNING 的完整例子</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-53-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-53-3"> 3</a></span>
@@ -14502,6 +14555,7 @@ INFO    |etl|第 3 行正常: 3.789
 就需要 <code>traceback</code> 模块。</p>
 <p>最常用的一个函数是 <strong><code>traceback.format_exc()</code></strong>：
 它<strong>只能在 <code>except</code> 块里用</strong>，返回<strong>当前正在处理的这个异常</strong>的完整 Traceback 字符串。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -14587,6 +14641,7 @@ ZeroDivisionError: division by zero</code></pre>
 </tbody>
 </table>
 <p><strong>「只要一行」和「要完整轨迹」的区别</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1">1</a></span>
 <span class="normal"><a href="#__codelineno-55-2">2</a></span>
 <span class="normal"><a href="#__codelineno-55-3">3</a></span>
@@ -14671,6 +14726,7 @@ ZeroDivisionError: division by zero</code></pre>
 但它们会<strong>悄悄制造出比原始错误更难查的问题</strong>。</p>
 <h3 id="101-except-pass">10.1 反模式一：<code>except: pass</code> 静默吞掉<a class="headerlink" href="#101-except-pass" title="Permanent link">&para;</a></h3>
 <p>症状：什么都不做，把错误删掉。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-57-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-57-3"> 3</a></span>
@@ -14699,6 +14755,7 @@ ZeroDivisionError: division by zero</code></pre>
 但它是<strong>错的</strong>：把 4 行里的 3 行加起来当成了全部数据 ✗</p>
 <p>如果这行数据决定的是报表金额、油耗、实验结论，后果就不用多说了。</p>
 <p><strong>更糟的一种情况</strong>：被吞掉的其实是一个<strong>代码 bug</strong>，而不是数据问题：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -14759,6 +14816,7 @@ ZeroDivisionError: division by zero</code></pre>
 <p>异常机制的开销<strong>明显高于普通判断</strong>，
 更重要的是：<strong>异常的本意是「意外」，不是「常规分支」</strong>。
 用它做流程控制，会让<strong>真正该重视的异常淹没在大量常规异常里</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-59-3"> 3</a></span>
@@ -14889,6 +14947,7 @@ ZeroDivisionError: division by zero</code></pre>
 <strong>LBYL</strong> = Look Before You Leap（先检查，再做）。</p>
 <h3 id="103-bug">10.3 反模式三：捕获过宽，把真正的 bug 也吞了<a class="headerlink" href="#103-bug" title="Permanent link">&para;</a></h3>
 <p><strong>症状：<code>except Exception</code> 的范围远超你的本意。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -14944,6 +15003,7 @@ ZeroDivisionError: division by zero</code></pre>
 但宽泛的 <code>except</code> 让它看起来像数据问题，
 于是排查方向从一开始就错了 ✗</p>
 <p><strong>类似的「好心办坏事」还有一个</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
@@ -15012,6 +15072,7 @@ ZeroDivisionError: division by zero</code></pre>
 </code></pre></div></td></tr></table></div>
 </div>
 <h3 id="104-try">10.4 再补一个常见坑：<code>try</code> 包得太大<a class="headerlink" href="#104-try" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-63-3"> 3</a></span>
@@ -15153,6 +15214,7 @@ ZeroDivisionError: division by zero</code></pre>
 </code></pre></div></td></tr></table></div>
 <p>调用方传了 <code>None</code> 进来时，<code>int(None)</code> 抛的是 <code>TypeError</code> ——
 <strong>这是调用方的 bug</strong>，不该被当成「值不合法」处理 ✗</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-66-3"> 3</a></span>
@@ -15323,6 +15385,7 @@ None   → None
 <h3 id="1-traceback">例题 1：读一段 Traceback，指出真正的出错位置<a class="headerlink" href="#1-traceback" title="Permanent link">&para;</a></h3>
 <p>下面这段代码在运行时报错了。请从 Traceback 里指出：
 真正的问题出在哪一行？为什么上面那几行不是问题？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-68-3"> 3</a></span>
@@ -15450,6 +15513,7 @@ IndexError: list index out of range</code></pre>
 </code></pre></div></td></tr></table></div>
 <p><strong>第三步：定位真正的原因</strong></p>
 <p>出错的是 <code>"101.5"</code> 这一行。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-1">1</a></span>
 <span class="normal"><a href="#__codelineno-70-2">2</a></span>
 <span class="normal"><a href="#__codelineno-70-3">3</a></span>
@@ -15459,7 +15523,7 @@ IndexError: list index out of range</code></pre>
 <a id="__codelineno-70-3" name="__codelineno-70-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;split 得到:&quot;</span><span class="p">,</span> <span class="n">parts</span><span class="p">)</span>
 <a id="__codelineno-70-4" name="__codelineno-70-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;元素个数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">))</span>
 <a id="__codelineno-70-5" name="__codelineno-70-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;parts[1] 取得到吗:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>split 得到: ['101.5']
 元素个数: 1
 parts[1] 取得到吗: False</code></pre>
@@ -15501,6 +15565,7 @@ parts[1] 取得到吗: False</code></pre>
 它们告诉你「这个 <code>"101.5"</code> 是从 <code>rows</code> 里、经过 <code>summarize</code> 传进来的」，
 但你<strong>不该去改它们</strong>，</p>
 <p>改法一：让函数把假设说明白（推荐）</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-71-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-71-3"> 3</a></span>
@@ -15524,7 +15589,7 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-71-10" name="__codelineno-71-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="si">!r:</span><span class="s2">12</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">parse_reading</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-71-11" name="__codelineno-71-11"></a>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-71-12" name="__codelineno-71-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">row</span><span class="si">!r:</span><span class="s2">12</span><span class="si">}</span><span class="s2"> → 数据问题: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>'25.4 1.0'   → (25.4, 1.0)
 '101.5'      → 数据问题: 期望 2 个字段，收到 1 个: '101.5'</code></pre>
 <p><strong>注意对比两种报错</strong>：</p>
@@ -15550,6 +15615,7 @@ parts[1] 取得到吗: False</code></pre>
 </tbody>
 </table>
 <p>改法二：跳过并记录（批量处理时）</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-72-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-72-3"> 3</a></span>
@@ -15571,7 +15637,7 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-72-9" name="__codelineno-72-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;处理:&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
 <a id="__codelineno-72-10" name="__codelineno-72-10"></a>
 <a id="__codelineno-72-11" name="__codelineno-72-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;跳过:&quot;</span><span class="p">,</span> <span class="n">skipped</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>处理: 25.4 1.0
 处理: 3.789 2.0
 跳过: ['101.5']</code></pre>
@@ -15623,6 +15689,7 @@ parts[1] 取得到吗: False</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p>第一步：先看危害 —— 写一个 <code>except: pass</code> 版对照</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-74-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-74-3"> 3</a></span>
@@ -15646,7 +15713,7 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-74-10" name="__codelineno-74-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;合计:&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 <a id="__codelineno-74-11" name="__codelineno-74-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;读入&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">),</span> <span class="s2">&quot;条，实际只算了 3 条&quot;</span><span class="p">)</span>
 <a id="__codelineno-74-12" name="__codelineno-74-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;但没有任何地方记录「另外两条是什么」&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>合计: 130.689
 读入 5 条，实际只算了 3 条
 但没有任何地方记录「另外两条是什么」</code></pre>
@@ -15674,6 +15741,7 @@ parts[1] 取得到吗: False</code></pre>
 </tbody>
 </table>
 <p>第二步：确认两类「坏数据」抛的异常类型</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1">1</a></span>
 <span class="normal"><a href="#__codelineno-75-2">2</a></span>
 <span class="normal"><a href="#__codelineno-75-3">3</a></span>
@@ -15683,12 +15751,13 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-75-3" name="__codelineno-75-3"></a>        <span class="nb">float</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <a id="__codelineno-75-4" name="__codelineno-75-4"></a>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-75-5" name="__codelineno-75-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">!r:</span><span class="s2">8</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>'缺测'     → ValueError: could not convert string to float: '缺测'
 ''       → ValueError: could not convert string to float: ''</code></pre>
 <p>两者<strong>都是 <code>ValueError</code></strong> —— 所以一个
 <code>except ValueError:</code> 就能覆盖，不需要宽捕获</p>
 <p>第三步：改造成「跳过 + 可追溯」的版本</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-76-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-76-3"> 3</a></span>
@@ -15734,7 +15803,7 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-76-21" name="__codelineno-76-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;可用数据:&quot;</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
 <a id="__codelineno-76-22" name="__codelineno-76-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;跳过    :&quot;</span><span class="p">,</span> <span class="n">skipped</span><span class="p">)</span>
 <a id="__codelineno-76-23" name="__codelineno-76-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;合计    :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="mi">3</span><span class="p">),</span> <span class="s2">&quot;共&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="s2">&quot;条&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>可用数据: [25.4, 101.5, 3.789]
 跳过    : [(3, '缺测'), (5, '')]
 合计    : 130.689 共 3 条</code></pre>
@@ -15766,6 +15835,7 @@ parts[1] 取得到吗: False</code></pre>
 </tbody>
 </table>
 <p>第四步：正式版本应该用 <code>logging</code> 而不是 <code>print</code></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-77-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-77-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-77-3"> 3</a></span>
@@ -15815,7 +15885,7 @@ parts[1] 取得到吗: False</code></pre>
 <a id="__codelineno-77-23" name="__codelineno-77-23"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-77-24" name="__codelineno-77-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 <a id="__codelineno-77-25" name="__codelineno-77-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;有效&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="s2">&quot;条 / 共&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">records</span><span class="p">),</span> <span class="s2">&quot;条&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>INFO    |第 1 行正常
 INFO    |第 2 行正常
 WARNING |第 3 行跳过，不是数字: '缺测'
@@ -15878,6 +15948,7 @@ WARNING |第 5 行跳过，不是数字: ''
 这里不写自定义 <code>__init__</code>，因为消息里要带的信息<strong>一句话就能说完</strong>，
 没必要拆成结构化字段</p>
 <p>第二步：写转换函数，两种情况分开处理</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-79-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-79-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-79-3"> 3</a></span>
@@ -15921,7 +15992,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <a id="__codelineno-79-20" name="__codelineno-79-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">raw</span><span class="si">!r:</span><span class="s2">8</span><span class="si">}</span><span class="s2"> → 配置错误: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-79-21" name="__codelineno-79-21"></a>        <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">__cause__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-79-22" name="__codelineno-79-22"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;            底层原因:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>'30'     → 30 秒
 '三十'     → 配置错误: timeout 必须是整数秒，收到 '三十'
             底层原因: ValueError
@@ -15983,6 +16054,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <p><strong>为什么 <code>-5</code> 里不加 <code>from None</code></strong>：因为根本没有 <code>__context__</code> 需要切断，
 加了只会让人以为「这里本来有别的异常被隐藏了」。</p>
 <p>第四步：消息里为什么用 <code>{text!r}</code> 而不是 <code>{text}</code></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1">1</a></span>
 <span class="normal"><a href="#__codelineno-80-2">2</a></span>
 <span class="normal"><a href="#__codelineno-80-3">3</a></span>
@@ -15992,16 +16064,17 @@ WARNING |第 5 行跳过，不是数字: ''
 <a id="__codelineno-80-3" name="__codelineno-80-3"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;不转换直接显示: 收到 </span><span class="si">{</span><span class="n">raw</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-80-4" name="__codelineno-80-4"></a>    <span class="k">except</span> <span class="n">ConfigError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-80-5" name="__codelineno-80-5"></a>        <span class="k">pass</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>不转换直接显示: 收到 三十
 不转换直接显示: 收到  30 
 不转换直接显示: 收到 30</code></pre>
 <p><strong>最后一行「收到 30」和第一行的「30」看起来一样</strong>，
 但其实一个带换行、一个不带 —— 用 <code>!r</code> 就能看出区别：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-81-1">1</a></span>
 <span class="normal"><a href="#__codelineno-81-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1"></a><span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;三十&quot;</span><span class="p">,</span> <span class="s2">&quot; 30 &quot;</span><span class="p">,</span> <span class="s2">&quot;30</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]:</span>
 <a id="__codelineno-81-2" name="__codelineno-81-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;用 !r 显示    : 收到 </span><span class="si">{</span><span class="n">raw</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>用 !r 显示    : 收到 '三十'
 用 !r 显示    : 收到 ' 30 '
 用 !r 显示    : 收到 '30\n'</code></pre>
@@ -16011,6 +16084,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <p>第五步：如果异常需要更多字段，就加 <code>__init__</code></p>
 <p>上面用一句消息就够了。但如果调用方想<strong>按字段处理</strong>
 （比如把 <code>channel</code> 传给别的系统），就需要结构化信息：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-82-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-82-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-82-3"> 3</a></span>
@@ -16046,7 +16120,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <a id="__codelineno-82-16" name="__codelineno-82-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;args   :&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 <a id="__codelineno-82-17" name="__codelineno-82-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;channel:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
 <a id="__codelineno-82-18" name="__codelineno-82-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;value  :&quot;</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>str(e) : 通道 A-01 读数 260.0 超出上限 250.0
 args   : ('通道 A-01 读数 260.0 超出上限 250.0',)
 channel: A-01
@@ -16132,6 +16206,7 @@ value  : 260.0</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p>第一步：先看反模式版本的危害</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-84-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-84-3"> 3</a></span>
@@ -16159,7 +16234,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-84-12" name="__codelineno-84-12"></a>
 <a id="__codelineno-84-13" name="__codelineno-84-13"></a><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">raw_lines</span><span class="p">:</span>
 <a id="__codelineno-84-14" name="__codelineno-84-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line</span><span class="si">!r:</span><span class="s2">16</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">parse_loose</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>'A-001,25.4'     → ('A-001', 25.4)
 'B-002'          → None
 'C-003,3.789'    → ('C-003', 3.789)
@@ -16190,6 +16265,7 @@ value  : 260.0</code></pre>
 <code>floot</code>，那会抛 <code>NameError</code>，也会被同一个裸 <code>except</code> 抓走，
 同样变成 <code>None</code> —— <strong>代码 bug 与数据问题被混成了同一个结果</strong> ✗</p>
 <p>第二步：改造成「分开报错」的版本</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-85-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-85-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-85-3"> 3</a></span>
@@ -16233,7 +16309,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-85-20" name="__codelineno-85-20"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line</span><span class="si">!r:</span><span class="s2">16</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">parse_strict</span><span class="p">(</span><span class="n">line</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-85-21" name="__codelineno-85-21"></a>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-85-22" name="__codelineno-85-22"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">line</span><span class="si">!r:</span><span class="s2">16</span><span class="si">}</span><span class="s2"> → 报错: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>--- 严格版：错在哪一目了然 ---
 'A-001,25.4'     → ('A-001', 25.4)
 'B-002'          → 报错: 字段数不是 2：'B-002'
@@ -16301,6 +16377,7 @@ value  : 260.0</code></pre>
 <p>上面例子里 <code>B-002</code> 与 <code>D-004,abc</code> 都属于<strong>数据问题</strong>，应该能跳过。
 但如果我们把「跳过」写成宽捕获，就又回到了反模式。
 正确做法是：<strong>让 <code>parse_strict</code> 只负责「报清楚」，跳过由调用方决定</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-86-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-86-3"> 3</a></span>
@@ -16352,7 +16429,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-86-24" name="__codelineno-86-24"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;问题:&quot;</span><span class="p">)</span>
 <a id="__codelineno-86-25" name="__codelineno-86-25"></a><span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">why</span> <span class="ow">in</span> <span class="n">bad</span><span class="p">:</span>
 <a id="__codelineno-86-26" name="__codelineno-86-26"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">line</span><span class="si">!r}</span><span class="s2"> → </span><span class="si">{</span><span class="n">why</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>有效: [('A-001', 25.4), ('C-003', 3.789)]
 问题:
   'B-002' → 字段数不是 2：'B-002'
@@ -16453,6 +16530,7 @@ value  : 260.0</code></pre>
 <hr />
 <h2 id="_6">十三、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 下面代码输出什么？<code>else</code> 为什么没有被执行？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-88-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-88-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-88-3"> 3</a></span>
@@ -16500,6 +16578,7 @@ value  : 260.0</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-89-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-89-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-89-3"> 3</a></span>
@@ -16537,7 +16616,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-89-17" name="__codelineno-89-17"></a>
 <a id="__codelineno-89-18" name="__codelineno-89-18"></a><span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">())</span>
 <a id="__codelineno-89-19" name="__codelineno-89-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">log</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>返回自 except
 ['try', 'except', 'finally']</code></pre>
 <p><strong>逐步追踪</strong>：</p>
@@ -16626,6 +16705,7 @@ value  : 260.0</code></pre>
 <p><strong>补充一个常被忽略的细节</strong>：
 <code>try</code> 块在第 2 步就中断了，所以<strong>如果 <code>try</code> 里 <code>raise</code> 后面还有代码，
 那些代码不会执行</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-90-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-90-3"> 3</a></span>
@@ -16645,7 +16725,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-90-8" name="__codelineno-90-8"></a>
 <a id="__codelineno-90-9" name="__codelineno-90-9"></a>
 <a id="__codelineno-90-10" name="__codelineno-90-10"></a><span class="n">g</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>会被打印
 进入 except</code></pre>
 <p><strong>这条性质在排查时很有用</strong>：
@@ -16653,6 +16733,7 @@ value  : 260.0</code></pre>
 </details>
 <hr />
 <p><strong>Q2</strong> 下面代码有什么问题？<code>safe_div(10, 0)</code> 最后返回了什么？为什么？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-91-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-91-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-91-3"> 3</a></span>
@@ -16687,6 +16768,7 @@ value  : 260.0</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-92-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-92-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-92-3"> 3</a></span>
@@ -16710,7 +16792,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-92-10" name="__codelineno-92-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">safe_div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-92-11" name="__codelineno-92-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">safe_div</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 <a id="__codelineno-92-12" name="__codelineno-92-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;那一支 ZeroDivisionError 永远不会被执行&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>5.0
 0
 那一支 ZeroDivisionError 永远不会被执行</code></pre>
@@ -16744,6 +16826,7 @@ value  : 260.0</code></pre>
 <strong><code>10 / 0</code> 本该报错，现在返回了一个整数 <code>0</code></strong>。
 这会让调用方以为「除法的结果是 0」，而不是「这次除法失败了」✗</p>
 <p>改法一：调对顺序 + 让返回值类型一致</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-93-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-93-3"> 3</a></span>
@@ -16769,10 +16852,11 @@ value  : 260.0</code></pre>
 <a id="__codelineno-93-11" name="__codelineno-93-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> → 无法计算（除数为零）&quot;</span><span class="p">)</span>
 <a id="__codelineno-93-12" name="__codelineno-93-12"></a>    <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-93-13" name="__codelineno-93-13"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>10 / 2 → 5.0
 10 / 0 → 无法计算（除数为零）</code></pre>
 <p>改法二（更好）：把「谁该处理」交给调用方</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-94-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-94-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-94-3"> 3</a></span>
@@ -16794,7 +16878,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-94-9" name="__codelineno-94-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">divide</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-94-10" name="__codelineno-94-10"></a>    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-94-11" name="__codelineno-94-11"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>10 / 2 → 5.0
 10 / 0 → 除数不能为 0: a=10, b=0</code></pre>
 <p><strong>为什么改法二更好</strong>：</p>
@@ -16853,6 +16937,7 @@ value  : 260.0</code></pre>
 </details>
 <hr />
 <p><strong>Q3</strong> 下面这个程序里，<code>-O</code> 前后结果一样吗？为什么？这说明了什么？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-95-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-95-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-95-3"> 3</a></span>
@@ -16917,6 +17002,7 @@ value  : 260.0</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong>把上面那段完整跑一遍</strong>（为了能独立运行，这里把要检查的小程序也放进来）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-96-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-96-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-96-3"> 3</a></span>
@@ -16970,7 +17056,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-96-25" name="__codelineno-96-25"></a>
 <a id="__codelineno-96-26" name="__codelineno-96-26"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;常规运行  :&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">())</span>
 <a id="__codelineno-96-27" name="__codelineno-96-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;加 -O 运行:&quot;</span><span class="p">,</span> <span class="n">run</span><span class="p">(</span><span class="s2">&quot;-O&quot;</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>常规运行  : AssertionError: names 不能为空
 加 -O 运行: {}</code></pre>
 <p><strong>结果不一样</strong> ✗</p>
@@ -17026,6 +17112,7 @@ value  : 260.0</code></pre>
 </tbody>
 </table>
 <p>正确的做法：把「程序正确性依赖的检查」写成 <code>if + raise</code></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-97-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-97-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-97-3"> 3</a></span>
@@ -17047,7 +17134,7 @@ value  : 260.0</code></pre>
 <a id="__codelineno-97-9" name="__codelineno-97-9"></a><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-97-10" name="__codelineno-97-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;常规运行时:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 <a id="__codelineno-97-11" name="__codelineno-97-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;这段代码在 -O 下行为完全一致，因为 if 不会被删除&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>常规运行时: names 不能为空
 这段代码在 -O 下行为完全一致，因为 if 不会被删除</code></pre>
 <p><strong><code>assert</code> 与 <code>if + raise</code> 的最终判据表</strong>：</p>
@@ -17109,6 +17196,7 @@ value  : 260.0</code></pre>
 <p><strong>还要注意一件事</strong>：<code>assert</code> 的消息<strong>写与不写差别很大</strong>。
 不写消息时输出只有光秃秃的 <code>AssertionError</code>，
 在长日志里完全看不出它想表达什么 ✗</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-98-1">1</a></span>
 <span class="normal"><a href="#__codelineno-98-2">2</a></span>
 <span class="normal"><a href="#__codelineno-98-3">3</a></span>
@@ -17126,12 +17214,13 @@ value  : 260.0</code></pre>
 <a id="__codelineno-98-7" name="__codelineno-98-7"></a>    <span class="n">head</span><span class="p">([])</span>
 <a id="__codelineno-98-8" name="__codelineno-98-8"></a><span class="k">except</span> <span class="ne">AssertionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-98-9" name="__codelineno-98-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;带消息:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>带消息: head() 要求 items 至少有 1 个元素</code></pre>
 </details>
 <hr />
 <p><strong>Q4</strong> 下面这段 Traceback 说明什么？请指出「真正出错的位置」，
 并说明为什么前两帧不应该改。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-99-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-99-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-99-3"> 3</a></span>
@@ -17292,6 +17381,7 @@ KeyError: 'B-107'</code></pre>
 于是问题定位到「传入的通道列表」和「<code>table</code> 里有什么」这两处</p>
 <p>第四步：两条修法，按「缺数据算不算正常」选</p>
 <p>修法一：缺数据算正常 → 用 <code>get()</code> 给默认值</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-101-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-101-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-101-3"> 3</a></span>
@@ -17321,9 +17411,10 @@ KeyError: 'B-107'</code></pre>
 <a id="__codelineno-101-13" name="__codelineno-101-13"></a>
 <a id="__codelineno-101-14" name="__codelineno-101-14"></a>
 <a id="__codelineno-101-15" name="__codelineno-101-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">build_report</span><span class="p">([</span><span class="s2">&quot;A-001&quot;</span><span class="p">,</span> <span class="s2">&quot;B-107&quot;</span><span class="p">],</span> <span class="n">table</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>[('A-001', 25.4), ('B-107', None)]</code></pre>
 <p>修法二：缺数据算错误 → 主动 <code>raise</code>，把上下文补上</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-102-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-102-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-102-3"> 3</a></span>
@@ -17351,7 +17442,7 @@ KeyError: 'B-107'</code></pre>
 <a id="__codelineno-102-12" name="__codelineno-102-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">get_reading</span><span class="p">(</span><span class="s2">&quot;B-107&quot;</span><span class="p">,</span> <span class="n">table</span><span class="p">))</span>
 <a id="__codelineno-102-13" name="__codelineno-102-13"></a><span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <a id="__codelineno-102-14" name="__codelineno-102-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;报错:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>报错: "通道 B-107 不在数据表里；可用通道: ['A-001', 'A-002']"</code></pre>
 <p><strong>两种报错的对比 —— 这是本例最有价值的一点</strong>：</p>
 <table>

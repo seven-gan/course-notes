@@ -10378,6 +10378,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（Group by / Merge, join, concatenate）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="08">08 分组聚合与合并<a class="headerlink" href="#08" title="Permanent link">&para;</a></h1>
@@ -10802,6 +10810,7 @@ L 202.662598 68.393
 <p><strong>第二行是新手最常踩的坑</strong>，后面第八节会专门处理。</p>
 <p><strong>用一个代码块把上面那张图跑一遍</strong>——先手工实现三阶段，
 再用 <code>groupby</code> 一行写完，两者结果完全一致：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10898,6 +10907,7 @@ L 202.662598 68.393
 <p><strong>为什么随机数要固定种子</strong>：<code>np.random.default_rng(42)</code> 之后，
 每一次取值的顺序都是确定的，所以「第 4 行语文缺考」这种细节在
 任何机器上都一样，本页的输出才敢写成固定的文本</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -11043,6 +11053,7 @@ Name: 语文, dtype: float64
 <hr />
 <h2 id="_1">二、基本用法：一行代码拿下「各组统计量」<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p><strong>最小可用写法只有两个东西</strong>：分组键 + 要紧的函数。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11209,6 +11220,7 @@ Name: 语文, dtype: float64
 这通常正是你要的，但<strong>报人数时千万别用 <code>count</code> 去凑</strong>——两者口径不同。</p>
 <h3 id="22">2.2 多列分组：结果变成「多级索引」<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>分组键可以传一个列表，于是得到「二维的分组」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11341,6 +11353,7 @@ reset_index() 之后:
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11458,6 +11471,7 @@ sort=False（按出现顺序）:
 它有四种写法，对应四种不同复杂度的需求。</p>
 <h3 id="31">3.1 写法一：单个函数名<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p><strong>最简形式</strong>：<code>.agg("mean")</code> 与 <code>.mean()</code> <strong>完全等价</strong>（都会跳过缺失值）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11566,6 +11580,7 @@ agg(["count", "mean", "max"]):
 而 <code>一班</code> 实际有 6 行 —— 少的那个就是缺考的 <code>S04</code></p>
 <h3 id="32">3.2 多级列索引怎么取、怎么压平<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>多级列索引不难，只是需要多给一个键。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -11699,6 +11714,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 <a id="__codelineno-11-5" name="__codelineno-11-5"></a>语文_mean,数学_min,数学_max
 </code></pre></div></td></tr></table></div>
 <p><strong>压平列名只要一行</strong>，而且这一步<strong>完全可以先跑一遍看看结果</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11736,7 +11752,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 <a id="__codelineno-12-17" name="__codelineno-12-17"></a><span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">flat</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 <a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">flat</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>压平前的列名（两层元组）:
 [('语文', 'mean'), ('数学', 'min'), ('数学', 'max')]
 
@@ -11753,6 +11769,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 </div>
 <h3 id="33">3.3 写法三：不同列用不同函数<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>这是 <code>agg</code> 最实用的形式</strong>，一次就能出一个完整报表：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -11851,6 +11868,7 @@ xs("数学", axis=1, level=0) 取出「数学」整块:
 <h3 id="34-lambda">3.4 写法四：自定义函数与 <code>lambda</code><a class="headerlink" href="#34-lambda" title="Permanent link">&para;</a></h3>
 <p>内置函数不够用时，直接塞一个函数进去。
 函数<strong>接收的是每一组的那个 Series</strong>，返回一个标量：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11971,6 +11989,7 @@ Name: 语文, dtype: float64
 <strong>能用内置函数就不要用自定义函数</strong>。</p>
 <h3 id="35-named-aggregation">3.5 命名聚合（named aggregation）：列名由你定<a class="headerlink" href="#35-named-aggregation" title="Permanent link">&para;</a></h3>
 <p><strong>这是本页最推荐的报表写法</strong>——因为它的输出<strong>列名干净、可读、没有多级索引</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -12189,6 +12208,7 @@ reset_index 之后就完全是一张普通表了:
 </tbody>
 </table>
 <p><strong>最常见的用法就是赋值成一个新列</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -12257,6 +12277,7 @@ reset_index 之后就完全是一张普通表了:
 这与 <code>agg</code> 形成鲜明对比——把只有 3 行的结果赋给 22 行的表，
 pandas 会按索引对齐，对不上的位置全部变成 <code>NaN</code>。</p>
 <p><strong>顺手验证一下 <code>agg</code> 的失败现场</strong>（这是很值得跑一次的错误）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -12328,6 +12349,7 @@ Name: 语文, dtype: float64</code></pre>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a>绝对分数：一班 85.0 分、二班 69.4 分 —— 谁更&quot;好&quot;？看平均分才知道
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>相对偏差：一班 +4.34、二班 -8.20 —— 同组内部，谁高谁低一眼看清 ✓
 </code></pre></div></td></tr></table></div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12450,6 +12472,7 @@ Name: 语文, dtype: float64</code></pre>
 </tbody>
 </table>
 <p><strong>一个实用例子</strong>：找出「每个班里比本班均分高 10 分以上」的学生。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12503,6 +12526,7 @@ Name: 语文, dtype: float64</code></pre>
 <strong>没有 <code>transform</code> 时，这个需求只能靠循环或手工拼表</strong>，
 而现在它就是一行。</p>
 <p><strong><code>transform</code> 还能一次广播多列</strong>（传列表给列选择，得到 DataFrame）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12622,6 +12646,7 @@ Name: 语文, dtype: float64</code></pre>
 </tbody>
 </table>
 <p><strong>最典型的场景</strong>：样本太少的组统计量不可信，直接整组剔除。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12675,6 +12700,7 @@ Name: 语文, dtype: float64</code></pre>
 <p><strong>一行代码就把「一班 6 行」剔掉了</strong>，而二班、三班整组保留。
 注意这不是「删掉 6 行里的一部分」，而是<strong>整组消失</strong>。</p>
 <p><strong>条件可以写在组上任何量上</strong>，因为它拿到的是整张子表：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12839,6 +12865,7 @@ Name: 语文, dtype: float64</code></pre>
 <p>这个需求的特点是：<strong>既要「每组只留两行」（像 <code>filter</code>），
 又要「按分数挑」（像排序），还要「保留所有列」（像没有聚合）。</strong>
 三种现成方法都办不到，<code>apply</code> 可以：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -12973,6 +13000,7 @@ pandas 只是把结果摞起来。</p>
 <p>另一个 <code>agg</code> 做不到的例子：每组拟合一条直线。</p>
 <p>这个需求要给每组算<strong>多个数</strong>（斜率、截距、样本数），
 <code>agg</code> 只能给每组一个数，<code>transform</code> 只能给等长的结果：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -13037,6 +13065,7 @@ pandas 只是把结果摞起来。</p>
 但<strong>它比命名聚合强大得多</strong>，因为函数内部可以做任意复杂的计算。</p>
 <p><strong>回报是灵活性，代价是速度。</strong> <code>apply</code> 慢在哪里，
 以及什么时候<strong>不该</strong>用它：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -13249,6 +13278,7 @@ pandas 只是把结果摞起来。</p>
 <p><strong>一句话记法</strong>：
 <code>value_counts</code> 数「值的频次」，<code>size</code> 数「行」，<code>count</code> 数「<strong>有值的格子</strong>」。</p>
 <h3 id="71">7.1 三者的实测对比<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -13343,6 +13373,7 @@ pandas 只是把结果摞起来。</p>
 <h3 id="72-size-count">7.2 <code>size</code> 与 <code>count</code> 摆在同一个表里<a class="headerlink" href="#72-size-count" title="Permanent link">&para;</a></h3>
 <p><strong>这是报表里最实用的一行代码</strong>：一眼看出每组有多少行、多少个有效值、
 以及<strong>缺了几个</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -13413,6 +13444,7 @@ pandas 只是把结果摞起来。</p>
 <strong>两个数相减，就是缺失的个数</strong> —— 这比单独去写一个 <code>isna().sum()</code> 更省事，
 而且两者互为验证</p>
 <h3 id="73-value_counts">7.3 <code>value_counts</code> 的常用参数<a class="headerlink" href="#73-value_counts" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -13611,6 +13643,7 @@ bins 参数对数值列分箱（只对数值有意义）:
 <a id="__codelineno-33-8" name="__codelineno-33-8"></a>                                 格 = 这个组合的统计量
 </code></pre></div></td></tr></table></div>
 <h3 id="81-crosstab">8.1 <code>crosstab</code>：数组合的频次<a class="headerlink" href="#81-crosstab" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -13732,6 +13765,7 @@ All  13  9   22
 <strong>光看人数会误判</strong>。看 <code>normalize="index"</code> 才知道构成是否均衡。</p>
 <h3 id="82-crosstab-groupbyunstack">8.2 <code>crosstab</code> 与 <code>groupby().unstack()</code> 的关系<a class="headerlink" href="#82-crosstab-groupbyunstack" title="Permanent link">&para;</a></h3>
 <p><strong>它们做的是同一件事</strong>，知道这一点能让你在两者之间自由选择：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -13872,6 +13906,7 @@ crosstab 还能顺便聚合别的列（values + aggfunc）:
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -13993,6 +14028,7 @@ All  1040.6  631.0  1671.6
 那一格默认是 <code>NaN</code>，加上 <code>fill_value=0</code> 就变成 0。
 <strong>注意这两者含义不同</strong>：「没人」和「都是 0 分」不是一回事 ⚠</p>
 <h3 id="84-pivot_table-pivot">8.4 <code>pivot_table</code> 的更多用法与 <code>pivot</code> 的分工<a class="headerlink" href="#84-pivot_table-pivot" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -14196,6 +14232,7 @@ All  1040.6  631.0  1671.6
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -14258,6 +14295,7 @@ how=outer  → (6, 5)
 ==============================================
 （左表 5 行、右表 3 行，四种写法的结果行数完全不同）</code></pre>
 <p><strong>四种写法的完整结果</strong>，一次看清：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -14432,6 +14470,7 @@ how="outer"（6 行）
 </div>
 <h3 id="92-on-left_on-right_on-suffixes">9.2 <code>on</code> / <code>left_on</code> / <code>right_on</code> / <code>suffixes</code><a class="headerlink" href="#92-on-left_on-right_on-suffixes" title="Permanent link">&para;</a></h3>
 <p><strong>两张表的键名不一样时，用 <code>left_on</code> + <code>right_on</code>：</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -14555,6 +14594,7 @@ how="outer"（6 行）
 </tbody>
 </table>
 <p><strong>这是排查「合并为什么少了/多了行」的第一工具</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -14684,6 +14724,7 @@ right_only    1
 </tbody>
 </table>
 <p>用真实数据看一遍「一对一」与「一对多」的差别：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -14761,6 +14802,7 @@ right_only    1
 6  A05  上海  200.0  沪一店
 左表 5 行 → 结果 7 行，多了 2 行 ⚠</code></pre>
 <p><strong>同一个例子，把「膨胀」的后果量化出来</strong>——这是最直观的教训：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -14863,6 +14905,7 @@ A03    2</code></pre>
 <p class="admonition-title"><code>merge</code> 之后第一件事：打印 <code>shape</code>，跟合并前比</p>
 <p>合并不报错，不代表结果对。<strong>行数变化必须被当场看见。</strong></p>
 <p><strong>推荐的自检写法</strong>（三步，几秒钟）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
@@ -14888,7 +14931,7 @@ A03    2</code></pre>
 <a id="__codelineno-45-11" name="__codelineno-45-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;行数:&quot;</span><span class="p">,</span> <span class="n">before</span><span class="p">,</span> <span class="s2">&quot;→&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">merged</span><span class="p">))</span>
 <a id="__codelineno-45-12" name="__codelineno-45-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">merged</span><span class="p">[</span><span class="s2">&quot;_merge&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
 <a id="__codelineno-45-13" name="__codelineno-45-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;右表键是否唯一:&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">city</span><span class="p">[</span><span class="s2">&quot;城市&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">duplicated</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>行数: 5 → 5
 {'both': 4, 'left_only': 1, 'right_only': 0}
 右表键是否唯一: True</code></pre>
@@ -14925,6 +14968,7 @@ A03    2</code></pre>
 左表里匹配不上的行会被丢掉。<strong>同样是静默的</strong>，同样要靠 <code>shape</code> 发现。</p>
 <h3 id="95-nan">9.5 键不匹配：结果里会出现 <code>NaN</code><a class="headerlink" href="#95-nan" title="Permanent link">&para;</a></h3>
 <p>这是合并的第二个坑：<code>NaN</code> 不一定来自原始数据，可能来自「没接上」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -15034,6 +15078,7 @@ A03    2</code></pre>
 </table>
 <p><strong>最省事的排查方法</strong>：合并后用 <code>indicator</code> 把 <code>left_only</code> 的行取出来，
 再看这些行的键<strong>长什么样</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -15145,6 +15190,7 @@ A03    2</code></pre>
 <a id="__codelineno-48-13" name="__codelineno-48-13"></a>└────┘
 </code></pre></div></td></tr></table></div>
 <h3 id="101-axis-vs">10.1 <code>axis</code>：纵向堆叠 vs 横向拼接<a class="headerlink" href="#101-axis-vs" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -15268,6 +15314,7 @@ A03    2</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
@@ -15347,6 +15394,7 @@ reset_index 之后（多出一列 level_0 就是来源）:
 <p><strong>实用建议</strong>：<strong>要接着做分析（分组、筛选）→ 加列；只是临时看一眼 → 用 <code>keys</code>。</strong></p>
 <h3 id="102-axis1">10.2 <code>axis=1</code>：横向拼接（按索引对齐）<a class="headerlink" href="#102-axis1" title="Permanent link">&para;</a></h3>
 <p>横向拼接最常见的用途：把几个「每组一行」的汇总表并排放成一张宽表。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -15419,6 +15467,7 @@ axis=1 横向拼接（按索引对齐）:
 1  三班   8  80.94
 2  二班   8  77.60</code></pre>
 <p><code>axis=1</code> 最容易出错的地方：它是按索引对齐的，不是按位置。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -15529,6 +15578,7 @@ B  NaN  NaN  77.60
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-53-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-53-3"> 3</a></span>
@@ -15629,6 +15679,7 @@ S03  丙  二班  92.0</code></pre>
 </tbody>
 </table>
 <p><strong>最后一条值得现场看一眼</strong>，因为索引重复不像列重复那样显眼：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -15731,6 +15782,7 @@ S03  丙  NaN
 <p><strong>任务</strong>：一次拿到「每个班几个人、两科的均分各多少」。</p>
 <p><strong>为什么用命名聚合</strong>：一次分组算出所有量，列名直接是中文表头，
 <code>reset_index()</code> 之后就是一张能直接存文件、直接交给别人的表</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -15829,6 +15881,7 @@ S03  丙  NaN
 <p><strong>任务</strong>：给每个学生加一列「本班语文均分」，并标出「谁高于本班均分」。</p>
 <p><strong>为什么这里必须用 <code>transform</code></strong>：结果要<strong>贴在每一行上</strong>，
 所以长度必须与原表一致 —— 这正是 <code>transform</code> 的定义。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -15919,6 +15972,7 @@ S03  丙  NaN
 因为 <code>NaN &gt; 数字</code> 的结果是 <code>False</code>。
 <strong>这会让「缺考的人」被算进「不高于班均」那一堆</strong>，
 所以做统计时一定要记得把缺考行排除：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-57-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-57-3"> 3</a></span>
@@ -15984,6 +16038,7 @@ S03  丙  NaN
 <p><strong>任务</strong>：订单表里有城市，但要看「大区」和「折扣率」，
 这些信息在另一张城市表里 —— 用 <code>left</code> 连接补齐。</p>
 <p><strong>完整流程</strong>：合并 → 检查行数 → 检查缺口 → 算派生列。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -16469,6 +16524,7 @@ S03  丙  NaN
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -16526,7 +16582,7 @@ S03  丙  NaN
 <a id="__codelineno-65-27" name="__codelineno-65-27"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-65-28" name="__codelineno-65-28"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺考那一行的比重是 NaN:&quot;</span><span class="p">)</span>
 <a id="__codelineno-65-29" name="__codelineno-65-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()][[</span><span class="s2">&quot;学号&quot;</span><span class="p">,</span> <span class="s2">&quot;语文&quot;</span><span class="p">,</span> <span class="s2">&quot;班语文总分&quot;</span><span class="p">,</span> <span class="s2">&quot;占本班比重%&quot;</span><span class="p">]])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>    学号  班级    语文  本班人数  班语文总分  占本班比重%
 0  S01  一班  85.0     6  403.3   21.08
 1  S02  一班  78.6     6  403.3   19.49
@@ -16607,6 +16663,7 @@ S03  丙  NaN
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-66-3"> 3</a></span>
@@ -16670,7 +16727,7 @@ S03  丙  NaN
 <a id="__codelineno-66-30" name="__codelineno-66-30"></a><span class="nb">print</span><span class="p">(</span><span class="n">audit</span><span class="p">)</span>
 <a id="__codelineno-66-31" name="__codelineno-66-31"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-66-32" name="__codelineno-66-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;有缺考的批次:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">audit</span><span class="p">[</span><span class="n">audit</span><span class="p">[</span><span class="s2">&quot;有无缺考&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>各批次记录数:
 批次
 一班    6
@@ -16761,6 +16818,7 @@ S03  丙  NaN
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-67-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-67-3"> 3</a></span>
@@ -16848,7 +16906,7 @@ S03  丙  NaN
 <a id="__codelineno-67-42" name="__codelineno-67-42"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-67-43" name="__codelineno-67-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;② 没有员工的部门:&quot;</span><span class="p">)</span>
 <a id="__codelineno-67-44" name="__codelineno-67-44"></a><span class="nb">print</span><span class="p">(</span><span class="n">tagged</span><span class="p">[</span><span class="n">tagged</span><span class="p">[</span><span class="s2">&quot;_merge&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;right_only&quot;</span><span class="p">][[</span><span class="s2">&quot;部门&quot;</span><span class="p">,</span> <span class="s2">&quot;楼层&quot;</span><span class="p">]])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>员工表: (5, 2)
   姓名  部门
 0  甲  研发
@@ -16973,6 +17031,7 @@ outer + indicator:
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-68-3"> 3</a></span>
@@ -17056,7 +17115,7 @@ outer + indicator:
 <a id="__codelineno-68-40" name="__codelineno-68-40"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两表可以互相印证：格子里的金额 &gt; 0 时，笔数必然 &gt; 0&quot;</span><span class="p">)</span>
 <a id="__codelineno-68-41" name="__codelineno-68-41"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  金额为 0 的格子数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">table</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 <a id="__codelineno-68-42" name="__codelineno-68-42"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  笔数为 0 的格子数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">counts</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>明细规模: (17, 3)
    月份  品类     金额
 0  1月  水果   99.0
@@ -17147,6 +17206,7 @@ All   5   6   6   17
 <details class="success">
 <summary>解答</summary>
 <p><strong>乙对，甲错。</strong> 而且<strong>甲不会报错</strong>——它会静默地给出一整列 <code>NaN</code>。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-70-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-70-3"> 3</a></span>
@@ -17200,7 +17260,7 @@ All   5   6   6   17
 <a id="__codelineno-70-25" name="__codelineno-70-25"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-70-26" name="__codelineno-70-26"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最终表:&quot;</span><span class="p">)</span>
 <a id="__codelineno-70-27" name="__codelineno-70-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;组&quot;</span><span class="p">,</span> <span class="s2">&quot;分&quot;</span><span class="p">,</span> <span class="s2">&quot;甲_组均值&quot;</span><span class="p">,</span> <span class="s2">&quot;乙_组均值&quot;</span><span class="p">]])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>agg 结果（每组一行，索引是组名）:
 组
 A    65.000000
@@ -17268,6 +17328,7 @@ transform 结果（与每行一一对应）:
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-71-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-71-3"> 3</a></span>
@@ -17317,7 +17378,7 @@ transform 结果（与每行一一对应）:
 <a id="__codelineno-71-23" name="__codelineno-71-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;班级这一列没有缺失，所以数它时两者相等:&quot;</span><span class="p">,</span>
 <a id="__codelineno-71-24" name="__codelineno-71-24"></a>      <span class="nb">bool</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;班级&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span>
 <a id="__codelineno-71-25" name="__codelineno-71-25"></a>          <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;班级&quot;</span><span class="p">)[</span><span class="s2">&quot;班级&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">())))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原表:
    班级    语文 姓名
 0  一班  80.0  甲
@@ -17397,6 +17458,7 @@ count() → 姓名非缺失个数 : {'一班': 3, '二班': 2}
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-73-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-73-3"> 3</a></span>
@@ -17484,7 +17546,7 @@ count() → 姓名非缺失个数 : {'一班': 3, '二班': 2}
 <a id="__codelineno-73-42" name="__codelineno-73-42"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-73-43" name="__codelineno-73-43"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;修法二（先汇总到键唯一，再合并）:&quot;</span><span class="p">)</span>
 <a id="__codelineno-73-44" name="__codelineno-73-44"></a><span class="nb">print</span><span class="p">(</span><span class="n">fix2</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>右表键重复次数:
 城市
 北京    2
@@ -17582,6 +17644,7 @@ A03    2
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-76-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-76-3"> 3</a></span>
@@ -17647,7 +17710,7 @@ A03    2
 <a id="__codelineno-76-31" name="__codelineno-76-31"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-76-32" name="__codelineno-76-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;同班的值都一样吗:&quot;</span><span class="p">)</span>
 <a id="__codelineno-76-33" name="__codelineno-76-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;班级&quot;</span><span class="p">)[</span><span class="s2">&quot;班均分&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>右侧对象的类型: Series
 右侧对象的长度: 3 （原表是 22 行）
 右侧对象的索引: ['一班', '三班', '二班']

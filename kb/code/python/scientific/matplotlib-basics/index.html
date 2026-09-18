@@ -9678,6 +9678,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Matplotlib 官方文档（Quick start guide / Pyplot tutorial）</code><code>本页示例在 Matplotlib 3.9 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="10">10 可视化基础<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
@@ -9810,6 +9818,7 @@
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a>└─────────────────────────────────────────────────────────┘
 </code></pre></div></td></tr></table></div>
 <p><strong>两种 API 风格</strong>是这一节的重点：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -9828,6 +9837,7 @@
 <a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="c1"># 实际保存到临时目录，避免污染项目目录</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -9881,6 +9891,7 @@
 <div class="admonition warning">
 <p class="admonition-title">风格 A 最典型的翻车方式</p>
 <p>很多人这么写：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
 <span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -9894,10 +9905,11 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5"></a>
 <a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>      <span class="c1"># ⚠ 又画到同一张图上了</span>
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;第二张&quot;</span><span class="p">)</span>                  <span class="c1"># 覆盖了上一个标题</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p><strong>结果是一张图上有两条线、只有一个标题</strong> ——
 作者以为画了两张。</p>
 <p><strong>风格 B 会立刻暴露这个问题</strong>（你必须明确指定往哪个 <code>ax</code> 画）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -9919,7 +9931,7 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;画布上的 Axes 数量:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">))</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;第一张的线条数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;第二张的线条数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax2</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>画布上的 Axes 数量: 2
 第一张的线条数: 1
 第二张的线条数: 1</code></pre>
@@ -9928,6 +9940,7 @@
 <h2 id="_1">二、四种基本图：各解决一类问题<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 折线图：看趋势<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>适用</strong>：横轴有<strong>顺序</strong>（时间、序号），纵轴是连续量。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10013,6 +10026,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </table>
 <h3 id="22">2.2 散点图：看两变量关系<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>适用</strong>：判断两个量是否相关、有没有离群点、是不是非线性。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -10090,6 +10104,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </table>
 <h3 id="23">2.3 柱状图：比较类别<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p><strong>适用</strong>：类别之间比大小。<strong>分组柱状</strong>与<strong>堆叠柱状</strong>是两个常用变体。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -10143,6 +10158,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <div class="admonition warning">
 <p class="admonition-title">柱状图最常见的两个错误</p>
 <p><strong>错误 1：纵轴不从 0 开始</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -10162,7 +10178,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">86</span><span class="p">)</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;纵轴下限:&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>纵轴下限: 80.0</code></pre>
 <p><strong>柱状图的长短代表数值大小</strong>，一旦截断纵轴，比例关系就被破坏了 ✗
 <strong>折线图</strong>截断纵轴是可以接受的（它表达的是变化趋势）。</p>
@@ -10171,6 +10187,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </div>
 <h3 id="24">2.4 直方图：看分布<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p><strong>适用</strong>：一个连续变量的取值分布（集中还是分散、单峰还是双峰、偏斜方向）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -10213,6 +10230,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <div class="admonition tip">
 <p class="admonition-title"><code>bins</code> 怎么选：太少掩盖结构，太多变成噪声</p>
 <p><strong>同一个数据集，<code>bins</code> 不同，结论可能完全不同</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -10246,7 +10264,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;三张图的分箱数:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span>
 <a id="__codelineno-11-16" name="__codelineno-11-16"></a>                        <span class="p">[</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">]])</span>
 <a id="__codelineno-11-17" name="__codelineno-11-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p><strong>判据</strong>：</p>
 <table>
 <thead>
@@ -10351,6 +10369,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <hr />
 <h2 id="_3">四、标注与装饰：让图能自己说话<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p><strong>一张合格的图应当「不看正文也能懂」</strong>。这需要几样东西：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -10523,6 +10542,7 @@ y 轴标签: y
 </div>
 <hr />
 <h2 id="_4">五、子图布局：一页放多张图<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -10603,6 +10623,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <p><strong>最容易踩的是第三行</strong>：只画一张图时，<code>axes</code> 不是列表，
 不能写 <code>axes[0]</code>。</p>
 <p><strong>统一的写法</strong>（始终拿到数组）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -10622,7 +10643,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;形状:&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;可以按下标访问:&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">())</span>
 <a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>形状: (1, 1)
 可以按下标访问: (0.9, 3.1)</code></pre>
 <p>这样写虽然略啰嗦，但<strong>循环画子图时不会因形状不同而崩</strong></p>
@@ -10634,6 +10655,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <p><strong>现象</strong>：图能出，但标题、轴标签里的中文全成了 <code>□□□</code>。</p>
 <p><strong>原因</strong>：Matplotlib 的默认字体不含中文字形。</p>
 <p><strong>解决</strong>：指定一个<strong>含中文的字体族</strong>。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -10675,7 +10697,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-15-19" name="__codelineno-15-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;已配置字体族数量:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;font.sans-serif&quot;</span><span class="p">]))</span>
 <a id="__codelineno-15-20" name="__codelineno-15-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;负号设置:&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.unicode_minus&quot;</span><span class="p">])</span>
 <a id="__codelineno-15-21" name="__codelineno-15-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>已配置字体族数量: 5
 负号设置: False</code></pre>
 <p><strong>两个设置缺一不可</strong>：</p>
@@ -10699,6 +10721,7 @@ axes[0, 0] 的标题: sin</code></pre>
 </table>
 </div>
 <h3 id="_6">查本机有哪些中文字体<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -10727,6 +10750,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <p><strong>用它的方法</strong>：把 <code>cn</code> 里实际存在的名字填进 <code>font.sans-serif</code></p>
 <h3 id="_7">一个字体都没装怎么办<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>不必依赖系统安装 —— 可以把字体文件随项目一起带走：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
 <span class="normal"><a href="#__codelineno-17-3">3</a></span>
@@ -10765,17 +10789,19 @@ axes[0, 0] 的标题: sin</code></pre>
 在没有图形界面的环境（服务器、CI、某些编辑器）里会<strong>卡住等关窗口</strong>，
 或者直接报错 ✗</p>
 <p><strong>关键点：它必须在 <code>import matplotlib.pyplot</code> 之前</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;Agg&quot;</span><span class="p">)</span>        <span class="c1"># ← 必须在下一行之前！</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p><strong>顺序写错会怎样</strong>：<code>pyplot</code> 已经按默认后端初始化了，
 之后再用 <code>use("Agg")</code> 可能不生效（并给出警告）</p>
 </div>
 <hr />
 <h2 id="_8">八、保存图片：三个必知要点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -10818,13 +10844,15 @@ axes[0, 0] 的标题: sin</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">三个要点的顺序不能乱</p>
 <p><strong>① 先保存，再关闭</strong> ✗ 顺序反了会存出一张<strong>空白图</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
 <span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="c1"># 错误顺序：close 之后 savefig 会存出空白</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="c1"># fig.savefig(...)   ← 必须在这之前</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="c1"># plt.close(fig)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p><strong>② 循环画图必须每次 <code>close</code></strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -10858,7 +10886,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-21-15" name="__codelineno-21-15"></a>        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>                      <span class="c1"># ← 关键：每次都关 ✓</span>
 <a id="__codelineno-21-16" name="__codelineno-21-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;生成的图文件数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">made</span><span class="p">))</span>
 <a id="__codelineno-21-17" name="__codelineno-21-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全部非空:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">made</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>生成的图文件数: 3
 全部非空: True</code></pre>
 <p><strong>不关的后果</strong>：Matplotlib 会保留每个 Figure 的引用，
@@ -10998,6 +11026,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <h2 id="_10">十、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：找出画错的地方<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>下面代码想画两张独立的图，但结果不对。错在哪？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
 <span class="normal"><a href="#__codelineno-22-2">2</a></span>
 <span class="normal"><a href="#__codelineno-22-3">3</a></span>
@@ -11025,6 +11054,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <p><strong>问题</strong>：状态机风格下，<code>plt.plot()</code> 画到的是<strong>同一个「当前 Axes」</strong>
 —— 所以<strong>只有一张图，上面两条线</strong>，标题是最后设置的那个 ✗</p>
 <p><strong>验证这一点</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -11054,13 +11084,14 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-23-13" name="__codelineno-23-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;第一个 Axes 上的线条数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
 <a id="__codelineno-23-14" name="__codelineno-23-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;它的标题:&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_title</span><span class="p">())</span>
 <a id="__codelineno-23-15" name="__codelineno-23-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>Figure 数量（当前这张）: 1
 这张图上有几个 Axes: 1
 第一个 Axes 上的线条数: 2
 它的标题: 图 2</code></pre>
 <p><strong>输出会显示「1 个 Axes、2 条线」</strong> —— 证实是同一张图</p>
 <p><strong>修法（推荐面向对象风格）</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -11094,7 +11125,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-24-15" name="__codelineno-24-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;图 2 的标题:&quot;</span><span class="p">,</span> <span class="n">ax2</span><span class="o">.</span><span class="n">get_title</span><span class="p">())</span>
 <a id="__codelineno-24-16" name="__codelineno-24-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两张图各有多少线条:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax1</span><span class="o">.</span><span class="n">lines</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax2</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>Axes 数量: 2
 图 1 的标题: 图 1
 图 2 的标题: 图 2
@@ -11106,6 +11137,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <h3 id="2bins">例题 2：<code>bins</code> 的选择会改变结论<a class="headerlink" href="#2bins" title="Permanent link">&para;</a></h3>
 <p>给定一组<strong>双峰</strong>数据，分别用 <code>bins=4</code> 与 <code>bins=40</code> 画直方图，
 说明为什么结论可能不同。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -11191,6 +11223,7 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
 <hr />
 <h3 id="3">例题 3：中文字体与负号<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>下面代码的中文与负号都可能显示异常。给出完整修法。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -11226,6 +11259,7 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
    该字体若无此字形 → 刻度上的负号变方框</li>
 </ol>
 <p><strong>完整修法</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -11267,7 +11301,7 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
 <a id="__codelineno-27-19" name="__codelineno-27-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;是否用 ASCII 减号:&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;axes.unicode_minus&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">)</span>
 <a id="__codelineno-27-20" name="__codelineno-27-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x 轴第一个刻度:&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xticks</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-27-21" name="__codelineno-27-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>字体族已设几项: 5
 是否用 ASCII 减号: True
 x 轴第一个刻度: -6.0</code></pre>
@@ -11294,6 +11328,7 @@ x 轴第一个刻度: -6.0</code></pre>
 <hr />
 <h3 id="4">例题 4：批量出图与内存<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>下面代码要画 200 张图。它有什么问题？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
 <span class="normal"><a href="#__codelineno-28-2">2</a></span>
 <span class="normal"><a href="#__codelineno-28-3">3</a></span>
@@ -11323,6 +11358,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <p><strong>问题二：<code>savefig</code> 的参数不全</strong> ——
 没设 <code>dpi</code>（默认较低）、没设 <code>bbox_inches="tight"</code>（会有多余白边）</p>
 <p><strong>修正版</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -11360,7 +11396,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <a id="__codelineno-29-17" name="__codelineno-29-17"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;生成张数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">files</span><span class="p">))</span>
 <a id="__codelineno-29-18" name="__codelineno-29-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全部非空:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">files</span><span class="p">))</span>
 <a id="__codelineno-29-19" name="__codelineno-29-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;当前打开的 Figure 数量:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">get_fignums</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>生成张数: 20
 全部非空: True
 当前打开的 Figure 数量: 0</code></pre>
@@ -11399,6 +11435,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <hr />
 <h2 id="_11">十一、自测<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 下面代码输出什么？为什么？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -11483,12 +11520,13 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </tbody>
 </table>
 <p><strong>正确的开头三行（固定写法）</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
 <span class="normal"><a href="#__codelineno-31-2">2</a></span>
 <span class="normal"><a href="#__codelineno-31-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;Agg&quot;</span><span class="p">)</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <p><strong>为什么脚本里要用 <code>Agg</code></strong>：</p>
 <table>
 <thead>
@@ -11520,6 +11558,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </details>
 <hr />
 <p><strong>Q3</strong> 下面代码想给柱状图加均值参考线，但线没出现。为什么？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
 <span class="normal"><a href="#__codelineno-32-2">2</a></span>
 <span class="normal"><a href="#__codelineno-32-3">3</a></span>
@@ -11547,6 +11586,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <p><strong>这条线其实画出来了</strong> —— 但<strong>可能与第一根柱子的顶端重合</strong>
 （均值恰好接近 82），或者<strong>被柱子盖住</strong>。</p>
 <p><strong>验证它确实存在</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -11576,7 +11616,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <a id="__codelineno-33-13" name="__codelineno-33-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;线条数量:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">))</span>
 <a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;线的 y 值:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_ydata</span><span class="p">()))</span>
 <a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>柱子数量: 3
 线条数量: 1
 线的 y 值: [82.0, 82.0]</code></pre>
@@ -11650,6 +11690,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -11691,7 +11732,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B 的网格形状:&quot;</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-34-20" name="__codelineno-34-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;B 中非空格子数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">((</span><span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
 <a id="__codelineno-34-21" name="__codelineno-34-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>A 的点数: 10000
 B 的网格形状: (40, 40)
 B 中非空格子数: 717</code></pre>

@@ -10466,6 +10466,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#6b7280">了解</span><span class="kb-imp-desc">扩展阅读，不必深究</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>SciPy 官方文档（scipy.stats）</code><code>统计学通用术语（推断统计部分）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="13">13 统计推断入门<a class="headerlink" href="#13" title="Permanent link">&para;</a></h1>
@@ -10587,6 +10595,7 @@
 </ul>
 <p>所以现实流程永远是：<strong>抽样 → 算统计量 → 用统计量推断参数</strong>。
 下面这段代码把「总体」和「样本」的差距直观地摆出来：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -10643,6 +10652,7 @@ xbar 与 mu 的差   : 8.828</code></pre>
 <h2 id="_2">二、抽样的随机性<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 同一总体抽两次，结果不一样<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>这是理解后面所有内容的地基：<strong>同一个总体，抽两次，样本均值几乎必然不同。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10762,6 +10772,7 @@ xbar 与 mu 的差   : 8.828</code></pre>
 <p>图能帮我们直观看到，但本页一律<strong>把画图改成打印可核对量</strong>。
 下面这段代码真的画了一张直方图（存到临时目录），
 随后把图里的关键数字打印出来 —— 这样你不需要看图也能核对：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10875,6 +10886,7 @@ PNG 文件签名对 : True
 这是最容易搞混的一句话。</p>
 <p>下面用一个<strong>强右偏</strong>的总体（指数分布）来演示。
 指数分布的偏度约 2、超额峰度约 6，离正态差得很远：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10998,6 +11010,7 @@ n = 200 时偏度只剩 0.21，<strong>已经非常接近正态</strong>。</p>
 <p>下面再用<strong>分位点</strong>核对一次。如果样本均值近似正态，
 它的 1% 和 99% 分位点应该分别接近 <span class="arithmatex">\(\mu + 2.326\sigma/\sqrt{n}\)</span>
 和 <span class="arithmatex">\(\mu - 2.326\sigma/\sqrt{n}\)</span>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11055,6 +11068,7 @@ n = 200 那一行的实测值与正态预测已经非常接近</code></pre>
 <div class="arithmatex">\[\text{SD}(\bar{x}) = \frac{\sigma}{\sqrt{n}}\]</div>
 <p>其中 <span class="arithmatex">\(\sigma\)</span> 是<strong>原总体</strong>的标准差，<span class="arithmatex">\(n\)</span> 是样本量。
 用模拟直接验证：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11179,6 +11193,7 @@ n      实测 SD(样本均值)   理论 sigma/√n     比值
 <h3 id="42">4.2 两者的数值关系<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>它们之间只差一个 <span class="arithmatex">\(\sqrt{n}\)</span>：</p>
 <div class="arithmatex">\[\mathrm{SE} = \frac{\mathrm{SD}}{\sqrt{n}}, \qquad \frac{\mathrm{SD}}{\mathrm{SE}} = \sqrt{n}\]</div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -11330,6 +11345,7 @@ n 再乘 4 变成 400，SE 又减半到 0.6。</p>
 </blockquote>
 <p>注意这句话的主语是「<strong>区间（程序）</strong>」，不是「真值」。</p>
 <p>下面用模拟直接把覆盖率算出来：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -11457,6 +11473,7 @@ n 再乘 4 变成 400，SE 又减半到 0.6。</p>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11563,6 +11580,7 @@ t 区间比正态区间更宽，因为多承担了「用 s 估计 σ」的不确
 <div class="arithmatex">\[\text{宽度} \approx 2 \times z_{1-\alpha/2} \times \frac{\sigma}{\sqrt{n}}\]</div>
 <p>它由<strong>三个因素</strong>决定，下面逐个验证。</p>
 <p><strong>① 置信水平</strong>（通过分位数 <span class="arithmatex">\(z\)</span>）—— 水平越高，区间越宽：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11622,6 +11640,7 @@ t 区间比正态区间更宽，因为多承担了「用 s 估计 σ」的不确
 <p>从 80% 到 99%，宽度从 5.579 涨到 11.727，<strong>变成 2.102 倍</strong>。
 代价换来的收益是：长期看覆盖真值的比例从 80% 提到 99%。</p>
 <p><strong>② 样本量</strong>（通过 <span class="arithmatex">\(\sqrt{n}\)</span>）—— n 越大，区间越窄：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -11773,6 +11792,7 @@ n      样本均值   样本标准差 区间下界   区间上界   宽度
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11871,6 +11891,7 @@ alternative='greater' 单侧 p = 0.4532
 </blockquote>
 <p>用模拟来验证这个定义。如果 <span class="arithmatex">\(H_0\)</span> 真的成立（真均值就是 100），
 那么 p 值应该是什么样的？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -12118,6 +12139,7 @@ p 值小，完全不代表 <span class="arithmatex">\(H_0\)</span> 为真的概�
 这种阴性结果<strong>几乎没有信息量</strong></p>
 <h3 id="66-t">6.6 单样本 t 检验<a class="headerlink" href="#66-t" title="Permanent link">&para;</a></h3>
 <p><code>ttest_1samp</code> 用于「<strong>一组数据，与一个给定值比较</strong>」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -12235,6 +12257,7 @@ p &lt; 0.05 吗   : True
 </tbody>
 </table>
 <p>下面故意造两组<strong>方差差很多</strong>的数据，看两种算法的差别：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -12381,6 +12404,7 @@ Student t 检验的<strong>实际第一类错误率可能远高于名义的 0.05
 </div>
 <h3 id="68-t">6.8 配对 t 检验<a class="headerlink" href="#68-t" title="Permanent link">&para;</a></h3>
 <p><code>ttest_rel</code> 用于「<strong>同一批对象测两次</strong>」或「一一配对」的数据。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -12497,6 +12521,7 @@ Student t 检验的<strong>实际第一类错误率可能远高于名义的 0.05
 </table>
 <h3 id="69">6.9 卡方检验<a class="headerlink" href="#69" title="Permanent link">&para;</a></h3>
 <p><code>chi2_contingency</code> 用于<strong>列联表</strong>：两个<strong>分类变量</strong>之间是否有关联。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -12646,6 +12671,7 @@ p 值      : 0.0033
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -12795,6 +12821,7 @@ Levene 方差齐性检验（H0：各组方差相等）
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -12864,6 +12891,7 @@ Levene 方差齐性检验（H0：各组方差相等）
   t = -4.6225  p = 3.39408e-05
 
 两种方法都拒绝了 H0；非参数方法只依赖「排序」，不依赖分布形状</code></pre>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -12971,6 +12999,7 @@ Wilcoxon 符号秩检验（配对，不要求正态）
 <h3 id="71-p">7.1 陷阱一：p 小不等于效应大<a class="headerlink" href="#71-p" title="Permanent link">&para;</a></h3>
 <p><strong>这是 p 值被误用最多的地方。</strong> 下面做一个残酷的演示：
 固定真实差异为 0.05（小到没有实际意义），只看样本量的影响：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -13102,6 +13131,7 @@ n        实测平均d   平均p值    p&lt;0.05 的比例
 <div class="arithmatex">\[P(\text{至少一次}) = 1 - (1-\alpha)^k\]</div>
 <p>代入 α = 0.05、k = 20：<span class="arithmatex">\(1 - 0.95^{20} \approx 0.6415\)</span>。
 <strong>超过六成。</strong> 用模拟验证：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -13230,6 +13260,7 @@ p 值就已经失真了。</strong> 正确做法是事先登记分析方案，�
 <h3 id="73-bonferroni">7.3 陷阱三的解法：Bonferroni 校正<a class="headerlink" href="#73-bonferroni" title="Permanent link">&para;</a></h3>
 <p><strong>Bonferroni 校正</strong>是最简单的一种多重比较校正：
 把判定阈值从 <span class="arithmatex">\(\alpha\)</span> 改成 <span class="arithmatex">\(\alpha/k\)</span>（k 是检验次数）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -13542,6 +13573,7 @@ p × k   : [ 0.02  0.4   0.8   4.   16.  ]
 <div class="arithmatex">\[d = \frac{\bar{x}_1 - \bar{x}_2}{s_{\text{pooled}}}\]</div>
 <p>分子是<strong>两组均值之差</strong>，分母是<strong>合并标准差</strong>（两组的共同噪声水平）。
 所以 d 的含义是「<strong>差异相当于多少个标准差</strong>」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -13779,6 +13811,7 @@ r 的经验判据  ：约 0.1 小、0.3 中、0.5 大
 <h2 id="_8">九、实际应用<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="91-ab">9.1 A/B 对比的完整流程<a class="headerlink" href="#91-ab" title="Permanent link">&para;</a></h3>
 <p>这是把前面所有零件串起来的一段代码，<strong>五步走</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -13997,6 +14030,7 @@ p 值是否可信也就无从谈起</p>
 两组等样本、双侧检验时，每组大约需要：</p>
 <div class="arithmatex">\[n \approx \frac{2(z_{1-\alpha/2} + z_{1-\beta})^2}{d^2}\]</div>
 <p><strong>注意分母是 <span class="arithmatex">\(d^2\)</span></strong> —— 所以 d 减半，n 要变成<strong>约 4 倍</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -14300,6 +14334,7 @@ n 达到公式给的值后功效接近 0.80，再加样本还能更高</code></p
 <details class="success">
 <summary>解答</summary>
 <p><strong>完整代码与结果</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -14349,7 +14384,7 @@ n 达到公式给的值后功效接近 0.80，再加样本还能更高</code></p
 <a id="__codelineno-27-23" name="__codelineno-27-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;t =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">statistic</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
 <a id="__codelineno-27-24" name="__codelineno-27-24"></a>      <span class="s2">&quot; df =&quot;</span><span class="p">,</span> <span class="n">res</span><span class="o">.</span><span class="n">df</span><span class="p">,</span> <span class="s2">&quot; p =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">pvalue</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
 <a id="__codelineno-27-25" name="__codelineno-27-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;拒绝 H0 吗:&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">pvalue</span> <span class="o">&lt;</span> <span class="mf">0.05</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>样本量 n     : 12
 样本均值 xbar: 81.8333
 样本标准差 s : 10.6927
@@ -14450,6 +14485,7 @@ t = 0.5939  df = 11  p = 0.5646
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -14515,7 +14551,7 @@ t = 0.5939  df = 11  p = 0.5646
 <a id="__codelineno-28-31" name="__codelineno-28-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  均值差 =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">diff</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
 <a id="__codelineno-28-32" name="__codelineno-28-32"></a>      <span class="s2">&quot; 95% CI = [&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">lo</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">hi</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;]&quot;</span><span class="p">)</span>
 <a id="__codelineno-28-33" name="__codelineno-28-33"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Cohen&#39;s d =&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>第 1 步  方差齐性:Levene W = 0.2965  p = 0.5874
          p &gt; 0.05 → 没有证据说方差不等
 
@@ -14636,6 +14672,7 @@ t = 0.5939  df = 11  p = 0.5646
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -14681,7 +14718,7 @@ t = 0.5939  df = 11  p = 0.5646
 <a id="__codelineno-31-21" name="__codelineno-31-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;期望频数表:&quot;</span><span class="p">)</span>
 <a id="__codelineno-31-22" name="__codelineno-31-22"></a><span class="nb">print</span><span class="p">(</span><span class="n">expected</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-31-23" name="__codelineno-31-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最小期望频数:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">expected</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="mi">4</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>3×2 列联表（行 = 方案，列 = 成功 / 失败）:
 [[60 40]
  [45 55]
@@ -14794,6 +14831,7 @@ p = 0.069 只是<strong>略高于</strong> 0.05，而且样本量只有 300。
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -14831,7 +14869,7 @@ p = 0.069 只是<strong>略高于</strong> 0.05，而且样本量只有 300。
 <a id="__codelineno-33-17" name="__codelineno-33-17"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">d</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-33-18" name="__codelineno-33-18"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-33-19" name="__codelineno-33-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;真实差异一直没变，但 n 越大越容易检出 —— 这就是统计功效&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>真实 Cohen's d = 0.3 ，重复 B = 200 次实验
 
 每组 n    平均 p 值   功效(p&lt;0.05 的比例)   平均实测 d
@@ -14953,6 +14991,7 @@ d 一直稳定在 0.30 附近（真实值 0.3），
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -14976,7 +15015,7 @@ d 一直稳定在 0.30 附近（真实值 0.3），
 <a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SD 一直是&quot;</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="s2">&quot;，但 SE 从&quot;</span><span class="p">,</span>
 <a id="__codelineno-34-11" name="__codelineno-34-11"></a>      <span class="nb">round</span><span class="p">(</span><span class="n">sd</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;降到&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">sd</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="mi">4</span><span class="p">))</span>
 <a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;样本量乘 4，SE 变成原来的&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="s2">&quot;倍&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>同一个总体、同样的个体离散度 SD = 20.0
 
 样本量 n    SD      SE = SD/√n
@@ -15064,6 +15103,7 @@ SD 一直是 20.0 ，但 SE 从 5.0 降到 2.5
 <a id="__codelineno-35-2" name="__codelineno-35-2"></a>那么重复抽样时，约有 0.8095 的比例会得到
 <a id="__codelineno-35-3" name="__codelineno-35-3"></a>「与这次的样本均值一样极端、或更偏离 5」的样本。
 </code></pre></div></td></tr></table></div>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -15093,7 +15133,7 @@ SD 一直是 20.0 ，但 SE 从 5.0 降到 2.5
 <a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;那么重复抽样时约有&quot;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="s2">&quot;的比例会得到像这次这样、或更偏离 5 的样本。&quot;</span><span class="p">)</span>
 <a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;错误读法：不能说「总体均值等于 5 的概率是&quot;</span><span class="p">,</span> <span class="n">pv</span><span class="p">,</span> <span class="s2">&quot;」。&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>样本量 n = 16  样本均值 = 4.8879
 t = -0.2454  p = 0.8095
 
@@ -15190,6 +15230,7 @@ t = -0.2454  p = 0.8095
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -15225,7 +15266,7 @@ t = -0.2454  p = 0.8095
 <a id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-37-17" name="__codelineno-37-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论：p 小只说明「差异不像随机波动造成的」，&quot;</span><span class="p">)</span>
 <a id="__codelineno-37-18" name="__codelineno-37-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;      不说明「差异大到值得采取行动」。&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>每组样本量: 200000
 观测到的均值差: 0.1157
 p 值 : 0.000254 → 远小于 0.05，显著
@@ -15331,6 +15372,7 @@ p 值随之变得极小。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -15368,7 +15410,7 @@ p 值随之变得极小。</p>
 <a id="__codelineno-38-17" name="__codelineno-38-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;校正后的 p 值(p×k) :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">pvals</span> <span class="o">*</span> <span class="n">ks</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
 <a id="__codelineno-38-18" name="__codelineno-38-18"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-38-19" name="__codelineno-38-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;校正能拦住假阳性，代价是真的效应也更难被检出。&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>做了 5 个检验（数据全部来自同一个总体，本不该有显著）
 原始 p 值          : [0.771  0.9096 0.0691 0.7107 0.5406]
 p &lt; 0.05 的个数    : 0 / 5

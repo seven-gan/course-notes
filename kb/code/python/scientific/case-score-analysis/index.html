@@ -9800,6 +9800,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本案例为教学用综合练习（数据为程序生成的模拟数据）</code><code>pandas / NumPy 官方文档</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="14">14 实战：成绩数据分析<a class="headerlink" href="#14" title="Permanent link">&para;</a></h1>
@@ -10026,6 +10034,7 @@
 </table>
 <p><strong>先把「造数据」这一步封装成模块</strong>，后面每个代码块都能直接调用它。
 这也顺便演示了工程上的一个习惯：<strong>把「造数据/清洗/汇总」写成函数，主流程只做编排</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -10189,6 +10198,7 @@
 </tbody>
 </table>
 <p><strong>第一步：规模与长相。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -10245,6 +10255,7 @@
 </tbody>
 </table>
 <p><strong>第二步：把五类问题逐个定位</strong> —— 不要靠眼睛扫，靠代码把它们指出来。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10288,6 +10299,7 @@
 <p><strong>第三步：<code>info()</code> 一眼看全。</strong>
 它把「非空个数」和「类型」放在同一张表里，
 是发现「某列悄悄变成文本」最快的手段：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -10417,6 +10429,7 @@ dtypes: float64(2), object(3)</code></pre>
 <p><strong>为什么</strong>：列名里的空格是<strong>不可见字符</strong>，
 写代码时你看不出 <code>df["班级"]</code> 和实际列名 <code>"班级 "</code> 的差别，
 只会收到一个 <code>KeyError</code>，然后在屏幕上反复比对两行字。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10468,6 +10481,7 @@ dtypes: float64(2), object(3)</code></pre>
 <h3 id="42-errors">4.2 类型转换：先看不用 <code>errors</code> 会怎样<a class="headerlink" href="#42-errors" title="Permanent link">&para;</a></h3>
 <p><strong>为什么要专门演示报错</strong>：这样你才知道 <code>errors="coerce"</code> 到底救了什么。
 下面这段<strong>故意保留报错</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
 <span class="normal"><a href="#__codelineno-5-2">2</a></span>
 <span class="normal"><a href="#__codelineno-5-3">3</a></span>
@@ -10489,6 +10503,7 @@ dtypes: float64(2), object(3)</code></pre>
 但真实表可能有几万个格子，逐个改是不现实的 ——
 而且<strong>有些格子本来就应该变成缺失值</strong>（「缺考」就是）。</p>
 <p><strong>加上 <code>errors="coerce"</code></strong>：把转不过去的值<strong>降级为缺失值</strong>，而不是丢掉整列。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10563,6 +10578,7 @@ bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了�
 <p><strong>为什么先去重、再去处理异常</strong>：如果不去重，
 后面「一班 12 人」会变成「一班 13 人」，
 而且那条重复记录的分数会被<strong>算两次</strong>，均值、排名统统偏移。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -10641,6 +10657,7 @@ bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了�
 <p><strong>为什么用「业务规则」而不是「统计规则」</strong>：
 业务规则是<strong>确定的、可解释的</strong>：分数是 -5 或 999，不需要算标准差就知道它错。
 统计规则（比如 3σ）会被极端值本身带偏 —— 这一点在例题 1 里实测。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -10750,6 +10767,7 @@ bug 会推迟到 <code>mean()</code> 那一行才爆发，而那时你早忘了�
 <h3 id="45">4.5 缺失值填充：为什么选这一步的统计量<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
 <p><strong>先看清有哪些格子需要填</strong>。经过前面三步，
 缺失来自两个源头：本来就空的（语文）、以及刚刚被置空的（越界值）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -10854,6 +10872,7 @@ dtype: float64</code></pre>
 <li>填分类列 → 用众数或用 <code>"未知"</code> 这种<strong>显式的缺失类别</strong></li>
 <li>填数值列 → 用中位数，通常比均值稳</li>
 </ul>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -10978,6 +10997,7 @@ dtype: float64</code></pre>
 <p><strong>注意 <code>axis=1</code></strong>：求和、求平均都发生在<strong>每一行内部</strong>（横向），
 所以是 <code>axis=1</code>。写成 <code>axis=0</code> 会得到「每门课的总分」，
 那是一个完全不同的东西，而且<strong>不会报错</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11030,6 +11050,7 @@ dtype: float64</code></pre>
 <p><strong>为什么用 <code>pd.cut</code> 而不是一串 <code>if</code></strong>：分档是一个<strong>映射</strong>，
 用 <code>pd.cut</code> 能一次表达「区间 → 标签」的全部边界，
 不会出现「60 分到底算及格还是不及格」这种在代码缝隙里被漏掉的情况。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -11180,6 +11201,7 @@ Name: count, dtype: int64
 <h3 id="52">5.2 班级排名<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p><strong>为什么排名要「分班」</strong>：报告要的是「这个学生在<strong>自己班</strong>里排第几」。
 如果直接对全体学员排名，那是另一种口径，与题目要的不是同一个数。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11311,6 +11333,7 @@ Name: count, dtype: int64
 新手常写成「求人数 <code>groupby().size()</code> 一次、求均分再来一次」，
 重复分组既慢又容易<strong>口径不一致</strong>（比如某次忘了先筛选有效数据）。
 一次 <code>agg</code> 在同一份数据上算出所有指标，口径天然一致</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11470,6 +11493,7 @@ Name: 平均分, dtype: float64</code></pre>
 </tbody>
 </table>
 <h3 id="71">7.1 全班第一与各科最高分<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -11558,6 +11582,7 @@ dtype: float64
 <p>这是本页最需要「想清楚再算」的一步。</p>
 <p>问题在于：三科的<strong>均值不一样</strong>（语文 78.46、数学 71.34、英语 78.62），
 所以直接比标准差会<strong>混入「难度差异」的影响</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -11735,6 +11760,7 @@ dtype: float64
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11850,6 +11876,7 @@ dtype: float64
 我们把第一项求和，就得到「有多少个样本落进了这些箱子」——
 只要它等于人数，就说明没有数据因为 <code>range</code> 设窄了而被漏掉</p>
 <p><strong>接下来画班级均分柱状图与平均分箱线图</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -11983,6 +12010,7 @@ dtype: float64
 路径里含用户名、盘符、临时目录名，<strong>在不同机器上完全不同</strong>，
 写进教学材料既会让输出对不上，也没有必要。
 改成打印<strong>行数</strong>和<strong>布尔判断</strong>，输出就稳定了</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12122,6 +12150,7 @@ dtype: float64
 报告里如果只给出结论，读者<strong>无法判断你动了多少数据</strong>。
 把「清洗前 → 清洗后」并排写出来，
 读者一眼就知道这份结论有多大的加工痕迹</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12339,6 +12368,7 @@ dtype: float64
 其他改动都是「更稳」，而它带来的是「能用」</p>
 <p><strong>下面是一个可以按需改造的脚本骨架</strong>，体现上面几条中的三条
 （断言、日志、保留原始数据）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12505,6 +12535,7 @@ dtype: float64
 <details class="success">
 <summary>解答</summary>
 <p><strong>先跑 3σ 规则</strong>，注意这里<strong>故意不先置空</strong>（很多人的第一版就是这样写的）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12540,7 +12571,7 @@ dtype: float64
 <a id="__codelineno-24-16" name="__codelineno-24-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  </span><span class="si">%s</span><span class="s2">: 下界 </span><span class="si">%.1f</span><span class="s2"> 上界 </span><span class="si">%.1f</span><span class="s2"> → 标出 </span><span class="si">%d</span><span class="s2"> 处 </span><span class="si">%s</span><span class="s2">&quot;</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a>          <span class="o">%</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">bad</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span>
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a>             <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">bad</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>用 3σ 规则（未先剔除越界值）:
   语文: 下界 -410.8 上界 633.7 → 标出 1 处 [999.0]
   数学: 下界 37.5 上界 105.1 → 标出 0 处 []
@@ -12549,6 +12580,7 @@ dtype: float64
 但看语文那一行的下界：<strong>-410.8</strong>。
 这个数字暴露了问题：3σ 的区间被 999 撑到了荒谬的宽度。</p>
 <p><strong>再看 999 把统计量污染到什么程度</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12588,7 +12620,7 @@ dtype: float64
 <a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-25-19" name="__codelineno-25-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;业务规则 (0 到 100) 对这三个值全部报出:&quot;</span><span class="p">,</span>
 <a id="__codelineno-25-20" name="__codelineno-25-20"></a>      <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">200.0</span><span class="p">,</span> <span class="mf">150.0</span><span class="p">,</span> <span class="mf">999.0</span><span class="p">)</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>语文列含 999 时：均值 111.42，标准差 174.08
 它给出的 3σ 区间: [-410.8, 633.7]
   若再出现一个  200.0 的错值，3σ 会报出来吗: False
@@ -12693,6 +12725,7 @@ dtype: float64
 <details class="success">
 <summary>解答</summary>
 <p><strong>构造一份有「同名学生两次录入、分数不同」的表</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -12726,7 +12759,7 @@ dtype: float64
 <a id="__codelineno-27-15" name="__codelineno-27-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;姓名&quot;</span><span class="p">,</span> <span class="s2">&quot;班级&quot;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">))</span>
 <a id="__codelineno-27-16" name="__codelineno-27-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;看清重复组（keep=False 标出全部同名记录）:&quot;</span><span class="p">)</span>
 <a id="__codelineno-27-17" name="__codelineno-27-17"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;姓名&quot;</span><span class="p">,</span> <span class="s2">&quot;班级&quot;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>  姓名  班级    语文
 0  甲  一班  80.0
 1  乙  一班  75.0
@@ -12832,6 +12865,7 @@ dtype: float64
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12873,7 +12907,7 @@ dtype: float64
 <a id="__codelineno-28-19" name="__codelineno-28-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">：语文均值 </span><span class="si">%.2f</span><span class="s2"> 标准差 </span><span class="si">%.2f</span><span class="s2"> | 总分均值 </span><span class="si">%.2f</span><span class="s2">&quot;</span>
 <a id="__codelineno-28-20" name="__codelineno-28-20"></a>          <span class="o">%</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">filled</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">filled</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
 <a id="__codelineno-28-21" name="__codelineno-28-21"></a>             <span class="n">filled</span><span class="p">[</span><span class="n">SUBJECTS</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>中位数填充：语文均值 78.46 标准差 6.43 | 总分均值 228.41
 均值填充：语文均值 78.55 标准差 6.42 | 总分均值 228.48
 填 0：语文均值 70.70 标准差 24.81 | 总分均值 215.63</code></pre>
@@ -13000,6 +13034,7 @@ dtype: float64
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -13029,7 +13064,7 @@ dtype: float64
 <a id="__codelineno-30-13" name="__codelineno-30-13"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-30-14" name="__codelineno-30-14"></a><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
 <a id="__codelineno-30-15" name="__codelineno-30-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-6s</span><span class="s2"> 最大的科目: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">stats</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>      极差    标准差   四分位距
 语文  27.9   6.43   7.70
 数学  44.5  11.07  15.22
@@ -13169,6 +13204,7 @@ dtype: float64
 </tbody>
 </table>
 <p><strong>第二行的实际效果</strong>（实测）：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -13198,7 +13234,7 @@ dtype: float64
 <a id="__codelineno-33-13" name="__codelineno-33-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用筛选结果赋回去之后:&quot;</span><span class="p">)</span>
 <a id="__codelineno-33-14" name="__codelineno-33-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">df2</span><span class="p">)</span>
 <a id="__codelineno-33-15" name="__codelineno-33-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺失个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">df2</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>加分后:
      姓名    语文
 0  学生01  75.3
@@ -13218,6 +13254,7 @@ dtype: float64
 5  学生06  81.3
 缺失个数: 0</code></pre>
 <p><strong>正确写法：加分和截断要分开做，而且截断要用「赋值」而不是「筛选」</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
 <span class="normal"><a href="#__codelineno-34-2">2</a></span>
 <span class="normal"><a href="#__codelineno-34-3">3</a></span>
@@ -13233,7 +13270,7 @@ dtype: float64
 <a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="n">df</span> <span class="o">=</span> <span class="n">build_clean</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)[[</span><span class="s2">&quot;姓名&quot;</span><span class="p">,</span> <span class="s2">&quot;语文&quot;</span><span class="p">]]</span>
 <a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;语文&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">upper</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>   <span class="c1"># 加分后直接夹到 100</span>
 <a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>     姓名    语文
 0  学生01  75.3
 1  学生02  86.3
@@ -13307,6 +13344,7 @@ dtype: float64
 <details class="success">
 <summary>解答</summary>
 <p><strong>两个写法在「按列标准化」这件事上结果相同</strong> —— 实测如下：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -13328,7 +13366,7 @@ dtype: float64
 <a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;写法 A 每列的均值:&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;写法 B 每列的均值:&quot;</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-36-11" name="__codelineno-36-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两种写法结果是否完全一致:&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>写法 A 每列的均值: [0.0, 0.0, 0.0]
 写法 B 每列的均值: [0.0, 0.0, 0.0]
 两种写法结果是否完全一致: True</code></pre>
@@ -13360,6 +13398,7 @@ dtype: float64
 一旦场景换成「按行」，同一个写法会<strong>静默失败</strong>（结果全变缺失，且不报错）。
 这一点在下面实测</p>
 <p>实测一下「按行标准化」长什么样 —— <strong>注意这里有个坑</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -13381,7 +13420,7 @@ dtype: float64
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;直接减之后的前 3 行:&quot;</span><span class="p">)</span>
 <a id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">wrong</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <a id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;整表缺失个数（本应是 0 才对）:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">wrong</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>直接减之后的前 3 行:
     0   1   2   3   4   5   6   7   8  ...  24  25  26  27  28  29  数学  英语  语文
 0 NaN NaN NaN NaN NaN NaN NaN NaN NaN  ... NaN NaN NaN NaN NaN NaN NaN NaN NaN
@@ -13392,6 +13431,7 @@ dtype: float64
 整表缺失个数（本应是 0 才对）: 990</code></pre>
 <p><strong>它没报错，却几乎全是 <code>NaN</code></strong> —— 原因见下一段。
 正确写法是用 <code>.sub(..., axis=0)</code> <strong>明确告诉 pandas 按行广播</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -13425,7 +13465,7 @@ dtype: float64
 <a id="__codelineno-38-15" name="__codelineno-38-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;按行标准化后，每列的均值:&quot;</span><span class="p">)</span>
 <a id="__codelineno-38-16" name="__codelineno-38-16"></a><span class="nb">print</span><span class="p">(</span><span class="n">row_wise</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-38-17" name="__codelineno-38-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;整表缺失个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">row_wise</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>按行标准化后，每行的均值:
 [-0.0, 0.0, -0.0]
 按行标准化后，每行的标准差:
@@ -13434,6 +13474,7 @@ dtype: float64
 [0.138155, -0.443125, 0.30497]
 整表缺失个数: 0</code></pre>
 <p><strong>对比一下按列标准化的结果</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -13455,7 +13496,7 @@ dtype: float64
 <a id="__codelineno-39-9" name="__codelineno-39-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">col_wise</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-39-10" name="__codelineno-39-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;按列标准化后，每行的均值（前 3 个）:&quot;</span><span class="p">)</span>
 <a id="__codelineno-39-11" name="__codelineno-39-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">col_wise</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>按列标准化后，每列的均值:
 [0.0, 0.0, 0.0]
 按列标准化后，每行的均值（前 3 个）:
@@ -13590,6 +13631,7 @@ dtype: float64
 <summary>解答</summary>
 <p><code>count</code> 数的是「非空值个数」，不是「行数」。</p>
 <p>实测一下差别：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -13629,7 +13671,7 @@ dtype: float64
 <a id="__codelineno-41-18" name="__codelineno-41-18"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-41-19" name="__codelineno-41-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总行数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="s2">&quot; 平均分缺失个数:&quot;</span><span class="p">,</span>
 <a id="__codelineno-41-20" name="__codelineno-41-20"></a>      <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;平均分&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>    人数按平均分数  人数按姓名数
 班级                 
 一班       11      12
@@ -13638,6 +13680,7 @@ dtype: float64
 总行数: 30  平均分缺失个数: 1</code></pre>
 <p><strong>正确写法</strong>：数「有多少个人」就数一个<strong>必然非空</strong>的列，
 通常是姓名或编号。实测一下两种写法在同一份数据上的差别：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -13667,7 +13710,7 @@ dtype: float64
 <a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用 size 数行数:&quot;</span><span class="p">)</span>
 <a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;班级&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>数平均分列（错）:
 班级  一班  二班
 人数  11  18
@@ -13777,6 +13820,7 @@ dtype: float64
 </table>
 <p><strong>正确的算法是「在每一步的现场记录差值」</strong>，而不是事后估算。
 下面是完整实现：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13842,7 +13886,7 @@ dtype: float64
 <a id="__codelineno-43-31" name="__codelineno-43-31"></a>
 <a id="__codelineno-43-32" name="__codelineno-43-32"></a><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">log</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 <a id="__codelineno-43-33" name="__codelineno-43-33"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%-18s</span><span class="s2"> : </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>输入行数               : 31
 类型转换后缺失格子          : 3
 删除重复行              : 1

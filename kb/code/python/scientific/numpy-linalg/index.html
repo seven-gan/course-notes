@@ -10234,6 +10234,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>NumPy 官方文档（Linear algebra / Random sampling）</code><code>本页示例在 NumPy 1.26 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="04">04 线性代数与随机数<a class="headerlink" href="#04" title="Permanent link">&para;</a></h1>
@@ -10317,6 +10325,7 @@
 <h2 id="_1">一、<code>*</code> 是逐元素乘法，<code>@</code> 才是矩阵乘法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 两种乘法并排看<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>先看最小的一段代码：两个 2×2 矩阵，同一次运算用两种符号各做一遍。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -10378,6 +10387,7 @@ a @ b（矩阵乘法）：
 <h3 id="12">1.2 一维数组上，两者差别最大<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>一维数组（向量）的情况更值得单独说，因为这里的结果<strong>连形状都不同</strong>：
 一个给出标量，一个给出数组。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10474,6 +10484,7 @@ NumPy 里做「乘法」的函数不止一个，它们在<strong>一维</strong>
 <p><strong>二维那一行的差别是关键</strong>：<code>dot</code> 与 <code>matmul</code> 算的是矩阵乘法，
 而 <code>inner</code> 算的是「先转置再乘」，得到的是完全不同的矩阵。</p>
 <h3 id="21">2.1 一维输入：四个函数里三个给出同一个数<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10511,6 +10522,7 @@ np.outer(v, w) 的形状: (3, 3)
 都是 <code>1*4 + 2*5 + 3*6 = 32</code>。
 这也是它们容易混淆的原因——只有输入变成二维，差别才暴露出来。</p>
 <h3 id="22-inner-dot">2.2 二维输入：<code>inner</code> 与 <code>dot</code> 分道扬镳<a class="headerlink" href="#22-inner-dot" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10626,6 +10638,7 @@ m @ m 与 np.inner(m, m) 相同? False</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -10727,6 +10740,7 @@ c.conj().T（共轭转置）:
 </table>
 <p>把握住「中间的数字必须相等」这一条，你就能在写代码之前先把形状算出来，
 而不是等报错再改。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10951,6 +10965,7 @@ ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -10987,6 +11002,7 @@ ValueError: matmul: Input operand 1 has a mismatch in its core dimension 0, with
 直接算逆矩阵再乘，会多花时间，还会放大误差。</p>
 <p>先用一个「轻微病态」的矩阵看差别并不明显，
 换成一个 12 阶的 Hilbert 矩阵，差距就出来了。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11127,6 +11143,7 @@ inv    残差 ||hx - b||: 0.134564</code></pre>
 </table>
 <p><code>pinv</code> 的行为最容易记：<strong>对能精确解出的方程组，它给的是「长度最短的那个解」</strong>；
 对解不出来的方程组，它给的是「最接近的那个解」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11174,6 +11191,7 @@ pinv 解: [-0.5  0.   0.5]
 伪逆的性质 a @ pinv(a) @ a == a ? True</code></pre>
 <p>再看 <code>lstsq</code>。它的返回值是四元组：<strong>解、残差平方和、秩、奇异值</strong>。
 这里的「残差」是<strong>最小二乘意义上的残差平方和</strong>，不是残差范数，这一点经常被记错。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11273,6 +11291,7 @@ NumPy 提供专用版本 <code>eigh</code>：<strong>更快、更稳定，并且
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -11340,6 +11359,7 @@ eigh 验证: True
 <p>但有一个<strong>极高频的坑</strong>：<code>np.linalg.svd</code> 返回的第二个值 <code>s</code>
 是<strong>一维向量</strong>，不是对角矩阵。很多教材公式里写的是矩阵 <code>S</code>，
 照抄公式做矩阵乘法就会报错。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11513,6 +11533,7 @@ np.linalg.svd(m, compute_uv=False): [3. 2.]</code></pre>
 </table>
 <p><strong>记法</strong>：矩阵的 1 范数看<strong>列</strong>，<code>inf</code> 范数看<strong>行</strong>——
 和「1 竖着写像列、∞ 横着写像行」的印象正好对上。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11605,6 +11626,7 @@ np.linalg.svd(m, compute_uv=False): [3. 2.]</code></pre>
 通常要的就是 Frobenius 范数，记得显式写 <code>'fro'</code>。</p>
 </div>
 <h3 id="47-matrix_rankmatrix_powertraceqrcholesky">4.7 <code>matrix_rank</code>、<code>matrix_power</code>、<code>trace</code>、<code>qr</code>、<code>cholesky</code><a class="headerlink" href="#47-matrix_rankmatrix_powertraceqrcholesky" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11694,6 +11716,7 @@ q @ r 还原 a 吗? True
 ch @ ch.T 还原原矩阵吗? True</code></pre>
 <p><code>cholesky</code> 有一条硬性前提：<strong>矩阵必须对称正定</strong>。
 输入不满足时会直接报错，这是它的优点——能当校验用。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
 <span class="normal"><a href="#__codelineno-17-3">3</a></span>
@@ -11707,6 +11730,7 @@ ch @ ch.T 还原原矩阵吗? True</code></pre>
 <pre class="kb-output"><code>numpy.linalg.LinAlgError: Matrix is not positive definite</code></pre>
 <p>同样的道理，<code>solve</code> 遇到奇异矩阵也会报错，
 所以它并不像 <code>inv</code> 那样「悄悄给你一个垃圾结果」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -11792,6 +11816,7 @@ ch @ ch.T 还原原矩阵吗? True</code></pre>
 </tbody>
 </table>
 <h3 id="51-solve">5.1 情形一：唯一解 → <code>solve</code><a class="headerlink" href="#51-solve" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11824,6 +11849,7 @@ det: 5.0  rank: 2
 <h3 id="52-lstsq">5.2 情形二：无解（超定）→ <code>lstsq</code>，并检查残差<a class="headerlink" href="#52-lstsq" title="Permanent link">&para;</a></h3>
 <p>制造一个「无解」的方程组：两个方程实际上是同一条直线的不同倍数，
 但右端项不成比例，于是不可能同时满足。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -11876,6 +11902,7 @@ lstsq 解: [0.52 1.04]
 <h3 id="53-pinv">5.3 情形三：无穷多解（欠定）→ <code>pinv</code><a class="headerlink" href="#53-pinv" title="Permanent link">&para;</a></h3>
 <p>未知数多于方程时，自由度多出来，解构成一条直线或一个平面。
 <code>pinv</code> 的作用是在无穷多个解里<strong>挑出长度最短的那个</strong>（最小范数解）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -11973,6 +12000,7 @@ pinv 给出的最短解: [1. 1. 1.]
 <p>这意味着<strong>特征向量的正负号在数学上完全没有意义</strong>。
 算法内部会选一个方向，但选哪个方向取决于 LAPACK 的具体实现版本，
 <strong>不同机器、不同 NumPy 版本可能给出相反的结果</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12076,6 +12104,7 @@ eigh 特征值: [2.381966 4.618034]   ← 同一个集合，顺序相反
 <h3 id="62">6.2 解法一：统一规范化符号<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>最实用的做法是写一个小函数，把所有特征向量统一成
 「<strong>第一个非零分量为正</strong>」（也可以约定为负，只要统一）。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12149,6 +12178,7 @@ eigh 特征值: [2.381966 4.618034]   ← 同一个集合，顺序相反
 <h3 id="63">6.3 解法二：不比较数值，只验证关系式<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
 <p>更稳妥的思路是<strong>根本不去比较具体的向量数值</strong>，
 而是验证它的定义式。这才是特征向量「应该满足」的性质：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12221,6 +12251,7 @@ eigh 特征值: [2.381966 4.618034]   ← 同一个集合，顺序相反
 <h3 id="71">7.1 旧式写法与新式写法<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
 <p>NumPy 有两套随机数接口。旧的一套是模块级函数加全局种子；
 新的一套是<strong>先生成一个生成器对象，再从它取数</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -12265,6 +12296,7 @@ eigh 特征值: [2.381966 4.618034]   ← 同一个集合，顺序相反
 <h3 id="72-default_rng">7.2 为什么推荐 <code>default_rng</code><a class="headerlink" href="#72-default_rng" title="Permanent link">&para;</a></h3>
 <p><strong>旧式的核心问题是「全局状态」</strong>：整个程序共用一份随机数状态，
 任何一处调用都会改变它，于是你的结果会被别人（或库内部）的调用悄悄影响。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -12467,6 +12499,7 @@ eigh 特征值: [2.381966 4.618034]   ← 同一个集合，顺序相反
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12511,6 +12544,7 @@ rng.choice('ABCDE', 3, replace=False): ['E' 'A' 'D']
 rng.binomial(10, 0.3, 5) : [4 3 5 4 1]
 rng.poisson(3.0, 5)      : [4 4 5 1 7]</code></pre>
 <p><strong><code>permutation</code> 与 <code>shuffle</code> 的区别就是「是否原地」</strong>，这是高频错误：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -12565,6 +12599,7 @@ shuffle 之后原数组已变: [5 3 4 2 1]</code></pre>
 </div>
 <h3 id="74-size">7.4 <code>size</code> 参数：一次造出多维随机数组<a class="headerlink" href="#74-size" title="Permanent link">&para;</a></h3>
 <p><code>size</code> 可以是整数，也可以是<strong>元组</strong>，这一点与 <code>zeros</code> / <code>ones</code> 完全一致。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12612,6 +12647,7 @@ size=(2,2,2) 的形状: (2, 2, 2)
 <h3 id="75">7.5 固定种子 → 同样的输入给同样的结果<a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
 <p>这是随机数最容易被忽略、也最重要的一条纪律：
 <strong>任何用到随机数的代码，都必须固定种子。</strong> 否则结论无法复现。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -12643,6 +12679,7 @@ size=(2,2,2) 的形状: (2, 2, 2)
 <p>随机数对不对，可以自己验证。<strong>大数定律</strong>说：
 样本量越大，样本均值越接近理论均值。
 下面用两种分布各抽 20 万个样本，把理论值与实测值并排打印。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12736,6 +12773,7 @@ size=(2,2,2) 的形状: (2, 2, 2)
 未知数是「斜率」和「截距」两个数。
 这是一个<strong>超定方程组</strong>（50 个方程、2 个未知数），
 用 <code>lstsq</code> 求最小二乘解。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -12812,6 +12850,7 @@ size=(2,2,2) 的形状: (2, 2, 2)
 <li><code>Vt</code> 的<strong>行</strong>就是主成分方向，按解释力从大到小排列；</li>
 <li>奇异值的平方除以平方和，就是<strong>解释方差比</strong>。</li>
 </ol>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -12884,6 +12923,7 @@ svd 返回：u (500, 2)  s (2,)  vt (2, 2)
 方向是单位长度吗? [1. 1.]</code></pre>
 <p>再和「协方差矩阵 + 特征分解」这条经典路线对照一下，
 确认两条路给出同一个答案：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -12974,6 +13014,7 @@ eigh 最大特征值方向: [-0.7437 -0.6686]
 <p><strong>场景</strong>：用随机撒点的方法估算圆周率，这是随机模拟最经典的入门例子。</p>
 <p><strong>做法</strong>：在单位正方形 <code>[0, 1) × [0, 1)</code> 里均匀撒点，
 落在四分之一圆内的点占比约为 π/4，所以 π ≈ 4 × 占比。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -13095,6 +13136,7 @@ pi 真值  : 3.14159
 <p><strong>这张表里最值得反复看的是前四行</strong>：
 它们的共同特征是「不报错，但结果是错的」。</p>
 <p>浮点比较那一条值得单独展开，因为它的后果最容易被低估：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -13144,6 +13186,7 @@ pi 真值  : 3.14159
 <p><code>np.allclose</code> 默认允许的相对误差是 <code>1e-5</code> 量级，绝对误差是 <code>1e-8</code> 量级。
 对绝大多数数值计算场景，这个宽松度都合适；
 只有当你确实需要更严格的容差时，才手动传 <code>rtol</code> 与 <code>atol</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -13200,6 +13243,7 @@ np.isclose(a, b, rtol=0, atol=1e-12): [False False False]</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -13259,7 +13303,7 @@ np.isclose(a, b, rtol=0, atol=1e-12): [False False False]</code></pre>
 <a id="__codelineno-39-28" name="__codelineno-39-28"></a><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
 <a id="__codelineno-39-29" name="__codelineno-39-29"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;p @ p 报错（3 与 2 不等，矩阵乘法不成立）：&quot;</span><span class="p">)</span>
 <a id="__codelineno-39-30" name="__codelineno-39-30"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  ValueError:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)[:</span><span class="mi">80</span><span class="p">],</span> <span class="s2">&quot;...&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>p 的形状: (3, 2)   q 的形状: (2, 4)
 
 p * q 报错（形状不兼容，不能逐元素乘）：
@@ -13295,6 +13339,7 @@ p @ p 报错（3 与 2 不等，矩阵乘法不成立）：
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -13362,7 +13407,7 @@ p @ p 报错（3 与 2 不等，矩阵乘法不成立）：
 <a id="__codelineno-40-32" name="__codelineno-40-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;真解   （前 3 个）   :&quot;</span><span class="p">,</span> <span class="n">x_true</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 <a id="__codelineno-40-33" name="__codelineno-40-33"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-40-34" name="__codelineno-40-34"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;solve 的误差更小吗?&quot;</span><span class="p">,</span> <span class="n">norm_error</span><span class="p">(</span><span class="n">x_solve</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">norm_error</span><span class="p">(</span><span class="n">x_inv</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>a 是 10 阶方阵，秩 10
 条件数 cond(a): 16025028168113.18
 
@@ -13399,6 +13444,7 @@ solve 的误差更小吗? True</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -13478,7 +13524,7 @@ solve 的误差更小吗? True</code></pre>
 <a id="__codelineno-41-38" name="__codelineno-41-38"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;特征值之和 = 迹 ?&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span>
 <a id="__codelineno-41-39" name="__codelineno-41-39"></a>      <span class="s2">&quot;  (</span><span class="si">%.6f</span><span class="s2"> vs </span><span class="si">%.6f</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">trace</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
 <a id="__codelineno-41-40" name="__codelineno-41-40"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;特征值之积 = 行列式 ?&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>矩阵是否对称? True
 
 eigh 特征值（升序）: [0.585786 2.       3.414214]
@@ -13517,6 +13563,7 @@ eig 的特征值（顺序不同）: [3.414214 2.       0.585786]
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -13574,7 +13621,7 @@ eig 的特征值（顺序不同）: [3.414214 2.       0.585786]
 <a id="__codelineno-42-27" name="__codelineno-42-27"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;换个种子结果会有小变化:&quot;</span><span class="p">,</span>
 <a id="__codelineno-42-28" name="__codelineno-42-28"></a>      <span class="nb">round</span><span class="p">(</span><span class="n">estimate_probability</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">),</span> <span class="mi">6</span><span class="p">),</span>
 <a id="__codelineno-42-29" name="__codelineno-42-29"></a>      <span class="s2">&quot;vs&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">estimate_probability</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">),</span> <span class="mi">6</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>理论概率: 0.682689
 
 样本量        估计值        绝对误差      相对误差
@@ -13601,6 +13648,7 @@ eig 的特征值（顺序不同）: [3.414214 2.       0.585786]
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13636,7 +13684,7 @@ eig 的特征值（顺序不同）: [3.414214 2.       0.585786]
 <a id="__codelineno-43-16" name="__codelineno-43-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者结果不同吗?&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
 <a id="__codelineno-43-17" name="__codelineno-43-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a @ b            :&quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">@</span> <span class="n">b</span><span class="p">)</span>
 <a id="__codelineno-43-18" name="__codelineno-43-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(a * b).sum(axis=1):&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>a 的形状: (4, 3)   b 的形状: (3,)
 
 a @ b 的结果形状: (4,)
@@ -13851,6 +13899,7 @@ a @ b            : [ 91 112  56  98]
 </table>
 <p><strong>实践建议</strong>：把种子作为参数传进函数，
 在函数开头创建自己的生成器：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -13872,7 +13921,7 @@ a @ b            : [ 91 112  56  98]
 <a id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;种子 42:&quot;</span><span class="p">,</span> <span class="n">run_experiment</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
 <a id="__codelineno-44-10" name="__codelineno-44-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;再来一次:&quot;</span><span class="p">,</span> <span class="n">run_experiment</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
 <a id="__codelineno-44-11" name="__codelineno-44-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;换个种子:&quot;</span><span class="p">,</span> <span class="n">run_experiment</span><span class="p">(</span><span class="mi">7</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>种子 42: -0.199057
 再来一次: -0.199057
 换个种子: -0.263885</code></pre>

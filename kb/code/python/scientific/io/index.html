@@ -9734,6 +9734,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（IO tools）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="09">09 数据读写<a class="headerlink" href="#09" title="Permanent link">&para;</a></h1>
@@ -9790,6 +9798,7 @@
 <p>先把「该用哪个格式」这件事一次说清。四种格式解决的问题完全不同，
 <strong>选错格式的代价不是慢一点，而是丢信息</strong>。</p>
 <p>先跑一遍完整的往返：同一个 DataFrame，写成四种格式，再各自读回来，看类型还剩多少。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -9969,6 +9978,7 @@ JSON 文件开头: [{"姓名":"阿黎","分数":88,"日期":"2024</code></pre>
 <h3 id="21-to_csv">2.1 <code>to_csv</code>：两个最常被忘掉的参数<a class="headerlink" href="#21-to_csv" title="Permanent link">&para;</a></h3>
 <p><code>index=False</code> 和 <code>encoding</code>。这两个参数忘掉任何一个，都会产出
 「打开看着正常、用起来才发现不对」的文件。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10077,6 +10087,7 @@ JSON 文件开头: [{"姓名":"阿黎","分数":88,"日期":"2024</code></pre>
 </tbody>
 </table>
 <p><code>columns</code> 与 <code>float_format</code> 一起用的效果：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10132,6 +10143,7 @@ JSON 文件开头: [{"姓名":"阿黎","分数":88,"日期":"2024</code></pre>
 <p>问题就出在：<strong>Excel 打开一个没有 BOM 的 UTF-8 CSV 时，默认按系统本地编码（中文环境是 GBK）去解</strong>，
 于是三个字节被强行当成 1.5 个汉字，屏幕上就是「阿鏍」「锟斤拷」这类乱码。
 加上 BOM 之后，Excel 认得这面旗子，就会正确按 UTF-8 解，中文正常显示。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10246,6 +10258,7 @@ pandas 读 utf-8   文件: ['姓名']</code></pre>
 <h3 id="23-read_csv">2.3 <code>read_csv</code> 常用参数<a class="headerlink" href="#23-read_csv" title="Permanent link">&para;</a></h3>
 <p><code>read_csv</code> 有几十个参数，真正天天用的是下面这十个。
 关键心态是：<strong>不要让它猜</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10384,6 +10397,7 @@ na_values 后缺失数: 2</code></pre>
 </tbody>
 </table>
 <p><strong><code>dtype</code> 值得单独强调。</strong> 看这个例子：编号 <code>007</code> 和 <code>010</code> 被读成了什么。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -10456,6 +10470,7 @@ dtype=str: ['007', '010'] 类型 object</code></pre>
 机器开始疯狂交换内存，几分钟后进程被杀。</p>
 <p><code>chunksize</code> 让 pandas 一次只返回一块，循环处理、
 <strong>只保留累加结果，不保留历史块</strong>，于是内存占用与文件大小脱钩。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -10557,6 +10572,7 @@ dtype=str: ['007', '010'] 类型 object</code></pre>
 </tbody>
 </table>
 <p><strong>平均值这类「不能直接累加」的统计量</strong>要拆成分子分母：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -10609,6 +10625,7 @@ dtype=str: ['007', '010'] 类型 object</code></pre>
 <h3 id="31-to_excel-read_excel">3.1 <code>to_excel</code> 与 <code>read_excel</code><a class="headerlink" href="#31-to_excel-read_excel" title="Permanent link">&para;</a></h3>
 <p><code>read_excel</code> 的参数与 <code>read_csv</code> 大体相同（<code>usecols</code> / <code>dtype</code> / <code>na_values</code> 都在），
 多出来的是一个 <code>sheet_name</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -10669,6 +10686,7 @@ dtype=str: ['007', '010'] 类型 object</code></pre>
 <h3 id="32-sheet_name">3.2 <code>sheet_name</code> 的三种用法<a class="headerlink" href="#32-sheet_name" title="Permanent link">&para;</a></h3>
 <p>一个 <code>.xlsx</code> 文件可以装很多张工作表，<code>sheet_name</code> 决定你要哪几张。
 这是 <code>read_excel</code> 与 <code>read_csv</code> 最大的差别，也是最容易搞混的地方。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -10779,6 +10797,7 @@ sheet_name=0 形状: (3, 2)</code></pre>
 <h3 id="33-excelwriter">3.3 <code>ExcelWriter</code> 写多表<a class="headerlink" href="#33-excelwriter" title="Permanent link">&para;</a></h3>
 <p><code>to_excel</code> 一次只能写一张表。要往同一个文件写多张，
 必须用 <code>ExcelWriter</code> 当上下文管理器——<strong>不用 <code>with</code> 的话文件会因为没关闭而损坏</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -10847,6 +10866,7 @@ sheet_name=0 形状: (3, 2)</code></pre>
 从 <code>1899-12-30</code> 起算过了多少天。<code>45536</code> 就是 <code>2024-09-01</code>。
 单元格上显示的「2024-09-01」只是<strong>显示格式</strong>。</p>
 <p>那么 pandas 读回来会得到什么？这取决于那一格有没有被设成日期格式：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -10944,6 +10964,7 @@ sheet_name=0 形状: (3, 2)</code></pre>
 一个用户有几个收货地址——这类「树」在 CSV 里只能靠拆成多张表来表达。</p>
 <h3 id="41-to_json-orient-dataframe">4.1 <code>to_json</code> 的 <code>orient</code>：同一个 DataFrame，四种形状<a class="headerlink" href="#41-to_json-orient-dataframe" title="Permanent link">&para;</a></h3>
 <p><code>orient</code> 控制「行列怎么摆」。四种都写出来对比看，比读文档快得多。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11036,6 +11057,7 @@ sheet_name=0 形状: (3, 2)</code></pre>
 pandas 的 <code>to_json</code> <strong>默认就转义</strong>，于是「姓名」在文件里变成 <code>"\u59d3\u540d"</code>。</p>
 <p>程序读它没问题（反正是等价的），但人没法看，
 而且文件体积会膨胀——一个汉字变成 6 个字符。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -11137,6 +11159,7 @@ pandas 的 <code>to_json</code> <strong>默认就转义</strong>，于是「姓�
 <code>df = pd.DataFrame(data)</code> 遇到「值本身还是一个 dict」时，
 只会给你一个装着 dict 的 <code>object</code> 列——你要的字段全在里面出不来。</p>
 <p><code>json_normalize</code> 就是干这件事的：<strong>把嵌套的键用点号连起来，变成普通的列</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -11175,6 +11198,7 @@ A2  92    小北    杭州</code></pre>
 这个点号命名不是随便定的——它就是 pandas 用来表示层级的惯例。</p>
 <p>如果嵌套的不是 dict 而是<strong>列表</strong>（一个订单多个商品），
 就要用 <code>record_path</code> 指定「列表在哪」，用 <code>meta</code> 把外层的字段带上：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11280,6 +11304,7 @@ A2  92    小北    杭州</code></pre>
 <h3 id="51-dtypecsv">5.1 保留 dtype：CSV 做不到的事<a class="headerlink" href="#51-dtypecsv" title="Permanent link">&para;</a></h3>
 <p>先看最有说服力的一点。构造一个「编号带前导零、日期是真日期、分数带缺失」的表，
 分别用 CSV 和 Parquet 往返一次：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -11430,6 +11455,7 @@ Parquet 读回和原始相等: True</code></pre>
 </table>
 </div>
 <h3 id="52-csv">5.2 与 CSV 的体积、速度对比<a class="headerlink" href="#52-csv" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -11523,6 +11549,7 @@ CSV 比 Parquet 大: True
 但手边没有文件，或者不想真造一个文件。</p>
 <p>答案是 <strong><code>io.StringIO</code></strong>：把一段字符串包装成「长得像文件的对象」，
 <code>read_csv</code> 认它，因为它只需要一个支持 <code>read</code> 的对象，不在乎背后是不是磁盘。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -11603,6 +11630,7 @@ to_records: [('阿黎', 88), ('小北', 92)]</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">测试数据的写法</p>
 <p>把样本写成模块级常量，测试函数直接用它：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -11638,7 +11666,7 @@ to_records: [('阿黎', 88), ('小北', 92)]</code></pre>
 <a id="__codelineno-25-16" name="__codelineno-25-16"></a><span class="n">_df</span> <span class="o">=</span> <span class="n">test_read</span><span class="p">()</span>
 <a id="__codelineno-25-17" name="__codelineno-25-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两条断言都通过，形状:&quot;</span><span class="p">,</span> <span class="n">_df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-25-18" name="__codelineno-25-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺失个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">_df</span><span class="p">[</span><span class="s2">&quot;分数&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>两条断言都通过，形状: (2, 2)
 缺失个数: 1</code></pre>
 <p>三行字符串就覆盖了「列名 + 正常值 + 缺失值」三种情况，
@@ -11651,6 +11679,7 @@ to_records: [('阿黎', 88), ('小北', 92)]</code></pre>
 <code>df.head()</code> 能正常显示，<code>df["分数"].sum()</code> 能算出数字，
 哪怕日期是字符串、编号前几位被砍了、缺失值其实是「-」这个字符串。</p>
 <p>下面这段代码是同一个 DataFrame 的六道体检：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -11832,6 +11861,7 @@ memory usage: 228.0+ bytes</code></pre>
 <p class="admonition-title">把它变成固定动作</p>
 <p>建议写完 <code>read_*</code> 之后<strong>立刻</strong>敲这六个，不要等出了怪事再回头查。
 把它们封成一个函数，每次读文件都调一遍：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -11873,7 +11903,7 @@ memory usage: 228.0+ bytes</code></pre>
 <a id="__codelineno-27-19" name="__codelineno-27-19"></a>    <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;姓名&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;阿黎&quot;</span><span class="p">,</span> <span class="s2">&quot;小北&quot;</span><span class="p">],</span> <span class="s2">&quot;分数&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">88</span><span class="p">,</span> <span class="kc">None</span><span class="p">]})</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
 <a id="__codelineno-27-20" name="__codelineno-27-20"></a>        <span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;s.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <a id="__codelineno-27-21" name="__codelineno-27-21"></a>    <span class="n">_</span> <span class="o">=</span> <span class="n">体检</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;s.csv&quot;</span><span class="p">),</span> <span class="s2">&quot;成绩&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>--- 成绩 ---
 形状: (2, 2)
 类型:
@@ -11976,6 +12006,7 @@ memory usage: 228.0+ bytes</code></pre>
 <p>前六个是「每次都会遇到」的，后面几个是「遇到一次记一辈子」的。</p>
 <p>关于第 6 条，再补一个最容易被忽略的变体：<strong>一列里有一个脏值，
 整列就变成 <code>object</code></strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12040,6 +12071,7 @@ memory usage: 228.0+ bytes</code></pre>
 而 <code>df[df["学号"] == "010"]</code> 拿字符串 <code>"010"</code> 去和整数比，
 自然一个都匹配不上（而且 pandas 不会提醒你类型不匹配）。</p>
 <p><strong>修法：读入时显式指定 <code>dtype</code>。</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12085,7 +12117,7 @@ memory usage: 228.0+ bytes</code></pre>
 <a id="__codelineno-30-21" name="__codelineno-30-21"></a>          <span class="nb">len</span><span class="p">(</span><span class="n">good</span><span class="p">[</span><span class="n">good</span><span class="p">[</span><span class="s2">&quot;学号&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;010&quot;</span><span class="p">]))</span>
 <a id="__codelineno-30-22" name="__codelineno-30-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;筛选结果:&quot;</span><span class="p">)</span>
 <a id="__codelineno-30-23" name="__codelineno-30-23"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">good</span><span class="p">[</span><span class="n">good</span><span class="p">[</span><span class="s2">&quot;学号&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;010&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>默认读 学号: [7, 10, 11] 类型 int64
 按字符串筛 '010' 命中行数: 0
 dtype=str 后 学号: ['007', '010', '011'] 类型 object
@@ -12135,6 +12167,7 @@ dtype=str 后 学号: ['007', '010', '011'] 类型 object
 </tbody>
 </table>
 <p><strong>验证一下 BOM 确实写进去了</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -12166,7 +12199,7 @@ dtype=str 后 学号: ['007', '010', '011'] 类型 object
 <a id="__codelineno-31-14" name="__codelineno-31-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;首行:&quot;</span><span class="p">,</span> <span class="n">raw</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-31-15" name="__codelineno-31-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;读回列名:&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;交付.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 <a id="__codelineno-31-16" name="__codelineno-31-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;读回行数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;交付.csv&quot;</span><span class="p">)))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>前 3 字节是 BOM: True
 首行: 姓名,分数
 读回列名: ['姓名', '分数']
@@ -12197,6 +12230,7 @@ Excel 打开时会按本机默认编码（中文环境是 GBK）去猜，
 那么每块无论大小权重都一样。假如第一块 100 人、最后一块 1 人，
 这两个平均值却被同等对待——结果必然错。</p>
 <p><strong>正确做法是把均值拆成「总和 ÷ 人数」</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12246,7 +12280,7 @@ Excel 打开时会按本机默认编码（中文环境是 GBK）去猜，
 <a id="__codelineno-32-23" name="__codelineno-32-23"></a>          <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">whole</span><span class="p">[</span><span class="s2">&quot;分数&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-32-24" name="__codelineno-32-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者一致:&quot;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="n">n</span> <span class="o">-</span> <span class="n">whole</span><span class="p">[</span><span class="s2">&quot;分数&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">)</span>
 <a id="__codelineno-32-25" name="__codelineno-32-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;分块数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="s2">&quot;大.csv&quot;</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">700</span><span class="p">))))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>分块：人数 = 3000  总分 = 239881  平均分 = 79.96
 整读：人数 = 3000  平均分 = 79.96
 两者一致: True
@@ -12305,6 +12339,7 @@ Excel 打开时会按本机默认编码（中文环境是 GBK）去猜，
 <p><strong>第一步：直接建 DataFrame 会失败</strong>。每个班的「学生」字段是一个 list，
 它会整坨塞进一个单元格里，没法直接分析。</p>
 <p>第二步：<code>record_path="学生"</code> 拆行 + <code>meta="班"</code> 带上下文。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -12342,7 +12377,7 @@ Excel 打开时会按本机默认编码（中文环境是 GBK）去猜，
 <a id="__codelineno-34-17" name="__codelineno-34-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全校平均分:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">flat</span><span class="p">[</span><span class="s2">&quot;分数&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span> <span class="mi">2</span><span class="p">))</span>
 <a id="__codelineno-34-18" name="__codelineno-34-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;各班人数:&quot;</span><span class="p">)</span>
 <a id="__codelineno-34-19" name="__codelineno-34-19"></a><span class="nb">print</span><span class="p">(</span><span class="n">flat</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;班&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>直接建表列名: ['班', '学生']
 学生列里装的是: list
 展平后列名: ['姓名', '分数', '班']

@@ -10986,6 +10986,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Python 官方文档（标准库 · pathlib / io / csv / json）</code><code>本页示例在 Python 3.9+ 上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="11">11 文件与路径<a class="headerlink" href="#11" title="Permanent link">&para;</a></h1>
@@ -11506,6 +11514,7 @@
 </table>
 <h3 id="24">2.4 用代码把「能不能读、能不能写」验证一遍<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>光看表容易记混，跑一遍就清楚了：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -11651,6 +11660,7 @@ rb 读到的类型: bytes</code></pre>
 <p><strong>判断口诀</strong>：<strong>「改」用 <code>a</code>，「重做」用 <code>w</code>。</strong>
 拿不准的时候先想一句：<strong>原来的内容还要不要？要 → 绝不能写 <code>w</code>。</strong></p>
 <p>下面用一段真实代码把「清空」和「追加」的差别摆出来：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -11692,7 +11702,7 @@ rb 读到的类型: bytes</code></pre>
 <a id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a 之后行数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">))</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;第一行:&quot;</span><span class="p">,</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-2-21" name="__codelineno-2-21"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最后一行:&quot;</span><span class="p">,</span> <span class="n">lines</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>写入前字节数: 14
 w 之后字节数: 11
 原有内容还在吗: False
@@ -11732,6 +11742,7 @@ a 之后行数: 2
 </tbody>
 </table>
 <p><strong>报错的具体样子</strong>（这段代码故意让第二次创建失败）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -11828,6 +11839,7 @@ FileExistsError: [Errno 17] File exists: 'only_once.txt'</code></pre>
 </div>
 <h3 id="26-r">2.6 <code>r+</code> 的一个细节：指针在开头，写会覆盖<a class="headerlink" href="#26-r" title="Permanent link">&para;</a></h3>
 <p><code>r+</code> 不清空文件，但<strong>指针停在开头</strong>，所以直接写会<strong>覆盖前面的内容</strong>，而不是插入：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11893,6 +11905,7 @@ FileExistsError: [Errno 17] File exists: 'only_once.txt'</code></pre>
 而是先攒在<strong>缓冲区</strong>里，够了再一次性写。<strong>关文件就是「最后一次强制落盘」</strong>。</p>
 <h3 id="32-close">3.2 手动 <code>close()</code> 的两个致命问题<a class="headerlink" href="#32-close" title="Permanent link">&para;</a></h3>
 <p>问题一：中间抛异常，<code>close()</code> 那一行永远执行不到。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11937,6 +11950,7 @@ FileExistsError: [Errno 17] File exists: 'only_once.txt'</code></pre>
 <strong>你根本不知道还有一个文件没关</strong>。</p>
 <p>问题二：忘记写 <code>close()</code> 时，Python 只能靠「回收对象」来补救。
 而这会触发一条 <code>ResourceWarning</code>（资源告警）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -12070,6 +12084,7 @@ with 写法的告警条数: 0
 </tbody>
 </table>
 <p>验证一下「抛异常也会关闭」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -12112,6 +12127,7 @@ with 块异常退出后 closed: True
 <h3 id="34">3.4 一次打开两个文件<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>复制文件是「同时读一个、同时写一个」的典型场景，
 <code>with</code> 可以一行开两个，<strong>逗号分隔即可</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -12291,6 +12307,7 @@ with 块异常退出后 closed: True
 </tbody>
 </table>
 <h3 id="41">4.1 四种读法跑一遍<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -12459,6 +12476,7 @@ readlines 行数: 4
 <p><strong>为什么直接打印时看不出来</strong>：<code>print</code> 自己也会在末尾补一个换行，
 于是「内容里的换行」和「print 的换行」叠在一起，
 表现为<strong>每隔一行一个空行</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -12484,7 +12502,7 @@ readlines 行数: 4
 <a id="__codelineno-11-11" name="__codelineno-11-11"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-11-12" name="__codelineno-11-12"></a>        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13"></a>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;去掉换行:&quot;</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>直接打印: '甲\n'
 直接打印: '乙\n'
 用 strip 之后:
@@ -12565,6 +12583,7 @@ readlines 行数: 4
 列表要为每一行存一个对象，<strong>开销比字符串本身还大</strong>（几十字节的固定成本 × 行数）。
 一个千万行的文件，光是列表结构就要几百兆。</p>
 <p><strong>逐行迭代的另一个好处是「越早出错越早发现」</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -12638,6 +12657,7 @@ readlines 行数: 4
 只有明确知道文件很小，才用 <code>read()</code> / <code>readlines()</code>。</strong></p>
 <h3 id="43-with">4.3 在 <code>with</code> 之外用文件对象会怎样<a class="headerlink" href="#43-with" title="Permanent link">&para;</a></h3>
 <p><code>with</code> 一结束文件就关了。之后再想读写，就会报错：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -12720,6 +12740,7 @@ ValueError: I/O operation on closed file.</code></pre>
 </tbody>
 </table>
 <p>跑一遍，把三种写法的结果并列出来：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -12857,6 +12878,7 @@ ValueError: I/O operation on closed file.</code></pre>
 </tbody>
 </table>
 <p><strong>所以想做「写得对不对」的自检</strong>，可以这样用：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -12918,6 +12940,7 @@ ValueError: I/O operation on closed file.</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -13010,6 +13033,7 @@ ValueError: I/O operation on closed file.</code></pre>
 </tbody>
 </table>
 <p>验证一下这个报错：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -13025,7 +13049,7 @@ ValueError: I/O operation on closed file.</code></pre>
 <a id="__codelineno-18-6" name="__codelineno-18-6"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span> <span class="o">/</span> <span class="s2">&quot;num.txt&quot;</span>
 <a id="__codelineno-18-7" name="__codelineno-18-7"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-18-8" name="__codelineno-18-8"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="mi">92</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>TypeError: write() argument must be str, not int</code></pre>
 <p><strong>为什么不能自动转</strong>：<code>write</code> 不知道你想把 <code>92</code> 写成什么形式 ——
 <code>"92"</code>、<code>"92.000"</code>、<code>"0x5c"</code> 都合理。
@@ -13169,6 +13193,7 @@ ValueError: I/O operation on closed file.</code></pre>
 </tbody>
 </table>
 <h3 id="62">6.2 用字节看一眼「编码到底是什么」<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -13285,6 +13310,7 @@ Linux 与 macOS 近年来基本是 <code>utf-8</code>。</p>
 </table>
 <p><strong>后果最轻的是「乱码」，最重的是「程序直接崩溃」</strong>。
 两种都演示一下 —— 先制造一个 GBK 文件，再按 UTF-8 去读：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -13381,6 +13407,7 @@ Linux 与 macOS 近年来基本是 <code>utf-8</code>。</p>
 <p><strong>为什么默认是 <code>strict</code></strong>：因为「报错」比「悄悄给你一个错的结果」友好得多。
 <strong>乱码比报错更危险</strong> —— 报错你会去查，乱码可能一路带进最终结果。</p>
 <p><strong>反过来，写的时候也会遇到编不出来的字符</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -13541,6 +13568,7 @@ GBK 下写成: b'\xd6\xd0\xce\xc4\xba\xcd\xb1\xed\xc7\xe9?'
 </tbody>
 </table>
 <p>看真实字节的差别：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -13909,6 +13937,7 @@ utf-8-sig 字节数: 15
 </tbody>
 </table>
 <p>跑一遍，并和「手工切字符串」的做法对照：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -14059,6 +14088,7 @@ Path 取扩展名: gz
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -14249,6 +14279,7 @@ Path 取扩展名: gz
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -14343,6 +14374,7 @@ Path 取扩展名: gz
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -14452,6 +14484,7 @@ read_bytes 的类型: bytes 长度: 4
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -14603,6 +14636,7 @@ rglob *.py 相对路径:
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -14692,6 +14726,7 @@ st_mtime 是浮点数: True
 从命令行运行、从编辑器运行、从别处调用这个脚本，
 三种方式的工作目录可能完全不同。</p>
 <p><code>resolve()</code> 的作用是：<strong>把相对路径按当前工作目录补全，并整理掉 <code>..</code> 与 <code>.</code></strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -14784,6 +14819,7 @@ resolve 后的文件名: x.txt
 </tbody>
 </table>
 <p><code>os.getcwd()</code> 就是「当前的答案」：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -14825,7 +14861,7 @@ resolve 后的文件名: x.txt
 <a id="__codelineno-33-19" name="__codelineno-33-19"></a>        <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-33-20" name="__codelineno-33-20"></a>            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
 <a id="__codelineno-33-21" name="__codelineno-33-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最后切回了原来的工作目录:&quot;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span> <span class="o">==</span> <span class="n">start</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>在目录 A 里，相对路径能读到: True
 在目录 B 里，读同一个相对路径: False
 目录 B 确实是空的: True
@@ -15065,6 +15101,7 @@ resolve 后的文件名: x.txt
 </tbody>
 </table>
 <p><strong>「用二进制模式复制任意文件」是 <code>b</code> 模式最常用的场景</strong> —— 它对文件内容毫无假设。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -15341,6 +15378,7 @@ resolve 后的文件名: x.txt
 </tbody>
 </table>
 <h3 id="92-csv">9.2 读写一个 CSV 跑一遍<a class="headerlink" href="#92-csv" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -15451,6 +15489,7 @@ DictWriter 写出的内容: name,score
 </tbody>
 </table>
 <p>两层叠加，就会<strong>多出多余的换行</strong>。规范做法是<strong>关掉文本模式这层转换</strong>：<code>newline=""</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -15822,6 +15861,7 @@ DictWriter 写出的内容: name,score
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -15945,6 +15985,7 @@ ensure_ascii=False:
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -16012,6 +16053,7 @@ ensure_ascii=False:
 <p><strong>注意</strong>：<code>indent</code> 只影响<strong>空格</strong>，不影响正确性 ——
 两种写法解析出来完全一样。所以<strong>要求可读性时不必犹豫，加上就行</strong>。</p>
 <h3 id="106">10.6 存到文件、再读回来<a class="headerlink" href="#106" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -16240,6 +16282,7 @@ loads 能解析字符串: True
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -16318,6 +16361,7 @@ loads 能解析字符串: True
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -16516,6 +16560,7 @@ loads 能解析字符串: True
 </table>
 <h3 id="122">12.2 三个陷阱各跑一遍<a class="headerlink" href="#122" title="Permanent link">&para;</a></h3>
 <p><strong>陷阱一：字符串拼路径</strong>。它不会立刻报错，只会给你一个奇怪的路径：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -16551,6 +16596,7 @@ base 末尾本来就有斜杠时:
 而 <code>Path</code> 会自动处理成单斜杠。
 <code>Path</code> 不只是一个更方便的写法，它会把你没想到的规范化都做掉。</p>
 <p><strong>陷阱二：忘写 <code>encoding</code>。</strong> 它的可怕之处是<strong>在写代码的环境里看不出问题</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
@@ -16723,6 +16769,7 @@ base 末尾本来就有斜杠时:
 <p><strong>一个实用的习惯</strong>：处理大文件时，
 <strong>不要先把数据都读进内存再开始处理</strong>，而是「读一行 → 处理一行 → 丢掉」。
 需要保留的只是<strong>结果</strong>，不是<strong>过程数据</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -16791,6 +16838,7 @@ base 末尾本来就有斜杠时:
 <details class="success">
 <summary>解答</summary>
 <p><strong>关键在一句话</strong>：<strong>「追加」用 <code>a</code>，不能用 <code>w</code></strong>。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -16838,7 +16886,7 @@ base 末尾本来就有斜杠时:
 <a id="__codelineno-47-22" name="__codelineno-47-22"></a>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 <a id="__codelineno-47-23" name="__codelineno-47-23"></a>        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;重新开始</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-47-24" name="__codelineno-47-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;换成 w 之后的行数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">log</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>第一次运行后行数: 1
 第二次运行后行数: 3
 第一行还是启动: True
@@ -16911,6 +16959,7 @@ base 末尾本来就有斜杠时:
 <details class="success">
 <summary>解答</summary>
 <p><strong>核心思路</strong>：<strong>用文件真实的编码读进来，再用统一的编码写出去</strong>。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -16970,7 +17019,7 @@ base 末尾本来就有斜杠时:
 <a id="__codelineno-48-28" name="__codelineno-48-28"></a>        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;姓名,分数&quot;</span><span class="p">)</span>
 <a id="__codelineno-48-29" name="__codelineno-48-29"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两个文件内容相同:&quot;</span><span class="p">,</span> <span class="n">modern</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span>
 <a id="__codelineno-48-30" name="__codelineno-48-30"></a>        <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">legacy</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;gbk&quot;</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>老文件的字节: b'\xd0\xd5\xc3\xfb,\xb7\xd6\xca\xfd\n\xd0\xa1\xc3\xf7,92\n'
 按 utf-8 读: 失败（UnicodeDecodeError）
 按 gbk 读到的行数: 2
@@ -17045,6 +17094,7 @@ base 末尾本来就有斜杠时:
 <details class="success">
 <summary>解答</summary>
 <p><strong>关键三点</strong>：<code>rglob</code> 递归、<code>relative_to</code> 去前缀、<code>stat().st_size</code> 取大小。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -17092,7 +17142,7 @@ base 末尾本来就有斜杠时:
 <a id="__codelineno-49-22" name="__codelineno-49-22"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;总字节数:&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
 <a id="__codelineno-49-23" name="__codelineno-49-23"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全都是 .csv 后缀:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.csv&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">found</span><span class="p">))</span>
 <a id="__codelineno-49-24" name="__codelineno-49-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全都存在:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">found</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>只在一层 glob: []
 递归找到的个数: 3
     2023/a.csv       3 字节
@@ -17178,6 +17228,7 @@ base 末尾本来就有斜杠时:
 <details class="success">
 <summary>解答</summary>
 <p><strong>要点是 <code>ensure_ascii=False</code> 与 <code>indent=2</code> 一起用</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
@@ -17237,7 +17288,7 @@ base 末尾本来就有斜杠时:
 <a id="__codelineno-50-28" name="__codelineno-50-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;成功的实验:&quot;</span><span class="p">,</span> <span class="n">ok_names</span><span class="p">)</span>
 <a id="__codelineno-50-29" name="__codelineno-50-29"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;平均温度:&quot;</span><span class="p">,</span> <span class="n">aver</span><span class="p">)</span>
 <a id="__codelineno-50-30" name="__codelineno-50-30"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最高的温度:&quot;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;温度&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">back</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>文件里能直接搜到中文: True
 转义的版本里搜得到吗: False
 读回来的类型与条数: list 3
@@ -17328,6 +17379,7 @@ base 末尾本来就有斜杠时:
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -17373,7 +17425,7 @@ base 末尾本来就有斜杠时:
 <a id="__codelineno-52-21" name="__codelineno-52-21"></a>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;再来一行</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-52-22" name="__codelineno-52-22"></a>    <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-52-23" name="__codelineno-52-23"></a>        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原内容还在吗: False
 现在的行数: 1
 FileExistsError: [Errno 17] File exists: 'mode.txt'</code></pre>
@@ -17486,6 +17538,7 @@ FileExistsError: [Errno 17] File exists: 'mode.txt'</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-53-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-53-3"> 3</a></span>
@@ -17549,7 +17602,7 @@ FileExistsError: [Errno 17] File exists: 'mode.txt'</code></pre>
 <a id="__codelineno-53-30" name="__codelineno-53-30"></a>        <span class="n">rows</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
 <a id="__codelineno-53-31" name="__codelineno-53-31"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;readlines 类型:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;行数:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">))</span>
 <a id="__codelineno-53-32" name="__codelineno-53-32"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;每行都带换行符:&quot;</span><span class="p">,</span> <span class="nb">all</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>一次性读入行数: 100 总和: 5050
 逐行处理行数: 100 总和: 5050 最大值: 100
 两种写法结果一致: True
@@ -17626,6 +17679,7 @@ readlines 类型: list 行数: 100
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -17697,7 +17751,7 @@ readlines 类型: list 行数: 100
 <a id="__codelineno-55-34" name="__codelineno-55-34"></a>
 <a id="__codelineno-55-35" name="__codelineno-55-35"></a>    <span class="c1"># JSON 里同类的问题</span>
 <a id="__codelineno-55-36" name="__codelineno-55-36"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;默认转义里含反斜杠 u:&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">u&quot;</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;姓名&quot;</span><span class="p">:</span> <span class="s2">&quot;甲&quot;</span><span class="p">}))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>问题一的结果: '第一行第二行'
 行数: 1
 补齐换行后的行数: 2
@@ -17824,6 +17878,7 @@ JSON 里中文默认被转义成 <code>\uXXXX</code>。<strong>它不影响解�
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -17889,7 +17944,7 @@ JSON 里中文默认被转义成 <code>\uXXXX</code>。<strong>它不影响解�
 <a id="__codelineno-56-31" name="__codelineno-56-31"></a>    <span class="k">finally</span><span class="p">:</span>
 <a id="__codelineno-56-32" name="__codelineno-56-32"></a>        <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">here</span><span class="p">)</span>
 <a id="__codelineno-56-33" name="__codelineno-56-33"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;切回之后，那行相对路径指向的名字仍是:&quot;</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;data/x.csv&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>name: x.csv
 stem: x
 suffix: .csv

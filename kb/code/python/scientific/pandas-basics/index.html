@@ -10422,6 +10422,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（10 minutes to pandas / Indexing and selecting data）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="05-series-dataframe">05 Series 与 DataFrame<a class="headerlink" href="#05-series-dataframe" title="Permanent link">&para;</a></h1>
@@ -10579,6 +10587,7 @@
 <p>NumPy 的 <code>ndarray</code> 只满足第三条。前两条它都不管：
 <code>ndarray</code> 里<strong>所有元素的类型必须一致</strong>，而且<strong>没有列名这个概念</strong>。</p>
 <p>把上面那张表原样交给 NumPy，会发生什么：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
@@ -10601,6 +10610,7 @@
 NumPy 做了唯一它能做的事——<strong>把数字也变成字符串</strong>。
 <code>21.5</code> 变成了 <code>'21.5'</code>，<code>45.0</code> 变成了 <code>'45.0'</code>。
 从这一刻起，这些「数字」已经不再是数字了：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
 <span class="normal"><a href="#__codelineno-1-3">3</a></span>
@@ -10621,6 +10631,7 @@ NumPy 做了唯一它能做的事——<strong>把数字也变成字符串</stro
 它要快，就必须要求元素类型统一、内存布局规整。</p>
 <h3 id="12-pandas">1.2 换成 pandas：同一张表<a class="headerlink" href="#12-pandas" title="Permanent link">&para;</a></h3>
 <p>同样的数据，交给 pandas：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10656,6 +10667,7 @@ dtype: object</code></pre>
 文字列是 <code>object</code>，温度是 <code>float64</code>，湿度是 <code>int64</code>。
 列类型各自独立，正是 pandas 相对于 NumPy 最大的结构差异。</p>
 <p>有了「列」这个一等公民，很多操作就变成了一句：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10767,6 +10779,7 @@ pandas 里你写的是列<strong>名字</strong>，列的顺序随便变，代�
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -10867,6 +10880,7 @@ Name: 温度, dtype: float64</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -10899,6 +10913,7 @@ dtype : float64
 <h3 id="23">2.3 索引对齐（重点）<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>这是 pandas 与 NumPy <strong>最本质的区别</strong>，也是这一页最该记住的一条。</p>
 <p>先看两个 <code>Series</code>，它们的标签集合完全一样，但<strong>顺序不同</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -10948,6 +10963,7 @@ dtype: float64</code></pre>
 也就是说，<strong>pandas 不是把第 1 个和第 1 个相加，而是把「标签 a」和「标签 a」相加</strong>。
 顺序乱了也没关系，结果依然正确，而且结果的标签是排好序的。</p>
 <p>对比 NumPy 的同一件事：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
@@ -10997,6 +11013,7 @@ dtype: float64</code></pre>
 </tbody>
 </table>
 <p>那么标签<strong>对不上</strong>会怎样？不报错，补 <code>NaN</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11477,6 +11494,7 @@ z
 </tbody>
 </table>
 <p><strong>从字典</strong>是最常用的写法，因为列名就在数据里：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span>
@@ -11501,6 +11519,7 @@ z
 2  A  19.4  61
 3  C  25.1  38</code></pre>
 <p><strong>从嵌套列表</strong>时列名不在数据里，所以<strong>必须补 <code>columns</code></strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11533,6 +11552,7 @@ z
 嵌套列表构造时，<code>columns</code> 不是可选项。</p>
 </div>
 <p><strong>从 NumPy 数组</strong>构造，是把计算结果变成表的最短路径：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span>
@@ -11566,6 +11586,7 @@ e  21.97  20.72</code></pre>
 <li><strong><code>index</code> 给行标</strong> —— 用站点代号 <code>a</code>~<code>e</code> 替换默认的 <code>0</code>~<code>4</code>。</li>
 </ol>
 <p><strong>指定 <code>index</code> 与 <code>columns</code></strong> 的完整写法就是这样：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
 <span class="normal"><a href="#__codelineno-13-3">3</a></span>
@@ -11628,6 +11649,7 @@ C  22.8  52</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11712,6 +11734,7 @@ dtype: object</code></pre>
 <p><strong>想知道整表内存，只打印类型就够了</strong>，
 不要在页面里贴具体的字节数。</p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11763,6 +11786,7 @@ dtypes: bool(1), float64(1), int64(1), object(1)</code></pre>
 <p><code>head(n)</code> 看前 <code>n</code> 行，<code>tail(n)</code> 看后 <code>n</code> 行，默认都是 5 行。
 打印长表时<strong>永远先 <code>head()</code></strong>，否则控制台会被刷屏，
 而且中间部分被省略成 <code>...</code>，反而看不清。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -11827,6 +11851,7 @@ dtypes: bool(1), float64(1), int64(1), object(1)</code></pre>
 或者想抽几条记录人工核对，用 <code>sample</code>。</p>
 <p><strong><code>sample</code> 一定要固定 <code>random_state</code></strong>，
 否则每次抽到的行都不一样，输出无法核对，问题也无法复现：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -11872,6 +11897,7 @@ dtypes: bool(1), float64(1), int64(1), object(1)</code></pre>
 <h3 id="43-describe">4.3 <code>describe</code>：数值列的统计摘要<a class="headerlink" href="#43-describe" title="Permanent link">&para;</a></h3>
 <p><code>describe()</code> 对<strong>数值列</strong>给出计数、均值、标准差、最小值、
 四分之一分位数、中位数、四分之三分位数、最大值。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
 <span class="normal"><a href="#__codelineno-18-3">3</a></span>
@@ -11923,6 +11949,7 @@ max    25.10  61.00</code></pre>
 <li><code>value_counts()</code> —— 每个取值各出现多少次。</li>
 <li><code>nunique()</code> —— 一共有多少个不同取值。</li>
 </ul>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -11963,6 +11990,7 @@ Name: count, dtype: int64
 也知道有没有「只出现一次」的可疑取值（往往是录入错误）。</p>
 <h3 id="45-columnstolist">4.5 <code>columns.tolist()</code>：先看清有哪些列<a class="headerlink" href="#45-columnstolist" title="Permanent link">&para;</a></h3>
 <p>写代码前先打印一遍列名，能避免九成的 <code>KeyError</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -12011,6 +12039,7 @@ Name: count, dtype: int64
 <h3 id="51-df-df">5.1 <code>df[列名]</code> 还是 <code>df[[列名]]</code>：形状差别<a class="headerlink" href="#51-df-df" title="Permanent link">&para;</a></h3>
 <p>同一个 <code>DataFrame</code>，方括号里放<strong>一个字符串</strong>和放<strong>一个列表</strong>，
 得到的是<strong>两种不同的对象</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12078,6 +12107,7 @@ df[['温度']] 形状: (3, 1)</code></pre>
 <p><strong>多一个方括号，就是多一个维度。</strong> 这一条背下来，
 后面所有「为什么这个方法不存在」「为什么形状对不上」的问题都少一半。</p>
 <p>一次选多列，用列名列表：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12173,6 +12203,7 @@ df[['温度']] 形状: (3, 1)</code></pre>
 </tbody>
 </table>
 <p><strong>用一个 <code>DataFrame</code> 同时演示两者的右端差异</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12249,6 +12280,7 @@ df.iloc[1:3]（按位置，不含右端）:
 但它们不是一回事。<strong>默认整数索引的表，这就是一个雷。</strong></p>
 </div>
 <p><strong><code>loc</code> 与 <code>iloc</code> 都能一次定位行和列</strong>，逗号左边是行、右边是列：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12329,6 +12361,7 @@ s3  C  22.8</code></pre>
 </div>
 <h3 id="53-at-iat">5.3 <code>at</code> / <code>iat</code>：取一个格子<a class="headerlink" href="#53-at-iat" title="Permanent link">&para;</a></h3>
 <p>取<strong>单个值</strong>时，<code>at</code>（按标签）和 <code>iat</code>（按位置）更快也更明确：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12386,6 +12419,7 @@ df.iat[1, 1]         = 19.4
 是新手最常见的绕路。</p>
 <h3 id="54-settingwithcopywarning">5.4 <code>SettingWithCopyWarning</code>：成因与正确写法<a class="headerlink" href="#54-settingwithcopywarning" title="Permanent link">&para;</a></h3>
 <p>先看一个「看起来完全合理、实际一行都没改成功」的写法：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -12427,6 +12461,7 @@ df.iat[1, 1]         = 19.4
 而是一个<strong>不确定要不要回写到原表的临时结果</strong>。</p>
 <p>pandas 发现这种写法时会发出 <code>SettingWithCopyWarning</code>。
 它不是错误，是一条「你这行可能没生效」的提醒：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12488,6 +12523,7 @@ df.iat[1, 1]         = 19.4
 <li><strong>原表 <code>df</code> 里什么都没有</strong> —— 因为那列加在了临时对象上。</li>
 </ol>
 <p>正确写法：原地一步定位到位，不要在中间产生临时对象。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -12558,6 +12594,7 @@ df.iat[1, 1]         = 19.4
 <h2 id="_3">六、增删改列<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="61-assign">6.1 直接赋值与 <code>assign</code><a class="headerlink" href="#61-assign" title="Permanent link">&para;</a></h3>
 <p><strong>加一列</strong>最简单的方式就是直接赋值，和给字典添键一样：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -12586,6 +12623,7 @@ df.iat[1, 1]         = 19.4
 2  C  19.4  61 -0.6</code></pre>
 <p><code>assign</code> 做同一件事，但它<strong>返回一个新表</strong>，不改动原表 ——
 这个差别在流水线式处理里非常重要：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -12655,6 +12693,7 @@ df.iat[1, 1]         = 19.4
 <h3 id="62-insert">6.2 <code>insert</code>：插到指定位置<a class="headerlink" href="#62-insert" title="Permanent link">&para;</a></h3>
 <p>直接赋值和 <code>assign</code> 都只能<strong>加在最后</strong>。
 要插到某一列前面，用 <code>insert(位置, 列名, 值)</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -12695,6 +12734,7 @@ df.iat[1, 1]         = 19.4
 </ul>
 <h3 id="63-drop">6.3 <code>drop</code>：删列与删行<a class="headerlink" href="#63-drop" title="Permanent link">&para;</a></h3>
 <p><code>drop</code> 的写法有好几种，<strong>推荐始终用带 <code>columns</code> / <code>index</code> 的显式写法</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -12790,6 +12830,7 @@ drop(index=[...]) 删行后的行标:
 </div>
 <h3 id="64-rename">6.4 <code>rename</code>：改列名<a class="headerlink" href="#64-rename" title="Permanent link">&para;</a></h3>
 <p><code>rename</code> 支持两种用法，<strong>都很有用</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -12857,6 +12898,7 @@ drop(index=[...]) 删行后的行标:
 从 CSV 读进来的列名常常大小写混乱（<code>Temp</code>、<code>temp</code>、<code>TEMP</code>），
 一条 <code>str.lower</code> 全部拉齐。</p>
 <p>去列名首尾空格可以用 <code>str.strip</code>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
 <span class="normal"><a href="#__codelineno-35-2">2</a></span>
 <span class="normal"><a href="#__codelineno-35-3">3</a></span>
@@ -12876,6 +12918,7 @@ drop(index=[...]) 删行后的行标:
 <h3 id="71-set_index">7.1 <code>set_index</code>：把某一列变成行标<a class="headerlink" href="#71-set_index" title="Permanent link">&para;</a></h3>
 <p>默认的行标是 <code>0, 1, 2, ...</code>，它只表示「第几行」，没有含义。
 把有含义的列（站点、日期、编号）设为行标，会让取数变得非常自然：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -12921,6 +12964,7 @@ D   25.1  38
 </ul>
 <h3 id="72-reset_index">7.2 <code>reset_index</code>：把行标变回普通列<a class="headerlink" href="#72-reset_index" title="Permanent link">&para;</a></h3>
 <p>它做的事正好相反。这里有一个<strong>必须知道的参数 <code>drop</code></strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-37-3"> 3</a></span>
@@ -12997,6 +13041,7 @@ reset_index(drop=True) —— 行标直接丢掉:
 <h3 id="73-sort_index">7.3 <code>sort_index</code>：按行标排序<a class="headerlink" href="#73-sort_index" title="Permanent link">&para;</a></h3>
 <p><code>sort_index()</code> 排的是<strong>行标</strong>，<code>sort_values()</code> 排的是<strong>某一列的值</strong>。
 两者容易混，记住「<code>index</code> 排标签、<code>values</code> 排值」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -13210,6 +13255,7 @@ A   21.5</code></pre>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -13285,6 +13331,7 @@ values 的类型: ndarray</code></pre>
 </div>
 <h3 id="92-astype">9.2 <code>astype</code>：显式转换<a class="headerlink" href="#92-astype" title="Permanent link">&para;</a></h3>
 <p>类型不对就用 <code>astype</code> 明确改过来。<strong>宁可多写一次转换，也不要靠猜</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13355,6 +13402,7 @@ values 的类型: ndarray</code></pre>
 <h3 id="93-datetime64">9.3 <code>datetime64</code>：时间列<a class="headerlink" href="#93-datetime64" title="Permanent link">&para;</a></h3>
 <p>时间列不是普通字符串。转成 <code>datetime64</code> 之后，可以用 <code>.dt</code> 访问器
 <strong>按年、月、日、星期</strong>一次取出整列：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -13412,6 +13460,7 @@ values 的类型: ndarray</code></pre>
 <h3 id="94-category">9.4 <code>category</code>：省内存、定顺序、加速分组<a class="headerlink" href="#94-category" title="Permanent link">&para;</a></h3>
 <p><code>category</code> 适合「取值只有有限几种、但重复很多次」的列，
 比如站点、等级、性别、省份。它做三件事：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-45-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-45-3"> 3</a></span>
@@ -13484,6 +13533,7 @@ dtype: category
 </table>
 <p><strong>「能定顺序」这一点最实用</strong>，因为默认的字符串排序会把
 「高、低、中」按字典序排成「低、高、中」，完全没有意义：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -13632,6 +13682,7 @@ pandas 会按出现顺序或字典序排类别，结果依然不是你想要的�
 </table>
 <h3 id="103">10.3 五种写法的对照实验<a class="headerlink" href="#103" title="Permanent link">&para;</a></h3>
 <p>把「想做的事」和「该写的代码」直接对照，这是最省事的记法：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -13742,6 +13793,7 @@ pandas 会按出现顺序或字典序排类别，结果依然不是你想要的�
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -13763,7 +13815,7 @@ pandas 会按出现顺序或字典序排类别，结果依然不是你想要的�
 <a id="__codelineno-51-9" name="__codelineno-51-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
 <a id="__codelineno-51-10" name="__codelineno-51-10"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-51-11" name="__codelineno-51-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;合计:&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">amount</span><span class="o">.</span><span class="n">sum</span><span class="p">()),</span> <span class="mi">2</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>金额（标签自动对齐）:
 橙子     6.75
 苹果    16.50
@@ -13803,6 +13855,7 @@ dtype: float64
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -13826,7 +13879,7 @@ dtype: float64
 <a id="__codelineno-52-10" name="__codelineno-52-10"></a><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;温度&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">21</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;湿度&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">40</span><span class="p">),</span> <span class="s2">&quot;闷热&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;是&quot;</span>
 <a id="__codelineno-52-11" name="__codelineno-52-11"></a>
 <a id="__codelineno-52-12" name="__codelineno-52-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>  站点    温度  湿度 闷热
 0  A  21.5  45  是
 1  B  19.4  61  否
@@ -13940,6 +13993,7 @@ dtype: float64
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -13973,7 +14027,7 @@ dtype: float64
 <a id="__codelineno-54-15" name="__codelineno-54-15"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-54-16" name="__codelineno-54-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;前 3 条保留一位小数:&quot;</span><span class="p">)</span>
 <a id="__codelineno-54-17" name="__codelineno-54-17"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;测量值&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>记录条数: 8   形状: (8, 2)
 
          测量值
@@ -14027,6 +14081,7 @@ Name: 测量值, dtype: float64</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -14050,7 +14105,7 @@ Name: 测量值, dtype: float64</code></pre>
 <a id="__codelineno-55-10" name="__codelineno-55-10"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-55-11" name="__codelineno-55-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;a + 标签不全的 Series（按标签，缺的补 NaN）:&quot;</span><span class="p">)</span>
 <a id="__codelineno-55-12" name="__codelineno-55-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">]))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>pandas a.shape: (3,)  numpy b.shape: (3,)
 a + b（ndarray 没有标签，按位置）:
 x    11
@@ -14111,6 +14166,7 @@ dtype: float64</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1">1</a></span>
 <span class="normal"><a href="#__codelineno-57-2">2</a></span>
 <span class="normal"><a href="#__codelineno-57-3">3</a></span>
@@ -14126,7 +14182,7 @@ dtype: float64</code></pre>
 <a id="__codelineno-57-6" name="__codelineno-57-6"></a>
 <a id="__codelineno-57-7" name="__codelineno-57-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <a id="__codelineno-57-8" name="__codelineno-57-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>x: Series (3,)
 y: DataFrame (3, 1)</code></pre>
 <ul>
@@ -14147,6 +14203,7 @@ y: DataFrame (3, 1)</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1">1</a></span>
 <span class="normal"><a href="#__codelineno-59-2">2</a></span>
 <span class="normal"><a href="#__codelineno-59-3">3</a></span>
@@ -14164,7 +14221,7 @@ y: DataFrame (3, 1)</code></pre>
 <a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <a id="__codelineno-59-8" name="__codelineno-59-8"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺值个数:&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>p     NaN
 q     NaN
 r    13.0
@@ -14225,6 +14282,7 @@ dtype: float64
 <details class="success">
 <summary>解答</summary>
 <p><strong>错。</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1">1</a></span>
 <span class="normal"><a href="#__codelineno-60-2">2</a></span>
 <span class="normal"><a href="#__codelineno-60-3">3</a></span>
@@ -14240,7 +14298,7 @@ dtype: float64
 <a id="__codelineno-60-6" name="__codelineno-60-6"></a><span class="n">n_iloc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
 <a id="__codelineno-60-7" name="__codelineno-60-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loc[0:2] 行标:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;共&quot;</span><span class="p">,</span> <span class="n">n_loc</span><span class="p">,</span> <span class="s2">&quot;行&quot;</span><span class="p">)</span>
 <a id="__codelineno-60-8" name="__codelineno-60-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iloc[0:2] 行标:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="s2">&quot;共&quot;</span><span class="p">,</span> <span class="n">n_iloc</span><span class="p">,</span> <span class="s2">&quot;行&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>loc[0:2] 行标: [0, 1, 2] 共 3 行
 iloc[0:2] 行标: [0, 1] 共 2 行</code></pre>
 <table>
@@ -14289,6 +14347,7 @@ iloc[0:2] 行标: [0, 1] 共 2 行</code></pre>
 赋值落在临时对象上，原表 <code>df</code> <strong>一个格子都没变</strong>，
 同时 pandas 发出 <code>SettingWithCopyWarning</code>。</p>
 <p><strong>正确写法</strong>：用 <code>loc</code> 一步定位到位。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1">1</a></span>
 <span class="normal"><a href="#__codelineno-62-2">2</a></span>
 <span class="normal"><a href="#__codelineno-62-3">3</a></span>
@@ -14304,12 +14363,13 @@ iloc[0:2] 行标: [0, 1] 共 2 行</code></pre>
 <a id="__codelineno-62-6" name="__codelineno-62-6"></a><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;温度&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">21</span><span class="p">,</span> <span class="s2">&quot;等级&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;偏高&quot;</span>
 <a id="__codelineno-62-7" name="__codelineno-62-7"></a>
 <a id="__codelineno-62-8" name="__codelineno-62-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>     温度  等级
 0  21.5  偏高
 1  19.4  正常
 2  22.8  偏高</code></pre>
 <p><strong>对照组</strong>：把两种写法放在一起跑一遍，差别非常直观。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-63-3"> 3</a></span>
@@ -14339,7 +14399,7 @@ iloc[0:2] 行标: [0, 1] 共 2 行</code></pre>
 <a id="__codelineno-63-13" name="__codelineno-63-13"></a>
 <a id="__codelineno-63-14" name="__codelineno-63-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;链式赋值之后:&quot;</span><span class="p">,</span> <span class="n">df_bad</span><span class="p">[</span><span class="s2">&quot;温度&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <a id="__codelineno-63-15" name="__codelineno-63-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loc 赋值之后:&quot;</span><span class="p">,</span> <span class="n">df_good</span><span class="p">[</span><span class="s2">&quot;温度&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>链式赋值之后: [21.5, 19.4, 22.8]
 loc 赋值之后: [99.0, 19.4, 99.0]</code></pre>
 <p>第一行<strong>和原来完全一样</strong>，第二行才真的改了。</p>

@@ -10720,6 +10720,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>pandas 官方文档（Working with missing data / Duplicates）</code><code>本页示例在 pandas 2.x 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="07">07 数据清洗<a class="headerlink" href="#07" title="Permanent link">&para;</a></h1>
@@ -10885,6 +10893,7 @@
 <h3 id="12">1.2 先造一份「哪里都脏」的数据<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>为了让每个例子都有具体对象，先造一份模拟数据：
 一份由多人手工录入、登记时谁也没检查过的班级成绩表。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
@@ -11099,6 +11108,7 @@
 </table>
 <h3 id="13">1.3 第一件事：体检，而不是动手<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>拿到任何一份表，先做 15 秒体检，<strong>看清问题再决定怎么改</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -11239,6 +11249,7 @@
 <h3 id="21">2.1 三种检测写法，用途不同<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><code>isna()</code> 与 <code>notna()</code> 是互补的，一个说「哪里空」，一个说「哪里不空」。
 <strong>关键是别停在布尔表上</strong> —— 它只告诉你「哪里有洞」，不告诉你「洞有多大」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -11373,6 +11384,7 @@
 <p><strong>三者的共同点</strong>：<code>pd.isna()</code> 都认定为缺失，<code>isna()</code> 也都报 <code>True</code>。
 所以检测时永远用 <code>pd.isna()</code> / <code>isna()</code>，不要用 <code>== None</code> 或 <code>== np.nan</code>。</p>
 <p>为什么？因为缺失值<strong>不等于自己</strong>，用 <code>==</code> 判断会静默失败：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -11470,6 +11482,7 @@ pd.NA == pd.NA    : &lt;NA&gt;      ← 比出来的还是缺失值本身
 <p>检测只是第一步。真正难的是<strong>选哪种处理</strong>。
 下面五种按「信息损失」从大到小排列，每一种都配例子和代价说明。</p>
 <h3 id="24-dropna">2.4 策略一：删 —— <code>dropna()</code><a class="headerlink" href="#24-dropna" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11608,6 +11621,7 @@ dropna(subset=["数学","英语"], how="all") 行数: 3</code></pre>
 </table>
 </div>
 <h3 id="25-fillna0">2.5 策略二：填固定值 —— <code>fillna(0)</code><a class="headerlink" href="#25-fillna0" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11685,6 +11699,7 @@ fillna(0) —— 两列都被填成 0:
 这会拉低班级均分，且可能不公平 —— <strong>这是业务决定，不是技术决定</strong></p>
 <h3 id="26-fillna-fillna">2.6 策略三：填统计量 —— <code>fillna(均值)</code> / <code>fillna(中位数)</code><a class="headerlink" href="#26-fillna-fillna" title="Permanent link">&para;</a></h3>
 <p>这是最常用的填充方式，也最容易出错。先看一段<strong>并排对比</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
@@ -11857,6 +11872,7 @@ fillna(0) —— 两列都被填成 0:
 <h3 id="27-ffill-bfill">2.7 策略四：用相邻值填 —— <code>ffill</code> / <code>bfill</code><a class="headerlink" href="#27-ffill-bfill" title="Permanent link">&para;</a></h3>
 <p>适合<strong>有顺序的数据</strong>：时间序列、按行排列的台账、传感器读数。
 逻辑很直接 —— 假设「上一个值还能近似代表现在」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
@@ -11981,6 +11997,7 @@ bfill()（向后填充，用下一个非缺失值往上灌）:
 <h3 id="28-interpolate">2.8 策略五：插值 —— <code>interpolate()</code><a class="headerlink" href="#28-interpolate" title="Permanent link">&para;</a></h3>
 <p>插值不复制相邻值，而是<strong>在已知点之间连线，算中间点的值</strong>。
 最常用的是线性插值：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -12205,6 +12222,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 <p><code>数学</code> 这一列在脏表里是 <code>object</code>（字符串）。
 第一反应可能是「直接转成数字不就行了」，于是写下 <code>pd.to_numeric(数学列)</code>。
 <strong>这行代码一定会报错</strong>，而且报错信息值得完整看一遍：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -12287,6 +12305,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </div>
 <h3 id="32-errorscoerce">3.2 <code>errors="coerce"</code>：把转不了的值变成缺失<a class="headerlink" href="#32-errorscoerce" title="Permanent link">&para;</a></h3>
 <p>加上 <code>errors="coerce"</code> 之后，转不了的值不会报错，而是<strong>变成缺失值</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -12369,6 +12388,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </tbody>
 </table>
 <p><strong>所以正确用法是「两个都要」</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -12446,6 +12466,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </div>
 <h3 id="33-astype">3.3 <code>astype</code>：已经确定干净时才用<a class="headerlink" href="#33-astype" title="Permanent link">&para;</a></h3>
 <p><code>astype</code> 是「我保证这些值都能转」的写法。它<strong>不做容错</strong>，遇到转不了的值就抛异常：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
 <span class="normal"><a href="#__codelineno-12-2">2</a></span>
 <span class="normal"><a href="#__codelineno-12-3">3</a></span>
@@ -12462,6 +12483,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>pandas.errors.IntCastingNaNError: Cannot convert non-finite values (NA or inf) to integer</code></pre>
 <p><code>astype</code> 的典型用法是<strong>已经确认无缺失</strong>的场景：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
@@ -12577,6 +12599,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 <p>日期是最容易「看起来对、其实不能算」的一列。
 本页的脏表里 <code>登记时间</code> 混了 <code>2024-03-01</code>、<code>2024/03/02</code>、<code>20240303</code> 三种写法，
 还有一个 <code>不是日期</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
 <span class="normal"><a href="#__codelineno-14-3">3</a></span>
@@ -12597,6 +12620,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>- passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.</code></pre>
 <p><strong>两种修法，选哪种取决于数据：格式是否统一</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -12713,6 +12737,7 @@ interpolate 结果: [10.0, 20.0, 30.0, 40.0]  ← 10 与 40 之间等距取 20�
 </div>
 <h3 id="35-to_timedelta">3.5 时长：<code>to_timedelta</code><a class="headerlink" href="#35-to_timedelta" title="Permanent link">&para;</a></h3>
 <p>时间<strong>点</strong>用 <code>to_datetime</code>，时间<strong>长度</strong>用 <code>to_timedelta</code>。两者是一对：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
@@ -12808,6 +12833,7 @@ dtype    : timedelta64[ns]
 </table>
 <h3 id="36">3.6 「读进来是字符串」的陷阱：并排看一遍<a class="headerlink" href="#36" title="Permanent link">&para;</a></h3>
 <p>这是本页最值得记住的一组对比。<strong>同样两个值，同样的符号，结果完全不同</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-17-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-17-3"> 3</a></span>
@@ -12955,6 +12981,7 @@ dtype    : timedelta64[ns]
 <h3 id="37-category">3.7 <code>category</code> 类型：低基数文本列的优化<a class="headerlink" href="#37-category" title="Permanent link">&para;</a></h3>
 <p><code>班级</code>、<code>性别</code>、<code>等级</code> 这类列，取值只有几个但重复成千上万次。
 把它们转成 <code>category</code> 有两个好处：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -13239,6 +13266,7 @@ category 内部做了什么：每个取值只存一份，单元格里存的是�
 <p><code>duplicated()</code> <strong>不删任何东西</strong>，它只返回一列布尔值。
 这个设计很好：<strong>先看有多少、看是哪些，再决定删不删</strong>。</p>
 <p><code>keep</code> 参数决定「重复的那一组里，哪一条不算重复」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -13350,6 +13378,7 @@ keep=False 保留的行（只要重名就整组不要）:
 在这个例子里，<code>first</code> 与 <code>last</code> 各标记 2 条，<code>False</code> 标记 4 条。</p>
 <p><strong>怎么记住</strong>：<code>keep</code> 回答的是「<strong>这一组里留下哪一条</strong>」，
 <code>False</code> 的意思是「<strong>一条都不留</strong>」，而不是「不保留重复信息」</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -13422,6 +13451,7 @@ keep=False 保留的行（只要重名就整组不要）:
 <h3 id="43-drop_duplicates">4.3 <code>drop_duplicates()</code>：真正删行<a class="headerlink" href="#43-drop_duplicates" title="Permanent link">&para;</a></h3>
 <p>它是 <code>duplicated()</code> 的「取反 + 筛选」两步的封装，
 参数完全一样（<code>subset</code>、<code>keep</code>）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -13552,6 +13582,7 @@ keep=False 保留的行（只要重名就整组不要）:
 <code>mean</code> 是 <code>146.69</code>，<code>50%</code>（中位数）是 <code>88.0</code>。
 一个班的学生英语均分是 146 分，这在满分 100 分的卷子上<strong>不可能</strong>。
 这就是异常值：代码没报任何错，数字却荒谬。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -13596,6 +13627,7 @@ max      999.0000
 这两行是 <code>describe()</code> 输出里最该一起看的两行 ✓</p>
 <h3 id="52">5.2 方法一：描述统计法（最快，但只给线索）<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p>描述统计不告诉你「哪个值是异常」，它只告诉你「这里可能有问题」。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -13722,6 +13754,7 @@ max      999.0000
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -13874,6 +13907,7 @@ IQR = Q3 - Q1  : 14.0
 <h3 id="54-z-score">5.4 方法三：Z-score 法（假设近似正态）<a class="headerlink" href="#54-z-score" title="Permanent link">&para;</a></h3>
 <p>Z-score 回答「这个值离均值有几个标准差」：</p>
 <p>公式是 <span class="arithmatex">\(z = \dfrac{x - \mu}{\sigma}\)</span>，判据常写成 <span class="arithmatex">\(|z| \gt 3\)</span>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -14038,6 +14072,7 @@ IQR = Q3 - Q1  : 14.0
 <p>前三种都是统计方法：它们看「这个值像不像其他值」。
 <strong>业务规则法看的是「这个值本身是否可能」</strong>，与前三种完全不同的思路。</p>
 <p>对这种有明确物理含义的数据，业务规则<strong>永远是第一道也是最后一道防线</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -14182,6 +14217,7 @@ IQR = Q3 - Q1  : 14.0
 <h3 id="56">5.6 四种处理策略<a class="headerlink" href="#56" title="Permanent link">&para;</a></h3>
 <p>找到异常值之后，有四种处理方式。<strong>优先选保留信息的那几种</strong>：</p>
 <h4 id="_6">策略一：删除<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -14269,6 +14305,7 @@ IQR = Q3 - Q1  : 14.0
 </table>
 <h4 id="clip">策略二：截断 —— <code>clip</code><a class="headerlink" href="#clip" title="Permanent link">&para;</a></h4>
 <p>不删行、不置空，把越界的值<strong>拉回到边界上</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -14354,6 +14391,7 @@ clip(0, 100) 之后：
 </tbody>
 </table>
 <h4 id="_7">策略三：替换（置空后再填，或用统计量替换）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
@@ -14486,6 +14524,7 @@ clip(0, 100) 之后：
 </div>
 <h4 id="_8">策略四：单独标注（推荐默认做法）<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <p>不删、不改，<strong>额外加一列标记</strong>，把「这个值是可疑的」这个事实保留下来：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-31-3"> 3</a></span>
@@ -14741,6 +14780,7 @@ clip(0, 100) 之后：
 <h3 id="62">6.2 三种最常用的清洗<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>本页脏表里 <code>姓名</code> 列带着前后空格（<code>" 李娜"</code>、<code>"李娜 "</code>、<code>" 王芳  "</code>）。
 <strong>这些空格在显示时几乎看不出来，但会让同一个名字被当成不同的人</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -14809,6 +14849,7 @@ clip(0, 100) 之后：
 <p><strong>注意 ③ 这个技巧</strong>：空格是看不见的，
 但<strong>「长度变了几个」和「唯一值少了几个」是看得见的数字</strong> ——
 清洗文本列时，永远用这种可核对的指标来证明改动生效了 ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -14900,6 +14941,7 @@ clip(0, 100) 之后：
 <h3 id="63-strextract">6.3 正则捕获组：<code>str.extract()</code><a class="headerlink" href="#63-strextract" title="Permanent link">&para;</a></h3>
 <p>需要抽出<strong>结构中固定的一部分</strong>时，用 <code>str.extract()</code> 配合正则捕获组。
 捕获组就是正则里的 <code>(...)</code>，每个括号抽成一列：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
@@ -15000,6 +15042,7 @@ clip(0, 100) 之后：
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -15040,6 +15083,7 @@ clip(0, 100) 之后：
 <h3 id="64-str-na">6.4 <code>.str</code> 与缺失值：<code>na</code> 参数<a class="headerlink" href="#64-str-na" title="Permanent link">&para;</a></h3>
 <p><code>.str</code> 默认<strong>遇到缺失值就跳过</strong>（结果仍为缺失）。
 这对有些操作是隐患：<code>contains()</code> 返回的可能是 <code>object</code> 而不是 <code>bool</code>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
@@ -15236,6 +15280,7 @@ clip(0, 100) 之后：
 <h3 id="71">7.1 列名脏了会怎样<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
 <p>本页脏表的列名是 <code>" 姓名 "</code>、<code>" 班级 "</code>（前后各带一个空格）。
 这个空格<strong>在打印时几乎看不出来</strong>，但会让所有按名字取列的代码失败：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
@@ -15288,6 +15333,7 @@ pandas 把候选列名都列了出来，<strong>只是空格在终端里太不�
 </tbody>
 </table>
 <h3 id="72">7.2 三步洗法：去空格 → 统一大小写 → 批量重命名<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-38-3"> 3</a></span>
@@ -15348,6 +15394,7 @@ pandas 把候选列名都列了出来，<strong>只是空格在终端里太不�
 <h3 id="73">7.3 用字典批量重命名<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
 <p>列名要从英文改成中文、或从含义不清改成清晰时，
 用 <code>rename(columns={...})</code> 配一个字典。<strong>这个写法比逐个赋值清楚得多</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-39-3"> 3</a></span>
@@ -15460,6 +15507,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 </table>
 <p>另外：<strong>重命名后要确认列数没变</strong>，<code>len(df.columns)</code> 前后应当相同</p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -15540,6 +15588,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 <p>封装成函数后，同一份输入<strong>每次得到同一份输出</strong>，
 参数集中在签名里，清洗过程变成一句可读的 <code>clean(df)</code></p>
 <h3 id="82">8.2 一份完整的清洗函数<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
@@ -15795,6 +15844,7 @@ B2024-0003  王芳 75.0  82</code></pre>
 <p>在报告里贴两行日志，成本极低，可信度提升很多</p>
 </div>
 <h3 id="83">8.3 调用演示：换个参数，结果跟着变<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -15952,6 +16002,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 会在你毫无察觉时把值变成缺失；<code>dropna()</code> 会在你毫无察觉时删掉大半数据。
 <strong>只有前后对比能把这两种「悄悄发生的事」变成数字</strong></p>
 <h3 id="92">9.2 三张对照表<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -16216,6 +16267,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 如果对不上，就说明有一步的行为和你以为的不一样 ——
 <strong>这时候的 10 分钟排查，能避免后面一整个结论作废</strong></p>
 </div>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -16329,6 +16381,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 <h2 id="_13">十、常见陷阱汇总<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
 <h3 id="101">10.1 五个高频陷阱<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
 <h4 id="inplacetrue">陷阱一：<code>inplace=True</code> 与链式调用同用<a class="headerlink" href="#inplacetrue" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
 <span class="normal"><a href="#__codelineno-45-2">2</a></span>
 <span class="normal"><a href="#__codelineno-45-3">3</a></span>
@@ -16347,6 +16400,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 <p><strong>原因</strong>：<code>inplace=True</code> 表示「就地改，不返回值」，
 所以它返回的是 <code>None</code>，而 <code>None</code> 没有 <code>.reset_index()</code></p>
 <p><strong>更隐蔽的是「改了一半才报错」</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -16426,6 +16480,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 <strong>这也正是「统一用赋值式」能同时避开两种坑的原因</strong></p>
 </div>
 <h4 id="_14">陷阱二：填充时用错列<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -16498,6 +16553,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 <p><strong>根因</strong>：<code>fillna</code> 收到一个<strong>标量</strong>时会把它用到<strong>所有列</strong>上，
 收到 <strong>Series</strong> 时才会按列名对齐。<code>df["数学"].mean()</code> 是标量，所以到处都填它</p>
 <h4 id="_15">陷阱三：清洗后不复查<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -16582,6 +16638,7 @@ fill=mean    → 英语均值 82.5833，语文均值 80.6875
 就像上面把语文缺失填成 0，代码毫无异常，页面上也看不出问题</p>
 </div>
 <h4 id="dropna">陷阱四：<code>dropna()</code> 默认删整行<a class="headerlink" href="#dropna" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-49-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-49-3"> 3</a></span>
@@ -16655,6 +16712,7 @@ dropna(how='all') 后: 13
 </tbody>
 </table>
 <h4 id="_16">陷阱五：用均值填充但有异常值<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-50-3"> 3</a></span>
@@ -16964,6 +17022,7 @@ dropna(how='all') 后: 13
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -17053,7 +17112,7 @@ dropna(how='all') 后: 13
 <a id="__codelineno-54-43" name="__codelineno-54-43"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;总分&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;语文&quot;</span><span class="p">,</span> <span class="s2">&quot;数学&quot;</span><span class="p">,</span> <span class="s2">&quot;英语&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-54-44" name="__codelineno-54-44"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s2">&quot;姓名&quot;</span><span class="p">,</span> <span class="s2">&quot;语文&quot;</span><span class="p">,</span> <span class="s2">&quot;数学&quot;</span><span class="p">,</span> <span class="s2">&quot;英语&quot;</span><span class="p">,</span> <span class="s2">&quot;总分&quot;</span><span class="p">]]</span>
 <a id="__codelineno-54-45" name="__codelineno-54-45"></a>      <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>第 1 步：先体检，看清问题
   语文 dtype : float64
   数学 dtype : object  ← object，整列是文本
@@ -17172,6 +17231,7 @@ dropna(how='all') 后: 13
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -17261,7 +17321,7 @@ dropna(how='all') 后: 13
 <a id="__codelineno-56-43" name="__codelineno-56-43"></a>            <span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s2">&quot;学号&quot;</span><span class="p">,</span> <span class="s2">&quot;科目&quot;</span><span class="p">])</span>
 <a id="__codelineno-56-44" name="__codelineno-56-44"></a>            <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 <a id="__codelineno-56-45" name="__codelineno-56-45"></a><span class="nb">print</span><span class="p">(</span><span class="n">latest</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>① 三种判定口径各自判出多少重复：
    全部列相同          重复 0 条
    只按学号           重复 3 条
@@ -17378,6 +17438,7 @@ B2024-0003 王芳 语文  78 2024-03-06</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -17443,7 +17504,7 @@ B2024-0003 王芳 语文  78 2024-03-06</code></pre>
 <a id="__codelineno-58-31" name="__codelineno-58-31"></a><span class="n">parts</span><span class="p">[</span><span class="s2">&quot;分数备注&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parts</span><span class="p">[</span><span class="s2">&quot;分数&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="kc">True</span><span class="p">:</span> <span class="s2">&quot;缺考或格式异常&quot;</span><span class="p">,</span>
 <a id="__codelineno-58-32" name="__codelineno-58-32"></a>                                            <span class="kc">False</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">})</span>
 <a id="__codelineno-58-33" name="__codelineno-58-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">parts</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>原始值（方括号框住，空格可见）:
     ['[1班-张伟-88]', '[2班-李娜-92分]', '[ 1班-王芳-缺考 ]', '[2班-刘洋-79分]']
 
@@ -17564,6 +17625,7 @@ NaN NaN  NaN 缺考或格式异常
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-60-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-60-3"> 3</a></span>
@@ -17649,7 +17711,7 @@ NaN NaN  NaN 缺考或格式异常
 <a id="__codelineno-60-41" name="__codelineno-60-41"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    去重后行数         =&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 <a id="__codelineno-60-42" name="__codelineno-60-42"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;    减少数 == 重复数   :&quot;</span><span class="p">,</span>
 <a id="__codelineno-60-43" name="__codelineno-60-43"></a>      <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>清洗检查清单：
 步骤   做什么          为什么                          怎么验证
 1    列名清洗         去首尾空格、统一小写                   df.columns 里没有前后空格
@@ -17878,6 +17940,7 @@ NaN NaN  NaN 缺考或格式异常
 </table>
 <p>所以这个写法不是「什么都没做」，而是<strong>做了一半然后崩掉</strong></p>
 <p><strong>正确写法</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1">1</a></span>
 <span class="normal"><a href="#__codelineno-64-2">2</a></span>
 <span class="normal"><a href="#__codelineno-64-3">3</a></span>
@@ -17893,7 +17956,7 @@ NaN NaN  NaN 缺考或格式异常
 <a id="__codelineno-64-6" name="__codelineno-64-6"></a>
 <a id="__codelineno-64-7" name="__codelineno-64-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 <a id="__codelineno-64-8" name="__codelineno-64-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;索引 :&quot;</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>     语文    数学
 0  90.0  95.0
 1  70.0  88.0
@@ -17932,6 +17995,7 @@ NaN NaN  NaN 缺考或格式异常
 </details>
 <details class="success">
 <summary>解答</summary>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -17973,7 +18037,7 @@ NaN NaN  NaN 缺考或格式异常
 <a id="__codelineno-65-19" name="__codelineno-65-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;界外的值 :&quot;</span><span class="p">,</span> <span class="n">flagged</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
 <a id="__codelineno-65-20" name="__codelineno-65-20"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-65-21" name="__codelineno-65-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;对照：中位数 </span><span class="si">%.1f</span><span class="s2">，均值 </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">median</span><span class="p">(),</span> <span class="n">s</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>Q1（25%% 分位）  : 72.5
 Q3（75%% 分位）  : 91.0
 IQR = Q3 - Q1   : 18.5
@@ -18132,6 +18196,7 @@ IQR = Q3 - Q1   : 18.5
 </tbody>
 </table>
 <p><strong>正确写法</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-67-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-67-3"> 3</a></span>
@@ -18179,7 +18244,7 @@ IQR = Q3 - Q1   : 18.5
 <a id="__codelineno-67-22" name="__codelineno-67-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;日期 dtype :&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;日期&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 <a id="__codelineno-67-23" name="__codelineno-67-23"></a><span class="nb">print</span><span class="p">()</span>
 <a id="__codelineno-67-24" name="__codelineno-67-24"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>转换前后缺失数 : 0 → 0
 日期 dtype : datetime64[ns]
 

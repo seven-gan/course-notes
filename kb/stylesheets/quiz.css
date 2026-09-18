@@ -1,0 +1,166 @@
+/* 编程基础闯关：自测交互样式
+ *
+ * 原则：**不改变原有阅读体验**。所有新增 UI 都是「附加」的，
+ * 用户不看自测也能正常读页面。
+ */
+
+.kbq {
+  margin: 1.2rem 0 2rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .3rem;
+  overflow: hidden;
+}
+
+/* ---- 顶部状态条 ---- */
+.kbq-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: .6rem .8rem;
+  background: var(--md-default-fg-color--lightest);
+}
+
+.kbq-badge {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .18rem .5rem;
+  border-radius: 1rem;
+  color: #fff;
+  white-space: nowrap;
+}
+.kbq-new     { background: #8a8a8a; }
+.kbq-passed  { background: #2b8a3e; }
+.kbq-known   { background: #2b4ea2; }
+.kbq-skipped { background: #b4530a; }
+
+.kbq-info {
+  font-size: .72rem;
+  color: var(--md-default-fg-color--light);
+  flex: 1 1 auto;
+}
+
+.kbq-acts { display: flex; gap: .35rem; flex-wrap: wrap; }
+
+.kbq-btn {
+  font-size: .72rem;
+  font-family: inherit;
+  padding: .28rem .7rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: .2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  line-height: 1.5;
+}
+.kbq-btn:hover { border-color: var(--md-accent-fg-color); }
+.kbq-primary {
+  background: var(--md-primary-fg-color);
+  border-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+}
+
+/* ---- 答题面板（默认收起，避免打断阅读）---- */
+.kbq-panel { display: none; padding: .8rem; }
+.kbq-panel.kbq-open { display: block; }
+
+.kbq-q {
+  border-top: 1px dashed var(--md-default-fg-color--lightest);
+  padding: .8rem 0;
+}
+.kbq-q:first-child { border-top: 0; padding-top: 0; }
+
+.kbq-qhead {
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  margin-bottom: .45rem;
+}
+
+.kbq-input {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--md-code-font, monospace);
+  font-size: .74rem;
+  padding: .45rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: .2rem;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  resize: vertical;
+}
+.kbq-input:focus { outline: 2px solid var(--md-accent-fg-color); }
+
+.kbq-fb {
+  font-size: .74rem;
+  margin: .45rem 0 0;
+  min-height: 1.1em;
+}
+.kbq-ok { color: #2b8a3e; }
+.kbq-no { color: #b4530a; }
+
+/* ---- 总览（放在目录页）---- */
+.kbq-ov {
+  font-size: .78rem;
+  padding: .5rem .7rem;
+  border-left: 3px solid var(--md-primary-fg-color);
+  background: var(--md-default-fg-color--lightest);
+  border-radius: .2rem;
+  margin: .8rem 0;
+}
+
+.kbq-due {
+  margin: .7rem 0;
+  padding: .6rem .8rem;
+  border: 1px solid #b4530a;
+  border-radius: .3rem;
+  font-size: .76rem;
+}
+.kbq-duetitle { font-weight: 700; color: #b4530a; margin-bottom: .35rem; }
+.kbq-duelink {
+  display: inline-block;
+  margin: .15rem .5rem .15rem 0;
+  color: var(--md-typeset-a-color);
+}
+
+/* 深色主题下也看得清 */
+[data-md-color-scheme="slate"] .kbq-ok { color: #51cf66; }
+[data-md-color-scheme="slate"] .kbq-no { color: #ffa94d; }
+[data-md-color-scheme="slate"] .kbq-duetitle { color: #ffa94d; }
+[data-md-color-scheme="slate"] .kbq-due { border-color: #ffa94d; }
+
+/* ---- 代码块上的「运行」按钮（按需加载 Pyodide）---- */
+.kbpy-btn {
+  font-size: .7rem;
+  font-family: inherit;
+  margin: .25rem 0 0;
+  padding: .2rem .6rem;
+  border: 1px solid var(--md-default-fg-color--lighter);
+  border-radius: .2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-primary-fg-color);
+  cursor: pointer;
+}
+.kbpy-btn:hover:not(:disabled) { border-color: var(--md-accent-fg-color); }
+.kbpy-btn:disabled { opacity: .6; cursor: default; }
+
+.kbpy-out {
+  font-family: var(--md-code-font, monospace);
+  font-size: .72rem;
+  line-height: 1.5;
+  margin: .35rem 0 0;
+  padding: .5rem .6rem;
+  border-left: 3px solid #2b8a3e;
+  background: var(--md-code-bg-color);
+  color: var(--md-default-fg-color);
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+.kbpy-out.kbpy-err {
+  border-left-color: #b4530a;
+}
+
+/* 深色主题下也看得清 */
+[data-md-color-scheme="slate"] .kbpy-out { border-left-color: #51cf66; }
+[data-md-color-scheme="slate"] .kbpy-out.kbpy-err { border-left-color: #ffa94d; }

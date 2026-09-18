@@ -10610,6 +10610,14 @@
 
 
 
+<!-- kbq:start -->
+<p><link rel="stylesheet" href="../../../../stylesheets/quiz.css"></p>
+<script src="../../../../javascripts/quiz_index.js"></script>
+<script defer src="../../../../javascripts/quiz-progress.js"></script>
+<script defer src="../../../../javascripts/quiz.js"></script>
+<script defer src="../../../../javascripts/quiz-run.js"></script>
+<!-- kbq:end -->
+
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#6b7280">了解</span><span class="kb-imp-desc">扩展阅读，不必深究</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>PEP 8 风格指南 / Python 官方文档（标准库 · logging / typing）</code><code>本页示例在 Python 3.9+ 上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="14">14 工程习惯<a class="headerlink" href="#14" title="Permanent link">&para;</a></h1>
@@ -10847,6 +10855,7 @@
 </tbody>
 </table>
 <h3 id="22">2.2 四类命名一次看全<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -10947,6 +10956,7 @@
 <div class="admonition warning">
 <p class="admonition-title"><code>_name</code> 是约定，不是保险</p>
 <p>很多语言有真正的 <code>private</code>，Python 没有。所以：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -10980,7 +10990,7 @@
 <a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="c1"># 外面当然能读到 —— 因为语言根本没拦</span>
 <a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;通过方法读:&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;直接读内部字段（能读到，但不该这么写）:&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">_count</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>通过方法读: 1
 直接读内部字段（能读到，但不该这么写）: 1</code></pre>
 <p><strong>判断依据</strong>：<strong>写库 / 写给别人用的模块时用 <code>_</code> 表明边界；
@@ -11015,6 +11025,7 @@
 </tbody>
 </table>
 <p>除了这三种，<code>a</code>、<code>b</code>、<code>d</code>、<code>f</code>、<code>x1</code>、<code>tmp2</code> 这类名字都应该被改掉。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
@@ -11077,6 +11088,7 @@
 <p>Python 有几百个内置名字（<code>list</code>、<code>sum</code>、<code>id</code>、<code>type</code>、<code>max</code>、<code>min</code>、
 <code>str</code>、<code>dict</code>、<code>range</code>、<code>filter</code>……）。<strong>它们不是关键字，可以随便覆盖</strong> ——
 而<strong>覆盖之后通常不会立刻报错</strong>，这才是它危险的地方。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
@@ -11104,6 +11116,7 @@
 内置 sum 已经被遮住，而且一句警告都没有</code></pre>
 <p><strong>最糟糕的情况是「覆盖了自己还想用」</strong> —— 这时才会报错，
 但报错信息里出现的 <code>'list' object is not callable</code> 常常让人一头雾水：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span>
@@ -11123,6 +11136,7 @@ TypeError: 'list' object is not callable</code></pre>
 <p><strong>报错的意思是</strong>：「你让我调用 <code>list</code>，可 <code>list</code> 现在是一个<strong>列表对象</strong>，
 列表不能被当作函数调用」✓</p>
 <p><code>id</code> 和 <code>type</code> 也一样 —— 它们通常「悄悄坏掉」：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
 <span class="normal"><a href="#__codelineno-7-3">3</a></span>
@@ -11274,6 +11288,7 @@ type 现在是: 文本</code></pre>
 </tbody>
 </table>
 <p>看一个完整的对照：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
@@ -11435,6 +11450,7 @@ SECONDS_PER_DAY 一眼看出单位: 86400</code></pre>
 </tbody>
 </table>
 <p>看正反例对照：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
@@ -11506,6 +11522,7 @@ SECONDS_PER_DAY 一眼看出单位: 86400</code></pre>
 <a id="__codelineno-10-8" name="__codelineno-10-8"></a>    &quot;&quot;&quot;这个也不是 —— 它前面有别的东西了&quot;&quot;&quot;
 </code></pre></div></td></tr></table></div>
 <p><strong>三种主流风格</strong>，写法不同，信息内容一样：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
@@ -11675,6 +11692,7 @@ SECONDS_PER_DAY 一眼看出单位: 86400</code></pre>
 </table>
 <h3 id="33-help-__doc__">3.3 用 <code>help()</code> 和 <code>__doc__</code> 查看<a class="headerlink" href="#33-help-__doc__" title="Permanent link">&para;</a></h3>
 <p><strong>docstring 写完不是白写</strong> —— 它会自动出现在 <code>help()</code> 里：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
@@ -11799,6 +11817,7 @@ mean(values)
 </tbody>
 </table>
 <p><strong>检查 docstring 是否真的生效，只要一句</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
@@ -11828,7 +11847,7 @@ mean(values)
 <a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者都真的执行了 body:&quot;</span><span class="p">)</span>
 <a id="__codelineno-14-14" name="__codelineno-14-14"></a><span class="n">suspicious</span><span class="p">()</span>
 <a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="n">proper</span><span class="p">()</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>suspicious 的 __doc__: None
 proper 的 __doc__    : 这句才是 docstring。
 两者都真的执行了 body:
@@ -11866,6 +11885,7 @@ proper 的 __doc__    : 这句才是 docstring。
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
@@ -11986,6 +12006,7 @@ proper 的 __doc__    : 这句才是 docstring。
 </tbody>
 </table>
 <h3 id="42">4.2 基础标注<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-18-3"> 3</a></span>
@@ -12114,6 +12135,7 @@ set[str]     : a, b
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-19-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-19-3"> 3</a></span>
@@ -12141,7 +12163,7 @@ set[str]     : a, b
 <a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fixed   :&quot;</span><span class="p">,</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">fixed</span><span class="p">)[</span><span class="s2">&quot;pair&quot;</span><span class="p">])</span>
 <a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;variable:&quot;</span><span class="p">,</span> <span class="n">get_type_hints</span><span class="p">(</span><span class="n">variable</span><span class="p">)[</span><span class="s2">&quot;items&quot;</span><span class="p">])</span>
 <a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;注意 `...` 在标注里表示「任意多个」&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>fixed   : tuple[int, str]
 variable: tuple[int, ...]
 注意 `...` 在标注里表示「任意多个」</code></pre>
@@ -12179,6 +12201,7 @@ Python 3.9+ 已经可以直接写 <code>list[float]</code> 了</p>
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
@@ -12289,6 +12312,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-21-3"> 3</a></span>
@@ -12324,7 +12348,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 <a id="__codelineno-21-16" name="__codelineno-21-16"></a>
 <a id="__codelineno-21-17" name="__codelineno-21-17"></a>
 <a id="__codelineno-21-18" name="__codelineno-21-18"></a><span class="nb">print</span><span class="p">(</span><span class="n">optional_with_default</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>收到 None
 收到 1.5
 收到 None</code></pre>
@@ -12334,6 +12358,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 <h3 id="44">4.4 类型标注<strong>不强制</strong> —— 运行时不会检查<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
 <p><strong>这是本节最需要记住的一条</strong>。Python 的标注只是「写下来给工具看的说明」，
 <strong>解释器根本不会去核对它</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-22-3"> 3</a></span>
@@ -12362,6 +12387,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 <p><strong>标注甚至连「函数到底会不会报错」都管不了</strong> ——
 <code>add("a", "b")</code> 能跑，是因为 <code>str + str</code> 恰好合法；
 换个操作就会在<strong>运行到那一行时</strong>才炸：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
@@ -12450,6 +12476,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 </tbody>
 </table>
 <p><strong>要真的挡住错误输入，只能自己写检查</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-24-3"> 3</a></span>
@@ -12485,7 +12512,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 <a id="__codelineno-24-16" name="__codelineno-24-16"></a>    <span class="n">mean</span><span class="p">([</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">])</span>
 <a id="__codelineno-24-17" name="__codelineno-24-17"></a><span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;被校验拦住了:&quot;</span><span class="p">,</span> <span class="n">exc</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>正常调用: 1.5
 整数也能过: 1.5
 被校验拦住了: 元素必须是数字，收到 str</code></pre>
@@ -12495,6 +12522,7 @@ Callable 传普通函数: [2, 4, 6]</code></pre>
 <h3 id="45-get_type_hints">4.5 用 <code>get_type_hints</code> 读回标注<a class="headerlink" href="#45-get_type_hints" title="Permanent link">&para;</a></h3>
 <p><strong>标注写下来以后是可以程序化读取的</strong> —— 这正是编辑器、
 文档生成器和校验框架能利用它的原因。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-25-3"> 3</a></span>
@@ -12735,6 +12763,7 @@ head 的 items: tuple[int, ...]
 </tbody>
 </table>
 <p><strong>关键不是「选哪个数字」，而是「整个项目选同一个」</strong> ✓</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
@@ -12810,6 +12839,7 @@ head 的 items: tuple[int, ...]
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -12875,6 +12905,7 @@ a b
 空行不改变行为，只决定读起来累不累</code></pre>
 <p>③ 导入顺序：标准库 → 第三方 → 本地</p>
 <p><strong>这条规则的价值在于「一眼看出这段代码依赖了什么」</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
@@ -12909,6 +12940,7 @@ a b
 标准库模块都能用: True
 库名按字母序排列: json &lt; math &lt; os: True</code></pre>
 <p><strong>对照错误写法</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
@@ -13004,6 +13036,7 @@ json 能用: {"a": 1}
 </table>
 <p><strong>一个容易被忽略的连锁问题</strong>：本地模块和标准库<strong>同名</strong>时，
 导入顺序还会决定导入到谁：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
 <span class="normal"><a href="#__codelineno-30-2">2</a></span>
 <span class="normal"><a href="#__codelineno-30-3">3</a></span>
@@ -13019,7 +13052,7 @@ json 能用: {"a": 1}
 <a id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;同名冲突时，导入的是:&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="vm">__file__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
 <a id="__codelineno-30-7" name="__codelineno-30-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;本次导入到的模块名:&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 <a id="__codelineno-30-8" name="__codelineno-30-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结论：绝不要用标准库的名字给本地文件命名&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>同名冲突时，导入的是: True
 本次导入到的模块名: json
 结论：绝不要用标准库的名字给本地文件命名</code></pre>
@@ -13134,6 +13167,7 @@ json 能用: {"a": 1}
 </tbody>
 </table>
 <p><strong>格式问题是可以被「机械地发现」的</strong> —— 看一段纯标准库写的检查：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-32-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-32-3"> 3</a></span>
@@ -13247,6 +13281,7 @@ json 能用: {"a": 1}
 <h3 id="61">6.1 为什么需要测试<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>因为「改了一处，别处悄悄坏了」是编程里最贵的一类问题。</p>
 <p>尤其是数值代码：<strong>一次看似无害的改动，可能悄悄改变结果</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-33-3"> 3</a></span>
@@ -13358,6 +13393,7 @@ over = 1
 <a id="__codelineno-34-3" name="__codelineno-34-3"></a>      必须为真   失败时打印的东西（可选）
 </code></pre></div></td></tr></table></div>
 <p><strong>最小自测的写法</strong>：把已知答案写死，跑一遍就知道有没有改坏。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -13460,14 +13496,16 @@ celsius_to_fahrenheit(37) = 98.6</code></pre>
 <strong><code>assert</code> 适合做「自测」和「内部一致性检查」，
 不能用来校验用户输入</strong> —— 用户输入的校验必须写 <code>if</code> + <code>raise</code> ✓</p>
 <p>第二条：<code>assert</code> 失败时给的信息很少。</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
 <span class="normal"><a href="#__codelineno-36-2">2</a></span>
 <span class="normal"><a href="#__codelineno-36-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="c1"># @expect-error</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="c1"># 看不出「是多少、期望是多少」，只能知道错了</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="k">assert</span> <span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">==</span> <span class="mf">0.3</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>AssertionError</code></pre>
 <p><strong>所以养成「带说明」的习惯</strong> —— 失败时会一起打出来：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
@@ -13485,12 +13523,13 @@ celsius_to_fahrenheit(37) = 98.6</code></pre>
 <a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="c1"># 带上 got 和 want，失败时一眼知道差在哪</span>
 <a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="k">assert</span> <span class="nb">abs</span><span class="p">(</span><span class="n">got</span> <span class="o">-</span> <span class="n">want</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-9</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;got=</span><span class="si">{</span><span class="n">got</span><span class="si">}</span><span class="s2">, want=</span><span class="si">{</span><span class="n">want</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;带说明的断言通过了:&quot;</span><span class="p">,</span> <span class="n">got</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>带说明的断言通过了: 98.6</code></pre>
 <p><strong>写断言时顺手带一句说明，是「为了将来的自己」的典型操作</strong></p>
 </div>
 <h3 id="63-isclose-approx">6.3 浮点比较：必须用 <code>isclose</code> 或 <code>approx</code><a class="headerlink" href="#63-isclose-approx" title="Permanent link">&para;</a></h3>
 <p><strong>这是本节最重要的一条。</strong> 先看它为什么会失败：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
 <span class="normal"><a href="#__codelineno-38-2">2</a></span>
 <span class="normal"><a href="#__codelineno-38-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="c1"># @expect-error</span>
@@ -13500,6 +13539,7 @@ celsius_to_fahrenheit(37) = 98.6</code></pre>
 <pre class="kb-output"><code>AssertionError</code></pre>
 <p><strong>为什么？因为 <code>0.1</code>、<code>0.2</code>、<code>0.3</code> 在二进制浮点里都不是精确值</strong>，
 它们的和比你心里那个 <code>0.3</code> 大了一点点：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
 <span class="normal"><a href="#__codelineno-39-3">3</a></span>
@@ -13516,6 +13556,7 @@ celsius_to_fahrenheit(37) = 98.6</code></pre>
 任何用二进制浮点的语言都是这个结果。
 <strong>让「失败」变成「通过」的办法只有一种：不要用 <code>==</code>，改用「够不够接近」</strong></p>
 <p><strong>三种正确的写法</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
@@ -13542,6 +13583,7 @@ math.isclose    : True
 round 到 12 位  : True
 --- 三种都通过了，但推荐顺序：isclose &gt; 手动容差 &gt; round ---</code></pre>
 <p><strong>这一组对比特别值得看</strong> —— 四个「差不多」的浮点运算，全都无法用 <code>==</code> 判断：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
 <span class="normal"><a href="#__codelineno-41-2">2</a></span>
 <span class="normal"><a href="#__codelineno-41-3">3</a></span>
@@ -13581,6 +13623,7 @@ round 到 12 位  : True
 </tr>
 </tbody>
 </table>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
@@ -13698,6 +13741,7 @@ isclose(1e-12, 0.0, abs_tol=1e-9) : True</code></pre>
 </tbody>
 </table>
 <p><strong>一个完整的测试文件长这样</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
@@ -13813,6 +13857,7 @@ isclose(1e-12, 0.0, abs_tol=1e-9) : True</code></pre>
 上面几行是<strong>要执行的命令</strong>，按你的操作系统在命令行里敲进去即可。）</p>
 <p><strong>下面这段代码演示「用程序调用 pytest 跑一个测试文件」</strong>，
 它把「运行测试」这件事本身也变成了可核对的输出：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-44-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-44-3"> 3</a></span>
@@ -13959,6 +14004,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 </tbody>
 </table>
 <p><strong>验证一下「哪些文件会被收集」</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-46-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-46-3"> 3</a></span>
@@ -14070,6 +14116,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 </div>
 <h3 id="66">6.6 一个完整可运行的小例子<a class="headerlink" href="#66" title="Permanent link">&para;</a></h3>
 <p><strong>把「函数 + 测试」放在一起，是最快养成习惯的方式</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-47-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-47-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-47-3"> 3</a></span>
@@ -14271,6 +14318,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 </tbody>
 </table>
 <p><strong>代码方式看一个粗判函数</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-48-3"> 3</a></span>
@@ -14431,6 +14479,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 <p><strong>注意 README 里最值钱的部分是最后一节「输入输出约定」</strong> ——
 它挡住了「拿到项目不知道数据该长什么样」这个最常见的沟通成本</p>
 <p><strong>用 <code>pathlib</code> 检查骨架是否齐全</strong>（在临时目录里造，不碰真实项目）：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-51-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-51-3"> 3</a></span>
@@ -14532,6 +14581,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 </tbody>
 </table>
 <p><strong>源码里怎么用这些检查</strong> —— 缺文件时给一句人话提示，而不是让它崩：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-52-3"> 3</a></span>
@@ -14775,6 +14825,7 @@ pytest 输出的<strong>耗时</strong>（形如 <code>0.05s</code>）每次都�
 </tbody>
 </table>
 <p><strong>级别是「数字越大越严重」</strong>，这一点值得亲眼看一下：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
 <span class="normal"><a href="#__codelineno-53-3">3</a></span>
@@ -14870,6 +14921,7 @@ DEBUG &lt; INFO &lt; WARNING &lt; ERROR &lt; CRITICAL: True</code></pre>
 </div>
 <h3 id="83">8.3 基本配置：写进文件<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
 <p><strong><code>basicConfig</code> 是最快的上手方式</strong>，一次配置全局生效：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-54-3"> 3</a></span>
@@ -14970,6 +15022,7 @@ DEBUG 写进去了吗: False
 <p><strong><code>basicConfig</code> 的一个坑</strong>：它<strong>只在第一次调用生效</strong>。
 所以在同一个程序里改配置，用 <code>basicConfig</code> 是改不动的 ——
 那种场景要用 <code>getLogger</code> + 自己的 handler：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-55-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-55-3"> 3</a></span>
@@ -15066,6 +15119,7 @@ DEBUG 有几条: 1
 <h3 id="84">8.4 级别阈值：改一个数就改了详略<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
 <p><strong>这是 <code>logging</code> 相比 <code>print</code> 最大的好处</strong>：
 <strong>调试语句不用删</strong> —— 只要把阈值调高，它们就自动闭嘴了。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-56-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-56-3"> 3</a></span>
@@ -15173,6 +15227,7 @@ INFO 被挡住了: True
 </code></pre></div></td></tr></table></div>
 <p><strong>为什么要这么别扭？</strong> 因为这样日志库里可以<strong>先判断级别再看要不要拼字符串</strong>。
 写成 f-string 的话，<strong>不管这条日志最终会不会被输出，字符串都已经拼好了</strong> ✗</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-58-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-58-3"> 3</a></span>
@@ -15338,6 +15393,7 @@ INFO 被挡住了: True
 只打印<strong>计数与布尔判断</strong>，不打印带时间戳的原始行</p>
 </div>
 <p><strong>写中文时务必显式给 <code>encoding="utf-8"</code></strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-59-3"> 3</a></span>
@@ -15724,6 +15780,7 @@ INFO 被挡住了: True
 <p><strong>六种坏味道里，「重复代码」是最该优先处理的</strong> ——
 因为它的代价随修改次数线性增长：<strong>改一次漏一次</strong> ✗</p>
 <h3 id="101">10.1 重复代码<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
@@ -15799,6 +15856,7 @@ INFO 被挡住了: True
 判断标准是：「它们表达的是同一件事吗？」</p>
 <h3 id="102">10.2 嵌套过深<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
 <p><strong>嵌套超过三层，读代码的人就开始丢线索了。</strong> 最有效的解法是<strong>早返回</strong>：</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-62-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-62-3"> 3</a></span>
@@ -15920,6 +15978,7 @@ INFO 被挡住了: True
 </tbody>
 </table>
 <p>循环里用 <code>continue</code> 压平的对照：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-63-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-63-3"> 3</a></span>
@@ -15985,7 +16044,7 @@ INFO 被挡住了: True
 <a id="__codelineno-63-31" name="__codelineno-63-31"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;嵌套写法:&quot;</span><span class="p">,</span> <span class="n">parse_nested</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
 <a id="__codelineno-63-32" name="__codelineno-63-32"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;早 continue:&quot;</span><span class="p">,</span> <span class="n">parse_flat</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
 <a id="__codelineno-63-33" name="__codelineno-63-33"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;结果一致:&quot;</span><span class="p">,</span> <span class="n">parse_nested</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span> <span class="o">==</span> <span class="n">parse_flat</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>嵌套写法: [('A', 25.4), ('D', 101.5)]
 早 continue: [('A', 25.4), ('D', 101.5)]
 结果一致: True</code></pre>
@@ -15994,6 +16053,7 @@ INFO 被挡住了: True
 <h3 id="103">10.3 超长函数<a class="headerlink" href="#103" title="Permanent link">&para;</a></h3>
 <p><strong>一个函数超过一屏（约 40 行），或者需要好几句话才能描述它在做什么，
 就该拆了。</strong></p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-64-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-64-3"> 3</a></span>
@@ -16120,6 +16180,7 @@ D: 101.50
 </table>
 <h3 id="104">10.4 魔法数字<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
 <p>「魔法数字」指的是代码里突然冒出来、不知道哪来的数字。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-65-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-65-3"> 3</a></span>
@@ -16222,6 +16283,7 @@ D: 101.50
 <strong>业务约定 → 提成常量；数学定义 → 可以留在原地</strong></p>
 <h3 id="105">10.5 名字含糊与注释不符<a class="headerlink" href="#105" title="Permanent link">&para;</a></h3>
 <p>这两个放在一起讲，因为它们经常同时出现。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-66-3"> 3</a></span>
@@ -16333,6 +16395,7 @@ D: 101.50
 <h3 id="1">例题 1：把一段「只有自己能看懂」的代码改造成工程代码<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>下面这个函数能跑，但没人愿意维护。请从<strong>命名、常量、docstring、类型标注</strong>
 四个方面改造它，并说明每一处改动解决了什么问题。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-67-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-67-3"> 3</a></span>
@@ -16375,6 +16438,7 @@ D: 101.50
 </code></pre></div></td></tr></table></div>
 <p>这么说来：<code>l</code> 是「金额列表」，<code>r</code> 是「放大比例」，<code>t</code> 是「总额」。</p>
 <p><strong>第二步：改造后的版本</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-69-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-69-3"> 3</a></span>
@@ -16472,7 +16536,7 @@ D: 101.50
 <a id="__codelineno-69-47" name="__codelineno-69-47"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- docstring 真的写进去了 ---&quot;</span><span class="p">)</span>
 <a id="__codelineno-69-48" name="__codelineno-69-48"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;摘要行:&quot;</span><span class="p">,</span> <span class="n">total_after_discount</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
 <a id="__codelineno-69-49" name="__codelineno-69-49"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;含 Args:&quot;</span><span class="p">,</span> <span class="s2">&quot;Args:&quot;</span> <span class="ow">in</span> <span class="n">total_after_discount</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>旧函数结果: 1125.0
 新函数结果: 1125.0
 行为完全一致: True
@@ -16542,6 +16606,7 @@ D: 101.50
 </tbody>
 </table>
 <p>第四步：一个值得注意的细节</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-70-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-70-3"> 3</a></span>
@@ -16581,7 +16646,7 @@ D: 101.50
 <a id="__codelineno-70-18" name="__codelineno-70-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用的是 &gt; 而不是 &gt;=，所以刚好等于阈值时不打折&quot;</span><span class="p">)</span>
 <a id="__codelineno-70-19" name="__codelineno-70-19"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;isclose 检查边界值:&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span>
 <a id="__codelineno-70-20" name="__codelineno-70-20"></a>    <span class="n">total_after_discount</span><span class="p">([</span><span class="mf">1000.0</span><span class="p">],</span> <span class="mf">1.0</span><span class="p">),</span> <span class="mf">1000.0</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>刚好等于阈值 1000 时: 1000.0
 略超阈值 1000.2 时: 900.1800000000001
 --- 边界值得写进 docstring ---
@@ -16598,6 +16663,7 @@ isclose 检查边界值: True</code></pre>
 <h3 id="2">例题 2：为一个函数写测试<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>给定下面的换算函数，请写出覆盖<strong>四类情况</strong>的测试：
 正常值、边界值、浮点比较、异常输入。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1">1</a></span>
 <span class="normal"><a href="#__codelineno-71-2">2</a></span>
 <span class="normal"><a href="#__codelineno-71-3">3</a></span>
@@ -16627,6 +16693,7 @@ isclose 检查边界值: True</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p>第一步：先把四类测试写出来</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-72-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-72-3"> 3</a></span>
@@ -16726,13 +16793,14 @@ isclose 检查边界值: True</code></pre>
 <a id="__codelineno-72-48" name="__codelineno-72-48"></a>    <span class="nb">globals</span><span class="p">()[</span><span class="n">name</span><span class="p">]()</span>
 <a id="__codelineno-72-49" name="__codelineno-72-49"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;通过:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 <a id="__codelineno-72-50" name="__codelineno-72-50"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;共&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tests</span><span class="p">),</span> <span class="s2">&quot;个测试全部通过&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>通过: test_body_temperature
 通过: test_equal_scale_point
 通过: test_freezing_and_boiling
 通过: test_zero_division_raises
 共 4 个测试全部通过</code></pre>
 <p><strong>第二步：用 <code>pytest</code> 写同样的测试</strong>（更简洁）</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-73-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-73-3"> 3</a></span>
@@ -16822,7 +16890,7 @@ isclose 检查边界值: True</code></pre>
 <a id="__codelineno-73-43" name="__codelineno-73-43"></a>    <span class="nb">globals</span><span class="p">()[</span><span class="n">name</span><span class="p">]()</span>
 <a id="__codelineno-73-44" name="__codelineno-73-44"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;通过:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 <a id="__codelineno-73-45" name="__codelineno-73-45"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pytest 写法更短，且不需要手写 else: raise AssertionError&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>通过: test_body_temperature_approx
 通过: test_boiling
 通过: test_divide_shape
@@ -16867,6 +16935,7 @@ pytest 写法更短，且不需要手写 else: raise AssertionError</code></pre>
 </tbody>
 </table>
 <p>第四步：为什么必须写「边界」和「异常」两类</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-74-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-74-3"> 3</a></span>
@@ -16922,7 +16991,7 @@ pytest 写法更短，且不需要手写 else: raise AssertionError</code></pre>
 <a id="__codelineno-74-26" name="__codelineno-74-26"></a>      <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">wrong_formula</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="mf">87.55555555555556</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">))</span>
 <a id="__codelineno-74-27" name="__codelineno-74-27"></a><span class="n">test_wrong_formula_is_caught</span><span class="p">()</span>
 <a id="__codelineno-74-28" name="__codelineno-74-28"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;断言通过：测试确实抓住了这个错误&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>错误公式算出来的值: 87.55555555555556
 正确公式算出来的值: 212.0
 测试能发现差异: True
@@ -17028,6 +17097,7 @@ pytest 写法更短，且不需要手写 else: raise AssertionError</code></pre>
 <h3 id="3-print-logging">例题 3：把 <code>print</code> 换成 <code>logging</code><a class="headerlink" href="#3-print-logging" title="Permanent link">&para;</a></h3>
 <p>下面这个解析函数用 <code>print</code> 报告问题。请改造成用 <code>logging</code>，
 要求：<strong>问题写进日志文件、屏幕上不出现日志、日志里能区分「跳过」和「失败」</strong>。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-76-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-76-3"> 3</a></span>
@@ -17113,6 +17183,7 @@ pytest 写法更短，且不需要手写 else: raise AssertionError</code></pre>
 </tbody>
 </table>
 <p><strong>第二步：改造后的版本</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-77-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-77-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-77-3"> 3</a></span>
@@ -17202,7 +17273,7 @@ pytest 写法更短，且不需要手写 else: raise AssertionError</code></pre>
 <a id="__codelineno-77-43" name="__codelineno-77-43"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两类问题都记下来了:&quot;</span><span class="p">,</span>
 <a id="__codelineno-77-44" name="__codelineno-77-44"></a>          <span class="n">levels</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;WARNING&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">levels</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">&quot;ERROR&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-77-45" name="__codelineno-77-45"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;屏幕上一句日志都没有 —— 它们全都进了文件&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>解析结果: [('A', 25.4), ('D', 101.5)]
 日志行数: 2
 WARNING 条数: 1
@@ -17241,6 +17312,7 @@ ERROR 条数: 1
 </tbody>
 </table>
 <p><strong>第四步：为什么用 <code>%</code> 而不用 f-string</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-78-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-78-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-78-3"> 3</a></span>
@@ -17288,7 +17360,7 @@ ERROR 条数: 1
 <a id="__codelineno-78-22" name="__codelineno-78-22"></a>          <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;: &quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
 <a id="__codelineno-78-23" name="__codelineno-78-23"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;但占位符写法在级别不够时不会拼字符串&quot;</span><span class="p">)</span>
 <a id="__codelineno-78-24" name="__codelineno-78-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;调用 2 次，写出 2 行:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>两行内容等价: True
 但占位符写法在级别不够时不会拼字符串
 调用 2 次，写出 2 行: True</code></pre>
@@ -17359,6 +17431,7 @@ ERROR 条数: 1
 <p>请写一个函数 <code>audit(root)</code>，检查一个目录是否符合最小项目骨架，
 返回<strong>缺失的文件</strong>和<strong>缺失的目录</strong>；
 并在<strong>临时目录</strong>里造一个「故意缺两项」的骨架来验证它。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-79-1">1</a></span>
 <span class="normal"><a href="#__codelineno-79-2">2</a></span>
 <span class="normal"><a href="#__codelineno-79-3">3</a></span>
@@ -17426,6 +17499,7 @@ ERROR 条数: 1
 </tbody>
 </table>
 <p><strong>第二步：实现 <code>audit</code> 并验证</strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-80-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-80-3"> 3</a></span>
@@ -17503,7 +17577,7 @@ ERROR 条数: 1
 <a id="__codelineno-80-37" name="__codelineno-80-37"></a>          <span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">as_posix</span><span class="p">()</span>
 <a id="__codelineno-80-38" name="__codelineno-80-38"></a>                 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">root</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*.py&quot;</span><span class="p">)))</span>
 <a id="__codelineno-80-39" name="__codelineno-80-39"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;全部在临时目录里完成，项目目录没有任何新增文件&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>缺失文件: ['requirements.txt', '.gitignore']
 缺失目录: []
 一共要补 2 项
@@ -17512,6 +17586,7 @@ ERROR 条数: 1
 递归找到的 .py: ['src/main.py']
 全部在临时目录里完成，项目目录没有任何新增文件</code></pre>
 <p><strong>第三步：为什么必须区分 <code>is_file()</code> 和 <code>is_dir()</code></strong></p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-81-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-81-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-81-3"> 3</a></span>
@@ -17539,7 +17614,7 @@ ERROR 条数: 1
 <a id="__codelineno-81-12" name="__codelineno-81-12"></a>              <span class="sa">f</span><span class="s2">&quot; is_file= </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span><span class="si">!s:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> is_dir= </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-81-13" name="__codelineno-81-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 关键区别 ---&quot;</span><span class="p">)</span>
 <a id="__codelineno-81-14" name="__codelineno-81-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;目录的 is_file() 是 False：用错判据会把目录当成缺失&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>src        exists= True   is_file= False  is_dir= True
 README.md  exists= True   is_file= True   is_dir= False
 不存在的项      exists= False  is_file= False  is_dir= False
@@ -17713,6 +17788,7 @@ README.md  exists= True   is_file= True   is_dir= False
 <details class="success">
 <summary>解答</summary>
 <p><strong>先做一个机械的分类</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-84-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-84-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-84-3"> 3</a></span>
@@ -17746,7 +17822,7 @@ README.md  exists= True   is_file= True   is_dir= False
 <a id="__codelineno-84-15" name="__codelineno-84-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;18</span><span class="si">}{</span><span class="n">pattern_snake</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="si">!s:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-84-16" name="__codelineno-84-16"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pattern_camel</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="si">!s:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-84-17" name="__codelineno-84-17"></a>          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">pattern_upper</span><span class="o">.</span><span class="n">fullmatch</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="kc">None</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>名字                小写下划线       大驼峰       全大写
 total_price       True        False     False
 totalPrice        False       False     False
@@ -17860,6 +17936,7 @@ x1                True        False     False</code></pre>
 「名字有没有信息量」得靠你自己判断</strong></p>
 </blockquote>
 <p><strong>再看一个把所有规则用对的例子</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-85-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-85-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-85-3"> 3</a></span>
@@ -17907,7 +17984,7 @@ x1                True        False     False</code></pre>
 <a id="__codelineno-85-22" name="__codelineno-85-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;方法:&quot;</span><span class="p">,</span> <span class="n">board</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
 <a id="__codelineno-85-23" name="__codelineno-85-23"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;类名首字母大写:&quot;</span><span class="p">,</span> <span class="n">ScoreBoard</span><span class="o">.</span><span class="vm">__name__</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
 <a id="__codelineno-85-24" name="__codelineno-85-24"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;函数名全小写:&quot;</span><span class="p">,</span> <span class="n">average_score</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">islower</span><span class="p">())</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>常量: 8
 函数: 2.0
 方法: 86.33333333333333
@@ -17916,6 +17993,7 @@ x1                True        False     False</code></pre>
 </details>
 <hr />
 <p><strong>Q2</strong> 下面代码有什么问题？运行结果为什么会让人吃惊？</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-86-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-86-3"> 3</a></span>
@@ -17946,6 +18024,7 @@ x1                True        False     False</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong>运行结果</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-87-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-87-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-87-3"> 3</a></span>
@@ -17981,7 +18060,7 @@ x1                True        False     False</code></pre>
 <a id="__codelineno-87-16" name="__codelineno-87-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;functools.reduce:&quot;</span><span class="p">,</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
 <a id="__codelineno-87-17" name="__codelineno-87-17"></a>    <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span> <span class="k">else</span> <span class="n">b</span><span class="p">,</span> <span class="n">values</span><span class="p">))</span>
 <a id="__codelineno-87-18" name="__codelineno-87-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;正确做法：给它改个名字，别再叫 max&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>被遮住的 max 返回: 4
 它给的是第一个元素，不是最大值
 --- 想拿真正最大值，只能绕开内置名 ---
@@ -18040,6 +18119,7 @@ functools.reduce: 16
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-88-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-88-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-88-3"> 3</a></span>
@@ -18063,7 +18143,7 @@ functools.reduce: 16
 <a id="__codelineno-88-10" name="__codelineno-88-10"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;内置 max 还能正常用:&quot;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
 <a id="__codelineno-88-11" name="__codelineno-88-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;内置 min 也没被影响:&quot;</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
 <a id="__codelineno-88-12" name="__codelineno-88-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;两者结果当然不同:&quot;</span><span class="p">,</span> <span class="n">first_value</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">max</span><span class="p">(</span><span class="n">values</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>自己写的函数: 4
 内置 max 还能正常用: 16
 内置 min 也没被影响: 4
@@ -18121,6 +18201,7 @@ functools.reduce: 16
 </details>
 <hr />
 <p><strong>Q3</strong> 下面这段代码为什么输出 <code>False</code>？请给出三种让它「正确比较」的写法。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-89-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-89-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-89-3"> 3</a></span>
@@ -18154,6 +18235,7 @@ functools.reduce: 16
 <details class="success">
 <summary>解答</summary>
 <p><strong>先把真实值打印出来</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-90-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-90-3"> 3</a></span>
@@ -18187,7 +18269,7 @@ functools.reduce: 16
 <a id="__codelineno-90-15" name="__codelineno-90-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;直接比较      :&quot;</span><span class="p">,</span> <span class="n">got</span> <span class="o">==</span> <span class="n">want</span><span class="p">)</span>
 <a id="__codelineno-90-16" name="__codelineno-90-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;math.isclose  :&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">got</span><span class="p">,</span> <span class="n">want</span><span class="p">))</span>
 <a id="__codelineno-90-17" name="__codelineno-90-17"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;带绝对容差    :&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">got</span><span class="p">,</span> <span class="n">want</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>结果          : 0.034999999999999996
 期望          : 0.035
 差值          : -6.938893903907228e-18
@@ -18225,6 +18307,7 @@ math.isclose  : True
 <strong>差 <code>6.9e-18</code> 和差 <code>0.005</code> 在 <code>==</code> 眼里是一样的 —— 都是「不相等」</strong> ✗
 所以浮点比较<strong>必须</strong>表达「差的允许范围」 ✓</p>
 <p><strong>三种正确写法</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-91-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-91-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-91-3"> 3</a></span>
@@ -18264,7 +18347,7 @@ math.isclose  : True
 <a id="__codelineno-91-18" name="__codelineno-91-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;写法三 round 后比较 :&quot;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">got</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span> <span class="o">==</span> <span class="nb">round</span><span class="p">(</span><span class="n">want</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <a id="__codelineno-91-19" name="__codelineno-91-19"></a>
 <a id="__codelineno-91-20" name="__codelineno-91-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;在 pytest 里就是 pytest.approx:&quot;</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">got</span><span class="p">,</span> <span class="n">want</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>写法一 math.isclose : True
 写法二 abs 差值容差 : True
 写法三 round 后比较 : True
@@ -18319,6 +18402,7 @@ math.isclose  : True
 </tr>
 </tbody>
 </table>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-92-1">1</a></span>
 <span class="normal"><a href="#__codelineno-92-2">2</a></span>
 <span class="normal"><a href="#__codelineno-92-3">3</a></span>
@@ -18336,7 +18420,7 @@ math.isclose  : True
 <a id="__codelineno-92-7" name="__codelineno-92-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- 大数时相对判据刚好合适 ---&quot;</span><span class="p">)</span>
 <a id="__codelineno-92-8" name="__codelineno-92-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;isclose(1000.0 * 0.1, 100.0)     :&quot;</span><span class="p">,</span>
 <a id="__codelineno-92-9" name="__codelineno-92-9"></a>      <span class="n">math</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="mf">1000.0</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">))</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>--- 接近 0 时相对判据失灵 ---
 isclose(1e-12, 0.0)              : False
 isclose(1e-12, 0.0, abs_tol=1e-9): True
@@ -18377,6 +18461,7 @@ isclose(1000.0 * 0.1, 100.0)     : True</code></pre>
 <hr />
 <p><strong>Q4</strong> 下面这段代码想检查项目骨架是否齐全，但它有一个判据错误。
 请指出问题，并写出修正后的版本。</p>
+<!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-93-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-93-3"> 3</a></span>
@@ -18413,6 +18498,7 @@ isclose(1000.0 * 0.1, 100.0)     : True</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong>先跑一遍，看它报了什么</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-94-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-94-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-94-3"> 3</a></span>
@@ -18444,7 +18530,7 @@ isclose(1000.0 * 0.1, 100.0)     : True</code></pre>
 <a id="__codelineno-94-14" name="__codelineno-94-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺少的条目:&quot;</span><span class="p">,</span> <span class="n">missing</span><span class="p">)</span>
 <a id="__codelineno-94-15" name="__codelineno-94-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺几项:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing</span><span class="p">))</span>
 <a id="__codelineno-94-16" name="__codelineno-94-16"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;骨架完整吗:&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">missing</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>缺少的条目: ['requirements.txt', '.gitignore', 'src', 'tests']
 缺几项: 4
 骨架完整吗: False</code></pre>
@@ -18495,6 +18581,7 @@ isclose(1000.0 * 0.1, 100.0)     : True</code></pre>
 <p><strong><code>is_file()</code> 对目录一律返回 <code>False</code></strong> ——
 所以「存在的目录」被误判成「不存在」，这是<strong>典型的判据混用</strong></p>
 <p><strong>验证这个事实</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-95-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-95-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-95-3"> 3</a></span>
@@ -18520,13 +18607,14 @@ isclose(1000.0 * 0.1, 100.0)     : True</code></pre>
 <a id="__codelineno-95-11" name="__codelineno-95-11"></a>        <span class="n">item</span> <span class="o">=</span> <span class="n">root</span> <span class="o">/</span> <span class="n">name</span>
 <a id="__codelineno-95-12" name="__codelineno-95-12"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}{</span><span class="n">item</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">!s:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2">&quot;</span>
 <a id="__codelineno-95-13" name="__codelineno-95-13"></a>              <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span><span class="si">!s:</span><span class="s2">&lt;10</span><span class="si">}{</span><span class="n">item</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>名字          exists    is_file   is_dir
 src         True      False     True
 README.md   True      True      False
 不存在的项       False     False     False</code></pre>
 <p><strong>看 <code>src</code> 那一行</strong>：<code>exists</code> 是 <code>True</code>，但 <code>is_file</code> 是 <strong><code>False</code></strong></p>
 <p><strong>修正后的版本</strong>：</p>
+<p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-96-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-96-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-96-3"> 3</a></span>
@@ -18576,7 +18664,7 @@ README.md   True      True      False
 <a id="__codelineno-96-23" name="__codelineno-96-23"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺少的条目:&quot;</span><span class="p">,</span> <span class="n">missing_files</span> <span class="o">+</span> <span class="n">missing_dirs</span><span class="p">)</span>
 <a id="__codelineno-96-24" name="__codelineno-96-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;缺几项:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_files</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_dirs</span><span class="p">))</span>
 <a id="__codelineno-96-25" name="__codelineno-96-25"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;骨架完整吗:&quot;</span><span class="p">,</span> <span class="ow">not</span> <span class="n">missing_files</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">missing_dirs</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
+</code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>缺少的条目: ['requirements.txt', '.gitignore']
 缺几项: 2
 骨架完整吗: False</code></pre>
