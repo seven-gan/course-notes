@@ -6,17 +6,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="优化问题与凸性：整门机器学习的训练过程，都可以写成一句话：找一个让损失最小的参数。这句话的数学形式就是优化问题：这一页讲清楚问题的分类与凸性——后者决定了「局部最优是否等于全局最优」，这是优化理论中最关键的分水岭。">
+    <meta name="description" content="机器人构型：第一章回答了「机器人是什么」，这一页回答「机器人长成什么样」。同一件工作，可以做成一串关节连成的手臂、几条支链拉住的平台、靠轮子在地上滚的车，甚至一台能边动边改自己结构的机构。这七个小节看起来是七种东西，其实回答的是同一个问题：这个机构的构件怎么连、能独立动几个方向。">
   
   
   
-    <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/math/optimization/convexity/">
+    <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/courses/robotics/robot-configuration/">
   
   
-    <link rel="prev" href="../">
+    <link rel="prev" href="../intro/">
   
   
-    <link rel="next" href="../gradient-descent/">
+    <link rel="next" href="../pose-transform/">
   
   
     
@@ -28,7 +28,7 @@
 
     
       
-        <title>优化问题与凸性 - 我的学习知识库</title>
+        <title>机器人构型 - 我的学习知识库</title>
       
     
     
@@ -60,21 +60,21 @@
     <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:site_name" content="我的学习知识库">
-  <meta property="og:title" content="优化问题与凸性">
+  <meta property="og:title" content="机器人构型">
   
-  <meta property="og:description" content="优化问题与凸性：整门机器学习的训练过程，都可以写成一句话：找一个让损失最小的参数。这句话的数学形式就是优化问题：这一页讲清楚问题的分类与凸性——后者决定了「局部最优是否等于全局最优」，这是优化理论中最关键的分水岭。">
+  <meta property="og:description" content="机器人构型：第一章回答了「机器人是什么」，这一页回答「机器人长成什么样」。同一件工作，可以做成一串关节连成的手臂、几条支链拉住的平台、靠轮子在地上滚的车，甚至一台能边动边改自己结构的机构。这七个小节看起来是七种东西，其实回答的是同一个问题：这个机构的构件怎么连、能独立动几个方向。">
   
   
-  <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/optimization/convexity/">
+  <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/robot-configuration/">
   
   <meta property="og:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="我的学习知识库 - 课程大纲 · 数学基础 · 专业课讲义">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="优化问题与凸性">
+  <meta name="twitter:title" content="机器人构型">
   
-  <meta name="twitter:description" content="优化问题与凸性：整门机器学习的训练过程，都可以写成一句话：找一个让损失最小的参数。这句话的数学形式就是优化问题：这一页讲清楚问题的分类与凸性——后者决定了「局部最优是否等于全局最优」，这是优化理论中最关键的分水岭。">
+  <meta name="twitter:description" content="机器人构型：第一章回答了「机器人是什么」，这一页回答「机器人长成什么样」。同一件工作，可以做成一串关节连成的手臂、几条支链拉住的平台、靠轮子在地上滚的车，甚至一台能边动边改自己结构的机构。这七个小节看起来是七种东西，其实回答的是同一个问题：这个机构的构件怎么连、能独立动几个方向。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -133,7 +133,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              优化问题与凸性
+              机器人构型
             
           </span>
         </div>
@@ -250,13 +250,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../math/" class="md-tabs__link">
           
   
   
@@ -296,11 +294,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../courses/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
   
@@ -384,8 +384,6 @@
       
   
   
-    
-  
   
   
     
@@ -423,23 +421,20 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../" class="md-nav__link ">
+            <a href="../../../math/" class="md-nav__link ">
               
   
   
@@ -457,13 +452,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -513,13 +508,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -527,7 +519,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../linear-algebra/" class="md-nav__link ">
+            <a href="../../../math/linear-algebra/" class="md-nav__link ">
               
   
   
@@ -545,7 +537,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -571,7 +563,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/vector-space/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/vector-space/" class="md-nav__link">
         
   
   
@@ -599,7 +591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/basis-dimension/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/basis-dimension/" class="md-nav__link">
         
   
   
@@ -627,7 +619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/linear-map/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/linear-map/" class="md-nav__link">
         
   
   
@@ -655,7 +647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/determinant/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/determinant/" class="md-nav__link">
         
   
   
@@ -683,7 +675,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/inner-product/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/inner-product/" class="md-nav__link">
         
   
   
@@ -711,7 +703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/orthogonality/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/orthogonality/" class="md-nav__link">
         
   
   
@@ -739,7 +731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/eigenvalue/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/eigenvalue/" class="md-nav__link">
         
   
   
@@ -767,7 +759,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/matrix-decomposition/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/matrix-decomposition/" class="md-nav__link">
         
   
   
@@ -795,7 +787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../linear-algebra/svd/" class="md-nav__link">
+      <a href="../../../math/linear-algebra/svd/" class="md-nav__link">
         
   
   
@@ -857,13 +849,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -871,7 +860,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../calculus/" class="md-nav__link ">
+            <a href="../../../math/calculus/" class="md-nav__link ">
               
   
   
@@ -889,7 +878,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -915,7 +904,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/derivative/" class="md-nav__link">
+      <a href="../../../math/calculus/derivative/" class="md-nav__link">
         
   
   
@@ -943,7 +932,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/chain-rule/" class="md-nav__link">
+      <a href="../../../math/calculus/chain-rule/" class="md-nav__link">
         
   
   
@@ -971,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/taylor/" class="md-nav__link">
+      <a href="../../../math/calculus/taylor/" class="md-nav__link">
         
   
   
@@ -999,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/integral/" class="md-nav__link">
+      <a href="../../../math/calculus/integral/" class="md-nav__link">
         
   
   
@@ -1027,7 +1016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/matrix-calculus/" class="md-nav__link">
+      <a href="../../../math/calculus/matrix-calculus/" class="md-nav__link">
         
   
   
@@ -1055,7 +1044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/jacobian/" class="md-nav__link">
+      <a href="../../../math/calculus/jacobian/" class="md-nav__link">
         
   
   
@@ -1083,7 +1072,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../calculus/logistic-softmax/" class="md-nav__link">
+      <a href="../../../math/calculus/logistic-softmax/" class="md-nav__link">
         
   
   
@@ -1116,8 +1105,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1145,21 +1132,18 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../../math/optimization/" class="md-nav__link ">
               
   
   
@@ -1177,13 +1161,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1200,37 +1184,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    优化问题与凸性
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../math/optimization/convexity/" class="md-nav__link">
         
   
   
@@ -1246,237 +1203,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一、问题的分类
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="一、问题的分类">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#11" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.1 按变量类型
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.2 按约束
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1.3 按函数性质
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        二、全局最优与局部最优
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="二、全局最优与局部最优">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2.1 驻点、极值点、鞍点
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        三、凸集与凸函数
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="三、凸集与凸函数">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.1 凸集
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.2 凸函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 保持凸性的运算
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        四、常见凸/非凸函数一览
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        五、典型例题
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="五、典型例题">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 1：判断凸性
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 2：凸集判定
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 3：验证凸性的一阶条件
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 4：判断问题是否为凸优化
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        六、自测
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1489,7 +1215,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../gradient-descent/" class="md-nav__link">
+      <a href="../../../math/optimization/gradient-descent/" class="md-nav__link">
         
   
   
@@ -1517,7 +1243,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../newton/" class="md-nav__link">
+      <a href="../../../math/optimization/newton/" class="md-nav__link">
         
   
   
@@ -1545,7 +1271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lagrange/" class="md-nav__link">
+      <a href="../../../math/optimization/lagrange/" class="md-nav__link">
         
   
   
@@ -1573,7 +1299,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../duality/" class="md-nav__link">
+      <a href="../../../math/optimization/duality/" class="md-nav__link">
         
   
   
@@ -1601,7 +1327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../kkt/" class="md-nav__link">
+      <a href="../../../math/optimization/kkt/" class="md-nav__link">
         
   
   
@@ -1663,13 +1389,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -1677,7 +1400,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../probability/" class="md-nav__link ">
+            <a href="../../../math/probability/" class="md-nav__link ">
               
   
   
@@ -1695,7 +1418,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -1721,7 +1444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/sample-space/" class="md-nav__link">
+      <a href="../../../math/probability/sample-space/" class="md-nav__link">
         
   
   
@@ -1749,7 +1472,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/random-variable/" class="md-nav__link">
+      <a href="../../../math/probability/random-variable/" class="md-nav__link">
         
   
   
@@ -1777,7 +1500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/bayes/" class="md-nav__link">
+      <a href="../../../math/probability/bayes/" class="md-nav__link">
         
   
   
@@ -1805,7 +1528,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/expectation/" class="md-nav__link">
+      <a href="../../../math/probability/expectation/" class="md-nav__link">
         
   
   
@@ -1833,7 +1556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/gaussian/" class="md-nav__link">
+      <a href="../../../math/probability/gaussian/" class="md-nav__link">
         
   
   
@@ -1861,7 +1584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/mle/" class="md-nav__link">
+      <a href="../../../math/probability/mle/" class="md-nav__link">
         
   
   
@@ -1889,7 +1612,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../probability/random-process/" class="md-nav__link">
+      <a href="../../../math/probability/random-process/" class="md-nav__link">
         
   
   
@@ -1949,13 +1672,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -1963,7 +1683,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../statistics/" class="md-nav__link ">
+            <a href="../../../math/statistics/" class="md-nav__link ">
               
   
   
@@ -1981,7 +1701,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2007,7 +1727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/point-estimation/" class="md-nav__link">
+      <a href="../../../math/statistics/point-estimation/" class="md-nav__link">
         
   
   
@@ -2035,7 +1755,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/interval-estimation/" class="md-nav__link">
+      <a href="../../../math/statistics/interval-estimation/" class="md-nav__link">
         
   
   
@@ -2063,7 +1783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/regression/" class="md-nav__link">
+      <a href="../../../math/statistics/regression/" class="md-nav__link">
         
   
   
@@ -2091,7 +1811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/em-algorithm/" class="md-nav__link">
+      <a href="../../../math/statistics/em-algorithm/" class="md-nav__link">
         
   
   
@@ -2119,7 +1839,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/variational-bound/" class="md-nav__link">
+      <a href="../../../math/statistics/variational-bound/" class="md-nav__link">
         
   
   
@@ -2147,7 +1867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../statistics/model-selection/" class="md-nav__link">
+      <a href="../../../math/statistics/model-selection/" class="md-nav__link">
         
   
   
@@ -2205,13 +1925,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -2219,7 +1936,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../ode/" class="md-nav__link ">
+            <a href="../../../math/ode/" class="md-nav__link ">
               
   
   
@@ -2237,7 +1954,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2263,7 +1980,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/first-order/" class="md-nav__link">
+      <a href="../../../math/ode/first-order/" class="md-nav__link">
         
   
   
@@ -2291,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/second-order/" class="md-nav__link">
+      <a href="../../../math/ode/second-order/" class="md-nav__link">
         
   
   
@@ -2319,7 +2036,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/linear-systems/" class="md-nav__link">
+      <a href="../../../math/ode/linear-systems/" class="md-nav__link">
         
   
   
@@ -2347,7 +2064,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/stability/" class="md-nav__link">
+      <a href="../../../math/ode/stability/" class="md-nav__link">
         
   
   
@@ -2375,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ode/numerical/" class="md-nav__link">
+      <a href="../../../math/ode/numerical/" class="md-nav__link">
         
   
   
@@ -2433,13 +2150,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -2447,7 +2161,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../mdp/" class="md-nav__link ">
+            <a href="../../../math/mdp/" class="md-nav__link ">
               
   
   
@@ -2465,7 +2179,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2491,7 +2205,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mdp/markov-chain/" class="md-nav__link">
+      <a href="../../../math/mdp/markov-chain/" class="md-nav__link">
         
   
   
@@ -2519,7 +2233,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mdp/mdp-basics/" class="md-nav__link">
+      <a href="../../../math/mdp/mdp-basics/" class="md-nav__link">
         
   
   
@@ -2547,7 +2261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mdp/dynamic-programming/" class="md-nav__link">
+      <a href="../../../math/mdp/dynamic-programming/" class="md-nav__link">
         
   
   
@@ -2575,7 +2289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mdp/td-learning/" class="md-nav__link">
+      <a href="../../../math/mdp/td-learning/" class="md-nav__link">
         
   
   
@@ -2603,7 +2317,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mdp/policy-gradient/" class="md-nav__link">
+      <a href="../../../math/mdp/policy-gradient/" class="md-nav__link">
         
   
   
@@ -2657,13 +2371,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -2671,7 +2382,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../graph-theory/" class="md-nav__link ">
+            <a href="../../../math/graph-theory/" class="md-nav__link ">
               
   
   
@@ -2689,7 +2400,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2715,7 +2426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../graph-theory/graph-basics/" class="md-nav__link">
+      <a href="../../../math/graph-theory/graph-basics/" class="md-nav__link">
         
   
   
@@ -2743,7 +2454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../graph-theory/matrix-representation/" class="md-nav__link">
+      <a href="../../../math/graph-theory/matrix-representation/" class="md-nav__link">
         
   
   
@@ -2771,7 +2482,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../graph-theory/graph-search/" class="md-nav__link">
+      <a href="../../../math/graph-theory/graph-search/" class="md-nav__link">
         
   
   
@@ -2825,13 +2536,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -2839,7 +2547,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../numerical/" class="md-nav__link ">
+            <a href="../../../math/numerical/" class="md-nav__link ">
               
   
   
@@ -2857,7 +2565,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -2883,7 +2591,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../numerical/floating-point/" class="md-nav__link">
+      <a href="../../../math/numerical/floating-point/" class="md-nav__link">
         
   
   
@@ -2911,7 +2619,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../numerical/linear-solve/" class="md-nav__link">
+      <a href="../../../math/numerical/linear-solve/" class="md-nav__link">
         
   
   
@@ -2939,7 +2647,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../numerical/numerical-diff-integration/" class="md-nav__link">
+      <a href="../../../math/numerical/numerical-diff-integration/" class="md-nav__link">
         
   
   
@@ -2989,13 +2697,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -3003,7 +2708,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../lagrangian-mechanics/" class="md-nav__link ">
+            <a href="../../../math/lagrangian-mechanics/" class="md-nav__link ">
               
   
   
@@ -3021,7 +2726,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_11" id="__nav_2_11_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -3047,7 +2752,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
+      <a href="../../../math/lagrangian-mechanics/generalized-coordinates/" class="md-nav__link">
         
   
   
@@ -3107,13 +2812,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -3121,7 +2823,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../information-theory/" class="md-nav__link ">
+            <a href="../../../math/information-theory/" class="md-nav__link ">
               
   
   
@@ -3139,7 +2841,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -3165,7 +2867,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/entropy/" class="md-nav__link">
+      <a href="../../../math/information-theory/entropy/" class="md-nav__link">
         
   
   
@@ -3193,7 +2895,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/joint-entropy/" class="md-nav__link">
+      <a href="../../../math/information-theory/joint-entropy/" class="md-nav__link">
         
   
   
@@ -3221,7 +2923,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/mutual-information/" class="md-nav__link">
+      <a href="../../../math/information-theory/mutual-information/" class="md-nav__link">
         
   
   
@@ -3249,7 +2951,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/cross-entropy/" class="md-nav__link">
+      <a href="../../../math/information-theory/cross-entropy/" class="md-nav__link">
         
   
   
@@ -3277,7 +2979,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/js-divergence/" class="md-nav__link">
+      <a href="../../../math/information-theory/js-divergence/" class="md-nav__link">
         
   
   
@@ -3305,7 +3007,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../information-theory/wasserstein/" class="md-nav__link">
+      <a href="../../../math/information-theory/wasserstein/" class="md-nav__link">
         
   
   
@@ -3371,13 +3073,10 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
@@ -3385,7 +3084,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../signal-systems/" class="md-nav__link ">
+            <a href="../../../math/signal-systems/" class="md-nav__link ">
               
   
   
@@ -3403,7 +3102,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -3429,7 +3128,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/basics/" class="md-nav__link">
+      <a href="../../../math/signal-systems/basics/" class="md-nav__link">
         
   
   
@@ -3457,7 +3156,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/convolution/" class="md-nav__link">
+      <a href="../../../math/signal-systems/convolution/" class="md-nav__link">
         
   
   
@@ -3485,7 +3184,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/fourier/" class="md-nav__link">
+      <a href="../../../math/signal-systems/fourier/" class="md-nav__link">
         
   
   
@@ -3513,7 +3212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/dft/" class="md-nav__link">
+      <a href="../../../math/signal-systems/dft/" class="md-nav__link">
         
   
   
@@ -3541,7 +3240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/sampling/" class="md-nav__link">
+      <a href="../../../math/signal-systems/sampling/" class="md-nav__link">
         
   
   
@@ -3569,7 +3268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/quantization/" class="md-nav__link">
+      <a href="../../../math/signal-systems/quantization/" class="md-nav__link">
         
   
   
@@ -3597,7 +3296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/laplace/" class="md-nav__link">
+      <a href="../../../math/signal-systems/laplace/" class="md-nav__link">
         
   
   
@@ -3625,7 +3324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/ztransform/" class="md-nav__link">
+      <a href="../../../math/signal-systems/ztransform/" class="md-nav__link">
         
   
   
@@ -3653,7 +3352,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../signal-systems/random-signals/" class="md-nav__link">
+      <a href="../../../math/signal-systems/random-signals/" class="md-nav__link">
         
   
   
@@ -5000,6 +4699,8 @@
       
   
   
+    
+  
   
   
     
@@ -5027,20 +4728,23 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   
@@ -5058,13 +4762,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -5118,10 +4822,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -5129,7 +4836,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/pattern-recognition/" class="md-nav__link ">
+            <a href="../../pattern-recognition/" class="md-nav__link ">
               
   
   
@@ -5147,7 +4854,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_2" id="__nav_4_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -5235,7 +4942,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/intro-concepts/" class="md-nav__link">
+      <a href="../../pattern-recognition/intro-concepts/" class="md-nav__link">
         
   
   
@@ -5263,7 +4970,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/intro-pipeline/" class="md-nav__link">
+      <a href="../../pattern-recognition/intro-pipeline/" class="md-nav__link">
         
   
   
@@ -5291,7 +4998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/intro-applications/" class="md-nav__link">
+      <a href="../../pattern-recognition/intro-applications/" class="md-nav__link">
         
   
   
@@ -5319,7 +5026,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/intro-taxonomy/" class="md-nav__link">
+      <a href="../../pattern-recognition/intro-taxonomy/" class="md-nav__link">
         
   
   
@@ -5425,7 +5132,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayes-basic/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayes-basic/" class="md-nav__link">
         
   
   
@@ -5453,7 +5160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayes-min-error/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayes-min-error/" class="md-nav__link">
         
   
   
@@ -5481,7 +5188,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayes-min-risk/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayes-min-risk/" class="md-nav__link">
         
   
   
@@ -5509,7 +5216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayes-reject/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayes-reject/" class="md-nav__link">
         
   
   
@@ -5537,7 +5244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/discriminant/" class="md-nav__link">
+      <a href="../../pattern-recognition/discriminant/" class="md-nav__link">
         
   
   
@@ -5565,7 +5272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/gaussian-discriminant/" class="md-nav__link">
+      <a href="../../pattern-recognition/gaussian-discriminant/" class="md-nav__link">
         
   
   
@@ -5593,7 +5300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/error-rate/" class="md-nav__link">
+      <a href="../../pattern-recognition/error-rate/" class="md-nav__link">
         
   
   
@@ -5621,7 +5328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/discrete-and-compound/" class="md-nav__link">
+      <a href="../../pattern-recognition/discrete-and-compound/" class="md-nav__link">
         
   
   
@@ -5721,7 +5428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/density-estimation/" class="md-nav__link">
+      <a href="../../pattern-recognition/density-estimation/" class="md-nav__link">
         
   
   
@@ -5749,7 +5456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayesian-estimation/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayesian-estimation/" class="md-nav__link">
         
   
   
@@ -5777,7 +5484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/nonparametric/" class="md-nav__link">
+      <a href="../../pattern-recognition/nonparametric/" class="md-nav__link">
         
   
   
@@ -5805,7 +5512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/em-hmm/" class="md-nav__link">
+      <a href="../../pattern-recognition/em-hmm/" class="md-nav__link">
         
   
   
@@ -5833,7 +5540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/bayesian-network/" class="md-nav__link">
+      <a href="../../pattern-recognition/bayesian-network/" class="md-nav__link">
         
   
   
@@ -5925,7 +5632,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/nonparametric/" class="md-nav__link">
+      <a href="../../pattern-recognition/nonparametric/" class="md-nav__link">
         
   
   
@@ -6017,7 +5724,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/linear-classifier/" class="md-nav__link">
+      <a href="../../pattern-recognition/linear-classifier/" class="md-nav__link">
         
   
   
@@ -6109,7 +5816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/nonlinear-classifier/" class="md-nav__link">
+      <a href="../../pattern-recognition/nonlinear-classifier/" class="md-nav__link">
         
   
   
@@ -6203,7 +5910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/feature-extraction/" class="md-nav__link">
+      <a href="../../pattern-recognition/feature-extraction/" class="md-nav__link">
         
   
   
@@ -6231,7 +5938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/feature-selection/" class="md-nav__link">
+      <a href="../../pattern-recognition/feature-selection/" class="md-nav__link">
         
   
   
@@ -6325,7 +6032,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/model-evaluation/" class="md-nav__link">
+      <a href="../../pattern-recognition/model-evaluation/" class="md-nav__link">
         
   
   
@@ -6353,7 +6060,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/decision-tree/" class="md-nav__link">
+      <a href="../../pattern-recognition/decision-tree/" class="md-nav__link">
         
   
   
@@ -6445,7 +6152,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/clustering/" class="md-nav__link">
+      <a href="../../pattern-recognition/clustering/" class="md-nav__link">
         
   
   
@@ -6537,7 +6244,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/svm-kernel/" class="md-nav__link">
+      <a href="../../pattern-recognition/svm-kernel/" class="md-nav__link">
         
   
   
@@ -6629,7 +6336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/pattern-recognition/decision-tree/" class="md-nav__link">
+      <a href="../../pattern-recognition/decision-tree/" class="md-nav__link">
         
   
   
@@ -6670,6 +6377,8 @@
                 
   
   
+    
+  
   
   
     
@@ -6721,18 +6430,21 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/robotics/" class="md-nav__link ">
+            <a href="../" class="md-nav__link ">
               
   
   
@@ -6750,13 +6462,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_3" id="__nav_4_3_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6832,7 +6544,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/intro/" class="md-nav__link">
+      <a href="../intro/" class="md-nav__link">
         
   
   
@@ -6865,8 +6577,10 @@
                 
   
   
+    
   
   
+  
     
     
       
@@ -6881,11 +6595,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3_3" checked>
         
           
           <label class="md-nav__link" for="__nav_4_3_3" id="__nav_4_3_3_label" tabindex="0">
@@ -6906,7 +6620,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_4_3_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_3_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -6921,10 +6635,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../courses/robotics/robot-configuration/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    机器人构型
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -6940,6 +6681,398 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一、构型与自由度
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一、构型与自由度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 构型由三样东西决定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 自由度是构型的第一指标
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 五种构型手算对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二、串联机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="二、串联机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 一串关节连到底
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 位形空间是环面，可达区域是圆环
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三、并联机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="三、并联机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 多条支链拉住一个平台
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 为什么并联精度高：误差被平均掉了
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        四、轮式机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="四、轮式机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 轮式机构的不同在「约束」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 位形 3 维，输入只有 2 个
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 三种走法的手算对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        五、复合机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="五、复合机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 把几种构型叠起来用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 一台移动机械臂的自由度账
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        六、仿生机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、仿生机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 仿生机构想抄的是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 与「仿生机器人」页的分工
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、变胞机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、变胞机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 让机构自己换拓扑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 变胞的两个用途
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 三个构态的手算对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：算并联平台的自由度，别忘局部自由度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：杆长与死角
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：差速小车的圆弧
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：变胞机构的构态切换
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小结
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -7016,7 +7149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/pose-transform/" class="md-nav__link">
+      <a href="../pose-transform/" class="md-nav__link">
         
   
   
@@ -7108,7 +7241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/forward-kinematics/" class="md-nav__link">
+      <a href="../forward-kinematics/" class="md-nav__link">
         
   
   
@@ -7200,7 +7333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/inverse-kinematics/" class="md-nav__link">
+      <a href="../inverse-kinematics/" class="md-nav__link">
         
   
   
@@ -7292,7 +7425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/differential-kinematics/" class="md-nav__link">
+      <a href="../differential-kinematics/" class="md-nav__link">
         
   
   
@@ -7384,7 +7517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/motion-planning/" class="md-nav__link">
+      <a href="../motion-planning/" class="md-nav__link">
         
   
   
@@ -7476,7 +7609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/dynamics/" class="md-nav__link">
+      <a href="../dynamics/" class="md-nav__link">
         
   
   
@@ -7568,7 +7701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/sensing/" class="md-nav__link">
+      <a href="../sensing/" class="md-nav__link">
         
   
   
@@ -7660,7 +7793,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/position-control/" class="md-nav__link">
+      <a href="../position-control/" class="md-nav__link">
         
   
   
@@ -7752,7 +7885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/force-control/" class="md-nav__link">
+      <a href="../force-control/" class="md-nav__link">
         
   
   
@@ -7844,7 +7977,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/control-methods/" class="md-nav__link">
+      <a href="../control-methods/" class="md-nav__link">
         
   
   
@@ -7936,7 +8069,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/visual-measurement/" class="md-nav__link">
+      <a href="../visual-measurement/" class="md-nav__link">
         
   
   
@@ -8028,7 +8161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/visual-control/" class="md-nav__link">
+      <a href="../visual-control/" class="md-nav__link">
         
   
   
@@ -8120,7 +8253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/simultaneous-localization-mapping/" class="md-nav__link">
+      <a href="../simultaneous-localization-mapping/" class="md-nav__link">
         
   
   
@@ -8212,7 +8345,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/multi-robot-coordination/" class="md-nav__link">
+      <a href="../multi-robot-coordination/" class="md-nav__link">
         
   
   
@@ -8304,7 +8437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/underwater-robot/" class="md-nav__link">
+      <a href="../underwater-robot/" class="md-nav__link">
         
   
   
@@ -8396,7 +8529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/robotics/bionic-robot/" class="md-nav__link">
+      <a href="../bionic-robot/" class="md-nav__link">
         
   
   
@@ -8474,10 +8607,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -8485,7 +8621,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/ocean-acoustics/" class="md-nav__link ">
+            <a href="../../ocean-acoustics/" class="md-nav__link ">
               
   
   
@@ -8503,7 +8639,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_4" id="__nav_4_4_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -8585,7 +8721,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/introduction/" class="md-nav__link">
+      <a href="../../ocean-acoustics/introduction/" class="md-nav__link">
         
   
   
@@ -8677,7 +8813,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/sonar-equation/" class="md-nav__link">
+      <a href="../../ocean-acoustics/sonar-equation/" class="md-nav__link">
         
   
   
@@ -8769,7 +8905,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/sound-speed/" class="md-nav__link">
+      <a href="../../ocean-acoustics/sound-speed/" class="md-nav__link">
         
   
   
@@ -8861,7 +8997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/propagation-basics/" class="md-nav__link">
+      <a href="../../ocean-acoustics/propagation-basics/" class="md-nav__link">
         
   
   
@@ -8955,7 +9091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/deep-channel/" class="md-nav__link">
+      <a href="../../ocean-acoustics/deep-channel/" class="md-nav__link">
         
   
   
@@ -8983,7 +9119,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/shallow-water/" class="md-nav__link">
+      <a href="../../ocean-acoustics/shallow-water/" class="md-nav__link">
         
   
   
@@ -9077,7 +9213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/target-strength/" class="md-nav__link">
+      <a href="../../ocean-acoustics/target-strength/" class="md-nav__link">
         
   
   
@@ -9105,7 +9241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/scattering-theory/" class="md-nav__link">
+      <a href="../../ocean-acoustics/scattering-theory/" class="md-nav__link">
         
   
   
@@ -9197,7 +9333,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/reverberation/" class="md-nav__link">
+      <a href="../../ocean-acoustics/reverberation/" class="md-nav__link">
         
   
   
@@ -9289,7 +9425,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/ambient-noise/" class="md-nav__link">
+      <a href="../../ocean-acoustics/ambient-noise/" class="md-nav__link">
         
   
   
@@ -9381,7 +9517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/fluctuation/" class="md-nav__link">
+      <a href="../../ocean-acoustics/fluctuation/" class="md-nav__link">
         
   
   
@@ -9473,7 +9609,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/sonar-applications/" class="md-nav__link">
+      <a href="../../ocean-acoustics/sonar-applications/" class="md-nav__link">
         
   
   
@@ -9567,7 +9703,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/computational-ocean-acoustics/" class="md-nav__link">
+      <a href="../../ocean-acoustics/computational-ocean-acoustics/" class="md-nav__link">
         
   
   
@@ -9595,7 +9731,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/ocean-acoustics/underwater-observation/" class="md-nav__link">
+      <a href="../../ocean-acoustics/underwater-observation/" class="md-nav__link">
         
   
   
@@ -9655,10 +9791,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -9666,7 +9805,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/mechanisms/" class="md-nav__link ">
+            <a href="../../mechanisms/" class="md-nav__link ">
               
   
   
@@ -9684,7 +9823,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_5" id="__nav_4_5_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -9778,7 +9917,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/history/" class="md-nav__link">
+      <a href="../../mechanisms/history/" class="md-nav__link">
         
   
   
@@ -9806,7 +9945,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/elements/" class="md-nav__link">
+      <a href="../../mechanisms/elements/" class="md-nav__link">
         
   
   
@@ -9834,7 +9973,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/dof/" class="md-nav__link">
+      <a href="../../mechanisms/dof/" class="md-nav__link">
         
   
   
@@ -9862,7 +10001,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/dof-pitfalls/" class="md-nav__link">
+      <a href="../../mechanisms/dof-pitfalls/" class="md-nav__link">
         
   
   
@@ -9890,7 +10029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/transmission/" class="md-nav__link">
+      <a href="../../mechanisms/transmission/" class="md-nav__link">
         
   
   
@@ -9918,7 +10057,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/planar-linkage/" class="md-nav__link">
+      <a href="../../mechanisms/planar-linkage/" class="md-nav__link">
         
   
   
@@ -9946,7 +10085,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/analysis-tools/" class="md-nav__link">
+      <a href="../../mechanisms/analysis-tools/" class="md-nav__link">
         
   
   
@@ -10050,7 +10189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/serial-overview/" class="md-nav__link">
+      <a href="../../mechanisms/serial-overview/" class="md-nav__link">
         
   
   
@@ -10078,7 +10217,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/serial-config/" class="md-nav__link">
+      <a href="../../mechanisms/serial-config/" class="md-nav__link">
         
   
   
@@ -10106,7 +10245,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/workspace/" class="md-nav__link">
+      <a href="../../mechanisms/workspace/" class="md-nav__link">
         
   
   
@@ -10134,7 +10273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/redundancy/" class="md-nav__link">
+      <a href="../../mechanisms/redundancy/" class="md-nav__link">
         
   
   
@@ -10162,7 +10301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/kinematics/" class="md-nav__link">
+      <a href="../../mechanisms/kinematics/" class="md-nav__link">
         
   
   
@@ -10190,7 +10329,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/serial-design/" class="md-nav__link">
+      <a href="../../mechanisms/serial-design/" class="md-nav__link">
         
   
   
@@ -10218,7 +10357,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mechanisms/design-considerations/" class="md-nav__link">
+      <a href="../../mechanisms/design-considerations/" class="md-nav__link">
         
   
   
@@ -10276,10 +10415,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -10287,7 +10429,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/mdsp/" class="md-nav__link ">
+            <a href="../../mdsp/" class="md-nav__link ">
               
   
   
@@ -10305,7 +10447,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_6" id="__nav_4_6_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_6" id="__nav_4_6_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -10401,7 +10543,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/transforms-overview/" class="md-nav__link">
+      <a href="../../mdsp/transforms-overview/" class="md-nav__link">
         
   
   
@@ -10429,7 +10571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/random-process-definition/" class="md-nav__link">
+      <a href="../../mdsp/random-process-definition/" class="md-nav__link">
         
   
   
@@ -10457,7 +10599,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/stationarity-ergodicity/" class="md-nav__link">
+      <a href="../../mdsp/stationarity-ergodicity/" class="md-nav__link">
         
   
   
@@ -10485,7 +10627,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/wss-description/" class="md-nav__link">
+      <a href="../../mdsp/wss-description/" class="md-nav__link">
         
   
   
@@ -10513,7 +10655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/autocorrelation-properties/" class="md-nav__link">
+      <a href="../../mdsp/autocorrelation-properties/" class="md-nav__link">
         
   
   
@@ -10541,7 +10683,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/psd-wiener-khinchin/" class="md-nav__link">
+      <a href="../../mdsp/psd-wiener-khinchin/" class="md-nav__link">
         
   
   
@@ -10569,7 +10711,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/wss-linear-system/" class="md-nav__link">
+      <a href="../../mdsp/wss-linear-system/" class="md-nav__link">
         
   
   
@@ -10597,7 +10739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/mdsp/parameter-estimation/" class="md-nav__link">
+      <a href="../../mdsp/parameter-estimation/" class="md-nav__link">
         
   
   
@@ -10669,10 +10811,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -10680,7 +10825,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/autonomous-decision/" class="md-nav__link ">
+            <a href="../../autonomous-decision/" class="md-nav__link ">
               
   
   
@@ -10698,7 +10843,7 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_4_7" id="__nav_4_7_label" tabindex="0">
+              <label class="md-nav__link " for="__nav_4_7" id="__nav_4_7_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -10780,7 +10925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/introduction/" class="md-nav__link">
+      <a href="../../autonomous-decision/introduction/" class="md-nav__link">
         
   
   
@@ -10872,7 +11017,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/static-optimization/" class="md-nav__link">
+      <a href="../../autonomous-decision/static-optimization/" class="md-nav__link">
         
   
   
@@ -10964,7 +11109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/discrete-lqr/" class="md-nav__link">
+      <a href="../../autonomous-decision/discrete-lqr/" class="md-nav__link">
         
   
   
@@ -11056,7 +11201,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/continuous-lqr/" class="md-nav__link">
+      <a href="../../autonomous-decision/continuous-lqr/" class="md-nav__link">
         
   
   
@@ -11148,7 +11293,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/dynamic-programming/" class="md-nav__link">
+      <a href="../../autonomous-decision/dynamic-programming/" class="md-nav__link">
         
   
   
@@ -11240,7 +11385,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/differential-games/" class="md-nav__link">
+      <a href="../../autonomous-decision/differential-games/" class="md-nav__link">
         
   
   
@@ -11332,7 +11477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/reinforcement-learning/" class="md-nav__link">
+      <a href="../../autonomous-decision/reinforcement-learning/" class="md-nav__link">
         
   
   
@@ -11424,7 +11569,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../courses/autonomous-decision/adaptive-dp/" class="md-nav__link">
+      <a href="../../autonomous-decision/adaptive-dp/" class="md-nav__link">
         
   
   
@@ -11480,10 +11625,13 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
@@ -11491,7 +11639,7 @@
         
           
           <div class="md-nav__link md-nav__container">
-            <a href="../../../courses/intelligent-sensing/" class="md-nav__link ">
+            <a href="../../intelligent-sensing/" class="md-nav__link ">
               
   
   
@@ -11568,19 +11716,19 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一、问题的分类
+        一、构型与自由度
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="一、问题的分类">
+    <nav class="md-nav" aria-label="一、构型与自由度">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#11" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.1 按变量类型
+        1.1 构型由三样东西决定
       
     </span>
   </a>
@@ -11591,7 +11739,7 @@
   <a href="#12" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.2 按约束
+        1.2 自由度是构型的第一指标
       
     </span>
   </a>
@@ -11602,7 +11750,7 @@
   <a href="#13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1.3 按函数性质
+        1.3 五种构型手算对照
       
     </span>
   </a>
@@ -11618,19 +11766,30 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        二、全局最优与局部最优
+        二、串联机构
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="二、全局最优与局部最优">
+    <nav class="md-nav" aria-label="二、串联机构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2.1 驻点、极值点、鞍点
+        2.1 一串关节连到底
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 位形空间是环面，可达区域是圆环
       
     </span>
   </a>
@@ -11646,19 +11805,19 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        三、凸集与凸函数
+        三、并联机构
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="三、凸集与凸函数">
+    <nav class="md-nav" aria-label="三、并联机构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#31" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.1 凸集
+        3.1 多条支链拉住一个平台
       
     </span>
   </a>
@@ -11669,18 +11828,7 @@
   <a href="#32" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3.2 凸函数
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3.3 保持凸性的运算
+        3.2 为什么并联精度高：误差被平均掉了
       
     </span>
   </a>
@@ -11696,10 +11844,49 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        四、常见凸/非凸函数一览
+        四、轮式机构
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="四、轮式机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 轮式机构的不同在「约束」
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-3-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 位形 3 维，输入只有 2 个
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 三种走法的手算对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -11707,19 +11894,19 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        五、典型例题
+        五、复合机构
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="五、典型例题">
+    <nav class="md-nav" aria-label="五、复合机构">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1" class="md-nav__link">
+  <a href="#51" class="md-nav__link">
     <span class="md-ellipsis">
       
-        例题 1：判断凸性
+        5.1 把几种构型叠起来用
       
     </span>
   </a>
@@ -11727,32 +11914,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#52" class="md-nav__link">
     <span class="md-ellipsis">
       
-        例题 2：凸集判定
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 3：验证凸性的一阶条件
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        例题 4：判断问题是否为凸优化
+        5.2 一台移动机械臂的自由度账
       
     </span>
   </a>
@@ -11768,7 +11933,151 @@
   <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       
-        六、自测
+        六、仿生机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="六、仿生机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 仿生机构想抄的是什么
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 与「仿生机器人」页的分工
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        七、变胞机构
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="七、变胞机构">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 让机构自己换拓扑
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 变胞的两个用途
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 三个构态的手算对照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 1：算并联平台的自由度，别忘局部自由度
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 2：杆长与死角
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 3：差速小车的圆弧
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        例题 4：变胞机构的构态切换
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自测
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        小结
       
     </span>
   </a>
@@ -11792,1328 +12101,1241 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#2b8a3e">基础</span><span class="kb-imp-desc">入门必备</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 3 讲 数学优化」C.1–C.2 节</code><code>Mathematics for Machine Learning（§7.3 Convex Optimization）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《凸优化》或《最优化理论与方法》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../">机器人学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本课程大纲 第二章 机器人构型（2.1 基本概念；2.2 串联机构；2.3 并联机构；2.4 轮式机构；2.5 复合机构；2.6 仿生机构；2.7 变胞机构）</code><code>参考教材 先进机器人控制（第 1 章 绪论：机器人的结构与分类；第 2 章 机器人运动学）</code><code>交叉引用本库机器人机构学（机构的基本元素 / 自由度与约束 / 自由度计算的两个陷阱 / 运动空间与工作空间）</code><code>本页数值示例均为手算，并与解析式逐条核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（构型、拓扑、构件、运动副、支链、动平台、静平台、机架、自由度、格鲁布勒公式、位形空间、非完整约束、差速驱动、瞬时旋转中心、Stewart 平台、Delta 机构、局部自由度、变胞机构、构态、折展机构）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
-<h1 id="_1">优化问题与凸性<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>整门机器学习的训练过程，都可以写成一句话：</p>
+<h1 id="_1">机器人构型<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p><strong>找一个让损失最小的参数。</strong></p>
+<p>第一章回答了「机器人是什么」，这一页回答<strong>「机器人长成什么样」</strong>。
+同一件工作，可以做成一串关节连成的手臂、几条支链拉住的平台、
+靠轮子在地上滚的车，甚至一台能<strong>边动边改自己结构</strong>的机构。
+这七个小节看起来是七种东西，其实回答的是<strong>同一个问题</strong>：
+这个机构的构件怎么连、能独立动几个方向。</p>
 </blockquote>
-<p>这句话的数学形式就是<strong>优化问题</strong>：</p>
-<div class="arithmatex">\[
-\min_{\boldsymbol{x}} f(\boldsymbol{x})
-\quad\text{s.t.}\quad \boldsymbol{x}\in\mathcal{X}
-\]</div>
-<p>这一页讲清楚<strong>问题的分类</strong>与<strong>凸性</strong>——后者决定了「局部最优是否等于全局最优」，
-这是优化理论中最关键的分水岭。</p>
-<div class="admonition tip">
-<p class="admonition-title">为什么「凸性」是优化的分水岭</p>
-<table>
-<thead>
-<tr>
-<th>性质</th>
-<th>凸优化</th>
-<th>非凸优化</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>局部最优</td>
-<td><strong>一定是全局最优</strong> ✓</td>
-<td>可能只是局部</td>
-</tr>
-<tr>
-<td>求解难度</td>
-<td><strong>多项式时间</strong>（可靠）</td>
-<td>NP 难（一般情形）</td>
-</tr>
-<tr>
-<td>算法保证</td>
-<td>有收敛证明</td>
-<td>通常只能给「不错的解」</td>
-</tr>
-<tr>
-<td>例子</td>
-<td>线性回归、SVM、逻辑回归</td>
-<td>神经网络、聚类</td>
-</tr>
-</tbody>
-</table>
-<p><strong>一句话</strong>：<strong>凸 ⇒ 梯度下降一定收敛到全局最优；非凸 ⇒ 只能寄希望于好运</strong>。</p>
-<p>这就是为什么深度学习「能work」需要额外解释（非凸却常常效果好）。</p>
-</div>
 <hr />
-<h2 id="_2">一、问题的分类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="11">1.1 按变量类型<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">这一页的主线</p>
+<p>构型 = <strong>构件 + 运动副 + 它们的连接关系</strong>。
+七个小节是同一张问题表的七个答案：</p>
+<ul>
+<li>一串关节连到底 → <strong>串联</strong>（臂）</li>
+<li>多条支链同时拉住一个平台 → <strong>并联</strong>（平台）</li>
+<li>靠轮子在地上滚 → <strong>轮式</strong>（车、移动机器人）</li>
+<li>把上面几种叠起来 → <strong>复合</strong></li>
+<li>照生物的结构做 → <strong>仿生</strong></li>
+<li>结构本身能变 → <strong>变胞</strong></li>
+</ul>
+<p>贯穿全页的<strong>唯一一把尺子</strong>是<strong>自由度</strong> <span class="arithmatex">\(F\)</span>：
+它数的是「这个机构能独立动几个方向」，
+也正是下一章要用位姿和坐标变换去描述的对象。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">「构型」不是「外形」</p>
+<p>构型说的是<strong>构件怎么连、运动副是什么</strong>，
+跟「长得像不像一只手臂」没有关系。
+两根外形几乎一样的机械臂，只要中间某个运动副从转动改成移动，
+就是<strong>两种不同的构型</strong>，运动学方程完全不同。
+判据始终是<strong>连接关系</strong>。</p>
+</div>
+<h2 id="_2">一、构型与自由度<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="11">1.1 构型由三样东西决定<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
+<p>一个机构的构型，由下面三样唯一确定：</p>
 <table>
 <thead>
 <tr>
-<th>类型</th>
-<th>变量取值</th>
-<th>求解方法</th>
+<th>要素</th>
+<th>含义</th>
 <th>例子</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>连续优化</strong></td>
-<td><span class="arithmatex">\(\boldsymbol{x}\in\mathbb{R}^n\)</span></td>
-<td>梯度类方法</td>
-<td>神经网络训练</td>
+<td><strong>构件</strong></td>
+<td>参与运动的刚体</td>
+<td>连杆、动平台、机架</td>
 </tr>
 <tr>
-<td><strong>离散优化</strong></td>
-<td><span class="arithmatex">\(\boldsymbol{x}\in\mathbb{Z}^n\)</span></td>
-<td>组合方法</td>
-<td>旅行商、调度</td>
+<td><strong>运动副</strong></td>
+<td>两个构件之间的连接方式</td>
+<td>转动副（R）、移动副（P）、球副（S）</td>
+</tr>
+<tr>
+<td><strong>连接关系</strong></td>
+<td>谁和谁相连、按什么次序</td>
+<td>串联、并联、闭环</td>
 </tr>
 </tbody>
 </table>
-<p><strong>关键差别</strong>：离散优化<strong>不能用梯度</strong>（不可导），难度通常高得多。</p>
-<p><strong>工程含义</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>情形</th>
-<th>做法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>本来离散</td>
-<td>用整数规划、动态规划、启发式</td>
-</tr>
-<tr>
-<td>想让连续方法可用</td>
-<td><strong>松弛</strong>为连续问题</td>
-</tr>
-</tbody>
-</table>
-<p><strong>松弛的例子</strong>：把「必须选 0 或 1」放松为「可以取 <span class="arithmatex">\([0,1]\)</span> 内任意值」，
-求出解后再取整到最近的整数。这常给出「近似最优」的解。</p>
-<h3 id="12">1.2 按约束<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>形式</th>
-<th>求解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>无约束</strong></td>
-<td><span class="arithmatex">\(\min f(\boldsymbol{x})\)</span></td>
-<td>令梯度为零</td>
-</tr>
-<tr>
-<td><strong>约束</strong></td>
-<td><span class="arithmatex">\(\min f\)</span>，s.t. <span class="arithmatex">\(g_i(\boldsymbol{x})\leq0\)</span></td>
-<td>拉格朗日乘数法、KKT</td>
-</tr>
-</tbody>
-</table>
-<h3 id="13">1.3 按函数性质<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>条件</th>
-<th>难度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>线性规划（LP）</strong></td>
-<td><span class="arithmatex">\(f\)</span> 与约束都线性</td>
-<td>简单（单纯形法）</td>
-</tr>
-<tr>
-<td><strong>二次规划（QP）</strong></td>
-<td><span class="arithmatex">\(f\)</span> 二次，约束线性</td>
-<td>中等</td>
-</tr>
-<tr>
-<td><strong>凸优化</strong></td>
-<td><span class="arithmatex">\(f\)</span> 凸，可行集凸</td>
-<td>可靠可解</td>
-</tr>
-<tr>
-<td><strong>非线性非凸</strong></td>
-<td>——</td>
-<td>困难</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="_3">二、全局最优与局部最优<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><strong>局部最优</strong>：存在邻域，使得</p>
-<div class="arithmatex">\[
-f(\boldsymbol{x}^*) \leq f(\boldsymbol{x}), \quad \forall \boldsymbol{x}\in N(\boldsymbol{x}^*)\cap\mathcal{X}
-\]</div>
-<p><strong>全局最优</strong>：在整个可行集上最小。</p>
-<div class="admonition warning">
-<p class="admonition-title">局部最优 ≠ 全局最优（非凸情形）</p>
-<p><strong>典型陷阱</strong>：<span class="arithmatex">\(f(x) = x^4 - 3x^2 + x\)</span> 有多个极值点。</p>
-<table>
-<thead>
-<tr>
-<th>概念</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>局部最优</td>
-<td>在附近最小</td>
-</tr>
-<tr>
-<td>全局最优</td>
-<td>在所有点中最小</td>
-</tr>
-</tbody>
-</table>
-<p><strong>梯度下降的行为</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>初值位置</th>
-<th>收敛到</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>靠近某个局部极小</td>
-<td>那个局部极小（可能不是全局）</td>
-</tr>
-<tr>
-<td>靠近全局极小</td>
-<td>全局极小（运气好）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>工程含义</strong>：<strong>初值很重要</strong>。</p>
-<p><strong>深度学习中为什么还能用</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>观察</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>高维空间中「坏的」局部极小很少</td>
-<td>维度越高，鞍点比局部极小更常见</td>
-</tr>
-<tr>
-<td>过参数化</td>
-<td>参数多于数据时，损失曲面变得「平缓」</td>
-</tr>
-<tr>
-<td>随机梯度噪声</td>
-<td>有助于跳出浅的局部极小</td>
-</tr>
-<tr>
-<td><strong>实践验证</strong></td>
-<td>不同初值常收敛到<strong>相近</strong>的损失值</td>
-</tr>
-</tbody>
-</table>
-<p><strong>注意</strong>：这一条是「经验观察 + 部分理论」，不是完全的定理。</p>
-</div>
-<h3 id="21">2.1 驻点、极值点、鞍点<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p><strong>驻点</strong>：<span class="arithmatex">\(\nabla f(\boldsymbol{x}) = \boldsymbol{0}\)</span>。</p>
-<p><strong>判据</strong>（用 Hessian，回到泰勒展开那一页）：</p>
-<table>
-<thead>
-<tr>
-<th>Hessian 性质</th>
-<th>结论</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>正定</td>
-<td>局部极小</td>
-</tr>
-<tr>
-<td>负定</td>
-<td>局部极大</td>
-</tr>
-<tr>
-<td><strong>不定</strong></td>
-<td><strong>鞍点</strong></td>
-</tr>
-<tr>
-<td>半定</td>
-<td>需更高阶信息</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">鞍点在优化中的重要性（高维特有）</p>
-<p><strong>鞍点</strong>：某些方向是极小、另一些方向是极大的点。</p>
-<p><strong>为什么高维中鞍点特别多</strong>：</p>
-<p><span class="arithmatex">\(n\)</span> 维空间中，Hessian 有 <span class="arithmatex">\(n\)</span> 个特征值。
-「恰好全部同号」的概率随 <span class="arithmatex">\(n\)</span> 增大而<strong>指数下降</strong>
-（若特征值符号随机，概率约 <span class="arithmatex">\(2^{-(n-1)}\)</span>）。</p>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>「全部同号」的概率（粗略）</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(1\)</span></td>
-<td><span class="arithmatex">\(1\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(3\)</span></td>
-<td><span class="arithmatex">\(1/4\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(10\)</span></td>
-<td><span class="arithmatex">\(\approx 1/512\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(1000\)</span></td>
-<td><strong>极小</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>结论</strong>：<strong>高维优化中，绝大多数驻点是鞍点，而非局部极小。</strong></p>
-<p><strong>梯度下降会停在鞍点吗</strong>：理论上会（梯度为零），
-但实际上：</p>
-<table>
-<thead>
-<tr>
-<th>原因</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>精确到达鞍点概率为零</td>
-<td>浮点运算几乎不可能精确落在鞍点</td>
-</tr>
-<tr>
-<td>鞍点附近梯度很小但非零</td>
-<td>会缓慢「滑过」鞍点向极小方向</td>
-</tr>
-<tr>
-<td>随机梯度噪声</td>
-<td>帮助逃离</td>
-</tr>
-<tr>
-<td>负曲率方向</td>
-<td>有些算法（如 Newton 类）主动利用</td>
-</tr>
-</tbody>
-</table>
-<p>这就是「高维非凸优化在实践中不难」的核心原因之一。</p>
-</div>
+<p><strong>第三行最容易被忽略，却最关键。</strong> 同样三个构件，
+只连两个转动副就是一条<strong>开口的链</strong>，能自由摆动；
+再加一个转动副把首尾接起来，就<strong>闭合成三角形</strong>，
+一动也不能动。零件一样、外形差不多，能力却完全不同 ——
+<strong>构件与运动副只是「零件」，拓扑才是构型。</strong></p>
 <figure class="kb-fig">
-<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="凸函数与非凸函数的对比：局部最优是否等于全局最优">
+<svg viewBox="0 0 460 232" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三构件机构：开口链自由度为 2，闭合成三角形自由度为 0">
 <defs>
-<marker id="cv1-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
-<marker id="cv1-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
-<marker id="cv1-ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
-<marker id="cv1-ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
-</defs>
-<!-- 左：凸函数 -->
-<text class="lbl-s" x="14" y="16">凸函数：只有一个「谷」</text>
-<line class="gb" x1="26" y1="150" x2="200" y2="150" marker-end="url(#cv1-ah1)"/>
-<line class="gb" x1="26" y1="150" x2="26" y2="30" marker-end="url(#cv1-ah2)"/>
-<path class="a3" d="M34,44 C60,70 78,116 106,132 C130,144 152,132 180,112" fill="none" stroke-width="2.6"/>
-<circle class="d3" cx="106" cy="132" r="5"/>
-<text class="l3" x="86" y="150">唯一极小</text>
-<text class="lbl-s" x="34" y="172">任意起点都收敛到同一点</text>
-<text class="lbl-s" x="34" y="192">→ 全局最优 ✓</text>
-<text class="lbl-s" x="34" y="216">切线始终在曲线下方（定义性质）</text>
-<!-- 右：非凸 -->
-<text class="lbl-s" x="230" y="16">非凸函数：多个「谷」</text>
-<line class="gb" x1="242" y1="150" x2="416" y2="150" marker-end="url(#cv1-ah3)"/>
-<line class="gb" x1="242" y1="150" x2="242" y2="30" marker-end="url(#cv1-ah4)"/>
-<path class="a1" d="M250,60 C264,96 274,124 288,130 C300,134 312,120 322,102 C332,86 344,84 356,98 C368,114 378,126 392,130" fill="none" stroke-width="2.6"/>
-<circle class="d1" cx="288" cy="130" r="4.5"/>
-<circle class="d3" cx="322" cy="102" r="4.5"/>
-<circle class="d2" cx="356" cy="98" r="5"/>
-<text class="l1" x="262" y="150">局部极小</text>
-<text class="l2" x="350" y="86">全局</text>
-<text class="lbl-s" x="256" y="172">起点不同 → 结果不同</text>
-<text class="lbl-s" x="256" y="192">→ 可能困在局部最优 ✗</text>
-<text class="lbl-s" x="256" y="216">左谷与右谷之间还有鞍点/局部极大</text>
+<marker id="rc1ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="lbl-s" x="112" y="20" text-anchor="middle">开口链：3 构件 + 2 转动副</text>
+<text class="lbl-s" x="346" y="20" text-anchor="middle">闭合成三角形：3 构件 + 3 转动副</text>
+<line class="gd" x1="231" y1="34" x2="231" y2="208"/>
+<line class="a1" x1="62" y1="172" x2="146" y2="104"/>
+<line class="a2" x1="146" y1="104" x2="216" y2="148"/>
+<polyline class="gb" points="62,172 45,190 79,190 62,172"/>
+<line class="gb" x1="53.5" y1="190" x2="48.5" y2="196"/>
+<line class="gb" x1="62" y1="190" x2="57" y2="196"/>
+<line class="gb" x1="70.5" y1="190" x2="65.5" y2="196"/>
+<circle class="dc" cx="62" cy="172" r="5"/>
+<circle class="d3" cx="146" cy="104" r="5"/>
+<circle class="d2" cx="216" cy="148" r="4"/>
+<text class="lbl-s" x="44" y="188" text-anchor="end">机架</text>
+<text class="lbl-s" x="150" y="100">B</text>
+<text class="lbl-s" x="222" y="146">C</text>
+<text class="lbl-s" x="72" y="128">连杆 1</text>
+<text class="lbl-s" x="176" y="116">连杆 2</text>
+<line class="a2" x1="220" y1="151" x2="246" y2="174" marker-end="url(#rc1ah2)"/>
+<text class="lbl-s" x="196" y="190">末端可动</text>
+<text class="l3" x="112" y="216" text-anchor="middle">F = 2</text>
+<line class="a1" x1="286" y1="172" x2="352" y2="96"/>
+<line class="a2" x1="352" y1="96" x2="420" y2="150"/>
+<line class="a3" x1="420" y1="150" x2="286" y2="172"/>
+<polyline class="gb" points="286,172 269,190 303,190 286,172"/>
+<line class="gb" x1="277.5" y1="190" x2="272.5" y2="196"/>
+<line class="gb" x1="286" y1="190" x2="281" y2="196"/>
+<line class="gb" x1="294.5" y1="190" x2="289.5" y2="196"/>
+<circle class="dc" cx="286" cy="172" r="5"/>
+<circle class="d3" cx="352" cy="96" r="5"/>
+<circle class="d2" cx="420" cy="150" r="5"/>
+<text class="lbl-s" x="268" y="188" text-anchor="end">机架</text>
+<text class="lbl-s" x="300" y="118">连杆 1</text>
+<text class="lbl-s" x="370" y="116">连杆 2</text>
+<text class="lbl-s" x="346" y="190">三杆两两相连</text>
+<text class="l2" x="346" y="216" text-anchor="middle">F = 0（刚性）</text>
 </svg>
-<figcaption>图 1　凸性决定「局部最优是否等于全局最优」。<b>凸函数</b>只有一个谷，任意起点都收敛到同一点；<b>非凸函数</b>有多个谷，起点不同会停在不同的局部极小。这是优化理论最重要的分水岭</figcaption>
+<figcaption>同样的三个构件：只连两个转动副是开口链，能自由摆动；三个转动副闭合成三角形，就变成动不了的刚性桁架</figcaption>
 </figure>
 
-<hr />
-<h2 id="_4">三、凸集与凸函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<h3 id="31">3.1 凸集<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p><strong>定义</strong>：集合 <span class="arithmatex">\(C\)</span> 是凸的，若对任意 <span class="arithmatex">\(\boldsymbol{x},\boldsymbol{y}\in C\)</span> 与任意 <span class="arithmatex">\(\theta\in[0,1]\)</span>：</p>
+<h3 id="12">1.2 自由度是构型的第一指标<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
+<p><strong>自由度</strong> <span class="arithmatex">\(F\)</span> 是「描述这个机构的位置需要几个独立参数」，
+也就是「它能独立地动几个方向」。</p>
+<p>空间机构的通用判据是 <strong>Grübler–Kutzbach 公式</strong>：</p>
 <div class="arithmatex">\[
-\theta\boldsymbol{x} + (1-\theta)\boldsymbol{y} \in C
+F = \lambda\,(n - j - 1) + \sum_{i=1}^{j} f_i
 \]</div>
-<p><strong>直观</strong>：集合内<strong>任意两点的连线都在集合内</strong>（没有「凹进去」的部分）。</p>
-<p><strong>凸集例子</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>集合</th>
-<th>是否凸</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>超平面 <span class="arithmatex">\(\{\boldsymbol{x}:\boldsymbol{a}^\top\boldsymbol{x}=b\}\)</span></td>
-<td>✓</td>
-<td>平面本身</td>
-</tr>
-<tr>
-<td>半空间 <span class="arithmatex">\(\{\boldsymbol{x}:\boldsymbol{a}^\top\boldsymbol{x}\leq b\}\)</span></td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td>球/椭球</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td>多面体（线性不等式定义）</td>
-<td>✓</td>
-<td></td>
-</tr>
-<tr>
-<td><strong>圆环</strong>（挖掉中间的圆）</td>
-<td>✗</td>
-<td>连心线不在集合内</td>
-</tr>
-<tr>
-<td><strong>两个分离的球之并</strong></td>
-<td>✗</td>
-<td>连接线穿过外面</td>
-</tr>
-</tbody>
-</table>
-<h3 id="32">3.2 凸函数<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p><strong>定义</strong>：<span class="arithmatex">\(f\)</span> 是凸函数，若其定义域为凸集，且对任意 <span class="arithmatex">\(\boldsymbol{x},\boldsymbol{y}\)</span> 与 <span class="arithmatex">\(\theta\in[0,1]\)</span>：</p>
-<div class="arithmatex">\[
-f(\theta\boldsymbol{x}+(1-\theta)\boldsymbol{y}) \leq \theta f(\boldsymbol{x})+(1-\theta)f(\boldsymbol{y})
-\]</div>
-<p><strong>几何含义</strong>：<strong>函数图像上任意两点连线，都在函数图像的上方</strong>
-（或：弦在弧之上）。</p>
-<p><strong>等价判据</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>判据</th>
-<th>形式</th>
-<th>适用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>一阶</strong></td>
-<td><span class="arithmatex">\(f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top(\boldsymbol{y}-\boldsymbol{x})\)</span></td>
-<td>可微</td>
-</tr>
-<tr>
-<td><strong>二阶</strong></td>
-<td><span class="arithmatex">\(\nabla^2f(\boldsymbol{x}) \succeq 0\)</span>（Hessian 半正定）</td>
-<td>二阶可微</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition tip">
-<p class="admonition-title">一阶条件的几何意义（「切线在下方」）</p>
-<div class="arithmatex">\[
-f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top(\boldsymbol{y}-\boldsymbol{x})
-\]</div>
-<p><strong>右边是 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\boldsymbol{x}\)</span> 处的切线（或切平面）</strong>。</p>
-<p><strong>含义</strong>：<strong>切线永远在函数下方</strong> —— 这是凸函数最直观的特征。</p>
-<p><strong>重要推论</strong>（一阶最优性条件）：</p>
-<div class="arithmatex">\[
-\nabla f(\boldsymbol{x}^*) = \boldsymbol{0} \implies \boldsymbol{x}^* \text{ 是全局最优}
-\]</div>
-<p><strong>推导</strong>：把 <span class="arithmatex">\(\boldsymbol{x}=\boldsymbol{x}^*\)</span> 代入一阶条件（<span class="arithmatex">\(\nabla f = 0\)</span>）：</p>
-<div class="arithmatex">\[
-f(\boldsymbol{y}) \geq f(\boldsymbol{x}^*) \quad \forall \boldsymbol{y}
-\]</div>
-<p><strong>对所有 <span class="arithmatex">\(\boldsymbol{y}\)</span> 成立</strong> → 全局最小</p>
-<p><strong>这就是「凸函数只需令梯度为零」的严格依据</strong>——
-而<strong>对非凸函数，梯度为零只给出局部信息</strong>。</p>
-</div>
-<h3 id="33">3.3 保持凸性的运算<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<p>这些规则让「判断一个函数是否凸」变得容易。</p>
-<table>
-<thead>
-<tr>
-<th>运算</th>
-<th>结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(f,g\)</span> 凸，<span class="arithmatex">\(a,b\geq0\)</span></td>
-<td><span class="arithmatex">\(af+bg\)</span> <strong>凸</strong></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f\)</span> 凸，<span class="arithmatex">\(A\)</span> 矩阵</td>
-<td><span class="arithmatex">\(f(A\boldsymbol{x}+\boldsymbol{b})\)</span> <strong>凸</strong></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f,g\)</span> 凸且都 <span class="arithmatex">\(\geq0\)</span></td>
-<td><span class="arithmatex">\(fg\)</span> 不一定凸 ✗</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\max(f_1,\dots,f_m)\)</span>（都凸）</td>
-<td><strong>凸</strong> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\sup\)</span> of 凸函数族</td>
-<td><strong>凸</strong> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f\)</span> 凸，<span class="arithmatex">\(g\)</span> 凸且<strong>非减</strong></td>
-<td><span class="arithmatex">\(g(f(\boldsymbol{x}))\)</span> <strong>凸</strong> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(h\)</span> 凸</td>
-<td><span class="arithmatex">\(\{\boldsymbol{x}:h(\boldsymbol{x})\leq c\}\)</span> 是<strong>凸集</strong> ✓</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition note">
-<p class="admonition-title">最值得记的两条：max 与 sup 保持凸性</p>
-<p><strong>1. <span class="arithmatex">\(\max\)</span> 保持凸性</strong></p>
-<div class="arithmatex">\[
-f(\boldsymbol{x}) = \max_i f_i(\boldsymbol{x}) \quad\text{（}f_i\text{ 均凸）} \Rightarrow f \text{ 凸}
-\]</div>
-<p><strong>用途</strong>：<strong>最小最大问题</strong>、鲁棒优化中的「最坏情况」目标
-都是 max 形式。</p>
-<p><strong>例</strong>：鲁棒优化要求「在所有可能情形下都满足约束」
-→ 把每个情形的约束写成不等式，取最大值 ≤ 0 → 仍是凸问题。</p>
-<p><strong>2. <span class="arithmatex">\(\sup\)</span>（写法的上确界）也保持凸性</strong></p>
-<p>这一条更强的版本：<strong>任何凸函数的逐点上确界仍是凸的</strong>。</p>
-<p><strong>用途</strong>：构造凸函数（如「支撑函数」），以及证明某些复杂函数的凸性。</p>
-<p><strong>反面</strong>：<span class="arithmatex">\(\min\)</span> <strong>不一定</strong>保持凸性 ——
-这解释了为什么「取最小值」的操作会把凸问题变成非凸问题。</p>
-</div>
-<hr />
-<h2 id="_5">四、常见凸/非凸函数一览<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>这张表在判断问题时极其有用。</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>凸性</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(f(\boldsymbol{x}) = \boldsymbol{a}^\top\boldsymbol{x}+b\)</span></td>
-<td><strong>凸</strong>（也是凹）</td>
-<td>仿射函数</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = \boldsymbol{x}^\top A\boldsymbol{x}\)</span>（<span class="arithmatex">\(A\succeq0\)</span>）</td>
-<td><strong>凸</strong></td>
-<td>二次型</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = \lVert\boldsymbol{x}\rVert_p\)</span>（<span class="arithmatex">\(p\geq1\)</span>）</td>
-<td><strong>凸</strong></td>
-<td>任何范数都凸</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = \lVert\boldsymbol{x}\rVert_0\)</span></td>
-<td><strong>非凸</strong></td>
-<td>计数 = 非凸</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = -\log x\)</span>（<span class="arithmatex">\(x&gt;0\)</span>）</td>
-<td><strong>凸</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = e^x\)</span></td>
-<td><strong>凸</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = x\log x\)</span></td>
-<td><strong>凸</strong></td>
-<td>负熵</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(f = \log(1+e^x)\)</span></td>
-<td><strong>凸</strong></td>
-<td>softplus</td>
-</tr>
-<tr>
-<td><strong>log-sum-exp</strong> <span class="arithmatex">\(\log\sum_i e^{x_i}\)</span></td>
-<td><strong>凸</strong> ✓</td>
-<td>重要</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\max_i x_i\)</span></td>
-<td><strong>凸</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\lvert x\rvert\)</span></td>
-<td><strong>凸</strong></td>
-<td></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\sin x\)</span></td>
-<td><strong>非凸</strong></td>
-<td>振荡</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition tip">
-<p class="admonition-title">log-sum-exp 为什么重要</p>
-<div class="arithmatex">\[
-f(\boldsymbol{x}) = \log\sum_{i=1}^{n}e^{x_i}
-\]</div>
-<p><strong>两个用途</strong>：</p>
-<p><strong>1. 它是 <span class="arithmatex">\(\max\)</span> 的光滑近似</strong></p>
-<table>
-<thead>
-<tr>
-<th>性质</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>下界</td>
-<td><span class="arithmatex">\(f(\boldsymbol{x}) \geq \max_i x_i\)</span></td>
-</tr>
-<tr>
-<td>上界</td>
-<td><span class="arithmatex">\(f(\boldsymbol{x}) \leq \max_i x_i + \log n\)</span></td>
-</tr>
-<tr>
-<td>极限</td>
-<td><span class="arithmatex">\(f(\boldsymbol{x})\to\max_i x_i\)</span>（当 <span class="arithmatex">\(\max\)</span> 明显大于其它）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>所以「用 log-sum-exp 近似 max」既保持可微性又不改变最优解的本质</strong>。</p>
+<p>其中 <span class="arithmatex">\(\lambda\)</span> 是机构所在空间的维数（平面 <span class="arithmatex">\(\lambda = 3\)</span>，空间 <span class="arithmatex">\(\lambda = 6\)</span>），
+<span class="arithmatex">\(n\)</span> 是构件数（含机架与动平台），<span class="arithmatex">\(j\)</span> 是运动副数，
+<span class="arithmatex">\(f_i\)</span> 是第 <span class="arithmatex">\(i\)</span> 个运动副的自由度（转动副与移动副 <span class="arithmatex">\(f = 1\)</span>，球副 <span class="arithmatex">\(f = 3\)</span>）。</p>
+<p><strong>这个式子是数出来的，不是背下来的。</strong> 三步：</p>
 <ol>
-<li>它是 softmax 与交叉熵的数值稳定实现核心</li>
+<li><span class="arithmatex">\(n\)</span> 个构件各自在 <span class="arithmatex">\(\lambda\)</span> 维空间里有 <span class="arithmatex">\(\lambda\)</span> 个自由度，一共 <span class="arithmatex">\(\lambda n\)</span> 个；</li>
+<li>机架固定不动，占去 <span class="arithmatex">\(\lambda\)</span> 个；</li>
+<li>每接一个运动副，就减掉 <span class="arithmatex">\(\lambda - f_i\)</span> 个约束
+   —— 第 <span class="arithmatex">\(i\)</span> 个副只留下 <span class="arithmatex">\(f_i\)</span> 个相对运动，其余方向都被约束住了。</li>
 </ol>
+<p>把这三步写成一个式子，再把同类项合并：</p>
 <div class="arithmatex">\[
-\log\operatorname{softmax}(\boldsymbol{z})_i = z_i - \underbrace{\log\sum_j e^{z_j}}_{\text{log-sum-exp}}
+\begin{aligned}
+F &amp;= \lambda n - \lambda - \sum_{i=1}^{j}(\lambda - f_i) \\
+&amp;= \lambda(n - 1) - j\lambda + \sum_{i=1}^{j} f_i \\
+&amp;= \lambda\,(n - j - 1) + \sum_{i=1}^{j} f_i
+\end{aligned}
 \]</div>
-<p><strong>计算时先减去最大值</strong>（平移不变性，回到「Logistic 与 Softmax 导数」一页）
-就得到数值稳定的实现。</p>
-<p><strong>一般规律</strong>：<strong>「指数 + 求和 + 取对数」的组合保持凸性</strong> ——
-这类函数在机器学习中到处都是（softmax、交叉熵、摊薄损失）。</p>
-</div>
-<hr />
-<h2 id="_6">五、典型例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<h3 id="1">例题 1：判断凸性<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p>判断下列函数的凸性：</p>
-<p><strong>(a)</strong> <span class="arithmatex">\(f(x) = x^4\)</span>。<strong>(b)</strong> <span class="arithmatex">\(f(x) = x^3\)</span>。<strong>&copy;</strong> <span class="arithmatex">\(f(\boldsymbol{x}) = \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span>。</p>
-<details class="note">
-<summary>思路</summary>
-<p>用二阶条件（求二阶导或 Hessian）。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p><strong>(a) <span class="arithmatex">\(f(x) = x^4\)</span></strong></p>
+<p>最后一步只是把前两项里的 <span class="arithmatex">\(\lambda\)</span> 提出来：<span class="arithmatex">\(\lambda(n-1) - j\lambda = \lambda(n - j - 1)\)</span>。</p>
+<p>平面机构是它的特例。<span class="arithmatex">\(F = 3(n-j-1) + \sum f_i\)</span>，
+把运动副按自由度分成 <span class="arithmatex">\(p_1\)</span> 个单自由度副（转动、移动）和 <span class="arithmatex">\(p_2\)</span> 个双自由度副，
+则 <span class="arithmatex">\(j = p_1 + p_2\)</span>、<span class="arithmatex">\(\sum f_i = p_1 + 2p_2\)</span>，代进去整理：</p>
 <div class="arithmatex">\[
-f'(x) = 4x^3, \qquad f''(x) = 12x^2 \geq 0 \;\checkmark
+F = 3(n - 1) - 2p_1 - p_2
 \]</div>
-<p><strong>二阶导非负</strong>（仅 <span class="arithmatex">\(x=0\)</span> 处为零，其它严格正）</p>
-<p><strong>结论</strong>：<strong>凸函数</strong>（严格凸，除 0 点）</p>
-<p><strong>(b) <span class="arithmatex">\(f(x) = x^3\)</span></strong></p>
-<div class="arithmatex">\[
-f'(x) = 3x^2, \qquad f''(x) = 6x
-\]</div>
-<p><span class="arithmatex">\(f''(x) &lt; 0\)</span> 当 <span class="arithmatex">\(x&lt;0\)</span>，<span class="arithmatex">\(&gt;0\)</span> 当 <span class="arithmatex">\(x&gt;0\)</span> → <strong>符号变化</strong> ✗</p>
-<p><strong>结论</strong>：<strong>非凸函数</strong></p>
-<p><strong>验证（用定义找反例）</strong>：取 <span class="arithmatex">\(x = -1\)</span>、<span class="arithmatex">\(y = 1\)</span>、<span class="arithmatex">\(\theta = 0.5\)</span>。</p>
-<p>左边：</p>
-<div class="arithmatex">\[
-f(0) = 0
-\]</div>
-<p>右边：</p>
-<div class="arithmatex">\[
-0.5f(-1)+0.5f(1) = 0.5(-1)+0.5(1) = 0
-\]</div>
-<p>两者相等（不构成反例）。需要另取点。试 <span class="arithmatex">\(x=-2\)</span>、<span class="arithmatex">\(y=1\)</span>、<span class="arithmatex">\(\theta=0.5\)</span>：</p>
-<p>左边：<span class="arithmatex">\(f(-0.5) = -0.125\)</span></p>
-<p>右边：<span class="arithmatex">\(0.5(-8)+0.5(1) = -3.5\)</span></p>
-<p>左边 <span class="arithmatex">\((-0.125) &gt;\)</span> 右边 <span class="arithmatex">\((-3.5)\)</span> → <strong>违反凸性定义</strong> ✗</p>
-<p><strong>结论确认：非凸</strong></p>
-<p><strong>&copy; <span class="arithmatex">\(f(\boldsymbol{x}) = \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span></strong></p>
-<p>展开（回到矩阵微积分一页）：</p>
-<div class="arithmatex">\[
-f(\boldsymbol{x}) = \boldsymbol{x}^\top A^\top A\boldsymbol{x} - 2\boldsymbol{b}^\top A\boldsymbol{x} + \boldsymbol{b}^\top\boldsymbol{b}
-\]</div>
-<p>求梯度与 Hessian：</p>
-<div class="arithmatex">\[
-\nabla f = 2A^\top(A\boldsymbol{x}-\boldsymbol{b}), \qquad \nabla^2 f = 2A^\top A
-\]</div>
-<p><strong>判断 <span class="arithmatex">\(2A^\top A\)</span> 的正定性</strong>：对任意 <span class="arithmatex">\(\boldsymbol{v}\)</span>：</p>
-<div class="arithmatex">\[
-\boldsymbol{v}^\top(2A^\top A)\boldsymbol{v} = 2\lVert A\boldsymbol{v}\rVert^2 \geq 0 \;\checkmark
-\]</div>
-<p><strong>半正定</strong> → <strong>凸函数</strong></p>
-<p><strong>并且</strong>：</p>
+<p>这正是机构学里的<strong>格鲁布勒公式</strong>。两式是同一个东西，
+<strong>用哪个取决于在哪项上省事</strong>。</p>
+<h3 id="13">1.3 五种构型手算对照<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>同一个公式，代进五种差别极大的机构，手算一遍：</p>
 <table>
 <thead>
 <tr>
-<th>条件</th>
-<th>结论</th>
+<th>构型</th>
+<th><span class="arithmatex">\(\lambda\)</span></th>
+<th><span class="arithmatex">\(n\)</span></th>
+<th><span class="arithmatex">\(j\)</span></th>
+<th><span class="arithmatex">\(\sum f_i\)</span></th>
+<th>代入 <span class="arithmatex">\(F = \lambda(n-j-1) + \sum f_i\)</span></th>
+<th><span class="arithmatex">\(F\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="arithmatex">\(A\)</span> 列满秩</td>
-<td><span class="arithmatex">\(A^\top A\)</span> <strong>正定</strong> → <strong>严格凸</strong>（唯一最优解）</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(A\)</span> 秩亏</td>
-<td>半正定 → 凸但不严格（最优解<strong>不唯一</strong>）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>工程含义</strong>：最小二乘问题<strong>总是凸的</strong> ✓ 这是它可靠的原因。</p>
-</details>
-<div class="admonition tip">
-<p class="admonition-title">这类判断的通用流程</p>
-<table>
-<thead>
-<tr>
-<th>步骤</th>
-<th>操作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>求 Hessian</td>
-</tr>
-<tr>
-<td>2</td>
-<td>检查是否半正定（所有特征值 <span class="arithmatex">\(\geq0\)</span>，或所有顺序主子式 <span class="arithmatex">\(\geq0\)</span>）</td>
-</tr>
-<tr>
+<td>平面四杆机构</td>
 <td>3</td>
-<td>若半正定 → 凸；若正定 → 严格凸</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td><span class="arithmatex">\(3\times(-1) + 4\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>平面五杆机构</td>
+<td>3</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td><span class="arithmatex">\(3\times(-1) + 5\)</span></td>
+<td>2</td>
+</tr>
+<tr>
+<td>平面 3-RRR 并联</td>
+<td>3</td>
+<td>8</td>
+<td>9</td>
+<td>9</td>
+<td><span class="arithmatex">\(3\times(-2) + 9\)</span></td>
+<td>3</td>
+</tr>
+<tr>
+<td>串联六轴手臂 6R</td>
+<td>6</td>
+<td>7</td>
+<td>6</td>
+<td>6</td>
+<td><span class="arithmatex">\(6\times 0 + 6\)</span></td>
+<td>6</td>
+</tr>
+<tr>
+<td>Stewart 平台 6-UPS</td>
+<td>6</td>
+<td>14</td>
+<td>18</td>
+<td>36</td>
+<td><span class="arithmatex">\(6\times(-5) + 36\)</span></td>
+<td>6</td>
 </tr>
 </tbody>
 </table>
-<p><strong>常用工具</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>判据</th>
-<th>适用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>特征值全 <span class="arithmatex">\(\geq0\)</span></td>
-<td>通用</td>
-</tr>
-<tr>
-<td><strong>顺序主子式全 <span class="arithmatex">\(\geq0\)</span></strong></td>
-<td>对称矩阵（Sylvester 判据的推广）</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\boldsymbol{v}^\top H\boldsymbol{v}\geq0\)</span> 对任意 <span class="arithmatex">\(\boldsymbol{v}\)</span></td>
-<td>有时更容易验证</td>
-</tr>
-</tbody>
-</table>
+<p><strong>逐行核对，五个数各有各的道理</strong>：</p>
+<ul>
+<li>平面四杆 <span class="arithmatex">\(F = 1\)</span>：一个输入就够，所以能当传动机构用</li>
+<li>平面五杆 <span class="arithmatex">\(F = 2\)</span>：要两个输入，灵活多一分、不确定也多一分</li>
+<li>平面 3-RRR 并联 <span class="arithmatex">\(F = 3\)</span>：动平台在平面内剩两平移加一转动</li>
+<li>串联六轴 <span class="arithmatex">\(F = 6\)</span>：没有闭环，自由度就是各关节自由度直接相加</li>
+<li>Stewart 平台 <span class="arithmatex">\(F = 6\)</span>：六条支链，配方不同会算出不同的数 —— 见下面的提示</li>
+</ul>
+<p>注意 <span class="arithmatex">\(n - j - 1\)</span> <strong>经常是负数</strong>（四杆是 <span class="arithmatex">\(4-4-1=-1\)</span>），这很正常：
+它扣的是被运动副约束掉的部分，<span class="arithmatex">\(\sum f_i\)</span> 再把真正允许的运动加回来。</p>
+<div class="admonition warning">
+<p class="admonition-title">并联平台的自由度，配方很讲究</p>
+<p>同样是 Stewart 平台，写成 <strong>6-UPS</strong>（虎克铰–移动副–球副）
+时公式干净地给出 6；
+若写成 <strong>6-SPS</strong>（两端都是球副），球副会允许上杆<strong>绕自身轴自转</strong>，
+这是<strong>局部自由度</strong>，公式会多算出 6 个，必须再扣掉。
+所以「先算再逐条检查运动副的实际作用」这一步不能省。</p>
 </div>
-<hr />
-<h3 id="2">例题 2：凸集判定<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>判断下列集合是否凸：</p>
-<p><strong>(a)</strong> <span class="arithmatex">\(C_1 = \{(x_1,x_2): x_1^2+x_2^2\leq1\}\)</span>（单位圆盘）</p>
-<p><strong>(b)</strong> <span class="arithmatex">\(C_2 = \{(x_1,x_2): x_1^2+x_2^2=1\}\)</span>（单位圆周）</p>
-<p><strong>&copy;</strong> <span class="arithmatex">\(C_3 = \{(x_1,x_2): x_1x_2\geq1,\ x_1&gt;0\}\)</span></p>
-<details class="note">
-<summary>思路</summary>
-<p>(a) 是「凸函数的子水平集」；(b) 只在边界；&copy; 取两点看连线。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p><strong>(a) 单位圆盘</strong></p>
-<p><span class="arithmatex">\(C_1\)</span> 是凸函数 <span class="arithmatex">\(f(\boldsymbol{x}) = x_1^2+x_2^2\)</span> 的<strong>子水平集</strong>：</p>
+<p><strong>机构学里有一整套「口诀式公式」的例外情形</strong>（虚约束、局部自由度、
+公共约束），本页只用最通用的一条。这些陷阱在
+<a href="../../mechanisms/dof-pitfalls/">自由度计算的两个陷阱</a>
+和<a href="../../mechanisms/dof/">自由度与约束</a>里展开，这里不重复。</p>
+<h2 id="_3">二、串联机构<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="21">2.1 一串关节连到底<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
+<p><strong>串联机构</strong>由<strong>臂、关节、末端执行装置</strong>依次连接而成，像手臂一样一节套一节。
+它的连接关系可以用一个<strong>关节序列</strong>写下来：<code>R</code> 表示转动副，<code>P</code> 表示移动副，
+所以一台六轴工业机器人就是 <code>RRRRRR</code>（记作 6R）。</p>
+<p><strong>为什么这个简写值得记</strong>：序列本身就是构型的全部信息。
+一眼 <code>6R</code> 就知道六个转动副首尾相接，没有闭环；
+<code>RPR</code> 则是「转—移—转」的三自由度手腕。工业机械臂绝大多数是 6R，
+原因下一章会讲清楚：<strong>6 个自由度刚好覆盖空间中位姿的 6 个独立量</strong>。</p>
+<h3 id="22">2.2 位形空间是环面，可达区域是圆环<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
+<p>串联没有闭环，所以自由度就是<strong>各关节自由度之和</strong>：</p>
 <div class="arithmatex">\[
-C_1 = \{\boldsymbol{x}: f(\boldsymbol{x})\leq1\}
+F = \sum_{i=1}^{n} f_i
 \]</div>
-<p><strong>凸函数的子水平集一定是凸集</strong> ✓（前面「保持凸性的运算」表中的最后一条）</p>
-<p><strong>结论</strong>：<strong>凸集</strong></p>
-<p><strong>(b) 单位圆周</strong></p>
-<p>取两点 <span class="arithmatex">\(\boldsymbol{x} = (1,0)\)</span> 与 <span class="arithmatex">\(\boldsymbol{y} = (-1,0)\)</span>，它们在 <span class="arithmatex">\(C_2\)</span> 上。</p>
-<p>中点：</p>
+<p>每个关节角都是一个独立的刻度盘，<span class="arithmatex">\(n\)</span> 个关节角拼起来就是<strong>关节空间</strong>。
+平面 2R 的关节空间是两个角的组合，形状是二维环面；
+空间 6R 则是六维环面。<strong>这是后面运动规划要搜索的空间。</strong></p>
+<p>末端能到哪，由关节角范围和杆长共同决定。平面串联手臂的可达区域是一个<strong>圆环</strong>。
+外半径最好算 —— 把杆全部伸直到一条直线上：</p>
 <div class="arithmatex">\[
-\frac{\boldsymbol{x}+\boldsymbol{y}}{2} = (0,0)
+R_{\text{外}} = \sum_i l_i
 \]</div>
-<p>但 <span class="arithmatex">\((0,0)\)</span> <strong>不在</strong> <span class="arithmatex">\(C_2\)</span> 上（<span class="arithmatex">\(\lVert(0,0)\rVert = 0\neq1\)</span>）✗</p>
-<p><strong>结论</strong>：<strong>非凸集</strong> ✗</p>
-<p><strong>关键区别</strong>：<strong>「<span class="arithmatex">\(\leq\)</span>」给出凸集，「<span class="arithmatex">\(=\)</span>」一般不凸</strong>
-（等式约束定义的是「低维曲面」，通常不凸）。</p>
-<p><strong>这一条在优化中很实用</strong>：</p>
+<p>内半径来自一个反向的问题：<strong>最短能缩到多短</strong>？末端离根部最近时，
+最长的那根杆与其余杆反向对齐，此时到根部的距离正好是
+「最长杆减去其余杆之和」。但要它<strong>大于 0</strong> 才真的是够不到的死角：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+r_{\text{内}} &amp;= \max\!\left(0,\; l_{\max} - \sum_{i \ne \max} l_i\right) \\
+&amp;= \max\!\left(0,\; 2\,l_{\max} - \sum_i l_i\right)
+\end{aligned}
+\]</div>
+<p>把第二种写法里的 <span class="arithmatex">\(\sum_i l_i\)</span> 记作总杆长 <span class="arithmatex">\(L\)</span>，判据就变得非常干净：</p>
+<div class="arithmatex">\[
+\text{出现死角} \iff l_{\max} &gt; \frac{L}{2}
+\quad\text{（最长杆超过总杆长的一半）}
+\]</div>
+<p><strong>把这条判据记住，比记公式有用</strong>：它一眼就能看出某个杆长组合有没有死角，
+不必先算 <span class="arithmatex">\(r\)</span>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 460 258" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三副串联手臂的可达范围：绿色是够得到的，橙色是够不到的中间死角">
+<defs>
+<marker id="rc2ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="gb" x1="14" y1="20" x2="58" y2="20" marker-end="url(#rc2ah1)"/>
+<text class="lbl-s" x="64" y="24">距基座的距离</text>
+<text class="lbl-s" x="14" y="48">平面 2R：杆长 1.0 + 0.8</text>
+<rect class="f2" x="14" y="61" width="26.4" height="22"/>
+<rect class="f3" x="40.4" y="61" width="211.2" height="22"/>
+<rect class="gb" x="14" y="61" width="237.6" height="22"/>
+<line class="gb" x1="14" y1="56" x2="14" y2="88"/>
+<line class="gb" x1="251.6" y1="56" x2="251.6" y2="88"/>
+<text class="lbl-s" x="10" y="96" text-anchor="end">0</text>
+<text class="l3" x="261.6" y="71">R = 1.80 m</text>
+<text class="l2" x="261.6" y="89">r = 0.20 m（死角）</text>
+<text class="lbl-s" x="14" y="122">平面 3R：杆长 1.0 + 0.8 + 0.5</text>
+<rect class="f3" x="14" y="135" width="303.6" height="22"/>
+<rect class="gb" x="14" y="135" width="303.6" height="22"/>
+<line class="gb" x1="14" y1="130" x2="14" y2="162"/>
+<line class="gb" x1="317.6" y1="130" x2="317.6" y2="162"/>
+<text class="lbl-s" x="10" y="170" text-anchor="end">0</text>
+<text class="l3" x="327.6" y="145">R = 2.30 m</text>
+<text class="l3" x="327.6" y="163">r = 0，无死角</text>
+<text class="lbl-s" x="14" y="196">平面 3R：杆长 1.0 + 0.5 + 0.4</text>
+<rect class="f2" x="14" y="209" width="13.2" height="22"/>
+<rect class="f3" x="27.2" y="209" width="237.6" height="22"/>
+<rect class="gb" x="14" y="209" width="250.8" height="22"/>
+<line class="gb" x1="14" y1="204" x2="14" y2="236"/>
+<line class="gb" x1="264.8" y1="204" x2="264.8" y2="236"/>
+<text class="lbl-s" x="10" y="244" text-anchor="end">0</text>
+<text class="l3" x="274.8" y="219">R = 1.90 m</text>
+<text class="l2" x="274.8" y="237">r = 0.10 m（死角）</text>
+</svg>
+<figcaption>把可达区域摊成一条距离轴：绿色段是手臂够得到的范围，橙色段是中间够不到的死角。只有最长杆长于其余杆之和时才有死角</figcaption>
+</figure>
+
+<p>三行读数前后对照着看：</p>
 <table>
 <thead>
 <tr>
-<th>约束类型</th>
-<th>可行集</th>
+<th>杆长（m）</th>
+<th><span class="arithmatex">\(R_{\text{外}}\)</span></th>
+<th><span class="arithmatex">\(r_{\text{内}}\)</span></th>
+<th>判据 <span class="arithmatex">\(l_{\max}\)</span> 与 <span class="arithmatex">\(L/2\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>线性<strong>不等式</strong> <span class="arithmatex">\(\boldsymbol{a}^\top\boldsymbol{x}\leq b\)</span></td>
-<td><strong>凸</strong> ✓</td>
+<td>1.0, 0.8</td>
+<td>1.80</td>
+<td>0.20（有死角）</td>
+<td><span class="arithmatex">\(1.00 &gt; 0.90\)</span></td>
 </tr>
 <tr>
-<td>线性<strong>等式</strong> <span class="arithmatex">\(\boldsymbol{a}^\top\boldsymbol{x}= b\)</span></td>
-<td><strong>凸</strong> ✓（超平面是凸的）</td>
+<td>1.0, 0.8, 0.5</td>
+<td>2.30</td>
+<td>0（实心圆）</td>
+<td><span class="arithmatex">\(1.00 &lt; 1.15\)</span></td>
 </tr>
 <tr>
-<td>非线性<strong>等式</strong> <span class="arithmatex">\(g(\boldsymbol{x})=0\)</span></td>
-<td>一般<strong>非凸</strong> ✗</td>
+<td>1.0, 0.5, 0.4</td>
+<td>1.90</td>
+<td>0.10（有死角）</td>
+<td><span class="arithmatex">\(1.00 &gt; 0.95\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>所以 <strong>一般只把等式约束限制在线性形式</strong> ——
-这是「凸优化标准形式」的由来。</p>
-<p><strong>&copy; <span class="arithmatex">\(C_3 = \{x_1x_2\geq1,\ x_1&gt;0\}\)</span></strong></p>
-<p>等价改写：<span class="arithmatex">\(x_1&gt;0\)</span> 时 <span class="arithmatex">\(x_1x_2\geq1 \iff x_2\geq\frac{1}{x_1}\)</span>。</p>
-<p><strong>关键观察</strong>：<span class="arithmatex">\(\frac1{x_1}\)</span> 在 <span class="arithmatex">\(x_1&gt;0\)</span> 上是<strong>凸函数</strong>
-（因为 <span class="arithmatex">\(\frac{1}{x}\)</span> 的二阶导 <span class="arithmatex">\(\frac{2}{x^3}&gt;0\)</span>）。</p>
-<p>所以 <span class="arithmatex">\(C_3\)</span> 是凸函数的<strong>上镜图</strong>（epigraph）：</p>
-<div class="arithmatex">\[
-C_3 = \{(x_1,x_2): x_2 \geq g(x_1)\}, \quad g = \frac{1}{x_1}
-\]</div>
-<p><strong>凸函数的上镜图一定是凸集</strong> ✓</p>
-<p><strong>结论</strong>：<strong>凸集</strong></p>
-<p><strong>几何直观</strong>：画 <span class="arithmatex">\(x_2 = 1/x_1\)</span> 的图像，集合是它<strong>上方</strong>的区域
-——这个区域没有「凹陷」，确实是凸的。</p>
-</details>
-<div class="admonition note">
-<p class="admonition-title">三类「凸性保证」的集合（记住这三个）</p>
-<table>
-<thead>
-<tr>
-<th>形式</th>
-<th>是否凸</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>子水平集</strong> <span class="arithmatex">\(\{f\leq c\}\)</span>（<span class="arithmatex">\(f\)</span> 凸）</td>
-<td>✓</td>
-<td>凸函数性质</td>
-</tr>
-<tr>
-<td><strong>上镜图</strong> <span class="arithmatex">\(\{(x,t): t\geq f(x)\}\)</span>（<span class="arithmatex">\(f\)</span> 凸）</td>
-<td>✓</td>
-<td>凸函数定义</td>
-</tr>
-<tr>
-<td><strong>等式</strong> <span class="arithmatex">\(\{f = c\}\)</span>（非线性）</td>
-<td>一般 ✗</td>
-<td>只是边界</td>
-</tr>
-</tbody>
-</table>
-<p><strong>实用口诀</strong>：</p>
-<div class="arithmatex">\[
-\text{凸函数} + \text{「}\leq\text{」} \Rightarrow \text{凸集}
-\]</div>
-<div class="arithmatex">\[
-\text{凸函数} + \text{「}= \text{」} \Rightarrow \text{一般非凸（除非是线性）}
-\]</div>
-</div>
-<hr />
-<h3 id="3">例题 3：验证凸性的一阶条件<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>用一阶条件验证 <span class="arithmatex">\(f(x) = e^x\)</span> 是凸函数。</p>
-<details class="note">
-<summary>思路</summary>
-<p>一阶条件：<span class="arithmatex">\(f(y)\geq f(x)+f'(x)(y-x)\)</span>。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p><strong>写出不等式的两边</strong>：</p>
-<div class="arithmatex">\[
-e^y \geq e^x + e^x(y-x)
-\]</div>
-<p>两边除以 <span class="arithmatex">\(e^x\)</span>（正数，不变号）：</p>
-<div class="arithmatex">\[
-e^{y-x} \geq 1 + (y-x)
-\]</div>
-<p><strong>令 <span class="arithmatex">\(t = y-x\)</span></strong>，需证明：</p>
-<div class="arithmatex">\[
-e^{t} \geq 1+t \quad \forall t\in\mathbb{R}
-\]</div>
-<p><strong>这就是 <span class="arithmatex">\(e^t\)</span> 在 <span class="arithmatex">\(t=0\)</span> 处的切线是它的下界</strong></p>
-<p><strong>证明</strong>：定义</p>
-<div class="arithmatex">\[
-g(t) = e^t - 1 - t
-\]</div>
-<p><strong>求导找最小值</strong>：</p>
-<div class="arithmatex">\[
-g'(t) = e^t - 1
-\]</div>
-<p><span class="arithmatex">\(g'(t) = 0\)</span> 当 <span class="arithmatex">\(t = 0\)</span>。且</p>
-<table>
-<thead>
-<tr>
-<th>区间</th>
-<th><span class="arithmatex">\(g'\)</span></th>
-<th><span class="arithmatex">\(g\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(t&lt;0\)</span></td>
-<td><span class="arithmatex">\(&lt;0\)</span></td>
-<td>递减</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(t&gt;0\)</span></td>
-<td><span class="arithmatex">\(&gt;0\)</span></td>
-<td>递增</td>
-</tr>
-</tbody>
-</table>
-<p>所以 <span class="arithmatex">\(t=0\)</span> 是<strong>全局最小点</strong>：</p>
-<div class="arithmatex">\[
-g(0) = e^0-1-0 = 0
-\]</div>
-<p>因此 <span class="arithmatex">\(g(t)\geq0\)</span>，即 <span class="arithmatex">\(e^t\geq1+t\)</span></p>
-<p><strong>结论</strong>：<span class="arithmatex">\(f(x)=e^x\)</span> 满足一阶条件 → <strong>凸函数</strong></p>
-</details>
+<p><strong>这里能读出两条设计经验</strong>：</p>
+<p>第一，<strong>「杆一多，最长的那根就不显得长」</strong> —— 同样是 1.0 m 的长杆，
+在两根杆的机构里超过总长的一半，加到三根杆就不再超过了，
+死角自然消失。第二，<strong>外半径只由杆长之和决定，内半径只由最长杆和其余杆的差决定</strong>；
+想让手臂伸得远就把杆加长，想让中间别留空洞就<strong>别让某一根杆太突出</strong>。</p>
 <div class="admonition tip">
-<p class="admonition-title">这个不等式值得记住（工程中反复出现）</p>
-<div class="arithmatex">\[
-\boxed{\ e^t \geq 1+t\ }
-\]</div>
-<p><strong>等号仅在 <span class="arithmatex">\(t=0\)</span> 成立。</strong></p>
-<p><strong>工程用途</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>场景</th>
-<th>用法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>证明不等式</td>
-<td>把 <span class="arithmatex">\(e^t\)</span> 换成 <span class="arithmatex">\(1+t\)</span> 做下界估计</td>
-</tr>
-<tr>
-<td>指数增长的保守估计</td>
-<td>增长率至少是线性的</td>
-</tr>
-<tr>
-<td>信息论</td>
-<td>用于证明 KL 散度非负</td>
-</tr>
-<tr>
-<td>数值分析</td>
-<td>相对误差界</td>
-</tr>
-</tbody>
-</table>
-<p><strong>推广形式</strong>（对凸函数的一般性质）：</p>
-<div class="arithmatex">\[
-e^t \geq 1+t \quad\text{（这是 }e^t\text{ 在 0 处一阶泰勒的下界）}
-\]</div>
-<p><strong>对比其它函数的线性下界</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>切线不等式</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(e^t\)</span></td>
-<td><span class="arithmatex">\(e^t\geq1+t\)</span></td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(-\ln t\)</span></td>
-<td><span class="arithmatex">\(-\ln t \geq 1-t\)</span>（即 <span class="arithmatex">\(\ln t\leq t-1\)</span>）</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(t\ln t\)</span></td>
-<td><span class="arithmatex">\(t\ln t\geq t-1\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>这些都可以由「凸函数的切线在下方」统一解释。</p>
+<p class="admonition-title">可达区域不等于工作空间</p>
+<p>上面算的是<strong>几何上能不能到</strong>。真实工作空间还要扣掉
+「算进来但装不下」的部分，并且要问一句<strong>姿态能不能同时满足</strong>。
+机构学把这两件事分开算：<a href="../../mechanisms/workspace/">运动空间与工作空间</a>。</p>
 </div>
-<hr />
-<h3 id="4">例题 4：判断问题是否为凸优化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>判断下列问题是否凸：</p>
-<p><strong>(a)</strong> <span class="arithmatex">\(\min\ \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2 + \lambda\lVert\boldsymbol{x}\rVert_2^2\)</span></p>
-<p><strong>(b)</strong> <span class="arithmatex">\(\min\ \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span>，s.t. <span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_2\leq1\)</span></p>
-<p><strong>&copy;</strong> <span class="arithmatex">\(\min\ \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span>，s.t. <span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_0\leq k\)</span></p>
-<details class="note">
-<summary>思路</summary>
-<p>检查目标函数与可行集各自的凸性。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p><strong>(a) 岭回归（Ridge）</strong></p>
-<p><strong>目标函数</strong>是两项之和：</p>
+<h2 id="_4">三、并联机构<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="31">3.1 多条支链拉住一个平台<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
+<p><strong>并联机构</strong>由<strong>支链、动平台、静平台</strong>组成：静平台固定，
+动平台被若干条支链<strong>同时</strong>与静平台相连，
+最著名的是六条支链的 <strong>Stewart 平台</strong>。
+它的构型参数是 <strong>支链数 × 每条支链的自由度</strong>：</p>
 <table>
 <thead>
 <tr>
-<th>项</th>
-<th>凸性</th>
+<th>机构</th>
+<th>支链数</th>
+<th>每条支链</th>
+<th>动平台自由度</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="arithmatex">\(\lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2\)</span></td>
-<td><strong>凸</strong>（例题 1c）</td>
+<td>Stewart（6-UPS）</td>
+<td>6</td>
+<td>虎克铰(2) + 移动副(1) + 球副(3)</td>
+<td>6（三平移 + 三转动）</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(\lambda\lVert\boldsymbol{x}\rVert_2^2\)</span></td>
-<td><strong>凸</strong>（<span class="arithmatex">\(\lambda&gt;0\)</span>，二次型）</td>
+<td>Delta</td>
+<td>3</td>
+<td>主动臂 + 平行四边形从动臂</td>
+<td>3（只有平移）</td>
+</tr>
+<tr>
+<td>平面 3-RRR</td>
+<td>3</td>
+<td>三个转动副</td>
+<td>3（两平移 + 一转动）</td>
 </tr>
 </tbody>
 </table>
-<p><strong>凸 + 凸 = 凸</strong></p>
-<p><strong>结论</strong>：<strong>凸优化问题</strong> ✓（无约束）</p>
-<p><strong>进一步</strong>：Hessian 是</p>
+<p><strong>Delta 与 Stewart 的差别值得记</strong>：Stewart 的动平台能转，
+Delta 的动平台<strong>只能平移、转不动</strong> —— 它的三条支链把转动全约束掉了。
+所以 Delta 用来做高速抓放（面包分拣、药品包装），
+Stewart 用来做运动模拟与精密定位（飞行模拟器、手术台）。</p>
+<h3 id="32">3.2 为什么并联精度高：误差被平均掉了<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
+<p>串联的误差<strong>沿链累加</strong>：每一节的定位误差都叠到末端，越往后越大。
+并联恰好相反：动平台的位置由多条支链共同决定，
+任何一条支链的偏差都会被其他支链「拉住」，效果上相当于<strong>做了一次平均</strong>。</p>
+<p>这句话可以算出来。设每一节关节（或每一条支链）的定位误差是
+均值 0、标准差 <span class="arithmatex">\(\sigma\)</span> 的<strong>相互独立</strong>随机量，链数为 <span class="arithmatex">\(N\)</span>。</p>
+<p><strong>串联 —— 误差沿链相加。</strong> 末端误差是 <span class="arithmatex">\(N\)</span> 个独立误差之和 <span class="arithmatex">\(S = \sum_{i=1}^{N} e_i\)</span>，
+方差直接相加：</p>
 <div class="arithmatex">\[
-2A^\top A + 2\lambda I
+\operatorname{Var}(S) = \sum_{i=1}^{N}\sigma^2 = N\sigma^2
+\qquad\Longrightarrow\qquad \text{标准差} = \sqrt{N}\,\sigma
 \]</div>
-<p>因为 <span class="arithmatex">\(2\lambda I\)</span> <strong>正定</strong>，所以 Hessian 恒正定
-→ <strong>严格凸</strong> → <strong>唯一最优解</strong> ✓</p>
-<p><strong>这就是岭回归比普通最小二乘更「稳」的原因</strong>：
-加正则项后 Hessian 一定可逆，最优解唯一。</p>
-<p><strong>(b) 带球约束的最小二乘</strong></p>
-<p><strong>目标</strong>：凸</p>
-<p><strong>约束</strong> <span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_2\leq1\)</span>：
-这是凸函数（范数）的<strong>子水平集</strong> → <strong>凸集</strong></p>
-<p><strong>结论</strong>：<strong>凸优化问题</strong></p>
-<p><strong>求解</strong>：可用投影梯度法（每步把点投影回球内）。</p>
-<p><strong>&copy; 带基数约束的最小二乘</strong></p>
-<p><strong>目标</strong>：凸</p>
-<p><strong>约束</strong> <span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_0\leq k\)</span>：
-<strong>基数约束</strong>要求「非零元素的个数 ≤ k」。</p>
-<p><strong><span class="arithmatex">\(\lVert\cdot\rVert_0\)</span> 不是范数，且非凸</strong> ✗</p>
-<p><strong>为什么非凸</strong>：考虑 <span class="arithmatex">\(\boldsymbol{x} = (1,0)\)</span>、<span class="arithmatex">\(\boldsymbol{y} = (0,1)\)</span>，
-两者基数都是 1（满足 <span class="arithmatex">\(\leq k\)</span>）。但中点</p>
+<p><strong>并联 —— 多条支链的误差取平均。</strong> 末端误差是 <span class="arithmatex">\(\bar e = \frac{1}{N}\sum e_i\)</span>，
+方差外面多了一层 <span class="arithmatex">\(1/N^2\)</span>：</p>
 <div class="arithmatex">\[
-\frac{\boldsymbol{x}+\boldsymbol{y}}{2} = (0.5,\ 0.5)
+\operatorname{Var}(\bar e) = \frac{1}{N^2}\cdot N\sigma^2 = \frac{\sigma^2}{N}
+\qquad\Longrightarrow\qquad \text{标准差} = \frac{\sigma}{\sqrt{N}}
 \]</div>
-<p>基数<strong>仍为 2</strong>？不，这里两个分量都非零 → 基数为 2。</p>
-<p>当 <span class="arithmatex">\(k=1\)</span> 时，中点基数 <span class="arithmatex">\(= 2 &gt; 1\)</span> → <strong>不在可行集内</strong> ✗
-违反凸集定义。</p>
-<p><strong>结论</strong>：<strong>非凸优化问题</strong> ✗（实际上是 NP 难的）</p>
-<p><strong>工程上的处理（这是重点）</strong>：</p>
+<p><strong>两者之比恰好是 <span class="arithmatex">\(N\)</span></strong>：一个按 <span class="arithmatex">\(\sqrt{N}\)</span> 放大，一个按 <span class="arithmatex">\(\sqrt{N}\)</span> 缩小。</p>
+<p><strong>为什么要再乘一个系数</strong>：标准差衡量的是「偏离的平均幅度」，
+而误差可正可负、符号会互相抵消，所以工程上更关心<strong>平均偏差</strong> <span class="arithmatex">\(E|e|\)</span>。
+对均值为 0、标准差为 <span class="arithmatex">\(\sigma\)</span> 的正态误差，<span class="arithmatex">\(E|e| = \sqrt{2/\pi}\,\sigma\)</span>。于是</p>
+<div class="arithmatex">\[
+\text{串联} \approx \sqrt{N}\,\sigma\sqrt{\tfrac{2}{\pi}},
+\qquad
+\text{并联} \approx \frac{\sigma}{\sqrt{N}}\sqrt{\tfrac{2}{\pi}}
+\]</div>
+<p>代入 <span class="arithmatex">\(\sigma = 0.01\)</span> m、<span class="arithmatex">\(N = 6\)</span>，两项各自算一遍：</p>
 <table>
 <thead>
 <tr>
-<th>方法</th>
+<th>走法</th>
+<th>标准差</th>
+<th>平均偏差（乘 <span class="arithmatex">\(\sqrt{2/\pi}\)</span>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>串联（误差相加）</td>
+<td><span class="arithmatex">\(\sqrt{6}\times 0.01 = 0.0245\)</span> m</td>
+<td>0.0195 m</td>
+</tr>
+<tr>
+<td>并联（多链取平均）</td>
+<td><span class="arithmatex">\(0.01/\sqrt{6} = 0.00408\)</span> m</td>
+<td>0.0033 m</td>
+</tr>
+<tr>
+<td><strong>比值</strong></td>
+<td><strong>6.00</strong></td>
+<td><strong>6.00</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>这就是「并联精度高」的定量含义</strong>：6 条支链，末端平均偏差就差 6 倍。
+链数越多，这个优势越大。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 460 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="误差的两种走法：串联沿链累加，并联取平均">
+<defs>
+<marker id="rc3ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc3ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc3ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="lbl-s" x="112" y="20" text-anchor="middle">串联：各节误差沿链相加</text>
+<text class="lbl-s" x="338" y="20" text-anchor="middle">并联：多条支链的误差取平均</text>
+<line class="gd" x1="225" y1="34" x2="225" y2="200"/>
+<line class="a1" x1="48" y1="168" x2="98" y2="138" marker-end="url(#rc3ah1)"/>
+<line class="a1" x1="98" y1="138" x2="134" y2="158" marker-end="url(#rc3ah1)"/>
+<line class="a1" x1="134" y1="158" x2="188" y2="128" marker-end="url(#rc3ah1)"/>
+<line class="a1" x1="188" y1="128" x2="216" y2="162" marker-end="url(#rc3ah1)"/>
+<line class="a2" x1="48" y1="168" x2="216" y2="162" marker-end="url(#rc3ah2)"/>
+<circle class="dc" cx="98" cy="138" r="2.5"/>
+<circle class="dc" cx="134" cy="158" r="2.5"/>
+<circle class="dc" cx="188" cy="128" r="2.5"/>
+<text class="lbl-s" x="120" y="108">e₁</text>
+<text class="lbl-s" x="150" y="178">e₂</text>
+<text class="lbl-s" x="198" y="118">e₃</text>
+<text class="lbl-s" x="238" y="176">e₄</text>
+<text class="lbl-s" x="112" y="204" text-anchor="middle">合成误差 = 各段之和 → 标准差 ∝ √N · σ</text>
+<line class="a1" x1="300" y1="152" x2="345" y2="122" marker-end="url(#rc3ah1)"/>
+<circle class="dc" cx="345" cy="122" r="2.5"/>
+<line class="a1" x1="300" y1="152" x2="342" y2="178" marker-end="url(#rc3ah1)"/>
+<circle class="dc" cx="342" cy="178" r="2.5"/>
+<line class="a1" x1="300" y1="152" x2="268" y2="122" marker-end="url(#rc3ah1)"/>
+<circle class="dc" cx="268" cy="122" r="2.5"/>
+<line class="a1" x1="300" y1="152" x2="312" y2="100" marker-end="url(#rc3ah1)"/>
+<circle class="dc" cx="312" cy="100" r="2.5"/>
+<line class="a3" x1="300" y1="152" x2="316.75" y2="130.5" marker-end="url(#rc3ah3)"/>
+<circle class="dc" cx="300" cy="152" r="3.5"/>
+<text class="l3" x="322.75" y="124.5">平均</text>
+<text class="lbl-s" x="338" y="204" text-anchor="middle">合成误差 = 取平均 → 标准差 ∝ σ / √N</text>
+</svg>
+<figcaption>同样大小的单节误差：左边首尾相接所以越叠越长，右边取平均所以互相抵消，最终偏差小得多</figcaption>
+</figure>
+
+<div class="admonition note">
+<p class="admonition-title">「同源」比单个结论更重要</p>
+<p>「精度高」和「工作空间小」不是两个独立的缺点，
+而是<strong>同一个机制的两面</strong>：都来自「多条支链共同约束动平台」。
+约束越多，动平台活动范围越小，同时也越不容易被单条链条带偏。
+所以别指望改进设计能「保留优点、去掉缺点」——
+那等于要求同一个机制既约束又不约束。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 460 196" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="并联机构里「精度高」与「工作空间小」同源">
+<defs>
+<marker id="rc6ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc6ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<line class="ax" x1="56" y1="104" x2="384" y2="104"/>
+<line class="ax" x1="56" y1="97" x2="56" y2="111"/>
+<line class="ax" x1="384" y1="97" x2="384" y2="111"/>
+<text class="lbl-s" x="56" y="128" text-anchor="middle">支链少 · 约束弱</text>
+<text class="lbl-s" x="384" y="128" text-anchor="middle">支链多 · 约束强</text>
+<line class="a3" x1="160" y1="104" x2="160" y2="50" marker-end="url(#rc6ah3)"/>
+<text class="lbl-s" x="174" y="56" text-anchor="start">精度提高：误差被平均</text>
+<line class="a2" x1="160" y1="104" x2="160" y2="162" marker-end="url(#rc6ah2)"/>
+<text class="lbl-s" x="174" y="168" text-anchor="start">工作空间缩小：范围被限住</text>
+</svg>
+<figcaption>同一个原因的两个后果：共同约束越强，单条支链的偏差越容易被拉住（精度高），动平台能活动的范围也越小（工作空间小）</figcaption>
+</figure>
+
+<h2 id="_5">四、轮式机构<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h3 id="41">4.1 轮式机构的不同在「约束」<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
+<p>轮式机构靠轮子与地面接触，运动方式与前两类完全不同：
+它不在关节空间里摆，而是在<strong>地面上移动</strong>，
+位形用三个量描述 —— 位置 <span class="arithmatex">\((x, y)\)</span> 加上朝向 <span class="arithmatex">\(\theta\)</span>。</p>
+<p>要害在于<strong>轮子不能侧滑</strong>。普通的固定轮只能沿自己的滚动方向前进，
+横向是滑不动的。这就是一条<strong>非完整约束</strong>：
+它限制的是<strong>速度</strong>，不是<strong>位置</strong>。</p>
+<p><strong>「限制速度而不是位置」这句话很关键</strong>：车最终能到达平面上任何
+<span class="arithmatex">\((x, y, \theta)\)</span>，一个都不少；只是<strong>不能瞬时横着挪过去</strong>，
+必须靠「先转一点、再走一点」把横向位移攒出来。</p>
+<h3 id="42-3-2">4.2 位形 3 维，输入只有 2 个<a class="headerlink" href="#42-3-2" title="Permanent link">&para;</a></h3>
+<p>一台差速驱动小车（左右各一个驱动轮），位形空间是 3 维，
+但控制输入只有 2 个：左轮速 <span class="arithmatex">\(v_L\)</span> 与右轮速 <span class="arithmatex">\(v_R\)</span>。轮子不打滑时，
+两个轮心的线速度就等于各自的轮面速度，而车体中心在两轮正中间，
+距左轮 <span class="arithmatex">\(B/2\)</span>（<span class="arithmatex">\(B\)</span> 是两轮中心距）：</p>
+<div class="arithmatex">\[
+v - \omega\frac{B}{2} = v_L, \qquad v + \omega\frac{B}{2} = v_R
+\]</div>
+<p><strong>两式相加</strong>消掉 <span class="arithmatex">\(\omega\)</span>，得 <span class="arithmatex">\(2v = v_L + v_R\)</span>；
+<strong>两式相减</strong>消掉 <span class="arithmatex">\(v\)</span>，得 <span class="arithmatex">\(\omega B = v_R - v_L\)</span>。整理后：</p>
+<div class="arithmatex">\[
+v = \frac{v_L + v_R}{2}, \qquad
+\omega = \frac{v_R - v_L}{B}
+\]</div>
+<p>线速度取平均，是因为车体中心正好在两轮正中间；
+角速度与两轮速差成正比，差得越多转得越快。
+由这两式还能算出<strong>瞬时旋转中心</strong>（ICR）到车体中心的距离：</p>
+<div class="arithmatex">\[
+r = \frac{v}{\omega} = \frac{B}{2}\cdot\frac{v_L + v_R}{v_R - v_L}
+\]</div>
+<p>盯着这个式子看两个极端：左轮右轮等速时 <span class="arithmatex">\(\omega = 0\)</span>，
+<span class="arithmatex">\(r \to \infty\)</span>，车走<strong>直线</strong>；两轮反向等速时 <span class="arithmatex">\(v = 0\)</span>，
+<span class="arithmatex">\(r = 0\)</span>，车<strong>原地打转</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 460 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="差速驱动的三种走法：直线、圆弧、原地转">
+<defs>
+<marker id="rc4ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc4ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc4ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="rc4ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a4" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<text class="lbl-s" x="78" y="18" text-anchor="middle">两轮等速 → 直线</text>
+<rect class="f1" x="56" y="76" width="44" height="64" rx="3"/>
+<rect class="gb" x="56" y="76" width="44" height="64" rx="3"/>
+<rect class="a2" x="49" y="83" width="7" height="50" rx="2"/>
+<rect class="a2" x="100" y="83" width="7" height="50" rx="2"/>
+<circle class="dc" cx="78" cy="108" r="3"/>
+<line class="a1" x1="78" y1="74" x2="78" y2="30" marker-end="url(#rc4ah1)"/>
+<line class="gd" x1="56" y1="46" x2="100" y2="46"/>
+<text class="lbl-s" x="104" y="50">v</text>
+<text class="lbl-s" x="78" y="182" text-anchor="middle">v_L = v_R，ω = 0</text>
+<text class="lbl-s" x="78" y="198" text-anchor="middle">瞬时旋转中心在无穷远</text>
+<text class="lbl-s" x="230" y="18" text-anchor="middle">两轮不等速 → 圆弧</text>
+<rect class="f1" x="208" y="76" width="44" height="64" rx="3"/>
+<rect class="gb" x="208" y="76" width="44" height="64" rx="3"/>
+<rect class="a2" x="201" y="83" width="7" height="50" rx="2"/>
+<rect class="a2" x="252" y="83" width="7" height="50" rx="2"/>
+<circle class="dc" cx="230" cy="108" r="3"/>
+<line class="gd" x1="230" y1="108" x2="302" y2="154"/>
+<circle class="d1" cx="302" cy="154" r="4"/>
+<text class="lbl-s" x="308" y="158">ICR</text>
+<path class="a3" d="M 230.0,108.0 A 85.4,85.4 0 0 1 221.4,182.4" marker-end="url(#rc4ah3)" fill="none"/>
+<text class="lbl-s" x="262" y="145">r</text>
+<text class="lbl-s" x="230" y="182" text-anchor="middle">v_L ≠ v_R，绕 ICR 画圆弧</text>
+<text class="lbl-s" x="230" y="198" text-anchor="middle">r = v / ω</text>
+<text class="lbl-s" x="386" y="18" text-anchor="middle">两轮反向 → 原地转</text>
+<rect class="f1" x="364" y="76" width="44" height="64" rx="3"/>
+<rect class="gb" x="364" y="76" width="44" height="64" rx="3"/>
+<rect class="a2" x="357" y="83" width="7" height="50" rx="2"/>
+<rect class="a2" x="408" y="83" width="7" height="50" rx="2"/>
+<circle class="dc" cx="386" cy="108" r="3"/>
+<line class="a1" x1="361" y1="126" x2="361" y2="90" marker-end="url(#rc4ah1)"/>
+<line class="a2" x1="411" y1="90" x2="411" y2="126" marker-end="url(#rc4ah2)"/>
+<path class="a4" d="M 340.9,91.6 A 48.0,48.0 0 0 1 431.1,91.6" marker-end="url(#rc4ah4)" fill="none"/>
+<text class="lbl-s" x="386" y="182" text-anchor="middle">v_R = −v_L，v = 0</text>
+<text class="lbl-s" x="386" y="198" text-anchor="middle">ICR 落在车体中心</text>
+</svg>
+<figcaption>俯视一辆差速小车：两轮速度的差别决定它走直线、画圆弧，还是原地打转；圆弧的圆心就是瞬时旋转中心</figcaption>
+</figure>
+
+<h3 id="43">4.3 三种走法的手算对照<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
+<p>车体中心绕位于 <span class="arithmatex">\((0,\; r)\)</span> 的瞬时旋转中心画圆弧，转过 <span class="arithmatex">\(\theta = \omega t\)</span>，所以终点是</p>
+<div class="arithmatex">\[
+x = r\sin\theta, \qquad y = r\,(1 - \cos\theta)
+\]</div>
+<p>取轮距 <span class="arithmatex">\(B = 0.30\)</span> m，四种输入各走 2 s，逐行算一遍：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(v_L\)</span></th>
+<th><span class="arithmatex">\(v_R\)</span></th>
+<th><span class="arithmatex">\(v\)</span></th>
+<th><span class="arithmatex">\(\omega\)</span></th>
+<th><span class="arithmatex">\(r\)</span></th>
+<th>走法</th>
+<th><span class="arithmatex">\(\theta\)</span></th>
+<th>终点 <span class="arithmatex">\((x, y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+0.5</td>
+<td>+0.5</td>
+<td>0.5</td>
+<td>0</td>
+<td><span class="arithmatex">\(\infty\)</span></td>
+<td>直线</td>
+<td><span class="arithmatex">\(0^\circ\)</span></td>
+<td>(+1.000, 0.000)</td>
+</tr>
+<tr>
+<td>+0.6</td>
+<td>+0.4</td>
+<td>0.5</td>
+<td><span class="arithmatex">\(-0.667\)</span></td>
+<td><span class="arithmatex">\(-0.75\)</span></td>
+<td>顺时针画弧</td>
+<td><span class="arithmatex">\(-76.39^\circ\)</span></td>
+<td>(+0.729, <span class="arithmatex">\(-0.574\)</span>)</td>
+</tr>
+<tr>
+<td>+0.4</td>
+<td>+0.6</td>
+<td>0.5</td>
+<td><span class="arithmatex">\(+0.667\)</span></td>
+<td><span class="arithmatex">\(+0.75\)</span></td>
+<td>逆时针画弧</td>
+<td><span class="arithmatex">\(+76.39^\circ\)</span></td>
+<td>(+0.729, +0.574)</td>
+</tr>
+<tr>
+<td>+0.2</td>
+<td><span class="arithmatex">\(-0.2\)</span></td>
+<td>0</td>
+<td><span class="arithmatex">\(-1.333\)</span></td>
+<td>0</td>
+<td>原地转</td>
+<td><span class="arithmatex">\(-152.79^\circ\)</span></td>
+<td>(0.000, 0.000)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>读这张表要注意两处</strong>：</p>
+<ul>
+<li><strong>第二、三行 <span class="arithmatex">\(y\)</span> 互为相反数</strong>，因为两条弧一左一右；
+  它们的 <span class="arithmatex">\(r\)</span> 也一正一负，符号只表示圆心在车体左侧还是右侧。</li>
+<li><strong>最后一行位置完全没动</strong>，只有朝向变了。
+  这正是 <span class="arithmatex">\(v = 0\)</span>、<span class="arithmatex">\(r = 0\)</span> 的含义：绕车体中心自己转。</li>
+</ul>
+<p><strong>为什么「3 维位形、2 个输入」值得单独记一笔</strong>：
+它意味着小车<strong>不能直接横向平移</strong>，
+所以「倒车入库」一定要前后反复调整 —— 这不是驾驶技术问题，
+而是非完整约束的必然后果。移动机器人的规划器必须把这一条写进模型，
+否则算出来的路径根本走不了。</p>
+<h2 id="_6">五、复合机构<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="51">5.1 把几种构型叠起来用<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
+<p><strong>复合机构</strong>是把前几类<strong>串起来用</strong>。
+最常见的是「<strong>移动平台 + 机械臂</strong>」：底盘负责把手臂送到工作点附近，
+手臂负责在近处做精细操作 —— 一个管「大范围」，一个管「高精度」。</p>
+<p>复合机构的自由度是<strong>分层叠加</strong>的：总自由度等于底盘自由度加机械臂自由度，
+但<strong>可独立控制的输入数</strong>要分开数，因为底盘那部分带着非完整约束。</p>
+<h3 id="52">5.2 一台移动机械臂的自由度账<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
+<p>以「差速底盘 + 六轴臂」为例，把账算清楚：</p>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>位形自由度</th>
+<th>控制输入</th>
 <th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>L1 松弛</strong></td>
-<td>用 <span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_1\leq c\)</span> 替代（<strong>凸</strong>！）</td>
+<td>差速底盘</td>
+<td>3（<span class="arithmatex">\(x, y, \theta\)</span>）</td>
+<td>2（<span class="arithmatex">\(v_L, v_R\)</span>）</td>
+<td>带一条非完整约束</td>
 </tr>
 <tr>
-<td>贪心算法</td>
-<td>逐步选择（如 OMP）</td>
+<td>六轴机械臂</td>
+<td>6</td>
+<td>6</td>
+<td>关节空间无约束</td>
 </tr>
 <tr>
-<td>启发式搜索</td>
-<td>模拟退火、遗传算法</td>
+<td><strong>整体</strong></td>
+<td><strong>9</strong></td>
+<td><strong>8</strong></td>
+<td>差的正是底盘那 1 个</td>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么 L1 是好替代</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>范数</th>
-<th>形状</th>
-<th>效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(\lVert\cdot\rVert_0\)</span></td>
-<td><strong>非凸</strong>（计数）</td>
-<td>精确稀疏</td>
-</tr>
-<tr>
-<td><strong><span class="arithmatex">\(\lVert\cdot\rVert_1\)</span></strong></td>
-<td><strong>凸</strong>（菱形）</td>
-<td><strong>诱导稀疏</strong> ✓</td>
-</tr>
-<tr>
-<td><span class="arithmatex">\(\lVert\cdot\rVert_2\)</span></td>
-<td>凸（圆形）</td>
-<td>不稀疏</td>
-</tr>
-</tbody>
-</table>
-<p><strong>几何直观</strong>：L1 球的「尖角」正好在坐标轴上，
-所以最优解容易<strong>恰好落在坐标轴上</strong> → 该分量为零 → 稀疏</p>
-<p><strong>这就是 Lasso 的原理</strong>，也是压缩感知的核心思想。</p>
-</details>
+<p><strong>读法</strong>：位形是 9 维，输入却只有 8 个。
+底盘少的那 1 个（横向平移）只能靠时间去攒，<strong>不能瞬时给出</strong>。
+这就解释了一条工程常识：移动机械臂做精细作业时，
+通常先<strong>把底盘停稳、锁定</strong>，再让手臂动作 ——
+不是设计者偷懒，而是让一个非完整系统去干精确定位本来就别扭。</p>
 <div class="admonition tip">
-<p class="admonition-title">「L0 难、L1 松」是稀疏优化的基本套路</p>
+<p class="admonition-title">「复合」不止是串并联混搭</p>
+<p>复合还包括<strong>不同运动类型的拼接</strong>（移动 + 操作）
+和<strong>不同尺度的拼接</strong>（粗定位 + 精定位）。
+后者在机构学里有专门讨论：
+<a href="../../mechanisms/serial-design/">机构设计剖析</a>、
+<a href="../../mechanisms/design-considerations/">应用中的设计考量</a>。</p>
+</div>
+<h2 id="_7">六、仿生机构<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<h3 id="61">6.1 仿生机构想抄的是什么<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
+<p><strong>仿生机构</strong>照着生物的结构做：鱼的身躯、鸟的翅、蛇的脊骨、壁虎的脚。
+它要的不是「像」，而是生物结构带来的那种能力 ——
+柔软、能变形、能在非结构环境里移动。</p>
+<p>用机构学的眼光看，仿生机构的价值在于它常常<strong>不是传统的
+「刚性构件 + 转动副」组合</strong>，而是引入了别的连接方式：</p>
 <table>
 <thead>
 <tr>
-<th>层级</th>
-<th>问题</th>
-<th>可解性</th>
+<th>生物结构</th>
+<th>机构学对应</th>
+<th>关键差别</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>原始</td>
-<td><span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_0\leq k\)</span></td>
-<td><strong>NP 难</strong></td>
+<td>鱼的躯干</td>
+<td>多关节串联链</td>
+<td>关节多，靠<strong>波形</strong>传动力</td>
 </tr>
 <tr>
-<td><strong>松弛</strong></td>
-<td><span class="arithmatex">\(\lVert\boldsymbol{x}\rVert_1\leq c\)</span></td>
-<td><strong>凸，多项式可解</strong> ✓</td>
+<td>章鱼的腕</td>
+<td>连续体机构</td>
+<td>无固定关节，<strong>处处可弯</strong></td>
 </tr>
 <tr>
-<td>理论保证</td>
-<td>满足条件时两者解<strong>相同</strong></td>
-<td>压缩感知的核心定理</td>
+<td>鸟的翅</td>
+<td>柔性 / 变刚度机构</td>
+<td>刚度可调，靠<strong>变形</strong>产生气动升力</td>
+</tr>
+<tr>
+<td>蛇的脊柱</td>
+<td>高冗余串联链</td>
+<td>自由度远多于 6，<strong>冗余</strong>换机动</td>
 </tr>
 </tbody>
 </table>
-<p><strong>工程含义</strong>：<strong>遇到非凸的「计数」约束，先想 L1 松弛</strong>。</p>
-<p>这与「正则化的概率解释」一页的结论呼应：
-L1 正则等价于拉普拉斯先验，天然倾向于产生稀疏解。</p>
+<h3 id="62">6.2 与「仿生机器人」页的分工<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
+<p><strong>这一节只讲「构型层」</strong>：仿生机构在<strong>结构</strong>上属于哪一类，
+和传统机构差在哪。至于<strong>运动层与控制层</strong> ——
+体波怎么造出推力、CPG 怎么产生节律、路径怎么跟踪 ——
+那是<a href="../bionic-robot/">仿生机器人</a>整页的内容。</p>
+<p>一句话说清分工：<strong>这一页回答「长成什么样」，那一页回答「怎么动起来」。</strong>
+之所以分开写，是因为构型（拓扑与尺寸）定下来之后，
+运动学与控制才谈得上；反过来讲控制时也不必再重复一遍结构。
+本节定义的「串联 / 冗余」这些概念，第 18 章可以直接拿来用。
+再往细节走（运动副如何分类、平面连杆怎么综合），
+在<a href="../../mechanisms/">机器人机构学</a>里展开。</p>
+<h2 id="_8">七、变胞机构<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h3 id="71">7.1 让机构自己换拓扑<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
+<p>前六节的构型都是<strong>固定</strong>的：装好之后拓扑不变，自由度也就不变。
+<strong>变胞机构</strong>打破了这条假设 —— 它能在运动中<strong>改变拓扑</strong>，
+于是在几个「构态」之间切换，每个构态有各自的自由度。</p>
+<p><strong>靠什么改</strong>：靠<strong>锁死或释放</strong>某些运动副。
+锁死一个转动副，它连接的两个构件就并成同一个刚体，
+于是 <span class="arithmatex">\(n \to n-1\)</span>、<span class="arithmatex">\(j \to j-1\)</span>、<span class="arithmatex">\(\sum f_i \to \sum f_i - 1\)</span>。
+<strong>「变胞」的关键字是「变」</strong>：零件一个不换，只改连接关系。</p>
+<p><strong>每锁一个，自由度正好少 1，而且与平面还是空间无关</strong>。
+把三处变化代进公式，<span class="arithmatex">\(\lambda(n - j - 1)\)</span> 这一项里
+<span class="arithmatex">\(-1 - (-1) = 0\)</span> <strong>相互抵消</strong>，只剩 <span class="arithmatex">\(\sum f_i\)</span> 少了 1：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\Delta F &amp;= \lambda\,(\Delta n - \Delta j) + \Delta\textstyle\sum f_i \\
+&amp;= \lambda\,(-1 + 1) - 1 = -1
+\end{aligned}
+\]</div>
+<p><strong>这个「<span class="arithmatex">\(-1\)</span>」是可以数的</strong>，所以变胞机构的自由度变化能算得很干净，
+不用逐构态重新猜测。</p>
+<div class="admonition warning">
+<p class="admonition-title">锁死运动副 ≠ 固定关节</p>
+<p>「锁死」是把两个构件<strong>并成一个刚体</strong>，
+构件的数目真的变少了，拓扑也变了。
+而「把一个关节固定在某角度」只是给运动学加了一条约束，
+<strong>构件数与连接关系一个没动</strong>，机构本身还是原来的构型。
+两者在方程里的地位完全不同，别混着说。</p>
+</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 460 212" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="变胞机构的三个构态：零件不换，只改运动副的通断">
+<defs>
+<marker id="rc5ah4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a4" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+<polyline class="a1" points="78,50 117.944,79.0213 102.687,125.979 53.313,125.979 38.0556,79.0213 78,50"/>
+<circle class="dc" cx="78" cy="50" r="4.5"/>
+<circle class="dc" cx="117.944" cy="79.0213" r="4.5"/>
+<circle class="dc" cx="102.687" cy="125.979" r="4.5"/>
+<circle class="dc" cx="53.313" cy="125.979" r="4.5"/>
+<circle class="dc" cx="38.0556" cy="79.0213" r="4.5"/>
+<polyline class="gb" points="78,125.979 61,143.979 95,143.979 78,125.979"/>
+<line class="gb" x1="69.5" y1="143.979" x2="64.5" y2="149.979"/>
+<line class="gb" x1="78" y1="143.979" x2="73" y2="149.979"/>
+<line class="gb" x1="86.5" y1="143.979" x2="81.5" y2="149.979"/>
+<text class="l3" x="78" y="184" text-anchor="middle">五杆　F = 2</text>
+<text class="lbl-s" x="78" y="200" text-anchor="middle">双输入操作手</text>
+<polyline class="a1" points="235,52 280,92 235,132 190,92 235,52"/>
+<circle class="dc" cx="235" cy="52" r="4.5"/>
+<circle class="dc" cx="280" cy="92" r="4.5"/>
+<circle class="dc" cx="235" cy="132" r="4.5"/>
+<circle class="dc" cx="190" cy="92" r="4.5"/>
+<polyline class="gb" points="235,132 218,150 252,150 235,132"/>
+<line class="gb" x1="226.5" y1="150" x2="221.5" y2="156"/>
+<line class="gb" x1="235" y1="150" x2="230" y2="156"/>
+<line class="gb" x1="243.5" y1="150" x2="238.5" y2="156"/>
+<text class="l2" x="235" y="184" text-anchor="middle">四杆　F = 1</text>
+<text class="lbl-s" x="235" y="200" text-anchor="middle">单输入传动机构</text>
+<polyline class="a1" points="392,50 437,136 347,136 392,50"/>
+<circle class="dc" cx="392" cy="50" r="4.5"/>
+<circle class="dc" cx="437" cy="136" r="4.5"/>
+<circle class="dc" cx="347" cy="136" r="4.5"/>
+<polyline class="gb" points="392,136 375,154 409,154 392,136"/>
+<line class="gb" x1="383.5" y1="154" x2="378.5" y2="160"/>
+<line class="gb" x1="392" y1="154" x2="387" y2="160"/>
+<line class="gb" x1="400.5" y1="154" x2="395.5" y2="160"/>
+<text class="l4" x="392" y="184" text-anchor="middle">三角架　F = 0</text>
+<text class="lbl-s" x="392" y="200" text-anchor="middle">完全锁死（刚性）</text>
+<line class="a4" x1="140" y1="92" x2="174" y2="92" marker-end="url(#rc5ah4)"/>
+<line class="a4" x1="298" y1="92" x2="332" y2="92" marker-end="url(#rc5ah4)"/>
+<text class="lbl-s" x="157" y="72" text-anchor="middle">锁死 1 个转动副</text>
+<text class="lbl-s" x="315" y="72" text-anchor="middle">再锁 1 个</text>
+</svg>
+<figcaption>同一个平面机构依次锁死两个转动副：构件一个没换，自由度却从 2 掉到 1，再掉到 0，机构变成刚性结构</figcaption>
+</figure>
+
+<h3 id="72">7.2 变胞的两个用途<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
+<p>变胞机构通常冲着两个目标去：</p>
+<table>
+<thead>
+<tr>
+<th>用途</th>
+<th>说明</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>一机多能</strong></td>
+<td>不同构态对应不同工作模式</td>
+<td>机械手先张开抓取、再锁死成稳定握持</td>
+</tr>
+<tr>
+<td><strong>折展</strong></td>
+<td>从收拢构态展开成工作构态</td>
+<td>折展天线、折叠太阳能板、可展开阵列</td>
+</tr>
+</tbody>
+</table>
+<p><strong>第二行对大孔径、小平台的任务特别有用</strong>：把一个大阵列折起来带下去，
+到工作区再展开，就能用小的运载平台承载大的孔径。
+代价是<strong>展开后各阵元的位置不再精确已知</strong> ——
+这会给后面的阵列信号处理带来一个全新的问题（位置误差）。</p>
+<h3 id="73">7.3 三个构态的手算对照<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
+<p>一个平面变胞机构，从五杆出发依次锁死两个转动副。
+每锁一次，<span class="arithmatex">\(n\)</span>、<span class="arithmatex">\(j\)</span>、<span class="arithmatex">\(\sum f_i\)</span> 各减 1，用同一个公式重算：</p>
+<table>
+<thead>
+<tr>
+<th>构态</th>
+<th><span class="arithmatex">\(n\)</span></th>
+<th><span class="arithmatex">\(j\)</span></th>
+<th><span class="arithmatex">\(\sum f_i\)</span></th>
+<th>代入 <span class="arithmatex">\(3(n-j-1) + \sum f_i\)</span></th>
+<th><span class="arithmatex">\(F\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构态 1：五杆全开</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td><span class="arithmatex">\(3\times(-1) + 5\)</span></td>
+<td>2</td>
+</tr>
+<tr>
+<td>构态 2：锁一组，变四杆</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td><span class="arithmatex">\(3\times(-1) + 4\)</span></td>
+<td>1</td>
+</tr>
+<tr>
+<td>构态 3：再锁一组，变三角架</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td><span class="arithmatex">\(3\times(-1) + 3\)</span></td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三行连成一条降级链</strong>：<span class="arithmatex">\(2 \to 1 \to 0\)</span>。
+机构从「双输入操作手」一路降到「刚性结构」，再也不能动。
+反过来说，<strong>把锁住的运动副释放开，就能从 0 回到 2</strong> ——
+这正是折展机构展开时的动作。</p>
+<div class="admonition warning">
+<p class="admonition-title">变胞和冗余是两回事</p>
+<p>容易混的一组概念：</p>
+<ul>
+<li><strong>冗余</strong>：自由度<strong>一直多于</strong> 6（如七轴臂）。
+  多出来的自由度始终存在，用来避障、避奇异。</li>
+<li><strong>变胞</strong>：自由度<strong>在某些时刻改变</strong>。
+  变的是构型本身，拓扑换了。</li>
+</ul>
+<p>前者是「同一个构型里可选的解多」，后者是「换了一个构型」，
+别把两者都笼统说成「自由度可调」。</p>
 </div>
 <hr />
-<h2 id="_7">六、自测<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> 判断 <span class="arithmatex">\(f(x) = \lvert x\rvert\)</span> 是否凸函数。</p>
+<h2 id="1">例题 1：算并联平台的自由度，别忘局部自由度<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>某六自由度并联平台用 <strong>6-SPS</strong> 支链（每条支链：球副–移动副–球副）。
+构件数 <span class="arithmatex">\(n = 14\)</span>（静平台 + 动平台 + 6 根上杆 + 6 根下杆），
+运动副数 <span class="arithmatex">\(j = 18\)</span>。用 Grübler–Kutzbach 公式算它的自由度，
+并说明结果要不要修正。</p>
+</blockquote>
 <details class="note">
-<summary>提示</summary>
-<p>可以直接用定义，或注意它可写成两个仿射函数的最大值。</p>
+<summary>思路</summary>
+<p>先把公式代一遍。如果算出来的数明显大于 6，就去想
+「多出来的那几个自由度，会不会其实不影响平台运动」。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>方法一：用定义</strong></p>
-<p>对任意 <span class="arithmatex">\(x,y\)</span> 与 <span class="arithmatex">\(\theta\in[0,1]\)</span>，需验证</p>
+<p><strong>第一步：直接代公式</strong></p>
+<p>每条支链的球副自由度是 3、移动副是 1，所以</p>
 <div class="arithmatex">\[
-\lvert\theta x+(1-\theta)y\rvert \leq \theta\lvert x\rvert+(1-\theta)\lvert y\rvert
+\sum f_i = 6 \times (3 + 1 + 3) = 42
 \]</div>
-<p>由三角不等式（注意 <span class="arithmatex">\(\theta\geq0\)</span>、<span class="arithmatex">\(1-\theta\geq0\)</span>）：</p>
+<p>代入 <span class="arithmatex">\(F = \lambda(n - j - 1) + \sum f_i\)</span>，取 <span class="arithmatex">\(\lambda = 6\)</span>：</p>
 <div class="arithmatex">\[
-\lvert\theta x+(1-\theta)y\rvert \leq \lvert\theta x\rvert+\lvert(1-\theta)y\rvert
-= \theta\lvert x\rvert+(1-\theta)\lvert y\rvert \;\checkmark
+F = 6 \times (14 - 18 - 1) + 42 = 6 \times (-5) + 42 = 12
 \]</div>
-<p><strong>方法二：写成 max 形式</strong></p>
+<p>直接算得 <strong>12</strong> —— 但一台 Stewart 平台明明只有 6 个自由度。</p>
+<p><strong>第二步：多出来的 6 个是什么</strong></p>
+<p>每条支链两端的<strong>球副</strong>允许上杆绕自身轴线<strong>自转</strong>。
+这个自转<strong>不影响动平台的位置与姿态</strong>，
+属于<strong>局部自由度</strong>（也叫消极自由度）。每条支链 1 个，共 6 个。</p>
+<p><strong>第三步：扣掉</strong></p>
 <div class="arithmatex">\[
-\lvert x\rvert = \max\{x,\ -x\}
+F_{\text{有效}} = 12 - 6 = 6
 \]</div>
-<p>而 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(-x\)</span> 都是<strong>仿射函数</strong>（既凸又凹），</p>
-<p><strong>max 保持凸性</strong>（前面「保持凸性的运算」表） → <strong>凸</strong></p>
-<p><strong>结论</strong>：<span class="arithmatex">\(\lvert x\rvert\)</span> 是<strong>凸函数</strong>。</p>
-<p><strong>工程意义</strong>：这解释了为什么 L1 正则（<span class="arithmatex">\(\sum\lvert w_j\rvert\)</span>）
-是凸的 → Lasso 问题可可靠求解</p>
+<p><strong>结论</strong>：这个平台的有效自由度是 <strong>6</strong>。</p>
+<p><strong>顺带记住一个工程约定</strong>：教材里常把这类平台写成 <strong>6-UPS</strong>，
+把靠近静平台的球副换成<strong>虎克铰</strong>（只有 2 个自由度），
+就掐掉了那 1 个自转，公式直接给出 6，不用再扣。
+换句话说，<strong>公式的「配方」是为了让答案干净而设计的。</strong></p>
+</details>
+<h2 id="2">例题 2：杆长与死角<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>一台平面 3R 手臂，三根杆长分别是 <span class="arithmatex">\(1.2\)</span>、<span class="arithmatex">\(0.5\)</span>、<span class="arithmatex">\(0.4\)</span> m。
+求它的可达区域内外半径。若把最长的那根改成 <span class="arithmatex">\(0.8\)</span> m，结果怎么变？</p>
+</blockquote>
+<details class="note">
+<summary>思路</summary>
+<p>外半径是杆长之和；内半径看「最长杆是不是长于总杆长的一半」。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：原杆长（1.2, 0.5, 0.4）</strong></p>
+<p>外半径是全部杆长之和，总杆长 <span class="arithmatex">\(L = 2.1\)</span>：</p>
+<div class="arithmatex">\[
+R = 1.2 + 0.5 + 0.4 = 2.1 \text{ m}
+\]</div>
+<p>判据 <span class="arithmatex">\(l_{\max} = 1.2 &gt; L/2 = 1.05\)</span>，确有死角。内半径用
+<span class="arithmatex">\(r = l_{\max} - \sum_{i \ne \max} l_i\)</span> 算：
+其余两根之和是 <span class="arithmatex">\(0.5 + 0.4 = 0.9\)</span>，</p>
+<div class="arithmatex">\[
+r = 1.2 - 0.9 = 0.3 \text{ m}
+\]</div>
+<p>（用另一种写法核对：<span class="arithmatex">\(2 l_{\max} - L = 2.4 - 2.1 = 0.3\)</span>，一致。）</p>
+<p>可达区域是一个<strong>外径 2.1 m、内径 0.3 m 的圆环</strong>。</p>
+<p><strong>第二步：把最长杆改成 0.8 m（0.8, 0.5, 0.4）</strong></p>
+<p>外半径变小，新的总杆长 <span class="arithmatex">\(L = 1.7\)</span>：</p>
+<div class="arithmatex">\[
+R = 0.8 + 0.5 + 0.4 = 1.7 \text{ m}
+\]</div>
+<p>此时 <span class="arithmatex">\(l_{\max} = 0.8 &lt; L/2 = 0.85\)</span>，死角消失：</p>
+<div class="arithmatex">\[
+r = \max(0,\; 0.8 - 0.9) = 0
+\]</div>
+<p>可达区域变成<strong>半径 1.7 m 的实心圆</strong>。</p>
+<p><strong>结论</strong>：1.2 m 时是圆环（外 2.1 / 内 0.3），
+改成 0.8 m 后变成实心圆（半径 1.7）。
+缩短最长杆<strong>牺牲了外缘，换来了中间不再有空洞</strong> ——
+所以想消除死角，就要让<strong>最长杆不超过总杆长的一半</strong>。
+这是「连杆不要做得太不成比例」的一个定量理由。</p>
+</details>
+<h2 id="3">例题 3：差速小车的圆弧<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>一台差速小车，轮距 <span class="arithmatex">\(B = 0.40\)</span> m。左轮 <span class="arithmatex">\(v_L = 0.30\)</span> m/s、
+右轮 <span class="arithmatex">\(v_R = 0.50\)</span> m/s，运行 <span class="arithmatex">\(3\)</span> s。
+求车体线速度、角速度、瞬时旋转中心半径，以及这段时间车体中心走的路程。</p>
+</blockquote>
+<details class="note">
+<summary>思路</summary>
+<p>线速度取两轮平均，角速度由两轮速差定。
+最后问的「路程」要想清楚：车体中心走的是直线还是圆弧？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>第一步：线速度</strong></p>
+<div class="arithmatex">\[
+v = \frac{v_L + v_R}{2} = \frac{0.30 + 0.50}{2} = 0.40 \text{ m/s}
+\]</div>
+<p><strong>第二步：角速度</strong></p>
+<div class="arithmatex">\[
+\omega = \frac{v_R - v_L}{B} = \frac{0.50 - 0.30}{0.40} = 0.50 \text{ rad/s}
+\]</div>
+<p><strong>第三步：瞬时旋转中心半径</strong></p>
+<div class="arithmatex">\[
+r = \frac{v}{\omega} = \frac{0.40}{0.50} = 0.80 \text{ m}
+\]</div>
+<p><strong>第四步：转角与路程</strong></p>
+<p>车体中心绕瞬时旋转中心画圆弧，转角是</p>
+<div class="arithmatex">\[
+\theta = \omega t = 0.50 \times 3 = 1.50 \text{ rad} \approx 85.94^\circ
+\]</div>
+<p>弧长为</p>
+<div class="arithmatex">\[
+s = r\,\theta = 0.80 \times 1.50 = 1.20 \text{ m}
+\]</div>
+<p><strong>验算一下</strong>：绕圆心转的弧长等于 <span class="arithmatex">\(\omega r t\)</span>，
+而 <span class="arithmatex">\(\omega r = v\)</span>，所以 <span class="arithmatex">\(s = v t = 0.40 \times 3 = 1.20\)</span> m，
+与上面一致。</p>
+<p><strong>这个验算说明什么</strong>：车体中心「走了多远」仍然等于线速度乘时间，
+只不过这条路是<strong>弯的</strong>。真正被非完整约束卡住的，
+是它<strong>不能横向平移</strong>，跟它走多远无关 ——
+这两件事常被混在一起，要分清。</p>
+</details>
+<h2 id="4">例题 4：变胞机构的构态切换<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>一个平面变胞机构，初始构态是<strong>平面五杆</strong>（<span class="arithmatex">\(n = 5\)</span>，<span class="arithmatex">\(j = 5\)</span>，
+五个转动副，<span class="arithmatex">\(\sum f_i = 5\)</span>）。
+依次锁死两个转动副，求三个构态各自自由度，
+并判断最后一个构态还能不能动。</p>
+</blockquote>
+<details class="note">
+<summary>思路</summary>
+<p>锁死一个转动副 = 把它连接的两个构件并成一个：
+<span class="arithmatex">\(n\)</span>、<span class="arithmatex">\(j\)</span>、<span class="arithmatex">\(\sum f_i\)</span> 各减 1。每锁一次就用公式重算。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>构态 1：五杆全开</strong></p>
+<div class="arithmatex">\[
+F_1 = 3 \times (5 - 5 - 1) + 5 = -3 + 5 = 2
+\]</div>
+<p>两个输入，是一台<strong>双自由度操作手</strong>。</p>
+<p><strong>构态 2：锁死一组之后</strong></p>
+<p><span class="arithmatex">\(n\)</span>、<span class="arithmatex">\(j\)</span>、<span class="arithmatex">\(\sum f_i\)</span> 各减 1，得 <span class="arithmatex">\(n = 4\)</span>、<span class="arithmatex">\(j = 4\)</span>、<span class="arithmatex">\(\sum f_i = 4\)</span>，
+这正是平面四杆：</p>
+<div class="arithmatex">\[
+F_2 = 3 \times (4 - 4 - 1) + 4 = -3 + 4 = 1
+\]</div>
+<p>只剩一个输入，机构被降到单自由度。</p>
+<p><strong>构态 3：再锁死一组</strong></p>
+<p>得 <span class="arithmatex">\(n = 3\)</span>、<span class="arithmatex">\(j = 3\)</span>、<span class="arithmatex">\(\sum f_i = 3\)</span>，即一个三角形桁架：</p>
+<div class="arithmatex">\[
+F_3 = 3 \times (3 - 3 - 1) + 3 = -3 + 3 = 0
+\]</div>
+<p><strong>结论</strong>：三个构态的自由度依次是 <span class="arithmatex">\(2 \to 1 \to 0\)</span>。
+最后一个构态 <span class="arithmatex">\(F = 0\)</span>，机构<strong>完全锁死、变成刚性结构</strong>，
+一动也不能动 —— 这正是变胞机构想要的「稳定锁定」状态。</p>
+<p>这也印证了 7.1 节那条规律：每锁一个运动副，自由度就少 1，
+与是平面还是空间无关。</p>
+<p><strong>反过来读一遍</strong>：把锁死的运动副逐个释放，
+就能从 <span class="arithmatex">\(F = 0\)</span> 一路回到 <span class="arithmatex">\(F = 2\)</span>，这就是展开的动作。
+<strong>同一个机构，靠改变拓扑得到不同职能</strong>，是变胞的全部意思。</p>
 </details>
 <hr />
-<p><strong>Q2</strong> 判断集合 <span class="arithmatex">\(\{(x_1,x_2): x_1^2+x_2^2\geq1\}\)</span>（单位圆盘外部）是否凸。</p>
+<h2 id="_9">自测<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<p><strong>Q1</strong> 什么是「构型」？为什么说「构型」不等于「外形」？
+请举一个「外形差不多、构型不同」的例子。</p>
 <details class="note">
 <summary>提示</summary>
-<p>取两个离得很远的点看中点。</p>
+<p>回看 1.1 节的三要素。再想：把某个转动副改成移动副，
+外观会不会大变？运动学方程会不会变？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>不是凸集。</strong></p>
-<p><strong>反例</strong>：取 <span class="arithmatex">\(\boldsymbol{x} = (1,0)\)</span> 与 <span class="arithmatex">\(\boldsymbol{y} = (-1,0)\)</span>。</p>
-<p>两者都满足 <span class="arithmatex">\(x_1^2+x_2^2 = 1\geq1\)</span> ✓ 都在集合内。</p>
-<p><strong>中点</strong>：</p>
-<div class="arithmatex">\[
-\frac{\boldsymbol{x}+\boldsymbol{y}}{2} = (0,0)
-\]</div>
-<p>检查：<span class="arithmatex">\(0^2+0^2 = 0 &lt; 1\)</span> → <strong>中点不在集合内</strong> ✗</p>
-<p><strong>违反凸集定义</strong> → <strong>非凸</strong> ✗</p>
-<p><strong>关键对比</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>集合</th>
-<th>形式</th>
-<th>是否凸</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>圆盘内部</td>
-<td><span class="arithmatex">\(x_1^2+x_2^2\leq1\)</span></td>
-<td>✓ 凸（子水平集）</td>
-</tr>
-<tr>
-<td><strong>圆盘外部</strong></td>
-<td><span class="arithmatex">\(x_1^2+x_2^2\geq1\)</span></td>
-<td>✗ <strong>非凸</strong></td>
-</tr>
-</tbody>
-</table>
-<p><strong>规律</strong>：<strong>「<span class="arithmatex">\(\leq\)</span>」（凸函数的子水平集）给出凸集，
-「<span class="arithmatex">\(\geq\)</span>」一般不给</strong> ——
-因为 <span class="arithmatex">\(\geq\)</span> 对应「凸函数的上水平集」，
-而<strong>凸函数的上水平集不保证凸</strong>。</p>
-<p><strong>对应到滤波设计</strong>：若要求「某些频率的增益 <span class="arithmatex">\(\geq\)</span> 某值」（带通要求），
-可行集可能是非凸的 → 需要专门处理（如凸松弛）。</p>
+<p><strong>构型是「构件 + 运动副 + 它们的连接关系（拓扑）」</strong>，
+三样合起来才唯一确定一个机构。</p>
+<p><strong>它不等于外形</strong>，因为<strong>判据是连接关系，不是外观</strong>。
+两根外形几乎一样的机械臂，只要中间某个运动副从转动副
+改成移动副，就是两种不同的构型：末端能到达的区域变了，
+正逆运动学方程也完全不同。</p>
+<p><strong>更好的例子</strong>：同样三个构件，只连两个转动副是开口的链
+（<span class="arithmatex">\(F = 2\)</span>，能自由摆动）；再把首尾用一个转动副连起来，
+就闭合成三角形（<span class="arithmatex">\(F = 0\)</span>，刚性桁架）。
+零件数量完全相同、占的地方也差不多，能力却完全不同。</p>
+</details>
+<p><strong>Q2</strong> 并联机构「精度高」与「工作空间小」，能不能通过改进设计
+只保留前者、去掉后者？</p>
+<details class="note">
+<summary>提示</summary>
+<p>先分别找出这两个特点各自的<strong>原因</strong>。
+如果原因是同一个，就不是「碰巧各有一个」的独立缺点。</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>不能</strong>，因为它们是<strong>同一个原因的两面</strong>：都来自
+「多条支链共同约束同一个动平台」。</p>
+<ul>
+<li>因为<strong>共同约束</strong> → 单条支链的误差被其他支链拉住 → <strong>精度高</strong></li>
+<li>也因为<strong>共同约束</strong> → 动平台活动范围被限制 → <strong>工作空间小</strong></li>
+</ul>
+<p>3.2 节把它算成了具体倍数：<span class="arithmatex">\(N\)</span> 条支链时，
+串联与并联的平均偏差之比正好是 <span class="arithmatex">\(N\)</span>。</p>
+<p><strong>所以「改进设计同时去掉缺点、保留优点」在逻辑上就不成立</strong> ——
+那等于要求同一个机制既约束又不约束。</p>
+<p><strong>正确的做法是接受这个折中，然后按任务选</strong>：
+小范围高精度（手术台、模拟器）选并联；
+大范围一般精度（搬运、喷涂）选串联。</p>
+</details>
+<p><strong>Q3</strong> 差速小车的位形是 3 维（<span class="arithmatex">\(x, y, \theta\)</span>），
+为什么只有 2 个可控自由度？这对「倒车入库」意味着什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>数一数控制输入有几个。再想：轮子能不能横向滑动？
+这个限制是针对<strong>位置</strong>的，还是针对<strong>速度</strong>的？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>因为控制输入只有 2 个</strong>（左轮速 <span class="arithmatex">\(v_L\)</span>、右轮速 <span class="arithmatex">\(v_R\)</span>），
+而位形是 3 维，所以瞬时可独立控制的方向只有 2 个。</p>
+<p><strong>根源是轮子不能侧滑</strong>，这是一条<strong>非完整约束</strong> ——
+它限制的是<strong>速度</strong>，不是<strong>位置</strong>。
+注意这个区别很重要：车最终仍然能到达平面上任何 <span class="arithmatex">\((x, y, \theta)\)</span>，
+一个都不少；只是<strong>不能瞬时横着挪过去</strong>。</p>
+<p><strong>对倒车入库的含义</strong>：因为不能直接横向平移，
+所以必须靠「<strong>先往前打一点方向、再往后倒一点</strong>」，
+把横向位移一点点攒出来。这解释了为什么入库要反复调整 ——
+它是约束的必然后果，不是驾驶技术差。</p>
+</details>
+<p><strong>Q4</strong> 「复合机构」和「变胞机构」都涉及「不止一种构型」，
+两者的区别是什么？</p>
+<details class="note">
+<summary>提示</summary>
+<p>想清楚这两种情况下，<strong>构型的变化发生在什么时候</strong>：
+一直是同一个构型，还是运行中途换了一个？</p>
+</details>
+<details class="success">
+<summary>解答</summary>
+<p><strong>区别在「构型是同时存在，还是先后存在」。</strong></p>
+<p><strong>复合机构</strong>：把几类构型<strong>拼</strong>在一起同时使用，
+例如「差速底盘 + 六轴臂」。
+底盘的非完整约束和手臂的关节空间<strong>同时</strong>起作用，
+整体位形 9 维、输入 8 个。<strong>构型本身始终没变。</strong></p>
+<p><strong>变胞机构</strong>：<strong>同一个</strong>机构在运行中途<strong>改变拓扑</strong>，
+从一个构态切换到另一个构态。
+每个构态有自己的自由度（例如 <span class="arithmatex">\(2 \to 1 \to 0\)</span>），
+切换靠锁死或释放运动副。<strong>变的就是构型本身。</strong></p>
+<p><strong>一句话分辨</strong>：复合是「<strong>多套构型并用</strong>」，
+变胞是「<strong>一套构型会变</strong>」。
+前者的难点在协调，后者的难点在切换时刻的连续性。</p>
 </details>
 <hr />
-<p><strong>Q3</strong> 设 <span class="arithmatex">\(f(\boldsymbol{x}) = \max\{2x_1+x_2,\ x_1-x_2+3,\ -x_1+1\}\)</span>。
-说明 <span class="arithmatex">\(f\)</span> 是凸函数，并求 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\boldsymbol{x} = (1,1)\)</span> 处的值。</p>
-<details class="note">
-<summary>提示</summary>
-<p>max 保持凸性；直接代入三个仿射函数取最大。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p><strong>凸性</strong>：三项都是<strong>仿射函数</strong></p>
-<div class="arithmatex">\[
-g_1 = 2x_1+x_2,\qquad g_2 = x_1-x_2+3,\qquad g_3 = -x_1+1
-\]</div>
-<p><strong>仿射函数既凸又凹</strong> → <strong>max 保持凸性</strong> → <span class="arithmatex">\(f\)</span> <strong>凸</strong></p>
-<p><strong>求值</strong>（<span class="arithmatex">\(\boldsymbol{x} = (1,1)\)</span>）：</p>
+<h2 id="_10">小结<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>项</th>
-<th>计算</th>
-<th>值</th>
+<th>要记住的</th>
+<th>为什么重要</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="arithmatex">\(g_1\)</span></td>
-<td><span class="arithmatex">\(2(1)+1\)</span></td>
-<td><span class="arithmatex">\(3\)</span></td>
+<td>构型 = 构件 + 运动副 + <strong>连接关系</strong></td>
+<td>拓扑决定能力，外形不决定</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(g_2\)</span></td>
-<td><span class="arithmatex">\(1-1+3\)</span></td>
-<td><span class="arithmatex">\(3\)</span></td>
+<td>自由度用 <strong>Grübler–Kutzbach</strong> 公式算</td>
+<td>一个公式覆盖串联、并联、平面、空间</td>
 </tr>
 <tr>
-<td><span class="arithmatex">\(g_3\)</span></td>
-<td><span class="arithmatex">\(-1+1\)</span></td>
-<td><span class="arithmatex">\(0\)</span></td>
+<td>公式是必要条件，<strong>不是万能</strong></td>
+<td>虚约束与局部自由度会让结果偏</td>
+</tr>
+<tr>
+<td>串联：关节序列 + 关节空间维数</td>
+<td>6R 是主流，因为 6 个自由度刚好覆盖位姿</td>
+</tr>
+<tr>
+<td>串联可达区域：<span class="arithmatex">\(R = \sum l_i\)</span>、<span class="arithmatex">\(r = 2l_{\max} - L\)</span></td>
+<td>有死角的判据是「最长杆超过总长的一半」</td>
+</tr>
+<tr>
+<td>并联：支链数 × 每条支链自由度</td>
+<td>精度与工作空间的取舍同源，不能只取一半</td>
+</tr>
+<tr>
+<td>误差：串联 <span class="arithmatex">\(\sqrt{N}\sigma\)</span>、并联 <span class="arithmatex">\(\sigma/\sqrt{N}\)</span></td>
+<td>平均偏差之比恰好是链数 <span class="arithmatex">\(N\)</span></td>
+</tr>
+<tr>
+<td>轮式：位形 3 维、输入 2 个</td>
+<td>非完整约束限制速度，不限制位置</td>
+</tr>
+<tr>
+<td>复合：位形自由度与输入数<strong>要分开数</strong></td>
+<td>移动机械臂因此必须先停稳再操作</td>
+</tr>
+<tr>
+<td>仿生：换的是<strong>连接方式</strong>，不是外形</td>
+<td>结构层归本页，运动层归第 18 章</td>
+</tr>
+<tr>
+<td>变胞：拓扑可变，<strong>每锁一个副少 1 个自由度</strong></td>
+<td>一机多能、折展，靠锁死 / 释放运动副</td>
 </tr>
 </tbody>
 </table>
-<div class="arithmatex">\[
-f(1,1) = \max\{3,\ 3,\ 0\} = 3
-\]</div>
-<p><strong>结果</strong>：<span class="arithmatex">\(f(1,1) = 3\)</span></p>
-<p><strong>注意</strong>：<strong>两项同时取到最大值</strong>（<span class="arithmatex">\(g_1 = g_2 = 3\)</span>）——
-这对应「活跃约束不止一个」的情形
-（与 KKT 那一页的「角点」情形同源）。</p>
-<p><strong>工程含义</strong>：<strong>max 形式在鲁棒优化中很常见</strong> ——
-「在所有可能情形下满足要求」就是让每个情形的约束都成立，
-即取最大值 ≤ 0。而 max 保持凸性，所以<strong>鲁棒优化常常仍是凸问题</strong></p>
-</details>
-<hr />
-<p><strong>Q4</strong> 为什么 <span class="arithmatex">\(\min\)</span> 不一定保持凸性？举反例。</p>
-<details class="note">
-<summary>提示</summary>
-<p>考虑两个凸函数的逐点最小值。</p>
-</details>
-<details class="success">
-<summary>解答</summary>
-<p>因为「取最小值」是「取上确界」的对偶操作，方向相反。</p>
-<table>
-<thead>
-<tr>
-<th>运算</th>
-<th>是否保持</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(\max\)</span>（或 <span class="arithmatex">\(\sup\)</span>）</td>
-<td><strong>保持凸性</strong> ✓</td>
-</tr>
-<tr>
-<td><strong><span class="arithmatex">\(\min\)</span>（或 <span class="arithmatex">\(\inf\)</span>）</strong></td>
-<td><strong>不保持</strong> ✗</td>
-</tr>
-</tbody>
-</table>
-<p><strong>反例</strong>：取两个凸函数</p>
-<div class="arithmatex">\[
-f_1(x) = x^2, \qquad f_2(x) = (x-2)^2
-\]</div>
-<p><strong>逐点最小值</strong>：</p>
-<div class="arithmatex">\[
-g(x) = \min\{f_1(x),\ f_2(x)\}
-\]</div>
-<p>这个 <span class="arithmatex">\(g\)</span> 的形状是「两个抛物线各自的下半部分」——
-在 <span class="arithmatex">\(x = 1\)</span> 附近（两抛物线交点，<span class="arithmatex">\(f_1 = f_2 = 1\)</span>）
-<strong>出现一个「向上凸的尖峰」</strong>（严格说是<strong>非凸</strong>的转折）。</p>
-<p><strong>验证非凸性</strong>：取 <span class="arithmatex">\(x_1 = 0\)</span>、<span class="arithmatex">\(x_2 = 2\)</span>：</p>
-<div class="arithmatex">\[
-g(0) = \min\{0,\ 4\} = 0,\qquad g(2) = \min\{4,\ 0\} = 0
-\]</div>
-<p>中点：</p>
-<div class="arithmatex">\[
-g(1) = \min\{1,\ 1\} = 1
-\]</div>
-<p>凸性要求 <span class="arithmatex">\(g(1)\leq\frac{g(0)+g(2)}{2} = 0\)</span>，但实际 <span class="arithmatex">\(g(1) = 1 &gt; 0\)</span> ✗</p>
-<p><strong>违反凸性</strong> ✗</p>
-<p><strong>工程含义</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>后果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>引入 max（最坏情况）</td>
-<td>通常<strong>仍凸</strong> ✓</td>
-</tr>
-<tr>
-<td><strong>引入 min（选择最好的）</strong></td>
-<td><strong>可能破坏凸性</strong> ✗</td>
-</tr>
-</tbody>
-</table>
-<p><strong>这解释了一件重要的事</strong>：<strong>「混合模型」常是非凸的</strong>。</p>
-<p>例如高斯混合模型（GMM）的似然：</p>
-<div class="arithmatex">\[
-p(x) = \sum_k\pi_k\mathcal{N}(x;\mu_k,\sigma_k)
-\]</div>
-<p>涉及「哪个分量更好」的选择，导致非凸 →
-所以 GMM 用 EM 算法（只能到局部最优）。</p>
-</details>
-<nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../../calculus/derivative/">导数与微分</a><a href="../../linear-algebra/linear-map/">线性映射与矩阵</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../gradient-descent/">梯度下降与收敛</a><a href="../duality/">对偶问题</a></span></div></nav>
+<p><strong>四条最容易混的地方</strong>：</p>
+<ol>
+<li><strong>把构型当外形</strong> —— 判据是连接关系，不是长得像不像</li>
+<li><strong>算完自由度不检查运动副</strong> —— 局部自由度和虚约束必须单独看</li>
+<li><strong>只看到并联的精度、忘了它的小工作空间</strong> —— 两者同源</li>
+<li><strong>把「冗余」和「变胞」混为一谈</strong> —— 前者自由度一直多，后者自由度会变</li>
+</ol>
+<p><strong>下一章</strong>：<a href="../pose-transform/">位姿表示与坐标变换</a></p>
+<p>这一页把「机器人长成什么样」定下来了。但无论哪种构型，
+接下来都要回答同一个问题：<strong>这个机构的位置和姿态，用什么数学量描述？</strong>
+下一章就从最基础的<strong>位姿表示与坐标变换</strong>讲起。</p>
+<p><strong>上一页</strong>：<a href="../intro/">机器人的概念、发展与分类</a></p>
+<nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../intro/">机器人的概念、发展与分类</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../pose-transform/">位姿表示与坐标变换</a></span></div></nav>
 
 
 
@@ -13154,7 +13376,7 @@ p(x) = \sum_k\pi_k\mathcal{N}(x;\mu_k,\sigma_k)
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 总览">
+          <a href="../intro/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 机器人的概念、发展与分类">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -13164,20 +13386,20 @@ p(x) = \sum_k\pi_k\mathcal{N}(x;\mu_k,\sigma_k)
                 上一页
               </span>
               <div class="md-ellipsis">
-                总览
+                机器人的概念、发展与分类
               </div>
             </div>
           </a>
         
         
           
-          <a href="../gradient-descent/" class="md-footer__link md-footer__link--next" aria-label="下一页: 梯度下降与收敛">
+          <a href="../pose-transform/" class="md-footer__link md-footer__link--next" aria-label="下一页: 位姿表示与坐标变换">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                梯度下降与收敛
+                位姿表示与坐标变换
               </div>
             </div>
             <div class="md-footer__button md-icon">
