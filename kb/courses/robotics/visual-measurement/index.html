@@ -3,28 +3,29 @@
 <html lang="zh" class="no-js">
   <head>
     
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
-      
-      
-      
-        <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/courses/robotics/visual-measurement/">
-      
-      
-        <link rel="prev" href="../control-methods/">
-      
-      
-        <link rel="next" href="../visual-control/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <meta name="description" content="机器人的视觉测量：前面十二章，机器人一直在闭着眼睛干活：位置、力、控制方法都讲完了，可它怎么知道「孔在哪、工件偏了多少」？—— 得靠看。这一页把「相机 → 像素 → 三维/位姿」这条链路拆开：先看清相机怎么把三维压成二维（一）→ 再明白为什么单靠像素定不了位（二）→ 然后逐个数清几类测量武器（三、四）→ 最后回到「相机怎么认识自己」（五）。">
+  
+  
+  
+    <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/courses/robotics/visual-measurement/">
+  
+  
+    <link rel="prev" href="../control-methods/">
+  
+  
+    <link rel="next" href="../visual-control/">
+  
+  
     
+  
+  
+  <link rel="icon" href="../../../assets/images/favicon-kb.png">
+  <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png">
+  <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+
     
       
         <title>机器人的视觉测量 - 我的学习知识库</title>
@@ -56,7 +57,27 @@
       
 
     
-    
+    <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="我的学习知识库">
+  <meta property="og:title" content="机器人的视觉测量">
+  
+  <meta property="og:description" content="机器人的视觉测量：前面十二章，机器人一直在闭着眼睛干活：位置、力、控制方法都讲完了，可它怎么知道「孔在哪、工件偏了多少」？—— 得靠看。这一页把「相机 → 像素 → 三维/位姿」这条链路拆开：先看清相机怎么把三维压成二维（一）→ 再明白为什么单靠像素定不了位（二）→ 然后逐个数清几类测量武器（三、四）→ 最后回到「相机怎么认识自己」（五）。">
+  
+  
+  <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/visual-measurement/">
+  
+  <meta property="og:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="我的学习知识库 - 课程大纲 · 数学基础 · 专业课讲义">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="机器人的视觉测量">
+  
+  <meta name="twitter:description" content="机器人的视觉测量：前面十二章，机器人一直在闭着眼睛干活：位置、力、控制方法都讲完了，可它怎么知道「孔在哪、工件偏了多少」？—— 得靠看。这一页把「相机 → 像素 → 三维/位姿」这条链路拆开：先看清相机怎么把三维压成二维（一）→ 再明白为什么单靠像素定不了位（二）→ 然后逐个数清几类测量武器（三、四）→ 最后回到「相机怎么认识自己」（五）。">
+  
+  <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+
   </head>
   
   
@@ -11846,7 +11867,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">机器人学</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>先进机器人控制（第 9 章 机器人的视觉测量与控制 p283；9.1 机器人视觉系统类型 p283；9.2 结构光立体视觉测量 p286；9.3 基于矩形目标约束的视觉测量 p293；9.7 无标定摄像机的立体视觉伺服控制 p306）</code><code>本页数值示例由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（针孔模型、内参、外参、主点、透视除法、径向/切向畸变、尺度歧义、视差、三角测量、单应矩阵、消失点、PnP、相机标定、张正友标定法、Hartley 归一化、重投影误差）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../">机器人学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>先进机器人控制（第 9 章 机器人的视觉测量与控制 p283；9.1 机器人视觉系统类型 p283；9.2 结构光立体视觉测量 p286；9.3 基于矩形目标约束的视觉测量 p293；9.7 无标定摄像机的立体视觉伺服控制 p306）</code><code>本页数值示例由代码实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（针孔模型、内参、外参、主点、透视除法、径向/切向畸变、尺度歧义、视差、三角测量、单应矩阵、消失点、PnP、相机标定、张正友标定法、Hartley 归一化、重投影误差）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">机器人的视觉测量<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
@@ -13205,6 +13226,7 @@ B \ge \frac{9 \times 0.5}{800 \times 0.005} = 1.125\ \text{m}
 下一章转入<strong>机器人的视觉控制</strong>，看怎么把「图像里的误差」变成「关节上的运动」——
 基于位置的、基于图像的，以及混合视觉伺服。</p>
 <p><strong>上一页</strong>：<a href="../control-methods/">机器人的控制方法</a></p>
+<nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../control-methods/">机器人的控制方法</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../visual-control/">机器人的视觉控制</a></span></div></nav>
 
 
 

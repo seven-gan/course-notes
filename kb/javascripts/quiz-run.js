@@ -128,6 +128,9 @@
       btn.textContent = "▶ 运行";
       var out = document.createElement("pre");
       out.className = "kbpy-out";
+      /* 让读屏用户也能听到「正在运行 / 运行结果 / 出错」的变化 */
+      out.setAttribute("role", "status");
+      out.setAttribute("aria-live", "polite");
       out.style.display = "none";
 
       btn.addEventListener("click", function () {
@@ -136,6 +139,7 @@
                   || wrap.querySelector("pre code");
         var src = codeEl ? codeEl.textContent : "";
         btn.disabled = true;
+        btn.setAttribute("aria-busy", "true");
         btn.textContent = "运行中…";
         out.style.display = "block";
         out.className = "kbpy-out";
@@ -143,6 +147,7 @@
 
         runWithTimeout(src, function (d) {
           btn.disabled = false;
+          btn.removeAttribute("aria-busy");
           btn.textContent = "▶ 运行";
           if (d.error) {
             out.className = "kbpy-out kbpy-err";

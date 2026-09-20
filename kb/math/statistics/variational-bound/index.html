@@ -3,28 +3,29 @@
 <html lang="zh" class="no-js">
   <head>
     
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
-      
-      
-      
-        <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/math/statistics/variational-bound/">
-      
-      
-        <link rel="prev" href="../em-algorithm/">
-      
-      
-        <link rel="next" href="../model-selection/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <meta name="description" content="期望最大化与变分下界：最大似然那一页假设数据完整：每个样本的每个变量都能看到。但很多问题里，数据是不完整的：一旦有看不见的变量，最大似然就不能直接用了 —— 这一页讲清为什么，以及 EM 怎么绕过去。">
+  
+  
+  
+    <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/math/statistics/variational-bound/">
+  
+  
+    <link rel="prev" href="../em-algorithm/">
+  
+  
+    <link rel="next" href="../model-selection/">
+  
+  
     
+  
+  
+  <link rel="icon" href="../../../assets/images/favicon-kb.png">
+  <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png">
+  <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+
     
       
         <title>期望最大化与变分下界 - 我的学习知识库</title>
@@ -56,7 +57,27 @@
       
 
     
-    
+    <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="我的学习知识库">
+  <meta property="og:title" content="期望最大化与变分下界">
+  
+  <meta property="og:description" content="期望最大化与变分下界：最大似然那一页假设数据完整：每个样本的每个变量都能看到。但很多问题里，数据是不完整的：一旦有看不见的变量，最大似然就不能直接用了 —— 这一页讲清为什么，以及 EM 怎么绕过去。">
+  
+  
+  <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/statistics/variational-bound/">
+  
+  <meta property="og:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="我的学习知识库 - 课程大纲 · 数学基础 · 专业课讲义">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="期望最大化与变分下界">
+  
+  <meta name="twitter:description" content="期望最大化与变分下界：最大似然那一页假设数据完整：每个样本的每个变量都能看到。但很多问题里，数据是不完整的：一旦有看不见的变量，最大似然就不能直接用了 —— 这一页讲清为什么，以及 EM 怎么绕过去。">
+  
+  <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+
   </head>
   
   
@@ -11861,9 +11882,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本课程讲义</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（期望最大化 / 变分下界 / 隐变量 / 责任度）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
-
-<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../em-algorithm/">em-algorithm</a></span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本课程讲义</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（期望最大化 / 变分下界 / 隐变量 / 责任度）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">期望最大化与变分下界<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>最大似然那一页假设<strong>数据完整</strong>：每个样本的每个变量都能看到。</p>
@@ -15308,6 +15327,7 @@ E 步「不知道」每个点属于谁 → 信息增量极小 → 每步只能�
 <p><strong>Q2</strong> 用 Jensen 不等式推导变分下界，并说明下界取等号的条件。</p>
 <p><strong>Q3</strong> 证明 EM 的对数似然单调不降（写出那条不等式链，并说明每一步的依据）。</p>
 <p><strong>Q4</strong> 举出两个 EM 在实践中的失败模式，并各给一个应对办法。</p>
+<nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../../probability/mle/">最大似然估计</a><a href="../../probability/gaussian/">高斯分布</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../em-algorithm/">EM 算法与混合模型</a></span></div></nav>
 
 
 

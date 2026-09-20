@@ -8,6 +8,15 @@
  *  4. 阅读体验（中文排版、行距、触控尺寸）
  * ============================================================= */
 
+/* ---------- 0. 变量补全 ----------
+ * --md-primary-fg-color--transparent 在部分 Material 版本中并不存在，
+ * 旧代码靠 rgba() 兜底（写死靛蓝）。这里显式定义，并优先用 color-mix
+ * 使其随主题主色与深浅色自动变化；不支持 color-mix 时回退到 rgba。 */
+:root {
+  --md-primary-fg-color--transparent: rgba(63, 81, 181, 0.08);
+  --md-primary-fg-color--transparent: color-mix(in srgb, var(--md-primary-fg-color) 8%, transparent);
+}
+
 /* ---------- 1. 中文排版优化 ---------- */
 .md-typeset {
   font-size: 0.82rem;
@@ -181,7 +190,8 @@
  *
  * 放弃横向滚动，改成**让表格自己适应宽度**：
  *   1. `width: 100%` 而不是 `max-content` —— 表格不超出容器
- *   2. `table-layout: fixed` —— 列宽由容器均分，不被超长内容顶开
+ *   2. `table-layout: fixed`（**仅窄屏**）—— 窄屏列宽由容器均分，不被超长内容顶开；
+ *      宽屏保留 auto，列宽随内容自适应
  *   3. 单元格 `overflow-wrap: anywhere` —— 长公式/长单词在格内折行
  *
  * 代价是表格变高（内容折行），但对**手机阅读**来说，
@@ -201,7 +211,13 @@
   display: table;
   width: 100%;
   min-width: 0;
-  table-layout: fixed;
+}
+/* 窄屏才强制等宽列（防超长内容撑破版面）；
+   宽屏改用默认的 auto，让列宽随内容自适应，中文表格读起来更自然。 */
+@media screen and (max-width: 768px) {
+  .md-typeset .md-typeset__table table {
+    table-layout: fixed;
+  }
 }
 /* 单元格内允许折行（长公式、长英文词、URL） */
 .md-typeset table:not([class]) td,
@@ -297,6 +313,18 @@
   font-size: 0.72rem;
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* 课程标签作为链接时（hook 会链接到课程页）保持药丸外观 */
+a.kb-course-tag {
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+a.kb-course-tag:hover,
+a.kb-course-tag:focus-visible {
+  border-color: var(--md-primary-fg-color);
+  background: var(--md-primary-fg-color--transparent, rgba(63, 81, 181, 0.16));
 }
 
 /* 重要程度徽章 */
@@ -493,10 +521,28 @@
 
 /* ---------- 7. 打印 ---------- */
 @media print {
-  .kb-metacard,
-  .kb-relnav {
-    break-inside: avoid;
+  /* 只保留正文：隐藏页头 / 侧栏 / 目录 / 页脚 / 回到顶部 / 搜索 */
+  .md-header,
+  .md-sidebar,
+  .md-nav,
+  .md-footer,
+  .md-top,
+  .md-search,
+  .md-skip { display: none !important; }
+  .md-main__inner,
+  .md-content,
+  .md-content__inner {
+    margin: 0 !important;
+    max-width: none !important;
   }
+  .md-typeset { font-size: 11pt; }
+  /* 表格、图示、卡片、公式尽量不在中间断开 */
+  .md-typeset table,
+  .kb-fig,
+  .kb-metacard,
+  .kb-relnav,
+  .md-typeset .admonition,
+  .md-typeset details { break-inside: avoid; }
   .md-typeset .arithmatex > .katex-display {
     overflow: visible;
   }
@@ -786,4 +832,60 @@
   .md-typeset pre.kb-output > code,
   .md-typeset pre.kb-term > code { font-size: 0.68rem; }
   .md-typeset ol.kb-steps > li { padding-left: 1.9rem; }
+}
+
+/* ============================================================
+   §7 可访问性 · 交互细节（2026-09 增补）
+   ============================================================ */
+
+/* ---- 7.1 键盘焦点可见 ----
+ * 默认焦点环在彩色按钮 / 深色底上常看不清，
+ * 统一给站内可交互元素加醒目的焦点环，方便键盘与读屏用户定位。 */
+.md-typeset a:focus-visible,
+.md-nav__link:focus-visible,
+.md-nav__item a:focus-visible,
+.kb-card:focus-visible,
+.kb-navlinks a:focus-visible,
+a.kb-course-tag:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ---- 7.2 尊重「减少动态效果」系统偏好 ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .kb-card:hover { transform: none; }
+}
+
+/* ---- 7.3 触屏设备：禁用「粘滞 hover」 ----
+ * 触摸屏上 :hover 会在点按后残留，卡片/链接会一直维持高亮态，看起来像故障。 */
+@media (hover: none) {
+  .kb-card:hover {
+    border-color: var(--md-default-fg-color--lightest);
+    box-shadow: none;
+    transform: none;
+  }
+  .kb-navlinks a:hover,
+  a.kb-course-tag:hover {
+    border-color: var(--md-default-fg-color--lightest);
+    background: var(--md-primary-fg-color--transparent, rgba(63, 81, 181, 0.08));
+  }
+}
+
+/* ---- 7.4 锚点跳转不被吸顶导航遮挡 ----
+ * 站点开启了 header.autohide，跳转到小节标题时标题可能被顶栏盖住。 */
+.md-typeset :target,
+.md-typeset h1[id],
+.md-typeset h2[id],
+.md-typeset h3[id],
+.md-typeset h4[id] {
+  scroll-margin-top: 4.2rem;
 }

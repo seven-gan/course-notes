@@ -31,13 +31,18 @@
   function clearMarks() {
     var marks = document.querySelectorAll("mark[data-md-highlight]");
     if (!marks.length) return 0;
+    var parents = [];
     for (var i = 0; i < marks.length; i++) {
       var m = marks[i];
       var parent = m.parentNode;
       if (!parent) continue;
       parent.replaceChild(document.createTextNode(m.textContent), m);
-      parent.normalize();
+      /* 同一父节点只记一次；normalize 放到循环外做。
+       * 旧写法在每个 mark 上立刻 normalize()：同一段落里有多个高亮时会
+       * 反复合并同一批文本节点，既多余又慢。 */
+      if (parents.indexOf(parent) === -1) parents.push(parent);
     }
+    for (var j = 0; j < parents.length; j++) parents[j].normalize();
     return marks.length;
   }
 
@@ -123,15 +128,21 @@
   }, { passive: true });
 
   /* ---------- 5. 搜索框关闭事件（保留，覆盖手动关闭） ---------- */
+  /* ⚠ 每次导航（document$）与 load 都会调用 watchToggle()，
+   *   若不加标记，同一个元素会被反复绑定 change/input 监听器，
+   *   随着翻页累积成几十个重复回调。这里用节点自带标记去重：
+   *   只有「新元素」才绑定，元素被即时导航替换后也能重新绑定。 */
   function watchToggle() {
     var toggle = document.getElementById("__search");
-    if (toggle) {
+    if (toggle && !toggle.__hlBound) {
+      toggle.__hlBound = true;
       toggle.addEventListener("change", function () {
         if (!toggle.checked) setTimeout(function () { resetAll("toggle-off"); }, 60);
       });
     }
     var input = document.querySelector(".md-search__input");
-    if (input) {
+    if (input && !input.__hlBound) {
+      input.__hlBound = true;
       input.addEventListener("input", function () {
         if (!input.value.trim()) setTimeout(function () { resetAll("input-empty"); }, 60);
       });

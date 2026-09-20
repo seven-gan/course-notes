@@ -38,6 +38,18 @@
       .trim();
   }
 
+  /* 尊重「减少动态效果」偏好：不再用平滑滚动，直接跳转 */
+  var REDUCE = !!(window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  function scrollToEl(target, block) {
+    if (!target) return;
+    if (REDUCE) {
+      target.scrollIntoView({ block: block || "start" });
+    } else {
+      target.scrollIntoView({ behavior: "smooth", block: block || "start" });
+    }
+  }
+
   /* 当前页在索引里的 key（用 URL 反查最稳）
    *
    * ⚠ URL 末尾是 `/index.html`，而索引里存的是**没有 index.html 的目录路径**
@@ -132,26 +144,44 @@
 
   /* ---------- 注入 UI ---------- */
   function build(index, quiz, key) {
-    var st = P.get(key);
     var meta = index.pages[key];
     var wrap = el("div", "kbq");
 
     /* 顶部状态条 */
     var bar = el("div", "kbq-bar");
-    var stTxt = { new: "未开始", passed: "已通过", known: "已标记掌握",
-                  skipped: "已跳过" }[st.status] || "未开始";
-    bar.appendChild(el("span", "kbq-badge kbq-" + st.status, stTxt));
-    bar.appendChild(el("span", "kbq-info",
-      "本题组 " + quiz.qs.length + " 题" +
-      (st.attempts ? "，已试 " + st.attempts + " 次，最好成绩 " + st.best + "/" + st.total : "")));
+    var badge = el("span", "kbq-badge");
+    badge.setAttribute("role", "status");            // 状态变化时播报给读屏
+    var info = el("span", "kbq-info");
+    bar.appendChild(badge);
+    bar.appendChild(info);
 
     var acts = el("span", "kbq-acts");
     var bStart = el("button", "kbq-btn kbq-primary", "开始自测");
-    var bKnown = el("button", "kbq-btn", st.status === "known" ? "改回未开始" : "我已掌握");
-    var bSkip = el("button", "kbq-btn", st.status === "skipped" ? "取消跳过" : "暂时跳过");
+    var bKnown = el("button", "kbq-btn");
+    var bSkip = el("button", "kbq-btn");
+    [bStart, bKnown, bSkip].forEach(function (b) { b.type = "button"; });
     acts.appendChild(bStart); acts.appendChild(bKnown); acts.appendChild(bSkip);
     bar.appendChild(acts);
     wrap.appendChild(bar);
+
+    /* 就地刷新状态条
+     * ⚠ 旧实现用 location.reload() 切「已掌握 / 跳过」，
+     *   会整页闪一下、还丢掉滚动位置与已填的答案。
+     *   改成只更新这几个节点，体验连续、也更省流量。 */
+    var STATUS_TXT = { new: "未开始", passed: "已通过",
+                       known: "已标记掌握", skipped: "已跳过" };
+    function refresh() {
+      var s = P.get(key);
+      badge.textContent = STATUS_TXT[s.status] || "未开始";
+      badge.className = "kbq-badge kbq-" + s.status;
+      info.textContent = "本题组 " + quiz.qs.length + " 题" +
+        (s.attempts ? "，已试 " + s.attempts + " 次，最好成绩 " + s.best + "/" + s.total : "");
+      bKnown.textContent = s.status === "known" ? "改回未开始" : "我已掌握";
+      bSkip.textContent = s.status === "skipped" ? "取消跳过" : "暂时跳过";
+      bKnown.setAttribute("aria-pressed", s.status === "known" ? "true" : "false");
+      bSkip.setAttribute("aria-pressed", s.status === "skipped" ? "true" : "false");
+    }
+    refresh();
 
     /* 每题一块 */
     var panel = el("div", "kbq-panel");
@@ -175,11 +205,14 @@
         var exp = expectedFrom(d.succ);
         var ta = el("textarea", "kbq-input");
         ta.rows = 3;
+        ta.setAttribute("aria-label", "第 " + q.n + " 题：填写你预测的程序输出");
         ta.placeholder = "把你预测的输出填在这里（不必完全一致，忽略行尾空格）";
         box.appendChild(ta);
         var fb = el("div", "kbq-fb");
+        fb.setAttribute("aria-live", "polite");
         var bCheck = el("button", "kbq-btn kbq-primary", "对答案");
         var bShow = el("button", "kbq-btn", "看解答");
+        bCheck.type = "button"; bShow.type = "button";
         box.appendChild(bCheck); box.appendChild(bShow); box.appendChild(fb);
         bCheck.addEventListener("click", function () {
           var ok = exp != null && norm(ta.value) === norm(exp);
@@ -192,9 +225,11 @@
         bShow.addEventListener("click", function () { goTo(d); });
       } else {
         var fb2 = el("div", "kbq-fb");
+        fb2.setAttribute("aria-live", "polite");
         var bReveal = el("button", "kbq-btn kbq-primary", "看参考答案");
         var bYes = el("button", "kbq-btn", "会了");
         var bNo = el("button", "kbq-btn", "没会");
+        bReveal.type = "button"; bYes.type = "button"; bNo.type = "button";
         box.appendChild(bReveal); box.appendChild(bYes); box.appendChild(bNo);
         box.appendChild(fb2);
         bReveal.addEventListener("click", function () { goTo(d); });
@@ -215,18 +250,15 @@
     /* 按钮行为 —— 注意：**任何状态都不阻止继续** */
     bStart.addEventListener("click", function () {
       panel.classList.add("kbq-open");
-      bar.scrollIntoView({ behavior: "smooth", block: "start" });
+      scrollToEl(bar, "start");
     });
-bKnown.addEventListener("click", function () {
-      var to = st.status === "known" ? "new" : "known";
-      P.setStatus(key, to);
-      location.reload();                 // 简单可靠地刷新状态条
-    });
-    bSkip.addEventListener("click", function () {
-      var to = st.status === "skipped" ? "new" : "skipped";
-      P.setStatus(key, to);
-      location.reload();
-    });
+    function toggle(target) {
+      var s = P.get(key);
+      P.setStatus(key, s.status === target ? "new" : target);
+      refresh();
+    }
+    bKnown.addEventListener("click", function () { toggle("known"); });
+    bSkip.addEventListener("click", function () { toggle("skipped"); });
 
     /* 插到自测标题之前 */
     quiz.head.parentNode.insertBefore(wrap, quiz.head);
@@ -238,7 +270,7 @@ bKnown.addEventListener("click", function () {
     if (d.note) d.note.open = true;
     if (d.succ) {
       d.succ.open = true;
-      d.succ.scrollIntoView({ behavior: "smooth", block: "center" });
+      scrollToEl(d.succ, "center");
     }
   }
 
@@ -266,6 +298,8 @@ bKnown.addEventListener("click", function () {
   function renderOverview(index) {
     var host = document.querySelector("[data-kbq-overview]");
     if (!host) return;
+    /* 由 hook 写入的「回到站点根」前缀（各目录页深度不同，不能写死） */
+    var up = host.getAttribute("data-kbq-up") || "";
     var s = P.summary(index);
     var due = P.dueForReview();
     host.innerHTML = "";
@@ -279,8 +313,9 @@ bKnown.addEventListener("click", function () {
       box.appendChild(el("div", "kbq-duetitle",
         "⏳ 有几页你之前跳过或标记过「已会」，现在该回头看一眼了："));
       due.slice(0, 12).forEach(function (k) {
-        var a = el("a", "kbq-duelink", (index.pages[k] || {}).title || k);
-        a.href = "../../" + (index.pages[k] || {}).path;
+        var page = index.pages[k] || {};
+        var a = el("a", "kbq-duelink", page.title || k);
+        a.href = up + (page.path || "");
         box.appendChild(a);
       });
       host.appendChild(box);

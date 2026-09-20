@@ -3,28 +3,29 @@
 <html lang="zh" class="no-js">
   <head>
     
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="课程大纲 · 数学基础 · 专业课讲义">
-      
-      
-      
-        <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/math/information-theory/wasserstein/">
-      
-      
-        <link rel="prev" href="../js-divergence/">
-      
-      
-        <link rel="next" href="../../signal-systems/">
-      
-      
-        
-      
-      
-      <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  
+    <meta name="description" content="上一页看到 JS 散度的致命问题：分布不重叠时梯度消失。这一页讲一个从根本上解决该问题的度量。Wasserstein 距离：把一个分布「搬运」成另一个所需的最小代价。">
+  
+  
+  
+    <link rel="canonical" href="https://seven-gan.github.io/course-notes/kb/math/information-theory/wasserstein/">
+  
+  
+    <link rel="prev" href="../js-divergence/">
+  
+  
+    <link rel="next" href="../../signal-systems/">
+  
+  
     
+  
+  
+  <link rel="icon" href="../../../assets/images/favicon-kb.png">
+  <link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png">
+  <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+
     
       
         <title>Wasserstein 距离 - 我的学习知识库</title>
@@ -56,7 +57,27 @@
       
 
     
-    
+    <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:site_name" content="我的学习知识库">
+  <meta property="og:title" content="Wasserstein 距离">
+  
+  <meta property="og:description" content="上一页看到 JS 散度的致命问题：分布不重叠时梯度消失。这一页讲一个从根本上解决该问题的度量。Wasserstein 距离：把一个分布「搬运」成另一个所需的最小代价。">
+  
+  
+  <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/information-theory/wasserstein/">
+  
+  <meta property="og:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="我的学习知识库 - 课程大纲 · 数学基础 · 专业课讲义">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Wasserstein 距离">
+  
+  <meta name="twitter:description" content="上一页看到 JS 散度的致命问题：分布不重叠时梯度消失。这一页讲一个从根本上解决该问题的度量。Wasserstein 距离：把一个分布「搬运」成另一个所需的最小代价。">
+  
+  <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
+
   </head>
   
   
@@ -11461,9 +11482,7 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">模式识别</span><span class="kb-course-tag">无人系统自主决策与优化</span><span class="kb-course-tag">智能传感与信息处理</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#6b7280">了解</span><span class="kb-imp-desc">扩展阅读，不必深究</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>WGAN 论文（Arjovsky et al., 2017）</code><code>最优传输（Optimal Transport）简介资料</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《最优传输》或相关中文综述（术语通行一致：最优传输、推土机距离）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
-
-<div class="kb-relnav"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../js-divergence/">js-divergence</a></span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#6b7280">了解</span><span class="kb-imp-desc">扩展阅读，不必深究</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>WGAN 论文（Arjovsky et al., 2017）</code><code>最优传输（Optimal Transport）简介资料</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《最优传输》或相关中文综述（术语通行一致：最优传输、推土机距离）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="wasserstein">Wasserstein 距离<a class="headerlink" href="#wasserstein" title="Permanent link">&para;</a></h1>
 <p>上一页看到 JS 散度的致命问题：<strong>分布不重叠时梯度消失</strong>。这一页讲一个
@@ -13006,6 +13025,7 @@ E_p[f]-E_q[f] = c\,(\mu_p-\mu_q)
 </tbody>
 </table>
 </details>
+<nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../js-divergence/">JS 散度</a></span></div></nav>
 
 
 

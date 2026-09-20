@@ -164,3 +164,28 @@
 /* 深色主题下也看得清 */
 [data-md-color-scheme="slate"] .kbpy-out { border-left-color: #51cf66; }
 [data-md-color-scheme="slate"] .kbpy-out.kbpy-err { border-left-color: #ffa94d; }
+
+/* ---- 键盘焦点可见 ----
+ * 按钮此前只有 :hover、没有焦点样式，纯键盘操作时看不出当前在哪一个按钮上。 */
+.kbq-btn:focus-visible,
+.kbpy-btn:focus-visible {
+  outline: 2px solid var(--md-accent-fg-color);
+  outline-offset: 2px;
+}
+
+/* ---- 尊重「减少动态效果」系统偏好 ---- */
+@media (prefers-reduced-motion: reduce) {
+  .kbq-btn,
+  .kbpy-btn,
+  .kbq-duelink {
+    transition: none;
+  }
+}
+
+/* ---- 触屏设备：避免点按后 hover 高亮残留 ---- */
+@media (hover: none) {
+  .kbq-btn:hover { border-color: var(--md-default-fg-color--lighter); }
+  .kbpy-btn:hover:not(:disabled) {
+    border-color: var(--md-default-fg-color--lighter);
+  }
+}
