@@ -13041,6 +13041,11 @@ z
 <p>四杆机构只需要<strong>一个</strong>独立输入（比如曲柄的转角），
 整个机构的姿态就被完全确定了 ——
 这与「给曲柄一个电机，摇杆就乖乖按规律摆」的经验完全一致</p>
+<p><strong>顺手做个对照，看错在哪</strong>：
+如果忘了「机架不算」，写成 <span class="arithmatex">\(3l - 2P_L - P_H\)</span>，会得到 <span class="arithmatex">\(12-8=4\)</span>；
+如果把「关节数」当成自由度，会得到 <span class="arithmatex">\(4\)</span>；
+如果漏掉一个转动副，会得到 <span class="arithmatex">\(9-6=3\)</span>。
+<strong>三个数错一个，答案就废</strong> —— 所以数 <span class="arithmatex">\(l\)</span>、<span class="arithmatex">\(P_L\)</span>、<span class="arithmatex">\(P_H\)</span> 要慢</p>
 <div class="admonition warning">
 <p class="admonition-title">自由度算出来的常见错法，逐个点名</p>
 <table>
@@ -13934,6 +13939,42 @@ z
 <p><strong>这就是「工业机械臂几乎都是串联（开链）、
 而高精度高刚度场合用并联（闭链）」的原因</strong></p>
 <p>两种链用两种算法，判据只看一句话：「有没有环」。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>开链（串联机械臂）</th>
+<th>闭链（平面四杆）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有环吗</td>
+<td><strong>没有</strong></td>
+<td><strong>有，回路闭合</strong></td>
+</tr>
+<tr>
+<td>自由度怎么算</td>
+<td>各关节允许自由度<strong>直接相加</strong></td>
+<td>用公式 <span class="arithmatex">\(F = 3(l-1) - 2P_L - P_H\)</span></td>
+</tr>
+<tr>
+<td>本例参数</td>
+<td>6 个转动副，每个允许 1</td>
+<td><span class="arithmatex">\(l=4\)</span>、<span class="arithmatex">\(P_L=4\)</span>、<span class="arithmatex">\(P_H=0\)</span></td>
+</tr>
+<tr>
+<td>本例结果</td>
+<td><span class="arithmatex">\(1+1+1+1+1+1 = 6\)</span></td>
+<td><span class="arithmatex">\(3\times3 - 2\times4 - 0 = 1\)</span></td>
+</tr>
+<tr>
+<td>若套错算法</td>
+<td>——</td>
+<td>按「副数累加」会得到 4，<strong>错 3 倍</strong> ⚠</td>
+</tr>
+</tbody>
+</table>
 <p><strong>为什么闭链不能累加</strong>：闭链绕一圈要回到原位，
 这个「回到原位」本身就是一批约束方程。
 四杆里 4 个转动副看似有 4 个自由度，但环路闭合条件额外吃掉 3 个，
@@ -14027,9 +14068,6 @@ z
 （禁止两构件在两个方向上的相对平移）。</p>
 <p><strong>第三步</strong>：剩余</p>
 <div class="arithmatex">\[6 - 2 = 4\]</div>
-<p><strong>这个结果可以分解验证</strong>：
-整个双构件系统的位姿可以用 4 个数确定，例如
-「构件 1 的 <span class="arithmatex">\(x_1, y_1, \theta_1\)</span>」+「相对转角 <span class="arithmatex">\(\theta_{21}\)</span>」</p>
 <p><strong>手算核账</strong>：</p>
 <table>
 <thead>
