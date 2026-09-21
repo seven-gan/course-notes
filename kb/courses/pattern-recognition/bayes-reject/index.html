@@ -12704,7 +12704,6 @@
 <p>答案是<strong>可以</strong>，而且这个选项有正式的名字 —— <strong>拒识（reject）</strong>。
 加上拒识之后，分类器的输出就从「<span class="arithmatex">\(c\)</span> 个类别里挑一个」
 变成「<span class="arithmatex">\(c\)</span> 个类别里挑一个，<strong>或者</strong>承认我拿不准」。</p>
-<p>三个说法看着差不多，差别却很大：</p>
 <table>
 <thead>
 <tr>
@@ -12792,13 +12791,13 @@
 <hr />
 <h2 id="_2">一、为什么需要拒识<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 本课程课件给出的理由：错判会带来严重后果<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>本课程课件引入这一节时，只写了很短的一句，但这句话是整节的起点：</p>
+<p>本课程课件引入这一节时写道：</p>
 <blockquote>
 <p><strong>错误识别可能带来严重后果。</strong>
 是否每次一定要做出决策？
 有时，不做决策比做出错误率很大的决策会更好。</p>
 </blockquote>
-<p>这句话其实含<strong>两个</strong>论断，都要拆开读：</p>
+<p>这句话其实含<strong>两个</strong>论断：</p>
 <table>
 <thead>
 <tr>
@@ -12823,7 +12822,6 @@
 <p><strong>关键在第二个论断</strong>：它把「不判」从「系统出故障」
 重新定义成了「系统的一个正常选项」。</p>
 <h3 id="12">1.2 落到具体场景，代价有多大<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>先看四个场景里，「硬判」和「拒识」各会发生什么。</p>
 <table>
 <thead>
 <tr>
@@ -12900,7 +12898,7 @@
 这些样本<strong>本来就不该被判成任何一类</strong>。
 这类问题叫<strong>开放集</strong>问题，第八节专门讲。</p>
 <h3 id="14">1.4 这一节用到的记号<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
-<p>为了避免和上一页脱节，先把这一页反复用到的符号列出来。
+<p>先把这一页反复用到的符号列出来。
 前五个与 <a href="../bayes-min-error/">最小错误率决策</a> 完全一致，不再重新解释。</p>
 <table>
 <thead>
@@ -12976,8 +12974,7 @@
 <p><strong>为什么要专门造一个动作，而不是把拒识当成一个「额外的类」</strong>：
 因为类和动作的<strong>代价结构不同</strong>。真实类别的样本有先验、有密度、有分布形状；
 而「拒识」这个动作<strong>没有任何分布假设</strong>，
-它只有一个价格，而且这个价格与样本长什么样无关（第 5.2 节会正式说明）。
-把这一点记住，第六节的推导就只是代公式了</p>
+它只有一个价格，而且这个价格与样本长什么样无关（第 5.2 节会正式说明）。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 356.735625 236.905625" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="带拒识的决策：两个阈值构成「不确定就拒识」的中间带">
@@ -13514,8 +13511,7 @@ L 310.763625 40.273531
 </figure>
 
 <h2 id="_3">二、拒识的两种情形<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>「我拿不准」其实包含两种完全不同的情况，
-分不清这两种，后面的阈值就会用错地方。</p>
+<p>「我拿不准」其实包含两种完全不同的情况。</p>
 <h3 id="21">2.1 情形一：样本不属于任何已知类<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>这是什么情况</strong>：
 测试时送进来的样本，<strong>根本不属于训练时定义的那 <span class="arithmatex">\(c\)</span> 个类</strong>。
@@ -13565,7 +13561,6 @@ L 310.763625 40.273531
 这部分错误率是贝叶斯错误率的一部分
 拒识不能消掉重叠，但可以<strong>把重叠区里没把握的样本挑出来</strong>。</p>
 <h3 id="23">2.3 两种情形的对照<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>把两种情形放在一起看，区别就清楚了。</p>
 <table>
 <thead>
 <tr>
@@ -13610,7 +13605,6 @@ L 310.763625 40.273531
 <p><strong>一句话记住这张表</strong>：情形二靠<strong>后验</strong>看得出来，情形一必须靠<strong>距离或密度</strong>。
 后面的阈值拒识擅长的是情形二。</p>
 <h3 id="24">2.4 只按后验分不清这两种情形<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
-<p>这一点值得单独强调，因为它是新手最常踩的坑。</p>
 <p>后验的定义是</p>
 <div class="arithmatex">\[P(\omega_i \mid x) = \frac{p(x \mid \omega_i)\,P(\omega_i)}{\sum_{j=1}^{c} p(x \mid \omega_j)\,P(\omega_j)}\]</div>
 <p>分母是<strong>同一个数</strong>（对所有 <span class="arithmatex">\(i\)</span> 都一样）。
@@ -14166,13 +14160,7 @@ L 261.394688 31.306588
 几乎是<strong>不可能</strong>从 <span class="arithmatex">\(\omega_2\)</span> 里出来的样本，
 可是在只含两类的后验里，它的自信度是 <span class="arithmatex">\(1.000000\)</span> ——
 分类器会用<strong>最高的自信度</strong>说「这肯定是 <span class="arithmatex">\(\omega_2\)</span>」。</p>
-<p><strong>而且它离得越远，自信度越高</strong>。下面把这一点摊开：</p>
-<p>x = 33 这个样本，在只含两类的后验里：</p>
-<ul>
-<li>它离 w2 的中心有多远 : 2.75 个 sigma</li>
-<li>它离 w1 的中心有多远 : 6.0 个 sigma</li>
-</ul>
-<p>好，离得都很远。那么它的最大后验是多少？</p>
+<p><strong>而且它离得越远，自信度越高</strong>。下面把这一点摊开，看它的最大后验：</p>
 <table>
 <thead>
 <tr>
@@ -14260,7 +14248,7 @@ L 261.394688 31.306588
 这样后面才会出现「<span class="arithmatex">\(T\)</span> 上升 → 拒识率上升」这样干净的单调性。</p>
 </div>
 <h3 id="32">3.2 为什么门槛设在「最大后验」上<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>这个设计有三个层次的理由，缺一层理解都不牢。</p>
+<p>这个设计有三个层次的理由。</p>
 <p>第一层：判决的成败只看被选中的那一类。</p>
 <p>判决规则的动作是「选中后验最大的那一类」。
 给定 <span class="arithmatex">\(x\)</span> 之后，条件错误率（上一页算过）是</p>
@@ -14276,8 +14264,7 @@ L 261.394688 31.306588
 <p>第三层：<span class="arithmatex">\(T\)</span> 要和一个有上界的量比较。</p>
 <p>后验的概率范围是 <span class="arithmatex">\([1/c, 1]\)</span>（<span class="arithmatex">\(c\)</span> 类的情形：最大值至少是 <span class="arithmatex">\(1/c\)</span>，至多是 <span class="arithmatex">\(1\)</span>）。
 所以 <span class="arithmatex">\(T\)</span> 的物理意义非常清楚：
-「要求被选中那一类的后验<strong>至少达到</strong> <span class="arithmatex">\(T\)</span>」——
-这句话不需要任何额外解释就能说出来</p>
+「要求被选中那一类的后验<strong>至少达到</strong> <span class="arithmatex">\(T\)</span>」。</p>
 <h3 id="33">3.3 先把「最大后验」这个量算出来<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>规则里反复出现 <span class="arithmatex">\(\max_j P(\omega_j \mid x)\)</span>，所以先给它一个名字：</p>
 <div class="arithmatex">\[\mathrm{maxP}(x) \;=\; \max_{j=1,\dots,c} P(\omega_j \mid x)\]</div>
@@ -14328,7 +14315,7 @@ L 261.394688 31.306588
 <p><strong>第四步：取最大值。</strong> 校验一下两个后验之和：
 <span class="arithmatex">\(0.441139 + 0.558861 = 1.000000\)</span> ✓ 于是</p>
 <div class="arithmatex">\[\mathrm{maxP}(19.5) = 0.558861\]</div>
-<p>同样地手算几个位置，就得到这张 maxP 对照表：</p>
+<p>手算几个位置得到这张 maxP 对照表：</p>
 <table>
 <thead>
 <tr>
@@ -14365,7 +14352,6 @@ L 261.394688 31.306588
 </tr>
 </tbody>
 </table>
-<p><strong>读这张表要注意三件事</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14393,9 +14379,9 @@ L 261.394688 31.306588
 </tbody>
 </table>
 <p><strong>所以拒识的作用范围是「边界附近的一圈」</strong>，
-而不是随机地把样本扔掉。这一点在第五节会用数字再确认一次。</p>
+而不是随机地把样本扔掉。</p>
 <h3 id="34-t">3.4 阈值 <span class="arithmatex">\(T\)</span> 的取值含义<a class="headerlink" href="#34-t" title="Permanent link">&para;</a></h3>
-<p><span class="arithmatex">\(T\)</span> 是这一节唯一的可调参数，它的取值范围和每个特殊值都要说清。</p>
+<p><span class="arithmatex">\(T\)</span> 是这一节唯一的可调参数。</p>
 <table>
 <thead>
 <tr>
@@ -14466,7 +14452,6 @@ L 261.394688 31.306588
 中间的拒识段夹在两个判决区之间。</p>
 </div>
 <h3 id="35">3.5 拒识区的几何图像<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
-<p>把上一小节的结论画出来，三个区域的位置就一目了然。</p>
 <p>在两类情形下，<span class="arithmatex">\(P(\omega_1 \mid x)\)</span> 随 <span class="arithmatex">\(x\)</span> 单调下降，于是：</p>
 <ul>
 <li>在判决边界<strong>左侧</strong>，<span class="arithmatex">\(\omega_1\)</span> 的后验更大，<span class="arithmatex">\(\mathrm{maxP} = P(\omega_1 \mid x)\)</span>；
@@ -15208,7 +15193,7 @@ L 364.14375 187.272
 <div class="arithmatex">\[p_c = P(\text{判对}), \qquad p_e = P(\text{判错}), \qquad p_r = P(\text{拒识})\]</div>
 <p><strong>怎么读它们</strong>：
 <span class="arithmatex">\(p_c\)</span> 是<strong>正确识别率</strong>，<span class="arithmatex">\(p_e\)</span> 是<strong>错误识别率</strong>（也就是错误率），
-<span class="arithmatex">\(p_r\)</span> 是<strong>拒识率</strong>。三者都是概率，都在 <span class="arithmatex">\([0, 1]\)</span> 内。</p>
+<span class="arithmatex">\(p_r\)</span> 是<strong>拒识率</strong>。</p>
 <p>把 <span class="arithmatex">\(p_c\)</span> 展开成积分，就看得出它和判决区的关系：</p>
 <div class="arithmatex">\[p_c = \sum_{i=1}^{c} \int_{\mathcal{A}_i} P(\omega_i \mid x)\, p(x)\, \mathrm{d}x
 = \sum_{i=1}^{c} P(\omega_i)\int_{\mathcal{A}_i} p(x \mid \omega_i)\, \mathrm{d}x\]</div>
@@ -15223,7 +15208,6 @@ L 364.14375 187.272
 <div class="arithmatex">\[p_r = \int_{\mathcal{R}} p(x)\, \mathrm{d}x\]</div>
 <p><strong>怎么读它</strong>：被拒那一段的概率质量，与判决对不对完全无关 ✓</p>
 <h3 id="42-1">4.2 三者的关系：和恒等于 1<a class="headerlink" href="#42-1" title="Permanent link">&para;</a></h3>
-<p>三个指标之间有一条非常干净的关系：</p>
 <div class="arithmatex">\[p_c + p_e + p_r = 1\]</div>
 <p><strong>推导（不跳步）</strong>。取任意一个样本 <span class="arithmatex">\(x\)</span>，按上面的判决区域划分：
 它要么落在拒识区 <span class="arithmatex">\(\mathcal{R}\)</span>，要么落在某个判决区 <span class="arithmatex">\(\mathcal{A}_i\)</span>；
@@ -15240,7 +15224,6 @@ L 364.14375 187.272
 而第一项 <span class="arithmatex">\(\int_{\mathcal{A}} p(x)\mathrm{d}x\)</span> 恰好就是 <span class="arithmatex">\(p_c + p_e\)</span>。</p>
 <p><strong>怎么读这个推导</strong>：判决区与拒识区<strong>拼起来正好是全空间</strong>（不漏不重），
 所以两部分的概率质量加起来必然是 <span class="arithmatex">\(1\)</span> ✓</p>
-<p>并排对比一下，差别就清楚了：</p>
 <table>
 <thead>
 <tr>
@@ -15370,13 +15353,12 @@ L 364.14375 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>这一步最值得体会的地方</strong>：<span class="arithmatex">\(p_r\)</span> 是<strong>算出来的</strong>，不是另查一次表。
+<p><strong><span class="arithmatex">\(p_r\)</span> 是算出来的</strong>，不是另查一次表。
 因为「拒识区」=「除去两个判决区剩下的部分」，
 而两个判决区的概率质量已经分别算在 <span class="arithmatex">\(p_c\)</span> 和 <span class="arithmatex">\(p_e\)</span> 里了 ✓</p>
 <p><strong>同一个式子对别的 <span class="arithmatex">\(T\)</span> 也管用，只是端点不同</strong>。
 端点的方程是 <span class="arithmatex">\(P(\omega_1 \mid x) = T\)</span> 与 <span class="arithmatex">\(P(\omega_1 \mid x) = 1 - T\)</span>，
-所以三个指标都随 <span class="arithmatex">\(T\)</span> 一起变。这张表把端点先摆出来，
-后面 4.4 节的行就是照它算的：</p>
+所以三个指标都随 <span class="arithmatex">\(T\)</span> 一起变。这张表把端点先摆出来：</p>
 <table>
 <thead>
 <tr>
@@ -15422,7 +15404,7 @@ L 364.14375 187.272
 <p><strong>读这张表只需看最后一列</strong>：<span class="arithmatex">\(T\)</span> 从 <span class="arithmatex">\(0.6\)</span> 涨到 <span class="arithmatex">\(0.95\)</span>，
 拒识区宽度从 <span class="arithmatex">\(1.27\)</span> 涨到 <span class="arithmatex">\(9.97\)</span> —— 涨了将近八倍，
 而 <span class="arithmatex">\(T\)</span> 的涨幅只有 <span class="arithmatex">\(0.35\)</span> ⚠</p>
-<p>下面把上面每一步都算一遍，并顺手检验最优阈值：</p>
+<p>下面把上面每一步都算一遍：</p>
 <p>两类判决边界 t = 19.134613</p>
 <p>T = 0.8 时拒识区 = [16.746253, 21.151045]</p>
 <ul>
@@ -15510,8 +15492,7 @@ L 364.14375 187.272
 两列一升一降，加起来才出现一个谷底。
 <strong>所以「拒还是不拒」不是看某一个指标，而是看这两列的和</strong> ✓</p>
 <h3 id="44-0-1">4.4 阈值从 0 变到 1，三个指标怎么走<a class="headerlink" href="#44-0-1" title="Permanent link">&para;</a></h3>
-<p>固定两类分布，只动 <span class="arithmatex">\(T\)</span>，把三条曲线的变化列成一张<strong>手算对照表</strong>。
-表里的数由 4.3 节的同一套查表方法逐行算出：</p>
+<p>固定两类分布，只动 <span class="arithmatex">\(T\)</span>，把三条曲线的变化列成一张<strong>手算对照表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -15574,16 +15555,11 @@ L 364.14375 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>这张表比参数扫描更有用的地方</strong>在于第二列：
-<strong>拒识区随 <span class="arithmatex">\(T\)</span> 增大而单调变宽</strong>，而且始终是一条<strong>连通的区间</strong>，
-稳稳地夹在判决边界两侧。</p>
+<p><strong>这张表最有用的是第二列</strong>：<strong>拒识区随 <span class="arithmatex">\(T\)</span> 增大而单调变宽</strong>，而且始终是一条<strong>连通的区间</strong>。</p>
 <p><strong>手算的方法就是 4.3 节那五步的重复</strong>：对每个 <span class="arithmatex">\(T\)</span>，
 先解 <span class="arithmatex">\(P(\omega_1 \mid x) = T\)</span> 与 <span class="arithmatex">\(P(\omega_1 \mid x) = 1 - T\)</span> 得两个端点，
 再把端点化成 <span class="arithmatex">\(z\)</span>、查 <span class="arithmatex">\(\Phi\)</span>、乘先验、相加减。
 表中每一行的「三者之和」都是 <span class="arithmatex">\(1.000000\)</span>，就是 4.2 节恒等式的逐行体现 ✓</p>
-<p>下面用同一套口径把六个 <span class="arithmatex">\(T\)</span> 各算一遍，
-顺便验算「三者之和」这条恒等式：</p>
-<p><strong>逐行看这张表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -15681,14 +15657,10 @@ L 364.14375 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>把这张输出和上面的手算表逐格对照</strong>：六行的三个数完全一致，
-只有末位偶尔差 <span class="arithmatex">\(1\)</span>（例如 <span class="arithmatex">\(0.854782\)</span> 与 <span class="arithmatex">\(0.854802\)</span>）——
-差别来自手算时查表的位数，不是方法不同 ✓</p>
 <p><strong>这组数字的意义在于「口径统一」</strong>：
 三个指标出自同一个积分口径，所以「三者之和」能逐行验到 <span class="arithmatex">\(1.000000\)</span>。
 如果哪天三个指标分别由三套不同的口径算出来，
 这个恒等式反而是最好的<strong>一致性检查</strong> ✓</p>
-<p>表里还有两个细节值得核对：</p>
 <table>
 <thead>
 <tr>
@@ -15847,7 +15819,6 @@ L 364.14375 187.272
 </tr>
 </tbody>
 </table>
-<p>下面同时给出「拒识率—错误率」的走向和被拒样本的成分比例：</p>
 <p>不拒识时错误识别率 = 0.14565</p>
 <table>
 <thead>
@@ -15939,7 +15910,7 @@ L 364.14375 187.272
 <p><strong>怎么读这个等式</strong>：拒掉的 <span class="arithmatex">\(0.282270\)</span> 概率质量，被两个方向分掉了 ——
 <span class="arithmatex">\(0.095470\)</span> 来自原本的错判，<span class="arithmatex">\(0.186800\)</span> 来自原本的判对。
 <strong>误伤的量差不多是收益的两倍</strong></p>
-<p>而这只是 <span class="arithmatex">\(T = 0.8\)</span> 的情况。看上面那张表的最后一列：
+<p>看上面那张表的最后一列：
 阈值越高，「被拒样本中本来会判错的占比」越小 ——
 从 <span class="arithmatex">\(0.453800\)</span> 一路掉到 <span class="arithmatex">\(0.205442\)</span>。这说明：</p>
 <table>
@@ -16060,7 +16031,6 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 <p>把上面的期望损失代进「哪个动作损失小就选哪个」，就能直接算出结论。</p>
 <p><strong>判错比拒识更疼时</strong>（<span class="arithmatex">\(\lambda_e (1 - P_{\max}) \gt \lambda_r\)</span>），拒识合算；
 <strong>反过来则不如直接判</strong>。这个比较在第六节会化成一条关于 <span class="arithmatex">\(T\)</span> 的门槛。</p>
-<p>先给三个具体场景看量级差别：</p>
 <table>
 <thead>
 <tr>
@@ -16100,9 +16070,7 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 <p><strong>反过来说</strong>：这也是为什么拒识在医疗、自动驾驶、风控这类场景被广泛使用，
 而在普通的内容标注、商品分类里很少用 ——
 差别不在数学，而在<strong>两类损失的比值</strong>。</p>
-<p><strong>把上一张表读成三个数字，结论就很具体了</strong>。
-假设你手里有一批样本、一个训练好的分类器，
-唯一能改的就是「拒还是不拒」，那么决策链其实只有三步：</p>
+<p>把决策链写成三步：</p>
 <table>
 <thead>
 <tr>
@@ -16129,7 +16097,7 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 </tr>
 </tbody>
 </table>
-<p><strong>第 1 步最关键，也最容易被跳过</strong>。看下面这三行：</p>
+<p>看下面这三行：</p>
 <table>
 <thead>
 <tr>
@@ -16194,8 +16162,7 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 <h2 id="_7">六、最优阈值怎么定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>到这里，<span class="arithmatex">\(T\)</span> 一直是一个「人给的」参数。这一节回答最后一个问题：
 <strong><span class="arithmatex">\(T\)</span> 应该取多少才最合算？</strong></p>
-<p>答案由<strong>两个损失</strong>决定：判错损失 <span class="arithmatex">\(\lambda_e\)</span> 与拒识损失 <span class="arithmatex">\(\lambda_r\)</span>。
-下面把这条结论<strong>一步步推出来</strong>，每一步都写清依据。</p>
+<p>答案由<strong>两个损失</strong>决定：判错损失 <span class="arithmatex">\(\lambda_e\)</span> 与拒识损失 <span class="arithmatex">\(\lambda_r\)</span>。</p>
 <h3 id="61">6.1 先把损失写成两个常数<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>完整的最小风险决策允许任意一对损失 <span class="arithmatex">\(\lambda_{ij}\)</span>（把 <span class="arithmatex">\(\omega_j\)</span> 判成 <span class="arithmatex">\(\omega_i\)</span> 的损失）。
 本课程课件在这一节做了一个<strong>简化假设</strong>：所有「判错」的代价<strong>相等</strong>，都记为 <span class="arithmatex">\(\lambda_e\)</span>。
@@ -16413,8 +16380,7 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 所以 <span class="arithmatex">\(T = 0.2\)</span> 这个门槛<strong>低于最小值</strong>，效果和 <span class="arithmatex">\(T = 0.5\)</span> 一样是「不拒」；
 真正让拒识「起步」的门槛是 <span class="arithmatex">\(1/c\)</span> ✓</p>
 <h3 id="68">6.8 用两个极端数验证一遍<a class="headerlink" href="#68" title="Permanent link">&para;</a></h3>
-<p>把损失换成几个特殊值，逐项复核上面两条推导。
-重点看 <span class="arithmatex">\(\lambda_r\)</span> 走向两端时会发生什么 —— 这正是 6.7 节那两个极端：</p>
+<p>重点看 <span class="arithmatex">\(\lambda_r\)</span> 走向两端时会发生什么 —— 这正是 6.7 节那两个极端：</p>
 <p><strong>把拒识损失推向两端：</strong></p>
 <ul>
 <li>lambda_r = 0.0 → T = 1.00 拒识率 = 1.000000 错误识别率 = 0.000000</li>
@@ -16531,7 +16497,6 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 但总损失 <span class="arithmatex">\(0.712146\)</span> 反而比不拒识还差 ⚠</p>
 </div>
 <h3 id="69">6.9 换一组损失再看阈值<a class="headerlink" href="#69" title="Permanent link">&para;</a></h3>
-<p>最后把损失换一换，看阈值怎么跟着走。</p>
 <table>
 <thead>
 <tr>
@@ -16654,7 +16619,7 @@ R(\text{判 } \omega_i) = \lambda_e \cdot \bigl[1 - P(\omega_i \mid x)\bigr]\]</
 </table>
 <p>直观地说，<strong>每个「两类都像」的位置附近都可能出现一小段拒识区</strong>，
 这些段拼起来就是整个拒识区。</p>
-<p><strong>手算一个三类的小例子</strong>（这个形状值得自己画一遍）：
+<p><strong>手算一个三类的小例子</strong>：
 设三个类在同一维上依次排开，均值分别是 <span class="arithmatex">\(0\)</span>、<span class="arithmatex">\(4\)</span>、<span class="arithmatex">\(9\)</span>，
 标准差分别是 <span class="arithmatex">\(1\)</span>、<span class="arithmatex">\(1\)</span>、<span class="arithmatex">\(2\)</span>，先验分别是 <span class="arithmatex">\(0.4\)</span>、<span class="arithmatex">\(0.4\)</span>、<span class="arithmatex">\(0.2\)</span>，取 <span class="arithmatex">\(T = 0.7\)</span>。</p>
 <table>
@@ -16742,7 +16707,6 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 <p>前七节都在处理<strong>情形二</strong>（样本属于已知类，只是边界附近难分）。
 情形一要难得多，它有专门的名字。</p>
 <h3 id="81">8.1 闭集 与 开放集<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
-<p>本课程课件用两张图对比了这两种设定。</p>
 <table>
 <thead>
 <tr>
@@ -16767,13 +16731,12 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>「开放集」的核心困难</strong>，本课程课件讲得很直接：</p>
+<p><strong>「开放集」的核心困难</strong>：</p>
 <blockquote>
 <p>训练时<strong>只能</strong>用已知的 <span class="arithmatex">\(c\)</span> 个类来训练分类器，
 因为<strong>异常样本没有训练集</strong> —— 你根本不知道会出现什么新类。</p>
 </blockquote>
-<p><strong>这句话的含义值得展开</strong>：
-闭集问题里，你可以把「所有可能的类」都拿到训练数据；
+<p>闭集问题里，你可以把「所有可能的类」都拿到训练数据；
 开放集问题里，<strong>未知类在训练时是不可见的</strong>，
 不能简单地「把未知也当成一个类来训练」⚠</p>
 <h3 id="82">8.2 难点：模型对未知类会给出「自信的错误答案」<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
@@ -16920,7 +16883,6 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 未知类的拦截从 <span class="arithmatex">\(0.000200\)</span> 升到 <span class="arithmatex">\(0.295650\)</span>。
 两件事一起变好，说明它不是在「权衡」，而是<strong>把缺失的那一项补上了</strong> ✓</p>
 <h3 id="84">8.4 课件提到的一种思路：用语言引导的目标定位<a class="headerlink" href="#84" title="Permanent link">&para;</a></h3>
-<p>本课程课件在开放集这一节的末尾给了一个<strong>正面例子</strong>，思路值得记住。</p>
 <p><strong>传统做法的局限</strong>：经典的目标检测模型
 <strong>只能识别训练时定义好的固定类别</strong>。
 输出层的维度在训练时就固定了，
@@ -16984,7 +16946,6 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 语言引导也一样接不住 ⚠
 所以阈值、距离、密度这几类手段仍然需要保留。</p>
 <h3 id="85">8.5 常用手段一览<a class="headerlink" href="#85" title="Permanent link">&para;</a></h3>
-<p>把开放集识别的常见手段从<strong>原理层面</strong>归纳成一张表。</p>
 <table>
 <thead>
 <tr>
@@ -17036,7 +16997,6 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 用<strong>距离/密度</strong>对付「谁也不像」的情形一，
 用<strong>阈值拒识</strong>对付「两类都像」的情形二，
 再给两者都留一条<strong>人工复核</strong>的出口 ✓</p>
-<p>用一张表把两种手段的分工说清：</p>
 <table>
 <thead>
 <tr>
@@ -17068,7 +17028,6 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 所以距离法也要<strong>同时看误伤和拦截</strong>，不能只盯一个数 ✓</p>
 <hr />
 <h2 id="_10">九、实际应用中的拒识<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
-<p>把前面所有结论落到四个常见场景上。</p>
 <table>
 <thead>
 <tr>
@@ -17105,7 +17064,7 @@ P_{(1)}(x) - P_{(2)}(x) \gt cT - 1 \quad \text{（充分但不必要）}\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>这四个场景共享同一个模式</strong>，值得单独写出来：</p>
+<p><strong>四个场景共享同一个模式</strong>：</p>
 <table>
 <thead>
 <tr>

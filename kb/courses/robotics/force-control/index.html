@@ -11990,21 +11990,17 @@
 <hr />
 <h2 id="_2">一、当任务里有「接触」：位置控制的极限<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 位置控制有一个隐含前提：环境是「空」的<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>位置控制的目标只有一个：<strong>让被控位置等于指令值</strong>。
-它默认「<strong>空间是自由的</strong>」—— 只要电机出力，末端总能到达任意目标。</p>
-<p><strong>接触打破了这个前提。</strong> 当末端碰到一个物体，那个位置上多了一个<strong>约束</strong>：
-<strong>过不去就是过不去</strong>。此时位置控制器只看到「<strong>位置还没到</strong>」，
-于是<strong>持续加大力矩往外顶</strong> —— 结果要么电机过流、结构损坏，
-要么工件被顶飞。<strong>位置控制没有「中间态」。</strong></p>
+<p>位置控制的目标只有一个：<strong>让被控位置等于指令值</strong>，隐含默认「<strong>空间是自由的</strong>」—— 只要电机出力，末端总能到任意目标。</p>
+<p><strong>接触打破了这个前提。</strong> 末端碰到物体，那个位置就多了一个<strong>约束</strong>：<strong>过不去就是过不去</strong>。
+此时位置控制器只看到「<strong>位置还没到</strong>」，于是<strong>持续加大力矩往外顶</strong> —— 结果要么电机过流、结构损坏，要么工件被顶飞。<strong>位置控制没有「中间态」。</strong></p>
 <h3 id="12">1.2 接触把「位置」和「力」焊死在一起<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>接触面上，位置偏差 <span class="arithmatex">\(\delta x\)</span> 和接触力 <span class="arithmatex">\(F\)</span> 之间是<strong>近似线性、但系数极大</strong>的关系：</p>
+<p>接触面上，位置偏差 <span class="arithmatex">\(\delta x\)</span> 和接触力 <span class="arithmatex">\(F\)</span> 是<strong>近似线性、但系数极大</strong>的关系：</p>
 <div class="arithmatex">\[
 \delta F \approx k_{\text{contact}}\,\delta x
 \]</div>
-<p><span class="arithmatex">\(k_{\text{contact}}\)</span> 是<strong>接触刚度</strong>，刚性金属件常达 <span class="arithmatex">\(10^{5}\sim10^{7}\)</span> N/m。
-这意味着位置差 <span class="arithmatex">\(0.1\)</span> mm，力的量级就是几十上百牛。</p>
-<p><strong>一句话</strong>：位置控制追求「零位置误差」，而这恰恰等价于「把力推到无穷大」——
-在一个刚性接触面上，「位置精确」和「力可控」是不可兼得的。</p>
+<p><span class="arithmatex">\(k_{\text{contact}}\)</span> 是<strong>接触刚度</strong>，刚性金属件常达 <span class="arithmatex">\(10^{5}\sim10^{7}\)</span> N/m —— 位置差 <span class="arithmatex">\(0.1\)</span> mm，力的量级就是几十上百牛。</p>
+<p><strong>一句话</strong>：位置控制追求「零位置误差」，恰恰等价于「把力推到无穷大」——
+刚性接触面上，「位置精确」和「力可控」不可兼得。</p>
 <h3 id="13">1.3 两个世界的自由度：位置 与 力，只能选一个<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>在<strong>每一个自由度（方向）</strong>上，位置和力是<strong>一对共轭量</strong> ——
 就像电路里的电压和电流、结构里的位移和载荷：</p>
@@ -12078,16 +12074,11 @@
 <h2 id="_3">二、柔顺控制：让末端变成一支「弹簧」<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 被动柔顺 与 主动柔顺<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>既然「硬碰硬」会出事，一个直接的办法是<strong>让机器人变软</strong>。有两条路：</p>
-<p>· <strong>被动柔顺</strong>：在末端装一个<strong>机械弹性件</strong> —— 典型是
-  <strong>RCC（Remote Center of Compliance，远端柔顺中心）</strong>，
-  用一组弹簧片让末端在某点附近「能歪、能转」。
-  <strong>优点</strong>：无需传感器、无反应用延迟、本质安全；
-  <strong>缺点</strong>：柔顺特性<strong>出厂就定死了</strong>，换个任务就得换一个；
-· <strong>主动柔顺</strong>：用<strong>力传感器 + 控制律</strong>，在软件里「算出」一个软特性。
-  <strong>优点</strong>：柔顺刚度、阻尼<strong>可编程</strong>、随任务切换；
-  <strong>缺点</strong>：依赖传感器与控制带宽，且<strong>只能对已测量的力作出反应</strong>。</p>
-<p>工业上两者常常<strong>组合使用</strong>：RCC 提供「粗柔顺」吸收大偏差，
-主动控制提供「精细柔顺」调力。<strong>这一节主要讲主动柔顺。</strong></p>
+<p>· <strong>被动柔顺</strong>：末端装一个<strong>机械弹性件</strong> —— 典型是 <strong>RCC（Remote Center of Compliance，远端柔顺中心）</strong>，用一组弹簧片让末端在某点附近「能歪、能转」。
+  <strong>优点</strong>：无需传感器、无延迟、本质安全；<strong>缺点</strong>：柔顺特性<strong>出厂就定死</strong>，换任务就得换件；
+· <strong>主动柔顺</strong>：用<strong>力传感器 + 控制律</strong>，在软件里「算出」软特性。
+  <strong>优点</strong>：刚度、阻尼<strong>可编程</strong>、随任务切换；<strong>缺点</strong>：依赖传感器与控制带宽，且<strong>只能对已测量的力作出反应</strong>。</p>
+<p>工业上两者常<strong>组合使用</strong>：RCC 提供「粗柔顺」吸收大偏差，主动控制提供「精细柔顺」调力。<strong>这一节主要讲主动柔顺。</strong></p>
 <h3 id="22">2.2 阻抗控制：控制「位置—力」的关系<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>阻抗控制（impedance control，Hogan 1985）</strong> 的思路很特别：
 它既不死管位置，也不死管力 —— 它控制二者之间的关系。</p>
@@ -12098,10 +12089,9 @@
 <p>· <span class="arithmatex">\(\boldsymbol{x}_d\)</span>：期望的「<strong>零力平衡位置</strong>」（不是硬指令，是弹簧的自然长度）；
 · <span class="arithmatex">\(\boldsymbol{M}_d,\ \boldsymbol{B}_d,\ \boldsymbol{K}_d\)</span>：<strong>希望机器人表现的</strong>惯量、阻尼、刚度（都是设计参数）；
 · <span class="arithmatex">\(\boldsymbol{F}_{\text{ext}}\)</span>：环境给末端的<strong>外力</strong>。</p>
-<p><strong>读这个式子</strong>：外力越大，末端偏离 <span class="arithmatex">\(\boldsymbol{x}_d\)</span> 越多 ——
-<strong>偏差不再是「错误」，而是「力」的度量</strong>。
-环境<strong>推</strong>它，它就<strong>让</strong>；力气大，它退得多；<span class="arithmatex">\(\boldsymbol{K}_d\)</span> 越小它越「软」。
-这就是阻抗控制的核心：<strong>把「力」翻译成「位置偏差」，再用位置环去实现偏差。</strong></p>
+<p><strong>读这个式子</strong>：外力越大，末端偏离 <span class="arithmatex">\(\boldsymbol{x}_d\)</span> 越多 —— <strong>偏差不再是「错误」，而是「力」的度量</strong>。
+环境<strong>推</strong>它，它就<strong>让</strong>；力大退得多，<span class="arithmatex">\(\boldsymbol{K}_d\)</span> 越小越「软」。
+阻抗控制的核心就是：<strong>把「力」翻译成「位置偏差」，再用位置环去实现偏差。</strong></p>
 <p>这张图把等效模型的每个元件对齐到实际部件上，末端与接触对象的关系也画了出来：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="阻抗控制的质量—弹簧—阻尼等效模型，右端接触对象">
@@ -12187,9 +12177,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>导纳控制</strong>是「<strong>外环算位置、内环执行位置</strong>」：测到外力 <span class="arithmatex">\(\boldsymbol{F}_{\text{ext}}\)</span>，
-用虚拟模型算出该退让多少 <span class="arithmatex">\(\Delta\boldsymbol{x}\)</span>，把 <span class="arithmatex">\(\boldsymbol{x}_d+\Delta\boldsymbol{x}\)</span> 交给原来的位置控制器。
-<strong>它让任何一台「只会做位置」的工业机器人，都能获得柔顺能力</strong> —— 工程上极其常见。</p>
+<p><strong>导纳控制</strong>是「<strong>外环算位置、内环执行位置</strong>」：测到外力 <span class="arithmatex">\(\boldsymbol{F}_{\text{ext}}\)</span>，用虚拟模型算出该退让多少 <span class="arithmatex">\(\Delta\boldsymbol{x}\)</span>，把 <span class="arithmatex">\(\boldsymbol{x}_d+\Delta\boldsymbol{x}\)</span> 交给原来的位置控制器 ——
+<strong>让任何一台「只会做位置」的工业机器人获得柔顺能力</strong>，工程上极常见。</p>
 <div class="admonition tip">
 <p class="admonition-title">阻抗 / 导纳 一句话区分</p>
 <p><strong>看「输入」是什么、机器人「天生的强项」是什么</strong>：
@@ -12209,27 +12198,20 @@
 </ul>
 <p>读这张表，三种控制的分工一目了然：</p>
 <ol>
-<li><strong>纯位置控制</strong>：接触力 <strong><span class="arithmatex">\(47.62\)</span> N</strong> —— 它是<strong>副产物</strong>，由位置增益和墙刚度「分压」出来，
-   <strong>想设多少由不得你</strong>。而且 <span class="arithmatex">\(K_p\)</span> 越大、墙越硬，它越大 —— <strong>这正是位置控制做接触任务会「出事」的根源</strong>；</li>
-<li><strong>阻抗控制</strong>：接触力 <strong><span class="arithmatex">\(2.00\)</span> N</strong> —— 恰好是 <span class="arithmatex">\(K_d\cdot x_d = 200\times0.01\)</span>。
-   <strong>它由「目标刚度」决定，与墙的刚度无关</strong>，可以事先算出来、可以调；</li>
-<li><strong>力控制</strong>：接触力 <strong><span class="arithmatex">\(5.00\)</span> N</strong> —— <strong>精确等于设定值</strong> <span class="arithmatex">\(F_d\)</span>。
-   侵入深度只有 <span class="arithmatex">\(0.050\)</span> mm（<span class="arithmatex">\(=F_d/k_w\)</span>），<strong>位置是多少无所谓，力对就行</strong>。</li>
+<li><strong>纯位置控制</strong>：接触力 <strong><span class="arithmatex">\(47.62\)</span> N</strong> —— 是<strong>副产物</strong>，由位置增益与墙刚度「分压」出来，<strong>想设多少由不得你</strong>；<span class="arithmatex">\(K_p\)</span> 越大、墙越硬它越大 —— <strong>这正是位置控制做接触任务会「出事」的根源</strong>；</li>
+<li><strong>阻抗控制</strong>：接触力 <strong><span class="arithmatex">\(2.00\)</span> N</strong> —— 恰好是 <span class="arithmatex">\(K_d\cdot x_d = 200\times0.01\)</span>，<strong>由「目标刚度」决定、与墙刚度无关</strong>，可事先算出、可调；</li>
+<li><strong>力控制</strong>：接触力 <strong><span class="arithmatex">\(5.00\)</span> N</strong> —— <strong>精确等于设定值</strong> <span class="arithmatex">\(F_d\)</span>；侵入深度只有 <span class="arithmatex">\(0.050\)</span> mm（<span class="arithmatex">\(=F_d/k_w\)</span>），<strong>位置多少无所谓，力对就行</strong>。</li>
 </ol>
 <p><strong>一句话</strong>：纯位置控制下，接触力是「命运的赠品」；阻抗控制下，它是「可设计的弹性」；
 力控制下，它是「被锁定的指标」。</p>
 <hr />
 <h2 id="_4">三、力/位混合控制：把运动分解到不同方向<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 约束坐标系：把任务空间拆成「自由」和「约束」<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p>一次接触任务里，<strong>不是所有方向都需要控力</strong>。
-以「机器人拿砂纸打磨桌面」为例：<strong>竖直方向</strong>要压住桌面（<strong>该控力</strong>），
-<strong>水平方向</strong>要划过去（<strong>该控位置</strong>）。<strong>两个方向的性质完全不同。</strong></p>
-<p>Mason 提出用<strong>约束坐标系（constraint frame, C-frame）</strong>来组织这件事：
-在接触点建立一个坐标系，把任务空间<strong>逐轴</strong>分成两类：</p>
-<p>· <strong>自由方向（free axis）</strong>：机器人可以自由运动 —— 指定<strong>位置/速度</strong>，力自然为 0；
+<p>一次接触任务里，<strong>不是所有方向都需要控力</strong>。以「拿砂纸打磨桌面」为例：<strong>竖直方向</strong>要压住桌面（<strong>该控力</strong>），<strong>水平方向</strong>要划过去（<strong>该控位置</strong>）—— <strong>两个方向性质完全不同。</strong></p>
+<p>Mason 提出用<strong>约束坐标系（constraint frame, C-frame）</strong>组织这件事：在接触点建系，把任务空间<strong>逐轴</strong>分成两类：</p>
+<p>· <strong>自由方向（free axis）</strong>：可自由运动 —— 指定<strong>位置/速度</strong>，力自然为 0；
 · <strong>约束方向（constrained axis）</strong>：被环境挡住 —— 指定<strong>力</strong>，位置由环境决定。</p>
-<p><strong>这就把上一节的「二选一」从「整个空间」细化到了「每个方向」</strong> ——
-一个任务可以同时在不同方向上「控位置」和「控力」。</p>
+<p><strong>这把上一节的「二选一」从「整个空间」细化到「每个方向」</strong> —— 一个任务可同时在不同方向「控位置」和「控力」。</p>
 <h3 id="32">3.2 自然约束 与 人工约束<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>在约束方向上，约束有<strong>两个来源</strong>，必须分清楚：</p>
 <table>
@@ -12263,8 +12245,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>关键规则</strong>：在约束方向上，自然约束给出的是「速度=0」，所以我们要用人工约束去指定「力」；
-在自由方向上，自然约束给出的是「力=0」，所以我们要用人工约束去指定「速度/位置」。
+<p><strong>关键规则</strong>：约束方向上自然约束给出「速度=0」，所以用人工约束指定「力」；自由方向上自然约束给出「力=0」，所以用人工约束指定「速度/位置」。
 <strong>两类约束在每个方向上恰好「互补」，不能重叠、不能留空。</strong></p>
 <h3 id="33-boldsymbols">3.3 力/位混合控制器：一个「选择矩阵」<span class="arithmatex">\(\boldsymbol{S}\)</span><a class="headerlink" href="#33-boldsymbols" title="Permanent link">&para;</a></h3>
 <p>把这个「按方向分工」写成公式，就有了<strong>力/位混合控制（hybrid motion–force control）</strong>。
@@ -12319,15 +12300,10 @@
 </table>
 <p>读这张表，力/位混合的价值就出来了：</p>
 <ol>
-<li><strong>纯位置控制（x 固定）</strong>：x 死死钉在 <span class="arithmatex">\(0.6\)</span> mm，墙面一起伏，<strong>接触力就跟着起伏</strong> ——
-   平均 <strong><span class="arithmatex">\(54.55\)</span> N</strong>，<strong>波动高达 <span class="arithmatex">\(29.95\)</span> N</strong>。
-   机器人对「墙面差 <span class="arithmatex">\(0.5\)</span> mm」这件事<strong>毫无办法</strong>，因为它的 <span class="arithmatex">\(x\)</span> 被指令锁死了。
-   这在打磨里意味着<strong>忽轻忽重</strong>，在装配里意味着<strong>忽顶忽松</strong>；</li>
-<li><strong>力/位混合（x 控力 <span class="arithmatex">\(2\)</span> N）</strong>：接触力<strong>稳稳压在 <span class="arithmatex">\(2.00\)</span> N</strong>，波动只有 <strong><span class="arithmatex">\(0.24\)</span> N</strong>（<strong>降了两个数量级</strong>）。
-   机器人<strong>自己去追墙面起伏</strong> —— 该退就退、该进就进，<strong>力始终不变</strong>；</li>
-<li><strong><span class="arithmatex">\(y\)</span> 方向的跟踪误差两者完全相同（<span class="arithmatex">\(1.59\times10^{-2}\)</span> m）</strong> ——
-   别小看这一点：它证明<strong>在 <span class="arithmatex">\(x\)</span> 方向换掉控制律，对 <span class="arithmatex">\(y\)</span> 方向的位置跟踪毫无影响</strong>。
-   这正是「混合」二字的意义：<strong>不同方向各管各的，互不干扰。</strong></li>
+<li><strong>纯位置控制（x 固定）</strong>：x 死死钉在 <span class="arithmatex">\(0.6\)</span> mm，墙面一起伏<strong>接触力就跟着起伏</strong> —— 平均 <strong><span class="arithmatex">\(54.55\)</span> N</strong>、<strong>波动高达 <span class="arithmatex">\(29.95\)</span> N</strong>。
+   机器人对「墙面差 <span class="arithmatex">\(0.5\)</span> mm」<strong>毫无办法</strong>，因为它的 <span class="arithmatex">\(x\)</span> 被指令锁死了 —— 打磨里意味着<strong>忽轻忽重</strong>，装配里意味着<strong>忽顶忽松</strong>；</li>
+<li><strong>力/位混合（x 控力 <span class="arithmatex">\(2\)</span> N）</strong>：接触力<strong>稳稳压在 <span class="arithmatex">\(2.00\)</span> N</strong>，波动只有 <strong><span class="arithmatex">\(0.24\)</span> N</strong>（<strong>降了两个数量级</strong>）—— 机器人<strong>自己去追墙面起伏</strong>，该退就退、该进就进，<strong>力始终不变</strong>；</li>
+<li><strong><span class="arithmatex">\(y\)</span> 方向跟踪误差两者完全相同（<span class="arithmatex">\(1.59\times10^{-2}\)</span> m）</strong>：这证明<strong>在 <span class="arithmatex">\(x\)</span> 方向换掉控制律，对 <span class="arithmatex">\(y\)</span> 方向的位置跟踪毫无影响</strong> —— 这正是「混合」的意义：<strong>不同方向各管各的，互不干扰。</strong></li>
 </ol>
 <p><strong>一句话</strong>：位置控制在接触面上「硬碰硬」，把环境的形状误差全部吃成力的波动；
 力/位混合让机器人「顺着环境的形状走」，换来一个稳定的接触力。</p>
@@ -12342,20 +12318,15 @@
 · <strong>接触力方向会「指路」</strong>：孔壁把销往<strong>孔心</strong>推 —— 这个天然的方向性，正是力控的抓手；
 · <strong>失败模式危险</strong>：位置控制下会<strong>卡死（jamming）</strong>、顶伤孔壁、甚至损坏工件。</p>
 <h3 id="42">4.2 位置控制为什么「卡死」<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p>位置控制的逻辑是「<strong>不管遇到什么，先把位置开到指令点</strong>」。
-但在装配里，机器人<strong>根本不知道孔在哪</strong>（孔位有误差、工件有装配公差）——
-于是它<strong>朝着一个错误的目标硬顶</strong>：销撞上孔壁，侧向接触力急剧增大，
-而位置控制器<strong>越顶越用力</strong>，却<strong>永远差那一点点</strong>。<strong>这就是「卡死」。</strong></p>
-<p>本页算例复现了这个场景：偏心状态下，位置控制<strong>既消不掉偏心，也降不下侧向力</strong>。</p>
+<p>位置控制的逻辑是「<strong>不管遇到什么，先把位置开到指令点</strong>」。但装配里机器人<strong>根本不知道孔在哪</strong>（孔位有误差、工件有装配公差）——
+于是<strong>朝着错误的目标硬顶</strong>：销撞上孔壁、侧向力急剧增大，位置控制器<strong>越顶越用力</strong>却<strong>永远差那一点点</strong>。<strong>这就是「卡死」。</strong>
+本页算例复现了这个场景：偏心状态下，位置控制<strong>既消不掉偏心，也降不下侧向力</strong>。</p>
 <h3 id="43">4.3 力控为什么能「引」销入孔<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p><strong>关键洞察</strong>：<strong>侧向接触力的方向，天然指向孔心。</strong>
-孔壁把销往里推 —— 这等于环境在<strong>免费告诉你</strong>「孔在哪个方向」。</p>
-<p>于是<strong>把侧向接触力控到 0</strong>，就等价于<strong>顺着这个方向滑向孔心</strong>：
-<strong>力控等于用「力」这条线索，替代了机器人缺失的「孔位信息」。</strong>
-一旦销滑进孔内（偏心小于间隙），侧向接触力自然归零，<strong>装配完成</strong>。</p>
-<p><strong>这解释了为什么装配难用纯位置控制、而天生适合柔顺/力控制</strong> ——
-位置控制要的是「<strong>先知道位置</strong>」，力控制要的是「<strong>能测力</strong>」；
-在「位置未知但力可测」的装配场景里，<strong>力控制拿到了更靠谱的信息。</strong></p>
+<p><strong>关键洞察</strong>：<strong>侧向接触力的方向天然指向孔心</strong> —— 孔壁把销往里推，等于环境<strong>免费告诉你</strong>「孔在哪个方向」。</p>
+<p>于是<strong>把侧向接触力控到 0</strong>，就等价于<strong>顺着这个方向滑向孔心</strong>：<strong>力控用「力」这条线索替代了缺失的「孔位信息」</strong>。
+一旦销滑进孔内（偏心小于间隙），侧向力自然归零，<strong>装配完成</strong>。</p>
+<p><strong>所以装配难用纯位置控制、而天生适合柔顺/力控制</strong> —— 位置控制要「<strong>先知道位置</strong>」，力控制要「<strong>能测力</strong>」；
+在「位置未知但力可测」的场景里，<strong>力控制拿到了更靠谱的信息。</strong></p>
 <h3 id="44-vs">4.4 算例：轴孔装配，位置控制 vs 力控<a class="headerlink" href="#44-vs" title="Permanent link">&para;</a></h3>
 <p>孔的单边间隙 <span class="arithmatex">\(0.5\)</span> mm，初始偏心 <span class="arithmatex">\(2\)</span> mm（<strong>远大于间隙，一定会撞壁</strong>），
 比较「纯位置」和「把侧向力控到 0」两种策略的最终偏心与侧向力：</p>
@@ -12383,13 +12354,9 @@
 </table>
 <p>读这张表，装配的两条路彻底分开了：</p>
 <ol>
-<li><strong>纯位置控制</strong>：指令是「保持在偏心 <span class="arithmatex">\(2\)</span> mm 处」——
-   机器人<strong>忠实地执行了</strong>，可这毫无意义。最终<strong>偏心停在 <span class="arithmatex">\(0.571\)</span> mm</strong>，
-   <strong>侧向力 <span class="arithmatex">\(7.14\)</span> N</strong> 一直顶在孔壁上 —— 这就是<strong>卡死</strong>：
-   位置没错（相对指令），<strong>力却是灾难</strong>；</li>
-<li><strong>力控（目标侧向力 <span class="arithmatex">\(0\)</span>）</strong>：侧向力被压到 <strong><span class="arithmatex">\(0.00\)</span> N</strong>，偏心降到 <strong><span class="arithmatex">\(0.345\)</span> mm</strong> ——
-   <strong>注意 <span class="arithmatex">\(0.345 &lt; 0.5\)</span>（间隙）</strong>：销已经<strong>进入孔内、不再碰壁</strong>。
-   机器人<strong>从头到尾不知道孔在哪</strong>，却靠着「把力压到 0」<strong>自己滑进了孔心</strong>。</li>
+<li><strong>纯位置控制</strong>：指令是「保持在偏心 <span class="arithmatex">\(2\)</span> mm 处」，机器人<strong>忠实地执行了</strong>，可这毫无意义 —— 最终<strong>偏心停在 <span class="arithmatex">\(0.571\)</span> mm</strong>、<strong>侧向力 <span class="arithmatex">\(7.14\)</span> N</strong> 一直顶在孔壁上，这就是<strong>卡死</strong>：位置没错（相对指令），<strong>力却是灾难</strong>；</li>
+<li><strong>力控（目标侧向力 <span class="arithmatex">\(0\)</span>）</strong>：侧向力被压到 <strong><span class="arithmatex">\(0.00\)</span> N</strong>，偏心降到 <strong><span class="arithmatex">\(0.345\)</span> mm</strong> —— <strong>注意 <span class="arithmatex">\(0.345 &lt; 0.5\)</span>（间隙）</strong>，销已<strong>进入孔内、不再碰壁</strong>。
+   机器人<strong>从头到尾不知道孔在哪</strong>，却靠「把力压到 0」<strong>自己滑进了孔心</strong>。</li>
 </ol>
 <p><strong>一句话</strong>：装配的难点不在「走得准」，而在「不知道对得准不准」；
 力控制用「接触力」替代「孔位信息」，把「对准」变成了一个「把力调零」的问题 ——
@@ -12520,21 +12487,15 @@ F_c = K_d(x_d - x)
 解释：为什么「把侧向接触力控到 0」就能让销自己滑进孔心？</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：看清接触力的方向。</strong> 销偏在位心一侧、撞上孔壁。
-孔壁对销的作用力，<strong>法向垂直于孔壁、指向孔内</strong> —— 也就是
-<strong>天然把销往孔心推</strong>。所以侧向接触力的<strong>方向</strong>里，
-<strong>免费携带了「孔心在哪边」这条信息</strong>。</p>
-<p><strong>第二步：力控做了什么。</strong> 力控的目标是<strong>把侧向力压到 0</strong>。
-于是控制器驱动销<strong>朝着「力减小」的方向走</strong> —— 而「力减小的方向」
-正是<strong>背离孔壁、滑向孔心</strong>的方向。只要还在碰壁，力就非零，机器人就一直朝孔心挪；
-<strong>一旦进入孔内（偏心 <span class="arithmatex">\(&lt;\)</span> 间隙），力自然归零，任务完成。</strong></p>
+<p><strong>第一步：看清接触力的方向。</strong> 销偏在位心一侧、撞上孔壁。孔壁对销的作用力<strong>法向垂直于孔壁、指向孔内</strong>，也就是<strong>天然把销往孔心推</strong> —— 侧向接触力的<strong>方向</strong>里<strong>免费携带了「孔心在哪边」这条信息</strong>。</p>
+<p><strong>第二步：力控做了什么。</strong> 力控目标是把<strong>侧向力压到 0</strong>，于是控制器驱动销<strong>朝「力减小」的方向走</strong> —— 而这正是<strong>背离孔壁、滑向孔心</strong>的方向。
+只要还在碰壁，力就非零，机器人就一直朝孔心挪；<strong>一旦进入孔内（偏心 <span class="arithmatex">\(&lt;\)</span> 间隙），力自然归零，任务完成。</strong></p>
 <p><strong>第三步：对照算例。</strong> 纯位置控制：偏心 <span class="arithmatex">\(0.571\)</span> mm、侧向力 <span class="arithmatex">\(7.14\)</span> N（<strong>卡在壁上</strong>）；
 力控：侧向力 <span class="arithmatex">\(0.00\)</span> N、偏心 <span class="arithmatex">\(0.345\)</span> mm —— <strong>小于间隙 <span class="arithmatex">\(0.5\)</span> mm，说明已进入孔内</strong>。
 两条路的差别不在控制器「好不好」，而在
 <strong>它们各自依赖的信息不同</strong>：位置控制依赖「知道孔在哪」，力控依赖「测得到力」。</p>
-<p><strong>第四步：本质。</strong> 装配的困难，是<strong>「位置信息缺失」</strong>；
-力控制<strong>换了一条信息通道</strong>，把「对准」翻译成「把力调零」。
-<strong>这也是「力控制天生适合装配」的根本原因。</strong></p>
+<p><strong>第四步：本质。</strong> 装配的困难是<strong>「位置信息缺失」</strong>；力控制<strong>换了一条信息通道</strong>，把「对准」翻译成「把力调零」——
+<strong>这就是「力控制天生适合装配」的根本原因。</strong></p>
 <p><strong>一句话</strong>：接触力是环境给的「路标」，把力调零就是顺着路标走 ——
 机器人不必知道孔在哪，力会把它带进去。</p>
 </details>
@@ -12547,15 +12508,11 @@ F_c = K_d(x_d - x)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>· <strong>被动柔顺</strong>：靠<strong>机械弹性结构</strong>提供柔顺。典型是 <strong>RCC（远端柔顺中心）</strong>，
-  用弹簧片让末端在某点附近能歪能转。
-  <strong>优点</strong>：无需传感器、无延迟、本质安全；
-  <strong>缺点</strong>：柔顺特性<strong>结构定死</strong>，换任务得换件；
+<p>· <strong>被动柔顺</strong>：靠<strong>机械弹性结构</strong>提供柔顺，典型是 <strong>RCC（远端柔顺中心）</strong>，用弹簧片让末端在某点附近能歪能转。
+  <strong>优点</strong>：无需传感器、无延迟、本质安全；<strong>缺点</strong>：柔顺特性<strong>结构定死</strong>，换任务得换件；
 · <strong>主动柔顺</strong>：靠<strong>力传感器 + 控制律</strong>，在软件里「算出」软特性（如阻抗控制）。
-  <strong>优点</strong>：刚度/阻尼<strong>可编程</strong>；
-  <strong>缺点</strong>：依赖传感器与带宽。</p>
-<p><strong>RCC 属于被动柔顺</strong>。它的柔顺来自<strong>弹簧的物理变形</strong> ——
-外力的效果直接体现在<strong>几何位移</strong>上，<strong>不需要测量力</strong>。
+  <strong>优点</strong>：刚度/阻尼<strong>可编程</strong>；<strong>缺点</strong>：依赖传感器与带宽。</p>
+<p><strong>RCC 属于被动柔顺</strong>：柔顺来自<strong>弹簧的物理变形</strong> —— 外力的效果直接体现在<strong>几何位移</strong>上，<strong>不需要测量力</strong>。
 机器人只需照常做位置控制，RCC 会自己「吸收」那点偏差。
 <strong>一句话</strong>：<strong>被动柔顺把「软」做进机械里，主动柔顺把「软」写进控制器里。</strong></p>
 </details>
@@ -12611,18 +12568,11 @@ F_c = K_d(x_d - x)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>· <strong>自然约束</strong>：由<strong>环境物理/几何</strong>决定、<strong>改变不了</strong>的约束 ——
-  如「刚体不能互相穿透」（约束方向速度 <span class="arithmatex">\(=0\)</span>）、
-  「光滑面不产生切向力」（自由方向力 <span class="arithmatex">\(=0\)</span>）；
-· <strong>人工约束</strong>：由<strong>任务需求</strong>指定、<strong>随时可改</strong>的约束 ——
-  如「以 <span class="arithmatex">\(5\)</span> N 压住」「以 <span class="arithmatex">\(0.1\)</span> m/s 划过」。</p>
-<p><strong>为什么必须互补</strong>：在每个方向上，<strong>自然约束已经「占用」了一个量</strong>
-（约束方向占住速度，自由方向占住力）。位置和力是<strong>共轭量</strong>，
-<strong>同一个方向只能指定一个</strong>。所以人工约束必须去指定<strong>另一个</strong>：
-<strong>约束方向控力、自由方向控位置</strong>。</p>
-<p><strong>若重叠</strong>（同一方向既想控位置又控力）→ 两个环<strong>互相打架</strong>，
-控制器振荡甚至发散；<strong>若有缺口</strong>（某个方向两个都不管）→
-机器人<strong>在该方向失控</strong>（乱冲或乱飘）。</p>
+<p>· <strong>自然约束</strong>：由<strong>环境物理/几何</strong>决定、<strong>改变不了</strong> —— 如「刚体不能互相穿透」（约束方向速度 <span class="arithmatex">\(=0\)</span>）、「光滑面不产生切向力」（自由方向力 <span class="arithmatex">\(=0\)</span>）；
+· <strong>人工约束</strong>：由<strong>任务需求</strong>指定、<strong>随时可改</strong> —— 如「以 <span class="arithmatex">\(5\)</span> N 压住」「以 <span class="arithmatex">\(0.1\)</span> m/s 划过」。</p>
+<p><strong>为什么必须互补</strong>：每个方向上<strong>自然约束已「占用」一个量</strong>（约束方向占速度，自由方向占力）；位置和力是<strong>共轭量</strong>，<strong>同一方向只能指定一个</strong>。
+所以人工约束必须去指定<strong>另一个</strong>：<strong>约束方向控力、自由方向控位置</strong>。
+<strong>若重叠</strong>（既控位置又控力）→ 两环<strong>互相打架</strong>、振荡甚至发散；<strong>若有缺口</strong>（两个都不管）→ 机器人<strong>在该方向失控</strong>（乱冲或乱飘）。</p>
 <p><strong>一句话</strong>：自然约束划下「哪些量已经被环境拿走了」，
 人工约束只能去填「剩下的空位」—— 一个方向一个环，不能抢、不能空。</p>
 </details>
@@ -12633,18 +12583,11 @@ F_c = K_d(x_d - x)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong><span class="arithmatex">\(\boldsymbol{S}\)</span> 是一张「逐方向的分工表」</strong>：
-对角元为 <span class="arithmatex">\(1\)</span> 的方向走<strong>位置 PD</strong>（力自由为 0），
-对角元为 <span class="arithmatex">\(0\)</span> 的方向走<strong>力误差反馈</strong>（位置随环境）。
-它把「哪些方向控位置、哪些方向控力」<strong>显式写成矩阵</strong>，
-既清楚又可按条件切换。</p>
-<p><strong>为什么不能省</strong>：位置和力在同一方向上是<strong>共轭量，物理上不允许同时指定</strong>
-（就像不能同时指定电压和电流）。若两个环同时接管同一方向：</p>
-<p>· 位置环说「再进去一点」（因为位置没到）；
-· 力环说「退出来一点」（因为力太大）；
-· 两者<strong>方向相反、互相抵消不了</strong> → 执行器<strong>来回振荡</strong>，甚至发散。</p>
-<p><strong><span class="arithmatex">\(\boldsymbol{S}\)</span> 加上 <span class="arithmatex">\((\boldsymbol{I}-\boldsymbol{S})\)</span> 恰好互补</strong>：
-每个方向<strong>有且仅有一个环</strong>接管 —— 这正是「混合」的数学保证。</p>
+<p><strong><span class="arithmatex">\(\boldsymbol{S}\)</span> 是一张「逐方向的分工表」</strong>：对角元为 <span class="arithmatex">\(1\)</span> 的方向走<strong>位置 PD</strong>（力自由为 0），为 <span class="arithmatex">\(0\)</span> 的方向走<strong>力误差反馈</strong>（位置随环境）。
+它把「哪些方向控位置、哪些方向控力」<strong>显式写成矩阵</strong>，清楚又可按条件切换。</p>
+<p><strong>为什么不能省</strong>：位置和力在同一方向上是<strong>共轭量，物理上不允许同时指定</strong>（就像不能同时指定电压和电流）。若两环同时接管同一方向：
+位置环说「再进去一点」（位置没到），力环说「退出来一点」（力太大），<strong>方向相反、抵消不掉</strong> → 执行器<strong>来回振荡</strong>甚至发散。
+<strong><span class="arithmatex">\(\boldsymbol{S}\)</span> 加上 <span class="arithmatex">\((\boldsymbol{I}-\boldsymbol{S})\)</span> 恰好互补</strong>：每个方向<strong>有且仅有一个环</strong>接管 —— 这正是「混合」的数学保证。</p>
 <p><strong>一句话</strong>：<span class="arithmatex">\(\boldsymbol{S}\)</span> 把「一个方向一个环」这条物理铁律，
 写成了一个控制器里干净的分工矩阵 —— 省了它，两个环就会打架。</p>
 </details>

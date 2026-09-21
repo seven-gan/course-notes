@@ -11958,7 +11958,7 @@ X[k] = \sum_{n=0}^{N-1} x[n]\,e^{-j2\pi kn/N},
 </tr>
 </tbody>
 </table>
-<p><strong>两条规律</strong>（记这两条就够了）：</p>
+<p><strong>两条规律</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11977,7 +11977,7 @@ X[k] = \sum_{n=0}^{N-1} x[n]\,e^{-j2\pi kn/N},
 </tr>
 </tbody>
 </table>
-<p>所以：<strong>时域离散且有限 → 频域周期且离散</strong>，这正是 DFT。</p>
+<p>所以：<strong>时域离散且有限 → 频域周期且离散</strong>。</p>
 </div>
 <hr />
 <h2 id="dft">一、DFT 的定义与来源<a class="headerlink" href="#dft" title="Permanent link">&para;</a></h2>
@@ -12514,9 +12514,8 @@ f_k = \frac{k}{N}f_s, \qquad k = 0,1,\dots,N-1
 </tr>
 </tbody>
 </table>
-<p><strong>常见误解</strong>：「补零能提高分辨率」。</p>
-<p><strong>实际上</strong>：补零只是让频点更密（曲线更光滑），
-<strong>不能</strong>区分原本分辨不出的两个频率——因为补零没有增加真实信息。</p>
+<p><strong>常见误解</strong>：「补零能提高分辨率」——补零只是让频点更密，
+<strong>不能</strong>区分原本分辨不出的两个频率。</p>
 <table>
 <thead>
 <tr>
@@ -12538,7 +12537,6 @@ f_k = \frac{k}{N}f_s, \qquad k = 0,1,\dots,N-1
 </tr>
 </tbody>
 </table>
-<p>验证方法：观察补零后的频谱，峰仍然「胖」（主瓣宽度由 <span class="arithmatex">\(T\)</span> 决定）。</p>
 </div>
 <hr />
 <h2 id="_4">三、频谱泄漏与窗函数<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -12770,7 +12768,6 @@ O(N\log N)
 </tr>
 </tbody>
 </table>
-<p>没有 FFT，现代数字通信与信号处理都不可能实现。</p>
 </div>
 <hr />
 <h2 id="dft_2">五、DFT 的重要性质<a class="headerlink" href="#dft_2" title="Permanent link">&para;</a></h2>
@@ -12843,7 +12840,6 @@ O(N\log N)
 <div class="arithmatex">\[
 L \geq M+N-1
 \]</div>
-<p>这也是「用 FFT 做快速卷积」必须注意的第一个细节。</p>
 </div>
 <hr />
 <h2 id="_8">六、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -12896,8 +12892,7 @@ X[k] = 1\cdot W_4^0 + 1\cdot W_4^{k} = 1 + (-j)^k
 <div class="arithmatex">\[
 X = \{2,\ 1-j,\ 0,\ 1+j\}
 \]</div>
-<p><strong>验证共轭对称</strong>：<span class="arithmatex">\(X[1] = 1-j\)</span> 与 <span class="arithmatex">\(X[3] = 1+j\)</span> 互为共轭
-（因为 <span class="arithmatex">\(x\)</span> 是实序列，这正是前面讲的共轭对称性。）</p>
+<p><strong>验证共轭对称</strong>：<span class="arithmatex">\(X[1] = 1-j\)</span> 与 <span class="arithmatex">\(X[3] = 1+j\)</span> 互为共轭（<span class="arithmatex">\(x\)</span> 是实序列）</p>
 <p><strong>验证帕塞瓦尔定理</strong>：</p>
 <p>时域能量：<span class="arithmatex">\(\lvert1\rvert^2+\lvert1\rvert^2 = 2\)</span></p>
 <p>频域能量：</p>
@@ -13011,9 +13006,7 @@ y_c = \{1,\ 3,\ 5,\ 3\}
 <div class="arithmatex">\[
 y_c = \{1,3,5,3\} = y_{\text{lin}} \;\checkmark
 \]</div>
-<p><strong>完全一致！</strong></p>
-<p><strong>原因</strong>：我们选的 <span class="arithmatex">\(N = 4\)</span> 恰好等于 <span class="arithmatex">\(M+N-1 = 4\)</span>，
-满足「<span class="arithmatex">\(N \geq M+N_{\text{len}}-1\)</span>」的条件，所以没有下标环绕。</p>
+<p><strong>两者完全一致</strong>：我们选的 <span class="arithmatex">\(N = 4\)</span> 恰好满足 <span class="arithmatex">\(N \geq M+N_{\text{len}}-1\)</span>，没有下标环绕。</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">若 N 选得太小会怎样</p>
@@ -13190,7 +13183,6 @@ L \geq M + N - 1
 </tr>
 </tbody>
 </table>
-<p>想分辨更精细的频率结构，只能测更久。</p>
 </div>
 <h3 id="_11">智能传感与信息处理 · 传感器信号分析<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <ul>
@@ -13316,19 +13308,44 @@ W_N^{k(n+N/2)} = -W_N^{kn}
 不需要重新计算。于是每次把问题规模减半，递归下去得到 <span class="arithmatex">\(O(N\log N)\)</span>。</p>
 <p><strong>它不改变结果</strong>：</p>
 <p>FFT 与原 DFT 的<strong>数学定义完全相同</strong>，输出<strong>逐点一致</strong>（浮点误差范围内）。</p>
-<p>验证方法：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">X1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="n">j</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">k</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>               <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)])</span>   <span class="c1"># 直接 DFT</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                  <span class="c1"># FFT</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">))</span>          <span class="c1"># True</span>
-</code></pre></div></td></tr></table></div>
+<p><strong>验证方法</strong>（以 <span class="arithmatex">\(N=4\)</span>、<span class="arithmatex">\(x=[1,2,3,4]\)</span> 为例，<span class="arithmatex">\(W_4 = e^{-j2\pi/4} = -j\)</span>）：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(k\)</span></th>
+<th>直接 DFT</th>
+<th>基-2 蝶形（DIT）</th>
+<th>是否一致</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><span class="arithmatex">\(X_0 = 1+2+3+4 = 10\)</span></td>
+<td><span class="arithmatex">\(E_0+O_0 = 4+6 = 10\)</span></td>
+<td>一致</td>
+</tr>
+<tr>
+<td>1</td>
+<td><span class="arithmatex">\(X_1 = 1+2(-j)+3(-1)+4(j) = -2+2j\)</span></td>
+<td><span class="arithmatex">\(E_1 + W_4^1 O_1 = -2 + (-j)(-2) = -2+2j\)</span></td>
+<td>一致</td>
+</tr>
+<tr>
+<td>2</td>
+<td><span class="arithmatex">\(X_2 = 1-2+3-4 = -2\)</span></td>
+<td><span class="arithmatex">\(E_0 - O_0 = 4-6 = -2\)</span></td>
+<td>一致</td>
+</tr>
+<tr>
+<td>3</td>
+<td><span class="arithmatex">\(X_3 = 1+2j-3-4j = -2-2j\)</span></td>
+<td><span class="arithmatex">\(E_1 - W_4^1 O_1 = -2 - (-j)(-2) = -2-2j\)</span></td>
+<td>一致</td>
+</tr>
+</tbody>
+</table>
+<p>其中偶序列 <span class="arithmatex">\([1,3]\)</span> 得 <span class="arithmatex">\(E_0 = 4\)</span>、<span class="arithmatex">\(E_1 = -2\)</span>，奇序列 <span class="arithmatex">\([2,4]\)</span> 得 <span class="arithmatex">\(O_0 = 6\)</span>、<span class="arithmatex">\(O_1 = -2\)</span>。</p>
 <p><strong>两者的区别只在计算速度</strong>：</p>
 <table>
 <thead>
@@ -13351,7 +13368,6 @@ W_N^{k(n+N/2)} = -W_N^{kn}
 </tr>
 </tbody>
 </table>
-<p>所以 FFT 是<strong>算法</strong>，不是新的<strong>变换</strong>。</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 用 FFT 计算两个长度 100 的序列的线性卷积，FFT 长度至少取多少？为什么？</p>

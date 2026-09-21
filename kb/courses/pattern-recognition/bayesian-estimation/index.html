@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场的改变看起来只是一句话，但它把整条推理链的形态都改掉了 —— 参数不再是一个要「解」出来的数，而是一个有分布的变量；我们要交出去的不再是一个点，而是一个分布。">
+    <meta name="description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场看似只改了一句话，却把整条推理链的形态都改掉了 —— 参数不再是要「解」出来的数，而是有分布的变量；要交出去的不再是一个点，而是分布。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="贝叶斯估计与贝叶斯学习">
   
-  <meta property="og:description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场的改变看起来只是一句话，但它把整条推理链的形态都改掉了 —— 参数不再是一个要「解」出来的数，而是一个有分布的变量；我们要交出去的不再是一个点，而是一个分布。">
+  <meta property="og:description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场看似只改了一句话，却把整条推理链的形态都改掉了 —— 参数不再是要「解」出来的数，而是有分布的变量；要交出去的不再是一个点，而是分布。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/pattern-recognition/bayesian-estimation/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="贝叶斯估计与贝叶斯学习">
   
-  <meta name="twitter:description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场的改变看起来只是一句话，但它把整条推理链的形态都改掉了 —— 参数不再是一个要「解」出来的数，而是一个有分布的变量；我们要交出去的不再是一个点，而是一个分布。">
+  <meta name="twitter:description" content="贝叶斯估计与贝叶斯学习：上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。这一页换一个立场：把参数也当成随机变量。这个立场看似只改了一句话，却把整条推理链的形态都改掉了 —— 参数不再是要「解」出来的数，而是有分布的变量；要交出去的不再是一个点，而是分布。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12004,39 +12004,33 @@
 <h1 id="_1">贝叶斯估计与贝叶斯学习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p><strong>上一页把参数当成一个「固定的未知常数」，用最大似然把它点出来。
 这一页换一个立场：把参数也当成随机变量。</strong></p>
-<p>这个立场的改变看起来只是一句话，
-但它把整条推理链的形态都改掉了 ——
-参数不再是一个要「解」出来的数，
-而是一个有分布的变量；
-我们要交出去的不再是一个点，
-而是一个<strong>分布</strong>。</p>
-<p>代价是：必须先说清楚「在看见数据之前，我们相信什么」。
-回报是：小样本不再失控、估计的不确定性可以被量化、
-先验信息可以被合法地用进来、
-而且样本一多，结论会自动退回到最大似然的那一套。</p>
+<p>这个立场看似只改了一句话，
+却把整条推理链的形态都改掉了 ——
+参数不再是要「解」出来的数，而是有分布的变量；
+要交出去的不再是一个点，而是<strong>分布</strong>。</p>
+<p>代价是：必须先说清「看见数据之前我们相信什么」。
+回报是：小样本不再失控、不确定性可被量化、
+先验信息可合法用进来，
+且样本一多结论会自动退回最大似然那一套。</p>
 <p>这一页把这条链走完：从<strong>后验分布的完整推导</strong>出发，
-讲清楚三种贝叶斯估计量各自在优化什么、
-共轭先验为什么能让公式保持闭式、
-正态分布下那个著名的「加权平均」是怎么来的，
+讲清三种贝叶斯估计量各在优化什么、
+共轭先验为何能让公式保持闭式、
+正态分布下那个「加权平均」怎么来，
 最后落到<strong>贝叶斯学习</strong>——
-用后验当权重做积分平均，而不是拿一个点估去顶替整个分布。</p>
+用后验当权重做积分平均，而不是拿一个点估顶替整个分布。</p>
 <hr />
 <h2 id="_2">一、两种世界观的差别<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>先把话说准。<strong>最大似然和贝叶斯的差别不在计算技巧上，
-而在「参数是什么」这个本体论判断上。</strong></p>
-<p>最大似然的世界里，参数 <span class="arithmatex">\(\theta\)</span> 是一个<strong>客观存在但未知的常数</strong>。
-它不随机、没有分布、也不会变。
-数据 <span class="arithmatex">\(D\)</span> 是随机的，因为采样有随机性。
-于是我们可以谈 <span class="arithmatex">\(p(D\mid\theta)\)</span> ——
-「假如参数取 <span class="arithmatex">\(\theta\)</span>，观察到这份数据的概率」——
-但不能谈 <span class="arithmatex">\(p(\theta)\)</span>，因为一个常数没有概率可言。</p>
-<p>贝叶斯的世界里，参数 <span class="arithmatex">\(\theta\)</span> 是一个<strong>随机变量</strong>。
-它的随机性不来自「它会跳来跳去」，
-而来自<strong>我们不知道它在哪</strong>。
-不确定就是一种不确定性，
-既然要建模不确定性，那就给它一个概率分布。
-于是 <span class="arithmatex">\(p(\theta)\)</span> 和 <span class="arithmatex">\(p(D\mid\theta)\)</span> 同时有意义，
-贝叶斯公式可以把两者接起来。</p>
+<p>先把话说准。<strong>两者的差别不在计算技巧，而在「参数是什么」这一本体论判断。</strong></p>
+<p>最大似然的世界里，参数 <span class="arithmatex">\(\theta\)</span> 是<strong>客观存在但未知的常数</strong>：
+不随机、无分布、也不变。
+数据 <span class="arithmatex">\(D\)</span> 随机，因为采样有随机性。
+于是能谈 <span class="arithmatex">\(p(D\mid\theta)\)</span> ——「若参数取 <span class="arithmatex">\(\theta\)</span>，观察到这份数据的概率」——
+但不能谈 <span class="arithmatex">\(p(\theta)\)</span>，因为常数没有概率可言。</p>
+<p>贝叶斯的世界里，参数 <span class="arithmatex">\(\theta\)</span> 是<strong>随机变量</strong>。
+它的随机性不来自「跳来跳去」，而来自<strong>我们不知道它在哪</strong>。
+既然要建模这份不确定性，就给它一个概率分布。
+于是 <span class="arithmatex">\(p(\theta)\)</span> 与 <span class="arithmatex">\(p(D\mid\theta)\)</span> 同时有意义，
+贝叶斯公式可把两者接起来。</p>
 <p>这个差别会一路传导下去，后果可以列得很具体：</p>
 <table>
 <thead>
@@ -12094,66 +12088,62 @@
 </tr>
 </tbody>
 </table>
-<p>这张表里最容易被忽略的是「输出的信息量」那一行。
-最大似然交出去的是一个点；要知道这个点有多可信，
-还得另外做一次方差分析、念一遍渐近正态定理。
-贝叶斯交出去的是一个分布，
-「最可能在哪」和「有多不确定」在同一个对象里，
-不用再补一次推导。这正是它在小样本问题上特别顺手的原因。</p>
+<p>表里最易被忽略的是「输出的信息量」那一行。
+最大似然交出的只是一个点；要知它有多可信，
+还得另做一次方差分析、念一遍渐近正态定理。
+贝叶斯交出的却是一个分布，
+「最可能在哪」与「有多不确定」同在一个对象里，不必再补一次推导。
+这正是它在小样本上特别顺手的原因。</p>
 <div class="admonition warning">
 <p class="admonition-title">贝叶斯不是「更准」，而是「先验说了算一部分」</p>
 <p>初学者容易把贝叶斯估计当成最大似然的升级版，以为它总是更好。
 事实是：<strong>它只是把一部分话语权从数据手里拿过来，交给先验。</strong>
-如果先验是错的，那么在小样本上，
-贝叶斯的结果会被先验拉到错误的方向，
-而最大似然反而因为「只听数据」而离真值更近。
-先验不是免费的午餐，它是一笔要还的账。</p>
+先验若错，小样本上贝叶斯的结果会被拉到错误方向，
+而最大似然反因「只听数据」离真值更近。
+先验不是免费午餐，而是一笔要还的账。</p>
 </div>
 <hr />
 <h2 id="_3">二、后验分布：一步一步推，不跳步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>贝叶斯学习的一切都写在<strong>贝叶斯公式</strong>里。
-这一节把它从最原始的乘法公式推到最后一步，
-不跳任何一步，因为后面所有结论都从这里长出来。</p>
+这一节把它从最原始的乘法公式一路推到最后一步，不跳步，
+因为后面所有结论都由此长出。</p>
 <p><strong>第一步：联合分布。</strong> 参数和数据都是随机变量，
 它们的联合分布可以直接由条件概率的乘法公式拆开：</p>
 <div class="arithmatex">\[p(\theta, D) = p(\theta)\, p(D \mid \theta)\]</div>
-<p>这条式子说的是：先有参数（按先验分布抽一个出来），
-再按这个参数生成数据（按似然函数抽一批出来）。</p>
+<p>这条式子说的是：先按先验分布抽出参数，
+再按该参数、按似然函数生成一批数据。</p>
 <p><strong>第二步：对称地拆一次。</strong> 同样的联合分布，也可以反过来拆：</p>
 <div class="arithmatex">\[p(\theta, D) = p(D)\, p(\theta \mid D)\]</div>
 <p><strong>第三步：让两个式子相等，把想要的那一项解出来。</strong> 于是</p>
 <div class="arithmatex">\[p(\theta \mid D) = \frac{p(\theta, D)}{p(D)} = \frac{p(\theta)\, p(D \mid \theta)}{p(D)}\]</div>
 <p>这一步就是贝叶斯公式。注意<strong>先验是乘上去的，不是加进去的</strong> ——
-这一点很重要：先验不是对参数取值做一个「加分」，
+先验不是对参数取值做一个「加分」，
 而是把整个似然曲面按先验的形状<strong>重新加权</strong>。</p>
 <p><strong>第四步：把分母算成积分。</strong> 分母 <span class="arithmatex">\(p(D)\)</span> 不依赖 <span class="arithmatex">\(\theta\)</span>，
 可以看成归一化常数。用全概率公式（连续情形就是积分）：</p>
 <div class="arithmatex">\[p(D) = \int p(\theta)\, p(D \mid \theta)\, \mathrm{d}\theta\]</div>
-<p>这个积分有名字，叫<strong>证据</strong>（也叫边缘似然）。
-它同时是「这个模型解释这批数据的能力」，
-在模型比较里会再遇到它。</p>
+<p>这个积分叫<strong>证据</strong>（也叫边缘似然），
+它同时是「这个模型解释这批数据的能力」，模型比较里会再遇到。</p>
 <p><strong>第五步：整理成「正比于」的形式。</strong> 因为分母不含 <span class="arithmatex">\(\theta\)</span>：</p>
 <div class="arithmatex">\[p(\theta \mid D) \propto p(\theta)\, p(D \mid \theta)\]</div>
 <p><strong>后验 ∝ 先验 × 似然。</strong></p>
-<p>这七个字就是全部内容。剩下的都是技术活：
-把右边的乘积算出来、认出它属于哪个分布族、
-再补上归一化常数。</p>
+<p>这七个字就是全部内容，剩下都是技术活：
+算出右边的乘积、认出它属于哪个分布族、补上归一化常数。</p>
 <p><strong>第六步：独立同分布下把似然展开。</strong> 若样本独立同分布：</p>
 <div class="arithmatex">\[p(D \mid \theta) = \prod_{i=1}^{n} p(x_i \mid \theta)\]</div>
 <p>所以</p>
 <div class="arithmatex">\[p(\theta \mid x_1, \dots, x_n) \propto p(\theta) \prod_{i=1}^{n} p(x_i \mid \theta)\]</div>
-<p><strong>关键观察</strong>：如果把 <span class="arithmatex">\(D\)</span> 拆成互不相交的两批 <span class="arithmatex">\(D_1, D_2\)</span>，
-那么上式可以改写成</p>
+<p><strong>关键观察</strong>：把 <span class="arithmatex">\(D\)</span> 拆成互不相交的两批 <span class="arithmatex">\(D_1, D_2\)</span>，上式即可改写成</p>
 <div class="arithmatex">\[p(\theta \mid D_1, D_2) \propto \big[\, p(\theta)\, p(D_1\mid\theta) \,\big]\, p(D_2 \mid \theta) \propto p(\theta\mid D_1)\, p(D_2\mid\theta)\]</div>
-<p>也就是说：<strong>先把第一批数据吃掉得到后验，
-再把这个后验当成第二批数据的先验继续吃。</strong>
-这就是贝叶斯学习的<strong>递推性质</strong>，后面第四节专门讲。</p>
-<p><strong>关于归一化，有一句话必须说清楚</strong>：
-在「后验 ∝ 先验 × 似然」这一步之后，
-右边一般不是合法概率密度（积分不等于 1）。
+<p>即：<strong>先吃掉第一批数据得到后验，
+再把它当成第二批数据的先验继续吃。</strong>
+这就是贝叶斯学习的<strong>递推性质</strong>，第四节专门讲。</p>
+<p><strong>关于归一化必须说清一点</strong>：
+在「后验 ∝ 先验 × 似然」之后，
+右边一般不是合法概率密度（积分不等于 1），
 归一化常数必须补上，否则：
-后验的均值、方差、分位数、区间全都会错；
-「用后验当权重做积分平均」这件事本身也无从谈起 ——
+后验的均值、方差、分位数、区间全会错；
+「用后验当权重做积分平均」也无从谈起 ——
 权重之和不为 1，平均就没有意义。
 所以<strong>先验 × 似然只是后验的骨架，不是后验本身。</strong></p>
 <details class="note">
@@ -12794,52 +12784,43 @@ L 295.375625 53.989
 </figure>
 
 <h2 id="_4">三、三种贝叶斯估计量：各自在优化什么<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>后验分布 <span class="arithmatex">\(p(\theta\mid D)\)</span> 是一个完整的对象，
-但很多时候我们仍然需要交出去一个数。
-用后验的哪个泛函当这个数，取决于我们打算拿它去干什么。
-不同的用途对应不同的损失函数，
-最小化不同的损失，就得到不同的估计量。</p>
+<p>后验分布 <span class="arithmatex">\(p(\theta\mid D)\)</span> 是完整对象，
+但很多时候仍要交出一个数。
+用后验的哪个泛函，取决于拿它去干什么：
+不同用途对应不同损失，最小化不同损失就得到不同估计量。</p>
 <h3 id="31">3.1 后验均值 —— 最小均方误差<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>如果损失函数取平方误差 <span class="arithmatex">\((\theta - \hat\theta)^2\)</span>，
 那么使<strong>期望损失</strong>最小的那个 <span class="arithmatex">\(\hat\theta\)</span> 就是后验均值：</p>
 <div class="arithmatex">\[\hat\theta_{\mathrm{MMSE}} = \mathbb{E}[\theta \mid D] = \int \theta\, p(\theta\mid D)\, \mathrm{d}\theta\]</div>
-<p>推导很短：期望损失关于 <span class="arithmatex">\(\hat\theta\)</span> 求导置零即得。
-结论是：后验均值让「平均平方误差」最小。</p>
+<p>推导很短：期望损失对 <span class="arithmatex">\(\hat\theta\)</span> 求导置零即得 ——
+后验均值让「平均平方误差」最小。</p>
 <h3 id="32">3.2 后验中位数 —— 最小绝对误差<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>如果损失函数取绝对误差 <span class="arithmatex">\(\lvert \theta - \hat\theta \rvert\)</span>，
 最优解变成后验中位数：</p>
 <div class="arithmatex">\[\hat\theta_{\mathrm{med}} = \text{满足 } \int_{-\infty}^{\hat\theta} p(\theta\mid D)\,\mathrm{d}\theta = 0.5 \text{ 的 } \hat\theta\]</div>
-<p>后验中位数让「平均绝对误差」最小。
-它对后验的尾部不敏感 ——
-把后验的尾拉长、把少数离群点挪远，
-中位数几乎不动，均值却会跟着跑。
-所以数据里有重尾或可疑点时，中位数更稳。</p>
+<p>后验中位数让「平均绝对误差」最小，且对后验尾部不敏感：
+把尾部拉长、把少数离群点挪远，中位数几乎不动，均值却会跟着跑。
+所以数据有重尾或可疑点时，中位数更稳。</p>
 <h3 id="33-map">3.3 最大后验（MAP）—— 带正则的最大似然<a class="headerlink" href="#33-map" title="Permanent link">&para;</a></h3>
-<p>如果损失函数是<strong>全对全错</strong>的 0-1 损失
-（估错一点点和错得离谱，代价一样），
-最优解变成后验密度的<strong>众数</strong>：</p>
+<p>若损失是<strong>全对全错</strong>的 0-1 损失（错一点点与错得离谱同代价），
+最优解就是后验密度的<strong>众数</strong>：</p>
 <div class="arithmatex">\[\hat\theta_{\mathrm{MAP}} = \arg\max_\theta\, p(\theta\mid D) = \arg\max_\theta\, p(\theta)\,p(D\mid\theta)\]</div>
 <p>因为对数单调，等价于</p>
 <div class="arithmatex">\[\hat\theta_{\mathrm{MAP}} = \arg\max_\theta \Big[\, \ln p(D\mid\theta) + \ln p(\theta) \,\Big]\]</div>
-<p>这是全页最重要的一个等式。把它和最大似然并排：</p>
+<p>这是全页最重要的等式。与最大似然并排：</p>
 <div class="arithmatex">\[\hat\theta_{\mathrm{ML}} = \arg\max_\theta \ln p(D\mid\theta)\]</div>
-<p><strong>差别只是多了一项 <span class="arithmatex">\(\ln p(\theta)\)</span>。</strong>
-也就是说：</p>
+<p><strong>差别只是多了一项 <span class="arithmatex">\(\ln p(\theta)\)</span></strong>，即：</p>
 <blockquote>
 <p><strong>MAP = 最大似然 + 一个由先验给出的惩罚项。</strong></p>
 </blockquote>
-<p>当先验取均匀分布时 <span class="arithmatex">\(\ln p(\theta)\)</span> 是常数，
-MAP 和最大似然完全重合。
-反过来，只要先验不是平的，
-最大的似然点就会被拉离 ——
-拉的方向是先验密度大的方向，拉的力度是先验密度的陡峭程度。</p>
-<p>这个等式还有一个实用的推论：
-很多常见的「正则化」其实是某个先验在起作用。
-在参数上减去一个平方惩罚，
-等价于给这个参数加了正态先验；
-减去绝对值惩罚，
-等价于给了拉普拉斯先验。
-正则化不是纯工程技巧，它有一个概率解释。</p>
+<p>先验取均匀分布时 <span class="arithmatex">\(\ln p(\theta)\)</span> 为常数，MAP 与最大似然完全重合；
+只要先验不平，最大似然点就会被拉离 ——
+方向朝先验密度大处，力度由先验的陡峭程度决定。</p>
+<p>这个等式还有一个实用推论：
+很多常见「正则化」其实就是某个先验在起作用 ——
+减一个平方惩罚等价于加正态先验，
+减一个绝对值惩罚等价于加拉普拉斯先验。
+正则化不是纯工程技巧，它有概率解释。</p>
 <p>三种估计量的对照如下。</p>
 <table>
 <thead>
@@ -12882,12 +12863,10 @@ MAP 和最大似然完全重合。
 </tr>
 </tbody>
 </table>
-<p>只要后验是<strong>对称单峰</strong>的，
-这三个数就重合，用什么都可以。
-一旦后验偏斜或者多峰，它们会分开，
-这时选哪个就真的要看用途了。</p>
-<p>下面把这三个估计量在同一个后验上并排算出来，
-顺便把「后验宽度也是信息」这件事显示清楚：</p>
+<p>后验只要<strong>对称单峰</strong>，这三个数就重合，用哪个都行；
+一旦偏斜或多峰，它们便分开，选哪个就真要看用途。</p>
+<p>下面把这三个估计量在同一后验上并排算出，
+顺带把「后验宽度也是信息」显示清楚：</p>
 <ul>
 <li>先验总强度 a + b = 6.0</li>
 <li>后验参数 alpha = 16.0, beta = 10.0</li>
@@ -12900,28 +12879,24 @@ MAP 和最大似然完全重合。
 <li>P(p &gt; 0.5)（后验概率） = 0.885239</li>
 <li>蒙特卡洛复核后验均值 = 0.615206</li>
 </ul>
-<p>输出的最后一行是对后验均值的独立复核：
-蒙特卡洛按后验分布抽 40 万个样本取平均，
-结果和闭式解 <span class="arithmatex">\(16/26\)</span> 在小数点后三位就吻合了 ——
-这说明闭式推导没有算错。</p>
+<p>最后一行是对后验均值的独立复核：
+蒙特卡洛按后验分布抽 40 万样本取平均，
+结果与闭式解 <span class="arithmatex">\(16/26\)</span> 在小数点后三位就吻合 —— 说明闭式推导没算错。</p>
 <div class="admonition warning">
 <p class="admonition-title">MAP 不是「贝叶斯版的均值」，别混着用</p>
-<p>常见的错误是先验影响推公式时用 MAP（因为好算），
-却在报告不确定性时按后验均值那套说法去解释。
-两者优化的是<strong>不同的损失</strong>，在很多情形下数值也不同。
-更麻烦的是：MAP 只取众数，
-而后验可能在众数附近非常宽 ——
-报一个 MAP 而不报后验宽度，
-等于把这一页最值钱的信息丢掉了。
-如果只是要一个点估计且需要闭式，用 MAP；
-如果要把不确定性也交出去，就必须回到整个后验。</p>
+<p>常见的错误是：推公式时用 MAP（因为好算），
+报告不确定性时却按后验均值那套说法解释。
+两者优化的是<strong>不同的损失</strong>，很多情形下数值也不同。
+更麻烦的是 MAP 只取众数，而后验在众数附近可能很宽 ——
+报 MAP 而不报后验宽度，等于把这一页最值钱的信息丢掉。
+只要点估计且需闭式，用 MAP；
+要把不确定性也交出去，就必须回到整个后验。</p>
 </div>
 <hr />
 <h2 id="_5">四、共轭先验：让公式保持闭式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>从「后验 ∝ 先验 × 似然」出发，
-一般要算一个积分才能归一化。
-但有一类先验能让这个积分瞬间算完，
-因为<strong>后验和先验落在同一个分布族里</strong>。</p>
+<p>从「后验 ∝ 先验 × 似然」出发，一般要算一个积分才能归一化；
+但有一类先验能让积分瞬间算完 ——
+<strong>后验和先验落在同一个分布族里</strong>。</p>
 <p><strong>定义</strong>：若对某个似然函数，
 先验分布族 <span class="arithmatex">\(\mathcal{F}\)</span> 满足
 「先验取 <span class="arithmatex">\(\mathcal{F}\)</span> 中任意一个，后验也一定落在 <span class="arithmatex">\(\mathcal{F}\)</span> 中」，
@@ -12935,12 +12910,11 @@ MAP 和最大似然完全重合。
 <li><strong>可递推</strong>：在线学习时每来一个样本就更新两个计数，代价极小；</li>
 <li><strong>可采样</strong>：知道分布族就知道怎么从这个族里抽样本。</li>
 </ul>
-<p>代价是：共轭先验是<strong>按似然挑出来的</strong>，
-不一定能真实表达我们的先验信念。
-真实信念常常不是共轭族里的形状，
-这时只能在做「算得快」和「表达准」之间做取舍。</p>
-<p>下面这张表是本课程最常用的几组共轭配对。
-表里的「伪计数」指的是先验在更新公式里贡献的等效样本数。</p>
+<p>代价是：共轭先验<strong>按似然挑出</strong>，不一定能真实表达先验信念。
+真实信念常不在共轭族里，
+这时只能在「算得快」与「表达准」之间取舍。</p>
+<p>下表是本课程最常用的几组共轭配对；
+「伪计数」指先验在更新公式里贡献的等效样本数。</p>
 <table>
 <thead>
 <tr>
@@ -12989,11 +12963,9 @@ MAP 和最大似然完全重合。
 </tr>
 </tbody>
 </table>
-<p>从表里能看出一个统一的现象：
-后验参数 = 先验参数 + 数据统计量。
+<p>表里有一个统一现象：后验参数 = 先验参数 + 数据统计量。
 这就是贝叶斯更新的实际形式 ——
-它不需要每一步都重写一次贝叶斯公式，
-只需要把新样本的统计量加到当前后验的参数上。</p>
+不必每步重写贝叶斯公式，只需把新样本的统计量加到当前后验参数上。</p>
 <p>把「先验总强度决定话语权」这件事量一量：</p>
 <p>样本统计量：成功 13 次，失败 7 次</p>
 <ul>
@@ -13038,9 +13010,8 @@ MAP 和最大似然完全重合。
 于是后验均值被牢牢按在先验均值附近。
 而 <span class="arithmatex">\(0.02 + 0.02\)</span> 那一组的后验均值几乎等于最大似然 ——
 先验总强度就是决定话语权的那个旋钮。</p>
-<p>紧接着这张表，值得再说一句：
-「先验相当于几个虚拟观测」这个说法虽然方便，
-但读者要清楚它只是<strong>类比</strong>。
+<p>「先验相当于几个虚拟观测」这个说法虽然方便，
+但它只是<strong>类比</strong>。
 先验的强度并不总是能用整数观测数表示 ——
 Beta<span class="arithmatex">\((\alpha,\beta)\)</span> 的总强度是 <span class="arithmatex">\(\alpha+\beta\)</span>，
 而它既可以取 6，也可以取 0.02，
@@ -13061,15 +13032,14 @@ Beta<span class="arithmatex">\((\alpha,\beta)\)</span> 的总强度是 <span cla
 </div>
 <hr />
 <h2 id="_6">五、正态分布下的完整推导<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>这一节是本节最核心的计算。
-它之所以重要，是因为结论的形式非常漂亮，
-而且<strong>「先验越确定，权重越大」这句直觉可以被写出精确的公式</strong>。</p>
+<p>这一节是本节最核心的计算：结论形式漂亮，
+且<strong>「先验越确定，权重越大」这句直觉能写成精确公式</strong>。</p>
 <h3 id="51">5.1 情景与假设<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>设样本 <span class="arithmatex">\(x_1,\dots,x_n\)</span> 独立同分布，
 来自 <span class="arithmatex">\(\mathcal{N}(\mu, \sigma^2)\)</span>，
 其中<strong>观测方差 <span class="arithmatex">\(\sigma^2\)</span> 已知</strong>，均值 <span class="arithmatex">\(\mu\)</span> 未知。
-已知方差这个假设是为了让推导干净：
-未知的是单个参数 <span class="arithmatex">\(\mu\)</span>，共轭先验就是正态。
+已知方差是为让推导干净：
+未知的是单个参数 <span class="arithmatex">\(\mu\)</span>，共轭先验即正态。
 给 <span class="arithmatex">\(\mu\)</span> 配先验</p>
 <div class="arithmatex">\[\mu \sim \mathcal{N}(\mu_0, \sigma_0^2)\]</div>
 <p>用<strong>精度</strong>（方差的倒数）来写会让推导短很多。记</p>
@@ -13083,27 +13053,25 @@ Beta<span class="arithmatex">\((\alpha,\beta)\)</span> 的总强度是 <span cla
 <p>关键一步是把平方和恒等变形：</p>
 <div class="arithmatex">\[\sum_{i=1}^n (x_i - \mu)^2
 = \sum_{i=1}^n (x_i - \bar x)^2 + n(\mu - \bar x)^2\]</div>
-<p>这一步只是把 <span class="arithmatex">\(\mu\)</span> 的二次项和与 <span class="arithmatex">\(\mu\)</span> 无关的项分离开。</p>
+<p>这一步只是把 <span class="arithmatex">\(\mu\)</span> 的二次项与 <span class="arithmatex">\(\mu\)</span> 无关项分离。</p>
 <h3 id="53">5.3 先验乘似然<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p>先验密度是</p>
 <div class="arithmatex">\[p(\mu) = (2\pi\sigma_0^2)^{-1/2}
 \exp\left[-\frac{1}{2\sigma_0^2}(\mu-\mu_0)^2\right]\]</div>
-<p>两者相乘，常数因子全部提出去，
-只剩指数部分相加。乘完以后，<span class="arithmatex">\(\mu\)</span> 的二次部分正好是</p>
+<p>两者相乘，常数因子提出去，只剩指数相加。乘完后 <span class="arithmatex">\(\mu\)</span> 的二次部分正好是</p>
 <div class="arithmatex">\[-\frac{1}{2}\left[\, \tau_0(\mu-\mu_0)^2 + \tau\sum_{i=1}^n (x_i-\mu)^2 \,\right]\]</div>
 <p>而 <span class="arithmatex">\(\sum_i (x_i-\mu)^2\)</span> 里与 <span class="arithmatex">\(\mu\)</span> 有关的那部分是 <span class="arithmatex">\(n(\mu-\bar x)^2\)</span>。
 所以指数上真正决定形状的是</p>
 <div class="arithmatex">\[-\frac{1}{2}\Big[\, \tau_0(\mu-\mu_0)^2 + n\tau(\mu-\bar x)^2 \,\Big]\]</div>
 <h3 id="54">5.4 配方：把它重新写成一个平方<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
-<p>现在做<strong>配平方</strong>。把上式看成关于 <span class="arithmatex">\(\mu\)</span> 的二次多项式，
-二次项系数是 <span class="arithmatex">\(\tau_0 + n\tau\)</span>。
-把它写成一个完全平方加上一个常数：</p>
+<p>现在做<strong>配平方</strong>。上式是关于 <span class="arithmatex">\(\mu\)</span> 的二次多项式，
+二次项系数 <span class="arithmatex">\(\tau_0 + n\tau\)</span>，可写成一个完全平方加一常数：</p>
 <div class="arithmatex">\[\tau_0(\mu-\mu_0)^2 + n\tau(\mu-\bar x)^2
 = (\tau_0 + n\tau)\left(\mu - \mu_n\right)^2 + C\]</div>
 <p>其中</p>
 <div class="arithmatex">\[\mu_n = \frac{\tau_0 \mu_0 + n\tau \bar x}{\tau_0 + n\tau}\]</div>
-<p>常数 <span class="arithmatex">\(C\)</span> 与 <span class="arithmatex">\(\mu\)</span> 无关，会被吸进归一化常数里。
-把指数写回去，后验密度立刻现形：</p>
+<p>常数 <span class="arithmatex">\(C\)</span> 与 <span class="arithmatex">\(\mu\)</span> 无关，会被吸进归一化常数。
+指数写回去，后验密度立刻现形：</p>
 <div class="arithmatex">\[p(\mu \mid D) \propto \exp\left[-\frac{\tau_0 + n\tau}{2}(\mu-\mu_n)^2\right]\]</div>
 <p>这个形状就是正态密度的核。
 补上归一化常数，得到</p>
@@ -13115,73 +13083,66 @@ Beta<span class="arithmatex">\((\alpha,\beta)\)</span> 的总强度是 <span cla
 \qquad
 \frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}\]</div>
 <h3 id="55">5.5 这个结论该怎么读<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
-<p>第一，后验均值是先验均值和样本均值的加权平均。
-两个数只有两个，权重之和为 1，
-所以它一定落在两者之间 ——
-先验把估计值往自己这边拉，数据把它往回拉。</p>
-<p>第二，权重由方差的倒数决定，也就是由精度决定。
-把上式改写一下会更清楚：</p>
+<p>第一，后验均值是先验均值与样本均值的加权平均。
+权重之和为 1，所以它必落在两者之间 ——
+先验把估计往自己这边拉，数据把它往回拉。</p>
+<p>第二，权重由方差倒数（即精度）决定。改写一下更清楚：</p>
 <div class="arithmatex">\[\mu_n = w\,\bar x + (1-w)\,\mu_0, \qquad
 w = \frac{n\tau}{\tau_0 + n\tau} = \frac{n/\sigma^2}{1/\sigma_0^2 + n/\sigma^2}\]</div>
-<p>看这个 <span class="arithmatex">\(w\)</span>：</p>
+<p>看 <span class="arithmatex">\(w\)</span>：</p>
 <ul>
 <li>观测噪声 <span class="arithmatex">\(\sigma^2\)</span> 越小（<span class="arithmatex">\(\tau\)</span> 越大），<span class="arithmatex">\(w\)</span> 越大 —— 数据更可信；</li>
 <li>样本数 <span class="arithmatex">\(n\)</span> 越大，<span class="arithmatex">\(w\)</span> 越大 —— 数据更多；</li>
 <li><strong>先验方差 <span class="arithmatex">\(\sigma_0^2\)</span> 越小（<span class="arithmatex">\(\tau_0\)</span> 越大），<span class="arithmatex">\(w\)</span> 越小 —— 先验越确定，权重越大。</strong></li>
 </ul>
-<p>第三条正是「<strong>先验越确定权重越大</strong>」的精确版本。
-如果先验极其确定（<span class="arithmatex">\(\sigma_0^2 \to 0\)</span>，即 <span class="arithmatex">\(\tau_0\to\infty\)</span>），
-那么 <span class="arithmatex">\(w \to 0\)</span>，后验均值就等于先验均值 ——
-<strong>再多的数据也拉不动它。</strong>
-反过来，如果先验极其平坦（<span class="arithmatex">\(\tau_0 \to 0\)</span>），
-那么 <span class="arithmatex">\(w \to 1\)</span>，后验均值就是样本均值，
-退化成最大似然的结果。</p>
-<p>第三，在「先验方差等于观测方差、且 <span class="arithmatex">\(n=1\)</span>」这个特例里权重正好各占一半。
-因为此时 <span class="arithmatex">\(\tau_0 = \tau\)</span>，<span class="arithmatex">\(w = 1/(1+1) = 0.5\)</span>。
-先验被当成一个与观测同等可信的虚拟样本，
-这一点在例题里会算到。</p>
+<p>第三条正是「<strong>先验越确定权重越大</strong>」的精确版。
+若先验极其确定（<span class="arithmatex">\(\sigma_0^2 \to 0\)</span>，即 <span class="arithmatex">\(\tau_0\to\infty\)</span>），
+则 <span class="arithmatex">\(w \to 0\)</span>，后验均值就等于先验均值 ——
+<strong>再多数据也拉不动它。</strong>
+反过来，若先验极其平坦（<span class="arithmatex">\(\tau_0 \to 0\)</span>），
+则 <span class="arithmatex">\(w \to 1\)</span>，后验均值就是样本均值，退化为最大似然。</p>
+<p>第三，当「先验方差等于观测方差且 <span class="arithmatex">\(n=1\)</span>」时权重各占一半：
+此时 <span class="arithmatex">\(\tau_0 = \tau\)</span>，<span class="arithmatex">\(w = 1/(1+1) = 0.5\)</span>。
+先验被当成一个与观测同等可信的虚拟样本，例题里会算到。</p>
 <p><strong>第四，后验方差比两者都小。</strong>
-<span class="arithmatex">\(\tau_n = \tau_0 + n\tau\)</span> 说明<strong>精度是可以相加的</strong>：
-先验带来一份信息，每一个观测再带来一份，
-加起来就是后验的总信息量。
+<span class="arithmatex">\(\tau_n = \tau_0 + n\tau\)</span> 说明<strong>精度可以相加</strong>：
+先验带来一份信息，每个观测再带来一份，相加即后验总信息量。
 信息只增不减，不确定性只会缩小 ——
-<strong>贝叶斯更新永远不会让人更糊涂</strong>（前提是先验和模型都没写错）。</p>
+<strong>贝叶斯更新永远不会让人更糊涂</strong>（前提是先验与模型都没写错）。</p>
 <p>第五，样本量增大时先验被淹没。
 当 <span class="arithmatex">\(n \to \infty\)</span>，
 <span class="arithmatex">\(w = \frac{n\tau}{\tau_0+n\tau} \to 1\)</span>，
 <span class="arithmatex">\(\mu_n \to \bar x\)</span>，
 <span class="arithmatex">\(\sigma_n^2 \to \sigma^2/n \to 0\)</span>。
 两个学派在大样本下会走到一起。
-所以「用不用贝叶斯」在小样本上是真问题，
-在大样本上主要是计算与解释习惯的问题。</p>
+所以「用不用贝叶斯」在小样本上是真问题，大样本上只是计算与解释习惯之差。</p>
 <div class="admonition warning">
 <p class="admonition-title">先验方差极小是个危险设定</p>
-<p>从公式上看，取 <span class="arithmatex">\(\sigma_0^2 = 0.0001\)</span> 会让后验均值几乎等于先验均值。
-如果这个先验是拍脑袋写的，
-那就等于在数据面前强行宣布「我早就知道答案」。
-<strong>先验越强，估错的代价越大</strong>，
-而且这种错误在小样本上<strong>根本不会自我纠正</strong> ——
-公式里 <span class="arithmatex">\(w\)</span> 会老老实实地把数据压到 0 权重。
-写强先验之前，最好先问一句：
-这个信念是从上一批真正观测过的数据来的，
-还是从「我觉得应该是这样」来的？</p>
+<p>从公式看，<span class="arithmatex">\(\sigma_0^2 = 0.0001\)</span> 会让后验均值几乎等于先验均值。
+若这个先验是拍脑袋写的，
+就等于在数据面前强行宣布「我早就知道答案」。
+<strong>先验越强，估错代价越大</strong>，
+且这种错误在小样本上<strong>根本不会自我纠正</strong> ——
+公式里 <span class="arithmatex">\(w\)</span> 会老实地把数据压到 0 权重。
+写强先验前，最好先问一句：
+这个信念来自上一批真正观测过的数据，
+还是「我觉得应该是这样」？</p>
 </div>
 <hr />
 <h2 id="_7">六、从估计到学习：贝叶斯学习的做法<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>到这里为止，我们一直在算参数的后验。
+<p>到这里我们一直在算参数的后验。
 但分类器最终要用的不是参数，而是<strong>密度</strong> <span class="arithmatex">\(p(x\mid \omega)\)</span>。
 贝叶斯学习的关键一步就在这里：
-<strong>不要用后验的某个点去顶替参数，
-而是把参数的不确定性积分掉。</strong></p>
+<strong>不要用后验的某个点去顶替参数，而是把参数的不确定性积分掉。</strong></p>
 <h3 id="61">6.1 预测分布<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <p>给定训练集 <span class="arithmatex">\(D\)</span>，一个新样本 <span class="arithmatex">\(x\)</span> 的类条件密度是</p>
 <div class="arithmatex">\[p(x \mid D) = \int p(x \mid \theta)\, p(\theta \mid D)\, \mathrm{d}\theta\]</div>
-<p>这叫<strong>后验预测分布</strong>。读法是：
-「对每一个可能的 <span class="arithmatex">\(\theta\)</span>，
-按它有多可信（后验）把它给出的密度加权平均一遍。」</p>
+<p>这叫<strong>后验预测分布</strong>，读法是：
+「对每个可能的 <span class="arithmatex">\(\theta\)</span>，
+按它的可信度（后验）把其密度加权平均一遍。」</p>
 <p>因为 <span class="arithmatex">\(\int p(\theta\mid D)\,\mathrm{d}\theta = 1\)</span>，
-后验在这里就是一个<strong>合法的加权平均的权重</strong>。
-这也解释了为什么归一化常数不能省 ——
+后验就是一组<strong>合法的加权平均权重</strong>。
+这也解释了归一化常数为何不能省 ——
 权重不归一，平均就无从定义。</p>
 <h3 id="62-plug-in">6.2 与 plug-in 的对比<a class="headerlink" href="#62-plug-in" title="Permanent link">&para;</a></h3>
 <p><strong>plug-in（代入法）</strong>：
@@ -13190,19 +13151,18 @@ w = \frac{n\tau}{\tau_0 + n\tau} = \frac{n/\sigma^2}{1/\sigma_0^2 + n/\sigma^2}\
 <p><strong>完整的贝叶斯</strong>：
 把整个后验拿来积分平均：</p>
 <div class="arithmatex">\[p(x\mid D) = \int p(x\mid\theta)\,p(\theta\mid D)\,\mathrm{d}\theta\]</div>
-<p>两者的差别不在「准不准一点」，
-而在<strong>是否承认参数本身不确定</strong>。
+<p>两者的差别不在「准不准一点」，而在<strong>是否承认参数本身不确定</strong>。
 plug-in 宣布「参数就是这个数」，
-于是它给出的密度在参数附近会显得<strong>过于尖锐</strong>；
-贝叶斯把参数的不确定性摊开来平均，
+其密度在参数附近会显得<strong>过于尖锐</strong>；
+贝叶斯把参数不确定性摊开平均，
 得到的密度<strong>更宽、尾部更厚</strong>。</p>
 <p>用方差分解可以把这个差别写成公式：</p>
 <div class="arithmatex">\[\mathrm{Var}[x \mid D] = \mathbb{E}\big[\mathrm{Var}[x\mid\theta]\big] + \mathrm{Var}\big[\mathbb{E}[x\mid\theta]\big]\]</div>
 <p>右边两项分别是：
-「参数已知时数据本身的噪声」和「参数自己不确定带来的额外波动」。
-plug-in 只保留了第一项，直接把第二项当成 0。
+「参数已知时数据本身的噪声」与「参数自身不确定带来的额外波动」。
+plug-in 只保留第一项，把第二项当成 0。
 这就是它的系统性偏差 ——
-不是数值上差一点，而是结构上少了一项。</p>
+不是数值差一点，而是结构上少了一项。</p>
 <table>
 <thead>
 <tr>
@@ -13244,16 +13204,13 @@ plug-in 只保留了第一项，直接把第二项当成 0。
 </tr>
 </tbody>
 </table>
-<p><strong>结论</strong>：样本少的时候，
-「参数到底是多少」这件事本身很没底，
-这份没底应该被写进预测里，
-plug-in 恰恰把它丢掉了。
-样本一多，后验收缩成一个尖峰，
-积分退化成在最优点取值的代入，
-两者自然一致。</p>
+<p><strong>结论</strong>：样本少时，
+「参数到底是多少」本身很没底，
+这份没底应写进预测，plug-in 恰恰丢掉了它。
+样本一多，后验收缩成尖峰，
+积分退化为在最优点取值的代入，两者自然一致。</p>
 <h3 id="63">6.3 算例：把后验当权重做平均<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
-<p>下面把「后验当权重积分平均」和「plug-in」并排算出来，
-看它们的差别有多大。</p>
+<p>下面把「后验当权重积分平均」与「plug-in」并排算出来，看差别有多大。</p>
 <ul>
 <li>后验参数：alpha = 5.0, beta = 3.0</li>
 <li>后验均值（数值积分）= 0.625000</li>
@@ -13268,11 +13225,9 @@ plug-in 恰恰把它丢掉了。
 <li>蒙特卡洛后验预测（下一枚为正）= 0.624632</li>
 <li>闭式后验预测 = 0.600000</li>
 </ul>
-<p>这里有一个细节值得注意：
-数值积分用的网格宽度是均匀的，
-所以「权重之和」也是用同样的网格积出来的；
-如果只对权重做简单求和而不同时乘网格宽度，
-归一化就会差一个常数。<strong>权重要归一化，归一化要跟积分口径一致。</strong></p>
+<p>数值积分用的网格宽度是均匀的，
+所以「权重之和」也由同样的网格积出；
+若只对权重简单求和而不乘网格宽度，归一化就会差一个常数。<strong>权重要归一化，且要跟积分口径一致。</strong></p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 356.735625 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="样本量增加时后验收敛：先验的影响被数据「冲淡」">
@@ -13886,39 +13841,36 @@ L 283.463625 64.581719
 
 <h2 id="_8">七、递推性质：分两批看等于先验连乘两次<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>贝叶斯更新有一个很强的性质：<strong>它可以一批一批地做。</strong>
-这不是巧合，而是「后验 ∝ 先验 × 似然」这条式子本身的结构。</p>
+这不是巧合，而是「后验 ∝ 先验 × 似然」本身的结构。</p>
 <p>把训练集拆成两批 <span class="arithmatex">\(D_1, D_2\)</span>，独立同分布假设下：</p>
 <div class="arithmatex">\[p(\theta \mid D_1, D_2) = \frac{p(\theta)\, p(D_1\mid\theta)\, p(D_2\mid\theta)}{p(D_1, D_2)}
 \propto \underbrace{\frac{p(\theta)p(D_1\mid\theta)}{p(D_1)}}_{p(\theta\mid D_1)} p(D_2\mid\theta)\]</div>
 <p>也就是</p>
 <div class="arithmatex">\[p(\theta \mid D_1, D_2) \propto p(\theta\mid D_1)\, p(D_2\mid\theta)\]</div>
-<p>右边正好是「<strong>把 <span class="arithmatex">\(p(\theta\mid D_1)\)</span> 当成新的先验，
-再吃一遍 <span class="arithmatex">\(D_2\)</span></strong>」的写法。
-所以有两条结论：</p>
-<p><strong>第一，可以递推。</strong> 每来一批数据，把当前后验当成先验，更新一次即可。
+<p>右边正好是「<strong>把 <span class="arithmatex">\(p(\theta\mid D_1)\)</span> 当成新先验，
+再吃一遍 <span class="arithmatex">\(D_2\)</span></strong>」的写法。所以有两条结论：</p>
+<p><strong>第一，可以递推。</strong> 每来一批数据，把当前后验当成先验更新一次即可。
 在线学习、流式学习在贝叶斯框架下是<strong>天然支持</strong>的，
-不需要为它专门设计什么算法。</p>
+不需要专门设计算法。</p>
 <p><strong>第二，顺序无关。</strong> 因为乘法可交换，
-<span class="arithmatex">\(D_1\)</span> 先吃还是 <span class="arithmatex">\(D_2\)</span> 先吃，
-最终得到的后验<strong>一模一样</strong>。
+<span class="arithmatex">\(D_1\)</span> 先吃还是 <span class="arithmatex">\(D_2\)</span> 先吃，得到的后验<strong>一模一样</strong>。
 这正是「似然里每个样本是乘积里的一个因子」的直接后果 ——
-因子乘起来的顺序不影响积，也不影响归一化常数。</p>
-<p>对共轭族来说，这个性质表现得特别直观：
+因子相乘的顺序不影响积，也不影响归一化常数。</p>
+<p>对共轭族来说，这个性质特别直观：
 后验参数 = 先验参数 + 数据统计量。
 统计量是对样本求和得到的，
 求和当然可以分批做，也不必按顺序做。</p>
 <p>不过这个性质有两个前提，缺一不可：</p>
 <ul>
-<li><strong>样本互相独立。</strong> 如果样本之间有依赖（比如时间序列的自相关），
-  那么 <span class="arithmatex">\(p(D\mid\theta)\)</span> 就不再是简单乘积，
+<li><strong>样本互相独立。</strong> 若样本之间有依赖（比如时间序列的自相关），
+  <span class="arithmatex">\(p(D\mid\theta)\)</span> 就不再是简单乘积，
   「分批吃」的等价性直接失效；</li>
-<li><strong>参数不随时间变。</strong> 如果参数本身在漂移，
-  那么正确的做法是给一个随时间松弛的先验，
+<li><strong>参数不随时间变。</strong> 若参数本身在漂移，
+  正确做法是给一个随时间松弛的先验，
   而不是无限地把历史观测累加进去 ——
-  那会让旧数据永久地压制新数据。</li>
+  那会让旧数据永久压制新数据。</li>
 </ul>
-<p>第二个坑在讲概率密度估计的方法时经常被忽略，
-但它在实际系统里非常常见。</p>
+<p>第二个坑在讲密度估计方法时常被忽略，但实际系统里非常常见。</p>
 <div class="admonition warning">
 <p class="admonition-title">递推性质不等于「可以随便丢弃中间结果」</p>
 <p>有人从「顺序无关」推出一个错误结论：
@@ -13936,8 +13888,7 @@ L 283.463625 64.581719
 <hr />
 <h2 id="_9">八、这一页和最大似然的分工<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>第 3.1 到 3.5 这几个知识点在这里画一个句号。
-把这一页和前两页放在一起看，
-它们在整门课里的位置是这样的：</p>
+把这一页和前两页放在一起看，它们在整门课里的位置是：</p>
 <table>
 <thead>
 <tr>
@@ -13962,41 +13913,37 @@ L 283.463625 64.581719
 </tr>
 </tbody>
 </table>
-<p>两者不是互相否定的关系：</p>
+<p>两者不是互相否定：</p>
 <ul>
 <li>先验取均匀时，MAP 就是最大似然；</li>
-<li>样本量增大时，后验集中到最大似然解的附近；</li>
-<li>共轭先验下的后验均值，
-  可以写成「先验均值与样本统计量的加权平均」，
-  是一个平滑过的最大似然。</li>
+<li>样本量增大时，后验集中到最大似然解附近；</li>
+<li>共轭先验下的后验均值可写成
+  「先验均值与样本统计量的加权平均」，是一个平滑过的最大似然。</li>
 </ul>
-<p><strong>真正需要贝叶斯的场合是：</strong>
-样本很少、先验信息确实存在、或者必须把不确定性一并交给下游。
-<strong>不需要贝叶斯的场合是：</strong>
-样本充足、先验说不清、或者下游只要一个决策结果。</p>
+<p><strong>真正需要贝叶斯的场合：</strong>
+样本很少、先验信息确实存在、或必须把不确定性一并交给下游。
+<strong>不需要贝叶斯的场合：</strong>
+样本充足、先验说不清、或下游只要一个决策结果。</p>
 <div class="admonition warning">
 <p class="admonition-title">什么时候别用贝叶斯</p>
-<p>有四类情形应当谨慎，甚至直接改用别的路线：</p>
+<p>有四类情形应当谨慎，甚至直接改走别的路线：</p>
 <p>一、先验只是为了「让公式能用」而硬凑的。
-如果先验没有任何依据，那它带来的偏差就是纯粹的损失。
+若先验没有任何依据，它带来的偏差就是纯粹的损失。
 用「无信息先验」是允许的，
 但要清楚它未必真的无信息，
 在参数变换下也可能改变结论。</p>
 <p>二、高维参数、后验根本积不动。
-参数维度一高，
-归一化常数 <span class="arithmatex">\(p(D)\)</span> 的积分会迅速变得不可计算。
-常用的出路是拉普拉斯近似、变分推断或者采样，
-但这些方法都有自己的近似误差，
-不能再写成「精确的后验」。</p>
+参数维度一高，归一化常数 <span class="arithmatex">\(p(D)\)</span> 的积分会迅速变得不可计算。
+常用出路是拉普拉斯近似、变分推断或采样，
+但这些方法各有近似误差，不能再写成「精确的后验」。</p>
 <p>三、需要在线更新但样本并不独立。
 前面说过，递推性质以独立同分布为前提。
 样本相关时「先验连乘两次」不再等价于「一次性用全部数据」，
 两者甚至都不等于真正的后验。</p>
 <p>四、结果要给别人复核，而先验说不清。
-贝叶斯的结论带着先验，
-换一个先验可能换一个结论。
-如果先验无法被清楚交代和论证，
-这种结论在需要审计的场合就是不可复现的。</p>
+贝叶斯的结论带着先验，换一个先验可能换一个结论。
+若先验无法被清楚交代和论证，
+这种结论在需要审计的场合就不可复现。</p>
 </div>
 <hr />
 <h2 id="_10">九、用图把两件事钉住<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -14997,9 +14944,9 @@ z
 <p>这是一道把定义走一遍的题，关键是把「先验参数 + 数据统计量」
 这条更新规则算准。
 第二问要注意 MAP 一定小于最大似然 ——
-因为先验在 <span class="arithmatex">\(0.5\)</span> 处最高，它把众数往中间拉。
-第三问考的是「三种估计量优化不同损失」这个点，
-以及 <span class="arithmatex">\(p=0.5\)</span> 是一个对称点这件事。</p>
+因为先验在 <span class="arithmatex">\(0.5\)</span> 处最高，把众数往中间拉。
+第三问考「三种估计量优化不同损失」，
+以及 <span class="arithmatex">\(p=0.5\)</span> 是一个对称点。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15024,11 +14971,10 @@ z
 <p>四个数都在 <span class="arithmatex">\(0.61\)</span> 到 <span class="arithmatex">\(0.65\)</span> 之间，
 顺序是 后验均值 <span class="arithmatex">\(\lt\)</span> 后验中位数 <span class="arithmatex">\(\lt\)</span> 最大后验 <span class="arithmatex">\(\lt\)</span> 最大似然。
 原因是：先验以 <span class="arithmatex">\(p = 0.5\)</span> 为中心且对称，
-它把所有贝叶斯的结果都往 <span class="arithmatex">\(0.5\)</span> 那边拉了一点点，
-而最大似然完全不受影响。
+把贝叶斯的结果都往 <span class="arithmatex">\(0.5\)</span> 那边拉了一点，而最大似然完全不受影响。
 后验中位数作为一个<strong>分位数</strong>，
-在偏斜的后验上天然和众数、均值错开；
-它衡量的是「一半概率在左边」的位置，
+在偏斜后验上天然和众数、均值错开；
+它衡量「一半概率在左边」的位置，
 这正是最小绝对误差准则的要求。</p>
 </details>
 <h3 id="2">例题 2：正态先验的权重由谁决定<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -15040,12 +14986,12 @@ z
 &copy; 用一句话说明这三组结果说明了什么。</p>
 <details class="note">
 <summary>思路</summary>
-<p>这一题不需要任何新公式，就是把权重表达式
+<p>这题不需要新公式，把权重表达式
 <span class="arithmatex">\(w = \frac{n/\sigma^2}{1/\sigma_0^2 + n/\sigma^2}\)</span>
-代进去。
-注意第二组里先验方差是一只比观测方差还小，
-也就是「先验比数据更确定」，
-这时后验均值应该更靠近 <span class="arithmatex">\(0\)</span>（先验均值）。</p>
+代进去即可。
+注意第二组先验方差比观测方差还小，
+即「先验比数据更确定」，
+这时后验均值应更靠近 <span class="arithmatex">\(0\)</span>（先验均值）。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15090,12 +15036,10 @@ z
 </tbody>
 </table>
 <p><strong>&copy; 结论。</strong></p>
-<p>先验方差越小，先验精度越高，数据权重就越小，
-后验均值就越靠近先验均值 <span class="arithmatex">\(0\)</span>，
-同时后验方差也越小。
+<p>先验方差越小、先验精度越高，数据权重越小，
+后验均值越靠近先验均值 <span class="arithmatex">\(0\)</span>，后验方差也越小。
 反过来，先验方差很大时数据权重接近 <span class="arithmatex">\(1\)</span>，
-后验均值几乎等于样本均值 <span class="arithmatex">\(1.2\)</span>，
-后验方差接近 <span class="arithmatex">\(1/n = 0.2\)</span>。</p>
+后验均值几乎等于样本均值 <span class="arithmatex">\(1.2\)</span>，后验方差接近 <span class="arithmatex">\(1/n = 0.2\)</span>。</p>
 </details>
 <h3 id="3">例题 3：分两批更新与一次性更新<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>先验为 Beta<span class="arithmatex">\((1, 1)\)</span>。观测按时间分成两批：
@@ -15106,10 +15050,9 @@ z
 &copy; 说明这个性质叫什么，需要什么前提。</p>
 <details class="note">
 <summary>思路</summary>
-<p>只要记住更新规则是「加统计量」，
-这道题就是两次加法。
+<p>只要记住更新规则是「加统计量」，这题就是两次加法。
 第三问要注意：把后验当作下一批的先验，
-这个操作的合法性来自似然是乘积这一点。</p>
+这一操作的合法性来自似然是乘积。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15127,8 +15070,8 @@ z
 （也是「后验可以当下一步的先验」的合法性来源）。
 顺序反过来也一样：先吃第二批再吃第一批，
 结果是 <span class="arithmatex">\(\mathrm{Beta}(2,4) \to \mathrm{Beta}(6,6)\)</span>，仍然一样。
-它成立的前提是：<strong>样本之间独立，且参数不随时间变化</strong>。
-如果样本相关，或者参数本身在漂移，
+两者的前提是：<strong>样本之间独立，且参数不随时间变化</strong>。
+若样本相关，或参数本身在漂移，
 那么「先验 × 第二批似然」就不再等于真正的新似然，
 递推的等价性立刻失效。</p>
 </details>
@@ -15142,12 +15085,11 @@ z
     并把两者对比，说明多出来的那一部分是哪里来的。</p>
 <details class="note">
 <summary>思路</summary>
-<p>这题的关键在最后一步：
-预测的总方差不是「观测方差」，而是
-「观测方差 + 后验方差」。
-先算后验，再把这个后验方差加到观测方差上，
-就得到后验预测的方差。
-对比时要说清楚多出来的是<strong>参数不确定性</strong>。</p>
+<p>这题关键在最后一步：
+预测总方差不是「观测方差」，而是「观测方差 + 后验方差」。
+先算后验，再把后验方差加到观测方差上，
+即得后验预测方差。
+对比时要说清多出来的是<strong>参数不确定性</strong>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15165,9 +15107,9 @@ z
 于是 <span class="arithmatex">\(x \sim \mathcal{N}(1.846154,\ 1)\)</span>：
 方差为 <span class="arithmatex">\(1\)</span>，标准差为 <span class="arithmatex">\(1\)</span>。</p>
 <p><strong>&copy; 贝叶斯后验预测与对比。</strong></p>
-<p>后验预测要把参数的不确定性算进去。
-使用标准差时要注意：<strong>方差的期望与标准差的期望不是一回事</strong>，
-所以「后验预测标准差」应当写成</p>
+<p>后验预测要把参数不确定性算进去。
+用标准差时要注意：<strong>方差的期望与标准差的期望不是一回事</strong>，
+所以「后验预测标准差」应写成</p>
 <div class="arithmatex">\[\sqrt{\sigma^2 + \sigma_n^2} = \sqrt{1.307692} \approx 1.143544\]</div>
 <p>而不是 <span class="arithmatex">\(\mathbb{E}[\sigma] + \sqrt{\sigma_n^2}\)</span>。</p>
 <table>
@@ -15245,25 +15187,25 @@ plug-in 把它当成 <span class="arithmatex">\(0\)</span>，
 再用全概率公式把 <span class="arithmatex">\(p(D)\)</span> 写成积分即可 ✓</p>
 <p><strong>不能直接当后验</strong>的原因：右边一般是似然的形状函数，
 它非负、但积分不一定是 <span class="arithmatex">\(1\)</span>，
-所以它不是概率密度，其均值、方差、分位数都失去意义。
+所以不是概率密度，其均值、方差、分位数都失去意义。
 只有当 <span class="arithmatex">\(\int p(\theta)p(D\mid\theta)\,\mathrm{d}\theta\)</span> 有限且为正，
 相除之后才得到合法后验 ✗</p>
-<p>如果这个积分发散，
-说明先验在参数取值的两侧衰减得不够快 ——
+<p>若这个积分发散，
+说明先验在参数取值两侧衰减得不够快 ——
 常见于在无界区间上取常数先验。
 补救办法是换一个会衰减的先验，
-或者把参数限制在真实可能的范围内。</p>
+或把参数限制在真实可能的范围内。</p>
 <p><strong>Q2</strong> 后验均值对应平方误差，后验中位数对应绝对误差，
 最大后验对应 0-1 损失（只看对错，不看错多少）✓</p>
 <p>对称单峰时三者重合；
 右偏单峰时一般是 众数 <span class="arithmatex">\(\lt\)</span> 中位数 <span class="arithmatex">\(\lt\)</span> 均值。
-原因是：均值对尾部的一阶敏感（尾部拉长会把它拽走），
+原因是：均值对尾部一阶敏感（尾部拉长会把它拽走），
 中位数只看累积概率到 <span class="arithmatex">\(0.5\)</span> 的位置，
 众数只看最高点 ——
-后验一旦偏斜，这三个位置本来就是不同的几何量 ✗</p>
+后验一旦偏斜，这三个位置本就是不同的几何量 ✗</p>
 <p>不该拿 MAP 替代后验均值的原因是：
 它们优化的损失不同，
-而且 MAP 丢掉了后验的整个形状，
+且 MAP 丢掉了后验的整个形状，
 众数附近很宽时会给出过度自信的结论。</p>
 <p><strong>Q3</strong> 推导见第五节：配平方后得到</p>
 <div class="arithmatex">\[\mu_n = \frac{\tau_0\mu_0 + n\tau\bar x}{\tau_0 + n\tau}, \qquad
@@ -15273,7 +15215,7 @@ w = \frac{n\tau}{\tau_0 + n\tau}\]</div>
 后验均值更靠近先验均值</p>
 <p>(b) 当 <span class="arithmatex">\(\tau_0 \to \infty\)</span>（先验方差趋于 <span class="arithmatex">\(0\)</span>）时 <span class="arithmatex">\(w \to 0\)</span>，
 后验均值等于 <span class="arithmatex">\(\mu_0\)</span>。
-换句话说：一个无限确定的先验是完全不受数据影响的 ✗</p>
+即：一个无限确定的先验完全不受数据影响 ✗</p>
 <p>&copy; 当 <span class="arithmatex">\(\tau_0 \to 0\)</span>（先验方差趋于无穷）时 <span class="arithmatex">\(w \to 1\)</span>，
 后验均值等于 <span class="arithmatex">\(\bar x\)</span>，
 退化成最大似然的结果。
@@ -15286,7 +15228,7 @@ w = \frac{n\tau}{\tau_0 + n\tau}\]</div>
 <p>(a) <strong>错。</strong> 
 准确性取决于先验对不对。
 样本少而先验又写偏时，
-贝叶斯会被先验拉向错误的方向，
+贝叶斯会被先验拉向错误方向，
 反而不如只听数据的最大似然 ✗</p>
 <p>(b) <strong>错。</strong> 
 共轭只是说后验仍在同一族内，
@@ -15301,14 +15243,13 @@ Beta 的总质量 <span class="arithmatex">\(\alpha + \beta\)</span> 可以是 <
 <p>(d) <strong>错。</strong> 
 「可以分批」是<strong>精确递推</strong>的性质，
 它依赖于每步都得到精确的后验。
-数值近似每步都会引入误差，
-分批做会不断累积，
-而且丢掉中间结果就无法审计前几批数据的影响 ✗</p>
+数值近似每步都会引入误差，分批做会不断累积，
+且丢掉中间结果就无法审计前几批数据的影响 ✗</p>
 <p>(e) <strong>半对。</strong> 
 在模型设定正确、参数不随时间变、
 且先验不是人为设置的强集中分布时，
 样本量足够大确实会让先验的影响趋于消失。
-但如果先验是刚性的（比如方差极小），
+但若先验是刚性的（比如方差极小），
 那么无论样本多大都不会被淹没 ✗</p>
 </details>
 <hr />
@@ -15400,18 +15341,17 @@ Beta 的总质量 <span class="arithmatex">\(\alpha + \beta\)</span> 可以是 <
 <p><strong>最后一件要记住的事</strong>：本页所有结论都建立在两个前提上 ——
 <strong>先验是认真给的，且归一化常数是被算出来（或确认过）的</strong>。
 先验写得随意，贝叶斯就只是一个把偏差从数据转移到先验的机器；
-归一化被跳过，
-后面所有的均值、方差、预测都失去意义</p>
+归一化被跳过，后面所有均值、方差、预测都失去意义</p>
 <hr />
 <p><strong>上一页</strong>：<a href="../density-estimation/">概率密度估计与最大似然</a> ——
 面对「密度未知」这个反问题，
 先用最大似然把参数当成固定的未知常数点出来：
 似然怎么构造、为什么取对数、估计量有哪些渐近性质，
-以及它什么时候会失效。</p>
+以及它何时会失效。</p>
 <p><strong>下一页</strong>：<a href="../nonparametric/">非参数方法</a> ——
 连「密度的函数形式」这个假设也一起放掉：
 不预设参数族，直接让样本自己决定密度长什么样，
-以及这样做的代价是什么。</p>
+以及这样做的代价。</p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../density-estimation/">概率密度估计与最大似然</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../nonparametric/">非参数密度估计与近邻法</a></span></div></nav>
 
 

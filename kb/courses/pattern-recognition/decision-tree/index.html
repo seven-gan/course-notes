@@ -12171,9 +12171,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>它也是集成方法的基础</strong> —— 随机森林、梯度提升都以树为基学习器，
-这几类方法是表格数据上<strong>最常用的强基线</strong>。</p>
 </div>
+<p><strong>它也是集成方法的基础</strong> —— 随机森林、梯度提升都以树为基学习器，是表格数据上<strong>最常用的强基线</strong>。</p>
 <hr />
 <h2 id="_2">一、决策树的基本结构<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 递归分裂<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
@@ -12407,7 +12406,7 @@ L 273.808457 111.171511
 <p><strong>关键问题</strong>：每一步该选<strong>哪个特征</strong>、<strong>哪个阈值</strong>？</p>
 <p><strong>答案</strong>：选能让子集<strong>尽可能"纯"</strong>的那一个</p>
 <h3 id="12">1.2 "纯"怎么度量<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><strong>三种常用判据</strong>，本质上都在度量"不纯度"：</p>
+<p><strong>三种常用判据</strong>都在度量"不纯度"：</p>
 <table>
 <thead>
 <tr>
@@ -12434,7 +12433,6 @@ L 273.808457 111.171511
 </tr>
 </tbody>
 </table>
-<p><strong>三种判据的对照细节</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12508,7 +12506,7 @@ L 273.808457 111.171511
 </tr>
 </tbody>
 </table>
-<p><strong>CART 只用二叉树</strong>这一点很关键：
+<p><strong>CART 只用二叉树</strong>：
 它把多类别特征也拆成多次二分 ——
 这让后续的剪枝与集成处理都更简单</p>
 <hr />
@@ -12543,7 +12541,7 @@ L 273.808457 111.171511
 </tr>
 </tbody>
 </table>
-<p><strong>预剪枝的停止条件</strong>（常见几条）：</p>
+<p><strong>预剪枝的停止条件</strong>：</p>
 <ul>
 <li>节点样本数<strong>小于</strong>某个阈值</li>
 <li>不纯度下降<strong>小于</strong>某个阈值</li>
@@ -12580,7 +12578,6 @@ L 273.808457 111.171511
 \operatorname{Var}\left(\frac1M\sum_{m=1}^M\hat f_m\right)
 = \rho\,\sigma^2 + \frac{1-\rho}{M}\,\sigma^2
 \]</div>
-<p><strong>逐项读这个式子</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12599,12 +12596,10 @@ L 273.808457 111.171511
 </tr>
 </tbody>
 </table>
-<p><strong>两个立即有用的结论</strong>：</p>
 <ul>
 <li><span class="arithmatex">\(M\)</span> 增大能消掉第二项 —— 所以<strong>模型多一点通常更好</strong></li>
 <li><strong>第一项消不掉</strong> —— 所以<strong>降低相关性 <span class="arithmatex">\(\rho\)</span> 才是关键</strong> ✓</li>
 </ul>
-<p><strong>这就解释了随机森林为什么要"随机"两次</strong></p>
 <h3 id="32-bagging">3.2 装袋（Bagging）<a class="headerlink" href="#32-bagging" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：</p>
 <ol>
@@ -12614,7 +12609,7 @@ L 273.808457 111.171511
 </ol>
 <p><strong>为什么有效</strong>：每个子集不同 → 各模型学到的细节不同 →
 <strong>误差相关性降低</strong></p>
-<p><strong>自助抽样的一个性质</strong>（值得知道）：
+<p><strong>自助抽样的一个性质</strong>：
 从 <span class="arithmatex">\(n\)</span> 个样本中有放回抽 <span class="arithmatex">\(n\)</span> 次，<strong>约 <span class="arithmatex">\(1/e\approx36.8\%\)</span> 的样本抽不到</strong>。</p>
 <div class="arithmatex">\[
 \left(1-\frac1n\right)^n \xrightarrow{n\to\infty} \frac1e \approx 0.368
@@ -13360,8 +13355,6 @@ AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 —�
 \]</div>
 <p><strong>符号</strong>：<span class="arithmatex">\(D\)</span> 是当前节点样本集，<span class="arithmatex">\(A\)</span> 是候选特征，
 <span class="arithmatex">\(D_v\)</span> 是按 <span class="arithmatex">\(A\)</span> 取值 <span class="arithmatex">\(v\)</span> 划分出的子集。</p>
-<p><strong>要点</strong>：<strong>划分前的熵，减去划分后各子集熵的加权平均</strong></p>
-<p><strong>下面把三种判据算出来对比</strong>：</p>
 <p>两个候选特征，样本分布如下（括号内是各类计数）</p>
 <ul>
 <li>特征 A：把 10 个样本分成 5 与 5</li>
@@ -13403,17 +13396,6 @@ AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 —�
 <li>特征「真实属性」：分裂熵 = 1.0000，增益率 = 0.0000 / 1.0000 = 0.0000</li>
 </ul>
 <p>结论：学号的信息增益最大，但增益率被分裂熵除小了 ✓</p>
-<p><strong>从这两组数看到的</strong>：</p>
-<ul>
-<li><strong>两种判据对不同分裂的偏好可能不同</strong> → 换判据就换树</li>
-<li>
-<p><strong>"学号"式特征的信息增益最大，但增益率把它压下去了</strong></p>
-</li>
-<li>
-<p>平均 M 个模型的方差：rho<em>sigma^2 + (1-rho)/M</em>sigma^2</p>
-</li>
-<li>（取 sigma^2 = 1）</li>
-</ul>
 <p>不同 <span class="arithmatex">\(M\)</span> 与 <span class="arithmatex">\(\rho\)</span> 下的方差数值：</p>
 <table>
 <thead>
@@ -13457,9 +13439,8 @@ AdaBoost 会给<strong>难以分类的样本</strong>越来越大的权重 —�
 </tbody>
 </table>
 <p>结论：rho = 1.0 时无论多少模型方差都不降 —— 所以降低相关性是关键 ✓</p>
-<p><strong>最后一列最关键</strong>：<span class="arithmatex">\(M\)</span> 从 1 加到 100，方差<strong>一直是 1.0</strong> ——
-<strong>完全相关的模型再多也没用</strong>
-这正是随机森林要"第二层随机"的定量理由。</p>
+<p><span class="arithmatex">\(M\)</span> 从 1 加到 100，方差<strong>一直是 1.0</strong> ——
+<strong>完全相关的模型再多也没用</strong></p>
 <hr />
 <h2 id="_6">五、例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：手算信息增益<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>

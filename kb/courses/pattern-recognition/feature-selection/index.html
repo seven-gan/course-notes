@@ -12347,8 +12347,6 @@
 <p>这对应本课程大纲 7.5，
 也是参考书里<strong>专门立章讨论的专题</strong>（参考书的第 9 章即「特征选择」，
 与特征提取并列成章，而不是从属关系）。</p>
-<p><strong>两条路的取舍是本页的主线</strong>：
-<strong>要解释性 → 挑特征；要压缩率 → 做变换</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">这一页的四条主线</p>
 <p><strong>主线 1：三族方法</strong>
@@ -12367,7 +12365,7 @@
 <hr />
 <h2 id="_2">一、特征选择要解决什么问题<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 与降维的分工<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>先把这个容易混的问题说清楚。面对同一份 <span class="arithmatex">\(d\)</span> 维数据，
+<p>面对同一份 <span class="arithmatex">\(d\)</span> 维数据，
 "降维"和"特征选择"要达到的目的有重叠，但<strong>手段完全不同</strong>：</p>
 <table>
 <thead>
@@ -12385,22 +12383,22 @@
 </tr>
 <tr>
 <td>是否保留物理含义</td>
-<td><strong>保留</strong> ✓</td>
-<td>通常丧失 ⚠</td>
+<td><strong>保留</strong></td>
+<td>通常丧失</td>
 </tr>
 <tr>
 <td>最多能压到几维</td>
 <td>受原特征数限制</td>
-<td>可以压得任意低 ✓</td>
+<td>可以压得任意低</td>
 </tr>
 <tr>
 <td>是否可逆</td>
 <td>可逆（子集给出就能算出原特征）</td>
-<td>一般不可逆 ⚠</td>
+<td>一般不可逆</td>
 </tr>
 <tr>
 <td>典型计算量</td>
-<td>过滤式很便宜 ✓</td>
+<td>过滤式很便宜</td>
 <td>特征分解，较贵</td>
 </tr>
 <tr>
@@ -12415,7 +12413,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>最后两行是关键</strong>：</p>
 <ul>
 <li><strong>需要给出理由的场合，只能做特征选择</strong> ——
   医生要问"你为什么判它是甲类"，答案必须是"因为某项指标超标"，
@@ -12424,7 +12421,7 @@
   因为 <span class="arithmatex">\(k\)</span> 可以压得比选择方法低得多。</li>
 </ul>
 <p><strong>两者也可以连用</strong>：先做过滤式筛掉明显无用的特征（便宜），
-再对剩下的做 PCA（彻底压缩）。这在处理几万个特征的基因数据时很常见</p>
+再对剩下的做 PCA（彻底压缩），这在基因数据里很常见</p>
 <h3 id="12">1.2 特征选择的三个问题<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>任何特征选择方法都要回答三个问题，这三个问题<strong>互相独立</strong>：</p>
 <table>
@@ -12453,9 +12450,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>注意三个问题要分开想</strong>：一个方法可能用互信息打分（问题一），
-却用前向搜索（问题二），最后用交叉验证定个数（问题三）。
-本页第二、三节讲问题一，第五节讲问题二，第三节顺带讲问题三</p>
+<p><strong>三个问题要分开想</strong>：一个方法可能用互信息打分（问题一），
+却用前向搜索（问题二），最后用交叉验证定个数（问题三）。</p>
 <div class="admonition warning">
 <p class="admonition-title">特征不是越多越好</p>
 <p>一个常见的误解是"多给一点特征总没坏处，实在不行让分类器自己忽略"。
@@ -12469,10 +12465,8 @@
   随机塞进 100 个纯噪声特征，
   几乎必然有一两个与标签在训练集上"碰巧相关"，
   分类器会抓住它们 → <strong>过拟合</strong></p>
-<p>所以特征选择不是"锦上添花"，而是防止性能下降的必要步骤。</p>
 </div>
 <h3 id="13">1.3 为什么"单看有用"不等于"组合有用"<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>这是特征选择里最反直觉的一点，也是本页第三节要重点处理的。</p>
 <p><strong>两个特征各自与类别都高度相关，放在一起却可能毫无增量信息</strong>：</p>
 <div class="arithmatex">\[
 I(X_1; C) \text{ 很大},\qquad
@@ -12552,30 +12546,30 @@ I(X_2; C \mid X_1) = 0
 <tr>
 <td>是否用分类器性能打分</td>
 <td><strong>不用</strong></td>
-<td><strong>用</strong> ✓</td>
+<td><strong>用</strong></td>
 <td>训练中隐式使用</td>
 </tr>
 <tr>
 <td>计算代价</td>
-<td>最低 ✓</td>
-<td>最高 ⚠</td>
+<td>最低</td>
+<td>最高</td>
 <td>中等</td>
 </tr>
 <tr>
 <td>考虑特征组合效应</td>
 <td>不考虑 ⚠</td>
-<td>考虑 ✓</td>
+<td>考虑</td>
 <td>部分考虑</td>
 </tr>
 <tr>
 <td>过拟合风险</td>
-<td>最低 ✓</td>
-<td>最高 ⚠</td>
+<td>最低</td>
+<td>最高</td>
 <td>中等</td>
 </tr>
 <tr>
 <td>是否依赖具体模型</td>
-<td>不依赖 ✓</td>
+<td>不依赖</td>
 <td>依赖</td>
 <td>依赖</td>
 </tr>
@@ -12670,10 +12664,6 @@ z
 <figcaption>特征选择：包裹式 vs 过滤式</figcaption>
 </figure>
 
-<p>上图把三族的关系摆在一起：
-<strong>过滤式快但可能选到"单看有用、一起用冗余"的特征；
-包裹式准但计算量随特征数组合爆炸；
-嵌入式的代表就是 <span class="arithmatex">\(L_1\)</span> 正则 —— 边训练边把权重压到零</strong>。</p>
 <p><strong>选哪一族的经验法则</strong>：</p>
 <ul>
 <li><strong><span class="arithmatex">\(d\)</span> 很大（上万）</strong> → 先用过滤式砍到几百，再考虑包裹式</li>
@@ -12708,7 +12698,7 @@ J_j = \frac{\left(\bar{x}_{1j} - \bar{x}_{2j}\right)^2}
 \quad\text{（逐特征计算）}
 \]</div>
 <p><strong>逐特征计算的 <span class="arithmatex">\(J_j\)</span> 就是 Fisher 判据在一维时的样子</strong> ——
-与上一页 LDA 的目标函数是同一个东西，只是这里<strong>一个特征一个特征地算</strong></p>
+与上一页 LDA 的目标函数相同，只是这里<strong>逐特征算</strong></p>
 <p><strong>性质</strong>：</p>
 <ul>
 <li><strong>分子大</strong>（类均值离得远）→ 好</li>
@@ -12736,7 +12726,7 @@ H(C \mid X) = -\sum_{x}\sum_{c} P(x,c)\log_2 P(c \mid x)
 <div class="arithmatex">\[
 \operatorname{IG}(X) = H(C) - H(C \mid X)
 \]</div>
-<p><strong>注意</strong>：<span class="arithmatex">\(\operatorname{IG}(X)\)</span> 的定义与互信息 <span class="arithmatex">\(I(X;C)\)</span> <strong>完全相同</strong> ✓
+<p><strong>注意</strong>：<span class="arithmatex">\(\operatorname{IG}(X)\)</span> 的定义与互信息 <span class="arithmatex">\(I(X;C)\)</span> <strong>完全相同</strong>，
 两者是同一个量，只是在不同教材里从不同角度引入的：</p>
 <table>
 <thead>
@@ -12759,7 +12749,7 @@ H(C \mid X) = -\sum_{x}\sum_{c} P(x,c)\log_2 P(c \mid x)
 </tr>
 </tbody>
 </table>
-<p><strong>这条等价关系很重要</strong> —— 它说明"决策树按信息增益挑特征"
+<p>它说明"决策树按信息增益挑特征"
 和"过滤式按互信息挑特征"在打分环节是<strong>同一件事</strong></p>
 <p><strong>信息增益的已知缺陷</strong>：它<strong>偏好取值多的特征</strong>。
 如果一个特征每个样本取值都不同（如样本编号），
@@ -12799,29 +12789,29 @@ I(X;C) = H(C) - H(C\mid X) = H(X) - H(X\mid C)
 <tr>
 <td>类内类间距离</td>
 <td>均值差与类内方差之比</td>
-<td><strong>不能</strong>（会给出 0）⚠</td>
-<td>无量纲 ✓</td>
+<td><strong>不能</strong>（会给出 0）</td>
+<td>无量纲</td>
 <td>看不到 ⚠</td>
 </tr>
 <tr>
 <td>信息增益</td>
 <td>类别不确定性的减少</td>
-<td>能（需先离散化）✓</td>
-<td>比特 ✓</td>
+<td>能（需先离散化）</td>
+<td>比特</td>
 <td>看不到 ⚠</td>
 </tr>
 <tr>
 <td>互信息</td>
 <td>两个变量的共享信息</td>
-<td>能（需先离散化）✓</td>
-<td>比特 ✓</td>
+<td>能（需先离散化）</td>
+<td>比特</td>
 <td>看不到 ⚠</td>
 </tr>
 <tr>
 <td>相关系数</td>
 <td>线性相关强度</td>
 <td><strong>不能</strong>（只看一阶）⚠</td>
-<td>无量纲 ✓</td>
+<td>无量纲</td>
 <td>看不到 ⚠</td>
 </tr>
 </tbody>
@@ -12875,9 +12865,6 @@ I(X;C) = H(C) - H(C\mid X) = H(X) - H(X\mid C)
 <p><strong>原因</strong>：特征 3 的构造是"类别 0 的样本波动小、类别 1 的样本波动大"，
 <strong>两类均值完全相同</strong>。<span class="arithmatex">\(J\)</span> 的分子是均值差的平方，
 均值相同则分子为 <span class="arithmatex">\(0\)</span>，所以它必然给出接近 <span class="arithmatex">\(0\)</span> 的分数。</p>
-<p><strong>"只差均值"和"只差形状"是两类完全不同的判别信息</strong>
-前者一阶矩方法（距离、相关系数）就能抓，
-后者必须用<strong>基于分布</strong>的判据（互信息、信息增益、<span class="arithmatex">\(K\)</span> 近邻估计）。</p>
 <p><strong>实践建议</strong>：两个判据一起算，取并集而不是交集 ——
 只看 <span class="arithmatex">\(J\)</span> 会漏掉形状型特征，只看互信息会被离散化方式影响</p>
 <hr />
@@ -12892,7 +12879,6 @@ I(X;C) = H(C) - H(C \mid X)
 <div class="arithmatex">\[
 I(X;C \mid Z) = H(C \mid Z) - H(C \mid X, Z)
 \]</div>
-<p><strong>这个差别的含义极重要</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12910,7 +12896,7 @@ I(X;C \mid Z) = H(C \mid Z) - H(C \mid X, Z)
 <tr>
 <td><span class="arithmatex">\(I(X;C\mid Z)\)</span></td>
 <td>"<strong>在已有 <span class="arithmatex">\(Z\)</span> 之后</strong>它还多有用？"</td>
-<td>已经选了一些特征之后 ✓</td>
+<td>已经选了一些特征之后</td>
 </tr>
 </tbody>
 </table>
@@ -12978,15 +12964,12 @@ I(Z_3;C\mid Z_1) = H(C\mid Z_1) - H(C\mid Z_1,Z_3) = 0 - 0 = 0
 <div class="arithmatex">\[
 I(Z_4;C\mid Z_1) = 0 - 0 = 0
 \]</div>
-<p><strong>关键观察</strong>：<strong>在 <span class="arithmatex">\(Z_1\)</span> 之后，其余传感器的条件互信息全都为 <span class="arithmatex">\(0\)</span></strong> ⚠
-（<span class="arithmatex">\(I(Z_1;C\mid Z_1) = 0\)</span> 是定义本身的直接结果，
-因为条件在 <span class="arithmatex">\(Z_1\)</span> 上时它已经不能给自己提供新信息。）</p>
+<p><strong>关键观察</strong>：<strong>在 <span class="arithmatex">\(Z_1\)</span> 之后，其余传感器的条件互信息全都为 <span class="arithmatex">\(0\)</span></strong></p>
 <p><strong>为什么 <span class="arithmatex">\(I(Z_3;C\mid Z_1)=0\)</span></strong>：
 <span class="arithmatex">\(Z_1 = C\)</span> 已经<strong>完全确定</strong>了 <span class="arithmatex">\(C\)</span>（<span class="arithmatex">\(H(C\mid Z_1)=0\)</span>），
 再补任何信息都不可能让不确定性再降低，所以条件互信息一定是 <span class="arithmatex">\(0\)</span>。</p>
 <p><strong>为什么 <span class="arithmatex">\(I(Z_2;C\mid Z_1)=0\)</span> 也一样</strong>：
 这不是因为 <span class="arithmatex">\(Z_2\)</span> 差，而是因为 <span class="arithmatex">\(Z_1\)</span> <strong>太好了</strong>。
-<strong>这正是条件互信息的作用</strong>：它衡量的是<strong>增量信息</strong>，
 <span class="arithmatex">\(Z_1\)</span> 已经把信息拿满了，<span class="arithmatex">\(Z_2\)</span> 的增量当然是 <span class="arithmatex">\(0\)</span></p>
 <p><strong>所以正确的选择策略是</strong>：</p>
 <ul>
@@ -13430,12 +13413,11 @@ L 358.979688 200.946
 <td>用 <span class="arithmatex">\(I(Z;C\mid \text{已选})\)</span></td>
 <td>传感器 1</td>
 <td>（增量接近 0，应停止）</td>
-<td>只保留 1 个 ✓</td>
+<td>只保留 1 个</td>
 </tr>
 </tbody>
 </table>
-<p><strong>这就把本页最重要的结论说完了</strong>：
-<strong>互信息衡量"有没有信息"，条件互信息衡量"有没有新信息"</strong></p>
+<p><strong>互信息衡量"有没有信息"，条件互信息衡量"有没有新信息"</strong></p>
 <h3 id="43">4.3 互信息、条件互信息与信息增益的三角关系<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13454,23 +13436,22 @@ L 358.979688 200.946
 <tr>
 <td>互信息</td>
 <td><span class="arithmatex">\(H(C) - H(C\mid X)\)</span></td>
-<td>第一步打分 ✓</td>
+<td>第一步打分</td>
 </tr>
 <tr>
 <td>条件互信息</td>
 <td><span class="arithmatex">\(H(C\mid Z) - H(C\mid X,Z)\)</span></td>
-<td>第二步之后的每一步打分 ✓</td>
+<td>第二步之后的每一步打分</td>
 </tr>
 <tr>
 <td>对称不确定性</td>
 <td><span class="arithmatex">\(2I(X;C)/(H(X)+H(C))\)</span></td>
-<td>归一化版本，处理"取值多"偏差 ✓</td>
+<td>归一化版本，处理"取值多"偏差</td>
 </tr>
 </tbody>
 </table>
 <p><strong>注意表里前两行公式完全相同</strong> ——
-它们是同一个量在不同教材里的两个名字，
-不要以为它们是两种不同的判据</p>
+它们是同一个量在不同教材里的两个名字，</p>
 <div class="admonition warning">
 <p class="admonition-title">离散化会改变互信息的数值</p>
 <p>互信息与条件互信息<strong>都是定义在离散分布上的</strong>。
@@ -13522,7 +13503,7 @@ L 358.979688 200.946
 <tr>
 <td>10</td>
 <td><span class="arithmatex">\(1023\)</span></td>
-<td>约 <span class="arithmatex">\(1\)</span> 秒 ✓</td>
+<td>约 <span class="arithmatex">\(1\)</span> 秒</td>
 </tr>
 <tr>
 <td>20</td>
@@ -13605,18 +13586,18 @@ L 358.979688 200.946
 </tr>
 <tr>
 <td>计算量</td>
-<td><span class="arithmatex">\(O(kd)\)</span> 次训练 ✓</td>
+<td><span class="arithmatex">\(O(kd)\)</span> 次训练</td>
 <td><span class="arithmatex">\(O((d-k)d)\)</span> 次训练</td>
 </tr>
 <tr>
 <td>适合 <span class="arithmatex">\(d \gg n\)</span> 吗</td>
-<td><strong>适合</strong> ✓</td>
+<td><strong>适合</strong></td>
 <td><strong>不适合</strong>（首次训练就无法进行）⚠</td>
 </tr>
 <tr>
 <td>能考虑特征相互作用吗</td>
 <td>只在后期部分考虑</td>
-<td><strong>从第一步就能考虑</strong> ✓</td>
+<td><strong>从第一步就能考虑</strong></td>
 </tr>
 <tr>
 <td>主要风险</td>
@@ -13666,7 +13647,6 @@ L 358.979688 200.946
 <li>k = 12 C(12,12) = 1</li>
 <li>全部子集加起来 = 4095</li>
 </ul>
-<p><strong>两处结果要对比着看</strong>：</p>
 <p><strong>第一处：单看互信息的排名。</strong>
 输出是 <span class="arithmatex">\(X_1(0.527)\)</span>、<span class="arithmatex">\(X_4(0.488)\)</span>、<span class="arithmatex">\(X_2(0.350)\)</span>、<span class="arithmatex">\(X_3(0.204)\)</span> ——
 <strong>冗余特征 <span class="arithmatex">\(X_4\)</span> 排到了第 2 位</strong>
@@ -13684,12 +13664,12 @@ L 358.979688 200.946
 <p><strong>第三处：组合爆炸的量级。</strong>
 <span class="arithmatex">\(12\)</span> 个特征的全部子集是 <span class="arithmatex">\(4095\)</span> 个，
 看起来一点都不大 —— 但只要 <span class="arithmatex">\(d\)</span> 涨到 <span class="arithmatex">\(40\)</span> 就是 <span class="arithmatex">\(10^{12}\)</span> 量级，
-这就是为什么必须用贪心搜索替代穷举 ⚠</p>
+所以必须用贪心搜索替代穷举</p>
 <div class="admonition warning">
 <p class="admonition-title">贪心搜索只保证局部最优</p>
 <p>前向搜索每一步都取"当前看起来最好"的选择，
 <strong>这不能保证找到全局最优子集</strong> ⚠</p>
-<p>最典型的反例就是本页反复强调的<strong>异或型特征</strong>：
+<p>最典型的反例是<strong>异或型特征</strong>：
 两个特征各自与类别几乎无关（第一步打分很低，永远不会被选中），
 但合起来可以完全确定类别。</p>
 <p><strong>前向搜索会永远选不到它们</strong> ——
@@ -13734,12 +13714,12 @@ L 358.979688 200.946
 <tr>
 <td><span class="arithmatex">\(\Omega = \|\boldsymbol{\beta}\|_1 = \sum_j\vert\beta_j\vert\)</span></td>
 <td>Lasso（<span class="arithmatex">\(L_1\)</span>）</td>
-<td><strong>能把系数精确压到零</strong> ✓</td>
+<td><strong>能把系数精确压到零</strong></td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\Omega = \alpha\|\boldsymbol{\beta}\|_1 + (1-\alpha)\|\boldsymbol{\beta}\|_2^2\)</span></td>
 <td>弹性网</td>
-<td>兼顾稀疏与稳定 ✓</td>
+<td>兼顾稀疏与稳定</td>
 </tr>
 </tbody>
 </table>
@@ -13772,7 +13752,7 @@ L 358.979688 200.946
 <tr>
 <td><span class="arithmatex">\(L_1\)</span></td>
 <td>菱形（更高维是超立方体的对偶形）</td>
-<td><strong>有，顶点落在坐标轴上</strong> ✓</td>
+<td><strong>有，顶点落在坐标轴上</strong></td>
 </tr>
 </tbody>
 </table>
@@ -13782,7 +13762,7 @@ L 358.979688 200.946
 <span class="arithmatex">\(\vert\beta_1\vert + \vert\beta_2\vert \le t\)</span> 的<strong>顶点</strong>在
 <span class="arithmatex">\((\pm t, 0)\)</span> 和 <span class="arithmatex">\((0, \pm t)\)</span> 上 —— <strong>顶点处有一个坐标为 <span class="arithmatex">\(0\)</span></strong></p>
 <p><strong>等高线从外面逼近时，最容易"撞上"尖角</strong> ——
-因为尖角处的曲率是发散的，从尖角方向出去，
+因为尖角处的曲率是发散的，
 等高线的扩张在尖角附近代价最小</p>
 <p><strong>在二维里这是"很可能"；在几十维里，尖角的数量是 <span class="arithmatex">\(2d\)</span> 个，
 而光滑点的集合是无穷大，碰撞概率反过来了 ——
@@ -13849,7 +13829,7 @@ z \lt -\lambda
 <div class="arithmatex">\[
 \vert z\vert \le \lambda
 \]</div>
-<p><strong>这一条是全部的关键</strong> ✓</p>
+<p><strong>这一条是全部的关键</strong></p>
 <p><strong>合并三种情况，得到软阈值算子</strong>：</p>
 <div class="arithmatex">\[
 S_\lambda(z) =
@@ -13924,9 +13904,7 @@ S_\lambda(z) = \operatorname{sign}(z)\max\left(\vert z\vert-\lambda,\ 0\right)
 <p><strong>两个结论直接读出来</strong>：</p>
 <p>第一：<span class="arithmatex">\(L_2\)</span> 的非零个数永远是 <span class="arithmatex">\(8/8\)</span>，一行都没变。
 从 <span class="arithmatex">\(\lambda=10\)</span> 到 <span class="arithmatex">\(\lambda=800\)</span>，
-岭回归的系数全都在被压小，但<strong>没有一个变成零</strong>
-这说明<strong>岭回归做不了特征选择</strong> —— 它只能用"数值很小"
-来暗示某个特征不重要，但删不掉。</p>
+岭回归的系数全都在被压小，但<strong>没有一个变成零</strong></p>
 <p><strong>第二：<span class="arithmatex">\(L_1\)</span> 的非零个数随 <span class="arithmatex">\(\lambda\)</span> 单调下降</strong>：
 <span class="arithmatex">\(8 \to 7 \to 5 \to 3 \to 3\)</span>。
 到 <span class="arithmatex">\(\lambda=300\)</span> 时恰好剩下 <span class="arithmatex">\(3\)</span> 个非零系数，
@@ -13972,37 +13950,37 @@ S_\lambda(z) = \operatorname{sign}(z)\max\left(\vert z\vert-\lambda,\ 0\right)
 <tbody>
 <tr>
 <td><strong>新特征的身份</strong></td>
-<td>原特征之一 ✓</td>
+<td>原特征之一</td>
 <td>原特征的组合函数</td>
 </tr>
 <tr>
 <td><strong>能不能说清"为什么"</strong></td>
-<td>能（"因为温度超标"）✓</td>
+<td>能（"因为温度超标"）</td>
 <td>通常不能 ⚠</td>
 </tr>
 <tr>
 <td><strong>压缩能力</strong></td>
 <td>受限（最多删掉没用的）</td>
-<td>强（可以压到 1 维）✓</td>
+<td>强（可以压到 1 维）</td>
 </tr>
 <tr>
 <td><strong>信息损失</strong></td>
 <td>只丢被删特征的<strong>全部</strong>信息 ⚠</td>
-<td>每个方向都丢一点点 ✓</td>
+<td>每个方向都丢一点点</td>
 </tr>
 <tr>
 <td><strong>可逆性</strong></td>
-<td>完全可逆 ✓</td>
-<td>一般不可逆 ⚠</td>
+<td>完全可逆</td>
+<td>一般不可逆</td>
 </tr>
 <tr>
 <td><strong>受量纲影响</strong></td>
 <td>取决于具体判据</td>
-<td>PCA 必须标准化 ⚠</td>
+<td>PCA 必须标准化</td>
 </tr>
 <tr>
 <td><strong>计算代价</strong></td>
-<td>过滤式很便宜 ✓</td>
+<td>过滤式很便宜</td>
 <td>需要特征分解</td>
 </tr>
 <tr>
@@ -14020,7 +13998,7 @@ S_\lambda(z) = \operatorname{sign}(z)\max\left(\vert z\vert-\lambda,\ 0\right)
 <li><strong>降维</strong>相当于把 200 项指标<strong>加权求和成 3 个新分数</strong> ——
   这 3 个分数可能对预测更有效、噪声更小，
   但<strong>没有哪一项体检报告的格式里印着这 3 个分数</strong>，
-  你必须另行解释它们是什么 ⚠</li>
+  你必须另行解释它们是什么</li>
 </ul>
 <p><strong>两种做法都不能一概而论地说"更好"</strong>，
 取决于<strong>这个结果要被谁看、用来做什么</strong></p>
@@ -14036,12 +14014,12 @@ S_\lambda(z) = \operatorname{sign}(z)\max\left(\vert z\vert-\lambda,\ 0\right)
 <tbody>
 <tr>
 <td>必须向他人解释结论</td>
-<td><strong>特征选择</strong> ✓</td>
+<td><strong>特征选择</strong></td>
 <td>保留物理含义</td>
 </tr>
 <tr>
 <td>需要把模型部署到传感器很少的设备</td>
-<td><strong>特征选择</strong> ✓</td>
+<td><strong>特征选择</strong></td>
 <td>不用的传感器可以直接拆掉</td>
 </tr>
 <tr>
@@ -14051,17 +14029,17 @@ S_\lambda(z) = \operatorname{sign}(z)\max\left(\vert z\vert-\lambda,\ 0\right)
 </tr>
 <tr>
 <td>需要压到极低维（如 2 维可视化）</td>
-<td><strong>降维</strong> ✓</td>
+<td><strong>降维</strong></td>
 <td>选择方法很难压这么低</td>
 </tr>
 <tr>
 <td>特征之间高度相关、有大量冗余</td>
-<td><strong>降维</strong> ✓</td>
+<td><strong>降维</strong></td>
 <td>变换能把冗余压成一个方向</td>
 </tr>
 <tr>
 <td>需要测量成本最小化</td>
-<td><strong>特征选择</strong> ✓</td>
+<td><strong>特征选择</strong></td>
 <td>每个特征对应一项测量开销</td>
 </tr>
 <tr>
@@ -14128,10 +14106,9 @@ H(C\mid X) = \frac{5}{8}\times 0.7219 + \frac{3}{8}\times 0 = 0.4512
 \]</div>
 <p><strong>答案：<span class="arithmatex">\(H(C)=1\)</span> 比特，<span class="arithmatex">\(H(C\mid X)\approx 0.4512\)</span> 比特，
 信息增益约 <span class="arithmatex">\(0.5488\)</span> 比特</strong></p>
-<p><strong>信息增益为零表示这个特征对分类毫无帮助</strong> ——
-本例的 <span class="arithmatex">\(0.5488\)</span> 说明 <span class="arithmatex">\(X\)</span> 确实携带了相当大的判别信息，
+<p>本例的 <span class="arithmatex">\(0.5488\)</span> 说明 <span class="arithmatex">\(X\)</span> 确实携带了相当大的判别信息，
 但要<strong>大于</strong>其他候选特征才值得选进来</p>
-<p><strong>顺带一个观察</strong>：<span class="arithmatex">\(X=1\)</span> 那一组完全纯，
+<p><strong>一个观察</strong>：<span class="arithmatex">\(X=1\)</span> 那一组完全纯，
 所以 <span class="arithmatex">\(X=1\)</span> 几乎可以<strong>直接判定</strong>类别是 <span class="arithmatex">\(1\)</span>；
 剩下 <span class="arithmatex">\(0.4512\)</span> 比特的不确定性<strong>全部来自 <span class="arithmatex">\(X=0\)</span> 那一组</strong> ——
 这也是为什么看条件熵时要<strong>分组看</strong>，而不只看平均值</p>
@@ -14175,8 +14152,6 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 而这两个传感器提供的是<strong>完全相同的信息</strong></p>
 <p><strong>答案：<span class="arithmatex">\(I(Z_2;C)=1\)</span> 比特，<span class="arithmatex">\(I(Z_2;C\mid Z_1)=0\)</span> 比特。
 只看互信息会把一个完全冗余的特征当成并列最优选进来。</strong></p>
-<p><strong>互信息衡量"有没有信息"，
-条件互信息衡量"有没有新信息"</strong></p>
 <table>
 <thead>
 <tr>
@@ -14191,13 +14166,13 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <td><span class="arithmatex">\(I(Z;C)\)</span></td>
 <td><span class="arithmatex">\(1\)</span></td>
 <td><span class="arithmatex">\(1\)</span></td>
-<td><strong>不能</strong>（两者相同）⚠</td>
+<td><strong>不能</strong>（两者相同）</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(I(Z;C\mid Z_1)\)</span></td>
 <td><span class="arithmatex">\(0\)</span></td>
 <td><span class="arithmatex">\(0\)</span></td>
-<td>能（但两个都是 <span class="arithmatex">\(0\)</span>，需配合第一步看）✓</td>
+<td>能（但两个都是 <span class="arithmatex">\(0\)</span>，需配合第一步看）</td>
 </tr>
 </tbody>
 </table>
@@ -14247,14 +14222,14 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <td>（2）</td>
 <td><span class="arithmatex">\(1\)</span></td>
 <td><span class="arithmatex">\(1 \le 2\)</span></td>
-<td><strong><span class="arithmatex">\(0\)</span></strong> ✓</td>
+<td><strong><span class="arithmatex">\(0\)</span></strong></td>
 <td><span class="arithmatex">\(0.2\)</span> ⚠</td>
 </tr>
 <tr>
 <td>（3）</td>
 <td><span class="arithmatex">\(-2\)</span></td>
 <td><span class="arithmatex">\(2 \le 2\)</span></td>
-<td><strong><span class="arithmatex">\(0\)</span></strong> ✓</td>
+<td><strong><span class="arithmatex">\(0\)</span></strong></td>
 <td><span class="arithmatex">\(-0.4\)</span> ⚠</td>
 </tr>
 <tr>
@@ -14305,7 +14280,7 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <p><strong>甲：过滤式 + 保留原特征。</strong></p>
 <p>· <span class="arithmatex">\(d = 20000 \gg n = 100\)</span> →
   <strong>包裹式绝无可能</strong>（每次训练就要面对 20000 维、100 样本的问题）
-· 结论要给生物学家看 → <strong>必须保留基因的身份，不能做变换</strong> ✓
+· 结论要给生物学家看 → <strong>必须保留基因的身份，不能做变换</strong>
 · 所以用<strong>过滤式</strong>（互信息或类内类间距离）从 20000 里筛出几十个，
   再对剩下的做<strong>条件互信息前向搜索</strong>去掉冗余</p>
 <p><strong>乙：包裹式或嵌入式。</strong></p>
@@ -14318,7 +14293,7 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <p>丙：过滤式 + 前向搜索，并控制搜索规模。</p>
 <p>· <span class="arithmatex">\(d = 12\)</span>、<span class="arithmatex">\(n = 30\)</span> → <strong>样本量很小</strong>，
   包裹式的反复训练<strong>极易过拟合</strong>到验证集上
-· 但必须保留传感器身份（要拆硬件）→ <strong>只能用特征选择，不能用降维</strong> ✓
+· 但必须保留传感器身份（要拆硬件）→ <strong>只能用特征选择，不能用降维</strong>
 · 所以：先用过滤式按互信息排序，
   再在前几个里做<strong>小规模前向搜索</strong>，
   并且<strong>用交叉验证（而不是单一验证集）</strong>评估</p>
@@ -14342,9 +14317,9 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 </tr>
 <tr>
 <td>是否必须解释</td>
-<td><strong>必须</strong> ✓</td>
+<td><strong>必须</strong></td>
 <td>不必</td>
-<td><strong>必须</strong> ✓</td>
+<td><strong>必须</strong></td>
 </tr>
 <tr>
 <td>结论</td>
@@ -14402,12 +14377,12 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <tr>
 <td>类内类间距离</td>
 <td><span class="arithmatex">\(J = (\bar x_1-\bar x_2)^2/(s_1^2+s_2^2)\)</span></td>
-<td>只看一阶矩，漏掉形状型特征 ⚠</td>
+<td>只看一阶矩，漏掉形状型特征</td>
 </tr>
 <tr>
 <td>信息增益</td>
 <td><span class="arithmatex">\(H(C)-H(C\mid X)\)</span></td>
-<td><strong>等价于互信息</strong> ✓</td>
+<td><strong>等价于互信息</strong></td>
 </tr>
 <tr>
 <td>互信息</td>
@@ -14417,7 +14392,7 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <tr>
 <td>条件互信息</td>
 <td><span class="arithmatex">\(I(X;C\mid Z)=H(C\mid Z)-H(C\mid X,Z)\)</span></td>
-<td>衡量<strong>增量</strong>信息，能去冗余 ✓</td>
+<td>衡量<strong>增量</strong>信息，能去冗余</td>
 </tr>
 <tr>
 <td>前向搜索</td>
@@ -14432,7 +14407,7 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <tr>
 <td>组合爆炸</td>
 <td>全部子集数 <span class="arithmatex">\(2^d-1\)</span></td>
-<td><span class="arithmatex">\(d=40\)</span> 已是 <span class="arithmatex">\(10^{12}\)</span> 量级 ⚠</td>
+<td><span class="arithmatex">\(d=40\)</span> 已是 <span class="arithmatex">\(10^{12}\)</span> 量级</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(L_1\)</span> 的稀疏性</td>
@@ -14442,7 +14417,7 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
 <tr>
 <td>软阈值</td>
 <td><span class="arithmatex">\(S_\lambda(z)=\operatorname{sign}(z)\max(\vert z\vert-\lambda,0)\)</span></td>
-<td><span class="arithmatex">\(\vert z\vert\le\lambda\)</span> 时精确为 <span class="arithmatex">\(0\)</span> ✓</td>
+<td><span class="arithmatex">\(\vert z\vert\le\lambda\)</span> 时精确为 <span class="arithmatex">\(0\)</span></td>
 </tr>
 <tr>
 <td>选择 vs 降维</td>
@@ -14458,11 +14433,11 @@ I(Z_2;C\mid Z_1) = 0 - 0 = 0\ \text{比特}
    比"哪个精度高"重要得多</li>
 <li><strong>"单看有用"不等于"组合有用"</strong> ——
    互信息衡量有没有信息，条件互信息衡量有没有新信息。
-   前向搜索必须用后者，否则会不断选进冗余特征 ⚠</li>
+   前向搜索必须用后者，否则会不断选进冗余特征</li>
 <li><strong><span class="arithmatex">\(L_1\)</span> 能选出稀疏解，根子在"原点不可导"</strong> ——
    不可导 → 次微分是一个区间 → 区间包含 <span class="arithmatex">\(0\)</span> →
    最优解能被钉死在零上。
-   这也顺带解释了为什么 <span class="arithmatex">\(L_1\)</span> 之前<strong>必须标准化</strong> ⚠</li>
+   这也解释了为什么 <span class="arithmatex">\(L_1\)</span> 之前<strong>必须标准化</strong></li>
 </ol>
 <p><strong>上一页</strong>：<a href="../feature-extraction/">特征提取与降维</a> ——
 把特征<strong>变换</strong>成信息更紧凑的新特征，

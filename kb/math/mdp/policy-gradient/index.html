@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="前面几页的强化学习方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
+    <meta name="description" content="前面几页的方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="策略梯度">
   
-  <meta property="og:description" content="前面几页的强化学习方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
+  <meta property="og:description" content="前面几页的方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/mdp/policy-gradient/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="策略梯度">
   
-  <meta name="twitter:description" content="前面几页的强化学习方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
+  <meta name="twitter:description" content="前面几页的方法都基于价值函数：先学 Q 或 V，再据此选动作。这一页走另一条路：直接对策略参数求梯度，用梯度上升改进策略。这就是策略梯度。它比价值方法更适合连续动作与随机策略。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11873,7 +11873,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材与经典论文术语撰写（策略梯度、REINFORCE 等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">策略梯度<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>前面几页的强化学习方法都基于<strong>价值函数</strong>：先学 <span class="arithmatex">\(Q\)</span> 或 <span class="arithmatex">\(V\)</span>，再据此选动作。
+<p>前面几页的方法都基于<strong>价值函数</strong>：先学 <span class="arithmatex">\(Q\)</span> 或 <span class="arithmatex">\(V\)</span>，再据此选动作。
 这一页走<strong>另一条路</strong>：</p>
 <blockquote>
 <p><strong>直接对策略参数求梯度，用梯度上升改进策略。</strong></p>
@@ -11927,7 +11927,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>两个最关键的优势</strong>：</p>
+<p><strong>两个关键优势</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11946,12 +11946,12 @@
 </tr>
 </tbody>
 </table>
-<p><strong>本页的主线</strong>：如何求梯度 → 如何降低方差 → Actor-Critic 与 PPO。</p>
+<p><strong>本页主线</strong>：如何求梯度 → 如何降方差 → Actor-Critic 与 PPO。</p>
 </div>
 <hr />
 <h2 id="_2">一、目标函数与策略梯度定理<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="_3">目标函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p><strong>策略</strong>用参数化分布表示（如 softmax、高斯）：</p>
+<p><strong>策略</strong>用参数化分布表示（softmax、高斯）：</p>
 <div class="arithmatex">\[
 \pi_\theta(a\mid s)
 \]</div>
@@ -11966,7 +11966,7 @@ J(\theta) = E_{\tau\sim\pi_\theta}[R(\tau)]
 \theta\leftarrow\theta+\alpha\nabla_\theta J(\theta)
 \]</div>
 <h3 id="_4">策略梯度定理<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>问题</strong>：<span class="arithmatex">\(J\)</span> 的期望<strong>依赖 <span class="arithmatex">\(\theta\)</span></strong>（因为轨迹分布依赖 <span class="arithmatex">\(\theta\)</span>），
+<p><strong>问题</strong>：<span class="arithmatex">\(J\)</span> 的期望<strong>依赖 <span class="arithmatex">\(\theta\)</span></strong>（轨迹分布依赖 <span class="arithmatex">\(\theta\)</span>），
 而轨迹是<strong>离散采样</strong>的 —— 怎么求导？</p>
 <p><strong>关键技巧：对数导数技巧（log-derivative trick）</strong></p>
 <div class="admonition note">
@@ -12012,8 +12012,8 @@ p_\theta(\tau)\nabla_\theta\log p_\theta(\tau) = p_\theta(\tau)\cdot\frac{\nabla
 </tr>
 </tbody>
 </table>
-<p><strong>第二点极其重要</strong>：这就是「无模型」（model-free）的来源</p>
-<p><strong>进一步的化简</strong>：可以证明（利用马尔可夫性）
+<p><strong>第二点</strong>：这就是「无模型」（model-free）的来源</p>
+<p><strong>进一步化简</strong>：利用马尔可夫性可证
 只有<strong>动作之后的回报</strong>才影响该动作的梯度：</p>
 <div class="arithmatex">\[
 \nabla_\theta J = E\Big[\sum_t\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot G_t\Big]
@@ -12041,7 +12041,7 @@ G_t = \sum_{k=0}^{T-t-1}\gamma^k r_{t+k}
 </tr>
 </tbody>
 </table>
-<p>这个化简既正确又降低方差</p>
+<p>这个化简正确且降低方差</p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="策略梯度与价值方法两条技术路线">
@@ -12077,7 +12077,7 @@ G_t = \sum_{k=0}^{T-t-1}\gamma^k r_{t+k}
 
 <hr />
 <h2 id="reinforce">二、REINFORCE 算法<a class="headerlink" href="#reinforce" title="Permanent link">&para;</a></h2>
-<p><strong>把梯度定理写成算法</strong>：</p>
+<p><strong>写成算法</strong>：</p>
 <div class="arithmatex">\[
 \nabla_\theta J\approx\frac1N\sum_{i=1}^{N}\sum_t\nabla_\theta\log\pi_\theta(a_{i,t}\mid s_{i,t})G_{i,t}
 \]</div>
@@ -12160,8 +12160,8 @@ G_t = \sum_{k=0}^{T-t-1}\gamma^k r_{t+k}
 </tr>
 </tbody>
 </table>
-<p>这就是「策略梯度样本效率低」的根源</p>
-<p>本页后续内容全部围绕「降低方差」展开：</p>
+<p>这是样本效率低的根源</p>
+<p>后续内容围绕「降低方差」展开：</p>
 <table>
 <thead>
 <tr>
@@ -13083,7 +13083,7 @@ z
 <div class="arithmatex">\[
 E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 \]</div>
-<p>所以减去它不改变期望，但<strong>能降低方差</strong></p>
+<p>减去它不改变期望，<strong>能降低方差</strong></p>
 <div class="admonition note">
 <p class="admonition-title">「减去基线不改变期望」的证明（很短，值得看）</p>
 <p><strong>关键</strong>：<span class="arithmatex">\(b(s_t)\)</span> 只依赖 <span class="arithmatex">\(s_t\)</span>，而动作 <span class="arithmatex">\(a_t\)</span> 由 <span class="arithmatex">\(\pi_\theta\)</span> 采样。</p>
@@ -13092,18 +13092,18 @@ E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 E_{a_t\sim\pi_\theta}\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)b(s_t)\big]
 = b(s_t)\sum_{a}\pi_\theta(a\mid s_t)\frac{\nabla_\theta\pi_\theta(a\mid s_t)}{\pi_\theta(a\mid s_t)}
 \]</div>
-<p>（用了 <span class="arithmatex">\(\nabla\log\pi = \frac{\nabla\pi}{\pi}\)</span>。）</p>
+<p>（用 <span class="arithmatex">\(\nabla\log\pi = \frac{\nabla\pi}{\pi}\)</span>）</p>
 <p><strong>化简</strong>：</p>
 <div class="arithmatex">\[
 = b(s_t)\sum_a\nabla_\theta\pi_\theta(a\mid s_t) = b(s_t)\nabla_\theta\underbrace{\sum_a\pi_\theta(a\mid s_t)}_{=1}
 = b(s_t)\nabla_\theta 1 = 0 \;\checkmark
 \]</div>
-<p><strong>关键一步</strong>：概率之和恒为 1，其梯度为零 ✓</p>
-<p><strong>这说明</strong>：减去基线是「免费的降方差手段」 ——
+<p><strong>关键一步</strong>：概率之和恒为 1，梯度为零 ✓</p>
+<p><strong>减去基线是「免费的降方差手段」</strong> ——
 <strong>期望不变，方差变小</strong></p>
-<p><strong>最优基线的直观选择</strong>：<span class="arithmatex">\(b(s_t)\approx E[G_t\mid s_t] = V^{\pi}(s_t)\)</span> ——
+<p><strong>最优基线</strong>：<span class="arithmatex">\(b(s_t)\approx E[G_t\mid s_t] = V^{\pi}(s_t)\)</span> ——
 即「该状态下预期的回报」。</p>
-<p><strong>为什么它最优（直观）</strong>：</p>
+<p><strong>为什么它最优</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13125,14 +13125,14 @@ E_{a_t\sim\pi_\theta}\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)b(s_t)\big]
 </tr>
 </tbody>
 </table>
-<p>这正是我们想要的信号：比平均好就加强，比平均差就削弱</p>
+<p>正是想要的信号：比平均好就加强，比平均差就削弱</p>
 </div>
 <h3 id="_7">优势函数<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p><strong>定义</strong>：</p>
 <div class="arithmatex">\[
 A^{\pi}(s,a) = Q^{\pi}(s,a)-V^{\pi}(s)
 \]</div>
-<p><strong>含义</strong>：在状态 <span class="arithmatex">\(s\)</span> 下，选动作 <span class="arithmatex">\(a\)</span> 比「平均水平」好多少</p>
+<p><strong>含义</strong>：状态 <span class="arithmatex">\(s\)</span> 下选动作 <span class="arithmatex">\(a\)</span> 比「平均水平」好多少</p>
 <p><strong>用优势替换 <span class="arithmatex">\(G_t\)</span></strong>：</p>
 <div class="arithmatex">\[
 \nabla_\theta J = E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot A^{\pi}(s_t,a_t)\big]
@@ -13159,7 +13159,7 @@ A^{\pi}(s,a) = Q^{\pi}(s,a)-V^{\pi}(s)
 </tr>
 </tbody>
 </table>
-<p><strong>具体例子说明</strong>：</p>
+<p><strong>例子</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13247,15 +13247,15 @@ A_t\approx r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
 </tr>
 </tbody>
 </table>
-<p><strong>这与「价值方法」的关系</strong>：</p>
+<p><strong>与价值方法的关系</strong>：</p>
 <p><strong>Actor-Critic 是两者的结合</strong> ——
-用价值方法（critic）来降低策略梯度的方差</p>
+用 critic 降低策略梯度的方差</p>
 <div class="admonition note">
 <p class="admonition-title">「TD 误差」的多重身份（一个重要洞察）</p>
 <div class="arithmatex">\[
 \delta_t = r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
 \]</div>
-<p><strong>它可以有三种解读</strong>：</p>
+<p><strong>三种解读</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13278,11 +13278,11 @@ A_t\approx r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
 </tr>
 </tbody>
 </table>
-<p><strong>三种解读都指向同一件事</strong>：</p>
+<p><strong>三种解读指向同一件事</strong>：</p>
 <div class="arithmatex">\[
 \delta_t = \underbrace{\text{实际得到的}}_{\text{现在}+\\text{折现的未来}} - \underbrace{\text{预期的}}_{\text{critic 的估计}}
 \]</div>
-<p><strong>所以「advantage ≈ TD 误差」是自然的</strong> ——
+<p><strong>所以「advantage ≈ TD 误差」很自然</strong> ——
 两者都在度量「比预期好多少」。</p>
 <p>这也解释了「为什么 Actor-Critic 比 REINFORCE 方差小」：</p>
 <table>
@@ -13306,8 +13306,8 @@ A_t\approx r_t+\gamma V_\phi(s_{t+1})-V_\phi(s_t)
 </tr>
 </tbody>
 </table>
-<p><strong>代价</strong>：<strong>引入偏差</strong>（因为 <span class="arithmatex">\(V_\phi\)</span> 是估计的，不完美）✗</p>
-<p>这就是「偏差-方差权衡」在强化学习中的体现</p>
+<p><strong>代价</strong>：<strong>引入偏差</strong>（<span class="arithmatex">\(V_\phi\)</span> 是估计的，不完美）✗</p>
+<p>这就是强化学习里的「偏差-方差权衡」</p>
 </div>
 <h3 id="gae-">GAE：偏差-方差的连续调节<a class="headerlink" href="#gae-" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：用一步 TD（偏差大）还是用完整 <span class="arithmatex">\(G_t\)</span>（方差大）？</p>
@@ -13354,7 +13354,7 @@ A^{\text{GAE}(\gamma,\lambda)}_t = \sum_{l=0}^{\infty}(\gamma\lambda)^l\delta_{t
 <h3 id="ppo">PPO：限制更新幅度<a class="headerlink" href="#ppo" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：策略梯度更新可能<strong>步长过大</strong> → 策略突然变差 →
 <strong>训练崩溃</strong> ✗</p>
-<p><strong>PPO 的解决</strong>：限制新策略与旧策略的比率：</p>
+<p><strong>PPO 的做法</strong>：限制新旧策略的比率：</p>
 <div class="arithmatex">\[
 r_t(\theta) = \frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\text{old}}}(a_t\mid s_t)}
 \]</div>
@@ -13362,7 +13362,7 @@ r_t(\theta) = \frac{\pi_\theta(a_t\mid s_t)}{\pi_{\theta_{\text{old}}}(a_t\mid s
 <div class="arithmatex">\[
 L^{\text{CLIP}} = E\Big[\min\big(r_t(\theta)A_t,\ \operatorname{clip}(r_t(\theta),1-\epsilon,1+\epsilon)A_t\big)\Big]
 \]</div>
-<p><strong>含义（关键）</strong>：</p>
+<p><strong>含义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13385,9 +13385,9 @@ L^{\text{CLIP}} = E\Big[\min\big(r_t(\theta)A_t,\ \operatorname{clip}(r_t(\theta
 </tr>
 </tbody>
 </table>
-<p><strong>「取 min」的作用</strong>：<strong>确保裁剪总是「悲观」的</strong> ——
+<p><strong>「取 min」的作用</strong>：<strong>裁剪总是「悲观」的</strong> ——
 即使用户想更新更多，目标函数也不会奖励它</p>
-<p><strong>为什么 PPO 变得非常流行</strong>：</p>
+<p><strong>为什么 PPO 流行</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13429,7 +13429,7 @@ L^{\text{CLIP}} = E\Big[\min\big(r_t(\theta)A_t,\ \operatorname{clip}(r_t(\theta
 </tr>
 </tbody>
 </table>
-<p>这是 PPO 样本效率较高的关键原因之一 ✓</p>
+<p>这是 PPO 样本效率高的关键原因之一 ✓</p>
 <hr />
 <h2 id="_8">五、典型例题<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：验证基线不改变期望<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -13442,7 +13442,7 @@ L^{\text{CLIP}} = E\Big[\min\big(r_t(\theta)A_t,\ \operatorname{clip}(r_t(\theta
 <details class="success">
 <summary>解答</summary>
 <p><strong>第一步：写出对数梯度</strong></p>
-<p>记 <span class="arithmatex">\(\theta\)</span> 是 <span class="arithmatex">\(\log\frac{p}{1-p}\)</span> 形式的参数。用更直接的方式：
+<p>记 <span class="arithmatex">\(\theta\)</span> 是 <span class="arithmatex">\(\log\frac{p}{1-p}\)</span> 形式的参数。
 设策略由 <span class="arithmatex">\(p\)</span> 参数化（<span class="arithmatex">\(\theta\)</span> 通过 <span class="arithmatex">\(p\)</span> 依赖它）。</p>
 <div class="arithmatex">\[
 \log\pi(a_1) = \log p,\qquad \log\pi(a_2) = \log(1-p)
@@ -13460,10 +13460,10 @@ E\left[\frac{\partial}{\partial p}\log\pi\cdot b\right]
 <div class="arithmatex">\[
 = b\,[1-1] = 0 \;\checkmark
 \]</div>
-<p><strong>结果</strong>：<strong>期望恰为零</strong></p>
+<p><strong>结果</strong>：<strong>期望为零</strong></p>
 <p><strong>关键步骤</strong>：<strong><span class="arithmatex">\(p\cdot\frac1p = 1\)</span> 与 <span class="arithmatex">\((1-p)\cdot\frac{-1}{1-p} = -1\)</span> 恰好抵消</strong> ——
-这正是「概率之和为 1」的体现</p>
-<p><strong>更一般的形式</strong>（用 <span class="arithmatex">\(\theta\)</span> 而非 <span class="arithmatex">\(p\)</span>）：</p>
+这是「概率之和为 1」的体现</p>
+<p><strong>更一般形式</strong>（用 <span class="arithmatex">\(\theta\)</span>）：</p>
 <div class="arithmatex">\[
 \sum_a\pi_\theta(a)\nabla_\theta\log\pi_\theta(a) = \nabla_\theta\sum_a\pi_\theta(a) = \nabla_\theta 1 = 0
 \]</div>
@@ -13475,9 +13475,9 @@ E\left[\frac{\partial}{\partial p}\log\pi\cdot b\right]
 <div class="arithmatex">\[
 E[\nabla\log\pi\cdot(G_t-b(s_t))] = E[\nabla\log\pi\cdot G_t]-0
 \]</div>
-<p>期望不变，但方差可以显著降低</p>
+<p>期望不变，方差可显著降低</p>
 <p>推论 2：可以「加」任意与动作无关的量</p>
-<p>这不只是「减法」——<strong>加上任何 <span class="arithmatex">\(b(s_t)\)</span> 也允许</strong></p>
+<p>不只是「减法」——<strong>加上任何 <span class="arithmatex">\(b(s_t)\)</span> 也允许</strong></p>
 <p><strong>工程含义</strong>：</p>
 <table>
 <thead>
@@ -13503,9 +13503,9 @@ E[\nabla\log\pi\cdot(G_t-b(s_t))] = E[\nabla\log\pi\cdot G_t]-0
 </table>
 <p><strong>这也解释了「为什么可以用 critic 估计的 <span class="arithmatex">\(V_\phi\)</span> 作基线」</strong> ——
 <strong>即使 <span class="arithmatex">\(V_\phi\)</span> 不准确，期望仍是无偏的</strong>
-（不准确只影响方差降低的效果，不影响正确性。）</p>
+（只影响降方差效果，不影响正确性。）</p>
 <p><strong>这是 Actor-Critic 理论上的「安全网」</strong> ——
-critic 学得不好，actor 仍然不会系统性地学错</p>
+critic 学得不好，actor 仍不会系统性学错</p>
 </div>
 <hr />
 <h3 id="2-g_t">例题 2：优势函数比 <span class="arithmatex">\(G_t\)</span> 更好的数值例子<a class="headerlink" href="#2-g_t" title="Permanent link">&para;</a></h3>
@@ -13622,10 +13622,10 @@ critic 学得不好，actor 仍然不会系统性地学错</p>
 </tr>
 </tbody>
 </table>
-<p><strong>问题 1</strong>：<span class="arithmatex">\(s_1,a_2\)</span> 明明比 <span class="arithmatex">\(a_1\)</span> 差（<span class="arithmatex">\(9&lt;10\)</span>），但 <span class="arithmatex">\(G_t=9&gt;0\)</span> 仍然增强了它 ✗</p>
-<p><strong>问题 2</strong>：<strong><span class="arithmatex">\(s_2,a_1\)</span> 是很好的决策（<span class="arithmatex">\(5\)</span> 远高于平均 <span class="arithmatex">\(2\)</span>），
+<p><strong>问题 1</strong>：<span class="arithmatex">\(s_1,a_2\)</span> 比 <span class="arithmatex">\(a_1\)</span> 差（<span class="arithmatex">\(9&lt;10\)</span>），但 <span class="arithmatex">\(G_t=9&gt;0\)</span> 仍增强了它 ✗</p>
+<p><strong>问题 2</strong>：<strong><span class="arithmatex">\(s_2,a_1\)</span> 是很好的决策（<span class="arithmatex">\(5\)</span> 高于平均 <span class="arithmatex">\(2\)</span>），
 但权重 <span class="arithmatex">\(5\)</span> 小于 <span class="arithmatex">\(s_1,a_1\)</span> 的 <span class="arithmatex">\(10\)</span></strong> ——
-强化学习会「更偏好简单的状态」而非「更好的决策」 ✗</p>
+会「更偏好简单状态」而非「更好决策」 ✗</p>
 <p><strong>第三步：用 <span class="arithmatex">\(A_t\)</span> 的更新信号</strong></p>
 <table>
 <thead>
@@ -13723,7 +13723,7 @@ critic 学得不好，actor 仍然不会系统性地学错</p>
 </tr>
 </tbody>
 </table>
-<p><strong>这也解释了「为什么 Actor-Critic 效果好」</strong> ——
+<p><strong>这也解释了「Actor-Critic 为什么好」</strong> ——
 它提供了一个<strong>学习得到的基线</strong> <span class="arithmatex">\(V_\phi\)</span>，
 从而得到接近优势函数的信号</p>
 <p><strong>工程含义（奖励设计）</strong>：</p>
@@ -13928,7 +13928,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tbody>
 </table>
 <p>这解释了「为什么 <span class="arithmatex">\(\lambda\)</span> 越小方差越小」：</p>
-<p>用的 <span class="arithmatex">\(\delta\)</span> 越少 → 累积的随机性越少 → 方差越小</p>
+<p>用的 <span class="arithmatex">\(\delta\)</span> 越少 → 随机性累积越少 → 方差越小</p>
 <p><strong>工程建议</strong>：</p>
 <table>
 <thead>
@@ -13956,14 +13956,14 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tr>
 </tbody>
 </table>
-<p><strong>一个重要提醒</strong>：<strong><span class="arithmatex">\(\lambda\)</span> 与 <span class="arithmatex">\(\gamma\)</span> 是耦合的</strong> ——
+<p><strong>一个重要提醒</strong>：<strong><span class="arithmatex">\(\lambda\)</span> 与 <span class="arithmatex">\(\gamma\)</span> 耦合</strong> ——
 关键是乘积 <span class="arithmatex">\(\gamma\lambda\)</span>。</p>
-<p>所以若 <span class="arithmatex">\(\gamma = 0.99\)</span>，则 <span class="arithmatex">\(\lambda = 0.95\)</span> 给的有效步数：</p>
+<p>若 <span class="arithmatex">\(\gamma = 0.99\)</span>，<span class="arithmatex">\(\lambda = 0.95\)</span> 的有效步数：</p>
 <div class="arithmatex">\[
 \frac{1}{1-0.99\times0.95} = \frac{1}{1-0.9405} = 16.8
 \]</div>
 <p><strong>比 <span class="arithmatex">\(\gamma=0.9\)</span> 时的 <span class="arithmatex">\(6.9\)</span> 长得多</strong></p>
-<p>所以调参时要看「<span class="arithmatex">\(\gamma\lambda\)</span>」而非单独看 <span class="arithmatex">\(\lambda\)</span></p>
+<p>调参要看「<span class="arithmatex">\(\gamma\lambda\)</span>」而非单独看 <span class="arithmatex">\(\lambda\)</span></p>
 </div>
 <hr />
 <h3 id="4ppo">例题 4：PPO 裁剪的实际效果<a class="headerlink" href="#4ppo" title="Permanent link">&para;</a></h3>
@@ -13975,7 +13975,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>参数</strong>：<span class="arithmatex">\(\epsilon = 0.2\)</span>，所以裁剪区间是 <span class="arithmatex">\([0.8,\ 1.2]\)</span>。</p>
+<p><strong>参数</strong>：<span class="arithmatex">\(\epsilon = 0.2\)</span>，裁剪区间 <span class="arithmatex">\([0.8,\ 1.2]\)</span>。</p>
 <p><strong>逐个计算</strong>（<span class="arithmatex">\(A = 1.0&gt;0\)</span>）：</p>
 <p><strong>情形 1：<span class="arithmatex">\(r = 0.5\)</span></strong></p>
 <div class="arithmatex">\[
@@ -13998,7 +13998,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 <div class="arithmatex">\[
 \min(1.5,\ 1.2) = 1.2 \;\checkmark
 \]</div>
-<p><strong>被裁剪限制了</strong> ✓（否则会是 <span class="arithmatex">\(1.5\)</span>，鼓励过大的更新。）</p>
+<p><strong>被裁剪限制了</strong> ✓（否则是 <span class="arithmatex">\(1.5\)</span>，鼓励过大更新。）</p>
 <p><strong>情形 4：<span class="arithmatex">\(r = 3.0\)</span></strong></p>
 <div class="arithmatex">\[
 \operatorname{clip}(3.0) = 1.2
@@ -14047,8 +14047,8 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </details>
 <div class="admonition tip">
 <p class="admonition-title">「取 min」的巧妙之处（这是 PPO 的核心设计）</p>
-<p><strong>关键观察</strong>：对 <span class="arithmatex">\(r&gt;1.2\)</span> 的情形，目标值恒为 <span class="arithmatex">\(1.2\)</span>（不再增长） ✓</p>
-<p><strong>含义</strong>：进一步增大 <span class="arithmatex">\(r\)</span> 不会增加目标函数 →
+<p><strong>关键观察</strong>：<span class="arithmatex">\(r&gt;1.2\)</span> 时目标值恒为 <span class="arithmatex">\(1.2\)</span>（不再增长） ✓</p>
+<p><strong>含义</strong>：增大 <span class="arithmatex">\(r\)</span> 不会增加目标函数 →
 <strong>梯度为零</strong> → <strong>不会鼓励「走得更远」</strong></p>
 <p><strong>为什么用 <span class="arithmatex">\(\min\)</span> 而不用 <span class="arithmatex">\(\operatorname{clip}\)</span> 单独</strong>：</p>
 <p>考虑 <strong><span class="arithmatex">\(A&lt;0\)</span></strong>（坏动作）的情形：</p>
@@ -14066,10 +14066,10 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tr>
 </tbody>
 </table>
-<p><strong>若只用 clip</strong>：当 <span class="arithmatex">\(r&lt;0.8\)</span> 时，<span class="arithmatex">\(\operatorname{clip}(r) = 0.8\)</span>，
+<p><strong>若只用 clip</strong>：<span class="arithmatex">\(r&lt;0.8\)</span> 时 <span class="arithmatex">\(\operatorname{clip}(r) = 0.8\)</span>，
 则目标是 <span class="arithmatex">\(0.8\times A\)</span>（<span class="arithmatex">\(A&lt;0\)</span> → 负值较小）——
 这会<strong>阻止 <span class="arithmatex">\(r\)</span> 继续减小</strong> ✓ 正确。</p>
-<p><strong>但若 <span class="arithmatex">\(r\)</span> 变得很大</strong>（<span class="arithmatex">\(r&gt;1.2\)</span>，即坏动作概率反而增加了）：</p>
+<p><strong>但若 <span class="arithmatex">\(r\)</span> 很大</strong>（<span class="arithmatex">\(r&gt;1.2\)</span>，坏动作概率反而增加）：</p>
 <table>
 <thead>
 <tr>
@@ -14092,10 +14092,10 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tr>
 </tbody>
 </table>
-<p><strong>取 min 得到 <span class="arithmatex">\(-1.5\)</span></strong> —— <strong>保留了「惩罚」</strong></p>
-<p><strong>若只用 clip 会得到 <span class="arithmatex">\(-1.2\)</span></strong> —— <strong>削弱了惩罚</strong> ✗</p>
-<p>所以「取 min」保证了「总是采取悲观（保守）的估计」</p>
-<p><strong>「悲观」的含义</strong>：</p>
+<p><strong>取 min 得 <span class="arithmatex">\(-1.5\)</span></strong> —— <strong>保留「惩罚」</strong></p>
+<p><strong>只用 clip 得 <span class="arithmatex">\(-1.2\)</span></strong> —— <strong>削弱惩罚</strong> ✗</p>
+<p>所以「取 min」保证「总是采取悲观（保守）的估计」</p>
+<p><strong>「悲观」</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14134,7 +14134,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tr>
 </tbody>
 </table>
-<p>PPO 的成功很大程度来自这个「简单而有效」的设计</p>
+<p>PPO 的成功很大程度来自这个「简单有效」的设计</p>
 </div>
 <p>"""</p>
 <hr />
@@ -14170,7 +14170,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>因为 Q-learning 需要 <span class="arithmatex">\(\arg\max_a Q(s,a)\)</span>，而策略梯度不需要。</p>
+<p>Q-learning 需要 <span class="arithmatex">\(\arg\max_a Q(s,a)\)</span>，策略梯度不需要。</p>
 <p><strong>Q-learning 的困难</strong>：</p>
 <div class="arithmatex">\[
 \pi(s) = \arg\max_a Q(s,a)
@@ -14198,7 +14198,7 @@ A_0 = (\gamma\cdot0)^0\delta_0 = \delta_0 = 1.0
 </tbody>
 </table>
 <p><strong>策略梯度的做法</strong>：</p>
-<p><strong>直接输出一个分布</strong>（如高斯）：</p>
+<p><strong>直接输出分布</strong>（如高斯）：</p>
 <div class="arithmatex">\[
 \pi_\theta(a\mid s) = N\big(\mu_\theta(s),\ \sigma_\theta^2(s)\big)
 \]</div>
@@ -14239,10 +14239,10 @@ a\sim N\big(\mu_\theta(s),\ \sigma_\theta^2(s)\big)
 </tr>
 </tbody>
 </table>
-<p><strong>额外好处</strong>：<strong>动作维度增加时，策略梯度的难度增长平缓</strong> ——
-因为网络输出的维度增加是线性的，不需要指数级的枚举</p>
+<p><strong>额外好处</strong>：<strong>动作维度增加时难度增长平缓</strong> ——
+因为网络输出维度线性增加，不需要指数级枚举</p>
 <p><strong>代价</strong>：策略梯度<strong>样本效率更低</strong>（需要更多交互）✗ ——
-这就是「连续控制常用 PPO/SAC 而非 DQN」的原因。</p>
+这是连续控制常用 PPO/SAC 而非 DQN 的原因。</p>
 </details>
 <hr />
 <p><strong>Q2</strong> 证明：减去只依赖状态 <span class="arithmatex">\(s_t\)</span> 的基线 <span class="arithmatex">\(b(s_t)\)</span> 不改变策略梯度的期望。</p>
@@ -14252,7 +14252,7 @@ a\sim N\big(\mu_\theta(s),\ \sigma_\theta^2(s)\big)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>要证的命题</strong>：</p>
+<p><strong>要证</strong>：</p>
 <div class="arithmatex">\[
 E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 \]</div>
@@ -14261,7 +14261,7 @@ E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 <div class="arithmatex">\[
 = \sum_a\pi_\theta(a\mid s_t)\cdot\nabla_\theta\log\pi_\theta(a\mid s_t)\cdot b(s_t)
 \]</div>
-<p>第二步：用对数导数的逆恒等式</p>
+<p>第二步：用对数导数逆恒等式</p>
 <div class="arithmatex">\[
 \pi_\theta(a\mid s_t)\nabla_\theta\log\pi_\theta(a\mid s_t) = \nabla_\theta\pi_\theta(a\mid s_t)
 \]</div>
@@ -14279,14 +14279,14 @@ E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 \sum_a\pi_\theta(a\mid s_t) = 1 \quad\text{对任意 }\theta\text{ 都成立}
 \]</div>
 <p><strong>所以它的梯度恒为零</strong>
-（「常数函数的梯度为零」。）</p>
+（常数函数的梯度为零。）</p>
 <p><strong>推论：可以自由选择基线</strong></p>
-<p>若要用 <span class="arithmatex">\(b(s_t)\)</span>，则梯度估计变为：</p>
+<p>用 <span class="arithmatex">\(b(s_t)\)</span> 时梯度估计变为：</p>
 <div class="arithmatex">\[
 \nabla_\theta J\approx\frac1N\sum_i\sum_t\nabla_\theta\log\pi_\theta(a_{i,t}\mid s_{i,t})\big(G_{i,t}-b(s_{i,t})\big)
 \]</div>
 <p><strong>期望无偏、方差更小</strong></p>
-<p><strong>工程含义（很重要）</strong>：</p>
+<p><strong>工程含义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14309,8 +14309,8 @@ E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 </tr>
 </tbody>
 </table>
-<p><strong>这也是「Actor-Critic 中的 critic 可以很粗糙」的原因</strong> ——
-它只是一个「降方差工具」，不参与决定学习目标</p>
+<p><strong>这也是「critic 可以很粗糙」的原因</strong> ——
+它只是「降方差工具」，不参与决定学习目标</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 某任务奖励量级为 <span class="arithmatex">\(1000\)</span>。直接用策略梯度会有什么问题？如何处理？</p>
@@ -14373,11 +14373,11 @@ E\big[\nabla_\theta\log\pi_\theta(a_t\mid s_t)\cdot b(s_t)\big] = 0
 </table>
 <p><strong>两种处理方式</strong>：</p>
 <p><strong>方式 1：奖励缩放（reward scaling）</strong></p>
-<p>把奖励除以一个尺度因子（如 <span class="arithmatex">\(1000\)</span>）：</p>
+<p>把奖励除以尺度因子（如 <span class="arithmatex">\(1000\)</span>）：</p>
 <div class="arithmatex">\[
 r' = \frac{r}{1000}
 \]</div>
-<p><strong>注意「不改变问题的最优解」</strong>：
+<p><strong>注意「不改变最优解」</strong>：
 因为乘正常数不改变 <span class="arithmatex">\(\arg\max\)</span></p>
 <p><strong>方式 2：优势归一化（推荐）</strong></p>
 <p>对每个 batch 的优势做标准化：</p>
@@ -14407,8 +14407,8 @@ r' = \frac{r}{1000}
 </tr>
 </tbody>
 </table>
-<p><strong>注意优势归一化不改变期望</strong>（在 batch 内近似）——
-这与「减去基线」的论证类似：标准化的平移部分期望为零</p>
+<p><strong>优势归一化不改变期望</strong>（batch 内近似）——
+这与「减去基线」的论证类似：标准化平移部分期望为零</p>
 <p><strong>工程实践要点</strong>：</p>
 <table>
 <thead>
@@ -14440,17 +14440,17 @@ r' = \frac{r}{1000}
 <div class="arithmatex">\[
 g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
 \]</div>
-<p><strong>这是实现中的标准做法</strong></p>
+<p><strong>这是实现的标准做法</strong></p>
 </details>
 <hr />
 <p><strong>Q4</strong> PPO 的裁剪为什么用 <span class="arithmatex">\(\min\)</span> 而不是只对 <span class="arithmatex">\(r\)</span> 做 clip？</p>
 <details class="note">
 <summary>提示</summary>
-<p>分别考虑 <span class="arithmatex">\(A&gt;0\)</span> 与 <span class="arithmatex">\(A&lt;0\)</span>，看 <span class="arithmatex">\(r\)</span> 很大时两种做法有什么不同。</p>
+<p>分别考虑 <span class="arithmatex">\(A&gt;0\)</span> 与 <span class="arithmatex">\(A&lt;0\)</span>，看 <span class="arithmatex">\(r\)</span> 很大时两种做法的差别。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>因为「取 min」保证对两种符号的优势都采取「悲观」估计，
+<p>因为「取 min」对两种符号的优势都采取「悲观」估计，
 而只用 clip 会在 <span class="arithmatex">\(A&lt;0\)</span> 时削弱惩罚。</p>
 <p><strong>情形 1：<span class="arithmatex">\(A&gt;0\)</span>（好动作），<span class="arithmatex">\(r\)</span> 很大（如 <span class="arithmatex">\(r=3\)</span>）</strong></p>
 <table>
@@ -14476,7 +14476,7 @@ g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
 </tbody>
 </table>
 <p><strong>两种做法结果相同</strong> —— 都限制在 <span class="arithmatex">\(1.2A\)</span></p>
-<p>情形 2：<span class="arithmatex">\(A&lt;0\)</span>（坏动作），<span class="arithmatex">\(r\)</span> 很大（如 <span class="arithmatex">\(r=3\)</span>，即坏动作概率反而增大了）</p>
+<p>情形 2：<span class="arithmatex">\(A&lt;0\)</span>（坏动作），<span class="arithmatex">\(r\)</span> 很大（如 <span class="arithmatex">\(r=3\)</span>，坏动作概率反而增大）</p>
 <p>设 <span class="arithmatex">\(A = -1\)</span>：</p>
 <table>
 <thead>
@@ -14500,7 +14500,7 @@ g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
 </tr>
 </tbody>
 </table>
-<p><strong>差别出现了</strong>：</p>
+<p><strong>差别出现</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14524,8 +14524,8 @@ g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
 </table>
 <p><strong>为什么「保留惩罚」是对的</strong>：</p>
 <p><strong>我们要最大化目标</strong>。<span class="arithmatex">\(-3 &lt; -1.2\)</span>，
-所以 <span class="arithmatex">\(\min\)</span> 取了<strong>更负</strong>的值 → 目标更小 → 优化会避开它</p>
-<p><strong>含义</strong>：<strong>「坏动作概率增大」这件事必须被惩罚</strong> ——
+<span class="arithmatex">\(\min\)</span> 取了<strong>更负</strong>的值 → 目标更小 → 优化会避开它</p>
+<p><strong>含义</strong>：<strong>「坏动作概率增大」必须被惩罚</strong> ——
 而 <span class="arithmatex">\(\min\)</span> 保住了这个惩罚</p>
 <p>总结「取 min」在两个方向上的行为：</p>
 <table>
@@ -14555,9 +14555,9 @@ g\leftarrow g\cdot\min\left(1,\ \frac{c}{\lVert g\rVert}\right)
 L^{\text{CLIP}}\leq \text{（未裁剪的目标）}
 \]</div>
 <p><strong>即「目标函数总是取较小的那个」</strong> ——
-绝不会因为裁剪而「奖励」偏离旧策略的行为</p>
+绝不会因裁剪而「奖励」偏离旧策略</p>
 <p>这就是 PPO「信赖域」性质的实现机制 ——
-<strong>它用「取 min」代替了 TRPO 的硬约束</strong> ✓</p>
+<strong>它用「取 min」代替 TRPO 的硬约束</strong> ✓</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../td-learning/">时序差分学习</a><a href="../../optimization/gradient-descent/">梯度下降与收敛</a><a href="../../calculus/logistic-softmax/">Logistic 与 Softmax 导数</a></span></div></nav>
 

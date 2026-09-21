@@ -12087,8 +12087,7 @@ u = k_x\frac{x_c}{z_c} + u_0, \qquad v = k_y\frac{y_c}{z_c} + v_0
 <li><span class="arithmatex">\(M_1\)</span> 就是<strong>内参矩阵</strong>，只与相机本身有关。</li>
 </ul>
 <p><strong>最关键的是那两个除法 <span class="arithmatex">\(x_c/z_c\)</span>、<span class="arithmatex">\(y_c/z_c\)</span>（透视除法）</strong>：
-它把「尺度」除掉了 —— 同一个横移量，在远处只对应更小的像素偏移。
-<strong>也正因为除了深度，深度信息在投影的那一刻就丢了。</strong></p>
+它把尺度除掉，同一个横移量在远处只对应更小的像素偏移 —— <strong>深度也在这一刻被丢掉了。</strong></p>
 <h3 id="12">1.2 外参：世界坐标系到相机坐标系<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>空间点通常在<strong>世界（或目标）坐标系</strong>里给出，再变换到相机坐标系。
 用三个坐标轴方向 <span class="arithmatex">\(\boldsymbol n, \boldsymbol o, \boldsymbol a\)</span> 与位置 <span class="arithmatex">\(\boldsymbol p\)</span> 表示，即教材的式 (9-2)：</p>
@@ -12101,7 +12100,6 @@ u = k_x\frac{x_c}{z_c} + u_0, \qquad v = k_y\frac{y_c}{z_c} + v_0
 <p><span class="arithmatex">\(M_2\)</span> 是<strong>外参</strong>。分清楚：<strong>内参是相机的「脾气」，外参是相机「站的位置」。</strong>
 而视觉测量要问的往往是反过来那句：<strong>给定像点和已知的三维结构，外参（相机或目标的位姿）是多少？</strong>
 —— 这正是第三、四节的主题。</p>
-<p><strong>下图把「世界点 → 相机系 → 像素」这两步投影画出来</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 268" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="针孔成像的两步投影：外参把世界坐标搬到相机系，透视除法除以深度，内参再折算成像素">
 <defs>
@@ -12156,7 +12154,6 @@ x_d = x_n\left(1 + k_1 r^2 + k_2 r^4\right) + 2p_1 x_n y_n + p_2\left(r^2 + 2x_n
 \]</div>
 <p><span class="arithmatex">\(y_d\)</span> 同理。<strong>所以内参里通常还要带上一组畸变系数 <span class="arithmatex">\(k_1, k_2, p_1, p_2\)</span></strong> ——
 它们的求法，就是第五节要讲的<strong>相机标定</strong>。</p>
-<p><strong>下图对照理想针孔与桶形、枕形畸变，并给出像素位移随离光心距离的增长</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 292" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="理想针孔与桶形、枕形畸变的对比，以及像素位移随离光心距离增大">
 <defs>
@@ -12256,7 +12253,6 @@ x_d = x_n\left(1 + k_1 r^2 + k_2 r^4\right) + 2p_1 x_n y_n + p_2\left(r^2 + 2x_n
 </tr>
 </tbody>
 </table>
-<p>—— 同一个横移量，越远越靠近主点：深度被“除”进了分母，一丢就找不回来</p>
 <p><strong>【2】畸变</strong>：在归一化平面沿 45° 方向取点，比较理想/实际像素</p>
 <table>
 <thead>
@@ -12320,7 +12316,6 @@ x_d = x_n\left(1 + k_1 r^2 + k_2 r^4\right) + 2p_1 x_n y_n + p_2\left(r^2 + 2x_n
 </tr>
 </tbody>
 </table>
-<p>—— 畸变让图像边缘的像素点“搬家”，可多达几十像素：不标定就无法从像素反推方向</p>
 <p><strong>【3】单目的尺度歧义</strong>：像素相同、深度不同。
 沿同一条视线取三点（像素恒为 (480.0, 320.0)）：</p>
 <table>
@@ -12349,15 +12344,11 @@ x_d = x_n\left(1 + k_1 r^2 + k_2 r^4\right) + 2p_1 x_n y_n + p_2\left(r^2 + 2x_n
 </tr>
 </tbody>
 </table>
-<p>—— 一张图上同一个像素，可以是无穷多个深度上的点：单目必须再加约束才能定深度</p>
 <p><strong>读这三张表</strong>：</p>
 <ol>
-<li><strong>透视除法</strong>：同一物理横移 0.1 m，在 0.5 / 1 / 2 m 处分别落到 480 / 400 / 360 像素 ——
-   <strong>越远越靠向主点</strong>，像素里的「横移」被深度除小了；</li>
-<li><strong>畸变</strong>：归一化半径从 0.05 涨到 0.70 时，像素位移从 0.026 px 猛增到 <strong>63.056 px</strong>。
-   <strong>边缘点"搬家"几十像素</strong> —— 不标定、不校正，从像素反推方向就会系统性跑偏；</li>
-<li><strong>尺度歧义</strong>：同一个像素 <span class="arithmatex">\((480, 320)\)</span>，可以是 0.5 m 处的点，也可以是 2 m 处更偏的点。
-   <strong>一张图定不了深度。</strong></li>
+<li><strong>透视除法</strong>：同一横移 0.1 m 在 0.5 / 1 / 2 m 处分别落到 480 / 400 / 360 像素 —— <strong>越远越靠向主点</strong>；</li>
+<li><strong>畸变</strong>：归一化半径 0.05→0.70 时像素位移从 0.026 px 猛增到 <strong>63.056 px</strong> —— 不标定、不校正，从像素反推方向就会系统性跑偏；</li>
+<li><strong>尺度歧义</strong>：同一个像素 <span class="arithmatex">\((480, 320)\)</span> 可以是 0.5 m 处的点，也可以是 2 m 处更偏的点 —— <strong>一张图定不了深度。</strong></li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">相机模型的全部内容，就是一句话</p>
@@ -12372,7 +12363,7 @@ x_d = x_n\left(1 + k_1 r^2 + k_2 r^4\right) + 2p_1 x_n y_n + p_2\left(r^2 + 2x_n
 （去畸变后即 <span class="arithmatex">\((u - u_0)/k_x\)</span> 与 <span class="arithmatex">\((v - v_0)/k_y\)</span>）。
 <strong>它在三维空间里对应一条从光心出发、穿过该像素的射线</strong> —— 射线上每一点都投到同一个像素。
 <strong>所以：单张图 + 一个像点 = 一条射线 = 缺一个「深度」自由度。</strong></p>
-<p>要让测量成立，就必须从别处<strong>补上这个自由度</strong>。<strong>这就是「约束条件」的含义。</strong></p>
+<p>要让测量成立，就必须从别处<strong>补上这个自由度</strong>。</p>
 <h3 id="22">2.2 三类可用的约束<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12469,7 +12460,6 @@ w = \frac{k_x W}{z} \quad\Longrightarrow\quad z = \frac{k_x W}{w}
 </tr>
 </tbody>
 </table>
-<p>—— 深度误差 ∝ z²：近处“几毫米”、远处“几厘米”，单目测距天生越远越不准</p>
 <p><strong>【尺度歧义】若目标的真实尺寸未知（只知道像素宽度 w=160 px）：</strong></p>
 <table>
 <thead>
@@ -12497,16 +12487,12 @@ w = \frac{k_x W}{z} \quad\Longrightarrow\quad z = \frac{k_x W}{w}
 </tr>
 </tbody>
 </table>
-<p>—— 同一张图上同样的 160 px，可以对应 0.5 m 的“小盒子”或 4 m 的“大柜子”</p>
 <p>—— 单目定深度必须外加约束：已知尺寸（本表）、已知平面、或多视图</p>
 <p><strong>读这两张表</strong>：</p>
 <ol>
-<li><strong>精度衰减</strong>：同样 ±0.5 px 的测宽误差，在 0.3 m 处只造成 <strong>0.6 mm</strong> 的深度误差（0.19%），
-   到 3 m 处已经涨到 <strong>56 mm</strong>（1.87%）—— <strong>误差放大约 100 倍</strong>；</li>
-<li><strong>尺度歧义</strong>：图上永远是 160 px，若真实宽度是 0.05 m 则深度 0.25 m、
-   是 0.40 m 则深度 2.00 m —— <strong>8 倍的深度差，全靠「知道它多大」撑着</strong>；</li>
-<li><strong>一句话</strong>：<strong>单目测距的本质，是拿「已知尺寸」去换「未知深度」。</strong>
-   尺寸错一点，深度就错一片。</li>
+<li><strong>精度衰减</strong>：同样 ±0.5 px 的测宽误差，0.3 m 处只造成 <strong>0.6 mm</strong> 深度误差（0.19%），3 m 处已涨到 <strong>56 mm</strong>（1.87%）—— <strong>放大约 100 倍</strong>；</li>
+<li><strong>尺度歧义</strong>：图上永远是 160 px，真实宽度 0.05 m 对应深度 0.25 m、0.40 m 对应 2.00 m —— <strong>8 倍的深度差，全靠「知道它多大」撑着</strong>；</li>
+<li><strong>一句话</strong>：<strong>单目测距的本质，是拿「已知尺寸」换「未知深度」</strong> —— 尺寸错一点，深度就错一片。</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">约束条件的意义</p>
@@ -12518,8 +12504,7 @@ w = \frac{k_x W}{z} \quad\Longrightarrow\quad z = \frac{k_x W}{w}
 <h2 id="_4">三、单目与立体位置测量<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 单目位置测量：几何加尺度<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>单目要定三维位置，靠的是<strong>几何关系</strong>（相似三角形、共面、消失点……）加<strong>一条尺度约束</strong>。
-上一节的「已知尺寸」是最简单的一种；如果目标落在一个<strong>已知平面</strong>上（地面、工作台面），
-那么<strong>射线与该平面求交</strong>就能得到点 —— <strong>平面法向已知，正好补上了深度。</strong></p>
+「已知尺寸」是最简单的一种；若目标落在<strong>已知平面</strong>上（地面、工作台面），<strong>射线与该平面求交</strong>即可得点 —— <strong>平面法向已知，正好补上深度。</strong></p>
 <p><strong>工程上常见的两条路</strong>：</p>
 <ul>
 <li><strong>已知尺寸的标记</strong>（圆、方形、角点）：从像素尺寸反推距离与姿态；</li>
@@ -12593,7 +12578,6 @@ z = \frac{k_x B}{d}
 </tr>
 </tbody>
 </table>
-<p>—— 深度误差 ∝ Z²：立体视觉同样“越远越不准”，但视差把它拴在了基线长度上</p>
 <p><strong>【基线的作用】真实深度 Z=2.00 m 时，换不同基线：</strong></p>
 <table>
 <thead>
@@ -12626,23 +12610,17 @@ z = \frac{k_x B}{d}
 </tr>
 </tbody>
 </table>
-<p>—— 误差 ∝ 1/B：基线加倍，精度加倍（代价是体积更大、遮挡更多）</p>
 <p><strong>【三维重建】Z=1.00 m，像点 uL=560 px、vL=300 px 的一点：</strong></p>
 <ul>
 <li>左像 (560, 300) → 右像 (464, 300)，视差 d=96.00 px</li>
 <li>重建三维点：X=0.3000 m, Y=-0.0250 m, Z=1.0000 m</li>
 </ul>
-<p>—— 有了视差，那个“被除掉的深度”就被重新乘了回来</p>
 <p><strong>读这三张表</strong>：</p>
 <ol>
-<li><strong>深度对视差</strong>：视差从 320 px（0.3 m）掉到 24 px（4 m）；
-   误差则从 <strong>0.0005 m</strong> 涨到 <strong>0.0836 m</strong> —— 解析式与蒙特卡洛<strong>几乎完全重合</strong>，
-   说明公式 <span class="arithmatex">\(\sigma_z = z^2\sigma_d/(k_xB)\)</span> 用得住；</li>
-<li><strong>基线的作用</strong>：同为 2 m，基线 0.06 到 0.48 m 时误差从 0.0832 m 降到 <strong>0.0013 m</strong> ——
-   <strong>误差与基线成反比</strong>；想要测得远又准，就得<strong>把两个相机拉开</strong>（代价是体积、遮挡与视场）；</li>
-<li><strong>三维重建</strong>：知道了视差，<span class="arithmatex">\((X, Y, Z)\)</span> 就一起解出来（本例为 <span class="arithmatex">\((0.30, -0.025, 1.00)\)</span> m）；</li>
-<li><strong>一句话</strong>：<strong>立体视觉把「深度」换成了「视差」，精度就变成一道可以设计的几何题</strong> ——
-   想更准：加基线、加焦距、缩短距离。</li>
+<li><strong>深度对视差</strong>：视差从 320 px（0.3 m）掉到 24 px（4 m），误差却从 <strong>0.0005 m</strong> 涨到 <strong>0.0836 m</strong> —— 解析式与蒙特卡洛<strong>几乎完全重合</strong>，说明 <span class="arithmatex">\(\sigma_z = z^2\sigma_d/(k_xB)\)</span> 用得住；</li>
+<li><strong>基线的作用</strong>：同为 2 m，基线 0.06→0.48 m 时误差从 0.0832 m 降到 <strong>0.0013 m</strong> —— <strong>误差与基线成反比</strong>，想测得远又准就得把相机拉开（代价是体积、遮挡与视场）；</li>
+<li><strong>三维重建</strong>：知道视差，<span class="arithmatex">\((X, Y, Z)\)</span> 就一起解出来（本例 <span class="arithmatex">\((0.30, -0.025, 1.00)\)</span> m）；</li>
+<li><strong>一句话</strong>：<strong>立体视觉把「深度」换成「视差」，精度就变成一道可以设计的几何题</strong> —— 想更准：加基线、加焦距、缩短距离。</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">单目与立体：约束从哪来</p>
@@ -12667,8 +12645,8 @@ z = \frac{k_x B}{d}
 <p>对<strong>平行于同一条边</strong>的两个点（<span class="arithmatex">\(y_w\)</span> 相同、<span class="arithmatex">\(A_1,B_1\)</span> 不变）相减，正交性还能进一步消元，
 最终解出 <span class="arithmatex">\(n_x, n_y, n_z\)</span>（教材式 (9-9)~(9-14)）；其中当光轴垂直目标平面时 <span class="arithmatex">\(n_z = 0\)</span>，
 用 <span class="arithmatex">\(\boldsymbol n\)</span> 的归一定出 <span class="arithmatex">\(n_x, n_y\)</span> 即可。</p>
-<p><strong>这条路的味道是</strong>：<strong>不搞迭代优化，直接拿「矩形是矩形」这件事当方程解</strong>。
-它的<strong>代价</strong>也很明确 —— 目标必须真是矩形、尺寸必须已知，而且对像点噪声较敏感。</p>
+<p><strong>这条路不搞迭代优化，直接拿「矩形是矩形」当方程解</strong>；
+<strong>代价</strong>是目标必须真是矩形、尺寸必须已知，且对像点噪声较敏感。</p>
 <h3 id="42-pnp-2d-3d">4.2 PnP：由 2D-3D 对应直接解位姿<a class="headerlink" href="#42-pnp-2d-3d" title="Permanent link">&para;</a></h3>
 <p>更一般的问题是 <strong>PnP（Perspective-n-Point）</strong>：
 <strong>已知 <span class="arithmatex">\(n\)</span> 个空间点在世界系下的坐标、也知道它们在图像上的像素，求相机的位姿 <span class="arithmatex">\((R, \boldsymbol t)\)</span>。</strong></p>
@@ -12724,7 +12702,6 @@ X m_{11} + Y m_{12} + Z m_{13} + m_{14}
 </tr>
 </tbody>
 </table>
-<p>—— 每组 2D-3D 对应给 2 个方程；DLT 的 [R|t] 有 11 个自由度，故 n≥6 才够定解</p>
 <p>—— 工程上另有 P3P/P4P 等几何解法能用 3~4 组，但需非线性求解、可能多解</p>
 <p><strong>【2】有噪声</strong>（像点加 σ=0.5 px 高斯噪声）：点越多越稳</p>
 <table>
@@ -12763,24 +12740,17 @@ X m_{11} + Y m_{12} + Z m_{13} + m_{14}
 </tr>
 </tbody>
 </table>
-<p>—— 位姿误差大致按 1/√n 缩小：噪声一定时，点对越多、位姿越可靠</p>
-<p>—— 用 PnP 求位姿，等于把“相机看世界”这件事反着解了一遍</p>
 <p><strong>读这两张表</strong>：</p>
 <ol>
-<li><strong>无噪声</strong>：<span class="arithmatex">\(n \ge 6\)</span> 时重投影误差、旋转误差、平移误差<strong>全是 0</strong> ——
-   线性 DLT 在数据干净时能<strong>精确</strong>解出位姿（SVD 的零空间正好长在真解上）；</li>
-<li><strong>有噪声</strong>：<span class="arithmatex">\(n = 6\)</span>（刚好定解）时误差大得离谱（重投影 <strong>6484 px</strong>、旋转 25°）；
-   点对加多后迅速收敛 —— <span class="arithmatex">\(n = 48\)</span> 时重投影 <strong>5.1 px</strong>、旋转 <strong>0.75°</strong>；</li>
-<li><strong>教学点</strong>：<strong>「刚好够」的方程数，对噪声极其脆弱</strong>。多放几个点、让方程数明显多于未知量，
-   是位姿估计里最便宜也最有效的稳健化手段（代价：要能可靠地匹配 3D-2D 点对）。</li>
+<li><strong>无噪声</strong>：<span class="arithmatex">\(n \ge 6\)</span> 时三类误差<strong>全是 0</strong> —— 数据干净时线性 DLT 能<strong>精确</strong>解出位姿（SVD 的零空间正好长在真解上）；</li>
+<li><strong>有噪声</strong>：<span class="arithmatex">\(n = 6\)</span>（刚好定解）时误差离谱（重投影 <strong>6484 px</strong>、旋转 25°），点对加多后迅速收敛（<span class="arithmatex">\(n = 48\)</span> 时重投影 <strong>5.1 px</strong>、旋转 <strong>0.75°</strong>）；</li>
+<li><strong>教学点</strong>：<strong>「刚好够」的方程数对噪声极其脆弱</strong>；多放几个点、让方程数明显多于未知量，是位姿估计里最便宜也最有效的稳健化手段（代价：要能可靠匹配 3D-2D 点对）。</li>
 </ol>
 <h3 id="44">4.4 消失点：平行线在无穷远处相交<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
-<p>还有一类非常漂亮的约束来自<strong>消失点</strong>：空间中的一族<strong>平行直线</strong>，
-在图像上会交于一点（消失点），而这个点<strong>只与直线的方向有关</strong>。
-于是从消失点就能反推方向；再由两组互相垂直方向给出的消失点，解出<strong>旋转矩阵</strong>甚至焦距。</p>
-<p><strong>它最实用的地方</strong>：<strong>不需要知道直线的位置、也不要求目标尺寸</strong> ——
-只需要图像里能稳定地检出那两条（或多条）平行线。
-所以走廊、道路、箱体边缘这类<strong>天然有平行线</strong>的场景里，用消失点定姿态非常经济。</p>
+<p>另一类漂亮的约束来自<strong>消失点</strong>：一族<strong>平行直线</strong>在图像上交于一点，该点<strong>只与直线方向有关</strong>。
+于是由消失点可反推方向；两组互相垂直方向给出的消失点还能解出<strong>旋转矩阵</strong>甚至焦距。</p>
+<p><strong>它最实用之处</strong>：<strong>不需要知道直线位置、也不要求目标尺寸</strong>，只要能稳定检出那两条（或多条）平行线 ——
+走廊、道路、箱体边缘这类<strong>天然有平行线</strong>的场景里非常经济。</p>
 <div class="admonition tip">
 <p class="admonition-title">三种路数，一种思想</p>
 <p>· <strong>矩形目标</strong>：用<strong>正交加已知尺寸</strong>当方程，直接解；
@@ -12897,18 +12867,12 @@ X m_{11} + Y m_{12} + Z m_{13} + m_{14}
 </tr>
 </tbody>
 </table>
-<p>—— 单次σ(fx) 按 1/√m 缩小（随机误差被平均掉）；平均值却一直有 0.2%~0.9% 的偏差</p>
 <p>—— 那是线性 DLT 的系统偏差，多拍也消不掉：所以最后一步要用非线性最大似然精化</p>
 <p><strong>读这两张表</strong>：</p>
 <ol>
-<li><strong>无噪声</strong>：3 张图就把四个内参解到小数点后三位、最大相对误差 <strong>1e-14</strong> 量级 ——
-   <strong>理论上 3 张姿态不同的图就够</strong>；</li>
-<li><strong>有噪声</strong>：单次估计的标准差 <span class="arithmatex">\(\sigma(f_x)\)</span> 从 4 张图的 89.9 px 一路降到 16 张图的 <strong>29.8 px</strong>，
-   大致按 <span class="arithmatex">\(1/\sqrt m\)</span> 缩小 —— <strong>多拍能平均掉随机误差</strong>；</li>
-<li><strong>但</strong>估计的<strong>平均值</strong>始终偏离真值 0.2%~0.9%，且<strong>不随视角变多而消失</strong>：
-   这是<strong>线性 DLT 的系统偏差</strong>。
-   <strong>所以真实标定的最后一步，一定是非线性最大似然精化</strong>（同时优化内参、畸变与所有外参），
-   把线性解当初始值 —— 这正是 OpenCV / MATLAB 标定工具箱在做的事。</li>
+<li><strong>无噪声</strong>：3 张图就把四个内参解到最大相对误差 <strong>1e-14</strong> 量级 —— <strong>理论上 3 张姿态不同的图就够</strong>；</li>
+<li><strong>有噪声</strong>：单次估计的标准差 <span class="arithmatex">\(\sigma(f_x)\)</span> 从 4 张图的 89.9 px 一路降到 16 张图的 <strong>29.8 px</strong>，大致按 <span class="arithmatex">\(1/\sqrt m\)</span> 缩小 —— <strong>多拍能平均掉随机误差</strong>；</li>
+<li><strong>但</strong>估计的<strong>平均值</strong>始终偏离真值 0.2%~0.9%、<strong>不随视角变多而消失</strong> —— 这是<strong>线性 DLT 的系统偏差</strong>。<strong>所以真实标定的最后一步一定是非线性最大似然精化</strong>（同时优化内参、畸变与所有外参），把线性解当初始值 —— 这正是 OpenCV / MATLAB 标定工具箱在做的事。</li>
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">标定的三层意思</p>

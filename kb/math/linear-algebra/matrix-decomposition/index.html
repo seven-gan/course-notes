@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲的是同一件事的实用版本：同一个矩阵，能不能拆成几个「结构简单」的矩阵的乘积？拆开之后，很多问题会变得容易：解方程组变成两次三角回代、求逆变成两次三角回代、最小二乘变成解一个三角系统、数据压缩变成丢掉小的对角元。">
+    <meta name="description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲同一件事的实用版本：同一个矩阵，能否拆成几个「结构简单」矩阵的乘积？拆开后，许多问题变简单：解方程组与求逆都变成两次三角回代，最小二乘变成解三角系统，数据压缩变成丢掉小对角元。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="矩阵分解">
   
-  <meta property="og:description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲的是同一件事的实用版本：同一个矩阵，能不能拆成几个「结构简单」的矩阵的乘积？拆开之后，很多问题会变得容易：解方程组变成两次三角回代、求逆变成两次三角回代、最小二乘变成解一个三角系统、数据压缩变成丢掉小的对角元。">
+  <meta property="og:description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲同一件事的实用版本：同一个矩阵，能否拆成几个「结构简单」矩阵的乘积？拆开后，许多问题变简单：解方程组与求逆都变成两次三角回代，最小二乘变成解三角系统，数据压缩变成丢掉小对角元。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/linear-algebra/matrix-decomposition/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="矩阵分解">
   
-  <meta name="twitter:description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲的是同一件事的实用版本：同一个矩阵，能不能拆成几个「结构简单」的矩阵的乘积？拆开之后，很多问题会变得容易：解方程组变成两次三角回代、求逆变成两次三角回代、最小二乘变成解一个三角系统、数据压缩变成丢掉小的对角元。">
+  <meta name="twitter:description" content="矩阵分解：前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。这一页讲同一件事的实用版本：同一个矩阵，能否拆成几个「结构简单」矩阵的乘积？拆开后，许多问题变简单：解方程组与求逆都变成两次三角回代，最小二乘变成解三角系统，数据压缩变成丢掉小对角元。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11940,13 +11940,13 @@
 
 <h1 id="_1">矩阵分解<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>前面讲过：线性映射是客观对象，矩阵是它在某组基下的记账方式。</p>
-<p>这一页讲的是同一件事的<strong>实用版本</strong>：</p>
+<p>这一页讲同一件事的<strong>实用版本</strong>：</p>
 <blockquote>
-<p><strong>同一个矩阵，能不能拆成几个「结构简单」的矩阵的乘积？</strong></p>
+<p><strong>同一个矩阵，能否拆成几个「结构简单」矩阵的乘积？</strong></p>
 </blockquote>
-<p>拆开之后，很多问题会变得容易：
-解方程组变成两次三角回代、求逆变成两次三角回代、
-最小二乘变成解一个三角系统、数据压缩变成丢掉小的对角元。</p>
+<p>拆开后，许多问题变简单：
+解方程组与求逆都变成两次三角回代，
+最小二乘变成解三角系统，数据压缩变成丢掉小对角元。</p>
 <p>四种最常用的分解：</p>
 <table>
 <thead>
@@ -11986,12 +11986,12 @@
 </table>
 <hr />
 <h2 id="lu">一、LU 分解：高斯消元的矩阵语言<a class="headerlink" href="#lu" title="Permanent link">&para;</a></h2>
-<p><strong>形式</strong>：把 <span class="arithmatex">\(A\)</span> 分解为下三角矩阵 <span class="arithmatex">\(L\)</span> 与上三角矩阵 <span class="arithmatex">\(U\)</span> 的乘积</p>
+<p><strong>形式</strong>：把 <span class="arithmatex">\(A\)</span> 分解为下三角阵 <span class="arithmatex">\(L\)</span> 与上三角阵 <span class="arithmatex">\(U\)</span> 的乘积</p>
 <div class="arithmatex">\[
 A = LU
 \]</div>
-<p><strong>它其实就是高斯消元的过程</strong>：我们用行变换把 <span class="arithmatex">\(A\)</span> 化成上三角（得到 <span class="arithmatex">\(U\)</span>），
-而记录下所用的倍数就组成 <span class="arithmatex">\(L\)</span>。</p>
+<p><strong>它其实就是高斯消元</strong>：用行变换把 <span class="arithmatex">\(A\)</span> 化成上三角（得 <span class="arithmatex">\(U\)</span>），
+记下所用倍数就组成 <span class="arithmatex">\(L\)</span>。</p>
 <h3 id="_2">用一个例子看懂<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 A = \begin{bmatrix} 2 &amp; 1 \\ 6 &amp; 5\end{bmatrix}
@@ -12000,7 +12000,7 @@ A = \begin{bmatrix} 2 &amp; 1 \\ 6 &amp; 5\end{bmatrix}
 <div class="arithmatex">\[
 U = \begin{bmatrix} 2 &amp; 1 \\ 0 &amp; 2\end{bmatrix}
 \]</div>
-<p><strong>记录倍数</strong>：<span class="arithmatex">\(L\)</span> 的对角线为 1，左下角填「刚用的倍数」：</p>
+<p><strong>记录倍数</strong>：<span class="arithmatex">\(L\)</span> 对角线为 1，左下角填「刚用的倍数」：</p>
 <div class="arithmatex">\[
 L = \begin{bmatrix} 1 &amp; 0 \\ 3 &amp; 1\end{bmatrix}
 \]</div>
@@ -12011,28 +12011,28 @@ LU = \begin{bmatrix} 1 &amp; 0 \\ 3 &amp; 1\end{bmatrix}\begin{bmatrix} 2 &amp; 
 \]</div>
 <div class="admonition tip">
 <p class="admonition-title">为什么 L 的对角线是 1，左下角是消元倍数</p>
-<p><strong>对角线为 1</strong>：因为我们只做「某行加另一行的倍数」，不改对角元本身。</p>
-<p><strong>左下角是消元倍数</strong>：每一步消元用的倍数，正好是 <span class="arithmatex">\(L\)</span> 的对应元素。</p>
-<p>「<span class="arithmatex">\(L\)</span> = 消元的记录本」这个观点让 LU 分解变得很自然：
-消元过程中只要顺便记下倍数，就得到了 L。</p>
+<p><strong>对角线为 1</strong>：只做「某行加另一行的倍数」，不改对角元。</p>
+<p><strong>左下角是消元倍数</strong>：每步消元用的倍数正好是 <span class="arithmatex">\(L\)</span> 的对应元素。</p>
+<p>「<span class="arithmatex">\(L\)</span> = 消元的记录本」让 LU 分解变得自然：
+消元中记下倍数，就得到 L。</p>
 </div>
 <h3 id="_3">为什么有用：解方程组变成两步<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>要求解 <span class="arithmatex">\(A\boldsymbol{x} = \boldsymbol{b}\)</span>。代入 <span class="arithmatex">\(A = LU\)</span>：</p>
 <div class="arithmatex">\[
 LU\boldsymbol{x} = \boldsymbol{b}
 \]</div>
-<p>令 <span class="arithmatex">\(\boldsymbol{y} = U\boldsymbol{x}\)</span>，分成两步：</p>
-<p><strong>第一步：前代</strong>（解 <span class="arithmatex">\(L\boldsymbol{y} = \boldsymbol{b}\)</span>，<span class="arithmatex">\(L\)</span> 是下三角）</p>
+<p>令 <span class="arithmatex">\(\boldsymbol{y} = U\boldsymbol{x}\)</span>，分两步：</p>
+<p><strong>第一步：前代</strong>（解 <span class="arithmatex">\(L\boldsymbol{y} = \boldsymbol{b}\)</span>，<span class="arithmatex">\(L\)</span> 下三角）</p>
 <div class="arithmatex">\[
 y_1 = b_1, \quad y_2 = b_2 - l_{21}y_1, \quad \dots
 \]</div>
-<p><strong>第二步：回代</strong>（解 <span class="arithmatex">\(U\boldsymbol{x} = \boldsymbol{y}\)</span>，<span class="arithmatex">\(U\)</span> 是上三角）</p>
+<p><strong>第二步：回代</strong>（解 <span class="arithmatex">\(U\boldsymbol{x} = \boldsymbol{y}\)</span>，<span class="arithmatex">\(U\)</span> 上三角）</p>
 <div class="arithmatex">\[
 x_n = \frac{y_n}{u_{nn}}, \quad x_{n-1} = \frac{y_{n-1} - u_{n-1,n}x_n}{u_{n-1,n-1}}, \dots
 \]</div>
-<p><strong>关键优势</strong>：三角方程组的求解只需 <span class="arithmatex">\(O(n^2)\)</span>，而消元是 <span class="arithmatex">\(O(n^3)\)</span>。</p>
-<p>所以<strong>若要对同一个 <span class="arithmatex">\(A\)</span>、多个不同的 <span class="arithmatex">\(\boldsymbol{b}\)</span> 求解</strong>，
-只需分解一次（<span class="arithmatex">\(O(n^3)\)</span>），之后每次求解都只要 <span class="arithmatex">\(O(n^2)\)</span>。</p>
+<p><strong>关键优势</strong>：三角方程组求解只需 <span class="arithmatex">\(O(n^2)\)</span>，消元是 <span class="arithmatex">\(O(n^3)\)</span>。</p>
+<p>所以<strong>对同一个 <span class="arithmatex">\(A\)</span>、多个 <span class="arithmatex">\(\boldsymbol{b}\)</span> 求解时</strong>，
+只需分解一次（<span class="arithmatex">\(O(n^3)\)</span>），之后每次求解只要 <span class="arithmatex">\(O(n^2)\)</span>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LU 分解把解方程组分成前代与回代两步">
 <defs>
@@ -12063,18 +12063,18 @@ x_n = \frac{y_n}{u_{nn}}, \quad x_{n-1} = \frac{y_{n-1} - u_{n-1,n}x_n}{u_{n-1,n
 A = \begin{bmatrix} 0 &amp; 1 \\ 1 &amp; 0\end{bmatrix}
 \]</div>
 <p>第一个主元就是 0，无法消元。</p>
-<p><strong>解决</strong>：先做<strong>行交换</strong>（选主元），得到</p>
+<p><strong>解决</strong>：先做<strong>行交换</strong>（选主元），得</p>
 <div class="arithmatex">\[
 PA = LU
 \]</div>
-<p>其中 <span class="arithmatex">\(P\)</span> 是<strong>置换矩阵</strong>（每行每列只有一个 1）。这叫<strong>带主元的 LU 分解</strong>，
-实际计算中总是如此实现。</p>
+<p>其中 <span class="arithmatex">\(P\)</span> 是<strong>置换矩阵</strong>（每行每列仅一个 1）。这叫<strong>带主元的 LU 分解</strong>，
+实际计算总是如此实现。</p>
 <div class="admonition warning">
 <p class="admonition-title">为什么必须「选主元」而不只是「遇到零才交换」</p>
-<p>数值计算中，即使主元<strong>接近零但不为零</strong>，也会导致严重的误差放大
+<p>数值计算中，即使主元<strong>接近零但不为零</strong>，也会严重放大误差
 （除以很小的数）。</p>
-<p>所以实际算法会<strong>每次选当前列中绝对值最大的元素</strong>作主元
-（部分选主元）。这能显著改善数值稳定性。</p>
+<p>所以实际算法<strong>每次选当前列绝对值最大的元素</strong>作主元
+（部分选主元），能显著改善数值稳定性。</p>
 </div>
 <hr />
 <h2 id="qr">二、QR 分解：正交化的矩阵形式<a class="headerlink" href="#qr" title="Permanent link">&para;</a></h2>
@@ -12082,9 +12082,9 @@ PA = LU
 <div class="arithmatex">\[
 A = QR
 \]</div>
-<p>其中 <span class="arithmatex">\(Q\)</span> 的<strong>列是规范正交的</strong>，<span class="arithmatex">\(R\)</span> 是<strong>上三角矩阵</strong>。</p>
-<p><strong>它的来源就是格拉姆-施密特正交化</strong>：把 <span class="arithmatex">\(A\)</span> 的列正交化就得到 <span class="arithmatex">\(Q\)</span>，
-而正交化过程中的投影系数就组成 <span class="arithmatex">\(R\)</span>。</p>
+<p>其中 <span class="arithmatex">\(Q\)</span> 的<strong>列规范正交</strong>，<span class="arithmatex">\(R\)</span> 是<strong>上三角矩阵</strong>。</p>
+<p><strong>它来自格拉姆-施密特正交化</strong>：正交化 <span class="arithmatex">\(A\)</span> 的列就得 <span class="arithmatex">\(Q\)</span>，
+正交化中的投影系数组成 <span class="arithmatex">\(R\)</span>。</p>
 <h3 id="_5">几何含义<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 215" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR 分解把列向量正交化">
@@ -12119,7 +12119,7 @@ A = QR
 <div class="arithmatex">\[
 A^\top A\,\hat{\boldsymbol{x}} = A^\top\boldsymbol{b}
 \]</div>
-<p>它的<strong>数值条件数是 <span class="arithmatex">\(\kappa(A)^2\)</span></strong>（条件数被平方），可能造成严重误差。</p>
+<p>它的<strong>数值条件数是 <span class="arithmatex">\(\kappa(A)^2\)</span></strong>（被平方），可能造成严重误差。</p>
 <p>用 QR 分解：代入 <span class="arithmatex">\(A = QR\)</span>，</p>
 <div class="arithmatex">\[
 (QR)^\top(QR)\hat{\boldsymbol{x}} = (QR)^\top\boldsymbol{b}
@@ -12128,11 +12128,11 @@ A^\top A\,\hat{\boldsymbol{x}} = A^\top\boldsymbol{b}
 <div class="arithmatex">\[
 R^\top R\,\hat{\boldsymbol{x}} = R^\top Q^\top\boldsymbol{b}
 \]</div>
-<p>由于 <span class="arithmatex">\(R\)</span> 可逆（<span class="arithmatex">\(A\)</span> 列满秩时），两边左乘 <span class="arithmatex">\((R^\top)^{-1}\)</span>：</p>
+<p>因 <span class="arithmatex">\(R\)</span> 可逆（<span class="arithmatex">\(A\)</span> 列满秩时），两边左乘 <span class="arithmatex">\((R^\top)^{-1}\)</span>：</p>
 <div class="arithmatex">\[
 \boxed{\ R\hat{\boldsymbol{x}} = Q^\top\boldsymbol{b}\ }
 \]</div>
-<p>这是一个上三角方程组，直接回代即可。</p>
+<p>这是上三角方程组，直接回代即可。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么这个改进很重要</p>
 <table>
@@ -12156,38 +12156,38 @@ R^\top R\,\hat{\boldsymbol{x}} = R^\top Q^\top\boldsymbol{b}
 </tr>
 </tbody>
 </table>
-<p><strong>举例</strong>：若 <span class="arithmatex">\(\kappa(A) = 10^8\)</span>（病态但常见），则
-正规方程的条件数是 <span class="arithmatex">\(10^{16}\)</span>，正好达到双精度浮点的极限——
+<p><strong>举例</strong>：若 <span class="arithmatex">\(\kappa(A) = 10^8\)</span>（病态常见），则
+正规方程的条件数是 <span class="arithmatex">\(10^{16}\)</span>，正好达到双精度浮点极限——
 <strong>有效数字全部丢失</strong>。</p>
 <p>所以实际软件（NumPy、MATLAB）的最小二乘<strong>都用 QR 或 SVD</strong>，
-不用正规方程。正规方程只在理论推导中使用。</p>
+不用正规方程，它只在理论推导中使用。</p>
 </div>
 <h3 id="-">与格拉姆-施密特的对应关系<a class="headerlink" href="#-" title="Permanent link">&para;</a></h3>
-<p>若用格拉姆-施密特对 <span class="arithmatex">\(A\)</span> 的列正交化，记 <span class="arithmatex">\(A\)</span> 的第 <span class="arithmatex">\(k\)</span> 列为 <span class="arithmatex">\(\boldsymbol{a}_k\)</span>：</p>
+<p>用格拉姆-施密特正交化 <span class="arithmatex">\(A\)</span> 的列，记第 <span class="arithmatex">\(k\)</span> 列为 <span class="arithmatex">\(\boldsymbol{a}_k\)</span>：</p>
 <div class="arithmatex">\[
 \boldsymbol{a}_k = \sum_{j=1}^{k} r_{jk}\boldsymbol{q}_j
 \]</div>
 <p>（<span class="arithmatex">\(r_{jk}\)</span> 是投影系数，<span class="arithmatex">\(j&gt;k\)</span> 时为 0。）</p>
-<p>把系数按列排成矩阵就是 <span class="arithmatex">\(R\)</span>。由于 <span class="arithmatex">\(j &gt; k\)</span> 的系数为 0，<strong><span class="arithmatex">\(R\)</span> 必然是上三角的</strong>——
-这就解释了「<span class="arithmatex">\(R\)</span> 为什么是上三角」，而不是额外的要求。</p>
+<p>把系数按列排成矩阵就是 <span class="arithmatex">\(R\)</span>。因 <span class="arithmatex">\(j &gt; k\)</span> 的系数为 0，<strong><span class="arithmatex">\(R\)</span> 必是上三角</strong>——
+这解释了「<span class="arithmatex">\(R\)</span> 为何是上三角」，而非额外要求。</p>
 <hr />
 <h2 id="_6">三、特征分解：对称矩阵的对角化<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p><strong>形式</strong>：若 <span class="arithmatex">\(A\)</span> 是<strong>实对称矩阵</strong>（<span class="arithmatex">\(A = A^\top\)</span>），则存在正交矩阵 <span class="arithmatex">\(Q\)</span> 与对角矩阵 <span class="arithmatex">\(\Lambda\)</span>，使</p>
+<p><strong>形式</strong>：若 <span class="arithmatex">\(A\)</span> 是<strong>实对称矩阵</strong>（<span class="arithmatex">\(A = A^\top\)</span>），则存在正交矩阵 <span class="arithmatex">\(Q\)</span> 与对角阵 <span class="arithmatex">\(\Lambda\)</span>，使</p>
 <div class="arithmatex">\[
 A = Q\Lambda Q^\top
 \]</div>
-<p>其中 <span class="arithmatex">\(Q\)</span> 的列是 <span class="arithmatex">\(A\)</span> 的规范正交特征向量，<span class="arithmatex">\(\Lambda\)</span> 的对角元是对应的特征值。</p>
-<p><strong>这个结论称为谱定理。</strong></p>
+<p>其中 <span class="arithmatex">\(Q\)</span> 的列是 <span class="arithmatex">\(A\)</span> 的规范正交特征向量，<span class="arithmatex">\(\Lambda\)</span> 的对角元是对应特征值。</p>
+<p><strong>这称为谱定理。</strong></p>
 <h3 id="_7">谱定理为什么成立（思路）<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>关键事实（在特征值那一页证过）：</p>
+<p>关键事实（特征值页证过）：</p>
 <ol>
 <li><strong>实对称矩阵的特征值都是实数</strong></li>
-<li><strong>不同特征值对应的特征向量正交</strong></li>
+<li><strong>不同特征值的特征向量正交</strong></li>
 </ol>
-<p>具体证明分两步：</p>
+<p>证明分两步：</p>
 <p><strong>第一步</strong>：实对称矩阵必有实特征值。由特征多项式必有复根，
-而前面的证明说明特征值必为实数。</p>
-<p><strong>第二步</strong>：对维度做归纳。取一个特征向量 <span class="arithmatex">\(\boldsymbol{q}_1\)</span> 与特征值 <span class="arithmatex">\(\lambda_1\)</span>。
+而前面已证特征值必为实数。</p>
+<p><strong>第二步</strong>：对维度归纳。取特征向量 <span class="arithmatex">\(\boldsymbol{q}_1\)</span> 与特征值 <span class="arithmatex">\(\lambda_1\)</span>。
 由于 <span class="arithmatex">\(A\)</span> 对称，<span class="arithmatex">\(\boldsymbol{q}_1^\perp\)</span> 是<strong>不变子空间</strong>：</p>
 <div class="arithmatex">\[
 \boldsymbol{v} \perp \boldsymbol{q}_1 \implies \langle A\boldsymbol{v},\boldsymbol{q}_1\rangle = \langle\boldsymbol{v},A\boldsymbol{q}_1\rangle = \lambda_1\langle\boldsymbol{v},\boldsymbol{q}_1\rangle = 0
@@ -12231,7 +12231,7 @@ A = Q\Lambda Q^\top
 <tbody>
 <tr>
 <td>代数形式</td>
-<td>实对称矩阵可以正交对角化</td>
+<td>实对称矩阵可正交对角化</td>
 </tr>
 <tr>
 <td>几何形式</td>
@@ -12245,12 +12245,12 @@ A = Q\Lambda Q^\top
 </table>
 <div class="admonition tip">
 <p class="admonition-title">主轴定理的实际用途</p>
-<p>「<strong>化二次型为标准形</strong>」就是找一组坐标轴（主轴），
+<p>「<strong>化二次型为标准形</strong>」就是找坐标轴（主轴），
 使交叉项消失。</p>
 <ul>
-<li><strong>PCA</strong>：对协方差矩阵做特征分解，主轴就是主成分方向</li>
-<li><strong>二次型优化</strong>：<span class="arithmatex">\(\boldsymbol{x}^\top A\boldsymbol{x}\)</span> 沿各主轴的变化率就是特征值，
-  所以正定（所有 <span class="arithmatex">\(\lambda &gt; 0\)</span>）意味着<strong>全局严格凸</strong></li>
+<li><strong>PCA</strong>：对协方差矩阵特征分解，主轴即主成分方向</li>
+<li><strong>二次型优化</strong>：<span class="arithmatex">\(\boldsymbol{x}^\top A\boldsymbol{x}\)</span> 沿各主轴的变化率即特征值，
+  正定（所有 <span class="arithmatex">\(\lambda &gt; 0\)</span>）即<strong>全局严格凸</strong></li>
 </ul>
 </div>
 <hr />
@@ -12326,7 +12326,7 @@ A = Q\Lambda Q^\top
 <span class="arithmatex">\(A\boldsymbol{x} = (7, 11)^\top\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>消元得到 U，记录倍数得到 L，然后前代 + 回代。</p>
+<p>消元得 U，记录倍数得 L，然后前代 + 回代。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12355,7 +12355,7 @@ x_2 = \frac{0.5}{0.5} = 1
 <div class="arithmatex">\[
 x_1 = \frac{7 - 3\times1}{4} = \frac44 = 1
 \]</div>
-<p><strong>解为</strong> <span class="arithmatex">\(\boldsymbol{x} = (1,1)^\top\)</span>。</p>
+<p><strong>解</strong> <span class="arithmatex">\(\boldsymbol{x} = (1,1)^\top\)</span>。</p>
 <p><strong>验证</strong>：<span class="arithmatex">\(A\boldsymbol{x} = (4+3,\ 6+5) = (7,11)\)</span></p>
 </details>
 <hr />
@@ -12364,7 +12364,7 @@ x_1 = \frac{7 - 3\times1}{4} = \frac44 = 1
 <span class="arithmatex">\(\boldsymbol{b} = (2, 1, 0)^\top\)</span>。用 QR 分解求最小二乘解。</p>
 <details class="note">
 <summary>思路</summary>
-<p>先正交化 A 的列得 Q，记录系数得 R，然后解 <span class="arithmatex">\(R\hat{\boldsymbol{x}} = Q^\top\boldsymbol{b}\)</span>。</p>
+<p>先正交化 A 的列得 Q、记录系数得 R，再解 <span class="arithmatex">\(R\hat{\boldsymbol{x}} = Q^\top\boldsymbol{b}\)</span>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12377,7 +12377,7 @@ x_1 = \frac{7 - 3\times1}{4} = \frac44 = 1
 <div class="arithmatex">\[
 \langle \boldsymbol{a}_2,\boldsymbol{q}_1\rangle = \frac{1}{\sqrt3}(1+0-1) = 0
 \]</div>
-<p><strong>投影为零！</strong> 说明 <span class="arithmatex">\(\boldsymbol{a}_2\)</span> 已经与 <span class="arithmatex">\(\boldsymbol{a}_1\)</span> 正交。</p>
+<p><strong>投影为零！</strong> 说明 <span class="arithmatex">\(\boldsymbol{a}_2\)</span> 已与 <span class="arithmatex">\(\boldsymbol{a}_1\)</span> 正交。</p>
 <div class="arithmatex">\[
 \lVert\boldsymbol{a}_2\rVert = \sqrt{1+0+1} = \sqrt2, \qquad
 \boldsymbol{q}_2 = \frac{1}{\sqrt2}(1,0,-1)
@@ -12408,23 +12408,23 @@ Q^\top\boldsymbol{b} = \begin{bmatrix} \tfrac{1}{\sqrt3} &amp; \tfrac{1}{\sqrt3}
 \]</div>
 <p><strong>最小二乘解</strong> <span class="arithmatex">\(\hat{\boldsymbol{x}} = (1,1)^\top\)</span>。</p>
 <p><strong>验证</strong>：<span class="arithmatex">\(A\hat{\boldsymbol{x}} = (2, 1, 0)^\top = \boldsymbol{b}\)</span> ——
-恰好完全拟合（误差为零），说明 <span class="arithmatex">\(\boldsymbol{b}\)</span> 恰好在列空间内。</p>
+恰好完全拟合（误差为零），说明 <span class="arithmatex">\(\boldsymbol{b}\)</span> 在列空间内。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">本例的启示</p>
-<p><span class="arithmatex">\(r_{12} = 0\)</span> 说明两列<strong>本来就正交</strong>，所以正交化没有改变方向。</p>
-<p>实际计算中若碰巧正交，QR 分解会简化很多。但一般情形需要完整的格拉姆-施密特过程。</p>
+<p><span class="arithmatex">\(r_{12} = 0\)</span> 说明两列<strong>本来就正交</strong>，正交化没有改变方向。</p>
+<p>若碰巧正交，QR 分解会简化很多；一般情形仍需完整的格拉姆-施密特过程。</p>
 </div>
 <hr />
 <h3 id="3">例题 3：对称矩阵的特征分解<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p>求 <span class="arithmatex">\(A = \begin{bmatrix} 2 &amp; 1 \\ 1 &amp; 2\end{bmatrix}\)</span> 的谱分解 <span class="arithmatex">\(A = Q\Lambda Q^\top\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>特征值由特征方程得到（这个矩阵在特征值一页算过），再求正交特征向量。</p>
+<p>特征值解特征方程（该矩阵在特征值页算过），再求正交特征向量。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>特征值</strong>（前面已算过）：</p>
+<p><strong>特征值</strong>（前面算过）：</p>
 <div class="arithmatex">\[
 \det(A-\lambda I) = (2-\lambda)^2 - 1 = \lambda^2-4\lambda+3 = (\lambda-1)(\lambda-3)
 \]</div>
@@ -12432,7 +12432,7 @@ Q^\top\boldsymbol{b} = \begin{bmatrix} \tfrac{1}{\sqrt3} &amp; \tfrac{1}{\sqrt3}
 \lambda_1 = 1, \qquad \lambda_2 = 3
 \]</div>
 <p><strong>特征向量</strong>：</p>
-<p>对 <span class="arithmatex">\(\lambda_1 = 1\)</span>：<span class="arithmatex">\((A-I)\boldsymbol{x} = \boldsymbol{0}\)</span> 给出 <span class="arithmatex">\(x_1 + x_2 = 0\)</span>，取</p>
+<p>对 <span class="arithmatex">\(\lambda_1 = 1\)</span>：<span class="arithmatex">\((A-I)\boldsymbol{x} = \boldsymbol{0}\)</span> 得 <span class="arithmatex">\(x_1 + x_2 = 0\)</span>，取</p>
 <div class="arithmatex">\[
 \boldsymbol{v}_1 = (1,-1)^\top \implies \boldsymbol{q}_1 = \frac{1}{\sqrt2}(1,-1)^\top
 \]</div>
@@ -12440,7 +12440,7 @@ Q^\top\boldsymbol{b} = \begin{bmatrix} \tfrac{1}{\sqrt3} &amp; \tfrac{1}{\sqrt3}
 <div class="arithmatex">\[
 \boldsymbol{v}_2 = (1,1)^\top \implies \boldsymbol{q}_2 = \frac{1}{\sqrt2}(1,1)^\top
 \]</div>
-<p><strong>验证正交性</strong>（谱定理保证，但值得确认）：</p>
+<p><strong>验证正交性</strong>（谱定理保证，值得确认）：</p>
 <div class="arithmatex">\[
 \langle \boldsymbol{q}_1,\boldsymbol{q}_2\rangle = \frac12(1\cdot1 + (-1)\cdot1) = 0 \;\checkmark
 \]</div>
@@ -12465,7 +12465,7 @@ Q\Lambda Q^\top = \frac{1}{\sqrt2}\begin{bmatrix}1&amp;3\\-1&amp;3\end{bmatrix}\
 </details>
 <div class="admonition tip">
 <p class="admonition-title">从特征值读出的信息</p>
-<p>两个特征值都是<strong>正数</strong>（1 和 3），所以 <span class="arithmatex">\(A\)</span> 是<strong>正定矩阵</strong>。</p>
+<p>两个特征值都是<strong>正数</strong>（1 和 3），<span class="arithmatex">\(A\)</span> 是<strong>正定矩阵</strong>。</p>
 <p>这意味着二次型 <span class="arithmatex">\(\boldsymbol{x}^\top A\boldsymbol{x} = 2x_1^2 + 2x_1x_2 + 2x_2^2\)</span> 恒正
 （除原点外），曲面是<strong>椭圆抛物面</strong>而非马鞍面。</p>
 <p>在优化里，<strong>正定 = 严格凸 = 有唯一全局最小</strong>。</p>
@@ -12474,11 +12474,11 @@ Q\Lambda Q^\top = \frac{1}{\sqrt2}\begin{bmatrix}1&amp;3\\-1&amp;3\end{bmatrix}\
 <h3 id="4">例题 4：比较两种方法求最小二乘的条件数<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(A = \begin{bmatrix} 1 &amp; 1 \\ \epsilon &amp; 0 \\ 0 &amp; \epsilon\end{bmatrix}\)</span>，
 其中 <span class="arithmatex">\(\epsilon = 10^{-4}\)</span>。</p>
-<p><strong>(a)</strong> 说明 <span class="arithmatex">\(A^\top A\)</span> 的条件数约为 <span class="arithmatex">\(A\)</span> 条件数的平方。</p>
+<p><strong>(a)</strong> 说明 <span class="arithmatex">\(A^\top A\)</span> 的条件数约为 <span class="arithmatex">\(A\)</span> 的平方。</p>
 <p><strong>(b)</strong> 讨论两种方法的数值影响。</p>
 <details class="note">
 <summary>思路</summary>
-<p>先算 <span class="arithmatex">\(A^\top A\)</span>，再看其特征值比值与 <span class="arithmatex">\(A\)</span> 的奇异值比值的关系。</p>
+<p>先算 <span class="arithmatex">\(A^\top A\)</span>，再看其特征值比值与 <span class="arithmatex">\(A\)</span> 奇异值比值的关系。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12491,7 +12491,7 @@ A^\top A = \begin{bmatrix}1 &amp; \epsilon &amp; 0\\ 1 &amp; 0 &amp; \epsilon\en
 <div class="arithmatex">\[
 A^\top A = \begin{bmatrix}1.00000001 &amp; 1 \\ 1 &amp; 1.00000001\end{bmatrix}
 \]</div>
-<p>它的特征值：</p>
+<p>其特征值：</p>
 <div class="arithmatex">\[
 \lambda = 1.00000001 \pm 1 \implies \lambda_{\max} = 2.00000001,\quad \lambda_{\min} = 10^{-8}
 \]</div>
@@ -12511,7 +12511,7 @@ A^\top A = \begin{bmatrix}1.00000001 &amp; 1 \\ 1 &amp; 1.00000001\end{bmatrix}
 \kappa(A^\top A) = 2\times10^8 \approx \left(\kappa(A)\right)^2 = (1.41\times10^4)^2 \approx 2\times10^8 \;\checkmark
 \]</div>
 <p><strong>(b) 数值影响</strong></p>
-<p>双精度浮点的有效位数约 <strong>16 位</strong>。</p>
+<p>双精度浮点有效位数约 <strong>16 位</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -12537,15 +12537,15 @@ A^\top A = \begin{bmatrix}1.00000001 &amp; 1 \\ 1 &amp; 1.00000001\end{bmatrix}
 </tbody>
 </table>
 <p><strong>结论</strong>：QR 方法保留约 12 位有效数字，正规方程只剩约 8 位。
-在这个例子里两者都还能用；但若 <span class="arithmatex">\(\epsilon = 10^{-8}\)</span>，
+本例中两者都还能用；但若 <span class="arithmatex">\(\epsilon = 10^{-8}\)</span>，
 则 <span class="arithmatex">\(\kappa(A^\top A) \approx 2\times10^{16}\)</span>，<strong>超过双精度极限</strong>，
 正规方程的结果完全不可信。</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">这是实践中必须知道的一点</p>
-<p>「解最小二乘用正规方程」在教科书里很常见，因为它形式简洁。
+<p>「解最小二乘用正规方程」在教科书中很常见，因形式简洁。
 但<strong>工程实现几乎从不用它</strong>。</p>
-<p>实际软件的做法：</p>
+<p>实际软件做法：</p>
 <table>
 <thead>
 <tr>
@@ -12568,8 +12568,8 @@ A^\top A = \begin{bmatrix}1.00000001 &amp; 1 \\ 1 &amp; 1.00000001\end{bmatrix}
 </tr>
 </tbody>
 </table>
-<p>只有在 <span class="arithmatex">\(A\)</span> 的条件数本来就很好（<span class="arithmatex">\(\kappa &lt; 10^4\)</span> 左右）时，
-正规方程才是可接受的。</p>
+<p>只有 <span class="arithmatex">\(A\)</span> 的条件数本来就好（<span class="arithmatex">\(\kappa &lt; 10^4\)</span> 左右）时，
+正规方程才可接受。</p>
 </div>
 <hr />
 <h2 id="_11">六、用在哪些课程里<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -12577,31 +12577,31 @@ A^\top A = \begin{bmatrix}1.00000001 &amp; 1 \\ 1 &amp; 1.00000001\end{bmatrix}
 <ul>
 <li><strong>逆运动学</strong>：牛顿迭代每步要求解 <span class="arithmatex">\(J\Delta\boldsymbol{q} = \boldsymbol{e}\)</span>，
   用 LU（方阵）或 QR（超定）分解</li>
-<li><strong>雅可比的奇异值分解</strong>给出<strong>可操作度椭圆</strong>：
-  奇异值大的方向容易移动，小的方向接近奇异</li>
-<li><strong>轨迹规划</strong>中的样条求解涉及三对角方程组，用 LU 变体（Thomas 算法）</li>
+<li><strong>雅可比的奇异值分解</strong>给出<strong>可操作度椭圆</strong>：</li>
+<li>奇异值大的方向易动，小的方向接近奇异</li>
+<li><strong>轨迹规划</strong>的样条求解涉及三对角方程组，用 LU 变体（Thomas 算法）</li>
 </ul>
 <h3 id="pca">模式识别 · PCA 与降维<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>PCA</strong> 就是协方差矩阵的特征分解。主成分方向 = 特征向量，
+<li><strong>PCA</strong> 即协方差矩阵的特征分解。主成分方向 = 特征向量，
   方差 = 特征值</li>
-<li><strong>注意</strong>：实际实现常对<strong>数据矩阵</strong>做 SVD（而不是构造协方差矩阵再特征分解），
-  因为后者会把条件数平方（与例题 4 同样的原因）</li>
+<li><strong>注意</strong>：实际实现常对<strong>数据矩阵</strong>做 SVD（而非构造协方差矩阵再特征分解），
+  因为后者会把条件数平方（与例题 4 同因）</li>
 </ul>
 <h3 id="_13">现代数字信号处理 · 子空间与格型滤波<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>MUSIC / ESPRIT</strong> 基于协方差矩阵的特征分解：
   大特征值对应信号子空间，小特征值对应噪声子空间</li>
-<li><strong>格（lattice）滤波器</strong>的结构与 QR 分解有深刻联系</li>
-<li><strong>白化滤波</strong>本质上是在做正交化</li>
+<li><strong>格（lattice）滤波器</strong>结构与 QR 分解有深刻联系</li>
+<li><strong>白化滤波</strong>本质是正交化</li>
 </ul>
 <h3 id="_14">智能传感与信息处理 · 卡尔曼滤波的平方根实现<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
 <li>标准卡尔曼滤波的协方差更新 <span class="arithmatex">\(P_{k|k} = (I-KH)P_{k|k-1}\)</span>
-  在某些情形下会<strong>失去对称正定性</strong>（数值误差累积）</li>
+  在某些情形会<strong>失去对称正定性</strong>（数值误差累积）</li>
 <li><strong>平方根滤波</strong>改为传播 <span class="arithmatex">\(P\)</span> 的 Cholesky 因子 <span class="arithmatex">\(S\)</span>（<span class="arithmatex">\(P = SS^\top\)</span>），
   保证正定性</li>
-<li>这与「用 QR 代替正规方程」是同一个思路：<strong>避免条件数平方</strong></li>
+<li>这与「用 QR 代替正规方程」同一思路：<strong>避免条件数平方</strong></li>
 </ul>
 <hr />
 <h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
@@ -12630,7 +12630,7 @@ LU = \begin{bmatrix}1&amp;0\\3&amp;1\end{bmatrix}\begin{bmatrix}1&amp;2\\0&amp;1
 <p><strong>Q2</strong> 判断：任何方阵都存在 LU 分解。</p>
 <details class="note">
 <summary>提示</summary>
-<p>考虑一个第一行第一列为零的矩阵。</p>
+<p>考虑第一行第一列为零的矩阵。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12640,7 +12640,7 @@ LU = \begin{bmatrix}1&amp;0\\3&amp;1\end{bmatrix}\begin{bmatrix}1&amp;2\\0&amp;1
 A = \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}
 \]</div>
 <p>第一主元为 0，无法消元（不能除以 0）。</p>
-<p><strong>修正</strong>：加入行交换后成立，即</p>
+<p><strong>修正</strong>：加入行交换后成立：</p>
 <div class="arithmatex">\[
 PA = LU
 \]</div>
@@ -12649,22 +12649,22 @@ PA = LU
 P = \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}
 \]</div>
 <p>则 <span class="arithmatex">\(PA = \begin{bmatrix}1&amp;0\\0&amp;1\end{bmatrix} = I\)</span>，可分解为 <span class="arithmatex">\(L = U = I\)</span>。</p>
-<p><strong>更严格的结论</strong>：一个方阵有<strong>不带主元</strong>的 LU 分解，
-<strong>当且仅当它的所有顺序主子式均非零</strong>。</p>
-<p>实际算法总是带部分主元（每次选当前列绝对值最大者），
-所以总能完成分解。</p>
+<p><strong>更严格的结论</strong>：方阵有<strong>不带主元</strong>的 LU 分解，
+<strong>当且仅当其所有顺序主子式非零</strong>。</p>
+<p>实际算法总带部分主元（每次选当前列绝对值最大者），
+所以总能完成。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 设 <span class="arithmatex">\(A\)</span> 是实对称矩阵，特征值为 <span class="arithmatex">\(3, 1, -2\)</span>。判断 <span class="arithmatex">\(A\)</span> 是否正定，以及 <span class="arithmatex">\(\det A\)</span>。</p>
 <details class="note">
 <summary>提示</summary>
-<p>正定要求所有特征值为正；行列式等于特征值之积。</p>
+<p>正定要求特征值全正；行列式等于特征值之积。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>不是正定</strong>：因为有一个特征值 <span class="arithmatex">\(-2 &lt; 0\)</span>。</p>
-<p>具体地，<span class="arithmatex">\(A\)</span> 是<strong>不定</strong>的（既有正特征值也有负特征值）。
-对应的二次型曲面是<strong>马鞍面</strong>。</p>
+<p><strong>不是正定</strong>：有特征值 <span class="arithmatex">\(-2 &lt; 0\)</span>。</p>
+<p>具体地，<span class="arithmatex">\(A\)</span> <strong>不定</strong>（正负特征值都有）。
+对应二次型曲面是<strong>马鞍面</strong>。</p>
 <p><strong>行列式</strong>：</p>
 <div class="arithmatex">\[
 \det A = 3\times1\times(-2) = -6
@@ -12675,7 +12675,7 @@ P = \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}
 \det A = \det Q\det\Lambda\det Q^\top = 1\cdot\det\Lambda\cdot1 = \prod\lambda_i
 \]</div>
 <p>（用 <span class="arithmatex">\(\det Q = \pm1\)</span> 且 <span class="arithmatex">\((\det Q)^2 = 1\)</span>。）</p>
-<p><strong>正定性判据汇总</strong>（都等价）：</p>
+<p><strong>正定性判据汇总</strong>（等价）：</p>
 <table>
 <thead>
 <tr>
@@ -12704,10 +12704,10 @@ P = \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}
 </table>
 </details>
 <hr />
-<p><strong>Q4</strong> 为什么「<span class="arithmatex">\(A\)</span> 列满秩」是可保证 <span class="arithmatex">\(A^\top A\)</span> 可逆的条件？</p>
+<p><strong>Q4</strong> 为什么「<span class="arithmatex">\(A\)</span> 列满秩」可保证 <span class="arithmatex">\(A^\top A\)</span> 可逆？</p>
 <details class="note">
 <summary>提示</summary>
-<p>若 <span class="arithmatex">\(A^\top A\boldsymbol{x} = \boldsymbol{0}\)</span>，两边左乘 <span class="arithmatex">\(\boldsymbol{x}^\top\)</span> 看看。</p>
+<p>若 <span class="arithmatex">\(A^\top A\boldsymbol{x} = \boldsymbol{0}\)</span>，两边左乘 <span class="arithmatex">\(\boldsymbol{x}^\top\)</span>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12715,17 +12715,17 @@ P = \begin{bmatrix}0&amp;1\\1&amp;0\end{bmatrix}
 <div class="arithmatex">\[
 \boldsymbol{x}^\top A^\top A\boldsymbol{x} = 0
 \]</div>
-<p>注意 <span class="arithmatex">\(\boldsymbol{x}^\top A^\top = (A\boldsymbol{x})^\top\)</span>，所以</p>
+<p>注意 <span class="arithmatex">\(\boldsymbol{x}^\top A^\top = (A\boldsymbol{x})^\top\)</span>，故</p>
 <div class="arithmatex">\[
 (A\boldsymbol{x})^\top(A\boldsymbol{x}) = \lVert A\boldsymbol{x}\rVert^2 = 0
 \]</div>
 <p>故 <span class="arithmatex">\(A\boldsymbol{x} = \boldsymbol{0}\)</span>。</p>
 <p><strong>若 <span class="arithmatex">\(A\)</span> 列满秩</strong>（列线性无关），则 <span class="arithmatex">\(\operatorname{null}A = \{\boldsymbol{0}\}\)</span>，
-所以 <span class="arithmatex">\(\boldsymbol{x} = \boldsymbol{0}\)</span>。</p>
-<p>这说明 <span class="arithmatex">\(A^\top A\)</span> 的零空间只有零向量，因此<strong>可逆</strong></p>
+故 <span class="arithmatex">\(\boldsymbol{x} = \boldsymbol{0}\)</span>。</p>
+<p>这说明 <span class="arithmatex">\(A^\top A\)</span> 的零空间只有零向量，故<strong>可逆</strong></p>
 <p><strong>补充</strong>：<span class="arithmatex">\(A^\top A\)</span> 还是<strong>对称半正定</strong>的（因为
 <span class="arithmatex">\(\boldsymbol{x}^\top A^\top A\boldsymbol{x} = \lVert A\boldsymbol{x}\rVert^2 \geq 0\)</span>），
-列满秩时进一步是<strong>正定</strong>的。</p>
+列满秩时进一步是<strong>正定</strong>。</p>
 <p><strong>这解释了为什么列满秩是最小二乘有唯一解的条件</strong> ——
 它保证正规方程有唯一解。</p>
 </details>

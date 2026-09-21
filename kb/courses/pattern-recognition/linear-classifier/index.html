@@ -12628,7 +12628,7 @@
 用样本邻域里的密度估计直接做判决，边界的形状完全由数据自己长出来。</p>
 <p>这一页换一条路：<strong>先把边界的形状规定死</strong>，再让数据去确定它的参数。
 把形状规定成最简单的那一种 —— <strong>直线、平面、超平面</strong> —— 就是线性分类器。</p>
-<p><strong>为什么先学线性的</strong> —— 本课程课件给了三条理由，都值得记住：</p>
+<p><strong>为什么先学线性的</strong> —— 课件给了三条理由：</p>
 <ul>
 <li><strong>参数最少</strong> —— <span class="arithmatex">\(d\)</span> 维特征只要 <span class="arithmatex">\(d+1\)</span> 个参数，样本少也估得动</li>
 <li><strong>性质最好证</strong> —— 判别函数是线性的，凸性、唯一性、收敛性都有严格结论</li>
@@ -12637,7 +12637,6 @@
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
 <p>整页只做一件事：<strong>给「一条直线」定参数。</strong></p>
-<p>围绕这件事会走五步：</p>
 <ol>
 <li>先说清<strong>几何意义</strong>：法向量定方向、偏置定位置</li>
 <li>再把偏置<strong>吸收进权向量</strong>（增广写法），形式统一成内积</li>
@@ -12654,7 +12653,7 @@
 <div class="arithmatex">\[g(x) = \boldsymbol{w}^{\mathsf T}x + b\]</div>
 <p><strong>判决规则</strong>：<span class="arithmatex">\(g(x) \gt 0\)</span> 判 <span class="arithmatex">\(\omega_1\)</span>，<span class="arithmatex">\(g(x) \lt 0\)</span> 判 <span class="arithmatex">\(\omega_2\)</span>，
 <span class="arithmatex">\(g(x) = 0\)</span> 落在边界上（按约定归入任一类，或作为拒识点）。</p>
-<p><strong>符号说明</strong>（这张表要背下来，后面每一节都在用它）：</p>
+<p><strong>符号说明</strong>（后面每一节都用到）：</p>
 <table>
 <thead>
 <tr>
@@ -12691,7 +12690,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>先看一张图</strong>，把「判别函数」与「决策面」的对应关系钉在脑子里：</p>
+<p>把「判别函数」与「决策面」的对应关系钉在脑子里：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 353.140312 223.551375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="判别函数与决策面：g(x)=0 处就是分类边界">
 
@@ -12996,9 +12995,9 @@ L 348.820312 187.272
 <p><strong>第一步：<span class="arithmatex">\(\boldsymbol{w}\)</span> 定方向。</strong></p>
 <p>设 <span class="arithmatex">\(x_1\)</span>、<span class="arithmatex">\(x_2\)</span> 都在决策面上，则 <span class="arithmatex">\(g(x_1) = g(x_2) = 0\)</span>，两式相减：</p>
 <div class="arithmatex">\[g(x_1) - g(x_2) = \boldsymbol{w}^{\mathsf T}(x_1 - x_2) = 0\]</div>
-<p><strong>要点</strong>：<span class="arithmatex">\(\boldsymbol{w}\)</span> 与<strong>决策面上任意一条连线</strong>正交 ——
+<p><span class="arithmatex">\(\boldsymbol{w}\)</span> 与<strong>决策面上任意一条连线</strong>正交 ——
 所以 <span class="arithmatex">\(\boldsymbol{w}\)</span> 是决策面的<strong>法向量</strong></p>
-<p><strong>一句话</strong>：<strong><span class="arithmatex">\(\boldsymbol{w}\)</span> 指向的那一侧，就是 <span class="arithmatex">\(g \gt 0\)</span> 的那一类。</strong></p>
+<p><strong><span class="arithmatex">\(\boldsymbol{w}\)</span> 指向的那一侧，就是 <span class="arithmatex">\(g \gt 0\)</span> 的那一类。</strong></p>
 <p><strong>第二步：<span class="arithmatex">\(b\)</span> 定位置。</strong></p>
 <p>法向量只管方向，方向定了之后，这个平面还可能在<strong>平行地</strong>滑动。
 滑到哪儿，由 <span class="arithmatex">\(b\)</span> 决定：</p>
@@ -13009,7 +13008,7 @@ L 348.820312 187.272
 </ul>
 <p><strong>所以设计一个线性分类器，就是设计 <span class="arithmatex">\(\boldsymbol{w}\)</span> 和 <span class="arithmatex">\(b\)</span> 这两个东西</strong></p>
 <h3 id="13">1.3 判别函数值到底代表什么<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p><strong>判别函数值 <span class="arithmatex">\(g(x)\)</span> 不是距离</strong>，这一点必须说清楚 ⚠</p>
+<p><strong>判别函数值 <span class="arithmatex">\(g(x)\)</span> 不是距离</strong> ⚠</p>
 <p>如果把 <span class="arithmatex">\(\boldsymbol{w}\)</span> 整体放大两倍（<span class="arithmatex">\(2\boldsymbol{w}\)</span>、<span class="arithmatex">\(2b\)</span>），
 判决结果<strong>一点不变</strong>（符号相同），但 <span class="arithmatex">\(g(x)\)</span> 的值<strong>放大两倍</strong>。
 所以 <span class="arithmatex">\(g(x)\)</span> 的绝对值<strong>没有几何意义</strong>。</p>
@@ -13061,8 +13060,8 @@ L 348.820312 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>这张表的意义</strong>：<strong>同一个算法，在两种情形下的行为完全不同</strong>。
-感知器在可分时保证收敛，在不可分时<strong>会一直震荡</strong>，
+<p><strong>这张表的意义</strong>：感知器在可分时保证收敛，
+在不可分时<strong>会一直震荡</strong>，
 所以「跑不完」本身就是一条诊断信息 ✓</p>
 <hr />
 <h2 id="_3">二、增广特征写法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -13075,7 +13074,7 @@ L 348.820312 187.272
 a = \begin{pmatrix} \boldsymbol{w} \\ b \end{pmatrix} \in \mathbb{R}^{d+1}\]</div>
 <p>于是：</p>
 <div class="arithmatex">\[g(x) = \boldsymbol{w}^{\mathsf T}x + b = a^{\mathsf T}\tilde{x}\]</div>
-<p><strong>一句话</strong>：<strong>偏置不是「额外的参数」，只是「第 <span class="arithmatex">\(d+1\)</span> 个输入恒为 1 的权重」</strong></p>
+<p><strong>偏置不是「额外的参数」，只是「第 <span class="arithmatex">\(d+1\)</span> 个输入恒为 1 的权重」</strong></p>
 <p><strong>这两种写法完全等价</strong>：</p>
 <table>
 <thead>
@@ -13113,16 +13112,16 @@ a = \begin{pmatrix} \boldsymbol{w} \\ b \end{pmatrix} \in \mathbb{R}^{d+1}\]</di
 </tr>
 </tbody>
 </table>
-<p><strong>注意最后一行</strong>：增广之后，<strong>决策面在增广空间里变成了「过原点的超平面」</strong>。
-这个「过原点」不是巧合，而是把「平移」这件事塞进了<strong>多出来的那一维</strong>里</p>
+<p><strong>注意最后一行</strong>：这个「过原点」不是巧合 ——
+它是把「平移」这件事塞进了<strong>多出来的那一维</strong>里</p>
 <h3 id="22">2.2 齐次形式的好处与代价<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p><strong>好处</strong>（三条，都很实在）：</p>
+<p><strong>好处</strong>：</p>
 <ul>
 <li><strong>形式统一</strong>：所有公式都只剩内积，不再出现「<span class="arithmatex">\(+b\)</span>」这种尾巴</li>
 <li><strong>几何统一</strong>：决策面过原点，垂直性、投影、余量全部复用同一套说法</li>
 <li><strong>证明统一</strong>：感知器收敛定理的经典证明就是在增广空间做的</li>
 </ul>
-<p><strong>代价</strong>（两条，也要说）：</p>
+<p><strong>代价</strong>：</p>
 <ul>
 <li><strong>多了一维</strong>：<span class="arithmatex">\(d\)</span> 维变 <span class="arithmatex">\(d+1\)</span> 维，参数多了一个</li>
 <li><strong>尺度不定</strong>：<span class="arithmatex">\(a\)</span> 整体乘正数，判决不变 → <strong>解不唯一</strong>，
@@ -13150,7 +13149,7 @@ a = \begin{pmatrix} \boldsymbol{w} \\ b \end{pmatrix} \in \mathbb{R}^{d+1}\]</di
 <p><strong>这是整个第五、六节的基础</strong> ✓
 没有规范化，「错分样本」要分两种情形讨论；
 规范化之后，<strong>错分只有一种定义</strong>：<span class="arithmatex">\(a^{\mathsf T}z_i \leq 0\)</span>。</p>
-<p><strong>把这两个概念的差别摆出来</strong>。下面先只做几何部分：
+<p>下面先只做几何部分：
 算判别函数值、有向距离，以及正交投影点。</p>
 <ul>
 <li>w = [2.0, -1.0]，b = -1.0，||w|| = 2.2361</li>
@@ -13228,12 +13227,13 @@ a = \begin{pmatrix} \boldsymbol{w} \\ b \end{pmatrix} \in \mathbb{R}^{d+1}\]</di
 <li>
 <p>沿 w 方向走 1 个单位，g 值改变 2.2361（即 ||w||）</p>
 </li>
-<li>所以 g(x)/||w|| 才是真正的欧氏距离</li>
-</ul>
-<p><strong>读这段输出</strong>：</p>
-<ul>
-<li><strong>第 2、4、5、6 行判 <span class="arithmatex">\(\omega_1\)</span>，第 1、3 行判 <span class="arithmatex">\(\omega_2\)</span></strong> ——
-  符号就是类别，没有例外 ✓</li>
+<li>
+<p>所以 g(x)/||w|| 才是真正的欧氏距离</p>
+</li>
+<li>
+<p><strong>第 2、4、5、6 行判 <span class="arithmatex">\(\omega_1\)</span>，第 1、3 行判 <span class="arithmatex">\(\omega_2\)</span></strong> ——
+  符号就是类别，没有例外 ✓</p>
+</li>
 <li><strong>第 4 行的 <span class="arithmatex">\(g\)</span> 值只有 <span class="arithmatex">\(0.9128\)</span></strong>，有向距离只有 <span class="arithmatex">\(0.4082\)</span> ——
   它<strong>分对了，但离边界很近</strong>，这类样本最危险 ⚠</li>
 <li><strong>投影点代回后 <span class="arithmatex">\(g\)</span> 几乎为 <span class="arithmatex">\(0\)</span></strong> —— 验证了正交投影的公式 ✓</li>
@@ -13251,8 +13251,8 @@ a = \begin{pmatrix} \boldsymbol{w} \\ b \end{pmatrix} \in \mathbb{R}^{d+1}\]</di
 <p>则</p>
 <div class="arithmatex">\[g(x) = \boldsymbol{w}^{\mathsf T}\phi(x) + b\]</div>
 <p>叫<strong>广义线性判别函数</strong>。</p>
-<p><strong>关键理解</strong>：<strong>「广义线性」对 <span class="arithmatex">\(x\)</span> 是非线性的，对参数 <span class="arithmatex">\(\boldsymbol{w}\)</span> 仍是线性的</strong> ✓</p>
-<p><strong>这一点为什么重要</strong>：所有线性分类器的理论（凸性、收敛定理、
+<p><strong>「广义线性」对 <span class="arithmatex">\(x\)</span> 是非线性的，对参数 <span class="arithmatex">\(\boldsymbol{w}\)</span> 仍是线性的</strong> ✓</p>
+<p>所有线性分类器的理论（凸性、收敛定理、
 正规方程）<strong>只在「对参数线性」这一条上成立</strong>，
 和「对输入是否线性」无关。所以搬到 <span class="arithmatex">\(\phi\)</span> 空间后，<strong>旧结论全部可用</strong> ✓</p>
 <figure class="kb-fig">
@@ -13637,11 +13637,11 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 <li>一个实根（判别式为 0）→ 退化成<strong>一个点</strong></li>
 <li>无实根 → <strong>整个实轴判同一类</strong>（这个判别函数失效了）</li>
 </ul>
-<p><strong>注意最后一行</strong>：广义线性判别函数<strong>可能「退化」成恒正或恒负</strong>，
+<p>广义线性判别函数<strong>可能「退化」成恒正或恒负</strong>，
 这时它一个样本也分不开。<strong>出现这种情况说明 <span class="arithmatex">\(\phi\)</span> 选得不合适</strong>，
 而不是数据不可分</p>
 <h3 id="33">3.3 三种做法的对比<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<p>特征变换这条路有三种走法，课上都必须分清：</p>
+<p>特征变换这条路有三种走法：</p>
 <table>
 <thead>
 <tr>
@@ -13705,7 +13705,7 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 <hr />
 <h2 id="_5">四、感知准则函数<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 设计准则：把「分类对不对」变成「一个数最小」<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>有了判别函数的形式，接下来的问题是：<strong>怎么定 <span class="arithmatex">\(a\)</span>？</strong></p>
+<p>有了判别函数的形式，问题是：<strong>怎么定 <span class="arithmatex">\(a\)</span>？</strong></p>
 <p>直接对着「错分样本个数最少」去优化是行不通的 ——
 <strong>错分个数是整数，对 <span class="arithmatex">\(a\)</span> 不可导</strong>，没法用梯度方法</p>
 <p><strong>所以需要一个「可导的代理目标」</strong>，这就是<strong>准则函数</strong>（判据）。
@@ -13732,13 +13732,13 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>第三条最关键</strong>：<strong>准则函数的设计，本质上就是「挑一个代理目标」</strong>，
+<p><strong>准则函数的设计，本质上就是「挑一个代理目标」</strong>，
 代理目标选得好不好，直接决定算法行为。</p>
 <h3 id="42">4.2 感知准则函数的定义<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p><strong>定义</strong>（只在<strong>错分样本</strong>上求和）：</p>
 <div class="arithmatex">\[J_P(a) = \sum_{z_i \in \mathcal{M}} (-a^{\mathsf T}z_i)\]</div>
 <p>其中 <span class="arithmatex">\(\mathcal{M} = \{z_i : a^{\mathsf T}z_i \leq 0\}\)</span> 是<strong>当前的错分样本集</strong>。</p>
-<p><strong>逐项读这个式子</strong>：</p>
+<p><strong>逐项看</strong>：</p>
 <ul>
 <li><span class="arithmatex">\(a^{\mathsf T}z_i \leq 0\)</span> 表示错分（规范化之后两类条件已经统一）</li>
 <li>前面加负号，<span class="arithmatex">\(-a^{\mathsf T}z_i \geq 0\)</span> —— <strong>让它变成一个非负量</strong></li>
@@ -13763,7 +13763,7 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 <p><span class="arithmatex">\(J_P\)</span> 对 <span class="arithmatex">\(a\)</span> 求梯度：只有错分样本那一部分对 <span class="arithmatex">\(a\)</span> 有贡献，每项是 <span class="arithmatex">\(-a^{\mathsf T}z_i\)</span>，
 对 <span class="arithmatex">\(a\)</span> 求导得 <span class="arithmatex">\(-z_i\)</span>，所以</p>
 <div class="arithmatex">\[\nabla J_P(a) = -\sum_{z_i \in \mathcal{M}} z_i\]</div>
-<p><strong>要点</strong>：<strong>梯度就是「错分样本之和取负」</strong></p>
+<p><strong>梯度就是「错分样本之和取负」</strong></p>
 <p><strong>梯度下降</strong>（步长 <span class="arithmatex">\(\rho \gt 0\)</span>，负梯度方向）：</p>
 <div class="arithmatex">\[a_{k+1} = a_k - \rho\,\nabla J_P(a_k) = a_k + \rho \sum_{z_i \in \mathcal{M}} z_i\]</div>
 <p><strong>这就是「批量修正」</strong>：一次把<strong>所有</strong>错分样本加起来挪一步。</p>
@@ -13807,11 +13807,10 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>注意第 4 行</strong>：单样本修正<strong>不保证 <span class="arithmatex">\(J_P\)</span> 每次更新都下降</strong>，
+<p>单样本修正<strong>不保证 <span class="arithmatex">\(J_P\)</span> 每次更新都下降</strong>，
 但<strong>保证收敛</strong>（下一节给证明）。这两件事不矛盾 ——
 <strong>收敛性靠的是「解的几何性质」，不是「目标函数的单调性」</strong></p>
-<p><strong>把这两件事都验一遍</strong>。
-先算 <span class="arithmatex">\(J_P\)</span> 的解析梯度，再与数值梯度对照，
+<p>先算 <span class="arithmatex">\(J_P\)</span> 的解析梯度，再与数值梯度对照，
 然后跑单样本修正看它收敛到哪里：</p>
 <ul>
 <li>感知准则函数 J(a) = 误分样本的 (-a.z) 之和</li>
@@ -13830,11 +13829,12 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 <li>收敛后 J = -0.00000000</li>
 <li>最小投影 min(a.z) = 0.0783</li>
 <li>几何间隔 = 0.0166</li>
-<li>权向量 a = [3.5904, 3.0478, 1.0000]</li>
-</ul>
-<p><strong>读这段输出，有三处值得停一下</strong>：</p>
-<ul>
-<li><strong>解析梯度与数值梯度完全一致</strong> —— 验证了 <span class="arithmatex">\(\nabla J_P = -\sum z_i\)</span></li>
+<li>
+<p>权向量 a = [3.5904, 3.0478, 1.0000]</p>
+</li>
+<li>
+<p><strong>解析梯度与数值梯度完全一致</strong> —— 验证了 <span class="arithmatex">\(\nabla J_P = -\sum z_i\)</span></p>
+</li>
 <li><strong>每轮误分数不是单调下降的</strong>：<span class="arithmatex">\(2 \to 4 \to 2 \to \dots\)</span>
   中间还出现过 <span class="arithmatex">\(4\)</span>。<strong>这就是单样本修正不保证 <span class="arithmatex">\(J_P\)</span> 单调的证据</strong></li>
 <li><strong>最小投影只有 <span class="arithmatex">\(0.0783\)</span></strong> —— 边界刚好把样本兜住，
@@ -13877,13 +13877,12 @@ g(x) = w_1 x + w_2 x^2 + b\]</div>
 <li><span class="arithmatex">\(a_0 \neq 0\)</span> 也可以，但<strong>最终解会不同</strong> ——
   因为线性可分时解<strong>有无穷多个</strong>，算法只保证「找到其中一个」</li>
 </ul>
-<p><strong>这一点必须提醒</strong>：<strong>「感知器收敛了」不等于「找到了好边界」</strong>，
+<p><strong>「感知器收敛了」不等于「找到了好边界」</strong>，
 只等于「找到了一个把样本分对的边界」。
 不同的初始值、不同的样本顺序，
 会给出<strong>不同的</strong>边界，泛化性能也可能差很多</p>
 <p>下面这张图把这套迭代机制画出来：
 每遇上一次错分样本，权向量就被<strong>推一下</strong>，
-推的方向与错分样本自己同向，
 直到<strong>所有样本都落在正确的一侧</strong>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 355.722344 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="感知器：错分样本把它推着走，直到全部分对">
@@ -14264,7 +14263,6 @@ L 348.470312 200.946
 <figcaption>感知器：错分样本把它推着走，直到全部分对</figcaption>
 </figure>
 
-<p><strong>看图时要抓住三件事</strong>：</p>
 <ul>
 <li><strong>边界是「被推出来的」，不是「被算出来的」</strong> ——
   最终位置完全由「推过哪些样本、按什么顺序推」决定</li>
@@ -14290,7 +14288,7 @@ L 348.470312 200.946
 迭代，则序列<strong>在有限步内停止</strong>，即存在 <span class="arithmatex">\(k^{*}\)</span> 使得
 <span class="arithmatex">\(a_{k^{*}}^{\mathsf T}z_i \gt 0\)</span> 对全部 <span class="arithmatex">\(i\)</span> 成立。</p>
 </blockquote>
-<p><strong>这句话里的每一个限定都不能删</strong>，逐条列出来：</p>
+<p><strong>这句话里的每一个限定都不能删</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14321,7 +14319,7 @@ L 348.470312 200.946
 </tr>
 </tbody>
 </table>
-<p><strong>还有两个「没有说」但极其重要的事</strong>，必须单独点明：</p>
+<p><strong>还有两个「没有说」但极其重要的事</strong>：</p>
 <div class="admonition warning">
 <p class="admonition-title">收敛定理没有保证的两件事</p>
 <p>第一，它没说收敛到哪一个解。</p>
@@ -14336,7 +14334,7 @@ L 348.470312 200.946
 下一小节会用具体数字展示这一点。</p>
 </div>
 <h3 id="52">5.2 证明思路（三步）<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
-<p><strong>完整证明很长，但骨架只有三步</strong>，每一步的「想干什么」要看懂。</p>
+<p><strong>完整证明很长，但骨架只有三步</strong>。</p>
 <p>第一步：证明 <span class="arithmatex">\(\lVert a_k\rVert\)</span> 有一个下界（而且会往上涨）。</p>
 <p>利用<strong>存在最优解</strong> <span class="arithmatex">\(a^{*}\)</span> 这一条件。把 <span class="arithmatex">\(a^{*}\)</span> 归一化，使 <span class="arithmatex">\(\lVert a^{*}\rVert = 1\)</span>，
 并记 <span class="arithmatex">\(\gamma = \min_i a^{*\mathsf T}z_i \gt 0\)</span>（这就是<strong>最优间隔</strong>）。</p>
@@ -14414,9 +14412,7 @@ L 348.470312 200.946
 那就要<strong>预期感知器很慢、而且解很不稳定</strong> ⚠</p>
 </div>
 <h3 id="53">5.3 核对这个上界<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
-<p><strong>图上是一次典型收敛过程</strong>：</p>
-<p>下面做两件事：
-<strong>跑感知器数出实际修正次数</strong>，再<strong>算出定理给的界</strong>，对照两者：</p>
+<p><strong>跑感知器数出实际修正次数</strong>，再<strong>算出定理给的界</strong>，对照两者：</p>
 <ul>
 <li>感知器收敛定理的界与实际值对照</li>
 <li>样本 80 个，增广维数 3</li>
@@ -14451,11 +14447,12 @@ L 348.470312 200.946
 </table>
 <ul>
 <li>几何间隔（投影/||w||） = 0.0166</li>
-<li>每轮误分数 = [2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 1, 0]</li>
-</ul>
-<p><strong>读这段输出，最扎眼的是那个比值</strong>：</p>
-<ul>
-<li><strong>实际修正 <span class="arithmatex">\(29\)</span> 次，界是 <span class="arithmatex">\(89404\)</span> 次</strong> —— 差了<strong>三千多倍</strong> ⚠</li>
+<li>
+<p>每轮误分数 = [2, 4, 2, 2, 2, 2, 4, 2, 2, 2, 2, 2, 1, 0]</p>
+</li>
+<li>
+<p><strong>实际修正 <span class="arithmatex">\(29\)</span> 次，界是 <span class="arithmatex">\(89404\)</span> 次</strong> —— 差了<strong>三千多倍</strong> ⚠</p>
+</li>
 <li><strong>为什么这么松</strong>：证明里用了两次很不紧的不等式
   （Cauchy–Schwarz 与「每步只涨 <span class="arithmatex">\(\rho^2R^2\)</span>」），
   而且这里的 <span class="arithmatex">\(\gamma\)</span> 是<strong>用最终解反推的</strong>，
@@ -14463,7 +14460,7 @@ L 348.470312 200.946
 <li><strong>但这不影响定理的价值</strong>：定理要证的是<strong>「有限步」</strong>，
   不是「步数很少」。<strong>「存在有限上界」和「上界够紧」是两回事</strong> ✓</li>
 </ul>
-<p><strong>顺便注意 <code>gamma</code> 只有 0.016</strong>：
+<p><strong>注意 <code>gamma</code> 只有 0.016</strong>：
 这说明两类样本<strong>几乎贴在一起</strong>（虽然仍然线性可分）。
 <strong>间隔这么小，边界的稳定性一定差</strong> —— 这正好是支持向量机要解决的问题 ✓</p>
 <hr />
@@ -14588,7 +14585,7 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 直到违反样本数突然不再下降 —— <strong>那个位置附近就是 <span class="arithmatex">\(b_{\max}\)</span></strong>。</p>
 </div>
 <h3 id="64">6.4 用一个表格把三种准则横向比清楚<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
-<p>这是本页<strong>最重要的一张表</strong>，请逐格对照：</p>
+<p>这是本页<strong>最重要的一张表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14649,7 +14646,6 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 </tr>
 </tbody>
 </table>
-<p><strong>从这张表能读出两条结论</strong>：</p>
 <ul>
 <li><strong>「求和范围」是区分准则的关键</strong>：
   前两个只关注「还没满足的样本」，最小二乘<strong>关心所有样本</strong> ——
@@ -14660,7 +14656,6 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
   就得到支持向量机 ✓</li>
 </ul>
 <h3 id="65-b">6.5 逐项验证：<span class="arithmatex">\(b\)</span> 就是「要求的最小投影」<a class="headerlink" href="#65-b" title="Permanent link">&para;</a></h3>
-<p>下面把「<span class="arithmatex">\(b\)</span> 的含义」算出来：</p>
 <ul>
 <li>松弛准则（每项按 ||z||^2 归一化）</li>
 <li>J(a) = 0.5 * sum( (b - a.z)^2 / ||z||^2 )，只对不满足 a.z &gt;= b 的样本求和</li>
@@ -14717,19 +14712,18 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 <li>
 <p>读法：b 就是「要求的最小投影」。收敛后最小投影正好被推到 b 附近，</p>
 </li>
-<li>所以想留多大余量，就把 b 设为多大 —— 这就是松弛方法的用处。</li>
-</ul>
-<p><strong>读这张表，注意两列之间的「一一对应」</strong>：</p>
-<ul>
-<li><strong><span class="arithmatex">\(b = 0.5\)</span> 时最小投影是 <span class="arithmatex">\(0.5000\)</span></strong>；<span class="arithmatex">\(b = 1.0\)</span> 时是 <span class="arithmatex">\(1.0000\)</span>；
-  <span class="arithmatex">\(b = 2.0\)</span> 时是 <span class="arithmatex">\(2.0000\)</span>；<span class="arithmatex">\(b = 3.0\)</span> 时是 <span class="arithmatex">\(3.0000\)</span> ✓</li>
-<li><strong>这就是松弛方法的核心机制</strong>：<strong>你要求多少，它就给你多少</strong> ——
-  因为 <span class="arithmatex">\(J_r = 0\)</span> 的定义就是「<strong>所有样本的投影都不小于 <span class="arithmatex">\(b\)</span></strong>」✓</li>
+<li>
+<p>所以想留多大余量，就把 b 设为多大 —— 这就是松弛方法的用处。</p>
+</li>
+<li>
+<p><strong>这就是松弛方法的核心机制</strong>：<strong>你要求多少，它就给你多少</strong> ——
+  因为 <span class="arithmatex">\(J_r = 0\)</span> 的定义就是「<strong>所有样本的投影都不小于 <span class="arithmatex">\(b\)</span></strong>」✓</p>
+</li>
 <li><strong><span class="arithmatex">\(J_r\)</span> 逐次不增</strong>（<code>True</code>）：这是松弛准则相对感知准则的理论优势 ✓</li>
 <li><strong>迭代次数都是 <span class="arithmatex">\(2\)</span></strong>：因为批量修正一步就把所有违反样本一次拉到位；
   真实的迭代法不会这么快，这里只是因为<strong>步长取到了 <span class="arithmatex">\(1.0\)</span></strong> ⚠</li>
 </ul>
-<p><strong>一个必须点破的坑</strong>：</p>
+<p><strong>一个坑</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14752,7 +14746,7 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行是很关键的提醒</strong>：
+<p><strong>最后一行</strong>：
 <strong>「松弛方法的余量」不是「几何间隔」</strong>。
 想真正最大化几何间隔，必须<strong>显式地约束 <span class="arithmatex">\(\lVert\boldsymbol{w}\rVert\)</span></strong> ——
 这正是支持向量机做的事 ✓</p>
@@ -14839,7 +14833,7 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 </tr>
 </tbody>
 </table>
-<p><strong>注意第一行</strong>：<span class="arithmatex">\(J_{LS}\)</span> <strong>把已经分对的样本也算进损失</strong>，
+<p><span class="arithmatex">\(J_{LS}\)</span> <strong>把已经分对的样本也算进损失</strong>，
 而且<strong>分得越「远」贡献越大</strong>。
 这是它有闭式解的代价，也是它对离群点敏感的原因</p>
 <h3 id="72">7.2 正规方程与闭式解<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
@@ -14853,7 +14847,7 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 <div class="arithmatex">\[a^{*} = \left(\tilde{X}^{\mathsf T}\tilde{X}\right)^{-1}\tilde{X}^{\mathsf T}t\]</div>
 <p><strong>注意这里没有迭代、没有步长、没有初始值</strong> ——
 <strong>一次矩阵求解就结束</strong></p>
-<p><strong>三个必须交代的细节</strong>：</p>
+<p><strong>三个细节</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14876,12 +14870,12 @@ a_{k+1} = a_k + \rho\sum_{i \in \mathcal{M}_b}
 </tr>
 </tbody>
 </table>
-<p><strong>第三行特别值得说明</strong>：
+<p><strong>第三行</strong>：
 <strong>最小二乘永远给你一个答案，但从不给警告</strong>。
 所以它的错误表现为「结果看着正常，但错误率就是高」，
 排查时容易误以为是数据有问题</p>
 <h3 id="73">7.3 几何意义：残差竖线<a class="headerlink" href="#73" title="Permanent link">&para;</a></h3>
-<p>把一维情形画出来最直观：</p>
+<p>一维情形最直观：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 362.599688 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="线性最小二乘：使残差平方和最小的那条线">
 
@@ -15377,7 +15371,7 @@ L 68.999688 41.17275
 <p><strong>为什么是「竖直」而不是「垂直」</strong>：因为回归把横轴当自变量、
 纵轴当因变量，<strong>只在因变量方向上量误差</strong>。
 这一点在分类问题里有重要后果：<strong>特征方向的误差被完全忽略了</strong></p>
-<p><strong>换到分类场景，这个后果很显眼</strong>：</p>
+<p><strong>换到分类场景</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -15400,7 +15394,7 @@ L 68.999688 41.17275
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行是最反直觉的地方</strong>：
+<p><strong>最后一行最反直觉</strong>：
 最小二乘<strong>惩罚「过度自信」</strong>。
 一个被正确分类、而且离边界很远的样本，
 如果 <span class="arithmatex">\(g(x) = 3\)</span> 而 <span class="arithmatex">\(t = 1\)</span>，它贡献 <span class="arithmatex">\((3-1)^2 = 4\)</span> 的损失 ——
@@ -15410,7 +15404,7 @@ L 68.999688 41.17275
 <p><strong>平方损失的放大效应</strong>：误差从 <span class="arithmatex">\(e\)</span> 变到 <span class="arithmatex">\(2e\)</span> 时，损失从 <span class="arithmatex">\(e^2\)</span> 变到 <span class="arithmatex">\(4e^2\)</span>。
 <strong>所以离群点的影响力与它的距离是平方关系</strong> ——
 一个距离 <span class="arithmatex">\(10\)</span> 倍远的点，<strong>影响力是 <span class="arithmatex">\(100\)</span> 倍</strong></p>
-<p>把这个效果算出来。下面同时验两件事：
+<p>下面同时验两件事：
 <strong>类别不平衡把偏置拉偏</strong>，以及<strong>一个离群点就足以挪动边界</strong>：</p>
 <ul>
 <li>一维两类，最小二乘把分类当回归做（目标取 +1 / -1）</li>
@@ -15437,8 +15431,6 @@ L 68.999688 41.17275
 <li>w = 0.2848, b = 0.0361, x0 = -0.1267</li>
 <li>阈值从 0.0272 移到 -0.1267，挪动了 0.1538</li>
 </ul>
-<p>一个点（只占 1.0% 的样本）就把边界挪了这么多</p>
-<p><strong>读这段输出，两组数字各自说明一件事</strong>：</p>
 <p><strong>甲 → 乙（类别不平衡）</strong>：</p>
 <ul>
 <li>阈值从 <span class="arithmatex">\(0.0272\)</span> 被推到 <span class="arithmatex">\(-2.6366\)</span>，<strong>移动了将近三个单位</strong></li>
@@ -15503,7 +15495,7 @@ L 68.999688 41.17275
 </tr>
 </tbody>
 </table>
-<p><strong>换一个角度看这张表</strong>：
+<p><strong>换个角度看</strong>：
 <strong>这几条不是几个独立缺陷，而是同一个设计选择在不同侧面的表现</strong> ——
 「把分类当成回归」。</p>
 <p><strong>所以正确的用法是</strong>：
@@ -15536,7 +15528,6 @@ L 68.999688 41.17275
 <strong>个别分类器判错不会改变最终结果</strong>
 这正像通信里的纠错码：<strong>冗余换取容错</strong></p>
 <h3 id="82">8.2 三种方案的量化对比<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
-<p>这是多类扩展<strong>最该记住的一张表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -15591,7 +15582,6 @@ L 68.999688 41.17275
 </tr>
 </tbody>
 </table>
-<p><strong>逐行读三处关键</strong>：</p>
 <p><strong>第一，分类器个数</strong>。
 <span class="arithmatex">\(K=10\)</span> 时 OVA 是 <span class="arithmatex">\(10\)</span> 个、OvO 是 <span class="arithmatex">\(45\)</span> 个。
 <strong>OvO 的分类器多得多</strong>，但每个只需要<strong>两类的样本</strong>，
@@ -15635,7 +15625,7 @@ OVA 的每一个二类问题里，正类是 <span class="arithmatex">\(1\)</span
 <strong>这正好踩在上一节讲的「最小二乘偏置被拉偏」的坑上</strong>
 OvO 里每个问题是两个类，<strong>比例天然接近 <span class="arithmatex">\(1:1\)</span></strong>，就绕开了这个坑</p>
 <h3 id="83">8.3 多类为什么不能直接类比两类<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
-<p><strong>一个必须点破的概念混淆</strong>。</p>
+<p><strong>一个概念混淆</strong>。</p>
 <p>在<strong>两类</strong>问题里，
 「<span class="arithmatex">\(g_1 \gt g_2\)</span>」与「<span class="arithmatex">\(g_1 - g_2 \gt 0\)</span>」是<strong>同一件事</strong> ——
 所以只需要<strong>一个</strong>判别函数。</p>
@@ -15716,7 +15706,7 @@ OvO 里每个问题是两个类，<strong>比例天然接近 <span class="arithm
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行值得多说一句</strong>：OVA 的第 <span class="arithmatex">\(k\)</span> 个判别函数
+<p><strong>最后一行</strong>：OVA 的第 <span class="arithmatex">\(k\)</span> 个判别函数
 <strong>本身是一条超平面</strong>，可以画出来、
 也能解释成「这个类的分数由哪些特征决定」。
 OvO 与 ECOC 的判决是<strong>投票或查表的结果</strong>，
@@ -15811,8 +15801,7 @@ OvO 与 ECOC 的判决是<strong>投票或查表的结果</strong>，
 <strong>把后两个不等式相加</strong>：左边是 <span class="arithmatex">\(2b\)</span>，右边是 <span class="arithmatex">\(0\)</span>，所以 <span class="arithmatex">\(b \lt 0\)</span>。</p>
 <p><strong><span class="arithmatex">\(b \gt 0\)</span> 与 <span class="arithmatex">\(b \lt 0\)</span> 同时成立，矛盾</strong> ——
 所以这样的 <span class="arithmatex">\(w_1, w_2, b\)</span> <strong>不存在</strong></p>
-<p><strong>这个证明很短、很干净，而且不依赖任何几何直觉</strong>，
-非常适合手写</p>
+<p><strong>这个证明很短、很干净，而且不依赖任何几何直觉</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">异或不可分是「线性」的局限，不是「分类器」的局限</p>
 <p>容易把这件事说成「感知器太笨」或「最小二乘不够好」。
@@ -15868,9 +15857,9 @@ OvO 与 ECOC 的判决是<strong>投票或查表的结果</strong>，
 </tr>
 </tbody>
 </table>
-<p><strong>读这张表</strong>：<strong>三条路的本质是同一件事 —— 放弃「边界必须是超平面」</strong> ✓
+<p><strong>三条路的本质是同一件事 —— 放弃「边界必须是超平面」</strong> ✓
 区别只在「谁来放弃」：<strong>人（设计特征）、网络（学特征）、还是方法本身</strong>。</p>
-<p><strong>所以线性分类器的定位应该这样说</strong>：
+<p><strong>线性分类器的定位</strong>：
 <strong>它是「一切方法的基本构件」，不是「一个够用就够了的方案」</strong>。
 遇到线性不可分，要换的<strong>不是算法，而是表示</strong></p>
 <hr />
@@ -16054,7 +16043,7 @@ a_1^{\mathsf T}z_2 = 1 \times (-2) + 2 \times 1 + 1 \times 1
 </tbody>
 </table>
 <p><strong>区别在于「求和为空」还是「每一项都为零」</strong> ✓</p>
-<p><strong>这说明什么</strong>：<strong>准则函数与分类目标之间需要一个额外的条件
+<p><strong>准则函数与分类目标之间需要一个额外的条件
 （<span class="arithmatex">\(a \neq 0\)</span>）才能画等号</strong> ⚠
 这也是实践里从 <span class="arithmatex">\(a = 0\)</span> 出发时必须<strong>先修正一次</strong>的原因 ——
 否则算法会「认为」已经没什么可做的了。</p>
@@ -16115,7 +16104,7 @@ a_1^{\mathsf T}z_2 = 1 \times (-2) + 2 \times 1 + 1 \times 1
 事实上模长从 <span class="arithmatex">\(4.71\)</span> 涨到 <span class="arithmatex">\(15.80\)</span>，放大了约 <span class="arithmatex">\(3.35\)</span> 倍；
 而几何间隔放大了 <span class="arithmatex">\(0.0633/0.0166 \approx 3.81\)</span> 倍 ——
 <strong>投影的放大倍数（约 <span class="arithmatex">\(12.8\)</span> 倍）几乎全被模长的变大吃掉了</strong> ⚠</p>
-<p><strong>一句话</strong>：<strong>光靠「投影等于 <span class="arithmatex">\(b\)</span>」这条约束，无法阻止模长跟着涨，
+<p><strong>光靠「投影等于 <span class="arithmatex">\(b\)</span>」这条约束，无法阻止模长跟着涨，
 所以它对几何间隔只有间接、有限的提升作用</strong> ✓</p>
 <p><strong>（丙）该看几何间隔。</strong></p>
 <p><strong>理由</strong>：几何间隔是<strong>尺度无关</strong>的，
@@ -16150,7 +16139,7 @@ a_1^{\mathsf T}z_2 = 1 \times (-2) + 2 \times 1 + 1 \times 1
 </tr>
 </tbody>
 </table>
-<p><strong>这说明什么</strong>：<strong>「余量」有两种含义</strong> ——
+<p><strong>「余量」有两种含义</strong> ——
 数学上的「投影大于 <span class="arithmatex">\(b\)</span>」与几何上的「距离大于某个量」。
 <strong>松弛方法用的是前者，最大间隔方法用的是后者</strong> ⚠
 混淆这两者，会把「松弛方法的解比较稳」这句话说过头。</p>
@@ -16236,7 +16225,7 @@ a_1^{\mathsf T}z_2 = 1 \times (-2) + 2 \times 1 + 1 \times 1
 </tr>
 </tbody>
 </table>
-<p><strong>这说明什么</strong>：<strong>多类扩展没有「通用最优方案」</strong>，
+<p><strong>多类扩展没有「通用最优方案」</strong>，
 选择取决于<strong>你更怕哪一种失败</strong> ——
 怕训练慢、怕不平衡、还是怕判决无定义 ⚠
 四个场景分别对应了四种不同的「怕」。</p>

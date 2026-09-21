@@ -11913,28 +11913,23 @@
 </tbody>
 </table>
 <p><strong>为什么这样分层</strong>：内层快、外层慢 —— 外层的指令，靠内层去「实现」。
-位置环只需要下达「转到多少度」，下面两层负责把力矩和速度调好。
-<strong>这一页讲的，是最外层的「位置环」。</strong></p>
+位置环只需要下达「转到多少度」，下面两层负责把力矩和速度调好。</p>
 <h3 id="12">1.2 两个层次：关节空间 与 笛卡尔空间<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>机器人位置控制可以在两个层面去做，<strong>它们的难度完全不同</strong>：</p>
 <p>· <strong>关节空间</strong>：直接控制每个关节角 <span class="arithmatex">\(\boldsymbol{q}\)</span> —— 简单、成熟，
   工业机器人的<strong>出厂控制器</strong>大多就是这一层；
 · <strong>笛卡尔空间</strong>：直接控制末端位姿 <span class="arithmatex">\(\boldsymbol{x}\)</span> —— 更贴近任务（"把杯子移到那"），
   但要<strong>经过运动学</strong>（正解 / 逆解 / 雅可比），复杂得多，也更容易出问题（奇异性）。</p>
-<p><strong>两者的桥梁是微分运动学</strong>：<span class="arithmatex">\(\dot{\boldsymbol{x}} = \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}\)</span>。
-这句话会在第四节反复用到。</p>
+<p><strong>两者的桥梁是微分运动学</strong>：<span class="arithmatex">\(\dot{\boldsymbol{x}} = \boldsymbol{J}(\boldsymbol{q})\dot{\boldsymbol{q}}\)</span>。</p>
 <div class="admonition tip">
 <p class="admonition-title">记住这条主线</p>
-<p>这一页的四节，是同一件事的四个尺度：
-<strong>先看清位置控制的层次（一）→ 单关节怎么闭环（二）→ 多关节怎么协调（三）→ 末端怎么保证精度（四）</strong>。
-贯穿始终的只有一个问题：<strong>如何让被控量又快又准地跟住目标，同时不被耦合与奇异拖垮</strong>。</p>
+<p>贯穿始终的只有一个问题：<strong>如何让被控量又快又准地跟住目标，同时不被耦合与奇异拖垮</strong>。</p>
 </div>
 <h3 id="13">1.3 为什么位置控制是「主菜」<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>· <strong>工业场景大多是「点位 / 轨迹」任务</strong>：焊接、搬运、喷涂、上下料 ——
   只要<strong>走得准</strong>，就成了。位置控制够用；
-· <strong>位置控制是「地基」</strong>：力控制、视觉伺服、阻抗控制……都是在位置环之上再套一层。
-  地基不稳，上层都是空中楼阁。</p>
-<p><strong>所以先把位置控制讲透 —— 它是后面所有控制器件的参照系。</strong></p>
+· <strong>位置控制是「地基」</strong>：力控制、视觉伺服、阻抗控制……都是在位置环之上再套一层。</p>
+<p>所以先把位置控制讲透 —— 它是后面所有控制器件的参照系。</p>
 <hr />
 <h2 id="_3">二、单关节位置控制：一个闭环最小的样子<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 关节伺服的简化模型<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -11978,7 +11973,7 @@ J\ddot{\theta} = \tau - b\dot{\theta} - \tau_d
 </tr>
 </tbody>
 </table>
-<p>下面这张方框图把闭环的每个环节摆在一起，恒定负载是从哪里灌进来的也标了出来：</p>
+<p>下面这张方框图把闭环的每个环节摆在一起：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 460 262" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="单关节位置闭环方框图：期望角、比较、控制器、关节对象与反馈">
 <defs>
@@ -12022,9 +12017,8 @@ J\ddot{\theta} = \tau - b\dot{\theta} - \tau_d
 </ul>
 <p><strong>读这张表，三件事一目了然</strong>：</p>
 <ol>
-<li><strong>纯 P 的稳态误差正好是 <span class="arithmatex">\(\tau_d/K_p = 0.5/20 = 0.025\)</span> rad</strong> ——
-   和理论值<strong>分毫不差</strong>。这不是巧合：稳态时 <span class="arithmatex">\(\ddot{\theta}=\dot{\theta}=0\)</span>，
-   方程退化，必须靠偏差「换」出力矩：<span class="arithmatex">\(K_p e = \tau_d\)</span>；</li>
+<li><strong>纯 P 的稳态误差正好是 <span class="arithmatex">\(\tau_d/K_p = 0.5/20 = 0.025\)</span> rad</strong>，
+   和理论值<strong>分毫不差</strong>；</li>
 <li><strong>PD 消不掉稳态误差</strong>（还是 <span class="arithmatex">\(0.025\)</span>），但它把<strong>超调压到 0</strong> ——
    微分项加阻尼，让系统<strong>不过冲</strong>；</li>
 <li><strong>PID 把稳态误差压到 <span class="arithmatex">\(10^{-5}\)</span> 量级以下</strong>（表中显示 <span class="arithmatex">\(-0.00000\)</span>）——
@@ -12057,7 +12051,6 @@ J\ddot{\theta} = \tau - b\dot{\theta} - \tau_d
 <p class="admonition-title">为什么纯 P 一定有稳态误差</p>
 <p>只要有一个<strong>恒定的干扰力矩</strong> <span class="arithmatex">\(\tau_d\)</span>（重力、摩擦），
 纯 P 就<strong>必须靠偏差出力</strong>去抵消它：<span class="arithmatex">\(K_p e = \tau_d \Rightarrow e = \tau_d/K_p\)</span>。
-偏差是「换取力矩」的代价 —— 想减小，要么加大 <span class="arithmatex">\(K_p\)</span>，要么加积分项。
 <strong>增大 <span class="arithmatex">\(K_p\)</span> 只能减小误差、永远消不掉；只有积分项能真正归零。</strong></p>
 </div>
 <hr />
@@ -12304,8 +12297,7 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 <strong>力</strong>的问题 —— 位置和力在接触瞬间是<strong>强耦合</strong>的：
 <span class="arithmatex">\(\delta F \approx k\,\delta x\)</span>（<span class="arithmatex">\(k\)</span> 是接触刚度）。位置稍微过一点，力就爆炸。</p>
 <p><strong>正确做法</strong>：切换到<strong>力控制 / 柔顺控制</strong>——
-不再死盯位置，而是<strong>控制接触力</strong>（或让末端像弹簧一样「软」）。
-这正是下一章的内容。</p>
+不再死盯位置，而是<strong>控制接触力</strong>（或让末端像弹簧一样「软」）。</p>
 <p><strong>一句话</strong>：<strong>位置控制管「到没到」，力控制管「多重」；
 一旦任务里有接触，「到没到」就不再是决定成败的量。</strong></p>
 </details>
@@ -12451,10 +12443,6 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 </ol>
 <hr />
 <p><strong>下一章</strong>：<a href="../force-control/">机器人的力控制</a></p>
-<p>这一页把「<strong>走得准</strong>」讲透了 —— 但只要任务里有<strong>接触</strong>（装配、打磨、抓取），
-「走得准」就不够了：位置稍微过一点，接触力就会爆炸。
-下一章转入<strong>力控制与柔顺控制</strong>，看机器人如何学会「手上使多大劲」——
-这正是本页末尾例题 4 埋下的伏笔。</p>
 <p><strong>上一页</strong>：<a href="../sensing/">机器人的传感系统与信息融合</a></p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../sensing/">机器人的传感系统与信息融合</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../force-control/">机器人的力控制</a></span></div></nav>
 

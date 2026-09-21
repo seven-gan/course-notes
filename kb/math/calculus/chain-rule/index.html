@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="链式法则与反向传播：上一页讲了单变量求导。这一页讲复合函数的求导，以及它在神经网络训练中的决定性应用。链式法则：变化率可以沿复合链条逐级传递。形式简单，但它是反向传播算法（所有神经网络训练的底层机制）的全部数学依据。">
+    <meta name="description" content="链式法则与反向传播：上一页讲单变量求导。这页讲复合函数求导及其在神经网络训练中的决定性应用。链式法则：变化率可沿复合链条逐级传递。形式简单，却是反向传播算法（一切神经网络训练的底层机制）的依据。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="链式法则与反向传播">
   
-  <meta property="og:description" content="链式法则与反向传播：上一页讲了单变量求导。这一页讲复合函数的求导，以及它在神经网络训练中的决定性应用。链式法则：变化率可以沿复合链条逐级传递。形式简单，但它是反向传播算法（所有神经网络训练的底层机制）的全部数学依据。">
+  <meta property="og:description" content="链式法则与反向传播：上一页讲单变量求导。这页讲复合函数求导及其在神经网络训练中的决定性应用。链式法则：变化率可沿复合链条逐级传递。形式简单，却是反向传播算法（一切神经网络训练的底层机制）的依据。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/calculus/chain-rule/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="链式法则与反向传播">
   
-  <meta name="twitter:description" content="链式法则与反向传播：上一页讲了单变量求导。这一页讲复合函数的求导，以及它在神经网络训练中的决定性应用。链式法则：变化率可以沿复合链条逐级传递。形式简单，但它是反向传播算法（所有神经网络训练的底层机制）的全部数学依据。">
+  <meta name="twitter:description" content="链式法则与反向传播：上一页讲单变量求导。这页讲复合函数求导及其在神经网络训练中的决定性应用。链式法则：变化率可沿复合链条逐级传递。形式简单，却是反向传播算法（一切神经网络训练的底层机制）的依据。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11995,15 +11995,15 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Mathematics for Machine Learning（§5.2～5.6 Partial Differentiation and Gradients / Backpropagation and Automatic Differentiation）</code><code>现有讲义「第 2 讲 微积分」B.3–B.4 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《高等数学》复合函数求导章节（术语与定义通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">链式法则与反向传播<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>上一页讲了单变量求导。这一页讲<strong>复合函数</strong>的求导，以及它在神经网络训练中的
+<p>上一页讲单变量求导。这页讲<strong>复合函数</strong>求导及其在神经网络训练中的
 决定性应用。</p>
 <blockquote>
-<p><strong>链式法则：变化率可以沿复合链条逐级传递。</strong></p>
+<p><strong>链式法则：变化率可沿复合链条逐级传递。</strong></p>
 </blockquote>
 <div class="arithmatex">\[
 \big(f(g(x))\big)' = f'(g(x))\cdot g'(x)
 \]</div>
-<p>形式简单，但它是<strong>反向传播算法</strong>（所有神经网络训练的底层机制）的全部数学依据。</p>
+<p>形式简单，却是<strong>反向传播算法</strong>（一切神经网络训练的底层机制）的依据。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么这一条法则如此重要</p>
 <table>
@@ -12032,7 +12032,6 @@
 </tr>
 </tbody>
 </table>
-<p>理解这几点，才能看懂「训练为什么能成功、为什么会失败」。</p>
 </div>
 <hr />
 <h2 id="_2">一、单变量链式法则<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12041,8 +12040,8 @@
 <div class="arithmatex">\[
 \frac{\mathrm{d}y}{\mathrm{d}x} = \frac{\mathrm{d}y}{\mathrm{d}u}\cdot\frac{\mathrm{d}u}{\mathrm{d}x}
 \]</div>
-<p><strong>看起来像「分数约分」</strong>（<span class="arithmatex">\(\mathrm{d}u\)</span> 约掉），但这不是严格证明——
-不过它确实提供了正确的直觉。</p>
+<p><strong>看似「分数约分」</strong>（<span class="arithmatex">\(\mathrm{d}u\)</span> 约掉），但并非严格证明——
+但提供了正确的直觉。</p>
 <h3 id="_3">直觉：变化率的传递<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(x\)</span> 变化 <span class="arithmatex">\(\Delta x\)</span>：</p>
 <table>
@@ -12072,32 +12071,32 @@
 <p>取极限即得结论。</p>
 <div class="admonition note">
 <p class="admonition-title">为什么「约分」的直觉是对的（但需小心）</p>
-<p>严格做法是：</p>
+<p>严格做法：</p>
 <div class="arithmatex">\[
 \frac{\Delta y}{\Delta x} = \frac{\Delta y}{\Delta u}\cdot\frac{\Delta u}{\Delta x}
 \]</div>
-<p>这在 <span class="arithmatex">\(\Delta u \neq 0\)</span> 时<strong>恒等成立</strong>（只是乘除）。</p>
-<p>问题在于：当 <span class="arithmatex">\(\Delta x \to 0\)</span> 时，可能 <span class="arithmatex">\(\Delta u = 0\)</span>（例如 <span class="arithmatex">\(g\)</span> 在该点是局部常数），
+<p>这在 <span class="arithmatex">\(\Delta u \neq 0\)</span> 时<strong>恒等成立</strong>（仅乘除）。</p>
+<p>问题在于：<span class="arithmatex">\(\Delta x \to 0\)</span> 时可能 <span class="arithmatex">\(\Delta u = 0\)</span>（如 <span class="arithmatex">\(g\)</span> 在该点是局部常数），
 此时不能除 <span class="arithmatex">\(\Delta u\)</span>。</p>
-<p><strong>严格证明需要分情形讨论</strong>，但结论仍然成立。工程使用中记住结论即可。</p>
+<p><strong>严格证明需分情形讨论</strong>，但结论成立。工程中记住结论即可。</p>
 </div>
 <h3 id="_4">多层复合<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p>可以无限延伸：</p>
+<p>可无限延伸：</p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}y}{\mathrm{d}x}
 = \frac{\mathrm{d}y}{\mathrm{d}u_1}\cdot\frac{\mathrm{d}u_1}{\mathrm{d}u_2}\cdots\frac{\mathrm{d}u_{n-1}}{\mathrm{d}u_n}\cdot\frac{\mathrm{d}u_n}{\mathrm{d}x}
 \]</div>
-<p><strong>这就是「连乘」结构的来源</strong>——也是梯度消失/爆炸的根源（见第四节）。</p>
+<p><strong>这是「连乘」结构的来源</strong>——也是梯度消失/爆炸的根源（见第四节）。</p>
 <hr />
 <h2 id="_5">二、多元链式法则<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>机器学习中函数几乎都是多元的，需要多元版本。</p>
+<p>机器学习的函数几乎都是多元的，需多元版本。</p>
 <h3 id="1">情形 1：单路径（标量函数嵌入）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(z = f(\boldsymbol{x})\)</span>，而 <span class="arithmatex">\(\boldsymbol{x} = \boldsymbol{g}(t)\)</span>（<span class="arithmatex">\(\boldsymbol{x}\)</span> 是 <span class="arithmatex">\(t\)</span> 的向量函数）。
 则</p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}z}{\mathrm{d}t} = \sum_i \frac{\partial z}{\partial x_i}\frac{\mathrm{d}x_i}{\mathrm{d}t}
 \]</div>
-<p><strong>含义</strong>：<span class="arithmatex">\(t\)</span> 通过<strong>每一条路径</strong>影响 <span class="arithmatex">\(z\)</span>，把各路径的贡献<strong>相加</strong>。</p>
+<p><strong>含义</strong>：<span class="arithmatex">\(t\)</span> 经<strong>每条路径</strong>影响 <span class="arithmatex">\(z\)</span>，各路径贡献<strong>相加</strong>。</p>
 <h3 id="2">情形 2：多路径（最关键的情形）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(z\)</span> 依赖中间变量 <span class="arithmatex">\(u_1,\dots,u_m\)</span>，而各 <span class="arithmatex">\(u_j\)</span> 都依赖 <span class="arithmatex">\(x\)</span>：</p>
 <div class="arithmatex">\[
@@ -12105,25 +12104,11 @@
 \]</div>
 <div class="admonition tip">
 <p class="admonition-title">「路径求和」是多元链式法则的核心</p>
-<p><strong>画一张计算图</strong>就能看清：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#__codelineno-0-6">6</a></span>
-<span class="normal"><a href="#__codelineno-0-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>     x
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>    /|\
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>   / | \
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a> u₁  u₂  u₃
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>   \ | /
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a>    \|/
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a>     z
-</code></pre></div></td></tr></table></div>
-<p><span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(z\)</span> 有 3 条路径，<strong>总梯度是 3 条路径贡献之和</strong>。</p>
-<p><strong>这正是反向传播的规则</strong>：每个节点把来自所有下游分支的梯度<strong>累加</strong>。</p>
-<p><strong>反例警示</strong>：若漏掉某条路径，梯度就会算错。
-这在实现复杂网络时是最常见的 bug 来源。</p>
+<p><strong>画计算图</strong>就能看清（见图）：<span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(z\)</span> 有 3 条路径，
+<strong>总梯度是 3 条路径贡献之和</strong>。</p>
+<p><strong>这正是反向传播的规则</strong>：每个节点把下游分支的梯度<strong>累加</strong>。</p>
+<p><strong>反例警示</strong>：漏掉某条路径，梯度就算错。
+这是实现复杂网络时最常见的 bug 来源。</p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="计算图与反向传播的梯度累加">
@@ -12133,15 +12118,20 @@
 </defs>
 <!-- 正向：左到右 -->
 <text class="lbl-s" x="14" y="18">正向传播</text>
-<circle class="d1" cx="40" cy="118" r="16"/>
+<circle class="f1" cx="40" cy="118" r="16" style="opacity:0.22"/>
+<circle class="a1" cx="40" cy="118" r="16" fill="none"/>
 <text class="l1" x="34" y="123">x</text>
-<circle class="d3" cx="150" cy="58" r="18"/>
+<circle class="f3" cx="150" cy="58" r="18" style="opacity:0.22"/>
+<circle class="a3" cx="150" cy="58" r="18" fill="none"/>
 <text class="l3" x="143" y="63">u₁</text>
-<circle class="d3" cx="150" cy="118" r="18"/>
+<circle class="f3" cx="150" cy="118" r="18" style="opacity:0.22"/>
+<circle class="a3" cx="150" cy="118" r="18" fill="none"/>
 <text class="l3" x="143" y="123">u₂</text>
-<circle class="d3" cx="150" cy="178" r="18"/>
+<circle class="f3" cx="150" cy="178" r="18" style="opacity:0.22"/>
+<circle class="a3" cx="150" cy="178" r="18" fill="none"/>
 <text class="l3" x="143" y="183">u₃</text>
-<circle class="d2" cx="272" cy="118" r="18"/>
+<circle class="f2" cx="272" cy="118" r="18" style="opacity:0.22"/>
+<circle class="a2" cx="272" cy="118" r="18" fill="none"/>
 <text class="l2" x="265" y="123">z</text>
 <!-- 边 -->
 <line class="a1" x1="56" y1="112" x2="130" y2="64" marker-end="url(#cr1-ah1)"/>
@@ -12172,18 +12162,13 @@
 \qquad
 \boldsymbol{a}^{(\ell)} = \sigma(\boldsymbol{z}^{(\ell)})
 \]</div>
-<p>损失 <span class="arithmatex">\(\mathcal{L}\)</span> 依赖最后一层的输出。</p>
+<p>损失 <span class="arithmatex">\(\mathcal{L}\)</span> 依赖最后一层输出。</p>
 <p><strong>要算的是</strong>：<span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial W^{(\ell)}}\)</span> 与
 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial \boldsymbol{b}^{(\ell)}}\)</span>（对<strong>每一层</strong>）。</p>
 <h3 id="_8">朴素做法：为什么不可行<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<p><strong>数值求导</strong>（逐个参数扰动）：设网络有 <span class="arithmatex">\(10^6\)</span> 个参数。
-每算一个偏导要做一次前向传播 →</p>
-<div class="arithmatex">\[
-10^6 \ \text{次前向传播}
-\]</div>
-<p><strong>完全不可行。</strong></p>
+<p><strong>数值求导</strong>逐个扰动参数：<span class="arithmatex">\(10^6\)</span> 个参数就要 <span class="arithmatex">\(10^6\)</span> 次前向，<strong>不可行</strong>。</p>
 <h3 id="_9">反向传播：一次反向遍历搞定<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p><strong>关键观察</strong>：链式法则的作用是<strong>复用中间结果</strong>。</p>
+<p><strong>关键观察</strong>：链式法则<strong>复用中间结果</strong>。</p>
 <p>定义第 <span class="arithmatex">\(\ell\)</span> 层的<strong>误差项</strong>（损失对该层线性输出的梯度）：</p>
 <div class="arithmatex">\[
 \boldsymbol{\delta}^{(\ell)} = \frac{\partial\mathcal{L}}{\partial\boldsymbol{z}^{(\ell)}}
@@ -12207,14 +12192,14 @@
 <tr>
 <th>方法</th>
 <th>复杂度</th>
-<th><span class="arithmatex">\(10^6\)</span> 参数时的代价</th>
+<th><span class="arithmatex">\(10^6\)</span> 参数代价</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>数值求导</td>
 <td><span class="arithmatex">\(O(n)\)</span> 次前向</td>
-<td><span class="arithmatex">\(10^6\)</span> 次前向传播</td>
+<td><span class="arithmatex">\(10^6\)</span> 次前向</td>
 </tr>
 <tr>
 <td><strong>反向传播</strong></td>
@@ -12223,11 +12208,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong><span class="arithmatex">\(10^6\)</span> 倍的加速</strong>——这是深度学习可行的前提。</p>
+<p><strong><span class="arithmatex">\(10^6\)</span> 倍的加速</strong>——深度学习可行的前提。</p>
 <p><strong>2. 需要保存中间结果</strong></p>
 <p>递推式用到 <span class="arithmatex">\(\boldsymbol{z}^{(\ell)}\)</span> 与 <span class="arithmatex">\(\boldsymbol{a}^{(\ell-1)}\)</span>，
-所以<strong>前向传播时必须缓存激活值</strong>。</p>
-<p><strong>这就是 GPU 显存的主要开销来源</strong>：
+所以<strong>前向传播必须缓存激活值</strong>。</p>
+<p><strong>这是 GPU 显存的主要开销来源</strong>：
 网络越深、批量越大，缓存越多。</p>
 <p><strong>工程权衡：</strong></p>
 <table>
@@ -12250,11 +12235,11 @@
 </table>
 </div>
 <h3 id="_10">为什么叫「反向」<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p>因为梯度<strong>从输出层逐层回传到输入层</strong>，方向与正向传播相反。</p>
-<p>这与「多路径求和」一致：每一层收集来自<strong>下游所有路径</strong>的梯度贡献。</p>
+<p>梯度<strong>从输出层逐层回传到输入层</strong>，方向与正向传播相反；
+每一层收集<strong>下游所有路径</strong>的梯度贡献（与「多路径求和」一致）。</p>
 <hr />
 <h2 id="_11">四、梯度消失与梯度爆炸<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
-<p>这是链式法则的<strong>「连乘」结构</strong>带来的直接后果。</p>
+<p>这是链式法则<strong>「连乘」结构</strong>的直接后果。</p>
 <h3 id="_12">机制<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>多层网络的梯度是<strong>连乘</strong>：</p>
 <div class="arithmatex">\[
@@ -12262,10 +12247,42 @@
 = \frac{\partial\mathcal{L}}{\partial\boldsymbol{a}^{(L)}}\cdot
 \prod_{\ell=2}^{L}\frac{\partial\boldsymbol{a}^{(\ell)}}{\partial\boldsymbol{a}^{(\ell-1)}}
 \]</div>
-<p><strong>若每层的雅可比范数约等于 <span class="arithmatex">\(c\)</span></strong>，则 <span class="arithmatex">\(L\)</span> 层的总梯度量级约为</p>
+<p><strong>若每层雅可比范数约等于 <span class="arithmatex">\(c\)</span></strong>，则 <span class="arithmatex">\(L\)</span> 层梯度量级约为</p>
 <div class="arithmatex">\[
 c^{L}
 \]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="深层复合函数的梯度沿链路逐层连乘">
+<defs>
+<marker id="cr2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a1" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<text class="lbl" x="14" y="22">深层复合：梯度沿链路逐层连乘</text>
+<circle class="f1" cx="46" cy="86" r="16"/>
+<circle class="a1" cx="46" cy="86" r="16"/>
+<text class="l1" x="40" y="91">x</text>
+<circle class="f3" cx="152" cy="86" r="16"/>
+<circle class="a3" cx="152" cy="86" r="16"/>
+<text class="l3" x="143" y="91">a₁</text>
+<circle class="f3" cx="258" cy="86" r="16"/>
+<circle class="a3" cx="258" cy="86" r="16"/>
+<text class="l3" x="249" y="91">a₂</text>
+<circle class="f2" cx="364" cy="86" r="16"/>
+<circle class="a2" cx="364" cy="86" r="16"/>
+<text class="l2" x="352" y="91">a_L</text>
+<line class="a1" x1="62" y1="86" x2="134" y2="86" marker-end="url(#cr2-ah1)"/>
+<line class="a1" x1="168" y1="86" x2="240" y2="86" marker-end="url(#cr2-ah1)"/>
+<line class="a1" x1="274" y1="86" x2="346" y2="86" marker-end="url(#cr2-ah1)"/>
+<text class="l2" x="76" y="108">× f₁′</text>
+<text class="l2" x="182" y="108">× f₂′</text>
+<text class="l2" x="288" y="108">× f_L′</text>
+<text class="lbl-s" x="14" y="150">总梯度 ∂L/∂x = ∂L/∂a_L · f_L′ ⋯ f₂′ · f₁′（各层导数连乘）</text>
+<text class="lbl-s" x="14" y="176">若每层因子量级约为 c，则 L 层后总量级约为 c^L：</text>
+<text class="l1" x="14" y="202">c &lt; 1 → 梯度消失（浅层几乎学不到）</text>
+<text class="l2" x="14" y="228">c &gt; 1 → 梯度爆炸（训练发散）</text>
+</svg>
+<figcaption>图 2　把深层网络看成一条复合函数链：梯度沿链路反向传递，每经过一层就乘上该层导数 f′。总梯度是<b>各层导数连乘</b>——因子普遍偏小就指数衰减（梯度消失），偏大就指数增长（梯度爆炸）</figcaption>
+</figure>
+
 <table>
 <thead>
 <tr>
@@ -12328,11 +12345,11 @@ c^{L}
 </tr>
 <tr>
 <td>训练发散</td>
-<td>需要重新调参</td>
+<td>需重新调参</td>
 </tr>
 </tbody>
 </table>
-<p><strong>注意</strong>：这个问题<strong>与激活函数的选择密切相关</strong>。</p>
+<p><strong>注意</strong>：该问题<strong>与激活函数选择密切相关</strong>。</p>
 </div>
 <h3 id="_13">常见对策<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <table>
@@ -12345,7 +12362,7 @@ c^{L}
 <tbody>
 <tr>
 <td><strong>ReLU 激活</strong></td>
-<td>正区间导数为 1，不衰减（对比 sigmoid 导数最大 0.25）</td>
+<td>正区间导数为 1，不衰减（sigmoid 导数最大 0.25）</td>
 </tr>
 <tr>
 <td><strong>残差连接</strong></td>
@@ -12365,7 +12382,7 @@ c^{L}
 </tr>
 <tr>
 <td><strong>合适的初始化</strong></td>
-<td>Xavier / He 初始化控制方差</td>
+<td>Xavier / He 控制方差</td>
 </tr>
 </tbody>
 </table>
@@ -12380,9 +12397,9 @@ c^{L}
 0.25^{50} \approx 8\times10^{-31}
 \]</div>
 <p><strong>完全消失。</strong></p>
-<p>相比之下 ReLU 在正区间导数为 <span class="arithmatex">\(1\)</span>，连乘不会衰减
-（但负区间导数为 0，会有「神经元死亡」问题）。</p>
-<p>这解释了<strong>为什么现代网络基本都用 ReLU 及其变体</strong>。</p>
+<p>相比之下 ReLU 正区间导数为 <span class="arithmatex">\(1\)</span>，连乘不衰减
+（但负区间导数为 0，有「神经元死亡」问题）。</p>
+<p>这解释了<strong>现代网络基本都用 ReLU 及变体</strong>。</p>
 </div>
 <hr />
 <h2 id="_14">五、典型例题<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
@@ -12394,7 +12411,7 @@ c^{L}
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>分解复合结构</strong>：</p>
+<p><strong>分解结构</strong>：</p>
 <div class="arithmatex">\[
 y = \sin(u), \qquad u = e^{v}, \qquad v = 2x
 \]</div>
@@ -12423,8 +12440,8 @@ f'(x) = \underbrace{\cos(\square)}_{\text{外层导数}}\cdot
 \underbrace{e^{\square}}_{\text{中层}}\cdot
 \underbrace{2}_{\text{内层}}
 \]</div>
-<p><strong>每一层都把它的导数写上，最后连乘</strong>。</p>
-<p>括号里始终保留<strong>原始的内层表达式</strong>（这里是 <span class="arithmatex">\(e^{2x}\)</span>），
+<p><strong>每层都写上它的导数，最后连乘</strong>。</p>
+<p>括号里保留<strong>原始内层表达式</strong>（这里是 <span class="arithmatex">\(e^{2x}\)</span>），
 这一步最容易漏或写错。</p>
 </div>
 <hr />
@@ -12436,15 +12453,15 @@ z = u_1^2 + u_2^2, \qquad u_1 = x+y, \qquad u_2 = x\cdot y
 <p>求 <span class="arithmatex">\(\frac{\partial z}{\partial x}\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p><span class="arithmatex">\(x\)</span> 同时影响 <span class="arithmatex">\(u_1\)</span> 与 <span class="arithmatex">\(u_2\)</span>，所以共 2 条路径，需<strong>求和</strong>。</p>
+<p><span class="arithmatex">\(x\)</span> 同时影响 <span class="arithmatex">\(u_1\)</span> 与 <span class="arithmatex">\(u_2\)</span>，共 2 条路径，需<strong>求和</strong>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>画路径</strong>：<span class="arithmatex">\(x\)</span> 通过两条路径影响 <span class="arithmatex">\(z\)</span></p>
+<p><strong>画路径</strong>：<span class="arithmatex">\(x\)</span> 经两条路径影响 <span class="arithmatex">\(z\)</span></p>
 <div class="arithmatex">\[
 x \to u_1 \to z, \qquad x \to u_2 \to z
 \]</div>
-<p><strong>分别求各路径的贡献</strong>：</p>
+<p><strong>分别求各路径贡献</strong>：</p>
 <p>路径 1：</p>
 <div class="arithmatex">\[
 \frac{\partial z}{\partial u_1} = 2u_1, \qquad \frac{\partial u_1}{\partial x} = 1
@@ -12474,15 +12491,15 @@ z = (x+y)^2 + (xy)^2 = x^2 + 2xy + y^2 + x^2y^2
 </details>
 <div class="admonition warning">
 <p class="admonition-title">漏掉一条路径是最常见的错误</p>
-<p>若只算路径 1，得到 <span class="arithmatex">\(2(x+y)\)</span>，<strong>漏了 <span class="arithmatex">\(2xy^2\)</span> 这一项</strong>。</p>
-<p><strong>自查方法</strong>：把中间变量全部展开成原变量，直接求导对比。
-虽然麻烦，但能可靠地发现漏项。</p>
+<p>只算路径 1 得 <span class="arithmatex">\(2(x+y)\)</span>，<strong>漏了 <span class="arithmatex">\(2xy^2\)</span> 这一项</strong>。</p>
+<p><strong>自查方法</strong>：把中间变量展开成原变量，直接求导对比。
+虽麻烦，但能可靠发现漏项。</p>
 <p><strong>习惯建议</strong>：求偏导前先<strong>画出依赖关系图</strong>，
-数清有几条路径，避免遗漏。</p>
+数清路径条数，避免遗漏。</p>
 </div>
 <hr />
 <h3 id="3">例题 3：两层网络的反向传播<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>考虑一个最简单的两层网络（标量形式便于手算）：</p>
+<p>考虑最简单的两层网络（标量形式便于手算）：</p>
 <div class="arithmatex">\[
 z_1 = w_1 x + b_1, \quad a_1 = \sigma(z_1),
 \qquad
@@ -12495,7 +12512,7 @@ z_2 = w_2 a_1 + b_2
 <p>求 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial w_1}\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>从损失往回逐层应用链式法则，先算输出层，再传回第一层。</p>
+<p>从损失往回逐层用链式法则，先算输出层，再传回第一层。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12521,14 +12538,14 @@ z_2 = w_2 a_1 + b_2
 \frac{\partial\mathcal{L}}{\partial w_1} = \frac{\partial\mathcal{L}}{\partial z_1}\cdot\frac{\partial z_1}{\partial w_1}
 = \delta_1\cdot x
 \]</div>
-<p><strong>最终结果</strong>：</p>
+<p><strong>结果</strong>：</p>
 <div class="arithmatex">\[
 \boxed{
 \frac{\partial\mathcal{L}}{\partial w_1}
 = (z_2-y_{\text{true}})\,w_2\,\sigma'(z_1)\,x
 }
 \]</div>
-<p><strong>结构解读</strong>（这就是反向传播的骨架）：</p>
+<p><strong>结构解读</strong>（即反向传播的骨架）：</p>
 <table>
 <thead>
 <tr>
@@ -12556,7 +12573,7 @@ z_2 = w_2 a_1 + b_2
 </tbody>
 </table>
 <p><strong>注意梯度里有 <span class="arithmatex">\(\sigma'(z_1)\)</span></strong> —— 若用 sigmoid，
-这个因子最大 0.25，<strong>层数多了就会连乘衰减</strong>。</p>
+该因子最大 0.25，<strong>层数多了就连乘衰减</strong>。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">推广到多层：结构完全一样</p>
@@ -12565,7 +12582,7 @@ z_2 = w_2 a_1 + b_2
 \frac{\partial\mathcal{L}}{\partial w^{(\ell)}}
 = \delta^{(\ell)}\cdot a^{(\ell-1)}
 \]</div>
-<p>其中 <span class="arithmatex">\(\delta^{(\ell)}\)</span> 由反向递推得到。</p>
+<p>其中 <span class="arithmatex">\(\delta^{(\ell)}\)</span> 由反向递推得。</p>
 <p><strong>实现要点</strong>：</p>
 <ol>
 <li>前向传播时<strong>缓存</strong>所有 <span class="arithmatex">\(z^{(\ell)}\)</span> 与 <span class="arithmatex">\(a^{(\ell)}\)</span></li>
@@ -12575,19 +12592,19 @@ z_2 = w_2 a_1 + b_2
 </div>
 <hr />
 <h3 id="4">例题 4：梯度消失的定量估计<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>一个 20 层网络，全部使用 sigmoid 激活，且每层 <span class="arithmatex">\(\sigma'(z)\)</span> 的典型值为 <span class="arithmatex">\(0.2\)</span>。
-估计第一层梯度相对输出层梯度的比例。</p>
+<p>一个 20 层网络，全用 sigmoid 激活，每层 <span class="arithmatex">\(\sigma'(z)\)</span> 典型值 <span class="arithmatex">\(0.2\)</span>。
+估计第一层梯度相对输出层的比例。</p>
 <details class="note">
 <summary>思路</summary>
-<p>梯度是连乘，用「每层因子」的 20 次方估算。</p>
+<p>梯度是连乘，用「每层因子」20 次方估算。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>每层反向传递的因子</strong>：</p>
+<p><strong>每层反向传递因子</strong>：</p>
 <div class="arithmatex">\[
 \text{每层因子} = w\cdot\sigma'(z)
 \]</div>
-<p>若权重 <span class="arithmatex">\(w\)</span> 的量级约为 1，则每层因子约</p>
+<p>若权重 <span class="arithmatex">\(w\)</span> 量级约为 1，则每层因子约</p>
 <div class="arithmatex">\[
 1\times0.2 = 0.2
 \]</div>
@@ -12604,16 +12621,16 @@ z_2 = w_2 a_1 + b_2
 0.2^{20} \approx 1.05\times10^{-14}
 \]</div>
 <p><strong>结论</strong>：第一层收到的梯度只有输出层的约 <span class="arithmatex">\(10^{-14}\)</span> 倍
-—— <strong>实际上等于零，这一层学不到任何东西</strong>。</p>
+——<strong>实际等于零，这一层学不到东西</strong>。</p>
 <p><strong>对比 ReLU</strong>（正区间导数为 1）：</p>
 <div class="arithmatex">\[
 1^{20} = 1
 \]</div>
-<p><strong>梯度完全不衰减</strong> ✓ 这就是 ReLU 成为默认选择的直接原因。</p>
+<p><strong>梯度完全不衰减</strong> ✓ 这是 ReLU 成为默认选择的直接原因。</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">这个估计的简化之处（需说明）</p>
-<p>上面的估算假设<strong>每层权重为 1</strong>。实际中：</p>
+<p>上述估算假设<strong>每层权重为 1</strong>。实际中：</p>
 <table>
 <thead>
 <tr>
@@ -12632,40 +12649,40 @@ z_2 = w_2 a_1 + b_2
 </tr>
 <tr>
 <td>精心初始化（He/Xavier）</td>
-<td>控制方差，使连乘保持稳定</td>
+<td>控制方差，保持连乘稳定</td>
 </tr>
 </tbody>
 </table>
-<p><strong>所以「梯度消失」不是必然的，而是与初始化、激活函数、
-网络结构共同决定</strong>。工程中的做法是<strong>让每层的雅可比范数接近 1</strong>。</p>
-<p><strong>这也解释了残差连接为什么有效</strong>：
+<p><strong>「梯度消失」不是必然的，而由初始化、激活函数、
+网络结构共同决定</strong>。工程做法是<strong>让每层雅可比范数接近 1</strong>。</p>
+<p><strong>这也解释了残差连接为何有效</strong>：
 <span class="arithmatex">\(y = x + f(x)\)</span> 使雅可比为 <span class="arithmatex">\(I + f'\)</span>，
-即使 <span class="arithmatex">\(f'\)</span> 很小，整体仍接近单位矩阵 —— <strong>梯度可以「绕道」直传</strong>。</p>
+即使 <span class="arithmatex">\(f'\)</span> 很小，整体仍接近单位矩阵——<strong>梯度可「绕道」直传</strong>。</p>
 </div>
 <hr />
 <h2 id="_15">六、用在哪些课程里<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
 <h3 id="_16">模式识别 · 神经网络训练<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>反向传播是训练的唯一实用算法</strong>，其数学内容就是链式法则</li>
-<li><strong>批量归一化、残差连接</strong>都是为了缓解链式连乘带来的数值问题</li>
+<li><strong>反向传播是训练唯一实用算法</strong>，其数学内容即链式法则</li>
+<li><strong>批量归一化、残差连接</strong>都为缓解链式连乘带来的数值问题</li>
 <li><strong>自动微分框架</strong>（PyTorch / TensorFlow）实现的就是反向传播
   （本质是「计算图 + 链式法则」的自动化）</li>
 </ul>
 <h3 id="_17">无人系统自主决策与优化 · 策略梯度与最优控制<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>策略梯度方法</strong>：<span class="arithmatex">\(\nabla_\theta J = \mathbb{E}[\nabla_\theta\log\pi_\theta(a|s)\cdot G]\)</span>
-  —— 对策略参数求梯度要用链式法则穿透概率模型</li>
+  —— 对策略参数求梯度需链式法则穿透概率模型</li>
 <li><strong>最优控制的伴随法</strong>（adjoint method）与反向传播<strong>数学上完全相同</strong>：
   都是「正向算状态、反向传梯度」</li>
 </ul>
 <h3 id="_18">机器人学 · 轨迹优化的梯度<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
 <ul>
-<li>轨迹优化中代价依赖整条轨迹，梯度要对每个时刻求导并回传</li>
-<li>这与循环网络的 BPTT 是同一结构</li>
+<li>轨迹优化中代价依赖整条轨迹，梯度要对每个时刻求导回传</li>
+<li>这与循环网络的 BPTT 同构</li>
 </ul>
 <h3 id="_19">智能传感与信息处理 · 卡尔曼滤波的等价形式<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
 <ul>
-<li>卡尔曼滤波的递推与「正向-反向平滑」在结构上对应
+<li>卡尔曼滤波递推与「正向-反向平滑」结构对应
   反向传播的「先收集后回传」</li>
 </ul>
 <hr />
@@ -12681,11 +12698,11 @@ z_2 = w_2 a_1 + b_2
 <div class="arithmatex">\[
 f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 \]</div>
-<p><strong>这个函数有个名字</strong>：它是 <strong>softplus</strong> 的导数，也就是 <strong>sigmoid</strong> 函数</p>
+<p><strong>这个函数有名字</strong>：它是 <strong>softplus</strong> 的导数，即 <strong>sigmoid</strong> 函数</p>
 <div class="arithmatex">\[
 \frac{e^x}{1+e^x} = \frac{1}{1+e^{-x}} = \sigma(x)
 \]</div>
-<p><strong>验证</strong>：把分子分母同除以 <span class="arithmatex">\(e^x\)</span>：</p>
+<p><strong>验证</strong>：分子分母同除以 <span class="arithmatex">\(e^x\)</span>：</p>
 <div class="arithmatex">\[
 \frac{e^x}{1+e^x} = \frac{1}{e^{-x}+1} = \sigma(x) \;\checkmark
 \]</div>
@@ -12696,7 +12713,7 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 <p><strong>Q2</strong> 设 <span class="arithmatex">\(z = f(u,v)\)</span>，<span class="arithmatex">\(u = x^2\)</span>，<span class="arithmatex">\(v = xy\)</span>。用链式法则写出 <span class="arithmatex">\(\frac{\partial z}{\partial x}\)</span>。</p>
 <details class="note">
 <summary>提示</summary>
-<p><span class="arithmatex">\(x\)</span> 通过 <span class="arithmatex">\(u\)</span> 与 <span class="arithmatex">\(v\)</span> 两条路径影响 <span class="arithmatex">\(z\)</span>。</p>
+<p><span class="arithmatex">\(x\)</span> 经 <span class="arithmatex">\(u\)</span>、<span class="arithmatex">\(v\)</span> 两条路径影响 <span class="arithmatex">\(z\)</span>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12729,8 +12746,8 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 <div class="arithmatex">\[
 1.05^{10} \approx 1.629
 \]</div>
-<p><strong>虽然单层只放大 5%，10 层后放大 63%</strong> —— 尚可接受。</p>
-<p><strong>但看更深的网络</strong>：</p>
+<p><strong>单层只放大 5%，10 层后放大 63%</strong> —— 尚可接受。</p>
+<p><strong>但更深的网络</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12775,11 +12792,11 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 <tbody>
 <tr>
 <td>梯度裁剪</td>
-<td>直接限制范数上限</td>
+<td>直接限制范数</td>
 </tr>
 <tr>
 <td>更好的初始化</td>
-<td>使初始每层因子接近 1</td>
+<td>使每层因子接近 1</td>
 </tr>
 <tr>
 <td>批归一化</td>
@@ -12787,17 +12804,17 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 </tr>
 <tr>
 <td>降低学习率</td>
-<td>治标，但拖慢训练</td>
+<td>治标但拖慢训练</td>
 </tr>
 </tbody>
 </table>
-<p><strong>这个例子说明</strong>：梯度问题<strong>双向都可能</strong>——不仅要防消失，也要防爆炸。</p>
+<p><strong>这例子说明</strong>：梯度问题<strong>双向都可能</strong>——不仅防消失，也要防爆炸。</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 为什么反向传播比数值求导快这么多？</p>
 <details class="note">
 <summary>提示</summary>
-<p>对比两种方法各需要多少次前向/反向传播。</p>
+<p>对比两种方法各需多少次前向/反向传播。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12805,7 +12822,7 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 <div class="arithmatex">\[
 \frac{\partial\mathcal{L}}{\partial\theta_i} \approx \frac{\mathcal{L}(\theta_i+h)-\mathcal{L}(\theta_i-h)}{2h}
 \]</div>
-<p>对 <span class="arithmatex">\(n\)</span> 个参数，每个都要做 2 次前向传播（或 1 次中心差分算 2 次）：</p>
+<p>对 <span class="arithmatex">\(n\)</span> 个参数，每个要做 2 次前向传播（或 1 次中心差分算 2 次）：</p>
 <div class="arithmatex">\[
 \text{总代价} = O(n)\ \text{次前向传播}
 \]</div>
@@ -12850,8 +12867,8 @@ f'(x) = \frac{1}{1+e^x}\cdot(1+e^x)' = \frac{e^x}{1+e^x}
 链式法则的连乘结构让「一次反向遍历」就能得到<strong>所有</strong>参数的梯度。</p>
 <p>代价是<strong>必须缓存中间激活值</strong>（显存开销），
 这是「时间换空间」的反向版本。</p>
-<p><strong>这也解释了为什么深度学习在 2012 年后才爆发</strong>：
-算法（反向传播）早在 1986 年就有了，
+<p><strong>这也解释了深度学习为何在 2012 年后才爆发</strong>：
+算法（反向传播）早在 1986 年就有，
 但要等 GPU 提供足够的算力与显存。</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../derivative/">导数与微分</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../matrix-calculus/">矩阵微积分</a></span></div></nav>

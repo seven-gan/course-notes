@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束的思路、以及对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。这是整个约束优化理论的核心。">
+    <meta name="description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束与对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="KKT 条件">
   
-  <meta property="og:description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束的思路、以及对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。这是整个约束优化理论的核心。">
+  <meta property="og:description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束与对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/optimization/kkt/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="KKT 条件">
   
-  <meta name="twitter:description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束的思路、以及对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。这是整个约束优化理论的核心。">
+  <meta name="twitter:description" content="前面三页分别讲了等式约束（拉格朗日）、不等式约束与对偶。这一页把它们合成约束优化最优性的统一判据。KKT 条件：约束优化「最优」的完整刻画。对凸问题，KKT 是充要条件；对一般问题，它是必要条件。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11617,13 +11617,12 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>现有讲义「第 3 讲 数学优化」C.3.2 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《凸优化》或《最优化理论与方法》（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="kkt">KKT 条件<a class="headerlink" href="#kkt" title="Permanent link">&para;</a></h1>
-<p>前面三页分别讲了<strong>等式约束</strong>（拉格朗日）、<strong>不等式约束</strong>的思路、以及<strong>对偶</strong>。
+<p>前面三页分别讲了<strong>等式约束</strong>（拉格朗日）、<strong>不等式约束</strong>与<strong>对偶</strong>。
 这一页把它们合成<strong>约束优化最优性的统一判据</strong>。</p>
 <blockquote>
 <p><strong>KKT 条件：约束优化「最优」的完整刻画。</strong></p>
 </blockquote>
-<p>对凸问题，KKT 是<strong>充要条件</strong>；对一般问题，它是<strong>必要条件</strong>。
-这是整个约束优化理论的核心。</p>
+<p>对凸问题，KKT 是<strong>充要条件</strong>；对一般问题，它是<strong>必要条件</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">KKT 四个条件的记忆框架</p>
 <table>
@@ -11686,9 +11685,42 @@
 </tbody>
 </table>
 </div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="互补松弛的两种情形：最优点在约束边界上与在可行域内部">
+<defs>
+<marker id="kk2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：约束起作用 -->
+<text class="lbl" x="22" y="22">最优点在约束边界上</text>
+<polygon class="f1" points="36,190 186,36 200,36 200,200 36,200"/>
+<circle class="f0" cx="75" cy="105" r="75" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<circle class="f0" cx="75" cy="105" r="55" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<circle class="f0" cx="75" cy="105" r="32" fill="none" stroke="var(--kb-a1)" stroke-width="1.6" opacity="0.75"/>
+<line class="a2" x1="36" y1="190" x2="186" y2="36"/>
+<line class="a3" x1="98" y1="127" x2="74" y2="105" marker-end="url(#kk2-ah1)" stroke-width="2.4"/>
+<circle class="d2" cx="98" cy="127" r="5"/>
+<text class="l3" x="44" y="152">下降方向 − ∇f</text>
+<text class="lbl-s" x="120" y="182">可行域 g ≤ 0</text>
+<text class="l2" x="105" y="120">x*</text>
+<text class="l2" x="22" y="218">约束起作用：g = 0，λ &gt; 0</text>
+<!-- 右：约束不起作用 -->
+<text class="lbl" x="232" y="22">最优点在可行域内部</text>
+<polygon class="f1" points="226,190 376,36 390,36 390,200 226,200"/>
+<circle class="f0" cx="330" cy="150" r="72" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<circle class="f0" cx="330" cy="150" r="50" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.55"/>
+<circle class="f0" cx="330" cy="150" r="28" fill="none" stroke="var(--kb-a1)" stroke-width="1.6" opacity="0.75"/>
+<line class="gd" x1="226" y1="190" x2="376" y2="36" stroke-dasharray="6 4"/>
+<circle class="d2" cx="330" cy="150" r="5"/>
+<text class="l2" x="338" y="146">x*</text>
+<text class="lbl-s" x="300" y="182">可行域 g ≤ 0</text>
+<text class="lbl-s" x="232" y="218">约束不起作用：g &lt; 0，λ = 0</text>
+</svg>
+<figcaption>图 2　互补松弛条件的两种情形。<b>左</b>：无约束最优落在可行域之外，最优点只能停在约束边界上，此时 g=0、λ 大于 0，约束「起作用」；<b>右</b>：无约束最优本身就在可行域内部，边界并未被触及，此时 g 小于 0、λ=0，约束「不起作用」。两者不能同时非零，这就是互补松弛</figcaption>
+</figure>
+
 <hr />
 <h2 id="kkt_1">一、KKT 条件与三个已有结论的关系<a class="headerlink" href="#kkt_1" title="Permanent link">&para;</a></h2>
-<p>KKT 不是新东西，而是前面三页的<strong>统一</strong>：</p>
+<p>KKT 是前面三页的<strong>统一</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11715,10 +11747,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>所以 KKT 可以理解为</strong>：</p>
-<blockquote>
-<p><strong>「拉格朗日平稳性 + 可行性 + 符号条件 + 互补松弛」的合集。</strong></p>
-</blockquote>
 <div class="admonition note">
 <p class="admonition-title">KKT 的严格陈述（含约束品性）</p>
 <p>考虑问题：</p>
@@ -11829,17 +11857,14 @@ g_i(\boldsymbol{x}^*)\leq0,\qquad h_j(\boldsymbol{x}^*) = 0
 </tr>
 </tbody>
 </table>
-<p><strong>我最初写的 <span class="arithmatex">\(\min x\)</span> s.t. <span class="arithmatex">\(x^3\leq0\)</span> 是错的</strong>——
-那个问题的可行域是 <span class="arithmatex">\(x\leq0\)</span>，而 <span class="arithmatex">\(x\)</span> 可以无限减小
-→ <strong>无下界，最优解不存在</strong>，不能作为反例。
-正确写法应让可行域是 <span class="arithmatex">\(x\geq0\)</span>（如上）。</p>
-<p><strong>教训</strong>：<strong>KKT 不是「无条件」的必要条件</strong>。
+<p><strong>教训</strong>：反例必须保证最优解存在（例如 <span class="arithmatex">\(\min x\)</span> s.t. <span class="arithmatex">\(x^3\leq0\)</span>
+的可行域是 <span class="arithmatex">\(x\leq0\)</span>、无下界，就不能用）；而且
+<strong>KKT 不是「无条件」的必要条件</strong>。
 但工程中的约束通常不会这么退化，
 所以实践中一般直接用 KKT（若发现问题再检查约束品性）。</p>
 </div>
 <hr />
 <h2 id="kkt_2">二、凸问题：KKT 是充分必要的<a class="headerlink" href="#kkt_2" title="Permanent link">&para;</a></h2>
-<p>这是 KKT 最有用的部分。</p>
 <p><strong>定理</strong>：若问题是<strong>凸的</strong>（<span class="arithmatex">\(f\)</span> 与所有 <span class="arithmatex">\(g_i\)</span> 凸，<span class="arithmatex">\(h_j\)</span> 仿射），
 且 <span class="arithmatex">\(\boldsymbol{x}^*\)</span> 满足 KKT 条件，则 <span class="arithmatex">\(\boldsymbol{x}^*\)</span> 是<strong>全局最优解</strong>。</p>
 <div class="admonition tip">
@@ -11913,12 +11938,11 @@ g_i(\boldsymbol{x}^*)\leq0,\qquad h_j(\boldsymbol{x}^*) = 0
 </tr>
 </tbody>
 </table>
-<p><strong>三者都小于容差 → 认为已收敛</strong>
-（所有实用求解器都这么做。）</p>
+<p><strong>三者都小于容差 → 认为已收敛</strong></p>
 </div>
 <hr />
 <h2 id="kkt_3">三、用 KKT 解问题的完整流程<a class="headerlink" href="#kkt_3" title="Permanent link">&para;</a></h2>
-<p><strong>这是本页最实用的部分</strong> —— 一套可照做的流程。</p>
+<p><strong>这是本页最实用的部分</strong>。</p>
 <h3 id="_1">流程<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -11961,7 +11985,7 @@ g_i(\boldsymbol{x}^*)\leq0,\qquad h_j(\boldsymbol{x}^*) = 0
 <div class="admonition warning">
 <p class="admonition-title">第 5、6 步是「猜活跃集」——这很容易出错</p>
 <p><strong>为什么需要枚举</strong>：<span class="arithmatex">\(\mu_ig_i = 0\)</span> 意味着
-「<span class="arithmatex">\(g_i = 0\)</span> 或 <span class="arithmatex">\(\mu_i = 0\)</span>」——<strong>两者之一成立</strong>。</p>
+「<span class="arithmatex">\(g_i = 0\)</span> 或 <span class="arithmatex">\(\mu_i = 0\)</span>」。</p>
 <p><strong><span class="arithmatex">\(m\)</span> 个不等式约束就有 <span class="arithmatex">\(2^m\)</span> 种组合</strong>，所以要逐个试。</p>
 <p><strong>实用简化</strong>（不必真的枚举 <span class="arithmatex">\(2^m\)</span>）：</p>
 <table>
@@ -12009,7 +12033,7 @@ g_i(\boldsymbol{x}^*)\leq0,\qquad h_j(\boldsymbol{x}^*) = 0
 </tr>
 </tbody>
 </table>
-<p><strong>必须两样都查</strong>，否则结果不可信。</p>
+<p><strong>必须两样都查</strong>。</p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KKT 条件的四个组成部分与决策流程">
@@ -12176,15 +12200,13 @@ d^2 = \frac{\lvert0+0-2\rvert^2}{1^2+1^2} = \frac42 = 2 \;\checkmark
 </tr>
 </tbody>
 </table>
-<p><strong>这在多约束问题中尤其重要</strong>——能省掉大量枚举。</p>
 <p><strong>刹车点 2：必须查 <span class="arithmatex">\(\mu\geq0\)</span></strong></p>
 <p><strong>若算出 <span class="arithmatex">\(\mu&lt;0\)</span> 说明什么</strong>：</p>
 <div class="arithmatex">\[
 \mu&lt;0 \implies \text{猜测的活跃集错了} ✗
 \]</div>
 <p><strong>为什么</strong>：<span class="arithmatex">\(\mu&lt;0\)</span> 违反对偶可行（条件 ③）。
-物理上意味着「约束方向与目标下降方向一致」——
-即约束本该<strong>阻止</strong>下降，却实际上<strong>帮助</strong>了下降
+物理上意味着约束本该阻止下降，却反而帮助了下降
 → 说明该约束<strong>不应该</strong>是活跃的。</p>
 <p><strong>正确做法</strong>：去掉这个约束（设为不活跃，<span class="arithmatex">\(\mu=0\)</span>）重新求解。</p>
 </div>
@@ -12243,7 +12265,6 @@ g_1 = 1-x\leq0,\qquad g_2 = 1-y\leq0
 2x-\mu_1 = 0,\qquad 2y = 0
 \]</div>
 <p>得 <span class="arithmatex">\(y = 0\)</span>。但<strong>违反 <span class="arithmatex">\(y\geq1\)</span></strong> ✗</p>
-<p><strong>该情形不可行</strong> ✗</p>
 <p><strong>情形 B（只 <span class="arithmatex">\(g_2\)</span> 活跃）</strong></p>
 <p>对称地得 <span class="arithmatex">\(x = 0\)</span>，<strong>违反 <span class="arithmatex">\(x\geq1\)</span></strong> ✗</p>
 <p><strong>情形 C（两个都活跃）</strong></p>
@@ -12294,8 +12315,8 @@ g_1 = 1-x\leq0,\qquad g_2 = 1-y\leq0
 <div class="arithmatex">\[
 (x^*,y^*) = (1,1),\qquad f_{\min} = 1+1 = 2
 \]</div>
-<p><strong>注意</strong>：此处的答案是<strong>可行域的「角点」</strong>（两个约束的交点）——
-这是两个约束同时活跃的典型情形。</p>
+<p><strong>注意</strong>：此处的答案是<strong>可行域的「角点」</strong>（两个约束的交点），
+即两个约束同时活跃。</p>
 </details>
 <div class="admonition note">
 <p class="admonition-title">这个例子揭示的几何规律（值得记住）</p>
@@ -12387,7 +12408,7 @@ g_1 = 1-x\leq0,\qquad g_2 = 1-y\leq0
 g_1 = -2-x\leq0, \qquad g_2 = x-2\leq0
 \]</div>
 <p><strong>注意：这个问题非凸</strong>（<span class="arithmatex">\(f\)</span> 的三阶导为 6，<span class="arithmatex">\(f'' = 6x\)</span> 变号）。</p>
-<p><strong>所以 KKT 只是必要条件</strong> —— KKT 点可能不是最优。</p>
+<p><strong>所以 KKT 只是必要条件</strong>。</p>
 <p><strong>第二步：分情形</strong></p>
 <table>
 <thead>
@@ -12678,44 +12699,22 @@ w_j = 0 \iff \lvert X_j^\top\boldsymbol{r}\rvert \leq \lambda
 <thead>
 <tr>
 <th>方法</th>
-<th>正则</th>
-<th>次梯度/梯度</th>
+<th>在 <span class="arithmatex">\(w_j=0\)</span> 处</th>
 <th><span class="arithmatex">\(w_j=0\)</span> 的条件</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Lasso</strong></td>
-<td><span class="arithmatex">\(\lVert\boldsymbol{w}\rVert_1\)</span></td>
-<td>在 0 处<strong>是一个区间</strong> <span class="arithmatex">\([-1,1]\)</span></td>
-<td><strong>容易满足</strong> → 稀疏 ✓</td>
-</tr>
-<tr>
-<td>Ridge</td>
-<td><span class="arithmatex">\(\lVert\boldsymbol{w}\rVert_2^2\)</span></td>
-<td>处处可微，梯度 <span class="arithmatex">\(2\lambda w_j\)</span></td>
-<td><span class="arithmatex">\(X_j^\top\boldsymbol{r} = -2\lambda w_j\)</span> → 只有 <span class="arithmatex">\(w_j\)</span> 恰为 0 才行（<strong>几乎不可能</strong>）</td>
-</tr>
-</tbody>
-</table>
-<p><strong>核心机制</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>范数</th>
-<th>在 <span class="arithmatex">\(w_j=0\)</span> 处的性质</th>
 <th>稀疏</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>L1</strong></td>
-<td><strong>不可微</strong>（次梯度是区间）</td>
+<td><strong>Lasso（L1）</strong></td>
+<td><strong>不可微</strong>（次梯度是区间 <span class="arithmatex">\([-1,1]\)</span>）</td>
+<td><span class="arithmatex">\(\lvert X_j^\top\boldsymbol{r}\rvert\leq\lambda\)</span>，<strong>区间条件</strong></td>
 <td>✓</td>
 </tr>
 <tr>
-<td>L2</td>
-<td>可微（梯度是单点）</td>
+<td>Ridge（L2）</td>
+<td>可微（梯度是单点 <span class="arithmatex">\(2\lambda w_j\)</span>）</td>
+<td><span class="arithmatex">\(X_j^\top\boldsymbol{r} = 0\)</span>，需<strong>恰好正交</strong></td>
 <td>✗</td>
 </tr>
 </tbody>
@@ -12747,25 +12746,8 @@ w_j = 0 \iff \lvert X_j^\top\boldsymbol{r}\rvert \leq \lambda
 </tr>
 </tbody>
 </table>
-<p><strong>这解释了两件事</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>现象</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>调大 <span class="arithmatex">\(\lambda\)</span> 特征变少</td>
-<td>阈值升高</td>
-</tr>
-<tr>
-<td>不存在「自动最优 <span class="arithmatex">\(\lambda\)</span>」</td>
-<td>需要交叉验证选择</td>
-</tr>
-</tbody>
-</table>
+<p><strong>推论</strong>：最优的 <span class="arithmatex">\(\lambda\)</span> 不会自动给出，
+只能靠交叉验证选择。</p>
 <p><strong>2. 特征标准化为什么必要</strong></p>
 <p>观察条件 <span class="arithmatex">\(\lvert X_j^\top\boldsymbol{r}\rvert\leq\lambda\)</span>：
 <strong>比较的是「相关性」与「阈值 <span class="arithmatex">\(\lambda\)</span>」</strong>。</p>
@@ -12793,7 +12775,7 @@ w_j = 0 \iff \lvert X_j^\top\boldsymbol{r}\rvert \leq \lambda
 <p>这与「梯度下降与收敛」一页的结论呼应：
 <strong>标准化既改善条件数，又保证正则化的公平性</strong>。</p>
 <p><strong>对比 Ridge</strong>：它也有尺度问题（惩罚 <span class="arithmatex">\(\lambda w_j^2\)</span>），
-同样需要标准化 —— 所以这条对两者都适用。</p>
+同样需要标准化。</p>
 </div>
 <hr />
 <h2 id="_3">五、自测<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -12873,7 +12855,7 @@ d^2 = \frac{(0+0-4)^2}{2} = \frac{16}{2} = 8 \;\checkmark
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <span class="arithmatex">\(\lambda\)</span> 的符号没有限制</strong>：这是因为等式约束
+<p><strong>注意 <span class="arithmatex">\(\lambda\)</span> 的符号没有限制</strong>：等式约束
 「两侧都能走」，乘数可正可负。
 本题得 <span class="arithmatex">\(\lambda = -4\)</span>，这是<strong>合法</strong>的</p>
 <p><strong>对比</strong>：若把约束改成 <span class="arithmatex">\(x+y\geq4\)</span>（不等式），则要求 <span class="arithmatex">\(\mu\geq0\)</span>：</p>
@@ -12882,7 +12864,7 @@ d^2 = \frac{(0+0-4)^2}{2} = \frac{16}{2} = 8 \;\checkmark
 \]</div>
 <p>得 <span class="arithmatex">\(\mu = 4\geq0\)</span> ✓ <strong>合法</strong></p>
 <p><strong>两次得到的 <span class="arithmatex">\(f_{\min}\)</span> 相同（都是 8）</strong> ——
-因为在这两道题里，约束都恰好活跃，
+两题约束都恰好活跃，
 且「≥」与「=」在原最优点处等价。</p>
 </div>
 <hr />
@@ -12995,7 +12977,7 @@ d^2 = \frac{(0+0-4)^2}{2} = \frac{16}{2} = 8 \;\checkmark
 </tbody>
 </table>
 <p><strong>关键判断</strong>：<strong>先确认问题是否凸</strong> ——
-这决定 KKT 能否作为充分条件。这是优化的第一步。</p>
+这决定 KKT 能否作为充分条件。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 求解 <span class="arithmatex">\(\min f(x) = (x-3)^2\)</span> s.t. <span class="arithmatex">\(1\leq x\leq2\)</span>。</p>
@@ -13081,8 +13063,7 @@ f'(x) = 2(x-3) = 0 \implies x = 3
 x^* = 2,\qquad f_{\min} = (2-3)^2 = 1
 \]</div>
 <p><strong>直观验证</strong>：<span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(x=3\)</span> 处最小，
-但可行域是 <span class="arithmatex">\([1,2]\)</span>，<strong>最靠近 3 的可行点是 <span class="arithmatex">\(x=2\)</span></strong>
-所以最优在右端点。</p>
+但可行域是 <span class="arithmatex">\([1,2]\)</span>，<strong>最靠近 3 的可行点是 <span class="arithmatex">\(x=2\)</span></strong>。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">为什么情形 A 的乘数为负说明它不该活跃</p>
@@ -13174,7 +13155,7 @@ X_j^\top\boldsymbol{r}\in\lambda\,\partial\lvert w_j\rvert
 </tr>
 </tbody>
 </table>
-<p><strong>这解释了稀疏性</strong>：<strong>只要特征的相关性「不够大」，权重就恰好为 0</strong>。</p>
+<p><strong>这解释了稀疏性</strong>：相关性「不够大」时，权重恰好为 0。</p>
 <p><strong>第三步：几何直观（「尖角」vs「圆滑」）</strong></p>
 <table>
 <thead>

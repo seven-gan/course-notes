@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个函数之一：这一页把它们的导数完整推导一遍——因为导数的形式直接决定了训练能否收敛。值域：(0, 1) —— 所以可解释为概率。形状：S 形曲线，在 x = 0 处取 0.5。">
+    <meta name="description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个之一：这一页把它们的导数完整推导一遍——因为导数形式直接决定了训练能否收敛。值域：(0, 1) —— 可解释为概率。形状：S 形曲线，x = 0 处取 0.5。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="Logistic 与 Softmax 导数">
   
-  <meta property="og:description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个函数之一：这一页把它们的导数完整推导一遍——因为导数的形式直接决定了训练能否收敛。值域：(0, 1) —— 所以可解释为概率。形状：S 形曲线，在 x = 0 处取 0.5。">
+  <meta property="og:description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个之一：这一页把它们的导数完整推导一遍——因为导数形式直接决定了训练能否收敛。值域：(0, 1) —— 可解释为概率。形状：S 形曲线，x = 0 处取 0.5。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/calculus/logistic-softmax/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Logistic 与 Softmax 导数">
   
-  <meta name="twitter:description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个函数之一：这一页把它们的导数完整推导一遍——因为导数的形式直接决定了训练能否收敛。值域：(0, 1) —— 所以可解释为概率。形状：S 形曲线，在 x = 0 处取 0.5。">
+  <meta name="twitter:description" content="Logistic 与 Softmax 导数：分类任务的输出层几乎总是这两个之一：这一页把它们的导数完整推导一遍——因为导数形式直接决定了训练能否收敛。值域：(0, 1) —— 可解释为概率。形状：S 形曲线，x = 0 处取 0.5。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11995,7 +11995,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#f5a623">重要</span><span class="kb-imp-desc">在本课程中占比高</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Mathematics for Machine Learning（§5.6 Backpropagation and Automatic Differentiation）</code><code>现有讲义「第 2 讲 微积分」B.4.2 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《深度学习》或《模式识别》激活函数章节（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="logistic-softmax">Logistic 与 Softmax 导数<a class="headerlink" href="#logistic-softmax" title="Permanent link">&para;</a></h1>
-<p>分类任务的输出层几乎总是这两个函数之一：</p>
+<p>分类任务的输出层几乎总是这两个之一：</p>
 <table>
 <thead>
 <tr>
@@ -12017,7 +12017,7 @@
 </tr>
 </tbody>
 </table>
-<p>这一页把它们的导数<strong>完整推导一遍</strong>——因为导数的形式
+<p>这一页把它们的导数<strong>完整推导一遍</strong>——因为导数形式
 直接决定了训练能否收敛。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么值得专门用一页讲它们的导数</p>
@@ -12039,16 +12039,14 @@
 </tr>
 <tr>
 <td>为什么不用平方误差配 softmax？</td>
-<td>梯度会「消失」</td>
+<td>梯度会消失</td>
 </tr>
 <tr>
-<td>计算复杂度如何？</td>
-<td>一个是对角阵，一个是满矩阵</td>
+<td>计算复杂度？</td>
+<td>一个对角阵，一个满矩阵</td>
 </tr>
 </tbody>
 </table>
-<p><strong>结论先行</strong>：这两个函数的导数形式<strong>直接解释了深度学习的
-若干设计选择</strong>。</p>
 </div>
 <hr />
 <h2 id="logisticsigmoid">一、Logistic（Sigmoid）函数<a class="headerlink" href="#logisticsigmoid" title="Permanent link">&para;</a></h2>
@@ -12056,10 +12054,10 @@
 <div class="arithmatex">\[
 \sigma(x) = \frac{1}{1+e^{-x}}
 \]</div>
-<p><strong>值域</strong>：<span class="arithmatex">\((0, 1)\)</span> —— 所以可解释为概率。</p>
-<p><strong>形状</strong>：S 形曲线，在 <span class="arithmatex">\(x = 0\)</span> 处取 <span class="arithmatex">\(0.5\)</span>。</p>
+<p><strong>值域</strong>：<span class="arithmatex">\((0, 1)\)</span> —— 可解释为概率。</p>
+<p><strong>形状</strong>：S 形曲线，<span class="arithmatex">\(x = 0\)</span> 处取 <span class="arithmatex">\(0.5\)</span>。</p>
 <h3 id="_2">导数推导<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<p>用<strong>商的求导法则</strong>（分子为常数 1）：</p>
+<p>用<strong>商法则</strong>（分子为常数 1）：</p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}}{\mathrm{d}x}\left[\frac{1}{1+e^{-x}}\right]
 = \frac{0\cdot(1+e^{-x}) - 1\cdot(-e^{-x})}{(1+e^{-x})^2}
@@ -12078,22 +12076,22 @@
 = \frac{1}{1+e^{-x}}\cdot\frac{e^{-x}}{1+e^{-x}}
 = \frac{e^{-x}}{(1+e^{-x})^2}
 \]</div>
-<p><strong>与上面完全相同</strong> ✓ 所以</p>
+<p><strong>与上面完全相同</strong> ✓ 故</p>
 <div class="arithmatex">\[
 \boxed{\ \sigma'(x) = \sigma(x)\big(1-\sigma(x)\big)\ }
 \]</div>
 <div class="admonition tip">
 <p class="admonition-title">这个结果为什么漂亮</p>
-<p><strong>1. 求导结果只用函数值本身</strong></p>
-<p>前向传播时已经算出 <span class="arithmatex">\(\sigma(x)\)</span>，所以反向传播<strong>不需要额外计算</strong>——
-直接复用。这让 sigmoid 的反向传播几乎没有额外成本。</p>
-<p><strong>2. 最大值只有 &frac14;</strong></p>
+<p><strong>1. 求导只用函数值本身</strong></p>
+<p>前向传播已算出 <span class="arithmatex">\(\sigma(x)\)</span>，故反向传播<strong>不需额外计算</strong>——
+直接复用。sigmoid 的反向传播几乎没有额外成本。</p>
+<p><strong>2. 最大值仅 &frac14;</strong></p>
 <p>设 <span class="arithmatex">\(s = \sigma(x)\in(0,1)\)</span>，则 <span class="arithmatex">\(\sigma' = s(1-s)\)</span>。</p>
-<p>这是开口向下的抛物线，顶点在 <span class="arithmatex">\(s = 1/2\)</span>：</p>
+<p>这是开口向下的抛物线，顶点 <span class="arithmatex">\(s = 1/2\)</span>：</p>
 <div class="arithmatex">\[
 \sigma'_{\max} = \frac12\cdot\frac12 = \frac14 = 0.25
 \]</div>
-<p><strong>上界 0.25</strong> 是后面「梯度消失」分析的出发点。</p>
+<p><strong>上界 0.25</strong> 是后面梯度消失分析的起点。</p>
 </div>
 <h3 id="_3">导数的取值<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
@@ -12143,11 +12141,40 @@
 </tbody>
 </table>
 <p><strong>观察</strong>：两端（<span class="arithmatex">\(\lvert x\rvert\)</span> 大）导数趋零——
-这意味着<strong>当输入饱和时，梯度消失</strong>。</p>
+即<strong>输入饱和时，梯度消失</strong>。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="sigmoid 曲线及其导数曲线">
+<defs>
+<marker id="ls2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<text class="lbl" x="14" y="20">sigmoid 曲线</text>
+<text class="lbl" x="240" y="20">其导数曲线</text>
+<line class="gb" x1="34" y1="170" x2="204" y2="170" marker-end="url(#ls2-ah1)"/>
+<line class="gb" x1="118" y1="180" x2="118" y2="46" marker-end="url(#ls2-ah1)"/>
+<path class="a1" d="M40,164 C86,162 104,152 118,112 C132,72 152,58 200,56" fill="none"/>
+<circle class="d1" cx="118" cy="112" r="4"/>
+<text class="l1" x="130" y="80">σ(x)</text>
+<text class="lbl-s" x="96" y="106">0.5</text>
+<text class="lbl-s" x="112" y="188">0</text>
+<line class="gb" x1="240" y1="170" x2="404" y2="170" marker-end="url(#ls2-ah1)"/>
+<line class="gb" x1="322" y1="180" x2="322" y2="46" marker-end="url(#ls2-ah1)"/>
+<path class="a2" d="M244,166 C288,164 308,158 322,112 C336,158 356,164 400,166" fill="none"/>
+<circle class="d2" cx="322" cy="112" r="4"/>
+<text class="l2" x="336" y="132">σ′(x)</text>
+<text class="l2" x="286" y="100">0.25</text>
+<text class="lbl-s" x="316" y="188">0</text>
+<line class="gd" x1="118" y1="170" x2="118" y2="112"/>
+<line class="gd" x1="322" y1="170" x2="322" y2="112"/>
+<text class="lbl-s" x="14" y="214">σ 在 |x| 大处变平（饱和），导数趋零</text>
+<text class="lbl-s" x="14" y="234">σ′ 峰值仅 0.25，多层连乘即梯度消失</text>
+</svg>
+<figcaption>图 2　左：sigmoid 曲线 σ(x)，在 0 处取 0.5，两端饱和变平；右：它的导数 σ′(x) = σ(1−σ)，呈钟形，<b>峰值只有 0.25</b>。这解释了为什么深层网络用 sigmoid 会梯度消失——每层导数都 ≤ 0.25，连乘后指数衰减到零</figcaption>
+</figure>
+
 <div class="admonition warning">
 <p class="admonition-title">「饱和」是梯度消失的直接原因</p>
 <p><strong>什么叫饱和</strong>：<span class="arithmatex">\(\lvert x\rvert\)</span> 很大时 <span class="arithmatex">\(\sigma(x)\)</span> 接近 0 或 1，
-此时输入怎么变，输出几乎不变 → 导数趋于零。</p>
+此时输入再变，输出几乎不变 → 导数趋零。</p>
 <p><strong>后果</strong>：</p>
 <table>
 <thead>
@@ -12167,7 +12194,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「为什么深层网络用 sigmoid 学不动」</strong>。</p>
+<p><strong>这是深层网络用 sigmoid 学不动的原因</strong>。</p>
 <p><strong>实践中的缓解方法</strong>：</p>
 <table>
 <thead>
@@ -12191,7 +12218,7 @@
 </tr>
 <tr>
 <td>合适的权重初始化</td>
-<td>避免初始就饱和</td>
+<td>避免初始饱和</td>
 </tr>
 </tbody>
 </table>
@@ -12227,17 +12254,17 @@ s_i = \frac{e^{z_i}}{\sum_{j=1}^{K}e^{z_j}},
 </tr>
 <tr>
 <td>平移不变</td>
-<td><span class="arithmatex">\(z_i \to z_i + c\)</span> 不改变输出</td>
+<td><span class="arithmatex">\(z_i \to z_i + c\)</span> 输出不变</td>
 </tr>
 </tbody>
 </table>
 <h3 id="softmax_1">为什么需要 softmax<a class="headerlink" href="#softmax_1" title="Permanent link">&para;</a></h3>
-<p><strong>问题</strong>：分类需要「各类的概率，且和为 1」。直接归一化不行：</p>
+<p><strong>问题</strong>：分类需要各类概率且和为 1。直接归一化不行：</p>
 <div class="arithmatex">\[
 \frac{z_i}{\sum_j z_j} \quad\text{（当 } z_i \text{ 为负时会出错）}
 \]</div>
-<p><strong>softmax 的做法</strong>：先指数（保证正），再归一化。</p>
-<p><strong>指数还带来一个好处</strong>：<strong>放大差异</strong>。</p>
+<p><strong>softmax 的做法</strong>：先指数（保正），再归一化。</p>
+<p><strong>指数还带来好处</strong>：<strong>放大差异</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -12264,7 +12291,7 @@ s_i = \frac{e^{z_i}}{\sum_{j=1}^{K}e^{z_j}},
 </tr>
 </tbody>
 </table>
-<p><strong>注意</strong>：<span class="arithmatex">\(z\)</span> 只差 2，概率却差 20 倍——<strong>softmax 是「赢者通吃」的</strong>。</p>
+<p><strong>注意</strong>：<span class="arithmatex">\(z\)</span> 只差 2，概率却差 20 倍——<strong>softmax 赢者通吃</strong>。</p>
 <div class="admonition note">
 <p class="admonition-title">平移不变性的实际价值（数值稳定）</p>
 <p><strong>证明平移不变</strong>：</p>
@@ -12274,14 +12301,14 @@ s_i = \frac{e^{z_i}}{\sum_{j=1}^{K}e^{z_j}},
 = \frac{e^{z_i}}{\sum_j e^{z_j}} = s_i
 \]</div>
 <p><strong>工程用途：防止溢出</strong>。</p>
-<p>若 <span class="arithmatex">\(z_i = 1000\)</span>，则 <span class="arithmatex">\(e^{1000}\)</span> <strong>溢出</strong>（浮点数上限约 <span class="arithmatex">\(e^{709}\)</span>）。</p>
+<p>若 <span class="arithmatex">\(z_i = 1000\)</span>，<span class="arithmatex">\(e^{1000}\)</span> <strong>溢出</strong>（浮点上限约 <span class="arithmatex">\(e^{709}\)</span>）。</p>
 <p><strong>解决办法</strong>：减去最大值</p>
 <div class="arithmatex">\[
 s_i = \frac{e^{z_i - \max_j z_j}}{\sum_j e^{z_j - \max_j z_j}}
 \]</div>
-<p>这样指数的自变量最大为 0，<span class="arithmatex">\(e^0 = 1\)</span>，<strong>绝不会溢出</strong>，
-而结果<strong>完全不变</strong>（由平移不变性保证）。</p>
-<p><strong>这是所有深度学习框架内部的做法</strong>（<code>log_softmax</code> 同理）。</p>
+<p>这样指数自变量最大为 0，<span class="arithmatex">\(e^0 = 1\)</span>，<strong>绝不溢出</strong>，
+而结果<strong>完全不变</strong>（平移不变性保证）。</p>
+<p><strong>所有深度学习框架内部都这么做</strong>（<code>log_softmax</code> 同理）。</p>
 </div>
 <hr />
 <h2 id="softmax_2">三、Softmax 的雅可比矩阵<a class="headerlink" href="#softmax_2" title="Permanent link">&para;</a></h2>
@@ -12292,7 +12319,7 @@ s_i = \frac{e^{z_i - \max_j z_j}}{\sum_j e^{z_j - \max_j z_j}}
 <p><strong>分两种情形。</strong></p>
 <p><strong>情形 1：<span class="arithmatex">\(i = j\)</span></strong></p>
 <p>记 <span class="arithmatex">\(S = \sum_k e^{z_k}\)</span>（分母，与 <span class="arithmatex">\(i\)</span> 无关），则 <span class="arithmatex">\(s_i = e^{z_i}/S\)</span>。</p>
-<p>用商法则（注意 <span class="arithmatex">\(S\)</span> 也依赖 <span class="arithmatex">\(z_i\)</span>）：</p>
+<p>用商法则（<span class="arithmatex">\(S\)</span> 也依赖 <span class="arithmatex">\(z_i\)</span>）：</p>
 <div class="arithmatex">\[
 \frac{\partial s_i}{\partial z_i}
 = \frac{e^{z_i}\cdot S - e^{z_i}\cdot e^{z_i}}{S^2}
@@ -12302,9 +12329,9 @@ s_i = \frac{e^{z_i - \max_j z_j}}{\sum_j e^{z_j - \max_j z_j}}
 <div class="arithmatex">\[
 \boxed{\ \frac{\partial s_i}{\partial z_i} = s_i(1 - s_i)\ }
 \]</div>
-<p><strong>形式与 sigmoid 相同</strong>（这并非巧合——二分类时二者一致）。</p>
+<p><strong>形式与 sigmoid 相同</strong>（并非巧合——二分类时二者一致）。</p>
 <p><strong>情形 2：<span class="arithmatex">\(i \neq j\)</span></strong></p>
-<p>此时分子 <span class="arithmatex">\(e^{z_i}\)</span> 与分母中只有 <span class="arithmatex">\(e^{z_j}\)</span> 那项依赖 <span class="arithmatex">\(z_j\)</span>：</p>
+<p>此时分子 <span class="arithmatex">\(e^{z_i}\)</span> 与分母中仅 <span class="arithmatex">\(e^{z_j}\)</span> 那项依赖 <span class="arithmatex">\(z_j\)</span>：</p>
 <div class="arithmatex">\[
 \frac{\partial s_i}{\partial z_j}
 = \frac{0\cdot S - e^{z_i}\cdot e^{z_j}}{S^2}
@@ -12319,7 +12346,7 @@ s_i = \frac{e^{z_i - \max_j z_j}}{\sum_j e^{z_j - \max_j z_j}}
 J = \frac{\partial\boldsymbol{s}}{\partial\boldsymbol{z}}
 = \operatorname{diag}(\boldsymbol{s}) - \boldsymbol{s}\boldsymbol{s}^\top
 \]</div>
-<p><strong>验证</strong>：对角元是 <span class="arithmatex">\(s_i - s_i^2\)</span>，非对角元是 <span class="arithmatex">\(-s_is_j\)</span></p>
+<p><strong>验证</strong>：对角元 <span class="arithmatex">\(s_i - s_i^2\)</span>，非对角元 <span class="arithmatex">\(-s_is_j\)</span></p>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="sigmoid 与 softmax 的雅可比结构对比">
 <!-- 此图只画矩阵块，不需要箭头 marker -->
@@ -12414,14 +12441,14 @@ J\boldsymbol{v} = \boldsymbol{s}\odot\boldsymbol{v} - \boldsymbol{s}\big(\boldsy
 J\boldsymbol{v} = \operatorname{diag}(\boldsymbol{s})\boldsymbol{v} - \boldsymbol{s}(\boldsymbol{s}^\top\boldsymbol{v})
 = \boldsymbol{s}\odot\boldsymbol{v} - \boldsymbol{s}(\boldsymbol{s}^\top\boldsymbol{v})
 \]</div>
-<p><strong>这是「矩阵-向量积」的隐式实现</strong>，避免了 <span class="arithmatex">\(O(K^2)\)</span> 的存储和运算。
+<p><strong>这是「矩阵-向量积」的隐式实现</strong>，避免 <span class="arithmatex">\(O(K^2)\)</span> 存储与运算。
 深度学习框架正是这么做的。</p>
 </div>
 <h3 id="_7">一个重要性质：每行之和为零<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 \sum_j \frac{\partial s_i}{\partial z_j} = 0
 \]</div>
-<p><strong>验证</strong>：因为 <span class="arithmatex">\(\sum_i s_i = 1\)</span> 恒成立（与 <span class="arithmatex">\(\boldsymbol{z}\)</span> 无关），
+<p><strong>验证</strong>：因 <span class="arithmatex">\(\sum_i s_i = 1\)</span> 恒成立（与 <span class="arithmatex">\(\boldsymbol{z}\)</span> 无关），
 对 <span class="arithmatex">\(z_j\)</span> 求导得零。</p>
 <p><strong>逐项验证</strong>（<span class="arithmatex">\(K = 3\)</span>）：</p>
 <div class="arithmatex">\[
@@ -12431,10 +12458,10 @@ s_i(1-s_i) + (-s_is_k) + (-s_is_l) = s_i - s_i^2 - s_i(s_k+s_l)
 <div class="arithmatex">\[
 = s_i - s_i^2 - s_i(1-s_i) = s_i - s_i^2 - s_i + s_i^2 = 0 \;\checkmark
 \]</div>
-<p><strong>物理含义</strong>：提高某一类概率必然降低其它类——<strong>这是「竞争」关系</strong>。</p>
+<p><strong>物理含义</strong>：提高某类概率必然降低其它类——<strong>即竞争关系</strong>。</p>
 <hr />
 <h2 id="_8">四、与交叉熵配合：梯度极简<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>这是「softmax + 交叉熵」成为分类标准配置的原因。</p>
+<p>这是「softmax + 交叉熵」成为分类标配的原因。</p>
 <h3 id="_9">设定<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 \boldsymbol{s} = \operatorname{softmax}(\boldsymbol{z}),
@@ -12493,24 +12520,24 @@ L = -\sum_i y_i\log s_i
 </tr>
 </tbody>
 </table>
-<p><strong>为什么平方误差差</strong>：当预测严重错误时
-（例如真值是类别 2，但 <span class="arithmatex">\(s_2 \approx 0\)</span>），</p>
+<p><strong>为何平方误差差</strong>：预测严重错误时
+（例如真值类别 2，但 <span class="arithmatex">\(s_2 \approx 0\)</span>），</p>
 <div class="arithmatex">\[
 \frac{\partial}{\partial s_2}(s_2 - 1)^2 = 2(s_2-1) \approx -2
 \]</div>
-<p>这个梯度<strong>看起来不小</strong>，但要传到 <span class="arithmatex">\(\boldsymbol{z}\)</span> 还要乘
+<p>该梯度<strong>看似不小</strong>，但传到 <span class="arithmatex">\(\boldsymbol{z}\)</span> 还要乘
 softmax 的雅可比，其中含 <span class="arithmatex">\(s_2(1-s_2)\approx 0\)</span> 的因子——</p>
-<p><strong>结果：梯度被「掐灭」，学习停滞。</strong></p>
-<p>而交叉熵给出的 <span class="arithmatex">\(s_2 - y_2 = s_2 - 1 \approx -1\)</span>，
-<strong>经过雅可比后仍然是 <span class="arithmatex">\(s_j - y_j\)</span></strong>，不含消失因子。</p>
-<p><strong>这正是「交叉熵是为分类任务设计的损失函数」的含义</strong>。</p>
+<p><strong>结果：梯度被掐灭，学习停滞。</strong></p>
+<p>而交叉熵给出 <span class="arithmatex">\(s_2 - y_2 = s_2 - 1 \approx -1\)</span>，
+<strong>经过雅可比后仍是 <span class="arithmatex">\(s_j - y_j\)</span></strong>，不含消失因子。</p>
+<p><strong>这是「交叉熵是为分类任务设计的损失」的含义</strong>。</p>
 </div>
 <h3 id="_11">二分类的特例<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>当 <span class="arithmatex">\(K = 2\)</span> 时，softmax 退化为 sigmoid：</p>
+<p><span class="arithmatex">\(K = 2\)</span> 时，softmax 退化为 sigmoid：</p>
 <div class="arithmatex">\[
 s_1 = \frac{e^{z_1}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{-(z_1-z_2)}} = \sigma(z_1-z_2)
 \]</div>
-<p><strong>梯度形式也一致</strong>：交叉熵 + sigmoid 的梯度是 <span class="arithmatex">\(\sigma - y\)</span>。</p>
+<p><strong>梯度形式一致</strong>：交叉熵 + sigmoid 的梯度为 <span class="arithmatex">\(\sigma - y\)</span>。</p>
 <table>
 <thead>
 <tr>
@@ -12541,13 +12568,13 @@ s_1 = \frac{e^{z_1}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{-(z_1-z_2)}} = \sigma(z_1-
 </tr>
 </tbody>
 </table>
-<p><strong>注意「多标签」用多个 sigmoid（不是 softmax）</strong>——
-因为多标签的类别<strong>不互斥</strong>（可以同时属于多类），
-不需要「和为 1」的约束。</p>
+<p><strong>注意多标签用多个 sigmoid（不是 softmax）</strong>——
+因为多标签的类别<strong>不互斥</strong>（可同时属于多类），
+不需「和为 1」的约束。</p>
 <hr />
 <h2 id="_12">五、典型例题<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <h3 id="1-sigmoid">例题 1：求 sigmoid 的导数<a class="headerlink" href="#1-sigmoid" title="Permanent link">&para;</a></h3>
-<p>设 <span class="arithmatex">\(\sigma(x) = \dfrac{1}{1+e^{-x}}\)</span>，求 <span class="arithmatex">\(\sigma'(x)\)</span> 并求最大值。</p>
+<p>设 <span class="arithmatex">\(\sigma(x) = \dfrac{1}{1+e^{-x}}\)</span>，求 <span class="arithmatex">\(\sigma'(x)\)</span> 与最大值。</p>
 <details class="note">
 <summary>思路</summary>
 <p>用商法则，再设法用 <span class="arithmatex">\(\sigma\)</span> 自身表示。</p>
@@ -12591,7 +12618,7 @@ s = \frac{1}{2}, \qquad \sigma'_{\max} = \frac12\cdot\frac12 = \frac14
 \qquad
 \sigma'(0) = 0.5\times0.5 = 0.25 \;\checkmark
 \]</div>
-<p><strong>导数的上界 0.25</strong> 是「梯度消失」分析的起点。</p>
+<p><strong>导数上界 0.25</strong> 是梯度消失分析的起点。</p>
 </details>
 <hr />
 <h3 id="2-softmax">例题 2：求 softmax 的雅可比矩阵<a class="headerlink" href="#2-softmax" title="Permanent link">&para;</a></h3>
@@ -12653,7 +12680,7 @@ J = \begin{bmatrix}
 -0.05989 &amp; -0.16281 &amp; 0.22270
 \end{bmatrix}
 \]</div>
-<p><strong>第四步：验证每行之和为零</strong></p>
+<p><strong>第四步：验证每行和为零</strong></p>
 <p>第一行：<span class="arithmatex">\(0.08192 - 0.02203 - 0.05989 = 0.00000\)</span></p>
 <p>第二行：<span class="arithmatex">\(-0.02203 + 0.18484 - 0.16281 = 0.00000\)</span></p>
 <p>第三行：<span class="arithmatex">\(-0.05989 - 0.16281 + 0.22270 = 0.00000\)</span></p>
@@ -12683,10 +12710,10 @@ J = \begin{bmatrix}
 </tbody>
 </table>
 <p><strong>规律</strong>：分布越尖锐（某类概率接近 1），
-该类对应的对角线元素 <span class="arithmatex">\(s_i(1-s_i)\)</span> <strong>越小</strong>。</p>
-<p><strong>含义</strong>：<strong>当模型已经很有信心时（<span class="arithmatex">\(s_i \approx 1\)</span>），
-梯度变小</strong>——这是「学习放缓」的数学表现。</p>
-<p>与 sigmoid 饱和的情形本质相同。</p>
+该类对应对角线元素 <span class="arithmatex">\(s_i(1-s_i)\)</span> <strong>越小</strong>。</p>
+<p><strong>含义</strong>：<strong>模型已很有信心时（<span class="arithmatex">\(s_i \approx 1\)</span>），
+梯度变小</strong>——这是学习放缓的数学表现。</p>
+<p>与 sigmoid 饱和本质相同。</p>
 </div>
 <hr />
 <h3 id="3softmax">例题 3：softmax + 交叉熵的梯度<a class="headerlink" href="#3softmax" title="Permanent link">&para;</a></h3>
@@ -12729,7 +12756,7 @@ J = \begin{bmatrix}
 <tr>
 <td><span class="arithmatex">\(z_1\)</span></td>
 <td><span class="arithmatex">\(+0.09\)</span></td>
-<td><strong>减小</strong> <span class="arithmatex">\(z_1\)</span>（预测概率偏高了）</td>
+<td><strong>减小</strong> <span class="arithmatex">\(z_1\)</span>（预测概率偏高）</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(z_2\)</span></td>
@@ -12743,19 +12770,19 @@ J = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>验证梯度之和为零</strong>（这个性质由雅可比每行和为零推出）：</p>
+<p><strong>验证梯度之和为零</strong>（由雅可比每行和为零推出）：</p>
 <div class="arithmatex">\[
 0.09003 + 0.24473 - 0.33476 = 0.00000 \;\checkmark
 \]</div>
-<p><strong>物理含义</strong>：softmax 参数有一个<strong>冗余自由度</strong>——
-所有 <span class="arithmatex">\(z_i\)</span> 同加一个常数，输出不变。</p>
+<p><strong>物理含义</strong>：softmax 参数有<strong>冗余自由度</strong>——
+所有 <span class="arithmatex">\(z_i\)</span> 同加常数，输出不变。</p>
 <p>所以梯度必然「零和」（对平移方向无梯度），
-这解释了为什么<strong>必须有权重衰减或正则化</strong>来定住这个自由度。</p>
+这解释了为何<strong>必须有权重衰减或正则化</strong>来定住该自由度。</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">梯度之和为零带来的实践问题</p>
 <p><strong>问题</strong>：<span class="arithmatex">\(\sum_j\partial L/\partial z_j = 0\)</span> 意味着
-梯度的方向总与向量 <span class="arithmatex">\((1,1,\dots,1)\)</span> <strong>正交</strong>。</p>
+梯度方向总与向量 <span class="arithmatex">\((1,1,\dots,1)\)</span> <strong>正交</strong>。</p>
 <p><strong>后果</strong>：</p>
 <table>
 <thead>
@@ -12767,7 +12794,7 @@ J = \begin{bmatrix}
 <tbody>
 <tr>
 <td>参数漂移</td>
-<td>所有 <span class="arithmatex">\(z_i\)</span> 可以同时增大而不改变输出</td>
+<td>所有 <span class="arithmatex">\(z_i\)</span> 可同时增大而输出不变</td>
 </tr>
 <tr>
 <td>数值膨胀</td>
@@ -12794,25 +12821,25 @@ J = \begin{bmatrix}
 </tr>
 <tr>
 <td>早停</td>
-<td>在漂移造成问题前停止</td>
+<td>漂移造成问题前停止</td>
 </tr>
 </tbody>
 </table>
-<p><strong>这是「为什么分类网络需要正则化」的一个具体原因</strong>——
-不只是防过拟合，也是为了控制这个固有自由度。</p>
+<p><strong>这是「为何分类网络需要正则化」的具体原因</strong>——
+不只是防过拟合，也为控制该固有自由度。</p>
 </div>
 <hr />
 <h3 id="4">例题 4：求导链的完整验证<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>用两层网络验证「softmax + 交叉熵」的梯度确实等于 <span class="arithmatex">\(\boldsymbol{s}-\boldsymbol{y}\)</span>。</p>
+<p>用两层网络验证「softmax + 交叉熵」梯度确实等于 <span class="arithmatex">\(\boldsymbol{s}-\boldsymbol{y}\)</span>。</p>
 <p>网络：</p>
 <div class="arithmatex">\[
 \boldsymbol{z} = W\boldsymbol{h} + \boldsymbol{b}, \qquad
 \boldsymbol{s} = \operatorname{softmax}(\boldsymbol{z})
 \]</div>
-<p>其中 <span class="arithmatex">\(\boldsymbol{h}\)</span> 是隐藏层输出，<span class="arithmatex">\(W\)</span> 是输出层权重矩阵。</p>
+<p>其中 <span class="arithmatex">\(\boldsymbol{h}\)</span> 是隐藏层输出，<span class="arithmatex">\(W\)</span> 是输出层权重。</p>
 <details class="note">
 <summary>思路</summary>
-<p>先对 <span class="arithmatex">\(W\)</span>（间接）求导，验证链式法则在各环节都成立。</p>
+<p>先对 <span class="arithmatex">\(W\)</span>（间接）求导，验证链式法则各环节成立。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12867,11 +12894,11 @@ J = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「输出层误差 × 输入」的经典形式</strong>——
-与前面「反向传播」一节的
+<p><strong>这是「输出层误差 × 输入」的经典形式</strong>——
+与前面反向传播一节的
 <span class="arithmatex">\(\frac{\partial\mathcal{L}}{\partial W^{(\ell)}} = \boldsymbol{\delta}^{(\ell)}\boldsymbol{a}^{(\ell-1)\top}\)</span>
 完全相同。</p>
-<p><strong>验证一个具体数值</strong>（简化：<span class="arithmatex">\(K = 2\)</span>，<span class="arithmatex">\(d = 3\)</span>）：</p>
+<p><strong>验证具体数值</strong>（简化：<span class="arithmatex">\(K = 2\)</span>，<span class="arithmatex">\(d = 3\)</span>）：</p>
 <p>设 <span class="arithmatex">\(\boldsymbol{s}-\boldsymbol{y} = (0.1, -0.1)^\top\)</span>、
 <span class="arithmatex">\(\boldsymbol{h} = (1, 2, 3)^\top\)</span>，则</p>
 <div class="arithmatex">\[
@@ -12879,8 +12906,8 @@ J = \begin{bmatrix}
 = \begin{bmatrix}0.1&amp;0.2&amp;0.3\\-0.1&amp;-0.2&amp;-0.3\end{bmatrix}
 \]</div>
 <p><strong>观察</strong>：两行<strong>成比例</strong>（第二行 = 第一行 × <span class="arithmatex">\((-1)\)</span>）。</p>
-<p>这不是巧合——它反映了 softmax 的「零和」结构：
-所有输出权重的梯度沿 <span class="arithmatex">\((1,\dots,1)\)</span> 方向的分量为零。</p>
+<p>这不是巧合——它反映了 softmax 的零和结构：
+所有输出权重梯度沿 <span class="arithmatex">\((1,\dots,1)\)</span> 方向的分量为零。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">完整的训练步骤（把这一页用起来）</p>
@@ -12923,7 +12950,7 @@ J = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>注意第 3 步</strong>：整个输出层的反向传播只需要<strong>一次减法</strong>——
+<p><strong>注意第 3 步</strong>：整个输出层反向传播只需<strong>一次减法</strong>——
 这是 softmax + 交叉熵组合的核心优势。</p>
 </div>
 <hr />
@@ -12937,15 +12964,15 @@ J = \begin{bmatrix}
 </ul>
 <h3 id="_15">智能传感与信息处理 · 软判决与置信度<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>传感器融合</strong>的软判决：用 softmax 给出各假设的置信度</li>
-<li><strong>注意力的权重</strong>：softmax 用于归一化注意力分数</li>
-<li><strong>温度参数</strong>：softmax 前除以 <span class="arithmatex">\(T\)</span> 可调节「软硬程度」
+<li><strong>传感器融合</strong>软判决：用 softmax 给出各假设的置信度</li>
+<li><strong>注意力权重</strong>：softmax 用于归一化注意力分数</li>
+<li><strong>温度参数</strong>：softmax 前除以 <span class="arithmatex">\(T\)</span> 可调「软硬程度」
   （<span class="arithmatex">\(T\to0\)</span> 变硬，<span class="arithmatex">\(T\)</span> 大则更均匀）</li>
 </ul>
 <h3 id="_16">无人系统自主决策与优化 · 策略网络<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>强化学习的策略输出</strong>：softmax 给出各动作的概率</li>
-<li><strong>策略梯度中要对 log 概率求导</strong>（用到本页的链式结构）</li>
+<li><strong>强化学习策略输出</strong>：softmax 给出各动作的概率</li>
+<li><strong>策略梯度中要对 log 概率求导</strong>（用到本页链式结构）</li>
 <li><strong>动作选择</strong>：按 softmax 概率采样（探索与利用的平衡）</li>
 </ul>
 <hr />
@@ -12976,21 +13003,21 @@ e^{-2} = 0.135335
 <div class="arithmatex">\[
 \frac{0.135335}{(1.135335)^2} = \frac{0.135335}{1.288990} = 0.104994 \;\checkmark
 \]</div>
-<p><strong>注意</strong>：<span class="arithmatex">\(x = 2\)</span> 时导数只有 <span class="arithmatex">\(0.105\)</span>，
-<strong>不到最大值 <span class="arithmatex">\(0.25\)</span> 的一半</strong>——已经进入「部分饱和」区间。</p>
-<p>这提醒我们：<strong>即使 <span class="arithmatex">\(x\)</span> 不算很大（<span class="arithmatex">\(x=2\)</span>），sigmoid 也开始饱和了</strong>。
-这是 sigmoid 在深层网络中不受欢迎的定量原因之一。</p>
+<p><strong>注意</strong>：<span class="arithmatex">\(x = 2\)</span> 时导数仅 <span class="arithmatex">\(0.105\)</span>，
+<strong>不到最大值 <span class="arithmatex">\(0.25\)</span> 的一半</strong>——已进入部分饱和区间。</p>
+<p>注意：<strong>即使 <span class="arithmatex">\(x=2\)</span> 不算大，sigmoid 也开始饱和</strong>。
+这是 sigmoid 在深层网络中不受欢迎的定量原因。</p>
 </details>
 <hr />
 <p><strong>Q2</strong> 验证 softmax 的平移不变性：<span class="arithmatex">\(\boldsymbol{z} = (1,2,3)\)</span> 与
 <span class="arithmatex">\(\boldsymbol{z}' = (0,1,2)\)</span>（都减 1）的 softmax 相同。</p>
 <details class="note">
 <summary>提示</summary>
-<p>分别算，或直接用平移不变性的证明。</p>
+<p>分别算，或直接用平移不变性证明。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>算第一个</strong>（已在例 2 中算过）：</p>
+<p><strong>算第一个</strong>（例 2 已算过）：</p>
 <div class="arithmatex">\[
 \boldsymbol{s} = (0.09003,\ 0.24473,\ 0.66524)
 \]</div>
@@ -13014,16 +13041,12 @@ s_3' = \frac{7.38906}{11.10734} = 0.66524
 \]</div>
 <p><strong>完全一致</strong></p>
 <p><strong>验证关系</strong>：<span class="arithmatex">\(S' = S/e = 30.19284/2.71828 = 11.10734\)</span></p>
-<p>（因为每个 <span class="arithmatex">\(e^{z_i}\)</span> 都除以了 <span class="arithmatex">\(e\)</span>，分母也除以 <span class="arithmatex">\(e\)</span>，比值不变。）</p>
+<p>（每个 <span class="arithmatex">\(e^{z_i}\)</span> 都除以 <span class="arithmatex">\(e\)</span>，分母亦然，比值不变。）</p>
 <p><strong>工程价值</strong>：<strong>数值稳定</strong>。</p>
 <p>若 <span class="arithmatex">\(\boldsymbol{z} = (1000, 1001, 1002)\)</span>，直接算 <span class="arithmatex">\(e^{1000}\)</span> <strong>溢出</strong>。
 减去最大值后变成 <span class="arithmatex">\((0,1,2)\)</span> 附近的相对值，<strong>安全计算</strong>。</p>
-<p><strong>实现要点</strong>：</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>z_shift = z - max(z)          # 平移（防止溢出）
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a>s = exp(z_shift) / sum(exp(z_shift))
-</code></pre></div></td></tr></table></div>
-<p>所有深度学习框架的内部实现都这么做。</p>
+<p><strong>实现要点</strong>：先减去最大值（平移），再取指数并归一化——指数自变量最大为 0，
+绝不溢出。所有深度学习框架内部都这么做。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 二分类任务中，用 1 个 sigmoid 与用 2 个 softmax 等价吗？</p>
@@ -13033,7 +13056,7 @@ s_3' = \frac{7.38906}{11.10734} = 0.66524
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>在数学上等价，但实践中有差异。</p>
+<p>数学上等价，但实践中有差异。</p>
 <p><strong>等价性</strong>：softmax 输出 <span class="arithmatex">\((s_1, s_2)\)</span> 且 <span class="arithmatex">\(s_1+s_2 = 1\)</span>，
 所以只有 1 个自由度，与单个 sigmoid 相同：</p>
 <div class="arithmatex">\[
@@ -13067,7 +13090,7 @@ s_2 = \frac{e^{z_2}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{z_1-z_2}} = \sigma(z_2-z_1
 <tr>
 <td>数值稳定性</td>
 <td>好</td>
-<td>需做平移处理</td>
+<td>需平移处理</td>
 </tr>
 <tr>
 <td>实用性</td>
@@ -13080,10 +13103,10 @@ s_2 = \frac{e^{z_2}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{z_1-z_2}} = \sigma(z_2-z_1
 <p><strong>原因</strong>：</p>
 <ol>
 <li><strong>参数更少</strong>（少一半输出层参数）</li>
-<li><strong>无冗余自由度</strong>（不需要额外正则化来定住平移）</li>
+<li><strong>无冗余自由度</strong>（不需额外正则化定住平移）</li>
 <li><strong>实现简单</strong>（一次 sigmoid vs 带 max 减法的 softmax）</li>
 </ol>
-<p><strong>什么情况用 2 类 softmax</strong>：当代码框架统一处理多分类时
+<p><strong>什么情况用 2 类 softmax</strong>：代码框架统一处理多分类时
 （<span class="arithmatex">\(K=2\)</span> 也走 softmax 路径），便于代码复用。
 这在小 <span class="arithmatex">\(K\)</span> 时代价可忽略。</p>
 </details>
@@ -13091,11 +13114,11 @@ s_2 = \frac{e^{z_2}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{z_1-z_2}} = \sigma(z_2-z_1
 <p><strong>Q4</strong> 为什么「多标签分类」要用多个 sigmoid 而不是 softmax？</p>
 <details class="note">
 <summary>提示</summary>
-<p>考虑标签之间是否互斥。</p>
+<p>考虑标签是否互斥。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>因为多标签任务的类别不互斥。</p>
+<p>因多标签任务的类别不互斥。</p>
 <p><strong>核心区别</strong>：</p>
 <table>
 <thead>
@@ -13109,28 +13132,28 @@ s_2 = \frac{e^{z_2}}{e^{z_1}+e^{z_2}} = \frac{1}{1+e^{z_1-z_2}} = \sigma(z_2-z_1
 <tbody>
 <tr>
 <td><strong>多分类</strong></td>
-<td><strong>互斥</strong>（只能属于一类）</td>
+<td><strong>互斥</strong>（只能属一类）</td>
 <td>softmax</td>
 <td><span class="arithmatex">\(=1\)</span></td>
 </tr>
 <tr>
 <td><strong>多标签</strong></td>
-<td><strong>不互斥</strong>（可同时属于多类）</td>
+<td><strong>不互斥</strong>（可同属多类）</td>
 <td>多个 sigmoid</td>
 <td>各自独立</td>
 </tr>
 </tbody>
 </table>
-<p><strong>具体例子</strong>（图像标签）：</p>
+<p><strong>例子</strong>（图像标签）：</p>
 <p>一张图片可能同时是「<strong>沙滩</strong>」「<strong>日落</strong>」「<strong>有人</strong>」——
-这三个标签<strong>可以同时为真</strong>。</p>
-<p>若用 softmax，则三者的概率之和必须为 1，
-<strong>强行让它们互相排斥</strong>——这不符合实际情况。</p>
-<p><strong>正确做法</strong>：每个标签独立过一个 sigmoid</p>
+三个标签<strong>可同时为真</strong>。</p>
+<p>若用 softmax，则三者概率之和必须为 1，
+<strong>强行让它们互相排斥</strong>——这不符合实际。</p>
+<p><strong>正确做法</strong>：每个标签独立过 sigmoid</p>
 <div class="arithmatex">\[
 \hat y_i = \sigma(w_i^\top\boldsymbol{h}), \qquad i = 1,\dots,K
 \]</div>
-<p>用<strong>各类各自的二元交叉熵</strong>求和作为总损失：</p>
+<p>用<strong>各类二元交叉熵</strong>求和作为总损失：</p>
 <div class="arithmatex">\[
 L = -\sum_{i=1}^{K}\Big[y_i\log\hat y_i + (1-y_i)\log(1-\hat y_i)\Big]
 \]</div>
@@ -13155,7 +13178,7 @@ L = -\sum_{i=1}^{K}\Big[y_i\log\hat y_i + (1-y_i)\log(1-\hat y_i)\Big]
 </tr>
 </tbody>
 </table>
-<p><strong>这是初学最容易搞错的地方之一</strong>——用错会导致模型
+<p><strong>这是初学最易搞错的地方之一</strong>——用错会导致模型
 无法同时预测多个标签。</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../matrix-calculus/">矩阵微积分</a><a href="../chain-rule/">链式法则与反向传播</a></span></div></nav>

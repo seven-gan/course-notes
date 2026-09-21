@@ -12243,7 +12243,6 @@ l_{ij} = \frac{1}{l_{jj}}\left(a_{ij}-\sum_{k&lt;j}l_{ik}l_{jk}\right)\quad(i&gt
 </tr>
 </tbody>
 </table>
-<p><strong>第三个优势最实用</strong>：省掉了选主元的逻辑与数据移动</p>
 <p>但有一个前提：<strong><span class="arithmatex">\(A\)</span> 必须对称正定</strong>。</p>
 <p>「对称正定」在实践中能否保证：</p>
 <table>
@@ -12299,8 +12298,6 @@ l_{ij} = \frac{1}{l_{jj}}\left(a_{ij}-\sum_{k&lt;j}l_{ik}l_{jk}\right)\quad(i&gt
 </tr>
 </tbody>
 </table>
-<p><strong>实用技巧</strong>：直接尝试 Cholesky 分解 ——
-它是<strong>最快的 SPD 检测器</strong></p>
 <p><strong>若分解失败（根号内为负）</strong>：</p>
 <table>
 <thead>
@@ -12328,7 +12325,6 @@ l_{ij} = \frac{1}{l_{jj}}\left(a_{ij}-\sum_{k&lt;j}l_{ik}l_{jk}\right)\quad(i&gt
 <div class="arithmatex">\[
 A+\lambda I\ \text{（SPD，条件数改善）}
 \]</div>
-<p>这与「线性代数」模块的矩阵分解一页的结论一致</p>
 </div>
 <hr />
 <h2 id="_2">二、经典迭代法<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12449,7 +12445,6 @@ x_i^{(k+1)} = \frac{1}{a_{ii}}\left(b_i-\sum_{j&lt;i}a_{ij}x_j^{(k+1)}-\sum_{j&g
 </tr>
 </tbody>
 </table>
-<p><strong>所以迭代次数约减半</strong></p>
 <p><strong>为什么更快（直观）</strong>：</p>
 <p><strong>GS 用「更新的信息」</strong> —— 计算 <span class="arithmatex">\(x_2\)</span> 时已经用上了新的 <span class="arithmatex">\(x_1\)</span>
 而 Jacobi 还在用旧的 <span class="arithmatex">\(x_1\)</span>。</p>
@@ -12584,7 +12579,6 @@ x_i^{(k+1)} = (1-\omega)x_i^{(k)}+\omega x_i^{\text{GS}}
 </tr>
 </tbody>
 </table>
-<p>这就是「SOR 在高分辨率问题上有巨大优势」的原因</p>
 <p><strong>注意「最优 <span class="arithmatex">\(\omega\)</span> 需要知道 <span class="arithmatex">\(\rho_J\)</span>」</strong>：</p>
 <p>实践中常用<strong>自适应估计</strong>（用迭代过程中的信息估计），
 或<strong>试几个 <span class="arithmatex">\(\omega\)</span></strong> 看哪个收敛快</p>
@@ -14142,8 +14136,6 @@ z
 <p><strong>注意「<span class="arithmatex">\(n\)</span> 步精确收敛」在实际中不成立</strong> ——
 因为舍入误差破坏了共轭性 ✗</p>
 <p>但 CG 的实用价值在于「远小于 <span class="arithmatex">\(n\)</span> 步就足够准」</p>
-<p><strong>与「梯度下降」页的联系</strong>：CG 的收敛因子形式与上一层的
-「梯度下降在二次函数上的收敛速率」完全一致</p>
 </div>
 <h3 id="32">3.2 预处理：改善条件数<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：若 <span class="arithmatex">\(\kappa(A)\)</span> 很大，CG 仍需要很多步 ✗</p>
@@ -14181,7 +14173,6 @@ z
 </table>
 <div class="admonition note">
 <p class="admonition-title">「预处理」的本质就是「改善条件数」</p>
-<p>这与本知识库反复出现的主题一致：</p>
 <table>
 <thead>
 <tr>
@@ -14249,7 +14240,7 @@ z
 <div class="arithmatex">\[
 A^{T}A\boldsymbol{x} = A^{T}\boldsymbol{b}
 \]</div>
-<p><strong>但条件数被平方</strong>（回顾「浮点数与误差」一页的警告）✗</p>
+<p><strong>但条件数被平方</strong> ✗</p>
 <div class="admonition warning">
 <p class="admonition-title">「用 QR 而不是正规方程」的量化理由</p>
 <table>
@@ -14359,7 +14350,6 @@ A = U\Sigma V^{T}\implies\boldsymbol{x} = V\Sigma^{+}U^{T}\boldsymbol{b}
 <p>其中 <span class="arithmatex">\(\Sigma^{+}\)</span> 是「把小的奇异值置零后的倒数」——</p>
 <p>这给出「最小范数解」，且可以显式控制截断</p>
 </div>
-<p>"""</p>
 <hr />
 <h2 id="_4">四、典型例题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1-lu">例题 1：带选主元的高斯消元与 LU 分解<a class="headerlink" href="#1-lu" title="Permanent link">&para;</a></h3>
@@ -14543,8 +14533,7 @@ PA = \begin{bmatrix}4 &amp; 9 &amp; 16\\ 2 &amp; 3 &amp; 4\\ 1 &amp; 1 &amp; 1\e
 </tbody>
 </table>
 <p><strong>最后一条很重要</strong>：</p>
-<p><strong>选主元保证「算法稳定」，但不改变「问题的条件数」</strong>
-（回顾上一页的区分：条件数属于问题。）</p>
+<p><strong>选主元保证「算法稳定」，但不改变「问题的条件数」</strong></p>
 <p>所以即使做了选主元，若 <span class="arithmatex">\(\kappa(A) = 10^{16}\)</span>，结果仍不可信 ✗</p>
 </div>
 <hr />
@@ -14689,8 +14678,6 @@ L = \begin{bmatrix}2 &amp; 0 &amp; 0\\ 6 &amp; 1 &amp; 0\\ -8 &amp; 5 &amp; 3\en
 <div class="arithmatex">\[
 A+\lambda I\ \text{的 Cholesky 可做} \implies\text{正定化}
 \]</div>
-<p>这与岭回归、以及「矩阵分解」一页讲的「加对角扰动改善条件数」
-是同一个技术</p>
 <p><strong><span class="arithmatex">\(\lambda\)</span> 怎么选</strong>：</p>
 <table>
 <thead>
@@ -14896,7 +14883,6 @@ k = \frac{13.8155}{3.3998}\approx4.06\to5
 </tr>
 </tbody>
 </table>
-<p><strong>所以 <span class="arithmatex">\(n\)</span> 越大，SOR 越相对有优势</strong></p>
 <p><strong>工程选择的实际建议</strong>：</p>
 <table>
 <thead>
@@ -14925,8 +14911,7 @@ k = \frac{13.8155}{3.3998}\approx4.06\to5
 </tbody>
 </table>
 <p><strong>最后一行值得说明</strong>：<strong>实践中常用「迭代法热身 + 直接法收尾」</strong> ——
-迭代法快速降低误差，直接法处理剩余的小规模问题
-（这就是「混合方法」的思想。）</p>
+迭代法快速降低误差，直接法处理剩余的小规模问题</p>
 </div>
 <hr />
 <h3 id="4-qr">例题 4：共轭梯度的手算与 QR 最小二乘<a class="headerlink" href="#4-qr" title="Permanent link">&para;</a></h3>
@@ -15804,7 +15789,6 @@ A^{T}A\boldsymbol{x} = A^{T}\boldsymbol{b}
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行值得展开</strong>：</p>
 <p>Tikhonov 正则化可以转化为一个「更大的、但良态的最小二乘问题」</p>
 <div class="arithmatex">\[
 \min\lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^{2}+\lambda\lVert\boldsymbol{x}\rVert^{2}
@@ -15836,7 +15820,6 @@ A^{T}A\boldsymbol{x} = A^{T}\boldsymbol{b}
 </tr>
 </tbody>
 </table>
-<p><strong>「优先用库函数」的理由</strong>：</p>
 <p>LAPACK/NumPy 的实现考虑了选主元、缩放、迭代改善等细节 ——
 <strong>自己实现很容易漏掉关键步骤</strong> ✗</p>
 </details>

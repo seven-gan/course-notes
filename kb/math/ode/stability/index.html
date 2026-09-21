@@ -12296,8 +12296,8 @@ x(t) = \frac{x_0}{\sqrt{1 + 2x_0^{2}t}}
 \]</div>
 <p>它趋于零，但<strong>按 <span class="arithmatex">\(t^{-1/2}\)</span> 衰减</strong>，比任何 <span class="arithmatex">\(e^{-\alpha t}\)</span> 都慢。
 所以它渐近稳定但不是指数稳定。</p>
-<p><strong>工程含义</strong>：任何「收敛速度保证了具体指标」的结论都要求指数稳定。
-若只知道渐近稳定，<strong>收敛时间可能是无穷长</strong>。</p>
+<p><strong>工程含义</strong>：任何保证具体指标的收敛结论都要求指数稳定。
+若只知渐近稳定，<strong>收敛时间可能是无穷长</strong>。</p>
 <p>具体数值对比（<span class="arithmatex">\(\lvert x\rvert\)</span> 从 1 衰减到给定水平所需时间）：</p>
 <table>
 <thead>
@@ -12331,7 +12331,7 @@ x(t) = \frac{x_0}{\sqrt{1 + 2x_0^{2}t}}
 </table>
 <p><strong>结论</strong>：多项式收敛在工程上等于「不收敛」——
 到 <span class="arithmatex">\(10^{-6}\)</span> 需要 <span class="arithmatex">\(5 \times 10^{11}\)</span> 个时间单位。
-这就是为什么控制器设计必须检查「指数衰减率 <span class="arithmatex">\(\alpha\)</span>」而不仅仅是「是否会收敛」。</p>
+所以控制器设计必须检查「指数衰减率 <span class="arithmatex">\(\alpha\)</span>」，而非「是否会收敛」。</p>
 <h3 id="_6">平衡点与轨道稳定性<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12406,8 +12406,7 @@ J_{ij} = \frac{\partial f_i}{\partial x_j}\bigg|_{\boldsymbol{x}_e}
 </tr>
 </tbody>
 </table>
-<p><strong>「双曲」的含义</strong>：没有任何特征值落在虚轴上。
-只有双曲平衡点，线性化才能给出确定结论。</p>
+<p><strong>「双曲」的含义</strong>：没有任何特征值落在虚轴上。</p>
 <p><strong>为什么非双曲时失效</strong>：看两个例子，线性化后的矩阵<strong>完全相同</strong>：</p>
 <table>
 <thead>
@@ -12530,16 +12529,14 @@ M_p = \exp\left(-\frac{\pi \times 0.079819}{0.996810}\right) = e^{-0.251637} \ap
 </tr>
 </tbody>
 </table>
-<p><strong>约 18.4 秒才能衰减到 1 %</strong> —— 这是「阻尼不足」的直接后果。</p>
-<p><strong>工程含义</strong>：这条计算说明了「<span class="arithmatex">\(\operatorname{Re}\lambda\)</span> 决定收敛快慢」。
+<p><strong>工程含义</strong>：<span class="arithmatex">\(\operatorname{Re}\lambda\)</span> 决定收敛快慢。
 若希望 5 秒内衰减到 1 %，需要 <span class="arithmatex">\(\lvert\operatorname{Re}\lambda\rvert \ge \dfrac{\ln 100}{5} = 0.921034\)</span>，
 而 <span class="arithmatex">\(\lvert\operatorname{Re}\lambda\rvert = \dfrac{k}{2}\)</span>，所以</p>
 <div class="arithmatex">\[
 k \ge 2 \times 0.921034 = 1.842068
 \]</div>
 <p>即<strong>阻尼系数要从 <span class="arithmatex">\(0.5\)</span> 增大到约 <span class="arithmatex">\(1.84\)</span>（约 3.7 倍）</strong>。</p>
-<p><strong>这是「从稳定性要求反推设计参数」的完整链条</strong>。
-把新参数代回去看副作用：</p>
+<p>把新参数代回去看副作用：</p>
 <table>
 <thead>
 <tr>
@@ -12577,12 +12574,9 @@ k \ge 2 \times 0.921034 = 1.842068
 <ul>
 <li><span class="arithmatex">\(\lvert\operatorname{Re}\lambda\rvert\)</span> 只增大 <strong>3.68 倍</strong>（<span class="arithmatex">\(0.921034/0.25 = 3.684136\)</span>），
   收敛时间正好降到 <span class="arithmatex">\(1/3.68\)</span>；</li>
-<li><span class="arithmatex">\(\omega_d\)</span> 只从 <span class="arithmatex">\(3.122099\)</span> 降到 <span class="arithmatex">\(2.993609\)</span>（<strong>约 4 %</strong>），
-  周期几乎不变；</li>
 <li><span class="arithmatex">\(\zeta\)</span> 从 <span class="arithmatex">\(0.0798\)</span> 增到 <span class="arithmatex">\(0.2941\)</span>，<strong>超调从 77.75 % 降到 38.04 %</strong>，
   改善明显但<strong>仍不理想</strong>（38 % 的超调在精密定位中仍不可接受）。</li>
 </ul>
-<p><strong>关键工程结论</strong>：<strong>增大阻尼能有效缩短收敛时间，但代价是响应变「迟钝」</strong>。</p>
 <p>把极限情形算出来看：</p>
 <table>
 <thead>
@@ -13374,7 +13368,7 @@ J = \begin{bmatrix} 0 &amp; 1 \\ \dfrac{g}{L} &amp; -k \end{bmatrix}, \qquad
 \dot{V} = \frac{\partial V}{\partial \boldsymbol{x}}\cdot\dot{\boldsymbol{x}}
 = \nabla V^{\mathsf{T}}\boldsymbol{f}(\boldsymbol{x})
 \]</div>
-<p><strong>注意这里用的是链式法则</strong>——<span class="arithmatex">\(\dot{V}\)</span> 不显含时间，
+<p><strong>这里用的是链式法则</strong>——<span class="arithmatex">\(\dot{V}\)</span> 不显含时间，
 因为 <span class="arithmatex">\(V\)</span> 只依赖于状态，而状态的演化由方程给出。</p>
 <h3 id="_12">三种「能量」的常见取法<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <table>
@@ -13421,8 +13415,7 @@ A \ \text{的所有特征值实部为负} \iff
 \text{方程 } A^{\mathsf{T}}P + PA = -Q \text{ 有唯一正定解 } P
 \]</div>
 <p><strong>这条定理的价值</strong>：它把「求特征值」换成了「解线性方程组」。
-在数值上，解 <span class="arithmatex">\(n^{2}\)</span> 个线性方程通常比求特征值<strong>更稳定、更快</strong>，
-尤其是 <span class="arithmatex">\(A\)</span> 是稀疏矩阵时。</p>
+在数值上，解 <span class="arithmatex">\(n^{2}\)</span> 个线性方程通常比求特征值<strong>更稳定、更快</strong>。</p>
 <h3 id="lyapunov_3">具体例：解 Lyapunov 方程<a class="headerlink" href="#lyapunov_3" title="Permanent link">&para;</a></h3>
 <p>取</p>
 <div class="arithmatex">\[
@@ -13555,7 +13548,7 @@ V(x_1, x_2) = \underbrace{\frac12 x_2^{2}}_{\text{动能}} + \underbrace{\frac{g
 <div class="arithmatex">\[
 \dot{V} = -kx_2^{2} \le 0 \ \checkmark
 \]</div>
-<p><strong>这是一个漂亮的结论</strong>：<strong>能量耗散的速率只由阻尼项决定</strong>，
+<p><strong>能量耗散的速率只由阻尼项决定</strong>，
 与势能无关 —— 这正是「阻尼消耗能量」的数学表述。</p>
 <p><strong>数值验证</strong>（<span class="arithmatex">\(g/L = 9.81\)</span>、<span class="arithmatex">\(k = 0.5\)</span>）：</p>
 <table>
@@ -13608,8 +13601,7 @@ E = \left\{\boldsymbol{x} \in \Omega : \dot{V}(\boldsymbol{x}) = 0\right\}
 且在系统作用下不变的集合），则<strong>每条轨迹都趋于 <span class="arithmatex">\(M\)</span></strong>。</p>
 <p><strong>关键</strong>：不需要 <span class="arithmatex">\(\dot{V}\)</span> 负定，只需要「<span class="arithmatex">\(\dot{V} = 0\)</span> 的地方没有非平凡的不变集」。
 <strong>这个放宽极其重要</strong>，因为很多物理系统的能量导数天然是半负定的。</p>
-<p><strong>「不变集」的含义</strong>：若 <span class="arithmatex">\(\boldsymbol{x}(0) \in M\)</span>，则 <span class="arithmatex">\(\boldsymbol{x}(t) \in M\)</span> 对所有 <span class="arithmatex">\(t\)</span> 成立。
-<strong>在 <span class="arithmatex">\(E\)</span> 里检查不变性</strong>：取 <span class="arithmatex">\(E\)</span> 中的点，代入方程看状态是否留在 <span class="arithmatex">\(E\)</span> 内。</p>
+<p><strong>「不变集」的含义</strong>：若 <span class="arithmatex">\(\boldsymbol{x}(0) \in M\)</span>，则 <span class="arithmatex">\(\boldsymbol{x}(t) \in M\)</span> 对所有 <span class="arithmatex">\(t\)</span> 成立。</p>
 <h3 id="_14">用它证明阻尼摆的渐近稳定<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(E\)</span> 是 <span class="arithmatex">\(x_2 = 0\)</span>（整条水平轴）。检查 <span class="arithmatex">\(E\)</span> 中的不变集：</p>
 <p>在 <span class="arithmatex">\(E\)</span> 上，<span class="arithmatex">\(x_2 = 0\)</span>。由方程，<span class="arithmatex">\(\dot{x}_1 = x_2 = 0\)</span>，而</p>
@@ -13680,9 +13672,7 @@ E = \left\{\boldsymbol{x} \in \Omega : \dot{V}(\boldsymbol{x}) = 0\right\}
 </tbody>
 </table>
 <p><strong>工程含义</strong>：<strong>吸引域就是「系统能承受多大扰动的容许范围」</strong>。
-它用能量给出：<strong>初始能量只要低于势垒，就能回到最低点</strong>。
-这个结论<strong>不需要解方程</strong>，也不依赖阻尼大小 ——
-只要阻尼为正（<span class="arithmatex">\(k &gt; 0\)</span>），就有 <span class="arithmatex">\(\dot{V} \le 0\)</span>。</p>
+它用能量给出：<strong>初始能量只要低于势垒，就能回到最低点</strong>。</p>
 <h3 id="_15">极限环：稳定的自激振荡<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <p><strong>定义</strong>：<strong>极限环</strong>是一条<strong>孤立的闭合轨道</strong>，
 其周期与幅值由系统本身决定，与初始条件无关。</p>
@@ -13802,11 +13792,11 @@ E = \left\{\boldsymbol{x} \in \Omega : \dot{V}(\boldsymbol{x}) = 0\right\}
 <p><strong>两个重要观察</strong>：</p>
 <ol>
 <li><strong>幅值几乎不随 <span class="arithmatex">\(\mu\)</span> 变化</strong>：从 <span class="arithmatex">\(\mu = 0.1\)</span> 到 <span class="arithmatex">\(\mu = 5.0\)</span>，
-   <span class="arithmatex">\(x_{\max}\)</span> 只从 <span class="arithmatex">\(2.000104\)</span> 变到 <span class="arithmatex">\(2.021508\)</span>（<strong>变化约 1 %</strong>）。
-   这与「极限环幅值由系统决定」完全一致 ——
-   <strong>幅值几乎是一个几何常数，而不是可调参数</strong>。</li>
-<li><strong>周期随 <span class="arithmatex">\(\mu\)</span> 显著增大</strong>：从 <span class="arithmatex">\(6.287\)</span> 增到 <span class="arithmatex">\(11.612\)</span>，
-   约 <span class="arithmatex">\(1.85\)</span> 倍。<strong>大 <span class="arithmatex">\(\mu\)</span> 时振荡变慢</strong>（因为能量交换过程更剧烈、更「松弛」）。</li>
+   <span class="arithmatex">\(x_{\max}\)</span> 只从 <span class="arithmatex">\(2.000104\)</span> 变到 <span class="arithmatex">\(2.021508\)</span>（<strong>变化约 1 %</strong>），
+   与「极限环幅值由系统决定」一致 ——
+   <strong>幅值几乎是几何常数，而非可调参数</strong>。</li>
+<li><strong>周期随 <span class="arithmatex">\(\mu\)</span> 显著增大</strong>：从 <span class="arithmatex">\(6.287\)</span> 增到 <span class="arithmatex">\(11.612\)</span>（约 <span class="arithmatex">\(1.85\)</span> 倍），
+   <strong>大 <span class="arithmatex">\(\mu\)</span> 时振荡变慢</strong>（能量交换更剧烈、更「松弛」）。</li>
 </ol>
 <p><strong>平均法（小 <span class="arithmatex">\(\mu\)</span> 近似）</strong>：</p>
 <div class="arithmatex">\[
@@ -13843,8 +13833,7 @@ T \approx 2\pi\left(1 + \frac{\mu^{2}}{16} - \frac{5\mu^{4}}{3072} + \cdots\righ
 </tbody>
 </table>
 <p><strong>结论</strong>：平均法在小 <span class="arithmatex">\(\mu\)</span> 时<strong>极其精确</strong>（<span class="arithmatex">\(\mu = 0.2\)</span> 时误差百万分之一），
-但 <span class="arithmatex">\(\mu\)</span> 增大后误差迅速增长（<span class="arithmatex">\(\mu = 2\)</span> 时接近 1 %）。
-这符合「平均法是 <span class="arithmatex">\(\mu\)</span> 的渐近展开」的定位。</p>
+但 <span class="arithmatex">\(\mu\)</span> 增大后误差迅速增长（<span class="arithmatex">\(\mu = 2\)</span> 时接近 1 %）。</p>
 <p><strong>工程含义</strong>：van der Pol 方程是<strong>自激振荡的标准模型</strong>：</p>
 <table>
 <thead>
@@ -13872,9 +13861,8 @@ T \approx 2\pi\left(1 + \frac{\mu^{2}}{16} - \frac{5\mu^{4}}{3072} + \cdots\righ
 </tr>
 </tbody>
 </table>
-<p><strong>关键区别</strong>：<strong>共振</strong>（第二页）是<strong>外部驱动</strong>频率撞上系统固有频率，
-<strong>去掉驱动就消失了</strong>；而<strong>极限环是自激的</strong>，
-<strong>没有外部驱动也会持续振荡</strong>。<strong>这是两类完全不同的振荡。</strong></p>
+<p><strong>关键区别</strong>：<strong>共振</strong>（第二页）由<strong>外部驱动</strong>引起，<strong>去掉驱动就消失</strong>；
+<strong>极限环是自激的</strong>，<strong>无外部驱动也持续振荡</strong>。<strong>这是两类完全不同的振荡。</strong></p>
 <p><strong>极限环的判定工具</strong>：</p>
 <table>
 <thead>
@@ -14239,7 +14227,7 @@ x(t) = \frac{1}{\sqrt{1 + 2t}}
 </tbody>
 </table>
 <p><strong>结论</strong>：<span class="arithmatex">\(\dot{x} = -x^{3}\)</span> <strong>渐近稳定但不是指数稳定</strong>，
-而且<strong>在实际工程时间尺度上等于不收敛</strong>。</p>
+在工程时间尺度上等于不收敛。</p>
 <p><strong>注意 <span class="arithmatex">\(\dot{V} = -2x^{4}\)</span> 与 <span class="arithmatex">\(V = x^{2}\)</span> 的关系</strong>：
 <span class="arithmatex">\(\dot{V} = -2V^{2}\)</span>，<strong>这是关于 <span class="arithmatex">\(V\)</span> 的非线性方程，不是 <span class="arithmatex">\(\dot{V} \le -cV\)</span> 的形式</strong>，
 所以只能得到渐近稳定（多项式速率），得不到指数稳定。
@@ -14247,7 +14235,7 @@ x(t) = \frac{1}{\sqrt{1 + 2t}}
 <p><strong>工程含义</strong>：这解释了一个常见困惑 ——
 「理论上证明收敛了，为什么实测还是不收敛？」
 因为「渐近稳定」不给出任何收敛速度保证。
-设计时必须额外确认<strong>指数稳定</strong>（即线性化后 <span class="arithmatex">\(\operatorname{Re}\lambda &lt; 0\)</span> 且留有余量）。</p>
+设计时必须额外确认<strong>指数稳定</strong>（线性化后 <span class="arithmatex">\(\operatorname{Re}\lambda &lt; 0\)</span> 且留余量）。</p>
 </details>
 <hr />
 <h3 id="3">例题 3：相图分类与阻尼比反推<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -14437,8 +14425,7 @@ t = \frac{\ln 100}{\lvert\operatorname{Re}\lambda\rvert} = \frac{4.605170}{1} = 
 <p><strong>工程含义</strong>：这张表就是<strong>一套完整的性能评估模板</strong>。
 只要给定了 <span class="arithmatex">\(A\)</span>，全部指标都能从特征值算出，
 <strong>不需要任何仿真</strong>。反过来，若设计要求「超调 &lt; 20 %、5 秒收敛」，
-就可以直接反推所需的 <span class="arithmatex">\(\zeta\)</span> 与 <span class="arithmatex">\(\lvert\operatorname{Re}\lambda\rvert\)</span>，
-再据此设计控制器增益。</p>
+就可以直接反推所需的 <span class="arithmatex">\(\zeta\)</span> 与 <span class="arithmatex">\(\lvert\operatorname{Re}\lambda\rvert\)</span>。</p>
 </details>
 <hr />
 <h3 id="4-lasalle">例题 4：用 LaSalle 不变原理证明渐近稳定<a class="headerlink" href="#4-lasalle" title="Permanent link">&para;</a></h3>
@@ -14494,8 +14481,7 @@ V = \frac{x^{2} + y^{2}}{2}
 </tbody>
 </table>
 <p><strong>注意 <span class="arithmatex">\((1,0)\)</span> 处 <span class="arithmatex">\(\dot{V} = 0\)</span>，但这时系统并不平衡</strong>：
-<span class="arithmatex">\(\dot{x} = y = 0\)</span>、<span class="arithmatex">\(\dot{y} = -x - y^{3} = -1 \neq 0\)</span>。
-<strong>状态会立刻离开 <span class="arithmatex">\(y = 0\)</span> 这条线。</strong></p>
+<span class="arithmatex">\(\dot{x} = y = 0\)</span>、<span class="arithmatex">\(\dot{y} = -x - y^{3} = -1 \neq 0\)</span>。</p>
 <p>第二步：检查 <span class="arithmatex">\(\dot{V} = 0\)</span> 集合内的不变集</p>
 <div class="arithmatex">\[
 E = \left\{(x, y) : \dot{V} = 0\right\} = \left\{(x, y) : y = 0\right\}
@@ -14599,8 +14585,7 @@ J = \begin{bmatrix} \dfrac{\partial f_1}{\partial x} &amp; \dfrac{\partial f_1}{
 <p><strong>工程含义</strong>：这个例题说明了 Lyapunov 方法的<strong>不可替代性</strong>——
 在非双曲情形（线性化完全失效），
 Lyapunov 直接法是<strong>唯一能给出结论的工具</strong>。
-同时它提醒：<strong>「渐近稳定」离「工程可用」还有一段距离</strong>，
-必须进一步确认收敛速率。</p>
+同时它提醒：<strong>「渐近稳定」离「工程可用」还有一段距离</strong>。</p>
 </details>
 <hr />
 <h2 id="_18">六、用在哪些课程里<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h2>

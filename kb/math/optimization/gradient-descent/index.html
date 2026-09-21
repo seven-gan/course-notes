@@ -11872,7 +11872,6 @@
 </tr>
 </tbody>
 </table>
-<p>这一页把这些问题都量化回答。</p>
 </div>
 <hr />
 <h2 id="_2">一、算法与几何直觉<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12550,7 +12549,6 @@ L 56.870313 189.5345
 </figure>
 
 <h2 id="_3">二、学习率的影响<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这是实践中最关键的参数。</p>
 <table>
 <thead>
 <tr>
@@ -12676,7 +12674,7 @@ x_{k+1}^{(i)} = (1-\eta\lambda_i)x_k^{(i)}
 </tbody>
 </table>
 <p><strong>规律</strong>：<strong>迭代次数大致正比于条件数 <span class="arithmatex">\(\kappa\)</span></strong>。</p>
-<p><strong>工程含义（这直接指导实践）</strong>：</p>
+<p><strong>工程含义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12699,8 +12697,6 @@ x_{k+1}^{(i)} = (1-\eta\lambda_i)x_k^{(i)}
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「为什么深度学习必须做数据标准化」的定量理由</strong>——
-不是「习惯」，而是它能直接减少条件数、加速收敛。</p>
 </div>
 <h3 id="22">2.2 学习率调度<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>实践中常用「先大后小」的策略：</p>
@@ -12822,8 +12818,7 @@ f(\boldsymbol{x}_k) - f^* \leq \left(1-\frac{\mu}{L}\right)^k\big(f(\boldsymbol{
 </tr>
 </tbody>
 </table>
-<p><strong>重要提醒</strong>：<strong>非凸情形下只能说「梯度趋于零」</strong>，
-不能保证到达全局最优（因为它可能收敛到鞍点或局部极小）。</p>
+<p><strong>非凸情形只能保证梯度趋于零</strong>，可能停在鞍点或局部极小。</p>
 <p><strong><span class="arithmatex">\(L\)</span> 的实用估计</strong>：<span class="arithmatex">\(L\approx\lambda_{\max}(\nabla^2 f)\)</span>，
 所以「<span class="arithmatex">\(\eta\leq1/L\)</span>」与前面的「<span class="arithmatex">\(\eta&lt;2/\lambda_{\max}\)</span>」一致</p>
 </div>
@@ -12888,8 +12883,8 @@ E_{i_k}[\nabla f_{i_k}(\boldsymbol{x})] = \nabla f(\boldsymbol{x})
 </tr>
 </tbody>
 </table>
-<p><strong>这解释了「为什么 SGD 在非凸优化中表现好」</strong>——
-它不追求精确收敛，而是「在好的区域内游走」。</p>
+<p><strong>所以 SGD 在非凸优化中表现好</strong>——
+它不追求精确收敛，而是在「好的区域」内游走。</p>
 <p><strong>3. 学习率必须衰减</strong></p>
 <p>因为噪声导致的震荡幅度正比于 <span class="arithmatex">\(\eta\)</span>，要收敛必须<strong>逐步减小</strong>：</p>
 <div class="arithmatex">\[
@@ -13070,9 +13065,8 @@ v_k = \beta_2 v_{k-1} + (1-\beta_2)g_k^2 \quad\text{（二阶矩）}
 <div class="arithmatex">\[
 \frac{\hat m_k}{\sqrt{\hat v_k}} \approx \text{常数（约 1）}
 \]</div>
-<p><strong>于是各参数的「有效学习率」被拉平</strong> ——
-梯度大的参数（大尺度特征）自动被除以大分母。</p>
-<p><strong>这就是 Adam 对条件数不敏感的原因</strong>：</p>
+<p><strong>各参数的「有效学习率」被拉平</strong>：梯度大（大尺度特征）的参数
+自动被除以大分母。</p>
 <table>
 <thead>
 <tr>
@@ -13303,7 +13297,6 @@ x_{k+1} = (1-2.2)x_k = -1.2x_k
 \lvert x_k\rvert = 1.2^k \to \infty
 \]</div>
 <p><strong>发散</strong> ✗</p>
-<p><strong>这三组对比说明了什么</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13394,7 +13387,7 @@ k \geq \frac{\ln(10^{-6})}{\ln(0.998)} = \frac{-13.816}{-0.002002} \approx 6900
 </tr>
 </tbody>
 </table>
-<p><strong>规律（很重要）</strong>：</p>
+<p><strong>规律</strong>：</p>
 <div class="arithmatex">\[
 \text{步数} \approx \frac{\kappa}{2}\ln\frac{1}{\epsilon}
 \]</div>
@@ -13696,9 +13689,8 @@ k \geq \frac{\ln(10^{-3})}{\ln(0.980)} = \frac{-6.908}{-0.0202} \approx 345
 </tr>
 </tbody>
 </table>
-<p><strong>工程启示</strong>：<strong>改善条件数的重点是「拉近最大与最小」</strong>——
-中间的特征值怎么分布关系不大。</p>
-<p>所以数据标准化（把各维尺度拉近）直接命中要害</p>
+<p><strong>工程启示</strong>：改善条件数就是<strong>拉近最大与最小</strong>——
+所以数据标准化（把各维尺度拉近）直接命中要害</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 判断：SGD 的学习率可以保持不变（不衰减）。</p>
@@ -13824,7 +13816,6 @@ k \geq \frac{\ln(10^{-3})}{\ln(0.980)} = \frac{-6.908}{-0.0202} \approx 345
 <div class="arithmatex">\[
 \boldsymbol{v}_\infty = \frac{1}{1-\beta}\boldsymbol{g}
 \]</div>
-<p><strong>这就是放大倍数</strong></p>
 <p><strong>代入 <span class="arithmatex">\(\beta = 0.9\)</span></strong>：</p>
 <div class="arithmatex">\[
 \frac{1}{1-0.9} = 10 \;\checkmark

@@ -11856,8 +11856,7 @@
 <hr />
 <h2 id="_2">一、为什么「位置」容易、「姿态」难<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>位置</strong>只需要三个数 <span class="arithmatex">\((x, y, z)\)</span> —— 从原点出发的一个向量就够了。</p>
-<p><strong>姿态</strong>麻烦得多。一个刚体可以朝任意方向，
-要把「朝哪」这件事写成数字，有几条路，
+<p><strong>姿态</strong>麻烦得多。要把「朝哪」写成数字有几条路，
 而每条路都有它的麻烦：</p>
 <table>
 <thead>
@@ -11900,7 +11899,7 @@
 <div class="arithmatex">\[
 {}^{A}\boldsymbol{p} = \begin{bmatrix} p_x \\ p_y \\ p_z \end{bmatrix}
 \]</div>
-<p>左上角的标号 <span class="arithmatex">\({}^{A}\)</span> 表示<strong>「在哪个坐标系里量」</strong>。
+<p>左上角的标号 <span class="arithmatex">\({}^{A}\)</span> 表示<strong>「在哪个坐标系里量」</strong> ——
 这个标号很容易被忽略，但它是后面一切推导的记法基础 ——
 <strong>同一个点，在不同坐标系里的坐标是不同的</strong>。</p>
 <hr />
@@ -11916,8 +11915,7 @@
 | &amp; | &amp; |
 \end{bmatrix}
 \]</div>
-<p><strong>为什么是「列」</strong>：因为列就是「<span class="arithmatex">\(\{B\}\)</span> 的三个轴分别指向哪」。
-把姿态存成三根轴的方向，这是最直白的做法。</p>
+<p><strong>为什么是「列」</strong>：因为一列就是「<span class="arithmatex">\(\{B\}\)</span> 里某一根轴指向哪」。</p>
 <p><strong>下图把「一列 = 一根轴的分量」这件事画了出来</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="新坐标系的两根轴相对旧坐标系的分量：x_B 投出 cos 与 sin，y_B 再转九十度">
@@ -12010,8 +12008,7 @@ R_y(\theta) =
 </tr>
 </tbody>
 </table>
-<p><strong>第三条最实用</strong>：正因为正交，求逆只花<strong>转置</strong>的代价。
-这在实时控制里很重要。</p>
+<p><strong>第三条最实用</strong>：正因为正交，求逆只花<strong>转置</strong>的代价。</p>
 <p><strong>拿 <span class="arithmatex">\(R_z(30^\circ)\)</span> 实算一遍</strong>：代入 <span class="arithmatex">\(\theta = 30^\circ\)</span>，
 <span class="arithmatex">\(\cos 30^\circ = 0.866\)</span>、<span class="arithmatex">\(\sin 30^\circ = 0.5\)</span>，得</p>
 <div class="arithmatex">\[
@@ -12058,12 +12055,11 @@ R_x(90^\circ)R_z(90^\circ) =
 \begin{bmatrix} 0 &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; 0 \end{bmatrix}
 \]</div>
 <p>两个矩阵<strong>不相等</strong> —— 所以先转 <span class="arithmatex">\(x\)</span> 还是先转 <span class="arithmatex">\(z\)</span>，最终姿态<strong>完全不同</strong>。</p>
-<p><strong>为什么这件事重要到要单独讲</strong>：它带来两个后果 ——</p>
+<p><strong>它带来两个后果</strong> ——</p>
 <p><strong>① 说「绕 <span class="arithmatex">\(x\)</span> 转 90°、再绕 <span class="arithmatex">\(z\)</span> 转 90°」时必须讲清顺序。</strong>
 只给三个角度而不说顺序，等于没说。</p>
 <p><strong>② 矩阵乘法要从右往左读。</strong>
-<span class="arithmatex">\(R_z R_x\)</span> 意思是「<strong>先</strong>做 <span class="arithmatex">\(R_x\)</span>，<strong>再</strong>做 <span class="arithmatex">\(R_z\)</span>」——
-右边的先作用到向量上。这是初学最容易搞反的地方。</p>
+<span class="arithmatex">\(R_z R_x\)</span> 意思是「<strong>先</strong>做 <span class="arithmatex">\(R_x\)</span>，<strong>再</strong>做 <span class="arithmatex">\(R_z\)</span>」。</p>
 <div class="admonition tip">
 <p class="admonition-title">读矩阵乘积的窍门</p>
 <p>把 <span class="arithmatex">\(R_z R_x \boldsymbol{v}\)</span> 从右往左读：
@@ -12101,8 +12097,8 @@ R_x(90^\circ)R_z(90^\circ) =
 {}^{A}_{B}T
 \begin{bmatrix} {}^{B}\boldsymbol{p} \\ 1 \end{bmatrix}
 \]</div>
-<p><strong>多出来的那个 <code>1</code> 是关键</strong> —— 它让平移也能用乘法表示。
-这是齐次坐标的核心技巧：<strong>用一维冗余换掉「加法」</strong>。</p>
+<p><strong>多出来的那个 <code>1</code> 是关键</strong> —— 它让平移也能用乘法表示，
+即<strong>用一维冗余换掉「加法」</strong>。</p>
 <h3 id="42">4.2 好处：链条变成连乘<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>一串变换可以<strong>直接连乘</strong>：</p>
 <div class="arithmatex">\[
@@ -12123,8 +12119,7 @@ T_2 =
 T_1 T_2 =
 \begin{bmatrix} 0 &amp; -1 &amp; 0 &amp; -1 \\ 1 &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}
 \]</div>
-<p><strong>读这个结果</strong>：旋转部分仍是「绕 <span class="arithmatex">\(z\)</span> 转 <span class="arithmatex">\(90^\circ\)</span>」，
-但平移部分从 <span class="arithmatex">\((1,0,0)\)</span> 变成了 <span class="arithmatex">\((-1,0,0)\)</span> ——
+<p><strong>读这个结果</strong>：平移部分从 <span class="arithmatex">\((1,0,0)\)</span> 变成了 <span class="arithmatex">\((-1,0,0)\)</span> ——
 因为 <span class="arithmatex">\(T_2\)</span> 的平移 <span class="arithmatex">\((0,2,0)\)</span> <strong>先被 <span class="arithmatex">\(T_1\)</span> 的旋转带走了</strong>。
 完整的推导见下面例题 3。</p>
 <h3 id="43-44">4.3 逆变换有速算法，<strong>不要</strong>直接求 4×4 的逆<a class="headerlink" href="#43-44" title="Permanent link">&para;</a></h3>
@@ -12141,10 +12136,8 @@ T_1 T_2 =
 <span class="arithmatex">\(R^{\mathsf T}\boldsymbol{p} - R^{\mathsf T}\boldsymbol{p} = 0\)</span>，
 正好是单位矩阵。<strong>所以它确实是逆。</strong></p>
 <p><strong>为什么要用速算法</strong>：通用 4×4 求逆要做 <span class="arithmatex">\(O(n^3)\)</span> 的消元，
-而这个式子只需要一次转置和一次乘法。在实时控制里差别很大。</p>
-<p><strong>两种算法结果一样吗</strong>：完全一样 ——
-这个闭式公式与「通用 4×4 求逆」给出的矩阵<strong>逐元素相等</strong>，
-差的只是速度。</p>
+而这个式子只需要一次转置和一次乘法；两者结果<strong>逐元素相等</strong>，
+差的只是速度，在实时控制里差别很大。</p>
 <hr />
 <h2 id="_6">五、通用旋转变换：绕<strong>任意轴</strong>转<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>前面讲的只绕三个坐标轴。但机器人关节的转轴<strong>通常是斜的</strong> ——
@@ -12235,8 +12228,6 @@ R\boldsymbol{v} = (\boldsymbol{k}\cdot\boldsymbol{v})\boldsymbol{k}
   公式应退化成 <span class="arithmatex">\(R_z(90^\circ)\)</span>
 · <span class="arithmatex">\(\theta = 0\)</span> 时 <span class="arithmatex">\(R = I\)</span>；<span class="arithmatex">\(\theta = 180^\circ\)</span> 时
   <span class="arithmatex">\(R = 2\boldsymbol{k}\boldsymbol{k}^{\mathsf T} - I\)</span></p>
-<p>这两条可以当<strong>手边的验算清单</strong>用 ——
-把公式代进去对不上，就说明用错了。</p>
 </div>
 <p>把公式代进几组<strong>已知答案</strong>的输入，结果如下：</p>
 <table>
@@ -12276,7 +12267,7 @@ R\boldsymbol{v} = (\boldsymbol{k}\cdot\boldsymbol{v})\boldsymbol{k}
 </tbody>
 </table>
 <p><strong>这五条自检说明公式本身是对的</strong> ——
-而这也正是工程上的做法：<strong>用已知的特例去验通用的公式</strong>。</p>
+工程上正是<strong>用已知特例去验通用公式</strong>。</p>
 <hr />
 <h2 id="_7">典型例题<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="1-y">例题 1：写出绕 <span class="arithmatex">\(y\)</span> 轴的旋转矩阵，并说明负号为什么在别处<a class="headerlink" href="#1-y" title="Permanent link">&para;</a></h3>
@@ -12659,9 +12650,6 @@ R(\boldsymbol{k},\theta)\,R(\boldsymbol{k},-\theta)
    含平移的 4×4 必须用闭式公式</li>
 </ol>
 <p><strong>下一章</strong>：<a href="../forward-kinematics/">机器人正向运动学</a></p>
-<p>这一页把「单个变换」写清楚了，
-下一步就是<strong>把关节角一路推到末端位姿</strong> ——
-用连杆变换矩阵连乘，得到 <span class="arithmatex">\(T_0^6(\boldsymbol{q})\)</span>。</p>
 <p><strong>上一页</strong>：<a href="../intro/">机器人的概念、发展与分类</a></p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../robot-configuration/">机器人构型</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../forward-kinematics/">机器人正向运动学</a></span></div></nav>
 

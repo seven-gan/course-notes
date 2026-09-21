@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。但真实的无人系统往往写不出精确模型：气动参数不确定、环境扰动未知、执行器有未建模动态。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
+    <meta name="description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。真实无人系统却往往写不出精确模型：气动参数、环境扰动、执行器动态都不确定。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="强化学习">
   
-  <meta property="og:description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。但真实的无人系统往往写不出精确模型：气动参数不确定、环境扰动未知、执行器有未建模动态。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
+  <meta property="og:description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。真实无人系统却往往写不出精确模型：气动参数、环境扰动、执行器动态都不确定。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/autonomous-decision/reinforcement-learning/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="强化学习">
   
-  <meta name="twitter:description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。但真实的无人系统往往写不出精确模型：气动参数不确定、环境扰动未知、执行器有未建模动态。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
+  <meta name="twitter:description" content="前面几页都要求已知模型：A、B、Q、R 必须写得出。真实无人系统却往往写不出精确模型：气动参数、环境扰动、执行器动态都不确定。强化学习要解决的问题：不写出 f 与 L，只靠交互数据，能不能找到最优策略？">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11949,13 +11949,13 @@
 
 <h1 id="_1">强化学习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>前面几页都要求<strong>已知模型</strong>：<span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span>、<span class="arithmatex">\(Q\)</span>、<span class="arithmatex">\(R\)</span> 必须写得出。
-但真实的无人系统往往<strong>写不出精确模型</strong>：气动参数不确定、
-环境扰动未知、执行器有未建模动态。</p>
+真实无人系统却往往<strong>写不出精确模型</strong>：气动参数、
+环境扰动、执行器动态都不确定。</p>
 <p><strong>强化学习要解决的问题</strong>：</p>
 <blockquote>
 <p>不写出 <span class="arithmatex">\(f\)</span> 与 <span class="arithmatex">\(L\)</span>，只靠<strong>交互数据</strong>，能不能找到最优策略？</p>
 </blockquote>
-<p>答案是能 —— 但要付出数据量与计算量的代价。</p>
+<p>答案是能 —— 代价是数据量与计算量。</p>
 <hr />
 <h2 id="mdp">一、把最优控制写成 MDP<a class="headerlink" href="#mdp" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 马尔可夫决策过程的五元组<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
@@ -11994,27 +11994,24 @@
 </table>
 <p><strong>与最优控制的差别有两处最关键</strong>：</p>
 <ol>
-<li>动态从"确定性方程"变成<strong>概率分布</strong>。
-   即使同一状态同一动作，结果也可能不同。</li>
-<li>目标从"最小化代价"变成<strong>最大化累积奖励</strong>。
-   两者可以互相转换（取负号），但记号习惯不同。</li>
+<li>动态从"确定性方程"变成<strong>概率分布</strong>：同一状态同一动作，结果也可能不同。</li>
+<li>目标从"最小化代价"变成<strong>最大化累积奖励</strong>（两者取负号可互转，记号习惯不同）。</li>
 </ol>
-<p><strong>折扣因子 <span class="arithmatex">\(\gamma\)</span> 的作用</strong>：它让"未来的奖励"打折扣，
-从而保证无穷级数收敛：</p>
+<p><strong>折扣因子 <span class="arithmatex">\(\gamma\)</span> 的作用</strong>：让"未来奖励"打折扣，从而保证无穷级数收敛：</p>
 <div class="arithmatex">\[
 \sum_{k=0}^{\infty}\gamma^k R_k \lt \infty
 \quad(\text{当 } |R|\text{ 有界})
 \]</div>
 <h3 id="12">1.2 策略与值函数<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p><strong>策略</strong> <span class="arithmatex">\(\pi(\boldsymbol{u}\mid\boldsymbol{x})\)</span> 是"在状态 <span class="arithmatex">\(\boldsymbol{x}\)</span> 下选动作 <span class="arithmatex">\(\boldsymbol{u}\)</span>"的规则
-（可以是确定性的，也可以是概率的）。</p>
+（可确定性、可概率）。</p>
 <p><strong>状态值函数</strong>是"从 <span class="arithmatex">\(\boldsymbol{x}\)</span> 出发、按 <span class="arithmatex">\(\pi\)</span> 行动的期望折扣回报"：</p>
 <div class="arithmatex">\[
 V^\pi(\boldsymbol{x})
 = \mathbb{E}_\pi\left[\sum_{k=0}^{\infty}\gamma^k R_k
 \;\Big|\; \boldsymbol{x}_0=\boldsymbol{x}\right]
 \]</div>
-<p><strong>动作值函数</strong>（更常用，因为它让"选动作"变得直接）：</p>
+<p><strong>动作值函数</strong>（更常用，让"选动作"直接）：</p>
 <div class="arithmatex">\[
 Q^\pi(\boldsymbol{x},\boldsymbol{u})
 = R(\boldsymbol{x},\boldsymbol{u})
@@ -12030,8 +12027,8 @@ V^\pi(\boldsymbol{x}) = \mathbb{E}_{\boldsymbol{u}\sim\pi}\left[Q^\pi(\boldsymbo
 V^*(\boldsymbol{x}) = \max_\pi V^\pi(\boldsymbol{x})
 \]</div>
 <h3 id="13">1.3 贝尔曼最优方程<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p><span class="arithmatex">\(V^*\)</span> 满足的方程与上一页的 Bellman 方程<strong>结构完全相同</strong>，
-只是把 <span class="arithmatex">\(\min\)</span> 换成 <span class="arithmatex">\(\max\)</span>、把确定性转移换成期望：</p>
+<p><span class="arithmatex">\(V^*\)</span> 满足的方程与上一页 Bellman 方程<strong>结构完全相同</strong>，
+只是把 <span class="arithmatex">\(\min\)</span> 换成 <span class="arithmatex">\(\max\)</span>、确定性转移换成期望：</p>
 <div class="arithmatex">\[
 V^*(\boldsymbol{x})
 = \max_{\boldsymbol{u}}\left\{R(\boldsymbol{x},\boldsymbol{u})
@@ -12047,15 +12044,15 @@ V^*(\boldsymbol{x})
 <p><strong>这就是"值函数决定策略"的逻辑</strong> —— 也是后面所有算法的基础。</p>
 <div class="admonition warning">
 <p class="admonition-title">期望里的模型是强化学习的核心障碍</p>
-<p>上面式子里有 <span class="arithmatex">\(\mathbb{E}_{\boldsymbol{x}'\sim P}[\cdot]\)</span>。
-要算它，需要知道转移概率 <span class="arithmatex">\(P\)</span> ⚠</p>
-<p>强化学习的关键一步就是<strong>用采样代替期望</strong>：</p>
+<p>上面式子里有 <span class="arithmatex">\(\mathbb{E}_{\boldsymbol{x}'\sim P}[\cdot]\)</span>，
+要算它就得知道转移概率 <span class="arithmatex">\(P\)</span> ⚠</p>
+<p>强化学习的关键一步是<strong>用采样代替期望</strong>：</p>
 <div class="arithmatex">\[
 \mathbb{E}_{\boldsymbol{x}'\sim P}[V(\boldsymbol{x}')]
 \approx V(\boldsymbol{x}'_{\text{实测}})
 \]</div>
-<p>也就是"走一步、看看到哪、用那一个样本来估计"。
-这一步换掉了模型，代价是引入了<strong>方差</strong>。</p>
+<p>即"走一步、看看到哪、用该样本估计"。
+这一步换掉模型，代价是引入<strong>方差</strong>。</p>
 </div>
 <hr />
 <figure class="kb-fig">
@@ -12183,7 +12180,7 @@ L 182.578537 62.270293
 </figure>
 
 <h2 id="_2">二、策略评估与策略改进<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>强化学习的两大算法都由这两个步骤交替组成。</p>
+<p>强化学习的两大算法都由这两步交替组成。</p>
 <h3 id="21">2.1 策略评估：给定策略，求它的值函数<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>做法</strong>：反复用贝尔曼方程做"备份"（backup）。</p>
 <div class="arithmatex">\[
@@ -12192,10 +12189,8 @@ V_{k+1}(\boldsymbol{x})
 + \gamma\sum_{\boldsymbol{x}'}P(\boldsymbol{x}'\mid\boldsymbol{x},\pi(\boldsymbol{x}))
 V_k(\boldsymbol{x}')
 \]</div>
-<p><strong>收敛性</strong>：这是一个<strong>压缩映射</strong>（因为 <span class="arithmatex">\(\gamma\lt1\)</span>），
-所以从任意初值出发都收敛到 <span class="arithmatex">\(V^\pi\)</span>。</p>
-<p><strong>"压缩"的含义</strong>：每次迭代让误差缩小 <span class="arithmatex">\(\gamma\)</span> 倍，
-于是迭代次数约为 <span class="arithmatex">\(\log(\text{精度})/\log\gamma\)</span>。</p>
+<p><strong>收敛性</strong>：这是<strong>压缩映射</strong>（因 <span class="arithmatex">\(\gamma\lt1\)</span>），任意初值都收敛到 <span class="arithmatex">\(V^\pi\)</span>；
+每次迭代把误差缩小 <span class="arithmatex">\(\gamma\)</span> 倍，迭代次数约 <span class="arithmatex">\(\log(\text{精度})/\log\gamma\)</span>。</p>
 <h3 id="22">2.2 策略改进：让策略变得更好<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>有了 <span class="arithmatex">\(V^\pi\)</span>，可以逐状态地<strong>贪心改进</strong>：</p>
 <div class="arithmatex">\[
@@ -12210,9 +12205,9 @@ V^\pi(\boldsymbol{x}')\right\}
 V^{\pi'}(\boldsymbol{x}) \ge V^\pi(\boldsymbol{x}),
 \qquad \forall\boldsymbol{x}
 \]</div>
-<p>且若不等号在某个状态严格成立，则新策略<strong>确实更好</strong>（不是"一样好"）。</p>
-<p><strong>这个定理是整个领域的地基</strong>：它保证了交替执行"评估 → 改进"
-<strong>单调不减</strong>，从而必然收敛（值函数有上界）。</p>
+<p>且若某状态严格成立，则新策略<strong>确实更好</strong>（不是"一样好"）。</p>
+<p><strong>这个定理是领域的地基</strong>：它保证"评估 → 改进"交替执行时
+值函数<strong>单调不减</strong>，从而必然收敛（有上界）。</p>
 <h3 id="23">2.3 两种循环方式<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12245,24 +12240,22 @@ V^{\pi'}(\boldsymbol{x}) \ge V^\pi(\boldsymbol{x}),
 </tr>
 </tbody>
 </table>
-<p><strong>值迭代其实就是"把评估与改进合并成一次备份"</strong>：</p>
+<p><strong>值迭代就是把评估与改进合并成一次备份</strong>：</p>
 <div class="arithmatex">\[
 V_{k+1}(\boldsymbol{x})
 \leftarrow \max_{\boldsymbol{u}}\left\{R(\boldsymbol{x},\boldsymbol{u})
 + \gamma\sum_{\boldsymbol{x}'}P(\boldsymbol{x}'\mid\boldsymbol{x},\boldsymbol{u})
 V_k(\boldsymbol{x}')\right\}
 \]</div>
-<p><strong>注意与策略评估的唯一差别</strong>：把 <span class="arithmatex">\(\pi(\boldsymbol{x})\)</span> 换成了 <span class="arithmatex">\(\max_{\boldsymbol{u}}\)</span>。</p>
-<p><strong>用一个 5 状态的随机 MDP 把两种算法都走一遍</strong>，差别就看得见了。</p>
-<p>设状态 <span class="arithmatex">\(0,1,\dots,4\)</span>，动作只有「左」「右」两个。
-状态 4 是吸收态（到了就停，奖励 0）。<strong>从状态 3 向右走可以拿到奖励 1</strong>，
-其余任何一步的即时奖励都是 0。
-再设动作有 <span class="arithmatex">\(20\%\)</span> 的概率"打滑"：本该往目标状态走，结果留在原地。
-于是同一个状态、同一个动作，下一步落到哪里是随机的 ——
+<p><strong>与策略评估只差一点</strong>：<span class="arithmatex">\(\pi(\boldsymbol{x})\)</span> 换成 <span class="arithmatex">\(\max_{\boldsymbol{u}}\)</span>。</p>
+<p><strong>用一个 5 状态随机 MDP 各走一遍</strong>。</p>
+<p>设状态 <span class="arithmatex">\(0,\dots,4\)</span>，动作只有「左」「右」。状态 4 是吸收态
+（到了就停，奖励 0），<strong>从状态 3 向右可拿奖励 1</strong>，其余每步奖励都是 0。
+再设动作有 <span class="arithmatex">\(20\%\)</span> 概率"打滑"：本该往目标走却留在原地 ——
+同一状态同一动作，下一步落到哪里是随机的，
 这正是 MDP 与确定性动态的分界。</p>
-<p><strong>先算一个能手算的数：<span class="arithmatex">\(V^*(3)\)</span>。</strong>
-在状态 3 选「右」，有 <span class="arithmatex">\(80\%\)</span> 到达状态 4（之后奖励恒为 0），
-有 <span class="arithmatex">\(20\%\)</span> 留在状态 3（只好再来一次）。按贝尔曼最优方程：</p>
+<p><strong>先手算 <span class="arithmatex">\(V^*(3)\)</span>。</strong> 状态 3 选「右」，<span class="arithmatex">\(80\%\)</span> 到状态 4
+（之后奖励恒为 0），<span class="arithmatex">\(20\%\)</span> 留在状态 3（只好再来一次）。按贝尔曼最优方程：</p>
 <div class="arithmatex">\[V^*(3) = 1 + 0.9\left(0.8\times 0 + 0.2\,V^*(3)\right)\]</div>
 <p>把含 <span class="arithmatex">\(V^*(3)\)</span> 的项归到左边：</p>
 <div class="arithmatex">\[V^*(3)\left(1 - 0.9\times0.2\right) = 1
@@ -12291,10 +12284,9 @@ V^*(3) = \frac{1}{0.82} \approx 1.2195\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>第 1 轮为什么一步就收敛了评估</strong>：因为全「左」的策略下，
-任何动作都拿不到奖励，值函数恒为 <span class="arithmatex">\(0\)</span> —— 一次备份就已经是精确解。</p>
-<p><strong>值迭代的过程</strong>：不走"评估到收敛"这一步，
-每轮只做一次备份（把 <span class="arithmatex">\(\pi\)</span> 换成 <span class="arithmatex">\(\max\)</span>）。</p>
+<p><strong>第 1 轮为何一步收敛</strong>：全「左」策略下任何动作都拿不到奖励，
+值函数恒为 <span class="arithmatex">\(0\)</span>，一次备份已是精确解。</p>
+<p><strong>值迭代</strong>：不走"评估到收敛"，每轮只备份一次（<span class="arithmatex">\(\pi\)</span> 换成 <span class="arithmatex">\(\max\)</span>）。</p>
 <table>
 <thead>
 <tr>
@@ -12321,20 +12313,17 @@ V^*(3) = \frac{1}{0.82} \approx 1.2195\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>收敛快慢也可以手算</strong>：每轮残差乘以 <span class="arithmatex">\(\gamma\times0.2 = 0.18\)</span>，
-所以要缩到 <span class="arithmatex">\(10^{-14}\)</span> 需要约 <span class="arithmatex">\(\ln(10^{-14})/\ln(0.18)\approx 19\)</span> 轮 ——
-和实际跑出的 20 轮吻合。</p>
+<p><strong>收敛快慢也可手算</strong>：每轮残差乘以 <span class="arithmatex">\(\gamma\times0.2 = 0.18\)</span>，
+缩到 <span class="arithmatex">\(10^{-14}\)</span> 约需 <span class="arithmatex">\(\ln(10^{-14})/\ln(0.18)\approx 19\)</span> 轮，与实际 20 轮吻合。</p>
 <p><strong>两条对照</strong>：</p>
-<p>· <strong>收敛结果相同</strong>：两者都得到
-  <span class="arithmatex">\(V^*=[0,0,0,1.2195,0]\)</span> 与最优策略 <span class="arithmatex">\([0,0,0,1,0]\)</span>
-  （在状态 3 选「右」，其余状态在奖励上无差别，保持「左」）。
-  这不奇怪 —— 它们解的是<strong>同一个</strong>贝尔曼最优方程。</p>
-<p>· <strong>工作量分布不同</strong>：策略迭代只用 2 轮，但每轮要把评估做到收敛
-  （第 2 轮内部做了 20 次）；值迭代做了 20 轮，每轮只备份一次、很便宜。
-  <strong>轮数少、每轮贵</strong> 与 <strong>轮数多、每轮便宜</strong>，这就是 PI 与 VI 的取舍。</p>
-<p><strong>这也正是它们被合称「广义策略迭代」的原因</strong>：
-评估与改进交替进行，只是两者所占的比例不同 ——
-把评估做到收敛就是策略迭代，把评估压缩成一步就是值迭代。</p>
+<p>· <strong>收敛结果相同</strong>：两者都得到 <span class="arithmatex">\(V^*=[0,0,0,1.2195,0]\)</span> 与最优策略 <span class="arithmatex">\([0,0,0,1,0]\)</span>
+  （状态 3 选「右」，其余状态奖励无差别，保持「左」）—— 它们解的是<strong>同一个</strong>贝尔曼最优方程。</p>
+<p>· <strong>工作量分布不同</strong>：策略迭代只用 2 轮，但每轮评估都要做到收敛
+  （第 2 轮内部 20 次）；值迭代做 20 轮，每轮只备份一次、很便宜。
+  <strong>轮数少、每轮贵</strong> 与 <strong>轮数多、每轮便宜</strong>，就是 PI 与 VI 的取舍。</p>
+<p><strong>这也是它们合称「广义策略迭代」的原因</strong>：
+评估与改进交替进行，只是比例不同 ——
+评估到收敛即策略迭代，压缩成一步即值迭代。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="动态规划：从终点反向递推，每步只解一个「单步问题」">
@@ -12517,20 +12506,18 @@ V(\boldsymbol{x}) \leftarrow V(\boldsymbol{x})
 - V(\boldsymbol{x})\right]}_{\text{TD 误差 }\delta}
 \]</div>
 <p><strong>逐项读</strong>：
-<span class="arithmatex">\(R\)</span> 是实际拿到的奖励，<span class="arithmatex">\(\boldsymbol{x}'\)</span> 是实际到达的状态，
+<span class="arithmatex">\(R\)</span> 是实际奖励，<span class="arithmatex">\(\boldsymbol{x}'\)</span> 是实际到达的状态，
 <span class="arithmatex">\(\alpha\)</span> 是学习率。<strong>整个更新不需要模型</strong> ✓</p>
-<p><strong>为什么叫"时序差分"</strong>：TD 误差是"两个相邻时刻的估计之差"
-（<span class="arithmatex">\(R+\gamma V(\boldsymbol{x}')\)</span> 与 <span class="arithmatex">\(V(\boldsymbol{x})\)</span>），
-用这个差来修正估计。</p>
+<p><strong>为什么叫"时序差分"</strong>：TD 误差是两个相邻时刻估计之差
+（<span class="arithmatex">\(R+\gamma V(\boldsymbol{x}')\)</span> 与 <span class="arithmatex">\(V(\boldsymbol{x})\)</span>），用它修正估计。</p>
 <h3 id="32">3.2 平均化作用<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>把更新式整理一下，可以看出它的本质是<strong>指数滑动平均</strong>：</p>
+<p>把更新式整理一下，本质是<strong>指数滑动平均</strong>：</p>
 <div class="arithmatex">\[
 V(\boldsymbol{x}) \leftarrow (1-\alpha)V(\boldsymbol{x})
 + \alpha\left[R+\gamma V(\boldsymbol{x}')\right]
 \]</div>
-<p><strong>这说明 TD 是在"向 TD 目标靠拢"</strong>，
-而 TD 目标本身含 <span class="arithmatex">\(V(\boldsymbol{x}')\)</span> —— 所以是<strong>自举</strong>（bootstrap）：
-用自己的估计来更新自己。</p>
+<p><strong>即 TD 在"向 TD 目标靠拢"</strong>，而 TD 目标本身含 <span class="arithmatex">\(V(\boldsymbol{x}')\)</span> ——
+所以是<strong>自举</strong>（bootstrap）：用自己的估计更新自己。</p>
 <h3 id="33">3.3 与蒙特卡洛的对比<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12568,10 +12555,8 @@ V(\boldsymbol{x}) \leftarrow (1-\alpha)V(\boldsymbol{x})
 </tr>
 </tbody>
 </table>
-<p><strong>取舍很清楚</strong>：MC 无偏但方差大、必须等回合结束；
-TD 有偏但方差小、可在线更新。</p>
-<p><strong>为什么 MC 方差大</strong>：它把整条轨迹上所有随机性都累积进目标里；
-<strong>为什么 TD 有偏</strong>：它用了还不准的 <span class="arithmatex">\(V(\boldsymbol{x}')\)</span> 当"真值"。</p>
+<p><strong>取舍很清楚</strong>：MC 无偏但方差大、必须等回合结束，因为把整条轨迹的随机性
+都累积进目标；TD 有偏但方差小、可在线更新，因为用了还不准的 <span class="arithmatex">\(V(\boldsymbol{x}')\)</span> 当"真值"。</p>
 <h3 id="34">3.4 控制算法<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>把 TD 与"选动作"结合，得到常用的控制算法：</p>
 <table>
@@ -12602,25 +12587,23 @@ TD 有偏但方差小、可在线更新。</p>
 <div class="arithmatex">\[
 \text{Q 学习}:\ \ Q \leftarrow Q + \alpha\left[R + \gamma \max_{\boldsymbol{u}'}Q(\boldsymbol{x}',\boldsymbol{u}') - Q\right]
 \]</div>
-<p><strong>这个差别有实际后果</strong>：SARSA 会考虑"探索时的风险"，
-Q 学习则假设未来总是取最优动作。
-所以在有危险的场景（如机器人靠近障碍），
-<strong>SARSA 往往更保守安全</strong>，而 Q 学习收敛到理论最优但可能冒险。</p>
-<p><strong>用一条"危险走廊"把两种算法摆在一起比</strong>，
-这条差别就从一句话变成看得见的数。</p>
-<p>设状态 <span class="arithmatex">\(0,1,\dots,5\)</span> 排成一条线，动作「左」「右」两个。
+<p><strong>这个差别有实际后果</strong>：SARSA 考虑"探索时的风险"，
+Q 学习假设未来总取最优。
+所以危险场景（如机器人靠近障碍）里，
+<strong>SARSA 更保守安全</strong>，Q 学习收敛到理论最优但可能冒险。</p>
+<p><strong>再换一条"危险走廊"比一比。</strong></p>
+<p>设状态 <span class="arithmatex">\(0,\dots,5\)</span> 排成一条线，动作「左」「右」两个。
 <strong>状态 4 是陷阱，走进去得奖励 <span class="arithmatex">\(-1\)</span> 并终止；
 状态 5 名义上是目标，到达得 <span class="arithmatex">\(+1\)</span>。</strong>
-其余每一步的即时奖励都是 <span class="arithmatex">\(-0.02\)</span>。仍设 <span class="arithmatex">\(20\%\)</span> 的概率打滑走反方向。</p>
-<p><strong>先把这个布局看透，否则数会读错</strong>：</p>
-<p>· 从状态 3 向右，<strong>下一步就落进陷阱 4</strong>（<span class="arithmatex">\(0.8\)</span> 的概率），
+其余每步即时奖励都是 <span class="arithmatex">\(-0.02\)</span>，仍设 <span class="arithmatex">\(20\%\)</span> 概率打滑走反方向。</p>
+<p><strong>布局的要点</strong>：</p>
+<p>· 从状态 3 向右，<strong>下一步就落进陷阱 4</strong>（<span class="arithmatex">\(0.8\)</span> 概率），
   只有 <span class="arithmatex">\(0.2\)</span> 打滑的概率往左退回状态 2
 · 反过来，从状态 3 向左是 <span class="arithmatex">\(0.8\)</span> 去状态 2、<span class="arithmatex">\(0.2\)</span> 打滑进陷阱 4
-· <strong>状态 5 其实够不着</strong>：它是状态 4 的右邻，而状态 4 一旦进入就终止，
-  <span class="arithmatex">\(+1\)</span> 因此永远拿不到 —— 这条走廊里真正的目标只是"别掉进 4"</p>
-<p>于是<strong>状态 3 是全走廊最难的一格</strong>：向右 <span class="arithmatex">\(80\%\)</span> 掉坑，向左只有 <span class="arithmatex">\(20\%\)</span> 掉坑。
-两种算法用同一组超参数（<span class="arithmatex">\(\gamma=0.95\)</span>、<span class="arithmatex">\(\alpha=0.15\)</span>）、
-同一个随机种子、同样 6000 个回合训练 ——
+· <strong>状态 5 其实够不着</strong>：它是状态 4 的右邻，而状态 4 一进入就终止，
+  <span class="arithmatex">\(+1\)</span> 因此永远拿不到 —— 走廊里真正的目标只是"别掉进 4"</p>
+<p>于是<strong>状态 3 是全走廊最难的一格</strong>：向右 <span class="arithmatex">\(80\%\)</span> 掉坑，向左只有 <span class="arithmatex">\(20\%\)</span>。
+两种算法超参数（<span class="arithmatex">\(\gamma=0.95\)</span>、<span class="arithmatex">\(\alpha=0.15\)</span>）、随机种子、6000 个训练回合全同 ——
 <strong>差别只来自更新目标那一行</strong>。</p>
 <table>
 <thead>
@@ -12646,23 +12629,20 @@ Q 学习则假设未来总是取最优动作。
 </tr>
 </tbody>
 </table>
-<p><strong>先看两边一致的结论</strong>：两个 <span class="arithmatex">\(Q(3,\text{右})\)</span> 都是负的
-（<span class="arithmatex">\(-0.9026\)</span> 与 <span class="arithmatex">\(-0.8879\)</span>）—— 向右的大部分概率是掉坑，
-所以估价比向左低得多。两种算法在状态 3 都选了「左」，
-<strong>这一步它们没有分歧</strong>。</p>
-<p><strong>再看它们在同一个动作上的估价差别</strong>：对 <span class="arithmatex">\(Q(3,\text{左})\)</span>，
-Q 学习给 <span class="arithmatex">\(-0.4441\)</span>，SARSA 给 <span class="arithmatex">\(-0.6190\)</span>，<strong>相差 <span class="arithmatex">\(0.1749\)</span></strong>。
-这个差不是随机噪声，因为两者估计的对象本来就不同：</p>
+<p><strong>先看一致的结论</strong>：两个 <span class="arithmatex">\(Q(3,\text{右})\)</span> 都是负的
+（<span class="arithmatex">\(-0.9026\)</span> 与 <span class="arithmatex">\(-0.8879\)</span>）—— 向右大概率掉坑，
+估价因此低于向左。两者在状态 3 都选「左」，<strong>这一步没有分歧</strong>。</p>
+<p><strong>再看同一动作的估价差别</strong>：<span class="arithmatex">\(Q(3,\text{左})\)</span> 上
+Q 学习给 <span class="arithmatex">\(-0.4441\)</span>、SARSA 给 <span class="arithmatex">\(-0.6190\)</span>，<strong>相差 <span class="arithmatex">\(0.1749\)</span></strong> ——
+不是随机噪声，两者估计的对象本就不同：</p>
 <p>· <strong>Q 学习</strong>用 <span class="arithmatex">\(\max_{\boldsymbol{u}'}Q(\boldsymbol{x}',\boldsymbol{u}')\)</span> 当目标，
-  等于假设"以后每一步都取最优动作"。
-  它对风险是<strong>乐观</strong>的，所以估价偏高
+  等于假设"以后每一步都取最优动作"。它对风险<strong>乐观</strong>，估价偏高
 · <strong>SARSA</strong> 用实际采取的下一动作 <span class="arithmatex">\(Q(\boldsymbol{x}',\boldsymbol{u}')\)</span> 当目标。
-  而实际动作含 <span class="arithmatex">\(15\%\)</span> 的随机探索，<strong>这份探索本身就可能踩进陷阱 4</strong>。
-  它把风险如实算进去，所以估价偏低、更保守</p>
-<p><strong>还有一个可核对的旁证</strong>：这一格的真值（按贝尔曼方程迭代到底）
-是 <span class="arithmatex">\(Q^*(3,\text{左}) = -0.5551\)</span>。注意
+  而实际动作含 <span class="arithmatex">\(15\%\)</span> 随机探索，<strong>这份探索本身就可能踩进陷阱 4</strong>。
+  它把风险如实算进去，估价偏低、更保守</p>
+<p><strong>旁证</strong>：这一格真值（按贝尔曼方程迭代到底）<span class="arithmatex">\(Q^*(3,\text{左}) = -0.5551\)</span> ——
 <strong>Q 学习的 <span class="arithmatex">\(-0.4441\)</span> 在真值上方，SARSA 的 <span class="arithmatex">\(-0.6190\)</span> 在真值下方，真值正好夹在中间</strong>。
-这不是巧合 —— 它把两者的性格画了出来：</p>
+它把两者的性格画了出来：</p>
 <table>
 <thead>
 <tr>
@@ -12693,23 +12673,23 @@ Q 学习给 <span class="arithmatex">\(-0.4441\)</span>，SARSA 给 <span class=
 </tr>
 </tbody>
 </table>
-<p><strong>这就是"SARSA 更保守"的准确含义</strong>：
-它不是因为胆小，而是因为它的更新式里<strong>写着"下一步会按含探索的策略行动"</strong>。</p>
-<p><strong>工程上怎么选</strong>：训练期间绝不能出事（真机、有人在场）就用 SARSA ——
-它给出的估价直接把探索代价算进去了；
-只在仿真里练、最终只关心收敛后的策略就用 Q 学习 ——
-它学得多半更快，但要靠 <span class="arithmatex">\(\varepsilon\)</span> 退火把探索收干净，
+<p><strong>这就是"SARSA 更保守"的准确含义</strong>：不是它胆小，
+而是它的更新式里<strong>写着"下一步会按含探索的策略行动"</strong>。</p>
+<p><strong>工程上怎么选</strong>：训练绝不能出事（真机、有人在场）就用 SARSA ——
+它的估价已把探索代价算了进去；
+只在仿真里练、只看收敛后策略就用 Q 学习 ——
+它学得更快，但要用 <span class="arithmatex">\(\varepsilon\)</span> 退火把探索收干净，
 否则照它的乐观估价上真机会冒险。</p>
 <hr />
 <h2 id="_4">四、从强化学习到自适应最优控制<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么控制器设计要求更高<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <p>标准强化学习通常<strong>从头学</strong>：值函数初值随便取。
-但控制系统有个额外要求：</p>
+控制系统却有额外要求：</p>
 <div class="arithmatex">\[
 \text{在学习的**过程中**，系统也必须稳定}
 \]</div>
 <p><strong>这一条很硬</strong>：飞行器不能"先胡乱试几百次再学会稳定飞行"。
-所以控制领域发展出了<strong>自适应动态规划</strong>（下一章）：
+于是控制领域发展出<strong>自适应动态规划</strong>（下一章）：
 在结构中<strong>嵌入已知的稳定性保证</strong>，再学剩下的未知部分。</p>
 <h3 id="42">4.2 与最优控制的关系<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <table>
@@ -12754,11 +12734,11 @@ Q 学习给 <span class="arithmatex">\(-0.4441\)</span>，SARSA 给 <span class=
 </tbody>
 </table>
 <p><strong>注意值函数那两行</strong>：最优控制里值函数依赖剩余步数 <span class="arithmatex">\(k\)</span>
-（因为是有限时域），而强化学习里它只依赖状态
-（因为折扣保证了无穷级数收敛，且问题是稳态的）。</p>
+（有限时域），强化学习里它只依赖状态
+（折扣保证无穷级数收敛，且问题是稳态）。</p>
 <p><strong>两者在稳态、无限时域下会合流</strong>：
-若把最优控制取 <span class="arithmatex">\(N\to\infty\)</span> 并加折扣，其 Bellman 方程
-就变成强化学习的贝尔曼最优方程。<strong>它们本来是同一个方程。</strong></p>
+把最优控制取 <span class="arithmatex">\(N\to\infty\)</span> 并加折扣，其 Bellman 方程
+就变成强化学习的贝尔曼最优方程。<strong>它们本是同一个方程。</strong></p>
 <h3 id="43">4.3 适用边界的判断<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12786,21 +12766,20 @@ Q 学习给 <span class="arithmatex">\(-0.4441\)</span>，SARSA 给 <span class=
 </tr>
 </tbody>
 </table>
-<p><strong>第一行值得强调</strong>：能用 LQR 就别用强化学习。
-LQR 有闭式解、有稳定性保证、计算量极小；
-强化学习要大量数据、只有概率性保证。</p>
+<p><strong>第一行值得强调</strong>：能用 LQR 就别用强化学习 ——
+它有闭式解、稳定性保证、计算量极小；
+强化学习却要大量数据、只有概率性保证。</p>
 <p><strong>强化学习的价值在于"模型实在写不出来"的场合</strong>，
-而不是"不想建模"的场合。</p>
-<p><strong>回到状态 3 那个奖励，用 TD 的方式重新学一遍</strong>，
-就能看清"不需要模型"到底换来了什么、又付出了什么。</p>
-<p>系统还是刚才那 5 个状态、折扣 <span class="arithmatex">\(0.9\)</span>、从状态 3 向右得奖励 1。
+而非"不想建模"的场合。</p>
+<p><strong>用 TD 回到状态 3 重新学一遍</strong>，
+就能看清"不需要模型"换来了什么、付出了什么。</p>
+<p>系统仍是那 5 个状态、折扣 <span class="arithmatex">\(0.9\)</span>、从状态 3 向右得奖励 1。
 <strong>这次假装不知道转移概率</strong>，只让智能体反复走、按
 <span class="arithmatex">\(V(\boldsymbol{x})\leftarrow V(\boldsymbol{x})+\alpha[R+\gamma V(\boldsymbol{x}')-V(\boldsymbol{x})]\)</span>
 更新，学习率取 <span class="arithmatex">\(\alpha=0.05\)</span>。
 策略先固定为<strong>总是向右</strong>，跑 4000 个回合。</p>
-<p><strong>先说清每次采样落在哪里</strong>。取动作「右」，以 <span class="arithmatex">\(80\%\)</span> 直接到达状态 4，
-以 <span class="arithmatex">\(20\%\)</span> 原地不动。所以关键是：
-<strong>从状态 0 出发、一路向右，永远先到状态 4</strong>（那一步就终止了），
+<p><strong>先说清采样落在哪里</strong>：取动作「右」，<span class="arithmatex">\(80\%\)</span> 到状态 4、<span class="arithmatex">\(20\%\)</span> 原地不动。
+关键是<strong>从状态 0 一路向右永远先到状态 4</strong>（那一步就终止），
 <strong>根本走不到状态 3</strong>。</p>
 <table>
 <thead>
@@ -12839,18 +12818,17 @@ LQR 有闭式解、有稳定性保证、计算量极小；
 </tbody>
 </table>
 <p><strong>最大偏差 <span class="arithmatex">\(1.2195\)</span></strong> —— 恰好等于 <span class="arithmatex">\(V^*(3)\)</span> 本身。</p>
-<p><strong>这个偏差暴露的是"数据没覆盖"，不是算法算错</strong>：
-TD 只更新它<strong>实际访问过</strong>的状态。
-状态 3 在这 4000 个回合里一次也没被访问，
-它的估计就停在初值 <span class="arithmatex">\(0\)</span>，再好的更新式也无从下手。</p>
+<p><strong>这个偏差暴露的是"数据没覆盖"，不是算错</strong>：
+TD 只更新它<strong>实际访问过</strong>的状态，
+状态 3 在 4000 个回合里一次也没被访问，
+估计就停在初值 <span class="arithmatex">\(0\)</span>，再好的更新式也无从下手。</p>
 <p><strong>所以 TD 用采样换模型，代价是两条</strong>：</p>
 <p>· <strong>需要覆盖</strong>：没访问过的状态学不到。这正是"探测噪声""经验回放"要解决的问题 ——
-  它们的作用就是逼智能体去没走过的地方
-· <strong>学到的是当前策略的值</strong>：策略固定为"总是向右"，学到的本该是 <span class="arithmatex">\(V^\pi\)</span>。
-  可这里 <span class="arithmatex">\(\pi\)</span> 恰好也没走通（连状态 3 都没到），
-  于是学到的连 <span class="arithmatex">\(V^\pi\)</span> 都不完整</p>
+  它们逼智能体去没走过的地方
+· <strong>学到的是当前策略的值</strong>：策略固定为"总是向右"，学到的本该是 <span class="arithmatex">\(V^\pi\)</span>，
+  可这里 <span class="arithmatex">\(\pi\)</span> 恰好也没走通（连状态 3 都没到），学到的连 <span class="arithmatex">\(V^\pi\)</span> 都不完整</p>
 <p><strong>要让 TD 收敛到 <span class="arithmatex">\(V^*\)</span>，光更新值函数不够，必须让策略也随学习改进</strong>
-（即成为控制算法）—— 这就是下面 SARSA 与 Q 学习要做的事。</p>
+（即成为控制算法）—— 这正是下面 SARSA 与 Q 学习的内容。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 358.654375 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="值迭代与策略迭代：两种循环，都收敛到最优">
@@ -13346,9 +13324,9 @@ Q^*(\boldsymbol{x},\boldsymbol{u})
 \pi^*(\boldsymbol{x}) = \arg\max_{\boldsymbol{u}}Q^*(\boldsymbol{x},\boldsymbol{u})
 \]</div>
 <p><strong>为什么用 <span class="arithmatex">\(Q\)</span> 比用 <span class="arithmatex">\(V\)</span> 方便</strong>：用 <span class="arithmatex">\(V^*\)</span> 求策略时，
-还要对每个动作算一次"<span class="arithmatex">\(R+\gamma\mathbb{E}[V^*]\)</span>"的期望（需要模型）。
-而 <span class="arithmatex">\(Q^*\)</span> <strong>已经把动作作为输入</strong>，直接取 <span class="arithmatex">\(\arg\max\)</span> 即可 ——
-<strong>不需要模型，也不需要算期望</strong> ✓</p>
+还要对每个动作算一次"<span class="arithmatex">\(R+\gamma\mathbb{E}[V^*]\)</span>"的期望（需要模型）；
+而 <span class="arithmatex">\(Q^*\)</span> <strong>已把动作作为输入</strong>，直接取 <span class="arithmatex">\(\arg\max\)</span> 即可 ——
+<strong>不需要模型，也不必算期望</strong> ✓</p>
 <p>这正是 Q 学习受欢迎的原因。</p>
 </details>
 <h3 id="2-gamma-1">例题 2：为什么 <span class="arithmatex">\(\gamma\)</span> 必须小于 1<a class="headerlink" href="#2-gamma-1" title="Permanent link">&para;</a></h3>
@@ -13364,20 +13342,18 @@ Q^*(\boldsymbol{x},\boldsymbol{u})
 <div class="arithmatex">\[
 \sum_{k=0}^{\infty}1^k\cdot r = \infty
 \]</div>
-<p>回报发散，值函数无定义 —— <strong>所有策略的值都是无穷大，无法比较</strong>。</p>
+<p>回报发散、值函数无定义：<strong>所有策略的值都是无穷大，无法比较</strong>。</p>
 <p><strong>第二步：<span class="arithmatex">\(\gamma\lt1\)</span> 的情形。</strong></p>
 <div class="arithmatex">\[
 \sum_{k=0}^{\infty}\gamma^k r = \frac{r}{1-\gamma}
 \]</div>
 <p>有限，可以比较。</p>
-<p><strong>第三步：<span class="arithmatex">\(\gamma\)</span> 的第二个作用。</strong></p>
-<p><strong>压缩映射的压缩因子就是 <span class="arithmatex">\(\gamma\)</span></strong>。
-<span class="arithmatex">\(\gamma\lt1\)</span> 才保证迭代收敛；<span class="arithmatex">\(\gamma=1\)</span> 时映射只是"非扩张"，
-迭代可能不收敛。</p>
+<p><strong>第三步：第二个作用。</strong>
+<strong>压缩映射的压缩因子就是 <span class="arithmatex">\(\gamma\)</span></strong>：
+<span class="arithmatex">\(\gamma\lt1\)</span> 才保证迭代收敛；<span class="arithmatex">\(\gamma=1\)</span> 时映射只是"非扩张"，迭代可能不收敛。</p>
 <p><strong>所以 <span class="arithmatex">\(\gamma\)</span> 有两个作用</strong>：保证回报有界、保证迭代收敛。</p>
-<p><strong>补充</strong>：<span class="arithmatex">\(\gamma\)</span> 也表达"有多在乎远期"。
-<span class="arithmatex">\(\gamma\)</span> 接近 1 表示"看得远"，但收敛慢；
-<span class="arithmatex">\(\gamma\)</span> 小表示"只顾眼前"，收敛快。</p>
+<p><strong>补充</strong>：<span class="arithmatex">\(\gamma\)</span> 也表达"有多在乎远期"：
+接近 1 表示"看得远"但收敛慢，小表示"只顾眼前"、收敛快。</p>
 </details>
 <h3 id="3td-mc">例题 3：TD 与 MC 的取舍<a class="headerlink" href="#3td-mc" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某任务是"最多 1000 步的连续控制"。
@@ -13389,8 +13365,7 @@ Q^*(\boldsymbol{x},\boldsymbol{u})
 <details class="success">
 <summary>解答</summary>
 <p><strong>第一步：判断能否等回合结束。</strong></p>
-<p>1000 步的连续控制<strong>可以等到结束</strong>，但每次更新都要等 1000 步，
-学习效率很低。</p>
+<p>1000 步的连续控制<strong>可以等到结束</strong>，但每次更新都要等 1000 步，效率很低。</p>
 <p><strong>第二步：比较两者。</strong></p>
 <table>
 <thead>
@@ -13419,11 +13394,10 @@ Q^*(\boldsymbol{x},\boldsymbol{u})
 </tbody>
 </table>
 <p><strong>答案：优先用 TD</strong>。</p>
-<p><strong>理由</strong>：在这种长回合、连续控制的任务里，
-TD 的低方差与即时更新远比"无偏"更重要 ——
-因为它可以<strong>在线更新</strong>，1000 步就能更新 1000 次。</p>
-<p><strong>补充</strong>：还有一个折中方案 <span class="arithmatex">\(n\)</span> 步 TD，
-兼顾方差（比 MC 小）与偏差（比 1 步 TD 小）。</p>
+<p><strong>理由是</strong>：这种长回合、连续控制任务里，
+TD 的低方差与即时更新远比"无偏"重要 ——
+它能<strong>在线更新</strong>，1000 步就更新 1000 次。</p>
+<p><strong>补充</strong>：折中方案是 <span class="arithmatex">\(n\)</span> 步 TD，兼顾方差（比 MC 小）与偏差（比 1 步 TD 小）。</p>
 </details>
 <h3 id="4">例题 4：为什么控制器设计还要"保证稳定"<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：标准强化学习允许"先试错再学会"。
@@ -13470,7 +13444,7 @@ TD 的低方差与即时更新远比"无偏"更重要 ——
 </tr>
 </tbody>
 </table>
-<p><strong>答案</strong>：因为物理系统的试错代价是不可逆的，
+<p><strong>答案</strong>：物理系统的试错代价不可逆，
 所以要<strong>在有稳定性保证的框架里学</strong>，
 不能"先随便试、学会了再说"。</p>
 </details>

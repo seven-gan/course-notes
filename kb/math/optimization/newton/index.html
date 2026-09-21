@@ -11978,7 +11978,7 @@
 <blockquote>
 <p><strong>牛顿法：用二次函数局部近似目标，直接跳到二次模型的极小点。</strong></p>
 </blockquote>
-<p>代价是每步要算（或近似）Hessian，这在高维时很贵。</p>
+<p>代价是每步要算（或近似）Hessian，高维时很贵。</p>
 <div class="admonition tip">
 <p class="admonition-title">一阶 vs 二阶：一个核心权衡</p>
 <table>
@@ -12060,11 +12060,8 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tr>
 </tbody>
 </table>
-<p><strong>对比可见</strong>：牛顿法相当于取</p>
-<div class="arithmatex">\[
-\eta_k = H_k^{-1}
-\]</div>
-<p>即「学习率」是一个矩阵，而且每步自动调整。</p>
+<p><strong>对比可见</strong>：牛顿法相当于把「学习率」取成矩阵 <span class="arithmatex">\(\eta_k = H_k^{-1}\)</span>，
+且每步自动调整。</p>
 <p>这解释了为什么牛顿法对尺度不敏感：</p>
 <p>若把某个变量放大 <span class="arithmatex">\(c\)</span> 倍（尺度变化），则</p>
 <table>
@@ -12091,7 +12088,7 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </table>
 <p><strong>正好抵消尺度的变化</strong> ✓ 所以牛顿法天然「尺度不变」。</p>
 <p><strong>对比梯度下降</strong>：尺度变化直接改变梯度大小 →
-需要重新调学习率 → 这就是它对条件数敏感的原因。</p>
+需重新调学习率，故对条件数敏感。</p>
 </div>
 <h3 id="_3">二次函数的特殊情形：一步到位<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p>若 <span class="arithmatex">\(f\)</span> 本身就是<strong>二次函数</strong> <span class="arithmatex">\(f(\boldsymbol{x}) = \frac12\boldsymbol{x}^\top A\boldsymbol{x} + \boldsymbol{b}^\top\boldsymbol{x} + c\)</span>，
@@ -12190,7 +12187,6 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tr>
 </tbody>
 </table>
-<p><strong>只需 4 步</strong>就到达双精度极限</p>
 <p><strong>对比</strong>：</p>
 <table>
 <thead>
@@ -12213,6 +12209,28 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tr>
 </tbody>
 </table>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="梯度下降与牛顿法在同一条细长谷上的迭代轨迹对比">
+<!-- 目标函数等高线（细长的谷） -->
+<ellipse class="f0" cx="215" cy="125" rx="105" ry="40" transform="rotate(-17 215 125)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.5"/>
+<ellipse class="f0" cx="215" cy="125" rx="76" ry="29" transform="rotate(-17 215 125)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.5"/>
+<ellipse class="f0" cx="215" cy="125" rx="48" ry="18" transform="rotate(-17 215 125)" fill="none" stroke="var(--kb-a1)" stroke-width="1.4" opacity="0.5"/>
+<!-- 梯度下降：之字形 -->
+<polyline class="a1" points="356,84 300,63 312,103 272,84 280,114 250,102 250,122 226,118 215,125" fill="none"/>
+<!-- 牛顿法：直达 -->
+<polyline class="a2" points="356,84 250,124 215,125" fill="none"/>
+<!-- 起点与终点 -->
+<circle class="dc" cx="356" cy="84" r="4"/>
+<text class="lbl-s" x="360" y="80">起点</text>
+<text class="lbl" x="206" y="130">★</text>
+<text class="lbl-s" x="150" y="146">最优点</text>
+<!-- 图例 -->
+<text class="l1" x="24" y="26">梯度下降：来回之字形，收敛慢</text>
+<text class="l2" x="24" y="46">牛顿法：沿谷底直达，步数极少</text>
+</svg>
+<figcaption>图 2　梯度下降与牛顿法在同一等高线上的迭代轨迹。等高线是一道细长的「谷」；<b>梯度下降</b>（蓝）每步都垂直等高线下降，于是沿谷来回<b>之字形</b>震荡，要很多步才到谷底；<b>牛顿法</b>（橙）利用曲率信息瞄准谷底，几步就<b>直达</b>。两条轨迹的终点相同（星号）</figcaption>
+</figure>
+
 <div class="admonition warning">
 <p class="admonition-title">二次收敛是「局部」性质（这个前提很重要）</p>
 <p><strong>定理的条件</strong>：</p>
@@ -12261,8 +12279,6 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tr>
 </tbody>
 </table>
-<p><strong>反例（经典）</strong>：<span class="arithmatex">\(f(x) = \sqrt{x^2+1}\)</span>（光滑凸函数），
-若初值 <span class="arithmatex">\(x_0\)</span> 过大，牛顿法会<strong>震荡发散</strong>。</p>
 <p>这就是「牛顿法需要保护」的原因。</p>
 </div>
 <h3 id="_5">带保护的牛顿法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
@@ -12321,7 +12337,6 @@ f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \nabla f(\boldsymbol{x}_k)^\top(
 </tbody>
 </table>
 <p><strong><span class="arithmatex">\(n = 10^6\)</span> 时</strong>：<span class="arithmatex">\(O(n^3) = 10^{18}\)</span> —— <strong>完全不可行</strong> ✗</p>
-<p>这是牛顿法在高维深度学习中被弃用的原因。</p>
 <h3 id="hessian">拟牛顿法：用梯度差近似 Hessian<a class="headerlink" href="#hessian" title="Permanent link">&para;</a></h3>
 <p><strong>核心思想</strong>：不显式算 Hessian，而是用它满足的性质来迭代更新近似。</p>
 <p><strong>割线条件（secant condition）</strong>：</p>
@@ -12332,12 +12347,11 @@ H_{k+1}\boldsymbol{s}_k = \boldsymbol{y}_k
 <div class="arithmatex">\[
 \boldsymbol{s}_k = \boldsymbol{x}_{k+1}-\boldsymbol{x}_k, \qquad \boldsymbol{y}_k = \boldsymbol{g}_{k+1}-\boldsymbol{g}_k
 \]</div>
-<p><strong>含义</strong>：近似的 Hessian 应该把「位移」映成「梯度差」。</p>
-<p><strong>理由</strong>：由泰勒展开</p>
+<p><strong>理由</strong>（由泰勒展开）：</p>
 <div class="arithmatex">\[
 \boldsymbol{g}_{k+1}-\boldsymbol{g}_k \approx H(\boldsymbol{x}_{k+1}-\boldsymbol{x}_k)
 \]</div>
-<p>即 <span class="arithmatex">\(\boldsymbol{y}_k \approx H\boldsymbol{s}_k\)</span></p>
+<p>即 <span class="arithmatex">\(\boldsymbol{y}_k \approx H\boldsymbol{s}_k\)</span> —— 近似的 Hessian 把「位移」映成「梯度差」。</p>
 <h3 id="bfgs">BFGS 更新公式<a class="headerlink" href="#bfgs" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\top\boldsymbol{s}_k} - \frac{H_k\boldsymbol{s}_k\boldsymbol{s}_k^\top H_k}{\boldsymbol{s}_k^\top H_k\boldsymbol{s}_k}
@@ -12367,7 +12381,7 @@ H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\t
 <p><strong>2. 保持对称正定</strong></p>
 <p>若 <span class="arithmatex">\(H_k\succ0\)</span> 且 <span class="arithmatex">\(\boldsymbol{y}_k^\top\boldsymbol{s}_k&gt;0\)</span>，则 <span class="arithmatex">\(H_{k+1}\succ0\)</span></p>
 <p><strong>第 2 点很重要</strong>：它保证每步方向都是<strong>下降方向</strong>，
-不需要额外检查。</p>
+无需额外检查。</p>
 <p><strong>保证 <span class="arithmatex">\(\boldsymbol{y}_k^\top\boldsymbol{s}_k&gt;0\)</span> 的条件</strong>：<span class="arithmatex">\(f\)</span> <strong>严格凸</strong>。</p>
 <p>所以 <strong>BFGS 在凸问题上非常可靠</strong>；非凸时可能需要修正
 （如用 <span class="arithmatex">\(\boldsymbol{y}_k + \gamma\boldsymbol{s}_k\)</span> 替代，即「阻尼 BFGS」）。</p>
@@ -12455,8 +12469,6 @@ H_{k+1} = H_k + \frac{\boldsymbol{y}_k\boldsymbol{y}_k^\top}{\boldsymbol{y}_k^\t
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：SGD 系列靠「噪声+多次迭代」；L-BFGS 靠「精确曲率」。
-深度学习的损失曲面 + 大数据规模使前者更合适。</p>
 </div>
 <hr />
 <h2 id="-levenberg-marquardt">四、高斯-牛顿与 Levenberg-Marquardt<a class="headerlink" href="#-levenberg-marquardt" title="Permanent link">&para;</a></h2>
@@ -12488,7 +12500,6 @@ H \approx J^\top J
 <p><strong>1. 不需要真正的 Hessian</strong></p>
 <p>只需<strong>残差的雅可比 <span class="arithmatex">\(J\)</span></strong>（一阶导数）！
 二阶项被结构性消掉了。</p>
-<p><strong>这大幅降低了实现难度</strong>。</p>
 <p><strong>2. <span class="arithmatex">\(J^\top J\)</span> 总是半正定</strong></p>
 <div class="arithmatex">\[
 \boldsymbol{v}^\top(J^\top J)\boldsymbol{v} = \lVert J\boldsymbol{v}\rVert^2 \geq 0 \;\checkmark
@@ -12497,7 +12508,6 @@ H \approx J^\top J
 <p><strong>3. 小残差时接近牛顿法</strong></p>
 <p>残差 <span class="arithmatex">\(\boldsymbol{r}\to\boldsymbol{0}\)</span> 时，忽略的二阶项也 <span class="arithmatex">\(\to0\)</span>
 → 收敛速度接近二次</p>
-<p>这正是最小二乘问题的「天然结构优势」。</p>
 <p><strong>与最小二乘的闭环</strong>：<span class="arithmatex">\(J^\top J\)</span> 与 <span class="arithmatex">\(J^\top\boldsymbol{r}\)</span> 就是
 <strong>正规方程</strong>的两边（回到「矩阵微积分」一页）——
 高斯-牛顿本质上是在<strong>每次迭代重新线性化并解正规方程</strong>。</p>
@@ -12624,38 +12634,11 @@ x_{k+1} = \frac{2x_k^2 - x_k^2 + 2}{2x_k} = \frac{x_k^2+2}{2x_k} = \frac12\left(
 </tbody>
 </table>
 <p><strong>验证</strong>：<span class="arithmatex">\(\sqrt2 = 1.41421356\ldots\)</span></p>
-<p><strong>第 3 步已精确到小数点后 6 位</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">观察「有效数字翻倍」</p>
-<p>把误差写出来看：</p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(k\)</span></th>
-<th>误差</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td><span class="arithmatex">\(4.1\times10^{-1}\)</span></td>
-</tr>
-<tr>
-<td>1</td>
-<td><span class="arithmatex">\(8.6\times10^{-2}\)</span></td>
-</tr>
-<tr>
-<td>2</td>
-<td><span class="arithmatex">\(2.5\times10^{-3}\)</span></td>
-</tr>
-<tr>
-<td>3</td>
-<td><span class="arithmatex">\(2.1\times10^{-6}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p><strong>每步误差约「平方」</strong>：</p>
+<p>把上表的误差单独看：<span class="arithmatex">\(4.1\times10^{-1}\to8.6\times10^{-2}\to2.5\times10^{-3}\to2.1\times10^{-6}\)</span>，
+<strong>每步误差约等于上一步的平方</strong>：</p>
 <div class="arithmatex">\[
 (8.6\times10^{-2})^2 \approx 7.4\times10^{-3}
 \]</div>
@@ -13006,7 +12989,6 @@ J_{i,\cdot} = \begin{bmatrix}-e^{bt_i} &amp; -a t_i e^{bt_i}\end{bmatrix}
 <div class="arithmatex">\[
 (J^\top\boldsymbol{r})_2 = -\sum_i at_ie^{bt_i}r_i
 \]</div>
-<p>这就是可直接编程实现的迭代式。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">一个更简单的做法（线性化）</p>
@@ -13391,8 +13373,6 @@ x_{k+1} = \frac{1}{n}\left((n-1)x_k + \frac{a}{x_k^{n-1}}\right)
 </table>
 <p><strong>对比一般的牛顿法</strong>：需要完整 Hessian，
 且需要额外处理「Hessian 可能不定」的问题。</p>
-<p><strong>一句话</strong>：<strong>最小二乘问题的结构，使得「近似二阶信息」
-可以免费获得</strong>——这是它成为工程标准方法的原因。</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 为什么 LM 方法要比纯高斯-牛顿法更常用？</p>

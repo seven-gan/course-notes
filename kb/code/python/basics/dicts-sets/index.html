@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。想要第 3 个元素很方便，但想要「编号 A-001 的那条记录」「出现过 3 次以上的词」「两批文件的差异」，下标就完全帮不上忙了：你只能从头扫到尾，一个个比对。">
+    <meta name="description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。取第 3 个元素很方便，但想要「编号 A-001 的记录」「出现 3 次以上的词」「两批文件的差异」时，下标完全帮不上忙：只能从头扫到尾逐个比对。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="字典与集合">
   
-  <meta property="og:description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。想要第 3 个元素很方便，但想要「编号 A-001 的那条记录」「出现过 3 次以上的词」「两批文件的差异」，下标就完全帮不上忙了：你只能从头扫到尾，一个个比对。">
+  <meta property="og:description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。取第 3 个元素很方便，但想要「编号 A-001 的记录」「出现 3 次以上的词」「两批文件的差异」时，下标完全帮不上忙：只能从头扫到尾逐个比对。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/code/python/basics/dicts-sets/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="字典与集合">
   
-  <meta name="twitter:description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。想要第 3 个元素很方便，但想要「编号 A-001 的那条记录」「出现过 3 次以上的词」「两批文件的差异」，下标就完全帮不上忙了：你只能从头扫到尾，一个个比对。">
+  <meta name="twitter:description" content="字典与集合：这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。前面几页的容器只有一个入口 —— 下标。取第 3 个元素很方便，但想要「编号 A-001 的记录」「出现 3 次以上的词」「两批文件的差异」时，下标完全帮不上忙：只能从头扫到尾逐个比对。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -13358,12 +13358,8 @@
 </ul>
 </div>
 <p>这一页解决一个问题：把「按下标找」换成「按名字找」和「按归属找」。</p>
-<p>前面几页的容器只有一个入口 —— 下标。想要第 3 个元素很方便，
-但想要「编号 A-001 的那条记录」「出现过 3 次以上的词」「两批文件的差异」，
-下标就完全帮不上忙了：你只能从头扫到尾，一个个比对。</p>
-<p>现实中的问题几乎都是后一种形状。<strong>字典</strong>（<code>dict</code>）负责「用一个名字
-直接换到一份数据」，<strong>集合</strong>（<code>set</code>）负责「只关心有没有、归不归在一类」。
-它们内部都靠<strong>哈希表</strong>（hash table）实现，所以查找速度几乎不受数据量影响。</p>
+<p>前面几页的容器只有一个入口 —— 下标。取第 3 个元素很方便，但想要「编号 A-001 的记录」「出现 3 次以上的词」「两批文件的差异」时，下标完全帮不上忙：只能从头扫到尾逐个比对。</p>
+<p>现实问题几乎都是后一种形状。<strong>字典</strong>（<code>dict</code>）负责「用一个名字换到一份数据」，<strong>集合</strong>（<code>set</code>）负责「只关心有没有、归不归一类」。二者内部都靠<strong>哈希表</strong>（hash table）实现，查找速度几乎不受数据量影响。</p>
 <p>这一页学完，你将能够：</p>
 <table>
 <thead>
@@ -13409,20 +13405,15 @@
 <p class="admonition-title">这页的重点</p>
 <p>三个最容易搞错的地方，先点出来：</p>
 <ol>
-<li><strong>空集合不是 <code>{}</code>，而是 <code>set()</code></strong> —— <code>{}</code> 是空<strong>字典</strong>。
-   写错不会报错，只会在后面用 <code>add</code> 时才炸</li>
-<li><strong><code>d[k]</code> 与 <code>d.get(k)</code> 不是一回事</strong>：
-   前者取不到就抛 <code>KeyError</code>，后者取不到给你一个默认值。
-   「这个键可能不存在」时用 <code>get</code>，「不存在就是 bug」时用 <code>d[k]</code></li>
-<li><strong>集合的打印顺序不可依赖</strong>，尤其是字符串集合 ——
-   每次运行都可能不一样。要固定顺序就 <code>sorted(集合)</code>。</li>
+<li><strong>空集合不是 <code>{}</code>，而是 <code>set()</code></strong> —— <code>{}</code> 是空<strong>字典</strong>，写错不报错，直到用 <code>add</code> 才炸</li>
+<li><strong><code>d[k]</code> 与 <code>d.get(k)</code> 不是一回事</strong>：前者取不到抛 <code>KeyError</code>，后者给默认值。「键可能不存在」用 <code>get</code>，「不存在就是 bug」用 <code>d[k]</code></li>
+<li><strong>集合打印顺序不可依赖</strong>，尤其字符串集合，每次运行都可能不同；要固定就 <code>sorted(集合)</code></li>
 </ol>
 </div>
 <hr />
 <h2 id="_1">一、为什么需要它<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 用列表「按名字查」有多别扭<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>假设你手里有两份平行的数据：一份是名字，一份是分数。
-想知道某个人的分数，用列表只能这样写：</p>
+<p>假设你手里有两份平行数据：名字、分数。想知道某人的分数，用列表只能这样写：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -13483,12 +13474,9 @@
 <pre class="kb-output"><code>小华的分数是 79
 字典里有 3 个人
 有哪些键: ['小美', '小刚', '小华']</code></pre></p>
-<p><strong>区别在哪</strong>：列表的入口是「第几个」，字典的入口是「叫什么」。
-分数和名字绑在同一个整体里，不会再错位；查不到时还会<strong>立刻报错</strong>，
-而不是悄悄什么都不做</p>
+<p><strong>区别在哪</strong>：列表入口是「第几个」，字典入口是「叫什么」。分数和名字绑在同一整体里不会错位，查不到还会<strong>立刻报错</strong>，而不是悄悄不做事</p>
 <h3 id="13">1.3 什么时候该换容器<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>同样是「一堆数据」，需求不同，容器就不同。这张表可以先看一眼，
-后面每一行都会在本页展开：</p>
+<p>同样是「一堆数据」，需求不同，容器就不同：</p>
 <table>
 <thead>
 <tr>
@@ -13543,8 +13531,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：<strong>问自己「我要用什么去换什么」</strong>。
-用位置换值 → 列表；用名字换值 → 字典；用「在不在」换答案 → 集合</p>
+<p><strong>判断依据</strong>：<strong>问自己「用什么去换什么」</strong> —— 用位置换值 → 列表；用名字换值 → 字典；用「在不在」换答案 → 集合</p>
 <hr />
 <h2 id="_2">二、字典是什么：键到值的映射<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>一句话定义：字典是一组「键 → 值」的对应关系，能用键快速找回值。</p>
@@ -13612,8 +13599,7 @@
 {'a': 1, 'b': 2} {'a': 1, 'b': 2} {'a': 1, 'b': 2} {'a': 1, 'b': 2}
 四种写法结果一样吗: True
 空字典的类型: &lt;class 'dict'&gt;</code></pre></p>
-<p><strong><code>dict(a=1)</code> 这种写法有个硬限制</strong>：键必须是合法的变量名，
-所以用不了中文键、也用不了带空格的键：</p>
+<p><strong><code>dict(a=1)</code> 有个硬限制</strong>：键必须是合法变量名，所以用不了中文键、带空格的键：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -13624,11 +13610,9 @@
 <pre class="kb-output"><code>{'a': 1, 'b': 2}
 {'中文键': 1, '带 空格': 2}
 {'k': 1}</code></pre></p>
-<p><strong>选哪个</strong>：键是英文单词用 <code>dict(键=值)</code> 最漂亮；
-键从数据里来（可能是中文、可能带符号）就老老实实用字面量或 <code>zip</code>。</p>
+<p><strong>选哪个</strong>：键是英文单词用 <code>dict(键=值)</code> 最漂亮；键来自数据（可能中文、可能带符号）就用字面量或 <code>zip</code>。</p>
 <h3 id="22-dictzip">2.2 <code>dict(zip(...))</code>：把两个列表「拉」成字典<a class="headerlink" href="#22-dictzip" title="Permanent link">&para;</a></h3>
-<p>这是最常用的一种建法 —— <strong>你手上往往正好是两个列表</strong>：
-一列编号、一列读数。</p>
+<p>这是最常用的建法 —— <strong>手上往往正好是两个列表</strong>：一列编号、一列读数。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -13709,7 +13693,7 @@ A-002 的温度: 26.1
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>重复的键只留最后一个: {'a': 2}
 键有几个: 1</code></pre></p>
-<p>第二条：值可以随便重复，也可以是任意类型。 值不受任何限制：</p>
+<p>第二条：值可以随便重复，也可以是任意类型：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
@@ -13732,8 +13716,7 @@ A-002 的温度: 26.1
 <pre class="kb-output"><code>{'名字': '小美', '成绩': 88, '选修': ['数学', '英语'], '在读': True}
 值是列表也能取出来继续用: 数学
 两个键可以有一样的值: 2</code></pre></p>
-<p><strong>第三条：一个键只对应一个值。</strong> 想「一个名字挂多条数据」，
-就把值本身做成列表 —— 这是下一节分组归集的基础。</p>
+<p><strong>第三条：一个键只对应一个值。</strong> 想「一个名字挂多条数据」，就把值做成列表 —— 这是下一节分组归集的基础。</p>
 <p><strong>键与值的分工，记住这张表</strong>：</p>
 <table>
 <thead>
@@ -14027,8 +14010,7 @@ z
 <blockquote>
 <p><strong>可哈希 = 内容不会变，所以能算出一个固定的「指纹」。</strong></p>
 </blockquote>
-<p>字典靠这个指纹（哈希值）来决定「这个键该放在哪一格」。
-所以同一个内容必须每次都算出同一个指纹：</p>
+<p>字典靠这个指纹（哈希值）决定「键该放哪一格」。所以同一内容必须每次都算出同一指纹：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
@@ -14099,13 +14081,10 @@ True</code></pre></p>
 </tr>
 </tbody>
 </table>
-<p><strong>记忆线索</strong>：<strong>「能改的东西不能当键」</strong>。
-所以元组能当键、列表不能 —— 第 05 页讲元组时提过一句，
-本页第九节会把「为什么」补全，并当场演示报错</p>
+<p><strong>记忆线索</strong>：<strong>能改的东西不能当键</strong>。所以元组能当键、列表不能（第 05 页提过，本页第九节补全「为什么」并演示报错）</p>
 <hr />
 <h2 id="_3">三、字典方法全表<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这一节把字典的方法一个个过一遍，每个都配一段实跑代码。
-<strong>先看总表，再往下逐个看例子</strong>：</p>
+<p>这一节把字典方法一个个过一遍，每个都配一段实跑代码。<strong>先看总表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14227,8 +14206,7 @@ True</code></pre></p>
 新增后: {'小美': 88, '小刚': 95, '小华': 79}
 覆盖后: {'小美': 90, '小刚': 95, '小华': 79}
 自增后: {'小美': 90, '小刚': 96, '小华': 79}</code></pre></p>
-<p><strong><code>d[k] = v</code> 是「新增还是覆盖」取决于键在不在</strong>，
-两种行为合成一条语句，用起来非常顺手 —— 这也是字典能当计数器的基础。</p>
+<p><strong><code>d[k] = v</code> 是「新增还是覆盖」看键在不在</strong>，两种行为合成一句，用起来很顺手 —— 这也是字典能当计数器的基础。</p>
 <p><strong>取不存在的键会怎样</strong>：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
@@ -14303,15 +14281,11 @@ get 不会修改字典: {'小美': 88, '小刚': 95}</code></pre></p>
 <pre class="kb-output"><code>用 get 问一个没有的人: 0
 用 get 得到 None 时，写进文件会变成字符串 None:
 'None'</code></pre></p>
-<p><strong>判断依据</strong>：
-「缺了算正常」用 <code>get</code> 并给默认值；
-「缺了说明上游数据坏了」用 <code>d[k]</code> 让它当场报错</p>
-<p>最怕的是反过来用：拿 <code>get</code> 去读一份<strong>必须有</strong>的配置，
-结果拿到 <code>None</code> 一路往下传，最后在几百行之外才崩 ✗</p>
+<p><strong>判断依据</strong>：「缺了算正常」用 <code>get</code> 并给默认值；「缺了说明上游数据坏了」用 <code>d[k]</code> 当场报错</p>
+<p>最怕反过来用：拿 <code>get</code> 读一份<strong>必须有</strong>的配置，结果拿到 <code>None</code> 一路往下传，几百行之外才崩 ✗</p>
 </div>
 <h3 id="33-setdefault">3.3 <code>setdefault</code>：取不到就写入<a class="headerlink" href="#33-setdefault" title="Permanent link">&para;</a></h3>
-<p><code>setdefault(k, 默认值)</code> 比 <code>get</code> 多干一件事：
-<strong>键不存在时，顺手把这个键写进字典</strong>。</p>
+<p><code>setdefault(k, 默认值)</code> 比 <code>get</code> 多干一件事：<strong>键不存在时顺手把键写进字典</strong>。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
@@ -14354,8 +14328,7 @@ get 不会修改字典: {'小美': 88, '小刚': 95}</code></pre></p>
 </tr>
 </tbody>
 </table>
-<p>它的经典用途是给「值本身是列表」的字典开好格子，
-第五节会专门讲。</p>
+<p>它的经典用途是给「值本身是列表」的字典开好格子，第五节专讲。</p>
 <h3 id="34-pop-popitem-del-clear">3.4 删除：<code>pop</code> / <code>popitem</code> / <code>del</code> / <code>clear</code><a class="headerlink" href="#34-pop-popitem-del-clear" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
@@ -14505,8 +14478,7 @@ items() : [('小美', 88), ('小刚', 95)]
 转成列表才能排序: [88, 95]</code></pre></p>
 <div class="admonition tip">
 <p class="admonition-title">「视图」是活的，不是一个快照</p>
-<p><code>keys()</code> / <code>values()</code> / <code>items()</code> 返回的是<strong>视图对象</strong>，
-它不复制数据，而是<strong>跟着字典变</strong>：</p>
+<p><code>keys()</code> / <code>values()</code> / <code>items()</code> 返回<strong>视图对象</strong>：不复制数据，<strong>跟着字典变</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
@@ -14522,9 +14494,7 @@ items() : [('小美', 88), ('小刚', 95)]
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>第一次看: ['小美']
 字典改了以后再看: ['小美', '小刚']</code></pre></p>
-<p><strong>好处</strong>：不用复制一份，省内存
-<strong>要小心</strong>：如果你把它存起来当「当时的快照」用，就会拿到后来的数据
-真想要快照就 <code>list(scores.keys())</code>。</p>
+<p><strong>好处</strong>：不复制，省内存。<strong>要小心</strong>：把它存起来当「当时的快照」，就会拿到后来的数据；真想要快照就 <code>list(scores.keys())</code>。</p>
 </div>
 <h3 id="36-update">3.6 <code>update</code>：一次并入一批键值对<a class="headerlink" href="#36-update" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -14551,8 +14521,7 @@ items() : [('小美', 88), ('小刚', 95)]
 <pre class="kb-output"><code>传字典: {'小美': 88, '小刚': 96, '小华': 79}
 传序列: {'小美': 88, '小刚': 96, '小华': 79, '小强': 100}
 传关键字: {'小美': 88, '小刚': 96, '小华': 79, '小强': 100, '小丽': 70}</code></pre></p>
-<p><strong><code>update</code> 会覆盖已有的键</strong> —— 这正是「用新配置覆盖旧配置」想要的效果。
-字典合并的另外两种写法（<code>|</code> 与 <code>|=</code>）在第七节讲。</p>
+<p><strong><code>update</code> 会覆盖已有的键</strong> —— 这正是「用新配置覆盖旧配置」想要的效果。字典合并的另两种写法（<code>|</code>、<code>|=</code>）在第七节讲。</p>
 <h3 id="37">3.7 方法速查总表<a class="headerlink" href="#37" title="Permanent link">&para;</a></h3>
 <p>把前面几节合并成一张表，方便以后回来查：</p>
 <table>
@@ -14648,8 +14617,7 @@ items() : [('小美', 88), ('小刚', 95)]
 </table>
 <hr />
 <h2 id="_4">四、三种遍历方式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>字典里有「键」「值」「键值对」三个可遍历的部分，所以遍历就有三种写法。
-<strong>先给判断依据，再看例子</strong>：</p>
+<p>字典有「键」「值」「键值对」三个可遍历部分，所以遍历有三种写法。<strong>先给判断依据，再看例子</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14721,7 +14689,7 @@ items() : [('小美', 88), ('小刚', 95)]
 小美 → 88
 小刚 → 95
 小华 → 79</code></pre></p>
-<p><strong>三种方式打印的东西完全不同</strong>，这是初学阶段最容易混的地方：</p>
+<p><strong>三种方式打印的东西完全不同</strong>，最容易混：</p>
 <table>
 <thead>
 <tr>
@@ -14753,9 +14721,7 @@ items() : [('小美', 88), ('小刚', 95)]
 </tr>
 </tbody>
 </table>
-<p><strong>「<code>for x in 字典</code> 拿到的是键」这一点一定要记住</strong>，
-因为写成 <code>for x in d: print(x)</code> 期待看到值，输出的是键 ——
-<strong>它不会报错</strong>，只是结果不对 ✗</p>
+<p><strong>「<code>for x in 字典</code> 拿到的是键」一定得记住</strong>：写成 <code>for x in d: print(x)</code> 期待看到值，输出的却是键 ——<strong>它不报错</strong>，只是结果不对 ✗</p>
 <h3 id="42-dkeys">4.2 <code>d.keys()</code> 与「直接遍历字典」等价<a class="headerlink" href="#42-dkeys" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
@@ -14773,11 +14739,9 @@ items() : [('小美', 88), ('小刚', 95)]
 <pre class="kb-output"><code>直接遍历与 keys() 结果一样吗: True
 字典本身: ['小美', '小刚']
 keys()   : ['小美', '小刚']</code></pre></p>
-<p><strong>什么时候还写 <code>.keys()</code></strong>：想强调「这里只关心键」的意图时可以写。
-<strong>绝大多数情况直接写 <code>for k in d:</code> 就够了</strong></p>
+<p><strong>什么时候还写 <code>.keys()</code></strong>：想强调「只关心键」时可以。<strong>绝大多数情况直接写 <code>for k in d:</code> 就够</strong></p>
 <h3 id="43-items-for-k-v-in">4.3 <code>items()</code> 解包：<code>for k, v in ...</code><a class="headerlink" href="#43-items-for-k-v-in" title="Permanent link">&para;</a></h3>
-<p><code>items()</code> 每一项都是一个 <code>(键, 值)</code> 的元组，
-而 <code>for k, v in ...</code> 会自动<strong>把元组拆成两个变量</strong> —— 这叫解包（unpacking）。</p>
+<p><code>items()</code> 每一项都是 <code>(键, 值)</code> 元组，<code>for k, v in ...</code> 会自动<strong>把元组拆成两个变量</strong> —— 这叫解包（unpacking）。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span>
@@ -14856,8 +14820,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <pre class="kb-output"><code>小美 88
 2 1
 10 20 [30, 40]</code></pre></p>
-<p>遇到 <code>d.items()</code>、<code>enumerate(...)</code>、<code>zip(...)</code> 时，
-都可以放心地用「两个变量」去接</p>
+<p>遇到 <code>d.items()</code>、<code>enumerate(...)</code>、<code>zip(...)</code>，都放心用「两个变量」去接</p>
 </div>
 <h3 id="44-enumerate">4.4 想要序号就用 <code>enumerate</code><a class="headerlink" href="#44-enumerate" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -14921,7 +14884,6 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </tbody>
 </table>
 <h3 id="45">4.5 遍历时不要修改字典<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
-<p>这是本节最实用的一条警告。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
 <span class="normal"><a href="#__codelineno-27-2">2</a></span>
@@ -14953,9 +14915,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <pre class="kb-output"><code>把不及格的删掉后: {'小美': 88, '小华': 79}</code></pre></p>
 <div class="admonition warning">
 <p class="admonition-title">「边遍历边改」为什么危险，以及两种安全写法</p>
-<p><strong>原因</strong>：遍历字典时，解释器是按内部顺序一个一个往下走的。
-你中途插入或删除键，会打乱这个顺序 ——
-轻则<strong>跳过</strong>某些键，重则直接抛 <code>RuntimeError</code>。</p>
+<p><strong>原因</strong>：遍历字典时，解释器按内部顺序逐个往下走。中途插入或删除键会打乱这个顺序 —— 轻则<strong>跳过</strong>某些键，重则直接抛 <code>RuntimeError</code>。</p>
 <p>它可以表现为两种完全不同的后果：</p>
 <table>
 <thead>
@@ -15036,13 +14996,11 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>待删除的键: ['小刚']
 处理结果: {'小美': 88, '小华': 79}</code></pre></p>
-<p><strong>判断依据</strong>：只要循环体里有 <code>del</code>、<code>pop</code>、<code>d[新键] = ...</code>，
-就必须换成上面两种写法之一 ✓</p>
+<p><strong>判断依据</strong>：循环体里有 <code>del</code>、<code>pop</code>、<code>d[新键] = ...</code> 就必须换成上面两种写法之一 ✓</p>
 </div>
 <hr />
 <h2 id="get-setdefault">五、<code>get</code> 与 <code>setdefault</code> 的用途：做一个计数器<a class="headerlink" href="#get-setdefault" title="Permanent link">&para;</a></h2>
-<p>上一节讲了方法怎么用，这一节讲<strong>什么时候用</strong>。
-最典型的问题就是<strong>计数</strong>：给一段文本，数出每个字符（或每个词）出现了几次。</p>
+<p>上一节讲方法怎么用，这一节讲<strong>什么时候用</strong>。最典型的问题就是<strong>计数</strong>：给一段文本，数出每个字符（或词）出现了几次。</p>
 <h3 id="51">5.1 任务：数一数字母<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>用 <code>"abracadabra"</code> 这个字符串当例子。要得到的结果是
 「每个字母 → 出现次数」。</p>
@@ -15072,8 +15030,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>{'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}
 按字母顺序看: [('a', 5), ('b', 2), ('c', 1), ('d', 1), ('r', 2)]</code></pre></p>
-<p><strong>缺点</strong>：为了「加一」这一件事写了 5 行，
-而且 <code>counts[ch]</code> 这个名字在四行里出现了三次。<strong>容易写错、不容易看</strong>。</p>
+<p><strong>缺点</strong>：为了「加一」写了 5 行，而且 <code>counts[ch]</code> 在四行里出现了三次。<strong>容易写错、不容易看</strong>。</p>
 <h3 id="53-get">5.3 写法二：用 <code>get</code> 把默认值写进表达式<a class="headerlink" href="#53-get" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
@@ -15098,8 +15055,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <a id="__codelineno-33-2" name="__codelineno-33-2"></a>                + 1  ← 加一
 <a id="__codelineno-33-3" name="__codelineno-33-3"></a>counts[ch] = ...     ← 把新值写回去（这一句才真正写字典）
 </code></pre></div></td></tr></table></div>
-<p><strong>关键理解</strong>：<code>get</code> 只负责「读出 0」，<strong>它自己不写字典</strong>；
-写回去靠的是左边的 <code>counts[ch] =</code></p>
+<p><strong>关键理解</strong>：<code>get</code> 只负责「读出 0」，<strong>自己不写字典</strong>；写回去靠左边 <code>counts[ch] =</code></p>
 <h3 id="54-setdefault">5.4 写法三：用 <code>setdefault</code> 先开格子<a class="headerlink" href="#54-setdefault" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
@@ -15119,10 +15075,9 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>{'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}</code></pre></p>
-<p><strong>这里 <code>setdefault</code> 的作用是「保证格子存在」</strong>。
-写完之后，<code>counts[ch]</code> 必定能取到，所以可以安全地用 <code>+=</code>。</p>
+<p><strong><code>setdefault</code> 的作用是「保证格子存在」</strong>：写完后 <code>counts[ch]</code> 必定能取到，所以能安全地用 <code>+=</code>。</p>
 <p><strong>但它比 <code>get</code> 写法多查一次字典</strong>：<code>setdefault</code> 查一次、<code>counts[ch]</code> 又查一次。
-计数这种简单场景，<strong><code>get</code> 写法更好</strong></p>
+简单计数场景，<strong><code>get</code> 写法更好</strong></p>
 <h3 id="55-collectionscounter">5.5 写法四：直接用 <code>collections.Counter</code><a class="headerlink" href="#55-collectionscounter" title="Permanent link">&para;</a></h3>
 <p>标准库早就把这件事做成了现成工具：</p>
 <!--kbpy-->
@@ -15194,8 +15149,8 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <p><strong>判断依据</strong>：</p>
 <ul>
 <li><strong>只是数数</strong> → <code>Counter</code>，一行解决，还白送 <code>most_common</code></li>
-<li><strong>数数之外还要做别的事</strong>（例如同时求最大长度） → <code>get</code> 写法</li>
-<li><strong>格子里的东西不是数字，而是列表</strong>（分组） → 见 5.8，用 <code>setdefault</code> 或 <code>defaultdict</code></li>
+<li><strong>数数之外还要做别的事</strong>（如同时求最大长度） → <code>get</code> 写法</li>
+<li><strong>格子里的不是数字而是列表</strong>（分组） → 见 5.8，用 <code>setdefault</code> 或 <code>defaultdict</code></li>
 </ul>
 <h3 id="57-get">5.7 <code>get</code> 的第二个用途：读配置时给默认值<a class="headerlink" href="#57-get" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -15223,8 +15178,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 键不存在，用默认值: 30
 字典没被改动: {'重试次数': 3}
 连取三个，缺的用默认值: [3, 30, 4]</code></pre></p>
-<p><strong>这类场景 <code>get</code> 比 <code>d[k]</code> 好</strong>，因为「配置项没写」是<strong>正常情况</strong>，
-应该走默认值，不该让程序崩掉。</p>
+<p><strong>这类场景 <code>get</code> 比 <code>d[k]</code> 好</strong>：「配置项没写」是<strong>正常情况</strong>，该走默认值，不该让程序崩掉。</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>get</code> 的默认值只在「键不存在」时用，键存在但值是 <code>None</code> 时不管用</p>
 <p>这是一个非常隐蔽的坑：</p>
@@ -15242,8 +15196,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <pre class="kb-output"><code>键不存在: 5
 键存在但是 None: None
 ↑ 这里并没有拿到默认值 5</code></pre></p>
-<p><strong>原因</strong>：<code>get</code> 只看「键在不在」，
-键在就返回它对应的值 —— 哪怕那个值是 <code>None</code> ✗</p>
+<p><strong>原因</strong>：<code>get</code> 只看「键在不在」，键在就返回对应值 —— 哪怕那个值是 <code>None</code> ✗</p>
 <p>要连 <code>None</code> 一起兜住，得写成：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
@@ -15293,14 +15246,12 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行是隐藏的坑</strong>：<code>or</code> 会把 <code>0</code>、<code>""</code>、<code>False</code> 都当成「假」，
-于是「用户明确设成 0」也会被换成默认值 ✗</p>
+<p><strong>最后一行是隐藏的坑</strong>：<code>or</code> 把 <code>0</code>、<code>""</code>、<code>False</code> 都当「假」，于是「用户明确设成 0」也会被换成默认值 ✗</p>
 <p><strong>判断依据</strong>：默认值必须是「有意义的 0 或空串」时，
 一律显式写 <code>if x is None</code>，别用 <code>or</code></p>
 </div>
 <h3 id="58-setdefault">5.8 <code>setdefault</code> 的经典用途：分组归集<a class="headerlink" href="#58-setdefault" title="Permanent link">&para;</a></h3>
-<p><strong>当字典的值是列表时</strong>，<code>setdefault(k, [])</code> 正好一步做完两件事：
-「没有这一组就建一个空列表」+「拿到这个列表」。</p>
+<p><strong>字典的值是列表时</strong>，<code>setdefault(k, [])</code> 一步做完两件事：「没有这组就建空列表」+「拿到这个列表」。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-39-2"> 2</a></span>
@@ -15359,9 +15310,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 <pre class="kb-output"><code>用 get 分组的结果: {}
 水果那一组还在吗: False</code></pre></p>
 <p><strong>没有报错，但结果是空的</strong> —— 这是最危险的一类 bug。</p>
-<p><strong>为什么</strong>：<code>get(kind, [])</code> 返回的是一个<strong>临时空列表</strong>，
-往里 <code>append</code> 之后这个列表<strong>没有任何人引用</strong>，立刻被丢掉了。
-<code>get</code> <strong>不会往字典里写键</strong>，所以下一次循环又得到一个新的空列表……</p>
+<p><strong>为什么</strong>：<code>get(kind, [])</code> 返回一个<strong>临时空列表</strong>，往里 <code>append</code> 后它<strong>没人引用</strong>，立刻被丢掉。<code>get</code> <strong>不往字典里写键</strong>，所以下次循环又得到一个新的空列表……</p>
 <p>一张表说清 <code>get</code> 与 <code>setdefault</code> 在分组场景下的差别：</p>
 <table>
 <thead>
@@ -15393,13 +15342,10 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </tr>
 </tbody>
 </table>
-<p><strong>结论</strong>：<strong>分组归集用 <code>setdefault</code> 或 <code>defaultdict</code>，
-绝不能用 <code>get</code></strong> ✓ 差别就在「写不写字典」这一件事上，
-而这正是分组所必需的。</p>
+<p><strong>结论</strong>：<strong>分组归集用 <code>setdefault</code> 或 <code>defaultdict</code>，绝不能用 <code>get</code></strong> ✓ 差别就在「写不写字典」这件小事上，而这正是分组必需的。</p>
 <hr />
 <h2 id="collections-counter-defaultdict">六、<code>collections</code> 模块：<code>Counter</code> 与 <code>defaultdict</code><a class="headerlink" href="#collections-counter-defaultdict" title="Permanent link">&para;</a></h2>
-<p>标准库里的 <code>collections</code> 专门收录「比内置容器更好用的容器」。
-本页只讲两个最常用的：<code>Counter</code> 和 <code>defaultdict</code>。</p>
+<p>标准库的 <code>collections</code> 专门收录「比内置容器更好用的容器」。本页只讲两个最常用的：<code>Counter</code> 和 <code>defaultdict</code>。</p>
 <h3 id="61-counter">6.1 <code>Counter</code>：专门用来计数<a class="headerlink" href="#61-counter" title="Permanent link">&para;</a></h3>
 <p><strong>四种创建方式</strong>：</p>
 <!--kbpy-->
@@ -15525,8 +15471,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 全部按次数从多到少: [('the', 3), ('cat', 2), ('sat', 1), ('on', 1), ('mat', 1)]
 去重后有多少种词: 5
 总共多少个词: 8</code></pre></p>
-<p><strong><code>most_common()</code> 的返回值是列表，不是字典</strong> ——
-这一点很重要，因为<strong>列表是有序的</strong>，你可以直接用下标取第一名：</p>
+<p><strong><code>most_common()</code> 返回列表，不是字典</strong> —— <strong>列表有序</strong>，可以直接用下标取第一名：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
 <span class="normal"><a href="#__codelineno-45-2">2</a></span>
@@ -15544,9 +15489,7 @@ keys()   : ['小美', '小刚']</code></pre></p>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>第一名: ('the', 3)
 字典本身可没这个顺序: ['the', 'cat', 'sat', 'on', 'mat']</code></pre></p>
-<p><strong>注意最后一行</strong>：<code>list(word_count)</code> 的顺序是<strong>元素第一次出现的顺序</strong>
-（插入顺序），而 <code>most_common()</code> 是<strong>按次数排的</strong>。
-两者通常不一样，别混用</p>
+<p><strong>注意最后一行</strong>：<code>list(word_count)</code> 的顺序是<strong>元素第一次出现的顺序</strong>（插入顺序），<code>most_common()</code> 是<strong>按次数排的</strong>。两者通常不同，别混用</p>
 <h3 id="63-counter">6.3 <code>Counter</code> 还能做加法和减法<a class="headerlink" href="#63-counter" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
@@ -15646,10 +15589,7 @@ b = Counter({'a': 1, 'b': 1})
 <pre class="kb-output"><code>defaultdict(&lt;class 'list'&gt;, {'水果': ['苹果', '香蕉'], '蔬菜': ['白菜']})
 类型是: &lt;class 'collections.defaultdict'&gt;
 转成普通字典: {'水果': ['苹果', '香蕉'], '蔬菜': ['白菜']}</code></pre></p>
-<p><strong>注意看 <code>group[kind].append(name)</code> 这一行</strong> ——
-<strong>没有任何判断</strong>，直接就 append 了。
-<code>defaultdict(list)</code> 的规则是：<strong>访问不存在的键时，自动调用 <code>list()</code> 造一个空列表放进去</strong>，
-所以第一次访问 <code>group["水果"]</code> 拿到的就是可用的空列表</p>
+<p><strong>注意 <code>group[kind].append(name)</code> 这一行</strong> —— <strong>没有判断</strong>，直接 append。<code>defaultdict(list)</code> 的规则是：<strong>访问不存在的键时自动调用 <code>list()</code> 造一个空列表放进去</strong>，所以第一次访问 <code>group["水果"]</code> 拿到的就是可用的空列表</p>
 <p><strong><code>defaultdict(int)</code> 用来计数</strong>：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1">1</a></span>
@@ -15799,8 +15739,7 @@ b = Counter({'a': 1, 'b': 1})
 <pre class="kb-output"><code>用 get 探: None
 用 in 判断: False
 键没变: ['水果']</code></pre></p>
-<p><strong>判断依据</strong>：只想知道「在不在」用 <code>in</code> / <code>get</code>；
-准备往里写东西时才用 <code>[ ]</code></p>
+<p><strong>判断依据</strong>：只想知道「在不在」用 <code>in</code> / <code>get</code>；要往里写才用 <code>[ ]</code></p>
 </div>
 <h3 id="65">6.5 三个工具的选用<a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
 <table>
@@ -15839,13 +15778,11 @@ b = Counter({'a': 1, 'b': 1})
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：默认值永远是同一个东西（空列表、0）→ 用 <code>defaultdict</code>；
-默认值要按情况变 → 用普通字典 + <code>get</code> / <code>setdefault</code></p>
+<p><strong>判断依据</strong>：默认值永远是同一个东西（空列表、0）→ 用 <code>defaultdict</code>；默认值按情况变 → 用普通字典 + <code>get</code> / <code>setdefault</code></p>
 <hr />
 <h2 id="_5">七、字典的顺序：插入顺序，不是自动排序<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="71">7.1 它记住的是「你写进来的顺序」<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
-<p>从 Python 3.7 起，字典<strong>保证按插入顺序</strong>保存键。
-注意这句话的含义：<strong>是有序，但顺序来自「你插入的先后」，不是「按大小排好」。</strong></p>
+<p>从 Python 3.7 起，字典<strong>保证按插入顺序</strong>保存键。注意：<strong>它有序，但顺序来自「你插入的先后」，不是「按大小排好」。</strong></p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
@@ -15897,8 +15834,7 @@ b = Counter({'a': 1, 'b': 1})
 </tbody>
 </table>
 <h3 id="72">7.2 「有序」不等于「排过序」<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
-<p><strong>这是最容易误解的一点。</strong> 有序说的是「顺序是确定的、可预期的」，
-不是说「按字母或数字排好了」：</p>
+<p>有序说的是「顺序确定、可预期」，不是说「按字母或数字排好了」：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
 <span class="normal"><a href="#__codelineno-53-2">2</a></span>
@@ -15965,8 +15901,7 @@ b = Counter({'a': 1, 'b': 1})
 只要键的排序: ['小刚', '小华', '小美']</code></pre></p>
 <div class="admonition warning">
 <p class="admonition-title">中文按 key 排序，排的是「码点」，不是你心里的拼音</p>
-<p><code>sorted()</code> 对字符串是按 <strong>Unicode 码点</strong>比的，
-中文<strong>不按拼音</strong>、也不按笔画：</p>
+<p><code>sorted()</code> 对字符串按 <strong>Unicode 码点</strong>比，中文<strong>不按拼音</strong>、也不按笔画：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1">1</a></span>
 <span class="normal"><a href="#__codelineno-55-2">2</a></span>
@@ -15979,8 +15914,7 @@ b = Counter({'a': 1, 'b': 1})
 <p>「张」是 <code>U+5F20</code>、「李」是 <code>U+674E</code>、「王」是 <code>U+738B</code>，
 按码点排出来是「张、李、王」——
 <strong>恰好不是拼音顺序</strong>（li、wang、zhang）✗</p>
-<p><strong>要按拼音排序</strong>，得给 <code>sorted</code> 一个 <code>key</code>，明确用拼音字符串比较
-（标准库里没有内置拼音，通常借助第三方库，或自己维护一张映射表）：</p>
+<p><strong>要按拼音排序</strong>，得给 <code>sorted</code> 一个 <code>key</code>，用拼音字符串比较（标准库没有内置拼音，通常借助第三方库，或自己维护映射表）：</p>
 <table>
 <thead>
 <tr>
@@ -16019,12 +15953,10 @@ b = Counter({'a': 1, 'b': 1})
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>按业务顺序排: {'超时秒数': 30, '重试次数': 3, '并发数': 4}
 config 没被改动: {'并发数': 4, '超时秒数': 30, '重试次数': 3}</code></pre></p>
-<p><strong>判断依据</strong>：能接受「码点序」就用 <code>sorted</code>；
-要业务语义上的顺序，就把顺序明确写出来</p>
+<p><strong>判断依据</strong>：能接受「码点序」就用 <code>sorted</code>；要业务语义的顺序，就把顺序明确写出来</p>
 </div>
 <h3 id="74-value">7.4 按 value 排序<a class="headerlink" href="#74-value" title="Permanent link">&para;</a></h3>
-<p><strong>按值排序要多写一个 <code>key=</code></strong>，因为 <code>sorted</code> 默认比的是「元素本身」，
-而 <code>d.items()</code> 的元素是 <code>(键, 值)</code> 元组 —— 默认会先按键比，那不是我们想要的。</p>
+<p><strong>按值排序要多写 <code>key=</code></strong>：<code>sorted</code> 默认比「元素本身」，而 <code>d.items()</code> 的元素是 <code>(键, 值)</code> 元组 —— 默认先按键比，那不是我们要的。</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-57-1">1</a></span>
 <span class="normal"><a href="#__codelineno-57-2">2</a></span>
@@ -16041,12 +15973,9 @@ config 没被改动: {'并发数': 4, '超时秒数': 30, '重试次数': 3}</co
 <pre class="kb-output"><code>从低到高: [('小华', 79), ('小美', 88), ('小刚', 95)]
 转回字典: {'小华': 79, '小美': 88, '小刚': 95}
 从高到低: [('小刚', 95), ('小美', 88), ('小华', 79)]</code></pre></p>
-<p><code>key=lambda kv: kv[1]</code> 的意思是「拿元组的第 2 项（值）来比」。
-换成 <code>kv[0]</code> 就是按键比，而<strong>按键比本来就是默认行为</strong></p>
+<p><code>key=lambda kv: kv[1]</code> 的意思是「拿元组第 2 项（值）来比」。换成 <code>kv[0]</code> 就是按键比，而<strong>按键比本来就是默认行为</strong></p>
 <h3 id="75">7.5 多级排序：同分怎么办<a class="headerlink" href="#75" title="Permanent link">&para;</a></h3>
-<p><code>sorted</code> 是<strong>稳定排序</strong>，所以同分的元素会保持原来的顺序。
-但「原来的顺序」是插入顺序，往往不是你要的。
-想让同分的人按名字排，就让 <code>key</code> 返回一个<strong>元组</strong>：</p>
+<p><code>sorted</code> 是<strong>稳定排序</strong>，同分元素会保持原顺序。但「原顺序」是插入顺序，往往不是你要的。想让同分的按名字排，就让 <code>key</code> 返回一个<strong>元组</strong>：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-58-1">1</a></span>
 <span class="normal"><a href="#__codelineno-58-2">2</a></span>
@@ -16058,9 +15987,7 @@ config 没被改动: {'并发数': 4, '超时秒数': 30, '重试次数': 3}</co
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>只按分数: [('bob', 88), ('carol', 88), ('alice', 95)]
 分数降序、同分按名字: [('alice', 95), ('bob', 88), ('carol', 88)]</code></pre></p>
-<p><strong>元组比较的规则是「先比第一项，相等再比第二项」</strong>，
-所以 <code>(-kv[1], kv[0])</code> 就实现了「分数从高到低，同分按名字从 A 到 Z」
-<strong>想让某一项降序，就在它前面加负号</strong>（对数字有效；字符串不行）。</p>
+<p><strong>元组比较的规则是「先比第一项，相等再比第二项」</strong>，所以 <code>(-kv[1], kv[0])</code> 就实现了「分数从高到低，同分按名字从 A 到 Z」；<strong>想让某项降序，就在它前面加负号</strong>（对数字有效，字符串不行）。</p>
 <h3 id="76-lambda">7.6 不用 <code>lambda</code> 的两种干净写法<a class="headerlink" href="#76-lambda" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1">1</a></span>
@@ -16183,8 +16110,7 @@ config 没被改动: {'并发数': 4, '超时秒数': 30, '重试次数': 3}</co
 <pre class="kb-output"><code>base | patch: {'x': 1, 'y': 3, 'z': 4}
 patch | base: {'y': 2, 'z': 4, 'x': 1}
 两个原字典都没变: {'x': 1, 'y': 2} {'y': 3, 'z': 4}</code></pre></p>
-<p><strong>注意 <code>a | b</code> 与 <code>b | a</code> 结果不一样</strong>：谁在右边，谁的重复键就赢。
-合并配置时应把<strong>优先级高的放右边</strong></p>
+<p><strong>注意 <code>a | b</code> 与 <code>b | a</code> 结果不同</strong>：谁在右边，谁的重复键就赢。合并配置时把<strong>优先级高的放右边</strong></p>
 <h3 id="83">8.3 <code>|=</code>：就地合并的运算符写法<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1">1</a></span>
@@ -16194,8 +16120,7 @@ patch | base: {'y': 2, 'z': 4, 'x': 1}
 <a id="__codelineno-62-3" name="__codelineno-62-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;|= 之后:&quot;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>|= 之后: {'x': 9, 'y': 2}</code></pre></p>
-<p><strong><code>d |= e</code> 完全等价于 <code>d.update(e)</code></strong>，
-只是看起来更像「合并」这件事。</p>
+<p><strong><code>d |= e</code> 完全等价于 <code>d.update(e)</code></strong>，只是看起来更像「合并」。</p>
 <h3 id="84-a-b">8.4 <code>{**a, **b}</code>：解包合并<a class="headerlink" href="#84-a-b" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1">1</a></span>
@@ -16291,10 +16216,9 @@ patch | base: {'y': 2, 'z': 4, 'x': 1}
 </div>
 <hr />
 <h2 id="_7">九、集合：只关心「在不在」的数据<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
-<p>集合（<code>set</code>）是「一堆互不相同的元素」，且不关心顺序。
-它有两个特点必须记住：</p>
+<p>集合（<code>set</code>）是「一堆互不相同的元素」，不关心顺序。两个特点必须记住：</p>
 <ol>
-<li><strong>元素不重复</strong> —— 重复放进去也不会变多；</li>
+<li><strong>元素不重复</strong> —— 重复放进去也不变多；</li>
 <li><strong>查找极快</strong> —— 内部是哈希表，<code>in</code> 几乎不看数据量。</li>
 </ol>
 <h3 id="91">9.1 创建集合：<code>{}</code> 是空字典，不是空集合<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
@@ -16346,9 +16270,7 @@ frozenset 是: &lt;class 'frozenset'&gt;</code></pre></p>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么 <code>{}</code> 给了字典</strong>：字典的字面量语法更常用，
-所以 <code>{}</code> 让给了它；空集合只能写 <code>set()</code> ——
-<strong>这是语法上不得不接受的怪癖</strong>。</p>
+<p><strong>为什么 <code>{}</code> 给了字典</strong>：字典字面量语法更常用，所以 <code>{}</code> 让给了它；空集合只能写 <code>set()</code> ——<strong>这是语法上不得不接受的怪癖</strong>。</p>
 <p><strong>五种建集合的写法</strong>：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1">1</a></span>
@@ -16491,8 +16413,7 @@ add 一个已有的: None （不会重复）
 <pre class="kb-output"><code>原列表: ['A', 'B', 'A', 'C', 'B', 'A']
 去重后: ['A', 'B', 'C']
 个数: 6 → 3</code></pre></p>
-<p><strong><code>set(lst)</code> 是最快的去重方式</strong>，但它<strong>丢掉了顺序</strong>。
-要保持原来第一次出现的顺序去重，用 <code>dict.fromkeys</code>：</p>
+<p><strong><code>set(lst)</code> 是最快的去重方式</strong>，但它<strong>丢掉了顺序</strong>。要保持第一次出现的顺序去重，用 <code>dict.fromkeys</code>：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-1">1</a></span>
 <span class="normal"><a href="#__codelineno-72-2">2</a></span>
@@ -16507,10 +16428,7 @@ add 一个已有的: None （不会重复）
 <pre class="kb-output"><code>set 去重（顺序不保证）: ['A', 'B', 'C']
 dict.fromkeys 去重（保持原顺序）: ['A', 'B', 'C']
 字符串也能用: abrcd</code></pre></p>
-<p><strong><code>dict.fromkeys(序列)</code> 是怎么工作的</strong>：
-它拿序列里的每一项当<strong>键</strong>造一个字典（值统一是 <code>None</code>），
-而字典的键<strong>天然不重复、且保持插入顺序</strong> ——
-于是「去重 + 保序」一次完成</p>
+<p><strong><code>dict.fromkeys(序列)</code> 怎么工作</strong>：它拿序列里每一项当<strong>键</strong>造一个字典（值统一是 <code>None</code>），而字典的键<strong>天然不重复、且保持插入顺序</strong> ——于是「去重 + 保序」一次完成</p>
 <table>
 <thead>
 <tr>
@@ -16542,8 +16460,7 @@ dict.fromkeys 去重（保持原顺序）: ['A', 'B', 'C']
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：「顺序会影响结果」时一律用 <code>dict.fromkeys</code> 或 <code>sorted(set(...))</code>，
-别直接 <code>set</code></p>
+<p><strong>判断依据</strong>：「顺序会影响结果」一律用 <code>dict.fromkeys</code> 或 <code>sorted(set(...))</code>，别直接 <code>set</code></p>
 <h3 id="94-">9.4 集合运算：<code>|</code> <code>&amp;</code> <code>-</code> <code>^</code><a class="headerlink" href="#94-" title="Permanent link">&para;</a></h3>
 <p>这是集合最强大的地方 —— <strong>把「筛人」「找差异」写成一行</strong>。</p>
 <!--kbpy-->
@@ -16688,10 +16605,8 @@ dict.fromkeys 去重（保持原顺序）: ['A', 'B', 'C']
 </tr>
 </tbody>
 </table>
-<p><strong><code>&lt;=</code> / <code>&lt;</code> 的符号与数字的大小符号看起来一样，
-但语义是「包含」而不是「大小」</strong>
-<code>{"小刚"} &lt;= math</code> 读作「<code>{"小刚"}</code> 这个集合被 <code>math</code> 包含」，
-与元素值的大小无关</p>
+<p><strong><code>&lt;=</code> / <code>&lt;</code> 的符号与数字的大小符号看着一样，语义却是「包含」而不是「大小」</strong>
+<code>{"小刚"} &lt;= math</code> 读作「<code>{"小刚"}</code> 被 <code>math</code> 包含」，与元素值大小无关</p>
 <h3 id="96">9.6 一个实际例子：对比两份名单<a class="headerlink" href="#96" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1">1</a></span>
@@ -16715,9 +16630,7 @@ dict.fromkeys 去重（保持原顺序）: ['A', 'B', 'C']
 多学的: ['docker']
 完全满足要求吗: False
 两边不同的部分: ['docker', 'sql']</code></pre></p>
-<p><strong>这段代码的价值在于</strong>：把「对照两份清单」这件事从
-「两层循环 + 几十行判断」压成了五行集合运算，
-而且<strong>每一行都在说人话</strong>（交集 = 都会，差集 = 还缺）</p>
+<p><strong>这段代码的价值</strong>：把「对照两份清单」从「两层循环 + 几十行判断」压成五行集合运算，而且<strong>每一行都在说人话</strong>（交集 = 都会，差集 = 还缺）</p>
 <p><strong>方法形式的等价写法</strong>（结果一样）：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1">1</a></span>
@@ -16738,8 +16651,7 @@ dict.fromkeys 去重（保持原顺序）: ['A', 'B', 'C']
 intersection: ['小刚', '小华']
 difference  : ['小美']
 symmetric_difference: ['小强', '小美']</code></pre></p>
-<p><strong>什么时候用方法形式</strong>：右边的对象<strong>不是集合</strong>时，方法形式更稳
-（因为 <code>|</code> 要求两边都是集合）：</p>
+<p><strong>什么时候用方法形式</strong>：右边对象<strong>不是集合</strong>时，方法形式更稳（因为 <code>|</code> 要求两边都是集合）：</p>
 <table>
 <thead>
 <tr>
@@ -16767,12 +16679,9 @@ symmetric_difference: ['小强', '小美']</code></pre></p>
 <p>前面反复说「哈希表查找几乎与数据量无关」，这一节说清为什么。</p>
 <h3 id="101">10.1 一句话版本<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
 <blockquote>
-<p><strong>字典和集合先用「哈希函数」把键换算成一个整数（指纹），
-再用这个整数直接算出「该放在第几格」，
-所以查找时不用一个个比对，一次就能跳到那一格。</strong></p>
+<p><strong>字典和集合先用「哈希函数」把键换算成整数（指纹），再用它直接算出「该放第几格」，所以查找时不用逐个比对，一次跳到那格。</strong></p>
 </blockquote>
-<p>打个比方：列表像一排<strong>没编号的箱子</strong>，找东西只能从第一个开始翻；
-字典像<strong>带索引的档案柜</strong>，你先算出「该去第 3 排第 7 格」，直接走过去拿</p>
+<p>打个比方：列表像一排<strong>没编号的箱子</strong>，找东西只能从头翻；字典像<strong>带索引的档案柜</strong>，先算出「该去第 3 排第 7 格」，直接走过去拿</p>
 <h3 id="102">10.2 可哈希是什么意思<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
 <p>「可哈希」= 内容不会变，所以能算出一个固定的指纹。</p>
 <!--kbpy-->
@@ -16817,8 +16726,7 @@ True
 长度只有: 1
 2 和 2.0 也一样: 1
 但 1 与 '1' 不同: 2</code></pre></p>
-<p><strong>在 Python 里 <code>1 == 1.0 == True</code>，而哈希相同的东西会被当成同一个键</strong>，
-所以三次赋值只留下最后一个 ✗</p>
+<p><strong>Python 里 <code>1 == 1.0 == True</code>，哈希相同的东西会被当成同一个键</strong>，所以三次赋值只留下最后一个 ✗</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>1</code>、<code>1.0</code>、<code>True</code> 会互相覆盖 —— 混用类型当键时要当心</p>
 <table>
@@ -16864,15 +16772,11 @@ True
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>最后只剩一个键: {1: '还是一点零'}
 键的类型是: ['int']</code></pre></p>
-<p><strong>规避办法</strong>：<strong>别把 <code>bool</code> 和数字混着当键</strong>；
-从数据里读出来的值，先把类型统一（比如全部 <code>int(...)</code>）再当键</p>
+<p><strong>规避办法</strong>：<strong>别把 <code>bool</code> 和数字混着当键</strong>；从数据里读出的值，先把类型统一（如全部 <code>int(...)</code>）再当键</p>
 </div>
 <h3 id="103-list">10.3 为什么 <code>list</code> 不能当键<a class="headerlink" href="#103-list" title="Permanent link">&para;</a></h3>
 <p><strong>因为列表能改，指纹会失效。</strong></p>
-<p>设想一下：你把列表当键存进字典，字典按它当时的指纹把它放进了第 7 格；
-然后你 <code>append</code> 了一个元素 —— 指纹变了，
-但<strong>字典还按老指纹记着它在第 7 格</strong>。
-下次查的时候就会找不到 ✗</p>
+<p>设想一下：你把列表当键存进字典，字典按当时的指纹把它放进第 7 格；然后你 <code>append</code> 一个元素 —— 指纹变了，但<strong>字典还按老指纹记着它在第 7 格</strong>。下次查就找不到 ✗</p>
 <p>所以 Python 干脆<strong>禁止</strong>可变对象当键：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1">1</a></span>
@@ -16907,8 +16811,7 @@ True
 查不存在的坐标: 空地
 所有坐标按序: [(0, 0), (1, 2), (5, 5)]
 长度: 3</code></pre></p>
-<p><strong>但「元组里套了列表」就又不可以了</strong> ——
-元组只是「外表」不可变，里面的列表照样能改：</p>
+<p><strong>但「元组里套了列表」又不可以了</strong> —— 元组只是「外表」不可变，里面的列表照样能改：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-83-1">1</a></span>
 <span class="normal"><a href="#__codelineno-83-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1"></a><span class="c1"># @expect-error</span>
@@ -16974,8 +16877,7 @@ True
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>顺序不同也算同一个键: 第一组
 它是不可变的: &lt;class 'frozenset'&gt;</code></pre></p>
-<p><strong>判断依据</strong>：想用「一组值」当键，就用 <code>tuple</code> 或 <code>frozenset</code>；
-只要里面有任何一层是列表 / 集合 / 字典，就不能当键 ✓</p>
+<p><strong>判断依据</strong>：想用「一组值」当键就用 <code>tuple</code> 或 <code>frozenset</code>；只要里层有任何一层是列表 / 集合 / 字典，就不能当键 ✓</p>
 <h3 id="104">10.4 复杂度：为什么查询几乎不随数据量变慢<a class="headerlink" href="#104" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -17022,9 +16924,7 @@ True
 <code>d[k]</code> 花的时间<strong>基本一样</strong>。这就是它相对列表的根本优势。</p>
 <div class="admonition tip">
 <p class="admonition-title">O(1) 有个前提：哈希要「散得开」</p>
-<p>如果所有键的哈希值都挤在少数几格上（叫「哈希冲突」），
-格子里的元素还是要一个个比，速度就会退化。
-所以有两个实际影响：</p>
+<p>如果所有键的哈希值都挤在少数几格上（叫「哈希冲突」），格子里的元素还是要逐个比，速度就会退化。所以有两个实际影响：</p>
 <table>
 <thead>
 <tr>
@@ -17043,8 +16943,7 @@ True
 </tr>
 </tbody>
 </table>
-<p><strong>结论</strong>：<code>O(1)</code> 是「平均情况」的保证，
-对普通数据（数字、短字符串）完全成立，可以放心依赖</p>
+<p><strong>结论</strong>：<code>O(1)</code> 是「平均情况」的保证，对普通数据（数字、短字符串）完全成立，可放心依赖</p>
 </div>
 <hr />
 <h2 id="_9">十一、集合的遍历顺序是不稳定的<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -17080,9 +16979,7 @@ True
 </tr>
 </tbody>
 </table>
-<p><strong>为什么</strong>：集合是「哈希表 + 一组遍历槽位」，而
-<strong>字符串的哈希值默认是随机化的</strong>（每次启动进程都不一样），
-所以字符串集合的遍历顺序<strong>每次运行都可能不同</strong> ✗</p>
+<p><strong>为什么</strong>：集合是「哈希表 + 一组遍历槽位」，而<strong>字符串的哈希值默认随机化</strong>（每次启动进程都不同），所以字符串集合的遍历顺序<strong>每次运行都可能不同</strong> ✗</p>
 <h3 id="111">11.1 小整数集合看起来「很乖」<a class="headerlink" href="#111" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-85-1">1</a></span>
@@ -17097,9 +16994,7 @@ True
 {1, 2, 3, 4, 5}
 {10, 20, 30}
 排序后: [1, 2, 3]</code></pre></p>
-<p><strong>小整数的哈希值就是它本身</strong>，槽位的位置正好按值排开，
-所以看起来像「自动排好序了」——
-<strong>这是假象</strong>，换一批数据就不成立了</p>
+<p><strong>小整数的哈希值就是它本身</strong>，槽位正好按值排开，所以看起来像「自动排好序了」——<strong>这是假象</strong>，换一批数据就不成立</p>
 <h3 id="112">11.2 字符串集合的顺序会变<a class="headerlink" href="#112" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1">1</a></span>
 <span class="normal"><a href="#__codelineno-86-2">2</a></span>
@@ -17119,8 +17014,7 @@ True
 <a id="__codelineno-86-8" name="__codelineno-86-8"></a>print([&quot;alpha&quot;, &quot;beta&quot;, &quot;gamma&quot;, &quot;delta&quot;])
 <a id="__codelineno-86-9" name="__codelineno-86-9"></a>[&#39;alpha&#39;, &#39;beta&#39;, &#39;gamma&#39;, &#39;delta&#39;]                  ← 两次都一样
 </code></pre></div></td></tr></table></div>
-<p>（上面用 <code>text</code> 围栏，因为<strong>同一段代码在不同运行里结果不同</strong>，
-页面里不能写死一个 <code>output</code> 块。）</p>
+<p>（上面用 <code>text</code> 围栏，因为<strong>同一段代码在不同运行里结果不同</strong>，页面里不能写死 <code>output</code> 块。）</p>
 <h3 id="113-sorted">11.3 打印集合一律先 <code>sorted()</code><a class="headerlink" href="#113-sorted" title="Permanent link">&para;</a></h3>
 <p>这是写代码时应当养成的习惯：</p>
 <!--kbpy-->
@@ -17280,12 +17174,9 @@ True
 </table>
 <p>三个问题，问完就知道用哪个：</p>
 <ol>
-<li><strong>我需要「第几个」还是「叫什么」？</strong>
-   第几个 → 列表；叫什么 → 字典。</li>
-<li><strong>我关心的是「有几个／什么顺序」还是「有没有」？</strong>
-   前者 → 列表；后者 → 集合。</li>
-<li><strong>我要不要「一对多」地存数据？</strong>
-   要 → 字典（值放列表或集合）。</li>
+<li><strong>要「第几个」还是「叫什么」？</strong> 第几个 → 列表；叫什么 → 字典。</li>
+<li><strong>关心「有几个／什么顺序」还是「有没有」？</strong> 前者 → 列表；后者 → 集合。</li>
+<li><strong>要不要「一对多」存数据？</strong> 要 → 字典（值放列表或集合）。</li>
 </ol>
 <p><strong>几个现实场景的直接答案</strong>：</p>
 <table>
@@ -17334,8 +17225,7 @@ True
 </tr>
 </tbody>
 </table>
-<p><strong>还有一个常见需求值得单独说</strong>：
-「既要能按名字查，又要能按第几个取」。有两种方案：</p>
+<p><strong>还有一个常见需求值得单独说</strong>：「既要按名字查，又要按第几个取」。有两种方案：</p>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-89-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-89-2"> 2</a></span>
@@ -17363,13 +17253,10 @@ True
 小华的分数: 79
 插入顺序取第 2 个: 小刚
 按名字取: 79</code></pre></p>
-<p><strong>判断依据</strong>：只需要「顺序 + 按名字查」时，一个字典就够了
-（<code>list(d)</code> 拿到有序的键）；
-只有真的需要频繁按下标访问时，才值得额外维护一个列表</p>
+<p><strong>判断依据</strong>：只需要「顺序 + 按名字查」时，一个字典就够（<code>list(d)</code> 拿到有序的键）；只有真需要频繁按下标访问，才值得额外维护一个列表</p>
 <hr />
 <h2 id="in">十三、性能对比：<code>in</code> 在列表与集合上<a class="headerlink" href="#in" title="Permanent link">&para;</a></h2>
-<p><strong>结论先给</strong>：在「判断一个值在不在」这件事上，
-<strong>集合和字典比列表快几个数量级</strong>，而且这个差距随数据量<strong>拉大</strong>。</p>
+<p><strong>结论先给</strong>：在「判断一个值在不在」这件事上，<strong>集合和字典比列表快几个数量级</strong>，而且差距随数据量<strong>拉大</strong>。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-90-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-90-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-90-3"> 3</a></span>
@@ -17537,10 +17424,8 @@ True
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>通过的: ['A-001', 'A-002', 'A-003']
 被拦下的: ['A-009', 'A-007']</code></pre></p>
-<p>如果 <code>allowed</code> 是列表，这段判断就会退化成「每个元素扫一遍名单」；
-换成集合后，无论名单多长，每次判断都是一步</p>
-<p><strong>一条经验规则</strong>：要在循环里反复问「在不在」的那列数据，
-就先把它变成集合</p>
+<p><code>allowed</code> 是列表时，这段判断会退化成「每个元素扫一遍名单」；换成集合后，无论名单多长，每次判断都只需一步</p>
+<p><strong>经验规则</strong>：要在循环里反复问「在不在」的那列数据，先把它变成集合</p>
 </div>
 <hr />
 <h2 id="_11">十四、常见陷阱汇总<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -17563,8 +17448,7 @@ True
 <a id="__codelineno-95-3" name="__codelineno-95-3"></a><span class="n">empty</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s2">&quot;第一个元素&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>AttributeError: 'dict' object has no attribute 'add'</code></pre></p>
-<p><strong>这个错误最难受的地方是</strong>：报错发生在<strong>使用</strong>的时候，
-而不是<strong>创建</strong>的时候 —— 中间可能隔了几十行 ✗</p>
+<p><strong>这个错误最难受的是</strong>：报错发生在<strong>使用</strong>时，而不是<strong>创建</strong>时 —— 中间可能隔了几十行 ✗</p>
 <p><strong>修法</strong>：空集合一律写 <code>set()</code></p>
 <h3 id="143">14.3 遍历字典时增删键<a class="headerlink" href="#143" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -17577,8 +17461,7 @@ True
 <a id="__codelineno-96-4" name="__codelineno-96-4"></a>    <span class="n">scores</span><span class="p">[</span><span class="s2">&quot;小华&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">79</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>RuntimeError: dictionary changed size during iteration</code></pre></p>
-<p><strong>修法</strong>：见 4.5 节 —— 遍历 <code>list(scores)</code> 这份键的快照，
-或者先把要删的键收集起来、循环外统一处理</p>
+<p><strong>修法</strong>：见 4.5 节 —— 遍历 <code>list(scores)</code> 这份键快照，或先把要删的键收集起来、循环外统一处理</p>
 <h3 id="144">14.4 可变对象作键<a class="headerlink" href="#144" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-97-1">1</a></span>
@@ -17604,8 +17487,7 @@ True
 <pre class="kb-output"><code>判断键: True
 判断值: False ← 得不到你想要的结果
 要判断值，得显式写 values(): True</code></pre></p>
-<p><strong><code>x in d</code> 只判断键</strong>，这是设计如此：
-按键查是 O(1)，按值查必然要 O(n)</p>
+<p><strong><code>x in d</code> 只判断键</strong>，设计如此：按键查是 O(1)，按值查必然 O(n)</p>
 <h3 id="146">14.6 直接打印集合<a class="headerlink" href="#146" title="Permanent link">&para;</a></h3>
 <p>已在第十一节讲透，这里只再强调一次：</p>
 <!--kbpy-->
@@ -17879,7 +17761,7 @@ user | defaults: {'重试次数': 3, '超时秒数': 30}
 <ul>
 <li>都到 → 交集 <code>&amp;</code></li>
 <li>只在第一天到 → 差集 <code>-</code></li>
-<li><strong>只到过一天</strong> → 对称差 <code>^</code>（注意不是 <code>-</code>，<code>-</code> 只给一边）</li>
+<li><strong>只到过一天</strong> → 对称差 <code>^</code>（不是 <code>-</code>，<code>-</code> 只给一边）</li>
 <li>出现过的所有人 → 并集 <code>|</code></li>
 </ul>
 <p>打印一律用 <code>sorted()</code>，因为集合顺序不稳定。</p>
@@ -17968,11 +17850,8 @@ user | defaults: {'重试次数': 3, '超时秒数': 30}
 <details class="note">
 <summary>思路</summary>
 <p>「类别 → 一堆东西」正好是「键 → 列表」的映射。</p>
-<p>关键那一行是 <code>by_kind[kind].append(name)</code> ——
-<strong>它没有先判断这个类别有没有出现过</strong>。
-能做到这一点，靠的是 <code>defaultdict(list)</code> 或 <code>setdefault(kind, [])</code>。</p>
-<p>最后输出要<strong>排序</strong>，因为字典的顺序是插入顺序，
-而我们要的是「按类别名排好」的结果。</p>
+<p>关键那行是 <code>by_kind[kind].append(name)</code> —— <strong>它没先判断类别有没有出现过</strong>，能做到这点靠的是 <code>defaultdict(list)</code> 或 <code>setdefault(kind, [])</code>。</p>
+<p>最后输出要<strong>排序</strong>：字典的顺序是插入顺序，而我们要的是「按类别名排好」的结果。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -18041,8 +17920,7 @@ user | defaults: {'重试次数': 3, '超时秒数': 30}
 <pre class="kb-output"><code>研发组: ['小华', '小美']
 没有的类别: None （用 get 才不会多出键）
 现在有几类: 2</code></pre></p>
-<p><strong>注意最后两行</strong>：用 <code>by_kind["财务"]</code> 访问会<strong>凭空造出一个键</strong>，
-所以「只想知道有没有」时要用 <code>get</code> 或 <code>in</code></p>
+<p><strong>注意最后两行</strong>：<code>by_kind["财务"]</code> 访问会<strong>凭空造出一个键</strong>，所以「只想知道有没有」要用 <code>get</code> 或 <code>in</code></p>
 <p><strong>关键点</strong>：</p>
 <table>
 <thead>
@@ -18073,13 +17951,10 @@ user | defaults: {'重试次数': 3, '超时秒数': 30}
 </details>
 <hr />
 <h2 id="_13">十六、自测<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> 下面两种「造一个空容器」的写法，分别得到什么类型？
-为什么 <code>{}</code> 不能用来表示空集合？请写出代码验证，
-并说明写错之后会在哪里报错。</p>
+<p><strong>Q1</strong> 下面两种「造空容器」的写法，分别得到什么类型？为什么 <code>{}</code> 不能表示空集合？请写出代码验证，并说明写错后会在哪里报错。</p>
 <details class="note">
 <summary>提示</summary>
-<p>想两件事：<code>type()</code> 会打印什么；
-对一个字典调用 <code>add</code> 会发生什么。</p>
+<p>想两件事：<code>type()</code> 会打印什么；对字典调用 <code>add</code> 会发生什么。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -18129,10 +18004,8 @@ set() 的类型: &lt;class 'set'&gt;
 <pre class="kb-output"><code>AttributeError: 'dict' object has no attribute 'add'</code></pre></p>
 <p><strong><code>AttributeError: 'dict' object has no attribute 'add'</code></strong> ——
 报错信息说得很直白：字典没有 <code>add</code> 方法。</p>
-<p><strong>为什么 <code>{}</code> 给了字典</strong>：字典的字面量语法用得更多，
-所以 <code>{}</code> 留给了它；空集合只能靠 <code>set()</code> 构造。</p>
-<p><strong>一个更隐蔽的对比</strong>：<code>{"a"}</code> 是集合，<code>{"a": 1}</code> 是字典 ——
-区别就在有没有冒号：</p>
+<p><strong>为什么 <code>{}</code> 给了字典</strong>：字典字面量语法用得更多，所以 <code>{}</code> 留给了它；空集合只能靠 <code>set()</code> 构造。</p>
+<p><strong>更隐蔽的对比</strong>：<code>{"a"}</code> 是集合，<code>{"a": 1}</code> 是字典 —— 区别就在有没有冒号：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-110-1">1</a></span>
 <span class="normal"><a href="#__codelineno-110-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;花括号里只有元素:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">({</span><span class="s2">&quot;a&quot;</span><span class="p">}))</span>
@@ -18141,8 +18014,7 @@ set() 的类型: &lt;class 'set'&gt;
 <pre class="kb-output"><code>花括号里只有元素: &lt;class 'set'&gt;
 花括号里有冒号: &lt;class 'dict'&gt;</code></pre></p>
 </details>
-<p><strong>Q2</strong> <code>d.get(k, 默认)</code> 和 <code>d.setdefault(k, 默认)</code> 都能「取不到就给个默认值」，
-它们的差别是什么？请写一段代码，用一个 <code>in</code> 判断把差别显形。</p>
+<p><strong>Q2</strong> <code>d.get(k, 默认)</code> 和 <code>d.setdefault(k, 默认)</code> 都能「取不到就给默认值」，差别是什么？请写一段代码，用一个 <code>in</code> 判断把差别显形。</p>
 <details class="note">
 <summary>提示</summary>
 <p>问自己：调用之后，<code>k in d</code> 会变成 <code>True</code> 吗？
@@ -18219,19 +18091,13 @@ setdefault 之后键在吗: True
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>用 get 分组: {} ← 数据全丢了
 用 setdefault 分组: {'研发': ['小美', '小华']}</code></pre></p>
-<p><strong>原因</strong>：<code>get</code> 返回的临时列表被 append 之后没人引用，
-下次循环又拿到一个新的空列表，于是<strong>数据一次次被丢弃</strong>，
-而字典始终是空的 ✗</p>
+<p><strong>原因</strong>：<code>get</code> 返回的临时列表被 append 后没人引用，下次循环又拿到一个新的空列表，于是<strong>数据一次次被丢弃</strong>，而字典始终是空的 ✗</p>
 <p><strong>判断依据</strong>：只想读 → <code>get</code>；要「读了以后往里写」→ <code>setdefault</code></p>
 </details>
-<p><strong>Q3</strong> 已知两个集合 <code>A</code> 与 <code>B</code>。
-<code>A - B</code> 和 <code>A ^ B</code> 都能表示「不同」，它们到底差在哪？
-请各写一行代码，用同一组数据把两个结果都算出来。</p>
+<p><strong>Q3</strong> 已知两个集合 <code>A</code> 与 <code>B</code>。<code>A - B</code> 和 <code>A ^ B</code> 都能表示「不同」，到底差在哪？请各写一行代码，用同一组数据把两个结果都算出来。</p>
 <details class="note">
 <summary>提示</summary>
-<p>想一想：如果某个元素<strong>两边都有</strong>，
-它在 <code>A - B</code> 里吗？在 <code>A ^ B</code> 里吗？
-再想一想 <code>B - A</code> 的内容跑到 <code>A ^ B</code> 里去了没有。</p>
+<p>想一想：如果某个元素<strong>两边都有</strong>，它在 <code>A - B</code> 里吗？在 <code>A ^ B</code> 里吗？再想想 <code>B - A</code> 的内容跑到 <code>A ^ B</code> 里了没有。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -18283,9 +18149,7 @@ A ^ B       : ['小强', '小美']
 </tr>
 </tbody>
 </table>
-<p><strong>关键区别</strong>：<code>A - B</code> 只看到一边，
-而 <code>A ^ B</code> 把「只在 A」和「只在 B」<strong>合在一起</strong>。
-所以 <code>A ^ B == (A - B) | (B - A)</code></p>
+<p><strong>关键区别</strong>：<code>A - B</code> 只看一边，<code>A ^ B</code> 把「只在 A」和「只在 B」<strong>合在一起</strong>，所以 <code>A ^ B == (A - B) | (B - A)</code></p>
 <p><strong>另一个等价写法</strong>（更直观地说明「排除了共有的部分」）：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-114-1">1</a></span>
@@ -18303,16 +18167,14 @@ A ^ B       : ['小强', '小美']
 <pre class="kb-output"><code>交集中的（两边都有）: ['小刚', '小华']
 先并再减去交集: ['小强', '小美']
 和 A ^ B 一致: True</code></pre></p>
-<p><strong>实际用途</strong>：<code>A ^ B</code> 正好用来回答「<strong>只在一份名单里出现过的人</strong>」，
-而 <code>A - B</code> 只回答「第一份独有的」</p>
+<p><strong>实际用途</strong>：<code>A ^ B</code> 正好回答「<strong>只在一份名单里出现过的人</strong>」，而 <code>A - B</code> 只回答「第一份独有的」</p>
 </details>
 <p><strong>Q4</strong> 为什么 <code>list</code> 不能当字典的键，而 <code>tuple</code> 可以？
 请用 <code># @expect-error</code> 演示列表当键的报错，
 并说明「元组里套了列表」时为什么也不能当键。</p>
 <details class="note">
 <summary>提示</summary>
-<p>从「哈希值必须始终不变」这一点出发想。
-再想：元组是不可变的，那「元组里的元素」不可变吗？</p>
+<p>从「哈希值必须始终不变」出发想。再想：元组不可变，那「元组里的元素」不可变吗？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -18342,8 +18204,7 @@ A ^ B       : ['小强', '小美']
 <pre class="kb-output"><code>用元组当键: 终点
 查不存在的坐标: 空地
 所有坐标按序: [(0, 0), (1, 2)]</code></pre></p>
-<p><strong>但「元组里套列表」就不行</strong> ——
-元组本身不可变，可<strong>里面的列表照样能 <code>append</code></strong>：</p>
+<p><strong>但「元组里套列表」不行</strong> —— 元组本身不可变，可<strong>里面的列表照样能 <code>append</code></strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-117-1">1</a></span>
 <span class="normal"><a href="#__codelineno-117-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1"></a><span class="c1"># @expect-error</span>
@@ -18387,9 +18248,7 @@ A ^ B       : ['小强', '小美']
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：想用「一组值」当键，就一路用不可变的东西包起来 ——
-元组、字符串、数字、<code>frozenset</code>，
-绝不能出现列表 / 集合 / 字典 ✓</p>
+<p><strong>判断依据</strong>：想用「一组值」当键，就用不可变的东西包起来 ——元组、字符串、数字、<code>frozenset</code>，绝不能出现列表 / 集合 / 字典 ✓</p>
 </details>
 <hr />
 <h2 id="_14">小结<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
@@ -18499,10 +18358,7 @@ A ^ B       : ['小强', '小美']
 </tr>
 </tbody>
 </table>
-<p><strong>下一页</strong>：<a href="../control-flow/">07 条件与循环</a> —— 让程序自己决定走哪条路。
-到现在为止，代码都是从上往下一条条执行的；
-下一页要讲 <code>if</code> 判断与 <code>for</code> / <code>while</code> 循环，
-把「有条件地做」和「重复做」写进程序里。</p>
+<p><strong>下一页</strong>：<a href="../control-flow/">07 条件与循环</a> —— 让程序自己决定走哪条路。到现在为止，代码都是从上往下一条条执行；下一页讲 <code>if</code> 判断与 <code>for</code> / <code>while</code> 循环，把「有条件地做」「重复做」写进程序。</p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../lists-tuples/">列表与元组</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../control-flow/">条件与循环</a></span></div></nav>
 
 

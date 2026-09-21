@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出了 EM 的理论骨架：造一个下界，交替抬高它，从而抬高原目标。这一页把它落到可执行的形式：具体怎么算、什么时候会坏、怎么判断收敛。">
+    <meta name="description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出 EM 的理论骨架：造一个下界，交替抬高，从而抬高原目标。这一页把它落到可执行的形式：怎么算、什么时候会坏、怎么判断收敛。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="EM 算法与混合模型">
   
-  <meta property="og:description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出了 EM 的理论骨架：造一个下界，交替抬高它，从而抬高原目标。这一页把它落到可执行的形式：具体怎么算、什么时候会坏、怎么判断收敛。">
+  <meta property="og:description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出 EM 的理论骨架：造一个下界，交替抬高，从而抬高原目标。这一页把它落到可执行的形式：怎么算、什么时候会坏、怎么判断收敛。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/statistics/em-algorithm/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="EM 算法与混合模型">
   
-  <meta name="twitter:description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出了 EM 的理论骨架：造一个下界，交替抬高它，从而抬高原目标。这一页把它落到可执行的形式：具体怎么算、什么时候会坏、怎么判断收敛。">
+  <meta name="twitter:description" content="EM 算法与混合模型：上一页期望最大化与变分下界给出 EM 的理论骨架：造一个下界，交替抬高，从而抬高原目标。这一页把它落到可执行的形式：怎么算、什么时候会坏、怎么判断收敛。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11939,14 +11939,14 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本课程讲义</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（期望最大化 / 责任度 / 混合模型 / 收敛）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="em">EM 算法与混合模型<a class="headerlink" href="#em" title="Permanent link">&para;</a></h1>
-<p>上一页 <a href="../variational-bound/">期望最大化与变分下界</a> 给出了 EM 的
-<strong>理论骨架</strong>：造一个下界，交替抬高它，从而抬高原目标。</p>
-<p>这一页把它<strong>落到可执行的形式</strong>：具体怎么算、什么时候会坏、怎么判断收敛。</p>
+<p>上一页 <a href="../variational-bound/">期望最大化与变分下界</a> 给出 EM 的
+<strong>理论骨架</strong>：造一个下界，交替抬高，从而抬高原目标。</p>
+<p>这一页把它<strong>落到可执行的形式</strong>：怎么算、什么时候会坏、怎么判断收敛。</p>
 <div class="admonition tip">
 <p class="admonition-title">这一页与上一页的分工</p>
 <p>· <a href="../variational-bound/">变分下界</a>：<strong>为什么</strong> EM 有效（Jensen、KL、单调性）
 · <strong>这一页</strong>：<strong>怎么</strong>算（责任度、参数更新式、初始化、收敛判据、失败模式）</p>
-<p>两页合起来才是完整的 EM。</p>
+<p>两页合起来才完整。</p>
 </div>
 <hr />
 <figure class="kb-fig">
@@ -12412,7 +12412,7 @@ L 245.442375 189.376781
 
 <h2 id="_1">一、算法的一般形式<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 两步循环<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>EM 的迭代只有两步，循环执行：</p>
+<p>EM 迭代只有两步，循环执行：</p>
 <table>
 <thead>
 <tr>
@@ -12424,7 +12424,7 @@ L 245.442375 189.376781
 <tbody>
 <tr>
 <td><strong>E 步</strong></td>
-<td>在有隐变量的后验下，取完整数据对数似然的<strong>期望</strong></td>
+<td>在隐变量后验下取完整数据对数似然的<strong>期望</strong></td>
 <td>算 <span class="arithmatex">\(Q(\theta\mid\theta^{(t)})\)</span></td>
 </tr>
 <tr>
@@ -12434,7 +12434,7 @@ L 245.442375 189.376781
 </tr>
 </tbody>
 </table>
-<p><strong>其中 <span class="arithmatex">\(Q\)</span> 函数的定义</strong>：</p>
+<p><strong><span class="arithmatex">\(Q\)</span> 函数定义</strong>：</p>
 <div class="arithmatex">\[
 Q(\theta\mid\theta^{(t)})
 = \sum_{i}\sum_{z_i} p(z_i \mid x_i, \theta^{(t)})\,
@@ -12442,12 +12442,12 @@ Q(\theta\mid\theta^{(t)})
 \]</div>
 <p><strong>逐项读</strong>：</p>
 <ul>
-<li>求和号里的 <span class="arithmatex">\(z_i\)</span> 是<strong>隐变量</strong>（对所有可能取值求和）</li>
-<li>权重 <span class="arithmatex">\(p(z_i\mid x_i,\theta^{(t)})\)</span> 是<strong>当前参数下</strong>的后验</li>
-<li>对数里是<strong>完整数据</strong>的似然 —— 这个对数里<strong>没有对 <span class="arithmatex">\(z\)</span> 求和</strong></li>
+<li>求和号里 <span class="arithmatex">\(z_i\)</span> 是<strong>隐变量</strong>（对所有取值求和）</li>
+<li>权重 <span class="arithmatex">\(p(z_i\mid x_i,\theta^{(t)})\)</span> 是<strong>当前参数下</strong>后验</li>
+<li>对数里是<strong>完整数据</strong>似然——<strong>没有对 <span class="arithmatex">\(z\)</span> 求和</strong></li>
 </ul>
-<p><strong>这就是 EM 的全部秘密</strong>：把「对数里套求和」这个死结，
-换成「对数外面套求和」这个能算的问题</p>
+<p><strong>这是 EM 的全部秘密</strong>：把「对数里套求和」的死结，
+换成「对数外求和」这个能算的问题</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 352.790313 237.38525" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EM 的两步：E 步算下界，M 步把下界推到最高">
 
@@ -12832,17 +12832,17 @@ L 59.190313 189.117125
 </figure>
 
 <h3 id="12">1.2 为什么叫期望最大化<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><strong>「期望」</strong>指的是 E 步：在隐变量后验下的期望。
-<strong>「最大化」</strong>指的是 M 步：最大化这个期望。</p>
-<p><strong>注意一个容易误解的点</strong>：EM 最大化的是
-<strong><span class="arithmatex">\(\theta\)</span> 的后验加权对数似然</strong>，而不是原对数似然本身。
-原似然只是在每一步被<strong>间接</strong>抬高了（因为下界变紧了）</p>
+<p><strong>「期望」</strong>指 E 步：隐变量后验下的期望。
+<strong>「最大化」</strong>指 M 步：最大化这个期望。</p>
+<p><strong>一个易误解的点</strong>：EM 最大化的是
+<strong><span class="arithmatex">\(\theta\)</span> 的后验加权对数似然</strong>，不是原对数似然本身。
+原似然只在每步被<strong>间接</strong>抬高（下界变紧了）</p>
 <h3 id="13">1.3 收敛判据<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p><strong>关键性质</strong>：<span class="arithmatex">\(Q\)</span> 函数在 M 步得到的值<strong>不小于</strong>它在当前参数下的值：</p>
+<p><strong>关键性质</strong>：<span class="arithmatex">\(Q\)</span> 在 M 步得到的值<strong>不小于</strong>当前参数下的值：</p>
 <div class="arithmatex">\[
 Q(\theta^{(t+1)}\mid\theta^{(t)}) \ge Q(\theta^{(t)}\mid\theta^{(t)})
 \]</div>
-<p><strong>实践中的三种停止条件</strong>（通常同时用）：</p>
+<p><strong>三种停止条件</strong>（通常同用）：</p>
 <table>
 <thead>
 <tr>
@@ -12860,18 +12860,18 @@ Q(\theta^{(t+1)}\mid\theta^{(t)}) \ge Q(\theta^{(t)}\mid\theta^{(t)})
 <tr>
 <td>似然变化</td>
 <td><span class="arithmatex">\(\ell(\theta^{(t+1)})-\ell(\theta^{(t)}) &lt; \varepsilon\)</span></td>
-<td>要注意似然本身可能很大</td>
+<td>似然本身可能很大</td>
 </tr>
 <tr>
 <td>迭代上限</td>
 <td><span class="arithmatex">\(t &gt; T_{\max}\)</span></td>
-<td><strong>必须设</strong>，防不收敛时死循环 ⚠</td>
+<td><strong>必须设</strong>，防不收敛死循环 ⚠</td>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么不只用「似然变化小于阈值」</strong>：
-当似然本身量级很大（如 <span class="arithmatex">\(10^5\)</span>）时，
-「变化小于 <span class="arithmatex">\(10^{-6}\)</span>」可能永远不触发（浮点精度不够）⚠</p>
+<p><strong>为什么不能只用「似然变化小于阈值」</strong>：
+当似然量级很大（如 <span class="arithmatex">\(10^5\)</span>）时，
+「变化小于 <span class="arithmatex">\(10^{-6}\)</span>」可能永不触发（浮点精度不够）⚠</p>
 <hr />
 <h2 id="_2">二、高斯混合模型：最标准的例子<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 模型<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -12879,7 +12879,7 @@ Q(\theta^{(t+1)}\mid\theta^{(t)}) \ge Q(\theta^{(t)}\mid\theta^{(t)})
 p(x) = \sum_{k=1}^{K}\pi_k\,\mathcal{N}(x\mid\mu_k,\Sigma_k),
 \qquad \sum_k \pi_k = 1,\ \ \pi_k \ge 0
 \]</div>
-<p><strong>符号表</strong>（一次定义清楚）：</p>
+<p><strong>符号表</strong>（一次给全）：</p>
 <table>
 <thead>
 <tr>
@@ -12892,7 +12892,7 @@ p(x) = \sum_{k=1}^{K}\pi_k\,\mathcal{N}(x\mid\mu_k,\Sigma_k),
 <tr>
 <td><span class="arithmatex">\(K\)</span></td>
 <td>整数</td>
-<td>分量个数（<strong>需要事先指定</strong>）</td>
+<td>分量个数（<strong>需事先指定</strong>）</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\pi_k\)</span></td>
@@ -12927,9 +12927,9 @@ p(x) = \sum_{k=1}^{K}\pi_k\,\mathcal{N}(x\mid\mu_k,\Sigma_k),
 = \frac{\pi_k\,\mathcal{N}(x_i\mid\mu_k,\Sigma_k)}
 {\displaystyle\sum_{j=1}^{K}\pi_j\,\mathcal{N}(x_i\mid\mu_j,\Sigma_j)}
 \]</div>
-<p><strong>要点</strong>：<strong>第 <span class="arithmatex">\(k\)</span> 个分量"认领"了样本 <span class="arithmatex">\(i\)</span> 的多大比例</strong></p>
-<p><strong>注意：这里算的是一个"分配"</strong> —— 但它<strong>不是 0/1</strong>，
-而是 0 到 1 之间的连续值。</p>
+<p><strong>要点</strong>：<strong>第 <span class="arithmatex">\(k\)</span> 个分量"认领"样本 <span class="arithmatex">\(i\)</span> 的比例</strong></p>
+<p><strong>注意：这里算的是"分配"</strong>——但<strong>不是 0/1</strong>，
+而是 0 到 1 的连续值。</p>
 <h3 id="23-m">2.3 M 步：更新参数<a class="headerlink" href="#23-m" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 N_k = \sum_{i=1}^{n}\gamma_{ik}
@@ -12944,10 +12944,10 @@ N_k = \sum_{i=1}^{n}\gamma_{ik}
 <div class="arithmatex">\[
 \pi_k = \frac{N_k}{n}
 \]</div>
-<p><strong>三式可以统一地读</strong>：<strong>把责任度当"软计数"</strong>，
-那么每一式都退化成<strong>加权版的参数估计</strong> ——
-和 <a href="../../probability/mle/">最大似然估计</a> 里那一套形式完全一样，
-只是每一项多了权重 <span class="arithmatex">\(\gamma_{ik}\)</span></p>
+<p><strong>三式可统一读</strong>：<strong>把责任度当"软计数"</strong>，
+则每一式都退化成<strong>加权版的参数估计</strong>——
+和 <a href="../../probability/mle/">最大似然估计</a> 里那套形式完全一样，
+只是每项多了权重 <span class="arithmatex">\(\gamma_{ik}\)</span></p>
 <h3 id="24-k">2.4 与 K 均值的对照<a class="headerlink" href="#24-k" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12971,7 +12971,7 @@ N_k = \sum_{i=1}^{n}\gamma_{ik}
 <tr>
 <td>是否给不确定性</td>
 <td>不给</td>
-<td><strong>给</strong>（责任度本身就是）</td>
+<td><strong>给</strong>（责任度本身即）</td>
 </tr>
 <tr>
 <td>协方差</td>
@@ -12985,9 +12985,9 @@ N_k = \sum_{i=1}^{n}\gamma_{ik}
 </tr>
 </tbody>
 </table>
-<p><strong>两者的关系</strong>：<strong>K 均值是 GMM 的极限情形</strong> ——
-若令所有 <span class="arithmatex">\(\Sigma_k = \sigma^2 I\)</span> 且让 <span class="arithmatex">\(\sigma \to 0\)</span>，
-责任度就会退化成 0/1（离得最近的赢家通吃）</p>
+<p><strong>两者关系</strong>：<strong>K 均值是 GMM 的极限情形</strong>——
+若令所有 <span class="arithmatex">\(\Sigma_k = \sigma^2 I\)</span> 且 <span class="arithmatex">\(\sigma \to 0\)</span>，
+责任度退化成 0/1（最近的赢家通吃）</p>
 <p><strong>所以 GMM 比 K 均值"多"出的能力</strong>：
 它能表达<strong>椭球、不同大小、不同朝向</strong>的簇，
 而 K 均值只能表达"球形等大"的簇</p>
@@ -13960,26 +13960,26 @@ L 358.279688 200.946
 <hr />
 <h2 id="q-gmm">三、Q 函数的推导（GMM 情形）<a class="headerlink" href="#q-gmm" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 写出完整数据似然<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p>若 <span class="arithmatex">\(z_i\)</span> 已知，完整数据的对数似然是：</p>
+<p>若 <span class="arithmatex">\(z_i\)</span> 已知，完整数据对数似然是：</p>
 <div class="arithmatex">\[
 \ln p(x_i, z_i\mid\theta)
 = \sum_{k} \mathbb{1}[z_i = k]\,
 \ln\!\left[\pi_k\,\mathcal{N}(x_i\mid\mu_k,\Sigma_k)\right]
 \]</div>
 <p><strong>为什么用指示函数</strong>：<span class="arithmatex">\(z_i\)</span> 只取一个值，
-所以求和里只有一项非零</p>
+故求和里只有一项非零</p>
 <h3 id="32-e">3.2 取期望（E 步）<a class="headerlink" href="#32-e" title="Permanent link">&para;</a></h3>
 <p>把指示函数的期望换成责任度
-（因为 <span class="arithmatex">\(\mathbb{E}[\mathbb{1}[z_i=k]] = p(z_i=k\mid x_i,\theta^{(t)}) = \gamma_{ik}\)</span>）：</p>
+（因 <span class="arithmatex">\(\mathbb{E}[\mathbb{1}[z_i=k]] = p(z_i=k\mid x_i,\theta^{(t)}) = \gamma_{ik}\)</span>）：</p>
 <div class="arithmatex">\[
 Q(\theta\mid\theta^{(t)})
 = \sum_i\sum_k \gamma_{ik}
 \ln\!\left[\pi_k\,\mathcal{N}(x_i\mid\mu_k,\Sigma_k)\right]
 \]</div>
 <p><strong>这一步是 E 步的全部内容</strong>：
-把"未知的归属"换成"当前估计下的期望归属"</p>
+把"未知归属"换成"当前估计下的期望归属"</p>
 <h3 id="33-m">3.3 求导（M 步）<a class="headerlink" href="#33-m" title="Permanent link">&para;</a></h3>
-<p><strong>对 <span class="arithmatex">\(\mu_k\)</span> 求导</strong>。先把 <span class="arithmatex">\(\ln\)</span> 里与 <span class="arithmatex">\(\mu_k\)</span> 有关的部分写出来：</p>
+<p><strong>对 <span class="arithmatex">\(\mu_k\)</span> 求导</strong>。先写出 <span class="arithmatex">\(\ln\)</span> 里与 <span class="arithmatex">\(\mu_k\)</span> 有关的部分：</p>
 <div class="arithmatex">\[
 \ln\mathcal{N}(x_i\mid\mu_k,\Sigma_k)
 = -\frac{1}{2}(x_i-\mu_k)^{\mathsf T}\Sigma_k^{-1}(x_i-\mu_k) + \text{常数}
@@ -13991,44 +13991,44 @@ Q(\theta\mid\theta^{(t)})
 \]</div>
 <p><strong>为什么</strong>：这是二次型的标准梯度公式
 （见 <a href="../../calculus/matrix-calculus/">矩阵微积分</a>），
-注意用了 <span class="arithmatex">\(\Sigma_k\)</span> 的对称性 ✓</p>
-<p>令整个 <span class="arithmatex">\(Q\)</span> 的梯度为零：</p>
+注意用 <span class="arithmatex">\(\Sigma_k\)</span> 的对称性 ✓</p>
+<p>令 <span class="arithmatex">\(Q\)</span> 的梯度为零：</p>
 <div class="arithmatex">\[
 \sum_i \gamma_{ik}\,\Sigma_k^{-1}(x_i-\mu_k) = 0
 \]</div>
-<p>两边左乘 <span class="arithmatex">\(\Sigma_k\)</span>（可逆时），再解出：</p>
+<p>两边左乘 <span class="arithmatex">\(\Sigma_k\)</span>（可逆时），解出：</p>
 <div class="arithmatex">\[
 \mu_k = \frac{\sum_i\gamma_{ik}x_i}{\sum_i\gamma_{ik}}
 = \frac{1}{N_k}\sum_i\gamma_{ik}x_i
 \]</div>
-<p><strong>这正是 2.3 节那个式子</strong> —— 推导完成</p>
+<p><strong>这正是 2.3 节的式子</strong>——推导完成</p>
 <p><strong>对 <span class="arithmatex">\(\pi_k\)</span> 求导</strong>要注意约束 <span class="arithmatex">\(\sum_k\pi_k=1\)</span>，
 要用拉格朗日乘数法（见 <a href="../../optimization/lagrange/">拉格朗日乘数法</a>），
-结果是 <span class="arithmatex">\(\pi_k = N_k/n\)</span>，与"软计数占比"的直觉一致</p>
+结果 <span class="arithmatex">\(\pi_k = N_k/n\)</span>，与"软计数占比"的直觉一致</p>
 <div class="admonition warning">
 <p class="admonition-title">EM 有三个必须提前知道的坑</p>
-<p><strong>① <span class="arithmatex">\(K\)</span> 要事先定</strong>：GMM 不会自己决定有几个分量。
+<p><strong>① <span class="arithmatex">\(K\)</span> 要事先定</strong>：GMM 不会自己决定分量数。
 <span class="arithmatex">\(K\)</span> 选大了会过拟合（模型选择问题），选小了会欠拟合</p>
-<p><strong>② 局部最优</strong>：结果依赖初值。标准做法是<strong>多跑几个初值取最好的</strong>
+<p><strong>② 局部最优</strong>：结果依赖初值。标准做法是<strong>多跑几个初值取最好</strong>
 （比较最终对数似然）。</p>
-<p><strong>③ 方差塌缩</strong>：如果某个分量的均值正好贴到一个样本上、
-方差趋于零，似然会趋于<strong>无穷</strong> —— 算法"跑飞"
-常见应对：给协方差设下限、或改用有正则的变体。</p>
+<p><strong>③ 方差塌缩</strong>：若某分量均值正好贴到一个样本上、
+方差趋于零，似然趋于<strong>无穷</strong>——算法"跑飞"
+应对：给协方差设下限，或改用有正则的变体。</p>
 </div>
 <hr />
 <h2 id="k">三·补 与 K 均值的确切关系<a class="headerlink" href="#k" title="Permanent link">&para;</a></h2>
-<p>前面说过「K 均值是 GMM 的极限」。这句话值得<strong>算一遍</strong> ——
-它同时解释了 K 均值的目标函数从哪来、以及它为什么给不出不确定性。</p>
+<p>前面说过「K 均值是 GMM 的极限」。这句话值得<strong>算一遍</strong>——
+它同时解释了 K 均值目标函数从哪来、以及为什么给不出不确定性。</p>
 <h3 id="34">3.4 令方差趋于零<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
-<p>设所有分量共享球形协方差 <span class="arithmatex">\(\Sigma_k=\sigma^2I\)</span>、先验相同 <span class="arithmatex">\(\pi_k=1/K\)</span>。
+<p>设各分量共享球形协方差 <span class="arithmatex">\(\Sigma_k=\sigma^2I\)</span>、先验相同 <span class="arithmatex">\(\pi_k=1/K\)</span>。
 代入责任度：</p>
 <div class="arithmatex">\[
 \gamma_{ik}
 = \frac{\exp\!\left(-\dfrac{\|x_i-\mu_k\|^2}{2\sigma^2}\right)}
 {\displaystyle\sum_j \exp\!\left(-\dfrac{\|x_i-\mu_j\|^2}{2\sigma^2}\right)}
 \]</div>
-<p><strong>注意</strong>：分子分母的 <span class="arithmatex">\((\sigma\sqrt{2\pi})^{-d}\)</span> 是<strong>公因子，全部约掉了</strong> ——
-这正是 <span class="arithmatex">\(\sigma\to0\)</span> 时形式仍能保持的原因</p>
+<p><strong>注意</strong>：分子分母的 <span class="arithmatex">\((\sigma\sqrt{2\pi})^{-d}\)</span> 是<strong>公因子，全部约掉</strong>——
+这正是 <span class="arithmatex">\(\sigma\to0\)</span> 时形式仍保持的原因</p>
 <h3 id="35">3.5 取极限<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
 <p>记离 <span class="arithmatex">\(x_i\)</span> 最近的分量编号为 <span class="arithmatex">\(k^{\star}(i)\)</span>，
 <span class="arithmatex">\(d_{ik}^2=\|x_i-\mu_k\|^2\)</span>。把分子分母<strong>同除以最近那一项</strong>：</p>
@@ -14037,9 +14037,9 @@ Q(\theta\mid\theta^{(t)})
 = \frac{\exp\!\left(-\dfrac{d_{ik}^2-d_{ik^{\star}}^2}{2\sigma^2}\right)}
 {\displaystyle\sum_j \exp\!\left(-\dfrac{d_{ij}^2-d_{ik^{\star}}^2}{2\sigma^2}\right)}
 \]</div>
-<p><strong>关键观察</strong>：对<strong>非最近</strong>的分量，<span class="arithmatex">\(d_{ik}^2-d_{ik^\star}^2 \gt 0\)</span>，
-所以当 <span class="arithmatex">\(\sigma\to0\)</span> 时它的指数<strong>趋于零</strong>
-而最近那一项指数趋于 1、分母也趋于 1。于是</p>
+<p><strong>关键观察</strong>：对<strong>非最近</strong>分量，<span class="arithmatex">\(d_{ik}^2-d_{ik^\star}^2 \gt 0\)</span>，
+所以 <span class="arithmatex">\(\sigma\to0\)</span> 时指数<strong>趋于零</strong>
+而最近那项指数趋于 1、分母也趋于 1。于是</p>
 <div class="arithmatex">\[
 \lim_{\sigma\to 0}\gamma_{ik} =
 \begin{cases}
@@ -14047,14 +14047,14 @@ Q(\theta\mid\theta^{(t)})
 0, &amp; k \ne k^{\star}(i)
 \end{cases}
 \]</div>
-<p><strong>软分配退化成硬分配</strong> —— 责任度变成 0/1 的「胜者通吃」。</p>
+<p><strong>软分配退化成硬分配</strong>——责任度变成 0/1 的「胜者通吃」。</p>
 <h3 id="36">3.6 结论<a class="headerlink" href="#36" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(\gamma_{ik}\)</span> 取 0 或 1 代回均值更新式：</p>
 <div class="arithmatex">\[
 \mu_k = \frac{1}{N_k}\sum_{i\in\text{簇}\,k}x_i
 \]</div>
 <p><strong>这正是 K 均值的更新式</strong>（簇内算术平均）
-而 E 步「把每个点分给最近的簇」也正好是 K 均值的分配步。</p>
+而 E 步「把每点分给最近的簇」也正是 K 均值的分配步。</p>
 <table>
 <thead>
 <tr>
@@ -14089,10 +14089,10 @@ Q(\theta\mid\theta^{(t)})
 <div class="admonition tip">
 <p class="admonition-title">这条关系的两个实用价值</p>
 <p><strong>① K 均值给不出不确定性</strong>，原因就在这里：
-方差为零时责任度必然是 0/1，
-不可能输出「这个点有六成属于簇一」。</p>
+方差为零时责任度必为 0/1，
+无法输出「这个点六成属于簇一」。</p>
 <p><strong>② 更好的初始化</strong>：既然 GMM 是 K 均值的推广，
-<strong>用 K 均值的结果当 GMM 的初值</strong>是标准做法
+<strong>用 K 均值结果当 GMM 初值</strong>是标准做法
 （先粗定位，再细化）</p>
 </div>
 <hr />
@@ -14103,8 +14103,8 @@ Q(\theta\mid\theta^{(t)})
 求样本 <span class="arithmatex">\(x=1\)</span> 的两个责任度。</p>
 <details class="note">
 <summary>思路</summary>
-<p>代入责任度公式。注意<strong>先验不同</strong>，所以不能简单地按距离分配，
-但要先把公共的高斯常数因子放在一边。</p>
+<p>代入责任度公式。注意<strong>先验不同</strong>，不能简单地按距离分配，
+但要先把公共高斯常数因子放一边。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -14127,18 +14127,18 @@ Q(\theta\mid\theta^{(t)})
 \]</div>
 <p><strong>答案：责任度约 <span class="arithmatex">\((0.915,\ 0.085)\)</span></strong></p>
 <p><span class="arithmatex">\(x=1\)</span> 离 <span class="arithmatex">\(\mu_1=0\)</span> 更近，
-且第 1 个分量先验更小（0.4），两者<strong>部分抵消</strong> ——
+且第 1 个分量先验更小（0.4），两者<strong>部分抵消</strong>——
 最终仍是第 1 个分量主导。</p>
-<p>注意这里<strong>恰好</strong>接近"按距离分配"：
+<p>这里<strong>恰好</strong>接近"按距离分配"：
 因为先验差异（0.4 vs 0.6）不大，而距离差异（1 vs 3）更大</p>
 </details>
 <h3 id="2-m">例题 2：一步 M 步的更新<a class="headerlink" href="#2-m" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：承上题，若只有这一个样本 <span class="arithmatex">\(x=1\)</span>，
-用上面的责任度更新 <span class="arithmatex">\(\mu_1,\mu_2,\pi_1,\pi_2\)</span>（<span class="arithmatex">\(\sigma\)</span> 保持不变）。</p>
+用上面的责任度更新 <span class="arithmatex">\(\mu_1,\mu_2,\pi_1,\pi_2\)</span>（<span class="arithmatex">\(\sigma\)</span> 保持）。</p>
 <details class="note">
 <summary>思路</summary>
-<p>直接套加权平均公式。注意<strong>只有一个样本</strong>，
-所以加权平均就是"责任度决定的插值"。</p>
+<p>直接套加权平均公式。<strong>只有一个样本</strong>，
+所以加权平均即"责任度决定的插值"。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -14157,14 +14157,14 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 <div class="arithmatex">\[
 \pi_1 = \frac{0.915}{1} = 0.915,\qquad \pi_2 = 0.085
 \]</div>
-<p><strong>答案：两个均值都跑到了 1.00，权重变成 <span class="arithmatex">\((0.915,0.085)\)</span></strong></p>
-<p><strong>只用一个样本时，EM 会把所有分量都拉到这个点上</strong>
-⚠ 这不是 bug，而是必然结果 —— 单个样本无法区分分量，
-所以每个分量"认领"了它的一部分责任，各自朝它移动。</p>
-<p>这提醒我们：<strong>EM 需要足够多的样本</strong>才能把分量分开。</p>
+<p><strong>答案：两个均值都跑到 1.00，权重变成 <span class="arithmatex">\((0.915,0.085)\)</span></strong></p>
+<p><strong>只用一个样本时，EM 会把所有分量都拉到这一点</strong>
+⚠ 这不是 bug，而是必然结果——单个样本无法区分分量，
+所以每个分量"认领"它的一部分责任，各自朝它移动。</p>
+<p>这提醒：<strong>EM 需要足够多的样本</strong>才能把分量分开。</p>
 </details>
 <h3 id="3">例题 3：为什么方差要设下限<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p><strong>题目</strong>：某次运行中，某个分量的均值恰好等于一个样本 <span class="arithmatex">\(x_j\)</span>，
+<p><strong>题目</strong>：某次运行中，某分量均值恰好等于一个样本 <span class="arithmatex">\(x_j\)</span>，
 用公式算它的方差会得到什么？会导致什么问题？</p>
 <details class="note">
 <summary>思路</summary>
@@ -14174,7 +14174,7 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 <details class="success">
 <summary>解答</summary>
 <p><strong>第一步：代入方差公式。</strong></p>
-<p>若该分量只认领了 <span class="arithmatex">\(x_j\)</span>（<span class="arithmatex">\(\gamma_{jk}=1\)</span>，其余为 0），则 <span class="arithmatex">\(N_k=1\)</span>，
+<p>若该分量只认领 <span class="arithmatex">\(x_j\)</span>（<span class="arithmatex">\(\gamma_{jk}=1\)</span>，其余为 0），则 <span class="arithmatex">\(N_k=1\)</span>，
 且 <span class="arithmatex">\(\mu_k = x_j\)</span>：</p>
 <div class="arithmatex">\[
 \Sigma_k = \frac{1}{1}\times 1\times
@@ -14188,20 +14188,20 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 \]</div>
 <p><strong>第三步：后果。</strong></p>
 <p>该分量的似然 <span class="arithmatex">\(\to\infty\)</span> → 总似然 <span class="arithmatex">\(\to\infty\)</span> →
-<strong>算法认为找到了完美解，实际是把一个点当成了整个分量</strong></p>
+<strong>算法以为找到完美解，实际把一点当成了整个分量</strong></p>
 <p><strong>答案：方差会变成 0，似然发散，算法"跑飞"</strong>。</p>
 <p>这是 EM 在 GMM 上的<strong>病态解</strong>。
-应对办法：给 <span class="arithmatex">\(\Sigma_k\)</span> 设一个正的下限，
+应对：给 <span class="arithmatex">\(\Sigma_k\)</span> 设正的下限，
 或对协方差加正则项（相当于加先验）。</p>
 </details>
 <h3 id="4">例题 4：怎么判断收敛到的是局部最优<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某人跑 EM 得到最终对数似然 <span class="arithmatex">\(-800\)</span>，
 换了三组初值分别得到 <span class="arithmatex">\(-950\)</span>、<span class="arithmatex">\(-1200\)</span>、<span class="arithmatex">\(-880\)</span>。
-他问「哪次是对的」，并想知道还能不能更好。</p>
+他问「哪次是对的」，并想知道能否更好。</p>
 <details class="note">
 <summary>思路</summary>
 <p>先想清楚 EM 保证什么、不保证什么；
-再想"怎么知道还能不能更好"。</p>
+再想"怎么知道能否更好"。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -14241,23 +14241,23 @@ N_1 = 0.915,\qquad N_2 = 0.085,\qquad n = 1
 </tr>
 </tbody>
 </table>
-<p><strong>所以"−800 那次是对的"这个说法不成立</strong> ——
-它只是<strong>目前找到的最好</strong>，而且<strong>很可能仍是局部最优</strong></p>
-<p>第三步：怎么知道能不能更好。</p>
+<p><strong>所以"−800 那次是对的"不成立</strong>——
+它只是<strong>目前找到的最好</strong>，且<strong>很可能仍是局部最优</strong></p>
+<p>第三步：怎么知道能否更好。</p>
 <p><strong>没法从 EM 本身知道</strong>。要判断只能靠：</p>
 <p>· 继续换初值（如 <span class="arithmatex">\(k\)</span> 均值初始化、多次随机初始化）
 · 用<strong>模型选择准则</strong>比较不同 <span class="arithmatex">\(K\)</span>（见 <a href="../model-selection/">模型选择</a>）
 · 若明知有结构信息，把它用进初始化</p>
 <p><strong>答案：EM 只保证单调不降，不保证全局最优；
 "多初值取最好"是实践标准做法，但仍不能证明最优</strong>。</p>
-<p>这是一种"<strong>没有最优性证书</strong>"的优化 ——
-与凸问题不同，你<strong>永远无法确认</strong>是否已经到达全局最优 ⚠</p>
+<p>这是一种"<strong>没有最优性证书</strong>"的优化——
+与凸问题不同，你<strong>永远无法确认</strong>是否已到达全局最优 ⚠</p>
 </details>
 <hr />
 <h2 id="_4">五、自测<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> 写出 EM 的 E 步与 M 步分别做什么，
-并说明为什么把「对数里的求和」换成「求和外的对数」是关键。</p>
-<p><strong>Q2</strong> 写出 GMM 的责任度公式，并解释为什么 <span class="arithmatex">\(\pi_k\)</span> 不同的两个分量
+<p><strong>Q1</strong> 写出 EM 的 E 步与 M 步各做什么，
+并说明为何把「对数里的求和」换成「求和外的对数」是关键。</p>
+<p><strong>Q2</strong> 写出 GMM 的责任度公式，并解释为何 <span class="arithmatex">\(\pi_k\)</span> 不同的两个分量
 不能简单地"按距离"分配样本。</p>
 <p><strong>Q3</strong> 推导 GMM 中 <span class="arithmatex">\(\mu_k\)</span> 的更新式（从 <span class="arithmatex">\(Q\)</span> 函数出发，写出求导与令零的过程）。</p>
 <p><strong>Q4</strong> 说出 EM 的三个典型问题，各给一个应对办法。</p>

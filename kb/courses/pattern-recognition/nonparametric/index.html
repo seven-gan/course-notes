@@ -12665,9 +12665,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行是关键取舍</strong>：模型假设越强，需要的样本越少，
-但假设错了误差就下不来。这就是<strong>偏差-方差权衡</strong>的另一面。</p>
 </div>
+<p>模型假设越强，需要的样本越少，但假设错了误差就下不来 ——
+这就是<strong>偏差-方差权衡</strong>的另一面。</p>
 <hr />
 <h2 id="_2">一、从直方图说起<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 直方图：最朴素的无参数密度估计<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
@@ -12703,7 +12703,6 @@
 <p><strong>第一与第二条是结构性的</strong> —— 不管样本多少都存在</p>
 <p><strong>怎么绕开</strong>：<strong>不要让每个点只落在一个 bin 里，
 而是让每个点对周围所有位置都贡献一点"密度"</strong></p>
-<p>这就自然过渡到核密度估计。</p>
 <hr />
 <h2 id="parzen">二、Parzen 窗（核密度估计）<a class="headerlink" href="#parzen" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 构造<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -12740,7 +12739,7 @@
 </tbody>
 </table>
 <h3 id="22-1hd">2.2 那个 <span class="arithmatex">\(1/h^d\)</span> 是从哪来的<a class="headerlink" href="#22-1hd" title="Permanent link">&para;</a></h3>
-<p><strong>这是本节最该讲清的一步。</strong> 用一维（<span class="arithmatex">\(d=1\)</span>）来看。</p>
+<p>用一维（<span class="arithmatex">\(d=1\)</span>）来看。</p>
 <p><strong>要求</strong>：估计出的 <span class="arithmatex">\(\hat p\)</span> 必须是<strong>概率密度</strong>，
 也就是 <span class="arithmatex">\(\int \hat p(x)\,\mathrm dx = 1\)</span></p>
 <p><strong>代入检验</strong>：</p>
@@ -12802,7 +12801,6 @@ K(u) \ge 0,\qquad \int K(u)\,\mathrm du = 1
 <p><strong>重要事实</strong>：<strong>核的形状影响不大，窗宽 <span class="arithmatex">\(h\)</span> 的影响大得多</strong>
 所以实践中选高斯核基本就够，<strong>精力应花在调 <span class="arithmatex">\(h\)</span> 上</strong>。</p>
 <h3 id="24-">2.4 窗宽的偏差-方差权衡<a class="headerlink" href="#24-" title="Permanent link">&para;</a></h3>
-<p>这是本节的核心机制：</p>
 <table>
 <thead>
 <tr>
@@ -13661,7 +13659,6 @@ L 293.544375 53.5565
 h \to 0,\qquad nh^d \to \infty
 \]</div>
 <p>则 <span class="arithmatex">\(\hat p\)</span> 依概率收敛到真实密度 <span class="arithmatex">\(p\)</span></p>
-<p><strong>两条各自的含义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13692,14 +13689,13 @@ h \to 0,\qquad nh^d \to \infty
 → 稀疏区域窗内可能<strong>一个点都没有</strong>，估计为零</p>
 <p><strong>K 近邻</strong>：<strong>固定点数</strong>（<span class="arithmatex">\(k\)</span> 个），让体积变。
 → 每个位置都有 <span class="arithmatex">\(k\)</span> 个样本参与估计，<strong>稀疏区域自动用更大的体积</strong></p>
-<p><strong>这解决了稀疏区域的问题</strong>，代价是体积不再一致。</p>
+<p>代价是体积不再一致。</p>
 <h3 id="32">3.2 估计式<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 \hat p(x) = \frac{k}{n\,V_k(x)}
 \]</div>
 <p>其中 <span class="arithmatex">\(V_k(x)\)</span> 是<strong>包含离 <span class="arithmatex">\(x\)</span> 最近的 <span class="arithmatex">\(k\)</span> 个样本的最小体积</strong>。</p>
-<p><strong>要点</strong>：密度 = 点数 / (总数 × 体积)。
-<strong>点密说明密度高</strong></p>
+<p><strong>要点</strong>：密度 = 点数 / (总数 × 体积)。</p>
 <p><strong>为什么这个式子自洽</strong>：如果真实密度大，
 那么包围 <span class="arithmatex">\(k\)</span> 个点所需的体积就<strong>小</strong>，
 于是 <span class="arithmatex">\(\hat p\)</span> 大</p>
@@ -13725,7 +13721,6 @@ h \to 0,\qquad nh^d \to \infty
 </tr>
 </tbody>
 </table>
-<p><strong>所以 K 近邻与 Parzen 在"平滑程度"上是同一件事的两种控制方式</strong></p>
 <p><strong>一致性条件</strong>同样是一对：<span class="arithmatex">\(k\to\infty\)</span> 且 <span class="arithmatex">\(k/n\to 0\)</span>。</p>
 <hr />
 <h2 id="_3">四、最近邻分类器<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -13734,7 +13729,6 @@ h \to 0,\qquad nh^d \to \infty
 <p><strong>为什么这合法</strong>：可以证明它等价于"用 K 近邻估计各类密度，
 再比后验" —— 只是把除法约掉了</p>
 <h3 id="42-1-">4.2 1-近邻的错误率上界<a class="headerlink" href="#42-1-" title="Permanent link">&para;</a></h3>
-<p><strong>这是本节最重要的理论结果</strong>。</p>
 <p>设贝叶斯最优错误率为 <span class="arithmatex">\(R^{*}\)</span>（任何分类器能达到的最低错误率）。
 <strong>1-近邻的错误率 <span class="arithmatex">\(R\)</span> 满足</strong>：</p>
 <div class="arithmatex">\[
@@ -15087,29 +15081,6 @@ L 358.979688 200.946
 <li>1000 12.1229 13.3748 1.1033 0.1033</li>
 </ul>
 <p>比值越接近 1，说明近邻与远邻越难区分 —— 近邻法失效 ⚠</p>
-<p><strong>三组数各自说明的事</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>组</th>
-<th>结论</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>第一组</td>
-<td><strong>窗宽决定能不能看出双峰</strong> —— 太小是毛刺，太大被抹平 ⚠</td>
-</tr>
-<tr>
-<td>第二组</td>
-<td><strong>积分恒为 1</strong>，验证了 <span class="arithmatex">\(1/h\)</span> 归一化因子的必要性 ✓</td>
-</tr>
-<tr>
-<td>第三组</td>
-<td><strong>维数升高时，最近与最远邻的距离比趋于 1</strong> ⚠</td>
-</tr>
-</tbody>
-</table>
 <hr />
 <h2 id="_6">七、例题<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：手算核密度估计<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -15133,8 +15104,7 @@ L 358.979688 200.946
 \hat p(1) = \frac14 + \frac14 = 0.5
 \]</div>
 <p><strong>答案：<span class="arithmatex">\(0.5\)</span></strong></p>
-<p>两个点都在 <span class="arithmatex">\(x=1\)</span> 的影响范围内。
-注意 <span class="arithmatex">\(x=1\)</span> 处<strong>没有数据点</strong>，但估计值不为零 ——
+<p>注意 <span class="arithmatex">\(x=1\)</span> 处<strong>没有数据点</strong>，但估计值不为零 ——
 这正是核方法的用意：<strong>让密度在数据点之间也是连续的</strong></p>
 <p>（对比直方图：若 bin 边界恰好切在 <span class="arithmatex">\(x=1\)</span>，
 则可能两个点落在不同 bin，结果会很不一样）</p>
@@ -15338,7 +15308,6 @@ d^2 = \underbrace{(\Delta h)^2}_{\approx 25\sim100}
 </tr>
 </tbody>
 </table>
-<p><strong>三条最该带走的结论</strong>：</p>
 <ol>
 <li><strong>「非参数」是不假设形状，不是没有参数</strong> ——
    代价是<strong>需要更多数据</strong>，收益是<strong>能逼近任意分布</strong></li>

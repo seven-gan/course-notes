@@ -11805,8 +11805,7 @@
 \boxed{\ f_s &gt; 2f_{\max}\ }
 \]</div>
 <p>即<strong>采样频率必须大于信号最高频率的 2 倍</strong>。</p>
-<p>这句话看起来简单，但它背后有两个必须理解的机制：<strong>频谱周期延拓</strong>与<strong>混叠</strong>。
-不理解它们，就无法理解为什么「采样率不够会出错」，以及为什么必须加抗混叠滤波器。</p>
+<p>它背后有两个必须理解的机制：<strong>频谱周期延拓</strong>与<strong>混叠</strong>。</p>
 <hr />
 <h2 id="_2">一、采样的数学模型<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>理想采样</strong>：用周期冲激串乘上连续信号。</p>
@@ -11820,7 +11819,7 @@ p(t) = \sum_{n=-\infty}^{\infty}\delta(t-nT_s)
 x[n] = x(nT_s)
 \]</div>
 <h3 id="_3">关键：采样在频域做什么<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>冲激串 <span class="arithmatex">\(p(t)\)</span> 的傅里叶变换还是冲激串（这是一个漂亮的对称性）：</p>
+<p>冲激串 <span class="arithmatex">\(p(t)\)</span> 的傅里叶变换还是冲激串：</p>
 <div class="arithmatex">\[
 P(\omega) = \frac{2\pi}{T_s}\sum_{k=-\infty}^{\infty}\delta(\omega - k\omega_s),
 \qquad \omega_s = \frac{2\pi}{T_s} = 2\pi f_s
@@ -12024,7 +12023,6 @@ x(t) \xrightarrow{\ \text{抗混叠低通}\ } \tilde{x}(t) \xrightarrow{\ \text{
 <ol>
 <li>把高于 <span class="arithmatex">\(f_s/2\)</span> 的成分<strong>在采样前去掉</strong>，避免它们混叠到低频</li>
 <li>代价是<strong>损失了高频信息</strong>——但这是必须接受的</li>
-<li>比「让高频混叠进来干扰低频」要好得多</li>
 </ol>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="抗混叠滤波器的作用">
@@ -12086,8 +12084,7 @@ x(t) \xrightarrow{\ \text{抗混叠低通}\ } \tilde{x}(t) \xrightarrow{\ \text{
 </tr>
 </tbody>
 </table>
-<p>人眼无法「抗混叠」——因为我们无法在视网膜前加滤波器。
-这是采样理论在日常生活中的直观体现。</p>
+<p>人眼无法「抗混叠」——因为我们无法在视网膜前加滤波器。</p>
 </div>
 <hr />
 <h2 id="_8">五、恢复：为什么低通能重建信号<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -12187,8 +12184,6 @@ x(t) = \sum_{n=-\infty}^{\infty} x[n]\,\operatorname{sinc}\!\left(\frac{t-nT_s}{
 <p><span class="arithmatex">\(f_N = 1000\)</span> Hz。</p>
 <p>三个成分（100、300、900 Hz）<strong>都低于 1000 Hz</strong>，所以<strong>无混叠</strong></p>
 <p><strong>结论</strong>：<span class="arithmatex">\(f_s = 2000\)</span> Hz 可以无失真表示这三个成分。</p>
-<p><strong>对比</strong>：<span class="arithmatex">\(f_s\)</span> 从 1000 提高到 2000，混叠问题消失。
-这也说明<strong>提高采样率可以解决混叠</strong>（前提是硬件允许）。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">混叠的「对称」规律</p>
@@ -12344,8 +12339,6 @@ f_{\text{alias}} = \left\lvert f_0 \bmod f_s \right\rvert,\quad
 <li><strong>改变采样率重测</strong>：若峰值位置随 <span class="arithmatex">\(f_s\)</span> 变化而移动，说明是混叠</li>
 <li>加抗混叠滤波器后重测</li>
 </ol>
-<p><strong>这就是为什么振动监测设备的技术指标里，
-抗混叠滤波器的性能与采样率同等重要。</strong></p>
 </div>
 <hr />
 <h3 id="4">例题 4：采样定理的边界情形<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -12399,15 +12392,14 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 </table>
 <p><strong>第三种最实际</strong>：若滤波器不是理想的矩形，
 <span class="arithmatex">\(f_0\)</span> 附近的成分会部分漏过并混叠，直接污染结果。</p>
-<p><strong>所以工程上取 <span class="arithmatex">\(f_s &gt; 2f_{\max}\)</span>，且留出余量。</strong>
-音频的 44.1 kHz（对 20 kHz 上限留了 2.2 倍）就是例证。</p>
+<p><strong>所以工程上取 <span class="arithmatex">\(f_s &gt; 2f_{\max}\)</span>，且留出余量</strong> —— 音频的 44.1 kHz（对 20 kHz 上限留了 2.2 倍）就是例证。</p>
 <p>顺便说明：44.1 kHz 这个「奇怪」的数字来自早期数字录音设备
 （PAL 制式的 44.1 = 588 × 75 行扫描频率），是历史沿革而非理论最优。</p>
 </div>
 <hr />
 <h2 id="_10">七、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="_11">现代数字信号处理 · 数字化的第一步<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
-<p>采样定理是「模拟到数字」的理论基础，也是后续所有数字处理的前提：</p>
+<p>采样是「模拟到数字」的基础，也是后续数字处理的前提：</p>
 <table>
 <thead>
 <tr>
@@ -12516,8 +12508,7 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 </tr>
 </tbody>
 </table>
-<p><strong>建议</strong>：取 <span class="arithmatex">\(f_s = 10 \sim 20\)</span> kHz，留出余量。
-工程上通常取 <span class="arithmatex">\(2.5 \sim 5\)</span> 倍。</p>
+<p><strong>建议</strong>：取 <span class="arithmatex">\(f_s = 10 \sim 20\)</span> kHz，留出余量。</p>
 </details>
 <hr />
 <p><strong>Q2</strong> 某信号以 500 Hz 采样，在频谱上看到 50 Hz 处有一个峰。
@@ -12566,7 +12557,6 @@ x[n] = \cos(\pi n) = (-1)^n = \{1, -1, 1, -1, \dots\}
 <li><strong>加抗混叠滤波器</strong>：滤掉高频后再测</li>
 <li><strong>提高采样率</strong>：直接消除混叠</li>
 </ol>
-<p>这就是「频谱上的峰不一定可信」的原因。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 为什么不先采样、之后再数字滤波，来去除混叠？</p>

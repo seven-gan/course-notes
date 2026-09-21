@@ -11926,7 +11926,7 @@
 <h2 id="pid">一、控制方法的谱系：从 PID 到智能控制<a class="headerlink" href="#pid" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 位置控制、力控制都还留着「同一个洞」<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>第十章的 PID、第十一章的阻抗与力控，本质都在做同一件事：
-<strong>根据「现在的偏差」算出「该给多大力」</strong>。它们都默认了一件事 —— <strong>模型是准的</strong>。</p>
+<strong>根据「现在的偏差」算出「该给多大力」</strong>，都默认<strong>模型是准的</strong>。</p>
 <p>可真实机器人有<strong>三个绕不过去的「不准」</strong>：</p>
 <table>
 <thead>
@@ -11954,9 +11954,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>PID 对此只有一招</strong>：靠<strong>反馈</strong>把偏差压小。但反馈有一个硬上限 ——
-<strong>增益越大响应越快，也越容易振荡</strong>。所以在「模型不准」这件事上，
-<strong>纯反馈天然处于劣势</strong>：它手里只有「偏差」这一条信息。</p>
+<p><strong>PID 对此只有一招</strong>：靠<strong>反馈</strong>把偏差压小。但反馈有硬上限 ——
+<strong>增益越大响应越快，也越容易振荡</strong>，所以在「模型不准」时，
+<strong>纯反馈天然处于劣势</strong>：手里只有「偏差」这一条信息。</p>
 <h3 id="12">1.2 五类方法的看家本领<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>它们的根本差别，是「靠什么东西」来对付那三个「不准」：</p>
 <table>
@@ -12001,18 +12001,17 @@
 </tr>
 </tbody>
 </table>
-<p><strong>关键认识</strong>：<strong>这几种方法不是互相替代，而是「对付不同种类的不准」的专用工具</strong>；
-工程里它们<strong>几乎从不单用</strong>，而是组合：模糊滑模、神经网络自适应……</p>
+<p><strong>关键认识</strong>：<strong>它们不是互相替代，而是「对付不同种类的不准」的专用工具</strong>；
+工程里<strong>几乎从不单用</strong>，而是组合：模糊滑模、神经网络自适应……</p>
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
 <p>所有控制方法都在回答同一个问题：<strong>当模型不可靠时，我还能靠什么？</strong>
 后面四节就是四个答案：<strong>靠滑模面（二）→ 靠在线估计（三）→ 靠经验规则（四之一）→ 靠数据学习（四之二）</strong>。
-判断一种方法值不值得用，只看一件事：<strong>它在这条「纯反馈基准线」上，赢出的差距能不能被解释。</strong></p>
+判断一种方法值不值得用，只看一件事：<strong>它能否在这条「纯反馈基准线」上赢出可解释的差距。</strong></p>
 </div>
 <h3 id="13">1.3 先立一条「及格线」<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>后面每一节，我都拿<strong>同一个基准</strong>去对照：<strong>不加任何额外机制、只有反馈的控制器</strong>。
-<strong>如果一种方法没能在这条线上赢出可解释的差距，它就不值得上</strong> ——
-这不是苛刻，而是本页每一个算例都在做的事。</p>
+<p>后面每一节都拿<strong>同一个基准</strong>对照：<strong>不加任何额外机制、只有反馈的控制器</strong>。
+<strong>一种方法若不能在这条线上赢出可解释的差距，就不值得上</strong> —— 本页每个算例都在做这件事。</p>
 <p>下图是三种阻尼下的阶跃响应：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="三种阻尼下的阶跃响应">
@@ -12044,8 +12043,7 @@
 <div class="arithmatex">\[
 s = \dot{e} + \lambda e = 0
 \]</div>
-<p><strong>这条式子的含义</strong>：只要系统状态<strong>落到 <span class="arithmatex">\(s=0\)</span> 这条线上</strong>，
-误差就按 <span class="arithmatex">\(\dot{e} = -\lambda e\)</span> <strong>指数衰减到零</strong> ——
+<p><strong>含义</strong>：只要系统状态<strong>落到 <span class="arithmatex">\(s=0\)</span> 这条线上</strong>，误差就按 <span class="arithmatex">\(\dot{e} = -\lambda e\)</span> <strong>指数衰减到零</strong> ——
 <span class="arithmatex">\(s=0\)</span> 是一条「一进去就安全」的滑行轨道。</p>
 <p>于是控制任务被拆成两步：<strong>① 设计 <span class="arithmatex">\(s\)</span>（决定误差怎么衰减）；② 用力把状态「推」到 <span class="arithmatex">\(s=0\)</span> 上并留住。</strong></p>
 <h3 id="22">2.2 到达条件与抖振<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
@@ -12059,11 +12057,9 @@ s = \dot{e} + \lambda e = 0
 <div class="arithmatex">\[
 t_{\text{reach}} \le \frac{|s(0)|}{\eta - |d|/J}
 \]</div>
-<p><strong>这就是滑模最厉害的地方</strong>：只要知道扰动有界（不需要知道它多大），
-就能把它彻底压掉 —— 鲁棒性来自「切换」，而不是来自「模型有多准」。</p>
-<p><strong>但代价立刻来了</strong>：<span class="arithmatex">\(\operatorname{sign}(s)\)</span> 在 <span class="arithmatex">\(s=0\)</span> 处<strong>跳变</strong>。
-理想情况下切换频率无穷大，实际系统<strong>采样有限</strong>，于是状态<strong>在滑模面两侧来回穿越</strong> ——
-这就是<strong>抖振（chattering）</strong>：<strong>控制量每步都在抖，会激发高频谐振、磨损执行器。</strong></p>
+<p><strong>这就是滑模最厉害的地方</strong>：只要知道扰动有界（不必知道多大），就能把它彻底压掉 —— 鲁棒性来自「切换」，而非「模型有多准」。
+<strong>但代价紧跟着来</strong>：<span class="arithmatex">\(\operatorname{sign}(s)\)</span> 在 <span class="arithmatex">\(s=0\)</span> 处<strong>跳变</strong>，理想切换频率无穷大、实际系统<strong>采样有限</strong>，
+状态便在滑模面两侧来回穿越 —— 这就是<strong>抖振（chattering）</strong>：<strong>控制量每步都在抖，会激发高频谐振、磨损执行器。</strong></p>
 <p>下图是滑模控制在相平面上的轨迹：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="滑模控制的相平面：先到达滑模面，再沿滑模面滑向原点">
@@ -12101,14 +12097,12 @@ s/\Phi, &amp; |s| \le \Phi\\
 <div class="arithmatex">\[
 s \to \frac{\Phi\,d}{J\eta}, \qquad e \to \frac{s}{\lambda} = \frac{\Phi\,d}{J\eta\lambda}
 \]</div>
-<p><strong>换句话说</strong>：<span class="arithmatex">\(\Phi\)</span> 越小越精确、越抖；越大越平滑、越粗糙 ——
-<strong>这是在「精度」和「执行器寿命」之间拧的一个旋钮。</strong></p>
+<p><strong><span class="arithmatex">\(\Phi\)</span> 越小越精确、越抖；越大越平滑、越粗糙</strong> —— 这是在「精度」和「执行器寿命」之间拧的一个旋钮。</p>
 <div class="admonition tip">
 <p class="admonition-title">滑模为什么能「不靠模型」抗扰动</p>
-<p>因为它不问「扰动有多大」，只问「<strong>扰动有界吗</strong>」。
-只要 <span class="arithmatex">\(\eta\)</span> 比扰动界大，<strong>切换项就永远盖过扰动</strong> ——
-这是一种「用蛮力建立确定性」的思路：把不确定性挤进切换频率里，平均掉。
-代价也正是从这来的：<strong>切换频率不可能是无限的，挤不掉的那部分就是抖振。</strong></p>
+<p>因为它不问「扰动有多大」，只问「<strong>扰动有界吗</strong>」。只要 <span class="arithmatex">\(\eta\)</span> 比扰动界大，<strong>切换项就永远盖过扰动</strong> ——
+一种「用蛮力建立确定性」的思路：把不确定性挤进切换频率里平均掉。
+代价也正来自这里：<strong>切换频率不可能是无限的，挤不掉的那部分就是抖振。</strong></p>
 </div>
 <h3 id="24-pd-sign-sat">2.4 算例：PD / 滑模(sign) / 滑模(sat)<a class="headerlink" href="#24-pd-sign-sat" title="Permanent link">&para;</a></h3>
 <p>同一台关节、同一个恒定扰动 <span class="arithmatex">\(d=0.5\)</span> N·m，三种控制跑 4 秒：</p>
@@ -12127,12 +12121,12 @@ s \to \frac{\Phi\,d}{J\eta}, \qquad e \to \frac{s}{\lambda} = \frac{\Phi\,d}{J\e
 </ul>
 <p>读这张表，滑模的「得」与「失」都摆在明面上：</p>
 <ol>
-<li><strong>稳态误差</strong>：PD 是 <span class="arithmatex">\(0.01250\)</span>（<span class="arithmatex">\(=d/K_p\)</span>，还是第八章那个「用偏差换力矩」的老问题）；
-   滑模 <strong>sign 版 <span class="arithmatex">\(0.00015\)</span>、sat 版 <span class="arithmatex">\(0.00050\)</span></strong> —— <strong>比 PD 小两个数量级</strong>。
-   扰动被「切换」<strong>压</strong>掉了，不再靠偏差换。而且 sat 版的 <span class="arithmatex">\(0.00050\)</span> 与理论 <span class="arithmatex">\(\Phi d/(J\eta\lambda)\)</span> <strong>分毫不差</strong>；</li>
+<li><strong>稳态误差</strong>：PD 是 <span class="arithmatex">\(0.01250\)</span>（<span class="arithmatex">\(=d/K_p\)</span>，还是第八章「用偏差换力矩」的老问题）；
+   滑模 <strong>sign 版 <span class="arithmatex">\(0.00015\)</span>、sat 版 <span class="arithmatex">\(0.00050\)</span></strong> —— <strong>比 PD 小两个数量级</strong>，扰动被「切换」<strong>压</strong>掉而非靠偏差换；
+   且 sat 版的 <span class="arithmatex">\(0.00050\)</span> 与理论 <span class="arithmatex">\(\Phi d/(J\eta\lambda)\)</span> <strong>分毫不差</strong>；</li>
 <li><strong>抖振</strong>：sign 版每步控制量变化 <strong><span class="arithmatex">\(9.0473\)</span></strong> N·m（抖得厉害）；sat 版 <strong><span class="arithmatex">\(0.0000\)</span></strong> —— 平滑；</li>
-<li><strong>这笔交易划不划算</strong>：sat 版把误差从 <span class="arithmatex">\(0.00015\)</span> 退到 <span class="arithmatex">\(0.00050\)</span>（<strong>退了一点点</strong>），
-   把抖振从 <span class="arithmatex">\(9.05\)</span> 降到 <span class="arithmatex">\(0\)</span>（<strong>降到底</strong>）。<strong>显然划算 —— 这就是边界层成为标配的原因。</strong></li>
+<li><strong>划不划算</strong>：sat 版把误差从 <span class="arithmatex">\(0.00015\)</span> 退到 <span class="arithmatex">\(0.00050\)</span>（<strong>一点点</strong>），却把抖振从 <span class="arithmatex">\(9.05\)</span> 降到 <span class="arithmatex">\(0\)</span>（<strong>降到底</strong>）。
+   <strong>显然划算 —— 这就是边界层成为标配的原因。</strong></li>
 </ol>
 <p><strong>一句话</strong>：滑模用「切换」换来对抗扰动的鲁棒性；
 再用「边界层」把这份鲁棒性的副作用（抖振）压回去，只留下一点点精度损失。</p>
@@ -12158,8 +12152,7 @@ V = \tfrac{1}{2} m s^2 + \frac{1}{2\gamma}\tilde{m}^2
 \boxed{\ \dot{\hat{m}} = -\gamma\,s\,a\ }
 \]</div>
 <p>就有 <span class="arithmatex">\(\dot{V} = -k_d s^2 \le 0\)</span> —— <strong>误差能量单调不增，<span class="arithmatex">\(s\to0\)</span>、<span class="arithmatex">\(e\to0\)</span> 得到保证</strong>。
-<strong>注意这个律长什么样</strong>：<span class="arithmatex">\(\dot{\hat{m}} \propto -s\,a\)</span> ——
-「滑模面上的偏差」乘上「前馈信号」，就构成了参数的更新方向。</p>
+<strong>注意这个律的形状</strong>：<span class="arithmatex">\(\dot{\hat{m}} \propto -s\,a\)</span> —— 「滑模面上的偏差」乘上「前馈信号」，就构成参数的更新方向。</p>
 <p>这里面藏着自适应的两个命门：</p>
 <p>· <strong>需要「持续激励」</strong> —— 如果 <span class="arithmatex">\(a\equiv0\)</span>（机器人不动），乘出来恒为零，<span class="arithmatex">\(\hat{m}\)</span> <strong>学不到任何东西</strong>；
 · <strong>只保证 <span class="arithmatex">\(e\to0\)</span>，不保证 <span class="arithmatex">\(\hat{m}\to m\)</span></strong> —— 除非激励足够丰富，否则只保证「够用」，不保证「认对」。</p>
@@ -12198,12 +12191,9 @@ V = \tfrac{1}{2} m s^2 + \frac{1}{2\gamma}\tilde{m}^2
 <p>真实质量 m = 2.0 kg；自适应终值 m̂ = 1.997 kg，估计误差 0.0027 kg</p>
 <p><strong>读这张表</strong>：</p>
 <ol>
-<li><strong>定参数</strong>：<span class="arithmatex">\(\hat{m}\)</span> 永远是 <span class="arithmatex">\(0.5\)</span>，与真值差 4 倍 ——
-   前馈力矩<strong>错得离谱</strong>，只能靠反馈硬扛，后半段平均误差 <strong><span class="arithmatex">\(2.33\times10^{-2}\)</span> m</strong>（<strong>几厘米</strong>！）；</li>
-<li><strong>自适应</strong>：<span class="arithmatex">\(\hat{m}\)</span> 从 <span class="arithmatex">\(0.5\)</span> <strong>自己爬到 <span class="arithmatex">\(1.997\)</span></strong> ——
-   与真值 <span class="arithmatex">\(2.0\)</span> 只差 <strong><span class="arithmatex">\(0.0027\)</span> kg</strong>。<strong>没人告诉它质量是多少，它自己「试」出来了</strong>；</li>
-<li><strong>误差</strong>：后半段平均误差从 <span class="arithmatex">\(2.33\times10^{-2}\)</span> 掉到 <strong><span class="arithmatex">\(1.07\times10^{-4}\)</span> m</strong> ——
-   <strong>降了约 218 倍</strong>。这就是「把未知参数学到手」的直接收益。</li>
+<li><strong>定参数</strong>：<span class="arithmatex">\(\hat{m}\)</span> 永远是 <span class="arithmatex">\(0.5\)</span>，与真值差 4 倍 —— 前馈力矩<strong>错得离谱</strong>，只能靠反馈硬扛，后半段平均误差 <strong><span class="arithmatex">\(2.33\times10^{-2}\)</span> m</strong>（<strong>几厘米</strong>！）；</li>
+<li><strong>自适应</strong>：<span class="arithmatex">\(\hat{m}\)</span> 从 <span class="arithmatex">\(0.5\)</span> <strong>自己爬到 <span class="arithmatex">\(1.997\)</span></strong>，与真值 <span class="arithmatex">\(2.0\)</span> 只差 <strong><span class="arithmatex">\(0.0027\)</span> kg</strong>。<strong>没人告诉它质量，它自己「试」出来了</strong>；</li>
+<li><strong>误差</strong>：后半段平均误差从 <span class="arithmatex">\(2.33\times10^{-2}\)</span> 掉到 <strong><span class="arithmatex">\(1.07\times10^{-4}\)</span> m</strong>（<strong>降约 218 倍</strong>）—— 这就是「把未知参数学到手」的直接收益。</li>
 </ol>
 <p><strong>一句话</strong>：自适应控制把「未知参数」从一个「必须事先量准的数字」，
 变成了一个「可以在线学会的状态」—— 代价是它需要运动（激励），也害怕未建模动态。</p>
@@ -12217,8 +12207,7 @@ V = \tfrac{1}{2} m s^2 + \frac{1}{2\gamma}\tilde{m}^2
 <hr />
 <h2 id="_4">四、模糊控制 与 神经网络控制：把「经验」和「数据」装进控制器<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 模糊控制：一张规则表，就是一个控制面<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>前三节的方法都还在「数值」的世界里；<strong>模糊控制换了一种思路：用语言来描述控制</strong>。</p>
-<p>它的全部算法只有三步 —— <strong>模糊化 → 模糊推理 → 解模糊</strong>：</p>
+<p>前三节都还在「数值」的世界里；<strong>模糊控制换了思路：用语言描述控制</strong>。它的全部算法只有三步 —— <strong>模糊化 → 模糊推理 → 解模糊</strong>：</p>
 <ol>
 <li><strong>模糊化</strong>：把精确输入（误差 <span class="arithmatex">\(e\)</span>、误差变化率 <span class="arithmatex">\(\dot{e}\)</span>）<strong>翻译成语言值</strong> ——
    「负大 NB / 负小 NS / 零 ZE / 正小 PS / 正大 PB」，每个语言值对应一条隶属度曲线；</li>
@@ -12256,18 +12245,12 @@ V = \tfrac{1}{2} m s^2 + \frac{1}{2\gamma}\tilde{m}^2
 </ul>
 <p><strong>读这张表和这张控制面</strong>：</p>
 <ol>
-<li><strong>控制面那一块，就是规则表的样子</strong>：<span class="arithmatex">\(e\)</span> 与 <span class="arithmatex">\(\dot{e}\)</span> <strong>一正一负</strong>（偏差大、但在快速靠近）时，
-   输出反而<strong>归零</strong>（<span class="arithmatex">\(e=1,\ \dot{e}=-1\)</span> → <span class="arithmatex">\(u=0\)</span>）—— 这就是「<strong>快到站了要收力</strong>」那条规则在起作用；</li>
-<li><strong><span class="arithmatex">\(|u| \le 30\)</span> 恒成立</strong> —— 模糊输出<strong>天然有界</strong>，这是它与线性 PD <strong>最直观的区别</strong>：
-   PD 的 <span class="arithmatex">\(u = K_p e + K_d\dot{e}\)</span> 在误差大时可以<strong>无上限</strong>地往上冲；</li>
-<li><strong>阶跃响应对照</strong>：模糊 PD 的超调 <strong><span class="arithmatex">\(5.05\%\)</span></strong>，
-   与「<strong>小信号增益相同的等价线性 PD</strong>」的 <strong><span class="arithmatex">\(4.43\%\)</span></strong> 几乎持平；
-   负载惯量变 4 倍后，两者一起变差（<span class="arithmatex">\(31.82\%\)</span> vs <span class="arithmatex">\(30.73\%\)</span>）—— <strong>基本同步</strong>。</li>
+<li><strong>控制面就是规则表的样子</strong>：<span class="arithmatex">\(e\)</span> 与 <span class="arithmatex">\(\dot{e}\)</span> <strong>一正一负</strong>（偏差大、但在快速靠近）时，输出反而<strong>归零</strong>（<span class="arithmatex">\(e=1,\ \dot{e}=-1\)</span> → <span class="arithmatex">\(u=0\)</span>）—— 这是「<strong>快到站了要收力</strong>」那条规则在起作用；</li>
+<li><strong><span class="arithmatex">\(|u| \le 30\)</span> 恒成立</strong> —— 模糊输出<strong>天然有界</strong>，这是它与线性 PD <strong>最直观的区别</strong>：PD 的 <span class="arithmatex">\(u = K_p e + K_d\dot{e}\)</span> 在误差大时可以<strong>无上限</strong>往上冲；</li>
+<li><strong>阶跃响应对照</strong>：模糊 PD 超调 <strong><span class="arithmatex">\(5.05\%\)</span></strong>，与「<strong>小信号增益相同的等价线性 PD</strong>」的 <strong><span class="arithmatex">\(4.43\%\)</span></strong> 几乎持平；负载惯量变 4 倍后两者一起变差（<span class="arithmatex">\(31.82\%\)</span> vs <span class="arithmatex">\(30.73\%\)</span>）—— <strong>基本同步</strong>。</li>
 </ol>
-<p><strong>这张对照表要说的话很实在</strong>：<strong>模糊控制并不自动「更好」</strong>。
-它没有神奇的非线性优势 —— <strong>它是「把经验规则化」的一种表达方式</strong>。
-它的价值在于：<strong>无需建模</strong>（这一条就够用了）、<strong>规则可读可改</strong>、<strong>输出有界</strong>（对执行器友好）。
-至于性能，得看规则表设计得好不好 —— 而不是看它是不是叫「模糊」。</p>
+<p><strong>这张对照表要说的话很实在</strong>：<strong>模糊控制并不自动「更好」</strong>，它没有神奇的非线性优势 —— <strong>只是「把经验规则化」的一种表达方式</strong>。
+它的价值在于<strong>无需建模</strong>（这一条就够用）、<strong>规则可读可改</strong>、<strong>输出有界</strong>（对执行器友好）；至于性能，得看规则表设计得好不好，而不是看它叫不叫「模糊」。</p>
 <h3 id="42">4.2 神经网络控制：把未知的非线性「学」出来<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>如果说模糊是「把人的经验装进去」，<strong>神经网络就是「让机器自己长出经验」</strong>。</p>
 <p><strong>RBF（径向基函数）网络</strong>是最常用的一种：它用一族<strong>高斯基函数</strong>去<strong>拼</strong>出任意连续函数：</p>
@@ -12323,10 +12306,8 @@ u = -\hat{f} + \ddot{x}_d - \lambda\dot{e} - k_d s,
 <p><strong>读这张表</strong>：</p>
 <ol>
 <li><strong>纯 PD</strong>：没有任何模型信息，只能靠反馈硬扛 —— 后半段平均跟踪误差 <strong><span class="arithmatex">\(1.12\times10^{-2}\)</span> m</strong>；</li>
-<li><strong>RBF 补偿</strong>：网络<strong>在线</strong>把 <span class="arithmatex">\(f\)</span> 学出来，同一指标降到 <strong><span class="arithmatex">\(9.15\times10^{-4}\)</span> m</strong> ——
-   约 <strong><span class="arithmatex">\(12\)</span> 倍</strong>的提升，<strong>而且没人告诉过它 <span class="arithmatex">\(f\)</span> 长什么样</strong>；</li>
-<li><strong>逼近误差</strong>：从 <span class="arithmatex">\(2.67\)</span>（网络输出还是零，等于 <span class="arithmatex">\(\lvert f\rvert\)</span> 本身）
-   降到 <strong><span class="arithmatex">\(0.248\)</span></strong> —— 网络确实<strong>学到了那个非线性函数</strong>，而不是靠反馈硬蒙。</li>
+<li><strong>RBF 补偿</strong>：网络<strong>在线</strong>把 <span class="arithmatex">\(f\)</span> 学出来，同一指标降到 <strong><span class="arithmatex">\(9.15\times10^{-4}\)</span> m</strong>，约 <strong><span class="arithmatex">\(12\)</span> 倍</strong>提升，<strong>没人告诉过它 <span class="arithmatex">\(f\)</span> 长什么样</strong>；</li>
+<li><strong>逼近误差</strong>：从 <span class="arithmatex">\(2.67\)</span>（网络输出还是零，等于 <span class="arithmatex">\(\lvert f\rvert\)</span> 本身）降到 <strong><span class="arithmatex">\(0.248\)</span></strong> —— 网络确实<strong>学到了那个非线性函数</strong>，而非靠反馈硬蒙。</li>
 </ol>
 <p><strong>一句话</strong>：神经网络把「未知的动力学」变成「一批可调的权值」——
 只要给它足够的激励，它就能把模型「学」进控制器里；代价是它是黑箱、要数据、稳定性分析最难。</p>
@@ -12364,8 +12345,7 @@ u = -\hat{f} + \ddot{x}_d - \lambda\dot{e} - k_d s,
 <div class="arithmatex">\[
 \eta &gt; \frac{d}{J}
 \]</div>
-<p><span class="arithmatex">\(s\)</span> 为负时同理。<strong>所以到达条件是「切换强度 <span class="arithmatex">\(\eta\)</span> 大于扰动的界 <span class="arithmatex">\(d/J\)</span>」</strong> ——
-注意：只需要知道扰动 <span class="arithmatex">\(d\)</span> 的「界」，不需要知道它的精确值。</p>
+<p><span class="arithmatex">\(s\)</span> 为负时同理。<strong>到达条件即「切换强度 <span class="arithmatex">\(\eta\)</span> 大于扰动的界 <span class="arithmatex">\(d/J\)</span>」</strong> —— 只需知道 <span class="arithmatex">\(d\)</span> 的「界」，不必知道精确值。</p>
 <p><strong>第四步：到达时间。</strong> 以 <span class="arithmatex">\(s\)</span> 为正为例，<span class="arithmatex">\(\dot{s} = -(\eta - d/J)\)</span> 是常数，
 于是 <span class="arithmatex">\(s\)</span> 从 <span class="arithmatex">\(s(0)\)</span> <strong>线性</strong>降到零：</p>
 <div class="arithmatex">\[
@@ -12438,13 +12418,9 @@ m\dot{s} = -\tilde{m}\,a - k_d s
 而线性 PD 的 <span class="arithmatex">\(u = 30e + 7.5\dot{e}\)</span> 在 <span class="arithmatex">\(e=1,\ \dot{e}=-1\)</span> 时给出 <span class="arithmatex">\(22.5\)</span>，
 在 <span class="arithmatex">\(e=1,\ \dot{e}=1\)</span> 时给出 <span class="arithmatex">\(37.5\)</span> —— <strong>会一直往上冲</strong>。
 模糊的价值，是「非线性 + 有界」这一条，而不是「精度更高」。</p>
-<p><strong>第三步：那它凭什么被用？</strong> 三条实在的理由：</p>
-<p>· <strong>不需要模型</strong> —— 规则表里没有一个物理参数，换个对象照样能跑；
-· <strong>可读、可改</strong> —— 「快到站要收力」这条经验，改一行表就能体现，调试者看得懂；
-· <strong>输出有界</strong> —— 天然保护执行器，不需要额外限幅。</p>
-<p><strong>代价也要说清</strong>：规则数随输入维数<strong>指数增长</strong>（维数灾难）；
-传统模糊控制<strong>不会自己变好</strong>（没有学习能力）；
-性能<strong>高度依赖规则表设计得好不好</strong>。</p>
+<p><strong>第三步：它凭什么被用？</strong> 三条实在的理由：<strong>不需要模型</strong>（规则表里没有一个物理参数，换个对象照样跑）、
+<strong>可读可改</strong>（「快到站要收力」改一行表就能体现）、<strong>输出有界</strong>（天然保护执行器，不需额外限幅）。</p>
+<p><strong>代价也要说清</strong>：规则数随输入维数<strong>指数增长</strong>（维数灾难）；传统模糊控制<strong>不会自己变好</strong>；性能<strong>高度依赖规则表设计</strong>。</p>
 <p><strong>一句话</strong>：模糊控制是一种「表达方式」，不是一种「性能加成」——
 它把专家的手感写成表格，代价是它不会自己进步。</p>
 </details>
@@ -12557,12 +12533,9 @@ RBF 补偿后降到 <span class="arithmatex">\(9.15\times10^{-4}\)</span> m，�
 </tr>
 </tbody>
 </table>
-<p><strong>模糊</strong>：把「手感」翻译成规则，<strong>可解释</strong>是它最大的资产；
-但输入一多规则就爆炸，而且性能<strong>完全取决于规则设计者</strong>。
-<strong>神经网络</strong>：把「函数」学进权值里，<strong>能力强</strong>是它最大的资产；
-但<strong>不知道它到底学了什么</strong>，而且<strong>没有激励就学不到东西</strong>。</p>
-<p><strong>工程上的组合</strong>：用模糊给出结构与先验（隶属度、规则骨架），
-用神经网络在线调整这些参数（模糊神经网络 / 神经模糊控制）——
+<p><strong>模糊</strong>：把「手感」翻译成规则，<strong>可解释</strong>是最大资产；但输入一多规则就爆炸，性能<strong>完全取决于规则设计者</strong>。
+<strong>神经网络</strong>：把「函数」学进权值里，<strong>能力强</strong>是最大资产；但<strong>不知道它学了什么</strong>，且<strong>没有激励就学不到东西</strong>。
+<strong>工程上的组合</strong>：模糊给出结构与先验（隶属度、规则骨架），神经网络在线调这些参数（模糊神经网络 / 神经模糊控制）——
 <strong>既有可解释性，又有学习能力</strong>。</p>
 <p><strong>一句话</strong>：模糊是「把人的经验翻译给机器」，神经网络是「让机器自己长经验」；
 前者可读但不能学，后者能学但不可读。</p>
@@ -12588,10 +12561,9 @@ RBF 补偿后降到 <span class="arithmatex">\(9.15\times10^{-4}\)</span> m，�
 自适应 → 需要激励、怕未建模动态；
 模糊 → 规则要人写、维数灾难；
 神经网络 → 需要数据、黑箱、稳定性最难证。</p>
-<p><strong>工程现实</strong>：<strong>它们几乎从不单用</strong>。常见组合：
-<strong>计算力矩 + PID</strong>（基于模型的标配）、<strong>自适应 + 滑模</strong>（学参数 + 抗残差）、
+<p><strong>工程现实</strong>：<strong>它们几乎从不单用</strong>。常见组合：<strong>计算力矩 + PID</strong>（基于模型的标配）、<strong>自适应 + 滑模</strong>（学参数 + 抗残差）、
 <strong>模糊 + 神经网络</strong>（结构 + 学习）、<strong>智能补偿 + PID</strong>（智能负责精度、PID 保局部稳定）。
-<strong>判断标准永远是那句话：哪种方法能用最少的代价，把当前这个「不准」按下去。</strong></p>
+<strong>判断标准永远是：哪种方法能用最少代价把当前这个「不准」按下去。</strong></p>
 <p><strong>一句话</strong>：没有「最好的方法」，只有「和这个不确定性最匹配的方法」——
 选型的本质，是先看清「不准」到底是哪一种。</p>
 </details>

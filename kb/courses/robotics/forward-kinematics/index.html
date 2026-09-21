@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。这是学这门课第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
+    <meta name="description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="机器人正向运动学">
   
-  <meta property="og:description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。这是学这门课第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
+  <meta property="og:description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/forward-kinematics/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="机器人正向运动学">
   
-  <meta name="twitter:description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。这是学这门课第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
+  <meta name="twitter:description" content="机器人正向运动学：上一页把一个变换写清楚了。这一页解决整条链条：给定六个关节角，末端到底在哪、朝哪？这是机器人学里最基础、也是唯一永远有解的问题。第一个要钉死的区分：为什么正运动学一定好算：因为它是从关节往末端推，每一步都是「已知一个变换，乘上去」，不存在选择。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11755,7 +11755,7 @@
 </blockquote>
 <hr />
 <h2 id="_2">一、先分清「正」和「逆」<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>这是学这门课第一个要钉死的区分：</p>
+<p>第一个要钉死的区分：</p>
 <table>
 <thead>
 <tr>
@@ -11787,9 +11787,8 @@
 <div class="admonition tip">
 <p class="admonition-title">记住这个不对称性</p>
 <p><strong>正运动学是「算」，逆运动学是「解」。</strong>
-这个区别贯穿整门课：控制回路里往往要反复算正运动学
-（快、可靠），但逆运动学通常只在规划阶段算一次
-（慢、要考虑多解）。</p>
+控制回路里往往要反复算正运动学（快、可靠），
+但逆运动学通常只在规划阶段算一次（慢、要考虑多解）。</p>
 </div>
 <hr />
 <h2 id="44">二、连杆变换矩阵：把一个连杆写成 4×4<a class="headerlink" href="#44" title="Permanent link">&para;</a></h2>
@@ -11850,9 +11849,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>为什么要这样定</strong>：关键在于<strong>公垂线</strong>。
-两条空间直线之间最短的距离沿着公垂线，
-把 <span class="arithmatex">\(X_i\)</span> 定成公垂线方向后，<strong>相邻坐标系的相对位置就有了确定的几何含义</strong> ——
+<p><strong>为什么要这样定</strong>：关键在于<strong>公垂线</strong> ——
+把 <span class="arithmatex">\(X_i\)</span> 定成公垂线方向后，<strong>相邻坐标系的相对位置就有了确定的几何含义</strong>，
 连杆长度、偏距这些量都能直接读出来。</p>
 <h3 id="23-dh">2.3 四个 DH 参数<a class="headerlink" href="#23-dh" title="Permanent link">&para;</a></h3>
 <p>按上面的规矩建好坐标系后，相邻两个连杆的关系就由<strong>四个数</strong>完全确定：</p>
@@ -11892,7 +11890,7 @@
 · <strong>平移关节</strong>：<span class="arithmatex">\(d_i\)</span> 是变量，其余三个是常数</p>
 <p><strong>这正是 DH 参数好用的原因</strong>：一台机器人的<strong>所有结构信息</strong>
 就压缩成一张 <span class="arithmatex">\(n \times 4\)</span> 的表，而运行时只需要改其中一列。</p>
-<p>下面把这张表摆出来看：四列参数并排，只有「转角」一列会被运动改动，其余三列在标定后就钉死了。</p>
+<p>下面把这张表摆出来看：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="DH 参数表：a、α、d 三列是结构常数，只有转角 θ 一列随运动改变">
 <defs>
@@ -12001,7 +11999,7 @@
 <p><strong>三条都对，说明这个 DH 矩阵没错</strong> ——
 第 ① 条里的 <span class="arithmatex">\((1.0731,\ 1.2727)\)</span> 正是按两连杆公式
 <span class="arithmatex">\(x = a_1\cos\theta_1 + a_2\cos(\theta_1{+}\theta_2)\)</span>、<span class="arithmatex">\(y = a_1\sin\theta_1 + a_2\sin(\theta_1{+}\theta_2)\)</span> 手推出来的。</p>
-<p>第 ① 条那台平面两连杆的几何，画出来最直观：头一段沿 <span class="arithmatex">\(\theta_1\)</span> 走 <span class="arithmatex">\(a_1\)</span>，第二段接着沿 <span class="arithmatex">\(\theta_1+\theta_2\)</span> 走 <span class="arithmatex">\(a_2\)</span>，末端坐标就是两段在 <span class="arithmatex">\(x\)</span>、<span class="arithmatex">\(y\)</span> 两个方向上的贡献分别相加。</p>
+<p>第 ① 条那台平面两连杆的几何，画出来最直观：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 360 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平面 2 连杆正运动学：两段连杆首尾相接，末端落在坐标 x 1.0731、y 1.2727">
 <defs>
@@ -12042,8 +12040,7 @@
 <div class="arithmatex">\[
 {}^{0}_{n}T = {}^{0}_{1}T(\theta_1)\;{}^{1}_{2}T(\theta_2)\;\cdots\;{}^{n-1}_{n}T(\theta_n)
 \]</div>
-<p><strong>这就是正向运动学的全部内容。</strong> 前半部分的矩阵乘法、齐次变换，
-到这里终于「用上了」。</p>
+<p><strong>这就是正向运动学的全部内容。</strong></p>
 <h3 id="31">3.1 一个完整的六轴例子<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>用一组典型的工业机器人 DH 参数（不是某一具体型号，只用来演示算法）：</p>
 <table>
@@ -12118,7 +12115,7 @@
 · <strong>姿态</strong>要从左上角 <span class="arithmatex">\(3\times3\)</span> 的旋转矩阵里读出来 ——
   但它有 9 个数、只有 3 个独立，所以<strong>人读不出「转了多少」</strong>，
   需要转成角度表示（下面用的就是绕 <span class="arithmatex">\(z\)</span> 的等效转角）</p>
-<p>把 <span class="arithmatex">\({}^{0}_{6}T\)</span> 按「功能」切成四块就一目了然：左上 <span class="arithmatex">\(3\times3\)</span> 管姿态、最右一列管位置、底下那行恒为 <span class="arithmatex">\((0,0,0,1)\)</span>。</p>
+<p>把 <span class="arithmatex">\({}^{0}_{6}T\)</span> 按「功能」切成四块就一目了然：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4×4 齐次变换矩阵的分区：左上 3×3 是姿态，第 4 列是位置，末行是 0 0 0 1">
 <defs>
@@ -12161,8 +12158,7 @@
 它把姿态的 3 个自由度摊到了 9 个数上。</p>
 <p><strong>所以工程上的流程是</strong>：
 内部用矩阵算（稳、无奇异），
-要给人看的时候<strong>转成角度或四元数</strong>。
-这正是上一页说的「按用途选表示法」。</p>
+要给人看的时候<strong>转成角度或四元数</strong>。</p>
 </div>
 <h3 id="32">3.2 验证连乘是对的：用特例<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>取一个平面 2 连杆（<span class="arithmatex">\(a_1 = 1.0\)</span>、<span class="arithmatex">\(a_2 = 0.8\)</span>），把关节角记作 <span class="arithmatex">\(\theta\)</span>。
@@ -12194,8 +12190,8 @@
 </tbody>
 </table>
 <p><strong>这套「用特例验实现」的办法，是校核运动学模型的标准手段</strong> ——
-因为真实型号的正确答案你往往没有，但<strong>零位形、单轴转动</strong>这些
-情形的答案是可以推出来的。</p>
+真实型号的正确答案你往往没有，但<strong>零位形、单轴转动</strong>这类
+情形的答案能自己推出来。</p>
 <hr />
 <h2 id="_4">典型例题<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：为什么正运动学一定有解，逆运动学不一定<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -12228,8 +12224,7 @@
 没有通用的解析解法；而且解的存在性依赖于具体位姿。</p>
 <p><strong>所以两者的区别不是「难易」，而是「性质不同」</strong>：
 正运动学是<strong>求值</strong>（总能做），
-逆运动学是<strong>解方程</strong>（有解才做得了）。
-这就是下一章要展开的内容。</p>
+逆运动学是<strong>解方程</strong>（有解才做得了）。</p>
 </details>
 <h3 id="2dh">例题 2：DH 参数表里哪些是常数<a class="headerlink" href="#2dh" title="Permanent link">&para;</a></h3>
 <blockquote>
@@ -12522,9 +12517,6 @@ y &amp;= 0 + 0.7\sin(-90^\circ) = -0.7
 <li><strong>以为能从姿态矩阵一眼看出姿态</strong> —— 必须转成角度或四元数</li>
 </ol>
 <p><strong>下一章</strong>：<a href="../inverse-kinematics/">机器人逆向运动学</a></p>
-<p>这一页解决了「给定关节角，末端在哪」。
-下一章要解决反过来的问题：「要让末端到某个位置，关节该转多少」 ——
-那才是真正难的部分：多解、无解、以及怎么挑选。</p>
 <p><strong>上一页</strong>：<a href="../pose-transform/">位姿表示与坐标变换</a></p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../pose-transform/">位姿表示与坐标变换</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../inverse-kinematics/">机器人逆向运动学</a></span></div></nav>
 

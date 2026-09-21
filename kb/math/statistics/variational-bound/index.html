@@ -12108,7 +12108,7 @@
 <p>· <a href="../../probability/mle/">最大似然估计</a> 给<strong>完整数据</strong>的做法
 · <strong>这一页</strong>给<strong>含隐变量</strong>的做法（EM 的一般框架）
 · <a href="../em-algorithm/">EM 算法与混合模型</a> 给<strong>具体实现</strong></p>
-<p>三者是一条线：<strong>先把"为什么不能直接求导"讲清，
+<p>三者是一条线：<strong>先讲清"为什么不能直接求导"，
 再讲"用什么下界绕过去"，最后才落到具体算法</strong></p>
 </div>
 <hr />
@@ -12122,7 +12122,7 @@ L(\theta) = \prod_{i=1}^{n} p(x_i \mid \theta)
 <div class="arithmatex">\[
 \ell(\theta) = \sum_{i=1}^{n} \ln p(x_i \mid \theta)
 \]</div>
-<p><strong>为什么取对数好用</strong>：求和与求导可以交换顺序 ——
+<p><strong>为什么取对数好用</strong>：求和与求导可交换顺序 ——
 每一项单独求导再相加即可</p>
 <h3 id="12">1.2 有隐变量时会发生什么<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>设每个样本背后有个看不见的 <span class="arithmatex">\(z_i\)</span>。观测数据的密度要对 <span class="arithmatex">\(z\)</span> 求和：</p>
@@ -12133,7 +12133,7 @@ p(x \mid \theta) = \sum_{z} p(x, z \mid \theta)
 <div class="arithmatex">\[
 \ell(\theta) = \sum_{i=1}^{n} \ln \sum_{z_i} p(x_i, z_i \mid \theta)
 \]</div>
-<p><strong>注意这个结构</strong>：<strong>对数外面是求和，对数里面也是求和</strong> ⚠</p>
+<p><strong>注意</strong>：<strong>对数内外都是求和</strong> ⚠</p>
 <h3 id="13">1.3 为什么这样就不能求导了<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p><strong>关键差别</strong>：</p>
 <div class="arithmatex">\[
@@ -12141,14 +12141,14 @@ p(x \mid \theta) = \sum_{z} p(x, z \mid \theta)
 \]</div>
 <p>右边可以直接逐项求导；<strong>左边不行</strong> ——
 对 <span class="arithmatex">\(\theta\)</span> 求导时，求和号里的每一项都带着 <span class="arithmatex">\(\theta\)</span>，
-导数会变成「各项导数之和 / 各项之和」的形式：</p>
+会变成「各项导数之和 / 各项之和」的形式：</p>
 <div class="arithmatex">\[
 \frac{\partial}{\partial\theta}\ln\sum_z f(z;\theta)
 = \frac{\sum_z \partial_\theta f(z;\theta)}{\sum_z f(z;\theta)}
 \]</div>
 <p><strong>这个式子没有闭式解</strong>：分母里所有项纠缠在一起，
-没法像完整数据那样拆成「每项独立求导再相加」。</p>
-<p><strong>具体到高斯混合</strong>（最能说明问题）：</p>
+没法像完整数据那样拆成每项独立求导再相加。</p>
+<p><strong>具体到高斯混合</strong>：</p>
 <div class="arithmatex">\[
 \ell(\theta) = \sum_i \ln \sum_{k=1}^{K} \pi_k\,\mathcal{N}(x_i \mid \mu_k, \Sigma_k)
 \]</div>
@@ -12158,10 +12158,10 @@ p(x \mid \theta) = \sum_{z} p(x, z \mid \theta)
 <p>求导结果里含有未知量，方程<strong>自己咬住了自己</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">这不是"数学不够好"，而是结构性的困难</p>
-<p>有人会想：是不是换个求导技巧就能解出来？</p>
+<p>换个求导技巧能解出来吗？</p>
 <p><strong>不能</strong>。对数似然作为 <span class="arithmatex">\(\theta\)</span> 的函数是<strong>非凸</strong>的，
 而且是「多个峰叠加」的形状。
-即使强行写出导数为零的方程，那也是一个<strong>高次耦合方程组</strong>，
+即使写出导数为零的方程，那也是<strong>高次耦合方程组</strong>，
 没有闭式解。</p>
 <p>所以正路不是"硬解"，而是<strong>构造一个可以解的替代问题</strong> ——
 这就是 EM 的思路：<strong>不直接爬原山，而是每轮造一个"下界山"再爬到它的顶</strong></p>
@@ -13729,15 +13729,15 @@ z
 
 <h2 id="jensen">二、用 Jensen 不等式造一个下界<a class="headerlink" href="#jensen" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 引入一个任意的分布<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p>设 <span class="arithmatex">\(q_i(z)\)</span> 是<strong>任意</strong>一个关于 <span class="arithmatex">\(z\)</span> 的概率分布
+<p>设 <span class="arithmatex">\(q_i(z)\)</span> 是<strong>任意</strong>关于 <span class="arithmatex">\(z\)</span> 的概率分布
 （对每个样本 <span class="arithmatex">\(i\)</span> 各有一个，<span class="arithmatex">\(\sum_z q_i(z) = 1\)</span>，<span class="arithmatex">\(q_i(z)\ge 0\)</span>）。</p>
-<p><strong>为什么可以引入它</strong>：因为它是分布，所以乘上去再除回来不改变式子：</p>
+<p><strong>为什么可以引入它</strong>：它是分布，乘上去再除回来不改变式子：</p>
 <div class="arithmatex">\[
 p(x_i \mid \theta)
 = \sum_z p(x_i, z \mid \theta)
 = \sum_z q_i(z)\,\frac{p(x_i, z \mid \theta)}{q_i(z)}
 \]</div>
-<p><strong>这一步是恒等变形，没有任何近似</strong></p>
+<p><strong>这一步是恒等变形</strong></p>
 <h3 id="22-jensen">2.2 套 Jensen 不等式<a class="headerlink" href="#22-jensen" title="Permanent link">&para;</a></h3>
 <p><strong>Jensen 不等式</strong>（对凹函数 <span class="arithmatex">\(\ln\)</span>）：</p>
 <div class="arithmatex">\[
@@ -13761,7 +13761,7 @@ p(x_i \mid \theta)
 \;:=\; \sum_{i=1}^{n}\sum_{z} q_i(z)
 \ln\frac{p(x_i, z \mid \theta)}{q_i(z)}
 \]</div>
-<p><strong>这个 <span class="arithmatex">\(\mathcal{L}\)</span> 常称变分下界</strong>（也叫 ELBO）</p>
+<p><strong><span class="arithmatex">\(\mathcal{L}\)</span> 常称变分下界</strong>（ELBO）</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 352.790313 237.38525" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EM 的两步：E 步算下界，M 步把下界推到最高">
 
@@ -14158,7 +14158,7 @@ L 59.190313 189.117125
 <li>第一项：<strong>在 <span class="arithmatex">\(q\)</span> 分布下，完整数据对数似然的期望</strong></li>
 <li>第二项：<span class="arithmatex">\(q\)</span> 的<strong>熵</strong>（<span class="arithmatex">\(q\)</span> 越分散越大）</li>
 </ul>
-<p><strong>这两项的意义</strong>：第一项想让 <span class="arithmatex">\(q\)</span> 集中到「解释数据最好」的 <span class="arithmatex">\(z\)</span> 上，
+<p><strong>两项的意义</strong>：第一项想让 <span class="arithmatex">\(q\)</span> 集中到「解释数据最好」的 <span class="arithmatex">\(z\)</span>，
 第二项想让 <span class="arithmatex">\(q\)</span> 别太极端 —— 两者拉锯，
 <strong>最优的 <span class="arithmatex">\(q\)</span> 就是后验分布</strong>（见下节）</p>
 <hr />
@@ -14169,7 +14169,7 @@ L 59.190313 189.117125
 \ell(\theta) - \mathcal{L}(q,\theta)
 = \sum_i D_{\mathrm{KL}}\!\left(q_i(z)\,\Big\|\,p(z \mid x_i, \theta)\right)
 \]</div>
-<p><strong>这个等式的含义</strong>：</p>
+<p><strong>含义</strong>：</p>
 <div class="arithmatex">\[
 \text{差} = \text{（}q\text{ 与真实后验的 KL 散度之和）}
 \]</div>
@@ -14186,14 +14186,14 @@ q_i^{\star}(z) = p(z \mid x_i, \theta)
 <p><strong>这就是 E 步的理论依据</strong>：给定当前参数 <span class="arithmatex">\(\theta\)</span>，
 <strong>把 <span class="arithmatex">\(q\)</span> 设成后验</strong>，下界就变紧（与真值相切）</p>
 <p><strong>为什么叫「期望」步</strong>：<span class="arithmatex">\(q_i^\star\)</span> 是后验，
-而下一节要最大化的第一项正是「在这个后验下的期望」 ——
+而下一节最大化的第一项正是「这个后验下的期望」 ——
 <strong>「期望最大化」这个名字就来自这里</strong></p>
 <h3 id="33">3.3 交替上升<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p><strong>M 步</strong>：固定 <span class="arithmatex">\(q\)</span>（刚设成后验），对 <span class="arithmatex">\(\theta\)</span> 最大化 <span class="arithmatex">\(\mathcal{L}\)</span>：</p>
 <div class="arithmatex">\[
 \theta^{\text{new}} = \arg\max_{\theta}\;\mathcal{L}(q, \theta)
 \]</div>
-<p><strong>两个关键性质</strong>（这是 EM 能用的根本）：</p>
+<p><strong>两个关键性质</strong>（EM 能用的根本）：</p>
 <table>
 <thead>
 <tr>
@@ -14216,24 +14216,24 @@ q_i^{\star}(z) = p(z \mid x_i, \theta)
 </tr>
 </tbody>
 </table>
-<p><strong>单调性的完整证明</strong>：</p>
+<p><strong>单调性的证明</strong>：</p>
 <div class="arithmatex">\[
 \ell(\theta^{\text{new}})
 \;\ge\; \mathcal{L}(q,\theta^{\text{new}})
 \;\ge\; \mathcal{L}(q,\theta^{\text{old}})
 = \ell(\theta^{\text{old}})
 \]</div>
-<p><strong>逐步读这条链</strong>：</p>
+<p><strong>逐步读</strong>：</p>
 <ol>
 <li>第一个「大于等于」：下界永远不超过真值 ✓</li>
 <li>第二个「大于等于」：M 步的定义就是让 <span class="arithmatex">\(\mathcal{L}\)</span> 变大</li>
 <li><strong>最后的等号</strong>：上一轮 E 步已经让下界与真值相切</li>
 </ol>
-<p><strong>这就是"单调不降"的完整证明</strong>，一步都没跳</p>
+<p><strong>这就是"单调不降"的证明</strong>，一步都没跳</p>
 <div class="admonition warning">
 <p class="admonition-title">单调不降不等于能到全局最优</p>
-<p>EM 保证的是<strong>每一步都不变差</strong>，仅此而已。</p>
-<p>它停在<strong>哪个</strong>局部最优，完全由初值决定
+<p>EM 只保证<strong>每一步都不变差</strong>。</p>
+<p>停在<strong>哪个</strong>局部最优由初值决定
 而且：</p>
 <p>· 收敛可能是<strong>很慢的</strong>（接近驻点时步长趋零）
 · 参数化不同（如协方差用 <span class="arithmatex">\(\Sigma\)</span> 还是 <span class="arithmatex">\(\Sigma^{-1}\)</span>）收敛速度差别很大
@@ -14249,8 +14249,8 @@ q_i^{\star}(z) = p(z \mid x_i, \theta)
 = \frac{\pi_k\,\mathcal{N}(x_i \mid \mu_k, \Sigma_k)}
 {\displaystyle\sum_{j=1}^{K}\pi_j\,\mathcal{N}(x_i \mid \mu_j, \Sigma_j)}
 \]</div>
-<p><strong>在解释 <span class="arithmatex">\(x_i\)</span> 这件事上，第 <span class="arithmatex">\(k\)</span> 个分量"认领"了多大比例</strong></p>
-<p><strong>分子分母都在说什么</strong>：</p>
+<p><strong>第 <span class="arithmatex">\(k\)</span> 个分量"认领"了 <span class="arithmatex">\(x_i\)</span> 的多大比例</strong></p>
+<p><strong>分子与分母</strong>：</p>
 <ul>
 <li>分子：第 <span class="arithmatex">\(k\)</span> 个分量<strong>先验权重 × 它产生该样本的似然</strong></li>
 <li>分母：所有分量同样的量之和 —— <strong>归一化因子</strong></li>
@@ -14269,8 +14269,8 @@ N_k = \sum_i \gamma_{ik},
 <div class="arithmatex">\[
 \pi_k^{\text{new}} = \frac{N_k}{n}
 \]</div>
-<p><strong>三式的统一读法</strong>：<strong>把责任度当成"软计数"，一切都退化成加权版的参数估计</strong></p>
-<p><strong>这就是为什么说 GMM + EM ≈ "软"版 K 均值</strong>：
+<p><strong>三式的统一读法</strong>：<strong>把责任度当成"软计数"，一切退化成加权版参数估计</strong></p>
+<p><strong>所以 GMM + EM ≈ "软"版 K 均值</strong>：
 K 均值是责任度退化成 0/1 的极限情形</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 364.855355 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EM 拟合高斯混合：各分量逐渐就位">
@@ -15261,7 +15261,7 @@ L 358.279688 200.946
 q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \]</div>
 <p><strong>答案：<span class="arithmatex">\(q\)</span> 取后验时下界与真值相切</strong></p>
-<p>E 步不是在"猜"，而是<strong>精确地</strong>让下界贴住真值。
+<p>E 步不是"猜"，而是<strong>精确</strong>让下界贴住真值。
 这一点保证了 EM 的单调性。</p>
 </details>
 <h3 id="2-e">例题 2：算一次完整的高斯混合 E 步<a class="headerlink" href="#2-e" title="Permanent link">&para;</a></h3>
@@ -15285,7 +15285,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \approx 0.0540
 \]</div>
 <p><strong>第二步：代入并约分。</strong></p>
-<p>分子分母的 <span class="arithmatex">\(0.5/\sqrt{2\pi}\)</span> 是<strong>公因子</strong>，直接约掉：</p>
+<p>分子分母的 <span class="arithmatex">\(0.5/\sqrt{2\pi}\)</span> 是<strong>公因子</strong>，约掉：</p>
 <div class="arithmatex">\[
 \gamma_{1} = \frac{0.2420}{0.2420+0.0540} \approx 0.818
 \]</div>
@@ -15322,11 +15322,11 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <div class="arithmatex">\[
 (x-\mu_2)^2-(x-\mu_1)^2 = -2x(\mu_2-\mu_1) + (\mu_2^2-\mu_1^2)
 \]</div>
-<p><strong>答案：比值只依赖 <span class="arithmatex">\(x\)</span> 与两个均值的相对位置（即距离差）</strong></p>
-<p>只有当<strong>先验相同、方差相同</strong>时，
+<p><strong>答案：比值只依赖 <span class="arithmatex">\(x\)</span> 与两均值的相对位置</strong></p>
+<p>只有<strong>先验、方差都相同</strong>时，
 责任度才可以简化成"按距离分配"。
-<strong>先验不同或方差不同时，这个简化就失效</strong>
-——这是用 K 均值代替 GMM 时最常见的错误来源。</p>
+<strong>先验或方差不同时，简化失效</strong>
+——这是用 K 均值代替 GMM 时最常见的错误。</p>
 </details>
 <h3 id="4em">例题 4：EM 的单调性为什么撑不住"全局最优"<a class="headerlink" href="#4em" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某人在两个不同初值下跑 EM，得到两个对数似然值
@@ -15348,13 +15348,13 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 所以 <span class="arithmatex">\(-1200\)</span> 那个是<strong>更好的解</strong></p>
 <p><strong>第三步：指出错误。</strong></p>
 <p>把「更小的数」当成更好的解，是把似然当成了损失。
-<strong>似然取的是大的，损失取的是小的</strong>
+<strong>似然取大的，损失取小的</strong>
 而且他也不该"调"到更差的那个解。</p>
 <p><strong>答案：判断错在两点 —— 方向搞反了，
 而且误以为 EM 应该收敛到全局最优</strong>。</p>
 <p>EM 的结果<strong>依赖初值</strong>，
-实践中的标准做法是<strong>多跑几个初值取最好的</strong>，
-而不是指望单次运行到达全局最优</p>
+标准做法是<strong>多跑几个初值取最好的</strong>，
+而不是指望单次运行到全局最优</p>
 </details>
 <hr />
 <h2 id="em-k">六、EM 与 K 均值的确切关系<a class="headerlink" href="#em-k" title="Permanent link">&para;</a></h2>
@@ -15369,7 +15369,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 {\displaystyle\sum_j \exp\!\left(-\dfrac{\|x_i-\mu_j\|^2}{2\sigma^2}\right)}
 \]</div>
 <p><strong>注意分子分母的 <span class="arithmatex">\(1/(\sigma\sqrt{2\pi})^d\)</span> 因子全部约掉了</strong> ——
-这就是为什么 <span class="arithmatex">\(\sigma\)</span> 趋于零时形式还能保持</p>
+这就是 <span class="arithmatex">\(\sigma\)</span> 趋于零时形式仍能保持的原因</p>
 <h3 id="62">6.2 取极限<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>记离 <span class="arithmatex">\(x_i\)</span> 最近的分量编号为 <span class="arithmatex">\(k^{\star}(i)\)</span>。把分子分母同除以
 最近那一项：</p>
@@ -15379,7 +15379,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 {\displaystyle\sum_j \exp\!\left(-\dfrac{d_{ij}^2 - d_{ik^\star}^2}{2\sigma^2}\right)}
 \]</div>
 <p>其中 <span class="arithmatex">\(d_{ik}^2 = \|x_i-\mu_k\|^2\)</span>。</p>
-<p><strong>关键观察</strong>：对<strong>非最近</strong>的分量，<span class="arithmatex">\(d_{ik}^2 - d_{ik^\star}^2 &gt; 0\)</span>，
+<p><strong>关键观察</strong>：非最近分量 <span class="arithmatex">\(d_{ik}^2 - d_{ik^\star}^2 &gt; 0\)</span>，
 所以当 <span class="arithmatex">\(\sigma \to 0\)</span> 时它的指数<strong>趋于零</strong>
 而最近那一项的指数趋于 1，分母也趋于 1。</p>
 <p><strong>于是</strong>：</p>
@@ -15391,13 +15391,13 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \end{cases}
 \]</div>
 <h3 id="63">6.3 结论<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
-<p><strong>软分配退化成硬分配</strong> —— 责任度变成了 0/1 的「胜者通吃」。</p>
+<p><strong>软分配退化成硬分配</strong> —— 责任度变成 0/1 的「胜者通吃」。</p>
 <p>把 <span class="arithmatex">\(\gamma_{ik}\)</span> 取 0 或 1 代回 M 步的均值更新式：</p>
 <div class="arithmatex">\[
 \mu_k = \frac{1}{N_k}\sum_{i\in\text{簇}\,k} x_i
 \]</div>
-<p><strong>这正是 K 均值的更新式</strong>：簇内样本的算术平均
-而 E 步（把每个点分给最近的簇）也正好是 K 均值的「分配」步。</p>
+<p><strong>这正是 K 均值的更新式</strong>：簇内样本算术平均
+而 E 步（把每个点分给最近的簇）正是 K 均值的「分配」步。</p>
 <table>
 <thead>
 <tr>
@@ -15432,11 +15432,11 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 <div class="admonition tip">
 <p class="admonition-title">这条关系有三个实用价值</p>
 <p><strong>① 解释了 K 均值的目标函数从哪来</strong> ——
-它不是一个「凭直觉定的」准则，而是对数似然在零方差极限下的形式。</p>
+它不是「凭直觉定的」准则，而是对数似然在零方差极限下的形式。</p>
 <p><strong>② 解释了 K 均值为什么没有不确定性输出</strong> ——
-方差为零时责任度必然是 0/1，不可能给出「这个点有六成属于簇一」。</p>
+方差为零时责任度必为 0/1，给不出「这个点有六成属于簇一」。</p>
 <p><strong>③ 给出了初始化的好办法</strong> ——
-由于 GMM 是 K 均值的推广，<strong>用 K 均值的结果作为 GMM 的初值</strong>
+由于 GMM 是 K 均值的推广，<strong>用 K 均值结果作 GMM 初值</strong>
 是标准做法（先粗定位，再细化）</p>
 </div>
 <hr />
@@ -15449,7 +15449,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 \approx J\,(\theta^{(t)} - \theta^{\star})
 \]</div>
 <p><strong>收敛速率由 <span class="arithmatex">\(J\)</span> 的谱半径决定</strong>：
-谱半径越小收敛越快，接近 1 就会<strong>非常慢</strong></p>
+谱半径越小越快，接近 1 就<strong>非常慢</strong></p>
 <p><strong>关键事实</strong>：<strong>EM 的收敛速率由缺失信息比例决定</strong>。</p>
 <table>
 <thead>
@@ -15473,7 +15473,7 @@ q(1) = p(z=1\mid x), \qquad q(2) = p(z=2\mid x)
 </tbody>
 </table>
 <p><strong>直观解释</strong>：当责任度接近均匀时，
-E 步「不知道」每个点属于谁 → 信息增量极小 → 每步只能挪一点点。</p>
+E 步「不知道」每个点属于谁 → 信息增量极小 → 每步只挪一点点。</p>
 <h3 id="72">7.2 加速的常见思路<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -15506,8 +15506,8 @@ E 步「不知道」每个点属于谁 → 信息增量极小 → 每步只能�
 </tr>
 </tbody>
 </table>
-<p><strong>注意第一行</strong>：<strong>一旦离开标准 EM，单调不降就不再有保证</strong> ⚠
-这是所有加速方案最需要交代清楚的一点。</p>
+<p><strong>注意第一行</strong>：<strong>一旦离开标准 EM，单调不降不再有保证</strong> ⚠
+这是所有加速方案最需交代的一点。</p>
 <hr />
 <h2 id="_6">八、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 写出含隐变量时的对数似然表达式，

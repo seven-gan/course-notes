@@ -12052,8 +12052,6 @@ e_k = R_k + \gamma\,\boldsymbol{w}^{\mathsf T}
 <div class="arithmatex">\[
 \boldsymbol{w} = \left(\Phi^{\mathsf T}\Phi\right)^{-1}\Phi^{\mathsf T}\boldsymbol{r}
 \]</div>
-<p><strong>这就是"最小二乘"这个名字的来历</strong>：
-把"贝尔曼方程的两边之差"的平方和压到最小。</p>
 <p><strong>与随机梯度下降的对比</strong>：</p>
 <table>
 <thead>
@@ -12087,7 +12085,7 @@ e_k = R_k + \gamma\,\boldsymbol{w}^{\mathsf T}
 </tbody>
 </table>
 <p>对无人系统的<strong>离线设计</strong>场景（用仿真批量采样），
-最小二乘明显更合适 —— 这也是 ADP 常用它的原因 ✓</p>
+最小二乘明显更合适。</p>
 <p><strong>这个做法的可行性靠两点保证</strong>：</p>
 <p>· <strong>样本要足够</strong>（这里举的是 200 个样本的量级），
   否则 <span class="arithmatex">\(\Phi^{\mathsf T}\Phi\)</span> 病态，解不稳定
@@ -12144,8 +12142,7 @@ e_k = R_k + \gamma\,\boldsymbol{w}^{\mathsf T}
   这两个条件是理想化的，实机上不会这么干净</p>
 <p><strong>真正落到实机会怎样</strong>：数据带量测噪声、基函数未必匹配、
 状态分布也未必覆盖工作区间。这三条任何一条变差，
-误差都会从 <span class="arithmatex">\(10^{-16}\)</span> 抬升到百分之几甚至更高 ——
-<strong>这正是 2.3 节那两条"可行性保证"的必要性所在</strong>。</p>
+误差都会从 <span class="arithmatex">\(10^{-16}\)</span> 抬升到百分之几甚至更高。</p>
 <p><strong>需要注意的边界</strong>：最小二乘给的是"在采样范围内的最优拟合"。
 若状态超出采样范围，外推不可靠 —— 这也是下一页要讲的工程问题。</p>
 <hr />
@@ -12210,7 +12207,6 @@ V(\boldsymbol{x}(t)) = \int_t^{t+T}L(\boldsymbol{x},\boldsymbol{u})\,\mathrm{d}\
 <p><strong>"求导放大噪声"是实测中很常见的失败原因</strong>：
 采样得到的 <span class="arithmatex">\(\boldsymbol{x}\)</span> 有测量噪声，
 差分求 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span> 时噪声被除以很小的 <span class="arithmatex">\(\Delta t\)</span> 而放大。</p>
-<p><strong>所以积分形式不只是"理论漂亮"，而是实测更可用的选择</strong>。</p>
 <p><strong>把上面的式子用一组具体数走一遍</strong>，
 并在过程中把一个容易踩的坑标出来。</p>
 <p>取一维系统</p>
@@ -12256,9 +12252,6 @@ P^* = \sqrt2 - 1 \approx 0.414214\]</div>
 · <strong>反解出来的是"所用增益下的值函数"</strong>：若探测增益离最优很远，
   反解值就明显偏离 <span class="arithmatex">\(P^*\)</span>，必须靠<strong>迭代改进增益</strong>才能逼到最优。
   本例只是恰好选得接近，才没有暴露这个差别</p>
-<p><strong>这组数值也解释了 3.3 节为何强调积分</strong>：
-整段计算只用 <span class="arithmatex">\(x(t)\)</span> 与 <span class="arithmatex">\(x(t+T)\)</span> 两个时刻的<strong>状态值</strong>，
-一次求导都没有 —— 量测噪声因此不会被放大。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 358.654375 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="值迭代与策略迭代：两种循环，都收敛到最优">
@@ -12831,8 +12824,6 @@ L 223.443125 188.797375
 </tr>
 </tbody>
 </table>
-<p><strong>倒数第二条要特别说</strong>：上面 3.3 节讲过积分形式对噪声更稳，
-这在实机上非常关键 —— 量测噪声是必然存在的。</p>
 <p><strong>最后一条是工程底线</strong>：ADP 是"改进"而非"替代"。
 实机上通常保留一个基本稳定的控制器，
 ADP 只在其基础上做修正，即使学习失败也能安全返回 ✓</p>
@@ -12882,8 +12873,6 @@ ADP 只在其基础上做修正，即使学习失败也能安全返回 ✓</p>
 用 LQR 解作初值时，<strong>第 1 轮系统就已经是安全的</strong>；
 零初值即使最终也能收敛，早期的控制量却可能很差。
 学习过程本身要花时间，而物理系统在这段时间里是要飞、要跑的。</p>
-<p><strong>换句话说</strong>：ADP 的价值是"在稳定基础上改进"，
-而不是"从零学起" —— 初值的选择直接决定学习早期的安全性。</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 357.134062 237.0655" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="离散 LQR：代价是状态与控制增量的加权和">

@@ -11950,7 +11950,6 @@
 <div class="arithmatex">\[
 \mathcal{Z}\{x[n]\} = \sum_n x[n]z^{-n}, \qquad z = re^{j\omega}
 \]</div>
-<p><strong>这扩大了可分析的范围</strong>，也让「稳定性」有了清晰的几何判据（极点位置）。</p>
 </div>
 <hr />
 <h2 id="z_1">一、Z 变换的定义<a class="headerlink" href="#z_1" title="Permanent link">&para;</a></h2>
@@ -11969,7 +11968,6 @@ X(z) = \sum_{n=0}^{\infty} x[n]\,z^{-n}
 X(z) = \sum_n \delta[n-k]z^{-n} = z^{-k}
 \]</div>
 <p><strong>所以「延迟 <span class="arithmatex">\(k\)</span> 个采样」对应「乘 <span class="arithmatex">\(z^{-k}\)</span>」</strong>。</p>
-<p>这解释了为什么差分方程能变成代数方程：</p>
 <div class="arithmatex">\[
 y[n] - 0.5y[n-1] = x[n]
 \quad\Longrightarrow\quad
@@ -12004,7 +12002,6 @@ H(z) = \frac{Y(z)}{X(z)} = \frac{1}{1-0.5z^{-1}}
 </tr>
 </tbody>
 </table>
-<p>系统分析从「解递归方程」变成「分析多项式的根」——<strong>容易得多</strong>。</p>
 </div>
 <h3 id="roc">收敛域（ROC）<a class="headerlink" href="#roc" title="Permanent link">&para;</a></h3>
 <p>Z 变换是无穷级数，只在某些 <span class="arithmatex">\(z\)</span> 上收敛。这个集合叫<strong>收敛域</strong>。</p>
@@ -13281,7 +13278,6 @@ L 232.931438 200.466375
 </tr>
 </tbody>
 </table>
-<p><strong>所以「极点是否在单位圆内」就是稳定性判据</strong>（下面第四节详述）。</p>
 </div>
 <hr />
 <h2 id="_3">三、由差分方程求系统函数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -13414,7 +13410,6 @@ H(e^{j\omega}) = \frac{\prod_{m}(e^{j\omega}-z_m)}{\prod_{k}(e^{j\omega}-p_k)}
 <li>零点在单位圆上 → 该频率<strong>完全阻断</strong></li>
 <li>极点在圆上 → <strong>临界振荡</strong>（不稳定）</li>
 </ul>
-<p>这是滤波器设计的基本直觉。</p>
 </div>
 <hr />
 <h2 id="fir-iir">五、两类滤波器：FIR 与 IIR<a class="headerlink" href="#fir-iir" title="Permanent link">&para;</a></h2>
@@ -13613,7 +13608,6 @@ H(z) = \frac{z}{z-0.8}
 <p><span class="arithmatex">\(\lvert a\rvert\)</span> 越接近 1，平滑越强（但响应越慢）：
 - <span class="arithmatex">\(a = 0.8\)</span>：响应较快
 - <span class="arithmatex">\(a = 0.99\)</span>：很平滑但滞后明显</p>
-<p>这就是<strong>平滑度与响应延迟的权衡</strong>。</p>
 </div>
 <hr />
 <h3 id="2">例题 2：判断极点位置与稳定性<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -13753,7 +13747,7 @@ y[n] = 0.5x[n]+0.5x[n-1]
 <p><strong>这是 FIR 的通病</strong>：对称 FIR 的延迟为 <span class="arithmatex">\((N-1)/2\)</span> 个采样
 （<span class="arithmatex">\(N\)</span> 为系数个数）。本例 <span class="arithmatex">\(N=2\)</span>，延迟 0.5</p>
 <p><strong>好处是线性相位</strong>：延迟对所有频率都一样，所以<strong>波形不失真</strong>
-（只是整体平移）。这正是一个采样、音频处理中重视的性质。</p>
+（只是整体平移）。</p>
 <p><strong>改进方向</strong>：为减少振铃，可以用加权平均（如高斯窗）代替等权平均。</p>
 </div>
 <hr />
@@ -13806,7 +13800,7 @@ H(e^{j\omega}) = 1 - e^{-j\omega}
 </table>
 <p><strong>结论</strong>：<strong>高通滤波器</strong>（阻断低频，通过高频）。</p>
 <p><strong>零点</strong>在 <span class="arithmatex">\(z = 1\)</span>（单位圆上）—— 对应 <span class="arithmatex">\(\omega = 0\)</span>，
-所以直流被完全阻断 ✓（零点位置与阻断频率对应。）</p>
+所以直流被完全阻断 ✓</p>
 <p><strong>与上一题对照</strong>：</p>
 <table>
 <thead>
@@ -13832,7 +13826,6 @@ H(e^{j\omega}) = 1 - e^{-j\omega}
 </tr>
 </tbody>
 </table>
-<p><strong>两者恰好互补</strong>：一个阻断高频、一个阻断低频。</p>
 <p><strong>组合起来</strong>：把两者级联（卷积），得</p>
 <div class="arithmatex">\[
 H_{\text{总}} = (0.5+0.5z^{-1})(1-z^{-1}) = 0.5 - 0.5z^{-2}
@@ -13918,7 +13911,6 @@ X(z) = \sum_{n=0}^{\infty}0.5^nz^{-n} = \sum_{n=0}^{\infty}\left(0.5z^{-1}\right
 <div class="arithmatex">\[
 \boxed{\ X(z) = \frac{1}{1-0.5z^{-1}}, \qquad \lvert z\rvert &gt; 0.5\ }
 \]</div>
-<p><strong>收敛域是半径 0.5 的圆外区域</strong></p>
 <p><strong>为什么 ROC 是这样的</strong>：序列是「右边序列」（<span class="arithmatex">\(n \geq 0\)</span>），
 所以 ROC 是「最外极点之外的区域」。</p>
 <p><strong>极点在 <span class="arithmatex">\(z = 0.5\)</span></strong>（分母为零处），ROC 的边界正是这个极点 ——

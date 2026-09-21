@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前面九页写的代码，都建立在一个默认前提：一切都会按预期发生 —— 变量一定有值、列表一定不越界、用户一定输入数字、文件一定在那儿。">
+    <meta name="description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前九页的代码都建立在一个默认前提：一切都会按预期发生 —— 变量有值、列表不越界、用户输入数字、文件在那儿。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="异常与调试">
   
-  <meta property="og:description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前面九页写的代码，都建立在一个默认前提：一切都会按预期发生 —— 变量一定有值、列表一定不越界、用户一定输入数字、文件一定在那儿。">
+  <meta property="og:description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前九页的代码都建立在一个默认前提：一切都会按预期发生 —— 变量有值、列表不越界、用户输入数字、文件在那儿。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/code/python/basics/errors/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="异常与调试">
   
-  <meta name="twitter:description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前面九页写的代码，都建立在一个默认前提：一切都会按预期发生 —— 变量一定有值、列表一定不越界、用户一定输入数字、文件一定在那儿。">
+  <meta name="twitter:description" content="异常与调试：这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。前九页的代码都建立在一个默认前提：一切都会按预期发生 —— 变量有值、列表不越界、用户输入数字、文件在那儿。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12947,11 +12947,8 @@
 </ul>
 </div>
 <p>这一页解决一个问题：让「出错」从「程序崩溃」变成「一条可读的信息 + 一个可控的决定」。</p>
-<p>前面九页写的代码，都建立在一个默认前提：<strong>一切都会按预期发生</strong> ——
-变量一定有值、列表一定不越界、用户一定输入数字、文件一定在那儿。</p>
-<p>真实情况几乎从不如此。Python 的做法不是「默默算出一个错的结果」，
-而是<strong>立刻停下来，抛出一个带类型的异常对象，并附上完整的调用轨迹</strong>。
-学会读这段轨迹、学会判断「谁该负责处理它」，就是这一页的全部内容。</p>
+<p>前九页的代码都建立在一个默认前提：<strong>一切都会按预期发生</strong> —— 变量有值、列表不越界、用户输入数字、文件在那儿。</p>
+<p>真实情况几乎从不如此。Python 不会「默默算出一个错结果」，而是<strong>立刻停下，抛出带类型的异常对象，并附上完整调用轨迹</strong>。学会读这段轨迹、判断「谁该负责处理它」，就是本页全部内容。</p>
 <table>
 <thead>
 <tr>
@@ -12993,14 +12990,11 @@
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
 <p>本页沿一条主线走：<strong>先把错误分类，再决定谁来处理</strong>。</p>
-<p>第二、三节教你读懂 <code>Traceback</code> 与常见异常类型，第四到六节讲 <code>try/except</code> 的完整形态与何时该主动 <code>raise</code>，
-第七到九节是 <code>assert</code> 与三种调试手段，第十节收在一张「反模式」清单上。第一到第三节是地基，读到这里就能应付大多数报错。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">这页最重要的三句话</p>
 <p>① 报错信息是唯一免费的信息来源。</p>
-<p>初学者看到一屏报错的第一反应，往往是「赶紧让它别报错」，
-于是写下 <code>except: pass</code> —— 结果把真正的 bug 一起藏了起来 ✗</p>
+<p>初学者看到一屏报错，第一反应往往是「赶紧让它别报错」，于是写下 <code>except: pass</code> —— 结果把真正的 bug 一起藏了起来 ✗</p>
 <p>正确的第一反应是问三句：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -13013,11 +13007,9 @@
 </div>
 <hr />
 <h2 id="_1">一、错误分成两大类<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>Python 遇到的错误分成<strong>两种情况</strong>，它们的处理方式完全不同。
-先分清它们，才知道下一步该看哪儿。</p>
+<p>Python 遇到的错误分<strong>两种情况</strong>，处理方式完全不同。先分清它们，才知道下一步看哪儿。</p>
 <h3 id="11">1.1 语法错误：程序根本没启动<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>Python 执行一个文件分两步：<strong>先整体编译，再逐行执行</strong>。
-只要编译不通过，<strong>一行代码都不会运行</strong> —— 连第一句 <code>print</code> 都不会执行。</p>
+<p>Python 执行文件分两步：<strong>先整体编译，再逐行执行</strong>。只要编译不通过，<strong>一行代码都不会运行</strong> —— 连第一句 <code>print</code> 都不执行。</p>
 <p>先看一段正常代码作为对照：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -13042,8 +13034,7 @@
 <pre class="kb-output"><code>SyntaxError: expected ':'</code></pre>
 <div class="admonition warning">
 <p class="admonition-title">注意输出里没有「这一行有机会执行吗？」</p>
-<p>这一句本该在<strong>第一行</strong>就执行。它没出现，说明<strong>程序根本没启动</strong> ——
-编译阶段就把整个文件拦下了</p>
+<p>这一句本该在<strong>第一行</strong>就执行。它没出现，说明<strong>程序根本没启动</strong> —— 编译阶段就把整个文件拦下了</p>
 <p><code>SyntaxError</code> 一族的特点：</p>
 <table>
 <thead>
@@ -13077,8 +13068,7 @@
 </table>
 </div>
 <h3 id="12">1.2 异常：程序跑起来之后才出事<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>第二类错误发生在<strong>运行过程中</strong>：代码本身写得没问题，编译也通过了，
-但<strong>运行到某一行时它发现这件事做不到</strong>。</p>
+<p>第二类错误发生在<strong>运行过程中</strong>：代码本身没问题，编译也通过，但<strong>运行到某一行时发现这件事做不到</strong>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -13095,9 +13085,7 @@
 <pre class="kb-output"><code>第一行执行了
 第二行也执行了
 IndexError: list index out of range</code></pre>
-<p><strong>对比上一段</strong>，这里能看到两句已经打印出来的信息 ——
-说明程序<strong>真的跑起来了</strong>，只是跑到第 4 行时撞上了 <code>IndexError</code>（下标越界），
-于是第 5 行再也没有机会执行。</p>
+<p><strong>对比上一段</strong>，这里能看到两句已打印的信息 —— 说明程序<strong>真的跑起来了</strong>，只是跑到第 4 行时撞上 <code>IndexError</code>（下标越界），于是第 5 行再没机会执行。</p>
 <p>这种「运行到某一刻才发现做不到」的情况，就叫<strong>异常</strong>（exception）。</p>
 <h3 id="13">1.3 两类错误的对照表<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <table>
@@ -13148,8 +13136,7 @@ IndexError: list index out of range</code></pre>
 </table>
 <div class="admonition warning">
 <p class="admonition-title"><code>try</code> 抓不住语法错误</p>
-<p>很多人的直觉是「把可能出错的代码用 <code>try</code> 包起来就安全了」。
-但语法错误发生在编译阶段，那时 <code>try</code> 还不存在：</p>
+<p>很多人的直觉是「把可能出错的代码用 <code>try</code> 包起来就安全了」。但语法错误发生在编译阶段，那时 <code>try</code> 还不存在：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -13165,9 +13152,7 @@ IndexError: list index out of range</code></pre>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>IndentationError: unindent does not match any outer indentation level</code></pre>
 <p>程序<strong>根本没有走到 <code>try</code></strong>，所以 <code>except</code> 里那句永远等不到执行 ✓</p>
-<p><strong>判断依据</strong>：
-<strong>报错是 <code>SyntaxError</code> / <code>IndentationError</code> 一族 → 不用想 <code>try</code>，
-回去改代码；报错是别的异常 → 才轮到 <code>try</code> 出场。</strong></p>
+<p><strong>判断依据</strong>：<strong>报错是 <code>SyntaxError</code> / <code>IndentationError</code> 一族 → 不用想 <code>try</code>，回去改代码；报错是别的异常 → 才轮到 <code>try</code> 出场。</strong></p>
 </div>
 <h3 id="14">1.4 为什么要有「异常」这套机制<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>设想另一种设计：出错就返回一个特殊值（比如 <code>-1</code> 或 <code>None</code>）。那会带来三个麻烦：</p>
@@ -13193,8 +13178,7 @@ IndexError: list index out of range</code></pre>
 </tr>
 </tbody>
 </table>
-<p>所以 Python 的选择是：
-错误必须携带信息，而且必须被处理，或者继续往上抛。</p>
+<p>所以 Python 的选择是：错误必须携带信息，必须被处理，或继续往上抛。</p>
 <hr />
 <h2 id="traceback">二、读懂 Traceback：从下往上读<a class="headerlink" href="#traceback" title="Permanent link">&para;</a></h2>
 <h3 id="21-traceback">2.1 <code>Traceback</code> 长什么样<a class="headerlink" href="#21-traceback" title="Permanent link">&para;</a></h3>
@@ -13252,8 +13236,7 @@ IndexError: list index out of range</code></pre>
 </tbody>
 </table>
 <h3 id="22-most-recent-call-last">2.2 <code>most recent call last</code> 到底在说什么<a class="headerlink" href="#22-most-recent-call-last" title="Permanent link">&para;</a></h3>
-<p>这句话的字面意思是「最近的一次调用在最后」。
-换句话说，Traceback 是<strong>按时间顺序从上往下排</strong>的：</p>
+<p>这句话的字面意思是「最近的一次调用在最后」—— Traceback <strong>按时间顺序从上往下排</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
 <span class="normal"><a href="#__codelineno-6-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a>最上面  = 最早发生的调用（程序入口）
@@ -13270,18 +13253,15 @@ IndexError: list index out of range</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">为什么必须「从下往上读」</p>
 <p>如果从上往下读，最先看到的是入口那一帧（<code>&lt;module&gt;</code>）。</p>
-<p>而入口那一帧<strong>往往完全正确</strong> —— 它只是发起了调用，本身没有任何毛病。
-盯着它看，你什么也修不了 ✗</p>
+<p>入口那一帧<strong>往往完全正确</strong> —— 它只是发起调用，本身没有任何毛病。盯着它看，什么也修不了 ✗</p>
 <p>真正的答案永远在<strong>最下面那一帧</strong>：那里才是「做不到」发生的地方 ✓</p>
 </div>
 <h3 id="23-traceback">2.3 三层函数调用：看一次真实的 Traceback<a class="headerlink" href="#23-traceback" title="Permanent link">&para;</a></h3>
 <p>下面这段代码故意制造一个三层调用链，然后在 <code>except</code> 里把 Traceback 取出来。</p>
 <p>两点说明：</p>
 <ul>
-<li>真实 Traceback 里含有<strong>运行时的临时文件路径</strong>，<strong>每次运行都不同</strong>，
-  所以这里用正则把路径替换成固定占位符 <code>script.py</code>；</li>
-<li>新版 Python 还会在出错行下方多打印一行由 <code>^</code> 和 <code>~</code> 组成的定位标记，
-  这里把它滤掉，让输出在不同版本上都一致。</li>
+<li>真实 Traceback 含<strong>运行时的临时文件路径</strong>，<strong>每次运行都不同</strong>，所以这里用正则把路径替换成固定占位符 <code>script.py</code>；</li>
+<li>新版 Python 还会在出错行下方多打印一行由 <code>^</code> 和 <code>~</code> 组成的定位标记，这里滤掉它，让输出在不同版本上一致。</li>
 </ul>
 <p><strong>其余部分（行号、函数名、类型、消息）都是真实的实跑结果</strong>：</p>
 <!--kbpy-->
@@ -13396,9 +13376,7 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>这张表说清了最重要的一件事</strong>：
-上面三帧本身都没写错，它们只是<strong>把问题一层层传了下去</strong>；
-错误真正发生在<strong>最下面那一帧的那一行代码</strong>上</p>
+<p><strong>这张表说清了最重要的一件事</strong>：上面三帧本身都没写错，只是<strong>把问题一层层传了下去</strong>；错误真正发生在<strong>最下面那一帧的那一行代码</strong>上</p>
 <h3 id="24">2.4 读报错的固定四问<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>把这套动作固定成四个问题，遇到任何报错都按顺序问一遍：</p>
 <table>
@@ -13453,8 +13431,7 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p>力气应该花在<strong>中间那几帧</strong>上：它们显示数据是怎样一层层传下去的，
-又在哪一层变得不符合预期</p>
+<p>力气该花在<strong>中间那几帧</strong>上：它们显示数据怎样一层层传下去，又在哪一层变得不符合预期</p>
 </div>
 <hr />
 <h2 id="_2">三、常见内置异常全表<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -13772,8 +13749,7 @@ L 135.502642 160.400925
 <figcaption>异常继承树：捕获父类会连子类一起抓住</figcaption>
 </figure>
 
-<p>下表是初学阶段最常撞见的十种异常。
-<strong>先建立一张「症状 → 该查什么」的对照表</strong>，之后看到报错就能直接定位方向。</p>
+<p>下表是初学阶段最常撞见的十种异常 —— <strong>先建立一张「症状 → 该查什么」的对照表</strong>，之后看到报错就能直接定位方向。</p>
 <p>每一行后面都配了一个<strong>真实跑出来的报错</strong>，下方给出对应的排查思路。</p>
 <table>
 <thead>
@@ -13877,8 +13853,7 @@ L 135.502642 160.400925
 </tr>
 </tbody>
 </table>
-<p><strong>最容易忽略的情况是「执行顺序」</strong>：
-定义语句在出错行的<strong>下面</strong> —— 代码从上往下跑，还没跑到定义就用，一样报 <code>NameError</code>。</p>
+<p><strong>最容易忽略的是「执行顺序」</strong>：定义语句在出错行的<strong>下面</strong> —— 代码从上往下跑，还没跑到定义就用，一样报 <code>NameError</code>。</p>
 <h3 id="32-typeerror">3.2 <code>TypeError</code>：类型对不上<a class="headerlink" href="#32-typeerror" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
@@ -13934,9 +13909,7 @@ L 135.502642 160.400925
 </tr>
 </tbody>
 </table>
-<p>用一句话就能分清：
-<strong><code>int(None)</code> 报 <code>TypeError</code>（<code>None</code> 这种类型压根不能转），
-<code>int("十二")</code> 报 <code>ValueError</code>（字符串可以转，但「十二」不是个数字）</strong></p>
+<p>一句话分清：<strong><code>int(None)</code> 报 <code>TypeError</code>（<code>None</code> 这种类型压根不能转），<code>int("十二")</code> 报 <code>ValueError</code>（字符串能转，但「十二」不是数字）</strong></p>
 </div>
 <h3 id="33-valueerror">3.3 <code>ValueError</code>：类型没问题，但内容不行<a class="headerlink" href="#33-valueerror" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -13945,8 +13918,7 @@ L 135.502642 160.400925
 <a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="s2">&quot;十二&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>ValueError: invalid literal for int() with base 10: '十二'</code></pre>
-<p>消息里的 <code>'十二'</code> 直接把你给的那个值原样引出来了 ——
-<strong>这就是为什么读消息比读类型更有用</strong>。</p>
+<p>消息里的 <code>'十二'</code> 直接把你给的值原样引出 —— <strong>这就是读消息比读类型更有用的原因</strong>。</p>
 <p><strong>你该问自己什么</strong>：</p>
 <table>
 <thead>
@@ -13979,8 +13951,7 @@ L 135.502642 160.400925
 <a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">codes</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>IndexError: list index out of range</code></pre>
-<p>注意消息<strong>没有告诉你到底有几个元素</strong> —— 这是 <code>IndexError</code> 最不友好的地方。
-所以排查时必须自己去看长度。</p>
+<p>注意消息<strong>没告诉你到底有几个元素</strong> —— 这是 <code>IndexError</code> 最不友好的地方。所以排查时必须自己去看长度。</p>
 <p><strong>你该问自己什么</strong>：</p>
 <table>
 <thead>
@@ -14102,9 +14073,7 @@ L 135.502642 160.400925
 <a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="s2">&quot;d&quot;</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>AttributeError: 'str' object has no attribute 'push'</code></pre>
-<p><strong>注意消息里的 <code>'str' object</code></strong> —— 它顺便告诉了你<strong>这个对象是什么类型</strong>。
-很多 <code>AttributeError</code> 的真正原因是「类型跟我想的不一样」，
-而不是「方法名记错了」。</p>
+<p><strong>注意消息里的 <code>'str' object</code></strong> —— 它顺便告诉你<strong>这个对象是什么类型</strong>。很多 <code>AttributeError</code> 的真正原因是「类型跟我想的不一样」，而不是「方法名记错了」。</p>
 <p><strong>你该问自己什么</strong>：</p>
 <table>
 <thead>
@@ -14277,8 +14246,7 @@ L 135.502642 160.400925
 <a id="__codelineno-18-4" name="__codelineno-18-4"></a>   <span class="k">return</span> <span class="n">value</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>IndentationError: unindent does not match any outer indentation level</code></pre>
-<p>消息直译是「减少缩进后，对不上任何一层外部缩进」。
-<strong>通常是三个原因之一</strong>：</p>
+<p>消息直译是「减少缩进后，对不上任何一层外部缩进」，<strong>通常是三个原因之一</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14330,12 +14298,10 @@ L 135.502642 160.400925
 </tr>
 </tbody>
 </table>
-<p><strong>一个通用的预防手段</strong>：把编辑器的「Tab 键」设置成「插入 4 个空格」，
-从此不会再有混用问题</p>
+<p><strong>一个通用的预防手段</strong>：把编辑器的「Tab 键」设置成「插入 4 个空格」，从此不会再有混用问题</p>
 </div>
 <h3 id="311">3.11 异常也有「族谱」：一眼看清继承关系<a class="headerlink" href="#311" title="Permanent link">&para;</a></h3>
-<p>看见 <code>KeyError</code> 时，你大概会想「它算不算 <code>LookupError</code>」。
-下面这段代码直接打印每种异常的祖先链，把族谱摊开：</p>
+<p>看见 <code>KeyError</code> 时，你大概会想「它算不算 <code>LookupError</code>」。下面这段代码打印每种异常的祖先链，把族谱摊开：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
@@ -14388,9 +14354,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <code>BaseException</code> 也在链上是好事，但不要捕获它</strong>：
-<code>KeyboardInterrupt</code>（用户按了中断键）和 <code>SystemExit</code> 都是它的直接子类，
-捕获它会让程序<strong>无法被正常中断</strong> ✗</p>
+<p><strong>注意 <code>BaseException</code> 也在链上是好事，但别捕获它</strong>：<code>KeyboardInterrupt</code>（用户按中断键）和 <code>SystemExit</code> 都是它的直接子类，捕获它会让程序<strong>无法被正常中断</strong> ✗</p>
 <hr />
 <h2 id="try-except-else-finally">四、<code>try</code> / <code>except</code> / <code>else</code> / <code>finally</code>：四子句的完整形态<a class="headerlink" href="#try-except-else-finally" title="Permanent link">&para;</a></h2>
 <p><code>try</code> 语句最多由<strong>四个子句</strong>组成，每个子句负责一个时机：</p>
@@ -14443,8 +14407,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 </tbody>
 </table>
 <h3 id="41">4.1 完整形态与「记录执行顺序」的验证方法<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>光看表容易记混。<strong>最可靠的验证方式是往列表里 append 标记，最后把列表打出来</strong>——
-执行顺序一目了然。</p>
+<p>光看表容易记混。<strong>最可靠的是往列表里 append 标记，最后打出来</strong>——执行顺序一目了然。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
@@ -14556,8 +14519,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <span class="normal"><a href="#__codelineno-22-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a>写在 try 里   → 这一段出错时，会被本 try 的 except 捕获
 <a id="__codelineno-22-2" name="__codelineno-22-2"></a>写在 else 里  → 这一段出错时，不会 被本 try 的 except 捕获，直接往外抛 ✓
 </code></pre></div></td></tr></table></div>
-<p><strong>这条性质让 <code>else</code> 有了真正的用途</strong>，
-第五节和例题里会各给一个具体场景</p>
+<p><strong>这条性质让 <code>else</code> 有了真正的用途</strong> —— 第五节和例题里会各给一个具体场景</p>
 <h3 id="42-else">4.2 <code>else</code> 的实际用途：把「可能出错的转换」和「后续处理」分开<a class="headerlink" href="#42-else" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -14594,8 +14556,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 '二十一'
   转换失败，返回 None
   返回: None</code></pre>
-<p>这里 <code>else</code> 里的 <code>value * 2</code> <strong>不可能因为类型问题出错</strong>，
-所以写在哪里都一样 —— 但<strong>分开放让「可能出错的部分」变得边界清晰</strong>：</p>
+<p>这里 <code>else</code> 里的 <code>value * 2</code> <strong>不可能因类型问题出错</strong>，所以写在哪里都一样 —— 但<strong>分开放让「可能出错的部分」边界清晰</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14617,11 +14578,9 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：
-<code>try</code> 块要尽可能短，只包住「你确实预判它会出错」的那几行。</p>
+<p><strong>判断依据</strong>：<code>try</code> 块要尽可能短，只包住「你确实预判它会出错」的那几行。</p>
 <h3 id="43-finally">4.3 <code>finally</code>：无论如何都要执行<a class="headerlink" href="#43-finally" title="Permanent link">&para;</a></h3>
-<p><code>finally</code> 是唯一<strong>「<code>try</code> 里发生什么都会执行」</strong>的子句。
-下面用「记录执行顺序」的方式把它的行为展示清楚：</p>
+<p><code>finally</code> 是唯一<strong>「<code>try</code> 里发生什么都会执行」</strong>的子句。下面用「记录执行顺序」把它的行为展示清楚：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
@@ -14678,12 +14637,10 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 
 异常路径: 异常路径返回值
 ['1 申请资源', '3 捕获 模拟出错', '5 finally：释放资源']</code></pre>
-<p><strong>注意两条路径里 <code>finally</code> 都是最后一个 append</strong>，
-而且<strong>它是在 <code>return</code> 已经决定要返回什么之后才执行的</strong></p>
+<p><strong>注意两条路径里 <code>finally</code> 都是最后一个 append</strong>，而且<strong>它是在 <code>return</code> 已经决定返回什么之后才执行的</strong></p>
 <div class="admonition warning">
 <p class="admonition-title"><code>finally</code> 里有 <code>return</code> 会「吃掉」原来的返回值</p>
-<p>上面两个例子里，<code>return</code> 都写在 <code>try</code> / <code>except</code> / <code>else</code> 里，
-而 <code>finally</code> 只做了 append —— 所以返回值都是预期的。</p>
+<p>上面两个例子里，<code>return</code> 都写在 <code>try</code> / <code>except</code> / <code>else</code> 里，而 <code>finally</code> 只做了 append —— 所以返回值都是预期的。</p>
 <p>但如果在 <code>finally</code> 里也写 <code>return</code>，它会<strong>覆盖</strong>之前决定的返回值：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
@@ -14725,8 +14682,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <pre class="kb-output"><code>finally 在 return 之前执行
 拿到的: try 里的返回值
 拿到的: finally 覆盖了它</code></pre>
-<p><strong><code>g()</code> 的返回值被换掉了</strong> —— 本该返回 <code>try 里的返回值</code>，
-实际返回的是 <code>finally 覆盖了它</code> ✗</p>
+<p><strong><code>g()</code> 的返回值被换掉了</strong> —— 本该返回 <code>try 里的返回值</code>，实际返回的是 <code>finally 覆盖了它</code> ✗</p>
 <p><strong>判断依据</strong>：</p>
 <table>
 <thead>
@@ -14753,8 +14709,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 <p>一句话：<strong><code>finally</code> 只管收尾，不要改变结论。</strong></p>
 </div>
 <h3 id="44-with-finally">4.4 <code>with</code> 与 <code>finally</code> 的关系<a class="headerlink" href="#44-with-finally" title="Permanent link">&para;</a></h3>
-<p>日常写文件时，我们更常看到的是 <code>with</code> 而不是手写 <code>finally</code>。
-它们的关系是：<strong><code>with</code> 在内部替你做了 <code>finally</code> 该做的事。</strong></p>
+<p>日常写文件时更常看到 <code>with</code> 而不是手写 <code>finally</code>。它们的关系是：<strong><code>with</code> 在内部替你做了 <code>finally</code> 该做的事。</strong></p>
 <p>用 <code>with</code> 的真实行为来验证这一点：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
@@ -14809,8 +14764,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 读了一行
 关闭 data.csv
 捕获 ValueError: 模拟解析失败</code></pre>
-<p><strong>看第三行</strong>：<code>关闭 data.csv</code> 出现在 <code>捕获 ...</code> <strong>之前</strong> ——
-说明 <code>with</code> 块<strong>在异常向外抛的过程中</strong>就把资源关掉了</p>
+<p><strong>看第三行</strong>：<code>关闭 data.csv</code> 出现在 <code>捕获 ...</code> <strong>之前</strong> —— 说明 <code>with</code> 块<strong>在异常向外抛的过程中</strong>就把资源关掉了</p>
 <p>这解释了为什么「<code>with</code> 比手写 <code>finally</code> 更不容易出错」：</p>
 <table>
 <thead>
@@ -14843,9 +14797,7 @@ AttributeError       的祖先链: AttributeError → Exception → BaseExceptio
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：
-<strong>对象支持 <code>with</code>（文件、连接、锁、临时目录）就一律用 <code>with</code>；
-只有当「要释放的东西不支持 <code>with</code>」时，才手写 <code>try</code> / <code>finally</code>。</strong></p>
+<p><strong>判断依据</strong>：<strong>对象支持 <code>with</code>（文件、连接、锁、临时目录）就一律用 <code>with</code>；只有当「要释放的东西不支持 <code>with</code>」时，才手写 <code>try</code> / <code>finally</code>。</strong></p>
 <hr />
 <h2 id="vs-except">五、捕获特定异常 vs 裸 <code>except</code><a class="headerlink" href="#vs-except" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 三种写法的对比<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
@@ -14942,11 +14894,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <code>KeyError</code> 的 <code>str(e)</code> 带引号</strong>：
-因为它的参数本身就是一个字符串 <code>'missing'</code>，
-而 <code>str(异常)</code> 对元组里的元素用的是 <code>repr</code> 形式。
-这不算 bug，但<strong>写日志时混用 <code>str</code> 和 <code>repr</code> 会让格式不统一</strong>，
-所以统一用 <code>f"{e}"</code> 或统一用 <code>f"{e!r}"</code> 更好</p>
+<p><strong>注意 <code>KeyError</code> 的 <code>str(e)</code> 带引号</strong>：因为它的参数本身就是字符串 <code>'missing'</code>，而 <code>str(异常)</code> 对元组里的元素用 <code>repr</code> 形式。这不算 bug，但<strong>写日志时混用 <code>str</code> 和 <code>repr</code> 会让格式不统一</strong>，所以统一用 <code>f"{e}"</code> 或统一用 <code>f"{e!r}"</code> 更好</p>
 <div class="admonition tip">
 <p class="admonition-title">接住异常后，信息不要丢</p>
 <p>捕获异常最常见的错误是「接住了却什么也没记」。三种做法按场景选：</p>
@@ -15002,8 +14950,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>--- 子类分支被写在后面 ---
 [宽] Exception 抓住了: ZeroDivisionError</code></pre>
-<p><strong>注意输出</strong>：抓走 <code>ZeroDivisionError</code> 的是<strong>宽的那一支</strong>，
-而专门为它准备的那一支<strong>一次都没被执行</strong> ✗</p>
+<p><strong>注意输出</strong>：抓走 <code>ZeroDivisionError</code> 的是<strong>宽的那一支</strong>，专门为它准备的那一支<strong>一次都没被执行</strong> ✗</p>
 <p><strong>而且这件事不报错</strong> —— 代码照样跑，只是那几行成了死代码。</p>
 <p>把顺序换过来就对了：</p>
 <!--kbpy-->
@@ -15037,8 +14984,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 <p><strong>这次两行都打印了</strong>：<code>0</code> 被窄的那一支接走，<code>None</code> 落到宽的兜底里</p>
 <div class="admonition warning">
 <p class="admonition-title">顺序错了为什么「不报错」——这才是它危险的地方</p>
-<p>Python 不会检查「后面这个 <code>except</code> 是不是永远到不了」。
-所以这类错误<strong>只能靠人看出来</strong>，编译器帮不了你。</p>
+<p>Python 不会检查「后面这个 <code>except</code> 是不是永远到不了」，所以这类错误<strong>只能靠人看出来</strong>，编译器帮不了你。</p>
 <table>
 <thead>
 <tr>
@@ -15059,15 +15005,11 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 </table>
 <p><strong>两条固定检查动作</strong>：</p>
 <ol>
-<li><strong><code>except</code> 的顺序从「窄」到「宽」排</strong> ——
-   具体异常在前，<code>Exception</code> 永远放最后 ✓</li>
-<li>写多个 <code>except</code> 时，逐个问：
-   「它上面那一支会不会已经把它抓走了？」</li>
+<li><strong><code>except</code> 顺序按「窄 → 宽」排</strong> —— 具体异常在前，<code>Exception</code> 永远放最后 ✓</li>
+<li>写多个 <code>except</code> 时逐个问：「上面那一支会不会已经把它抓走了？」</li>
 </ol>
 </div>
-<p><strong>一条容易记住的规律</strong>：
-继承链越靠下的子类越窄，越靠上的越宽。
-参考第三节 3.11 的族谱表 ——</p>
+<p><strong>一条容易记住的规律</strong>：继承链越靠下的子类越窄，越靠上的越宽。参考第三节 3.11 的族谱表 ——</p>
 <table>
 <thead>
 <tr>
@@ -15128,8 +15070,7 @@ e.args   : ("invalid literal for int() with base 10: 'abc'",)</code></pre>
 '0'      → 分母是 0
 'abc'    → 输入不是能转成整数的东西
 None     → 输入不是能转成整数的东西</code></pre>
-<p><strong>注意第三个元素 <code>None</code> 进来时抛的是 <code>TypeError</code>，第四个 <code>"abc"</code> 抛的是 <code>ValueError</code></strong>，
-但因为写成了元组，两条路走到同一个分支里</p>
+<p><strong>注意第三个元素 <code>None</code> 进来时抛 <code>TypeError</code>，第四个 <code>"abc"</code> 抛 <code>ValueError</code></strong>，但因为写成元组，两条路走到同一个分支</p>
 <table>
 <thead>
 <tr>
@@ -15186,8 +15127,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>后果是具体的</strong>：程序用了 <code>except:</code> 之后，
-用户按下中断键<strong>停不下来</strong>，脚本还会继续往下跑 ✗</p>
+<p><strong>后果很具体</strong>：程序用了 <code>except:</code> 之后，用户按下中断键<strong>停不下来</strong>，脚本还会继续往下跑 ✗</p>
 <p><strong>判断依据</strong>：</p>
 <table>
 <thead>
@@ -15218,8 +15158,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 </div>
 <hr />
 <h2 id="raise">六、<code>raise</code>：主动抛出与保留因果链<a class="headerlink" href="#raise" title="Permanent link">&para;</a></h2>
-<p>前面都是「被动的」：出了错才去接。
-<code>raise</code> 让你<strong>主动</strong>说「这里就是不对」。</p>
+<p>前面都是「被动的」：出了错才去接。<code>raise</code> 让你<strong>主动</strong>说「这里就是不对」。</p>
 <h3 id="61">6.1 主动抛出：把错误在最合适的地方说清<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
@@ -15313,8 +15252,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>在第一层记录一笔日志，然后原样抛出
 第二层收到: ValueError invalid literal for int() with base 10: 'abc'</code></pre>
-<p><strong>它解决什么问题</strong>：
-「我想在这里记一笔日志（或补充一点上下文），但<strong>处理这个错误的决定权不在我这儿</strong>」。</p>
+<p><strong>它解决什么问题</strong>：「我想在这里记一笔日志（或补充上下文），但<strong>处理这个错误的决定权不在我这儿</strong>」。</p>
 <table>
 <thead>
 <tr>
@@ -15339,15 +15277,11 @@ None     → 输入不是能转成整数的东西</code></pre>
 </table>
 <div class="admonition warning">
 <p class="admonition-title"><code>raise e</code> 与 <code>raise</code> 不是一回事</p>
-<p>写 <code>raise</code> 会<strong>保留原始的 Traceback</strong>；
-写 <code>raise e</code> 则会<strong>在当前这一行重新开始一段 Traceback</strong>，
-原来「是哪一行、哪个函数出错」的现场信息被削弱了 ✗</p>
-<p><strong>判断依据</strong>：
-只想往上抛同一个异常，就写光秃秃的 <code>raise</code>，不要加 <code>e</code>。</p>
+<p>写 <code>raise</code> 会<strong>保留原始的 Traceback</strong>；写 <code>raise e</code> 则会<strong>在当前这一行重新开始一段 Traceback</strong>，原来「哪一行、哪个函数出错」的现场信息被削弱 ✗</p>
+<p><strong>判断依据</strong>：只想往上抛同一个异常，就写光秃秃的 <code>raise</code>，别加 <code>e</code>。</p>
 </div>
 <h3 id="63-raise-from">6.3 <code>raise ... from ...</code>：保留因果链<a class="headerlink" href="#63-raise-from" title="Permanent link">&para;</a></h3>
-<p>有时你既想让错误「换个更贴近业务的名字」，又不想丢掉底层原因。
-<code>raise NewError(...) from old_error</code> 就是干这个的：<strong>它建立一条因果链</strong>。</p>
+<p>有时你既想让错误「换个更贴近业务的名字」，又不想丢掉底层原因 —— <code>raise NewError(...) from old_error</code> 就是干这个的：<strong>它建立一条因果链</strong>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-33-2"> 2</a></span>
@@ -15495,8 +15429,7 @@ None     → 输入不是能转成整数的东西</code></pre>
 <p><strong>口诀</strong>：<strong>换类型就带上 <code>from</code>，不换类型就用裸 <code>raise</code>。</strong></p>
 </div>
 <h3 id="64">6.4 自定义异常类：让错误带上结构化信息<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
-<p>内置异常够用的时候不要自己造。但当一个错误<strong>需要携带好几个字段</strong>时，
-自定义异常让调用方可以「按类型捕获、按属性取值」。</p>
+<p>内置异常够用就别自己造。但当一个错误<strong>需要携带好几个字段</strong>时，自定义异常让调用方可以「按类型捕获、按属性取值」。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
@@ -15602,13 +15535,11 @@ limit  : 250.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一条经验</strong>：<strong>自定义异常的层级宜浅不宜深。</strong>
-两三层足够表达「哪一类问题 + 具体哪种」，再多就没人记得住了 ✗</p>
+<p><strong>最后一条经验</strong>：<strong>自定义异常的层级宜浅不宜深。</strong> 两三层足够表达「哪一类问题 + 具体哪种」，再多没人记得住 ✗</p>
 <hr />
 <h2 id="assert">七、<code>assert</code>：内部一致性检查<a class="headerlink" href="#assert" title="Permanent link">&para;</a></h2>
 <h3 id="71">7.1 它是什么<a class="headerlink" href="#71" title="Permanent link">&para;</a></h3>
-<p><code>assert 条件, 消息</code> 的含义是：<strong>「我坚信这里条件一定成立；
-如果不成立，说明程序内部逻辑已经坏了，请立刻停下来告诉我。」</strong></p>
+<p><code>assert 条件, 消息</code> 的含义是：<strong>「我坚信这里条件一定成立；若不成立，说明程序内部逻辑已坏，请立刻停下告诉我。」</strong></p>
 <p>它等价于：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
 <span class="normal"><a href="#__codelineno-36-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a>if not 条件:
@@ -15648,11 +15579,8 @@ limit  : 250.0</code></pre>
 <a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">average</span><span class="p">([]))</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>AssertionError: values 不能为空</code></pre>
-<p><strong>注意消息里的逗号</strong>：<code>assert 条件, 消息</code> 的逗号<strong>不是 <code>assert</code> 语法的一部分</strong>，
-它其实是「<code>assert (条件, 消息)</code>」这样一个元组被当成条件 ——
-但因为非空元组恒为真，所以<strong>只要写成逗号形式，消息就只在条件为假时才生效</strong></p>
-<p>（不加消息时，输出里只有光秃秃的 <code>AssertionError</code>，看不出原因：
-下面这段就没有消息。）</p>
+<p><strong>注意消息里的逗号</strong>：<code>assert 条件, 消息</code> 的逗号<strong>不属于 <code>assert</code> 语法</strong>，它其实是「<code>assert (条件, 消息)</code>」这个元组被当成条件 —— 但非空元组恒为真，所以<strong>写成逗号形式时，消息只在条件为假时才生效</strong></p>
+<p>（不加消息时，输出只有光秃秃的 <code>AssertionError</code>，看不出原因：下面这段就没消息。）</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
 <span class="normal"><a href="#__codelineno-39-2">2</a></span>
@@ -15669,8 +15597,7 @@ limit  : 250.0</code></pre>
 <a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">head</span><span class="p">([]))</span>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>AssertionError</code></pre>
-<p><strong>这就是为什么断言一定要带消息</strong> —— 否则半年后看到这个报错，
-你完全想不起来当初的假设是什么 ✗</p>
+<p><strong>这就是断言一定要带消息的原因</strong> —— 否则半年后看到这个报错，你完全想不起来当初的假设 ✗</p>
 <h3 id="72-assert-if-raise">7.2 <code>assert</code> 与 <code>if + raise</code> 的区别：该用哪个<a class="headerlink" href="#72-assert-if-raise" title="Permanent link">&para;</a></h3>
 <p>两者都能「拦下不该发生的事」，但<strong>面向的对象完全不同</strong>：</p>
 <table>
@@ -15785,10 +15712,8 @@ limit  : 250.0</code></pre>
 </table>
 <p>一句话：<strong><code>assert</code> 是给自己看的便签，<code>if + raise</code> 是给调用方看的合同。</strong></p>
 <h3 id="73-o">7.3 <code>-O</code> 会禁用它：为什么不能拿它做输入校验<a class="headerlink" href="#73-o" title="Permanent link">&para;</a></h3>
-<p><code>-O</code>（大写字母 O）表示「优化模式」。
-在优化模式下，<strong>所有 <code>assert</code> 语句会被整句删除</strong>。</p>
-<p>下面这段代码把要检查的程序写进临时文件，然后<strong>分别用「不加参数」和「加 <code>-O</code>」
-两种方式各跑一次</strong>，把最后一行输出打出来对比：</p>
+<p><code>-O</code>（大写字母 O）表示「优化模式」—— 在优化模式下<strong>所有 <code>assert</code> 语句会被整句删除</strong>。</p>
+<p>下面这段把要检查的程序写进临时文件，然后<strong>分别用「不加参数」和「加 <code>-O</code>」两种方式各跑一次</strong>，把最后一行输出打出来对比：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
@@ -15867,9 +15792,7 @@ limit  : 250.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>这不是 bug，是 <code>assert</code> 的设计意图</strong>：
-它被定位成「开发期用来发现内部矛盾的辅助手段」，
-既然生产环境不该有内部矛盾，就可以省掉它。</p>
+<p><strong>这不是 bug，是 <code>assert</code> 的设计意图</strong>：它被定位成「开发期发现内部矛盾的辅助手段」，既然生产环境不该有内部矛盾，就可以省掉它。</p>
 <p><strong>由此得到一条硬性规则</strong>：</p>
 <table>
 <thead>
@@ -15893,14 +15816,11 @@ limit  : 250.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>正确做法</strong>：
-<strong>凡是「程序正确性依赖它」的检查，一律用 <code>if + raise</code></strong>，
-这样它在任何运行模式下都存在</p>
+<p><strong>正确做法</strong>：<strong>凡是「程序正确性依赖它」的检查，一律用 <code>if + raise</code></strong> —— 这样它在任何运行模式下都存在</p>
 </div>
 <hr />
 <h2 id="_3">八、三种调试方法<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>代码不报错，但结果不对 —— 这类问题叫 <strong>bug</strong>，比异常更难查，
-因为<strong>没有任何提示</strong>。三种手段按复杂度递增，先掌握第一种就够了。</p>
+<p>代码不报错，但结果不对 —— 这类问题叫 <strong>bug</strong>，比异常更难查，因为<strong>没有任何提示</strong>。三种手段按复杂度递增，先掌握第一种就够。</p>
 <table>
 <thead>
 <tr>
@@ -15976,8 +15896,7 @@ limit  : 250.0</code></pre>
 </tbody>
 </table>
 <p>方法二：用 <code>!r</code> 看隐藏字符与真实类型。</p>
-<p>这是 <code>print</code> 调试里<strong>最关键的一招</strong>。
-不带 <code>!r</code> 时，字符串 <code>"3"</code> 和数字 <code>3</code> 打印出来<strong>一模一样</strong>：</p>
+<p>这是 <code>print</code> 调试里<strong>最关键的一招</strong> —— 不带 <code>!r</code> 时，字符串 <code>"3"</code> 和数字 <code>3</code> 打印出来<strong>一模一样</strong>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
@@ -16022,9 +15941,7 @@ str int</code></pre>
 <pre class="kb-output"><code>字符串相加: 34
 转成数字相加: 7
 repr 一眼看出是字符串: ['3', '4']</code></pre>
-<p><strong>第一行结果是 <code>34</code>，不是 <code>7</code></strong> ——
-字符串的 <code>+</code> 是<strong>拼接</strong>，数字的 <code>+</code> 才是<strong>相加</strong>。
-两个结果都不会报错，所以<strong>只能靠 <code>!r</code> 发现</strong> ✗</p>
+<p><strong>第一行结果是 <code>34</code>，不是 <code>7</code></strong> —— 字符串的 <code>+</code> 是<strong>拼接</strong>，数字的 <code>+</code> 才是<strong>相加</strong>。两个结果都不报错，所以<strong>只能靠 <code>!r</code> 发现</strong> ✗</p>
 <p><strong>方法三：用 <code>!r</code> 抓「看不见的字符」。</strong></p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
@@ -16041,8 +15958,7 @@ repr 一眼看出是字符串: ['3', '4']</code></pre>
 repr 出来 : '  25.4\u3000'
 长度: 7
 strip 后 : '25.4'</code></pre>
-<p><strong>对比前两行</strong>：<code>print</code> 出来只是一个「后面多了点空白」的普通字符串，
-而 <code>repr</code> 直接告诉你结尾是 <code>\u3000</code>（全角空格）、开头有两个普通空格</p>
+<p><strong>对比前两行</strong>：<code>print</code> 出来只是一个「后面多了点空白」的普通字符串，而 <code>repr</code> 直接告诉你结尾是 <code>\u3000</code>（全角空格）、开头有两个普通空格</p>
 <div class="admonition tip">
 <p class="admonition-title">三种「一看就知道」的调试打印</p>
 <table>
@@ -16079,8 +15995,7 @@ strip 后 : '25.4'</code></pre>
 <pre class="kb-output"><code>i=1, total=1
 i=2, total=3
 i=3, total=6</code></pre>
-<p><code>i=1, total=1</code> 这种「变量名 = 值」的格式<strong>复制到笔记里就能直接看懂</strong>，
-比 <code>print(i, total)</code> 有用得多</p>
+<p><code>i=1, total=1</code> 这种「变量名 = 值」的格式<strong>复制到笔记里就能直接看懂</strong>，比 <code>print(i, total)</code> 有用得多</p>
 </div>
 <p><strong>一次性抓到出错现场</strong>：把标记加在函数入口，出错时就能看到「收到的是什么」。</p>
 <!--kbpy-->
@@ -16105,9 +16020,7 @@ i=3, total=6</code></pre>
 <pre class="kb-output"><code>求和……
 进入函数，收到: [88, 92, '缺考']
 TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
-<p><strong>三行信息足以定位问题</strong>：
-传进来的列表里<strong>混进了一个字符串 <code>'缺考'</code></strong>，
-而 <code>sum()</code> 只接受数字 —— 问题不在 <code>sum()</code>，在<strong>数据来源</strong>上</p>
+<p><strong>三行信息足以定位问题</strong>：传进来的列表里<strong>混进了一个字符串 <code>'缺考'</code></strong>，而 <code>sum()</code> 只接受数字 —— 问题不在 <code>sum()</code>，在<strong>数据来源</strong>上</p>
 <p><strong><code>print</code> 调试的局限</strong>（该换工具的信号）：</p>
 <table>
 <thead>
@@ -16136,8 +16049,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
 </tbody>
 </table>
 <h3 id="82">8.2 断点调试：让程序停下来让你看<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
-<p><code>print</code> 的替代方案是在代码里打一个<strong>断点</strong>（breakpoint）——
-程序运行到那一行时<strong>暂停</strong>，把控制权交给你。</p>
+<p><code>print</code> 的替代方案是打一个<strong>断点</strong>（breakpoint）—— 程序运行到那一行时<strong>暂停</strong>，把控制权交给你。</p>
 <p><strong>在编辑器里的典型操作</strong>（各编辑器按钮位置不同，名称基本一致）：</p>
 <table>
 <thead>
@@ -16277,9 +16189,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>第三步是最容易被跳过、也最省事的一步</strong>：
-很多 bug 在<strong>函数入口</strong>就已经是错的（参数传错了），
-再往里单步就白走了。</p>
+<p><strong>第三步最容易被跳过，也最省事</strong>：很多 bug 在<strong>函数入口</strong>就已经错了（参数传错），再往里单步就白走了。</p>
 </div>
 <h3 id="83-logging-print">8.3 <code>logging</code> 模块：比 <code>print</code> 好在哪<a class="headerlink" href="#83-logging-print" title="Permanent link">&para;</a></h3>
 <p><code>print</code> 的问题是<strong>它没有开关</strong>。日志（logging）把它系统化了：</p>
@@ -16361,8 +16271,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>一条关键规则</strong>：
-设置 <code>level</code> 之后，低于该级别的消息会被直接丢弃。</p>
+<p><strong>一条关键规则</strong>：设置 <code>level</code> 之后，低于该级别的消息会被直接丢弃。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-48-2"> 2</a></span>
@@ -16396,8 +16305,7 @@ TypeError: unsupported operand type(s) for +: 'int' and 'str'</code></pre>
 WARNING|root|警告：数据里有一行缺字段
 ERROR|root|错误：解析失败，跳过该行
 CRITICAL|root|致命：无法继续</code></pre>
-<p><strong>注意第一行 <code>DEBUG</code> 那句话没有出现</strong> —— 因为 <code>level=logging.INFO</code>，
-比 <code>INFO</code> 低的都被丢掉了</p>
+<p><strong>注意第一行 <code>DEBUG</code> 那句话没有出现</strong> —— 因为 <code>level=logging.INFO</code>，比 <code>INFO</code> 低的都被丢掉了</p>
 <p>把级别调成 <code>DEBUG</code> 后，同一句话就出现了：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-49-1"> 1</a></span>
@@ -16424,12 +16332,9 @@ CRITICAL|root|致命：无法继续</code></pre>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>DEBUG|root|细节：正在准备数据（level=DEBUG 时能看见）
 INFO|root|正常：开始处理</code></pre>
-<p><strong>这就是分级的意义</strong>：
-<strong>调试时调成 <code>DEBUG</code> 看全，上线时调成 <code>INFO</code> 或 <code>WARNING</code></strong>，
-不用动一行业务代码</p>
+<p><strong>这就是分级的意义</strong>：<strong>调试时调成 <code>DEBUG</code> 看全，上线时调成 <code>INFO</code> 或 <code>WARNING</code></strong>，不用动一行业务代码</p>
 <p><strong>输出到文件：换一个 <code>Handler</code> 就行。</strong></p>
-<p>下面这段把日志写进一个临时文件，然后<strong>读回来打印</strong>，
-这样既能验证内容，又不会污染程序自己的标准输出：</p>
+<p>下面这段把日志写进一个临时文件，然后<strong>读回来打印</strong> —— 既能验证内容，又不会污染程序自己的标准输出：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-50-2"> 2</a></span>
@@ -16545,8 +16450,7 @@ WARNING|demo|警告：第 2 行缺字段</code></pre>
 <p>日志写在热点循环里时，这个差别会变成真实的开销</p>
 <p><strong>判断依据</strong>：<strong>日志调用一律用 <code>%s</code> 风格占位；拼给人看的普通输出才用 f-string。</strong></p>
 </div>
-<p><strong>只对日志说「出错时带上完整轨迹」</strong>：<code>exc_info=True</code>
-（路径已替换为占位符、并滤掉版本相关的定位行）：</p>
+<p><strong>只对日志说「出错时带上完整轨迹」</strong>：<code>exc_info=True</code>（路径已替换为占位符、并滤掉版本相关的定位行）：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-52-2"> 2</a></span>
@@ -16624,10 +16528,7 @@ Traceback (most recent call last):
   File "script.py", line 16, in &lt;module&gt;
     value = int("abc")
 ValueError: invalid literal for int() with base 10: 'abc'</code></pre>
-<p><strong><code>exc_info=True</code> 的价值</strong>：
-你在<strong>捕获异常的地方</strong>记了一句人话（「解析失败，已跳过该条」），
-同时把<strong>完整的技术细节</strong>（类型、消息、位置）也一起留在了日志里，
-之后排查时两样都有</p>
+<p><strong><code>exc_info=True</code> 的价值</strong>：你在<strong>捕获异常的地方</strong>记一句人话（「解析失败，已跳过该条」），同时把<strong>完整的技术细节</strong>（类型、消息、位置）也留在日志里，之后排查时两样都有</p>
 <p><strong>把「跳过」这类事记成 WARNING 的完整例子</strong>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
@@ -16755,15 +16656,11 @@ INFO    |etl|第 3 行正常: 3.789
 </tr>
 </tbody>
 </table>
-<p><strong>一条实用经验</strong>：
-先用 <code>print</code> 加 <code>!r</code> 快速试；发现要加五个以上 <code>print</code> 时，就换断点。</p>
+<p><strong>一条实用经验</strong>：先用 <code>print</code> 加 <code>!r</code> 快速试；发现要加五个以上 <code>print</code> 时，就换断点。</p>
 <hr />
 <h2 id="traceback_1">九、<code>traceback</code> 模块：程序里主动取出完整错误信息<a class="headerlink" href="#traceback_1" title="Permanent link">&para;</a></h2>
-<p>默认情况下，异常往上抛到最外层时 Python 会自动打印 Traceback。
-但如果你想<strong>自己拿到这段文本</strong>（写进日志、发给用户、存进数据库），
-就需要 <code>traceback</code> 模块。</p>
-<p>最常用的一个函数是 <strong><code>traceback.format_exc()</code></strong>：
-它<strong>只能在 <code>except</code> 块里用</strong>，返回<strong>当前正在处理的这个异常</strong>的完整 Traceback 字符串。</p>
+<p>默认情况下，异常抛到最外层时 Python 会自动打印 Traceback。但如果你想<strong>自己拿到这段文本</strong>（写进日志、发给用户、存进数据库），就需要 <code>traceback</code> 模块。</p>
+<p>最常用的函数是 <strong><code>traceback.format_exc()</code></strong>：它<strong>只能在 <code>except</code> 块里用</strong>，返回<strong>当前正在处理的这个异常</strong>的完整 Traceback 字符串。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-54-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-54-2"> 2</a></span>
@@ -16871,8 +16768,7 @@ ZeroDivisionError: division by zero</code></pre>
 完整轨迹有几行: 5</code></pre>
 <div class="admonition warning">
 <p class="admonition-title">别把完整 Traceback 直接甩给用户</p>
-<p>Traceback 里有<strong>文件名、路径、函数名、内部变量名</strong>。
-对开发者是宝，对普通使用者是一屏看不懂的噪音。</p>
+<p>Traceback 里有<strong>文件名、路径、函数名、内部变量名</strong> —— 对开发者是宝，对普通使用者是一屏看不懂的噪音。</p>
 <table>
 <thead>
 <tr>
@@ -16926,13 +16822,10 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么最外层可以写 <code>except Exception</code></strong>：
-因为那一层本来就<strong>不打算处理</strong>，只打算<strong>记录并体面地退出</strong>
-这是「捕获过宽」唯一被认可的用法。</p>
+<p><strong>为什么最外层可以写 <code>except Exception</code></strong>：那一层本来就<strong>不打算处理</strong>，只打算<strong>记录并体面地退出</strong> —— 这是「捕获过宽」唯一被认可的用法。</p>
 <hr />
 <h2 id="_4">十、异常处理的反模式<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>下面三种写法<strong>在语法上完全正确</strong>，在真实项目里也很常见 ——
-但它们会<strong>悄悄制造出比原始错误更难查的问题</strong>。</p>
+<p>下面三种写法<strong>语法上完全正确</strong>，在真实项目里也很常见 —— 但它们会<strong>悄悄制造出比原始错误更难查的问题</strong>。</p>
 <h3 id="101-except-pass">10.1 反模式一：<code>except: pass</code> 静默吞掉<a class="headerlink" href="#101-except-pass" title="Permanent link">&para;</a></h3>
 <p>症状：什么都不做，把错误删掉。</p>
 <!--kbpy-->
@@ -16960,8 +16853,7 @@ ZeroDivisionError: division by zero</code></pre>
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>合计: 15
 读了 4 行，只统计进 3 行，却一句提示都没有</code></pre>
-<p><strong>程序不报错、不崩溃、结果看起来还挺正常</strong> ——
-但它是<strong>错的</strong>：把 4 行里的 3 行加起来当成了全部数据 ✗</p>
+<p><strong>程序不报错、不崩溃、结果看起来还挺正常</strong> —— 但它是<strong>错的</strong>：把 4 行里的 3 行加起来当成了全部数据 ✗</p>
 <p>如果这行数据决定的是报表金额、油耗、实验结论，后果就不用多说了。</p>
 <p><strong>更糟的一种情况</strong>：被吞掉的其实是一个<strong>代码 bug</strong>，而不是数据问题：</p>
 <!--kbpy-->
@@ -16988,9 +16880,7 @@ ZeroDivisionError: division by zero</code></pre>
 <pre class="kb-output"><code>结果: 42
 结果: None
 调用者完全不知道第二行出了什么问题</code></pre>
-<p><strong>注意第二个结果 <code>None</code></strong> ——
-调用方拿到它之后，很可能把它当成「数据缺失」，然后继续往下算，
-一路算出一个错误的最终结果 ✗</p>
+<p><strong>注意第二个结果 <code>None</code></strong> —— 调用方拿到它之后，很可能把它当成「数据缺失」，然后继续往下算，一路算出一个错误结果 ✗</p>
 <div class="admonition warning">
 <p class="admonition-title"><code>except: pass</code> 的三种正确替代</p>
 <p>问题不在于「不该吞」，而在于<strong>吞掉之后什么都没留下</strong>。三种替代写法：</p>
@@ -17016,15 +16906,11 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>一条固定检查动作</strong>：
-看到 <code>pass</code> 跟在 <code>except</code> 后面，就问一句「那错误去哪儿了？」
-答不上来，就说明这行代码有问题</p>
+<p><strong>一条固定检查动作</strong>：看到 <code>pass</code> 跟在 <code>except</code> 后面，就问一句「那错误去哪儿了？」答不上来，这行代码就有问题</p>
 </div>
 <h3 id="102">10.2 反模式二：用异常做正常流程控制<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
 <p><strong>症状：把「异常」当成「另一种 <code>if</code>」。</strong></p>
-<p>异常机制的开销<strong>明显高于普通判断</strong>，
-更重要的是：<strong>异常的本意是「意外」，不是「常规分支」</strong>。
-用它做流程控制，会让<strong>真正该重视的异常淹没在大量常规异常里</strong>。</p>
+<p>异常机制的开销<strong>明显高于普通判断</strong>，更重要的是：<strong>异常的本意是「意外」，不是「常规分支」</strong> —— 用它做流程控制，会让<strong>真正该重视的异常淹没在大量常规异常里</strong>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
@@ -17129,10 +17015,7 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>一个例外要说清</strong>：
-「先做再处理」这种风格（EAFP）在 Python 里<strong>是受推荐的</strong>，
-典型例子就是 <code>try: int(text) except ValueError:</code> —— 它比
-「先用正则判断 <code>text</code> 是不是数字，再转」<strong>更可靠也更简洁</strong></p>
+<p><strong>一个例外要说清</strong>：「先做再处理」这种风格（EAFP）在 Python 里<strong>是受推荐的</strong>，典型例子就是 <code>try: int(text) except ValueError:</code> —— 它比「先用正则判断 <code>text</code> 是不是数字，再转」<strong>更可靠也更简洁</strong></p>
 <p>判断的界线是：</p>
 <table>
 <thead>
@@ -17208,9 +17091,7 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>真正的问题在代码里，不在数据里</strong> ——
-但宽泛的 <code>except</code> 让它看起来像数据问题，
-于是排查方向从一开始就错了 ✗</p>
+<p><strong>真正的问题在代码里，不在数据里</strong> —— 但宽泛的 <code>except</code> 让它看起来像数据问题，于是排查方向从一开始就错了 ✗</p>
 <p><strong>类似的「好心办坏事」还有一个</strong>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
@@ -17236,9 +17117,7 @@ ZeroDivisionError: division by zero</code></pre>
 <pre class="kb-output"><code>abc
 [参数类型不对]
 这个 except 把真正的调用错误也变成了一个普通字符串</code></pre>
-<p><strong>第二行的 <code>"3"</code> 本该让程序直接崩掉</strong>（这是调用方的 bug），
-但这里把它变成了一个<strong>字符串返回值</strong> ——
-于是错误会<strong>继续往下漂</strong>，在很远的地方以另一种面目出现 ✗</p>
+<p><strong>第二行的 <code>"3"</code> 本该让程序直接崩掉</strong>（这是调用方的 bug），但这里把它变成了一个<strong>字符串返回值</strong> —— 于是错误会<strong>继续往下漂</strong>，在很远的地方以另一种面目出现 ✗</p>
 <div class="admonition warning">
 <p class="admonition-title">「捕获过宽」的两种典型帮凶</p>
 <table>
@@ -17262,11 +17141,8 @@ ZeroDivisionError: division by zero</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>一条用来自查的规律</strong>：
-<strong>异常类型越多、<code>except</code> 块里的处理越「简单」（<code>pass</code> / <code>return None</code> / <code>return 0</code>），
-这段代码就越可疑。</strong></p>
-<p><strong>正确的宽捕获</strong>只有一个姿势 ——
-<strong>在最外层兜底：记完整日志，然后重新抛出或体面退出</strong></p>
+<p><strong>一条用来自查的规律</strong>：<strong>异常类型越多、<code>except</code> 块里的处理越「简单」（<code>pass</code> / <code>return None</code> / <code>return 0</code>），这段代码就越可疑。</strong></p>
+<p><strong>正确的宽捕获</strong>只有一个姿势 —— <strong>在最外层兜底：记完整日志，然后重新抛出或体面退出</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1">1</a></span>
 <span class="normal"><a href="#__codelineno-62-2">2</a></span>
 <span class="normal"><a href="#__codelineno-62-3">3</a></span>
@@ -17406,9 +17282,7 @@ ZeroDivisionError: division by zero</code></pre>
 <span class="normal"><a href="#__codelineno-64-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1"></a>def compute_ratio(a, b):
 <a id="__codelineno-64-2" name="__codelineno-64-2"></a>    return a / b
 </code></pre></div></td></tr></table></div>
-<p>如果 <code>b</code> 是<strong>自己刚算出来的</strong>，那它变成 <code>0</code> 说明<strong>上面的计算有 bug</strong>。
-这时写 <code>except ZeroDivisionError: return 0</code> 是<strong>最坏的选择</strong> ——
-它把「计算错了」变成了「比值是 0」，然后一路算下去 ✗</p>
+<p>如果 <code>b</code> 是<strong>自己刚算出来的</strong>，那它变成 <code>0</code> 说明<strong>上面的计算有 bug</strong>。这时写 <code>except ZeroDivisionError: return 0</code> 是<strong>最坏的选择</strong> —— 它把「计算错了」变成「比值是 0」，然后一路算下去 ✗</p>
 <p><strong>正确做法</strong>：让它崩，然后去修<strong>为什么分母会变成 0</strong>。</p>
 <p><strong>情况二：参数类型写错了。</strong></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1">1</a></span>
@@ -17421,8 +17295,7 @@ ZeroDivisionError: division by zero</code></pre>
 <a id="__codelineno-65-4" name="__codelineno-65-4"></a>    except Exception:
 <a id="__codelineno-65-5" name="__codelineno-65-5"></a>        return None
 </code></pre></div></td></tr></table></div>
-<p>调用方传了 <code>None</code> 进来时，<code>int(None)</code> 抛的是 <code>TypeError</code> ——
-<strong>这是调用方的 bug</strong>，不该被当成「值不合法」处理 ✗</p>
+<p>调用方传了 <code>None</code> 进来时，<code>int(None)</code> 抛的是 <code>TypeError</code> —— <strong>这是调用方的 bug</strong>，不该被当成「值不合法」处理 ✗</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-66-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-66-2"> 2</a></span>
@@ -17448,11 +17321,9 @@ ZeroDivisionError: division by zero</code></pre>
 '十二'   → None
 None   → None
 第三个其实是调用者传错了类型，不该被当成「值不合法」处理</code></pre>
-<p><strong>注意后两行的 <code>None</code> 完全一样</strong> ——
-从返回值上根本看不出「一个是数据问题，一个是代码问题」✗</p>
+<p><strong>注意后两行的 <code>None</code> 完全一样</strong> —— 从返回值上根本看不出「一个是数据问题，一个是代码问题」✗</p>
 <p><strong>情况三：配置缺失、依赖没装。</strong></p>
-<p>缺配置、缺依赖都是<strong>应该在启动时就炸掉</strong>的问题。
-偷偷用默认值继续跑，会让程序在<strong>一个没人知道的错误配置下</strong>运行很久 ✗</p>
+<p>缺配置、缺依赖都是<strong>该在启动时就炸掉</strong>的问题。偷偷用默认值继续跑，会让程序在<strong>一个没人知道的错误配置下</strong>运行很久 ✗</p>
 <h3 id="113-try">11.3 该用 <code>try</code> 的四种典型情况<a class="headerlink" href="#113-try" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -17485,8 +17356,7 @@ None   → None
 </tr>
 </tbody>
 </table>
-<p><strong>四种情况有个共同点</strong>：
-它们出错的原因都在程序之外，而且你处理完之后「结果是正确的」。</p>
+<p><strong>四种情况有个共同点</strong>：它们出错的原因都在程序之外，而且处理完之后「结果是正确的」。</p>
 <h3 id="114">11.4 一条总原则<a class="headerlink" href="#114" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-67-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1"></a>好代码让错误尽早暴露 —— 而且暴露在最接近现场的地方。
 </code></pre></div></td></tr></table></div>
@@ -17592,8 +17462,7 @@ None   → None
 <hr />
 <h2 id="_5">十二、典型例题<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="1-traceback">例题 1：读一段 Traceback，指出真正的出错位置<a class="headerlink" href="#1-traceback" title="Permanent link">&para;</a></h3>
-<p>下面这段代码在运行时报错了。请从 Traceback 里指出：
-真正的问题出在哪一行？为什么上面那几行不是问题？</p>
+<p>下面这段代码在运行时报错。请从 Traceback 里指出：真正的问题出在哪一行？为什么上面那几行不是问题？</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-68-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-68-2"> 2</a></span>
@@ -17673,8 +17542,8 @@ IndexError: list index out of range</code></pre>
 <ol>
 <li>异常类型是什么？消息说了什么？</li>
 <li>最下面那一帧在哪一行、哪个函数？</li>
-<li>从下往上看，三个参数是怎样被传下去的？</li>
-<li>哪一行代码<strong>真正做了做不到的事</strong>？</li>
+<li>从下往上看，三个参数怎样被传下去？</li>
+<li>哪一行<strong>真正做了做不到的事</strong>？</li>
 </ol>
 <p>提示：<code>"101.5".split()</code> 得到几个元素？</p>
 </details>
@@ -17736,8 +17605,7 @@ IndexError: list index out of range</code></pre>
 <pre class="kb-output"><code>split 得到: ['101.5']
 元素个数: 1
 parts[1] 取得到吗: False</code></pre>
-<p><strong>两个元素的期望落空了</strong> —— 这一行只有「值」，没有「权重」，
-所以 <code>parts[1]</code> 越界</p>
+<p><strong>两个元素的期望落空了</strong> —— 这一行只有「值」没有「权重」，所以 <code>parts[1]</code> 越界</p>
 <p>第四步：上面两帧为什么不是问题</p>
 <table>
 <thead>
@@ -17769,10 +17637,7 @@ parts[1] 取得到吗: False</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>关键认识</strong>：
-<strong>中间几帧的作用是「把错误现场指给你看」</strong> ——
-它们告诉你「这个 <code>"101.5"</code> 是从 <code>rows</code> 里、经过 <code>summarize</code> 传进来的」，
-但你<strong>不该去改它们</strong>，</p>
+<p><strong>关键认识</strong>：<strong>中间几帧的作用是「把错误现场指给你看」</strong> —— 它们告诉你「这个 <code>"101.5"</code> 是从 <code>rows</code> 里、经过 <code>summarize</code> 传进来的」，但你<strong>不该去改它们</strong>，</p>
 <p>改法一：让函数把假设说明白（推荐）</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-1"> 1</a></span>
@@ -17880,9 +17745,7 @@ parts[1] 取得到吗: False</code></pre>
 </details>
 <hr />
 <h3 id="2">例题 2：把一段批量处理改造成「跳过坏数据但不静默」<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>下面这段代码在处理一批读数时用 <code>except: pass</code> 跳过坏数据。
-请指出它的危害，并改写成「跳过但仍可追溯」的版本。
-输入数据是：</p>
+<p>下面这段代码处理一批读数时用 <code>except: pass</code> 跳过坏数据。请指出它的危害，并改写成「跳过但仍可追溯」的版本。输入数据是：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1"></a>records = [&quot;25.4&quot;, &quot;101.5&quot;, &quot;缺测&quot;, &quot;3.789&quot;, &quot;&quot;]
 </code></pre></div></td></tr></table></div>
 <details class="note">
@@ -17890,7 +17753,7 @@ parts[1] 取得到吗: False</code></pre>
 <p>先自己想三个问题：</p>
 <ol>
 <li><code>except: pass</code> 之后，调用方<strong>能知道跳过了几条</strong>吗？</li>
-<li>「跳过」这个动作应该记成哪个级别？</li>
+<li>「跳过」该记成哪个级别？</li>
 <li>被跳过的<strong>具体是哪些值</strong>，以后还能查出来吗？</li>
 </ol>
 <p>再想想：<code>float("")</code> 抛的是哪一类异常？它跟 <code>float("缺测")</code> 是同一类吗？</p>
@@ -17963,8 +17826,7 @@ parts[1] 取得到吗: False</code></pre>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>'缺测'     → ValueError: could not convert string to float: '缺测'
 ''       → ValueError: could not convert string to float: ''</code></pre>
-<p>两者<strong>都是 <code>ValueError</code></strong> —— 所以一个
-<code>except ValueError:</code> 就能覆盖，不需要宽捕获</p>
+<p>两者<strong>都是 <code>ValueError</code></strong> —— 所以一个 <code>except ValueError:</code> 就能覆盖，不需要宽捕获</p>
 <p>第三步：改造成「跳过 + 可追溯」的版本</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-76-1"> 1</a></span>
@@ -18101,9 +17963,7 @@ WARNING |第 3 行跳过，不是数字: '缺测'
 INFO    |第 4 行正常
 WARNING |第 5 行跳过，不是数字: ''
 有效 3 条 / 共 5 条</code></pre>
-<p><strong>判断依据</strong>：
-<strong>「跳过」不是「忽略」</strong> ——
-跳过必须<strong>留下可核对的数量与内容</strong>，否则数据对不上时无从查起 ✓</p>
+<p><strong>判断依据</strong>：<strong>「跳过」不是「忽略」</strong> —— 跳过必须<strong>留下可核对的数量与内容</strong>，否则数据对不上时无从查起 ✓</p>
 </details>
 <hr />
 <h3 id="3">例题 3：设计一个自定义异常并保留因果链<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -18143,8 +18003,7 @@ WARNING |第 5 行跳过，不是数字: ''
 </tr>
 </tbody>
 </table>
-<p>提示：<code>raise ... from ...</code> 用在<strong>能把下层异常接住的那一次</strong>；
-而 <code>-5</code> 这种情况<strong>根本没有下层异常</strong>，该怎么写？</p>
+<p>提示：<code>raise ... from ...</code> 用在<strong>能把下层异常接住的那一次</strong>；而 <code>-5</code> 这种情况<strong>根本没有下层异常</strong>，该怎么写？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -18153,9 +18012,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <span class="normal"><a href="#__codelineno-78-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1"></a>class ConfigError(Exception):
 <a id="__codelineno-78-2" name="__codelineno-78-2"></a>    &quot;&quot;&quot;配置文件有问题。&quot;&quot;&quot;
 </code></pre></div></td></tr></table></div>
-<p>只需要继承 <code>Exception</code>。
-这里不写自定义 <code>__init__</code>，因为消息里要带的信息<strong>一句话就能说完</strong>，
-没必要拆成结构化字段</p>
+<p>只需要继承 <code>Exception</code>。这里不写自定义 <code>__init__</code>，因为要带的信息<strong>一句话就能说完</strong>，没必要拆成结构化字段</p>
 <p>第二步：写转换函数，两种情况分开处理</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-79-1"> 1</a></span>
@@ -18260,8 +18117,7 @@ WARNING |第 5 行跳过，不是数字: ''
 </tr>
 </tbody>
 </table>
-<p><strong>为什么 <code>-5</code> 里不加 <code>from None</code></strong>：因为根本没有 <code>__context__</code> 需要切断，
-加了只会让人以为「这里本来有别的异常被隐藏了」。</p>
+<p><strong>为什么 <code>-5</code> 里不加 <code>from None</code></strong>：因为根本没有 <code>__context__</code> 需要切断，加了只会让人以为「这里本来有别的异常被隐藏了」。</p>
 <p>第四步：消息里为什么用 <code>{text!r}</code> 而不是 <code>{text}</code></p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-80-1">1</a></span>
@@ -18277,8 +18133,7 @@ WARNING |第 5 行跳过，不是数字: ''
 <pre class="kb-output"><code>不转换直接显示: 收到 三十
 不转换直接显示: 收到  30 
 不转换直接显示: 收到 30</code></pre>
-<p><strong>最后一行「收到 30」和第一行的「30」看起来一样</strong>，
-但其实一个带换行、一个不带 —— 用 <code>!r</code> 就能看出区别：</p>
+<p><strong>最后一行「收到 30」和第一行的「30」看起来一样</strong>，但其实一个带换行、一个不带 —— 用 <code>!r</code> 就能看出区别：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-81-1">1</a></span>
 <span class="normal"><a href="#__codelineno-81-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1"></a><span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;三十&quot;</span><span class="p">,</span> <span class="s2">&quot; 30 &quot;</span><span class="p">,</span> <span class="s2">&quot;30</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]:</span>
@@ -18287,12 +18142,9 @@ WARNING |第 5 行跳过，不是数字: ''
 <pre class="kb-output"><code>用 !r 显示    : 收到 '三十'
 用 !r 显示    : 收到 ' 30 '
 用 !r 显示    : 收到 '30\n'</code></pre>
-<p><strong>报错消息里用 <code>!r</code> 是标准做法</strong> ——
-它把空格、换行、全角字符都暴露出来，
-而报错消息的读者永远在<strong>追查数据问题</strong> ✓</p>
+<p><strong>报错消息里用 <code>!r</code> 是标准做法</strong> —— 它把空格、换行、全角字符都暴露出来，而报错消息的读者永远在<strong>追查数据问题</strong> ✓</p>
 <p>第五步：如果异常需要更多字段，就加 <code>__init__</code></p>
-<p>上面用一句消息就够了。但如果调用方想<strong>按字段处理</strong>
-（比如把 <code>channel</code> 传给别的系统），就需要结构化信息：</p>
+<p>上面用一句消息就够了。但如果调用方想<strong>按字段处理</strong>（比如把 <code>channel</code> 传给别的系统），就需要结构化信息：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-82-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-82-2"> 2</a></span>
@@ -18375,9 +18227,7 @@ value  : 260.0</code></pre>
 </details>
 <hr />
 <h3 id="4-try">例题 4：判断该用 <code>try</code> 还是该让它崩，并改造一段反模式代码<a class="headerlink" href="#4-try" title="Permanent link">&para;</a></h3>
-<p>下面这段代码检查一批速度读数是否超限，但它<strong>既能吞掉数据问题，
-也能吞掉代码 bug</strong>。请指出问题，并改成「数据问题照常处理、
-代码 bug 立刻暴露」的版本。输入数据是：</p>
+<p>下面这段代码检查一批速度读数是否超限，但它<strong>既能吞掉数据问题，也能吞掉代码 bug</strong>。请指出问题，并改成「数据问题照常处理、代码 bug 立刻暴露」的版本。输入数据是：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-83-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1"></a>raw_lines = [&quot;A-001,25.4&quot;, &quot;B-002&quot;, &quot;C-003,3.789&quot;, &quot;D-004,abc&quot;]
 </code></pre></div></td></tr></table></div>
 <details class="note">
@@ -18470,9 +18320,7 @@ value  : 260.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>而且更危险的是</strong>：如果函数里有个拼错的变量名，比如把 <code>float</code> 写成
-<code>floot</code>，那会抛 <code>NameError</code>，也会被同一个裸 <code>except</code> 抓走，
-同样变成 <code>None</code> —— <strong>代码 bug 与数据问题被混成了同一个结果</strong> ✗</p>
+<p><strong>更危险的是</strong>：如果函数里有个拼错的变量名，比如把 <code>float</code> 写成 <code>floot</code>，那会抛 <code>NameError</code>，也被同一个裸 <code>except</code> 抓走，同样变成 <code>None</code> —— <strong>代码 bug 与数据问题混成了同一个结果</strong> ✗</p>
 <p>第二步：改造成「分开报错」的版本</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-85-1"> 1</a></span>
@@ -18556,10 +18404,7 @@ value  : 260.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>关于 <code>from None</code> 在这里的用意</strong>：
-我们<strong>主动</strong>把 <code>ValueError</code> 换成了「带上下文的新 <code>ValueError</code>」。
-这里的下层异常（<code>not enough values to unpack</code>）本身信息量不大，
-所以用 <code>from None</code> 把因果链切断，让报错只显示我们自己写的那句</p>
+<p><strong>关于 <code>from None</code> 在这里的用意</strong>：我们<strong>主动</strong>把 <code>ValueError</code> 换成「带上下文的新 <code>ValueError</code>」。这里的下层异常（<code>not enough values to unpack</code>）本身信息量不大，所以用 <code>from None</code> 把因果链切断，让报错只显示自己写的那句</p>
 <table>
 <thead>
 <tr>
@@ -18583,9 +18428,7 @@ value  : 260.0</code></pre>
 </tbody>
 </table>
 <p>第三步：加上「哪些该崩、哪些该跳」的区分</p>
-<p>上面例子里 <code>B-002</code> 与 <code>D-004,abc</code> 都属于<strong>数据问题</strong>，应该能跳过。
-但如果我们把「跳过」写成宽捕获，就又回到了反模式。
-正确做法是：<strong>让 <code>parse_strict</code> 只负责「报清楚」，跳过由调用方决定</strong>：</p>
+<p>上面例子里 <code>B-002</code> 与 <code>D-004,abc</code> 都属于<strong>数据问题</strong>，应该能跳过。但如果把「跳过」写成宽捕获，就又回到反模式。正确做法是：<strong>让 <code>parse_strict</code> 只负责「报清楚」，跳过由调用方决定</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-86-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-86-2"> 2</a></span>
@@ -18937,8 +18780,7 @@ value  : 260.0</code></pre>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>会被打印
 进入 except</code></pre>
-<p><strong>这条性质在排查时很有用</strong>：
-如果某个 <code>print</code> 没有出现，说明<strong>它前面的那一行就抛异常了</strong></p>
+<p><strong>这条性质在排查时很有用</strong>：如果某个 <code>print</code> 没出现，说明<strong>它前面的那一行就抛异常了</strong></p>
 </details>
 <hr />
 <p><strong>Q2</strong> 下面代码有什么问题？<code>safe_div(10, 0)</code> 最后返回了什么？为什么？</p>
@@ -19031,9 +18873,7 @@ value  : 260.0</code></pre>
 <p>因为 <code>ZeroDivisionError</code> 是 <code>Exception</code> 的子类，
 <strong>第一个能匹配上的分支就被采用</strong>，后面的全部作废。</p>
 <p>问题二：即使顺序调对了，返回值类型也变了</p>
-<p>看第一个结果 <code>5.0</code>（float），第二个结果 <code>0</code>（int）——
-<strong><code>10 / 0</code> 本该报错，现在返回了一个整数 <code>0</code></strong>。
-这会让调用方以为「除法的结果是 0」，而不是「这次除法失败了」✗</p>
+<p>看第一个结果 <code>5.0</code>（float），第二个结果 <code>0</code>（int）—— <strong><code>10 / 0</code> 本该报错，现在返回一个整数 <code>0</code></strong>。这会让调用方以为「除法的结果是 0」，而不是「这次除法失败了」✗</p>
 <p>改法一：调对顺序 + 让返回值类型一致</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-93-1"> 1</a></span>
@@ -19117,9 +18957,7 @@ value  : 260.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：
-<strong>能用「主动报错」表达的，就不要用「特殊返回值」表达</strong> ——
-返回值可以被无声忽略，异常不能 ✓</p>
+<p><strong>判断依据</strong>：<strong>能用「主动报错」表达的，就别用「特殊返回值」表达</strong> —— 返回值可以被无声忽略，异常不能 ✓</p>
 <p><strong>一条记忆口诀</strong>：</p>
 <table>
 <thead>
@@ -19850,16 +19688,9 @@ KeyError: 'B-107'</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>一句话收束</strong>：
-异常不是敌人，「不知道发生了什么」才是。
-把这页的判据用熟之后，你写的程序会有一个明显变化 ——
-<strong>出错的时候，它说的信息足够让你直接动手修。</strong></p>
-<p><strong>下一页</strong>：<a href="../files/">11 文件与路径</a> ——
-把数据存到磁盘上，并且能安全地读回来。</p>
-<p>到这里，程序内部的一切你都控住了：类型、流程、函数、数据、错误。
-但程序一退出，内存里的东西就全部消失。下一页要解决的就是这件事 ——
-<strong>怎么让数据活过程序的生命周期，并且在读回来的时候不被编码、
-路径、换行符这些「环境差异」绊倒。</strong></p>
+<p><strong>一句话收束</strong>：异常不是敌人，「不知道发生了什么」才是。把本页的判据用熟之后，你写的程序会有一个明显变化 ——<strong>出错的时候，它说的信息足够让你直接动手修。</strong></p>
+<p><strong>下一页</strong>：<a href="../files/">11 文件与路径</a> —— 把数据存到磁盘上，并能安全地读回来。</p>
+<p>到这里，程序内部的一切你都控住了：类型、流程、函数、数据、错误。但程序一退出，内存里的东西就全部消失。下一页要解决的就是这件事 ——<strong>怎么让数据活过程序的生命周期，并且在读回来时不被编码、路径、换行符这些「环境差异」绊倒。</strong></p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../comprehensions/">推导式与生成器</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../files/">文件与路径</a></span></div></nav>
 
 

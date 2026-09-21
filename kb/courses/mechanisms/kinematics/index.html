@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="运动学概述：这一页要回答的问题是：机械臂的关节转了多少度，末端就到了哪里？反过来，想让末端到某个位置，关节该转多少度？前一个问题叫正运动学，后一个问题叫逆运动学。">
+    <meta name="description" content="运动学概述：这一页回答两个问题：关节转多少度，末端到哪里？反之，末端要到某位置，关节该转多少度？前者叫正运动学，后者叫逆运动学。二者看似只是「把公式反解一下」，实际难度差一个数量级：所以本页的主线是三个问题：正解怎么算（位姿描述 + 坐标变换 + D-H 参数）→ 逆解为什么难（非线性方程组 + 封闭解的存在条件）→ 多解怎么挑（选解准则）。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="运动学概述">
   
-  <meta property="og:description" content="运动学概述：这一页要回答的问题是：机械臂的关节转了多少度，末端就到了哪里？反过来，想让末端到某个位置，关节该转多少度？前一个问题叫正运动学，后一个问题叫逆运动学。">
+  <meta property="og:description" content="运动学概述：这一页回答两个问题：关节转多少度，末端到哪里？反之，末端要到某位置，关节该转多少度？前者叫正运动学，后者叫逆运动学。二者看似只是「把公式反解一下」，实际难度差一个数量级：所以本页的主线是三个问题：正解怎么算（位姿描述 + 坐标变换 + D-H 参数）→ 逆解为什么难（非线性方程组 + 封闭解的存在条件）→ 多解怎么挑（选解准则）。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/mechanisms/kinematics/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="运动学概述">
   
-  <meta name="twitter:description" content="运动学概述：这一页要回答的问题是：机械臂的关节转了多少度，末端就到了哪里？反过来，想让末端到某个位置，关节该转多少度？前一个问题叫正运动学，后一个问题叫逆运动学。">
+  <meta name="twitter:description" content="运动学概述：这一页回答两个问题：关节转多少度，末端到哪里？反之，末端要到某位置，关节该转多少度？前者叫正运动学，后者叫逆运动学。二者看似只是「把公式反解一下」，实际难度差一个数量级：所以本页的主线是三个问题：正解怎么算（位姿描述 + 坐标变换 + D-H 参数）→ 逆解为什么难（非线性方程组 + 封闭解的存在条件）→ 多解怎么挑（选解准则）。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12302,9 +12302,8 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../">机器人机构学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>机器人机构学的数学基础（第 2 版）</code><code>本课程课件（第 2 章第 1 节）</code><code>本页数值示例均已逐项复核</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（正运动学 / 逆运动学 / 位姿 / D-H 参数）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="21">2.1 运动学概述<a class="headerlink" href="#21" title="Permanent link">&para;</a></h1>
-<p>这一页要回答的问题是：机械臂的关节转了多少度，末端就到了哪里？反过来，想让末端到某个位置，关节该转多少度？</p>
-<p>前一个问题叫<strong>正运动学</strong>，后一个问题叫<strong>逆运动学</strong>。它们看起来只是「把公式反解一下」，
-实际难度差了一个数量级：</p>
+<p>这一页回答两个问题：关节转多少度，末端到哪里？反之，末端要到某位置，关节该转多少度？</p>
+<p>前者叫<strong>正运动学</strong>，后者叫<strong>逆运动学</strong>。二者看似只是「把公式反解一下」，实际难度差一个数量级：</p>
 <table>
 <thead>
 <tr>
@@ -12477,8 +12476,7 @@ z
 <hr />
 <h2 id="_1">一、为什么先分「正」和「逆」<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 两个问题的定义<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>先定义一个<strong>基本量</strong>：<strong>关节变量</strong>。</p>
-<p><strong>关节变量</strong>：描述一个关节「动了多少」的那个数。</p>
+<p>先定义<strong>关节变量</strong>：描述一个关节「动了多少」的那个数。</p>
 <table>
 <thead>
 <tr>
@@ -12503,11 +12501,11 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>一个 <span class="arithmatex">\(n\)</span> 关节的串联机械臂，就有 <span class="arithmatex">\(n\)</span> 个关节变量。</strong> 把它们排成一个列向量：</p>
+<p><strong><span class="arithmatex">\(n\)</span> 关节串联机械臂就有 <span class="arithmatex">\(n\)</span> 个关节变量</strong>，排成列向量：</p>
 <div class="arithmatex">\[q = \begin{bmatrix} q_1 \\ q_2 \\ \vdots \\ q_n \end{bmatrix}\]</div>
-<p>其中 <span class="arithmatex">\(q_i\)</span> 是第 <span class="arithmatex">\(i\)</span> 个关节的关节变量（转动关节时 <span class="arithmatex">\(q_i = \theta_i\)</span>，移动关节时 <span class="arithmatex">\(q_i = d_i\)</span>）。
-<span class="arithmatex">\(q\)</span> 所在的空间叫<strong>关节空间</strong>，<span class="arithmatex">\(n\)</span> 就是关节空间维数。</p>
-<p>有了 <span class="arithmatex">\(q\)</span> 的定义，两个问题就能写清楚了：</p>
+<p>其中 <span class="arithmatex">\(q_i\)</span> 是第 <span class="arithmatex">\(i\)</span> 个关节的关节变量（转动关节 <span class="arithmatex">\(q_i=\theta_i\)</span>，移动关节 <span class="arithmatex">\(q_i=d_i\)</span>）。
+<span class="arithmatex">\(q\)</span> 所在空间叫<strong>关节空间</strong>，<span class="arithmatex">\(n\)</span> 是其维数。</p>
+<p>有了 <span class="arithmatex">\(q\)</span>，两个问题就能写清楚：</p>
 <table>
 <thead>
 <tr>
@@ -12533,14 +12531,12 @@ z
 </tbody>
 </table>
 <p><strong>这两个方向不是「互逆运算」的对称关系。</strong> 正解是从 <span class="arithmatex">\(n\)</span> 维关节空间<strong>映射</strong>到 6 维位姿空间；
-逆解是从 6 维位姿空间<strong>反查</strong><span class="arithmatex">\(n\)</span> 维关节空间。映射的「正反」难度差异，全部来自这个方向差别。</p>
+逆解是从 6 维位姿空间<strong>反查</strong><span class="arithmatex">\(n\)</span> 维关节空间。</p>
 <h3 id="12">1.2 正运动学为什么容易<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>因为正运动学<strong>只是代入求值</strong>。</p>
-<p>给定 <span class="arithmatex">\(q\)</span>，每根连杆的相对角度就都确定了；沿着「基座 → 连杆 1 → 连杆 2 → …… → 末端」
-一路把变换矩阵乘起来，就得到末端的位姿。整个过程<strong>没有任何方程要解</strong>，
-只有三角函数求值 + 矩阵乘法。</p>
-<p><strong>正因为如此，正解的结果是唯一的</strong>：一组 <span class="arithmatex">\(q\)</span> 只能对应一个末端位姿。
-（反过来不成立 —— 这正是逆解多解的根源，见第六节。）</p>
+<p>给定 <span class="arithmatex">\(q\)</span>，每根连杆的相对角度都确定；沿「基座 → 连杆 1 → … → 末端」
+把变换矩阵乘起来即得末端位姿，<strong>全程没有任何方程要解</strong>，只有三角函数求值 + 矩阵乘法。</p>
+<p><strong>正解的结果因此唯一</strong>：一组 <span class="arithmatex">\(q\)</span> 只对应一个末端位姿（反过来不成立，见第六节）。</p>
 <div class="admonition tip">
 <p class="admonition-title">正解的「唯一」是单向的</p>
 <p>严格地说，正解是一个<strong>多对一的映射</strong>：</p>
@@ -12556,11 +12552,10 @@ z
 <p>难在<strong>方程的类型</strong>。正解的式子长这样（以平面二连杆为例）：</p>
 <div class="arithmatex">\[x = l_1\cos\theta_1 + l_2\cos(\theta_1+\theta_2)\]</div>
 <div class="arithmatex">\[y = l_1\sin\theta_1 + l_2\sin(\theta_1+\theta_2)\]</div>
-<p><span class="arithmatex">\(x, y\)</span> 是末端位置，<span class="arithmatex">\(l_1, l_2\)</span> 是两根连杆的长度，<span class="arithmatex">\(\theta_1, \theta_2\)</span> 是两个关节角。
-从 <span class="arithmatex">\((\theta_1, \theta_2)\)</span> 算 <span class="arithmatex">\((x, y)\)</span>，就是<strong>把数代进去算</strong>。</p>
-<p>逆解要把这个式子<strong>倒过来</strong>：已知 <span class="arithmatex">\(x, y\)</span>，求 <span class="arithmatex">\(\theta_1, \theta_2\)</span>。
-这时候 <span class="arithmatex">\(\theta_1, \theta_2\)</span> 被埋在 <span class="arithmatex">\(\cos\)</span> 和 <span class="arithmatex">\(\sin\)</span> 的<strong>括号里面</strong>，
-而且两个未知数还通过 <span class="arithmatex">\(\theta_1 + \theta_2\)</span> <strong>耦合</strong>在一起 —— 这就是难点所在。</p>
+<p>其中 <span class="arithmatex">\(x, y\)</span> 是末端位置，<span class="arithmatex">\(l_1, l_2\)</span> 是连杆长度，<span class="arithmatex">\(\theta_1, \theta_2\)</span> 是关节角。
+从 <span class="arithmatex">\((\theta_1, \theta_2)\)</span> 算 <span class="arithmatex">\((x, y)\)</span> 就是<strong>代入求值</strong>。</p>
+<p>逆解要把它<strong>倒过来</strong>：已知 <span class="arithmatex">\(x, y\)</span> 求 <span class="arithmatex">\(\theta_1, \theta_2\)</span>，
+此时两个未知数被埋在 <span class="arithmatex">\(\cos\)</span>、<span class="arithmatex">\(\sin\)</span> 的<strong>括号里</strong>，又通过 <span class="arithmatex">\(\theta_1 + \theta_2\)</span> <strong>耦合</strong> —— 这就是难点。</p>
 <p>三个后果：</p>
 <table>
 <thead>
@@ -12584,9 +12579,8 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>「无解」这件事在工程上很常见</strong>：如果规划器给的目标点在机械臂够不到的地方，
-逆解算不出来是<strong>正确行为</strong>，而不是程序出错。</p>
-<p>下面这张表是本页最需要记的一张对照表：</p>
+<p><strong>「无解」在工程上很常见</strong>：若规划器给的目标点够不到，逆解算不出来是<strong>正确行为</strong>，而非程序出错。</p>
+<p>下面这张对照表是本页最值得记的：</p>
 <table>
 <thead>
 <tr>
@@ -12643,15 +12637,13 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>这张表说明什么</strong>：机械臂控制里真正困难的运算几乎都在逆解这一侧。
-设计机器人构型时之所以要专门凑出「封闭解存在的条件」（第五节），
-就是为了把逆解从「迭代求解」降级成「代入公式」</p>
+<p><strong>这张表的要点</strong>：机械臂控制里真正困难的运算几乎都在逆解一侧 ——
+所以在设计构型时就要专门凑出「封闭解存在的条件」（第五节），把逆解从「迭代」降级成「代入公式」</p>
 <hr />
 <h2 id="_2">二、位姿描述：位置 + 姿态<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21_1">2.1 「位姿」这个词的含义<a class="headerlink" href="#21_1" title="Permanent link">&para;</a></h3>
-<p><strong>位姿（Pose）</strong> = <strong>位置（Position）+ 姿态（Orientation）</strong>。
-它是描述一个刚体「在哪、朝哪」的完整信息。</p>
-<p>为什么要分成两部分？因为<strong>位置和姿态是两件独立的事</strong>：</p>
+<p><strong>位姿（Pose）</strong> = <strong>位置（Position）+ 姿态（Orientation）</strong>，
+是描述刚体「在哪、朝哪」的完整信息。分成两部分，是因为二者<strong>互相独立</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12664,32 +12656,29 @@ z
 <tbody>
 <tr>
 <td><strong>位置</strong></td>
-<td>这个物体<strong>在哪</strong></td>
-<td><strong>3 个</strong>（三维空间里的 <span class="arithmatex">\(x, y, z\)</span>）</td>
+<td>物体<strong>在哪</strong></td>
+<td><strong>3 个</strong>（<span class="arithmatex">\(x,y,z\)</span>）</td>
 <td>向量 <span class="arithmatex">\(p\)</span></td>
 </tr>
 <tr>
 <td><strong>姿态</strong></td>
-<td>这个物体<strong>朝哪个方向</strong></td>
+<td>物体<strong>朝哪</strong></td>
 <td><strong>3 个</strong>（绕三个独立轴的转动）</td>
 <td>旋转矩阵 <span class="arithmatex">\(R\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>合起来是 6 个数 —— 这就是常常说的「<strong>6 自由度</strong>」。</p>
-<p><strong>为什么姿态恰好需要 3 个数</strong>：三维空间里可以绕三个轴转动
-（俯仰、偏航、翻滚这一类），每个轴的转动量是一个数，所以姿态最少需要 3 个独立的数。
-<strong>少了描述不全，多了就有冗余</strong>（冗余的后果见 2.3 节的万向节锁）。</p>
+<p>合起来 6 个数 —— 常说的「<strong>6 自由度</strong>」。</p>
+<p><strong>姿态为什么恰好 3 个数</strong>：三维空间里可绕三个轴转动，每个轴的转角是一个数，
+所以姿态最少需要 3 个独立的数；<strong>少了描述不全，多了就有冗余</strong>（见 2.3 节万向节锁）。</p>
 <h3 id="22">2.2 位置向量<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>位置用一个<strong>三维列向量</strong>表示：</p>
+<p>位置用<strong>三维列向量</strong>表示：</p>
 <div class="arithmatex">\[p = \begin{bmatrix} p_x \\ p_y \\ p_z \end{bmatrix}\]</div>
-<p>其中 <span class="arithmatex">\(p_x, p_y, p_z\)</span> 分别是这个点相对于<strong>某个参考坐标系</strong>的三个坐标分量。
-单位通常是米。</p>
-<p><strong>关键点</strong>：位置向量<strong>必须说清是「相对于哪个坐标系」</strong>，
-因为「同一个点，在不同的坐标系里坐标不同」。这一点在第三节会展开。</p>
+<p>其中 <span class="arithmatex">\(p_x, p_y, p_z\)</span> 是这个点相对于<strong>某个参考坐标系</strong>的三个分量，单位通常是米。</p>
+<p><strong>关键点</strong>：位置向量<strong>必须说清「相对于哪个坐标系」</strong>，
+因为同一个点在不同坐标系里坐标不同（第三节展开）。</p>
 <h3 id="23">2.3 姿态的三种表示<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>课件在这一节讲的核心内容之一是：<strong>姿态可以用多种方式表示</strong>，
-它们描述的是同一件事，但各有优缺点。</p>
+<p><strong>姿态可以用多种方式表示</strong>，它们描述同一件事，但各有优缺点。</p>
 <table>
 <thead>
 <tr>
@@ -12721,24 +12710,21 @@ z
 </tbody>
 </table>
 <h4 id="_3">旋转矩阵<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
-<p>旋转矩阵 <span class="arithmatex">\(R\)</span> 是一个 <span class="arithmatex">\(3\times 3\)</span> 的矩阵，表示一个坐标系相对另一个坐标系的<strong>方向关系</strong>。
-它作用在一个向量上，相当于把向量「转到新的方向」，但<strong>长度不变</strong>：</p>
+<p>旋转矩阵 <span class="arithmatex">\(R\)</span> 是 <span class="arithmatex">\(3\times 3\)</span> 矩阵，表示两个坐标系之间的<strong>方向关系</strong>：
+作用在一个向量上相当于把它「转到新方向」，但<strong>长度不变</strong>：</p>
 <div class="arithmatex">\[p' = R\,p\]</div>
-<p>其中 <span class="arithmatex">\(p\)</span> 是转动前的向量，<span class="arithmatex">\(p'\)</span> 是转动后的向量。
-因为转完之后长度不变，所以 <span class="arithmatex">\(R\)</span> 必须满足正交条件：</p>
+<p>其中 <span class="arithmatex">\(p\)</span> 是转动前、<span class="arithmatex">\(p'\)</span> 是转动后的向量。既然长度不变，<span class="arithmatex">\(R\)</span> 必须满足正交条件：</p>
 <div class="arithmatex">\[R^T R = R R^T = I\]</div>
-<p><span class="arithmatex">\(R^T\)</span> 是 <span class="arithmatex">\(R\)</span> 的转置，<span class="arithmatex">\(I\)</span> 是单位矩阵。这个式子有两个推论：</p>
+<p><span class="arithmatex">\(R^T\)</span> 是转置，<span class="arithmatex">\(I\)</span> 是单位阵。两个推论：</p>
 <ol>
-<li><strong><span class="arithmatex">\(R\)</span> 是可逆的</strong>，而且 <span class="arithmatex">\(R^{-1} = R^T\)</span> —— 求逆就是转置，特别便宜</li>
-<li><strong><span class="arithmatex">\(\det(R) = \pm 1\)</span></strong>。加上「不镜像」的要求（右手系转右手系），取 <span class="arithmatex">\(\det(R) = +1\)</span></li>
+<li><strong><span class="arithmatex">\(R\)</span> 可逆</strong>，且 <span class="arithmatex">\(R^{-1} = R^T\)</span> —— 求逆就是转置，特别便宜</li>
+<li><strong><span class="arithmatex">\(\det(R) = \pm 1\)</span></strong>；加上「不镜像」（右手系转右手系）取 <span class="arithmatex">\(\det(R) = +1\)</span></li>
 </ol>
 <p>于是 <span class="arithmatex">\(R\)</span> 属于<strong>特殊正交群</strong> <span class="arithmatex">\(SO(3)\)</span>。</p>
-<p><strong>为什么旋转矩阵有 6 个冗余约束</strong>：<span class="arithmatex">\(3\times3\)</span> 有 9 个元素，
-正交条件 <span class="arithmatex">\(R^TR = I\)</span> 是对称矩阵的等式，给出 6 个独立方程，
-所以自由度是 <span class="arithmatex">\(9 - 6 = 3\)</span></p>
+<p><strong>为什么有 6 个冗余约束</strong>：<span class="arithmatex">\(3\times3\)</span> 有 9 个元素，正交条件 <span class="arithmatex">\(R^TR=I\)</span> 给出 6 个独立方程，
+所以自由度 <span class="arithmatex">\(9-6=3\)</span></p>
 <h4 id="_4">欧拉角与「绕三次轴旋转」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
-<p><strong>欧拉旋转定理</strong>说：三维空间里的任意姿态，都可以<strong>用绕三个轴的依次旋转</strong>来实现。</p>
-<p>课件特别强调了两条规则：</p>
+<p><strong>欧拉旋转定理</strong>：三维空间任意姿态都可用<strong>绕三个轴的依次旋转</strong>实现。课件强调两条规则：</p>
 <ul>
 <li><strong>绕 3 个轴依次旋转</strong></li>
 <li><strong>不能绕同一轴线连续旋转两次</strong></li>
@@ -12768,22 +12754,19 @@ z
 <p>两类各 6 种，合计 <strong>12 种</strong>。</p>
 <div class="admonition warning">
 <p class="admonition-title">「欧拉角」这个称呼其实不确切</p>
-<p>现在通常把<strong>所有三角度表示法</strong>都叫做欧拉角，
-但这种称呼<strong>不够确切</strong> —— 因为一共有 <strong>12 种</strong>不同形式的欧拉角可供选择</p>
-<p>在某一特定技术领域中，说「欧拉角」往往指<strong>某一种特定的旋转角顺序</strong>。
-所以看到别人说「用欧拉角算」时，<strong>第一件事是问清是哪种顺序</strong></p>
-<p><strong>不同顺序给出的结果完全不同</strong>：同样的三个角度值，按 <code>XYZ</code> 旋转
-和按 <code>ZYX</code> 旋转，得到的最终姿态不是一回事</p>
+<p>现在通常把<strong>所有三角度表示法</strong>都叫做欧拉角，但这种称呼<strong>不够确切</strong> ——
+一共有 <strong>12 种</strong>不同顺序可选，在具体领域说「欧拉角」往往指<strong>某一种特定顺序</strong>。
+所以看到别人说「用欧拉角算」，<strong>第一件事是问清是哪种顺序</strong> ——
+<strong>不同顺序结果完全不同</strong>：同样三个角度值，按 <code>XYZ</code> 和按 <code>ZYX</code> 旋转得到的姿态不是一回事</p>
 </div>
 <h3 id="24">2.4 齐次变换矩阵<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
-<p><strong>旋转矩阵只描述方向，不能描述位置。</strong> 要把「转动 + 平移」一次做完，
+<p><strong>旋转矩阵只描述方向，不能描述位置。</strong> 把「转动 + 平移」一次做完，
 需要把两者拼进一个矩阵 —— 这就是<strong>齐次变换矩阵</strong>。</p>
-<p>课件的说法是：<strong>T 矩阵（也记作 A）是机械臂最基本的建系方法</strong>。
-通过关节的 6 个自由度的位姿信息来表示两个坐标系之间的<strong>齐次变换矩阵
-（Homogeneous Transformation Matrix）</strong>，
-通过矩阵相乘的形式对各个坐标系间的<strong>映射关系（Mapping）</strong>进行分析。
+<p>课件说法：<strong>T 矩阵（也记作 A）是机械臂最基本的建系方法</strong>，
+用关节的 6 自由度位姿信息表示两个坐标系之间的<strong>齐次变换矩阵
+（Homogeneous Transformation Matrix）</strong>，并以矩阵相乘分析坐标系间的<strong>映射关系（Mapping）</strong>。
 <strong>任何刚体变换都由旋转和平移组成</strong>。</p>
-<p>刚体变换可以表示成 <span class="arithmatex">\(4\times4\)</span> 的矩阵：</p>
+<p>刚体变换可写成 <span class="arithmatex">\(4\times4\)</span> 矩阵：</p>
 <div class="arithmatex">\[T = \begin{bmatrix} R &amp; p \\ 0 &amp; 1 \end{bmatrix}
 = \begin{bmatrix}
 r_{11} &amp; r_{12} &amp; r_{13} &amp; p_x \\
@@ -12823,17 +12806,13 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 </tr>
 </tbody>
 </table>
-<p><strong>为什么要把 <span class="arithmatex">\(4\times4\)</span> 补出来</strong>：因为「先转再移」这样的复合动作，
-如果用「<span class="arithmatex">\(R\)</span> 乘一下、加一个 <span class="arithmatex">\(p\)</span>」的写法，两步就要写两行式子，
-连续复合时非常繁琐。补成 <span class="arithmatex">\(4\times4\)</span> 之后，
-<strong>「转动 + 平移」就变成了纯粹的一次矩阵乘法</strong>，多段复合直接连乘即可 ✓</p>
-<p><strong>齐次坐标的含义</strong>：把三维点 <span class="arithmatex">\((p_x, p_y, p_z)\)</span> 写成四维 <span class="arithmatex">\((p_x, p_y, p_z, 1)\)</span>，
-最后那个 1 叫做<strong>齐次分量</strong>。它的作用是把「点」（用 1）和「方向向量」（用 0）区分开：
-方向向量平移之后不应该变，所以齐次分量写 0。</p>
-<p><strong>复合动作的顺序</strong>要用一个记号说清楚。课件用「运算符 <code>.</code> 把一个向量转换为新的向量」的说法，
-等式右侧表示<strong>从 <span class="arithmatex">\(\{A\}\)</span> 到 <span class="arithmatex">\(\{B\}\)</span> 然后到点</strong>的动作：</p>
+<p><strong>为什么补成 <span class="arithmatex">\(4\times4\)</span></strong>：若用「<span class="arithmatex">\(R\)</span> 乘一下、加一个 <span class="arithmatex">\(p\)</span>」的写法，两步要写两行，连续复合很繁琐；
+补成 <span class="arithmatex">\(4\times4\)</span> 后<strong>「转动 + 平移」变成纯粹一次矩阵乘法</strong>，多段复合直接连乘 ✓</p>
+<p><strong>齐次坐标</strong>：把三维点 <span class="arithmatex">\((p_x, p_y, p_z)\)</span> 写成四维 <span class="arithmatex">\((p_x, p_y, p_z, 1)\)</span>，
+最后那个 1 是<strong>齐次分量</strong>，用来区分「点」（用 1）和「方向向量」（用 0）：方向向量平移后不应变，所以写 0。</p>
+<p><strong>复合动作的顺序</strong>用一个记号说清楚。课件用运算符 <code>.</code> 把向量转换为新向量：</p>
 <div class="arithmatex">\[{}^A p = {}^A_B T \cdot {}^B p\]</div>
-<p>这个式子的读法是：<strong>点 <span class="arithmatex">\(p\)</span> 在 <span class="arithmatex">\(\{B\}\)</span> 系里的坐标，左乘「<span class="arithmatex">\(\{B\}\)</span> 相对 <span class="arithmatex">\(\{A\}\)</span> 的位姿」，
+<p>读法是：<strong>点 <span class="arithmatex">\(p\)</span> 在 <span class="arithmatex">\(\{B\}\)</span> 系里的坐标，左乘「<span class="arithmatex">\(\{B\}\)</span> 相对 <span class="arithmatex">\(\{A\}\)</span> 的位姿」，
 就得到它在 <span class="arithmatex">\(\{A\}\)</span> 系里的坐标。</strong></p>
 <table>
 <thead>
@@ -12859,21 +12838,16 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 </table>
 <div class="admonition warning">
 <p class="admonition-title">变换矩阵的下标顺序极易搞反</p>
-<p>以 <span class="arithmatex">\({}^A_B T\)</span> 为例，它的标准读法是「<strong><span class="arithmatex">\(B\)</span> 相对 <span class="arithmatex">\(A\)</span></strong>」，
-也就是<strong>把 <span class="arithmatex">\(B\)</span> 系里的坐标翻译成 <span class="arithmatex">\(A\)</span> 系里的坐标</strong>。</p>
-<p>这个矩阵的<strong>列</strong>是 <span class="arithmatex">\(B\)</span> 系的三个轴在 <span class="arithmatex">\(A\)</span> 系里的方向，
-<strong>最后一列</strong>是 <span class="arithmatex">\(B\)</span> 系原点在 <span class="arithmatex">\(A\)</span> 系里的位置 ⚠</p>
-<p><strong>判断方法</strong>：看它乘的是谁。<span class="arithmatex">\({}^A_B T \cdot {}^B p\)</span> 里，
-右边是 <span class="arithmatex">\({}^B p\)</span>，左边的<strong>下标 <span class="arithmatex">\(B\)</span> 和右边上标 <span class="arithmatex">\(B\)</span> 相消</strong>，
-剩下上标 <span class="arithmatex">\(A\)</span> —— 正好等于左边的上标 <span class="arithmatex">\(A\)</span> ✓
-这条「相邻标号相消」的记法在所有连乘式子里都成立 ✓</p>
+<p>以 <span class="arithmatex">\({}^A_B T\)</span> 为例，标准读法是「<strong><span class="arithmatex">\(B\)</span> 相对 <span class="arithmatex">\(A\)</span></strong>」，
+即<strong>把 <span class="arithmatex">\(B\)</span> 系坐标翻译成 <span class="arithmatex">\(A\)</span> 系坐标</strong>。</p>
+<p>这个矩阵的<strong>列</strong>是 <span class="arithmatex">\(B\)</span> 系三个轴在 <span class="arithmatex">\(A\)</span> 系里的方向，<strong>最后一列</strong>是 <span class="arithmatex">\(B\)</span> 系原点在 <span class="arithmatex">\(A\)</span> 系里的位置 ⚠</p>
+<p><strong>判断方法</strong>：看它乘谁。<span class="arithmatex">\({}^A_B T \cdot {}^B p\)</span> 中左边下标 <span class="arithmatex">\(B\)</span> 与右边上标 <span class="arithmatex">\(B\)</span> 相消，
+剩上标 <span class="arithmatex">\(A\)</span>，正好等于左边的上标 ✓ 这条「相邻标号相消」在所有连乘式里都成立 ✓</p>
 </div>
 <h3 id="25">2.5 复合变换：相对位姿的一个具体形式<a class="headerlink" href="#25" title="Permanent link">&para;</a></h3>
-<p>课件给出了相对位姿的一个具体表现形式：<span class="arithmatex">\(T \in SE(3)\)</span>，
-而且复合规则是</p>
+<p>课件给出相对位姿的一个具体形式：<span class="arithmatex">\(T \in SE(3)\)</span>，复合规则是</p>
 <div class="arithmatex">\[T_1 \oplus T_2 \mapsto T_1 T_2\]</div>
-<p><strong>这个式子在说什么</strong>：两个位姿的「复合」运算 <span class="arithmatex">\(\oplus\)</span>，
-落到矩阵上就是<strong>标准的矩阵乘法</strong>。</p>
+<p><strong>这个式子的意思</strong>：两个位姿的「复合」<span class="arithmatex">\(\oplus\)</span> 落到矩阵上就是<strong>标准矩阵乘法</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -12884,26 +12858,24 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 <tbody>
 <tr>
 <td><span class="arithmatex">\(T\)</span></td>
-<td>一个齐次变换矩阵（<span class="arithmatex">\(4\times4\)</span>）</td>
+<td>齐次变换矩阵（<span class="arithmatex">\(4\times4\)</span>）</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(SE(3)\)</span></td>
-<td><strong>特殊欧氏群</strong>：所有 <span class="arithmatex">\(4\times4\)</span> 的刚体变换矩阵构成的集合</td>
+<td><strong>特殊欧氏群</strong>：所有 <span class="arithmatex">\(4\times4\)</span> 刚体变换矩阵的集合</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\oplus\)</span></td>
-<td>位姿之间的复合运算</td>
+<td>位姿复合运算</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(T_1 T_2\)</span></td>
-<td>对应两个矩阵的<strong>普通矩阵乘法</strong></td>
+<td>两个矩阵的<strong>普通乘法</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>为什么这件事值得单独说</strong>：因为它意味着
-「把两个位姿接起来」这种几何操作，可以直接用矩阵乘法实现 ✓
-于是「基座 → 连杆 1 → 连杆 2 → …… → 末端」的整条链条，
-就是<strong>一串矩阵连乘</strong> —— 这正是下一节 D-H 参数法的全部基础 ✓</p>
+<p><strong>为什么值得单独说</strong>：这意味着「把两个位姿接起来」可直接用矩阵乘法实现 ✓
+于是「基座 → 连杆 1 → … → 末端」整条链就是<strong>一串矩阵连乘</strong> —— 这正是下一节 D-H 参数法的基础 ✓</p>
 <hr />
 <h2 id="_5">三、坐标系与变换的递推<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 三类坐标系<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -12920,8 +12892,8 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 <tr>
 <td><strong>基坐标系</strong></td>
 <td><span class="arithmatex">\(\{0\}\)</span> 或 <span class="arithmatex">\(\{B\}\)</span></td>
-<td>固定在机器人底座（不动的那个构件）</td>
-<td>所有位姿的总参考，最终答案都在这个系里</td>
+<td>固定在底座（不动构件）</td>
+<td>所有位姿的总参考，最终答案在这个系里</td>
 </tr>
 <tr>
 <td><strong>连杆坐标系</strong></td>
@@ -12937,21 +12909,20 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 </tr>
 </tbody>
 </table>
-<p><strong>为什么要分这么多坐标系</strong>：因为机械臂的运动会把姿态「累积」起来。
-如果把每根连杆都直接相对基座描述，那么一关节动一下，
-<strong>后面所有连杆的位置全都得重新算</strong> ⚠</p>
-<p><strong>正确做法是只用「相邻关系」</strong>：每根连杆只关心它和<strong>前一根</strong>连杆的相对位姿，
-这个相对位姿<strong>只由这一个关节的变量决定</strong>。于是：</p>
+<p><strong>为什么要分这么多坐标系</strong>：机械臂的运动会把姿态「累积」起来，
+若每根连杆都直接相对基座描述，一关节动一下，<strong>后面所有连杆的位置全都得重新算</strong> ⚠</p>
+<p><strong>正确做法是只用「相邻关系」</strong>：每根连杆只关心它和<strong>前一根</strong>的相对位姿，
+而这个相对位姿<strong>只由这一个关节的变量决定</strong>。于是：</p>
 <ul>
 <li>关节动一下 → <strong>只有这一个</strong>变换矩阵变</li>
 <li>整体位姿 → 把不变的矩阵连乘一下就行 ✓</li>
 </ul>
-<p>这就是递推的思想：<strong>把一个大问题拆成一串小问题，每个小问题只依赖一个关节变量。</strong></p>
+<p>这就是递推：<strong>把大问题拆成一串小问题，每个只依赖一个关节变量。</strong></p>
 <h3 id="32">3.2 变换递推的公式<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(\{i\}\)</span> 表示固定在第 <span class="arithmatex">\(i\)</span> 根连杆上的坐标系，
 从 <span class="arithmatex">\(\{i-1\}\)</span> 到 <span class="arithmatex">\(\{i\}\)</span> 的变换矩阵记作 <span class="arithmatex">\({}^{i-1}_i T\)</span>，那么</p>
 <div class="arithmatex">\[{}^0_n T = {}^0_1 T \cdot {}^1_2 T \cdots {}^{n-1}_n T = \prod_{i=1}^{n} {}^{i-1}_i T\]</div>
-<p>这个公式的读法是：<strong>从基座到末端的整体变换，等于相邻变换逐个连乘。</strong></p>
+<p>即：<strong>从基座到末端的整体变换，等于相邻变换逐个连乘。</strong></p>
 <table>
 <thead>
 <tr>
@@ -12974,26 +12945,22 @@ r_{31} &amp; r_{32} &amp; r_{33} &amp; p_z \\
 </tr>
 <tr>
 <td><span class="arithmatex">\(\prod\)</span></td>
-<td>连乘记号，<span class="arithmatex">\(\prod_{i=1}^{n}\)</span> 表示从 <span class="arithmatex">\(i=1\)</span> 一直乘到 <span class="arithmatex">\(i=n\)</span></td>
+<td>连乘记号，从 <span class="arithmatex">\(i=1\)</span> 乘到 <span class="arithmatex">\(i=n\)</span></td>
 </tr>
 </tbody>
 </table>
-<p><strong>等式里的「下标相消」</strong>：<span class="arithmatex">\({}^0_1 T \cdot {}^1_2 T\)</span> 中，
-前一个的下标 <span class="arithmatex">\(1\)</span> 和后一个的上标 <span class="arithmatex">\(1\)</span> 相消，得到 <span class="arithmatex">\({}^0_2 T\)</span> ✓
-这个规律保证连乘的顺序<strong>不能随意交换</strong> ⚠</p>
+<p><strong>「下标相消」</strong>：<span class="arithmatex">\({}^0_1 T \cdot {}^1_2 T\)</span> 中前一个的下标 <span class="arithmatex">\(1\)</span> 与后一个的上标 <span class="arithmatex">\(1\)</span> 相消，得 <span class="arithmatex">\({}^0_2 T\)</span> ✓
+这个规律保证连乘顺序<strong>不能随意交换</strong> ⚠</p>
 <div class="admonition warning">
 <p class="admonition-title">矩阵乘法不能交换顺序，连乘顺序错了结果完全不同</p>
 <p><span class="arithmatex">\(T_1 T_2 \neq T_2 T_1\)</span>（矩阵乘法不满足交换律）。</p>
-<p>物理含义：<strong>「先转再移」和「先移再转」到了不同的地方</strong> ✓
-所以连乘时必须严格按「从基座到末端」的顺序：
-<span class="arithmatex">\({}^0_1 T\)</span> 在<strong>最左边</strong>，<span class="arithmatex">\({}^{n-1}_n T\)</span> 在<strong>最右边</strong> ⚠</p>
-<p>检验方法：把下标当分数看，左边矩阵的<strong>下标</strong>要等于右边矩阵的<strong>上标</strong>，
-首尾相接，像链子一样串下去 ✓</p>
+<p>物理含义：<strong>「先转再移」和「先移再转」到的地方不同</strong> ✓
+所以连乘必须严格按「从基座到末端」的顺序：
+<span class="arithmatex">\({}^0_1 T\)</span> 在<strong>最左</strong>，<span class="arithmatex">\({}^{n-1}_n T\)</span> 在<strong>最右</strong> ⚠</p>
+<p>检验方法：把下标当分数看，左矩阵的<strong>下标</strong>要等于右矩阵的<strong>上标</strong>，首尾相接 ✓</p>
 </div>
 <h3 id="33">3.3 一个具体例子：曲柄滑块<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<p><strong>曲柄滑块机构</strong>是「转动 → 往复移动」的最简单实现，
-它也是理解「关节变量 → 末端位置」映射的极好例子：
-输入端只有一个转角 <span class="arithmatex">\(\theta\)</span>，输出端是滑块的位移 <span class="arithmatex">\(s\)</span>。</p>
+<p><strong>曲柄滑块机构</strong>是「转动 → 往复移动」的最简单实现，也是理解「关节变量 → 末端位置」映射的好例子：输入端一个转角 <span class="arithmatex">\(\theta\)</span>，输出端是滑块位移 <span class="arithmatex">\(s\)</span>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="曲柄滑块机构：转动转换为往复移动">
 
@@ -13097,30 +13064,27 @@ L 120.591628 104.508
 <figcaption>曲柄滑块机构：转动转换为往复移动</figcaption>
 </figure>
 
-<p>这张图画的就是「关节变量 → 末端位置」的映射：曲柄转一个角度 <span class="arithmatex">\(\theta\)</span>，
-滑块就滑到一个确定的位置 <span class="arithmatex">\(s\)</span>。<strong>一个输入对应一个输出，这就是正解的唯一性</strong> ✓</p>
-<p>设曲柄长为 <span class="arithmatex">\(r\)</span>，连杆长为 <span class="arithmatex">\(l\)</span>，曲柄转角为 <span class="arithmatex">\(\theta\)</span>（从曲柄与滑块导路共线的位置量起），
-滑块位移记作 <span class="arithmatex">\(s\)</span>。由几何关系（曲柄末端与滑块铰点之间距离恒为 <span class="arithmatex">\(l\)</span>）：</p>
+<p>这张图就是「关节变量 → 末端位置」的映射：曲柄转 <span class="arithmatex">\(\theta\)</span>，滑块滑到确定的 <span class="arithmatex">\(s\)</span>。
+<strong>一个输入对应一个输出，这就是正解的唯一性</strong> ✓</p>
+<p>设曲柄长 <span class="arithmatex">\(r\)</span>、连杆长 <span class="arithmatex">\(l\)</span>、曲柄转角 <span class="arithmatex">\(\theta\)</span>（从曲柄与滑块导路共线处量起），滑块位移 <span class="arithmatex">\(s\)</span>。
+由几何关系（曲柄末端与滑块铰点距离恒为 <span class="arithmatex">\(l\)</span>）：</p>
 <div class="arithmatex">\[(s - r\cos\theta)^2 + (r\sin\theta)^2 = l^2\]</div>
-<p>左边是两点距离的平方，<span class="arithmatex">\(s - r\cos\theta\)</span> 是水平方向差，<span class="arithmatex">\(r\sin\theta\)</span> 是竖直方向差。
-展开并化简：</p>
+<p>左边是两点距离平方，<span class="arithmatex">\(s - r\cos\theta\)</span>、<span class="arithmatex">\(r\sin\theta\)</span> 分别是水平、竖直方向差。展开并化简：</p>
 <div class="arithmatex">\[s^2 - 2sr\cos\theta + r^2\cos^2\theta + r^2\sin^2\theta = l^2\]</div>
-<p>用 <span class="arithmatex">\(\cos^2\theta + \sin^2\theta = 1\)</span> 把后两项合并成 <span class="arithmatex">\(r^2\)</span>：</p>
+<p>用 <span class="arithmatex">\(\cos^2\theta+\sin^2\theta=1\)</span> 合并后两项为 <span class="arithmatex">\(r^2\)</span>：</p>
 <div class="arithmatex">\[s^2 - 2sr\cos\theta + r^2 - l^2 = 0\]</div>
-<p>这是关于 <span class="arithmatex">\(s\)</span> 的一元二次方程，用求根公式：</p>
+<p>这是 <span class="arithmatex">\(s\)</span> 的一元二次方程，用求根公式：</p>
 <div class="arithmatex">\[s = \frac{2r\cos\theta \pm \sqrt{4r^2\cos^2\theta - 4(r^2 - l^2)}}{2}
 = r\cos\theta \pm \sqrt{r^2\cos^2\theta - r^2 + l^2}\]</div>
 <p>根号里用 <span class="arithmatex">\(\cos^2\theta - 1 = -\sin^2\theta\)</span> 化简：</p>
 <div class="arithmatex">\[s = r\cos\theta \pm \sqrt{l^2 - r^2\sin^2\theta}\]</div>
 <p>取<strong>正号</strong>（机械上滑块在曲柄外侧，取加号那一支）：</p>
 <div class="arithmatex">\[s = r\cos\theta + \sqrt{l^2 - r^2\sin^2\theta}\]</div>
-<p><strong>这个式子说明什么</strong>：滑块位移由两部分叠加 ——
+<p><strong>这个式子说明什么</strong>：滑块位移由两项叠加 ——
 <strong>第一部分 <span class="arithmatex">\(r\cos\theta\)</span> 是曲柄在导路方向上的投影</strong>，
-<strong>第二部分 <span class="arithmatex">\(\sqrt{l^2 - r^2\sin^2\theta}\)</span> 是连杆在导路方向上的投影</strong></p>
-<p><strong>注意这已经不是简单的正弦关系了</strong>：因为第二部分里含 <span class="arithmatex">\(\sin^2\theta\)</span>，
-整个式子是 <span class="arithmatex">\(\theta\)</span> 的<strong>非线性</strong>函数。
-这也解释了为什么曲柄滑块的运动分析必须用解析公式，
-而不能简单地用「正弦」近似 ⚠</p>
+<strong>第二部分 <span class="arithmatex">\(\sqrt{l^2 - r^2\sin^2\theta}\)</span> 是连杆在导路方向上的投影</strong>。
+因为第二部分含 <span class="arithmatex">\(\sin^2\theta\)</span>，整个式子是 <span class="arithmatex">\(\theta\)</span> 的<strong>非线性</strong>函数，
+所以曲柄滑块的运动分析必须用解析公式，不能用「正弦」近似 ⚠</p>
 <div class="admonition warning">
 <p class="admonition-title">平面二连杆的「臂展」范围要先记住</p>
 <p>二连杆（长 <span class="arithmatex">\(l_1\)</span>、<span class="arithmatex">\(l_2\)</span>）末端到基座的距离满足</p>
@@ -13134,22 +13098,19 @@ L 120.591628 104.508
 <hr />
 <h2 id="d-h">四、D-H 参数法<a class="headerlink" href="#d-h" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么需要一套统一的建系规则<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>上一节的公式 <span class="arithmatex">\({}^0_n T = \prod {}^{i-1}_i T\)</span> 是对的，
-但要真正用起来，还得回答一个问题：
+<p>上一节公式 <span class="arithmatex">\({}^0_n T = \prod {}^{i-1}_i T\)</span> 是对的，但要真正用起来还得回答：
 <strong>每个坐标系的三个轴到底怎么摆？</strong></p>
-<p>如果每个人自己随便摆，那么同一台机械臂在不同人手里会算出<strong>不同的参数</strong>，
-结果虽然都对，但没法互相核对，也没法用现成的公式表。</p>
+<p>若各人随便摆，同一台机械臂会算出<strong>不同的参数</strong>——结果虽然都对，但没法互相核对，也没法用现成公式表。</p>
 <p><strong>D-H 参数法（Denavit-Hartenberg）</strong> 给出的就是<strong>一套统一的建系规则</strong>：
-按固定步骤找到每个坐标系的轴，然后只用<strong>四个参数</strong>描述相邻两根连杆的关系。</p>
+按固定步骤定出每个坐标系的轴，再用<strong>四个参数</strong>描述相邻两根连杆的关系。</p>
 <h3 id="42">4.2 建系规则<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p>课件给出的建系规则是四条：</p>
+<p>建系规则共四条：</p>
 <ul>
 <li><strong><span class="arithmatex">\(Z_{j-1}\)</span> 为关节 <span class="arithmatex">\(j\)</span> 的旋转轴 / 移动方向</strong></li>
 <li><strong><span class="arithmatex">\(X_j\)</span> 垂直于 <span class="arithmatex">\(Z_{j-1}\)</span>，并顺着 <span class="arithmatex">\(j\)</span> 到 <span class="arithmatex">\(j+1\)</span> 的方向</strong></li>
 <li><strong><span class="arithmatex">\(X_j\)</span> 或其延长线与 <span class="arithmatex">\(Z_{j-1}\)</span> 相交</strong></li>
 <li><strong><span class="arithmatex">\(Y_j\)</span> 与另外两个轴垂直，构成右手系</strong></li>
 </ul>
-<p>逐条读一遍：</p>
 <table>
 <thead>
 <tr>
@@ -13162,39 +13123,37 @@ L 120.591628 104.508
 <tr>
 <td><span class="arithmatex">\(Z_{j-1}\)</span> 是关节 <span class="arithmatex">\(j\)</span> 的轴</td>
 <td><strong><span class="arithmatex">\(Z\)</span> 轴跟着关节走</strong></td>
-<td>关节转动时，绕的就是它，这样 <span class="arithmatex">\(\theta\)</span> 最自然</td>
+<td>关节绕的就是它，<span class="arithmatex">\(\theta\)</span> 最自然</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(X_j\)</span> 垂直于 <span class="arithmatex">\(Z_{j-1}\)</span></td>
-<td><span class="arithmatex">\(X\)</span> 轴要<strong>横着搭</strong>在前一个 <span class="arithmatex">\(Z\)</span> 轴上</td>
-<td>使「两根轴之间的距离」变成一个参数</td>
+<td><span class="arithmatex">\(X\)</span> 轴<strong>横着搭</strong>在前一个 <span class="arithmatex">\(Z\)</span> 轴上</td>
+<td>把两轴距离变成一个参数</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(X_j\)</span> 与 <span class="arithmatex">\(Z_{j-1}\)</span> 相交</td>
-<td>两条线<strong>相交</strong>而不是错开</td>
+<td>两条线<strong>相交</strong>而非错开</td>
 <td>把「错开的量」也变成一个参数</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(Y_j\)</span> 构成右手系</td>
 <td><span class="arithmatex">\(Y = Z \times X\)</span></td>
-<td>保证坐标系是右手系，<span class="arithmatex">\(3\times3\)</span> 的旋转矩阵才规范</td>
+<td>保证右手系，旋转矩阵才规范</td>
 </tr>
 </tbody>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">下标差一位，是最常见的手算错误</p>
-<p>注意 <span class="arithmatex">\(Z\)</span> 的下标是 <span class="arithmatex">\(j-1\)</span>，而 <span class="arithmatex">\(X\)</span> 的下标是 <span class="arithmatex">\(j\)</span>。</p>
+<p>注意 <span class="arithmatex">\(Z\)</span> 下标是 <span class="arithmatex">\(j-1\)</span>，<span class="arithmatex">\(X\)</span> 下标是 <span class="arithmatex">\(j\)</span>。</p>
 <ul>
 <li><span class="arithmatex">\(Z\)</span> 轴：<strong>属于前一关节</strong>（关节 <span class="arithmatex">\(j\)</span> 的轴记作 <span class="arithmatex">\(Z_{j-1}\)</span>）</li>
 <li><span class="arithmatex">\(X\)</span> 轴：<strong>属于当前连杆</strong>（第 <span class="arithmatex">\(j\)</span> 根连杆的 <span class="arithmatex">\(X\)</span> 轴记作 <span class="arithmatex">\(X_j\)</span>）</li>
 </ul>
-<p>所以写第 <span class="arithmatex">\(j\)</span> 个变换时，<span class="arithmatex">\(Z\)</span> 下标是 <span class="arithmatex">\(j-1\)</span>、<span class="arithmatex">\(X\)</span> 下标是 <span class="arithmatex">\(j\)</span>。
-<strong>抄公式时把这两个下标写反，整条链都会错位</strong></p>
-<p>自检方法：变换矩阵 <span class="arithmatex">\({}^{j-1}_j T\)</span> 描述「从 <span class="arithmatex">\(\{j-1\}\)</span> 到 <span class="arithmatex">\(\{j\}\)</span>」，
-它绕的轴应该是<strong>前一个坐标系</strong>的 <span class="arithmatex">\(Z\)</span>，也就是 <span class="arithmatex">\(Z_{j-1}\)</span></p>
+<p><strong>把这两个下标写反，整条链都会错位</strong>。自检：<span class="arithmatex">\({}^{j-1}_j T\)</span> 描述「从 <span class="arithmatex">\(\{j-1\}\)</span> 到 <span class="arithmatex">\(\{j\}\)</span>」，
+它绕的轴应是<strong>前一个坐标系</strong>的 <span class="arithmatex">\(Z\)</span>，即 <span class="arithmatex">\(Z_{j-1}\)</span></p>
 </div>
 <h3 id="43-d-h">4.3 四个 D-H 参数<a class="headerlink" href="#43-d-h" title="Permanent link">&para;</a></h3>
-<p>按上面的建系规则，相邻两根连杆之间的相对位姿只需要<strong>四个数</strong>就能完全确定：</p>
+<p>按上述规则，相邻两连杆的相对位姿只需<strong>四个数</strong>即可完全确定：</p>
 <table>
 <thead>
 <tr>
@@ -13270,18 +13229,14 @@ L 120.591628 104.508
 </table>
 <p><strong>记忆规律</strong>：<span class="arithmatex">\(a\)</span> 配 <span class="arithmatex">\(\alpha\)</span>、<span class="arithmatex">\(d\)</span> 配 <span class="arithmatex">\(\theta\)</span>；
 前者是长度后者是角度；下标带 <span class="arithmatex">\(i\)</span> 的都沿 <span class="arithmatex">\(X_i\)</span>，带 <span class="arithmatex">\(i-1\)</span> 的都沿 <span class="arithmatex">\(Z_{i-1}\)</span></p>
-<p><strong>关键的一点</strong>：每根连杆只有<strong>一个关节变量</strong>。
-转动关节时变量是 <span class="arithmatex">\(\theta_i\)</span>，移动关节时变量是 <span class="arithmatex">\(d_i\)</span>，
-另外两个永远是<strong>设计时定死的常数</strong> ✓
-所以 <span class="arithmatex">\(n\)</span> 关节机械臂的正解里，<strong>变量恰好只有 <span class="arithmatex">\(n\)</span> 个</strong> —— 这与 1.1 节说的对上了。</p>
+<p><strong>关键的一点</strong>：每根连杆只有<strong>一个关节变量</strong>（转动关节是 <span class="arithmatex">\(\theta_i\)</span>，移动关节是 <span class="arithmatex">\(d_i\)</span>），
+另外两个永远是<strong>设计时定死的常数</strong> ✓ 所以 <span class="arithmatex">\(n\)</span> 关节机械臂正解里<strong>变量恰好 <span class="arithmatex">\(n\)</span> 个</strong> —— 与 1.1 节对上。</p>
 <h3 id="44">4.4 相邻变换矩阵的构造<a class="headerlink" href="#44" title="Permanent link">&para;</a></h3>
-<p>把四个参数按固定顺序的四个动作串起来，就得到相邻变换矩阵。
-四个动作依次是：<strong>绕 <span class="arithmatex">\(Z_{i-1}\)</span> 转 <span class="arithmatex">\(\theta_i\)</span> → 沿 <span class="arithmatex">\(Z_{i-1}\)</span> 移 <span class="arithmatex">\(d_i\)</span> → 沿 <span class="arithmatex">\(X_i\)</span> 移 <span class="arithmatex">\(a_i\)</span> → 绕 <span class="arithmatex">\(X_i\)</span> 转 <span class="arithmatex">\(\alpha_i\)</span></strong>。</p>
+<p>把四个参数按固定顺序的四个动作串起来，即得相邻变换矩阵。
+四个动作依次为：<strong>绕 <span class="arithmatex">\(Z_{i-1}\)</span> 转 <span class="arithmatex">\(\theta_i\)</span> → 沿 <span class="arithmatex">\(Z_{i-1}\)</span> 移 <span class="arithmatex">\(d_i\)</span> → 沿 <span class="arithmatex">\(X_i\)</span> 移 <span class="arithmatex">\(a_i\)</span> → 绕 <span class="arithmatex">\(X_i\)</span> 转 <span class="arithmatex">\(\alpha_i\)</span></strong>。</p>
 <p>于是：</p>
 <div class="arithmatex">\[{}^{i-1}_i T = R_z(\theta_i)\, D_z(d_i)\, D_x(a_i)\, R_x(\alpha_i)\]</div>
-<p>其中 <span class="arithmatex">\(R_z(\theta_i)\)</span> 是绕 <span class="arithmatex">\(z\)</span> 轴转 <span class="arithmatex">\(\theta_i\)</span> 的 <span class="arithmatex">\(4\times4\)</span> 齐次矩阵，
-<span class="arithmatex">\(D_z(d_i)\)</span> 是沿 <span class="arithmatex">\(z\)</span> 轴平移 <span class="arithmatex">\(d_i\)</span> 的矩阵，以此类推。
-把它们逐个写出来（注意用齐次形式，平移项放在最后一列）：</p>
+<p>其中 <span class="arithmatex">\(R_z(\theta_i)\)</span> 是绕 <span class="arithmatex">\(z\)</span> 轴转 <span class="arithmatex">\(\theta_i\)</span> 的 <span class="arithmatex">\(4\times4\)</span> 齐次矩阵，<span class="arithmatex">\(D_z(d_i)\)</span> 是沿 <span class="arithmatex">\(z\)</span> 轴平移 <span class="arithmatex">\(d_i\)</span> 的矩阵，余类推。逐个写出（齐次形式，平移项在最后一列）：</p>
 <div class="arithmatex">\[R_z(\theta_i) = \begin{bmatrix}
 \cos\theta_i &amp; -\sin\theta_i &amp; 0 &amp; 0 \\
 \sin\theta_i &amp;  \cos\theta_i &amp; 0 &amp; 0 \\
@@ -13296,29 +13251,28 @@ R_x(\alpha_i) = \begin{bmatrix}
 0 &amp; \cos\alpha_i &amp; -\sin\alpha_i &amp; 0 \\
 0 &amp; \sin\alpha_i &amp;  \cos\alpha_i &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix}\]</div>
-<p><strong>先把右边两个平移的乘积算出来</strong>（它们只影响最后一列）：</p>
+<p><strong>先算右边两个平移的乘积</strong>（只影响最后一列）：</p>
 <div class="arithmatex">\[D_z(d_i)\,D_x(a_i) = \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; a_i \\
 0 &amp; 1 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 1 &amp; d_i \\
 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix}\]</div>
-<p>再乘上 <span class="arithmatex">\(R_x(\alpha_i)\)</span>（这一步只改旋转块里的后两行）：</p>
+<p>再右乘 <span class="arithmatex">\(R_x(\alpha_i)\)</span>（只改旋转块的后两行）：</p>
 <div class="arithmatex">\[D_z(d_i)D_x(a_i)R_x(\alpha_i) = \begin{bmatrix}
 1 &amp; 0 &amp; 0 &amp; a_i \\
 0 &amp; \cos\alpha_i &amp; -\sin\alpha_i &amp; 0 \\
 0 &amp; \sin\alpha_i &amp;  \cos\alpha_i &amp; d_i \\
 0 &amp; 0 &amp; 0 &amp; 1\end{bmatrix}\]</div>
-<p>最后左乘 <span class="arithmatex">\(R_z(\theta_i)\)</span>。左乘 <span class="arithmatex">\(R_z\)</span> 只作用在前两行上，
-第一行乘上 <span class="arithmatex">\((\cos\theta_i, -\sin\theta_i)\)</span> 的组合，第二行乘上 <span class="arithmatex">\((\sin\theta_i, \cos\theta_i)\)</span> 的组合：</p>
+<p>最后左乘 <span class="arithmatex">\(R_z(\theta_i)\)</span>：它只作用在前两行上，
+第一行乘 <span class="arithmatex">\((\cos\theta_i, -\sin\theta_i)\)</span>、第二行乘 <span class="arithmatex">\((\sin\theta_i, \cos\theta_i)\)</span>：</p>
 <div class="arithmatex">\[{}^{i-1}_i T = \begin{bmatrix}
 \cos\theta_i &amp; -\sin\theta_i\cos\alpha_i &amp;  \sin\theta_i\sin\alpha_i &amp; a_i\cos\theta_i \\
 \sin\theta_i &amp;  \cos\theta_i\cos\alpha_i &amp; -\cos\theta_i\sin\alpha_i &amp; a_i\sin\theta_i \\
 0            &amp;  \sin\alpha_i            &amp;  \cos\alpha_i            &amp; d_i \\
 0            &amp;  0                       &amp;  0                       &amp; 1
 \end{bmatrix}\]</div>
-<p><strong>这就是通用的 D-H 变换矩阵</strong>。四个 D-H 参数一代进去，就得到这一段连杆的变换 ✓</p>
-<p><strong>这个矩阵说明什么</strong>：它把「关节转了多少」和「连杆有多长、
-两根关节轴之间扭了多少、错开了多少」全部打包进一个 <span class="arithmatex">\(4\times4\)</span> 矩阵里。
+<p><strong>这就是通用的 D-H 变换矩阵</strong>：四个参数一代入即得该段连杆的变换 ✓</p>
+<p><strong>这个矩阵说明什么</strong>：它把「关节转了多少」和「连杆有多长、两轴间扭了多少、错开了多少」打包进一个 <span class="arithmatex">\(4\times4\)</span> 矩阵；
 整条臂的变换就是这些矩阵连乘 ✓</p>
 <p><strong>完整的正解算法，一共三步</strong>：</p>
 <ol>
@@ -13327,8 +13281,7 @@ R_x(\alpha_i) = \begin{bmatrix}
 <li>连乘：<span class="arithmatex">\({}^0_n T = {}^0_1 T\, {}^1_2 T \cdots {}^{n-1}_n T\)</span>，答案在最后一列 ✓</li>
 </ol>
 <h3 id="45-vs">4.5 数值核对：几何法 vs 变换法<a class="headerlink" href="#45-vs" title="Permanent link">&para;</a></h3>
-<p>用平面二连杆把两种方法对一遍。平面二连杆的 D-H 参数表很简单
-（所有扭角和偏置都为 0）：</p>
+<p>用平面二连杆把两种方法对一遍。它的 D-H 参数表很简单（扭角、偏置全为 0）：</p>
 <table>
 <thead>
 <tr>
@@ -13356,9 +13309,8 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p>取 <span class="arithmatex">\(\theta_1 = 30°\)</span>、<span class="arithmatex">\(\theta_2 = 45°\)</span>，下面三组算例分别验证：正解两种算法一致、
-逆解的多解、工作空间采样。</p>
-<p>下面第一组算例把「几何法」和「齐次变换法」各算一遍，看结果是否一致。</p>
+<p>取 <span class="arithmatex">\(\theta_1 = 30°\)</span>、<span class="arithmatex">\(\theta_2 = 45°\)</span>，三组算例分别验证：正解两种算法一致、逆解多解、工作空间采样。</p>
+<p>第一组算例：几何法与齐次变换法各算一遍，看是否一致。</p>
 <ul>
 <li>几何法 x = 0.424056 y = 0.489778</li>
 <li>变换法 x = 0.424056 y = 0.489778</li>
@@ -13366,19 +13318,15 @@ R_x(\alpha_i) = \begin{bmatrix}
 <li>cos(phi) = 0.258819 sin(phi) = 0.965926</li>
 <li>x^2 + y^2 = 0.419706</li>
 </ul>
-<p><strong>这一组算例验证了什么</strong>：几何法和齐次变换法给出<strong>完全相同</strong>的末端坐标
-（<span class="arithmatex">\(x = 0.424056\)</span>，<span class="arithmatex">\(y = 0.489778\)</span>）✓
+<p><strong>这一组算例验证了什么</strong>：几何法与齐次变换法给出<strong>完全相同</strong>的末端坐标（<span class="arithmatex">\(x = 0.424056\)</span>，<span class="arithmatex">\(y = 0.489778\)</span>）✓
 说明「连乘变换矩阵」和「直接三角求和」是同一件事的两种写法。
-变换矩阵的旋转块第一列给出 <span class="arithmatex">\(\cos\phi\)</span>、第二行第一列给出 <span class="arithmatex">\(\sin\phi\)</span>，
-反解出的 <span class="arithmatex">\(\phi = 75° = 30° + 45°\)</span>，正好是两个关节角之和 ✓</p>
-<p><strong>为什么必须两种方法都对一遍</strong>：考试里如果只背了一种，
-一旦中间某步记错（比如把 <span class="arithmatex">\(\theta_1 + \theta_2\)</span> 写成 <span class="arithmatex">\(\theta_2\)</span>），
-没有第二套算法就无法自查 ⚠
+旋转块第一列给出 <span class="arithmatex">\(\cos\phi\)</span>、第二行第一列给出 <span class="arithmatex">\(\sin\phi\)</span>，反解得 <span class="arithmatex">\(\phi = 75° = 30° + 45°\)</span> ✓</p>
+<p><strong>为什么两种方法都要对一遍</strong>：只背一种，一旦中间某步记错（如把 <span class="arithmatex">\(\theta_1+\theta_2\)</span> 写成 <span class="arithmatex">\(\theta_2\)</span>）就无法自查 ⚠
 几何法适合<strong>两三个关节的手算</strong>，变换法适合<strong>任意多关节的编程</strong>。</p>
 <hr />
 <h2 id="_6">五、逆运动学：为什么难，什么时候有封闭解<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 逆解的个数由什么决定<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
-<p>课件明确指出：<strong>逆解个数取决于机器人关节数目、机器人的构型以及关节运动范围。</strong></p>
+<p>课件明确指出：<strong>逆解个数取决于关节数目、机器人构型以及关节运动范围。</strong></p>
 <table>
 <thead>
 <tr>
@@ -13389,21 +13337,20 @@ R_x(\alpha_i) = \begin{bmatrix}
 <tbody>
 <tr>
 <td><strong>关节数目</strong></td>
-<td>关节越多，方程越多，解的结构越复杂</td>
+<td>关节越多，方程越多，解结构越复杂</td>
 </tr>
 <tr>
 <td><strong>构型</strong></td>
-<td>轴是不是相交、是不是平行，决定能不能解出封闭解</td>
+<td>轴是否相交、是否平行，决定能否解出封闭解</td>
 </tr>
 <tr>
 <td><strong>关节运动范围</strong></td>
-<td>数学上算出来的解，可能超出了关节实际能转到的范围，那就不算数 ⚠</td>
+<td>数学解可能超出关节实际范围，那就不算数 ⚠</td>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一条特别重要</strong>：数学解不等于物理可行解。
-一个解算出 <span class="arithmatex">\(\theta_2 = 200°\)</span>，但第 2 关节的机械限位只允许 <span class="arithmatex">\(-150°\sim150°\)</span>，
-那么这个解<strong>必须丢掉</strong> ✓</p>
+<p><strong>最后一条特别重要</strong>：数学解不等于物理可行解 ——
+若算出 <span class="arithmatex">\(\theta_2 = 200°\)</span> 而第 2 关节限位只允许 <span class="arithmatex">\(-150°\sim150°\)</span>，这个解<strong>必须丢掉</strong> ✓</p>
 <h3 id="52">5.2 两类解法<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <p>课件把逆运动学求解分为两类：</p>
 <table>
@@ -13430,17 +13377,13 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p>课件给出的结论是：<strong>通常来说数值迭代解法比计算封闭解的解析表达式更慢、更耗时，
-因此在设计机器人的构型时就要考虑封闭解的存在性。</strong></p>
-<p><strong>这句话把「机构设计」和「算法」连起来了</strong>：
-不是先造出机器人再想办法算逆解，而是<strong>在设计阶段就选一个逆解好算的构型</strong> ✓
-选择解法时应该从<strong>计算效率、计算精度</strong>等要求出发。</p>
+<p>课件结论：<strong>数值迭代通常比求封闭解的解析表达式更慢、更耗时，因此设计构型时就要考虑封闭解的存在性。</strong></p>
+<p>这<strong>把「机构设计」与「算法」连起来</strong>：不是先造机器人再想办法算逆解，
+而是<strong>在设计阶段就选一个逆解好算的构型</strong> ✓ 选解法应从<strong>计算效率、精度</strong>等要求出发。</p>
 <h3 id="53-6">5.3 6 自由度为什么特别难<a class="headerlink" href="#53-6" title="Permanent link">&para;</a></h3>
 <p>课件指出：<strong>6 自由度的机器人的运动学反解非常复杂，一般没有封闭解。</strong></p>
-<p><strong>为什么 6 自由度是关键数目</strong>：三维空间里的刚体位姿恰好有 6 个自由度
-（3 个位置 + 3 个姿态）。要让机械臂<strong>能到达任意位姿</strong>，
-关节数至少要 6 个。所以 6 自由度是工业机械臂的<strong>标准配置</strong> ——
-但也正是这个数目让逆解最复杂 ⚠</p>
+<p><strong>为什么 6 自由度是关键数目</strong>：刚体位姿恰好有 6 个自由度（3 位置 + 3 姿态），
+要让机械臂<strong>能到达任意位姿</strong>，关节数至少 6 个 —— 所以 6 自由度是工业机械臂的<strong>标准配置</strong>，但也正因此逆解最复杂 ⚠</p>
 <h3 id="54-pieper">5.4 Pieper 准则<a class="headerlink" href="#54-pieper" title="Permanent link">&para;</a></h3>
 <p>虽然一般没有封闭解，但课件给出：<strong>某些特殊情形仍可解</strong>。
 这就是 <strong>Pieper 准则</strong>：如果机器人满足<strong>两个充分条件中的一个</strong>，就会得到闭合解。</p>
@@ -13484,10 +13427,9 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>注意「充分条件」这四个字</strong>：满足就一定可解；
-不满足<strong>不一定</strong>不可解（只是没保证）⚠
-考试里如果问「什么样的机器人一定存在封闭解」，答的就是这两条 ✓</p>
-<p>下面第二组算例直接算平面二连杆的逆解，看<strong>多解</strong>是怎么冒出来的。</p>
+<p><strong>注意「充分条件」四个字</strong>：满足一定可解；不满足<strong>不一定</strong>不可解（只是没保证）⚠
+考试问「什么样的机器人一定存在封闭解」，答的就是这两条 ✓</p>
+<p>第二组算例：直接算逆解，看<strong>多解</strong>怎么冒出来。</p>
 <ul>
 <li>c2 = 0.166667</li>
 <li>肘下 theta1 = -11.5172 theta2 = 80.4059</li>
@@ -13496,17 +13438,14 @@ R_x(\alpha_i) = \begin{bmatrix}
 <li>肘上 回代 x = 0.5 y = 0.2</li>
 </ul>
 <p><strong>这一组算例验证了什么</strong>：同一个末端点 <span class="arithmatex">\((0.50, 0.20)\)</span> 确实对应<strong>两组</strong>关节角 ✓
-两组解回代之后都精确回到 <span class="arithmatex">\((0.5, 0.2)\)</span>，误差在小数点后 6 位以内 ——
-说明两组解都是<strong>正确的</strong>，不是算错了 ⚠
+两组解回代都精确回到 <span class="arithmatex">\((0.5, 0.2)\)</span>（误差在小数点后 6 位以内），说明两组解都<strong>正确</strong> ⚠
 这正是「逆解多解」的含义：<strong>多解不是 bug，是几何事实</strong>。</p>
-<p><strong>手算思路</strong>（第五节的例题会给完整推导）：
-先把两式平方相加消去 <span class="arithmatex">\(\theta_1\)</span>，解出 <span class="arithmatex">\(\cos\theta_2 = 0.166667\)</span>，
-再开方取正负号 —— <strong>开方那一步的两个符号就是多解的来源</strong> ✓</p>
+<p><strong>手算思路</strong>（第五节例题有完整推导）：
+两式平方相加消去 <span class="arithmatex">\(\theta_1\)</span>，解出 <span class="arithmatex">\(\cos\theta_2=0.166667\)</span>，再开方取正负号 —— <strong>开方的两个符号就是多解的来源</strong> ✓</p>
 <hr />
 <h2 id="_7">六、多解的来源与选解准则<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 多解从哪里来<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<p>以 6 自由度 PUMA 类机器人为例，课件逐条列出了多解的来源。这里面一共有
-<strong>三个独立的「二选一」</strong>：</p>
+<p>以 6 自由度 PUMA 类机器人为例，多解来源共有<strong>三个独立的「二选一」</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13546,17 +13485,17 @@ R_x(\alpha_i) = \begin{bmatrix}
 <tbody>
 <tr>
 <td><strong>左右手位形</strong></td>
-<td>肩关节相对于腰部有个<strong>水平偏移</strong>，所以同一组目标坐标对应两种解：机械臂落在腰部的左侧或右侧</td>
+<td>肩关节相对腰部有<strong>水平偏移</strong>，同一目标坐标对应两种解：臂落在腰部左侧或右侧</td>
 <td>「它们分别被称为左手运动学位形和右手运动学位形」</td>
 </tr>
 <tr>
 <td><strong>肘上 / 肘下</strong></td>
-<td>大臂与小臂形成三角形，肘可以往上弯也可以往下弯</td>
+<td>大臂与小臂成三角形，肘可上弯也可下弯</td>
 <td>「一些解对应肘关节在上或在下」</td>
 </tr>
 <tr>
 <td><strong>腕翻转</strong></td>
-<td>腕关节有<strong>较大的旋转范围</strong>，可以采用两个<strong>相差 <span class="arithmatex">\(180°\)</span></strong> 的关节角度</td>
+<td>腕关节<strong>旋转范围大</strong>，可取两个<strong>相差 <span class="arithmatex">\(180°\)</span></strong> 的角度</td>
 <td>「因此其可以采用两个相差 180° 的关节角度」</td>
 </tr>
 </tbody>
@@ -13583,17 +13522,14 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>为什么「交于一点」就能解耦</strong>：三个腕关节的轴都过同一个点，
-那么无论腕关节怎么转，<strong>这个点的位置不变</strong> ✓
-于是：</p>
+<p><strong>为什么「交于一点」就能解耦</strong>：三个腕关节的轴都过同一点，
+无论腕关节怎么转，<strong>这个点的位置不变</strong> ✓ 于是：</p>
 <ol>
-<li>用前三个关节（大臂那一段）把<strong>腕心</strong>送到指定位置</li>
-<li>再用三个腕关节把<strong>姿态</strong>调成指定的朝向</li>
+<li>用前三个关节把<strong>腕心</strong>送到指定位置</li>
+<li>再用三个腕关节把<strong>姿态</strong>调成指定朝向</li>
 </ol>
-<p>两个问题各管一件事，各自是<strong>低维问题</strong>，所以能解出公式解 ✓
-课件的评价是：<strong>许多工业机器人都具有这样的腕关节</strong> ——
-说明球腕不是特例，而是<strong>工业标准设计</strong> ✓</p>
-<p>下面这张「多解的来源」表是本页第二张需要记住的对照表：</p>
+<p>两个低维问题各管一件事，能解出公式解 ✓ —— 球腕因此不是特例，而是<strong>工业标准设计</strong> ✓</p>
+<p>下面这张表汇总多解的来源：</p>
 <table>
 <thead>
 <tr>
@@ -13625,13 +13561,12 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tbody>
 </table>
 <h3 id="63">6.3 选解准则<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
-<p>课件明确说：<strong>如果逆运动学有多个解，那么控制程序在运行时就必须选择其中一个解。</strong></p>
-<p><strong>怎么选</strong>：课件给出「其中一种比较合理的方法就是选择『最近』的解」。
+<p>课件明确说：<strong>逆解有多个时，控制程序运行时必须选其中一个。</strong></p>
+<p><strong>怎么选</strong>：课件给出「其中一种比较合理的方法就是选择『最近』的解」，
 而这个「最近」<strong>有多种定义方式</strong>。</p>
-<p>对于典型的 6 自由度关节型机器人：<strong>前三个关节较大，后三个关节较小</strong>。
-在定义关节空间内的距离远近时，<strong>要考虑给不同关节赋予不同的权重</strong> ——
-比如<strong>前三个关节设置大权重，后三个关节设置小权重</strong>。
-这样在选择解的时候会<strong>优先考虑移动较小的关节，而非移动大关节</strong> ✓</p>
+<p>对典型 6 自由度关节型机器人（<strong>前三个关节大、后三个小</strong>），
+定义关节空间距离时<strong>要给不同关节赋不同权重</strong> ——
+<strong>前三个设大权重、后三个设小权重</strong>，选解时就会<strong>优先让小关节动、而非大关节</strong> ✓</p>
 <p>设当前关节角为 <span class="arithmatex">\(q^{\text{now}}\)</span>，某个候选解为 <span class="arithmatex">\(q\)</span>，加权的关节空间距离定义为</p>
 <div class="arithmatex">\[D(q) = \sum_{i=1}^{n} w_i \, \lvert q_i - q_i^{\text{now}} \rvert\]</div>
 <table>
@@ -13664,11 +13599,9 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>这个式子的直觉</strong>：把每个关节「要转多少」乘上它的「重要性」再加起来。
-权重大 → 转一点点就会显著抬高距离 → 选解时自动避免让它动 ✓</p>
+<p><strong>直觉</strong>：把每个关节「要转多少」乘「重要性」再相加；权重大 → 转一点就显著抬高距离 → 自动避免让它动 ✓</p>
 <h3 id="64">6.4 避障：近的不一定能用<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
-<p>课件给了一个很重要的转折：<strong>当存在障碍物时，
-「最近」的解的运动路径会与其发生碰撞，这时就要选择另一个运动距离较远的解。</strong></p>
+<p>课件给了一个重要转折：<strong>当存在障碍物时，「最近」解的运动路径会与其碰撞，这时就要选择另一个运动距离较远的解。</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">「最近」和「不撞」是两个独立的要求</p>
 <p>「最近的解」只保证<strong>关节移动量小</strong>，
@@ -13692,10 +13625,8 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tbody>
 </table>
 <p>两者是不同的判据：一条「最短」的路径完全可能<strong>横穿障碍物</strong> ⚠</p>
-<p><strong>所以正确的流程是</strong>：先按「最近」排序，再逐个做<strong>碰撞检查</strong>，
-丢掉会撞的，取第一个通过的 ✓</p>
-<p><strong>还要注意</strong>：这里的「关节距离小」和「末端走的路程短」也不是一回事 ——
-关节上转得少，末端可能划出一道大弧线 ⚠</p>
+<p><strong>正确流程</strong>：先按「最近」排序，再逐个做<strong>碰撞检查</strong>，丢掉会撞的，取第一个通过的 ✓</p>
+<p><strong>还要注意</strong>：「关节距离小」和「末端路程短」也不是一回事 —— 关节转得少，末端可能划出大弧线 ⚠</p>
 </div>
 <h3 id="65">6.5 数值解的补充说明<a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
 <p>课件补充了数值解的两个特点：</p>
@@ -13717,28 +13648,23 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>为什么数值解需要初值</strong>：迭代法是从一个起点开始「往目标走」的，
-起点选在哪里会影响<strong>收敛到哪个解</strong>，甚至<strong>会不会收敛</strong> ⚠
-课件说默认用零，这是一个<strong>实用约定</strong>：零位通常是机械臂的自然位形，
-而且可重复 —— 同样的目标点每次求得同一个解 ✓</p>
-<p><strong>数值解慢，但适用范围广</strong> —— 这就是工程上的取舍。</p>
-<p>下面第三组算例用采样看工作空间，验证 3.3 节那个「圆环带洞」的结论。</p>
+<p><strong>为什么需要初值</strong>：迭代法从起点「往目标走」，起点会影响<strong>收敛到哪个解</strong>甚至<strong>会不会收敛</strong> ⚠
+课件默认用零，这是<strong>实用约定</strong>：零位通常是自然位形且可重复 —— 同一目标点每次求得同一个解 ✓
+<strong>数值解慢，但适用范围广</strong> —— 这就是工程上的取舍。</p>
+<p>第三组算例：采样看工作空间，验证 3.3 节「圆环带洞」。</p>
 <ul>
 <li>采样半径 min = 0.1 max = 0.7</li>
 <li>理论半径 min = 0.1 max = 0.7</li>
 <li>落在圆环内的比例 = 1.0</li>
 <li>r &lt; 0.1 的样本比例 = 0.0</li>
 </ul>
-<p><strong>这一组算例验证了什么</strong>：采样出来的半径范围是 <span class="arithmatex">\(0.1 \sim 0.7\)</span>，
-和理论范围 <span class="arithmatex">\(\lvert l_1 - l_2 \rvert = 0.1\)</span>、<span class="arithmatex">\(l_1 + l_2 = 0.7\)</span> <strong>完全对上</strong> ✓
-「落在圆环内的比例」等于 1.0，说明<strong>每一个采样点都在圆环里</strong>，
-没有跑到环外；「<span class="arithmatex">\(r \lt 0.1\)</span> 的样本比例」等于 0，说明<strong>内圆里面一个点都没有</strong> ——
+<p><strong>这一组算例验证了什么</strong>：采样半径范围 <span class="arithmatex">\(0.1 \sim 0.7\)</span> 与理论范围 <span class="arithmatex">\(\lvert l_1 - l_2 \rvert = 0.1\)</span>、<span class="arithmatex">\(l_1 + l_2 = 0.7\)</span> <strong>完全对上</strong> ✓
+「圆环内比例」= 1.0 说明<strong>每个采样点都在圆环里</strong>；「<span class="arithmatex">\(r \lt 0.1\)</span> 比例」= 0 说明<strong>内圆里一个点都没有</strong> ——
 <strong>这就是工作空间中间那个洞</strong> ✓</p>
-<p><strong>工程含义</strong>：如果规划器给的目标点在 <span class="arithmatex">\(r = 0.05\)</span> 处（在洞里），
-逆解<strong>一定无解</strong>。此时应该报「目标不可达」，而不是让迭代解乱跑 ⚠</p>
+<p><strong>工程含义</strong>：若规划器给的目标点在 <span class="arithmatex">\(r = 0.05\)</span>（洞里），逆解<strong>一定无解</strong>，应报「目标不可达」而非让迭代解乱跑 ⚠</p>
 <hr />
 <h2 id="_8">七、把四件事串起来<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>到这里，本页的四个环节可以串成一条完整的链：</p>
+<p>本页四个环节可串成一条完整的链：</p>
 <table>
 <thead>
 <tr>
@@ -13775,49 +13701,42 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>这张表说明什么</strong>：整页的数学其实只有<strong>一个动作在反复使用 —— 矩阵连乘</strong>。
+<p><strong>这张表说明什么</strong>：整页的数学其实只有<strong>一个动作反复使用 —— 矩阵连乘</strong>：
 位姿用矩阵表示，建系是给矩阵定参数，正解是连乘，逆解是解连乘之后的方程 ✓
 抓住了这条主线，所有公式都是<strong>同一个思想的展开</strong>。</p>
-<p>下面第四组算例演示「按最近准则选解」的具体做法。</p>
+<p>第四组算例：演示「按最近准则选解」。</p>
 <ul>
 <li>当前关节角 = [40. 60.]</li>
 <li>肘下 解 = [-11.5172 80.4059] 加权距离 = 61.7202</li>
 <li>肘上 解 = [ 55.12 -80.4059] 加权距离 = 85.323</li>
 <li>选中 = 肘下</li>
 </ul>
-<p><strong>这一组算例验证了什么</strong>：两组解在<strong>数学上都对</strong>，
-但加权距离不同（61.72 与 85.32），所以按「最近」准则选中了<strong>肘下</strong>那组 ✓
-这说明<strong>选解是一个独立的决策步骤</strong>，不能靠逆解算法本身决定 ⚠</p>
-<p><strong>换成不同的权重会怎样</strong>：如果给第 1 关节更大的权重，
-距离的数值会变，但因为两组解在第 1 关节上的差距本来就不占主导，
-顺序未必翻转 —— <strong>权重要按「哪个关节真的不该乱动」来定</strong>，
-而不是随手填 ⚠</p>
-<p>下面第五组算例用 D-H 通用公式把二连杆再算一遍，和第二节的几何法对照。</p>
+<p><strong>这一组算例验证了什么</strong>：两组解<strong>数学上都对</strong>，但加权距离不同（61.72 与 85.32），
+按「最近」准则选中了<strong>肘下</strong>那组 ✓ 说明<strong>选解是独立决策步骤</strong>，不能靠逆解算法本身决定 ⚠</p>
+<p><strong>换权重会怎样</strong>：给第 1 关节更大权重会改变距离数值，但两组解在第 1 关节上的差距不占主导，
+顺序未必翻转 —— <strong>权重要按「哪个关节真的不该乱动」来定</strong> ⚠</p>
+<p>第五组算例：用 D-H 通用公式再算二连杆，与第二节几何法对照。</p>
 <ul>
 <li>T 的平移列 = [0.424056 0.489778]</li>
 <li>末端 x = 0.424056 y = 0.489778</li>
 <li>姿态角 = 75.0 度</li>
 <li>第 1 段末端 = [0.34641 0.2 ]</li>
 </ul>
-<p><strong>这一组算例验证了什么</strong>：D-H 通用公式给出的末端坐标与第二节的几何法
-<strong>完全一致</strong>（<span class="arithmatex">\(0.424056, 0.489778\)</span>），姿态角也是 <span class="arithmatex">\(75°\)</span> ✓
-说明第二节那套 <span class="arithmatex">\(2\times2\)</span> 的小矩阵和第四节那个 <span class="arithmatex">\(4\times4\)</span> 的通用 D-H 矩阵
-<strong>是同一个东西在平面情形下的两种写法</strong> ✓</p>
-<p><strong>第一段末端的含义</strong>：<span class="arithmatex">\(\theta_1 = 30°\)</span> 时，第 1 段末端在
-<span class="arithmatex">\((0.40\cos30°, 0.40\sin30°) = (0.346410, 0.200000)\)</span> ——
-注意 <span class="arithmatex">\(y\)</span> 分量恰好是 <span class="arithmatex">\(0.2\)</span>，因为 <span class="arithmatex">\(0.40 \times 0.5 = 0.2\)</span> ✓</p>
+<p><strong>这一组算例验证了什么</strong>：D-H 通用公式的末端坐标与第二节几何法<strong>完全一致</strong>（<span class="arithmatex">\(0.424056, 0.489778\)</span>），姿态角也是 <span class="arithmatex">\(75°\)</span> ✓
+说明第二节的 <span class="arithmatex">\(2\times2\)</span> 小矩阵与第四节的 <span class="arithmatex">\(4\times4\)</span> 通用 D-H 矩阵<strong>是同一东西在平面情形的两种写法</strong> ✓</p>
+<p><strong>第一段末端的含义</strong>：<span class="arithmatex">\(\theta_1 = 30°\)</span> 时第 1 段末端在 <span class="arithmatex">\((0.40\cos30°, 0.40\sin30°) = (0.346410, 0.200000)\)</span>，
+<span class="arithmatex">\(y\)</span> 分量恰好 <span class="arithmatex">\(0.2\)</span>，因为 <span class="arithmatex">\(0.40 \times 0.5 = 0.2\)</span> ✓</p>
 <hr />
 <h2 id="_9">典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：二连杆正解（几何法手算）<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
-<p>平面二连杆机械臂，两根连杆长 <span class="arithmatex">\(l_1 = 0.40\)</span> m、<span class="arithmatex">\(l_2 = 0.30\)</span> m，
-关节角 <span class="arithmatex">\(\theta_1 = 30°\)</span>、<span class="arithmatex">\(\theta_2 = 45°\)</span>（<span class="arithmatex">\(\theta_2\)</span> 是<strong>相对</strong> <span class="arithmatex">\(\theta_1\)</span> 的转角）。
-求末端位置 <span class="arithmatex">\((x, y)\)</span> 和末端姿态角 <span class="arithmatex">\(\phi\)</span>。</p>
+<p>平面二连杆机械臂，<span class="arithmatex">\(l_1=0.40\)</span> m、<span class="arithmatex">\(l_2=0.30\)</span> m，
+关节角 <span class="arithmatex">\(\theta_1=30°\)</span>、<span class="arithmatex">\(\theta_2=45°\)</span>（<span class="arithmatex">\(\theta_2\)</span> 是<strong>相对</strong> <span class="arithmatex">\(\theta_1\)</span> 的转角）。
+求末端位置 <span class="arithmatex">\((x,y)\)</span> 和姿态角 <span class="arithmatex">\(\phi\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>平面二连杆的正解不需要矩阵，直接看几何：
-第一根杆的方向是 <span class="arithmatex">\(\theta_1\)</span>，第二根杆的方向是 <span class="arithmatex">\(\theta_1 + \theta_2\)</span>。
-把两根杆的向量加起来，就得到末端位置。</p>
-<p>注意 <span class="arithmatex">\(\theta_2\)</span> 是<strong>相对转角</strong>，所以第二根杆的<strong>绝对</strong>方向是两者之和 ⚠</p>
+<p>平面二连杆正解不需矩阵，直接看几何：
+第 1 根杆方向 <span class="arithmatex">\(\theta_1\)</span>、第 2 根杆方向 <span class="arithmatex">\(\theta_1 + \theta_2\)</span>；两向量相加即得末端位置。</p>
+<p>注意 <span class="arithmatex">\(\theta_2\)</span> 是<strong>相对转角</strong>，第 2 根杆的<strong>绝对</strong>方向是二者之和 ⚠</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13850,10 +13769,8 @@ R_x(\alpha_i) = \begin{bmatrix}
 要求末端到达 <span class="arithmatex">\(p = (0.50,\ 0.20)\)</span> m。求所有关节角解。</p>
 <details class="note">
 <summary>思路</summary>
-<p>两个方程两个未知数，但都是三角函数的非线性方程。
-<strong>标准套路是「先消元」</strong>：把两个方程平方相加，
-利用 <span class="arithmatex">\(\cos^2 + \sin^2 = 1\)</span> 把 <span class="arithmatex">\(\theta_1\)</span> 消掉，只剩下 <span class="arithmatex">\(\theta_2\)</span>。
-解出 <span class="arithmatex">\(\theta_2\)</span> 之后，再回代求 <span class="arithmatex">\(\theta_1\)</span>。</p>
+<p>两方程两未知数，但都是三角非线性方程。<strong>标准套路是先消元</strong>：
+两式平方相加，用 <span class="arithmatex">\(\cos^2+\sin^2=1\)</span> 消掉 <span class="arithmatex">\(\theta_1\)</span>，只剩 <span class="arithmatex">\(\theta_2\)</span>；解出 <span class="arithmatex">\(\theta_2\)</span> 再回代求 <span class="arithmatex">\(\theta_1\)</span>。</p>
 <p><strong>关键在开方那一步</strong>：<span class="arithmatex">\(\cos\theta_2\)</span> 已知后，
 <span class="arithmatex">\(\sin\theta_2 = \pm\sqrt{1-\cos^2\theta_2}\)</span> 有两个符号 —— <strong>这就是两组解的来源</strong> ✓</p>
 </details>
@@ -13891,11 +13808,10 @@ R_x(\alpha_i) = \begin{bmatrix}
 <div class="arithmatex">\[\theta_2 = \arctan_2(0.986013,\ 0.166667) = 80.4059°\]</div>
 <p><strong>负号（肘上）</strong>：</p>
 <div class="arithmatex">\[\theta_2 = \arctan_2(-0.986013,\ 0.166667) = -80.4059°\]</div>
-<p>（用双参数的 <span class="arithmatex">\(\arctan_2\)</span> 才能同时定住象限 —— 单参数 <span class="arithmatex">\(\arctan\)</span> 只给 <span class="arithmatex">\((-90°, 90°)\)</span>，会丢解 ⚠）</p>
+<p>（双参数 <span class="arithmatex">\(\arctan_2\)</span> 才能定住象限；单参数 <span class="arithmatex">\(\arctan\)</span> 只给 <span class="arithmatex">\((-90°, 90°)\)</span>，会丢解 ⚠）</p>
 <p><strong>第七步：回代求 <span class="arithmatex">\(\theta_1\)</span>。</strong></p>
-<p>回到第三步的式子 <span class="arithmatex">\(p_x = A\cos\theta_1 - B\sin\theta_1\)</span>、<span class="arithmatex">\(p_y = A\sin\theta_1 + B\cos\theta_1\)</span>，
-可以把它们看成「向量 <span class="arithmatex">\((A, B)\)</span> 逆时针转 <span class="arithmatex">\(\theta_1\)</span> 得到 <span class="arithmatex">\((p_y, p_x)\)</span>」的关系，
-解出</p>
+<p>回到第三步的式子 <span class="arithmatex">\(p_x=A\cos\theta_1-B\sin\theta_1\)</span>、<span class="arithmatex">\(p_y=A\sin\theta_1+B\cos\theta_1\)</span>，
+可看成「向量 <span class="arithmatex">\((A,B)\)</span> 逆时针转 <span class="arithmatex">\(\theta_1\)</span> 得 <span class="arithmatex">\((p_y,p_x)\)</span>」，解出</p>
 <div class="arithmatex">\[\theta_1 = \arctan_2(p_y,\ p_x) - \arctan_2(B,\ A)
 = \arctan_2(p_y,\ p_x) - \arctan_2(l_2\sin\theta_2,\ l_1 + l_2\cos\theta_2)\]</div>
 <p>其中 <span class="arithmatex">\(\arctan_2(p_y, p_x) = \arctan_2(0.20, 0.50) = 21.8014°\)</span>。</p>
@@ -13931,15 +13847,14 @@ R_x(\alpha_i) = \begin{bmatrix}
 <p>与算例结果一致 ✓ 两组解回代后<strong>都精确落在</strong> <span class="arithmatex">\((0.50, 0.20)\)</span></p>
 </details>
 <h3 id="3">例题 3：判断一组目标点是否可达<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>同一台二连杆（<span class="arithmatex">\(l_1 = 0.40\)</span> m、<span class="arithmatex">\(l_2 = 0.30\)</span> m）。
-判断下面三个目标点是否可达，并说明理由：
+<p>同一台二连杆（<span class="arithmatex">\(l_1=0.40\)</span> m、<span class="arithmatex">\(l_2=0.30\)</span> m）。
+判断下列三个目标点是否可达并说明理由：
 (a) <span class="arithmatex">\(p = (0.60,\ 0.10)\)</span>；(b) <span class="arithmatex">\(p = (0.05,\ 0.02)\)</span>；&copy; <span class="arithmatex">\(p = (0.00,\ 0.00)\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>可达性判据不是「<span class="arithmatex">\(\cos\theta_2\)</span> 算出来是多少」，而是
-<strong><span class="arithmatex">\(\lvert\cos\theta_2\rvert\)</span> 是否不超过 1</strong>。
-因为 <span class="arithmatex">\(\cos\theta_2\)</span> 必须落在 <span class="arithmatex">\([-1, 1]\)</span> 里 —— 出了这个范围，<strong>方程无解</strong> ✓</p>
-<p>还有一个更快的判据：<strong>看半径是否落在圆环里</strong></p>
+<p>可达性判据不是「<span class="arithmatex">\(\cos\theta_2\)</span> 等于多少」，而是
+<strong><span class="arithmatex">\(\lvert\cos\theta_2\rvert\)</span> 是否不超过 1</strong>（<span class="arithmatex">\(\cos\theta_2\)</span> 必须落在 <span class="arithmatex">\([-1,1]\)</span>，出界则<strong>方程无解</strong> ✓）。
+更快的判据：<strong>看半径是否落在圆环里</strong></p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13973,9 +13888,8 @@ R_x(\alpha_i) = \begin{bmatrix}
 这正对应「目标点离基座太近，机械臂反而够不到」</p>
 <p><strong>&copy; <span class="arithmatex">\(p = (0.00, 0.00)\)</span></strong></p>
 <p><span class="arithmatex">\(r = 0\)</span>，显然 <span class="arithmatex">\(0 \lt 0.10\)</span>，<strong>不可达</strong></p>
-<p>直观原因：<strong>两根连杆长度不等，折叠起来时末端离基座最近也只能到</strong>
-<span class="arithmatex">\(\lvert l_1 - l_2 \rvert = 0.10\)</span> m。要让末端正好落在基座原点，
-除非两根杆等长</p>
+<p>直观原因：<strong>两杆长度不等，折叠时末端离基座最近也只能到</strong> <span class="arithmatex">\(\lvert l_1-l_2 \rvert = 0.10\)</span> m，
+要让末端正好落在基座原点，除非两杆等长</p>
 <p><strong>结论汇总</strong>：</p>
 <table>
 <thead>
@@ -14007,13 +13921,11 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>这道题的教训</strong>：判断可达性<strong>不要先算 <span class="arithmatex">\(\theta_2\)</span> 再看合不合理</strong> ——
-先用半径判据快速筛掉不可达的点，省掉后面的三角函数运算</p>
+<p><strong>这道题的教训</strong>：判断可达性<strong>不要先算 <span class="arithmatex">\(\theta_2\)</span></strong>，先用半径判据筛掉不可达点，省去三角函数运算</p>
 </details>
 <h3 id="4-6">例题 4：为 6 自由度机器人设计选解流程<a class="headerlink" href="#4-6" title="Permanent link">&para;</a></h3>
-<p>某 6 自由度关节型机器人（前三个关节大、后三个关节小），
-从当前位形 <span class="arithmatex">\(q^{\text{now}}\)</span> 走向目标位姿，逆解算出 8 组解。
-请给出一个完整的选解流程，并说明每一步的判据。</p>
+<p>某 6 自由度关节型机器人（前三大、后三小）从当前位形 <span class="arithmatex">\(q^{\text{now}}\)</span> 走向目标位姿，
+逆解算出 8 组解。请给出完整的选解流程并说明每步判据。</p>
 <details class="note">
 <summary>思路</summary>
 <p>要串起本页讲过的三件事：
@@ -14049,24 +13961,20 @@ R_x(\alpha_i) = \begin{bmatrix}
 </table>
 <p><span class="arithmatex">\(2\times2\times2 = 8\)</span>
 <strong>漏解比多解危险</strong>：如果只算了 4 组，可能<strong>恰好把唯一不撞的那组丢了</strong> ⚠</p>
-<p>第二步：用关节限位筛掉不合法的解。</p>
-<p>对每一组解 <span class="arithmatex">\(q\)</span>，逐个关节检查</p>
+<p>第二步：用关节限位筛掉不合法解。对每组解 <span class="arithmatex">\(q\)</span> 逐个关节检查</p>
 <div class="arithmatex">\[q_i^{\min} \le q_i \le q_i^{\max},\qquad i = 1,\ldots,6\]</div>
-<p>任何一项不满足，整组解<strong>直接丢弃</strong>。
-（这一步对应 5.1 节说的「逆解个数取决于关节运动范围」）</p>
-<p>第三步：对剩下的解算加权关节距离。</p>
+<p>任一不满足则整组<strong>直接丢弃</strong>（对应 5.1 节「逆解个数取决于关节运动范围」）。</p>
+<p>第三步：对剩下解算加权关节距离。</p>
 <div class="arithmatex">\[D(q) = \sum_{i=1}^{6} w_i\,\lvert q_i - q_i^{\text{now}} \rvert\]</div>
-<p>权重按「前三个关节大、后三个关节小」设置，
-例如 <span class="arithmatex">\(w = (3, 3, 3, 1, 1, 1)\)</span>。
-<strong>理由</strong>：前三个大关节带动的惯量大、功耗大、对精度影响也大，
-不希望它们为了够一个点而大幅改位形</p>
+<p>权重按「前三关节大、后三关节小」设置，如 <span class="arithmatex">\(w=(3,3,3,1,1,1)\)</span>。
+<strong>理由</strong>：前三个大关节惯性大、功耗大、对精度影响大，不希望它们为够一个点而大幅改位形</p>
 <p><strong>第四步：按 <span class="arithmatex">\(D(q)\)</span> 从小到大排序。</strong></p>
 <p>得到候选顺序 <span class="arithmatex">\(q^{(1)}, q^{(2)}, \ldots\)</span></p>
 <p>第五步：逐个做路径碰撞检查，取第一个通过的。</p>
 <p>对每个候选解，检查从 <span class="arithmatex">\(q^{\text{now}}\)</span> 到 <span class="arithmatex">\(q^{(k)}\)</span> 的<strong>整条插值路径</strong>
 （而不是只检查终点）。第一个全程无碰撞的即为答案</p>
-<p><strong>为什么要放到最后一步</strong>：因为碰撞检查最贵（要算整条路径上每一时刻的位姿），
-而排序最便宜。<strong>先用便宜判据缩小范围，再用贵的判据做最终决定</strong></p>
+<p><strong>为什么放最后</strong>：碰撞检查最贵（要算整条路径每一时刻的位姿），排序最便宜 ——
+<strong>先用便宜判据缩小范围，再用贵的做最终决定</strong></p>
 <p><strong>完整的流程图（文字版）</strong>：</p>
 <table>
 <thead>
@@ -14116,9 +14024,8 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>一个容易被忽略的坑</strong>：如果<strong>没有任何一组解</strong>能通过全部检查，
-应当<strong>报告失败并停下</strong>，而不是强行选一组「最不坏」的
-勉强动起来可能造成碰撞或机械损伤</p>
+<p><strong>一个易忽略的坑</strong>：若<strong>没有一组解</strong>能通过全部检查，应<strong>报告失败并停下</strong>，
+不能强行选一组「最不坏」的勉强动起来（可能造成碰撞或机械损伤）</p>
 </details>
 <hr />
 <h2 id="_10">自测<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -14148,14 +14055,12 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>正解为什么唯一</strong>：正解是<strong>代入求值</strong> —— 一组关节角代进
-<span class="arithmatex">\(x = l_1\cos\theta_1 + l_2\cos(\theta_1+\theta_2)\)</span> 这样的式子，
-结果只有一个 ✓ 数学上是「多对一映射」的单值方向</p>
-<p><strong>逆解为什么不唯一</strong>：逆解要解<strong>非线性三角函数方程组</strong>，
-解方程的过程中会出现<strong>开方取正负号</strong>（如 <span class="arithmatex">\(\sin\theta_2 = \pm\sqrt{1-\cos^2\theta_2}\)</span>）
-或<strong>多值反三角函数</strong>，每个这样的地方都<strong>分出一个分支</strong>
-6 自由度机械臂有三处这样的分支（肩 / 肘 / 腕），所以最多 8 组解</p>
-<p><strong>还有第三种情况</strong>：目标点超出工作空间时，逆解<strong>一个都没有</strong></p>
+<p><strong>正解为什么唯一</strong>：正解是<strong>代入求值</strong>，一组关节角代进
+<span class="arithmatex">\(x = l_1\cos\theta_1 + l_2\cos(\theta_1+\theta_2)\)</span> 结果只有一个 ✓（多对一映射的单值方向）</p>
+<p><strong>逆解为什么不唯一</strong>：解<strong>非线性三角函数方程组</strong>时会出现<strong>开方取正负号</strong>（如 <span class="arithmatex">\(\sin\theta_2 = \pm\sqrt{1-\cos^2\theta_2}\)</span>）
+或<strong>多值反三角函数</strong>，每个这样的地方都<strong>分出一个分支</strong>；
+6 自由度有三处（肩 / 肘 / 腕），所以最多 8 组解</p>
+<p><strong>第三种情况</strong>：目标点超出工作空间时逆解<strong>一个都没有</strong></p>
 </details>
 <p><strong>Q2</strong> 「左手位形 / 右手位形」「肘上 / 肘下」「腕翻转 / 不翻转」
 各自对应的物理原因是什么？为什么腕翻转能相差 180 度？</p>
@@ -14171,7 +14076,7 @@ R_x(\alpha_i) = \begin{bmatrix}
 <tbody>
 <tr>
 <td><strong>左手 / 右手</strong></td>
-<td>肩关节<strong>相对于腰部有个水平偏移</strong>，所以同一目标点可以对应「臂在腰部左侧」或「臂在腰部右侧」两种情况</td>
+<td>肩关节<strong>相对腰部有水平偏移</strong>，同一目标点对应「臂在腰部左侧」或「右侧」两种情况</td>
 </tr>
 <tr>
 <td><strong>肘上 / 肘下</strong></td>
@@ -14183,26 +14088,24 @@ R_x(\alpha_i) = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>为什么腕翻转能差 180 度</strong>：因为姿态是<strong>周期性</strong>的。
-绕同一个轴转 <span class="arithmatex">\(\theta\)</span> 和转 <span class="arithmatex">\(\theta + 180°\)</span>（配合另外两个腕关节的相应调整），
-可能给出<strong>同样的末端姿态</strong>
-这不是因为腕关节转了两圈，而是因为<strong>姿态的表示本身不唯一</strong> ⚠</p>
+<p><strong>为什么腕翻转能差 180 度</strong>：因为姿态是<strong>周期性</strong>的 ——
+绕同轴转 <span class="arithmatex">\(\theta\)</span> 与转 <span class="arithmatex">\(\theta + 180°\)</span>（配合另两个腕关节调整）可能给出<strong>同样的末端姿态</strong>；
+这不是转了两圈，而是<strong>姿态表示本身不唯一</strong> ⚠</p>
 <p><strong>数量</strong>：三个二选一 → <span class="arithmatex">\(2\times2\times2 = 8\)</span> 组</p>
 </details>
 <p><strong>Q3</strong> 什么是球腕？为什么球腕能让逆解得到封闭解？
 Pieper 准则的另一个条件是什么？</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>球腕</strong>：三个腕关节的<strong>旋转轴相交于一点</strong>的腕部机构
-课件指出 PUMA-560 就是这种构型，而且<strong>许多工业机器人都具有这样的腕关节</strong>。</p>
-<p><strong>为什么能解</strong>：三个腕关节轴交于一点，意味着
-<strong>腕关节怎么转，那个交点（腕心）的位置都不变</strong>
-于是位置和姿态<strong>解耦</strong>：</p>
+<p><strong>球腕</strong>：三个腕关节<strong>旋转轴相交于一点</strong>的腕部机构。
+课件指出 PUMA-560 就是这种构型，且<strong>许多工业机器人都具有这样的腕关节</strong>。</p>
+<p><strong>为什么能解</strong>：三腕关节轴交于一点，意味着<strong>腕关节怎么转，交点（腕心）位置都不变</strong>，
+于是位置与姿态<strong>解耦</strong>：</p>
 <ol>
 <li>先只用前几个关节把<strong>腕心</strong>送到指定位置（退化成低维问题）</li>
 <li>再用三个腕关节把<strong>姿态</strong>调成目标朝向</li>
 </ol>
-<p>两个小问题各自都是低维的，能推出公式解</p>
+<p>两个低维小问题都能推出公式解</p>
 <p><strong>Pieper 准则的两个条件</strong>（满足任一即可）：</p>
 <table>
 <thead>
@@ -14218,7 +14121,7 @@ Pieper 准则的另一个条件是什么？</p>
 </tr>
 <tr>
 <td>（2）</td>
-<td><strong>三个相邻关节轴相互平行</strong>（如某型号机械臂第 2、3、4 关节轴平行）</td>
+<td><strong>三个相邻关节轴相互平行</strong>（如第 2、3、4 关节轴平行）</td>
 </tr>
 </tbody>
 </table>
@@ -14228,11 +14131,9 @@ Pieper 准则的另一个条件是什么？</p>
 完整的选解流程应该是什么？</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>为什么不能只看关节距离</strong>：「最近」只保证<strong>起点到终点的关节变量变化小</strong>，
-<strong>不保证中间过程不撞到东西</strong>
-一条关节空间里的「最短路径」，映射到笛卡尔空间里可能划出一道<strong>穿过障碍物</strong>的弧线
-课件明确说：<strong>当存在障碍物时，「最近」的解的运动路径会与其发生碰撞，
-这时就要选择另一个运动距离较远的解。</strong></p>
+<p><strong>为什么不能只看关节距离</strong>：「最近」只保证<strong>起点到终点的关节变化小</strong>，<strong>不保证中间不撞</strong>；
+关节空间的「最短路径」映射到笛卡尔空间可能划出<strong>穿过障碍物</strong>的弧线。
+课件说：<strong>存在障碍物时，「最近」解的运动路径会与其碰撞，这时就要选择另一个运动距离较远的解。</strong></p>
 <p><strong>另外，「关节距离近」和「末端路程短」也是两回事</strong>：
 关节转得少，末端可能反而跑得远</p>
 <p><strong>完整的选解流程</strong>（本页例题 4 的结论）：</p>
@@ -14277,10 +14178,8 @@ Pieper 准则的另一个条件是什么？</p>
 </tr>
 </tbody>
 </table>
-<p><strong>权重的取法</strong>：课件建议对<strong>较大的前三个关节设大权重、
-较小的后三个关节设小权重</strong>，这样会<strong>优先让大关节少动</strong></p>
-<p><strong>一条补充</strong>：如果所有解都不通过，应<strong>报告失败</strong>，
-不要强行选一个「最不坏」的</p>
+<p><strong>权重的取法</strong>：课件建议<strong>前三个大关节设大权重、后三个小关节设小权重</strong>，<strong>优先让大关节少动</strong></p>
+<p><strong>补充</strong>：若所有解都不通过，应<strong>报告失败</strong>，不要强选一个「最不坏」的</p>
 </details>
 <hr />
 <h2 id="_11">小结<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -14394,7 +14293,7 @@ Pieper 准则的另一个条件是什么？</p>
 </tr>
 </tbody>
 </table>
-<p><strong>本页的推导链，一共六步，每一步都能自己复现</strong>：</p>
+<p><strong>本页推导链共六步，每步都能自己复现</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14436,15 +14335,13 @@ Pieper 准则的另一个条件是什么？</p>
 </tr>
 </tbody>
 </table>
-<p><strong>这张表说明什么</strong>：本页看起来概念很多（位姿、欧拉角、齐次变换、D-H、正逆解、多解），
-其实<strong>只有两条主线</strong> ——
+<p><strong>这张表说明什么</strong>：本页看起来概念很多，其实<strong>只有两条主线</strong> ——
 「<strong>把位姿写成矩阵，然后连乘</strong>」和「<strong>把三角函数方程平方相加消元</strong>」。
 正解、逆解、多解、可达性全是这两条的推论
 考试时哪怕记不清某个具体公式，从这两条推一遍也来得及</p>
 <hr />
 <p><strong>下一页</strong>：<a href="../serial-design/">机构设计剖析</a> ——
-运动学讲的是「机构能怎么动」，接下来看工程师怎么把关节、减速器、
-腕部与走线<strong>装配成一台真正能用的机器人</strong>。</p>
+运动学讲「机构能怎么动」，接下来看工程师如何把关节、减速器、腕部与走线<strong>装配成一台能用的机器人</strong>。</p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../dof/">自由度与约束</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../../../math/calculus/jacobian/">雅可比矩阵</a></span></div></nav>
 
 

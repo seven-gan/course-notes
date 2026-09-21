@@ -11840,7 +11840,6 @@
 </tbody>
 </table>
 <p><strong>一句话</strong>：<strong>凸 ⇒ 梯度下降一定收敛到全局最优；非凸 ⇒ 只能寄希望于好运</strong>。</p>
-<p>这就是为什么深度学习「能work」需要额外解释（非凸却常常效果好）。</p>
 </div>
 <hr />
 <h2 id="_2">一、问题的分类<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -11954,25 +11953,7 @@ f(\boldsymbol{x}^*) \leq f(\boldsymbol{x}), \quad \forall \boldsymbol{x}\in N(\b
 <p><strong>全局最优</strong>：在整个可行集上最小。</p>
 <div class="admonition warning">
 <p class="admonition-title">局部最优 ≠ 全局最优（非凸情形）</p>
-<p><strong>典型陷阱</strong>：<span class="arithmatex">\(f(x) = x^4 - 3x^2 + x\)</span> 有多个极值点。</p>
-<table>
-<thead>
-<tr>
-<th>概念</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>局部最优</td>
-<td>在附近最小</td>
-</tr>
-<tr>
-<td>全局最优</td>
-<td>在所有点中最小</td>
-</tr>
-</tbody>
-</table>
+<p><strong>典型陷阱</strong>：<span class="arithmatex">\(f(x) = x^4 - 3x^2 + x\)</span> 有多个极值点（局部最优与全局最优的差别见上）。</p>
 <p><strong>梯度下降的行为</strong>：</p>
 <table>
 <thead>
@@ -12020,7 +12001,6 @@ f(\boldsymbol{x}^*) \leq f(\boldsymbol{x}), \quad \forall \boldsymbol{x}\in N(\b
 </tr>
 </tbody>
 </table>
-<p><strong>注意</strong>：这一条是「经验观察 + 部分理论」，不是完全的定理。</p>
 </div>
 <h3 id="21">2.1 驻点、极值点、鞍点<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>驻点</strong>：<span class="arithmatex">\(\nabla f(\boldsymbol{x}) = \boldsymbol{0}\)</span>。</p>
@@ -12113,7 +12093,6 @@ f(\boldsymbol{x}^*) \leq f(\boldsymbol{x}), \quad \forall \boldsymbol{x}\in N(\b
 </tr>
 </tbody>
 </table>
-<p>这就是「高维非凸优化在实践中不难」的核心原因之一。</p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="凸函数与非凸函数的对比：局部最优是否等于全局最优">
@@ -12200,13 +12179,42 @@ f(\boldsymbol{x}^*) \leq f(\boldsymbol{x}), \quad \forall \boldsymbol{x}\in N(\b
 </tr>
 </tbody>
 </table>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="凸集与非凸集的对比：集合内任意两点连线是否总在集合内">
+<defs>
+<marker id="cv2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 左：凸集 -->
+<text class="lbl" x="30" y="24">凸集</text>
+<ellipse class="f1" cx="110" cy="122" rx="66" ry="52"/>
+<ellipse class="a1" cx="110" cy="122" rx="66" ry="52"/>
+<line class="gd" x1="62" y1="102" x2="152" y2="107"/>
+<circle class="d1" cx="62" cy="102" r="4.5"/>
+<circle class="d1" cx="152" cy="107" r="4.5"/>
+<text class="lbl-s" x="26" y="206">任取两点，连线（虚线）整段都在集合内</text>
+<text class="lbl-s" x="26" y="226">→ 满足凸集定义 ✓</text>
+<!-- 右：非凸集（月牙形） -->
+<text class="lbl" x="250" y="24">非凸集（月牙形）</text>
+<path class="f2" d="M317,50 A72,72 0 1 0 317,190 A72,72 0 0 1 317,50 Z"/>
+<path class="a2" d="M317,50 A72,72 0 1 0 317,190 A72,72 0 0 1 317,50 Z"/>
+<line class="gd" x1="285" y1="62" x2="285" y2="178"/>
+<circle class="d2" cx="285" cy="62" r="4.5"/>
+<circle class="d2" cx="285" cy="178" r="4.5"/>
+<circle class="d2" cx="285" cy="120" r="3.5"/>
+<line class="gd" x1="366" y1="82" x2="304" y2="100" marker-end="url(#cv2-ah1)"/>
+<text class="lbl-s" x="356" y="76">凹口</text>
+<text class="lbl-s" x="228" y="206">两点连线中段跑到集合外（凹口内）</text>
+<text class="lbl-s" x="228" y="226">→ 违反凸集定义 ✗</text>
+</svg>
+<figcaption>图 2　凸集与非凸集。<b>左</b>：集合内任意两点的连线（虚线）都落在集合内，这就是凸集；<b>右</b>：月牙形集合中取两个尖端附近的点，连线中段落在凹口里（集合外），所以非凸。判断凸性，只需看「连线是否总在集合内」这一条</figcaption>
+</figure>
+
 <h3 id="32">3.2 凸函数<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p><strong>定义</strong>：<span class="arithmatex">\(f\)</span> 是凸函数，若其定义域为凸集，且对任意 <span class="arithmatex">\(\boldsymbol{x},\boldsymbol{y}\)</span> 与 <span class="arithmatex">\(\theta\in[0,1]\)</span>：</p>
 <div class="arithmatex">\[
 f(\theta\boldsymbol{x}+(1-\theta)\boldsymbol{y}) \leq \theta f(\boldsymbol{x})+(1-\theta)f(\boldsymbol{y})
 \]</div>
-<p><strong>几何含义</strong>：<strong>函数图像上任意两点连线，都在函数图像的上方</strong>
-（或：弦在弧之上）。</p>
+<p><strong>几何含义</strong>：<strong>函数图像上任意两点连线，都在函数图像的上方</strong>（弦在弧之上）。</p>
 <p><strong>等价判据</strong>：</p>
 <table>
 <thead>
@@ -12235,7 +12243,7 @@ f(\theta\boldsymbol{x}+(1-\theta)\boldsymbol{y}) \leq \theta f(\boldsymbol{x})+(
 f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top(\boldsymbol{y}-\boldsymbol{x})
 \]</div>
 <p><strong>右边是 <span class="arithmatex">\(f\)</span> 在 <span class="arithmatex">\(\boldsymbol{x}\)</span> 处的切线（或切平面）</strong>。</p>
-<p><strong>含义</strong>：<strong>切线永远在函数下方</strong> —— 这是凸函数最直观的特征。</p>
+<p><strong>含义</strong>：<strong>切线永远在函数下方</strong>。</p>
 <p><strong>重要推论</strong>（一阶最优性条件）：</p>
 <div class="arithmatex">\[
 \nabla f(\boldsymbol{x}^*) = \boldsymbol{0} \implies \boldsymbol{x}^* \text{ 是全局最优}
@@ -12249,7 +12257,6 @@ f(\boldsymbol{y}) \geq f(\boldsymbol{x}^*) \quad \forall \boldsymbol{y}
 而<strong>对非凸函数，梯度为零只给出局部信息</strong>。</p>
 </div>
 <h3 id="33">3.3 保持凸性的运算<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
-<p>这些规则让「判断一个函数是否凸」变得容易。</p>
 <table>
 <thead>
 <tr>
@@ -12294,19 +12301,17 @@ f(\boldsymbol{y}) \geq f(\boldsymbol{x}^*) \quad \forall \boldsymbol{y}
 <div class="arithmatex">\[
 f(\boldsymbol{x}) = \max_i f_i(\boldsymbol{x}) \quad\text{（}f_i\text{ 均凸）} \Rightarrow f \text{ 凸}
 \]</div>
-<p><strong>用途</strong>：<strong>最小最大问题</strong>、鲁棒优化中的「最坏情况」目标
-都是 max 形式。</p>
-<p><strong>例</strong>：鲁棒优化要求「在所有可能情形下都满足约束」
-→ 把每个情形的约束写成不等式，取最大值 ≤ 0 → 仍是凸问题。</p>
-<p><strong>2. <span class="arithmatex">\(\sup\)</span>（写法的上确界）也保持凸性</strong></p>
-<p>这一条更强的版本：<strong>任何凸函数的逐点上确界仍是凸的</strong>。</p>
+<p><strong>用途</strong>：<strong>最小最大问题</strong>与鲁棒优化中的「最坏情况」目标都取 max 形式。
+例如要求「所有可能情形都满足约束」，只需把各情形的约束写成不等式、
+取最大值 ≤ 0，问题仍是凸的。</p>
+<p><strong>2. <span class="arithmatex">\(\sup\)</span> 也保持凸性</strong></p>
+<p>更强的版本：<strong>任何凸函数的逐点上确界仍是凸的</strong>。</p>
 <p><strong>用途</strong>：构造凸函数（如「支撑函数」），以及证明某些复杂函数的凸性。</p>
 <p><strong>反面</strong>：<span class="arithmatex">\(\min\)</span> <strong>不一定</strong>保持凸性 ——
 这解释了为什么「取最小值」的操作会把凸问题变成非凸问题。</p>
 </div>
 <hr />
 <h2 id="_5">四、常见凸/非凸函数一览<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>这张表在判断问题时极其有用。</p>
 <table>
 <thead>
 <tr>
@@ -12407,7 +12412,7 @@ f(\boldsymbol{x}) = \log\sum_{i=1}^{n}e^{x_i}
 </tr>
 </tbody>
 </table>
-<p><strong>所以「用 log-sum-exp 近似 max」既保持可微性又不改变最优解的本质</strong>。</p>
+<p><strong>所以用它近似 <span class="arithmatex">\(\max\)</span>，既保持可微，又不改变最优解的本质</strong>。</p>
 <ol>
 <li>它是 softmax 与交叉熵的数值稳定实现核心</li>
 </ol>
@@ -12556,7 +12561,7 @@ f(\boldsymbol{x}) = \boldsymbol{x}^\top A^\top A\boldsymbol{x} - 2\boldsymbol{b}
 <div class="arithmatex">\[
 C_1 = \{\boldsymbol{x}: f(\boldsymbol{x})\leq1\}
 \]</div>
-<p><strong>凸函数的子水平集一定是凸集</strong> ✓（前面「保持凸性的运算」表中的最后一条）</p>
+<p><strong>凸函数的子水平集一定是凸集</strong> ✓（见「保持凸性的运算」表）</p>
 <p><strong>结论</strong>：<strong>凸集</strong></p>
 <p><strong>(b) 单位圆周</strong></p>
 <p>取两点 <span class="arithmatex">\(\boldsymbol{x} = (1,0)\)</span> 与 <span class="arithmatex">\(\boldsymbol{y} = (-1,0)\)</span>，它们在 <span class="arithmatex">\(C_2\)</span> 上。</p>
@@ -12603,8 +12608,7 @@ C_3 = \{(x_1,x_2): x_2 \geq g(x_1)\}, \quad g = \frac{1}{x_1}
 \]</div>
 <p><strong>凸函数的上镜图一定是凸集</strong> ✓</p>
 <p><strong>结论</strong>：<strong>凸集</strong></p>
-<p><strong>几何直观</strong>：画 <span class="arithmatex">\(x_2 = 1/x_1\)</span> 的图像，集合是它<strong>上方</strong>的区域
-——这个区域没有「凹陷」，确实是凸的。</p>
+<p><strong>几何直观</strong>：<span class="arithmatex">\(x_2 = 1/x_1\)</span> <strong>上方</strong>的区域，没有凹陷，是凸的。</p>
 </details>
 <div class="admonition note">
 <p class="admonition-title">三类「凸性保证」的集合（记住这三个）</p>
@@ -12825,7 +12829,7 @@ e^t \geq 1+t \quad\text{（这是 }e^t\text{ 在 0 处一阶泰勒的下界）}
 <p>当 <span class="arithmatex">\(k=1\)</span> 时，中点基数 <span class="arithmatex">\(= 2 &gt; 1\)</span> → <strong>不在可行集内</strong> ✗
 违反凸集定义。</p>
 <p><strong>结论</strong>：<strong>非凸优化问题</strong> ✗（实际上是 NP 难的）</p>
-<p><strong>工程上的处理（这是重点）</strong>：</p>
+<p><strong>工程上的处理</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13035,8 +13039,7 @@ f(1,1) = \max\{3,\ 3,\ 0\} = 3
 这对应「活跃约束不止一个」的情形
 （与 KKT 那一页的「角点」情形同源）。</p>
 <p><strong>工程含义</strong>：<strong>max 形式在鲁棒优化中很常见</strong> ——
-「在所有可能情形下满足要求」就是让每个情形的约束都成立，
-即取最大值 ≤ 0。而 max 保持凸性，所以<strong>鲁棒优化常常仍是凸问题</strong></p>
+「所有情形都满足」即取最大值 ≤ 0，而 max 保持凸性。</p>
 </details>
 <hr />
 <p><strong>Q4</strong> 为什么 <span class="arithmatex">\(\min\)</span> 不一定保持凸性？举反例。</p>

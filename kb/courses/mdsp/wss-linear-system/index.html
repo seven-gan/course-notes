@@ -12743,9 +12743,7 @@
 <p>然后把三个公式（均值关系、自相关关系、功率谱关系）直接写了出来。
 「易证明」三个字对写课件的人是轻松的，对第一次学的读者却是一道墙</p>
 <p><strong>这一页的任务就是把这句「易证明」补全</strong> ——
-从期望的定义出发，一步一步推到那三个公式，中间不跳任何一步。
-推导完之后，再把这几个结论<strong>逐条手算验一遍</strong>，
-让读者看到公式和数字确实对得上。</p>
+从定义出发推到那三个公式，再把结论逐条手算验一遍。</p>
 <p><strong>为什么这件事值得花一整页</strong>：</p>
 <table>
 <thead>
@@ -12893,14 +12891,10 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 </ol>
 <p><strong>输出</strong>：输入经过系统后的响应。</p>
 <div class="arithmatex">\[y(n) = x(n) * h(n) = \sum_{k=-\infty}^{\infty} h(k)\, x(n-k)\]</div>
-<p><strong>读法</strong>：输出是输入的「加权滑动和」——
-权重就是脉冲响应 <span class="arithmatex">\(h(k)\)</span>，第 <span class="arithmatex">\(n\)</span> 时刻的输出由第 <span class="arithmatex">\(n\)</span> 时刻往前各个输入值加权求和得到。</p>
-<p>卷积的完整定义、性质与几何解释，
-数学层已经讲得很透，这里<strong>不重复</strong>，
-需要的话请回看 <a href="../../../math/signal-systems/convolution/">卷积</a>。
-傅里叶变换的性质（尤其是「时域卷积 = 频域相乘」和时移性质）见
-<a href="../../../math/signal-systems/fourier/">傅里叶级数与变换</a>。
-本页只用这两条已知结论，不重新证明。</p>
+<p><strong>读法</strong>：输出是输入的「加权滑动和」——权重就是脉冲响应 <span class="arithmatex">\(h(k)\)</span>。</p>
+<p>卷积的定义与性质、傅里叶变换的两条结论（时域卷积 = 频域相乘、时移性质）
+见 <a href="../../../math/signal-systems/convolution/">卷积</a> 与
+<a href="../../../math/signal-systems/fourier/">傅里叶级数与变换</a>，本页不重复。</p>
 <h3 id="12">1.2 要问的两个问题<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>课件的原话是「如果 <span class="arithmatex">\(x(n)\)</span> 广义平稳，易证明 <span class="arithmatex">\(y(n)\)</span> 也广义平稳」。
 这句话里其实<strong>藏着两个问题</strong>，要分开回答：</p>
@@ -12925,15 +12919,9 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 </tr>
 </tbody>
 </table>
-<p><strong>这两个问题的关系不是并列的，而是有先后</strong>：</p>
-<ul>
-<li>只有当<strong>问题二</strong>算出了 <span class="arithmatex">\(\mathbb{E}[y(n)]\)</span> 和 <span class="arithmatex">\(\mathbb{E}[y(n+m)y^{*}(n)]\)</span> 的具体表达式，
-  才能拿它们去核对<strong>问题一</strong>的两个条件是否满足；</li>
-<li>也就是说，<strong>先算，再判</strong>。
-  「易证明」之所以易，就是因为算完之后一眼就看得出来 ⚠</li>
-</ul>
-<p><strong>下面按这个顺序走</strong>：第二节算均值（问题二的一半），
-第三节算自相关（问题二的另一半），第四节回头判平稳（问题一）。</p>
+<p><strong>两个问题有先后</strong>：只有先算出 <span class="arithmatex">\(\mathbb{E}[y(n)]\)</span> 和 <span class="arithmatex">\(\mathbb{E}[y(n+m)y^{*}(n)]\)</span>，
+才能拿它们核对问题一的两个条件 —— <strong>先算，再判</strong>。</p>
+<p><strong>下面按这个顺序走</strong>：第二节算均值，第三节算自相关，第四节回头判平稳。</p>
 <div class="admonition warning">
 <p class="admonition-title">这一页的推导有前提，别漏掉</p>
 <p>全部推导都依赖两个前提，缺一个结论就可能失效：</p>
@@ -12955,8 +12943,7 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <p>我们要求的是 <span class="arithmatex">\(\mu_y = \mathbb{E}[y(n)]\)</span>。
 因为 <span class="arithmatex">\(y\)</span> 是随机的，<span class="arithmatex">\(\mathbb{E}[\cdot]\)</span> 是对<strong>系综</strong>取平均
 （固定时刻 <span class="arithmatex">\(n\)</span>，把所有可能的样本函数在该时刻的取值加权平均）。</p>
-<p>第 1 步：把 <span class="arithmatex">\(y(n)\)</span> 的卷积表达式代进去。
-这一步只是替换，没有做任何假设：</p>
+<p>第 1 步：把 <span class="arithmatex">\(y(n)\)</span> 的卷积表达式代进去（只是替换，没有做任何假设）：</p>
 <div class="arithmatex">\[\mathbb{E}[y(n)] = \mathbb{E}\Big[\sum_{k} h(k)\, x(n-k)\Big]\]</div>
 <p>第 2 步：把期望号搬进求和号里面。</p>
 <div class="arithmatex">\[\mathbb{E}\Big[\sum_{k} h(k)\, x(n-k)\Big]
@@ -12967,7 +12954,7 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <div class="arithmatex">\[\sum_{k} h(k)\, \mathbb{E}\big[x(n-k)\big]\]</div>
 <p>第 4 步：用输入均值是常数这一条。
 因为 <span class="arithmatex">\(x\)</span> 广义平稳，<span class="arithmatex">\(\mathbb{E}[x(\cdot)]\)</span> 恒等于 <span class="arithmatex">\(\mu_x\)</span>，
-所以 <span class="arithmatex">\(\mathbb{E}[x(n-k)] = \mu_x\)</span> ——
+所以 <span class="arithmatex">\(\mathbb{E}[x(n-k)] = \mu_x\)</span>：
 <strong>注意这里 <span class="arithmatex">\(n-k\)</span> 是某一个整数下标，下面写什么字母都不影响结果</strong>：</p>
 <div class="arithmatex">\[= \sum_{k} h(k)\, \mu_x
 = \mu_x \sum_{k} h(k)\]</div>
@@ -13020,17 +13007,12 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 这一条对<strong>有限</strong>项求和永远成立；对无穷级数，
 只要 <span class="arithmatex">\(\sum_k \lvert h(k)\rvert\)</span> 有限（即系统稳定），
 用控制收敛定理就能保证它仍然成立 ✓</p>
-<p><strong>另外一个容易被忽略的点</strong>：
-上面的推导<strong>只用到「<span class="arithmatex">\(x\)</span> 的均值是常数」</strong>，
-根本没有用到「<span class="arithmatex">\(x\)</span> 的自相关是常数」。
-所以 <span class="arithmatex">\(\mu_y = \mu_x H(0)\)</span> 这一条，
-对「均值平稳但二阶不平稳」的序列也成立 —— 条件比想象中弱 ✓</p>
+<p><strong>另外</strong>：上面的推导只用到「<span class="arithmatex">\(x\)</span> 的均值是常数」，
+所以 <span class="arithmatex">\(\mu_y = \mu_x H(0)\)</span> 对「均值平稳但二阶不平稳」的序列也成立 ✓</p>
 <h3 id="23">2.3 结论怎么读：直流增益<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\mu_y = \mu_x \cdot H(0), \qquad H(0) = \sum_k h(k)\]</div>
-<p><strong>读法</strong>：输出的平均值 = 输入的平均值 × 系统在<strong>零频处的频率响应</strong>。</p>
-<p><span class="arithmatex">\(H(0)\)</span> 有个专门的名字：<strong>直流增益</strong>（DC gain，DC 即直流）。
-为什么叫直流？因为 <span class="arithmatex">\(\omega = 0\)</span> 对应<strong>频率为零</strong>的成分，
-也就是「一直不变的成分」——恒定分量、直流分量 ✓</p>
+<p><strong>读法</strong>：输出的平均值 = 输入的平均值 × 系统在<strong>零频处的频率响应</strong>。
+<span class="arithmatex">\(H(0)\)</span> 叫<strong>直流增益</strong>（DC gain）——<span class="arithmatex">\(\omega = 0\)</span> 对应频率为零的恒定分量 ✓</p>
 <p><strong>这个公式立刻给出了一个实用结论</strong>：</p>
 <table>
 <thead>
@@ -13058,9 +13040,8 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <span class="arithmatex">\(H(0)=0\)</span> 和「输出的均值等于 0」是同一件事</strong>，
-这正是很多滤波器（一阶差分、二阶差分、任何 <span class="arithmatex">\(\sum_k h(k)=0\)</span> 的 FIR）
-被用来消掉缓慢漂移的原因 ✓</p>
+<p><strong>注意</strong>：任何 <span class="arithmatex">\(\sum_k h(k)=0\)</span> 的 FIR（差分器等）都使输出均值归零，
+这正是它们能消掉缓慢漂移的原因 ✓</p>
 <h3 id="24-mu_y-mu_x-h0">2.4 手算三张表，把 <span class="arithmatex">\(\mu_y = \mu_x H(0)\)</span> 用到底<a class="headerlink" href="#24-mu_y-mu_x-h0" title="Permanent link">&para;</a></h3>
 <p>验算很轻：只要 <span class="arithmatex">\(h\)</span> 的长度是有限的，<span class="arithmatex">\(H(0)=\sum_k h(k)\)</span>
 就是一个<strong>几十秒能算完的加法</strong>。设输入均值 <span class="arithmatex">\(\mu_x = 5\)</span>（明显非零，
@@ -13113,43 +13094,23 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 </tr>
 </tbody>
 </table>
-<p>这张表把「挨个试参数」换成了「一支笔就能填完的对照」，
-而且每一格都能追溯到 <span class="arithmatex">\(H(0)\)</span> 的定义：
-<span class="arithmatex">\(H(0)\)</span> 就是 <span class="arithmatex">\(h\)</span> 的所有抽头加起来，它决定直流分量被放大几倍。</p>
-<p>三个值得停下来看一眼的点：</p>
-<ul>
-<li><strong>放大器</strong>：四点加权平滑的 <span class="arithmatex">\(\sum h(k) = 1.875 &gt; 1\)</span>，
-  输入均值 <span class="arithmatex">\(5\)</span> 被抬到 <span class="arithmatex">\(9.375\)</span>。系统的通带增益大于 1，
-  均值这种「零频成分」自然跟着放大。</li>
-<li><strong>杀手</strong>：任何 <span class="arithmatex">\(\sum_k h(k) = 0\)</span> 的 FIR（一阶差分、二阶差分、
-  所有相邻系数相消的组合）都把均值清零，<strong>与 <span class="arithmatex">\(\mu_x\)</span> 多大无关</strong>。
-  输入均值是 <span class="arithmatex">\(5\)</span> 还是 <span class="arithmatex">\(5000\)</span>，输出都是 <span class="arithmatex">\(0\)</span>。</li>
-<li><strong>零均值滤波器不是万能的</strong>：把直流杀掉的同时，
-  低频有用信号也被削弱。这一点到第六章看频率响应曲线就明白了。</li>
-</ul>
+<p>每一格都能追溯到 <span class="arithmatex">\(H(0)\)</span>：它就是 <span class="arithmatex">\(h\)</span> 的所有抽头之和。</p>
+<p>两个要点：<strong>放大器</strong>那行说明通带增益 <span class="arithmatex">\(&gt; 1\)</span> 时零频成分跟着放大；
+<strong>杀手</strong>那行说明任何 <span class="arithmatex">\(\sum_k h(k) = 0\)</span> 的 FIR 都把均值清零，与 <span class="arithmatex">\(\mu_x\)</span> 多大无关。
+但零均值滤波器不是万能的 —— 杀掉直流的同时低频有用信号也被削弱（这一点到第六章看频率响应曲线就明白了）。</p>
 <div class="admonition warning">
 <p class="admonition-title">别把均值的这条关系用错地方</p>
 <p><span class="arithmatex">\(H(0)\)</span> 里的 <span class="arithmatex">\(0\)</span> 是<strong>频率</strong> <span class="arithmatex">\(\omega = 0\)</span>（零频、直流），
 不是时刻 <span class="arithmatex">\(n=0\)</span>，也不是频响在某个采样点上的值。
 写成离散频率时它是 <span class="arithmatex">\(H(e^{j0})\)</span>，写成抽样点数时对应 <span class="arithmatex">\(\omega = 0\)</span> 那一点。</p>
-<p>另外，本例的两个平均滤波器都恰好有 <span class="arithmatex">\(H(0)=1\)</span>，
-容易让人误以为「滤波不改变均值」是默认性质 ⚠
-四点加权平滑已经把均值抬到 <span class="arithmatex">\(9.375\)</span>，说明 <span class="arithmatex">\(H(0)=1\)</span> 是设计出来的，
-不是碰巧成立的。</p>
-<p>好消息是它<strong>不依赖输入是什么形状</strong>：
-只要输入均值恒为 <span class="arithmatex">\(\mu_x\)</span>、系统是线性时不变的，输出就恒为 <span class="arithmatex">\(\mu_x H(0)\)</span>，
-与 <span class="arithmatex">\(\mu_x\)</span> 之外的所有统计量都无关。</p>
+<p>另外，本例两个平均滤波器恰好都有 <span class="arithmatex">\(H(0)=1\)</span>，容易让人误以为「滤波不改变均值」
+是默认性质 ⚠ 四点加权平滑已把均值抬到 <span class="arithmatex">\(9.375\)</span>，说明 <span class="arithmatex">\(H(0)=1\)</span> 是设计出来的。
+它<strong>不依赖输入形状</strong>：只要输入均值恒为 <span class="arithmatex">\(\mu_x\)</span>、系统 LTI，输出就恒为 <span class="arithmatex">\(\mu_x H(0)\)</span>。</p>
 </div>
-<p><strong>这个结论说明什么</strong>：均值这条关系是「最便宜」的结论 ——
-它只用到线性和期望的线性性质，连平稳性都几乎没用到。
-但它已经能回答一个很实际的问题：
-<strong>测量通道里需要一个不引入直流偏置的滤波器时，
-最低要求就是 <span class="arithmatex">\(\sum_k h(k) = 1\)</span>。</strong>
-常见的归一化做法（把 <span class="arithmatex">\(h\)</span> 除以元素和）正是为了把一个任意 <span class="arithmatex">\(h\)</span>
-改造成 <span class="arithmatex">\(H(0)=1\)</span> 的版本。</p>
+<p><strong>实用要点</strong>：测量通道里要一个不引入直流偏置的滤波器，
+最低要求就是 <span class="arithmatex">\(\sum_k h(k) = 1\)</span>；常见的「把 <span class="arithmatex">\(h\)</span> 除以元素和」正是这个目的。</p>
 <div class="admonition tip">
 <p class="admonition-title">均值关系的三种等价说法</p>
-<p>下面三句话说的是同一件事，考试和实际工作里都会遇到：</p>
 <ol>
 <li><span class="arithmatex">\(\mu_y = \mu_x H(0)\)</span>；</li>
 <li>「输出的直流分量 = 输入的直流分量 × 直流增益」；</li>
@@ -13201,14 +13162,13 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 （对实值序列，共轭等于本身，可以不管它。
 本页的文字推导保留共轭，具体例子都用实值序列。）</p>
 <h3 id="32">3.2 代入输出的卷积表达式<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>这一步把两个因子的卷积式都写出来，一个都不省。</p>
+<p>这一步把两个因子的卷积式都写出来：</p>
 <p>由 <span class="arithmatex">\(y(n) = \sum_k h(k) x(n-k)\)</span>，把 <span class="arithmatex">\(n\)</span> 换成 <span class="arithmatex">\(n+m\)</span>：</p>
 <div class="arithmatex">\[y(n+m) = \sum_{k} h(k)\, x(n+m-k)\]</div>
-<p>（求和哑标用 <span class="arithmatex">\(k\)</span>。）</p>
 <p>同样地，<span class="arithmatex">\(y(n)\)</span> 本身：</p>
 <div class="arithmatex">\[y(n) = \sum_{l} h(l)\, x(n-l)\]</div>
-<p><strong>注意这里换了一个哑标 <span class="arithmatex">\(l\)</span></strong> —— 这是必须的。
-两个求和<strong>不能共用同一个哑标</strong>，否则后面没法把它们分开处理。
+<p><strong>这里必须换一个哑标 <span class="arithmatex">\(l\)</span></strong>：
+两个求和不能共用同一个哑标，否则后面没法把它们分开处理。
 <span class="arithmatex">\(k\)</span> 管第一个因子的时移，<span class="arithmatex">\(l\)</span> 管第二个因子的时移，二者互不干涉 ✓</p>
 <p>把它俩乘起来（先不管期望）：</p>
 <div class="arithmatex">\[y(n+m)\,y^{*}(n)
@@ -13216,10 +13176,8 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <p><strong>处理共轭</strong>：乘积的共轭等于各自共轭的乘积，
 即 <span class="arithmatex">\((AB)^{*} = A^{*}B^{*}\)</span>。于是</p>
 <div class="arithmatex">\[\Big(\sum_{l} h(l)\, x(n-l)\Big)^{*} = \sum_{l} h^{*}(l)\, x^{*}(n-l)\]</div>
-<p><strong>注意这里 <span class="arithmatex">\(h\)</span> 也变成 <span class="arithmatex">\(h^{*}\)</span> 了</strong> ——
-共轭作用在<strong>整个括号</strong>上，括号里每一项都要共轭，
-所以 <span class="arithmatex">\(h(l)\)</span> 和 <span class="arithmatex">\(x(n-l)\)</span> 双双取共轭
-（很常见的错误是只给 <span class="arithmatex">\(x\)</span> 取共轭，忘掉 <span class="arithmatex">\(h\)</span>。）</p>
+<p><strong>注意 <span class="arithmatex">\(h\)</span> 也变成 <span class="arithmatex">\(h^{*}\)</span> 了</strong>：共轭作用在<strong>整个括号</strong>上，
+<span class="arithmatex">\(h(l)\)</span> 与 <span class="arithmatex">\(x(n-l)\)</span> 双双取共轭（常见错误是只给 <span class="arithmatex">\(x\)</span> 取共轭）。</p>
 <p>于是自相关写成</p>
 <div class="arithmatex">\[R_y(m)
 = \mathbb{E}\Big[\Big(\sum_{k} h(k)\, x(n+m-k)\Big)\Big(\sum_{l} h^{*}(l)\, x^{*}(n-l)\Big)\Big]\]</div>
@@ -13260,7 +13218,7 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <p><strong>注意 <span class="arithmatex">\(n\)</span> 被消掉了</strong> —— 这正是平稳性起作用的地方 ✓</p>
 <p>于是</p>
 <div class="arithmatex">\[\mathbb{E}\big[x(n+m-k)\, x^{*}(n-l)\big] = R_x\big(m-k+l\big)\]</div>
-<p><strong>这一步是整个推导的枢纽，值得反复看</strong>：</p>
+<p><strong>这一步是推导的枢纽</strong>：</p>
 <ul>
 <li>如果 <span class="arithmatex">\(x\)</span> <strong>不</strong>平稳，右边就还得写成依赖 <span class="arithmatex">\(n\)</span> 的形式，<span class="arithmatex">\(n\)</span> 消不掉，
   最后 <span class="arithmatex">\(R_y\)</span> 也会依赖 <span class="arithmatex">\(n\)</span>，输出就不是广义平稳的 ⚠</li>
@@ -13269,8 +13227,7 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <h3 id="35">3.5 得到双重和<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
 <p>代回去：</p>
 <div class="arithmatex">\[\boxed{\;R_y(m) = \sum_{k}\sum_{l} h(k)\, h^{*}(l)\; R_x\big(m-k+l\big)\;}\]</div>
-<p><strong>这个式子已经是对的了，但它不够好看</strong> ——
-双重求和看不出运算结构。下面把它整理成<strong>两次卷积</strong>。</p>
+<p><strong>这个双重和不够好看</strong>（看不出运算结构），下面把它整理成<strong>两次卷积</strong>。</p>
 <h3 id="36">3.6 双重和是什么运算：两次卷积<a class="headerlink" href="#36" title="Permanent link">&para;</a></h3>
 <p><strong>先做什么</strong>：固定 <span class="arithmatex">\(k\)</span>，看内层对 <span class="arithmatex">\(l\)</span> 的求和。</p>
 <div class="arithmatex">\[\sum_{l} h^{*}(l)\, R_x\big(m-k+l\big)\]</div>
@@ -13291,11 +13248,8 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 <h3 id="37">3.7 把方括号命名：脉冲响应的自相关<a class="headerlink" href="#37" title="Permanent link">&para;</a></h3>
 <p>定义</p>
 <div class="arithmatex">\[R_h(m) \;\triangleq\; h(m) * h^{*}(-m) = \sum_{k} h(k)\, h^{*}(k-m)\]</div>
-<p><strong>为什么叫「脉冲响应的自相关」</strong>：
-把 <span class="arithmatex">\(R_x\)</span> 的定义里的随机序列换成确定序列 <span class="arithmatex">\(h\)</span>，
-并且把共轭放在第一个因子上（实值序列时两者无差别），
-得到的就是这个形式 —— 它确实是一个<strong>相关运算</strong>，
-衡量的是 <span class="arithmatex">\(h\)</span> 与自己错开 <span class="arithmatex">\(m\)</span> 个样点后的相似程度 ✓</p>
+<p><strong>为什么叫「脉冲响应的自相关」</strong>：把 <span class="arithmatex">\(R_x\)</span> 定义里的随机序列换成确定序列 <span class="arithmatex">\(h\)</span>，
+得到的就是这个形式 —— 它衡量 <span class="arithmatex">\(h\)</span> 与自己错开 <span class="arithmatex">\(m\)</span> 个样点后的相似程度 ✓</p>
 <p><strong>几个立刻能用到的性质</strong>：</p>
 <table>
 <thead>
@@ -13333,11 +13287,9 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 </blockquote>
 <p><strong>这解释了两件事</strong>：</p>
 <ol>
-<li><strong>输出为什么还平稳</strong>：等式右边只含 <span class="arithmatex">\(m\)</span>，不含 <span class="arithmatex">\(n\)</span>。
-   <span class="arithmatex">\(n\)</span> 已经被消掉了（3.4 节那一步），所以 <span class="arithmatex">\(R_y\)</span> 只依赖延迟 ✓</li>
-<li><strong>系统对相关性的作用</strong>：系统不是简单地把 <span class="arithmatex">\(R_x\)</span> 平移或缩放，
-   而是<strong>用 <span class="arithmatex">\(R_h\)</span> 去「抹」一遍 <span class="arithmatex">\(R_x\)</span></strong> —— 这是一个<strong>低通式的模糊</strong>。
-   所以滤波后的信号，其自相关通常比原来更「平滑」、相关时间更长 ⚠</li>
+<li><strong>输出为什么还平稳</strong>：右边只含 <span class="arithmatex">\(m\)</span>、不含 <span class="arithmatex">\(n\)</span>（3.4 节已把 <span class="arithmatex">\(n\)</span> 消掉）✓</li>
+<li><strong>系统对相关性的作用</strong>：系统是用 <span class="arithmatex">\(R_h\)</span> 去「抹」一遍 <span class="arithmatex">\(R_x\)</span>，
+   所以滤波后的自相关通常更平滑、相关时间更长 ⚠</li>
 </ol>
 <p><strong>回看课件原话</strong>：课件在写出「<span class="arithmatex">\(y(n)\)</span> 也广义平稳，其自相关是」之后，
 给的正是 <span class="arithmatex">\(R_{yy}(m) = \sum_i \sum_l h(i)h^{*}(l) r_{xx}(m+l-i)\)</span> 这个双重和，
@@ -13345,21 +13297,12 @@ h(n) = \frac{1}{2\pi}\int_{-\pi}^{\pi} H(\omega)\, e^{j\omega n}\, d\omega\]</di
 并注明「容易得到」<span class="arithmatex">\(r_{yy}(m) = r_{hh}(m) * r_{xx}(m)\)</span>。
 <strong>本页做的就是把这个「容易得到」展开</strong> ✓</p>
 <h3 id="39-r_y-r_x-r_h">3.9 怎么核对 <span class="arithmatex">\(R_y = R_x * R_h\)</span><a class="headerlink" href="#39-r_y-r_x-r_h" title="Permanent link">&para;</a></h3>
-<p>要检验这个关系，思路是造一个自相关<strong>有解析表达式</strong>的输入
-（AR(1) 白噪声激励，<span class="arithmatex">\(R_x(m) = \dfrac{\sigma_w^2}{1-\rho^2}\rho^{\lvert m\rvert}\)</span>），
-再核对两条路算出的自相关是否一致：</p>
-<ol>
-<li>从输出序列出发，按定义 <span class="arithmatex">\(R_y(m) = \mathbb{E}[y(n+m)y^{*}(n)]\)</span> 直接算；</li>
-<li>用 <span class="arithmatex">\(R_y = R_h * R_x\)</span> 与上面的解析式另算一遍；</li>
-<li>把两者的差列成表，核对是否逐点相等。</li>
-</ol>
-<p><strong>怎么核对这个结论</strong>：<span class="arithmatex">\(R_y\)</span> 与 <span class="arithmatex">\(R_x * R_h\)</span> 的相等是恒等式，
-不是近似 —— 只要 <span class="arithmatex">\(\sum_k \lvert h(k)\rvert &lt; \infty\)</span>（BIBO 稳定），
-交换求和与期望就是合法的。取 <span class="arithmatex">\(h = [1,\ 0.5,\ -0.25]\)</span>，
-<span class="arithmatex">\(R_h(m)\)</span> 用前面 3.10 的手算表（<span class="arithmatex">\(1.3125,\ 0.375,\ -0.25\)</span>），
+<p>这个相等是<strong>恒等式</strong>而非近似：只要 <span class="arithmatex">\(\sum_k \lvert h(k)\rvert &lt; \infty\)</span>（BIBO 稳定），
+交换求和与期望就是合法的。用自相关有解析式的输入（AR(1)，
+<span class="arithmatex">\(R_x(m) = \frac{\sigma_w^2}{1-\rho^2}\rho^{\lvert m\rvert}\)</span>）或直接取白噪声例，
+都能逐点核对。比如取 <span class="arithmatex">\(h = [1,\ 0.5,\ -0.25]\)</span>（<span class="arithmatex">\(R_h\)</span> 见 3.10），
 输入若是方差 <span class="arithmatex">\(\sigma_w^2 = 2\)</span> 的白噪声（<span class="arithmatex">\(R_x(m) = 2\delta(m)\)</span>），
-则 <span class="arithmatex">\(R_y(m) = 2R_h(m)\)</span>，于是 <span class="arithmatex">\(R_y(0) = 2.625\)</span>、<span class="arithmatex">\(R_y(1) = 0.75\)</span>、
-<span class="arithmatex">\(R_y(2) = -0.5\)</span> —— 全在纸面上。</p>
+则 <span class="arithmatex">\(R_y(m) = 2R_h(m)\)</span>，<span class="arithmatex">\(R_y(0) = 2.625\)</span>、<span class="arithmatex">\(R_y(1) = 0.75\)</span>、<span class="arithmatex">\(R_y(2) = -0.5\)</span>。</p>
 <div class="admonition warning">
 <p class="admonition-title">这个验算里最容易搞错的两处</p>
 <p><strong>第一处：延迟的方向。</strong>
@@ -13466,9 +13409,7 @@ R_y(2) = 2\times(-0.25) = -0.5\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>两条都满足 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(y(n)\)</span> 是广义平稳的</strong> ——
-这就是课件那句「易证明」的全部内容：
-它不「易」在计算，而「易」在<strong>算完之后一眼看得出来</strong></p>
+<p><strong>两条都满足 <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(y(n)\)</span> 广义平稳</strong> —— 这就是那句「易证明」的全部内容 ✓</p>
 <h3 id="42">4.2 这两个结论的依赖关系（重要）<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>必须强调：<strong>判定平稳用的两个量，本身是从推导里来的</strong>。
 换句话说，逻辑顺序是：</p>
@@ -13498,8 +13439,7 @@ R_y(2) = 2\times(-0.25) = -0.5\]</div>
 <a id="__codelineno-0-12" name="__codelineno-0-12"></a>      │
 <a id="__codelineno-0-13" name="__codelineno-0-13"></a>      └─ 到此才有资格说「y 是平稳的」
 </code></pre></div></td></tr></table></div>
-<p><strong>顺序不能颠倒</strong>：不能先假设 <span class="arithmatex">\(y\)</span> 平稳再去算它的自相关。
-本页的顺序（先算后判）才是严格的顺序。</p>
+<p><strong>顺序不能颠倒</strong>：不能先假设 <span class="arithmatex">\(y\)</span> 平稳再去算它的自相关 —— 先算后判才是严格的。</p>
 <h3 id="43">4.3 结论成立的条件（不要漏掉）<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">不是「任何线性系统 + 任何平稳输入」都成立</p>
@@ -13565,7 +13505,7 @@ R_y(2) = 2\times(-0.25) = -0.5\]</div>
 </tr>
 </tbody>
 </table>
-<p>维纳–辛钦定理的证明与逐项讨论属于上一页「自相关与功率谱」的内容，本页不重复。</p>
+<p>维纳–辛钦定理的证明见上一页「自相关与功率谱」，本页不重复。</p>
 <p><strong>逐个因子做变换</strong>：</p>
 <table>
 <thead>
@@ -13601,7 +13541,7 @@ R_y(2) = 2\times(-0.25) = -0.5\]</div>
 <p>于是</p>
 <div class="arithmatex">\[\boxed{\;S_y(\omega) = \lvert H(\omega)\rvert^{2}\, S_x(\omega)\;}\]</div>
 <h3 id="52-r_h-lvert-hrvert2">5.2 单独说明：为什么 <span class="arithmatex">\(R_h\)</span> 的傅里叶变换是 <span class="arithmatex">\(\lvert H\rvert^2\)</span><a class="headerlink" href="#52-r_h-lvert-hrvert2" title="Permanent link">&para;</a></h3>
-<p>这一步很容易被跳过，但它是「为什么只看幅度」的根源，值得<strong>一步不跳</strong>地算一遍。</p>
+<p>这一步是「为什么只看幅度」的根源，值得一步不跳地算一遍。</p>
 <p><strong>起点</strong>：从 3.7 节的定义 <span class="arithmatex">\(R_h(m) = \sum_k h(k)h^{*}(k-m)\)</span> 出发。先把它改写成卷积形状：</p>
 <div class="arithmatex">\[R_h(m) = \sum_k h(k)h^{*}(k-m) = h(m) * h^{*}(-m)\]</div>
 <p><strong>为什么可以这样改写</strong>：卷积的定义是 <span class="arithmatex">\((h*g)(m) = \sum_k h(k)g(m-k)\)</span>。
@@ -13663,11 +13603,6 @@ H(\omega)\cdot H^{*}(-\omega)\]</div>
 = \sum_k \lvert h(k)\rvert^{2}\]</div>
 <p>左边是系统能量（时域），右边是频域的能量积分 ——
 这是帕塞瓦尔等式在 LTI 系统上的一个具体形态 ✓</p>
-<p><strong>顺带得到一条有用的等式</strong>：令 <span class="arithmatex">\(m = 0\)</span>，</p>
-<div class="arithmatex">\[R_h(0) = \frac{1}{2\pi}\int_{-\pi}^{\pi}\lvert H(\omega)\rvert^{2}\,d\omega
-= \sum_k \lvert h(k)\rvert^{2}\]</div>
-<p>左边是系统能量（时域），右边是频域的能量积分 ——
-这是帕塞瓦尔等式在 LTI 系统上的一个具体形态</p>
 <h3 id="53">5.3 公式怎么读：三个部分各是什么<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[S_y(\omega) = \lvert H(\omega)\rvert^{2}\, S_x(\omega)\]</div>
 <table>
@@ -13700,11 +13635,9 @@ H(\omega)\cdot H^{*}(-\omega)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>要点</strong>：输出功率谱 = 输入功率谱在每一点上<strong>乘一个非负的倍数</strong>。
+<p><strong>要点</strong>：输出功率谱 = 输入功率谱逐点乘一个非负倍数（系统的功率增益）。
 这个倍数就是系统的功率增益，它<strong>处处非负</strong>，因为它是平方。</p>
-<p>下面这张图把这条乘法关系画了出来：一条平直的输入谱（白噪声）、
-一条随频率上升的 <span class="arithmatex">\(\lvert H(\omega)\rvert^{2}\)</span>，
-两条曲线逐点相乘得到输出谱（三条曲线的交叉点就是这个乘法）。</p>
+<p>下图把这条乘法关系画出来：平直的输入谱 × 上升的 <span class="arithmatex">\(\lvert H(\omega)\rvert^{2}\)</span> = 输出谱。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 357.183867 224.192977" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平稳序列通过线性系统：输出谱等于输入谱乘幅频特性平方">
 
@@ -14167,9 +14100,8 @@ L 63.583867 175.244656
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 不可能为负</strong> ——
+<p><strong><span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 不可能为负</strong>：滤波器只能搬运和压制功率，不能凭空制造频率成分。
 这意味着系统<strong>永远不能让某个频率的功率变成负的</strong>。
-滤波器只能「搬运和压制」，不能凭空制造频率成分。
 绝对不可能出现「输入在某个频率上功率是 0，输出却在那个频率上功率不为 0」的情况
 （除非系统是非线性的，那就不在这个框架里了）</p>
 <h3 id="54">5.4 重要推论：功率谱与相位无关<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
@@ -14188,7 +14120,7 @@ L 63.583867 175.244656
 两个幅度响应完全相同的系统，输出波形可以完全不同。</p>
 <p><strong>一个常见误解</strong>：「反正功率谱一样，相位怎么设都行」——
 在需要对波形对齐的场合（通信解调、阵列波束形成、脉冲压缩）
-这样想会直接出错</p>
+这样想会直接出错 ⚠</p>
 <p><strong>看 5.6 节的两个系统</strong>：它们只有相位相反，
 幅频响应与输出功率谱逐位相同，
 但输出的<strong>波形</strong>可以相差好几倍 —— 这个对比很能说明问题</p>
@@ -14289,8 +14221,7 @@ L 63.583867 175.244656
 </tr>
 </tbody>
 </table>
-<p><span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 从 <span class="arithmatex">\(\omega=0\)</span> 的 <span class="arithmatex">\(1.5625\)</span> 先升到 <span class="arithmatex">\(\pi/3\)</span> 的 <span class="arithmatex">\(1.9375\)</span>，
-再一路落到 <span class="arithmatex">\(\pi\)</span> 的 <span class="arithmatex">\(0.0625\)</span> —— 输出谱就是被系统<strong>整形成</strong>这个形状的。</p>
+<p><span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 从 <span class="arithmatex">\(\omega=0\)</span> 先升到 <span class="arithmatex">\(\pi/3\)</span> 再落到 <span class="arithmatex">\(\pi\)</span> —— 输出谱就被整形成这个形状。</p>
 <p><strong>第三步：全频段积分回验总功率。</strong>
 把 <span class="arithmatex">\(S_y\)</span> 在全频段积分再除以 <span class="arithmatex">\(2\pi\)</span>，应当等于 <span class="arithmatex">\(R_y(0)\)</span>。
 用 Parseval 关系（<span class="arithmatex">\(h\)</span> 为实序列）
@@ -14345,9 +14276,8 @@ L 63.583867 175.244656
 </tr>
 </tbody>
 </table>
-<p><span class="arithmatex">\(\omega=0\)</span> 与 <span class="arithmatex">\(\omega=\pi\)</span> 两列的模平方<strong>逐位相同</strong>，
-唯一不同的是中间频率上的相位；而 <span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 那一列从不关心
-<span class="arithmatex">\(H\)</span> 的实部虚部怎么配比，只看它们的平方和。</p>
+<p>两个端点的模平方<strong>逐位相同</strong>，只有中间频率上的相位不同；
+<span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 只看实部虚部的平方和，不关心它们怎么配比。</p>
 <p><strong>这张对照表把 5.4 节的结论钉死了</strong>：</p>
 <table>
 <thead>
@@ -14933,14 +14863,10 @@ L 289.944609 55.470498
 = \sigma^{2}\cdot\frac{\omega_c}{\pi}\]</div>
 <p><strong>结论</strong>：输出功率 = 输入功率谱高度 × 带宽（归一化）。</p>
 <div class="arithmatex">\[\text{输出功率} = \sigma^{2}\times\frac{\text{带宽}}{2\pi}\]</div>
-<p><strong>这是降噪原理的全部内容</strong>：白噪声的功率均匀分布在所有频率上，
-低通滤波只保留 <span class="arithmatex">\(\omega_c/\pi\)</span> 这一小部分，
-所以噪声功率按<strong>带宽比例</strong>下降</p>
-<p><strong>顺带解释 3.10 节那个例子的「功率变大」</strong>：
-那里输入是白噪声（<span class="arithmatex">\(S_x = \sigma_w^2 = 2\)</span>，带宽全开），
-系统 <span class="arithmatex">\(\lvert H\rvert^2\)</span> 在某些频段大于 <span class="arithmatex">\(1\)</span>，
-所以积分结果 <span class="arithmatex">\(2.625 \gt 2\)</span> ——
-<strong>滤波器把某些频率加强了，所以输出总功率反而更大</strong></p>
+<p><strong>这就是降噪原理的全部内容</strong>：白噪声功率均匀分布在所有频率上，
+低通只保留 <span class="arithmatex">\(\omega_c/\pi\)</span> 这一小部分，噪声功率就按<strong>带宽比例</strong>下降。</p>
+<p>这也顺带解释 3.10 节的「功率变大」：那里 <span class="arithmatex">\(\lvert H\rvert^2\)</span> 在某些频段 <span class="arithmatex">\(&gt;1\)</span>，
+积分结果 <span class="arithmatex">\(2.625 \gt 2\)</span> —— 滤波器把某些频率加强了，输出总功率反而更大。</p>
 <h3 id="63">6.3 白噪声通过理想低通：功率随带宽变化（手算）<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
 <p>理想低通的定义很干净：</p>
 <div class="arithmatex">\[\lvert H(\omega)\rvert = \begin{cases} 1, &amp; \lvert\omega\rvert \le \omega_c\\ 0, &amp; \text{其他}\end{cases}\]</div>
@@ -14985,9 +14911,8 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>读数</strong>：输出功率与带宽<strong>严格成正比</strong>，带宽减半，功率就减半。
-原因是白噪声的谱在积分区间内是常数，积分退化成「常数 × 区间长度」，
-所以只剩一个线性关系 ✓</p>
+<p><strong>读数</strong>：输出功率与带宽<strong>严格成正比</strong>（白噪声谱在积分区间内是常数，
+积分退化成「常数 × 区间长度」）✓</p>
 <h3 id="64">6.4 窄带滤波：降噪有多强（手算对照）<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
 <p>把通带压在中心频率 <span class="arithmatex">\(0.5\pi\)</span> 附近、宽度为 <span class="arithmatex">\(b\)</span>（归一化），
 输入仍是 <span class="arithmatex">\(\sigma_w^2 = 1\)</span> 的白噪声。同样的积分：</p>
@@ -15024,10 +14949,8 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>读数</strong>：带宽从 <span class="arithmatex">\(0.400\)</span> 压到 <span class="arithmatex">\(0.005\)</span>，输出噪声功率从 <span class="arithmatex">\(0.2000\)</span> 掉到 <span class="arithmatex">\(0.0025\)</span>，
-<strong>掉了 80 倍</strong>，而它与带宽的比值<strong>始终不变</strong> —— 这正是
-「噪声功率 ∝ 带宽」这条线性律的直接体现。
-窄带接收机能在强噪声里工作，靠的就是这个可算的倍数 ✓</p>
+<p><strong>读数</strong>：带宽从 <span class="arithmatex">\(0.400\)</span> 压到 <span class="arithmatex">\(0.005\)</span>，输出功率从 <span class="arithmatex">\(0.2000\)</span> 掉到 <span class="arithmatex">\(0.0025\)</span>（80 倍），
+而功率与带宽的比值始终不变 —— 窄带接收机能抗强噪声靠的就是这个可算的倍数 ✓</p>
 <div class="admonition tip">
 <p class="admonition-title">降噪的账要两头算</p>
 <p>低通/窄带滤波确实按带宽比例压掉了噪声功率，
@@ -15048,9 +14971,7 @@ L 289.944609 55.470498
 \lvert H(\omega)\rvert = \frac{\text{常数}}{\sqrt{S_x(\omega)}}\]</div>
 <p>也就是说，<strong>在输入功率谱大的地方把系统增益做小</strong>，
 正好把输入的谱「拉平」。</p>
-<p><strong>这一条在课件里没有展开</strong>，本页把它标为<strong>延伸</strong>：
-它的完整讨论（含相位怎么选）属于后续「最优滤波」的内容，
-本页只给出这个最基本的思想</p>
+<p><strong>这一条标为延伸</strong>：完整讨论（含相位怎么选）属于后续「最优滤波」的内容。</p>
 <p><strong>手算验证</strong>：设输入是一阶自回归（AR(1)）过程，功率谱</p>
 <div class="arithmatex">\[S_x(\omega) = \frac{\sigma^{2}}{\lvert 1-\rho e^{-j\omega}\rvert^{2}}\]</div>
 <p>取驱动方差 <span class="arithmatex">\(\sigma^{2} = 1\)</span>、相关系数 <span class="arithmatex">\(\rho = 0.7\)</span>。
@@ -15110,9 +15031,8 @@ L 289.944609 55.470498
 <strong>噪声功率涨了 3 倍多</strong>，仅仅因为做了差分/求导 ⚠</p>
 <p><strong>为什么</strong>：<span class="arithmatex">\(\omega^{2}\)</span> 把高频放得特别大（<span class="arithmatex">\(\omega\)</span> 越接近 <span class="arithmatex">\(\pi\)</span>，放大越多），
 而白噪声在每个频率上都有功率，所以总量被高频项抬起来了</p>
-<p><strong>这个结论说明什么</strong>：<span class="arithmatex">\(\pi^{2}/3 \approx 3.29\)</span> 是一个<strong>可以背下来的比例</strong> ——
-白噪声做一次理想微分，输出功率涨到输入的 <span class="arithmatex">\(3.29\)</span> 倍。
-若换成二阶微分（<span class="arithmatex">\(\lvert H(\omega)\rvert = \omega^{2}\)</span>），同样的积分给出</p>
+<p><strong>这个结论说明什么</strong>：白噪声做一次理想微分，输出功率涨到输入的 <span class="arithmatex">\(\pi^{2}/3 \approx 3.29\)</span> 倍。
+二阶微分（<span class="arithmatex">\(\lvert H(\omega)\rvert = \omega^{2}\)</span>）同样积分得</p>
 <div class="arithmatex">\[R_y(0) = \frac{1}{2\pi}\int_{-\pi}^{\pi}\omega^{4}\, d\omega
 = \frac{1}{2\pi}\cdot\frac{2\pi^{5}}{5}
 = \frac{\pi^{4}}{5} \approx 19.48\]</div>
@@ -15130,9 +15050,8 @@ L 289.944609 55.470498
 <p>自相关函数 <span class="arithmatex">\(R_x(m)\)</span> 从 <span class="arithmatex">\(R_x(0)\)</span> 开始，
 随着延迟 <span class="arithmatex">\(\lvert m\rvert\)</span> 增大而衰减。
 <strong>它在多长的延迟上基本衰减完</strong>，就是序列的<strong>相关时间</strong>。</p>
-<p>一个方便的量化指标是<strong>归一化一阶自相关</strong>：</p>
-<div class="arithmatex">\[\rho_1 \;\triangleq\; \frac{R_x(1)}{R_x(0)}\]</div>
-<p><strong>要点</strong>：相邻两个样点之间的相似程度。</p>
+<p>一个方便的量化指标是<strong>归一化一阶自相关</strong> <span class="arithmatex">\(\rho_1 \triangleq R_x(1)/R_x(0)\)</span>
+——它衡量相邻两个样点之间的相似程度：</p>
 <table>
 <thead>
 <tr>
@@ -15200,9 +15119,8 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：<strong>输出自相关的宽度，大致是两个宽度的「叠加」</strong>，
-卷积只会让形状变宽，不会变窄
-（除非系统有负系数，把部分相关抵消掉。）</p>
+<p><strong>一句话</strong>：输出自相关的宽度大致是两个宽度的叠加，卷积只会让它变宽
+（除非系统有负系数把部分相关抵消）。</p>
 <p><strong>一个直观的物理图像</strong>：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -15331,10 +15249,8 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>这也解释了为什么处理实际数据时总要把输出的前若干点丢掉</strong>：
-那些点是系统从零初始状态「爬起来」的过程，
-它们不满足平稳性假设，
-拿它们去估自相关或功率谱会得到有偏的结果</p>
+<p><strong>这解释了为什么处理实际数据总要丢掉输出的前若干点</strong>：那些点是系统从零状态
+「爬起来」的暂态，不满足平稳假设，拿去估自相关或功率谱会得到有偏结果。</p>
 <hr />
 <h2 id="_8">八、一张完整的关系表<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>把本页所有结论集中到一张表里。</p>
@@ -15444,13 +15360,10 @@ L 289.944609 55.470498
 </div>
 <hr />
 <h2 id="_9">九、把「输出广义平稳」验成数字<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>前八节都是解析推导。最后按<strong>平稳性的定义</strong>把「输出广义平稳」
-检验成数字：把长序列切成若干段，在每一段上分别看均值和自相关，
-判断它们是否<strong>跨段保持一致</strong>。</p>
+<p>前八节都是解析推导。最后按<strong>平稳性的定义</strong>把「输出广义平稳」检验成数字：
+把长序列切成若干段，在每一段上分别看均值和自相关是否<strong>跨段保持一致</strong>。</p>
 <h3 id="91">9.1 分段检验：均值与自相关是否恒定<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
-<p>检验的思路<strong>极其朴素</strong>：把输出切成长度相等的若干段，
-对每一段分别算「段内均值」和「段内归一化自相关」，
-看它们是否<strong>跨段保持一致</strong>。这一段完全可以在纸面上设计出来：</p>
+<p>检验可以在纸面上设计出来：</p>
 <p><strong>设定</strong>：<span class="arithmatex">\(\mu_x = 1.5\)</span>，<span class="arithmatex">\(\rho = 0.75\)</span>，<span class="arithmatex">\(h = [1,\ 0.5,\ 0.25]\)</span>。</p>
 <p><strong>第一步，算出各段都应该等于什么</strong>。</p>
 <div class="arithmatex">\[H(0) = 1+0.5+0.25 = 1.75
@@ -15540,11 +15453,10 @@ L 289.944609 55.470498
 <p><strong>读数</strong>：均值明显在漂移，<strong>平稳性假设被破坏</strong> ⚠
 这个反例说明分段检验确实能区分「平稳」和「不平稳」，
 所以它是一次<strong>有内容</strong>的验证，不是走过场。</p>
-<p><strong>这个结论说明什么</strong>：平稳性不是「数学上的洁癖」，而是<strong>可检验的工程条件</strong>。
-真实数据里最常见的失稳就是<strong>慢漂移</strong>（温漂、基线漂移、零点漂移），
-它恰好能被「分段均值是否一致」这个最便宜的检查抓住。
-所以在做任何自相关/功率谱估计之前，
-<strong>先做一遍分段检验</strong>是成本最低的防线。</p>
+<p><strong>这个结论说明什么</strong>：平稳性不是「数学洁癖」，而是<strong>可检验的工程条件</strong>。
+真实数据最常见的失稳是<strong>慢漂移</strong>（温漂、基线漂移），
+恰能被「分段均值是否一致」这个最便宜的检查抓住 ——
+所以估自相关/功率谱前<strong>先做一遍分段检验</strong>是成本最低的防线。</p>
 <h3 id="93">9.3 再把三个结论排在一起看<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
 <p>本页的三个主结论可以排成一张「结论—公式—检验方法」的对照表，
 三者的位置一目了然：</p>
@@ -15582,20 +15494,15 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>三个结论的关系</strong>是层层递进的：</p>
-<ul>
-<li>结论一来自<strong>期望的线性性</strong>，最弱也最稳，只需要一阶矩存在。</li>
-<li>结论二来自<strong>自相关的定义 + 卷积的结合律</strong>，需要二阶矩存在且平稳。</li>
-<li>结论三就是<strong>结论二的傅里叶变换</strong>，没有新假设，
-  但它把「卷积」换成了「乘法」，是三个里最好用的一个 ✓</li>
-</ul>
-<p><strong>检验方法的一致性</strong>：结论三若在全频段积分（再除以 <span class="arithmatex">\(2\pi\)</span>），
-应当回到结论二的 <span class="arithmatex">\(m=0\)</span>：<span class="arithmatex">\(R_y(0) = \frac{1}{2\pi}\int S_y(\omega)\,d\omega\)</span>。
-这就是为什么总功率既能从时域样本的方差算，也能从谱积分算，
-两条路必须给出同一个数（差在估计误差里）。
-谱估计本身的偏差（窗泄漏导致积分能量不严格守恒）
-是这条校核里唯一会出现的系统性误差，
-而它可以通过加大段长、换用更长的数据来降低 ✓</p>
+<p><strong>三个结论层层递进</strong>：结论一来自<strong>期望的线性性</strong>（最弱，只需一阶矩）；
+结论二来自<strong>自相关定义 + 卷积结合律</strong>（需二阶矩且平稳）；
+结论三就是结论二的<strong>傅里叶变换</strong>，把「卷积」换成「乘法」，最好用 ✓</p>
+<p><strong>检验方法的一致性</strong>：结论三在全频段积分（除以 <span class="arithmatex">\(2\pi\)</span>）应回到结论二的 <span class="arithmatex">\(m=0\)</span>：
+<span class="arithmatex">\(R_y(0) = \frac{1}{2\pi}\int S_y(\omega)\,d\omega\)</span>。
+唯一会出现的系统性误差是谱估计偏差（窗泄漏导致能量不严格守恒），
+可通过加大段长来降低 ✓</p>
+<p>这就是为什么总功率既能从时域样本的方差算，也能从谱积分算，
+两条路必须给出同一个数（差在估计误差里）。</p>
 <div class="admonition tip">
 <p class="admonition-title">先减均值再估自相关和功率谱</p>
 <p>估计功率谱前有一件事很容易被忽略，但它很关键：
@@ -15629,9 +15536,8 @@ L 289.944609 55.470498
 <div class="arithmatex">\[\mu_y = \mu_x H(0) = 4 \times 2.0 = 8\]</div>
 <p><strong>第三步：解读。</strong> 这个系统的 <span class="arithmatex">\(H(0)=2\)</span>，<strong>不是 1</strong>，
 所以它把直流分量放大了 2 倍</p>
-<p>很多人会本能地认为「平均四个数不会改变均值」——
-那只对 <span class="arithmatex">\(\frac{1}{4}[1,1,1,1]\)</span> 成立。
-现在系数之和是 2 而不是 1，输出均值就翻倍了</p>
+<p>注意：只有 <span class="arithmatex">\(\frac{1}{4}[1,1,1,1]\)</span> 这类系数和为 1 的才「不改变均值」；
+本例系数和为 2，输出均值就翻倍了。</p>
 <p><strong>要真正做「不变均值」的滑动平均</strong>，系数必须归一化：</p>
 <div class="arithmatex">\[h = \tfrac{1}{4}[1,1,1,1], \qquad H(0) = 1, \qquad \mu_y = \mu_x = 4\]</div>
 <p><strong>结论</strong>：<span class="arithmatex">\(\mu_y = 4\)</span>（归一化）或 <span class="arithmatex">\(\mu_y = 8\)</span>（未归一化），
@@ -15667,8 +15573,7 @@ L 289.944609 55.470498
 </tr>
 </tbody>
 </table>
-<p><strong>这张表要背下来的那一列是 <span class="arithmatex">\(\sum_k h(k)\)</span></strong> ——
-它决定均值，与系数怎么排列完全无关。</p>
+<p><strong>决定均值的那一列是 <span class="arithmatex">\(\sum_k h(k)\)</span></strong>，与系数怎么排列无关。</p>
 </details>
 <h3 id="2-r_y-r_h-r_x">例题 2：用 <span class="arithmatex">\(R_y = R_h * R_x\)</span> 求输出自相关<a class="headerlink" href="#2-r_y-r_h-r_x" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：设 <span class="arithmatex">\(h = [1,\ -1]\)</span>（一阶差分），
@@ -15726,10 +15631,8 @@ R_y(\pm1) = 3\times(-1) = -3, \qquad
 R_y(m) = 0 \;\;(|m| \ge 2)\]</div>
 <p><strong>第四步：检查两条恒等式。</strong></p>
 <div class="arithmatex">\[R_y(0) = \sigma_w^{2}\sum_k h^{2}(k) = 3\times(1+1) = 6 \;\checkmark\]</div>
-<p><strong>第五步：解读符号。</strong> <span class="arithmatex">\(R_y(1) = -3 \lt 0\)</span> ——
-相邻输出的相关是<strong>负的</strong>。
-直觉上很合理：差分器输出的相邻样点是「两个相邻增量」，
-而白噪声的相邻增量方向相反的可能性更大 ✓</p>
+<p><strong>第五步：解读符号。</strong> <span class="arithmatex">\(R_y(1) = -3 \lt 0\)</span>：差分器输出的相邻样点是两个相邻增量，
+方向相反的可能性更大，所以相邻输出呈<strong>负相关</strong> ✓</p>
 <p><strong>再验证 <span class="arithmatex">\(H(0)\)</span></strong>：<span class="arithmatex">\(H(0) = 1-1 = 0\)</span>，
 所以这个滤波器输出均值为 0（去直流）✓</p>
 <p><strong>把这一题的全部数字排成手算对照表</strong>：</p>
@@ -15880,13 +15783,9 @@ R_y(m) = 0 \;\;(|m| \ge 2)\]</div>
 </tr>
 </tbody>
 </table>
-<p>这张表把「高频被放大」这件事量化了：
-<span class="arithmatex">\(\omega\)</span> 从 <span class="arithmatex">\(0\)</span> 走到 <span class="arithmatex">\(\pi\)</span>，<span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 从 <span class="arithmatex">\(0\)</span> 单调升到 <span class="arithmatex">\(4\)</span>，
-在 <span class="arithmatex">\(\omega = \pi\)</span> 处输入谱 <span class="arithmatex">\(3\)</span> 被放大到 <span class="arithmatex">\(12\)</span>。</p>
-<p><strong>同一个 <span class="arithmatex">\(R_y(0) = 6\)</span> 的第二条路</strong>（谱积分）：
-由 <span class="arithmatex">\(\frac{1}{2\pi}\int_{-\pi}^{\pi}\sin^{2}(\omega/2)\,d\omega = \frac12\)</span>，
-立得 <span class="arithmatex">\(3\times4\times\frac12 = 6\)</span> —— 与 <span class="arithmatex">\(\sigma_w^{2}\sum_k h^{2}(k)\)</span> 给出的 <span class="arithmatex">\(6\)</span> 一致 ✓
-手算时<strong>两条路互相校核</strong>，是检验有没有掉项的最快手段。</p>
+<p>这张表把「高频被放大」量化了：<span class="arithmatex">\(\omega\)</span> 从 <span class="arithmatex">\(0\)</span> 到 <span class="arithmatex">\(\pi\)</span>，<span class="arithmatex">\(\lvert H\rvert^{2}\)</span> 从 <span class="arithmatex">\(0\)</span> 单调升到 <span class="arithmatex">\(4\)</span>。</p>
+<p><strong>第二条路</strong>（谱积分）：由 <span class="arithmatex">\(\frac{1}{2\pi}\int_{-\pi}^{\pi}\sin^{2}(\omega/2)\,d\omega = \frac12\)</span>
+立得 <span class="arithmatex">\(6\)</span> —— 与 <span class="arithmatex">\(\sigma_w^{2}\sum_k h^{2}(k)\)</span> 一致（两条路互相校核）✓</p>
 </details>
 <h3 id="4">例题 4：给定输出谱，反推系统的幅度响应<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：某系统的输入是白噪声，功率谱 <span class="arithmatex">\(S_x(\omega) = 2\)</span>。
@@ -15965,8 +15864,7 @@ R_y(m) = 0 \;\;(|m| \ge 2)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>两个端点的读数与题目给的条件逐位对上</strong>，
-中间三个点是内插出来的，所以这个解是通过检验的</p>
+<p>两个端点与题设逐位对上，中间三点是内插的 —— 解通过检验。</p>
 <p><strong>核对另一组解</strong>：把 <span class="arithmatex">\(a,b\)</span> 同时取反，
 <span class="arithmatex">\(\lvert H(\omega)\rvert^{2}\)</span> 的每一个值都不变 ——
 因为 <span class="arithmatex">\(\lvert -H(\omega)\rvert^{2} = \lvert -1\rvert^{2}\lvert H(\omega)\rvert^{2}\)</span>
@@ -16155,11 +16053,8 @@ S_{y2}(\omega) = S_x(\omega)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>要构造「只有相位不同」的例子</strong>，
-必须保持 <span class="arithmatex">\(\lvert H\rvert\)</span> 一样，比如时间反转
-<span class="arithmatex">\(h'_1 = [1, 0, 1]\)</span> 的时间反转还是它自己，
-所以应该用 <span class="arithmatex">\(h = [1, 0.5, 0.25]\)</span> 与它的反转
-<span class="arithmatex">\([0.25, 0.5, 1]\)</span>（这正是 5.6 节的做法）</p>
+<p><strong>要构造「只有相位不同」的例子</strong>必须保持 <span class="arithmatex">\(\lvert H\rvert\)</span> 不变（如时间反转）；
+<span class="arithmatex">\(h_1 = [1, 0, 1]\)</span> 反转还是自己，应改用 <span class="arithmatex">\(h = [1, 0.5, 0.25]\)</span> 与它的反转（即 5.6 节）。</p>
 </details>
 <p><strong>Q4</strong> 某测量得到的输出功率谱在低频段很低、高频段很高。
 （a）能断定系统是「高通」吗？

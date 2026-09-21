@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="因为雅可比矩阵是把「数学」变成「工程」的那座桥。在机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端有 m 个自由度（任务空间维数）。">
+    <meta name="description" content="雅可比矩阵：它是把「数学」变成「工程」的那座桥。机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端 m 个自由度（任务空间维数）。正运动学给出末端位姿与关节变量的关系：其中 q∈R^n 是关节变量，x∈R^m 是末端位姿。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="雅可比矩阵">
   
-  <meta property="og:description" content="因为雅可比矩阵是把「数学」变成「工程」的那座桥。在机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端有 m 个自由度（任务空间维数）。">
+  <meta property="og:description" content="雅可比矩阵：它是把「数学」变成「工程」的那座桥。机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端 m 个自由度（任务空间维数）。正运动学给出末端位姿与关节变量的关系：其中 q∈R^n 是关节变量，x∈R^m 是末端位姿。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/calculus/jacobian/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="雅可比矩阵">
   
-  <meta name="twitter:description" content="因为雅可比矩阵是把「数学」变成「工程」的那座桥。在机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端有 m 个自由度（任务空间维数）。">
+  <meta name="twitter:description" content="雅可比矩阵：它是把「数学」变成「工程」的那座桥。机器人学里，雅可比直接决定：关节怎么动，末端就怎么动。设机器人有 n 个关节、末端 m 个自由度（任务空间维数）。正运动学给出末端位姿与关节变量的关系：其中 q∈R^n 是关节变量，x∈R^m 是末端位姿。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11883,11 +11883,11 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/mechanisms/">机器人机构学</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Mathematics for Machine Learning（§5.3 Gradients of Vector-Valued Functions）</code><code>现有讲义「第 2 讲 微积分」B.3 节（雅可比矩阵）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《机器人学导论》或《机器人机构学》雅可比章节（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">雅可比矩阵<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>上一页把雅可比矩阵定义成「向量函数的导数」。这一页专门讲它——</p>
+<p>上页把雅可比矩阵定义为「向量函数的导数」，这页专门讲它——</p>
 <blockquote>
-<p><strong>因为雅可比矩阵是把「数学」变成「工程」的那座桥。</strong></p>
+<p><strong>它是把「数学」变成「工程」的那座桥。</strong></p>
 </blockquote>
-<p>在机器人学里，雅可比直接决定：<strong>关节怎么动，末端就怎么动</strong>。</p>
+<p>机器人学里，雅可比直接决定：<strong>关节怎么动，末端就怎么动</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么机器人学必须掌握雅可比</p>
 <table>
@@ -11899,7 +11899,7 @@
 </thead>
 <tbody>
 <tr>
-<td>给定期望的末端速度，关节该转多快？</td>
+<td>给定期望末端速度，关节转多快？</td>
 <td>解 <span class="arithmatex">\(J\dot{\boldsymbol{q}} = \dot{\boldsymbol{x}}\)</span></td>
 </tr>
 <tr>
@@ -11907,11 +11907,11 @@
 <td><span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></td>
 </tr>
 <tr>
-<td>什么姿态下机器人「卡住」？</td>
+<td>什么姿态下机器人卡住？</td>
 <td><span class="arithmatex">\(\det J = 0\)</span>（奇异）</td>
 </tr>
 <tr>
-<td>冗余机器人的最优解？</td>
+<td>冗余机器人最优解？</td>
 <td>用伪逆 <span class="arithmatex">\(J^+\)</span></td>
 </tr>
 </tbody>
@@ -11920,13 +11920,13 @@
 </div>
 <hr />
 <h2 id="_2">一、定义：从关节空间到任务空间的线性化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>设机器人有 <span class="arithmatex">\(n\)</span> 个关节、末端有 <span class="arithmatex">\(m\)</span> 个自由度（任务空间维数）。</p>
+<p>设机器人有 <span class="arithmatex">\(n\)</span> 个关节、末端 <span class="arithmatex">\(m\)</span> 个自由度（任务空间维数）。</p>
 <p><strong>正运动学</strong>给出末端位姿与关节变量的关系：</p>
 <div class="arithmatex">\[
 \boldsymbol{x} = \boldsymbol{f}(\boldsymbol{q})
 \]</div>
 <p>其中 <span class="arithmatex">\(\boldsymbol{q}\in\mathbb{R}^n\)</span> 是关节变量，<span class="arithmatex">\(\boldsymbol{x}\in\mathbb{R}^m\)</span> 是末端位姿。</p>
-<p><strong>对时间求导</strong>（用链式法则）：</p>
+<p><strong>对时间求导</strong>（链式法则）：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{x}} = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}\,\dot{\boldsymbol{q}} = J(\boldsymbol{q})\,\dot{\boldsymbol{q}}
 \]</div>
@@ -11939,22 +11939,22 @@ J(\boldsymbol{q}) = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}
 \dfrac{\partial f_m}{\partial q_1} &amp; \cdots &amp; \dfrac{\partial f_m}{\partial q_n}
 \end{bmatrix}
 \]</div>
-<p><strong>形状是 <span class="arithmatex">\(m\times n\)</span></strong>（行 = 任务维度，列 = 关节数）。</p>
+<p><strong>形状 <span class="arithmatex">\(m\times n\)</span></strong>（行 = 任务维度，列 = 关节数）。</p>
 <div class="admonition note">
 <p class="admonition-title">三个关键认识</p>
-<p><strong>1. 雅可比是「局部的」</strong></p>
-<p>它依赖当前位形 <span class="arithmatex">\(\boldsymbol{q}\)</span>。同一个机器人，
-不同姿态下的雅可比不同。</p>
-<p><strong>工程含义</strong>：控制律必须<strong>在每个控制周期重新计算雅可比</strong>
-（通常是实时计算，这是机器人控制器的计算负担之一）。</p>
-<p><strong>2. 它是「速度层面」的线性映射</strong></p>
+<p><strong>1. 雅可比是局部的</strong></p>
+<p>它依赖当前位形 <span class="arithmatex">\(\boldsymbol{q}\)</span>。同一机器人，
+不同姿态下雅可比不同。</p>
+<p><strong>工程含义</strong>：控制律必须<strong>每周期重算雅可比</strong>
+（通常实时计算，是机器人控制器的计算负担）。</p>
+<p><strong>2. 它是速度层面的线性映射</strong></p>
 <p>位姿关系 <span class="arithmatex">\(\boldsymbol{x} = \boldsymbol{f}(\boldsymbol{q})\)</span> 是<strong>非线性</strong>的，
-但<strong>速度关系是线性</strong>的：</p>
+但<strong>速度关系线性</strong>：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{x}} = J\dot{\boldsymbol{q}}
 \]</div>
-<p><strong>这就是「在工作点线性化」</strong>（回到泰勒展开那一页的思想）。</p>
-<p><strong>3. 行数可以少于/多于列数</strong></p>
+<p><strong>这是「在工作点线性化」</strong>（即泰勒展开那页的思想）。</p>
+<p><strong>3. 行数可少于或多于列数</strong></p>
 <table>
 <thead>
 <tr>
@@ -11985,7 +11985,7 @@ J(\boldsymbol{q}) = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}
 </tr>
 </tbody>
 </table>
-<p>冗余机器人的「无穷多解」是<strong>优点</strong>——可以在完成任务的同时
+<p>冗余机器人「无穷多解」是<strong>优点</strong>——可完成任务的同时
 用多余自由度避障、避奇异、优化姿态。</p>
 </div>
 <figure class="kb-fig">
@@ -12031,7 +12031,6 @@ J(\boldsymbol{q}) = \frac{\partial\boldsymbol{f}}{\partial\boldsymbol{q}}
 
 <hr />
 <h2 id="_3">二、二连杆机器人的雅可比（亲手推导）<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这是最经典的例子，值得完整算一遍。</p>
 <h3 id="_4">几何设定<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>两根连杆长度 <span class="arithmatex">\(l_1\)</span>、<span class="arithmatex">\(l_2\)</span>，关节角 <span class="arithmatex">\(q_1\)</span>、<span class="arithmatex">\(q_2\)</span>（都在平面内）。</p>
 <p><strong>末端位置</strong>：</p>
@@ -12074,7 +12073,7 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 \det J = \left(-l_1\sin q_1 - l_2\sin(q_1{+}q_2)\right)\cdot l_2\cos(q_1{+}q_2)
 - \left(-l_2\sin(q_1{+}q_2)\right)\cdot\left(l_1\cos q_1 + l_2\cos(q_1{+}q_2)\right)
 \]</div>
-<p>展开并整理：</p>
+<p>展开整理：</p>
 <div class="arithmatex">\[
 = -l_1l_2\sin q_1\cos(q_1{+}q_2) - l_2^2\sin(q_1{+}q_2)\cos(q_1{+}q_2)
 + l_1l_2\sin(q_1{+}q_2)\cos q_1 + l_2^2\sin(q_1{+}q_2)\cos(q_1{+}q_2)
@@ -12111,13 +12110,13 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 </tr>
 </tbody>
 </table>
-<p><strong>为什么这两个姿态是奇异的</strong>：</p>
+<p><strong>为何这两个姿态奇异</strong>：</p>
 <ul>
 <li><strong>完全伸直</strong>时，末端只能沿垂直方向运动——
-  沿连杆方向的自由度丢失了</li>
-<li><strong>完全折叠</strong>时，末端位置与 <span class="arithmatex">\(q_1\)</span> 无关的变化被 <span class="arithmatex">\(q_2\)</span> 抵消</li>
+  沿连杆方向的自由度丢失</li>
+<li><strong>完全折叠</strong>时，与 <span class="arithmatex">\(q_1\)</span> 无关的末端变化被 <span class="arithmatex">\(q_2\)</span> 抵消</li>
 </ul>
-<p><strong>直观理解</strong>：伸直时，转动 <span class="arithmatex">\(q_2\)</span> 与转动 <span class="arithmatex">\(q_1\)</span> 在末端产生的
+<p><strong>直观理解</strong>：伸直时，<span class="arithmatex">\(q_2\)</span> 与 <span class="arithmatex">\(q_1\)</span> 转动在末端产生的
 速度方向<strong>重合</strong>（线性相关），雅可比的列不满秩。</p>
 <p><strong>工程后果</strong>：</p>
 <table>
@@ -12130,21 +12129,21 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 <tbody>
 <tr>
 <td>无法沿某方向运动</td>
-<td>该方向的速度要求无解</td>
+<td>该方向速度要求无解</td>
 </tr>
 <tr>
 <td>求逆发散</td>
-<td><span class="arithmatex">\(J^{-1}\)</span> 不存在（或接近奇异时数值爆炸）</td>
+<td><span class="arithmatex">\(J^{-1}\)</span> 不存在（接近奇异时数值爆炸）</td>
 </tr>
 <tr>
 <td>关节速度爆炸</td>
-<td>微小的末端速度要求对应极大的关节速度</td>
+<td>微小末端速度要求对应极大关节速度</td>
 </tr>
 </tbody>
 </table>
 <p><strong>对策</strong>：阻尼最小二乘（DLS）——用
 <span class="arithmatex">\(J^\top(JJ^\top + \lambda^2I)^{-1}\)</span> 替代 <span class="arithmatex">\(J^{-1}\)</span>，
-在接近奇异时自动降低增益。</p>
+接近奇异时自动降低增益。</p>
 </div>
 <hr />
 <h2 id="_7">三、雅可比的三类应用<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
@@ -12155,7 +12154,7 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 \]</div>
 <p><strong>总是可算</strong>（一次矩阵乘法）。</p>
 <h3 id="2">应用 2：逆速度映射（逆问题）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>已知期望的末端速度 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span>，求关节速度：</p>
+<p>已知期望末端速度 <span class="arithmatex">\(\dot{\boldsymbol{x}}\)</span>，求关节速度：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{q}} = J^{-1}\dot{\boldsymbol{x}} \quad (m = n)
 \]</div>
@@ -12165,10 +12164,10 @@ l_1\cos q_1 + l_2\cos(q_1+q_2) &amp; l_2\cos(q_1+q_2)
 \qquad
 J^{+} = J^\top(JJ^\top)^{-1}
 \]</div>
-<p>（这里 <span class="arithmatex">\(JJ^\top\)</span> 是 <span class="arithmatex">\(m\times m\)</span>，可逆性更好。）</p>
+<p>（<span class="arithmatex">\(JJ^\top\)</span> 是 <span class="arithmatex">\(m\times m\)</span>，可逆性更好。）</p>
 <h3 id="3">应用 3：静力对偶（力传递）<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>这是最容易被忽略却很重要的一点。</p>
-<p><strong>虚功原理</strong>：末端做的功 = 关节做的功</p>
+<p>这是最易被忽略却很重要的一点。</p>
+<p><strong>虚功原理</strong>：末端做功 = 关节做功</p>
 <div class="arithmatex">\[
 \boldsymbol{F}^\top\dot{\boldsymbol{x}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
 \]</div>
@@ -12176,13 +12175,13 @@ J^{+} = J^\top(JJ^\top)^{-1}
 <div class="arithmatex">\[
 \boldsymbol{F}^\top J\dot{\boldsymbol{q}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}}
 \]</div>
-<p>对任意 <span class="arithmatex">\(\dot{\boldsymbol{q}}\)</span> 成立，所以</p>
+<p>对任意 <span class="arithmatex">\(\dot{\boldsymbol{q}}\)</span> 成立，故</p>
 <div class="arithmatex">\[
 \boxed{\ \boldsymbol{\tau} = J^\top\boldsymbol{F}\ }
 \]</div>
 <div class="admonition note">
 <p class="admonition-title">为什么力映射用转置（而不是逆）</p>
-<p><strong>速度用 <span class="arithmatex">\(J\)</span>，力用 <span class="arithmatex">\(J^\top\)</span></strong>——这个「对偶」关系来自
+<p><strong>速度用 <span class="arithmatex">\(J\)</span>，力用 <span class="arithmatex">\(J^\top\)</span></strong>——该对偶关系来自
 <strong>虚功原理</strong>（能量守恒）。</p>
 <table>
 <thead>
@@ -12206,19 +12205,19 @@ J^{+} = J^\top(JJ^\top)^{-1}
 </tbody>
 </table>
 <p><strong>验证量纲</strong>：<span class="arithmatex">\(\boldsymbol{F}\)</span> 是力（<span class="arithmatex">\(m\)</span> 维），<span class="arithmatex">\(J^\top\)</span> 是 <span class="arithmatex">\(n\times m\)</span>，
-乘起来是 <span class="arithmatex">\(n\)</span> 维的力矩</p>
+乘起来得 <span class="arithmatex">\(n\)</span> 维力矩</p>
 <p><strong>工程含义</strong>：</p>
 <ul>
-<li>想让末端施加某个力，可由 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span> 算关节力矩</li>
+<li>想让末端施加某力，可由 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span> 算关节力矩</li>
 <li><strong>奇异位形下</strong>，某些方向的力需要无穷大力矩
-  （因为 <span class="arithmatex">\(J\)</span> 降秩，<span class="arithmatex">\(J^\top\)</span> 也降秩，无法产生某些方向的力）</li>
+  （<span class="arithmatex">\(J\)</span> 降秩则 <span class="arithmatex">\(J^\top\)</span> 降秩，无法产生某些方向的力）</li>
 </ul>
-<p><strong>这个对偶关系在「力控」「阻抗控制」中到处出现</strong>，
-也是为什么机器人控制里 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 总是成对出现。</p>
+<p><strong>该对偶关系在力控、阻抗控制中到处出现</strong>，
+这也是机器人控制里 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 成对出现的原因。</p>
 </div>
 <hr />
 <h2 id="_8">四、奇异值分解与雅可比<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>雅可比的<strong>奇异值</strong>有直接的物理含义。</p>
+<p>雅可比的<strong>奇异值</strong>有直接物理含义。</p>
 <div class="arithmatex">\[
 J = U\Sigma V^\top
 \]</div>
@@ -12233,7 +12232,7 @@ J = U\Sigma V^\top
 <tbody>
 <tr>
 <td>最大奇异值 <span class="arithmatex">\(\sigma_{\max}\)</span></td>
-<td>末端在某方向的<strong>最大速度放大倍数</strong></td>
+<td>末端某方向的<strong>最大速度放大倍数</strong></td>
 </tr>
 <tr>
 <td>最小奇异值 <span class="arithmatex">\(\sigma_{\min}\)</span></td>
@@ -12249,12 +12248,35 @@ J = U\Sigma V^\top
 <div class="arithmatex">\[
 w = \sqrt{\det(JJ^\top)} = \prod_i\sigma_i
 \]</div>
-<p><strong>衡量机器人「离奇异有多远」</strong>：<span class="arithmatex">\(w\)</span> 大表示灵活，<span class="arithmatex">\(w\to0\)</span> 表示接近奇异。</p>
+<p><strong>衡量离奇异有多远</strong>：<span class="arithmatex">\(w\)</span> 大表示灵活，<span class="arithmatex">\(w\to0\)</span> 表示接近奇异。</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="雅可比把单位方格映射为平行四边形，面积放大倍数为行列式">
+<defs>
+<marker id="jb2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="jb2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a2" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<text class="lbl" x="14" y="22">雅可比 = 局部线性映射：面积放大 |det J|</text>
+<line class="gb" x1="34" y1="168" x2="150" y2="168" marker-end="url(#jb2-ah1)"/>
+<line class="gb" x1="52" y1="178" x2="52" y2="84" marker-end="url(#jb2-ah1)"/>
+<rect class="f3" x="52" y="108" width="60" height="60"/>
+<rect class="gb" x="52" y="108" width="60" height="60"/>
+<text class="lbl-s" x="48" y="192">单位方格</text>
+<line class="a2" x1="162" y1="138" x2="236" y2="138" marker-end="url(#jb2-ah2)"/>
+<text class="l2" x="180" y="128">J</text>
+<path class="f2" d="M285,168 L361,152 L323,100 L247,116 z"/>
+<path class="a2" d="M285,168 L361,152 L323,100 L247,116 z" fill="none"/>
+<text class="lbl-s" x="272" y="142">面积 = |det J|</text>
+<text class="lbl-s" x="14" y="214">单位方格经 J 映成平行四边形（局部线性化）</text>
+<text class="lbl-s" x="14" y="234">面积放大 = |det J|；det J = 0 时退化为一条线（奇异）</text>
+</svg>
+<figcaption>图 2　雅可比把工作点附近的单位方格线性映射成平行四边形：<b>面积放大倍数正是 |det J|</b>。det J 越大，末端速度的可达范围越大（可操作度越高）；det J = 0 时平行四边形退化成一条线，说明该方向「动不了」——这就是奇异位形</figcaption>
+</figure>
+
 <p><strong>条件数</strong>：</p>
 <div class="arithmatex">\[
 \kappa(J) = \frac{\sigma_{\max}}{\sigma_{\min}}
 \]</div>
-<p><span class="arithmatex">\(\kappa\)</span> 大表示各向异性强（某些方向容易动、某些方向难动）。</p>
+<p><span class="arithmatex">\(\kappa\)</span> 大表示各向异性强（某些方向易动、某些难动）。</p>
 <div class="admonition note">
 <p class="admonition-title">这就是「奇异值和可操作度」在机器人学中的用法</p>
 <table>
@@ -12280,13 +12302,13 @@ w = \sqrt{\det(JJ^\top)} = \prod_i\sigma_i
 </tbody>
 </table>
 <p><strong>这回到了线性代数模块的 SVD</strong>——那里讲的数学工具，
-在这里变成了机器人设计的定量指标。</p>
+在这里成了机器人设计的定量指标。</p>
 </div>
 <hr />
 <h2 id="_9">五、典型例题<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <h3 id="1_1">例题 1：二连杆雅可比的计算<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(l_1 = l_2 = 1\)</span>，<span class="arithmatex">\(q_1 = 0°\)</span>，<span class="arithmatex">\(q_2 = 90°\)</span>。
-求雅可比矩阵，并判断是否奇异。</p>
+求雅可比矩阵，判断是否奇异。</p>
 <details class="note">
 <summary>思路</summary>
 <p>代入前面的公式，先算角度和，再代三角函数值。</p>
@@ -12316,13 +12338,13 @@ J = \begin{bmatrix}
 <div class="arithmatex">\[
 \det J = (-1)(0) - (-1)(1) = 1
 \]</div>
-<p><strong>交叉验证</strong>（用公式 <span class="arithmatex">\(\det J = l_1l_2\sin q_2\)</span>）：</p>
+<p><strong>交叉验证</strong>（用 <span class="arithmatex">\(\det J = l_1l_2\sin q_2\)</span>）：</p>
 <div class="arithmatex">\[
 \det J = 1\cdot1\cdot\sin\frac{\pi}{2} = 1 \;\checkmark
 \]</div>
 <p><strong>结论</strong>：<span class="arithmatex">\(\det J = 1 \neq 0\)</span> → <strong>非奇异</strong>，姿态可操作。</p>
-<p><strong>物理验证</strong>：<span class="arithmatex">\(q_2 = 90°\)</span> 是「垂直」，离奇异的
-<span class="arithmatex">\(q_2 = 0°\)</span> 与 <span class="arithmatex">\(180°\)</span> 都最远（<span class="arithmatex">\(90°\)</span> 处的 <span class="arithmatex">\(\lvert\sin q_2\rvert\)</span> 最大）。
+<p><strong>物理验证</strong>：<span class="arithmatex">\(q_2 = 90°\)</span> 是垂直方向，离奇异的
+<span class="arithmatex">\(q_2 = 0°\)</span> 与 <span class="arithmatex">\(180°\)</span> 都最远（<span class="arithmatex">\(90°\)</span> 处 <span class="arithmatex">\(\lvert\sin q_2\rvert\)</span> 最大）。
 所以这是<strong>可操作度最大</strong>的姿态</p>
 </details>
 <div class="admonition tip">
@@ -12371,14 +12393,14 @@ J = \begin{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>所以二连杆的最佳工作区间是 <span class="arithmatex">\(q_2\)</span> 在 <span class="arithmatex">\(60°\)</span>–<span class="arithmatex">\(120°\)</span></strong>。</p>
-<p>与 <span class="arithmatex">\(q_1\)</span> 无关（因为 <span class="arithmatex">\(\det J\)</span> 不含 <span class="arithmatex">\(q_1\)</span>）——
-这是二连杆平面臂的特殊性质（整个工作空间内径向对称）。</p>
+<p><strong>所以二连杆最佳工作区间是 <span class="arithmatex">\(q_2\)</span> 在 <span class="arithmatex">\(60°\)</span>–<span class="arithmatex">\(120°\)</span></strong>。</p>
+<p>与 <span class="arithmatex">\(q_1\)</span> 无关（<span class="arithmatex">\(\det J\)</span> 不含 <span class="arithmatex">\(q_1\)</span>）——
+这是二连杆平面臂的特性（全工作空间径向对称）。</p>
 </div>
 <hr />
 <h3 id="2_1">例题 2：由末端速度求关节速度<a class="headerlink" href="#2_1" title="Permanent link">&para;</a></h3>
 <p>承上例（<span class="arithmatex">\(J = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\)</span>）。
-要求末端速度为 <span class="arithmatex">\(\dot{\boldsymbol{x}} = (0, 1)^\top\)</span>，求关节速度。</p>
+要求末端速度 <span class="arithmatex">\(\dot{\boldsymbol{x}} = (0, 1)^\top\)</span>，求关节速度。</p>
 <details class="note">
 <summary>思路</summary>
 <p>解线性方程组 <span class="arithmatex">\(J\dot{\boldsymbol{q}} = \dot{\boldsymbol{x}}\)</span>。</p>
@@ -12398,7 +12420,7 @@ J = \begin{bmatrix}
 \dot q_1 = 1
 \end{cases}
 \]</div>
-<p><strong>求解</strong>：由第二式 <span class="arithmatex">\(\dot q_1 = 1\)</span>，代入第一式：</p>
+<p><strong>求解</strong>：由第二式 <span class="arithmatex">\(\dot q_1 = 1\)</span> 代入第一式：</p>
 <div class="arithmatex">\[
 -1 - \dot q_2 = 0 \implies \dot q_2 = -1
 \]</div>
@@ -12411,14 +12433,14 @@ J = \begin{bmatrix}
 J\dot{\boldsymbol{q}} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}1\\-1\end{bmatrix}
 = \begin{bmatrix}-1+1\\1\end{bmatrix} = \begin{bmatrix}0\\1\end{bmatrix} \;\checkmark
 \]</div>
-<p><strong>物理含义</strong>：关节 1 正向转、关节 2 反向转，
-两者配合使末端纯向上运动（水平分量恰好抵消）。</p>
-<p><strong>也可用逆矩阵直接算</strong>：</p>
+<p><strong>物理含义</strong>：关节 1 正转、关节 2 反转，
+两者配合使末端纯向上运动（水平分量抵消）。</p>
+<p><strong>也可用逆矩阵算</strong>：</p>
 <div class="arithmatex">\[
 J^{-1} = \frac{1}{\det J}\begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
 = \begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
 \]</div>
-<p>（因为 <span class="arithmatex">\(\det J = 1\)</span>，逆矩阵就是伴随矩阵。）</p>
+<p>（<span class="arithmatex">\(\det J = 1\)</span>，逆矩阵即伴随矩阵。）</p>
 <p>验证：</p>
 <div class="arithmatex">\[
 J^{-1}\dot{\boldsymbol{x}} = \begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}\begin{bmatrix}0\\1\end{bmatrix}
@@ -12432,9 +12454,9 @@ J^{-1}\dot{\boldsymbol{x}} = \begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}\begi
 \begin{bmatrix}a&amp;b\\c&amp;d\end{bmatrix}^{-1}
 = \frac{1}{ad-bc}\begin{bmatrix}d&amp;-b\\-c&amp;a\end{bmatrix}
 \]</div>
-<p><strong>注意对角元互换、非对角元变号</strong>——这个符号容易记错。</p>
+<p><strong>注意对角元互换、非对角元变号</strong>——该符号易记错。</p>
 <p><strong>验证方法</strong>：算 <span class="arithmatex">\(J\cdot J^{-1}\)</span> 看是否得单位阵。</p>
-<p>在本例中：</p>
+<p>本例中：</p>
 <div class="arithmatex">\[
 J\cdot J^{-1} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}0&amp;1\\-1&amp;-1\end{bmatrix}
 = \begin{bmatrix}0+1 &amp; -1+1\\ 0+0 &amp; 1+0\end{bmatrix}
@@ -12443,8 +12465,8 @@ J\cdot J^{-1} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}0&a
 </div>
 <hr />
 <h3 id="3_1">例题 3：奇异位形的检测<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
-<p>设 <span class="arithmatex">\(l_1 = 2\)</span>、<span class="arithmatex">\(l_2 = 1\)</span>。判断 <span class="arithmatex">\(q_2 = 5°\)</span> 时的可操作度，
-并说明为什么此时控制会出问题。</p>
+<p>设 <span class="arithmatex">\(l_1 = 2\)</span>、<span class="arithmatex">\(l_2 = 1\)</span>。判断 <span class="arithmatex">\(q_2 = 5°\)</span> 的可操作度，
+并说明为何此时控制会出问题。</p>
 <details class="note">
 <summary>思路</summary>
 <p>用 <span class="arithmatex">\(\det J = l_1l_2\sin q_2\)</span> 算可操作度。</p>
@@ -12478,15 +12500,15 @@ J\cdot J^{-1} = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\begin{bmatrix}0&a
 </tbody>
 </table>
 <p><strong>可操作度只有最优时的 8.7%</strong> —— 接近奇异。</p>
-<p><strong>为什么控制会出问题</strong>：</p>
+<p><strong>为何控制出问题</strong>：</p>
 <p><strong>1. 逆运动学的增益爆炸</strong></p>
 <div class="arithmatex">\[
 J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
 \]</div>
-<p><span class="arithmatex">\(\det J = 0.174\)</span> 时，逆矩阵的元素被放大 <span class="arithmatex">\(1/0.174 \approx 5.7\)</span> 倍。
+<p><span class="arithmatex">\(\det J = 0.174\)</span> 时，逆矩阵元素被放大 <span class="arithmatex">\(1/0.174 \approx 5.7\)</span> 倍。
 若 <span class="arithmatex">\(q_2 = 1°\)</span>（<span class="arithmatex">\(\det J = 0.035\)</span>），放大 29 倍；
 <span class="arithmatex">\(q_2 = 0.1°\)</span> 时放大 287 倍。</p>
-<p><strong>后果</strong>：末端要求一个微小的速度，关节就要转动极快——
+<p><strong>后果</strong>：末端要求微小速度，关节就要转动极快——
 超出电机能力，或引起剧烈振动。</p>
 <p><strong>2. 微小误差被放大</strong></p>
 <p>控制中总有测量/计算误差。接近奇异时，</p>
@@ -12499,8 +12521,8 @@ J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
 <p>奇异时 <span class="arithmatex">\(\det J = 0\)</span>，<span class="arithmatex">\(J\)</span> 降秩，
 存在非零向量 <span class="arithmatex">\(\boldsymbol{v}\)</span> 使 <span class="arithmatex">\(J\boldsymbol{v} = \boldsymbol{0}\)</span>。</p>
 <p><strong>物理含义</strong>：沿 <span class="arithmatex">\(\boldsymbol{v}\)</span> 方向转关节，末端<strong>不动</strong>——
-这部分「关节运动」被浪费了。</p>
-<p>在本例（完全伸直）中，这个方向就是「沿连杆轴向」的末端运动能力。</p>
+这部分关节运动被浪费了。</p>
+<p>本例（完全伸直）中，该方向就是沿连杆轴向的末端运动。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">工程对策一览</p>
@@ -12520,7 +12542,7 @@ J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
 </tr>
 <tr>
 <td>关节限位</td>
-<td>限制 <span class="arithmatex">\(q_2\)</span> 不小于某个角度</td>
+<td>限制 <span class="arithmatex">\(q_2\)</span> 不小于某角度</td>
 <td>缩小工作空间</td>
 </tr>
 <tr>
@@ -12530,7 +12552,7 @@ J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
 </tr>
 <tr>
 <td>避奇异路径规划</td>
-<td>规划时就绕开奇异区</td>
+<td>规划时绕开奇异区</td>
 <td>需要路径优化</td>
 </tr>
 <tr>
@@ -12540,20 +12562,20 @@ J^{-1} = \frac{1}{\det J}\begin{bmatrix}\cdots\end{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>阻尼最小二乘的公式</strong>：</p>
+<p><strong>阻尼最小二乘公式</strong>：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{q}} = J^\top\big(JJ^\top + \lambda^2I\big)^{-1}\dot{\boldsymbol{x}}
 \]</div>
 <p><strong>原理</strong>：加上 <span class="arithmatex">\(\lambda^2I\)</span> 使矩阵<strong>一定可逆</strong>（正定），
-在奇异附近自动「软化」——牺牲一些精度换取数值稳定。</p>
+在奇异附近自动软化——牺牲精度换取数值稳定。</p>
 <p><strong><span class="arithmatex">\(\lambda\)</span> 的选取</strong>：离奇异远时取小（精度优先），
-接近奇异时取大（稳定优先）。这就是<strong>变阻尼</strong>策略。</p>
+接近奇异时取大（稳定优先）。这是<strong>变阻尼</strong>策略。</p>
 </div>
 <hr />
 <h3 id="4">例题 4：力映射与对偶<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>承例 1（<span class="arithmatex">\(J = \begin{bmatrix}-1&amp;-1\\1&amp;0\end{bmatrix}\)</span>）。
 若末端要施加 <span class="arithmatex">\(\boldsymbol{F} = (0, 10)^\top\)</span>（向上 10 N），
-求需要的关节力矩，并验证能量守恒。</p>
+求所需关节力矩，并验证能量守恒。</p>
 <details class="note">
 <summary>思路</summary>
 <p>用 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span>。</p>
@@ -12594,9 +12616,9 @@ J^\top = \begin{bmatrix}-1&amp;1\\-1&amp;0\end{bmatrix}
 </tr>
 </tbody>
 </table>
-<p><strong>为什么关节 2 不需要力矩</strong>：当前姿态（<span class="arithmatex">\(q_1 = 0\)</span>，<span class="arithmatex">\(q_2 = 90°\)</span>）下，
-关节 2 的轴线与所需的力方向「对齐」，
-或者更准确地说：<span class="arithmatex">\(\boldsymbol{F}\)</span> 在关节 2 「能产生的力」方向上的
+<p><strong>为何关节 2 不需要力矩</strong>：当前姿态（<span class="arithmatex">\(q_1 = 0\)</span>，<span class="arithmatex">\(q_2 = 90°\)</span>）下，
+关节 2 的轴线与所需力方向对齐，
+更准确地说：<span class="arithmatex">\(\boldsymbol{F}\)</span> 在关节 2 能产生的力方向上的
 投影为零。</p>
 <p><strong>验证能量守恒（虚功）</strong>：</p>
 <p>设关节速度为 <span class="arithmatex">\(\dot{\boldsymbol{q}} = (1,-1)^\top\)</span>（例 2 的结果），
@@ -12639,11 +12661,11 @@ P_{\text{关节}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}} = (10,0)\cdot(1,-
 </tr>
 </tbody>
 </table>
-<p><strong>为什么这个对偶必然成立</strong>：来自<strong>虚功原理</strong>（能量守恒），
+<p><strong>为何该对偶必然成立</strong>：来自<strong>虚功原理</strong>（能量守恒），
 是物理定律，不是数学巧合。</p>
-<p><strong>这也解释了「奇异位形下不能施加某些方向的力」</strong>：
-<span class="arithmatex">\(J\)</span> 降秩 → <span class="arithmatex">\(J^\top\)</span> 也降秩 → <span class="arithmatex">\(\boldsymbol{\tau}\)</span> 张成的空间变小，
-有些 <span class="arithmatex">\(\boldsymbol{F}\)</span> 无法实现（无论给多大关节力矩）。</p>
+<p><strong>这也解释了奇异位形下有些力加不了</strong>：
+<span class="arithmatex">\(J\)</span> 降秩 → <span class="arithmatex">\(J^\top\)</span> 也降秩 → <span class="arithmatex">\(\boldsymbol{\tau}\)</span> 空间变小，
+有些 <span class="arithmatex">\(\boldsymbol{F}\)</span> 无法实现（力矩再大也不行）。</p>
 </div>
 <hr />
 <h2 id="_10">六、用在哪些课程里<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -12653,30 +12675,30 @@ P_{\text{关节}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}} = (10,0)\cdot(1,-
 <li><strong>静力分析</strong>：<span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span></li>
 <li><strong>奇异位形</strong>：<span class="arithmatex">\(\det J = 0\)</span>，用 <span class="arithmatex">\(\sigma_{\min}\)</span> 或可操作度检测</li>
 <li><strong>逆运动学数值解</strong>：<span class="arithmatex">\(\Delta\boldsymbol{q} = J^{+}\Delta\boldsymbol{x}\)</span>（雅可比迭代）</li>
-<li><strong>阻抗/导纳控制</strong>：全建立在 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 之上</li>
+<li><strong>阻抗/导纳控制</strong>：全建立在 <span class="arithmatex">\(J\)</span> 与 <span class="arithmatex">\(J^\top\)</span> 上</li>
 </ul>
 <h3 id="_12">机器人机构学 · 机构的自由度与性能<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>自由度分析</strong>：雅可比的秩给出瞬时自由度数</li>
 <li><strong>可操作度</strong> <span class="arithmatex">\(w = \sqrt{\det(JJ^\top)}\)</span> 作为机构设计指标</li>
 <li><strong>条件数</strong> <span class="arithmatex">\(\kappa(J)\)</span> 衡量灵活性</li>
-<li><strong>并联机构</strong>的雅可比分析与串联不同（含约束）</li>
+<li><strong>并联机构</strong>的雅可比分析异于串联（含约束）</li>
 </ul>
 <h3 id="_13">模式识别 · 反向传播与梯度流<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>雅可比矩阵</strong>就是链式法则里的偏导矩阵</li>
+<li><strong>雅可比矩阵</strong>即链式法则里的偏导矩阵</li>
 <li><strong>逐元素激活函数</strong>的雅可比是对角阵 → 高效计算</li>
-<li><strong>梯度消失</strong>的定量分析就是雅可比连乘的谱分析</li>
+<li><strong>梯度消失</strong>的定量分析即雅可比连乘的谱分析</li>
 </ul>
 <h3 id="_14">无人系统自主决策与优化 · 轨迹跟踪<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>微分平坦/反馈线性化</strong>：用雅可比的逆做精确线性化</li>
+<li><strong>微分平坦/反馈线性化</strong>：用雅可比逆做精确线性化</li>
 <li><strong>轨迹跟踪控制</strong>：<span class="arithmatex">\(\dot{\boldsymbol{q}}_d = J^{+}\dot{\boldsymbol{x}}_d\)</span></li>
 <li><strong>模型预测控制</strong>：预测模型对状态/控制的雅可比</li>
 </ul>
 <hr />
 <h2 id="_15">七、自测<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> 三连杆平面机械臂（<span class="arithmatex">\(n = 3\)</span>，末端位置 <span class="arithmatex">\(m = 2\)</span>）的雅可比是什么形状？
+<p><strong>Q1</strong> 三连杆平面机械臂（<span class="arithmatex">\(n = 3\)</span>，末端 <span class="arithmatex">\(m = 2\)</span>）的雅可比是什么形状？
 如何求逆运动学解？</p>
 <details class="note">
 <summary>提示</summary>
@@ -12689,7 +12711,7 @@ P_{\text{关节}} = \boldsymbol{\tau}^\top\dot{\boldsymbol{q}} = (10,0)\cdot(1,-
 J \in \mathbb{R}^{2\times3}
 \]</div>
 <p><strong>行列式不存在</strong>（非方阵）→ 不能直接求逆 ✗</p>
-<p><strong>这是冗余机器人</strong>（<span class="arithmatex">\(n &gt; m\)</span>：关节数多于任务维数）。</p>
+<p><strong>这是冗余机器人</strong>（<span class="arithmatex">\(n &gt; m\)</span>：关节多于任务维数）。</p>
 <p><strong>求逆解用伪逆</strong>（最小范数解）：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{q}} = J^{+}\dot{\boldsymbol{x}},
@@ -12728,19 +12750,19 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 <div class="arithmatex">\[
 \dot{\boldsymbol{q}} = J^{+}\dot{\boldsymbol{x}} + \big(I - J^{+}J\big)\boldsymbol{z}
 \]</div>
-<p>第二项在零空间内（不影响末端），可用来优化次要目标 <span class="arithmatex">\(\boldsymbol{z}\)</span>。</p>
+<p>第二项在零空间内（不影响末端），用于优化次要目标 <span class="arithmatex">\(\boldsymbol{z}\)</span>。</p>
 <p><strong>验证</strong>：<span class="arithmatex">\(J(I - J^+J) = J - JJ^+J = J - J = 0\)</span>
-（因为 <span class="arithmatex">\(JJ^+J = J\)</span> 是伪逆的定义性质之一。）</p>
+（因为 <span class="arithmatex">\(JJ^+J = J\)</span> 是伪逆的定义性质。）</p>
 </details>
 <hr />
 <p><strong>Q2</strong> 为什么 <span class="arithmatex">\(\boldsymbol{\tau} = J^\top\boldsymbol{F}\)</span> 而不是 <span class="arithmatex">\(\boldsymbol{\tau} = J^{-1}\boldsymbol{F}\)</span>？</p>
 <details class="note">
 <summary>提示</summary>
-<p>从能量/虚功角度考虑，并检查量纲。</p>
+<p>从能量/虚功角度考虑，检查量纲。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>因为来自虚功原理（能量守恒），不是运动学关系。</p>
+<p>因来自虚功原理（能量守恒），非运动学关系。</p>
 <p><strong>推导</strong>：</p>
 <p>末端做功 = 关节做功</p>
 <div class="arithmatex">\[
@@ -12754,7 +12776,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 <div class="arithmatex">\[
 \boldsymbol{\tau} = J^\top\boldsymbol{F}
 \]</div>
-<p><strong>为什么不能用 <span class="arithmatex">\(J^{-1}\)</span></strong>：</p>
+<p><strong>为何不能用 <span class="arithmatex">\(J^{-1}\)</span></strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12769,11 +12791,11 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 </tr>
 <tr>
 <td><strong>量纲不对</strong></td>
-<td><span class="arithmatex">\(\boldsymbol{F}\)</span>（力）乘 <span class="arithmatex">\(J^{-1}\)</span>（1/长度）得「力/长度」，不是力矩</td>
+<td><span class="arithmatex">\(\boldsymbol{F}\)</span>（力）乘 <span class="arithmatex">\(J^{-1}\)</span>（1/长度）得「力/长度」，非力矩</td>
 </tr>
 <tr>
 <td><strong>物理含义不对</strong></td>
-<td>力映射是「对偶」，不是「逆」</td>
+<td>力映射是「对偶」而非「逆」</td>
 </tr>
 </tbody>
 </table>
@@ -12784,8 +12806,8 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 <li><span class="arithmatex">\(J^\top\boldsymbol{F}\)</span>：N·m = <strong>力矩</strong></li>
 </ul>
 <p><strong>核心认识</strong>：<strong>速度用逆、力用转置</strong>，
-这与「线性代数的对偶空间」是同一件事——
-力是速度的对偶向量（属于对偶空间），
+这与线性代数的对偶空间是同一件事——
+力是速度的对偶向量，
 所以变换用转置而非逆。</p>
 </details>
 <hr />
@@ -12796,7 +12818,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>不对。不是「完全不能动」，而是「某个方向不能动」。</p>
+<p>不对。不是完全不能动，而是某个方向不能动。</p>
 <p><strong>准确表述</strong>：</p>
 <p><span class="arithmatex">\(\det J = 0\)</span> 表示 <span class="arithmatex">\(J\)</span> <strong>降秩</strong>——存在非零向量 <span class="arithmatex">\(\boldsymbol{v}\)</span> 使
 <span class="arithmatex">\(J\boldsymbol{v} = \boldsymbol{0}\)</span>。</p>
@@ -12811,7 +12833,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 <tbody>
 <tr>
 <td>值域方向（<span class="arithmatex">\(J\)</span> 的列空间）</td>
-<td><strong>可以</strong>运动 ✓</td>
+<td><strong>可</strong>运动 ✓</td>
 </tr>
 <tr>
 <td>零空间方向</td>
@@ -12819,12 +12841,12 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 </tr>
 </tbody>
 </table>
-<p><strong>二连杆例子的具体情况</strong>（完全伸直，<span class="arithmatex">\(q_2 = 0°\)</span>）：</p>
+<p><strong>二连杆的具体情况</strong>（完全伸直，<span class="arithmatex">\(q_2 = 0°\)</span>）：</p>
 <ul>
-<li>末端<strong>可以</strong>沿垂直于连杆的方向运动（转 <span class="arithmatex">\(q_1\)</span>）</li>
-<li>末端<strong>不能</strong>沿连杆轴向运动（这个自由度丢失）</li>
+<li>末端<strong>可</strong>沿垂直连杆方向运动（转 <span class="arithmatex">\(q_1\)</span>）</li>
+<li>末端<strong>不能</strong>沿连杆轴向运动（该自由度丢失）</li>
 </ul>
-<p>所以是<strong>「丢失一个自由度」</strong>，不是「完全不能动」。</p>
+<p>所以是<strong>丢失一个自由度</strong>，不是完全不能动。</p>
 <p><strong>工程含义</strong>：</p>
 <table>
 <thead>
@@ -12836,7 +12858,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 <tbody>
 <tr>
 <td>某些任务仍可完成</td>
-<td>只要不需要那个缺失的方向</td>
+<td>只要不涉及缺失的方向</td>
 </tr>
 <tr>
 <td>逆解不可靠</td>
@@ -12848,7 +12870,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 </tr>
 </tbody>
 </table>
-<p><strong>判据的精细程度</strong>：</p>
+<p><strong>判据精度</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12869,7 +12891,7 @@ J^{+} = J^\top\big(JJ^\top\big)^{-1}
 </table>
 <p><strong>实践建议</strong>：不要只看 <span class="arithmatex">\(\det J\)</span> 是否为零，而要看
 <span class="arithmatex">\(\sigma_{\min}\)</span> 或 <span class="arithmatex">\(\kappa(J)\)</span> ——
-因为<strong>接近</strong>奇异（数值上）就已经有问题了。</p>
+因<strong>接近</strong>奇异（数值上）就有问题了。</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../matrix-calculus/">矩阵微积分</a><a href="../../linear-algebra/linear-map/">线性映射与矩阵</a></span></div></nav>
 

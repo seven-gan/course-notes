@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度。用最朴素的写法，你会写一个循环；用 NumPy，你直接对整个数组做一次算术。">
+    <meta name="description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「逐个元素做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度：朴素写法会写一个循环，用 NumPy 则直接对整个数组做一次算术。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="03 广播与向量化">
   
-  <meta property="og:description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度。用最朴素的写法，你会写一个循环；用 NumPy，你直接对整个数组做一次算术。">
+  <meta property="og:description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「逐个元素做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度：朴素写法会写一个循环，用 NumPy 则直接对整个数组做一次算术。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/code/python/scientific/broadcasting/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="03 广播与向量化">
   
-  <meta name="twitter:description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度。用最朴素的写法，你会写一个循环；用 NumPy，你直接对整个数组做一次算术。">
+  <meta name="twitter:description" content="03 广播与向量化：这一页讲 NumPy 效率的真正来源：把「逐个元素做」改成「整体一起做」。学完这一页，你将能够：假设要把一串摄氏温度换成华氏温度：朴素写法会写一个循环，用 NumPy 则直接对整个数组做一次算术。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12583,7 +12583,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>NumPy 官方文档</code><code>本页示例在 Python 3.9+ 与 NumPy 1.26 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="03">03 广播与向量化<a class="headerlink" href="#03" title="Permanent link">&para;</a></h1>
-<p>这一页讲 NumPy 效率的真正来源：把「一个元素一个元素地做」改成「整体一起做」。</p>
+<p>这一页讲 NumPy 效率的真正来源：把「逐个元素做」改成「整体一起做」。</p>
 <p>学完这一页，你将能够：</p>
 <table>
 <thead>
@@ -12599,15 +12599,15 @@
 </tr>
 <tr>
 <td>预测广播结果</td>
-<td>看到两个形状，就能<strong>不运行代码</strong>说出结果形状</td>
+<td>看到两个形状，<strong>不运行代码</strong>就能说出结果形状</td>
 </tr>
 <tr>
 <td>读懂形状报错</td>
-<td>见到「could not be broadcast」立刻知道是哪个维度对不上</td>
+<td>见到「could not be broadcast」立刻知道哪个维度对不上</td>
 </tr>
 <tr>
 <td>控制内存</td>
-<td>知道什么时候广播会<strong>隐式复制大数组</strong>，怎么避免</td>
+<td>知道广播何时会<strong>隐式复制大数组</strong>，怎么避免</td>
 </tr>
 <tr>
 <td>判断该不该向量化</td>
@@ -12620,15 +12620,14 @@
 <p><strong>广播不会复制数据</strong> —— 它只是在「读」的时候把某个维度重复使用。
 真正会把内存撑爆的，是广播之后<strong>产生的那个新数组</strong>。</p>
 <p>所以看到 <code>(3, 4)</code> 与 <code>(3, 1)</code> 能相加，不要以为 NumPy 把 <code>(3, 1)</code>
-复制成了 <code>(3, 4)</code>；它给自己的例子加了个「步长为 0」的维度，
-<strong>反复读同一块内存</strong></p>
-<p>这一页后面会用 <code>view.strides</code> 把这件事直接打印出来。</p>
+复制成了 <code>(3, 4)</code>；它只是给维度加了个「步长为 0」的标记，<strong>反复读同一块内存</strong>。</p>
+<p>页末会用 <code>view.strides</code> 把这件事打印出来。</p>
 </div>
 <hr />
 <h2 id="_1">一、为什么需要向量化<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 先看一个真实的差别<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>假设要把一串摄氏温度换成华氏温度。用最朴素的写法，你会写一个循环；
-用 NumPy，你直接对整个数组做一次算术。</p>
+<p>假设要把一串摄氏温度换成华氏温度：朴素写法会写一个循环，
+用 NumPy 则直接对整个数组做一次算术。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
@@ -12663,9 +12662,8 @@
 <pre class="kb-output"><code>循环结果  : [-40.0, 32.0, 77.0, 99.5, 212.0]
 向量化结果: [-40.   32.   77.   99.5 212. ]
 两者一致吗: True</code></pre>
-<p>注意 <code>arr_c * 9 / 5 + 32</code> 这一行：<strong>没有任何循环</strong>，
-但 NumPy 会对数组里的<strong>每一个元素</strong>做同样的运算。
-这种「写成整体、作用到每个元素」的写法就叫<strong>向量化</strong>（vectorization）。</p>
+<p>注意 <code>arr_c * 9 / 5 + 32</code> 这行：<strong>没有任何循环</strong>，
+但 NumPy 会对数组的<strong>每一个元素</strong>做同样的运算，这种写法就叫<strong>向量化</strong>（vectorization）。</p>
 <p>它不只是少写几行，而是<strong>执行方式完全不同</strong>。</p>
 <h3 id="12">1.2 为什么向量化快<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <table>
@@ -12678,31 +12676,30 @@
 <tbody>
 <tr>
 <td><strong>循环在 C 里完成</strong></td>
-<td>那个「逐个元素做一次」的循环写在 NumPy 编译好的底层代码里，不是 Python 字节码</td>
+<td>「逐个元素做一次」的循环写在 NumPy 编译好的底层代码里，不是 Python 字节码</td>
 </tr>
 <tr>
 <td><strong>没有解释器开销</strong></td>
-<td>Python 每执行一次循环体，都要「取字节码、判断类型、调用方法」；这部分开销在小运算上远超运算本身</td>
+<td>Python 每执行一次循环体都要「取字节码、判断类型、调用方法」，这部分开销在小运算上远超运算本身</td>
 </tr>
 <tr>
 <td><strong>整块数据的类型是统一的</strong></td>
-<td><code>dtype</code> 已知，不需要每个元素都去猜「它是什么类型」</td>
+<td><code>dtype</code> 已知，不必逐个元素去猜类型</td>
 </tr>
 <tr>
 <td><strong>可以用 SIMD 指令</strong></td>
-<td>现代 CPU 一条指令能同时处理 4 个或 8 个浮点数，向量化运算能吃到这个好处</td>
+<td>现代 CPU 一条指令能同时处理 4~8 个浮点数，向量化能吃到这个好处</td>
 </tr>
 <tr>
 <td><strong>内存访问连续，缓存友好</strong></td>
-<td>数组数据在一块连续内存里顺序读取，命中的是缓存而不是内存</td>
+<td>数组数据在一块连续内存里顺序读取，命中缓存而非内存</td>
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：向量化把「一万次解释器往返」换成了「一次函数调用 + 一段紧凑的机器码」。</p>
+<p><strong>一句话</strong>：向量化把「一万次解释器往返」换成「一次函数调用 + 一段紧凑机器码」。</p>
 <h3 id="13">1.3 到底快多少<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>下面这段代码<strong>真的会去计时</strong>。但要提醒一句：
-<strong>具体毫秒数每次运行都不一样</strong>（还跟机器有关），
-所以我们只把「谁更快」这个结论当作可复现的输出。</p>
+<p>下面这段代码<strong>真的会去计时</strong>。但<strong>具体毫秒数每次运行都不一样</strong>（还跟机器有关），
+所以只把「谁更快」这个结论当作可复现的输出。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -12738,7 +12735,7 @@
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>两种写法结果一致吗: True
 向量化更快吗      : True</code></pre>
-<p>实测的耗时量级大致如下（<strong>示意，每次运行都会变</strong>）：</p>
+<p>实测耗时量级大致如下（<strong>示意</strong>）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
@@ -12756,14 +12753,13 @@
 <div class="admonition warning">
 <p class="admonition-title">别把「向量化更快」当成无条件真理</p>
 <p>只有在「运算本身很简单」时，向量化的优势才明显。</p>
-<p>如果每个元素要做的是「调一次网络请求」「写一个文件」「解析一段文本」，
-那么快的那部分根本不是循环开销，向量化也救不了你，
-<strong>反而会让代码更难读</strong> ✗</p>
+<p>如果每个元素要做的是「调网络请求」「写文件」「解析文本」，
+那么瓶颈根本不是循环开销，向量化也救不了你，<strong>反而让代码更难读</strong> ✗</p>
 <p>判断依据：<strong>运算本身很轻（几次算术/比较）→ 向量化收益大；
 单元素工作量很重（I/O、复杂逻辑）→ 循环更清楚</strong></p>
 </div>
 <h3 id="14">1.4 与列表推导式对比<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
-<p>Python 的列表推导式已经比 <code>for</code> 循环快不少，但它仍然<strong>在 Python 层逐个元素执行</strong>。
+<p>列表推导式比 <code>for</code> 循环快不少，但它仍然<strong>在 Python 层逐个元素执行</strong>，
 NumPy 则把整个循环下推到 C 层。</p>
 <table>
 <thead>
@@ -12807,18 +12803,17 @@ NumPy 则把整个循环下推到 C 层。</p>
 </tr>
 </tbody>
 </table>
-<p><strong>选择依据，记住三句话</strong>：</p>
+<p><strong>选择依据，三句话</strong>：</p>
 <ol>
 <li><strong>数值数组 + 简单运算 → 一律向量化</strong></li>
 <li><strong>对象不是数组（字典、类实例）或逻辑复杂 → 用循环</strong></li>
-<li><strong>不确定时先写成循环跑通，再逐个替换成向量化</strong> ——
-   不要一上来就追求炫技的写法。</li>
+<li><strong>不确定时先写循环跑通，再逐个替换成向量化</strong>，不要一上来就炫技。</li>
 </ol>
 <hr />
 <h2 id="ufuncnumpy">二、ufunc：NumPy 的通用函数<a class="headerlink" href="#ufuncnumpy" title="Permanent link">&para;</a></h2>
 <h3 id="21-ufunc">2.1 什么是 ufunc<a class="headerlink" href="#21-ufunc" title="Permanent link">&para;</a></h3>
 <p><strong>ufunc</strong>（universal function，通用函数）是 NumPy 里对数组<strong>逐元素</strong>作用的函数。
-<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code> 这些运算符，在数组上其实就是 ufunc 的简写。</p>
+<code>+</code>、<code>-</code>、<code>*</code>、<code>/</code> 这些运算符在数组上就是 ufunc 的简写。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -12853,10 +12848,10 @@ NumPy 则把整个循环下推到 C 层。</p>
 取余: [0. 0. 0. 0.]</code></pre>
 <p>这些运算符的「函数形式」是：<code>np.add(a, b)</code>、<code>np.subtract(a, b)</code>、<code>np.multiply(a, b)</code>、
 <code>np.divide(a, b)</code>、<code>np.power(a, b)</code>、<code>np.floor_divide(a, b)</code>、<code>np.mod(a, b)</code>。</p>
-<p><strong>为什么要知道函数形式</strong>？因为 <code>out</code> 和 <code>where</code> 这两个参数<strong>只能用在函数形式上</strong>（见 2.4）。</p>
+<p><strong>为什么要知道函数形式</strong>？因为 <code>out</code>、<code>where</code> <strong>只能用在函数形式上</strong>（见 2.4）。</p>
 <h3 id="22-ufunc">2.2 比较运算也是 ufunc<a class="headerlink" href="#22-ufunc" title="Permanent link">&para;</a></h3>
-<p>比较运算不像算术那样返回数值，而是返回<strong>布尔数组</strong>（<code>bool</code> 的 <code>ndarray</code>）。
-它是后续所有筛选、计数、条件赋值的基础。</p>
+<p>比较运算返回的不是数值，而是<strong>布尔数组</strong>（<code>bool</code> 的 <code>ndarray</code>），
+这是后续所有筛选、计数、条件赋值的基础。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -12884,9 +12879,9 @@ NumPy 则把整个循环下推到 C 层。</p>
 最高分    : 90.0
 最高分下标: 2
 平均分    : 66.2</code></pre>
-<p><strong>关键认识</strong>：<code>scores &gt;= 60</code> 不是 <code>True</code> 或 <code>False</code> 一个值，
-而是<strong>和 <code>scores</code> 一样长的一个布尔数组</strong>。
-<code>True</code> 当成 1、<code>False</code> 当成 0，所以 <code>.sum()</code> 就是<strong>计数</strong>。</p>
+<p><strong>关键认识</strong>：<code>scores &gt;= 60</code> 不是单个 <code>True</code>/<code>False</code>，
+而是<strong>和 <code>scores</code> 一样长的布尔数组</strong>；
+<code>True</code> 当 1、<code>False</code> 当 0，所以 <code>.sum()</code> 就是<strong>计数</strong>。</p>
 <h3 id="23-ufunc">2.3 常用数学 ufunc<a class="headerlink" href="#23-ufunc" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
@@ -12928,7 +12923,7 @@ sign: [-1.  0.  1.]
 maximum : [4. 5. 3.]
 minimum : [1. 2. 3.]
 clip 2~4: [2. 4. 3.]</code></pre>
-<p><strong>常用 ufunc 速查</strong>（全部都是「逐元素」作用，输入数组 → 输出数组）：</p>
+<p><strong>常用 ufunc 速查</strong>（都是「逐元素」：输入数组 → 输出数组）：</p>
 <table>
 <thead>
 <tr>
@@ -13044,15 +13039,15 @@ clip 2~4: [2. 4. 3.]</code></pre>
 np.maximum(y, z) : [4. 5. 3.]
 np.max(y, z) 报错: TypeError
 原因: 第二个参数被当成了轴号，而轴号必须是整数</code></pre>
-<p><strong>这就是两者的区别</strong>：<code>np.max</code> 的第二个位置参数是 <code>axis</code>，
-所以 <code>np.max(y, z)</code> 等于把数组 <code>z</code> 拿去当轴号，直接报错。
-在别的形状下它可能<strong>不报错却算出莫名其妙的结果</strong>
+<p><strong>区别就在这</strong>：<code>np.max</code> 的第二个位置参数是 <code>axis</code>，
+所以 <code>np.max(y, z)</code> 等于把 <code>z</code> 当轴号，直接报错；
+在别的形状下它可能<strong>不报错却算出莫名其妙的结果</strong>。
 <strong>两者名字只差两个字母，务必看清</strong>。</p>
 </div>
 <h3 id="24-out">2.4 <code>out</code> 参数：原地写入，省一次内存分配<a class="headerlink" href="#24-out" title="Permanent link">&para;</a></h3>
-<p>每次 <code>a + b</code> 都会<strong>新建</strong>一个数组。在大数组上的循环里，
-这些临时数组会反复申请、释放内存，既慢又占内存。
-<code>out=</code> 让结果直接写进一块<strong>已经存在的</strong>内存。</p>
+<p>每次 <code>a + b</code> 都<strong>新建</strong>一个数组。在大数组的循环里，
+这些临时数组反复申请、释放内存，既慢又占内存；
+<code>out=</code> 让结果直接写进一块<strong>已存在的</strong>内存。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
@@ -13081,7 +13076,7 @@ np.max(y, z) 报错: TypeError
 <pre class="kb-output"><code>第一次写入: [11. 22. 33. 44.]
 原地再乘 2: [22. 44. 66. 88.]
 与 a 共享内存吗: False</code></pre>
-<p><strong>什么时候值得用 <code>out</code></strong>：</p>
+<p><strong>什么时候用 <code>out</code></strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13110,17 +13105,16 @@ np.max(y, z) 报错: TypeError
 </table>
 <div class="admonition warning">
 <p class="admonition-title"><code>out</code> 会覆盖原数据，而且 dtype 必须对得上</p>
-<p><code>np.multiply(a, 2, out=a)</code> 是合法的，它会把 <code>a</code> 自己改掉。
-如果你后面还要用原来的 <code>a</code>，就等着出 bug ✗</p>
-<p>另外，<code>out</code> 的 <code>dtype</code> 必须能容纳结果。把浮点数写进整数数组时，
-NumPy 默认会<strong>直接报错拦住你</strong>（这是好事）；
-但如果图省事写了 <code>casting="unsafe"</code>，结果就会被<strong>静默截断</strong>
-详见本页第九节的陷阱 3。</p>
+<p><code>np.multiply(a, 2, out=a)</code> 是合法的，它会把 <code>a</code> 自己改掉；
+后面还要用原来的 <code>a</code> 就会出 bug ✗</p>
+<p>另外 <code>out</code> 的 <code>dtype</code> 必须能容纳结果。把浮点数写进整数数组，
+NumPy 默认会<strong>报错拦住你</strong>（这是好事）；
+但若图省事写了 <code>casting="unsafe"</code>，结果会被<strong>静默截断</strong>，
+详见第九节陷阱 3。</p>
 </div>
 <h3 id="25-where">2.5 <code>where</code> 参数：只对满足条件的位置做运算<a class="headerlink" href="#25-where" title="Permanent link">&para;</a></h3>
 <p>有些运算在某些位置上<strong>没有意义</strong>（除零、对负数开方）。
-朴素的写法是先算出全部再修补，<code>where=</code> 则让 NumPy <strong>只在指定位置写结果</strong>，
-其他位置保留原值。</p>
+朴素写法是先算全部再修补，<code>where=</code> 则让 NumPy <strong>只在指定位置写结果</strong>，其他位置保留原值。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -13176,8 +13170,8 @@ np.where 二选一  : [ 1.  2. -0.  4.]</code></pre>
 </tbody>
 </table>
 <h3 id="26-reduce-accumulate-ufunc">2.6 <code>reduce</code> / <code>accumulate</code>：一类特殊的 ufunc 用法<a class="headerlink" href="#26-reduce-accumulate-ufunc" title="Permanent link">&para;</a></h3>
-<p>所有 ufunc 都附带 <code>.reduce</code>（把数组压成一个数）和
-<code>.accumulate</code>（保留每一步的中间结果）两种用法。</p>
+<p>所有 ufunc 都附带 <code>.reduce</code>（压成一个数）和
+<code>.accumulate</code>（保留每一步中间结果）两种用法。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -13208,8 +13202,7 @@ np.where 二选一  : [ 1.  2. -0.  4.]</code></pre>
 累计销量: [ 3.  4.  8.  9. 14. 23.]
 历史最高: [3. 3. 4. 4. 5. 9.]</code></pre>
 <p><code>np.add.reduce</code> 就是 <code>np.sum</code>，<code>np.multiply.reduce</code> 就是 <code>np.prod</code>；
-但 <code>np.maximum.accumulate</code> 没有同名的简写，它在「历史最高值」「最大回撤」
-这类问题上非常好用。</p>
+<code>np.maximum.accumulate</code> 没有同名简写，但在「历史最高值」「最大回撤」上很好用。</p>
 <hr />
 <h2 id="_2">三、广播的三条规则（重点）<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <figure class="kb-fig">
@@ -13338,9 +13331,9 @@ z
 
 <h3 id="31">3.1 广播要解决什么问题<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p><code>(3, 4)</code> 的数组要「每一行都加上同一个长度为 4 的向量」，
-最笨的办法是手工把那个向量堆成 <code>(3, 4)</code>。<strong>广播（broadcasting）</strong>
-让你不写这一步：NumPy 在计算时自动让形状<strong>兼容</strong>。</p>
-<p>但兼容是有规则的，规则只有三条。</p>
+最笨的办法是手工把向量堆成 <code>(3, 4)</code>。<strong>广播（broadcasting）</strong>
+让你省掉这一步：NumPy 计算时自动让形状<strong>兼容</strong>。</p>
+<p>但兼容有规则，而且只有三条。</p>
 <h3 id="32">3.2 三条规则<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
@@ -13441,8 +13434,8 @@ m + row:
  [ 5.  7.  9. 11.]
  [ 9. 11. 13. 15.]]
 结果形状 : (3, 4)</code></pre>
-<p><strong>结果的含义</strong>：<code>row</code> 被撑成了 <code>(3, 4)</code>，也就是
-<strong>「每一行都加上同一组数」</strong> —— 效果等同于<strong>按列</strong>做了一次运算。</p>
+<p><strong>结果的含义</strong>：<code>row</code> 被撑成 <code>(3, 4)</code>，即
+<strong>「每一行都加上同一组数」</strong> —— 等同于<strong>按列</strong>做了一次运算。</p>
 <h3 id="35-33-4-3-1">3.5 例 3：<code>(3, 4)</code> 与 <code>(3, 1)</code> —— 按行施加影响<a class="headerlink" href="#35-33-4-3-1" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
@@ -13467,8 +13460,8 @@ m * col:
  [ 8. 10. 12. 14.]
  [24. 27. 30. 33.]]
 结果形状 : (3, 4)</code></pre>
-<p><strong>结果的含义</strong>：<code>col</code> 被撑成了 <code>(3, 4)</code>，
-<strong>每一列里的 3 个数分别是 1、2、3</strong> —— 效果等同于<strong>逐行</strong>施加一个系数。</p>
+<p><strong>结果的含义</strong>：<code>col</code> 被撑成 <code>(3, 4)</code>，
+<strong>每一列里的 3 个数分别是 1、2、3</strong> —— 等同于<strong>逐行</strong>施加系数。</p>
 <h3 id="36-4">3.6 例 4：失败案例（必须看懂这个报错）<a class="headerlink" href="#36-4" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
@@ -13495,10 +13488,10 @@ m * col:
 </code></pre></div></td></tr></table></div>
 <p><strong>读法</strong>：</p>
 <ol>
-<li>从右往左比：<code>3</code> 与 <code>2</code> —— 既不相等，也没有 1 → <strong>在这里失败</strong>。</li>
+<li>从右往左比：<code>3</code> 与 <code>2</code> —— 既不相等也没有 1 → <strong>在这里失败</strong>。</li>
 <li>规则 3 生效，报错。</li>
-<li>修法：如果你想要「每一行减同一个长度 3 的向量」，
-   那就传长度 3 的向量；如果你手上长度确实是 2，说明<strong>维度用错了</strong>。</li>
+<li>修法：想要「每一行减同一个长度 3 的向量」就传长度 3 的向量；
+   手上长度确实是 2，说明<strong>维度用错了</strong>。</li>
 </ol>
 <p>再看一个「方向对了但长度错了」的例子：</p>
 <!--kbpy-->
@@ -13518,7 +13511,7 @@ m * col:
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>ValueError: operands could not be broadcast together with shapes (3,4) (3,)</code></pre>
 <h3 id="37">3.7 常见目标 → 该用什么形状<a class="headerlink" href="#37" title="Permanent link">&para;</a></h3>
-<p>这张表建议记住，能解决绝大多数形状问题：</p>
+<p>这张表能解决绝大多数形状问题：</p>
 <table>
 <thead>
 <tr>
@@ -13652,7 +13645,7 @@ price * qty_col 的形状: (3, 3)
 </tbody>
 </table>
 <p><strong>一句话</strong>：<code>(3,)</code> 是「一行 3 个」，<code>(3, 1)</code> 是「一列 3 个」；
-它们在<strong>一维运算里往往等价</strong>，一旦参与了多维运算，
+它们在<strong>一维运算里往往等价</strong>，但一旦参与多维运算，
 <strong>广播的方向完全不同</strong>。</p>
 <h3 id="42">4.2 一个不会报错的错（最危险）<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
@@ -13702,19 +13695,16 @@ price * qty_col 的形状: (3, 3)
 <p class="admonition-title">广播失败会报错，广播「成功但方向错了」不会报错</p>
 <p><code>scores * student_w</code> 的形状完全合法（<code>(3, 3)</code> 与 <code>(3,)</code> 可以广播），
 <strong>所以不会有任何提示</strong>，但语义是「每一列乘一个学生系数」，
-和你想要的「每一行乘一个学生系数」正好差 90 度 ✗</p>
-<p><strong>自查口诀</strong>：
-「我是要每个行变，还是每个列变？」
+和想要的「每一行乘一个学生系数」正好差 90 度 ✗</p>
+<p><strong>自查口诀</strong>：「要每个行变，还是每个列变？」
 行变 → 用 <code>(n, 1)</code>；列变 → 用 <code>(n,)</code></p>
-<p>另外，养成习惯：<strong>算完看一眼 <code>.shape</code></strong> ——
-形状对不上时，结果往往一眼就能看出问题。</p>
+<p>另外养成习惯：<strong>算完看一眼 <code>.shape</code></strong>，形状对不上时结果往往一眼能看出问题。</p>
 </div>
 <hr />
 <h2 id="keepdimstrue">五、<code>keepdims=True</code>：聚合之后不要丢掉维度<a class="headerlink" href="#keepdimstrue" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 问题是什么<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
-<p>数组聚合后维度会<strong>减少</strong>。例如 <code>(3, 4)</code> 沿 <code>axis=1</code> 求均值，
-结果变成 <code>(3,)</code> —— 这个结果<strong>没法再和原数组按行相减</strong>，
-因为它会被当成「按列的长度 3」去广播。</p>
+<p>数组聚合后维度会<strong>减少</strong>。<code>(3, 4)</code> 沿 <code>axis=1</code> 求均值，结果变成 <code>(3,)</code>，
+它<strong>没法再和原数组按行相减</strong>，因为会被当成「按列长度 3」去广播。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
@@ -13858,14 +13848,13 @@ ValueError: operands could not be broadcast together with shapes (2,3) (2,)</cod
 </tr>
 </tbody>
 </table>
-<p><strong>配上 <code>keepdims=True</code>，被压掉的维度会变成 1，位置不变</strong> ——
-于是「一维的结果」能正确地对齐回原数组</p>
+<p><strong>配上 <code>keepdims=True</code>，被压掉的维度会变成 1，位置不变</strong>，
+于是「一维的结果」能正确对齐回原数组</p>
 </div>
 <hr />
 <h2 id="_3">六、实际应用<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 标准化：每列减均值、除标准差<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<p>这是数据预处理里最常用的一步：把量纲不同的特征拉到同一尺度。
-<strong>注意全程没有循环</strong>。</p>
+<p>这是数据预处理最常用的一步：把量纲不同的特征拉到同一尺度，<strong>全程没有循环</strong>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-22-2"> 2</a></span>
@@ -13917,9 +13906,8 @@ ValueError: operands could not be broadcast together with shapes (2,3) (2,)</cod
  [-0.3857 -0.5279  1.4771]]
 标准化后每列均值  : [ 0. -0.  0.]
 标准化后每列标准差: [1. 1. 1.]</code></pre>
-<p><strong>为什么结果一定「均值 0、标准差 1」</strong>：因为每一列都被<strong>独立地</strong>
-减去了自己的均值、除上了自己的标准差 ——
-这件事之所以能一行写完，靠的就是 <code>(1, 3)</code> 与 <code>(5, 3)</code> 的广播。</p>
+<p><strong>为什么结果一定「均值 0、标准差 1」</strong>：因为每一列都<strong>独立地</strong>
+减去了自己的均值、除上了自己的标准差；能一行写完靠的是 <code>(1, 3)</code> 与 <code>(5, 3)</code> 的广播。</p>
 <p>另一种常见做法是<strong>极差标准化</strong>（min-max），把数据压到 0 到 1 之间：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -13953,8 +13941,7 @@ min-max 归一化:
  [1.     1.     1.    ]
  [0.     0.     0.    ]]</code></pre>
 <h3 id="62">6.2 逐行 / 逐列加权<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
-<p>真实评分场景里，常常「不同指标权重不同」再加上「不同对象有各自系数」。
-广播可以把两种权重叠在一起。</p>
+<p>真实评分场景里，常要「不同指标权重不同」再叠加「不同对象各有系数」，广播可以把两种权重叠在一起。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
@@ -13990,7 +13977,7 @@ min-max 归一化:
 </code></pre></div></td></tr></table></div>
 <pre class="kb-output"><code>按课加权每行求和: [85.1 86.4 74.4 85.2]
 再乘学生系数    : [76.59 86.4  59.52 93.72]</code></pre>
-<p><strong>形状推演</strong>（养成写下来的习惯）：</p>
+<p><strong>形状推演</strong>（建议写下来）：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
 <span class="normal"><a href="#__codelineno-25-3">3</a></span>
@@ -14000,8 +13987,8 @@ min-max 归一化:
 <a id="__codelineno-25-4" name="__codelineno-25-4"></a>term_factor.reshape(4, 1)  (4, 1) → 撑成 (4, 3)         每行一个系数 ✓
 </code></pre></div></td></tr></table></div>
 <h3 id="63">6.3 距离矩阵：一次算出所有点对<a class="headerlink" href="#63" title="Permanent link">&para;</a></h3>
-<p>给 n 个点，求两两之间的距离，朴素写法是双重循环 O(n²)。
-广播写法把「每个点减去每个点」这一步写成三维数组，<strong>一次算完</strong>。</p>
+<p>给 n 个点求两两距离，朴素写法是双重循环 O(n²)；
+广播把「每个点减每个点」写成三维数组，<strong>一次算完</strong>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
@@ -14105,12 +14092,12 @@ min-max 归一化:
 <p class="admonition-title"><code>np.newaxis</code> 就是「插入一个长度为 1 的维度」</p>
 <p><code>a[:, np.newaxis, :]</code> 与 <code>a.reshape(4, 1, 2)</code> 效果一样，
 但 <code>np.newaxis</code> 写法<strong>不用手算长度</strong>，改数据规模时不用动代码</p>
-<p><code>axis=-1</code> 表示<strong>最后一维</strong>，所以 <code>sum(axis=-1)</code> 总是对「坐标」求和，
-换到三维、四维数据都不用改</p>
+<p><code>axis=-1</code> 表示<strong>最后一维</strong>，<code>sum(axis=-1)</code> 总是对「坐标」求和，
+换到三维、四维都不用改</p>
 </div>
 <h3 id="64">6.4 图像 / 网格运算<a class="headerlink" href="#64" title="Permanent link">&para;</a></h3>
-<p>图像在 NumPy 里就是数组：<code>(高, 宽, 通道)</code>。
-广播让「整幅图统一调亮度」「多条独立通道叠加」这些操作变得非常简单。</p>
+<p>图像在 NumPy 里就是数组 <code>(高, 宽, 通道)</code>，
+广播让「整图统一调亮度」「多通道叠加」这类操作变得非常简单。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
@@ -14164,8 +14151,7 @@ combined.shape: (8, 8)  峰值: 0.9104
 <a id="__codelineno-28-5" name="__codelineno-28-5"></a>求和后   (8, 8)     叠成一张
 </code></pre></div></td></tr></table></div>
 <h3 id="65">6.5 滑动窗口：把「双重循环」变成一次切片<a class="headerlink" href="#65" title="Permanent link">&para;</a></h3>
-<p>时序平滑、卷积、均值池化都属于「滑动窗口」。
-手写要两层循环，NumPy 提供了 <code>sliding_window_view</code>。</p>
+<p>时序平滑、卷积、均值池化都属于「滑动窗口」，手写要两层循环，NumPy 提供了 <code>sliding_window_view</code>。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
@@ -14216,11 +14202,10 @@ patches.shape: (3, 3, 3, 3)
  [[ 6.  7.  8.]
  [11. 12. 13.]
  [16. 17. 18.]]</code></pre>
-<p><strong>注意 <code>win.shape</code> 是 <code>(6, 3)</code></strong>：长度 8 的数组、窗口 3，共有 <code>8 - 3 + 1 = 6</code> 个窗口。
-滑动窗口视图<strong>不复制数据</strong>（它只是改了步长），所以内存开销很小</p>
+<p><strong><code>win.shape</code> 是 <code>(6, 3)</code></strong>：长度 8、窗口 3，共有 <code>8 - 3 + 1 = 6</code> 个窗口。
+滑动窗口视图<strong>不复制数据</strong>（只改了步长），内存开销很小</p>
 <h3 id="66-npbroadcast_to">6.6 广播的内存代价与 <code>np.broadcast_to</code><a class="headerlink" href="#66-npbroadcast_to" title="Permanent link">&para;</a></h3>
-<p>广播本身不复制，但<strong>运算结果一定要分配内存</strong>。
-搞清楚这两件事，才算真的理解广播。</p>
+<p>广播本身不复制，但<strong>运算结果一定要分配内存</strong> —— 搞清楚这两件事才算真懂广播。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
@@ -14256,9 +14241,9 @@ view.strides: (8, 0)  ← 第 1 维步长 0，反复读同一块内存
 可写吗      : False
 与 col 共享内存: True
 取第 0 行: [0. 0. 0. 0. 0.]</code></pre>
-<p><strong>步长（strides）是理解这一点的关键</strong>：
-<code>strides=(8, 0)</code> 的意思是「下一行要移动 8 字节，下一<strong>列</strong>移动 0 字节」——
-于是每一列读到的都是<strong>同一个数</strong>。</p>
+<p><strong>步长（strides）是理解这点的关键</strong>：
+<code>strides=(8, 0)</code> 指「下一行移 8 字节，下一<strong>列</strong>移 0 字节」，
+于是每一列读到<strong>同一个数</strong>。</p>
 <p>再对比「广播之后真的物化」的做法：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
@@ -14312,8 +14297,8 @@ total.nbytes: 4000000
 </tr>
 </tbody>
 </table>
-<p><strong>所以真正的内存风险不是「广播」，而是「广播后产生的大数组」</strong>。</p>
-<p>需要时可以用 <code>np.broadcast_arrays(a, b)</code> 一次得到多个只读视图：</p>
+<p><strong>真正的内存风险不是「广播」，而是「广播后产生的大数组」</strong>。</p>
+<p>需要时可用 <code>np.broadcast_arrays(a, b)</code> 一次得到多个只读视图：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
 <span class="normal"><a href="#__codelineno-32-2">2</a></span>
@@ -14346,7 +14331,7 @@ c:
 </div>
 <hr />
 <h2 id="_4">七、把循环改写成向量化：对照表<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>这张表是这一页最实用的东西：<strong>左边是你写的循环，右边是等价的一次性写法</strong>。</p>
+<p>这张表最实用：<strong>左边是你的循环，右边是等价的一次性写法</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -14504,9 +14489,9 @@ c:
 <pre class="kb-output"><code>循环结果: ['D', 'B', 'A', 'D', 'A']
 向量化  : ['D' 'B' 'A' 'D' 'A']
 一致吗  : [ True  True  True  True  True]</code></pre>
-<p><strong>注意 <code>np.select</code> 的匹配顺序</strong>：<strong>从上往下，第一个为真的条件生效</strong> ——
-所以条件一定要<strong>从严格到宽松</strong>排（先 <code>&gt;= 85</code> 再 <code>&gt;= 70</code>），
-这和 <code>if/elif</code> 的顺序要求完全一样</p>
+<p><strong>注意 <code>np.select</code> 的匹配顺序</strong>：<strong>从上往下，第一个为真的条件生效</strong>，
+所以条件要<strong>从严格到宽松</strong>排（先 <code>&gt;= 85</code> 再 <code>&gt;= 70</code>），
+这和 <code>if/elif</code> 的要求完全一样</p>
 <h3 id="73-bincount">7.3 计数与反查：循环计数 → 布尔掩码 + <code>bincount</code><a class="headerlink" href="#73-bincount" title="Permanent link">&para;</a></h3>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
@@ -14548,8 +14533,8 @@ dog 出现次数: 2
 是 dog 的位置: [1 4]</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">「计数」用 <code>sum</code>，「平均」用 <code>mean</code>，掩码是万能钥匙</p>
-<p>布尔数组最有用的一点是：<strong>它可以当成 0/1 数组用</strong>。
-于是「满足条件的比例」「满足条件下某列的平均值」都可以一行写完：</p>
+<p>布尔数组最有用的一点：<strong>它可以当成 0/1 数组用</strong>。
+于是「满足条件的比例」「满足条件下某列的平均值」都能一行写完：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
 <span class="normal"><a href="#__codelineno-36-2">2</a></span>
@@ -14573,7 +14558,7 @@ dog 出现次数: 2
 <p><code>~male</code> 是<strong>按位取反</strong>，也就是「不是男生」</p>
 </div>
 <h3 id="74">7.4 累加到缓冲区：<code>+=</code> 也能向量化<a class="headerlink" href="#74" title="Permanent link">&para;</a></h3>
-<p>如果循环是「把一列一列加进一个累加数组」，可以用矩阵乘法一次完成：</p>
+<p>如果循环是「把一列列加进一个累加数组」，可用矩阵乘法一次完成：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
@@ -14599,10 +14584,10 @@ dog 出现次数: 2
 一次求和: [1. 1. 1. 1. 0.]</code></pre>
 <hr />
 <h2 id="_5">八、什么时候不该向量化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>向量化不是宗教，<strong>它是一个权衡</strong>。下面三种情况，老老实实写循环反而更好。</p>
+<p>向量化不是宗教，<strong>而是一个权衡</strong>。下面三种情况老实写循环更好。</p>
 <h3 id="81">8.1 需要「提前退出」时<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
-<p>向量化运算总是<strong>把整个数组算完</strong>，它没有 <code>break</code> 的概念。
-「找到第一个满足条件的元素就停」这种需求，天然属于循环。</p>
+<p>向量化运算总是<strong>把整个数组算完</strong>，没有 <code>break</code> 的概念；
+「找到第一个满足条件的元素就停」天然属于循环。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
@@ -14688,9 +14673,8 @@ dog 出现次数: 2
 <pre class="kb-output"><code>逐日余额      : [100.0, 70.0, 95.0, 15.0, 55.0]
 cumsum 会给出 : [100.  70.  95.  15.  55.]
 两者相同吗    : True</code></pre>
-<p><strong>为什么 <code>cumsum</code> 不行</strong>：<code>cumsum</code> 是不带条件的累加，
-而这里每一步都要「先看上次结果有没有掉到 0 以下」。
-<strong>状态依赖的计算，天生是串行的</strong>。</p>
+<p><strong>为什么 <code>cumsum</code> 不行</strong>：它是无条件累加，
+而这里每一步都要「先看上次结果有没有掉到 0 以下」；<strong>状态依赖的计算天生是串行的</strong>。</p>
 <h3 id="83">8.3 逻辑太复杂或内存不够时<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -14725,7 +14709,7 @@ cumsum 会给出 : [100.  70.  95.  15.  55.]
 </table>
 <div class="admonition tip">
 <p class="admonition-title">判断标准只有一句话</p>
-<p>「这个计算能不能在不看其它元素的情况下，对每个元素独立完成？」</p>
+<p>「这个计算能不能在只看单个元素的情况下独立完成？」</p>
 <p>能 → 向量化可行（还要看内存）；
 不能（依赖顺序、状态、提前退出）→ 老老实实写循环 ✓</p>
 </div>
@@ -14747,7 +14731,7 @@ cumsum 会给出 : [100.  70.  95.  15.  55.]
 <tbody>
 <tr>
 <td>①</td>
-<td>找出括号里的<strong>两个形状</strong>，看位数是否相同（不同就先给短的左边补 1）</td>
+<td>找出括号里的<strong>两个形状</strong>，看位数是否相同（不同则短的左边补 1）</td>
 </tr>
 <tr>
 <td>②</td>
@@ -14789,12 +14773,11 @@ cumsum 会给出 : [100.  70.  95.  15.  55.]
 </div>
 <div class="admonition warning">
 <p class="admonition-title">陷阱 3：忘记 <code>keepdims</code>，或忘记检查 <code>dtype</code></p>
-<p><strong>忘记 <code>keepdims</code></strong>：聚合后维度少了一个，运气不好形状碰巧能广播，
-<strong>结果算错却不报错</strong> ⚠ 建议：<strong>只要聚合结果还要和原数组做运算，
-就写 <code>keepdims=True</code></strong></p>
+<p><strong>忘记 <code>keepdims</code></strong>：聚合后维度少了一个，形状碰巧能广播时
+<strong>算错却不报错</strong> ⚠ <strong>只要聚合结果还要和原数组做运算，就写 <code>keepdims=True</code></strong></p>
 <p><strong>忘记检查 <code>dtype</code></strong>：把浮点结果写进整数 <code>out</code> 时，
-NumPy 默认<strong>会拦下来报错</strong>；一旦你图省事写了 <code>casting="unsafe"</code>，
-它就<strong>静默截断</strong>：</p>
+NumPy 默认<strong>会拦下来报错</strong>；一旦图省事写了 <code>casting="unsafe"</code>，
+它会<strong>静默截断</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
@@ -14841,8 +14824,8 @@ ints // 2  : [0 1 2]  dtype: int32
 <details class="note">
 <summary>思路</summary>
 <p>这不是「整张表统一标准化」，而是<strong>每一行各自标准化</strong>。
-所以聚合要沿行方向（<code>axis=1</code>），而且必须加 <code>keepdims=True</code>，
-否则减法的广播方向会错。标准差用 <code>np.std</code> 的默认设置即可
+所以聚合要沿行方向（<code>axis=1</code>）并加 <code>keepdims=True</code>，
+否则减法的广播方向会错。标准差用 <code>np.std</code> 默认设置即可
 （默认除以 n，做相对比较够用）。</p>
 </details>
 <details class="success">
@@ -14911,11 +14894,11 @@ ints // 2  : [0 1 2]  dtype: int32
 </tbody>
 </table>
 <p>如果去掉 <code>keepdims</code>，<code>(2, 3)</code> 减 <code>(2,)</code> 会直接报错 ——
-这个报错反而比默默算错好，因为 <code>2</code> 和 <code>3</code> 对不上</p>
+这比默默算错好，因为 <code>2</code> 和 <code>3</code> 对不上</p>
 </details>
 <hr />
 <h3 id="2">例题 2：找出相距最远的一对点<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>给出 5 个平面点，用<strong>广播一次</strong>算出距离矩阵，并找出距离最远的那一对。</p>
+<p>给出 5 个平面点，用<strong>广播一次</strong>算出距离矩阵，找出距离最远的一对。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
 <span class="normal"><a href="#__codelineno-44-2">2</a></span>
 <span class="normal"><a href="#__codelineno-44-3">3</a></span>
@@ -14929,9 +14912,9 @@ ints // 2  : [0 1 2]  dtype: int32
 <details class="note">
 <summary>思路</summary>
 <p>距离矩阵的核心是「所有点减所有点」：
-给起点加一个长度为 1 的维度、给终点加一个长度为 1 的维度，
+给起点、终点各加一个长度为 1 的维度，
 相减就得到 <code>(n, n, 2)</code> 的坐标差。
-求最远点对时要注意<strong>对角线是 0</strong>，比较时应只看上三角。</p>
+求最远点对要注意<strong>对角线是 0</strong>，比较时只看上三角。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15016,9 +14999,9 @@ ints // 2  : [0 1 2]  dtype: int32
 并把结果裁剪到 0 到 1 之间。请用广播完成。</p>
 <details class="note">
 <summary>思路</summary>
-<p>「每张图一个偏置」意味着偏置的形状应当是 <code>(图片数, 1, 1)</code> ——
-这样它才能沿「高」「宽」两个方向被撑开。
-写成 <code>(图片数,)</code> 是常见错误：那会被当成沿最后一维（宽度）广播 ✗</p>
+<p>「每张图一个偏置」意味着偏置形状应当是 <code>(图片数, 1, 1)</code>，
+这样它才能沿「高」「宽」两个方向撑开。
+写成 <code>(图片数,)</code> 是常见错误：会被当成沿最后一维（宽度）广播 ✗</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15095,23 +15078,22 @@ adjusted.shape: (2, 2, 3)
 </tbody>
 </table>
 <p><strong>记住</strong>：<strong>要把某个系数作用到「整张图/整行/整列」上，
-就把它写成「那个方向长度为 1、其它方向也是 1」的形状</strong>，
+就把它写成「那个方向长度为 1、其余方向为 1」的形状</strong>，
 再用 <code>np.newaxis</code> 或 <code>reshape</code> 摆正</p>
 </details>
 <hr />
 <h3 id="4">例题 4：把一段真实的循环改写成向量化<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>下面是一段口语化描述的旧代码：给每个学生的成绩按规则加分 ——
+<p>下面这段旧代码给每个学生成绩按规则加分 ——
 不及格（低于 60）加 10 分、60 到 79 加 5 分、80 分以上不加分，
-然后把每人的加分限制在「不超过 100 分」。
-请改写成向量化写法，并验证结果一致。</p>
+再把加分限制在「不超过 100 分」。请改写成向量化，并验证结果一致。</p>
 <details class="note">
 <summary>思路</summary>
 <p>这里有<strong>两类操作</strong>：</p>
 <ol>
-<li>分成三段加分 —— 属于「多分支条件赋值」，用 <code>np.select</code> 或嵌套 <code>np.where</code>；</li>
-<li>封顶到 100 —— 属于「限幅」，用 <code>np.clip</code> 表达最清楚。</li>
+<li>分三段加分 —— 「多分支条件赋值」，用 <code>np.select</code> 或嵌套 <code>np.where</code>；</li>
+<li>封顶到 100 —— 「限幅」，用 <code>np.clip</code> 最清楚。</li>
 </ol>
-<p>最后一定要<strong>对比新旧结果</strong>（<code>np.array_equal</code>），否则你不知道改写对不对。</p>
+<p>最后一定要<strong>对比新旧结果</strong>（<code>np.array_equal</code>），否则不知道改写对不对。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15196,8 +15178,7 @@ adjusted.shape: (2, 2, 3)
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <code>np.clip(..., None, 100.0)</code></strong>：<code>None</code> 表示「下界不限」，
-只封上界。这比写一个很负的常数更清楚</p>
+<p><strong>注意 <code>np.clip(..., None, 100.0)</code></strong>：<code>None</code> 表示「下界不限」，只封上界，比写一个很负的常数更清楚</p>
 </details>
 <hr />
 <h2 id="_8">十一、自测<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -15216,8 +15197,7 @@ adjusted.shape: (2, 2, 3)
 </code></pre></div></td></tr></table></div>
 <details class="note">
 <summary>提示</summary>
-<p>先给位数少的形状<strong>在左边补 1</strong>，再从<strong>最右</strong>往左逐维判断：
-相等或有一边是 1 才通过。</p>
+<p>先给位数少的形状<strong>左边补 1</strong>，再从<strong>最右</strong>往左逐维判断：相等或有一边是 1 才通过。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15308,15 +15288,14 @@ adjusted.shape: (2, 2, 3)
 </code></pre></div></td></tr></table></div>
 <details class="note">
 <summary>提示</summary>
-<p><code>m.mean(axis=1)</code> 的形状是什么？它和 <code>(3, 4)</code> 的哪一维对齐了？</p>
+<p><code>m.mean(axis=1)</code> 形状是什么？它和 <code>(3, 4)</code> 的哪一维对齐？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
 <p><strong>报错</strong>：</p>
 <pre class="kb-output"><code>ValueError: operands could not be broadcast together with shapes (3,4) (3,)</code></pre>
-<p><strong>原因</strong>：<code>m.mean(axis=1)</code> 的形状是 <code>(3,)</code>，广播时被当成 <code>(1, 3)</code> ——
-也就是<strong>沿最后一维（长度 4）对齐</strong>，于是 <code>4</code> 与 <code>3</code> 对不上，
-触发规则 3 报错 ✗</p>
+<p><strong>原因</strong>：<code>m.mean(axis=1)</code> 形状是 <code>(3,)</code>，广播时被当成 <code>(1, 3)</code>，
+即<strong>沿最后一维（长度 4）对齐</strong>，于是 <code>4</code> 与 <code>3</code> 对不上，触发规则 3 报错 ✗</p>
 <p><strong>两种修法</strong>：</p>
 <table>
 <thead>
@@ -15364,9 +15343,9 @@ adjusted.shape: (2, 2, 3)
  [-1.5 -0.5  0.5  1.5]]
 两种修法一致吗: True
 每行和: [0. 0. 0.]</code></pre>
-<p><strong>顺带提醒</strong>：如果行数恰好等于列数（比如 <code>(3, 3)</code> 的方阵），
-这段代码<strong>不会报错</strong>，但会变成「每一列减去每一列的均值」，
-方向完全错了 ⚠ 这就是为什么<strong>形状检查不能只看「跑没跑通」</strong>。</p>
+<p><strong>顺带提醒</strong>：如果行数恰好等于列数（如 <code>(3, 3)</code> 方阵），
+这段代码<strong>不会报错</strong>，却会变成「每一列减去每一列的均值」，
+方向完全错了 ⚠ 所以<strong>形状检查不能只看「跑没跑通」</strong>。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 下面这段代码想算「每个学生加权后的总分」。
@@ -15390,15 +15369,15 @@ adjusted.shape: (2, 2, 3)
 <pre class="kb-output"><code>ValueError: operands could not be broadcast together with shapes (2,3) (2,)</code></pre>
 <details class="note">
 <summary>提示</summary>
-<p><code>stu_factor</code> 的形状是 <code>(2,)</code>，它和 <code>(2, 3)</code> 广播时对到了哪一维？
-「每个学生一个系数」应该用哪一种形状？</p>
+<p><code>stu_factor</code> 形状是 <code>(2,)</code>，它和 <code>(2, 3)</code> 广播时对到哪一维？
+「每个学生一个系数」该用哪种形状？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>错在哪里</strong>：<code>stu_factor</code> 形状 <code>(2,)</code> 被补成 <code>(1, 2)</code> ——
-和<strong>最后一维（3 个科目）</strong>对齐，但长度 <code>2</code> 与 <code>3</code> 对不上，所以直接报错。
-更阴险的是：<strong>如果科目数恰好是 2，它就会默默按科目录广播</strong>，
-变成「每门课乘一个学生系数」，方向完全错却不出声</p>
+<p><strong>错在哪里</strong>：<code>stu_factor</code> 形状 <code>(2,)</code> 被补成 <code>(1, 2)</code>，
+和<strong>最后一维（3 个科目）</strong>对齐，长度 <code>2</code> 与 <code>3</code> 对不上，直接报错。
+更阴险的是：<strong>若科目数恰好是 2，它会默默按科目录广播</strong>，
+变成「每门课乘一个学生系数」，方向全错却不出声</p>
 <p>换成 <code>(2, 1)</code>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
@@ -15439,9 +15418,9 @@ adjusted.shape: (2, 2, 3)
 「把每天的销售额按天加权（权重 <code>[1.0, 1.0, 0.5]</code>）后的总额」。</p>
 <details class="note">
 <summary>提示</summary>
-<p>单价是 <code>(4,)</code>，销量是 <code>(3, 4)</code>，两者相乘得到 <code>(3, 4)</code> 的「销售额矩阵」；
-然后沿着不同的轴求和，就得到两种口径的汇总。
-按天加权需要把权重转成 <code>(3, 1)</code>。</p>
+<p>单价 <code>(4,)</code>、销量 <code>(3, 4)</code> 相乘得到 <code>(3, 4)</code> 的「销售额矩阵」，
+沿不同轴求和就得到两种口径的汇总；
+按天加权要把权重转成 <code>(3, 1)</code>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -15523,7 +15502,7 @@ adjusted.shape: (2, 2, 3)
 </tbody>
 </table>
 <p><strong>要点</strong>：<strong>先用广播把「单价 × 数量」展开成矩阵，
-再用 <code>axis</code> 选择汇总口径</strong> —— 这是数据分析里最常见的两步组合</p>
+再用 <code>axis</code> 选汇总口径</strong> —— 这是数据分析最常见的两步组合</p>
 </details>
 <hr />
 <h2 id="_9">小结<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -15582,7 +15561,7 @@ adjusted.shape: (2, 2, 3)
 </tbody>
 </table>
 <p><strong>下一页</strong>：<a href="../numpy-linalg/">04 线性代数与随机数</a>
-矩阵乘法、解方程组、特征值分解、奇异值分解，以及怎么用随机数做实验。</p>
+矩阵乘法、解方程组、特征值分解、奇异值分解，以及用随机数做实验。</p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../numpy-basics/">01 NumPy 数组基础</a><a href="../numpy-indexing/">索引与切片</a><a href="../../basics/variables/">变量与类型</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../numpy-linalg/">线性代数与随机数</a></span></div></nav>
 
 

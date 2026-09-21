@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：这就是「拉格朗日乘数」的几何含义： λ 是让两个梯度对齐的缩放因子。">
+    <meta name="description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：λ 就是让两个梯度对齐的缩放因子。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="拉格朗日乘数法">
   
-  <meta property="og:description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：这就是「拉格朗日乘数」的几何含义： λ 是让两个梯度对齐的缩放因子。">
+  <meta property="og:description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：λ 就是让两个梯度对齐的缩放因子。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/optimization/lagrange/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="拉格朗日乘数法">
   
-  <meta name="twitter:description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：这就是「拉格朗日乘数」的几何含义： λ 是让两个梯度对齐的缩放因子。">
+  <meta name="twitter:description" content="前面讲的都是无约束优化。实际工程问题几乎都有约束：拉格朗日乘数法把带约束问题转化成无约束问题。问题：在最优解处，两者的梯度必须平行：为什么：λ 就是让两个梯度对齐的缩放因子。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11799,8 +11799,7 @@
 </tr>
 </tbody>
 </table>
-<p>这就是「拉格朗日乘数」的几何含义：
-<strong><span class="arithmatex">\(\lambda\)</span> 是让两个梯度对齐的缩放因子</strong>。</p>
+<p><strong><span class="arithmatex">\(\lambda\)</span> 就是让两个梯度对齐的缩放因子</strong>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="拉格朗日乘数法的几何意义：目标梯度与约束梯度平行">
 <defs>
@@ -11842,7 +11841,7 @@
 <div class="arithmatex">\[
 \frac{\partial\mathcal{L}}{\partial\lambda} = h(\boldsymbol{x}) = 0
 \]</div>
-<p><strong>第二个方程正好就是原约束</strong> ✓ —— 这就是「约束被自动满足」的机制。</p>
+<p><strong>第二个方程正好就是原约束</strong> ✓ —— 约束被自动满足。</p>
 <h3 id="_5">多个等式约束<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 \min f(\boldsymbol{x})\quad\text{s.t.}\quad h_i(\boldsymbol{x}) = 0,\ i=1,\dots,m
@@ -11854,7 +11853,6 @@
 （即 <span class="arithmatex">\(\nabla f\)</span> 是各约束梯度的线性组合）。</p>
 <hr />
 <h2 id="_6">二、乘数的实际含义（工程解释）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>这是最容易被忽略、却最有工程价值的一点。</p>
 <p><strong><span class="arithmatex">\(\lambda^*\)</span> 的含义</strong>：<strong>约束放松一点，目标能改善多少</strong>。</p>
 <div class="arithmatex">\[
 \frac{\partial f^*}{\partial c} = -\lambda^*
@@ -11922,9 +11920,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>这就是经济学中的「影子价格」</strong>，
-也是工程优化里最有实用价值的输出之一
-（通常优化求解器都会同时给出最优乘数）。</p>
+<p><strong>这就是经济学中的「影子价格」</strong>——通常求解器会一并给出最优乘数。</p>
 </div>
 <hr />
 <h2 id="kkt">三、不等式约束：从等式到 KKT<a class="headerlink" href="#kkt" title="Permanent link">&para;</a></h2>
@@ -12000,8 +11996,7 @@
 <p><strong>两者不能同时非零</strong> —— 这就是「互补」。</p>
 <div class="admonition note">
 <p class="admonition-title">互补松弛条件的实用价值（大幅简化问题）</p>
-<p><strong>它告诉我们</strong>：<strong>不需要考虑所有约束</strong>——
-可以先猜哪些约束活跃，只处理那几个。</p>
+<p><strong>不需要考虑所有约束</strong>——可以先猜哪些约束活跃，只处理那几个。</p>
 <p>在支持向量机（SVM）中的经典应用：</p>
 <table>
 <thead>
@@ -12024,28 +12019,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>结论</strong>：只有支持向量贡献于决策边界</p>
-<p><strong>这解释了两件事</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>现象</th>
-<th>原因</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>移动非支持向量的样本不改变模型</td>
-<td>它们的 <span class="arithmatex">\(\mu_i = 0\)</span></td>
-</tr>
-<tr>
-<td>稀疏性</td>
-<td>大部分样本 <span class="arithmatex">\(\mu_i = 0\)</span></td>
-</tr>
-</tbody>
-</table>
-<p><strong>工程意义</strong>：稀疏性使存储与预测只需保留支持向量 ——
-这是 SVM 高效的原因。</p>
+<p><strong>结论</strong>：只有支持向量贡献于决策边界（它们的 <span class="arithmatex">\(\mu_i &gt; 0\)</span>）。
+所以移动非支持向量的样本不改变模型，解也天然稀疏 ——
+存储与预测只需保留支持向量，这就是 SVM 高效的原因。</p>
 <p><strong>一般的工作流程</strong>：</p>
 <table>
 <thead>
@@ -12124,6 +12100,35 @@ d = \frac{\lvert0+0-1\rvert}{\sqrt{1^2+1^2}} = \frac{1}{\sqrt2}
 \]</div>
 <p>确实平行（<span class="arithmatex">\(\lambda = -1\)</span>）</p>
 </details>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="拉格朗日乘数法的等高线图：目标等高线族与约束曲线相切，切点处两梯度平行">
+<defs>
+<marker id="lg2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a3" d="M0,0 L10,5 L0,10 z"/></marker>
+<marker id="lg2-ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-a4" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 目标函数等高线（椭圆族，越靠中心 f 越小） -->
+<ellipse class="f0" cx="150" cy="108" rx="82" ry="58" fill="none" stroke="var(--kb-a1)" stroke-width="1.5" opacity="0.6"/>
+<ellipse class="f0" cx="150" cy="108" rx="56" ry="38" fill="none" stroke="var(--kb-a1)" stroke-width="1.5" opacity="0.6"/>
+<ellipse class="f0" cx="150" cy="108" rx="30" ry="20" fill="none" stroke="var(--kb-a1)" stroke-width="1.5" opacity="0.6"/>
+<circle class="d1" cx="150" cy="108" r="3.5"/>
+<text class="l1" x="58" y="86">等高线 f = 常数</text>
+<!-- 约束曲线（直线 g=0），与中间等高线相切 -->
+<line class="a2" x1="40" y1="20" x2="320" y2="132"/>
+<text class="l2" x="248" y="150">约束 g = 0</text>
+<!-- 切点 = 最优解 -->
+<circle class="d2" cx="178" cy="75" r="5"/>
+<text class="lbl-s" x="112" y="68">切点 x*</text>
+<!-- 相切处两梯度平行 -->
+<line class="a3" x1="178" y1="75" x2="199" y2="21" marker-end="url(#lg2-ah1)" stroke-width="2.6"/>
+<text class="l3" x="204" y="20">∇f</text>
+<line class="a4" x1="202" y="85" x2="217" y2="48" marker-end="url(#lg2-ah2)" stroke-width="2.6"/>
+<text class="l4" x="222" y="46">∇g</text>
+<text class="lbl-s" x="24" y="212">相切 ⟺ 两条法向共线 ⟺ 此处 ∇f ∥ ∇g</text>
+<text class="lbl-s" x="24" y="232">约束线与某条等高线相切的位置，就是约束下的最优解</text>
+</svg>
+<figcaption>图 2　拉格朗日乘数法的等高线图。椭圆族是目标函数的等高线（越靠内 f 越小）；约束 g=0 是那条直线。沿约束移动能同时降低 f 的唯一「尽头」，就是直线与某条等高线<b>相切</b>的位置——此处水平集与约束的<b>法向共线</b>，即 ∇f 与 ∇g 平行</figcaption>
+</figure>
+
 <div class="admonition tip">
 <p class="admonition-title">这道题也是「最小范数解」的原型</p>
 <div class="arithmatex">\[
@@ -12297,8 +12302,6 @@ f_{\min} = \left(\frac{200}{3}\right)^2 + 2\left(\frac{100}{3}\right)^2
 </tr>
 </tbody>
 </table>
-<p><strong>工程价值</strong>：这给出了<strong>分配资源的定量判据</strong>，
-而不只是「凭经验分配」。</p>
 </div>
 <hr />
 <h3 id="3">例题 3：多约束情形<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -12358,7 +12361,7 @@ f_{\max} = 2\times2\times2 = 8
 \sqrt[3]{xyz} \leq \frac63 = 2 \implies xyz \leq 8 \;\checkmark
 \]</div>
 <p><strong>等号条件正是 <span class="arithmatex">\(x=y=z\)</span></strong> —— 与拉格朗日法得到的结果一致</p>
-<p>这说明拉格朗日乘数法能「顺便证明」许多经典不等式：</p>
+<p>它也能顺便证明许多经典不等式：</p>
 <table>
 <thead>
 <tr>
@@ -12404,11 +12407,9 @@ f_{\max} = 2\times2\times2 = 8
 </tr>
 </tbody>
 </table>
-<p><strong>注意「往往最优」的例外</strong>：若各通道特性不同
-（信噪比不同），最优分配<strong>不再是等分</strong>，
-而是「注水算法」——好通道多分配资源。</p>
-<p>这是<strong>约束条件相同但系数不同</strong>的情形，
-与本节「系数相同所以等分」形成对比。</p>
+<p><strong>例外</strong>：若各通道特性不同（信噪比不同），
+最优分配<strong>不再是等分</strong>，而是「注水算法」——
+好通道多分配资源。</p>
 </div>
 <hr />
 <h3 id="4">例题 4：不等式约束与互补松弛<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
@@ -12689,14 +12690,8 @@ A = \left(\frac{P}{4}\right)^2-d^2 &lt; \frac{P^2}{16}
 </tbody>
 </table>
 <p><strong>共同点</strong>：在对称性不被打破时，最优解也对称。</p>
-<p><strong>但要注意「系数不同」的情况</strong>：若目标改为 <span class="arithmatex">\(A = 2xy\)</span>
-（给 <span class="arithmatex">\(x\)</span> 加权），则最优不再是正方形 ——
-<strong>此时应按「边际量相等」求解</strong>：</p>
-<div class="arithmatex">\[
-\frac{\partial A}{\partial x} = \frac{\partial A}{\partial y} = -\lambda
-\]</div>
-<p>即 <span class="arithmatex">\(2y = 2x\)</span> 仍给出 <span class="arithmatex">\(x = y\)</span>（因为 <span class="arithmatex">\(2xy\)</span> 对 <span class="arithmatex">\(x,y\)</span> 对称）。</p>
-<p>若目标改为 <span class="arithmatex">\(A = x^2y\)</span>，则</p>
+<p><strong>但要注意「系数不同」的情况</strong>：解是否对称，取决于目标是否对称。
+例如把目标改成不对称的 <span class="arithmatex">\(A = x^2y\)</span>，按「边际量相等」：</p>
 <div class="arithmatex">\[
 2xy = x^2 \implies 2y = x
 \]</div>
@@ -12758,9 +12753,7 @@ d = \frac{\lvert0+0-5\rvert}{\sqrt{1^2+2^2}} = \frac{5}{\sqrt5} = \sqrt5
 <div class="arithmatex">\[
 \boldsymbol{x}^* = \frac{5}{5}(1,2) = (1,2) \;\checkmark
 \]</div>
-<p><strong>物理含义</strong>：最优解沿约束的法向（即 <span class="arithmatex">\(\boldsymbol{a}\)</span> 方向）。</p>
-<p>这与「投影」完全一致——投影就是「最短距离对应的点」，
-也就是这个最小范数问题的解。</p>
+<p>最优解沿约束的法向（<span class="arithmatex">\(\boldsymbol{a}\)</span> 方向），与例题 1 及「投影」一页的公式同源。</p>
 </div>
 <hr />
 <p><strong>Q4</strong> 设约束 <span class="arithmatex">\(g(x) = x-3\leq0\)</span>，目标 <span class="arithmatex">\(f(x) = x^2\)</span>。
@@ -12860,9 +12853,8 @@ g(0) = 0-3 = -3 \leq0 \;\checkmark
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「互补松弛」的两种情形</strong>，
-也是实际求解时<strong>先检查无约束最优</strong>的依据
-（能省掉大量计算）。</p>
+<p><strong>这就是「互补松弛」的两种情形</strong>，也是实际求解时
+<strong>先检查无约束最优</strong>的依据。</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../convexity/">优化问题与凸性</a><a href="../gradient-descent/">梯度下降与收敛</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../duality/">对偶问题</a></span></div></nav>
 

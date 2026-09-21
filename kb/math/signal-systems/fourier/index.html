@@ -11778,14 +11778,14 @@
 <blockquote>
 <p><strong>把信号拆成不同频率的正弦波之和。</strong></p>
 </blockquote>
-<p>换到频域后，<strong>卷积变成乘法</strong>——这就是傅里叶分析的全部价值。</p>
+<p>换到频域后，<strong>卷积变成乘法</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">一句话版本</p>
 <p><strong>时域卷积 = 频域相乘</strong></p>
 <div class="arithmatex">\[
 y = h * x \qquad\Longleftrightarrow\qquad Y(\omega) = H(\omega)\,X(\omega)
 \]</div>
-<p><strong>这一个式子是信号处理中最重要的结论。</strong> 它把难以计算的卷积
+<p>它把难以计算的卷积
 变成了简单的逐点乘法，也是 FFT 加速卷积、滤波器设计的理论基础。</p>
 </div>
 <hr />
@@ -11802,9 +11802,8 @@ y(t) = \int_{-\infty}^{\infty}h(\tau)e^{j\omega(t-\tau)}\,\mathrm{d}\tau
 <div class="arithmatex">\[
 \boxed{\ y(t) = H(\omega)\,e^{j\omega t}\ }
 \]</div>
-<p>输入是复指数，输出还是同一个复指数，只是被乘了一个复数 <span class="arithmatex">\(H(\omega)\)</span>。
-这正是「特征函数」的含义，<span class="arithmatex">\(H(\omega)\)</span> 就是对应的「特征值」——
-在信号处理里称为<strong>频率响应</strong>。</p>
+<p>输出仍是同一个复指数，只被乘了一个复数 <span class="arithmatex">\(H(\omega)\)</span>——这就是「特征函数」，
+<span class="arithmatex">\(H(\omega)\)</span> 称为<strong>频率响应</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -11859,8 +11858,7 @@ y(t) = \int_{-\infty}^{\infty}h(\tau)e^{j\omega(t-\tau)}\,\mathrm{d}\tau
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「用特征基把算子对角化」。</strong> 与线性代数里
-「相似变换使矩阵对角化」是同一件事。</p>
+<p><strong>这就是「用特征基把算子对角化」。</strong></p>
 </div>
 <hr />
 <figure class="kb-fig">
@@ -13113,7 +13111,6 @@ c_n = \frac{1}{T}\int_{T} x(t)\,e^{-jn\omega_0 t}\,\mathrm{d}t
 c_n = \frac{\langle x,\ e^{jn\omega_0t}\rangle}{\lVert e^{jn\omega_0t}\rVert^2}
 = \frac{1}{T}\int_T x(t)e^{-jn\omega_0t}\,\mathrm{d}t
 \]</div>
-<p><strong>不需要背这个公式</strong> —— 它就是「规范正交基下求坐标」的标准公式。</p>
 </div>
 <h3 id="_4">频谱：系数就是「频率含量」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(\lvert c_n\rvert\)</span> 按 <span class="arithmatex">\(n\)</span>（即频率 <span class="arithmatex">\(n\omega_0\)</span>）画出来，就是<strong>幅度谱</strong>。</p>
@@ -13173,7 +13170,7 @@ x(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}X(\omega)e^{j\omega t}\,\mathrm{d}\o
 <p class="admonition-title">直观理解正变换：与每个频率做内积</p>
 <p><span class="arithmatex">\(X(\omega) = \langle x(t), e^{j\omega t}\rangle\)</span> ——
 <strong>测出信号中频率 <span class="arithmatex">\(\omega\)</span> 的成分有多少</strong>。</p>
-<p>所以 <span class="arithmatex">\(X(\omega)\)</span> 称为<strong>频谱</strong>：它告诉你信号由哪些频率构成、各占多少。</p>
+<p>所以 <span class="arithmatex">\(X(\omega)\)</span> 称为<strong>频谱</strong>。</p>
 </div>
 <hr />
 <h2 id="_6">五、傅里叶变换的性质（重点）<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -13374,8 +13371,7 @@ X(\omega) = \int_{-\tau/2}^{\tau/2}1\cdot e^{-j\omega t}\,\mathrm{d}t
 </tbody>
 </table>
 <p><strong>重要推论</strong>：理想低通滤波器（频域矩形）的冲激响应是 sinc，
-它在 <span class="arithmatex">\(t&lt;0\)</span> 时非零 —— <strong>不因果，物理上不可实现</strong>。
-这就是为什么实际滤波器只能近似理想特性。</p>
+它在 <span class="arithmatex">\(t&lt;0\)</span> 时非零 —— <strong>不因果，物理上不可实现</strong>。</p>
 </div>
 <hr />
 <h3 id="2">例题 2：用卷积定理求系统响应<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -13551,7 +13547,6 @@ E = \frac{1}{2\pi}\int_{-\infty}^{\infty}\frac{\mathrm{d}\omega}{1+\omega^2}
 </tr>
 </tbody>
 </table>
-<p>这与线性代数里的「正交分解后能量相加」（勾股定理的推广）是同一个定理。</p>
 </div>
 <hr />
 <h2 id="_9">七、用在哪些课程里<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
@@ -13662,7 +13657,6 @@ x(2t) \longleftrightarrow \frac{1}{2}X\!\left(\frac{\omega}{2}\right)
 <div class="arithmatex">\[
 B' = \frac{4\pi B}{2\pi} = 2B
 \]</div>
-<p>规律：时域压缩 2 倍 → 频域展宽 2 倍。</p>
 <p><strong>物理意义（时间-带宽不确定性）</strong>：</p>
 <div class="arithmatex">\[
 \Delta t \cdot \Delta f \geq \text{常数}

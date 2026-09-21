@@ -12396,7 +12396,7 @@
 <strong>抽象形式没法用</strong> —— 你没法对一个没有具体表达式的 <span class="arithmatex">\(p(x\mid\omega_i)\)</span> 做任何计算。</p>
 <p>这一页做的事很具体：<strong>假设每一类的类条件密度是高斯分布</strong>，
 把它代进判别函数，一步步化简，看<strong>决策面变成什么形状</strong>。</p>
-<p><strong>为什么要专门假设高斯</strong> —— 课件给了三条理由，都值得记住：</p>
+<p><strong>为什么要专门假设高斯</strong> —— 课件给了三条理由：</p>
 <table>
 <thead>
 <tr>
@@ -12419,13 +12419,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>这三条的组合含义很重要</strong>：
-前两条说明高斯在信息论与概率论上处于「最一般」的位置；
-第三条说明它在实际数据里经常成立。
-<strong>所以在不知道真实分布时，高斯是最合理的第一选择</strong></p>
+<p><strong>这三条的组合含义</strong>：前两条说明高斯在信息论与概率论上处于「最一般」的位置，
+第三条说明它在实际数据里经常成立 ——
+<strong>所以不知道真实分布时，高斯是最合理的第一选择</strong></p>
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
-<p>整页只做一件事：<strong>把高斯密度代进判别函数，化简，看决策面形状。</strong></p>
 <p>化简的结果由<strong>协方差矩阵怎么取</strong>决定，共三种情形：</p>
 <table>
 <thead>
@@ -12457,8 +12455,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>这一页的全部推导都服务于这张表</strong> ——
-三次化简的差别<strong>只在于哪些项能丢掉</strong></p>
+<p>三次化简的差别<strong>只在于哪些项能丢掉</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、高斯密度的两种形式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12469,7 +12466,6 @@
 <p><strong>两个参数的定义</strong>（课件明确给了积分形式）：</p>
 <div class="arithmatex">\[\mu = \mathbb{E}[x] = \int_{-\infty}^{\infty} x\,p(x)\,dx, \qquad
 \sigma^2 = \mathbb{E}\left[(x-\mu)^2\right] = \int_{-\infty}^{\infty} (x-\mu)^2 p(x)\,dx\]</div>
-<p><strong>逐项读密度函数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12532,7 +12528,7 @@
 <div class="arithmatex">\[p(x) = \frac{1}{(2\pi)^{d/2}\,\lvert\Sigma\rvert^{1/2}}
 \exp\left[-\frac{1}{2}(x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu)\right]\]</div>
 <p><strong>记法</strong>：<span class="arithmatex">\(x \sim \mathcal{N}(\mu, \Sigma)\)</span>。</p>
-<p><strong>逐个符号定义（这张表必须吃透，后面每一步都用到）</strong>：</p>
+<p><strong>逐个符号定义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12585,7 +12581,6 @@
 <div class="arithmatex">\[\mu_i = \mathbb{E}[x_i] = \int_{-\infty}^{\infty} x_i\,p(x_i)\,dx_i, \qquad i = 1, 2, \dots, d\]</div>
 <p><strong>协方差矩阵的每个元素</strong>：</p>
 <div class="arithmatex">\[\Sigma_{ij} = \mathbb{E}\left[(x_i - \mu_i)(x_j - \mu_j)\right]\]</div>
-<p><strong>注意对角线与非对角线</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12605,8 +12600,7 @@
 </tbody>
 </table>
 <p><strong>为什么 <span class="arithmatex">\(\Sigma\)</span> 一定对称</strong>：因为 <span class="arithmatex">\(\Sigma_{ij} = \Sigma_{ji}\)</span>（乘法可交换）✓</p>
-<p><strong>用手算把「指数上的二次型」落到实处</strong>。
-取 <span class="arithmatex">\(\mu = (2, 3)^{\mathsf{T}}\)</span>，<span class="arithmatex">\(\Sigma = \begin{bmatrix} 4 &amp; 1 \\ 1 &amp; 2 \end{bmatrix}\)</span>，
+<p>取 <span class="arithmatex">\(\mu = (2, 3)^{\mathsf{T}}\)</span>，<span class="arithmatex">\(\Sigma = \begin{bmatrix} 4 &amp; 1 \\ 1 &amp; 2 \end{bmatrix}\)</span>，
 先算<strong>归一化常数</strong>——它是公式里唯一与 <span class="arithmatex">\(x\)</span> 无关的部分，后面化简时可以直接消掉：</p>
 <p>第一步，算行列式。二阶行列式按对角线展开：</p>
 <div class="arithmatex">\[\lvert\Sigma\rvert = 4 \times 2 - 1 \times 1 = 8 - 1 = 7\]</div>
@@ -12635,13 +12629,10 @@
 <div class="arithmatex">\[(x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu)
 = \frac{1}{7}\left(0 \times 2 + 2 \times 4\right) = \frac{8}{7} \approx 1.1429\]</div>
 <p><strong>同样是「离开均值 2 个单位」，一个只付出 <span class="arithmatex">\(4/7\)</span>、另一个付出 <span class="arithmatex">\(8/7\)</span></strong> ——
-差了一倍。这就是<strong>马氏距离与欧氏距离分道扬镳</strong>的第一个具体迹象，
-下一节会把它讲透</p>
+差了一倍。这就是<strong>马氏距离与欧氏距离分道扬镳</strong>的第一个具体迹象，</p>
 <hr />
 <h2 id="_3">二、等密度轨迹与马氏距离<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p>这一节要说明「高斯的等密度面长什么样」，它是后面判断决策面形状的基础。</p>
 <h3 id="21">2.1 指数上的那个二次型就是马氏距离的平方<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
-<p>看多元高斯密度函数的指数部分：</p>
 <div class="arithmatex">\[-\frac{1}{2}\underbrace{(x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu)}_{\text{二次型}}\]</div>
 <p><strong>注意</strong>：这个二次型<strong>与 <span class="arithmatex">\(x\)</span> 有关、与密度的具体数值无关</strong>。
 所以「密度相等」等价于「<strong>这个二次型相等</strong>」</p>
@@ -12649,7 +12640,6 @@
 <div class="arithmatex">\[d_M(x, \mu) = \sqrt{(x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu)}\]</div>
 <p><strong>于是</strong>：</p>
 <div class="arithmatex">\[\text{密度相等} \iff \text{马氏距离相等} \iff (x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu) = \text{常数}\]</div>
-<p><strong>这就是「等密度轨迹」的定义式</strong></p>
 <h3 id="22">2.2 等密度面是椭球<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>结论</strong>：<span class="arithmatex">\((x-\mu)^{\mathsf{T}}\Sigma^{-1}(x-\mu) = r^2\)</span> 描述的曲面是<strong>椭球</strong>。</p>
 <p><strong>椭球的轴由什么决定</strong>（这一步需要特征分解，链接
@@ -14000,7 +13990,6 @@ L 175.229127 90.554
 </table>
 <div class="admonition tip">
 <p class="admonition-title">这三项的待遇差异，就是三种情形的全部区别</p>
-<p><strong>记住这张表，后面三节都是它的展开</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14210,7 +14199,6 @@ x_0 = \frac{\mu_1 + \mu_2}{2}
 </tr>
 </tbody>
 </table>
-<p><strong>逐项读 <span class="arithmatex">\(x_0\)</span> 这个点</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14600,8 +14588,6 @@ L 344.318359 187.272
 </li>
 <li>先验变大时边界朝 w2 方向偏移，偏移量随先验差增大 ✓</li>
 </ul>
-<p><strong>看最后一列</strong>：<span class="arithmatex">\(P_1\)</span> 从 <span class="arithmatex">\(0.5\)</span> 增到 <span class="arithmatex">\(0.9\)</span>，偏移量从 <span class="arithmatex">\(0\)</span> 增到 <span class="arithmatex">\(0.686\)</span> ——
-<strong>边界在朝 <span class="arithmatex">\(\omega_2\)</span> 方向移动</strong> ✓</p>
 <hr />
 <h2 id="_6">五、情形二：协方差相同但不一定是球形<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p><strong>假设</strong>：各类协方差矩阵<strong>相同</strong>，但是<strong>一般的矩阵</strong>（各维方差可不同、可相关）</p>
@@ -14658,7 +14644,6 @@ L 344.318359 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>结论</strong>：<strong>决策面仍是超平面，但法向量方向变了</strong> ✓</p>
 <h3 id="53">5.3 用白化把它化回情形一<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p><strong>思路</strong>：做白化变换 <span class="arithmatex">\(y = L^{-1}x\)</span>（<span class="arithmatex">\(L\)</span> 是 <span class="arithmatex">\(\Sigma\)</span> 的 Cholesky 因子），
 则 <span class="arithmatex">\(y\)</span> 的协方差是单位阵 → <strong>问题变成情形一</strong> ✓</p>
@@ -14758,7 +14743,6 @@ b_i = \Sigma_i^{-1}\mu_i
 \qquad
 c_i = -\frac{1}{2}\mu_i^{\mathsf{T}}\Sigma_i^{-1}\mu_i
 - \frac{1}{2}\ln\lvert\Sigma_i\rvert + \ln P(\omega_i)\]</div>
-<p><strong>逐项读</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14864,8 +14848,6 @@ c_i = -\frac{1}{2}\mu_i^{\mathsf{T}}\Sigma_i^{-1}\mu_i
 <p><strong>一个容易反直觉的结论</strong>：<span class="arithmatex">\(\omega_1\)</span> 的密度在<strong>任何一点</strong>上比大小都可能输，
 但在<strong>中心附近</strong>总是赢 —— 因为决定胜负的<strong>不是峰的高度，而是衰减的快慢</strong>
 这与 §1.1 讲的「高斯支撑集是整个实轴，两条曲线永远重叠」正好呼应。</p>
-<p><strong>读最后三行</strong>：三个边界点代回去都是 0 ✓ ——
-说明确实是同一个圆上的点。</p>
 <p><strong>设计 A′：先验不等 → 圆变大</strong></p>
 <p>仍用 <span class="arithmatex">\(\mu_1 = \mu_2 = (0,0)^{\mathsf{T}}\)</span>、<span class="arithmatex">\(\Sigma_1 = 1I\)</span>、<span class="arithmatex">\(\Sigma_2 = 4I\)</span>。
 此时 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(c\)</span> 的<strong>前几项固定不变</strong>，只有最后一项 <span class="arithmatex">\(\ln(P_1/P_2)\)</span> 随先验变。</p>
@@ -14938,8 +14920,6 @@ c_i = -\frac{1}{2}\mu_i^{\mathsf{T}}\Sigma_i^{-1}\mu_i
 </tr>
 </tbody>
 </table>
-<p><strong>读最后一列</strong>：先验从 <span class="arithmatex">\(0.5\)</span> 升到 <span class="arithmatex">\(0.9\)</span>，半径从 <span class="arithmatex">\(1.360\)</span> 涨到 <span class="arithmatex">\(2.776\)</span> ——
-<span class="arithmatex">\(\omega_1\)</span> 占的圆<strong>扩大了约一倍</strong> ✓</p>
 <p><strong>这说明什么</strong>：改变先验<strong>不改变决策面的形状</strong>（还是同一个圆），
 只改变它的<strong>大小</strong> —— 因为先验只进入常数项 <span class="arithmatex">\(c\)</span>，
 而形状由二次项系数矩阵 <span class="arithmatex">\(A\)</span> 决定，<span class="arithmatex">\(A\)</span> 完全不受先验影响 ✓
@@ -15061,7 +15041,6 @@ x = \pm 1.261294\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>从这张表读出的规律</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -16966,7 +16945,6 @@ L 4.5 4.5
 </tr>
 </tbody>
 </table>
-<p><strong>三条要读出的话</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -17601,7 +17579,7 @@ L 65.777617 41.035937
 </tr>
 </tbody>
 </table>
-<p><strong>一个重要的实践原则（值得单独记住）</strong>：</p>
+<p><strong>一个重要的实践原则</strong>：</p>
 <div class="admonition warning">
 <p class="admonition-title">「共享协方差」通常是比「各类独立」更稳的选择</p>
 <table>
@@ -17736,7 +17714,6 @@ P(\omega_1) = P(\omega_2) = 0.5\]</div>
 <li><span class="arithmatex">\(x = 2\)</span>：<span class="arithmatex">\(g_2 = 6 - 5.193147 = +0.806853\)</span>，大于 <span class="arithmatex">\(g_1\)</span> → 判 <span class="arithmatex">\(\omega_2\)</span></li>
 <li><span class="arithmatex">\(x = 3\)</span>：<span class="arithmatex">\(g_2 = 9 - 5.193147 = +3.806853\)</span>，大于 <span class="arithmatex">\(g_1\)</span> → 判 <span class="arithmatex">\(\omega_2\)</span></li>
 </ul>
-<p><strong>整理成表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -17779,16 +17756,12 @@ P(\omega_1) = P(\omega_2) = 0.5\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>解析边界</strong>：令 <span class="arithmatex">\(g_1 = g_2\)</span>，即 <span class="arithmatex">\(3x - 5.193147 = -0.693147\)</span>，
-解得 <span class="arithmatex">\(3x = 4.5\)</span>，<span class="arithmatex">\(x = 1.5\)</span> —— <strong>正好是两均值的中点</strong></p>
 <p><strong>边界处的似然与后验</strong>：因为 <span class="arithmatex">\(x = 1.5\)</span> 到两个均值的距离都是 <span class="arithmatex">\(1.5\)</span>，
 两个似然<strong>完全相等</strong>：</p>
 <div class="arithmatex">\[p(1.5 \mid \omega_1) = p(1.5 \mid \omega_2) = 0.129518\]</div>
 <p>代入后验公式（先验都是 <span class="arithmatex">\(0.5\)</span>，分子分母同乘 <span class="arithmatex">\(0.5\)</span> 约掉）：</p>
 <div class="arithmatex">\[P(\omega_1 \mid 1.5) = \frac{0.129518}{0.129518 + 0.129518} = 0.5,
 \qquad P(\omega_2 \mid 1.5) = 0.5\]</div>
-<p><strong>这说明什么</strong>：边界点上<strong>后验正好是 <span class="arithmatex">\(0.5\)</span></strong>，
-两类「一样可能」—— 这与「边界 = 判决函数相等 = 后验相等」完全自洽 ✓</p>
 </details>
 <hr />
 <h3 id="2">例题 2：先验改变时边界怎么移<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -17851,7 +17824,6 @@ P(\omega_1) = P(\omega_2) = 0.5\]</div>
 <li><span class="arithmatex">\(P_1 = 0.9\)</span>：<span class="arithmatex">\(\ln(0.9/0.1) = \ln 9 = 2.197225\)</span>，
   <span class="arithmatex">\(0.333333 \times 2.197225 = 0.732408\)</span>，<span class="arithmatex">\(x^* = 2.232408\)</span>，偏移 <span class="arithmatex">\(+0.732408\)</span></li>
 </ul>
-<p><strong>整理成表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -18000,7 +17972,6 @@ P(\omega_1) = P(\omega_2) = 0.5\]</div>
 <li><span class="arithmatex">\((0,1)\)</span>：<span class="arithmatex">\(g = 0 - 0.833333 = -0.833333\)</span> → <span class="arithmatex">\(\omega_2\)</span></li>
 <li><span class="arithmatex">\((0.5,2)\)</span>：<span class="arithmatex">\(g = 0.833333 \times 0.25 - 0.833333 \times 4 = 0.208333 - 3.333333 = -3.125\)</span> → <span class="arithmatex">\(\omega_2\)</span></li>
 </ul>
-<p><strong>整理成表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -18117,7 +18088,6 @@ L^{-1} = \begin{pmatrix} 0.5 &amp; 0 \\ -0.353553 &amp; 0.707107 \end{pmatrix}\]
 <div class="arithmatex">\[w = (-1.25,\ -0.5)^{\mathsf{T}}\]</div>
 <p>第五步，<strong>直接路径</strong> <span class="arithmatex">\(\Sigma^{-1}(\mu_1-\mu_2)\)</span>（前面已算出）：</p>
 <div class="arithmatex">\[\Sigma^{-1}(\mu_1-\mu_2) = \left(-\tfrac54,\ -\tfrac12\right)^{\mathsf{T}} = (-1.25,\ -0.5)\]</div>
-<p><strong>两条路径完全一致</strong> ✓ —— 印证了「白化把情形二化成情形一」这个等价性。</p>
 <table>
 <thead>
 <tr>
@@ -18190,7 +18160,6 @@ g_1(x) = 0.25x - 0.818147, \qquad g_2(x) = 1.25x - 3.818147
 <li><span class="arithmatex">\(x = 5\)</span>：<span class="arithmatex">\(g_1 = 1.25 - 0.818147 = +0.431853\)</span>，
   <span class="arithmatex">\(g_2 = 6.25 - 3.818147 = +2.431853\)</span> → 判 <span class="arithmatex">\(\omega_2\)</span></li>
 </ul>
-<p><strong>整理成表</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -18233,7 +18202,6 @@ g_1(x) = 0.25x - 0.818147, \qquad g_2(x) = 1.25x - 3.818147
 </tr>
 </tbody>
 </table>
-<p><strong>解析边界</strong> <span class="arithmatex">\(= \dfrac{\mu_1+\mu_2}{2} = 3.0\)</span> ✓ 与表中一致。</p>
 <p><strong>再对比方差为 <span class="arithmatex">\(\sigma^2 = 1\)</span> 的情形</strong>（在 <span class="arithmatex">\(x = 3\)</span> 处）：</p>
 <ul>
 <li><span class="arithmatex">\(\sigma^2 = 1\)</span>：<span class="arithmatex">\(g_1 = 3 - 0.5 = +2.5\)</span>（先验项为 <span class="arithmatex">\(0\)</span>），

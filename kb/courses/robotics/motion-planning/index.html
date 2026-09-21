@@ -11982,8 +11982,7 @@
 实际系统常常两者结合：在笛卡尔空间生成路径点，再逐点逆解成关节序列。</p>
 <div class="admonition tip">
 <p class="admonition-title">记住这条主线</p>
-<p>这一页的四节，其实是同一句话的四个层次：
-<strong>关节空间排轨迹（二）→ 笛卡尔空间走直线（三）→ 移动机器人绕障碍（四）</strong>，
+<p><strong>关节空间排轨迹（二）→ 笛卡尔空间走直线（三）→ 移动机器人绕障碍（四）</strong>，
 最后把它们放进同一张「什么时候用哪个」的对照表。
 共同目标只有一个：<strong>让机器人平滑地、不越限地、不撞地到达目标</strong>。</p>
 </div>
@@ -11991,7 +11990,6 @@
 <p>· <strong>路径</strong>（path）：只讲<strong>几何</strong> —— 从哪到哪，不关心快慢；
 · <strong>轨迹</strong>（trajectory）：路径 <strong>+ 时间</strong> —— 每时刻在哪、多快；
 · <strong>控制</strong>（control）：把轨迹变成<strong>关节力矩/电压</strong>（下一章的事）。</p>
-<p><strong>这一页只做前两层</strong>：先定路径，再给它配一条平滑的时间曲线。</p>
 <hr />
 <h2 id="_3">二、关节空间轨迹规划<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 为什么不能直接线性插值<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -12040,10 +12038,8 @@ q(t) = q_0 + \Delta\Big[10\Big(\frac{t}{T}\Big)^3
 </tr>
 </tbody>
 </table>
-<p><strong>读这三行</strong>：两者末位置都对（都是 1.0），差别在过程。
-五次多项式的<strong>峰值速度更大</strong>（1.875 对 1.500），但<strong>峰值加速度略小</strong>（5.774 对 5.999）；
-<strong>关键差别在两端</strong> —— 三次的加速度在 <span class="arithmatex">\(t=0\)</span> 就有 6.0 那么大（突跳），
-五次的加速度从 0 连续长起来。
+<p><strong>读这三行</strong>：末位置都对，差别在过程 —— 五次峰值速度更大（1.875 对 1.500），
+但两端加速度从 0 平滑起步，三次则在 <span class="arithmatex">\(t=0\)</span> 就跳到 6.0。
 <strong>平滑性，是用峰值速度换来的。</strong></p>
 <p>把同一段移动的两条速度曲线、两条加速度曲线叠在一起看，差别一眼就清楚：</p>
 <figure class="kb-fig">
@@ -12076,8 +12072,7 @@ q(t) = q_0 + \Delta\Big[10\Big(\frac{t}{T}\Big)^3
 每段用一条多项式，再在连接点加<strong>连续性条件</strong>
 （前一段的末速度 = 后一段的初速度，末加速度 = 初加速度）。</p>
 <p><strong>但要记住</strong>：这样做只保证「<strong>点被经过</strong>」，不保证<strong>路径的形状</strong> ——
-关节空间插出来的末端轨迹是<strong>一堆曲线</strong>。
-想让末端走出指定的形状，就得看下一节。</p>
+关节空间插出来的末端轨迹是<strong>一堆曲线</strong>。</p>
 <hr />
 <h2 id="_4">三、笛卡尔空间轨迹规划<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 直线插补 + 姿态插补<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
@@ -12101,8 +12096,8 @@ q(t) = q_0 + \Delta\Big[10\Big(\frac{t}{T}\Big)^3
 <li>关节空间直线插值：末端偏离目标直线最远 0.2409 m</li>
 <li>笛卡尔空间直线插值：末端偏离目标直线最远 4.69e-16 m（数值零）</li>
 </ul>
-<p><strong>看后两行</strong>：关节空间直线插值，末端<strong>偏离目标直线最远 0.2409 m</strong> ——
-足足四分之一米；笛卡尔直线插值则是数值零（<span class="arithmatex">\(10^{-16}\)</span>）。
+<p><strong>看后两行</strong>：关节空间直线插值，末端<strong>偏离目标直线最远 0.2409 m</strong>；
+笛卡尔直线插值则是数值零（<span class="arithmatex">\(10^{-16}\)</span>）。
 <strong>这就是「想走直线，就必须在笛卡尔空间规划」的定量证据。</strong></p>
 <p>把两条路线的末端轨迹画在同一张平面图上，差别一目了然：</p>
 <figure class="kb-fig">
@@ -12165,8 +12160,7 @@ q(t) = q_0 + \Delta\Big[10\Big(\frac{t}{T}\Big)^3
 <li>A* 找到路径步数（含起终点）：15</li>
 <li>路径：0,0 → 0,1 → 0,2 → 0,3 → 0,4 → 0,5 → 0,6 → 0,7 → 1,7 → 2,7 → 3,7 → 4,7 → 5,7 → 6,7 → 7,7</li>
 </ul>
-<p><strong>读结果</strong>：8×8 栅格，中间那道墙把左下角封住，
-A* 找到<strong>15 步</strong>的路径 —— 沿最上行走到右上角，再沿最右列南下到终点。
+<p><strong>读结果</strong>：8×8 栅格，A* 找到<strong>15 步</strong>的路径。
 <strong>栅格法简单可靠，代价是「分辨率」</strong>：格子太小内存爆炸，太大又贴不住障碍。</p>
 <p>这张图把那条路径落在栅格上，起点、终点与那道墙的位置也一并标了出来：</p>
 <figure class="kb-fig">
@@ -12229,7 +12223,7 @@ v_{\max} = \frac{1.5\,\Delta}{T} = \frac{1.5\times 1}{2} = 0.75\ \text{rad/s}
 <div class="arithmatex">\[
 a_{\max} = \frac{6\,\Delta}{T^2} = \frac{6\times 1}{2^2} = 1.5\ \text{rad/s}^2
 \]</div>
-<p><strong>一句话</strong>：时间拉越长，所需的速度、加速度越小 ——
+<p><strong>一句话</strong>：时间拉越长，所需的速度、加速度越小。
 这也解释了为什么「慢一点更省力、更护减速器」。</p>
 </details>
 <hr />
@@ -12243,7 +12237,6 @@ a_{\max} = \frac{6\,\Delta}{T^2} = \frac{6\times 1}{2^2} = 1.5\ \text{rad/s}^2
 如果改成关节空间插值，<strong>末端轨迹会变成一堆曲线</strong>：
 本页第三节的算例给出定量证据 —— 同一段移动，关节空间插值让末端
 <strong>偏离目标直线最远 0.2409 m</strong>，笛卡尔插值则是数值零。</p>
-<p>0.24 m 的偏差，焊缝早就焊飞了。</p>
 <p><strong>一句话</strong>：<strong>只要「路径形状」是工艺指标，就必须在笛卡尔空间规划</strong>；
 笛卡尔规划再逐点逆解，把路径翻译成关节序列。</p>
 </details>

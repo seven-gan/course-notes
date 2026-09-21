@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="时序差分学习：上一页的动态规划要求两样我们通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们都丢掉——只保留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一个状态与奖励。">
+    <meta name="description" content="时序差分学习：上一页的动态规划要求两样通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们全丢掉——只留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一状态与奖励。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="时序差分学习">
   
-  <meta property="og:description" content="时序差分学习：上一页的动态规划要求两样我们通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们都丢掉——只保留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一个状态与奖励。">
+  <meta property="og:description" content="时序差分学习：上一页的动态规划要求两样通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们全丢掉——只留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一状态与奖励。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/mdp/td-learning/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="时序差分学习">
   
-  <meta name="twitter:description" content="时序差分学习：上一页的动态规划要求两样我们通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们都丢掉——只保留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一个状态与奖励。">
+  <meta name="twitter:description" content="时序差分学习：上一页的动态规划要求两样通常没有的东西：完整的环境模型 p(s&#39;| s,a)，以及遍历所有状态的能力。这一页把它们全丢掉——只留「能与环境交互」这一条。能交互就意味着能采样：做一次动作，观察下一状态与奖励。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12202,26 +12202,26 @@
 
 
 
-<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（马尔可夫决策过程、值函数等为标准译法）</code><code>Sutton &amp; Barto《强化学习导论》时序差分与 Q-learning 章节的通行术语</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
+<div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>术语依通行教材（马尔可夫决策过程、值函数等为标准译法）</code><code>Sutton &amp; Barto《强化学习导论》时序差分与 Q-learning 章节的通行术语</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">时序差分学习<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p><strong>上一页的动态规划要求两样我们通常没有的东西：完整的环境模型 <span class="arithmatex">\(p(s'\mid s,a)\)</span>，
-以及遍历所有状态的能力。这一页把它们都丢掉——只保留「能与环境交互」这一条。</strong></p>
-<p>能交互就意味着能<strong>采样</strong>：做一次动作，观察下一个状态与奖励。
+<p><strong>上一页的动态规划要求两样通常没有的东西：完整的环境模型 <span class="arithmatex">\(p(s'\mid s,a)\)</span>，
+以及遍历所有状态的能力。这一页把它们全丢掉——只留「能与环境交互」这一条。</strong></p>
+<p>能交互就意味着能<strong>采样</strong>：做一次动作，观察下一状态与奖励。
 时序差分（Temporal-Difference, TD）学习的全部思想就是：</p>
 <blockquote>
 <p><strong>用一个采样到的 <span class="arithmatex">\((s,a,r,s')\)</span> 四元组，代替 Bellman 方程里那个算不出来的期望。</strong></p>
 </blockquote>
-<p><strong>这一页要解决的问题是</strong>：把「解方程」变成「边跑边学」。
-它带来的好处是巨大的——不需要模型、不需要遍历全状态、可以在线增量更新。
-代价是<strong>引入了随机性</strong>，于是所有结论都从「等式」变成「期望意义下的逼近」，
-收敛性需要额外的条件（学习率、探索充分性）。</p>
-<p><strong>这一页的位置</strong>：它是整个强化学习最核心的一页。
+<p><strong>本页要解决的问题</strong>：把「解方程」变成「边跑边学」。
+好处巨大：不需模型、不需遍历全状态、可在线增量更新。
+代价是<strong>引入随机性</strong>，于是结论都从「等式」变成「期望意义下的逼近」，
+收敛性需要额外条件（学习率、探索充分性）。</p>
+<p><strong>本页的位置</strong>：它是强化学习最核心的一页。
 Q-learning 是应用最广的算法，SARSA 是安全性最相关的算法，
 资格迹 TD(<span class="arithmatex">\(\lambda\)</span>) 是它们的统一框架。</p>
 <div class="admonition tip">
 <p class="admonition-title">一句话抓住核心</p>
-<p>三个更新式，一句话记住它们的区别。</p>
+<p>三个更新式，一句话记住区别。</p>
 <p><strong>TD(0)</strong>（评估固定策略）：</p>
 <div class="arithmatex">\[
 V(S_t) \leftarrow V(S_t) + \alpha\left[R_{t+1} + \gamma V(S_{t+1}) - V(S_t)\right]
@@ -12234,7 +12234,7 @@ Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha\left[R_{t+1} + \gamma Q(S_{t+1},A_{t+1
 <div class="arithmatex">\[
 Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha\left[R_{t+1} + \gamma\max_a Q(S_{t+1},a) - Q(S_t,A_t)\right]
 \]</div>
-<p><strong>唯一的差别就是目标值里那一项</strong>：</p>
+<p><strong>唯一差别就是目标值里那一项</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12269,8 +12269,8 @@ Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha\left[R_{t+1} + \gamma\max_a Q(S_{t+1},
 <div class="arithmatex">\[
 \delta_t := R_{t+1} + \gamma V(S_{t+1}) - V(S_t)
 \]</div>
-<p><strong>TD 误差就是「惊喜」</strong>：实际得到的比预期多还是少。
-它是本模块后面所有算法的通用信号——<strong>Actor-Critic 里用它更新策略，
+<p><strong>TD 误差就是「惊喜」</strong>：实际比预期多还是少。
+它是本模块后续算法的通用信号——<strong>Actor-Critic 里用它更新策略，
 资格迹里用它加权历史状态，连神经科学都把它当作多巴胺信号的模型</strong>。</p>
 </div>
 <hr />
@@ -12324,7 +12324,7 @@ Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha\left[R_{t+1} + \gamma\max_a Q(S_{t+1},
 <tbody>
 <tr>
 <td>已知精确模型 <span class="arithmatex">\(p(s'\mid s,a)\)</span></td>
-<td>真实系统模型往往未知或不准</td>
+<td>真实系统模型常未知或不准</td>
 <td><strong>无法做期望</strong></td>
 </tr>
 <tr>
@@ -12339,47 +12339,47 @@ Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha\left[R_{t+1} + \gamma\max_a Q(S_{t+1},
 </tr>
 </tbody>
 </table>
-<p><strong>但要看清一件重要的事</strong>：DP 真正依赖模型的地方只有一个——
+<p><strong>但要看清一件事</strong>：DP 真正依赖模型的地方只有一个——
 计算 <span class="arithmatex">\(\sum_{s'}p(s'\mid s,a)V(s')\)</span> 这个<strong>期望</strong>。
-如果能把期望换成别的东西，模型就不再需要。</p>
+如果能把期望换掉，模型就不再需要。</p>
 <h3 id="12">1.2 核心思想：用采样代替期望<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><strong>关键观察（本页的全部起点）</strong>：Bellman 期望方程</p>
+<p><strong>关键观察（本页的起点）</strong>：Bellman 期望方程</p>
 <div class="arithmatex">\[
 V^{\pi}(s) = \sum_a\pi(a\mid s)\sum_{s'}p(s'\mid s,a)\left[r(s,a)+\gamma V^{\pi}(s')\right]
 \]</div>
 <p>右端是一个<strong>期望</strong>：对 <span class="arithmatex">\(A_t\sim\pi(\cdot\mid s)\)</span> 与 <span class="arithmatex">\(S_{t+1}\sim p(\cdot\mid s,a)\)</span> 取期望。
-既然它是一个期望，就可以用<strong>一次采样</strong>来估计它：</p>
+既然是期望，就可用<strong>一次采样</strong>估计：</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[R_{t+1}+\gamma V(S_{t+1})\ \Big|\ S_t=s\right] \approx R_{t+1}+\gamma V(S_{t+1})
 \]</div>
-<p><strong>右边这个采样量就是 TD 目标（TD target）</strong>。它是一个<strong>无偏估计</strong>：
+<p><strong>右边这个采样量就是 TD 目标</strong>。它是<strong>无偏估计</strong>：
 由全期望公式</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[R_{t+1}+\gamma V(S_{t+1})\ \Big|\ S_t=s\right]
 = \sum_a\pi(a\mid s)\sum_{s'}p(s'\mid s,a)\left[r(s,a)+\gamma V(s')\right]
 \]</div>
-<p>即<strong>采样量的期望恰好等于 Bellman 方程的右端</strong> <span class="arithmatex">\(\checkmark\)</span>。</p>
+<p>即<strong>采样量的期望恰等于 Bellman 方程的右端</strong> <span class="arithmatex">\(\checkmark\)</span>。</p>
 <h3 id="13-td">1.3 TD 误差与随机逼近<a class="headerlink" href="#13-td" title="Permanent link">&para;</a></h3>
 <p><strong>TD 误差</strong>定义为</p>
 <div class="arithmatex">\[
 \delta_t := R_{t+1} + \gamma V(S_{t+1}) - V(S_t)
 \]</div>
-<p><strong>它是无偏的当且仅当 <span class="arithmatex">\(V=V^{\pi}\)</span></strong>：若 <span class="arithmatex">\(V=V^{\pi}\)</span>，则由 Bellman 方程</p>
+<p><strong>它无偏当且仅当 <span class="arithmatex">\(V=V^{\pi}\)</span></strong>：若 <span class="arithmatex">\(V=V^{\pi}\)</span>，则由 Bellman 方程</p>
 <div class="arithmatex">\[
 \mathbb{E}[\delta_t\mid S_t=s] = \mathbb{E}[R_{t+1}+\gamma V^{\pi}(S_{t+1})\mid S_t=s]-V^{\pi}(s) = V^{\pi}(s)-V^{\pi}(s)=0
 \]</div>
 <p><strong>反过来，若 <span class="arithmatex">\(\mathbb{E}[\delta_t\mid S_t=s]=0\)</span> 对所有 <span class="arithmatex">\(s\)</span> 成立，则 <span class="arithmatex">\(V\)</span> 满足 Bellman 方程，
 从而 <span class="arithmatex">\(V=V^{\pi}\)</span></strong>（由不动点唯一性）。</p>
-<p><strong>这就是 TD 学习的收敛判据</strong>：<strong>让 TD 误差的期望处处为零</strong>。
+<p><strong>这就是 TD 学习的收敛判据</strong>：<strong>让 TD 误差期望处处为零</strong>。
 于是自然地得到随机逼近（stochastic approximation）式的更新：</p>
 <div class="arithmatex">\[
 V(S_t)\leftarrow V(S_t)+\alpha_t\,\delta_t
 \]</div>
-<p><strong>这个更新式的含义</strong>：若实际拿到的比预期多（<span class="arithmatex">\(\delta_t&gt;0\)</span>），就把 <span class="arithmatex">\(V\)</span> 往上调一点；
-反之往下调。<span class="arithmatex">\(\alpha_t\)</span> 是学习率，控制「调多少」。</p>
+<p><strong>这个更新式的含义</strong>：若实际比预期多（<span class="arithmatex">\(\delta_t&gt;0\)</span>），就把 <span class="arithmatex">\(V\)</span> 上调一点；
+反之下调。<span class="arithmatex">\(\alpha_t\)</span> 是学习率，控制「调多少」。</p>
 <div class="admonition tip">
 <p class="admonition-title">TD 学习是「用采样解方程」的一般套路</p>
-<p><strong>把 DP 与他合并排，结构完全一样，只有一步不同</strong>：</p>
+<p><strong>把 DP 与他合并排，结构一样，只差一步</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12416,26 +12416,26 @@ V(S_t)\leftarrow V(S_t)+\alpha_t\,\delta_t
 </tr>
 </tbody>
 </table>
-<p><strong>「完全替换」与「部分修正」的区别值得说明</strong>：
+<p><strong>「完全替换」与「部分修正」的区别</strong>：
 DP 里写 <span class="arithmatex">\(V(s)\leftarrow\mathbb{E}[\cdots]\)</span> 是<strong>赋值</strong>（<span class="arithmatex">\(\alpha=1\)</span>）；
-TD 里必须写成 <span class="arithmatex">\(V(s)\leftarrow V(s)+\alpha\delta\)</span>（<span class="arithmatex">\(\alpha&lt;1\)</span>），
-否则单次采样的噪声会直接把 <span class="arithmatex">\(V\)</span> 冲垮，无法收敛。</p>
+TD 里必须写 <span class="arithmatex">\(V(s)\leftarrow V(s)+\alpha\delta\)</span>（<span class="arithmatex">\(\alpha&lt;1\)</span>），
+否则单次采样噪声会冲垮 <span class="arithmatex">\(V\)</span>，无法收敛。</p>
 </div>
 <h3 id="14-td-dp">1.4 TD 学习是「对 DP 的猜谜」<a class="headerlink" href="#14-td-dp" title="Permanent link">&para;</a></h3>
-<p>用 Sutton 与 Barto 在《强化学习导论》里的经典说法：</p>
+<p>用 Sutton 与 Barto《强化学习导论》里的经典说法：</p>
 <blockquote>
-<p><strong>TD 学习可以被看作是对 DP 的一种「猜谜」——
-它用量化的、基于经验的猜测，去逼近 DP 所要求的精确期望。</strong></p>
+<p><strong>TD 学习可以看作对 DP 的一种「猜谜」——
+它用量化、基于经验的猜测，去逼近 DP 所要求的精确期望。</strong></p>
 </blockquote>
 <p>这个比喻抓住了三件事：</p>
 <ol>
-<li><strong>有猜测成分</strong>：用 <span class="arithmatex">\(V(S_{t+1})\)</span> 当作「未来有多好」的估计，
-   而它本身也是学出来的——<strong>用估计去更新估计（bootstrapping）</strong>。</li>
-<li><strong>猜测逐步变准</strong>：每次交互给一点修正，长期看收敛到真值。</li>
-<li><strong>不需要模型的精确知识</strong>：猜的是「值」，不是「模型」。</li>
+<li><strong>有猜测成分</strong>：用 <span class="arithmatex">\(V(S_{t+1})\)</span> 当作「未来多好」的估计，
+   而它本身也在学——<strong>用估计更新估计（bootstrapping）</strong>。</li>
+<li><strong>猜测逐步变准</strong>：每次交互给点修正，长期收敛到真值。</li>
+<li><strong>不需模型的精确知识</strong>：猜的是「值」，不是「模型」。</li>
 </ol>
-<p><strong>「bootstrapping」这个术语要特别注意</strong>：它指
-<strong>更新一个估计量时用了另一个估计量（而不是真实结果）</strong>。
+<p><strong>「bootstrapping」这个词要注意</strong>：它指
+<strong>更新一个估计量时用了另一个估计量，而非真实结果</strong>。
 这是 TD 与 MC 的分水岭：</p>
 <table>
 <thead>
@@ -12704,7 +12704,7 @@ L 189.970526 127.908234
 <h2 id="_3">二、蒙特卡洛与时序差分<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 蒙特卡洛方法<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p><strong>蒙特卡洛（Monte Carlo, MC）</strong>方法完全不猜：
-跑完整个回合，得到真实的折扣回报 <span class="arithmatex">\(G_t\)</span>，然后用它更新：</p>
+跑完整个回合，得到真实折扣回报 <span class="arithmatex">\(G_t\)</span>，用它更新：</p>
 <div class="arithmatex">\[
 V(S_t)\leftarrow V(S_t) + \alpha\left[G_t - V(S_t)\right]
 \]</div>
@@ -12720,7 +12720,7 @@ V(S_t)\leftarrow V(S_t) + \alpha\left[G_t - V(S_t)\right]
 <tbody>
 <tr>
 <td>回合必须<strong>终止</strong></td>
-<td><span class="arithmatex">\(G_t\)</span> 是有限的有限项和</td>
+<td><span class="arithmatex">\(G_t\)</span> 是有限项和</td>
 </tr>
 <tr>
 <td>必须<strong>等到回合结束</strong>才能更新</td>
@@ -12732,10 +12732,10 @@ V(S_t)\leftarrow V(S_t) + \alpha\left[G_t - V(S_t)\right]
 </tr>
 </tbody>
 </table>
-<p><strong>第三条正是 MC 的根本缺陷</strong>：在持续性任务（永不终止）中无法使用，
-在长回合任务中即时性极差（要等几千步才能更新一次）。</p>
-<p><strong>MC 的优点</strong>：它是<strong>无偏</strong>的（<span class="arithmatex">\(G_t\)</span> 是真实回报，期望正好等于 <span class="arithmatex">\(V^{\pi}(s)\)</span>），
-而且<strong>不需要马尔可夫性</strong>（不需要 bootstrap，也就不依赖状态是否携带完整历史信息）。</p>
+<p><strong>第三条正是 MC 的根本缺陷</strong>：持续性任务（永不终止）无法使用，
+长回合任务即时性极差（要等几千步才能更新一次）。</p>
+<p><strong>MC 的优点</strong>：它<strong>无偏</strong>（<span class="arithmatex">\(G_t\)</span> 是真实回报，期望正好等于 <span class="arithmatex">\(V^{\pi}(s)\)</span>），
+且<strong>不需马尔可夫性</strong>（不需 bootstrap，因而不依赖状态是否携带完整历史信息）。</p>
 <h3 id="22">2.2 两者的完整对比<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <figure class="kb-fig">
 <svg viewBox="0 0 328.685433 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TD 与 MC 的目标值：引导 vs 完整回报">
@@ -12968,14 +12968,14 @@ L 96.512176 116.43
 </tr>
 </tbody>
 </table>
-<p><strong>方差对比的直观解释</strong>：<span class="arithmatex">\(G_t\)</span> 是 <span class="arithmatex">\(T\)</span> 步随机变量的和，方差随 <span class="arithmatex">\(T\)</span> <strong>线性增长</strong>；
+<p><strong>方差对比</strong>：<span class="arithmatex">\(G_t\)</span> 是 <span class="arithmatex">\(T\)</span> 步随机变量之和，方差随 <span class="arithmatex">\(T\)</span> <strong>线性增长</strong>；
 而 <span class="arithmatex">\(R_{t+1}+\gamma V(S_{t+1})\)</span> 只含一步随机性（在 <span class="arithmatex">\(V\)</span> 已知的假设下方差有界）。
-<strong>所以 TD 的方差远小于 MC</strong>，这是它样本效率更高的根本原因。</p>
-<p><strong>偏差对比的直观解释</strong>：<span class="arithmatex">\(V(S_{t+1})\)</span> 是学出来的，若它错了，
-TD 目标就系统性偏移。<strong>而且初始偏差会顺着迭代向回传播</strong>——
+<strong>所以 TD 方差远小于 MC</strong>，这是它样本效率高的根本原因。</p>
+<p><strong>偏差对比</strong>：<span class="arithmatex">\(V(S_{t+1})\)</span> 是学出来的，若它错了，
+TD 目标就系统性偏移。<strong>且初始偏差会顺迭代回传</strong>——
 这是 TD 的固有代价。</p>
 <h3 id="23-n">2.3 偏差–方差权衡的统一视角：<span class="arithmatex">\(n\)</span> 步回报<a class="headerlink" href="#23-n" title="Permanent link">&para;</a></h3>
-<p><strong>这两者不是对立的两极，而是一条连续谱上的两个端点</strong>。定义 <strong><span class="arithmatex">\(n\)</span> 步回报</strong>：</p>
+<p><strong>两者不是对立两极，而是一条连续谱的两个端点</strong>。定义 <strong><span class="arithmatex">\(n\)</span> 步回报</strong>：</p>
 <div class="arithmatex">\[
 G_t^{(n)} := R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1}R_{t+n} + \gamma^{n}V(S_{t+n})
 \]</div>
@@ -13009,8 +13009,8 @@ G_t^{(n)} := R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1}R_{t+n} + \gamma^{n
 </tr>
 </tbody>
 </table>
-<p><strong>这个表就是「偏差–方差权衡」在强化学习里的精确形式</strong>，
-<span class="arithmatex">\(n\)</span> 是那个调节旋钮。</p>
+<p><strong>这个表就是「偏差–方差权衡」的精确形式</strong>，
+<span class="arithmatex">\(n\)</span> 是调节旋钮。</p>
 <p><strong><span class="arithmatex">\(n\)</span> 步 TD 的更新式</strong>：</p>
 <div class="arithmatex">\[
 V(S_t)\leftarrow V(S_t)+\alpha\left[G_t^{(n)}-V(S_t)\right]
@@ -13018,52 +13018,52 @@ V(S_t)\leftarrow V(S_t)+\alpha\left[G_t^{(n)}-V(S_t)\right]
 <div class="admonition warning">
 <p class="admonition-title">「无偏」要看是对谁无偏</p>
 <p>MC 的无偏是<strong>真无偏</strong>：<span class="arithmatex">\(\mathbb{E}[G_t\mid S_t=s]=V^{\pi}(s)\)</span> 严格成立。</p>
-<p><span class="arithmatex">\(n\)</span> 步 TD 的「偏差」有两层含义，容易混淆：</p>
+<p><span class="arithmatex">\(n\)</span> 步 TD 的「偏差」有两层含义，易混：</p>
 <ol>
 <li><strong>相对于 <span class="arithmatex">\(V^{\pi}\)</span> 的偏差</strong>：当 <span class="arithmatex">\(n\)</span> 有限时，
    <span class="arithmatex">\(\mathbb{E}[G_t^{(n)}\mid S_t=s]\neq V^{\pi}(s)\)</span>——
-   这是因为插入了 <span class="arithmatex">\(V(S_{t+n})\)</span>，它是估计值。即使 <span class="arithmatex">\(V\)</span> 正确，
-   <span class="arithmatex">\(n\)</span> 步回报的期望也只在 <span class="arithmatex">\(n\to\infty\)</span> 时精确等于 <span class="arithmatex">\(V^{\pi}\)</span>。</li>
-<li><strong>收敛后的偏差</strong>：<strong>若算法收敛到某个 <span class="arithmatex">\(\tilde{V}\)</span></strong>，
-   则 <span class="arithmatex">\(n\)</span> 步 TD 与 TD(0) 一样都收敛到<strong>真值 <span class="arithmatex">\(V^{\pi}\)</span></strong>，
+   因为插入了 <span class="arithmatex">\(V(S_{t+n})\)</span>，它是估计值。即使 <span class="arithmatex">\(V\)</span> 正确，
+   <span class="arithmatex">\(n\)</span> 步回报的期望只在 <span class="arithmatex">\(n\to\infty\)</span> 时才精确等于 <span class="arithmatex">\(V^{\pi}\)</span>。</li>
+<li><strong>收敛后的偏差</strong>：<strong>若算法收敛到某 <span class="arithmatex">\(\tilde{V}\)</span></strong>，
+   则 <span class="arithmatex">\(n\)</span> 步 TD 与 TD(0) 一样收敛到<strong>真值 <span class="arithmatex">\(V^{\pi}\)</span></strong>，
    不留下固定偏差。<strong>有限 <span class="arithmatex">\(n\)</span> 只影响收敛路径，不影响极限。</strong></li>
 </ol>
-<p><strong>结论</strong>：<strong>有限 <span class="arithmatex">\(n\)</span> 带来的偏差是可消除的（随学习过程消失），
-不是不可消除的模型偏差。</strong> 这一点与函数逼近带来的不可消除偏差完全不同，
+<p><strong>结论</strong>：<strong>有限 <span class="arithmatex">\(n\)</span> 带来的偏差可消除（随学习过程消失），
+不是不可消除的模型偏差。</strong> 这与函数逼近的不可消除偏差完全不同，
 后者是本页末尾要提醒的严重问题。</p>
 </div>
 <h3 id="24-td-mc">2.4 「TD 比 MC 更有效」的一个经典例子<a class="headerlink" href="#24-td-mc" title="Permanent link">&para;</a></h3>
-<p>考虑一个<strong>随机游走</strong>环境：5 个非终止状态排成一行，两端是终止状态，
-最右端终止奖励为 <span class="arithmatex">\(1\)</span>，其余奖励为 <span class="arithmatex">\(0\)</span>。真实价值为 <span class="arithmatex">\(V(s)=i/6\)</span>
+<p>考虑<strong>随机游走</strong>环境：5 个非终止状态排成一行，两端终止，
+最右端终止奖励 <span class="arithmatex">\(1\)</span>，其余奖励 <span class="arithmatex">\(0\)</span>。真实价值为 <span class="arithmatex">\(V(s)=i/6\)</span>
 （<span class="arithmatex">\(i\)</span> 是位置编号，即「到达右端的概率」）。</p>
-<p><strong>理论结果（Sutton &amp; Barto 的经典实验）</strong>：在同样的数据量下，
-<strong>TD(0) 学到的价值明显更接近真值</strong>，而 MC 需要更多回合才能赶上来。</p>
-<p><strong>为什么</strong>：MC 必须等到达右端才能知道回报，
-且回报的方差很大（因为要经过多次随机选择）；
-TD 每步都能更新，且<strong>它利用了「相邻状态的价值相近」这一马尔可夫结构</strong>。</p>
-<p><strong>但必须注意</strong>：这个优势<strong>建立在一个前提上——马尔可夫性成立</strong>。
-若状态表示不完整（例如随机游走被改造成「每步有概率跳回随机位置」的非马尔可夫过程），
-<strong>MC 反而更准</strong>。这是 TD 的马尔可夫假设在实际中失效时的典型表现。</p>
-<p><strong>工程教训</strong>：<strong>TD 更好还是 MC 更好，取决于马尔可夫性的成立程度。</strong>
-状态设计得好，TD 优势明显；状态设计得差，TD 的系统性偏差会比 MC 的方差更致命。</p>
+<p><strong>理论结果（Sutton &amp; Barto 的经典实验）</strong>：同样数据量下，
+<strong>TD(0) 学到的价值明显更接近真值</strong>，MC 需更多回合才能赶上。</p>
+<p><strong>为什么</strong>：MC 必须到右端才知道回报，
+且回报方差大（因要经多次随机选择）；
+TD 每步都能更新，且<strong>利用「相邻状态的价值相近」这一马尔可夫结构</strong>。</p>
+<p><strong>但要注意</strong>：这优势<strong>建立在一个前提上——马尔可夫性成立</strong>。
+若状态表示不完整（如随机游走改造成「每步有概率跳回随机位置」的非马尔可夫过程），
+<strong>MC 反而更准</strong>。这是 TD 马尔可夫假设在实际失效时的典型表现。</p>
+<p><strong>工程教训</strong>：<strong>TD 与 MC 谁更好，取决于马尔可夫性成立程度。</strong>
+状态设计好，TD 优势明显；设计差，TD 系统性偏差会比 MC 方差更致命。</p>
 <hr />
 <h2 id="td0-sarsaon-policy">三、TD(0) 与 SARSA：on-policy 控制<a class="headerlink" href="#td0-sarsaon-policy" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 从评估到控制<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p>前面讲的 TD(0) 只解决<strong>评估</strong>问题（给定 <span class="arithmatex">\(\pi\)</span>，求 <span class="arithmatex">\(V^{\pi}\)</span>）。
-要做<strong>控制</strong>（找最优策略），需要引入动作维度：学 <span class="arithmatex">\(Q\)</span> 而不是 <span class="arithmatex">\(V\)</span>。</p>
-<p><strong>SARSA</strong> 的做法是把 TD(0) 式中的 <span class="arithmatex">\(V\)</span> 换成 <span class="arithmatex">\(Q\)</span>：</p>
+<p>前面的 TD(0) 只解决<strong>评估</strong>问题（给定 <span class="arithmatex">\(\pi\)</span>，求 <span class="arithmatex">\(V^{\pi}\)</span>）。
+要做<strong>控制</strong>（找最优策略），需引入动作维度：学 <span class="arithmatex">\(Q\)</span> 而非 <span class="arithmatex">\(V\)</span>。</p>
+<p><strong>SARSA</strong> 的做法是把 TD(0) 式的 <span class="arithmatex">\(V\)</span> 换成 <span class="arithmatex">\(Q\)</span>：</p>
 <div class="arithmatex">\[
 Q(S_t,A_t)\leftarrow Q(S_t,A_t)+\alpha\left[R_{t+1}+\gamma Q(S_{t+1},A_{t+1})-Q(S_t,A_t)\right]
 \]</div>
-<p><strong>名字的来源</strong>：更新用到了五元组 <span class="arithmatex">\((S_t,\ A_t,\ R_{t+1},\ S_{t+1},\ A_{t+1})\)</span>——
+<p><strong>名字的来源</strong>：更新用到五元组 <span class="arithmatex">\((S_t,\ A_t,\ R_{t+1},\ S_{t+1},\ A_{t+1})\)</span>——
 用中文说就是「状态–动作–奖励–状态–动作」（State-Action-Reward-State-Action），
-各取首字母就是 SARSA。</p>
-<p><strong><span class="arithmatex">\(A_{t+1}\)</span> 是怎么来的</strong>：<strong>由当前策略 <span class="arithmatex">\(\pi\)</span> 在实际交互中真的选出来</strong>。
-这一点至关重要，直接决定了 SARSA 是 <strong>on-policy</strong> 算法。</p>
+取首字母即 SARSA。</p>
+<p><strong><span class="arithmatex">\(A_{t+1}\)</span> 怎么来的</strong>：<strong>由当前策略 <span class="arithmatex">\(\pi\)</span> 在实际交互中真选出</strong>。
+这点至关重要，直接决定 SARSA 是 <strong>on-policy</strong> 算法。</p>
 <h3 id="32-on-policy-varepsilon-greedy">3.2 on-policy 的含义与 <span class="arithmatex">\(\varepsilon\)</span>-greedy 探索<a class="headerlink" href="#32-on-policy-varepsilon-greedy" title="Permanent link">&para;</a></h3>
-<p><strong>关键问题</strong>：如果策略总是选当前认为最好的动作（纯贪心），
-那没被试过的动作永远不会被改进，可能卡在次优解。<strong>必须探索。</strong></p>
-<p><strong><span class="arithmatex">\(\varepsilon\)</span>-greedy 策略</strong>是最常用的探索方法：</p>
+<p><strong>关键问题</strong>：若策略总选当前认为最好的动作（纯贪心），
+那没试过的动作永不会被改进，可能卡在次优解。<strong>必须探索。</strong></p>
+<p><strong><span class="arithmatex">\(\varepsilon\)</span>-greedy 策略</strong>是最常用的探索法：</p>
 <div class="arithmatex">\[
 \pi(a\mid s) = \begin{cases}
 1-\varepsilon+\dfrac{\varepsilon}{\lvert A(s)\rvert}, &amp; a = \arg\max_{a'}Q(s,a') \\[6pt]
@@ -13083,30 +13083,30 @@ Q(S_t,A_t)\leftarrow Q(S_t,A_t)+\alpha\left[R_{t+1}+\gamma Q(S_{t+1},A_{t+1})-Q(
 <tr>
 <td>保持探索</td>
 <td><span class="arithmatex">\(\pi(a\mid s)\geq\frac{\varepsilon}{\lvert A\rvert}&gt;0\)</span> 对所有 <span class="arithmatex">\(a\)</span></td>
-<td>每个动作都会被无限次尝试</td>
+<td>每个动作都被无限次尝试</td>
 </tr>
 <tr>
 <td>趋近贪心</td>
 <td><span class="arithmatex">\(\varepsilon\to0\)</span> 时退化为贪心</td>
-<td>最终能收敛到最优</td>
+<td>最终收敛到最优</td>
 </tr>
 </tbody>
 </table>
-<p><strong>第一个性质是收敛性的必要条件</strong>：若某动作永不被尝试，
-<span class="arithmatex">\(Q(s,a)\)</span> 永远不会更新，就无法保证收敛到 <span class="arithmatex">\(Q^{*}\)</span>。
+<p><strong>第一个性质是收敛的必要条件</strong>：若某动作永不尝试，
+<span class="arithmatex">\(Q(s,a)\)</span> 永远不更新，就无法收敛到 <span class="arithmatex">\(Q^{*}\)</span>。
 <strong>这就是「GLIE 条件」（Greedy in the Limit with Infinite Exploration，无限探索下的极限贪心）
 的实际含义。</strong></p>
-<p><strong>on-policy 的定义</strong>：<strong>行为策略（用于产生数据的策略）与目标策略（被评估/改进的策略）是同一个。</strong>
-SARSA 就是这种情况——它评估的就是当前正在执行的那个 <span class="arithmatex">\(\varepsilon\)</span>-greedy 策略。</p>
+<p><strong>on-policy 的定义</strong>：<strong>行为策略（产生数据的策略）与目标策略（被评估/改进的策略）是同一个。</strong>
+SARSA 即此类——它评估的就是当前执行的 <span class="arithmatex">\(\varepsilon\)</span>-greedy 策略。</p>
 <div class="admonition warning">
 <p class="admonition-title">SARSA 学到的是「带探索策略」的价值，不是最优价值</p>
-<p>设 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，SARSA 收敛到的是 <span class="arithmatex">\(Q^{\pi_\varepsilon}\)</span>——
-<strong>在「有一定概率乱走」的策略下的价值</strong>。</p>
-<p><strong>后果</strong>：SARSA 学出的 <span class="arithmatex">\(Q\)</span> 会<strong>正确反映探索的风险</strong>。
-例如在悬崖边行走：因为 <span class="arithmatex">\(\varepsilon\)</span> 概率会随机走一步，
-靠悬崖的路线<strong>真的有可能掉下去</strong>，所以它在该路线上的 <span class="arithmatex">\(Q\)</span> 值会偏低，
-于是 SARSA <strong>倾向于选择更安全但更绕的路线</strong>。</p>
-<p><strong>这不是缺陷，而是一个重要的安全特性</strong>——见例题 3 的定量分析。</p>
+<p>设 <span class="arithmatex">\(\varepsilon&gt;0\)</span>，SARSA 收敛到 <span class="arithmatex">\(Q^{\pi_\varepsilon}\)</span>——
+<strong>即「有一定概率乱走」策略下的价值</strong>。</p>
+<p><strong>后果</strong>：SARSA 学出的 <span class="arithmatex">\(Q\)</span> <strong>正确反映探索的风险</strong>。
+例如悬崖边行走：因 <span class="arithmatex">\(\varepsilon\)</span> 概率会随机走一步，
+靠悬崖的路线<strong>有可能掉下去</strong>，所以它在该路线上的 <span class="arithmatex">\(Q\)</span> 值偏低，
+于是 SARSA <strong>倾向更安全但更绕的路线</strong>。</p>
+<p><strong>这不是缺陷，而是安全特性</strong>——见例题 3 的定量分析。</p>
 </div>
 <h3 id="33-sarsa">3.3 SARSA 的收敛性<a class="headerlink" href="#33-sarsa" title="Permanent link">&para;</a></h3>
 <p><strong>定理（收敛性）</strong>：若满足以下条件，SARSA 以概率 1 收敛到 <span class="arithmatex">\(Q^{*}\)</span>：</p>
@@ -13114,7 +13114,7 @@ SARSA 就是这种情况——它评估的就是当前正在执行的那个 <spa
 \sum_{t=1}^{\infty}\alpha_t = \infty, \qquad \sum_{t=1}^{\infty}\alpha_t^2 &lt; \infty
 \]</div>
 <p>并且策略满足 <strong>GLIE</strong>，状态–动作对<strong>无限次被访问</strong>，奖励有界。</p>
-<p><strong>这两个学习率条件称为 Robbins–Monro 条件</strong>，含义值得解释清楚：</p>
+<p><strong>这两个学习率条件称 Robbins–Monro 条件</strong>，含义值得解释：</p>
 <table>
 <thead>
 <tr>
@@ -13127,7 +13127,7 @@ SARSA 就是这种情况——它评估的就是当前正在执行的那个 <spa
 <tr>
 <td><span class="arithmatex">\(\sum\alpha_t=\infty\)</span></td>
 <td>学习率衰减得<strong>足够慢</strong></td>
-<td><span class="arithmatex">\(\alpha_t=1/2^t\)</span>：衰减太快，<span class="arithmatex">\(V\)</span> 停在初始值附近</td>
+<td><span class="arithmatex">\(\alpha_t=1/2^t\)</span>：衰减太快，<span class="arithmatex">\(V\)</span> 停在初值附近</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\sum\alpha_t^2&lt;\infty\)</span></td>
@@ -13145,7 +13145,7 @@ SARSA 就是这种情况——它评估的就是当前正在执行的那个 <spa
 实践中常取 <span class="arithmatex">\(\alpha_t = 1/(1+\text{访问次数}(s,a))\)</span> 的变体。</p>
 <p><strong>注意</strong>：条件 <span class="arithmatex">\(\sum\alpha_t^2&lt;\infty\)</span> 对<strong>表格式</strong> SARSA / Q-learning 是必需的；
 但在<strong>函数逼近</strong>（如神经网络）下通常只用常数学习率，
-此时只能保证收敛到<strong>某个邻域</strong>而不是精确最优——
+此时只能保证收敛到<strong>某个邻域</strong>而非精确最优——
 这是深度强化学习的理论困难之一。</p>
 <hr />
 <h2 id="q-learningoff-policy">四、Q-learning：off-policy 控制<a class="headerlink" href="#q-learningoff-policy" title="Permanent link">&para;</a></h2>
@@ -13160,17 +13160,17 @@ Q(S_t,A_t)\leftarrow Q(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\max_{a}Q(S_{t+1},a)-Q
 Q^{*}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q^{*}(s',a')
 \]</div>
 <p>Q-learning 的更新目标 <span class="arithmatex">\(R_{t+1}+\gamma\max_a Q(S_{t+1},a)\)</span>
-正是右端<strong>期望里面的那个量</strong>的采样。所以：</p>
+正是右端<strong>期望里那个量</strong>的采样。故：</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[R_{t+1}+\gamma\max_a Q(S_{t+1},a)\ \Big|\ S_t=s,A_t=a\right]
 = r(s,a)+\gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q(s',a')
 \]</div>
-<p><strong>采样量的期望恰好是 Bellman 最优方程的右端</strong>——
-于是和 1.3 节一样的论证表明：让 TD 误差期望为零的 <span class="arithmatex">\(Q\)</span> 就是 <span class="arithmatex">\(Q^{*}\)</span>。</p>
+<p><strong>采样量的期望恰是 Bellman 最优方程的右端</strong>——
+于是和 1.3 节一样的论证表明：让 TD 误差期望为零的 <span class="arithmatex">\(Q\)</span> 即 <span class="arithmatex">\(Q^{*}\)</span>。</p>
 <h3 id="42-off-policy">4.2 为什么是 off-policy<a class="headerlink" href="#42-off-policy" title="Permanent link">&para;</a></h3>
-<p><strong>关键观察</strong>：更新式里的 <span class="arithmatex">\(\max_a Q(S_{t+1},a)\)</span> <strong>只依赖 <span class="arithmatex">\(Q\)</span> 表，不依赖实际采到的 <span class="arithmatex">\(A_{t+1}\)</span></strong>。</p>
-<p>这意味着：<strong>无论数据由哪个策略产生，这个更新都在朝 <span class="arithmatex">\(Q^{*}\)</span> 推进</strong>。
-产生数据的策略（行为策略）与被学习的目标策略（贪心策略）<strong>可以不同</strong>——
+<p><strong>关键观察</strong>：更新式里的 <span class="arithmatex">\(\max_a Q(S_{t+1},a)\)</span> <strong>只依赖 <span class="arithmatex">\(Q\)</span> 表，与采到的 <span class="arithmatex">\(A_{t+1}\)</span> 无关</strong>。</p>
+<p>这意味着：<strong>无论数据由哪个策略产生，此更新都朝 <span class="arithmatex">\(Q^{*}\)</span> 推进</strong>。
+产生数据的策略（行为策略）与被学习的目标策略（贪心）<strong>可不同</strong>——
 这就是 <strong>off-policy</strong>。</p>
 <p><strong>off-policy 的巨大优势</strong>：</p>
 <table>
@@ -13195,12 +13195,12 @@ Q^{*}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q^{*}(s',a')
 </tr>
 <tr>
 <td>目标策略可以<strong>纯贪心</strong></td>
-<td>不受探索策略的干扰</td>
+<td>不受探索策略干扰</td>
 </tr>
 </tbody>
 </table>
-<p><strong>代价</strong>：off-policy 的收敛更脆弱，且（在 MC 形式下）需要重要性采样修正。
-<strong>Q-learning 之所以这么受欢迎，正是因为它用「取 max」这个技巧
+<p><strong>代价</strong>：off-policy 收敛更脆弱，且（MC 形式下）需要重要性采样修正。
+<strong>Q-learning 之所以受欢迎，正因它用「取 max」这一技巧
 绕开了重要性采样</strong>——这是它最漂亮的数学贡献。</p>
 <h3 id="43-on-policy-off-policy">4.3 on-policy 与 off-policy 的完整对照<a class="headerlink" href="#43-on-policy-off-policy" title="Permanent link">&para;</a></h3>
 <table>
@@ -13230,7 +13230,7 @@ Q^{*}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q^{*}(s',a')
 <tr>
 <td>是否需重要性采样</td>
 <td>不需要</td>
-<td><strong>不需要</strong>（取 max 绕开了）</td>
+<td><strong>不需要</strong>（取 max 绕开）</td>
 </tr>
 <tr>
 <td>能否用经验回放</td>
@@ -13261,7 +13261,7 @@ Q^{*}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q^{*}(s',a')
 </table>
 <div class="admonition tip">
 <p class="admonition-title">怎么选：SARSA 还是 Q-learning</p>
-<p><strong>判断标准是「训练过程中的错误能不能容忍」</strong>：</p>
+<p><strong>判断标准是「训练中的错误能否容忍」</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13298,53 +13298,53 @@ Q^{*}(s,a) = r(s,a) + \gamma\sum_{s'}p(s'\mid s,a)\max_{a'}Q^{*}(s',a')
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：<strong>Q-learning 学的是「如果以后都走最优会怎样」，
-SARSA 学的是「按现在这个爱乱走的策略实际会怎样」。</strong>
-训练期间存在危险时，后者的估计更贴近现实。</p>
+<p><strong>一句话</strong>：<strong>Q-learning 学的是「若以后都走最优会怎样」，
+SARSA 学的是「按现在这爱乱走的策略实际会怎样」。</strong>
+训练期间有危险时，后者估计更贴近现实。</p>
 </div>
 <h3 id="44-double-q-learning">4.4 最大化偏差与 Double Q-learning<a class="headerlink" href="#44-double-q-learning" title="Permanent link">&para;</a></h3>
 <p>Q-learning 有一个<strong>系统性缺陷</strong>，来源正是那个 <span class="arithmatex">\(\max\)</span>。</p>
-<p><strong>问题</strong>：设 <span class="arithmatex">\(Q\)</span> 表带有估计噪声。取 <span class="arithmatex">\(\max_a Q(s,a)\)</span> 时，
-<strong>噪声为正的估值更容易被选中</strong>，于是</p>
+<p><strong>问题</strong>：设 <span class="arithmatex">\(Q\)</span> 表带估计噪声。取 <span class="arithmatex">\(\max_a Q(s,a)\)</span> 时，
+<strong>正噪声的估值更易被选中</strong>，于是</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[\max_a Q(s,a)\right] &gt; \max_a \mathbb{E}\left[Q(s,a)\right]
 \]</div>
-<p><strong>这个不等式的右边才是我们想估的量。</strong> 左边系统性偏大——
+<p><strong>这个不等式的右边才是想估的量。</strong> 左边系统性偏大——
 称为<strong>最大化偏差（maximization bias）</strong>。</p>
-<p><strong>数值示例（本页例题 4 会详细算）</strong>：两个动作的真值都是 <span class="arithmatex">\(0\)</span>，
-<span class="arithmatex">\(Q\)</span> 的估计带独立标准正态噪声，则</p>
+<p><strong>数值示例（本页例题 4 详算）</strong>：两个动作真值都是 <span class="arithmatex">\(0\)</span>，
+<span class="arithmatex">\(Q\)</span> 估计带独立标准正态噪声，则</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[\max(Q_1,Q_2)\right] = \frac{1}{\sqrt{\pi}} \approx 0.5642 &gt; 0
 \]</div>
-<p><strong>偏大了 0.56</strong>——完全来自噪声。若奖励尺度是 1，
-<strong>这个偏差足以让智能体一直选一个实际没有优势的动作</strong>。</p>
-<p><strong>Double Q-learning 的解法</strong>：<strong>把估计和选动作分开，用两套独立的 <span class="arithmatex">\(Q\)</span> 表</strong>：</p>
+<p><strong>偏大 0.56</strong>——完全来自噪声。若奖励尺度是 1，
+<strong>该偏差足以让智能体一直选实际没优势的动作</strong>。</p>
+<p><strong>Double Q-learning 的解法</strong>：<strong>把估计和选动作分开，用两套独立 <span class="arithmatex">\(Q\)</span> 表</strong>：</p>
 <div class="arithmatex">\[
 Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+1},\ \arg\max_a Q_1(S_{t+1},a)\right)-Q_1(S_t,A_t)\right]
 \]</div>
-<p>（每次随机选择更新 <span class="arithmatex">\(Q_1\)</span> 或 <span class="arithmatex">\(Q_2\)</span>，并相应交换两者的角色。）</p>
-<p><strong>为什么有效</strong>：<span class="arithmatex">\(\arg\max\)</span> 由 <span class="arithmatex">\(Q_1\)</span> 决定，但取值的 <span class="arithmatex">\(Q_2\)</span> 是<strong>独立</strong>估计的。
-<strong>「选中最大」这件事用了一个噪声源，「评估它多大」用了另一个独立的噪声源</strong>，
+<p>（每次随机更新 <span class="arithmatex">\(Q_1\)</span> 或 <span class="arithmatex">\(Q_2\)</span>，并交换两者角色。）</p>
+<p><strong>为什么有效</strong>：<span class="arithmatex">\(\arg\max\)</span> 由 <span class="arithmatex">\(Q_1\)</span> 决定，但取值的 <span class="arithmatex">\(Q_2\)</span> 是<strong>独立</strong>估计。
+<strong>「选中最大」用一个噪声源，「评估它多大」用另一个独立噪声源</strong>，
 两者不相关，故偏差被消除：</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[Q_2\left(s',\ \arg\max_a Q_1(s',a)\right)\right] = \max_a \mathbb{E}\left[Q_2(s',a)\right]
 \]</div>
-<p>（在 <span class="arithmatex">\(Q_1,Q_2\)</span> 独立且都无偏的假设下）。</p>
+<p>（<span class="arithmatex">\(Q_1,Q_2\)</span> 独立且都无偏时）。</p>
 <div class="admonition note">
 <p class="admonition-title">为什么这是个重要的问题</p>
-<p>最大化偏差在<strong>奖励稀疏、噪声大</strong>的环境中特别严重，
-因为它让算法<strong>系统性地高估未充分探索的动作</strong>。</p>
-<p>这在实践中表现为：智能体<strong>反复尝试一个其实不好的动作</strong>，
-因为它「看起来有潜力」（实际是噪声抬高了估值）。</p>
+<p>最大化偏差在<strong>奖励稀疏、噪声大</strong>环境中特别严重，
+因它让算法<strong>系统性高估未充分探索的动作</strong>。</p>
+<p>这在实践中表现为：智能体<strong>反复尝试一个不好的动作</strong>，
+因它「看起来有潜力」（实际是噪声抬高了估值）。</p>
 <p><strong>凡是更新式里有 <span class="arithmatex">\(\max\)</span> 的算法都有这个问题</strong>：
-Q-learning、值迭代（在有噪声估计时）、DQN、DDPG——
-这也是为什么深度强化学习里 DQN 用了两个网络
+Q-learning、值迭代（有噪声估计时）、DQN、DDPG——
+这也是深度强化学习里 DQN 用两个网络之因
 （在线网络选动作、目标网络评估值），
 <strong>它的动机与 Double Q-learning 完全相同</strong>。</p>
 </div>
 <h3 id="45">4.5 收敛性证明思路<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
-<p><strong>Q-learning 的收敛性证明比 SARSA 更微妙</strong>，因为它是 off-policy、
-且更新里含 <span class="arithmatex">\(\max\)</span>（非线性）。证明的核心是一个<strong>两个时间尺度</strong>的论证：</p>
+<p><strong>Q-learning 的收敛性证明比 SARSA 更微妙</strong>，因它是 off-policy、
+且更新含 <span class="arithmatex">\(\max\)</span>（非线性）。证明的核心是一个<strong>两个时间尺度</strong>的论证：</p>
 <p><strong>思路（把随机逼近写成「压缩算子 + 噪声」）</strong>：</p>
 <p><strong>第一步：把更新写成算子形式。</strong> 定义</p>
 <div class="arithmatex">\[
@@ -13359,26 +13359,26 @@ Q-learning、值迭代（在有噪声估计时）、DQN、DDPG——
 <div class="arithmatex">\[
 \mathbb{E}\left[\text{噪声}\ \Big|\ \mathcal{F}_t\right] = 0
 \]</div>
-<p>这是 4.1 节算出的无偏性。故更新是一个<strong>鞅差分（martingale difference）驱动的随机逼近</strong>。</p>
-<p><strong>第三步：<span class="arithmatex">\(\mathcal{T}\)</span> 是 <span class="arithmatex">\(\gamma\)</span>-压缩的</strong>（下一页与上一页都证明了）。</p>
+<p>这是 4.1 节算出的无偏性。故更新是<strong>鞅差分（martingale difference）驱动的随机逼近</strong>。</p>
+<p><strong>第三步：<span class="arithmatex">\(\mathcal{T}\)</span> 是 <span class="arithmatex">\(\gamma\)</span>-压缩的</strong>（上下页都证过）。</p>
 <p><strong>第四步：用随机逼近定理。</strong> 由 Robbins–Monro 条件
 （<span class="arithmatex">\(\sum\alpha_t=\infty\)</span>、<span class="arithmatex">\(\sum\alpha_t^2&lt;\infty\)</span>）
 与「充分探索」（每个 <span class="arithmatex">\((s,a)\)</span> 被访问无限次），
 可以证明 <span class="arithmatex">\(Q_t\to Q^{*}\)</span> 几乎必然。</p>
-<p><strong>证明的关键难点</strong>：第三步的压缩性是在<strong>无穷范数</strong>下成立的，
-但随机逼近的收敛定理通常需要<strong>加权范数</strong>——
-因为不同 <span class="arithmatex">\((s,a)\)</span> 的访问频率不同。引入权重 <span class="arithmatex">\(w(s,a)\)</span> 与范数</p>
+<p><strong>证明的关键难点</strong>：第三步压缩性在<strong>无穷范数</strong>下成立，
+但随机逼近的收敛定理通常需<strong>加权范数</strong>——
+因不同 <span class="arithmatex">\((s,a)\)</span> 访问频率不同。引入权重 <span class="arithmatex">\(w(s,a)\)</span> 与范数</p>
 <div class="arithmatex">\[
 \lVert Q\rVert_w = \max_{s,a}\frac{\lvert Q(s,a)\rvert}{w(s,a)}
 \]</div>
 <p>可证 <span class="arithmatex">\(\mathcal{T}\)</span> 在此范数下仍是压缩的，从而完成证明。</p>
-<p><strong>「充分探索」这个条件为什么不可省</strong>：若某个 <span class="arithmatex">\((s,a)\)</span> 从不被访问，
-它的 <span class="arithmatex">\(Q\)</span> 值永远是初始值，永远不收敛。<strong>这就是 5.2 节强调 <span class="arithmatex">\(\varepsilon\)</span>-greedy
+<p><strong>「充分探索」为什么不可省</strong>：若某 <span class="arithmatex">\((s,a)\)</span> 从不被访问，
+它的 <span class="arithmatex">\(Q\)</span> 值永远是初值，永不收敛。<strong>这就是 5.2 节强调 <span class="arithmatex">\(\varepsilon\)</span>-greedy
 必须保证 <span class="arithmatex">\(\pi(a\mid s)\geq\varepsilon/\lvert A\rvert&gt;0\)</span> 的原因。</strong></p>
 <hr />
 <h2 id="tdlambda">五、资格迹与 TD(<span class="arithmatex">\(\lambda\)</span>)<a class="headerlink" href="#tdlambda" title="Permanent link">&para;</a></h2>
 <h3 id="51-lambda-">5.1 前向视角：<span class="arithmatex">\(\lambda\)</span>-回报<a class="headerlink" href="#51-lambda-" title="Permanent link">&para;</a></h3>
-<p><span class="arithmatex">\(n\)</span> 步回报给了一个离散的旋钮。<strong>能不能把所有 <span class="arithmatex">\(n\)</span> 加权平均起来？</strong> 可以：</p>
+<p><span class="arithmatex">\(n\)</span> 步回报给了一个离散旋钮。<strong>能不能把所有 <span class="arithmatex">\(n\)</span> 加权平均？</strong> 可以：</p>
 <div class="arithmatex">\[
 G_t^{\lambda} := (1-\lambda)\sum_{n=1}^{\infty}\lambda^{n-1}G_t^{(n)}
 \]</div>
@@ -13410,14 +13410,14 @@ G_t^{\lambda} := (1-\lambda)\sum_{n=1}^{\infty}\lambda^{n-1}G_t^{(n)}
 </tr>
 </tbody>
 </table>
-<p><strong><span class="arithmatex">\(\lambda=1\)</span> 要小心处理</strong>：此时 <span class="arithmatex">\((1-\lambda)\lambda^{n-1}\)</span> 在 <span class="arithmatex">\(n=1\)</span> 处是 <span class="arithmatex">\(1\cdot1=1\)</span>，
+<p><strong><span class="arithmatex">\(\lambda=1\)</span> 需小心</strong>：此时 <span class="arithmatex">\((1-\lambda)\lambda^{n-1}\)</span> 在 <span class="arithmatex">\(n=1\)</span> 处是 <span class="arithmatex">\(1\cdot1=1\)</span>，
 在 <span class="arithmatex">\(n\geq2\)</span> 处是 <span class="arithmatex">\(0\cdot1=0\)</span>，形式上只剩 <span class="arithmatex">\(G_t^{(1)}\)</span>。</p>
 <p><strong>这说明上述定义在 <span class="arithmatex">\(\lambda=1\)</span> 处不连续</strong>——
-它是一个<strong>折扣和的定义方式</strong>问题。<strong>标准做法</strong>是定义</p>
+这是一个<strong>折扣和定义方式</strong>问题。<strong>标准做法</strong>是定义</p>
 <div class="arithmatex">\[
 G_t^{\lambda} = (1-\lambda)\sum_{n=1}^{T-t-1}\lambda^{n-1}G_t^{(n)} + \lambda^{T-t-1}G_t
 \]</div>
-<p>即在<strong>最后一个完整回报 <span class="arithmatex">\(G_t\)</span> 上额外加一个 <span class="arithmatex">\(\lambda^{T-t-1}\)</span> 权重</strong>。
+<p>即在<strong>最后一个完整回报 <span class="arithmatex">\(G_t\)</span> 上额外加 <span class="arithmatex">\(\lambda^{T-t-1}\)</span> 权重</strong>。
 这样 <span class="arithmatex">\(\lambda=1\)</span> 时恰好退化为 <span class="arithmatex">\(G_t\)</span>（<strong>纯 MC</strong>），且权重总和仍为 1。<strong>务必用这个定义。</strong></p>
 <p><strong>用这个定义检查权重和</strong>（设回合长 <span class="arithmatex">\(T-t\)</span> 步）：</p>
 <div class="arithmatex">\[
@@ -13461,9 +13461,9 @@ G_t^{\lambda} = (1-\lambda)\sum_{n=1}^{T-t-1}\lambda^{n-1}G_t^{(n)} + \lambda^{T
 </tbody>
 </table>
 <h3 id="52">5.2 反向视角：资格迹<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
-<p><strong>前向视角有个致命问题：它需要等到回合结束才能算 <span class="arithmatex">\(G_t^{(n)}\)</span></strong>——
+<p><strong>前向视角有个致命问题：它需等回合结束才能算 <span class="arithmatex">\(G_t^{(n)}\)</span></strong>——
 这样 TD 的「每步更新」优势就丢了。</p>
-<p><strong>反向视角用资格迹（eligibility trace）解决了这个问题</strong>：</p>
+<p><strong>反向视角用资格迹（eligibility trace）解决了这问题</strong>：</p>
 <div class="arithmatex">\[
 E_t(s) = \begin{cases}
 \gamma\lambda E_{t-1}(s)+1, &amp; s = S_t \\
@@ -13473,10 +13473,10 @@ E_t(s) = \begin{cases}
 <div class="arithmatex">\[
 V(s)\leftarrow V(s)+\alpha\,\delta_t\,E_t(s) \quad \text{对所有 } s
 \]</div>
-<p><strong>资格迹的含义（名字的来源）</strong>：<span class="arithmatex">\(E_t(s)\)</span> 衡量状态 <span class="arithmatex">\(s\)</span>
-「有多少资格为当前的 TD 误差负责」。
-「eligibility trace」借用的是信用分配（credit assignment）的比喻——
-<strong>哪些过去的状态有资格分享当前的惊喜</strong>。</p>
+<p><strong>资格迹的含义（名字来源）</strong>：<span class="arithmatex">\(E_t(s)\)</span> 衡量状态 <span class="arithmatex">\(s\)</span>
+「有多少资格为当前 TD 误差负责」。
+「eligibility trace」借用了信用分配（credit assignment）的比喻——
+<strong>哪些过去状态有资格分享当前的惊喜</strong>。</p>
 <p><strong>三个关键性质</strong>：</p>
 <table>
 <thead>
@@ -13504,20 +13504,20 @@ V(s)\leftarrow V(s)+\alpha\,\delta_t\,E_t(s) \quad \text{对所有 } s
 </tr>
 </tbody>
 </table>
-<p><strong>「一次误差更新所有状态」是反向视角最实用的一点</strong>：
-不需要等回合结束，<strong>每步都能对全部状态做一次更新</strong>，
-而且更新量自动按「该状态与当前的相关程度」加权。</p>
+<p><strong>「一次误差更新所有状态」是反向视角最实用之处</strong>：
+不需等回合结束，<strong>每步都能对全部状态做一次更新</strong>，
+且更新量自动按「该状态与当前的相关程度」加权。</p>
 <h3 id="53-tdlambda">5.3 两者等价：TD(<span class="arithmatex">\(\lambda\)</span>) 的核心定理<a class="headerlink" href="#53-tdlambda" title="Permanent link">&para;</a></h3>
 <p><strong>定理（前向–反向等价）</strong>：在线性函数逼近与表格式情形下，
-<strong>在回合结束时，反向视角（资格迹）对 <span class="arithmatex">\(V\)</span> 的累积更新量，
+<strong>在回合结束时，反向视角（资格迹）对 <span class="arithmatex">\(V\)</span> 累积更新量，
 等于前向视角（<span class="arithmatex">\(\lambda\)</span>-回报）的更新量。</strong></p>
-<p><strong>证明要点（这个推导很值得看一遍）</strong>：
-设回合为 <span class="arithmatex">\(S_t,S_{t+1},\dots,S_T\)</span>，各步 TD 误差为 <span class="arithmatex">\(\delta_t,\dots,\delta_{T-1}\)</span>。
+<p><strong>证明要点（这推导值得看一遍）</strong>：
+设回合为 <span class="arithmatex">\(S_t,S_{t+1},\dots,S_T\)</span>，各步 TD 误差 <span class="arithmatex">\(\delta_t,\dots,\delta_{T-1}\)</span>。
 反向视角下 <span class="arithmatex">\(V(S_t)\)</span> 累积收到的更新量是</p>
 <div class="arithmatex">\[
 \Delta V(S_t)=\alpha\sum_{k=t}^{T-1}\delta_k\,E_k(S_t)
 \]</div>
-<p>而<strong>状态 <span class="arithmatex">\(S_t\)</span> 在第 <span class="arithmatex">\(k\)</span> 步的资格迹</strong>可以精确算出。注意 <span class="arithmatex">\(S_t\)</span> 在 <span class="arithmatex">\(t\)</span> 步被访问后，
+<p>而<strong>状态 <span class="arithmatex">\(S_t\)</span> 在第 <span class="arithmatex">\(k\)</span> 步的资格迹</strong>可精确算出。注意 <span class="arithmatex">\(S_t\)</span> 在 <span class="arithmatex">\(t\)</span> 步被访问后，
 若无再次访问，其迹为</p>
 <div class="arithmatex">\[
 E_k(S_t) = (\gamma\lambda)^{k-t}
@@ -13526,13 +13526,13 @@ E_k(S_t) = (\gamma\lambda)^{k-t}
 <div class="arithmatex">\[
 \Delta V(S_t)=\alpha\sum_{k=t}^{T-1}(\gamma\lambda)^{k-t}\delta_k
 \]</div>
-<p><strong>这正是「前向视角」的另一种写法</strong>（可以证明
+<p><strong>这正是「前向视角」的另一种写法</strong>（可证明
 <span class="arithmatex">\(G_t^{\lambda}-V(S_t)=\sum_{k=t}^{T-1}(\gamma\lambda)^{k-t}\delta_k\)</span>），即</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[G_t^{\lambda}\right] = V(S_t) + \mathbb{E}\left[\sum_{k=t}^{T-1}(\gamma\lambda)^{k-t}\delta_k\right]
 \]</div>
-<p><strong>这个等式是本页最漂亮的结果</strong>：它说明
-「用加权历史误差之和」与「用 <span class="arithmatex">\(\lambda\)</span>-回报的误差」是同一件事的两种算法实现。</p>
+<p><strong>该等式是本页最漂亮的结果</strong>：它说明
+「用加权历史误差之和」与「用 <span class="arithmatex">\(\lambda\)</span>-回报的误差」是同一件事的两种实现。</p>
 <table>
 <thead>
 <tr>
@@ -13557,12 +13557,12 @@ E_k(S_t) = (\gamma\lambda)^{k-t}
 </tr>
 </tbody>
 </table>
-<p><strong>反向视角是实际可用的那个</strong>——它的内存与状态数同阶，与回合长度无关。
-<strong>前向视角只用于理论分析。</strong> 这个「同一算法两种视角」的模式
-在后面讲 GAE（广义优势估计）时会再次出现。</p>
+<p><strong>反向视角是实际可用的那个</strong>——内存与状态数同阶，与回合长度无关。
+<strong>前向视角只用于理论分析。</strong> 这个「同一算法两种视角」模式
+在后面讲 GAE（广义优势估计）时再现。</p>
 <div class="admonition note">
 <p class="admonition-title">资格迹的一个实践要点：lambda 与 alpha 的配合</p>
-<p>资格迹会<strong>放大有效学习率</strong>：因为一次 TD 误差同时更新了多个状态，
+<p>资格迹会<strong>放大有效学习率</strong>：因一次 TD 误差同时更新了多个状态，
 等价于学习率被乘了一个因子。</p>
 <p><strong>经验规律</strong>：用 TD(<span class="arithmatex">\(\lambda\)</span>) 时，
 <strong>学习率 <span class="arithmatex">\(\alpha\)</span> 应当大致按 <span class="arithmatex">\(\dfrac{1}{1+\lambda L}\)</span> 缩小</strong>，
@@ -13581,11 +13581,11 @@ E_k(S_t) = (\gamma\lambda)^{k-t}
 <strong>&copy;</strong> 对比两者并解释差异的来源。</p>
 <details class="note">
 <summary>思路</summary>
-<p>TD(0) 每步立刻更新，注意第二个 TD 误差要用<strong>已经更新过的</strong> <span class="arithmatex">\(V(B)\)</span>
+<p>TD(0) 每步立刻更新，注意第二个 TD 误差用<strong>已更新过的</strong> <span class="arithmatex">\(V(B)\)</span>
 还是更新前的 <span class="arithmatex">\(V(B)\)</span>？——按在线 TD(0) 的标准做法，
-<strong>第二个 TD 误差用更新前的 <span class="arithmatex">\(V(B)=2\)</span></strong>（因为该误差在本步之前就已算出）。
-为了对比清晰，本题采用「先算全部 TD 误差、再统一更新」的方式，
-这样与 MC 的对比更公平。
+<strong>第二个 TD 误差用更新前的 <span class="arithmatex">\(V(B)=2\)</span></strong>（因该误差在本步前就已算出）。
+为对比清晰，本题采用「先算全部 TD 误差、再统一更新」的方式，
+这样与 MC 对比更公平。
 MC 要先算出 <span class="arithmatex">\(G(A)=0.9^2\times1\)</span>、<span class="arithmatex">\(G(B)=0.9\times1\)</span>、<span class="arithmatex">\(G(C)=1\)</span>。</p>
 </details>
 <details class="success">
@@ -13677,11 +13677,11 @@ V_{\text{MC}} = \left(0.981,\ 1.89,\ 2.80\right)
 </tbody>
 </table>
 <p><strong>三个关键观察</strong>：</p>
-<p><strong>(1) <span class="arithmatex">\(C\)</span> 的更新完全相同。</strong> 因为 <span class="arithmatex">\(C\)</span> 是最后一站，
+<p><strong>(1) <span class="arithmatex">\(C\)</span> 的更新完全相同。</strong> 因 <span class="arithmatex">\(C\)</span> 是最后一站，
 TD 目标 <span class="arithmatex">\(1+\gamma V(T) = 1\)</span> 恰好等于 MC 回报 <span class="arithmatex">\(G(C)=1\)</span>。
-<strong>当误差不需要 bootstrap 时（终止前一步），TD 与 MC 等价</strong>——
+<strong>当误差不需 bootstrap 时（终止前一步），TD 与 MC 等价</strong>——
 这印证了「MC 是 <span class="arithmatex">\(n\to\infty\)</span> 的 TD、TD(0) 是 <span class="arithmatex">\(n=1\)</span> 的 TD」，
-而在最后一站两者重合。</p>
+而在最后一站重合。</p>
 <p><strong>(2) TD 把值「往高处拉」，MC 把值「往低处拉」。</strong> 原因很清楚：</p>
 <table>
 <thead>
@@ -13713,11 +13713,11 @@ TD 目标 <span class="arithmatex">\(1+\gamma V(T) = 1\)</span> 恰好等于 MC 
 </tr>
 </tbody>
 </table>
-<p><strong>TD 的目标被 <span class="arithmatex">\(V(B)=2\)</span>、<span class="arithmatex">\(V(C)=3\)</span> 这两个偏高的初始估计污染了</strong>——
-这正是 <strong>bootstrapping 带来的偏差</strong>。因为初始值 <span class="arithmatex">\(V\)</span> 远高于真值
-（<span class="arithmatex">\(2\)</span> 对 <span class="arithmatex">\(0.9\)</span>、<span class="arithmatex">\(3\)</span> 对 <span class="arithmatex">\(1.0\)</span>），TD 目标也跟着偏高。</p>
+<p><strong>TD 的目标被 <span class="arithmatex">\(V(B)=2\)</span>、<span class="arithmatex">\(V(C)=3\)</span> 这两个偏高的初始估计污染</strong>——
+这正是 <strong>bootstrapping 带来的偏差</strong>。因初始值 <span class="arithmatex">\(V\)</span> 远高于真值
+（<span class="arithmatex">\(2\)</span> 对 <span class="arithmatex">\(0.9\)</span>、<span class="arithmatex">\(3\)</span> 对 <span class="arithmatex">\(1.0\)</span>），TD 目标也偏高。</p>
 <p><strong>(3) 一次更新后 MC 更准，但这不是定论。</strong> 本题只更新一次，
-且<strong>初始值恰好严重偏高</strong>，所以 MC 占优。若多跑几轮：</p>
+且<strong>初始值恰好严重偏高</strong>，故 MC 占优。若多跑几轮：</p>
 <table>
 <thead>
 <tr>
@@ -13755,10 +13755,10 @@ TD 目标 <span class="arithmatex">\(1+\gamma V(T) = 1\)</span> 恰好等于 MC 
 </tbody>
 </table>
 <p>（每轮都用同一轨迹；TD 每轮做 3 次更新，MC 每轮做 3 次更新。）</p>
-<p><strong>TD 在第 3 轮就已经接近真值</strong>（<span class="arithmatex">\(0.952\)</span> 与真值 <span class="arithmatex">\(0.810\)</span> 的差距来自
-只用了 <span class="arithmatex">\(\alpha=0.1\)</span> 的步长），<strong>而 MC 的收敛节奏受同一轨迹重复的制约</strong>。
+<p><strong>TD 在第 3 轮就已接近真值</strong>（<span class="arithmatex">\(0.952\)</span> 与真值 <span class="arithmatex">\(0.810\)</span> 的差距来自
+只用了 <span class="arithmatex">\(\alpha=0.1\)</span> 的步长），<strong>而 MC 的收敛节奏受同一轨迹重复制约</strong>。
 <strong>这就是「样本效率」的体现</strong>：TD 用一条轨迹的信息做了 3 次传播，
-MC 只做了一次「终点回传」。</p>
+MC 只做一次「终点回传」。</p>
 <p><strong>(d) 结论汇总。</strong></p>
 <table>
 <thead>
@@ -13792,19 +13792,19 @@ MC 只做了一次「终点回传」。</p>
 </table>
 <p><strong>最重要的工程结论</strong>：<strong>TD 学习对初始值敏感。</strong>
 本题中若把初始值设为 <span class="arithmatex">\(V\equiv0\)</span>（而非偏高），
-TD 的首步目标就会是 <span class="arithmatex">\(0.9\times0=0&lt;0.81\)</span>，方向立刻变得正确。
-实践中 TD 的初始值常取 <span class="arithmatex">\(0\)</span> 或很小的值，就是一个朴素的防偏手段。</p>
+TD 的首步目标就会是 <span class="arithmatex">\(0.9\times0=0&lt;0.81\)</span>，方向立刻正确。
+实践中 TD 初始值常取 <span class="arithmatex">\(0\)</span> 或很小的值，就是一个朴素的防偏手段。</p>
 </details>
 <h3 id="2tdlambda">例题 2：TD(<span class="arithmatex">\(\lambda\)</span>) 的资格迹逐步计算<a class="headerlink" href="#2tdlambda" title="Permanent link">&para;</a></h3>
 <p><strong>环境</strong>：与例题 1 相同的轨迹 <span class="arithmatex">\(A\to B\to C\to T\)</span>，奖励 <span class="arithmatex">\(0,0,1\)</span>；
 <span class="arithmatex">\(\gamma=0.9\)</span>，<span class="arithmatex">\(\alpha=0.1\)</span>，<span class="arithmatex">\(\lambda=0.5\)</span>；
 初始 <span class="arithmatex">\(V=(1,2,3,0)\)</span>。
-用<strong>反向视角</strong>（资格迹）逐步更新，列出每一步的资格迹与 <span class="arithmatex">\(V\)</span>，
+用<strong>反向视角</strong>（资格迹）逐步更新，列出每步的资格迹与 <span class="arithmatex">\(V\)</span>，
 并用<strong>前向视角</strong>的加权误差和验证结果。</p>
 <details class="note">
 <summary>思路</summary>
-<p>资格迹的更新顺序很重要：<strong>先把所有迹乘上 <span class="arithmatex">\(\gamma\lambda\)</span>，再给当前状态加一</strong>。
-算量 <span class="arithmatex">\(\gamma\lambda = 0.45\)</span>。
+<p>资格迹的更新顺序很重要：<strong>先把所有迹乘 <span class="arithmatex">\(\gamma\lambda\)</span>，再给当前状态加一</strong>。
+先算 <span class="arithmatex">\(\gamma\lambda = 0.45\)</span>。
 最后用 <span class="arithmatex">\(\sum_{k=t}^{T-1}(\gamma\lambda)^{k-t}\delta_k\)</span> 核对。</p>
 </details>
 <details class="success">
@@ -13837,8 +13837,8 @@ V(B)\leftarrow 2 + 0.07\times1 = 2.07, \qquad V(C)\leftarrow3+0
 <div class="arithmatex">\[
 V = (1.111500,\ 2.070000,\ 3.000000), \qquad E=(0.4500,\ 1.0000,\ 0.0000)
 \]</div>
-<p><strong>注意 <span class="arithmatex">\(A\)</span> 也被更新了</strong>——虽然当前状态是 <span class="arithmatex">\(B\)</span>。
-<strong>这正是资格迹的作用</strong>：把当前 TD 误差的一部分「信用」分给刚才访问过的 <span class="arithmatex">\(A\)</span>。</p>
+<p><strong>注意 <span class="arithmatex">\(A\)</span> 也被更新</strong>——虽然当前状态是 <span class="arithmatex">\(B\)</span>。
+<strong>这正是资格迹的作用</strong>：把当前 TD 误差的一部分「信用」分给刚访问的 <span class="arithmatex">\(A\)</span>。</p>
 <p><strong>第 3 步：<span class="arithmatex">\(S=C\)</span>，<span class="arithmatex">\(r=1\)</span>，<span class="arithmatex">\(S'=T\)</span>。</strong></p>
 <p>先衰减：<span class="arithmatex">\(E\leftarrow0.45E=(0.2025,\ 0.45,\ 0)\)</span>；再给 <span class="arithmatex">\(C\)</span> 加一：<span class="arithmatex">\(E=(0.2025,\ 0.45,\ 1)\)</span>。</p>
 <div class="arithmatex">\[
@@ -13949,8 +13949,8 @@ V(B) = 2 + 0.1\times(-0.2) = 1.9800\ \checkmark
 <div class="arithmatex">\[
 \delta_3 = -2.0, \qquad V(C) = 3 + 0.1\times(-2.0) = 2.8000\ \checkmark
 \]</div>
-<p>三个状态全部与反向视角的逐步结果一致——前向–反向等价性得证。</p>
-<p><strong>&copy; <span class="arithmatex">\(\lambda\)</span> 取值的影响。</strong> 同一组数据、同一顺序，
+<p>三个状态均与反向视角的逐步结果一致——前向–反向等价性得证。</p>
+<p><strong>&copy; <span class="arithmatex">\(\lambda\)</span> 取值的影响。</strong> 同一组数据、顺序，
 只改 <span class="arithmatex">\(\lambda\)</span>，最终 <span class="arithmatex">\(V\)</span> 如下：</p>
 <table>
 <thead>
@@ -13994,16 +13994,16 @@ V(B) = 2 + 0.1\times(-0.2) = 1.9800\ \checkmark
 </tbody>
 </table>
 <p><strong>读这张表的三个要点</strong>：</p>
-<p><strong>(1) <span class="arithmatex">\(\lambda=1\)</span> 时结果与例题 1 的 MC 完全一样</strong>（<span class="arithmatex">\(0.981,\ 1.89,\ 2.8\)</span>）<span class="arithmatex">\(\checkmark\)</span>——
+<p><strong>(1) <span class="arithmatex">\(\lambda=1\)</span> 时结果与例题 1 的 MC 一样</strong>（<span class="arithmatex">\(0.981,\ 1.89,\ 2.8\)</span>）<span class="arithmatex">\(\checkmark\)</span>——
 这直接验证了 5.1 节「<span class="arithmatex">\(\lambda=1\)</span> 退化为 MC」的论断。</p>
-<p><strong>(2) <span class="arithmatex">\(\lambda=0\)</span> 时结果与例题 1 的 TD(0) 完全一样</strong>（<span class="arithmatex">\(1.08,\ 2.07,\ 2.8\)</span>）<span class="arithmatex">\(\checkmark\)</span>。</p>
+<p><strong>(2) <span class="arithmatex">\(\lambda=0\)</span> 时结果与例题 1 的 TD(0) 一样</strong>（<span class="arithmatex">\(1.08,\ 2.07,\ 2.8\)</span>）<span class="arithmatex">\(\checkmark\)</span>。</p>
 <p><strong>(3) <span class="arithmatex">\(V(C)\)</span> 与 <span class="arithmatex">\(\lambda\)</span> 无关</strong>（始终 <span class="arithmatex">\(2.8\)</span>）。
-因为 <span class="arithmatex">\(C\)</span> 是轨迹最后一站，它的 TD 目标不受 bootstrap 影响，
-<strong>这一点与例题 1 的观察 (1) 一致</strong>。</p>
-<p><strong>工程含义</strong>：<span class="arithmatex">\(\lambda\)</span> 是一个<strong>平滑的插值旋钮</strong>，
+因 <span class="arithmatex">\(C\)</span> 是轨迹最后一站，它的 TD 目标不受 bootstrap 影响，
+<strong>这点与例题 1 的观察 (1) 一致</strong>。</p>
+<p><strong>工程含义</strong>：<span class="arithmatex">\(\lambda\)</span> 是<strong>平滑的插值旋钮</strong>，
 从「低方差高偏差」（<span class="arithmatex">\(\lambda=0\)</span>）连续调到「高方差低偏差」（<span class="arithmatex">\(\lambda=1\)</span>）。
 实践中常取 <span class="arithmatex">\(\lambda\in[0.6,\ 0.95]\)</span>，
-<strong>在偏差与方差之间找一个平衡点</strong>。</p>
+<strong>在偏差与方差间找平衡</strong>。</p>
 </details>
 <h3 id="3q-learning-sarsa">例题 3：Q-learning 与 SARSA 的差异（含悬崖问题定量分析）<a class="headerlink" href="#3q-learning-sarsa" title="Permanent link">&para;</a></h3>
 <p><strong>(a)</strong> 某步的数据为：<span class="arithmatex">\(Q(s,a)=2.0\)</span>，<span class="arithmatex">\(r=1.0\)</span>，<span class="arithmatex">\(S'=s'\)</span>，
@@ -14017,10 +14017,10 @@ V(B) = 2 + 0.1\times(-0.2) = 1.9800\ \checkmark
 并解释为什么这解释了 SARSA 更保守的现象。</p>
 <details class="note">
 <summary>思路</summary>
-<p>(a) 两个算法唯一区别是目标值里用 <span class="arithmatex">\(\max\)</span> 还是用实际采样的 <span class="arithmatex">\(Q(s',a')\)</span>。
+<p>(a) 两个算法唯一区别是目标值用 <span class="arithmatex">\(\max\)</span> 还是实际采样的 <span class="arithmatex">\(Q(s',a')\)</span>。
 (b) 沿悬崖路线价值 <span class="arithmatex">\(V_A\)</span> 满足
 <span class="arithmatex">\(V_{\text{step}} = q(-100)+(1-q)(-1+\gamma V_{\text{next}})\)</span>，
-从终点倒推 9 步。绕路的价值是确定性的
+从终点倒推 9 步。绕路价值确定
 <span class="arithmatex">\(-\frac{1-\gamma^{11}}{1-\gamma}\)</span>。令两者相等解 <span class="arithmatex">\(q\)</span>。</p>
 </details>
 <details class="success">
@@ -14065,13 +14065,13 @@ Q(s,a)\leftarrow 2.0 + 0.1\times(3.70-2.0) = 2.0+0.17 = 2.17
 </tr>
 </tbody>
 </table>
-<p><strong>Q-learning 把 <span class="arithmatex">\(Q(s,a)\)</span> 抬得更高（<span class="arithmatex">\(2.305&gt;2.17\)</span>）</strong>，差距 <span class="arithmatex">\(0.135\)</span>。
-这反映了两种算法的根本差别：
+<p><strong>Q-learning 把 <span class="arithmatex">\(Q(s,a)\)</span> 抬得更高（<span class="arithmatex">\(2.305&gt;2.17\)</span>）</strong>，差 <span class="arithmatex">\(0.135\)</span>。
+这反映了两算法根本差别：
 Q-learning 假设<strong>今后都走最优</strong>（<span class="arithmatex">\(4.5\)</span>），
 SARSA 假设<strong>今后按当前行为策略走</strong>（<span class="arithmatex">\(3.0\)</span>）。
-行为策略带探索时，后者的估计更贴近现实。</p>
+行为策略带探索时，后者估计更贴近现实。</p>
 <p><strong>(b) 悬崖问题：临界探索率。</strong></p>
-<p><strong>绕远路的价值（确定性，11 步）。</strong> 每步 <span class="arithmatex">\(-1\)</span>，折扣后</p>
+<p><strong>绕远路的价值（确定，11 步）。</strong> 每步 <span class="arithmatex">\(-1\)</span>，折扣后</p>
 <div class="arithmatex">\[
 V_B = -\left(1+\gamma+\gamma^2+\cdots+\gamma^{10}\right)
 = -\frac{1-\gamma^{11}}{1-\gamma}
@@ -14081,12 +14081,12 @@ V_B = -\left(1+\gamma+\gamma^2+\cdots+\gamma^{10}\right)
 <div class="arithmatex">\[
 V_B = -\frac{1-0.313810596}{0.1} = -\frac{0.686189404}{0.1} = -6.861894
 \]</div>
-<p><strong>沿悬崖路线的价值（随机）。</strong> 记从「距离终点还剩 <span class="arithmatex">\(k\)</span> 步」处出发的价值为 <span class="arithmatex">\(v_k\)</span>，
+<p><strong>沿悬崖路线的价值（随机）。</strong> 记从「距终点还剩 <span class="arithmatex">\(k\)</span> 步」处出发的价值为 <span class="arithmatex">\(v_k\)</span>，
 边界 <span class="arithmatex">\(v_0=0\)</span>（已到达）。每步：</p>
 <div class="arithmatex">\[
 v_{k} = q\times(-100) + (1-q)\left(-1+\gamma v_{k-1}\right)
 \]</div>
-<p><strong>逐步倒推 9 次</strong>得到 <span class="arithmatex">\(v_9\)</span>（起点）。数值结果：</p>
+<p><strong>逐步倒推 9 次</strong>得 <span class="arithmatex">\(v_9\)</span>（起点）。数值结果：</p>
 <table>
 <thead>
 <tr>
@@ -14146,7 +14146,7 @@ q^{*} \approx 0.001261
 <div class="arithmatex">\[
 \varepsilon^{*} = 4q^{*} \approx 0.005
 \]</div>
-<p>结论：只要探索率超过约 <span class="arithmatex">\(0.5\%\)</span>，走悬崖边缘在价值上就不再划算。</p>
+<p>结论：只要探索率超过约 <span class="arithmatex">\(0.5\%\)</span>，走悬崖边缘在价值上就不划算。</p>
 <p><strong>这个数字小得惊人，正是悬崖问题的要害</strong>：</p>
 <table>
 <thead>
@@ -14158,7 +14158,7 @@ q^{*} \approx 0.001261
 <tbody>
 <tr>
 <td><span class="arithmatex">\(\varepsilon^{*}\approx0.5\%\)</span></td>
-<td>极小的探索就足以让冒险路线变差</td>
+<td>极小探索就足以让冒险路线变差</td>
 </tr>
 <tr>
 <td>失足代价 <span class="arithmatex">\(100\)</span> vs 绕路多花 <span class="arithmatex">\(2\)</span> 步</td>
@@ -14171,12 +14171,12 @@ q^{*} \approx 0.001261
 </tbody>
 </table>
 <p><strong>为什么 SARSA 更保守——现在有了定量解释</strong>：</p>
-<p>SARSA 学的是 <span class="arithmatex">\(Q^{\pi_\varepsilon}\)</span>，即<strong>在含 <span class="arithmatex">\(\varepsilon\)</span> 探索的策略下的真实价值</strong>。
+<p>SARSA 学的是 <span class="arithmatex">\(Q^{\pi_\varepsilon}\)</span>，即<strong>含 <span class="arithmatex">\(\varepsilon\)</span> 探索策略下的真实价值</strong>。
 由于 <span class="arithmatex">\(\varepsilon=0.1\)</span>（常用值）<span class="arithmatex">\(\gg\varepsilon^{*}=0.005\)</span>，
-SARSA 会算出悬崖路线的价值远低于绕路，<strong>因而选择绕路</strong>。</p>
+SARSA 会算出悬崖路线价值远低于绕路，<strong>因而选绕路</strong>。</p>
 <p>Q-learning 学的是 <span class="arithmatex">\(Q^{*}\)</span>，它<strong>假装探索不存在</strong>，
-于是认为悬崖路线（9 步）优于绕路（11 步），<strong>因而选择贴边冒险</strong>。</p>
-<p><strong>实测表现（这是强化学习最著名的实验之一）</strong>：</p>
+于是认为悬崖路线（9 步）优于绕路（11 步），<strong>因而选贴边冒险</strong>。</p>
+<p><strong>实测表现（强化学习最著名的实验之一）</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14203,24 +14203,24 @@ SARSA 会算出悬崖路线的价值远低于绕路，<strong>因而选择绕路
 </table>
 <p><strong>工程决策</strong>：</p>
 <ul>
-<li><strong>仿真训练、之后关掉探索上线</strong>：用 Q-learning（最终性能更好）。</li>
-<li><strong>真机训练、不允许撞坏</strong>：用 SARSA（训练过程更安全）。</li>
+<li><strong>仿真训练、之后关探索上线</strong>：用 Q-learning（最终性能更好）。</li>
+<li><strong>真机训练、不允许撞坏</strong>：用 SARSA（训练更安全）。</li>
 <li><strong>安全关键系统</strong>：用 SARSA，或显式加入风险约束
-  （如把 <span class="arithmatex">\(-100\)</span> 改成更极端的惩罚，或直接用 CVaR 等风险度量）。</li>
+  （如把 <span class="arithmatex">\(-100\)</span> 改成更极端惩罚，或用 CVaR 等风险度量）。</li>
 </ul>
 <p><strong>补充说明（为什么 <span class="arithmatex">\(\varepsilon\)</span> 不该一味调小）</strong>：
-既然 <span class="arithmatex">\(\varepsilon\)</span> 小就安全，为什么不直接取 <span class="arithmatex">\(\varepsilon=0.001\)</span>？
-因为由 3.2 节的 GLIE 条件，<strong>探索不足会导致某些 <span class="arithmatex">\((s,a)\)</span> 永不被访问，
+既然 <span class="arithmatex">\(\varepsilon\)</span> 小就安全，为何不直接取 <span class="arithmatex">\(\varepsilon=0.001\)</span>？
+因由 3.2 节的 GLIE 条件，<strong>探索不足会导致某些 <span class="arithmatex">\((s,a)\)</span> 永不被访问，
 <span class="arithmatex">\(Q\)</span> 值不收敛</strong>。过小的 <span class="arithmatex">\(\varepsilon\)</span> 会带来两个问题：
-收敛到次优解（局部最优），以及收敛速度极慢。
-<strong><span class="arithmatex">\(\varepsilon\)</span> 的调参本质上是「安全性」与「最优性」的权衡</strong>，
-这个权衡在悬崖问题上表现得最尖锐。</p>
+收敛到次优解（局部最优），以及收敛极慢。
+<strong><span class="arithmatex">\(\varepsilon\)</span> 调参本质上是「安全性」与「最优性」的权衡</strong>，
+这权衡在悬崖问题上表现得最尖锐。</p>
 </details>
 <h3 id="4-double-q-learning">例题 4：最大化偏差与 Double Q-learning<a class="headerlink" href="#4-double-q-learning" title="Permanent link">&para;</a></h3>
-<p><strong>(a)</strong> 设两个动作的真实价值都是 <span class="arithmatex">\(0\)</span>，但 <span class="arithmatex">\(Q\)</span> 的估计带独立同分布的标准正态噪声
+<p><strong>(a)</strong> 设两个动作真实价值都是 <span class="arithmatex">\(0\)</span>，但 <span class="arithmatex">\(Q\)</span> 的估计带独立同分布标准正态噪声
 <span class="arithmatex">\(Q_1,Q_2\sim N(0,1)\)</span>。求 <span class="arithmatex">\(\mathbb{E}[\max(Q_1,Q_2)]\)</span> 并指出偏差大小。</p>
-<p><strong>(b)</strong> 用一个具体的数值表格场景说明这个偏差如何误导决策。</p>
-<p><strong>&copy;</strong> 说明 Double Q-learning 如何消除这个偏差。</p>
+<p><strong>(b)</strong> 用一个具体数值表格场景说明该偏差如何误导决策。</p>
+<p><strong>&copy;</strong> 说明 Double Q-learning 如何消除该偏差。</p>
 <details class="note">
 <summary>思路</summary>
 <p>(a) 用 <span class="arithmatex">\(\max(x,y)=\frac{x+y+\lvert x-y\rvert}{2}\)</span>，
@@ -14240,7 +14240,7 @@ SARSA 会算出悬崖路线的价值远低于绕路，<strong>因而选择绕路
 \mathbb{E}\left[\max(Q_1,Q_2)\right] = \frac{0+0+\mathbb{E}\lvert Q_1-Q_2\rvert}{2} = \frac{\mathbb{E}\lvert Q_1-Q_2\rvert}{2}
 \]</div>
 <p><strong>求 <span class="arithmatex">\(\mathbb{E}\lvert Q_1-Q_2\rvert\)</span>。</strong> 令 <span class="arithmatex">\(D=Q_1-Q_2\)</span>。
-独立正态变量之差仍正态，方差相加：</p>
+独立正态变量差仍正态，方差相加：</p>
 <div class="arithmatex">\[
 D \sim N\left(0,\ 1+1\right) = N(0,2), \qquad \sigma_D = \sqrt{2}
 \]</div>
@@ -14252,12 +14252,12 @@ D \sim N\left(0,\ 1+1\right) = N(0,2), \qquad \sigma_D = \sqrt{2}
 <div class="arithmatex">\[
 \mathbb{E}\left[\max(Q_1,Q_2)\right] = \frac{1}{2}\cdot\frac{2}{\sqrt{\pi}} = \frac{1}{\sqrt{\pi}} \approx 0.564190
 \]</div>
-<p><strong>结论：真实价值都是 <span class="arithmatex">\(0\)</span>，但 <span class="arithmatex">\(\max\)</span> 的期望是 <span class="arithmatex">\(0.5642\)</span>——
-系统性地高估了约 <span class="arithmatex">\(0.56\)</span>。</strong></p>
-<p><strong>蒙特卡洛验证</strong>（<span class="arithmatex">\(4\times10^{5}\)</span> 次独立抽样）：
+<p><strong>结论：真实价值都是 <span class="arithmatex">\(0\)</span>，但 <span class="arithmatex">\(\max\)</span> 期望是 <span class="arithmatex">\(0.5642\)</span>——
+系统性高估约 <span class="arithmatex">\(0.56\)</span>。</strong></p>
+<p><strong>蒙特卡洛验证</strong>（<span class="arithmatex">\(4\times10^{5}\)</span> 次抽样）：
 得到 <span class="arithmatex">\(\mathbb{E}[\max]\approx0.563446\)</span>，与理论值 <span class="arithmatex">\(0.564190\)</span> 相符 <span class="arithmatex">\(\checkmark\)</span>
 （差异来自抽样误差）。</p>
-<p><strong>偏差的严重程度对照</strong>：</p>
+<p><strong>偏差严重程度对照</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14290,13 +14290,13 @@ D \sim N\left(0,\ 1+1\right) = N(0,2), \qquad \sigma_D = \sqrt{2}
 </tbody>
 </table>
 <p><strong>偏差与噪声标准差成正比</strong>：<span class="arithmatex">\(\mathbb{E}[\max]=\frac{\sigma}{\sqrt{\pi}}\)</span>。
-<strong>噪声越大，高估越严重</strong>——这就是「奖励噪声大、采样少」的环境里
-Q-learning 特别容易失效的原因。</p>
-<p><strong>更一般的结论</strong>（动作数为 <span class="arithmatex">\(k\)</span>）：偏差随 <span class="arithmatex">\(k\)</span> 增大而增大。
-可以证明当 <span class="arithmatex">\(k\to\infty\)</span> 时 <span class="arithmatex">\(\mathbb{E}[\max]\approx\sigma\sqrt{2\ln k}\)</span>，
+<strong>噪声越大，高估越严重</strong>——这就是「奖励噪声大、采样少」环境里
+Q-learning 特别易失效的原因。</p>
+<p><strong>更一般的结论</strong>（动作数为 <span class="arithmatex">\(k\)</span>）：偏差随 <span class="arithmatex">\(k\)</span> 增大。
+可证当 <span class="arithmatex">\(k\to\infty\)</span> 时 <span class="arithmatex">\(\mathbb{E}[\max]\approx\sigma\sqrt{2\ln k}\)</span>，
 <strong>对数增长</strong>——这意味着<strong>动作维度大时偏差会显著恶化</strong>。</p>
-<p><strong>(b) 具体的误导场景。</strong> 考虑三个动作的一个状态 <span class="arithmatex">\(s\)</span>，
-真实价值完全相同（都是 <span class="arithmatex">\(0\)</span>），但 <span class="arithmatex">\(Q\)</span> 表带噪声：</p>
+<p><strong>(b) 具体误导场景。</strong> 考虑三个动作的一个状态 <span class="arithmatex">\(s\)</span>，
+真实价值相同（都是 <span class="arithmatex">\(0\)</span>），但 <span class="arithmatex">\(Q\)</span> 表带噪声：</p>
 <table>
 <thead>
 <tr>
@@ -14323,8 +14323,8 @@ Q-learning 特别容易失效的原因。</p>
 </tr>
 </tbody>
 </table>
-<p><strong><span class="arithmatex">\(\max_a\hat{Q}(s,a) = 0.9\)</span>，而真实的最大值是 <span class="arithmatex">\(0\)</span></strong>——
-高估了 <span class="arithmatex">\(0.9\)</span>。</p>
+<p><strong><span class="arithmatex">\(\max_a\hat{Q}(s,a) = 0.9\)</span>，而真实最大值是 <span class="arithmatex">\(0\)</span></strong>——
+高估 <span class="arithmatex">\(0.9\)</span>。</p>
 <p><strong>后果链条</strong>：</p>
 <table>
 <thead>
@@ -14337,34 +14337,34 @@ Q-learning 特别容易失效的原因。</p>
 <tbody>
 <tr>
 <td>1</td>
-<td>贪心选择 <span class="arithmatex">\(a_1\)</span>（因为 <span class="arithmatex">\(\hat{Q}\)</span> 最高）</td>
-<td>其实三个动作一样好</td>
+<td>贪心选 <span class="arithmatex">\(a_1\)</span>（因 <span class="arithmatex">\(\hat{Q}\)</span> 最高）</td>
+<td>三个动作其实一样好</td>
 </tr>
 <tr>
 <td>2</td>
-<td>用 <span class="arithmatex">\(R+\gamma\max\hat{Q}\)</span> 更新，目标含 <span class="arithmatex">\(0.9\)</span> 的高估</td>
-<td>高估被写入 <span class="arithmatex">\(Q\)</span></td>
+<td>用 <span class="arithmatex">\(R+\gamma\max\hat{Q}\)</span> 更新，目标含 <span class="arithmatex">\(0.9\)</span> 高估</td>
+<td>高估写入 <span class="arithmatex">\(Q\)</span></td>
 </tr>
 <tr>
 <td>3</td>
-<td>下次还选 <span class="arithmatex">\(a_1\)</span>，因为它的估值被抬高了</td>
+<td>下次还选 <span class="arithmatex">\(a_1\)</span>，因它的估值被抬高</td>
 <td><strong>自我强化</strong></td>
 </tr>
 <tr>
 <td>4</td>
-<td>其他动作得不到更新，其噪声永远不被平均掉</td>
+<td>其他动作得不到更新，其噪声永不平均掉</td>
 <td>偏差累积</td>
 </tr>
 </tbody>
 </table>
-<p><strong>最终表现</strong>：智能体<strong>反复执行一个没有优势的动作</strong>，
-而真正有优势的动作（如果存在）可能被噪声淹没而永远不被探索充分。</p>
+<p><strong>最终表现</strong>：智能体<strong>反复执行一个没优势的动作</strong>，
+而真正有优势的动作（若存在）可能被噪声淹没而永不被探索充分。</p>
 <p><strong>这个现象在稀疏奖励任务中尤其致命</strong>：
-大部分 <span class="arithmatex">\((s,a)\)</span> 的奖励都是 <span class="arithmatex">\(0\)</span>，
-真实 <span class="arithmatex">\(Q\)</span> 值几乎相同，<span class="arithmatex">\(Q\)</span> 值的差异<strong>几乎全部来自噪声</strong>，
-于是 <span class="arithmatex">\(\max\)</span> 的高估直接主导了决策。</p>
+大部分 <span class="arithmatex">\((s,a)\)</span> 奖励都是 <span class="arithmatex">\(0\)</span>，
+真实 <span class="arithmatex">\(Q\)</span> 值几乎相同，<span class="arithmatex">\(Q\)</span> 值差异<strong>几乎全部来自噪声</strong>，
+于是 <span class="arithmatex">\(\max\)</span> 的高估直接主导决策。</p>
 <p><strong>&copy; Double Q-learning 的解法。</strong></p>
-<p>核心思想：把「选动作」和「给它估值」这两件事用两套独立估计完成。</p>
+<p>核心思想：把「选动作」和「给它估值」两件事用两套独立估计完成。</p>
 <p>维护两个 <span class="arithmatex">\(Q\)</span> 表 <span class="arithmatex">\(Q_1,Q_2\)</span>。每次更新时（以更新 <span class="arithmatex">\(Q_1\)</span> 为例）：</p>
 <div class="arithmatex">\[
 Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+1},\ \arg\max_a Q_1(S_{t+1},a)\right)-Q_1(S_t,A_t)\right]
@@ -14375,24 +14375,24 @@ Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+
 \quad\text{与}\quad
 \underbrace{Q_2(S_{t+1},\ \cdot\,)}_{\text{用 } Q_2 \text{ 估值}}
 \]</div>
-<p>两个环节用了不同的噪声源。</p>
-<p><strong>为什么偏差被消除（关键的期望计算）</strong>：
-设 <span class="arithmatex">\(a^{\dagger}=\arg\max_a Q_1(s',a)\)</span>。由于 <span class="arithmatex">\(Q_2\)</span> <strong>独立于</strong> <span class="arithmatex">\(Q_1\)</span>，
+<p>两个环节用了不同噪声源。</p>
+<p><strong>为什么偏差被消除（关键期望计算）</strong>：
+设 <span class="arithmatex">\(a^{\dagger}=\arg\max_a Q_1(s',a)\)</span>。因 <span class="arithmatex">\(Q_2\)</span> <strong>独立于</strong> <span class="arithmatex">\(Q_1\)</span>，
 条件在 <span class="arithmatex">\(a^{\dagger}\)</span> 上时 <span class="arithmatex">\(Q_2(s',a^{\dagger})\)</span> 仍是 <span class="arithmatex">\(Q_2(s',\cdot)\)</span> 的无偏估计：</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[Q_2\left(s',a^{\dagger}\right)\ \Big|\ a^{\dagger}\right]
 = \mathbb{E}\left[Q_2(s',a)\right]\Big|_{a=a^{\dagger}}
 = Q^{*}(s',a^{\dagger})
 \]</div>
-<p>（第二步用了「<span class="arithmatex">\(Q_2\)</span> 关于每个动作都无偏」。）
+<p>（第二步用了「<span class="arithmatex">\(Q_2\)</span> 对每个动作无偏」。）
 再对 <span class="arithmatex">\(a^{\dagger}\)</span> 取期望，并用 <span class="arithmatex">\(\mathbb{E}[Q^{*}(s',a^{\dagger})]=\max_a Q^{*}(s',a)\)</span>
-（因为真实价值在最优动作处取最大，而<strong>噪声已被排除在估值环节之外</strong>），即得</p>
+（因真实价值在最优动作处取最大，而<strong>噪声已被排除在估值环节之外</strong>），即得</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[Q_2\left(S_{t+1},\ \arg\max_a Q_1(S_{t+1},a)\right)\right]
 = \max_a Q^{*}(s',a)
 \]</div>
 <p><strong>无偏。</strong></p>
-<p><strong>对比 Q-learning 错在哪</strong>：它用<strong>同一套</strong>带噪声的 <span class="arithmatex">\(Q\)</span>
+<p><strong>对比 Q-learning 错在哪</strong>：它用<strong>同一套</strong>带噪声 <span class="arithmatex">\(Q\)</span>
 既选动作又估值，于是</p>
 <div class="arithmatex">\[
 \mathbb{E}\left[\max_a Q(s',a)\right] &gt; \max_a \mathbb{E}\left[Q(s',a)\right]
@@ -14431,13 +14431,13 @@ Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+
 </tr>
 </tbody>
 </table>
-<p><strong>注意 SARSA 天然没有这个偏差</strong>——因为它的更新式里不含 <span class="arithmatex">\(\max\)</span>，
-也就没有「先取最大再取期望」的问题。
-<strong>这是 on-policy 方法的一个隐性优势。</strong></p>
+<p><strong>注意 SARSA 天然没这个偏差</strong>——因它的更新式里不含 <span class="arithmatex">\(\max\)</span>，
+也就没「先取最大再取期望」的问题。
+<strong>这是 on-policy 方法的隐性优势。</strong></p>
 <p><strong>在深度强化学习中的对应</strong>：DQN 用<strong>两个网络</strong>
 （在线网络选动作、目标网络提供数值），
-<strong>其动机与 Double Q-learning 完全一致</strong>。
-这个「双估计」思想已经成为深度强化学习的标准组件，
+<strong>其动机与 Double Q-learning 一致</strong>。
+这个「双估计」思想已成为深度强化学习的标准组件，
 广泛应用于 DQN、DDPG、TD3 等算法。</p>
 <p><strong>实践建议</strong>：</p>
 <table>
@@ -14471,9 +14471,9 @@ Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+
 <h2 id="_5">七、用在哪些课程里<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="_6">无人系统自主决策与优化 · 在线学习与自主决策<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>不需要模型的巨大价值</strong>：无人机在未知风场中的悬停控制，
-  动力学模型往往不准；TD 类方法<strong>直接从交互数据学习价值</strong>，
-  绕开了建模环节。这是强化学习能用于真实无人系统的最主要原因。</li>
+<li><strong>不需模型的巨大价值</strong>：无人机在未知风场中的悬停控制，
+  动力学模型往往不准；TD 类方法<strong>直接从交互数据学价值</strong>，
+  绕开了建模环节。这是强化学习用于真实无人系统的最主要原因。</li>
 <li><strong>Q-learning 用于离线训练 + 在线查表</strong>：
   训练阶段用仿真大量试错（off-policy 支持经验回放，样本效率高），
   学到 <span class="arithmatex">\(Q^{*}\)</span> 后部署为查找表。
@@ -14482,10 +14482,10 @@ Q_1(S_t,A_t)\leftarrow Q_1(S_t,A_t)+\alpha\left[R_{t+1}+\gamma\,Q_2\!\left(S_{t+
   例题 3(b) 的悬崖分析直接适用——
   无人机的「贴边飞行」在仿真中最优，
   但<strong>探索期间的真实坠机代价不可接受</strong>。
-  用 SARSA 会让智能体主动选择保守策略。</li>
+  用 SARSA 会让智能体主动选保守策略。</li>
 <li><strong>经验回放与 off-policy</strong>：把历史 <span class="arithmatex">\((s,a,r,s')\)</span> 存入缓冲区反复采样，
   <strong>样本效率可提升一个数量级</strong>。这是 DQN 成功的关键组件之一，
-  其合法性完全来自 Q-learning 的 off-policy 性质。</li>
+  其合法性来自 Q-learning 的 off-policy 性质。</li>
 <li><strong>TD 误差作为「异常检测信号」</strong>：
   <span class="arithmatex">\(\delta_t\)</span> 大意味着「实际与预期严重不符」，
   可以直接用作<strong>故障检测</strong>（模型与实际偏离）或

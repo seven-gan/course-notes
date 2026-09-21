@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但黑盒用久了会形成一种危险的直觉 —— 以为「学习率」是一个可以随便设的数字，以为「收敛慢」是机器的问题。">
+    <meta name="description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但用久了会形成危险的直觉 —— 以为「学习率」可以随便设，以为「收敛慢」是机器的问题。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="实战：优化实验">
   
-  <meta property="og:description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但黑盒用久了会形成一种危险的直觉 —— 以为「学习率」是一个可以随便设的数字，以为「收敛慢」是机器的问题。">
+  <meta property="og:description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但用久了会形成危险的直觉 —— 以为「学习率」可以随便设，以为「收敛慢」是机器的问题。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/code/python/scientific/case-gradient-descent/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="实战：优化实验">
   
-  <meta name="twitter:description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但黑盒用久了会形成一种危险的直觉 —— 以为「学习率」是一个可以随便设的数字，以为「收敛慢」是机器的问题。">
+  <meta name="twitter:description" content="实战：优化实验：前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。优化器在工程里几乎是黑盒：调一个参数、看损失降不降。但用久了会形成危险的直觉 —— 以为「学习率」可以随便设，以为「收敛慢」是机器的问题。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12172,10 +12172,10 @@
 </div>
 <p>前面几页讲的是「怎么读数据」，这一页讲「怎么找一个最小值」。</p>
 <p>优化器在工程里几乎是黑盒：调一个参数、看损失降不降。
-但黑盒用久了会形成一种危险的直觉 ——
-以为「学习率」是一个可以随便设的数字，以为「收敛慢」是机器的问题。</p>
+但用久了会形成危险的直觉 ——
+以为「学习率」可以随便设，以为「收敛慢」是机器的问题。</p>
 <p>这一页不给现成优化器。<strong>自己用 NumPy 手写梯度下降</strong>，
-把一个二次函数当靶子，实测两件事：</p>
+拿一个二次函数当靶子，实测两件事：</p>
 <table>
 <thead>
 <tr>
@@ -12185,26 +12185,26 @@
 </thead>
 <tbody>
 <tr>
-<td>学习率调大调小，到底会发生什么</td>
+<td>学习率调大调小会怎样</td>
 <td>实验一：固定条件数，扫学习率</td>
 </tr>
 <tr>
-<td>为什么同样的算法换个问题就慢十倍</td>
+<td>为什么换个问题就慢十倍</td>
 <td>实验二：固定学习率，扫条件数</td>
 </tr>
 <tr>
-<td>有没有「一步到位」的办法，代价是什么</td>
+<td>有没有「一步到位」的办法、代价多大</td>
 <td>实验三：与牛顿法对比</td>
 </tr>
 </tbody>
 </table>
-<p>读完你应当能做到：拿到一个优化问题，先估算它的<strong>条件数</strong>，
-再据此判断「这个学习率大概能有多快」，而不是靠试。</p>
+<p>读完你应当能做到：拿到一个优化问题先估算<strong>条件数</strong>，
+据此判断「这个学习率大概能有多快」，而不是靠试。</p>
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
 <p>本页的主线是<strong>用两个参数把「优化为什么会变慢」拆开</strong>：学习率与条件数。</p>
 <p>第二节定义靶子函数，第三节手写梯度下降，第四、五节各固定一个、扫另一个，
-第六节用牛顿法做对照，第七节把收敛过程画出来。三个实验是主体，第四节读完就能理解「学习率不能再大」的边界在哪。</p>
+第六节用牛顿法对照，第七节画收敛过程。三个实验是主体，第四节读完就能理解「学习率不能再大」的边界。</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">这页最容易搞错的三件事</p>
@@ -12218,19 +12218,19 @@
 </thead>
 <tbody>
 <tr>
-<td>「学习率太大」与「学习率超过上界」</td>
-<td>前者只是震荡，后者<strong>每步放大</strong></td>
-<td>只看最后一步的损失，可能还以为在缓慢下降</td>
+<td>「学习率太大」与「超过上界」</td>
+<td>前者只震荡，后者<strong>每步放大</strong></td>
+<td>只看最后一步损失，可能还以为在缓慢下降</td>
 </tr>
 <tr>
 <td>「收敛慢」与「步数多」</td>
-<td>慢是<strong>每步的有效进展小</strong></td>
-<td>前期下降 40%、后期下降 0.1%，看前几步会误判成很快</td>
+<td>慢是<strong>每步进展小</strong></td>
+<td>前期降 40%、后期降 0.1%，看前几步会误判成很快</td>
 </tr>
 <tr>
-<td>「牛顿法更快」与「牛顿法更便宜」</td>
-<td>它是一个<strong>更贵的每步</strong>换更少的步数</td>
-<td>规模一大，解方程的代价直接吃掉所有收益</td>
+<td>「牛顿法更快」与「更便宜」</td>
+<td>它是<strong>更贵的每步</strong>换更少的步数</td>
+<td>规模一大，解方程的代价吃掉所有收益</td>
 </tr>
 </tbody>
 </table>
@@ -12239,9 +12239,9 @@
 <p><strong>本页与数学优化模块的关系</strong>：
 梯度下降的推导、为什么沿负梯度方向走、步长的几何直觉，
 在 <a href="../../../../math/optimization/gradient-descent/">梯度下降</a> 那一页已经讲过。
-这一页不重复推导，只做一件事：<strong>把那里的结论跑出来、量出来</strong>。</p>
+这一页不重复推导，只<strong>把那里的结论跑出来、量出来</strong>。</p>
 <p><strong>这页需要的库</strong>：NumPy，画图用 Matplotlib，最后一节用 SciPy 做交叉验证。
-版本不必与示例一致，行为在这个量级的版本上是稳定的。</p>
+版本不必与示例一致，行为在这个量级上稳定。</p>
 <table>
 <thead>
 <tr>
@@ -12252,11 +12252,11 @@
 <tbody>
 <tr>
 <td>手写迭代</td>
-<td>不用现成优化器，自己写出 <code>x ← x - lr * grad</code> 并记录全过程</td>
+<td>不用现成优化器，自己写 <code>x ← x - lr * grad</code> 并记录全程</td>
 </tr>
 <tr>
 <td>用解析解校准</td>
-<td>二次函数有闭式解，能精确判断「到底收敛了没有」</td>
+<td>二次函数有闭式解，能精确判断「到底收敛没有」</td>
 </tr>
 <tr>
 <td>判断稳定性</td>
@@ -12268,22 +12268,22 @@
 </tr>
 <tr>
 <td>看清代价</td>
-<td>说得出牛顿法一步为什么要解方程组，以及代价怎么随规模涨</td>
+<td>说得出牛顿法一步为何要解方程组、代价怎么随规模涨</td>
 </tr>
 <tr>
 <td>画图核对</td>
-<td>图画得出来，且输出里只留<strong>可核对的数字</strong></td>
+<td>图画得出来，输出里只留<strong>可核对的数字</strong></td>
 </tr>
 <tr>
 <td>讲清结论</td>
-<td>能说「为什么深度学习不用牛顿法」，而只答「因为太慢」</td>
+<td>能说「为什么深度学习不用牛顿法」，而不是只答「因为太慢」</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="_1">一、任务描述<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><strong>场景</strong>：要在一批数据上拟合一个模型，最终归结为「找一个使损失最小的参数」。
-现成的优化器能一行调用，但调用之前有三件事必须想清楚：</p>
+<p><strong>场景</strong>：在一批数据上拟合模型，最终归结为「找一个使损失最小的参数」。
+现成优化器能一行调用，但调用前有三件事必须想清楚：</p>
 <table>
 <thead>
 <tr>
@@ -12294,24 +12294,24 @@
 <tbody>
 <tr>
 <td>学习率取多少</td>
-<td>取错不是慢一点，是<strong>训练直接崩掉</strong></td>
+<td>取错不是慢一点，是<strong>训练直接崩</strong></td>
 </tr>
 <tr>
 <td>大概要迭代多少轮</td>
-<td>决定算力预算、决定要不要换方法</td>
+<td>决定算力预算、要不要换方法</td>
 </tr>
 <tr>
 <td>换个问题会不会变慢</td>
-<td>决定这套超参数能不能复用</td>
+<td>决定超参数能不能复用</td>
 </tr>
 </tbody>
 </table>
 <p><strong>为什么不用现成优化器</strong>：
 调用 <code>minimize</code> 或 <code>fit</code> 当然能得到一个解，
-但它把「中间发生了什么」全藏起来了 ——
-你看不到误差是在指数增长还是在缓慢爬行，
-也看不到「第 3 步就已经到了，后面 100 步都在浪费」。</p>
-<p>所以这一页的规则是：<strong>所有迭代都自己写，每一步都留下记录</strong>。</p>
+但它把「中间发生了什么」全藏起来 ——
+看不到误差在指数增长还是缓慢爬行，
+也看不到「第 3 步就到了，后面 100 步都在浪费」。</p>
+<p>所以这一页的规则：<strong>所有迭代都自己写，每一步都留下记录</strong>。</p>
 <div class="admonition warning">
 <p class="admonition-title">「用现成优化器」和「自己写」学到的不是同一件事</p>
 <table>
@@ -12326,24 +12326,24 @@
 <tr>
 <td><code>minimize(f, x0)</code> 一行调用</td>
 <td>一个解，和一句 <code>success: True</code></td>
-<td>为什么这个解可信、换组参数会不会崩 ⚠</td>
+<td>这个解为什么可信、换组参数会不会崩 ⚠</td>
 </tr>
 <tr>
 <td>手写迭代 + 记录误差</td>
-<td>一条误差曲线 + 每一步的中间量</td>
+<td>一条误差曲线 + 每步中间量</td>
 <td>—— 本页采用 ✓</td>
 </tr>
 <tr>
 <td>手写迭代但只打印最后结果</td>
 <td>一个数</td>
-<td>发散、震荡、停滞、收敛，这四种命运看起来一模一样 ⚠</td>
+<td>发散、震荡、停滞、收敛四种命运看起来一模一样 ⚠</td>
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：要「拿到答案」用现成库；
-要「搞懂这个问题的脾气」，必须自己写，而且必须<strong>记录全过程</strong>。</p>
 </div>
-<p><strong>任务拆成四步</strong>，每一步都要有可运行的代码和真实输出：</p>
+<p><strong>判断依据</strong>：要「拿到答案」用现成库；
+要「搞懂这个问题的脾气」必须自己写，且必须<strong>记录全过程</strong>。</p>
+<p><strong>任务拆成四步</strong>，每步都要有可运行的代码和真实输出：</p>
 <table>
 <thead>
 <tr>
@@ -12354,11 +12354,11 @@
 <tbody>
 <tr>
 <td>定义目标函数</td>
-<td>一个已知解析最优解的函数，这样才有「标准答案」可以对</td>
+<td>一个已知解析最优解的函数，才有「标准答案」可对</td>
 </tr>
 <tr>
 <td>手写梯度下降</td>
-<td>一个能返回轨迹、函数值、误差序列的迭代器</td>
+<td>能返回轨迹、函数值、误差序列的迭代器</td>
 </tr>
 <tr>
 <td>扫参数做实验</td>
@@ -12366,20 +12366,20 @@
 </tr>
 <tr>
 <td>交叉验证</td>
-<td>用解析解和现成优化器两条独立路径确认自己的实现没错</td>
+<td>用解析解和现成优化器两条独立路径确认实现没错</td>
 </tr>
 </tbody>
 </table>
 <p><strong>注意最后一步为什么必要</strong>：
-自己写的迭代器如果有个下标错误，
-它照样能跑出一条「看起来很收敛」的曲线 ——
+自己写的迭代器若有下标错误，
+照样能跑出一条「看起来很收敛」的曲线 ——
 因为它可能在解一个<strong>与你以为的不一样</strong>的问题。
 所以必须留一条独立的核对路径 ✓</p>
 <hr />
 <h2 id="_2">二、定义目标函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 为什么选二次函数<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>要研究「收敛」，前提是<strong>知道正确答案</strong>。
-二次函数 <code>f(x) = 0.5 * x^T A x</code>（<code>A</code> 对称正定）恰好满足这个前提：</p>
+二次函数 <code>f(x) = 0.5 * x^T A x</code>（<code>A</code> 对称正定）恰好满足：</p>
 <table>
 <thead>
 <tr>
@@ -12391,47 +12391,47 @@
 <tbody>
 <tr>
 <td>最优解</td>
-<td>梯度 <code>∇f = A x</code> 是<strong>一次式</strong>，令它为零即可解出</td>
-<td>有闭式标准答案，误差可以精确算 ✓</td>
+<td>梯度 <code>∇f = A x</code> 是<strong>一次式</strong>，令它为零即可解</td>
+<td>有闭式标准答案，误差可精确算 ✓</td>
 </tr>
 <tr>
 <td>收敛判据</td>
-<td>可以明确说「误差小于多少就算收敛」</td>
+<td>可明确说「误差小于多少算收敛」</td>
 <td>不同参数的迭代次数可比 ✓</td>
 </tr>
 <tr>
 <td>条件数</td>
-<td>就是 <code>A</code> 的最大与最小特征值之比</td>
+<td><code>A</code> 的最大与最小特征值之比</td>
 <td>一个数就能控制问题的「病态程度」 ✓</td>
 </tr>
 <tr>
 <td>梯度下降的表现</td>
 <td>有完整的理论收敛因子</td>
-<td>实测值可以和理论值对上 ✓</td>
+<td>实测可与理论对上 ✓</td>
 </tr>
 </tbody>
 </table>
 <p><strong>最关键的是第三行</strong>：条件数 κ 可以<strong>人为控制</strong>。
-现实问题的条件数是你拿到的，而教学实验的条件数应当是你<strong>设的</strong> ——
-否则你就不知道「变慢」到底是不是条件数造成的。</p>
+现实问题的条件数是你拿到的，教学实验的应当是你<strong>设的</strong>，
+否则就不知道「变慢」到底是不是条件数造成的。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么不用更「真实」的函数</p>
-<p>很多人第一反应是拿神经网络当例子。但那样做会同时变动一大堆东西：
+<p>很多人第一反应是拿神经网络当例子，但那样会同时变动一大堆东西：
 非凸、随机梯度、批量大小、初始化……
-最后测出来的差异<strong>归因不到任何单一因素</strong>。</p>
+最后测出的差异<strong>归因不到任何单一因素</strong>。</p>
 <p>本页的策略是<strong>一次只动一个旋钮</strong>：
 先固定条件数扫学习率，再固定学习率扫条件数。
 真实的深度学习是这些效应叠加的结果，
-但叠加之前，得先看清每一层各是什么</p>
+但叠加之前得先看清每一层各是什么</p>
 </div>
 <h3 id="22">2.2 用对角矩阵控制条件数<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>取 <code>A</code> 为对角矩阵 <code>diag(λ₁, …, λₙ)</code>，对角元从 <code>λ_max / κ</code> 均匀排到 <code>λ_max</code>。
-对角矩阵的特征值就是它的对角元，所以：</p>
+<p>取 <code>A</code> 为对角矩阵 <code>diag(λ₁, …, λₙ)</code>，对角元从 <code>λ_max / κ</code> 匀排到 <code>λ_max</code>。
+对角矩阵的特征值即其对角元，所以：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>条件数 κ = λ_max / λ_min        （对角矩阵的情形，一眼可见）
 </code></pre></div></td></tr></table></div>
-<p><strong>为什么"对角"这个限制是重要的</strong>：对一般矩阵，
-特征值要解特征方程才能得到，而「条件数」这个词在非对称矩阵上还有别的含义。
-对角矩阵把这件事变得完全透明 —— 你能看着 <code>np.diag(A)</code> 就说出条件数</p>
+<p><strong>为什么"对角"这个限制重要</strong>：对一般矩阵，
+特征值要解特征方程才能得到，而「条件数」在非对称矩阵上还有别的含义。
+对角矩阵把这件事变得完全透明 —— 看着 <code>np.diag(A)</code> 就能说出条件数</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
@@ -12582,7 +12582,7 @@
 最大特征值      : 10.0
 条件数          : 10.0
 2 / 最大特征值  : 0.2</code></pre>
-<p><strong>这段模块里有三个设计决定值得说清</strong>：</p>
+<p><strong>这段模块有三个设计决定值得说清</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12593,25 +12593,25 @@
 <tbody>
 <tr>
 <td>用 <code># @file: gd_lab.py</code> 声明成辅助文件</td>
-<td>本页有十几个代码块，全靠同一套函数；声明一次，后面每个块都能 <code>from gd_lab import ...</code> 独立运行 ✓</td>
+<td>本页十几个代码块全靠同一套函数；声明一次，后面每个块都能 <code>from gd_lab import ...</code> 独立运行 ✓</td>
 </tr>
 <tr>
 <td>三个「命运」都有名字</td>
-<td><code>已收敛</code> / <code>发散</code> / <code>停滞</code> / <code>未收敛</code> 分开返回，而不是只返回一个布尔值。因为<strong>发散的曲线和停滞的曲线看起来完全不一样</strong> ⚠</td>
+<td><code>已收敛</code> / <code>发散</code> / <code>停滞</code> / <code>未收敛</code> 分开返回，而不是只返回布尔值。因为<strong>发散的曲线和停滞的曲线看起来完全不一样</strong> ⚠</td>
 </tr>
 <tr>
 <td><code>grad</code> 单独写成函数</td>
-<td>二次函数的梯度恰好等于 <code>A x</code>，但这个写法在换成非二次函数时才能被替换（见例题 1）✓</td>
+<td>二次函数的梯度恰好等于 <code>A x</code>，但这样写法换成非二次函数时才可替换（见例题 1）✓</td>
 </tr>
 </tbody>
 </table>
 <p><strong>为什么状态判定里要有「停滞」这一档</strong>：
 当学习率<strong>恰好等于</strong>稳定上界时，误差不会爆掉，
-而是被某个方向卡在原地反复横跳 —— 它既不收敛也不发散。
-把它单独标出来，输出里才能一眼分辨「数值溢出」和「被卡住」这两种完全不同的失败</p>
+而是被某个方向卡住反复横跳 —— 既不收敛也不发散。
+把它单独标出来，输出里才能一眼分辨「数值溢出」和「被卡住」这两种不同的失败</p>
 <h3 id="23">2.3 验算：函数值与梯度<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p>写完定义之后，<strong>第一件事是验算</strong>。
-下面这段用两种独立方式算同一个 <code>f(x)</code>：</p>
+<p>写完定义，<strong>第一件事是验算</strong>。
+下面用两种独立方式算同一个 <code>f(x)</code>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
@@ -12686,7 +12686,7 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <tbody>
 <tr>
 <td><code>3.447368 = 3.447368</code></td>
-<td><code>f</code> 的实现与手算完全一致，不是「差不多」 ✓</td>
+<td><code>f</code> 的实现与手算完全一致 ✓</td>
 </tr>
 <tr>
 <td><code>梯度与 A x 一致吗</code> 两列相同</td>
@@ -12699,9 +12699,9 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 </tbody>
 </table>
 <p><strong>最后一行是后面所有实验的地基</strong>：
-它说明「解析最优解」是真的最优解，不是近似。
+它说明「解析最优解」是真的最优解，不是近似，
 于是后面所有误差都能拿它当分母算，
-「收敛了没有」这个问题才有确定答案</p>
+「收敛没有」才有确定答案</p>
 <div class="admonition warning">
 <p class="admonition-title">不要跳过「验算」这一步</p>
 <p>自己实现的函数有个特点：<strong>写错了也照样能跑</strong>。</p>
@@ -12717,22 +12717,22 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <tr>
 <td>忘记乘 <code>0.5</code></td>
 <td>函数值全部大一倍</td>
-<td>收敛判据的尺度整体偏移，迭代次数全变 ⚠</td>
+<td>收敛判据尺度整体偏移，迭代次数全变 ⚠</td>
 </tr>
 <tr>
 <td>梯度写成 <code>A.T @ x</code></td>
-<td>对称矩阵上看不出差别</td>
+<td>对称矩阵看不出差别</td>
 <td>换到非对称问题立刻出错 ⚠</td>
 </tr>
 <tr>
-<td><code>x</code> 写成 <code>x.copy()</code> 漏掉</td>
+<td>忘记 <code>x.copy()</code></td>
 <td>轨迹列表里全是同一个对象</td>
 <td>轨迹点数对，但每个点都一样 ⚠</td>
 </tr>
 </tbody>
 </table>
 <p><strong>防呆写法</strong>：拿一个能<strong>手算</strong>的小例子对一次（本页用的是 <code>x</code> 只有两个非零分量），
-再往下做实验。这一步只要十秒</p>
+再往下做实验。只要十秒</p>
 </div>
 <hr />
 <h2 id="_3">三、手写梯度下降<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -12743,9 +12743,9 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <p><strong>为什么这一行就够了</strong>：由一阶泰勒展开，
 要让 <code>f</code> 下降就需要 <code>∇f^T Δx</code> 为负；
 在所有单位方向里，<code>-∇f/‖∇f‖</code> 给出最小的内积。
-所以「沿负梯度走」是在一阶信息下最贪心的选择</p>
+所以「沿负梯度走」是一阶信息下最贪心的选择</p>
 <p>推导细节在 <a href="../../../../math/optimization/gradient-descent/">梯度下降</a> 那一页，
-这里直接看它在代码里长什么样 —— <strong>关键是每一步都要留下记录</strong>：</p>
+这里直接看它在代码里长什么样 —— <strong>关键是每步都留下记录</strong>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -12825,13 +12825,13 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 </table>
 <p><strong>为什么用「相对误差」而不是「函数值」当进度指标</strong>：
 函数值的绝对大小取决于问题本身 ——
-<code>f</code> 整体放大 100 倍，函数值就变大 100 倍，
-但迭代过程一步都没变（这一点在自测 Q2 里实测）。
+<code>f</code> 整体放大 100 倍，函数值就大 100 倍，
+但迭代过程一步都没变（自测 Q2 里实测）。
 相对误差 <code>‖x - x*‖ / ‖x₀ - x*‖</code> 是无量纲的，
 从 1.0 降到 <code>1e-6</code> 这件事，在任何尺度的同类问题上都可比</p>
 <h3 id="32">3.2 完整实现：记录、判定、对比<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>上面那段只跑了 6 步。要回答「多少步收敛」，
-需要一个会自己判断停下的版本 —— 就是模块里的 <code>gd</code> 函数。</p>
+需要一个会自己判断停下的版本 —— 模块里的 <code>gd</code> 函数。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
@@ -12899,7 +12899,7 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 最优解就是原点，最终点离它多远: 4.430e-06
 误差是否单调递减（前 100 步）: True
 函数值是否单调递减（全程）    : True</code></pre>
-<p><strong>五个可以通过的核对，逐个说明它挡住了什么错</strong>：</p>
+<p><strong>五个可通过的核对，逐个说明它挡住了什么错</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12912,7 +12912,7 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <tr>
 <td><code>轨迹点数 = 步数 + 1</code></td>
 <td>118 = 117 + 1</td>
-<td>记录时漏掉起点，或者多记一次 ⚠</td>
+<td>记录漏掉起点或多记一次 ⚠</td>
 </tr>
 <tr>
 <td><code>函数值序列长度 = 轨迹点数</code></td>
@@ -12927,23 +12927,23 @@ f(x) 与手算一致吗 : 3.447368 = 3.447368
 <tr>
 <td>函数值全程单调递减</td>
 <td><code>True</code></td>
-<td>二次函数上梯度下降<strong>一定</strong>单调下降；不成立就是实现有错 ✓</td>
+<td>二次函数上梯度下降<strong>一定</strong>单调下降，不成立就是实现有错 ✓</td>
 </tr>
 <tr>
 <td>最终点离最优解 <code>4.43e-06</code></td>
 <td>与误差 <code>9.9e-07</code> 同量级</td>
-<td>两个「误差」的口径互相印证 ✓</td>
+<td>两个「误差」口径互相印证 ✓</td>
 </tr>
 </tbody>
 </table>
 <p><strong>为什么「函数值单调递减」这条特别有价值</strong>：
 在二次函数 <code>f(x) = 0.5 x^T A x</code> 上，
-只要学习率不超过 <code>2/λ_max</code>，函数值就是<strong>严格单调下降</strong>的 —— 这是可以证明的。
-所以一旦看到函数值在上升，不必怀疑数学，<strong>一定是代码错了</strong> ✓</p>
+只要学习率不超过 <code>2/λ_max</code>，函数值就<strong>严格单调下降</strong> —— 这是可证明的。
+所以一旦看到函数值上升，不必怀疑数学，<strong>一定是代码错了</strong> ✓</p>
 <p><strong>最后一行 <code>最优解就是原点</code></strong> 说明了本页的简化：
-不带一次项的版本最优解固定在原点，于是「误差」可以直接读成 <code>‖x‖</code>。
-这是一个刻意的简化 —— 它让误差计算几乎不会出错，
-代价是少了一点一般性（例题里会补上带一次项的版本）</p>
+不带一次项的版本最优解固定在原点，于是「误差」可直接读成 <code>‖x‖</code>。
+这是刻意的简化 —— 让误差计算几乎不会出错，
+代价是少一点一般性（例题里会补上带一次项的版本）</p>
 <hr />
 <h2 id="_4">四、实验一：学习率的影响<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <figure class="kb-fig">
@@ -13418,11 +13418,11 @@ L 144.859063 66.26
 </code></pre></div></td></tr></table></div>
 <p><strong>为什么上界是 <code>2/λ_max</code></strong>：把误差沿特征方向拆开，
 第 <code>i</code> 个方向的误差每步乘上 <code>|1 - lr·λ_i|</code>。
-要让<strong>所有</strong>方向都缩小，就得让<strong>最大</strong>的那个因子也小于 1：</p>
+要让<strong>所有</strong>方向都缩小，就得让<strong>最大</strong>的因子也小于 1：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a>|1 - lr·λ_max| &lt; 1   ⟺   0 &lt; lr &lt; 2/λ_max
 </code></pre></div></td></tr></table></div>
 <p><strong>为什么最优值是 <code>2/(λ_max + λ_min)</code></strong>：
-收敛快慢由「最坏的那个因子」决定，
+收敛快慢由「最坏的因子」决定，
 即 <code>max(|1 - lr·λ_max|, |1 - lr·λ_min|)</code>。
 让这两个量相等，就得到 <code>lr = 2/(λ_max + λ_min)</code> ——
 这就是「把最坏情况压到最平」的取法</p>
@@ -13503,7 +13503,7 @@ L 144.859063 66.26
 <td><code>0.002</code></td>
 <td>1%</td>
 <td><strong>6153</strong></td>
-<td>步子太小：误差每步只乘 0.998，几乎在原地磨 ⚠</td>
+<td>步子太小：误差每步只乘 0.998，几乎原地磨 ⚠</td>
 </tr>
 <tr>
 <td><code>0.09</code></td>
@@ -13538,8 +13538,8 @@ L 144.859063 66.26
 </tbody>
 </table>
 <p><strong>表格里最反直觉的一行是 <code>0.19</code></strong>：
-它比最优值 <code>0.1818</code> 更大，按「步子大走得快」的直觉应该更快。
-但它的步数（117）反而是最优值的<strong>近两倍</strong>。</p>
+它比最优值 <code>0.1818</code> 更大，按「步子大走得快」的直觉应该更快，
+但步数（117）反而是最优值的<strong>近两倍</strong>。</p>
 <p><strong>原因是收敛因子不是单调的</strong>：</p>
 <table>
 <thead>
@@ -13579,8 +13579,8 @@ L 144.859063 66.26
 </table>
 <p><code>ρ</code> 先随学习率增大而降（步子变大，缩得快），
 到 <code>2/(λ_max+λ_min)</code> 触底，然后<strong>回升</strong>：
-因为此时最慢方向虽然在加速，但<strong>最快方向已经开始震荡</strong>，把整体拖了回去。
-再大一点，<code>1 - lr·λ_max</code> 变成负数、绝对值超过 1，游戏就结束了</p>
+因为此时最慢方向虽在加速，但<strong>最快方向已开始震荡</strong>，把整体拖了回去。
+再大一点，<code>1 - lr·λ_max</code> 变成负数、绝对值超过 1，游戏就结束</p>
 <div class="admonition tip">
 <p class="admonition-title">「学习率越大越快」只在很窄的一段里成立</p>
 <table>
@@ -13595,7 +13595,7 @@ L 144.859063 66.26
 <tr>
 <td><code>0 &lt; lr &lt; 2/(λ_max+λ_min)</code></td>
 <td>越大越快 ✓</td>
-<td>最快方向还没开始震荡</td>
+<td>最快方向还没震荡</td>
 </tr>
 <tr>
 <td><code>lr = 2/(λ_max+λ_min)</code></td>
@@ -13605,7 +13605,7 @@ L 144.859063 66.26
 <tr>
 <td><code>2/(λ_max+λ_min) &lt; lr &lt; 2/λ_max</code></td>
 <td>越大越慢 ⚠</td>
-<td>最快方向在震荡，抵消了收益</td>
+<td>最快方向在震荡，抵消收益</td>
 </tr>
 <tr>
 <td><code>lr ≥ 2/λ_max</code></td>
@@ -13614,12 +13614,12 @@ L 144.859063 66.26
 </tr>
 </tbody>
 </table>
-<p>所以「调大学习率」在超过最优值之后，<strong>是在往悬崖方向走</strong>：
-步数先涨、再不动、最后爆掉 —— 而这三步之间只差 0.02</p>
+<p>所以「调大学习率」超过最优值之后，<strong>是在往悬崖方向走</strong>：
+步数先涨、再不动、最后爆掉 —— 三步之间只差 0.02</p>
 </div>
 <h3 id="43">4.3 越过上界之后：误差长什么样<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>上表的最后两行只给了 <code>—</code>。
-真正要知道的是「发散时误差怎么动」—— 它<strong>不是乱涨，而是规规矩矩地等比增长</strong>：</p>
+真正要知道的是「发散时误差怎么动」—— 它<strong>不是乱涨，而是规规矩矩等比增长</strong>：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
@@ -13683,7 +13683,7 @@ L 144.859063 66.26
   lambda =   5.5 → 每步因子 0.155
   lambda =   1.0 → 每步因子 0.79
   只要某个因子大于 1，该方向的误差就会指数增长 → 整体发散</code></pre>
-<p><strong>这张表给出了三种截然不同的形状</strong>，用 <code>text</code> 块画出来最直观：</p>
+<p><strong>这张表给出三种截然不同的形状</strong>，用 <code>text</code> 块画出来最直观：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
@@ -13720,11 +13720,11 @@ L 144.859063 66.26
 </code></pre></div></td></tr></table></div>
 <p><strong>最后一条注释是本节的工程含义</strong>：
 发散不是「一开始就报错」，而是<strong>先伪装成正常下降</strong>。
-在真实训练里，你看到的往往是「前 100 步损失在降，然后突然变成 <code>nan</code>」——
-上面这张表精确刻画出这个过程的形状</p>
+真实训练里看到的往往是「前 100 步损失在降，然后突然变成 <code>nan</code>」——
+上面这张表精确刻画出这个过程</p>
 <div class="admonition warning">
 <p class="admonition-title">「恰好等于上界」比「略微超过」更值得警惕</p>
-<p>三档失败的样子完全不同，误判的代价也不同：</p>
+<p>三档失败的样子与误判代价都不同：</p>
 <table>
 <thead>
 <tr>
@@ -13751,21 +13751,21 @@ L 144.859063 66.26
 </tr>
 </tbody>
 </table>
-<p>前两种最危险，因为它们<strong>不报错、不溢出、还能算出一个数</strong>。</p>
-<p><strong>防呆办法</strong>：不要只看最后一步的损失，
-而是同时打印<strong>误差的比值</strong> <code>errs[k+1] / errs[k]</code> 或直接检查
+<p>前两种最危险：<strong>不报错、不溢出、还能算出一个数</strong>。</p>
+<p><strong>防呆办法</strong>：别只看最后一步的损失，
+而是同时打印<strong>误差比值</strong> <code>errs[k+1] / errs[k]</code> 或检查
 <code>函数值是否单调递减</code> —— 这个布尔判断比任何损失曲线都可靠</p>
 </div>
 <p><strong>为什么「函数值单调递减」这个判据这么强</strong>：
-理论上，只要 <code>lr &lt; 2/λ_max</code>，二次函数上梯度下降的函数值<strong>严格单调递减</strong>。
-所以这个布尔值一旦是 <code>False</code>，不用做任何进一步分析，
+理论上只要 <code>lr &lt; 2/λ_max</code>，二次函数上梯度下降的函数值<strong>严格单调递减</strong>。
+所以这个布尔值一旦是 <code>False</code>，不用进一步分析，
 就能确定「学习率超了上界」或者「代码有 bug」——
-两条出路都是立刻要处理的</p>
+两条出路都要立刻处理</p>
 <hr />
 <h2 id="_5">五、实验二：条件数的影响<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 固定学习率，只改条件数<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
 <p>实验一说明了学习率的重要性。现在把学习率<strong>固定</strong>在 <code>1/λ_max</code>（安全但保守），
-只让条件数变化 —— 这样才能单独看清条件数的作用：</p>
+只让条件数变化 —— 这样才能单独看清它的作用：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -13840,7 +13840,7 @@ L 144.859063 66.26
 <tr>
 <td><code>1 - 1/kappa</code></td>
 <td>收敛因子 <code>ρ = 1 - lr·λ_min</code></td>
-<td>每步误差乘上这个数；越接近 1 越慢</td>
+<td>每步误差乘这个数；越接近 1 越慢</td>
 </tr>
 <tr>
 <td><code>理论上界步数</code></td>
@@ -13856,8 +13856,8 @@ L 144.859063 66.26
 </table>
 <p><strong>为什么理论收敛因子恰好是 <code>1 - 1/kappa</code></strong>：
 取 <code>lr = 1/λ_max</code> 时，每个特征方向的因子是 <code>1 - λ_i/λ_max</code>。
-最慢的那个方向是 <code>λ_min</code> 对应的，因子为 <code>1 - λ_min/λ_max = 1 - 1/κ</code>。
-<strong>整体的收敛速度由最慢的方向主导</strong> ✓</p>
+最慢的方向对应 <code>λ_min</code>，因子为 <code>1 - λ_min/λ_max = 1 - 1/κ</code>。
+<strong>整体收敛速度由最慢的方向主导</strong> ✓</p>
 <p><strong>表里三行数字说明了什么</strong>：</p>
 <table>
 <thead>
@@ -13876,12 +13876,12 @@ L 144.859063 66.26
 <tr>
 <td>从 κ=1 到 κ=1000</td>
 <td>1 步 → 12312 步</td>
-<td>同一个算法、同一个学习率，<strong>慢了一万倍</strong> ⚠</td>
+<td>同算法、同学习率，<strong>慢了一万倍</strong> ⚠</td>
 </tr>
 <tr>
 <td><code>实测/理论</code> 稳定在 1.12</td>
 <td>四个 κ 都是 1.12</td>
-<td>理论与实测的偏差是常数，模型可信 ✓</td>
+<td>理论与实测偏差是常数，模型可信 ✓</td>
 </tr>
 <tr>
 <td>κ=1 只要 1 步</td>
@@ -13893,11 +13893,11 @@ L 144.859063 66.26
 <p><strong>最后一行值得单独说</strong>：κ = 1 意味着 <code>A</code> 是单位矩阵的常数倍，
 所有特征值相等，此时梯度<strong>直接指向最优解</strong>，
 从任意点出发一步就到 —— 这是梯度下降的「理想宇宙」。
-所有慢，都慢在「λ 之间不相等」这件事上</p>
-<p><strong>为什么「实测比重论少 12%」却不算错</strong>：
-理论用的是<strong>最坏方向</strong>的因子，而实测的误差是<strong>所有方向误差的合成范数</strong>。
-最快的方向早就缩到 0 了，剩下的范数主要由最慢方向贡献，
-但早期还有别的方向在帮忙缩 —— 所以实测比上界稍快。
+所有慢，都慢在「λ 之间不相等」上</p>
+<p><strong>为什么「实测比理论少 12%」却不算错</strong>：
+理论用的是<strong>最坏方向</strong>的因子，而实测误差是<strong>所有方向误差的合成范数</strong>。
+最快的方向早就缩到 0，剩下的范数主要由最慢方向贡献，
+但早期还有别的方向帮忙缩 —— 所以实测比上界稍快。
 两者只差常数倍（1.12）本身就说明模型抓住了主要矛盾</p>
 <h3 id="52-10">5.2 前 10 步为什么「看起来很快」<a class="headerlink" href="#52-10" title="Permanent link">&para;</a></h3>
 <p>一个非常容易误判的地方：<strong>慢的迭代，前几十步往往看着不慢</strong>。</p>
@@ -13957,8 +13957,8 @@ L 144.859063 66.26
 也就是说：前期很快，后期每步只挪一点点 —— 这正是慢的表现
 等它真正慢下来（步数 &gt;1000）之后，误差才降到 1e-6 量级</code></pre>
 <p><strong>把这张表读成一句话</strong>：
-第 1 步下降了 41.6%，第 10 步只下降 2.9%，而误差还有 <strong>0.27</strong>。
-按这个趋势，剩下的路要走一万多步。</p>
+第 1 步下降 41.6%，第 10 步只下降 2.9%，而误差还有 <strong>0.27</strong>，
+按这个趋势剩下的路要走一万多步。</p>
 <table>
 <thead>
 <tr>
@@ -13998,14 +13998,13 @@ L 144.859063 66.26
 <p><strong>为什么会「前快后慢」</strong>：
 误差是各方向误差的平方和。
 一开始，<code>λ = λ_max</code> 的方向（快方向）误差占主导，
-它每步乘上 <code>|1 - 0.1 × 10| = 0</code>（也就是一步归零），
-所以前几步总误差掉得很猛。
+它每步乘 <code>|1 - 0.1 × 10| = 0</code>（一步归零），所以前几步总误差掉得很猛；
 等快方向归零后，剩下的是 <code>λ_min</code> 方向的误差，
 它每步只乘 <code>1 - 0.1 × 0.01 = 0.999</code> —— 每步只缩 0.1%</p>
 <p><strong>这一段是「条件数」这个词的物理含义</strong>：
 条件数大，意味着问题里同时存在「极快」和「极慢」两种方向，
 而<strong>整体速度由最慢的那个决定</strong>。
-快的方向早早退场，慢的方向拖着整个迭代走</p>
+快的方向早早退场，慢的拖着整个迭代走</p>
 <div class="admonition warning">
 <p class="admonition-title">不要用「前几十步的下降速度」判断整体速度</p>
 <table>
@@ -14037,9 +14036,9 @@ L 144.859063 66.26
 <p><strong>可靠的做法</strong>：看<strong>误差比值</strong>而不是误差差值。
 打印 <code>errs[k+1]/errs[k]</code> 或对数坐标的斜率 ——
 只有当这个比值接近 1 时才是真的快到头了</p>
-<p>本页所有实验都同时打印「步数 + 最终误差」两个数，
-就是为了避免只看曲线形状下结论</p>
 </div>
+<p>本页所有实验都同时打印「步数 + 最终误差」两个数，
+避免只看曲线形状下结论</p>
 <hr />
 <h2 id="_6">六、实验三：与牛顿法对比<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 牛顿法在二次函数上一步到位<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
@@ -14142,8 +14141,8 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
   解线性方程组的运算量: O(n^3) = 8000
   在本例规模下相差    : 20.0 倍（且尚未算 Hessian）</code></pre>
 <p><strong><code>3.846e-16</code> 这个数字的意思是</strong>：
-一步之后与最优解的距离已经落到<strong>浮点精度级别</strong>
-（<code>float64</code> 的相对精度约 <code>2.2e-16</code>），也就是说精确到位了</p>
+一步之后与最优解的距离已落到<strong>浮点精度级别</strong>
+（<code>float64</code> 的相对精度约 <code>2.2e-16</code>），也就是精确到位了</p>
 <p><strong>「步数」和「每步代价」必须分开看</strong>：</p>
 <table>
 <thead>
@@ -14172,7 +14171,7 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 <tr>
 <td>是否要二阶信息</td>
 <td>不要 ✓</td>
-<td>要 Hessian（本例已知，真实问题要额外算）⚠</td>
+<td>要 Hessian（本例已知，真实问题要另算）⚠</td>
 </tr>
 <tr>
 <td>在本例（n = 20）</td>
@@ -14184,7 +14183,7 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 <p><strong>做个粗略的账</strong>：
 梯度下降用最优学习率走 63 步，总运算量约 <code>63 × 400 = 25200</code>；
 牛顿法一步 <code>8000</code>（还没算构造 Hessian 的开销）。
-在本例这个规模上，<strong>牛顿法还是划算的</strong></p>
+在本例规模上，<strong>牛顿法还是划算的</strong></p>
 <p>但把规模放大到 <code>n = 10000</code>：</p>
 <table>
 <thead>
@@ -14217,7 +14216,7 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 </tbody>
 </table>
 <p>规模每涨 10 倍，代价差距就涨 10 倍。
-到了深度学习那种参数量级（百万到十亿），
+到深度学习那种参数量级（百万到十亿），
 牛顿法的单步代价根本付不起 ——
 这就是下一节要回答的问题</p>
 <div class="admonition warning">
@@ -14257,11 +14256,11 @@ Hessian 恒等于 <code>A</code>（与位置无关），于是：</p>
 <p>另外还有两个实际障碍：
 <code>H</code> 要存 <code>n²</code> 个数（n = 1e6 时是 1e12 个数），
 而且解方程组的数值稳定性在病态问题上很差</p>
-<p><strong>判断依据</strong>：参数少、Hessian 便宜且正定 → 牛顿法值得考虑；
-参数多、非凸、只能用随机梯度 → 老老实实用一阶方法</p>
 </div>
+<p><strong>判断依据</strong>：参数少、Hessian 便宜且正定 → 牛顿法值得考虑；
+参数多、非凸、只能用随机梯度 → 老实使用一阶方法</p>
 <h3 id="62">6.2 与解析解交叉验证<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
-<p>自己写的迭代器必须被<strong>独立路径</strong>验证过。这里用两条独立路径：</p>
+<p>自己写的迭代器必须被<strong>独立路径</strong>验证。这里用两条独立路径：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
@@ -14343,11 +14342,10 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tbody>
 </table>
 <p><strong>为什么这个核对值得单独写一段</strong>：
-如果手写迭代器有 bug（比如梯度符号搞反、<code>A</code> 用成了 <code>A.T</code>），
-在<strong>本页这种对角对称的例子</strong>上它可能照样收敛 ——
-因为对角矩阵自己就是对称的。
-而 <code>minimize</code> 走的是一条完全独立的实现路径，
-两者的解对得上，才说明「这不是我一个人的错觉」</p>
+手写迭代器若有 bug（比如梯度符号搞反、<code>A</code> 用成 <code>A.T</code>），
+在<strong>本页这种对角对称的例子</strong>上可能照样收敛（对角矩阵自己就是对称的）；
+而 <code>minimize</code> 走的是完全独立的实现路径，
+两者解对得上，才说明「这不是我一个人的错觉」</p>
 <p><strong>注意最后一行 <code>两者之差 : 0.000e+00</code></strong>：
 这说明 BFGS 找到的点与解析解在函数值上<strong>完全一致到双精度</strong>。
 梯度范数 <code>2.665e-15</code> 也确认了它停在一阶条件上</p>
@@ -14501,11 +14499,11 @@ BFGS 在解处的梯度范数  : 2.665e-15
 <tbody>
 <tr>
 <td><code>matplotlib.use("Agg")</code></td>
-<td>不需要窗口，只在后台画图存文件；服务器或无图形界面上也能跑 ✓</td>
+<td>不需要窗口，只在后台画图存文件；无图形界面上也能跑 ✓</td>
 </tr>
 <tr>
 <td><code>with tempfile.TemporaryDirectory() as tmp</code></td>
-<td><strong>退出 <code>with</code> 块时自动删除</strong>，比手写 <code>mkdtemp</code> 加 <code>rmtree</code> 更不容易漏 ⚠</td>
+<td><strong>退出 <code>with</code> 块时自动删除</strong>，比手写 <code>mkdtemp</code> + <code>rmtree</code> 更不易漏 ⚠</td>
 </tr>
 <tr>
 <td><code>plt.close(fig)</code></td>
@@ -14513,7 +14511,7 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tr>
 <tr>
 <td><code>FuncFormatter</code> 自定义纵轴刻度</td>
-<td>让刻度显示成 <code>1e-06</code> 这种纯 ASCII 形式，避免负号的字体渲染问题 ✓</td>
+<td>让刻度显示成 <code>1e-06</code> 这种纯 ASCII 形式，避免负号字体渲染问题 ✓</td>
 </tr>
 </tbody>
 </table>
@@ -14536,16 +14534,14 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tr>
 </tbody>
 </table>
-<p><strong>「曲线条数 = 3」这个数字是真正的核对手段</strong>：
-它确认三条曲线都画上去了。
-如果忘了 <code>ax</code> 归属、或者用了不同的 <code>Axes</code>，
-条数就会变成 1 或 2 —— 而图上看不出来，因为缺的那条只是「没出现」</p>
+<p><strong>「曲线条数 = 3」是真正的核对手段</strong>：它确认三条曲线都画上去了。
+若忘了 <code>ax</code> 归属、或用了不同的 <code>Axes</code>，条数会变成 1 或 2 ——
+而图上看不出来，因为缺的那条只是「没出现」</p>
 <p><strong>纵轴为什么必须取对数</strong>：
-误差是<strong>等比衰减</strong>的，在对数坐标下才画成直线，
-而直线的斜率就是收敛速度 ——
-<code>lr = 0.002</code> 那条斜率几乎平缓、<code>lr = 0.1818</code> 那条近乎垂直立降，
-两者相差两个数量级的步数，看一眼就分得出
-在<strong>线性</strong>纵轴上，这三条线会全部挤在底部贴着横轴，
+误差是<strong>等比衰减</strong>的，在对数坐标下才画成直线，斜率就是收敛速度 ——
+<code>lr = 0.002</code> 那条几乎平缓、<code>lr = 0.1818</code> 那条近乎垂直，
+两者相差两个数量级的步数，一眼可辨。
+在<strong>线性</strong>纵轴上，这三条线会全挤在底部贴着横轴，
 什么差别都看不出来</p>
 <p><strong>为什么打印「每条曲线的点数」而不是「文件已写出」</strong>：
 <code>[6154, 132, 65]</code> 这三个数字<strong>就是实验一的核心结论</strong>：
@@ -14695,10 +14691,8 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tbody>
 </table>
 <p><strong>轨迹的形状因此可以预测</strong>：
-它不是沿着等高线的法线直冲原点，
-而是<strong>先横着走到底，再竖着慢慢挪</strong> ——
-在图上看起来就是一条「L 形折线」，
-越靠近终点步子越小、点越密。</p>
+它不是沿等高线法线直冲原点，而是<strong>先横着走到底、再竖着慢慢挪</strong> ——
+图上就是一条「L 形折线」，越靠近终点步子越小、点越密。</p>
 <p><strong>为什么用 <code>np.logspace(-2, 1, 12)</code> 定等高线高度</strong>：
 <code>f</code> 的取值跨度很大（从 55 到接近 0），
 线性等间隔的等高线会全挤在中心一小块。
@@ -14912,27 +14906,21 @@ BFGS 在解处的梯度范数  : 2.665e-15
 </tr>
 </tbody>
 </table>
-<p><strong>「符号翻转」就是「锯齿」的量化定义</strong>：
-它在数「轨迹穿过慢方向直线的次数」。
-一条平滑下降的轨迹只会穿 0 次或 1 次，
-而锯齿状轨迹会穿几十上百次 ——
+<p><strong>「符号翻转」就是「锯齿」的量化定义</strong>：数轨迹穿过慢方向直线的次数。
+平滑轨迹只穿 0 或 1 次，锯齿轨迹会穿几十上百次 ——
 <strong>这个数字把「图上看起来抖」变成了「可以核对的事实」</strong></p>
 <p><strong>为什么会抖</strong>：看「快方向因子」这一列。
-梯度下降在快方向上的每步缩放因子是 <code>1 - lr·λ_max</code>：
-<code>lr</code> 取上界的 50% 时它是 <code>0</code>（<strong>一步归零</strong>，完全不抖）；
+快方向上的每步缩放因子是 <code>1 - lr·λ_max</code>：
+<code>lr</code> 取上界 50% 时它是 <code>0</code>（<strong>一步归零</strong>，完全不抖）；
 取 95% 时它是 <code>-0.9</code> —— <strong>负号意味着每步都翻方向</strong>，
-<code>|-0.9| = 0.9</code> 意味着每步只缩 10%，于是要来回抖很多次才消掉</p>
-<p><strong>这正是「学习率接近上界」和「学习率只是偏大」的分界</strong>：
-前者在快方向上<strong>反复过冲</strong>（因子接近 <code>-1</code>），
-后者只是步子大一点（因子是个小的正数）。
+<code>|-0.9| = 0.9</code> 意味着每步只缩 10%，要来回抖很多次才消掉</p>
+<p><strong>这正是「接近上界」和「只是偏大」的分界</strong>：前者在快方向上<strong>反复过冲</strong>（因子接近 <code>-1</code>），后者只是步子大一点（因子是个小的正数）。
 两条曲线的步数也印证了这件事：
 <code>95%</code> 那条只用了 <code>348</code> 步，比 <code>50%</code> 那条的 <code>667</code> 步还少 ——
-<strong>接近上界的锯齿轨迹其实更快</strong>，
-代价是它对问题的任何变化都极其敏感，稍微再大一点就发散</p>
-<p><strong>所以「锯齿」不是一个必须消灭的坏事</strong>：
-它是「学习率用得很满」的<strong>外在表现</strong>。
-看到锯齿，意味着你正走在稳定边界的边缘：
-再想提高 <code>lr</code> 已经没有空间，要更快只能改问题本身（换坐标、上动量）</p>
+<strong>接近上界的锯齿轨迹其实更快</strong>，代价是对任何变化都极敏感，稍大一点就发散</p>
+<p><strong>所以「锯齿」不是必须消灭的坏事</strong>：它是「学习率用得很满」的<strong>外在表现</strong>。
+看到锯齿，说明你正走在稳定边界边缘：再提高 <code>lr</code> 已无空间，
+要更快只能改问题本身（换坐标、上动量）</p>
 <div class="admonition tip">
 <p class="admonition-title">画图代码里最值得抄走的三件事</p>
 <table>
@@ -15046,9 +15034,8 @@ BFGS 在解处的梯度范数  : 2.665e-15
 <a id="__codelineno-20-2" name="__codelineno-20-2"></a>x  ←  x + v
 </code></pre></div></td></tr></table></div>
 <p><strong>它为什么能加速</strong>：累加历史方向后，
-在「一直朝同一个方向走」的慢方向上速度被放大，
-在「来回震荡」的快方向上正负相消被抑制 ——
-恰好是条件数带来的两个症状</p>
+慢方向（一直朝同一方向走）速度被放大，
+快方向（来回震荡）正负相消被抑制 —— 恰好是条件数带来的两个症状</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
@@ -15175,12 +15162,12 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tr>
 <tr>
 <td>快方向的表现</td>
-<td>本来就已经在震荡</td>
+<td>本就在震荡</td>
 <td>正负相消，被压下去 ✓</td>
 </tr>
 <tr>
 <td>需要额外知道什么</td>
-<td>只知道 <code>λ_max</code> 就能定上界</td>
+<td>只需 <code>λ_max</code> 就能定上界</td>
 <td>还要调 <code>β</code> ⚠</td>
 </tr>
 <tr>
@@ -15192,9 +15179,9 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </table>
 <p><strong>最后一行值得强调</strong>：动量<strong>改善</strong>了病态性带来的后果，
 但它<strong>没有消除</strong>病态性。真正消除需要换坐标（如例题 2 的对角缩放）。</p>
-<p><strong>目前工程上更常用的是 Adam</strong>，它把动量与「按维度自适应缩放步长」结合：
-每个参数用自己的梯度平方的滑动平均来缩放步长。
-效果相当于<strong>自动做了一次逐坐标的缩放</strong>，
+<p><strong>工程上更常用的是 Adam</strong>，它把动量与「按维度自适应缩放步长」结合：
+每个参数用自己梯度平方的滑动平均来缩放步长，
+效果相当于<strong>自动做了一次逐坐标缩放</strong>，
 这正是例题 2 里对角缩放想做的事</p>
 <div class="admonition warning">
 <p class="admonition-title">「学习率」不是一个可以随便设的数</p>
@@ -15262,8 +15249,8 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 在工程里就是「学习率从哪起步」这个决定</p>
 <hr />
 <h2 id="_9">九、如果要做真实项目，你会怎么改<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>上面这套代码<strong>能跑、结论对</strong>，但它仍然是「一次性实验脚本」。
-真正拿去做一个需要反复运行、结果要交给别人的优化任务时，
+<p>上面这套代码<strong>能跑、结论对</strong>，但仍是「一次性实验脚本」。
+真正拿去做需要反复运行、结果要交给别人的优化任务时，
 下面这些改动最值钱 —— 按性价比排序：</p>
 <table>
 <thead>
@@ -15481,16 +15468,16 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </thead>
 <tbody>
 <tr>
-<td>「加了衰减就可以把初始 lr 调大」</td>
+<td>「加了衰减就能把初始 lr 调大」</td>
 <td>只能调大一点点（本例约 5%～50%）⚠</td>
 </tr>
 <tr>
 <td>「衰减越小越安全」</td>
-<td><code>decay</code> 太小等于没有；太大会让后期几乎不动 ⚠</td>
+<td><code>decay</code> 太小等于没有；太大后期几乎不动 ⚠</td>
 </tr>
 <tr>
 <td>「随便加个衰减总没坏处」</td>
-<td>会引入新参数，且<strong>掩盖真实的问题（条件数太大）</strong>⚠</td>
+<td>会引入新参数，且<strong>掩盖真实问题（条件数太大）</strong>⚠</td>
 </tr>
 </tbody>
 </table>
@@ -15708,14 +15695,14 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <tbody>
 <tr>
 <td><code>log</code> 记录条件数与上下界</td>
-<td>「为什么慢」这个问题<strong>当场就能回答</strong>，不用事后重跑 ⚠</td>
+<td>「为什么慢」<strong>当场就能回答</strong>，不用事后重跑 ⚠</td>
 </tr>
 <tr>
 <td>返回 <code>(解, log)</code> 而不是只返回解</td>
 <td>「跑了多少步、误差降到多少」是结论的一部分 ✓</td>
 </tr>
 <tr>
-<td>用 <code>scipy</code> 参考解做最后一行核对</td>
+<td>用 <code>scipy</code> 参考解核对</td>
 <td>自己实现的偏差<strong>当场暴露</strong>，而不是在别人那里暴露 ✓</td>
 </tr>
 </tbody>
@@ -16027,7 +16014,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tr>
 <tr>
 <td>为什么</td>
-<td>二次函数的 Hessian 是<strong>常数</strong>，所以「局部上界」处处相同，就成了全局规则 ⚠</td>
+<td>二次函数的 Hessian 是<strong>常数</strong>，「局部上界」处处相同就成了全局规则 ⚠</td>
 </tr>
 <tr>
 <td>非二次函数上怎么用</td>
@@ -16050,15 +16037,15 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 <tbody>
 <tr>
 <td>深度学习中初始化不好</td>
-<td>初始点就落在 Hessian 大的区域 → 局部上界小 → 越界 → 发散 ⚠</td>
+<td>初始点落在 Hessian 大的区域 → 局部上界小 → 越界 → 发散 ⚠</td>
 </tr>
 <tr>
 <td>损失曲面有陡峭区域</td>
-<td>学习率必须按<strong>最陡的地方</strong>来定，而不是平均值 ⚠</td>
+<td>学习率必须按<strong>最陡的地方</strong>定，而不是平均值 ⚠</td>
 </tr>
 <tr>
 <td>加正则项或截断</td>
-<td>有些实现会把梯度裁剪，本质就是<strong>强行把局部上界抬回来</strong> ✓</td>
+<td>有些实现会把梯度裁剪，本质是<strong>强行把局部上界抬回来</strong> ✓</td>
 </tr>
 <tr>
 <td>学习率预热（warmup）</td>
@@ -16068,9 +16055,8 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </table>
 <p><strong>最后一条是实践中最常用的对策</strong>：
 预热（warmup）先用很小的学习率走前几百步，
-等点稳定下来、Hessian 不再剧烈变化，再逐步放大。
-本页的两条上界公式没有变化，
-但实现上要<strong>承认 Hessian 不是常数</strong>这个事实</p>
+等点稳定、Hessian 不再剧烈变化，再逐步放大。
+本页的两条上界公式没变，但实现上要<strong>承认 Hessian 不是常数</strong></p>
 <p>另外还有一个细节值得注意：
 第 ② 块里 <code>lr = 1.5</code> 在 <code>x = 0.2</code> 处是收敛的
 （因为那里局部上界是 1.79），
@@ -16080,10 +16066,9 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <hr />
 <h3 id="2">例题 2：只做「对角缩放」能解决多少病态<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p><strong>题目</strong>：正文说条件数越大越慢。
-工程上最常见的做法是<strong>对输入做标准化</strong>。
-请实测：对一个对角矩阵，标准化能不能把条件数降到 1？
-再对一个「旋转过」的矩阵试一次，结果会怎样？</p>
+<p><strong>题目</strong>：正文说条件数越大越慢，工程上最常见的是<strong>对输入做标准化</strong>。
+请实测：对角矩阵上标准化能不能把条件数降到 1？
+再对一个「旋转过」的矩阵试一次，结果如何？</p>
 <details class="note">
 <summary>思路</summary>
 <p>先想清楚「对角缩放」这个操作在数学上做了什么：</p>
@@ -16091,14 +16076,16 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 那么原问题 <code>f(x) = 0.5 x^T A x</code> 就变成 <code>0.5 y^T (D⁻¹ A D⁻¹) y</code>。
 新的矩阵是 <code>D⁻¹ A D⁻¹</code>。</p>
 <p>三个问题：</p>
+</details>
 <ol>
-<li><code>D</code> 取什么值时，新矩阵的对角元全部变成 1？</li>
-<li>对角矩阵的情形下，把对角元变成 1 之后，条件数是多少？</li>
-<li>换一个<strong>非对角</strong>的矩阵，同样的操作还能不能把条件数压到 1？</li>
-</ol>
+<li><code>D</code> 取什么值时，新矩阵的对角元全变成 1？</li>
+<li>对角矩阵把对角元变成 1 之后，条件数是多少？</li>
+<li>
+<p>换一个<strong>非对角</strong>的矩阵，同样操作还能不能把条件数压到 1？</p>
 <p>第 3 问是关键 —— 构造一个「特征值完全相同，只是被旋转了」的矩阵，
 这样就能看出标准化到底动了哪部分信息。</p>
-</details>
+</li>
+</ol>
 <details class="success">
 <summary>解答</summary>
 <p><!--kbpy-->
@@ -16272,19 +16259,18 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tbody>
 </table>
 <p><strong>判断依据</strong>：标准化是<strong>最便宜的第一步</strong>，几乎总该做；
-但如果做完之后条件数仍然很大，说明病态来自<strong>特征之间的相关性</strong>，
-这时要继续查相关性矩阵、考虑主成分分析或改用自适应方法</p>
-<p><strong>最后提醒一个容易踩的坑</strong>：
-情形 A 里「加速 12312 倍」这个数字非常漂亮，
-但它之所以漂亮，是因为我们<strong>恰好构造了一个对角矩阵</strong>。
-真实数据几乎不可能这么干净，
-所以拿这个数字去预期真实项目的收益，会严重高估</p>
+但做完后条件数仍然很大，说明病态来自<strong>特征之间的相关性</strong>，
+这时要查相关性矩阵、考虑主成分分析或改用自适应方法</p>
+<p><strong>最后提醒一个容易踩的坑</strong>：</p>
 </details>
+<p>情形 A 里「加速 12312 倍」非常漂亮，但之所以漂亮，
+是因为<strong>恰好构造了一个对角矩阵</strong>；真实数据几乎不可能这么干净，
+拿这个数字去预期真实项目的收益会严重高估</p>
 <hr />
 <h3 id="3">例题 3：学习率衰减能不能救回发散的训练<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：正文实验一里，<code>lr = 0.21</code> 直接发散。
-如果在训练过程中让学习率<strong>逐渐变小</strong>，能不能把这个设置救回来？
-请实测并说明：什么样的发散能救，什么样的救不回来。</p>
+若在训练中让学习率<strong>逐渐变小</strong>，能不能把这个设置救回来？
+请实测并说明：什么样的发散能救、什么样的救不回。</p>
 <details class="note">
 <summary>思路</summary>
 <p>注意两个事实：</p>
@@ -16406,9 +16392,8 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </details>
 <hr />
 <h3 id="4">例题 4：精确一维搜索能替代「调学习率」吗<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p><strong>题目</strong>：既然手选学习率这么麻烦，
-那每一步都<strong>用解析公式算出最优步长</strong>（精确一维搜索）不就好了？
-请实现并实测，说明它的步数优势有多大，以及代价在哪。</p>
+<p><strong>题目</strong>：既然手选学习率这么麻烦，那每一步都<strong>用解析公式算最优步长</strong>（精确一维搜索）不就好了？
+请实现并实测，说明它的步数优势多大、代价在哪。</p>
 <details class="note">
 <summary>思路</summary>
 <p>沿负梯度方向 <code>d = -∇f</code>，一维最小化 <code>φ(η) = f(x + ηd)</code>。
@@ -16575,10 +16560,8 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tbody>
 </table>
 <p><strong>比值 <code>1.0323</code> 说明</strong>：
-精确搜索只比「用理论最优固定学习率」快 <strong>3.2%</strong>。
-步数上的优势几乎可以忽略 ——
-而它每步都要多算一次矩阵向量乘法，
-在总时间上<strong>很可能是更慢的</strong></p>
+精确搜索只比「用理论最优固定学习率」快 <strong>3.2%</strong>，步数优势几乎可忽略 ——
+而它每步要多算一次矩阵向量乘法，总时间上<strong>很可能更慢</strong></p>
 <p><strong>为什么优势这么小</strong>：因为对照组的 <code>lr</code> 已经取到了理论最优
 （<code>2/(λ_max+λ_min)</code>），这已经是固定步长的极限。
 精确搜索比它好的部分，只来自「不同方向的权重随位置调整」，
@@ -16607,9 +16590,8 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tbody>
 </table>
 <p><strong>最后一个观察很重要</strong>：精确一维搜索<strong>永远不会发散</strong>，
-因为 <code>η*</code> 是由当前点算出来的，天然满足稳定性条件。
-这是它相对于「固定学习率」的<strong>真正优势</strong> ——
-不是更快，而是<strong>不用调参也不会崩</strong></p>
+因为 <code>η*</code> 由当前点算出，天然满足稳定性条件。
+这是它相对于「固定学习率」的<strong>真正优势</strong> —— 不是更快，而是<strong>不用调参也不会崩</strong></p>
 <p><strong>那为什么深度学习不用它</strong>：</p>
 <table>
 <thead>
@@ -16637,11 +16619,10 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 用<strong>回溯线搜索</strong>（Armijo 条件）代替精确搜索 ——
 只要求损失「下降足够多」，不做精确最小化。
 这样既能保证不发散，又只多算几次函数值</p>
-<p><strong>这道题的结论可以总结成一句</strong>：
-精确一维搜索买的是「稳健」，不是「快」。
-如果只关心步数，理论最优的固定学习率已经几乎到顶了；
-如果要的是「换一个问题也不用重新调参」，它才值得</p>
 </details>
+<p><strong>这道题的结论可以总结成一句</strong>：精确一维搜索买的是「稳健」，不是「快」。
+只关心步数的话，理论最优的固定学习率已几乎到顶；
+要的是「换一个问题也不用重新调参」，它才值得</p>
 <hr />
 <h2 id="_11">十一、自测<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 有一个问题，<code>λ_min = 0.2</code>、<code>λ_max = 10</code>。
@@ -16766,8 +16747,7 @@ beta 太大反而变慢（0.99 用了 2652 步）: True</code></pre>
 </tbody>
 </table>
 <p><strong><code>0.2</code> 这一档最容易被答错</strong>，值得展开：
-在<strong>一维</strong>问题上，<code>lr = 2/λ</code> 会让误差每步乘 <code>|1 - 2| = 1</code> ——
-也就是原封不动地留在原地。
+在一维问题上，<code>lr = 2/λ</code> 会让误差每步乘 <code>|1 - 2| = 1</code>，即原封不动留在原地。
 在多维问题上，只有 <code>λ = λ_max</code> 的那一个方向被卡住，
 其余方向仍在缩 ——
 于是总误差先降一会儿，然后停在某个非零值上不动了</p>

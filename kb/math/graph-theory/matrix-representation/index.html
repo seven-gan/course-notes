@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="图的矩阵表示：一张图画在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，它只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可以借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
+    <meta name="description" content="图的矩阵表示：一张图在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="图的矩阵表示">
   
-  <meta property="og:description" content="图的矩阵表示：一张图画在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，它只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可以借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
+  <meta property="og:description" content="图的矩阵表示：一张图在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/graph-theory/matrix-representation/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="图的矩阵表示">
   
-  <meta name="twitter:description" content="图的矩阵表示：一张图画在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，它只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可以借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
+  <meta name="twitter:description" content="图的矩阵表示：一张图在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，只认得数字表格。把图写成矩阵，意义不只是&#34;方便存储&#34;——一旦变成矩阵，图论问题立刻可借用线性代数的全部工具：行列式、特征值、特征向量、二次型。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12215,8 +12215,8 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>本页面依据通行教材术语撰写（图论、邻接矩阵等为标准译法）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">图的矩阵表示<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>一张图画在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，它只认得<strong>数字表格</strong>。把图写成矩阵，意义不只是"方便存储"——一旦变成矩阵，图论问题立刻可以借用线性代数的全部工具：行列式、特征值、特征向量、二次型。多机器人编队里"哪个机器人簇更容易分裂"、传感器网络里"哪几个节点是信息瓶颈"、图神经网络里"信息传播 <span class="arithmatex">\(k\)</span> 步能覆盖多远"，问句不同，答案却都指向同一个矩阵的同一个量。</p>
-<p>这一页要解决三个问题：<strong>第一</strong>，同一张图为什么需要三种矩阵（邻接、关联、拉普拉斯），各自擅长回答什么；<strong>第二</strong>，矩阵的特征值到底泄露了图的什么结构信息；<strong>第三</strong>，谱聚类为什么只需一个特征向量就能完成"分割"，以及它偏在哪里。</p>
+<p>一张图在纸上，人能看出哪里连、哪里断；但计算机看不懂线条，只认得<strong>数字表格</strong>。把图写成矩阵，意义不只是"方便存储"——一旦变成矩阵，图论问题立刻可借用线性代数的全部工具：行列式、特征值、特征向量、二次型。多机器人编队里"哪簇更易分裂"、传感器网络里"哪几个节点是信息瓶颈"、图神经网络里"信息传播 <span class="arithmatex">\(k\)</span> 步能覆盖多远"，问句不同，答案都指向同一矩阵的同一个量。</p>
+<p>这一页解决三个问题：<strong>第一</strong>，同一张图为什么需要三种矩阵（邻接、关联、拉普拉斯），各自擅长回答什么；<strong>第二</strong>，矩阵的特征值到底泄露了图的什么结构信息；<strong>第三</strong>，谱聚类为什么只需一个特征向量就能完成"分割"，以及它偏在哪里。</p>
 <div class="admonition tip">
 <p class="admonition-title">一句话抓住核心</p>
 <p>三种矩阵是同一张图的三个"代数护照"，其中拉普拉斯矩阵最重要——它半正定，而且"零特征值重数 = 连通分量个数"：</p>
@@ -12253,7 +12253,7 @@ L = D - A, \qquad B B^\top = L
 </tr>
 </tbody>
 </table>
-<p>一条贯穿全页的主线：<strong><span class="arithmatex">\(L\)</span> 的零特征值重数等于连通分量个数</strong>（结构），而<strong>第二小特征值 <span class="arithmatex">\(\lambda_2\)</span> 的大小衡量"图连得多紧"</strong>（强度）。</p>
+<p>一条贯穿全页的主线：<strong><span class="arithmatex">\(L\)</span> 的零特征值重数等于连通分量个数</strong>（结构），<strong>第二小特征值 <span class="arithmatex">\(\lambda_2\)</span> 的大小衡量"图连得多紧"</strong>（强度）。</p>
 </div>
 <hr />
 <figure class="kb-fig">
@@ -12310,8 +12310,8 @@ A_{ij} =
 0, &amp; v_i v_j \notin E
 \end{cases}
 \]</div>
-<p>对<strong>有向图</strong>，把 <span class="arithmatex">\(A_{ij} = 1\)</span> 解释为"存在从 <span class="arithmatex">\(v_i\)</span> 指向 <span class="arithmatex">\(v_j\)</span> 的弧"，此时 <span class="arithmatex">\(A\)</span> 一般<strong>不对称</strong>。对<strong>带权图</strong>，把 <span class="arithmatex">\(1\)</span> 换成权 <span class="arithmatex">\(w_{ij}\)</span>，得到权矩阵；此时 <span class="arithmatex">\(A_{ij} = 0\)</span> 表示"无边"。这个约定隐含一个假设：<strong>所有权都为正</strong>。若工程上真出现零权边，<span class="arithmatex">\(A_{ij} = 0\)</span> 就会与"无边"撞车，必须改成"无边 <span class="arithmatex">\(= \infty\)</span>"或另设标记矩阵。</p>
-<p><span class="arithmatex">\(A\)</span> 的规模是 <span class="arithmatex">\(n \times n\)</span>，与边数无关，于是有两条直接后果：<strong>查边快，但稀疏图极费空间</strong>。一个百万节点、平均度 10 的稀疏图（<span class="arithmatex">\(m \approx 5 \times 10^6\)</span>）若用稠密矩阵要存 <span class="arithmatex">\(10^{12}\)</span> 个数，纯属灾难。这就是工程实现必须用稀疏结构（邻接表、CSR 压缩）而非二维数组的根源。</p>
+<p>对<strong>有向图</strong>，把 <span class="arithmatex">\(A_{ij} = 1\)</span> 解释为"存在从 <span class="arithmatex">\(v_i\)</span> 指向 <span class="arithmatex">\(v_j\)</span> 的弧"，此时 <span class="arithmatex">\(A\)</span> 一般<strong>不对称</strong>。对<strong>带权图</strong>，把 <span class="arithmatex">\(1\)</span> 换成权 <span class="arithmatex">\(w_{ij}\)</span>，得权矩阵；此时 <span class="arithmatex">\(A_{ij} = 0\)</span> 表示"无边"。这个约定隐含一个假设：<strong>权都为正</strong>。若真出现零权边，<span class="arithmatex">\(A_{ij} = 0\)</span> 会与"无边"撞车，须改成"无边 <span class="arithmatex">\(= \infty\)</span>"或另设标记矩阵。</p>
+<p><span class="arithmatex">\(A\)</span> 的规模是 <span class="arithmatex">\(n \times n\)</span>，与边数无关，于是有两条直接后果：<strong>查边快，但稀疏图极费空间</strong>。一个百万节点、平均度 10 的稀疏图（<span class="arithmatex">\(m \approx 5 \times 10^6\)</span>）若用稠密矩阵要存 <span class="arithmatex">\(10^{12}\)</span> 个数，纯属灾难。这就是实现必须用稀疏结构（邻接表、CSR 压缩）而非二维数组的根源。</p>
 <h3 id="_3">三条立刻能用的性质<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12339,7 +12339,7 @@ A_{ij} =
 </tr>
 </tbody>
 </table>
-<p>第一条把<strong>局部与整体</strong>连起来：把每一行加起来，就得到全图的度序列。</p>
+<p>第一条把<strong>局部与整体</strong>连起来：每行加起来即全图的度序列。</p>
 <h3 id="a-k"><span class="arithmatex">\(A\)</span> 的幂：走 <span class="arithmatex">\(k\)</span> 步有几条路<a class="headerlink" href="#a-k" title="Permanent link">&para;</a></h3>
 <p><strong>核心结论</strong>：记 <span class="arithmatex">\(A^k\)</span> 为 <span class="arithmatex">\(A\)</span> 的 <span class="arithmatex">\(k\)</span> 次幂，则</p>
 <div class="arithmatex">\[
@@ -12349,8 +12349,8 @@ A_{ij} =
 <div class="arithmatex">\[
 (A^2)_{ij} = \sum_{p=1}^{n} A_{ip} A_{pj}
 \]</div>
-<p>每一项 <span class="arithmatex">\(A_{ip} A_{pj}\)</span> 恰好对应"先走一步到中间点 <span class="arithmatex">\(v_p\)</span>、再从 <span class="arithmatex">\(v_p\)</span> 走一步到 <span class="arithmatex">\(v_j\)</span>"这条两步路线，只有两条边都存在时该项才为 <span class="arithmatex">\(1\)</span>。对 <span class="arithmatex">\(p\)</span> 求和即枚举所有可能的中间点。归纳到 <span class="arithmatex">\(k\)</span> 步同理。</p>
-<p>由此得到一批"算数就能回答图论问题"的推论：</p>
+<p>每一项 <span class="arithmatex">\(A_{ip} A_{pj}\)</span> 恰好对应"先走一步到中间点 <span class="arithmatex">\(v_p\)</span>、再从 <span class="arithmatex">\(v_p\)</span> 走一步到 <span class="arithmatex">\(v_j\)</span>"这条两步路线，只有两条边都存在时该项才为 <span class="arithmatex">\(1\)</span>。对 <span class="arithmatex">\(p\)</span> 求和即枚举所有中间点。归纳到 <span class="arithmatex">\(k\)</span> 步同理。</p>
+<p>由此得一批"算数就能回答图论问题"的推论：</p>
 <table>
 <thead>
 <tr>
@@ -12453,7 +12453,7 @@ A_1^2 =
 0 &amp; 1 &amp; 1 &amp; 0 &amp; 1
 \end{pmatrix}
 \]</div>
-<p>读法举例：<span class="arithmatex">\((A_1^2)_{14} = 2\)</span>，表示从顶点 <span class="arithmatex">\(1\)</span> 到顶点 <span class="arithmatex">\(4\)</span> 恰有 <strong>2</strong> 条长度 2 的途径，即 <span class="arithmatex">\(1 \to 2 \to 4\)</span> 与 <span class="arithmatex">\(1 \to 3 \to 4\)</span>。另注意 <span class="arithmatex">\((A_1^2)_{11} = 2 = \deg(1)\)</span>：从 <span class="arithmatex">\(1\)</span> 走两步回到 <span class="arithmatex">\(1\)</span>，必须原路折返，每条邻边恰好贡献一条。</p>
+<p>读法举例：<span class="arithmatex">\((A_1^2)_{14} = 2\)</span>，表示从顶点 <span class="arithmatex">\(1\)</span> 到 <span class="arithmatex">\(4\)</span> 恰有 <strong>2</strong> 条长度 2 的途径，即 <span class="arithmatex">\(1 \to 2 \to 4\)</span> 与 <span class="arithmatex">\(1 \to 3 \to 4\)</span>。另注意 <span class="arithmatex">\((A_1^2)_{11} = 2 = \deg(1)\)</span>：从 <span class="arithmatex">\(1\)</span> 走两步回到 <span class="arithmatex">\(1\)</span>，必须原路折返，每条邻边恰好贡献一条。</p>
 <p><strong>验算三：<span class="arithmatex">\(A_1^3\)</span> 数三角形</strong>。</p>
 <div class="arithmatex">\[
 A_1^3 =
@@ -12503,10 +12503,10 @@ A_1^3 =
 </tr>
 </tbody>
 </table>
-<p><strong>工程结论</strong>：PageRank、图卷积、谱聚类这类算法，迭代中最主要的开销就是"乘一次 <span class="arithmatex">\(A\)</span>"。稀疏图上用表做到 <span class="arithmatex">\(O(n+m)\)</span>，可比稠密矩阵快几个数量级。所以"存成矩阵"是<strong>数学视角</strong>，"遍历时换成表"是<strong>实现视角</strong>，两者并不冲突。</p>
+<p><strong>工程结论</strong>：PageRank、图卷积、谱聚类这类算法，迭代中最主要的开销就是"乘一次 <span class="arithmatex">\(A\)</span>"。稀疏图上用表做到 <span class="arithmatex">\(O(n+m)\)</span>，比稠密矩阵快几个数量级。所以"存成矩阵"是<strong>数学视角</strong>，"遍历时换成表"是<strong>实现视角</strong>，两者并不冲突。</p>
 <hr />
 <h2 id="_5">二、关联矩阵：把"边"也当成变量<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
-<p>邻接矩阵的视角是"顶点对"，关联矩阵的视角是"顶点—边"关系。设 <span class="arithmatex">\(n\)</span> 个顶点、<span class="arithmatex">\(m\)</span> 条边，<strong>关联矩阵</strong>（incidence matrix）<span class="arithmatex">\(B \in \mathbb{R}^{n \times m}\)</span> 的每一列对应一条边。</p>
+<p>邻接矩阵的视角是"顶点对"，关联矩阵的视角是"顶点—边"关系。设 <span class="arithmatex">\(n\)</span> 个顶点、<span class="arithmatex">\(m\)</span> 条边，<strong>关联矩阵</strong>（incidence matrix）<span class="arithmatex">\(B \in \mathbb{R}^{n \times m}\)</span> 的每列对应一条边。</p>
 <p><strong>有向（带符号）约定</strong>：对每条边先人为指定一个参考方向，例如 <span class="arithmatex">\(e = (v_i \to v_j)\)</span>，则</p>
 <div class="arithmatex">\[
 B_{ie} = 1, \qquad B_{je} = -1, \qquad \text{其余元素为 } 0
@@ -12521,7 +12521,7 @@ B B^\top = D - A = L
 <li>对角元：<span class="arithmatex">\((B B^\top)_{ii} = \sum_e B_{ie}^2\)</span> 数的是"顶点 <span class="arithmatex">\(v_i\)</span> 出现在多少条边的端点中"，即 <span class="arithmatex">\(\deg(v_i)\)</span>。</li>
 <li>非对角元：<span class="arithmatex">\((B B^\top)_{ij} = \sum_e B_{ie} B_{je}\)</span>。同一条边 <span class="arithmatex">\(e = (v_i \to v_j)\)</span> 贡献 <span class="arithmatex">\(1 \times (-1) = -1\)</span>；若 <span class="arithmatex">\(v_i v_j\)</span> 不是边，则每一项至少一个因子为 <span class="arithmatex">\(0\)</span>。</li>
 </ul>
-<p>拼起来正好是 <span class="arithmatex">\(D - A\)</span>。注意<strong>方向约定被"乘法"自动抵消</strong>：<span class="arithmatex">\(B_{ie} B_{je}\)</span> 里两个因子的符号必然相反，与选哪个方向无关，所以 <span class="arithmatex">\(B B^\top\)</span> 唯一确定。</p>
+<p>拼起来正好是 <span class="arithmatex">\(D - A\)</span>。注意<strong>方向约定被"乘法"自动抵消</strong>：<span class="arithmatex">\(B_{ie} B_{je}\)</span> 里两个因子的符号必然相反，与选哪个方向无关，故 <span class="arithmatex">\(B B^\top\)</span> 唯一确定。</p>
 <p>用 <span class="arithmatex">\(G_1\)</span> 检验（边按 <span class="arithmatex">\(12,13,23,24,34,45\)</span> 排列，参考方向取"小编号 <span class="arithmatex">\(\to\)</span> 大编号"）：</p>
 <div class="arithmatex">\[
 B_1 =
@@ -12545,7 +12545,7 @@ B_1 B_1^\top =
 \end{pmatrix}
 = D_1 - A_1 = L_1
 \]</div>
-<p>若改用无向约定 <span class="arithmatex">\(B_u\)</span>（把 <span class="arithmatex">\(-1\)</span> 全改为 <span class="arithmatex">\(+1\)</span>），则乘积变成 <span class="arithmatex">\(D + A\)</span>，<strong>减号变加号</strong>。因此只有<strong>带符号</strong>的关联矩阵才是拉普拉斯的"平方根"——这也是网络流、电路网络（基尔霍夫电流定律）里必须使用带符号关联矩阵的原因。</p>
+<p>若改用无向约定 <span class="arithmatex">\(B_u\)</span>（把 <span class="arithmatex">\(-1\)</span> 全改为 <span class="arithmatex">\(+1\)</span>），则乘积变成 <span class="arithmatex">\(D + A\)</span>，<strong>减号变加号</strong>。因此只有<strong>带符号</strong>的关联矩阵才是拉普拉斯的"平方根"——这也是网络流、电路网络（基尔霍夫电流定律）必须用带符号关联矩阵的原因。</p>
 <table>
 <thead>
 <tr>
@@ -12587,7 +12587,7 @@ B_1 B_1^\top =
 </tr>
 </tbody>
 </table>
-<p><strong>秩的结论</strong>（连通图）：<span class="arithmatex">\(B\)</span> 的行和为 <span class="arithmatex">\(0\)</span>，所有行相加得零向量，故 <span class="arithmatex">\(\operatorname{rank}(B) \le n-1\)</span>；连通性保证等号成立，即 <span class="arithmatex">\(\operatorname{rank}(B) = n-1\)</span>。这个"行和为 <span class="arithmatex">\(0\)</span> 导致降秩 <span class="arithmatex">\(1\)</span>"的现象，正是 <span class="arithmatex">\(L\)</span> 必有零特征值的原因。</p>
+<p><strong>秩的结论</strong>（连通图）：<span class="arithmatex">\(B\)</span> 的行和为 <span class="arithmatex">\(0\)</span>，所有行相加得零向量，故 <span class="arithmatex">\(\operatorname{rank}(B) \le n-1\)</span>；连通性保证等号成立，即 <span class="arithmatex">\(\operatorname{rank}(B) = n-1\)</span>。这个"行和为 <span class="arithmatex">\(0\)</span> 降秩 <span class="arithmatex">\(1\)</span>"的现象，正是 <span class="arithmatex">\(L\)</span> 必有零特征值的原因。</p>
 <hr />
 <h2 id="_6">三、拉普拉斯矩阵：图上的"二阶差分算子"<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="_7">定义<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
@@ -12643,7 +12643,7 @@ L_1 =
 </tr>
 </tbody>
 </table>
-<p>五行全为 <span class="arithmatex">\(0\)</span>，即 <span class="arithmatex">\(L_1 \mathbf{1} = \mathbf{0}\)</span>（<span class="arithmatex">\(\mathbf{1}\)</span> 是全 1 向量）。这不是巧合：对角线是度、非对角元是 <span class="arithmatex">\(-1\)</span>，每行加起来正好是"度减去邻居数"，而简单图中邻居数就是度。于是立刻得到</p>
+<p>五行全为 <span class="arithmatex">\(0\)</span>，即 <span class="arithmatex">\(L_1 \mathbf{1} = \mathbf{0}\)</span>（<span class="arithmatex">\(\mathbf{1}\)</span> 是全 1 向量）。这不是巧合：对角线是度、非对角元是 <span class="arithmatex">\(-1\)</span>，每行加起来正好是"度减去邻居数"，而简单图中邻居数就是度。于是即得</p>
 <blockquote>
 <p><strong><span class="arithmatex">\(0\)</span> 永远是 <span class="arithmatex">\(L\)</span> 的特征值，对应特征向量 <span class="arithmatex">\(\mathbf{1}\)</span>。</strong></p>
 </blockquote>
@@ -12656,7 +12656,7 @@ L_1 =
 <div class="arithmatex">\[
 \sum_{ij \in E} (x_i - x_j)^2 = \sum_{ij \in E}(x_i^2 + x_j^2 - 2x_ix_j) = \sum_i \deg(i)\, x_i^2 - 2\sum_{ij \in E} x_i x_j
 \]</div>
-<p>右边第一项就是 <span class="arithmatex">\(\boldsymbol{x}^\top D \boldsymbol{x}\)</span>，第二项是 <span class="arithmatex">\(\boldsymbol{x}^\top A \boldsymbol{x}\)</span>（因为 <span class="arithmatex">\(A\)</span> 的每对相邻元素出现两次）。两者相减即得 <span class="arithmatex">\(\boldsymbol{x}^\top(D-A)\boldsymbol{x}\)</span>。</p>
+<p>右边第一项就是 <span class="arithmatex">\(\boldsymbol{x}^\top D \boldsymbol{x}\)</span>，第二项是 <span class="arithmatex">\(\boldsymbol{x}^\top A \boldsymbol{x}\)</span>（因 <span class="arithmatex">\(A\)</span> 的每对相邻元素出现两次）。两者相减即得 <span class="arithmatex">\(\boldsymbol{x}^\top(D-A)\boldsymbol{x}\)</span>。</p>
 <p>这个式子解释了三件事：</p>
 <table>
 <thead>
@@ -12680,19 +12680,19 @@ L_1 =
 </tr>
 </tbody>
 </table>
-<p>最后一行的"当且仅当"直接给出<strong>零空间维数 = 连通分量个数</strong>：要让平方和为 <span class="arithmatex">\(0\)</span>，每条边两端取值必须相等，于是每个连通分量内部只能取同一个常数，每个分量提供一个自由度。</p>
+<p>最后一行的"当且仅当"直接给出<strong>零空间维数 = 连通分量个数</strong>：要让平方和为 <span class="arithmatex">\(0\)</span>，每条边两端取值必须相等，于是每个连通分量内部只能取同一常数，每分量提供一个自由度。</p>
 <h3 id="_8">与连续拉普拉斯算子的类比<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(x_i\)</span> 看成定义在图顶点上的函数，<span class="arithmatex">\((x_i - x_j)\)</span> 就是相邻两点的差分，于是</p>
 <div class="arithmatex">\[
 \boldsymbol{x}^\top L \boldsymbol{x} = \sum (x_i - x_j)^2 \quad \leftrightarrow \quad \int \lvert \nabla f\rvert^2
 \]</div>
-<p><span class="arithmatex">\(L\)</span> 本身对应算子 <span class="arithmatex">\(-\nabla^2\)</span>。这就是"图上傅里叶分析"的起点：<strong><span class="arithmatex">\(L\)</span> 的特征向量 = 图上的傅里叶基，特征值 = 图频率</strong>。小特征值对应的特征向量在相邻顶点上取值接近（低频、平滑），大特征值对应的剧烈震荡（高频）。这与信号与系统里用拉普拉斯变换 / 傅里叶变换分解连续信号的角色一一对应。</p>
+<p><span class="arithmatex">\(L\)</span> 本身对应算子 <span class="arithmatex">\(-\nabla^2\)</span>。这就是"图上傅里叶分析"的起点：<strong><span class="arithmatex">\(L\)</span> 的特征向量 = 图上的傅里叶基，特征值 = 图频率</strong>。小特征值对应的特征向量在相邻顶点上取值接近（低频、平滑），大特征值对应剧烈震荡（高频）。这与信号与系统里用拉普拉斯变换 / 傅里叶变换分解连续信号的角色一一对应。</p>
 <h3 id="_9">归一化拉普拉斯<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p>度数差异大的图（例如有一个度 100 的枢纽节点），原始 <span class="arithmatex">\(L\)</span> 的谱会被高度数节点"绑架"。为此有两个常用归一化版本：</p>
 <div class="arithmatex">\[
 L_{rw} = D^{-1} L = I - D^{-1}A, \qquad L_{sym} = D^{-1/2} L D^{-1/2} = I - D^{-1/2} A D^{-1/2}
 \]</div>
-<p>其中 <span class="arithmatex">\(L_{rw}\)</span> 对应"随机游走"视角（<span class="arithmatex">\(D^{-1}A\)</span> 就是转移概率矩阵），<span class="arithmatex">\(L_{sym}\)</span> 保持对称性因而可以使用对称特征值求解器。对 <span class="arithmatex">\(G_1\)</span> 写出 <span class="arithmatex">\(L_{rw}\)</span>：</p>
+<p>其中 <span class="arithmatex">\(L_{rw}\)</span> 对应"随机游走"视角（<span class="arithmatex">\(D^{-1}A\)</span> 就是转移概率矩阵），<span class="arithmatex">\(L_{sym}\)</span> 保持对称性因而可用对称特征值求解器。对 <span class="arithmatex">\(G_1\)</span> 写出 <span class="arithmatex">\(L_{rw}\)</span>：</p>
 <div class="arithmatex">\[
 L_{rw} =
 \begin{pmatrix}
@@ -12707,7 +12707,7 @@ L_{rw} =
 <div class="arithmatex">\[
 \sigma(L_{rw}) = \{0,\ 0.5657,\ 4/3,\ 4/3,\ 1.7676\}
 \]</div>
-<p>与 <span class="arithmatex">\(L_{sym}\)</span> 的谱完全相同（两者相似），但<strong>与 <span class="arithmatex">\(L\)</span> 的谱 <span class="arithmatex">\(\{0,\ 0.8299,\ 2.6889,\ 4,\ 4.4812\}\)</span> 不同</strong>——只有在正则图上 <span class="arithmatex">\(L_{rw} = L/r\)</span>，两套谱才成比例。这一点在工程上很容易踩坑，必须记牢。</p>
+<p>与 <span class="arithmatex">\(L_{sym}\)</span> 的谱完全相同（两者相似），但<strong>与 <span class="arithmatex">\(L\)</span> 的谱 <span class="arithmatex">\(\{0,\ 0.8299,\ 2.6889,\ 4,\ 4.4812\}\)</span> 不同</strong>——只有在正则图上 <span class="arithmatex">\(L_{rw} = L/r\)</span>，两套谱才成比例。这点在工程上很容易踩坑，必须记牢。</p>
 <table>
 <thead>
 <tr>
@@ -12738,7 +12738,7 @@ L_{rw} =
 </tr>
 </tbody>
 </table>
-<p>后两行"最大特征值 <span class="arithmatex">\(\le 2\)</span>"是通用结论（<span class="arithmatex">\(D^{-1}A\)</span> 的谱半径不超过 <span class="arithmatex">\(1\)</span>），也是"归一化后谱总落在 <span class="arithmatex">\([0,2]\)</span>"这一说法的来源——它让不同规模的图可以横向比较。</p>
+<p>后两行"最大特征值 <span class="arithmatex">\(\le 2\)</span>"是通用结论（<span class="arithmatex">\(D^{-1}A\)</span> 的谱半径不超过 <span class="arithmatex">\(1\)</span>），也是"归一化后谱总落在 <span class="arithmatex">\([0,2]\)</span>"这一说法的来源——它让不同规模的图可横向比较。</p>
 <p>对 <span class="arithmatex">\(G_1\)</span>，稳态分布为 <span class="arithmatex">\(\pi = (2,3,3,3,1)/12 = (1/6,\ 1/4,\ 1/4,\ 1/4,\ 1/12)\)</span>：<strong>度越高的顶点，随机游走停留越久</strong>。</p>
 <hr />
 <h2 id="_10">四、特征值与连通性：图的"体检指标"<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
@@ -13011,8 +13011,8 @@ z
 <blockquote>
 <p><strong>图连通 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\lambda_2 &gt; 0\)</span>。</strong></p>
 </blockquote>
-<p><strong>证明思路</strong>：由第三节的"当且仅当"，零空间由"在每个连通分量上取常数"的函数构成；各分量互不相通，可以独立取常数，故维数恰为 <span class="arithmatex">\(c\)</span>。</p>
-<p>这条定理有很实际的价值：想知道网络断成几块，<strong>不必跑并查集或 BFS，数一数 <span class="arithmatex">\(L\)</span> 有几个零特征值即可</strong>。反过来，如果数值计算出的 <span class="arithmatex">\(\lambda_2\)</span> 极其接近 <span class="arithmatex">\(0\)</span>（例如 <span class="arithmatex">\(10^{-12}\)</span>），说明图"几乎断开"——这是一个强烈的数值报警信号，谱聚类正是利用这一点。</p>
+<p><strong>证明思路</strong>：由第三节的"当且仅当"，零空间由"在每个连通分量上取常数"的函数构成；各分量互不相通，可独立取常数，故维数恰为 <span class="arithmatex">\(c\)</span>。</p>
+<p>这条定理有很实际的价值：想知道网络断成几块，<strong>不必跑并查集或 BFS，数一数 <span class="arithmatex">\(L\)</span> 有几个零特征值即可</strong>。反过来，若数值计算出的 <span class="arithmatex">\(\lambda_2\)</span> 极其接近 <span class="arithmatex">\(0\)</span>（例如 <span class="arithmatex">\(10^{-12}\)</span>），说明图"几乎断开"——这是一个强烈的数值报警信号，谱聚类正利用这一点。</p>
 <h3 id="lambda_2-fiedler"><span class="arithmatex">\(\lambda_2\)</span> 与 Fiedler 向量<a class="headerlink" href="#lambda_2-fiedler" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(\lambda_2\)</span> 称为<strong>代数连通度</strong>（algebraic connectivity），又称 Fiedler 值，对应特征向量 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 称 <strong>Fiedler 向量</strong>。</p>
 <table>
@@ -13049,7 +13049,7 @@ z
 </tr>
 </tbody>
 </table>
-<p>Fiedler 上界的含义很直观：<span class="arithmatex">\(\lambda_2\)</span> 被<strong>最小的度</strong>卡死。一个度 1 的叶子顶点只需切一条边就能隔离，图自然不会"连得很紧"。所以 <span class="arithmatex">\(\lambda_2\)</span> 常被当作<strong>网络鲁棒性指标</strong>：编队通信拓扑的 <span class="arithmatex">\(\lambda_2\)</span> 越小，越容易被切断而失联。</p>
+<p>Fiedler 上界的含义很直观：<span class="arithmatex">\(\lambda_2\)</span> 被<strong>最小的度</strong>卡死。一个度 1 的叶子顶点只需切一条边就能隔离，图自然不会"连得很紧"。故 <span class="arithmatex">\(\lambda_2\)</span> 常被当作<strong>网络鲁棒性指标</strong>：编队通信拓扑的 <span class="arithmatex">\(\lambda_2\)</span> 越小，越容易被切断而失联。</p>
 <p>还有一个必须记住的前提：<span class="arithmatex">\(\boldsymbol{v}_2 \perp \mathbf{1}\)</span>，即</p>
 <div class="arithmatex">\[
 \boldsymbol{v}_2^\top \mathbf{1} = \sum_i v_{2,i} = 0
@@ -13060,7 +13060,7 @@ z
 <div class="arithmatex">\[
 \tau(G) = \frac{1}{n}\prod_{i=2}^{n}\lambda_i
 \]</div>
-<p><strong>注意前提是连通</strong>：图不连通时根本不存在生成树，<span class="arithmatex">\(\tau(G) = 0\)</span>，上式会给出非整数的荒谬结果（后面例题 3 会看到这一点）。</p>
+<p><strong>注意前提是连通</strong>：图不连通时根本不存在生成树，<span class="arithmatex">\(\tau(G) = 0\)</span>，上式会给出非整数的荒谬结果（后面例题 3 会看到）。</p>
 <table>
 <thead>
 <tr>
@@ -13135,7 +13135,7 @@ z
 <p>这是一个容易记错的知识点，需要分两层说清楚：</p>
 <blockquote>
 <p><strong>判据</strong>：<span class="arithmatex">\(G\)</span> 是二分图 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\sigma(L) = \sigma(Q)\)</span>，其中 <span class="arithmatex">\(Q = D + A\)</span> 称为<strong>无符号拉普拉斯矩阵</strong>。</p>
-<p><strong>特例（<span class="arithmatex">\(r\)</span>-正则图）</strong>：此时 <span class="arithmatex">\(L = rI - A\)</span>，而 <span class="arithmatex">\(A\)</span> 的谱关于 <span class="arithmatex">\(0\)</span> 对称，所以 <span class="arithmatex">\(\sigma(L)\)</span> 关于 <span class="arithmatex">\(r\)</span> 对称；又因 <span class="arithmatex">\(r\)</span>-正则二分图的 <span class="arithmatex">\(\lambda_n = 2r\)</span>，中心恰为 <span class="arithmatex">\(\lambda_n/2\)</span>。所以"<span class="arithmatex">\(\sigma(L)\)</span> 关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称"<strong>只对正则二分图成立</strong>，不是通用判据。</p>
+<p><strong>特例（<span class="arithmatex">\(r\)</span>-正则图）</strong>：此时 <span class="arithmatex">\(L = rI - A\)</span>，而 <span class="arithmatex">\(A\)</span> 的谱关于 <span class="arithmatex">\(0\)</span> 对称，故 <span class="arithmatex">\(\sigma(L)\)</span> 关于 <span class="arithmatex">\(r\)</span> 对称；又因 <span class="arithmatex">\(r\)</span>-正则二分图的 <span class="arithmatex">\(\lambda_n = 2r\)</span>，中心恰为 <span class="arithmatex">\(\lambda_n/2\)</span>。所以"<span class="arithmatex">\(\sigma(L)\)</span> 关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称"<strong>只对正则二分图成立</strong>，不是通用判据。</p>
 </blockquote>
 <table>
 <thead>
@@ -13199,8 +13199,8 @@ z
 </tr>
 </tbody>
 </table>
-<p><span class="arithmatex">\(P_5\)</span> 那一行是关键反例：它明明是二分图，谱却不关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称。所以判断二分图请统一用 <span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称（或 <span class="arithmatex">\(\sigma(L) = \sigma(D+A)\)</span>），不要用"关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称"。</p>
-<p>顺带看"双三角形 + 桥"：<span class="arithmatex">\(\sigma(A) = \{-1.732,\ -1,\ -1,\ -0.4142,\ 1.732,\ 2.4142\}\)</span>。虽然含配对特征值 <span class="arithmatex">\(\pm\sqrt{17}\)</span> 一类结构，但 <span class="arithmatex">\(-0.4142\)</span> 的相反数 <span class="arithmatex">\(0.4142\)</span> 不在谱中，故<strong>不是二分图</strong>——与图中有三角形这一事实一致。</p>
+<p><span class="arithmatex">\(P_5\)</span> 那一行是关键反例：它明明是二分图，谱却不关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称。故判断二分图请统一用 <span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称（或 <span class="arithmatex">\(\sigma(L) = \sigma(D+A)\)</span>），不要用"关于 <span class="arithmatex">\(\lambda_n/2\)</span> 对称"。</p>
+<p>顺带看"双三角形 + 桥"：<span class="arithmatex">\(\sigma(A) = \{-1.732,\ -1,\ -1,\ -0.4142,\ 1.732,\ 2.4142\}\)</span>。虽含配对特征值 <span class="arithmatex">\(\pm\sqrt{17}\)</span> 一类结构，但 <span class="arithmatex">\(-0.4142\)</span> 的相反数 <span class="arithmatex">\(0.4142\)</span> 不在谱中，故<strong>不是二分图</strong>——与图中有三角形这一事实一致。</p>
 <h3 id="_13">连通性相关量汇总<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13248,11 +13248,11 @@ z
 </tr>
 </tbody>
 </table>
-<p>最后一行很有工程味道：多机器人系统里"信息扩散到全网要多久"这个时间尺度，正是由拉普拉斯的 <span class="arithmatex">\(\lambda_2\)</span> 控制的。</p>
+<p>最后一行很有工程味道：多机器人系统里"信息扩散到全网要多久"这个时间尺度，正由拉普拉斯的 <span class="arithmatex">\(\lambda_2\)</span> 控制。</p>
 <hr />
 <h2 id="_14">五、谱聚类入门：一个特征向量就能分割<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
 <h3 id="_15">问题设定<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
-<p>给定 <span class="arithmatex">\(n\)</span> 个样本点与相似度矩阵 <span class="arithmatex">\(W\)</span>（看作带权图），目标是把点分成若干簇，使<strong>簇内相似度高、簇间相似度低</strong>。难点在于"分成两半"是组合优化：可能的二分割总数是 <span class="arithmatex">\(2^{n-1}\)</span>，穷举不可行（<span class="arithmatex">\(n=100\)</span> 时已是天文数字）。谱聚类的策略是：把离散问题<strong>松弛</strong>成连续问题，再用线性代数求解。</p>
+<p>给定 <span class="arithmatex">\(n\)</span> 个样本点与相似度矩阵 <span class="arithmatex">\(W\)</span>（看作带权图），目标是把点分成若干簇，使<strong>簇内相似度高、簇间相似度低</strong>。难点在于"分成两半"是组合优化：二分割共 <span class="arithmatex">\(2^{n-1}\)</span> 种，穷举不可行（<span class="arithmatex">\(n=100\)</span> 时已是天文数字）。谱聚类的策略是：把离散问题<strong>松弛</strong>成连续问题，再用线性代数求解。</p>
 <h3 id="ratiocut">从割到 RatioCut<a class="headerlink" href="#ratiocut" title="Permanent link">&para;</a></h3>
 <p>对二分 <span class="arithmatex">\(S \subset V\)</span>（<span class="arithmatex">\(\bar S\)</span> 为补集），定义割的大小</p>
 <div class="arithmatex">\[
@@ -13265,7 +13265,7 @@ z
 <div class="arithmatex">\[
 \operatorname{Ncut}(S) = \frac{\operatorname{cut}(S,\bar S)}{\operatorname{vol}(S)} + \frac{\operatorname{cut}(S,\bar S)}{\operatorname{vol}(\bar S)}, \qquad \operatorname{vol}(S) = \sum_{i \in S} \deg(i)
 \]</div>
-<p>前者按"点数"惩罚，后者按"体积（度和）"惩罚。在度数差异明显时 <span class="arithmatex">\(N\)</span> 归一化版本更稳，是图像分割的标准选择。</p>
+<p>前者按"点数"惩罚，后者按"体积（度和）"惩罚。度数差异明显时 <span class="arithmatex">\(N\)</span> 归一化版本更稳，是图像分割的标准选择。</p>
 <h3 id="fiedler">松弛：从指示向量到 Fiedler 向量<a class="headerlink" href="#fiedler" title="Permanent link">&para;</a></h3>
 <p>关键是构造一个合适的连续向量。对 <span class="arithmatex">\(S\)</span> 取</p>
 <div class="arithmatex">\[
@@ -13290,11 +13290,11 @@ f^\top L f = \sum_{ij \in E}(f_i - f_j)^2 = \operatorname{cut}(S,\bar S)\left(\s
 <div class="arithmatex">\[
 f^\top L f = \operatorname{cut}(S,\bar S)\cdot n\left(\frac{1}{\lvert S\rvert} + \frac{1}{\lvert \bar S\rvert}\right) = n\cdot \operatorname{RatioCut}(S)
 \]</div>
-<p>于是<strong>离散的 RatioCut 被改写成了一个连续向量的二次型</strong>。现在把"<span class="arithmatex">\(f\)</span> 只能取两个值"这条硬约束放宽为"<span class="arithmatex">\(f\)</span> 是任意向量"，求解</p>
+<p>于是<strong>离散的 RatioCut 被改写成一个连续向量的二次型</strong>。现在把"<span class="arithmatex">\(f\)</span> 只能取两个值"这条硬约束放宽为"<span class="arithmatex">\(f\)</span> 是任意向量"，求解</p>
 <div class="arithmatex">\[
 \min_{f \neq 0} f^\top L f \quad \text{s.t.} \quad f^\top \mathbf{1} = 0,\ \lVert f\rVert^2 = n
 \]</div>
-<p>由于 <span class="arithmatex">\(\mathbf{1}\)</span> 张成零特征值方向，正交约束恰好排除该方向，剩下的最小值就是<strong>第二小特征值</strong>，取到最优的 <span class="arithmatex">\(f^\star\)</span> 就是 Fiedler 向量：</p>
+<p>由于 <span class="arithmatex">\(\mathbf{1}\)</span> 张成零特征值方向，正交约束恰好排除该方向，剩下的最小值就是<strong>第二小特征值</strong>，取到最优的 <span class="arithmatex">\(f^\star\)</span> 即 Fiedler 向量：</p>
 <div class="arithmatex">\[
 \min f^\top L f = \lambda_2, \qquad f^\star = \boldsymbol{v}_2
 \]</div>
@@ -13302,7 +13302,7 @@ f^\top L f = \operatorname{cut}(S,\bar S)\cdot n\left(\frac{1}{\lvert S\rvert} +
 <div class="arithmatex">\[
 \lambda_2 \le \frac{f^\top L f}{f^\top f} = \frac{n\cdot \operatorname{RatioCut}(S)}{n} = \operatorname{RatioCut}(S)
 \]</div>
-<p>即<strong><span class="arithmatex">\(\lambda_2\)</span> 是 RatioCut 最优值的下界</strong>，这就是松弛的理论保证。工程上再做一步"取整"：按 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 分量的正负号把点分成两簇；分多簇时把前 <span class="arithmatex">\(k\)</span> 个特征向量排成矩阵、对行做传统 <span class="arithmatex">\(k\)</span>-means。</p>
+<p>即<strong><span class="arithmatex">\(\lambda_2\)</span> 是 RatioCut 最优值的下界</strong>，这就是松弛的理论保证。工程上再做一步"取整"：按 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 分量的正负号分成两簇；分多簇时把前 <span class="arithmatex">\(k\)</span> 个特征向量排成矩阵、对行做传统 <span class="arithmatex">\(k\)</span>-means。</p>
 <h3 id="_16">算法流程<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13551,7 +13551,7 @@ L_2 =
 </tr>
 </tbody>
 </table>
-<p>一句话总结本节的工程含义：<strong>谱聚类把"怎么分组"这个组合难题，换成了"求一个矩阵的第二小特征向量"这个线性代数问题</strong>；代价是松弛偏差，收益是问题从组合爆炸变成可计算。同一套思想（把离散结构松弛到特征向量上）后面在马尔可夫链稳态、降维、图信号处理里会反复出现。</p>
+<p>一句话总结本节：<strong>谱聚类把"怎么分组"这个组合难题，换成"求一个矩阵的第二小特征向量"这个线性代数问题</strong>；代价是松弛偏差，收益是问题从组合爆炸变成可计算。同一套思想（把离散结构松弛到特征向量上）后面在马尔可夫链稳态、降维、图信号处理里会反复出现。</p>
 <hr />
 <h2 id="_19">六、典型例题<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：写出邻接矩阵、度序列与两步路径数<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -13559,11 +13559,11 @@ L_2 =
 （1）写出邻接矩阵 <span class="arithmatex">\(A_1\)</span>；（2）求度序列并用手握引理验算；（3）求顶点 1 到顶点 4 的长度为 2 的途径条数。</p>
 <details class="note">
 <summary>思路</summary>
-<p>邻接矩阵按"相邻填 1、否则填 0、对角线填 0"逐格填写；度序列看行和；两步途径数看 <span class="arithmatex">\(A_1^2\)</span> 的 <span class="arithmatex">\((1,4)\)</span> 元素，也可直接枚举中间点。</p>
+<p>邻接矩阵按"相邻填 1、否则填 0、对角线填 0"逐格填；度序列看行和；两步途径数看 <span class="arithmatex">\(A_1^2\)</span> 的 <span class="arithmatex">\((1,4)\)</span> 元素，也可直接枚举中间点。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>（1）邻接矩阵</strong>：逐对顶点检查是否在边集中。例如 <span class="arithmatex">\(A_{12}=1\)</span>（边 <span class="arithmatex">\(12\)</span> 存在）、<span class="arithmatex">\(A_{15}=0\)</span>（无边）、<span class="arithmatex">\(A_{kk}=0\)</span>（无自环）：</p>
+<p><strong>（1）邻接矩阵</strong>：逐对检查是否在边集中。例如 <span class="arithmatex">\(A_{12}=1\)</span>（边 <span class="arithmatex">\(12\)</span> 存在）、<span class="arithmatex">\(A_{15}=0\)</span>（无边）、<span class="arithmatex">\(A_{kk}=0\)</span>（无自环）：</p>
 <div class="arithmatex">\[
 A_1 =
 \begin{pmatrix}
@@ -13612,7 +13612,7 @@ A_1 =
 </tr>
 </tbody>
 </table>
-<p>度序列 <span class="arithmatex">\((2,3,3,3,1)\)</span>，总和 <span class="arithmatex">\(12\)</span>；边数 <span class="arithmatex">\(m=6\)</span>，<span class="arithmatex">\(2m=12\)</span>，握手引理 <span class="arithmatex">\(\sum \deg = 2m\)</span> 成立。顶点 5 是叶子，顶点 1 的度只有 2，这是它们"容易被切开"的代数原因。</p>
+<p>度序列 <span class="arithmatex">\((2,3,3,3,1)\)</span>，总和 <span class="arithmatex">\(12\)</span>；边数 <span class="arithmatex">\(m=6\)</span>，<span class="arithmatex">\(2m=12\)</span>，握手引理 <span class="arithmatex">\(\sum \deg = 2m\)</span> 成立。顶点 5 是叶子，顶点 1 的度只有 2，这是它们"易被切开"的代数原因。</p>
 <p><strong>（3）两步途径数</strong>：计算 <span class="arithmatex">\(A_1^2\)</span> 的 <span class="arithmatex">\((1,4)\)</span> 元素，即第 1 行与第 4 行的内积：</p>
 <div class="arithmatex">\[
 (A_1^2)_{14} = 0\cdot0 + 1\cdot1 + 1\cdot1 + 0\cdot0 + 0\cdot1 = 2
@@ -13625,7 +13625,7 @@ A_1 =
 </details>
 <div class="admonition tip">
 <p class="admonition-title">实用技巧</p>
-<p>手算两步途径数可用"第 <span class="arithmatex">\(i\)</span> 行与第 <span class="arithmatex">\(j\)</span> 行都为 1 的位置个数"，比写出整个 <span class="arithmatex">\(A^2\)</span> 快得多。三步以上则用 <span class="arithmatex">\(\operatorname{tr}(A^3)/6\)</span> 数三角形。</p>
+<p>手算两步途径数可用"第 <span class="arithmatex">\(i\)</span> 行与第 <span class="arithmatex">\(j\)</span> 行都为 1 的位置个数"，比写整个 <span class="arithmatex">\(A^2\)</span> 快得多。三步以上则用 <span class="arithmatex">\(\operatorname{tr}(A^3)/6\)</span> 数三角形。</p>
 </div>
 <hr />
 <h3 id="2">例题 2：关联矩阵与拉普拉斯矩阵的互验<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -13633,7 +13633,7 @@ A_1 =
 （1）写出带符号关联矩阵 <span class="arithmatex">\(B_1\)</span>；（2）计算 <span class="arithmatex">\(B_1B_1^\top\)</span> 并与 <span class="arithmatex">\(D_1-A_1\)</span> 比较；（3）说明为什么换一个方向约定后 <span class="arithmatex">\(B_1B_1^\top\)</span> 不变。</p>
 <details class="note">
 <summary>思路</summary>
-<p>关联矩阵每列对应一条边：参考方向的起点写 <span class="arithmatex">\(+1\)</span>、终点写 <span class="arithmatex">\(-1\)</span>。<span class="arithmatex">\(BB^\top\)</span> 的对角元统计"顶点出现在多少条边中"，非对角元只有"两点间有边"时才贡献 <span class="arithmatex">\(-1\)</span>。</p>
+<p>关联矩阵每列一条边：参考方向的起点写 <span class="arithmatex">\(+1\)</span>、终点写 <span class="arithmatex">\(-1\)</span>。<span class="arithmatex">\(BB^\top\)</span> 的对角元统计"顶点出现在几条边中"，非对角元只有"两点间有边"才贡献 <span class="arithmatex">\(-1\)</span>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13724,7 +13724,7 @@ B_1B_1^\top =
 \end{pmatrix}
 \]</div>
 <p>两者完全相同，即 <span class="arithmatex">\(B_1B_1^\top = L_1\)</span>。</p>
-<p><strong>（3）方向无关性</strong>：把某条边 <span class="arithmatex">\(e = v_iv_j\)</span> 的参考方向反过来，等价于把 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(e\)</span> 列整体乘以 <span class="arithmatex">\(-1\)</span>。此时乘积项变为 <span class="arithmatex">\((-B_{ie})(-B_{je}) = B_{ie}B_{je}\)</span>，<strong>两次变号相消</strong>，所以 <span class="arithmatex">\(BB^\top\)</span> 的每个元素都不变。这说明 <span class="arithmatex">\(L\)</span> 是图的内禀量，与记账约定无关。</p>
+<p><strong>（3）方向无关性</strong>：把某条边 <span class="arithmatex">\(e = v_iv_j\)</span> 的参考方向反过来，等价于把 <span class="arithmatex">\(B\)</span> 的第 <span class="arithmatex">\(e\)</span> 列整体乘以 <span class="arithmatex">\(-1\)</span>。此时乘积项变为 <span class="arithmatex">\((-B_{ie})(-B_{je}) = B_{ie}B_{je}\)</span>，<strong>两次变号相消</strong>，故 <span class="arithmatex">\(BB^\top\)</span> 的每个元素都不变。这说明 <span class="arithmatex">\(L\)</span> 是图的内禀量，与记账约定无关。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">实用技巧</p>
@@ -13738,7 +13738,7 @@ B_1B_1^\top =
 分别求出 <span class="arithmatex">\(L\)</span>，用零特征值重数判断连通分量个数，写出完整谱，并求出生成树个数。</p>
 <details class="note">
 <summary>思路</summary>
-<p>先写 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(D\)</span>，再算 <span class="arithmatex">\(L = D-A\)</span>。判据是"零特征值重数 = 连通分量个数"。谱靠因式分解求出。生成树个数用矩阵-树定理的删行删列行列式，注意不连通时必为 0。</p>
+<p>先写 <span class="arithmatex">\(A\)</span> 与 <span class="arithmatex">\(D\)</span>，再算 <span class="arithmatex">\(L = D-A\)</span>。判据是"零特征值重数 = 连通分量个数"。谱靠因式分解求。生成树个数用矩阵-树定理的删行删列行列式，注意不连通时必为 0。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13769,11 +13769,11 @@ L_3 =
 \chi_{L_3}(x) = x^2(x-3)^4
 \]</div>
 <p>谱：<span class="arithmatex">\(\lambda = 0\)</span>（重数 2）、<span class="arithmatex">\(\lambda = 3\)</span>（重数 4）。<strong>零特征值重数为 2，故 <span class="arithmatex">\(G_3\)</span> 有 2 个连通分量</strong>——正是两个三角形。</p>
-<p><strong>生成树个数</strong>：<span class="arithmatex">\(G_3\)</span> 不连通，不存在生成树，故 <span class="arithmatex">\(\tau(G_3) = 0\)</span>。这里正可以做一个反面验算：如果误用连通图公式把非零特征值代进去，会得到</p>
+<p><strong>生成树个数</strong>：<span class="arithmatex">\(G_3\)</span> 不连通，不存在生成树，故 <span class="arithmatex">\(\tau(G_3) = 0\)</span>。这里可做一个反面验算：若误用连通图公式把非零特征值代进去，会得到</p>
 <div class="arithmatex">\[
 \frac{1}{6}\prod_{i\ge2}\lambda_i = \frac{3^4}{6} = \frac{81}{6} = 13.5
 \]</div>
-<p><strong>非整数，明显荒谬</strong>——这个"报警信号"恰好说明公式 <span class="arithmatex">\(\tau = \frac{1}{n}\prod_{i\ge2}\lambda_i\)</span> 的前提是<strong>图连通</strong>。若按分量单独计算：每个三角形各有 3 棵生成树，两个分量合起来也不是"全图的生成树"（跨分量的连通无法建立），故全图 <span class="arithmatex">\(\tau = 0\)</span>。</p>
+<p><strong>非整数，明显荒谬</strong>——这个"报警信号"恰好说明公式 <span class="arithmatex">\(\tau = \frac{1}{n}\prod_{i\ge2}\lambda_i\)</span> 的前提是<strong>图连通</strong>。若按分量单独算：每个三角形各有 3 棵生成树，两个分量合起来也不是"全图的生成树"（跨分量连通无法建立），故全图 <span class="arithmatex">\(\tau = 0\)</span>。</p>
 <p><strong>图 <span class="arithmatex">\(G_4\)</span></strong>：顶点 4 是孤立点，度序列 <span class="arithmatex">\((1,2,1,0)\)</span>。</p>
 <div class="arithmatex">\[
 A_4 =
@@ -13796,7 +13796,7 @@ L_4 =
 <div class="arithmatex">\[
 \chi_{L_4}(x) = x^4 - 4x^3 + 3x^2 = x^2(x-1)(x-3)
 \]</div>
-<p>谱：<span class="arithmatex">\(0\)</span>（重数 2）、<span class="arithmatex">\(1\)</span>、<span class="arithmatex">\(3\)</span>。<strong>零特征值重数为 2</strong>，故 <span class="arithmatex">\(G_4\)</span> 有 2 个连通分量：<span class="arithmatex">\(\{1,2,3\}\)</span> 与 <span class="arithmatex">\(\{4\}\)</span>。同样地 <span class="arithmatex">\(\tau(G_4) = 0\)</span>。</p>
+<p>谱：<span class="arithmatex">\(0\)</span>（重数 2）、<span class="arithmatex">\(1\)</span>、<span class="arithmatex">\(3\)</span>。<strong>零特征值重数为 2</strong>，故 <span class="arithmatex">\(G_4\)</span> 有 2 个连通分量：<span class="arithmatex">\(\{1,2,3\}\)</span> 与 <span class="arithmatex">\(\{4\}\)</span>。同样 <span class="arithmatex">\(\tau(G_4) = 0\)</span>。</p>
 <p><strong>结论汇总</strong>：</p>
 <table>
 <thead>
@@ -13831,7 +13831,7 @@ L_4 =
 </details>
 <div class="admonition warning">
 <p class="admonition-title">易错点</p>
-<p><strong>孤立顶点会让 <span class="arithmatex">\(L\)</span> 出现整行整列的零</strong>，这是最快的人工识别信号。用程序求零特征值重数时要小心浮点误差：零特征值往往算成 <span class="arithmatex">\(10^{-16}\)</span> 而不是精确 <span class="arithmatex">\(0\)</span>，需要设阈值（如 <span class="arithmatex">\(10^{-9}\)</span>）再计数。</p>
+<p><strong>孤立顶点会让 <span class="arithmatex">\(L\)</span> 出现整行整列的零</strong>，这是最快的人工识别信号。用程序求零特征值重数时要小心浮点误差：零特征值往往算成 <span class="arithmatex">\(10^{-16}\)</span> 而非精确 <span class="arithmatex">\(0\)</span>，需设阈值（如 <span class="arithmatex">\(10^{-9}\)</span>）再计数。</p>
 </div>
 <hr />
 <h3 id="4-ratiocut">例题 4：谱聚类实操——二分割与 RatioCut<a class="headerlink" href="#4-ratiocut" title="Permanent link">&para;</a></h3>
@@ -13922,31 +13922,31 @@ L_2 =
 <div class="arithmatex">\[
 \operatorname{RatioCut}(S') = \frac{3}{1} + \frac{3}{5} = 3.6
 \]</div>
-<p>远大于 <span class="arithmatex">\(0.6667\)</span>，说明谱聚类给出的分割确实是优选。再验算 Rayleigh 商：<span class="arithmatex">\(\boldsymbol{v}_2^\top L_2 \boldsymbol{v}_2 = 2.0303\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2^\top\boldsymbol{v}_2 = 4.6307\)</span>，商为 <span class="arithmatex">\(0.4384 = \lambda_2\)</span>。同时 <span class="arithmatex">\(\lambda_2 = 0.4384 \le \operatorname{RatioCut} = 0.6667\)</span>，与"<span class="arithmatex">\(\lambda_2\)</span> 是 RatioCut 下界"的理论结论一致。</p>
+<p>远大于 <span class="arithmatex">\(0.6667\)</span>，说明谱聚类给出的分割确为优选。再验算 Rayleigh 商：<span class="arithmatex">\(\boldsymbol{v}_2^\top L_2 \boldsymbol{v}_2 = 2.0303\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2^\top\boldsymbol{v}_2 = 4.6307\)</span>，商为 <span class="arithmatex">\(0.4384 = \lambda_2\)</span>。同时 <span class="arithmatex">\(\lambda_2 = 0.4384 \le \operatorname{RatioCut} = 0.6667\)</span>，与"<span class="arithmatex">\(\lambda_2\)</span> 是 RatioCut 下界"的理论结论一致。</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">易错点</p>
-<p><span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 可作为"点是否在簇边界"的度量：本例中顶点 3 与 4 只有 <span class="arithmatex">\(0.5616\)</span>，而 1、2、5、6 达到 <span class="arithmatex">\(1.0000\)</span>，说明 <strong>3 与 4 位于两个簇的交界处</strong>。工程上若要找"最可能跨越组的节点"（例如编队中最容易被切断的通信节点），直接按 <span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 排序即可。</p>
+<p><span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 可作为"点是否在簇边界"的度量：本例中顶点 3 与 4 只有 <span class="arithmatex">\(0.5616\)</span>，而 1、2、5、6 达 <span class="arithmatex">\(1.0000\)</span>，说明 <strong>3 与 4 位于两簇交界处</strong>。工程上若要找"最可能跨越组的节点"（例如编队中最容易被切断的通信节点），直接按 <span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 排序即可。</p>
 </div>
 <hr />
 <h2 id="_20">七、用在哪些课程里<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h2>
 <h3 id="_21">无人系统自主决策与优化 · 通信拓扑与一致性收敛<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
-<p>多无人系统编队一致性的核心方程是 <span class="arithmatex">\(\dot{\boldsymbol{x}} = -L\boldsymbol{x}\)</span>，其中 <span class="arithmatex">\(\boldsymbol{x}\)</span> 由各机的位置/速度组成，<span class="arithmatex">\(L\)</span> 就是通信拓扑图的拉普拉斯矩阵。线性系统的解为 <span class="arithmatex">\(\boldsymbol{x}(t) = e^{-Lt}\boldsymbol{x}(0)\)</span>，收敛速度完全由 <span class="arithmatex">\(L\)</span> 的谱决定：<strong>最慢的衰减率是 <span class="arithmatex">\(\lambda_2\)</span></strong>（其余方向衰减更快，<span class="arithmatex">\(\mathbf{1}\)</span> 方向完全不衰减）。<span class="arithmatex">\(\lambda_2\)</span> 越小，编队达成一致所需的通信轮数越多；<span class="arithmatex">\(\lambda_2 \to 0\)</span> 意味着拓扑接近断开，编队会分裂成互不同步的若干组。</p>
-<p>因此工程上把 <span class="arithmatex">\(\lambda_2\)</span> 直接当作<strong>拓扑鲁棒性指标</strong>：通信预算有限时，选一个 <span class="arithmatex">\(\lambda_2\)</span> 尽量大的拓扑（例如带弦的环形而非纯环形），往往比单纯提高通信带宽更有效。另外 <span class="arithmatex">\(L\)</span> 的"行和为零"保证了一致性方程的守恒性质 <span class="arithmatex">\(\mathbf{1}^\top L = \mathbf{0}\)</span>，所以所有智能体的平均值不随时间变化——这正是分布式平均算法的物理基础。</p>
+<p>多无人系统编队一致性的核心方程是 <span class="arithmatex">\(\dot{\boldsymbol{x}} = -L\boldsymbol{x}\)</span>，其中 <span class="arithmatex">\(\boldsymbol{x}\)</span> 由各机的位置/速度组成，<span class="arithmatex">\(L\)</span> 即通信拓扑图的拉普拉斯矩阵。线性系统的解为 <span class="arithmatex">\(\boldsymbol{x}(t) = e^{-Lt}\boldsymbol{x}(0)\)</span>，收敛速度完全由 <span class="arithmatex">\(L\)</span> 的谱决定：<strong>最慢的衰减率是 <span class="arithmatex">\(\lambda_2\)</span></strong>（其余方向衰减更快，<span class="arithmatex">\(\mathbf{1}\)</span> 方向不衰减）。<span class="arithmatex">\(\lambda_2\)</span> 越小，编队达成一致所需通信轮数越多；<span class="arithmatex">\(\lambda_2 \to 0\)</span> 意味着拓扑接近断开，编队会分裂成互不同步的若干组。</p>
+<p>因此工程上把 <span class="arithmatex">\(\lambda_2\)</span> 直接当作<strong>拓扑鲁棒性指标</strong>：通信预算有限时，选一个 <span class="arithmatex">\(\lambda_2\)</span> 尽量大的拓扑（例如带弦的环形而非纯环形），往往比单纯提高带宽更有效。另外 <span class="arithmatex">\(L\)</span> 的"行和为零"保证了一致性方程的守恒性质 <span class="arithmatex">\(\mathbf{1}^\top L = \mathbf{0}\)</span>，故所有智能体的平均值不随时间变化——正是分布式平均算法的物理基础。</p>
 <h3 id="slam">机器人学 · 位姿图优化与 SLAM<a class="headerlink" href="#slam" title="Permanent link">&para;</a></h3>
-<p>SLAM 后端把机器人位姿当作顶点、位姿间的相对观测当作带权边，构成位姿图。优化目标是最小化所有边上的残差平方和</p>
+<p>SLAM 后端把位姿当作顶点、相对观测当作带权边，构成位姿图。优化目标是最小化所有边上的残差平方和</p>
 <div class="arithmatex">\[
 \sum_{ij \in E} \lVert (\boldsymbol{x}_i - \boldsymbol{x}_j) - \boldsymbol{z}_{ij}\rVert^2 = \boldsymbol{r}^\top L \boldsymbol{r}
 \]</div>
-<p>误差项表示的是"差分"，所以差分算子自然出现。规范方程中的法矩阵就是加权拉普拉斯矩阵 <span class="arithmatex">\(L = B^\top \Omega B\)</span>，其中 <span class="arithmatex">\(B\)</span> 是关联矩阵、<span class="arithmatex">\(\Omega\)</span> 是信息矩阵——这让求解器可以直接使用稀疏 Cholesky 分解。</p>
-<p>更妙的是<strong>零空间诊断</strong>：位姿图中 <span class="arithmatex">\(L\)</span> 必然含若干零特征值（对应整体平移/旋转自由度），当多个机器人各自独立成团时还会额外出现零空间。工程上若解出的 <span class="arithmatex">\(\lambda_2 \approx 0\)</span>，基本可断定<strong>拓扑断裂（回环约束缺失）</strong>，需要补回环边——这正是"零特征值重数 = 连通分量个数"在机器人领域最直接的应用。</p>
+<p>误差项表示的是"差分"，故差分算子自然出现。规范方程中的法矩阵就是加权拉普拉斯矩阵 <span class="arithmatex">\(L = B^\top \Omega B\)</span>，其中 <span class="arithmatex">\(B\)</span> 是关联矩阵、<span class="arithmatex">\(\Omega\)</span> 是信息矩阵——这让求解器可直接用稀疏 Cholesky 分解。</p>
+<p>更妙的是<strong>零空间诊断</strong>：位姿图中 <span class="arithmatex">\(L\)</span> 必含若干零特征值（对应整体平移/旋转自由度），多个机器人各自独立成团时还会额外出现零空间。工程上若解出的 <span class="arithmatex">\(\lambda_2 \approx 0\)</span>，基本可断定<strong>拓扑断裂（回环约束缺失）</strong>，需补回环边——正是"零特征值重数 = 连通分量个数"在机器人领域最直接的应用。</p>
 <h3 id="_22">智能传感与信息处理 · 传感器网络与图信号处理<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(n\)</span> 个传感器看作顶点、通信质量或相关性强弱看作边权，则传感器网络就是带权图，读数构成"图信号" <span class="arithmatex">\(\boldsymbol{x} \in \mathbb{R}^n\)</span>。图傅里叶变换定义为</p>
 <div class="arithmatex">\[
 \hat{\boldsymbol{x}} = V^\top \boldsymbol{x}
 \]</div>
 <p>其中 <span class="arithmatex">\(L = V\Lambda V^\top\)</span>，<span class="arithmatex">\(V\)</span> 的列是 <span class="arithmatex">\(L\)</span> 的特征向量。这与信号与系统的傅里叶变换完全同构：<span class="arithmatex">\(L\)</span> 的特征值对应频率，小特征值对应缓慢变化（低频），大特征值对应剧烈变化（高频）。三项典型应用：</p>
-<p>其一，<strong>压缩感知</strong>：传感器数据通常在图频域"低频稀疏"，只需采一部分节点就能重建全网；其二，<strong>平滑去噪</strong>：把对应大 <span class="arithmatex">\(\lambda_k\)</span> 的高频分量置零再逆变换，等价于图上的低通滤波；其三，<strong>簇划分</strong>：<span class="arithmatex">\(\lambda_2\)</span> 与 Fiedler 向量直接给出"哪一片传感器应分到同一个处理簇"，让分布式估计不必全网红传数据。位于簇边界的传感器（<span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 偏小）应被优先调度上报。</p>
+<p>其一，<strong>压缩感知</strong>：传感器数据通常在图频域"低频稀疏"，只需采一部分节点就能重建全网；其二，<strong>平滑去噪</strong>：把对应大 <span class="arithmatex">\(\lambda_k\)</span> 的高频分量置零再逆变换，等价于图上的低通滤波；其三，<strong>簇划分</strong>：<span class="arithmatex">\(\lambda_2\)</span> 与 Fiedler 向量直接给出"哪一片传感器应分到同一处理簇"，让分布式估计不必全网红传数据。位于簇边界的传感器（<span class="arithmatex">\(\lvert v_{2,i}\rvert\)</span> 偏小）应优先调度上报。</p>
 <hr />
 <h2 id="_23">八、自测<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> 对无向图 <span class="arithmatex">\(C_4\)</span>：<span class="arithmatex">\(V = \{1,2,3,4\}\)</span>，<span class="arithmatex">\(E = \{12, 23, 34, 41\}\)</span>。
@@ -13979,7 +13979,7 @@ L = 2I - A =
 \end{pmatrix}
 \]</div>
 <p>每行和为 <span class="arithmatex">\(0\)</span>：<span class="arithmatex">\((2-1+0-1) = 0\)</span>，四行同理。</p>
-<p><strong>求谱</strong>：先把特征多项式因式分解。观察其各项，<span class="arithmatex">\(x\)</span> 可以提出来：</p>
+<p><strong>求谱</strong>：先把特征多项式因式分解。观察各项，<span class="arithmatex">\(x\)</span> 可提出来：</p>
 <div class="arithmatex">\[
 \chi_L(x) = x^4 - 8x^3 + 20x^2 - 16x = x\,(x-2)^2\,(x-4)
 \]</div>
@@ -13992,7 +13992,7 @@ L = 2I - A =
 <div class="arithmatex">\[
 \tau(C_4) = \frac{1}{4}\prod_{i\ge2}\lambda_i = \frac{2 \times 2 \times 4}{4} = 4
 \]</div>
-<p>也确实如此：<span class="arithmatex">\(C_4\)</span> 上删去任意一条边都得到一棵生成树，共 4 棵。</p>
+<p>也确实如此：<span class="arithmatex">\(C_4\)</span> 上删任一条边都得到一棵生成树，共 4 棵。</p>
 </details>
 <p><strong>Q2</strong> 3 个顶点的简单图有三种：完全图 <span class="arithmatex">\(K_3\)</span>（三角形）、路径 <span class="arithmatex">\(P_3\)</span>（边 <span class="arithmatex">\(12\)</span> 与 <span class="arithmatex">\(23\)</span>）、以及"1 条边 <span class="arithmatex">\(+\)</span> 1 个孤立点"（边 <span class="arithmatex">\(12\)</span> 与顶点 3）。
 分别写出拉普拉斯矩阵，指出零特征值重数，并给出 <span class="arithmatex">\(\lambda_2\)</span>。</p>
@@ -14061,11 +14061,11 @@ L = \begin{pmatrix} 1 &amp; -1 &amp; 0 \\ -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 
 （1）验证它是二分图；（2）写出 <span class="arithmatex">\(A\)</span> 的谱并验证"关于 <span class="arithmatex">\(0\)</span> 对称"；（3）说明这条判据在有多个连通分量时如何推广。</p>
 <details class="note">
 <summary>提示</summary>
-<p>二分图的判据是能 2-着色。<span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称是充要条件。若图有多个连通分量，<span class="arithmatex">\(A\)</span> 是块对角的，逐块判断。</p>
+<p>二分图的判据是能 2-着色。<span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称是充要条件。图有多个连通分量时，<span class="arithmatex">\(A\)</span> 是块对角的，逐块判断。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>（1）二分性</strong>：取 <span class="arithmatex">\(X = \{1,3\}\)</span>、<span class="arithmatex">\(Y = \{2,4\}\)</span>。检查每条边：<span class="arithmatex">\(12\)</span> 跨越 <span class="arithmatex">\(X\)</span>-<span class="arithmatex">\(Y\)</span>，<span class="arithmatex">\(23\)</span> 跨越，<span class="arithmatex">\(34\)</span> 跨越，<span class="arithmatex">\(41\)</span> 跨越。所有边都在两部分之间，故 <span class="arithmatex">\(G_5\)</span> 是二分图（它就是 <span class="arithmatex">\(C_4\)</span> 的另一种编号）。</p>
+<p><strong>（1）二分性</strong>：取 <span class="arithmatex">\(X = \{1,3\}\)</span>、<span class="arithmatex">\(Y = \{2,4\}\)</span>。检查每条边：<span class="arithmatex">\(12\)</span>、<span class="arithmatex">\(23\)</span>、<span class="arithmatex">\(34\)</span>、<span class="arithmatex">\(41\)</span> 均跨越 <span class="arithmatex">\(X\)</span>-<span class="arithmatex">\(Y\)</span>。所有边都在两部分之间，故 <span class="arithmatex">\(G_5\)</span> 是二分图（它就是 <span class="arithmatex">\(C_4\)</span> 的另一种编号）。</p>
 <p><strong>（2）<span class="arithmatex">\(A\)</span> 的谱</strong>：与 <span class="arithmatex">\(C_4\)</span> 同构，故谱相同：</p>
 <div class="arithmatex">\[
 \sigma(A) = \{-2,\ 0,\ 0,\ 2\}
@@ -14075,11 +14075,11 @@ L = \begin{pmatrix} 1 &amp; -1 &amp; 0 \\ -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 
 <div class="arithmatex">\[
 A = \operatorname{diag}(A_1, A_2, \dots, A_c)
 \]</div>
-<p>块对角阵的特征值集合是各块特征值集合的<strong>并集</strong>（对应特征向量只需在其余块上补零）。因此只要每个 <span class="arithmatex">\(A_k\)</span> 的谱关于 <span class="arithmatex">\(0\)</span> 对称，并集也对称；反之若某个分量破坏对称，并集就被破坏。正确的表述是：</p>
+<p>块对角阵的特征值集合是各块特征值集合的<strong>并集</strong>（对应特征向量只需在其余块上补零）。因此只要每个 <span class="arithmatex">\(A_k\)</span> 的谱关于 <span class="arithmatex">\(0\)</span> 对称，并集也对称；反之若某分量破坏对称，并集就被破坏。正确的表述是：</p>
 <blockquote>
 <p><strong>每个连通分量都是二分图 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\sigma(A)\)</span> 关于 <span class="arithmatex">\(0\)</span> 对称。</strong></p>
 </blockquote>
-<p>反例：两个不相交的 <span class="arithmatex">\(K_3\)</span> 的谱为 <span class="arithmatex">\(\{-1,-1,-1,-1,2,2\}\)</span>，其中 <span class="arithmatex">\(-1\)</span> 出现 4 次而 <span class="arithmatex">\(1\)</span> 出现 0 次，不对称——该图确实不是二分图。</p>
+<p>反例：两个不相交的 <span class="arithmatex">\(K_3\)</span> 的谱为 <span class="arithmatex">\(\{-1,-1,-1,-1,2,2\}\)</span>，其中 <span class="arithmatex">\(-1\)</span> 出现 4 次而 <span class="arithmatex">\(1\)</span> 出现 0 次，不对称——该图确非二分图。</p>
 </details>
 <p><strong>Q4</strong> 给定 6 个顶点的图 <span class="arithmatex">\(G_6\)</span>：两个三角形 <span class="arithmatex">\(\{1,2,3\}\)</span> 与 <span class="arithmatex">\(\{4,5,6\}\)</span> 之间连着<strong>两条</strong>边 <span class="arithmatex">\(34\)</span> 与 <span class="arithmatex">\(35\)</span>。
 （1）写出 <span class="arithmatex">\(L_6\)</span>；（2）判断连通性与连通分量数；（3）求出 <span class="arithmatex">\(\lambda_2\)</span> 并与"单桥"版本的 <span class="arithmatex">\(0.4384\)</span> 比较；（4）求出 <span class="arithmatex">\(\tau(G_6)\)</span>。</p>
@@ -14089,7 +14089,7 @@ A = \operatorname{diag}(A_1, A_2, \dots, A_c)
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>（1）<span class="arithmatex">\(L_6\)</span></strong>：度序列 <span class="arithmatex">\((2,\ 2,\ 4,\ 3,\ 3,\ 2)\)</span>（顶点 3 连 <span class="arithmatex">\(1,2,4,5\)</span> 共 4 条边；顶点 4 连 <span class="arithmatex">\(5,6,3\)</span> 共 3 条；顶点 5 连 <span class="arithmatex">\(4,6,3\)</span> 共 3 条；顶点 6 连 <span class="arithmatex">\(4,5\)</span> 共 2 条）：</p>
+<p><strong>（1）<span class="arithmatex">\(L_6\)</span></strong>：度序列 <span class="arithmatex">\((2,\ 2,\ 4,\ 3,\ 3,\ 2)\)</span>（顶点 3 连 <span class="arithmatex">\(1,2,4,5\)</span> 共 4 条；顶点 4 连 <span class="arithmatex">\(5,6,3\)</span> 共 3 条；顶点 5 连 <span class="arithmatex">\(4,6,3\)</span> 共 3 条；顶点 6 连 <span class="arithmatex">\(4,5\)</span> 共 2 条）：</p>
 <div class="arithmatex">\[
 L_6 =
 \begin{pmatrix}
@@ -14116,7 +14116,7 @@ L_6 =
 <div class="arithmatex">\[
 \lambda_2 = \min_{\boldsymbol{x} \perp \mathbf{1}} \frac{\boldsymbol{x}^\top L\boldsymbol{x}}{\boldsymbol{x}^\top \boldsymbol{x}}, \qquad \boldsymbol{x}^\top L\boldsymbol{x} = \sum_{ij \in E}(x_i - x_j)^2
 \]</div>
-<p>跨越边越多，"跳变"项越多，二次型越大，最小值也随之抬升。这正是"增加冗余链路能直接提升代数连通度"的定量依据——多机器人通信拓扑设计中，铺几条跨组边比在组内加边更划算。</p>
+<p>跨越边越多，"跳变"项越多，二次型越大，最小值也随之抬升。这正是"增加冗余链路能直接提升代数连通度"的定量依据——多机器人通信拓扑设计中，铺几条跨组边比组内加边更划算。</p>
 <p><strong>（4）生成树个数</strong>：<span class="arithmatex">\(G_6\)</span> 连通，用矩阵-树定理</p>
 <div class="arithmatex">\[
 \tau(G_6) = \frac{1}{6}\prod_{i\ge2}\lambda_i = \frac{1}{6}\bigl[(3-\sqrt5)(3+\sqrt5)\cdot 3^2 \cdot 4\bigr] = \frac{(9-5)\times 9 \times 4}{6} = \frac{144}{6} = 24

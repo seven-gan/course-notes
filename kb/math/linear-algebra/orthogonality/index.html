@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="正交性与投影：上一页引入了内积，于是有了「长度」和「垂直」。这一页回答一个非常实用的问题：如果目标不在我能够到的范围里，我该选哪个「最接近」的？比如：想用两个方向的组合去逼近某个向量，但无论怎么组合都到不了它—— 该怎么办？">
+    <meta name="description" content="正交性与投影：上一页引入内积，有了「长度」和「垂直」。这一页回答一个很实用的问题：若目标不在可及范围内，该选哪个「最接近」的？比如：想用两方向的组合逼近某向量，但怎么组合都到不了它—— 该怎么办？">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="正交性与投影">
   
-  <meta property="og:description" content="正交性与投影：上一页引入了内积，于是有了「长度」和「垂直」。这一页回答一个非常实用的问题：如果目标不在我能够到的范围里，我该选哪个「最接近」的？比如：想用两个方向的组合去逼近某个向量，但无论怎么组合都到不了它—— 该怎么办？">
+  <meta property="og:description" content="正交性与投影：上一页引入内积，有了「长度」和「垂直」。这一页回答一个很实用的问题：若目标不在可及范围内，该选哪个「最接近」的？比如：想用两方向的组合逼近某向量，但怎么组合都到不了它—— 该怎么办？">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/linear-algebra/orthogonality/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="正交性与投影">
   
-  <meta name="twitter:description" content="正交性与投影：上一页引入了内积，于是有了「长度」和「垂直」。这一页回答一个非常实用的问题：如果目标不在我能够到的范围里，我该选哪个「最接近」的？比如：想用两个方向的组合去逼近某个向量，但无论怎么组合都到不了它—— 该怎么办？">
+  <meta name="twitter:description" content="正交性与投影：上一页引入内积，有了「长度」和「垂直」。这一页回答一个很实用的问题：若目标不在可及范围内，该选哪个「最接近」的？比如：想用两方向的组合逼近某向量，但怎么组合都到不了它—— 该怎么办？">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11907,23 +11907,23 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/robotics/">机器人学</a><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/mdsp/">现代数字信号处理</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a><a class="kb-course-tag" href="../../../courses/autonomous-decision/">无人系统自主决策与优化</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Axler Ch.6</code><code>Mathematics for Machine Learning（§3.4～3.8 Angles and Orthogonality / Orthonormal Basis / Orthogonal Projections）</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《线性代数应该这样学》第 6 章</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">正交性与投影<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>上一页引入了内积，于是有了「长度」和「垂直」。这一页回答一个非常实用的问题：</p>
+<p>上一页引入内积，有了「长度」和「垂直」。这一页回答一个很实用的问题：</p>
 <blockquote>
-<p><strong>如果目标不在我能够到的范围里，我该选哪个「最接近」的？</strong></p>
+<p><strong>若目标不在可及范围内，该选哪个「最接近」的？</strong></p>
 </blockquote>
-<p>比如：想用两个方向的组合去逼近某个向量，但无论怎么组合都到不了它——
+<p>比如：想用两方向的组合逼近某向量，但怎么组合都到不了它——
 <strong>该怎么办？</strong></p>
-<p>答案的美妙之处在于：<strong>选那个「误差与我的所有可用方向都垂直」的点</strong>。
-这个「垂直」条件不只是几何直觉，它给出一个<strong>可解的方程</strong>，
-而且可以证明它就是最优的。</p>
-<p>这一页的内容直接通向<strong>最小二乘拟合、PCA、卡尔曼滤波的更新步</strong>。</p>
+<p>答案很妙：<strong>选那个「误差与所有可用方向垂直」的点</strong>。
+这个「垂直」条件不只是几何直觉，它给出<strong>可解方程</strong>，
+且可证明它最优。</p>
+<p>本节直接通向<strong>最小二乘拟合、PCA、卡尔曼滤波更新步</strong>。</p>
 <hr />
 <h2 id="_2">一、正交补：所有「与它垂直」的向量<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>定义</strong>：设 <span class="arithmatex">\(U \subseteq V\)</span> 是子空间，定义 <span class="arithmatex">\(U\)</span> 的<strong>正交补</strong>为</p>
 <div class="arithmatex">\[
 U^{\perp} = \{\boldsymbol{v} \in V : \langle \boldsymbol{v},\boldsymbol{u}\rangle = 0 \ \text{对一切}\ \boldsymbol{u} \in U\}
 \]</div>
-<p>即：与 <span class="arithmatex">\(U\)</span> 中每个向量都正交的那些向量。</p>
+<p>即与 <span class="arithmatex">\(U\)</span> 中每个向量都正交的向量。</p>
 <div class="admonition note">
 <p class="admonition-title">正交补是子空间</p>
 <p><strong>证明</strong>：取 <span class="arithmatex">\(\boldsymbol{v}_1,\boldsymbol{v}_2 \in U^{\perp}\)</span>，任取 <span class="arithmatex">\(\boldsymbol{u} \in U\)</span>。</p>
@@ -11932,19 +11932,19 @@ U^{\perp} = \{\boldsymbol{v} \in V : \langle \boldsymbol{v},\boldsymbol{u}\rangl
 = \lambda\langle\boldsymbol{v}_1,\boldsymbol{u}\rangle + \langle\boldsymbol{v}_2,\boldsymbol{u}\rangle
 = \lambda\cdot 0 + 0 = 0
 \]</div>
-<p>所以 <span class="arithmatex">\(\lambda\boldsymbol{v}_1+\boldsymbol{v}_2 \in U^\perp\)</span>，对线性组合封闭；
+<p>故 <span class="arithmatex">\(\lambda\boldsymbol{v}_1+\boldsymbol{v}_2 \in U^\perp\)</span>，对线性组合封闭；
 又 <span class="arithmatex">\(\boldsymbol{0} \in U^\perp\)</span>（零向量与一切正交），非空。故 <span class="arithmatex">\(U^\perp\)</span> 是子空间</p>
 </div>
 <h3 id="_3">一个关键的直和分解<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p><strong>定理</strong>：若 <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(V\)</span> 的有限维子空间，则</p>
+<p><strong>定理</strong>：若 <span class="arithmatex">\(U\)</span> 为 <span class="arithmatex">\(V\)</span> 的有限维子空间，则</p>
 <div class="arithmatex">\[
 V = U \oplus U^{\perp}
 \]</div>
-<p>也就是说：<strong><span class="arithmatex">\(V\)</span> 中每个向量都能唯一地写成一个「<span class="arithmatex">\(U\)</span> 中的部分」加上一个「与 <span class="arithmatex">\(U\)</span> 垂直的部分」。</strong></p>
-<p>这两个部分有自己的名字：</p>
+<p>即：<strong><span class="arithmatex">\(V\)</span> 中每个向量都能唯一写成一个「<span class="arithmatex">\(U\)</span> 中的部分」加一个「与 <span class="arithmatex">\(U\)</span> 垂直的部分」。</strong></p>
+<p>两部分各有名字：</p>
 <ul>
-<li><span class="arithmatex">\(U\)</span> 中的部分称为 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在 <span class="arithmatex">\(U\)</span> 上的<strong>投影</strong>，记 <span class="arithmatex">\(\operatorname{proj}_U \boldsymbol{v}\)</span></li>
-<li><span class="arithmatex">\(U^\perp\)</span> 中的部分为<strong>正交余项</strong>（或误差项）</li>
+<li><span class="arithmatex">\(U\)</span> 中的部分称 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在 <span class="arithmatex">\(U\)</span> 上的<strong>投影</strong>，记 <span class="arithmatex">\(\operatorname{proj}_U \boldsymbol{v}\)</span></li>
+<li><span class="arithmatex">\(U^\perp\)</span> 中的部分为<strong>正交余项</strong>（或误差）</li>
 </ul>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="向量在子空间上的正交投影">
@@ -11975,9 +11975,9 @@ V = U \oplus U^{\perp}
 
 <hr />
 <h2 id="_4">二、一个向量的投影：先看最简单的情形<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>先设 <span class="arithmatex">\(U\)</span> 是一维的，由单个非零向量 <span class="arithmatex">\(\boldsymbol{u}\)</span> 张成。求 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在 <span class="arithmatex">\(U\)</span> 上的投影。</p>
-<p><strong>直观</strong>：投影应当形如 <span class="arithmatex">\(\lambda \boldsymbol{u}\)</span>，我们要定出 <span class="arithmatex">\(\lambda\)</span>。</p>
-<p><strong>关键条件</strong>：误差 <span class="arithmatex">\(\boldsymbol{v} - \lambda\boldsymbol{u}\)</span> 必须与 <span class="arithmatex">\(U\)</span> 正交，即与 <span class="arithmatex">\(\boldsymbol{u}\)</span> 正交：</p>
+<p>设 <span class="arithmatex">\(U\)</span> 由单个非零向量 <span class="arithmatex">\(\boldsymbol{u}\)</span> 张成（一维）。求 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在 <span class="arithmatex">\(U\)</span> 上的投影。</p>
+<p><strong>直观</strong>：投影应形如 <span class="arithmatex">\(\lambda \boldsymbol{u}\)</span>，要定出 <span class="arithmatex">\(\lambda\)</span>。</p>
+<p><strong>关键条件</strong>：误差 <span class="arithmatex">\(\boldsymbol{v} - \lambda\boldsymbol{u}\)</span> 须与 <span class="arithmatex">\(U\)</span> 正交，即与 <span class="arithmatex">\(\boldsymbol{u}\)</span> 正交：</p>
 <div class="arithmatex">\[
 \langle \boldsymbol{v}-\lambda\boldsymbol{u},\ \boldsymbol{u}\rangle = 0
 \]</div>
@@ -11990,38 +11990,38 @@ V = U \oplus U^{\perp}
 \lambda = \frac{\langle \boldsymbol{v},\boldsymbol{u}\rangle}{\langle \boldsymbol{u},\boldsymbol{u}\rangle}
 = \frac{\langle \boldsymbol{v},\boldsymbol{u}\rangle}{\lVert\boldsymbol{u}\rVert^2}
 \]</div>
-<p>于是<strong>投影公式</strong>：</p>
+<p>得<strong>投影公式</strong>：</p>
 <div class="arithmatex">\[
 \boxed{\ \operatorname{proj}_U \boldsymbol{v} = \frac{\langle \boldsymbol{v},\boldsymbol{u}\rangle}{\lVert\boldsymbol{u}\rVert^2}\,\boldsymbol{u}\ }
 \]</div>
-<p><strong>若 <span class="arithmatex">\(\boldsymbol{u}\)</span> 是单位向量</strong>（<span class="arithmatex">\(\lVert\boldsymbol{u}\rVert=1\)</span>），公式简化为</p>
+<p><strong>若 <span class="arithmatex">\(\boldsymbol{u}\)</span> 为单位向量</strong>（<span class="arithmatex">\(\lVert\boldsymbol{u}\rVert=1\)</span>），公式简化为</p>
 <div class="arithmatex">\[
 \operatorname{proj}_U \boldsymbol{v} = \langle \boldsymbol{v},\boldsymbol{u}\rangle\,\boldsymbol{u}
 \]</div>
 <h3 id="_5">为什么它是「最优」的<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>上面的推导只用了「误差垂直」这一个条件，但<strong>没有证明</strong>它就使距离最小。
-补上这一步（这是投影被称为「最佳逼近」的原因）：</p>
+<p>上面的推导只用「误差垂直」这一条件，但<strong>没证明</strong>它使距离最小。
+补上这一步（这是投影称「最佳逼近」的原因）：</p>
 <p>设 <span class="arithmatex">\(\boldsymbol{w} = \lambda\boldsymbol{u}\)</span> 是 <span class="arithmatex">\(U\)</span> 中<strong>任意</strong>向量。则</p>
 <div class="arithmatex">\[
 \lVert \boldsymbol{v}-\boldsymbol{w}\rVert^2 = \lVert \boldsymbol{v}-\operatorname{proj}_U\boldsymbol{v} + \operatorname{proj}_U\boldsymbol{v}-\boldsymbol{w}\rVert^2
 \]</div>
-<p>后面那一项 <span class="arithmatex">\(\operatorname{proj}_U\boldsymbol{v}-\boldsymbol{w}\)</span> 仍在 <span class="arithmatex">\(U\)</span> 中，而误差 <span class="arithmatex">\(\boldsymbol{v}-\operatorname{proj}_U\boldsymbol{v}\)</span> 与 <span class="arithmatex">\(U\)</span> 正交，
-所以两者正交。由<strong>勾股定理</strong>：</p>
+<p>后项 <span class="arithmatex">\(\operatorname{proj}_U\boldsymbol{v}-\boldsymbol{w}\)</span> 仍在 <span class="arithmatex">\(U\)</span> 中，而误差 <span class="arithmatex">\(\boldsymbol{v}-\operatorname{proj}_U\boldsymbol{v}\)</span> 与 <span class="arithmatex">\(U\)</span> 正交，
+故两者正交。由<strong>勾股定理</strong>：</p>
 <div class="arithmatex">\[
 \lVert \boldsymbol{v}-\boldsymbol{w}\rVert^2
 = \underbrace{\lVert \boldsymbol{v}-\operatorname{proj}_U\boldsymbol{v}\rVert^2}_{\text{固定}} + \underbrace{\lVert \operatorname{proj}_U\boldsymbol{v}-\boldsymbol{w}\rVert^2}_{\geq 0}
 \]</div>
-<p><strong>右边第一项与 <span class="arithmatex">\(\boldsymbol{w}\)</span> 无关，第二项非负</strong>。所以当且仅当
+<p><strong>右边第一项与 <span class="arithmatex">\(\boldsymbol{w}\)</span> 无关，第二项非负</strong>。故当且仅当
 <span class="arithmatex">\(\boldsymbol{w} = \operatorname{proj}_U\boldsymbol{v}\)</span> 时取到最小值。<span class="arithmatex">\(\blacksquare\)</span></p>
 <div class="admonition tip">
 <p class="admonition-title">这个证明的结构值得记住</p>
 <p>「<strong>把总误差拆成「垂直部分 + 水平部分」，垂直部分与选择无关，
-水平部分非负</strong>」——这是最小二乘、最优估计里反复出现的论证方式。</p>
-<p>它说明：<strong>最佳逼近 = 让误差落在正交补里</strong>。</p>
+水平部分非负</strong>」——这是最小二乘、最优估计中反复出现的论证。</p>
+<p>即：<strong>最佳逼近 = 让误差落在正交补里</strong>。</p>
 </div>
 <hr />
 <h2 id="_6">三、推广到多维：规范正交基下的投影<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>若 <span class="arithmatex">\(U\)</span> 有一组<strong>规范正交基</strong> <span class="arithmatex">\(\{\boldsymbol{e}_1,\dots,\boldsymbol{e}_m\}\)</span>，那么投影就是各方向投影之和：</p>
+<p>若 <span class="arithmatex">\(U\)</span> 有<strong>规范正交基</strong> <span class="arithmatex">\(\{\boldsymbol{e}_1,\dots,\boldsymbol{e}_m\}\)</span>，则投影即各方向投影之和：</p>
 <div class="arithmatex">\[
 \operatorname{proj}_U \boldsymbol{v} = \sum_{k=1}^m \langle \boldsymbol{v},\boldsymbol{e}_k\rangle\,\boldsymbol{e}_k
 \]</div>
@@ -12062,20 +12062,20 @@ V = U \oplus U^{\perp}
 <figcaption>图 2　投影到平面等于「沿两个正交基方向的投影之和」。这也是「傅里叶级数是投影」的几何原型：把整个基上的分量加起来</figcaption>
 </figure>
 
-<p><strong>为什么是「求和」而不是「解方程组」</strong>：</p>
-<p>一般基下求投影需要解正规方程（下面第五节）。但规范正交基下，
-各方向<strong>互不干扰</strong>——沿着 <span class="arithmatex">\(\boldsymbol{e}_1\)</span> 的坐标不受 <span class="arithmatex">\(\boldsymbol{e}_2\)</span> 影响，
-所以可以直接算内积再相加。</p>
+<p><strong>为什么是「求和」而非「解方程组」</strong>：</p>
+<p>一般基下求投影需解正规方程（见第五节）。但正交基下，
+各方向<strong>互不干扰</strong>——沿 <span class="arithmatex">\(\boldsymbol{e}_1\)</span> 的坐标不受 <span class="arithmatex">\(\boldsymbol{e}_2\)</span> 影响，
+故可直接算内积再相加。</p>
 <div class="admonition tip">
 <p class="admonition-title">这解释了正交性的价值</p>
-<p><strong>正交 = 分量之间不串扰。</strong></p>
-<p>工程上「正交码」「正交子载波」都是为了这个性质：
-接收端可以用一个内积就把某个分量单独取出来，不受其它分量影响。</p>
+<p><strong>正交 = 分量互不串扰。</strong></p>
+<p>工程上「正交码」「正交子载波」都为此：
+接收端用一个内积即可取出某分量，不受其它分量影响。</p>
 </div>
 <hr />
 <h2 id="-">四、格拉姆-施密特正交化：造出规范正交基<a class="headerlink" href="#-" title="Permanent link">&para;</a></h2>
 <p>给定线性无关组 <span class="arithmatex">\(\{\boldsymbol{v}_1,\dots,\boldsymbol{v}_m\}\)</span>，怎样得到规范正交组？</p>
-<p><strong>思路</strong>：逐个处理，每一步都<strong>减去已在前面方向上的投影</strong>，剩下的就是正交的部分。</p>
+<p><strong>思路</strong>：逐个处理，每步<strong>减去在前面方向上的投影</strong>，剩下即正交部分。</p>
 <p><strong>算法</strong>：</p>
 <div class="arithmatex">\[
 \boldsymbol{u}_1 = \boldsymbol{v}_1, \qquad \boldsymbol{e}_1 = \frac{\boldsymbol{u}_1}{\lVert\boldsymbol{u}_1\rVert}
@@ -12114,10 +12114,10 @@ V = U \oplus U^{\perp}
 
 <div class="admonition warning">
 <p class="admonition-title">为什么要求线性无关</p>
-<p>若 <span class="arithmatex">\(\boldsymbol{v}_k\)</span> 落在前面向量张成的子空间里，减去投影后剩零向量，
+<p>若 <span class="arithmatex">\(\boldsymbol{v}_k\)</span> 落在前面向量张成的子空间，减去投影后剩零向量，
 <strong>无法单位化</strong>（除零）。这正是线性相关的表现。</p>
-<p>所以在算法中若遇到 <span class="arithmatex">\(\boldsymbol{u}_k = \boldsymbol{0}\)</span>，说明原向量组线性相关，
-应当剔除该向量再继续。</p>
+<p>故算法中若遇到 <span class="arithmatex">\(\boldsymbol{u}_k = \boldsymbol{0}\)</span>，说明原向量组线性相关，
+应剔除该向量再继续。</p>
 </div>
 <h3 id="_7">一个手算例子<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
 <p>取 <span class="arithmatex">\(\boldsymbol{v}_1 = (1,1)\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2 = (2,0)\)</span>（<span class="arithmatex">\(\mathbb{R}^2\)</span> 标准内积）。</p>
@@ -12143,37 +12143,37 @@ V = U \oplus U^{\perp}
 \]</div>
 <hr />
 <h2 id="_8">五、最小二乘：投影最重要的应用<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
-<p>现在看这一页最实用的部分。</p>
+<p>现在看本节最实用的部分。</p>
 <h3 id="_9">问题：方程组无解时怎么办<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
-<p>设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(m\times n\)</span> 矩阵，<span class="arithmatex">\(\boldsymbol{b} \in \mathbb{R}^m\)</span>。
+<p>设 <span class="arithmatex">\(A\)</span> 为 <span class="arithmatex">\(m\times n\)</span> 矩阵，<span class="arithmatex">\(\boldsymbol{b} \in \mathbb{R}^m\)</span>。
 方程</p>
 <div class="arithmatex">\[
 A\boldsymbol{x} = \boldsymbol{b}
 \]</div>
-<p><strong>可能无解</strong>（当 <span class="arithmatex">\(\boldsymbol{b}\)</span> 不在 <span class="arithmatex">\(A\)</span> 的列空间里时）。</p>
+<p><strong>可能无解</strong>（当 <span class="arithmatex">\(\boldsymbol{b}\)</span> 不在 <span class="arithmatex">\(A\)</span> 列空间里时）。</p>
 <div class="admonition note">
 <p class="admonition-title">从几何角度看「无解」</p>
-<p>把 <span class="arithmatex">\(A\)</span> 的列看成 <span class="arithmatex">\(\mathbb{R}^m\)</span> 中的向量，它们的张成是<strong>列空间</strong> <span class="arithmatex">\(\operatorname{range}A\)</span>。</p>
+<p>把 <span class="arithmatex">\(A\)</span> 的列看成 <span class="arithmatex">\(\mathbb{R}^m\)</span> 中的向量，张成是<strong>列空间</strong> <span class="arithmatex">\(\operatorname{range}A\)</span>。</p>
 <p><span class="arithmatex">\(A\boldsymbol{x} = \boldsymbol{b}\)</span> 有解 <span class="arithmatex">\(\iff\)</span> <span class="arithmatex">\(\boldsymbol{b} \in \operatorname{range}A\)</span>。</p>
-<p>若 <span class="arithmatex">\(\boldsymbol{b}\)</span> 不在这个子空间里（比如 <span class="arithmatex">\(m &gt; n\)</span> 时通常如此），
-方程无解——这在几何上是「目标点不在可到达的平面上」。</p>
+<p>若 <span class="arithmatex">\(\boldsymbol{b}\)</span> 不在这个子空间里（<span class="arithmatex">\(m &gt; n\)</span> 时通常如此），
+方程无解——几何上即「目标点不在可到达平面」。</p>
 </div>
-<p><strong>但我们常常还是想要一个「最接近」的解</strong>。于是定义</p>
+<p><strong>但常常还是想要「最接近」的解</strong>。于是定义</p>
 <div class="arithmatex">\[
 \hat{\boldsymbol{x}} = \argmin_{\boldsymbol{x}} \lVert A\boldsymbol{x} - \boldsymbol{b}\rVert^2
 \]</div>
 <p>这就是<strong>最小二乘解</strong>。</p>
 <h3 id="_10">用投影求解<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
-<p><strong>关键观察</strong>：<span class="arithmatex">\(A\boldsymbol{x}\)</span> 的所有可能取值构成子空间 <span class="arithmatex">\(\operatorname{range}A\)</span>。
-所以问题就是：</p>
+<p><strong>关键观察</strong>：<span class="arithmatex">\(A\boldsymbol{x}\)</span> 的所有取值构成子空间 <span class="arithmatex">\(\operatorname{range}A\)</span>。
+所以问题即：</p>
 <blockquote>
 <p><strong>在 <span class="arithmatex">\(\operatorname{range}A\)</span> 里找一个与 <span class="arithmatex">\(\boldsymbol{b}\)</span> 最接近的点。</strong></p>
 </blockquote>
-<p>而这正是<strong>投影</strong>！由第二节的结论，最优解满足：</p>
+<p>而这正是<strong>投影</strong>！由第二节结论，最优解满足：</p>
 <div class="arithmatex">\[
 \boldsymbol{b} - A\hat{\boldsymbol{x}} \perp \operatorname{range}A
 \]</div>
-<p>「与列空间正交」等价于<strong>与 <span class="arithmatex">\(A\)</span> 的每一列都正交</strong>，写成矩阵形式就是</p>
+<p>「与列空间正交」等价于<strong>与 <span class="arithmatex">\(A\)</span> 每列都正交</strong>，写成矩阵形式即</p>
 <div class="arithmatex">\[
 A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 \]</div>
@@ -12181,7 +12181,7 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 <div class="arithmatex">\[
 \boxed{\ A^{\top}A\,\hat{\boldsymbol{x}} = A^{\top}\boldsymbol{b}\ }
 \]</div>
-<p>若 <span class="arithmatex">\(A^{\top}A\)</span> 可逆（即 <span class="arithmatex">\(A\)</span> 的列线性无关），则</p>
+<p>若 <span class="arithmatex">\(A^{\top}A\)</span> 可逆（即 <span class="arithmatex">\(A\)</span> 列线性无关），则</p>
 <div class="arithmatex">\[
 \hat{\boldsymbol{x}} = (A^{\top}A)^{-1}A^{\top}\boldsymbol{b}
 \]</div>
@@ -12214,12 +12214,12 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 
 <div class="admonition tip">
 <p class="admonition-title">为什么叫「最小二乘」</p>
-<p>「二乘」指平方。因为最小化的是<strong>误差平方和</strong>：</p>
+<p>「二乘」指平方：最小化的是<strong>误差平方和</strong>：</p>
 <div class="arithmatex">\[
 \lVert A\boldsymbol{x}-\boldsymbol{b}\rVert^2 = \sum_i (A\boldsymbol{x}-\boldsymbol{b})_i^2
 \]</div>
 <p>用平方而非绝对值，好处是<strong>可导</strong>，能求解析解（绝对值在零点不可导，
-所以 <span class="arithmatex">\(\ell_1\)</span> 问题没有闭式解——这正是上一节提到的对比）。</p>
+所以 <span class="arithmatex">\(\ell_1\)</span> 问题无闭式解——这正是上一节提到的对比）。</p>
 </div>
 <hr />
 <h2 id="_11">六、典型例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -12228,7 +12228,7 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 求 <span class="arithmatex">\(\boldsymbol{v}\)</span> 在 <span class="arithmatex">\(\operatorname{span}\{\boldsymbol{u}\}\)</span> 上的投影，以及最短距离。</p>
 <details class="note">
 <summary>思路</summary>
-<p>用一维投影公式 <span class="arithmatex">\(\frac{\langle v,u\rangle}{\|u\|^2}u\)</span>，误差范数就是最短距离。</p>
+<p>用一维投影公式 <span class="arithmatex">\(\frac{\langle v,u\rangle}{\|u\|^2}u\)</span>，误差范数即最短距离。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12239,7 +12239,7 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 <div class="arithmatex">\[
 \lVert\boldsymbol{u}\rVert^2 = 1^2+1^2+0^2 = 2
 \]</div>
-<p><strong>投影</strong>（系数 <span class="arithmatex">\(= 4/2 = 2\)</span>）：</p>
+<p><strong>投影</strong>（系数 <span class="arithmatex">\(4/2 = 2\)</span>）：</p>
 <div class="arithmatex">\[
 \operatorname{proj}_U \boldsymbol{v} = 2(1,1,0) = (2,2,0)
 \]</div>
@@ -12247,7 +12247,7 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 <div class="arithmatex">\[
 \boldsymbol{v} - \operatorname{proj}_U\boldsymbol{v} = (3,1,2) - (2,2,0) = (1,-1,2)
 \]</div>
-<p><strong>验证正交</strong>（这是投影的关键性质）：</p>
+<p><strong>验证正交</strong>（投影的关键性质）：</p>
 <div class="arithmatex">\[
 \langle (1,-1,2),\ (1,1,0)\rangle = 1\cdot1 + (-1)\cdot1 + 2\cdot0 = 0 \;\checkmark
 \]</div>
@@ -12255,28 +12255,28 @@ A^{\top}(\boldsymbol{b} - A\hat{\boldsymbol{x}}) = \boldsymbol{0}
 <div class="arithmatex">\[
 \lVert(1,-1,2)\rVert = \sqrt{1+1+4} = \sqrt{6}
 \]</div>
-<p><strong>结论</strong>：最佳逼近点是 <span class="arithmatex">\((2,2,0)\)</span>，最短距离 <span class="arithmatex">\(\sqrt6\)</span>。</p>
+<p><strong>结论</strong>：最佳逼近点 <span class="arithmatex">\((2,2,0)\)</span>，最短距离 <span class="arithmatex">\(\sqrt6\)</span>。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">实用技巧</p>
-<p><strong>永远验证误差与子空间正交</strong>。这既是投影的定义性质，也是快速自查手段——
-如果算出的误差不与基向量正交，说明计算有误。</p>
+<p><strong>永远验证误差与子空间正交</strong>。这既是投影的定义性质，也是自查手段——
+若误差不与基向量正交，说明算错了。</p>
 </div>
 <hr />
 <h3 id="2">例题 2：最小二乘拟合直线<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<p>用一条过原点的直线 <span class="arithmatex">\(y = kx\)</span> 拟合三个数据点 <span class="arithmatex">\((1,2)\)</span>、<span class="arithmatex">\((2,3)\)</span>、<span class="arithmatex">\((3,5)\)</span>。
+<p>用过原点的直线 <span class="arithmatex">\(y = kx\)</span> 拟合三个数据点 <span class="arithmatex">\((1,2)\)</span>、<span class="arithmatex">\((2,3)\)</span>、<span class="arithmatex">\((3,5)\)</span>。
 求最佳 <span class="arithmatex">\(k\)</span>。</p>
 <details class="note">
 <summary>思路</summary>
-<p>写成 <span class="arithmatex">\(A k = \boldsymbol{b}\)</span> 的形式，其中 <span class="arithmatex">\(A\)</span> 由 <span class="arithmatex">\(x\)</span> 坐标组成，然后解正规方程 <span class="arithmatex">\(A^\top A k = A^\top\boldsymbol{b}\)</span>。</p>
+<p>写成 <span class="arithmatex">\(A k = \boldsymbol{b}\)</span>，其中 <span class="arithmatex">\(A\)</span> 由 <span class="arithmatex">\(x\)</span> 坐标组成，再解正规方程 <span class="arithmatex">\(A^\top A k = A^\top\boldsymbol{b}\)</span>。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>建立方程</strong>（想找 <span class="arithmatex">\(k\)</span> 使 <span class="arithmatex">\(y_i \approx k x_i\)</span>）：</p>
+<p><strong>建立方程</strong>（找 <span class="arithmatex">\(k\)</span> 使 <span class="arithmatex">\(y_i \approx k x_i\)</span>）：</p>
 <div class="arithmatex">\[
 \begin{bmatrix} 1 \\ 2 \\ 3 \end{bmatrix} k = \begin{bmatrix} 2 \\ 3 \\ 5 \end{bmatrix}
 \]</div>
-<p>这个方程组<strong>无解</strong>（不存在一条过原点的直线同时穿过三个点）。</p>
+<p>这个方程组<strong>无解</strong>（不存在过原点的直线同时穿过三点）。</p>
 <p><strong>列正规方程</strong>：</p>
 <div class="arithmatex">\[
 A^\top A = \begin{bmatrix} 1 &amp; 2 &amp; 3\end{bmatrix}\begin{bmatrix} 1\\2\\3\end{bmatrix} = 1+4+9 = 14
@@ -12288,28 +12288,28 @@ A^\top\boldsymbol{b} = \begin{bmatrix} 1 &amp; 2 &amp; 3\end{bmatrix}\begin{bmat
 <div class="arithmatex">\[
 \hat{k} = \frac{23}{14} \approx 1.643
 \]</div>
-<p><strong>验证</strong>（误差与列空间正交，即与 <span class="arithmatex">\(A\)</span> 的列内积为零）：</p>
+<p><strong>验证</strong>（误差与列空间正交，即与 <span class="arithmatex">\(A\)</span> 列内积为零）：</p>
 <p>拟合值 <span class="arithmatex">\(\hat{y} = \frac{23}{14}(1,2,3) = (1.643,\ 3.286,\ 4.929)\)</span></p>
 <p>误差 <span class="arithmatex">\(\boldsymbol{r} = (2,3,5) - (1.643,3.286,4.929) = (0.357,\ -0.286,\ 0.071)\)</span></p>
 <div class="arithmatex">\[
 \langle \boldsymbol{r}, A\text{的列}\rangle = 0.357\cdot1 + (-0.286)\cdot2 + 0.071\cdot3 = 0.357 - 0.571 + 0.214 \approx 0 \;\checkmark
 \]</div>
-<p>（舍入误差范围内为 0，验证成立。）</p>
+<p>（舍入误差内为 0，验证成立。）</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">常见误解：为什么不是取平均斜率</p>
-<p>若不假思索，可能算三个点的斜率 <span class="arithmatex">\(2, 1.5, 1.667\)</span> 再取平均得 <span class="arithmatex">\(1.722\)</span>。</p>
+<p>若不加思索，可能算三点斜率 <span class="arithmatex">\(2, 1.5, 1.667\)</span> 再取平均得 <span class="arithmatex">\(1.722\)</span>。</p>
 <p><strong>这是错的</strong>。最小二乘最小化的是<strong>竖直方向</strong>的误差平方和
 <span class="arithmatex">\(\sum(y_i - kx_i)^2\)</span>，不是斜率误差。</p>
-<p>直观看：<span class="arithmatex">\(x=3\)</span> 的点误差权重更大（因为 <span class="arithmatex">\(kx\)</span> 在那里变化更快），
-所以最小二乘解 <span class="arithmatex">\(\frac{23}{14} \approx 1.643\)</span> 会比简单平均<strong>更靠近小斜率的解</strong>。</p>
+<p>直观看：<span class="arithmatex">\(x=3\)</span> 的点误差权重更大（因 <span class="arithmatex">\(kx\)</span> 在那里变化更快），
+故最小二乘解 <span class="arithmatex">\(\frac{23}{14} \approx 1.643\)</span> 比简单平均<strong>更靠近小斜率的解</strong>。</p>
 </div>
 <hr />
 <h3 id="3-">例题 3：格拉姆-施密特正交化<a class="headerlink" href="#3-" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(\boldsymbol{v}_1 = (1,1,0)\)</span>，<span class="arithmatex">\(\boldsymbol{v}_2 = (1,0,1)\)</span> 化为规范正交组。</p>
 <details class="note">
 <summary>思路</summary>
-<p>先单位化 <span class="arithmatex">\(\boldsymbol{v}_1\)</span>，再把 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 减去它在 <span class="arithmatex">\(\boldsymbol{e}_1\)</span> 上的投影，最后单位化。</p>
+<p>先单位化 <span class="arithmatex">\(\boldsymbol{v}_1\)</span>，再把 <span class="arithmatex">\(\boldsymbol{v}_2\)</span> 减去在 <span class="arithmatex">\(\boldsymbol{e}_1\)</span> 上的投影，最后单位化。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12353,7 +12353,7 @@ A^\top\boldsymbol{b} = \begin{bmatrix} 1 &amp; 2 &amp; 3\end{bmatrix}\begin{bmat
 </details>
 <hr />
 <h3 id="4">例题 4：证明正交补的维数关系<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>设 <span class="arithmatex">\(U\)</span> 是 <span class="arithmatex">\(n\)</span> 维内积空间 <span class="arithmatex">\(V\)</span> 的 <span class="arithmatex">\(m\)</span> 维子空间。证明</p>
+<p>设 <span class="arithmatex">\(U\)</span> 为 <span class="arithmatex">\(n\)</span> 维内积空间 <span class="arithmatex">\(V\)</span> 的 <span class="arithmatex">\(m\)</span> 维子空间。证明</p>
 <div class="arithmatex">\[
 \dim U^{\perp} = n - m
 \]</div>
@@ -12369,10 +12369,10 @@ A^\top\boldsymbol{b} = \begin{bmatrix} 1 &amp; 2 &amp; 3\end{bmatrix}\begin{bmat
 <div class="arithmatex">\[
 \langle \boldsymbol{w},\boldsymbol{w}\rangle = 0
 \]</div>
-<p>由内积正定性公理，<span class="arithmatex">\(\boldsymbol{w} = \boldsymbol{0}\)</span>。所以交只有零向量，
+<p>由内积正定性公理，<span class="arithmatex">\(\boldsymbol{w} = \boldsymbol{0}\)</span>。故交只有零向量，
 和 <span class="arithmatex">\(U + U^\perp\)</span> 是<strong>直和</strong>。</p>
 <p><strong>第二步：证明 <span class="arithmatex">\(U + U^\perp = V\)</span>。</strong></p>
-<p>任取 <span class="arithmatex">\(\boldsymbol{v} \in V\)</span>。取 <span class="arithmatex">\(U\)</span> 的一组规范正交基 <span class="arithmatex">\(\{\boldsymbol{e}_1,\dots,\boldsymbol{e}_m\}\)</span>（可由格拉姆-施密特得到），
+<p>任取 <span class="arithmatex">\(\boldsymbol{v} \in V\)</span>。取 <span class="arithmatex">\(U\)</span> 的一组规范正交基 <span class="arithmatex">\(\{\boldsymbol{e}_1,\dots,\boldsymbol{e}_m\}\)</span>（由格拉姆-施密特），
 令</p>
 <div class="arithmatex">\[
 \boldsymbol{p} = \sum_{k=1}^m \langle\boldsymbol{v},\boldsymbol{e}_k\rangle\boldsymbol{e}_k \in U,
@@ -12384,11 +12384,11 @@ A^\top\boldsymbol{b} = \begin{bmatrix} 1 &amp; 2 &amp; 3\end{bmatrix}\begin{bmat
 = \langle \boldsymbol{v},\boldsymbol{e}_j\rangle - \sum_{k=1}^m\langle\boldsymbol{v},\boldsymbol{e}_k\rangle\langle\boldsymbol{e}_k,\boldsymbol{e}_j\rangle
 = \langle \boldsymbol{v},\boldsymbol{e}_j\rangle - \langle \boldsymbol{v},\boldsymbol{e}_j\rangle = 0
 \]</div>
-<p>所以 <span class="arithmatex">\(\boldsymbol{q}\)</span> 与 <span class="arithmatex">\(U\)</span> 的基中每个向量正交，因而 <span class="arithmatex">\(\boldsymbol{q} \in U^\perp\)</span>。</p>
-<p>于是 <span class="arithmatex">\(\boldsymbol{v} = \boldsymbol{p} + \boldsymbol{q}\)</span> 具有「<span class="arithmatex">\(U\)</span> 中元素 + <span class="arithmatex">\(U^\perp\)</span> 中元素」的形式，
+<p>故 <span class="arithmatex">\(\boldsymbol{q}\)</span> 与 <span class="arithmatex">\(U\)</span> 的基中每个向量正交，因而 <span class="arithmatex">\(\boldsymbol{q} \in U^\perp\)</span>。</p>
+<p>于是 <span class="arithmatex">\(\boldsymbol{v} = \boldsymbol{p} + \boldsymbol{q}\)</span> 具有「<span class="arithmatex">\(U\)</span> 中元素 + <span class="arithmatex">\(U^\perp\)</span> 中元素」形式，
 故 <span class="arithmatex">\(V \subseteq U + U^\perp\)</span>；反向包含显然。得 <span class="arithmatex">\(V = U + U^\perp\)</span>。</p>
 <p><strong>第三步：用直和维数公式。</strong></p>
-<p>综合两步，<span class="arithmatex">\(V = U \oplus U^\perp\)</span>，所以</p>
+<p>综合两步，<span class="arithmatex">\(V = U \oplus U^\perp\)</span>，故</p>
 <div class="arithmatex">\[
 n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 \]</div>
@@ -12399,7 +12399,7 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 </details>
 <div class="admonition tip">
 <p class="admonition-title">这个结果的用途</p>
-<p>它给出了「自由度」的计数方式。</p>
+<p>它给出「自由度」的计数方式。</p>
 <table>
 <thead>
 <tr>
@@ -12414,11 +12414,11 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 </tr>
 <tr>
 <td>PCA 降维</td>
-<td>从 <span class="arithmatex">\(n\)</span> 维投影到 <span class="arithmatex">\(m\)</span> 维，被丢弃的是 <span class="arithmatex">\(n-m\)</span> 维（正交补方向）</td>
+<td>从 <span class="arithmatex">\(n\)</span> 维投影到 <span class="arithmatex">\(m\)</span> 维，丢弃的是 <span class="arithmatex">\(n-m\)</span> 维（正交补方向）</td>
 </tr>
 <tr>
 <td>约束优化</td>
-<td>每个等式约束减少一个自由度，正是这个公式</td>
+<td>每个等式约束减少一个自由度，正是此公式</td>
 </tr>
 </tbody>
 </table>
@@ -12428,30 +12428,30 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 <h3 id="_13">机器人学 · 冗余逆运动学与约束<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <ul>
 <li>冗余机械臂（关节数 &gt; 任务维数）的<strong>最小范数解</strong>由伪逆 <span class="arithmatex">\(J^+ = J^\top(JJ^\top)^{-1}\)</span> 给出——
-  它正是「在满足任务约束的所有解中取范数最小者」，本质是投影</li>
+  它即「满足任务约束的所有解中取范数最小者」，本质是投影</li>
 <li><strong>零空间投影</strong>：<span class="arithmatex">\(I - J^+J\)</span> 把任意关节速度投影到零空间，
-  实现在<strong>不影响末端</strong>的前提下调整姿态（避关节极限、避障）</li>
+  在不<strong>影响末端</strong>的前提下调整姿态（避关节极限、避障）</li>
 </ul>
 <h3 id="pca">模式识别 · 最小二乘与 PCA<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>线性回归</strong>的解析解 <span class="arithmatex">\(\hat{\boldsymbol{w}} = (X^\top X)^{-1}X^\top\boldsymbol{y}\)</span> 就是正规方程</li>
-<li><strong>PCA</strong>：把数据中心化后投影到主特征向量张成的子空间，
-  被丢弃的部分正是<strong>正交补方向</strong>上的分量</li>
+<li><strong>线性回归</strong>的解析解 <span class="arithmatex">\(\hat{\boldsymbol{w}} = (X^\top X)^{-1}X^\top\boldsymbol{y}\)</span> 即正规方程</li>
+<li><strong>PCA</strong>：数据中心化后投影到主特征向量张成的子空间，
+  被丢弃的部分正是<strong>正交补方向</strong>的分量</li>
 <li><strong>岭回归</strong>：在正规方程上加 <span class="arithmatex">\(\lambda I\)</span>，即 <span class="arithmatex">\((\lambda I + X^\top X)^{-1}X^\top\boldsymbol{y}\)</span>，
-  用来处理 <span class="arithmatex">\(X^\top X\)</span> 接近奇异的情形</li>
+  用于处理 <span class="arithmatex">\(X^\top X\)</span> 接近奇异的情形</li>
 </ul>
 <h3 id="_14">现代数字信号处理 · 投影与子空间方法<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>投影定理</strong>：信号在带限子空间上的最佳逼近就是投影</li>
+<li><strong>投影定理</strong>：信号在带限子空间上的最佳逼近即投影</li>
 <li><strong>子空间方法（MUSIC 等）</strong>把观测空间分成<strong>信号子空间</strong>与其<strong>正交补</strong>（噪声子空间），
-  通过正交性来估计频率/到达角</li>
-<li><strong>自适应滤波（LMS、RLS）</strong>：每一步都在做「误差与输入正交」的更新</li>
+  通过正交性估计频率/到达角</li>
+<li><strong>自适应滤波（LMS、RLS）</strong>：每步都在做「误差与输入正交」的更新</li>
 </ul>
 <h3 id="_15">智能传感与信息处理 · 卡尔曼滤波<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
 <ul>
 <li>量测更新可写成投影的代数形式：
   <span class="arithmatex">\(\hat{\boldsymbol{x}}_{k|k} = \hat{\boldsymbol{x}}_{k|k-1} + K(\boldsymbol{y} - H\hat{\boldsymbol{x}}_{k|k-1})\)</span></li>
-<li><strong>新息</strong> <span class="arithmatex">\(\boldsymbol{y} - H\hat{\boldsymbol{x}}\)</span> 必须与已有估计正交（新息白化条件），
+<li><strong>新息</strong> <span class="arithmatex">\(\boldsymbol{y} - H\hat{\boldsymbol{x}}\)</span> 须与已有估计正交（新息白化条件），
   这正是「误差垂直」在随机情形下的推广</li>
 </ul>
 <hr />
@@ -12489,11 +12489,11 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 \lVert\boldsymbol{u}+\boldsymbol{v}\rVert^2 = \lVert\boldsymbol{u}\rVert^2 + 2\langle\boldsymbol{u},\boldsymbol{v}\rangle + \lVert\boldsymbol{v}\rVert^2
 \]</div>
 <p>若 <span class="arithmatex">\(\boldsymbol{u}\perp\boldsymbol{v}\)</span> 则 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>，得等式</p>
-<p><strong>反向也成立</strong>。因为上式右侧与 <span class="arithmatex">\(\lVert\boldsymbol{u}\rVert^2+\lVert\boldsymbol{v}\rVert^2\)</span> 相等，
+<p><strong>反向也成立</strong>。因上式右侧与 <span class="arithmatex">\(\lVert\boldsymbol{u}\rVert^2+\lVert\boldsymbol{v}\rVert^2\)</span> 相等，
 就必须有 <span class="arithmatex">\(2\langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>，即 <span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>，
-也就是 <span class="arithmatex">\(\boldsymbol{u}\perp\boldsymbol{v}\)</span></p>
-<p>所以<strong>勾股定理是正交的等价刻画</strong>（在实内积空间里）。</p>
-<p><strong>推论</strong>：可以用勾股定理来检验正交，不必直接算内积。</p>
+即 <span class="arithmatex">\(\boldsymbol{u}\perp\boldsymbol{v}\)</span></p>
+<p>故<strong>勾股定理是正交的等价刻画</strong>（实内积空间里）。</p>
+<p><strong>推论</strong>：可用勾股定理检验正交，不必直接算内积。</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 设 <span class="arithmatex">\(A\)</span> 是 <span class="arithmatex">\(3\times2\)</span> 矩阵，<span class="arithmatex">\(\boldsymbol{b}\in\mathbb{R}^3\)</span>。若 <span class="arithmatex">\(A^\top A\)</span> 可逆，最小二乘解的几何意义是什么？</p>
@@ -12504,24 +12504,24 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 <details class="success">
 <summary>解答</summary>
 <p><span class="arithmatex">\(A\boldsymbol{x}\)</span> 当 <span class="arithmatex">\(\boldsymbol{x}\)</span> 取遍 <span class="arithmatex">\(\mathbb{R}^2\)</span> 时，取到的是 <span class="arithmatex">\(\mathbb{R}^3\)</span> 中由
-<span class="arithmatex">\(A\)</span> 的两列张成的<strong>二维子空间</strong>（一个过原点的平面）。</p>
-<p>最小二乘解 <span class="arithmatex">\(\hat{\boldsymbol{x}}\)</span> 使 <span class="arithmatex">\(A\hat{\boldsymbol{x}}\)</span> 成为 <span class="arithmatex">\(\boldsymbol{b}\)</span> 在这个平面上的<strong>正交投影</strong>。</p>
-<p><strong>几个要点</strong>：</p>
+<span class="arithmatex">\(A\)</span> 的两列张成的<strong>二维子空间</strong>（过原点的平面）。</p>
+<p>最小二乘解 <span class="arithmatex">\(\hat{\boldsymbol{x}}\)</span> 使 <span class="arithmatex">\(A\hat{\boldsymbol{x}}\)</span> 成为 <span class="arithmatex">\(\boldsymbol{b}\)</span> 在此平面上的<strong>正交投影</strong>。</p>
+<p><strong>要点</strong>：</p>
 <ul>
-<li><span class="arithmatex">\(\boldsymbol{b}\)</span> 一般不在平面内（三维里二维子空间装不下所有点），所以原方程无解</li>
+<li><span class="arithmatex">\(\boldsymbol{b}\)</span> 一般不在平面内（三维中二维子空间装不下所有点），故原方程无解</li>
 <li>误差向量 <span class="arithmatex">\(\boldsymbol{b} - A\hat{\boldsymbol{x}}\)</span> 与整个列空间正交，
-  也就是与 <span class="arithmatex">\(A\)</span> 的两列都正交：<span class="arithmatex">\(A^\top(\boldsymbol{b}-A\hat{\boldsymbol{x}}) = 0\)</span></li>
-<li>误差<strong>落在正交补里</strong>，而正交补是 <span class="arithmatex">\(3-2=1\)</span> 维的（一条直线）</li>
-<li>由于平面过原点，投影不会强制过任何非零点——<strong>所以最小二乘拟合一般不含截距项</strong>，
+  即与 <span class="arithmatex">\(A\)</span> 的两列都正交：<span class="arithmatex">\(A^\top(\boldsymbol{b}-A\hat{\boldsymbol{x}}) = 0\)</span></li>
+<li>误差<strong>落在正交补里</strong>，而正交补是 <span class="arithmatex">\(3-2=1\)</span> 维（一条直线）</li>
+<li>因平面过原点，投影不会强制过任何非零点——<strong>所以最小二乘拟合一般不含截距项</strong>，
   要含截距需在 <span class="arithmatex">\(A\)</span> 里加一列全 1</li>
 </ul>
 <p>这正是「拟合直线时要加常数项 1」的几何解释。</p>
 </details>
 <hr />
-<p><strong>Q4</strong> 判断：<span class="arithmatex">\(U^\perp\)</span> 中的向量与 <span class="arithmatex">\(U\)</span> 中每个向量都正交，那么 <span class="arithmatex">\(U\)</span> 中向量是否也与 <span class="arithmatex">\(U^\perp\)</span> 中每个向量正交？</p>
+<p><strong>Q4</strong> 判断：<span class="arithmatex">\(U^\perp\)</span> 中向量与 <span class="arithmatex">\(U\)</span> 中每个向量都正交，那么 <span class="arithmatex">\(U\)</span> 中向量是否也与 <span class="arithmatex">\(U^\perp\)</span> 中每个向量正交？</p>
 <details class="note">
 <summary>提示</summary>
-<p>看内积的定义里是否对称。</p>
+<p>看内积定义里是否对称。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12529,10 +12529,10 @@ n = \dim V = \dim U + \dim U^\perp = m + \dim U^\perp
 <p>内积满足共轭对称：<span class="arithmatex">\(\langle\boldsymbol{u},\boldsymbol{v}\rangle = \overline{\langle\boldsymbol{v},\boldsymbol{u}\rangle}\)</span>。
 所以 <span class="arithmatex">\(\langle\boldsymbol{v},\boldsymbol{u}\rangle = 0 \iff \langle\boldsymbol{u},\boldsymbol{v}\rangle = 0\)</span>，
 正交关系是<strong>相互的</strong>。</p>
-<p>因此 <span class="arithmatex">\(U^\perp\)</span> 与 <span class="arithmatex">\(U\)</span> 的关系是对称的，也可以写 <span class="arithmatex">\((U^\perp)^\perp \supseteq U\)</span>。</p>
-<p><strong>补充</strong>：在有限维空间里，进一步有 <span class="arithmatex">\((U^\perp)^\perp = U\)</span>（因为两者的维数互补且包含关系成立）。
-但在无穷维空间里这个等式<strong>一般不成立</strong>（只保证 <span class="arithmatex">\(\supseteq\)</span>），
-这是泛函分析里的一个经典差别。</p>
+<p>因此 <span class="arithmatex">\(U^\perp\)</span> 与 <span class="arithmatex">\(U\)</span> 的关系对称，也可写 <span class="arithmatex">\((U^\perp)^\perp \supseteq U\)</span>。</p>
+<p><strong>补充</strong>：有限维空间里进一步有 <span class="arithmatex">\((U^\perp)^\perp = U\)</span>（因两者维数互补且包含关系成立）。
+但无穷维空间里这等式<strong>一般不成立</strong>（只保证 <span class="arithmatex">\(\supseteq\)</span>），
+这是泛函分析的经典差别。</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../inner-product/">范数与内积</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../eigenvalue/">特征值与特征向量</a></span></div></nav>
 

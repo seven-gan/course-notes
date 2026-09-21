@@ -12217,8 +12217,6 @@ y'' + p(x)\,y' + q(x)\,y = f(x)
 <div class="arithmatex">\[
 = C_1\underbrace{(y_1'' + py_1' + qy_1)}_{=0} + C_2\underbrace{(y_2'' + py_2' + qy_2)}_{=0} = 0
 \]</div>
-<p><strong>关键</strong>：这一步之所以能「提出来」，正是因为方程对 <span class="arithmatex">\(y\)</span> 是线性的。
-非线性方程不具有这个性质——这也是线性理论能建立的原因。</p>
 <p><strong>非齐次解的结构</strong>：若 <span class="arithmatex">\(y_p\)</span> 是非齐次方程的一个<strong>特解</strong>，
 <span class="arithmatex">\(y_h\)</span> 是齐次方程的通解，则非齐次方程的<strong>通解</strong>为</p>
 <div class="arithmatex">\[
@@ -12229,9 +12227,6 @@ y = y_h + y_p
 u'' + pu' + qu = (y'' + py' + qy) - (y_p'' + py_p' + qy_p) = f(x) - f(x) = 0
 \]</div>
 <p>所以 <span class="arithmatex">\(u\)</span> 是齐次解，即 <span class="arithmatex">\(u = y_h\)</span></p>
-<p><strong>工程含义</strong>：这条定理把问题<strong>拆成两半</strong>——
-<span class="arithmatex">\(y_h\)</span> 只看系统本身（<span class="arithmatex">\(p\)</span>、<span class="arithmatex">\(q\)</span>），<span class="arithmatex">\(y_p\)</span> 只看外部输入（<span class="arithmatex">\(f\)</span>）。
-调参改善 <span class="arithmatex">\(y_h\)</span>，改输入改善 <span class="arithmatex">\(y_p\)</span>，两者互不干扰。</p>
 <h3 id="_5">线性相关与朗斯基行列式<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p>要把「两个解」写成通解，这两个解必须<strong>线性无关</strong>。
 判定工具是<strong>朗斯基行列式</strong>（Wronskian）：</p>
@@ -12270,9 +12265,6 @@ W(x) = W(x_0)\exp\left(-\int_{x_0}^{x} p(t)\,\mathrm{d}t\right)
 \]</div>
 <p>指数因子永不为零，所以 <span class="arithmatex">\(W\)</span> <strong>要么恒为零，要么处处不为零</strong>。
 判断线性无关只需在<strong>任意一点</strong>算一次。</p>
-<p><strong>工程含义</strong>：<span class="arithmatex">\(W \neq 0\)</span> 保证「两个初值条件可以唯一确定两个常数」。
-如果 <span class="arithmatex">\(W = 0\)</span>，就会出现「两个不同的初值给出同一组常数」或「无解」的尴尬，
-系统在数学上是<strong>不可辨识</strong>的。</p>
 <h3 id="_6">为什么二阶需要两个条件<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13084,6 +13076,32 @@ r = -\zeta\omega_n \pm \omega_n\sqrt{\zeta^{2} - 1}
 </tr>
 </tbody>
 </table>
+<p>三条典型曲线放在一起，<span class="arithmatex">\(\zeta\)</span> 的作用一目了然：</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="阻尼比对二阶系统响应的影响">
+<defs>
+<marker id="ode3-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<!-- 坐标轴 -->
+<line class="ax" x1="40" y1="175" x2="408" y2="175" marker-end="url(#ode3-ah1)"/>
+<line class="ax" x1="40" y1="175" x2="40" y2="30" marker-end="url(#ode3-ah1)"/>
+<text class="lbl-s" x="394" y="167">t</text>
+<text class="lbl-s" x="18" y="36">响应</text>
+<!-- 三条响应曲线 -->
+<path class="a2" d="M40,52 L55,77.3 L70,120.6 L85,168.6 L100,209.3 L115,234.8 L130,241.8 L145,232.2 L160,211.1 L175,185.5 L190,162.2 L205,146 L220,139.4 L235,142.3 L250,152.1 L265,165.5 L280,178.6 L310,193.5 L340,189 L370,175 L400,165.6"/>
+<path class="a3" d="M40,52 L55,63.1 L70,84.5 L85,106.4 L100,125.1 L115,139.6 L130,150.5 L145,158.3 L160,163.7 L190,170 L220,172.9 L280,174.6 L340,174.9 L400,175"/>
+<path class="a4" d="M40,52 L55,60.6 L70,73.8 L85,86.3 L100,97.5 L115,107.2 L130,115.7 L145,123.1 L160,129.6 L190,140.3 L220,148.5 L250,154.7 L280,159.5 L310,163.1 L340,165.9 L370,168 L400,169.7"/>
+<!-- 图例 -->
+<line class="a2" x1="252" y1="42" x2="272" y2="42"/>
+<text class="lbl-s" x="278" y="46">ζ = 0.2 欠阻尼</text>
+<line class="a3" x1="252" y1="58" x2="272" y2="58"/>
+<text class="lbl-s" x="278" y="62">ζ = 1 临界阻尼</text>
+<line class="a4" x1="252" y1="74" x2="272" y2="74"/>
+<text class="lbl-s" x="278" y="78">ζ = 2 过阻尼</text>
+</svg>
+<figcaption>图 2　阻尼比 ζ 对二阶系统响应的影响。三条曲线初值与初速度相同，ζ 越大振荡越少、回归越慢。ζ = 0.2 时剧烈振荡（超调约 73%）；ζ = 1（临界阻尼）最快且无过冲，是「临界」二字的由来；ζ = 2（过阻尼）缓慢单调回归。工程上常取 ζ ≈ 0.707，兼顾快速与低超调</figcaption>
+</figure>
+
 <p><strong>关键工程指标</strong>（欠阻尼情形的标准公式）：</p>
 <div class="arithmatex">\[
 \text{超调量 } M_p = \exp\left(-\frac{\pi\zeta}{\sqrt{1-\zeta^{2}}}\right), \qquad

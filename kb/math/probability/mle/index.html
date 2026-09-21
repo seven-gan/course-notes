@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="前面几页都假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——而且它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，其中 θ 是未知参数。">
+    <meta name="description" content="前面几页假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，θ 是未知参数。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="最大似然估计">
   
-  <meta property="og:description" content="前面几页都假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——而且它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，其中 θ 是未知参数。">
+  <meta property="og:description" content="前面几页假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，θ 是未知参数。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/math/probability/mle/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="最大似然估计">
   
-  <meta name="twitter:description" content="前面几页都假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——而且它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，其中 θ 是未知参数。">
+  <meta name="twitter:description" content="前面几页假设「分布已知」。这一页回答：给定数据，怎么反过来求分布的参数？最常用的答案是最大似然估计（MLE）——它与你熟悉的交叉熵损失是同一件事。设定：数据 x = (x_1,,x_n) 独立同分布，来自分布 f(x;θ)，θ 是未知参数。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11861,11 +11861,11 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../../../courses/pattern-recognition/">模式识别</a><a class="kb-course-tag" href="../../../courses/intelligent-sensing/">智能传感与信息处理</a><a class="kb-course-tag" href="../../../courses/mdsp/">现代数字信号处理</a><a class="kb-course-tag" href="../../../courses/ocean-acoustics/">海洋声学</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Mathematics for Machine Learning（§8.3 Parameter Estimation）</code><code>现有讲义「第 4 讲 概率论」D.6 节</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>《概率论与数理统计》参数估计章节（术语通行一致）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">最大似然估计<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>前面几页都假设「分布已知」。这一页回答：</p>
+<p>前面几页假设「分布已知」。这一页回答：</p>
 <blockquote>
 <p><strong>给定数据，怎么反过来求分布的参数？</strong></p>
 </blockquote>
-<p>最常用的答案是<strong>最大似然估计（MLE）</strong>——而且它与你熟悉的
+<p>最常用的答案是<strong>最大似然估计（MLE）</strong>——它与你熟悉的
 <strong>交叉熵损失</strong>是同一件事。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么这一页对机器学习特别重要</p>
@@ -11891,17 +11891,17 @@
 </tr>
 </tbody>
 </table>
-<p>理解了 MLE，损失函数就都有来源了。</p>
+<p>理解 MLE，损失函数就有来源了。</p>
 </div>
 <hr />
 <h2 id="_2">一、似然函数<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p><strong>设定</strong>：数据 <span class="arithmatex">\(\boldsymbol{x} = (x_1,\dots,x_n)\)</span> 独立同分布，
-来自分布 <span class="arithmatex">\(f(x;\theta)\)</span>，其中 <span class="arithmatex">\(\theta\)</span> 是<strong>未知参数</strong>。</p>
+来自分布 <span class="arithmatex">\(f(x;\theta)\)</span>，<span class="arithmatex">\(\theta\)</span> 是<strong>未知参数</strong>。</p>
 <p><strong>似然函数</strong>：</p>
 <div class="arithmatex">\[
 L(\theta) = \prod_{i=1}^{n}f(x_i;\theta)
 \]</div>
-<p><strong>关键的概念转变</strong>：</p>
+<p><strong>关键概念转变</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11932,15 +11932,15 @@ L(\theta) = \prod_{i=1}^{n}f(x_i;\theta)
 \]</div>
 <div class="admonition tip">
 <p class="admonition-title">似然的直观含义</p>
-<p>「哪个参数值最可能产生我看到的这组数据？」</p>
-<p>举例：抛硬币 10 次得到 7 次正面。</p>
+<p>「哪个参数值最可能产生这组数据？」</p>
+<p>例：抛硬币 10 次得到 7 次正面。</p>
 <ul>
-<li>若 <span class="arithmatex">\(\theta = 0.7\)</span> → 出现这个结果的概率较高</li>
-<li>若 <span class="arithmatex">\(\theta = 0.1\)</span> → 出现这个结果的概率极低</li>
-<li>所以 <span class="arithmatex">\(\theta = 0.7\)</span> 更「像」真值</li>
+<li>若 <span class="arithmatex">\(\theta = 0.7\)</span> → 出现该结果的概率较高</li>
+<li>若 <span class="arithmatex">\(\theta = 0.1\)</span> → 出现该结果的概率极低</li>
+<li>故 <span class="arithmatex">\(\theta = 0.7\)</span> 更「像」真值</li>
 </ul>
-<p>MLE 就是在所有可能的 <span class="arithmatex">\(\theta\)</span> 中挑「最像」的那个。</p>
-<p>注意因果方向是<strong>反的</strong>：</p>
+<p>MLE 就是在所有可能 <span class="arithmatex">\(\theta\)</span> 中挑「最像」的。</p>
+<p>注意因果方向<strong>反了</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11988,10 +11988,10 @@ L(\theta) = \prod_{i=1}^{n}f(x_i;\theta)
 </tbody>
 </table>
 <p><strong>下溢问题很实际</strong>：若每个 <span class="arithmatex">\(f \approx 0.01\)</span>，<span class="arithmatex">\(n = 100\)</span> 时
-<span class="arithmatex">\(L \approx 10^{-200}\)</span> ——已超出浮点数下限。取对数后变成 <span class="arithmatex">\(-460\)</span>，完全安全。</p>
+<span class="arithmatex">\(L \approx 10^{-200}\)</span>，已超浮点数下限。取对数后为 <span class="arithmatex">\(-460\)</span>，完全安全。</p>
 <hr />
 <h2 id="_4">二、求解步骤<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p><strong>标准流程</strong>：</p>
+<p><strong>流程</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12052,8 +12052,8 @@ L(\theta) = \prod_{i=1}^{n}f(x_i;\theta)
 </tr>
 </tbody>
 </table>
-<p><strong>边界情形很常见</strong>：例如伯努利参数的 MLE 可能是 <span class="arithmatex">\(\hat p = 0\)</span> 或 <span class="arithmatex">\(1\)</span>
-（当数据全为失败或全为成功）——这是<strong>边界解</strong>，不是驻点。</p>
+<p><strong>边界情形很常见</strong>：伯努利参数的 MLE 可能是 <span class="arithmatex">\(\hat p = 0\)</span> 或 <span class="arithmatex">\(1\)</span>
+（当数据全失败或全成功）——这是<strong>边界解</strong>，不是驻点。</p>
 </div>
 <hr />
 <h2 id="_5">三、三个经典结果<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -12063,7 +12063,7 @@ L(\theta) = \prod_{i=1}^{n}f(x_i;\theta)
 <div class="arithmatex">\[
 \hat p_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^{n}x_i = \frac{\text{成功次数}}{n}
 \]</div>
-<p><strong>就是「频率」</strong> —— 这符合直觉。</p>
+<p><strong>就是「频率」</strong>——符合直觉。</p>
 <h3 id="2">结果 2：高斯 → 样本均值与方差<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>若 <span class="arithmatex">\(x_i\sim N(\mu,\sigma^2)\)</span>，则</p>
 <div class="arithmatex">\[
@@ -12082,11 +12082,11 @@ E\left[\hat\sigma^2_{\text{MLE}}\right] = \frac{n-1}{n}\sigma^2 &lt; \sigma^2
 <div class="arithmatex">\[
 s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 \]</div>
-<p><strong>为什么除以 <span class="arithmatex">\(n-1\)</span></strong>：因为 <span class="arithmatex">\(\bar x\)</span> 本身是从数据估计的，
-消耗了「一个自由度」。用 <span class="arithmatex">\(\bar x\)</span> 代替真值 <span class="arithmatex">\(\mu\)</span> 会让
+<p><strong>为什么除以 <span class="arithmatex">\(n-1\)</span></strong>：<span class="arithmatex">\(\bar x\)</span> 本身是从数据估计的，
+消耗「一个自由度」。用 <span class="arithmatex">\(\bar x\)</span> 代替真值 <span class="arithmatex">\(\mu\)</span> 会让
 <span class="arithmatex">\(\sum(x_i-\bar x)^2\)</span> 偏小。</p>
 <p><strong>直观理解</strong>：用样本均值代替真均值时，
-数据「更靠近」样本均值（它就是为此而选的），所以平方和偏小。</p>
+数据「更靠近」样本均值（它为此而选），所以平方和偏小。</p>
 <table>
 <thead>
 <tr>
@@ -12109,8 +12109,8 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 </tr>
 </tbody>
 </table>
-<p><strong>实践建议</strong>：小样本时用 <span class="arithmatex">\(n-1\)</span>；大样本时区别可忽略。
-（但软件库的行为要确认——有些默认 <span class="arithmatex">\(n\)</span>。）</p>
+<p><strong>实践建议</strong>：小样本用 <span class="arithmatex">\(n-1\)</span>；大样本区别可忽略。
+（但软件库行为要确认——有些默认 <span class="arithmatex">\(n\)</span>。）</p>
 </div>
 <h3 id="3">结果 3：多元高斯 → 样本均值与协方差<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
@@ -12118,14 +12118,14 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 \qquad
 \hat\Sigma = \frac1n\sum_i(\boldsymbol{x}_i-\hat{\boldsymbol{\mu}})(\boldsymbol{x}_i-\hat{\boldsymbol{\mu}})^\top
 \]</div>
-<p>这就是模式识别中「用数据估计高斯模型」的做法。</p>
+<p>这是模式识别中「用数据估计高斯模型」的做法。</p>
 <hr />
 <h2 id="mle">四、MLE = 最小化负对数似然<a class="headerlink" href="#mle" title="Permanent link">&para;</a></h2>
 <p>这是与机器学习对接的关键。</p>
 <div class="arithmatex">\[
 \hat\theta_{\text{MLE}} = \arg\max_\theta\ell(\theta) = \arg\min_\theta\big[-\ell(\theta)\big]
 \]</div>
-<p><strong>所以「最大化似然」等价于「最小化负对数似然（NLL）」</strong>。</p>
+<p><strong>「最大化似然」等价于「最小化负对数似然（NLL）」</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">常见损失函数都是 NLL（这是本节最重要的认识）</p>
 <p><strong>情形 1：回归 → MSE</strong></p>
@@ -12135,20 +12135,20 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 <div class="arithmatex">\[
 -\ell = \frac{1}{2\sigma^2}\sum_i\big(y_i - f(\boldsymbol{x}_i)\big)^2
 \]</div>
-<p><strong>这就是均方误差（MSE）</strong></p>
+<p><strong>即均方误差（MSE）</strong></p>
 <p><strong>含义</strong>：<strong>用 MSE 做回归 = 假设噪声是高斯</strong>。</p>
 <p><strong>情形 2：二分类 → 二元交叉熵</strong></p>
 <p><span class="arithmatex">\(y_i\in\{0,1\}\)</span>，<span class="arithmatex">\(P(y_i = 1) = \hat p_i\)</span>，负对数似然：</p>
 <div class="arithmatex">\[
 -\ell = -\sum_i\Big[y_i\log\hat p_i + (1-y_i)\log(1-\hat p_i)\Big]
 \]</div>
-<p><strong>这就是二元交叉熵</strong></p>
+<p><strong>即二元交叉熵</strong></p>
 <p><strong>情形 3：多分类 → 交叉熵</strong></p>
 <p><span class="arithmatex">\(y_i\)</span> 是 one-hot，<span class="arithmatex">\(\hat{\boldsymbol{p}}_i\)</span> 是 softmax 输出：</p>
 <div class="arithmatex">\[
 -\ell = -\sum_i\sum_{c}y_{ic}\log\hat p_{ic}
 \]</div>
-<p><strong>这就是交叉熵</strong></p>
+<p><strong>即交叉熵</strong></p>
 <p><strong>总表</strong>：</p>
 <table>
 <thead>
@@ -12188,8 +12188,8 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 </table>
 <p><strong>最后一行值得注意</strong>：拉普拉斯噪声 → 负对数似然是
 <span class="arithmatex">\(-\ell \propto \sum\lvert y_i-\hat y_i\rvert\)</span> = <strong>MAE</strong>。</p>
-<p>所以「用 MAE 而非 MSE」等价于「假设噪声是拉普拉斯而非高斯」
-——而拉普拉斯分布<strong>尾部更厚</strong>，所以 MAE 对<strong>离群点更鲁棒</strong></p>
+<p>「用 MAE 而非 MSE」等价于「假设噪声是拉普拉斯而非高斯」
+——而拉普拉斯分布<strong>尾部更厚</strong>，MAE 对<strong>离群点更鲁棒</strong></p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="似然函数与最大似然估计">
@@ -12806,8 +12806,8 @@ L 214.952812 120.962203
 I(\theta) = -E\left[\frac{\partial^2\ell}{\partial\theta^2}\right]
 \]</div>
 <p><strong>直觉</strong>：<strong>对数似然的曲率越大（峰越尖），信息越多，估计越准。</strong></p>
-<p>这与图 1 的直观一致：峰越尖 → 参数越确定。</p>
-<p><strong>MLE 在 <span class="arithmatex">\(n\to\infty\)</span> 时达到该下界</strong> —— 所以它「渐近最优」。</p>
+<p>这与图 1 直观一致：峰越尖 → 参数越确定。</p>
+<p><strong>MLE 在 <span class="arithmatex">\(n\to\infty\)</span> 时达到该下界</strong>——即「渐近最优」。</p>
 <p><strong>工程意义</strong>：</p>
 <table>
 <thead>
@@ -12848,7 +12848,7 @@ I(\theta) = -E\left[\frac{\partial^2\ell}{\partial\theta^2}\right]
 <div class="arithmatex">\[
 L(p) = \prod_{i=1}^{n}p^{x_i}(1-p)^{1-x_i} = p^{k}(1-p)^{n-k}
 \]</div>
-<p>（因为乘积中 <span class="arithmatex">\(p\)</span> 的指数累加为正面次数 <span class="arithmatex">\(k\)</span>。）</p>
+<p>（乘积中 <span class="arithmatex">\(p\)</span> 的指数累加为正面次数 <span class="arithmatex">\(k\)</span>。）</p>
 <p><strong>第二步：取对数</strong></p>
 <div class="arithmatex">\[
 \ell(p) = k\log p + (n-k)\log(1-p)
@@ -12928,9 +12928,9 @@ k = np \implies p = \frac{k}{n}
 </tbody>
 </table>
 <p><strong>这正是「贝叶斯定理」一页讲的零概率问题的第二个例子</strong>——
-解决办法也一样：加先验（贝叶斯平滑）或拉普拉斯平滑。</p>
+解决办法一样：加先验（贝叶斯平滑）或拉普拉斯平滑。</p>
 <p><strong>例</strong>：<span class="arithmatex">\(k=0\)</span>、<span class="arithmatex">\(n=5\)</span> 时用 <span class="arithmatex">\(\text{Beta}(1,1)\)</span> 先验，
-后验均值 <span class="arithmatex">\(\frac{1}{7} \approx 0.143\)</span>，而不是 <span class="arithmatex">\(0\)</span>。</p>
+后验均值 <span class="arithmatex">\(\frac{1}{7} \approx 0.143\)</span>，而非 <span class="arithmatex">\(0\)</span>。</p>
 </div>
 <hr />
 <h3 id="2-mle">例题 2：高斯参数的 MLE<a class="headerlink" href="#2-mle" title="Permanent link">&para;</a></h3>
@@ -12938,12 +12938,12 @@ k = np \implies p = \frac{k}{n}
 求 <span class="arithmatex">\(\mu\)</span> 与 <span class="arithmatex">\(\sigma^2\)</span> 的 MLE。</p>
 <details class="note">
 <summary>思路</summary>
-<p>对数似然含 <span class="arithmatex">\(n\)</span> 项求和；对两个参数分别求偏导。</p>
+<p>对数似然含 <span class="arithmatex">\(n\)</span> 项求和；对两参数分别求偏导。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
 <p><strong>第一步：写出对数似然</strong></p>
-<p>单个样本的对数密度：</p>
+<p>单样本对数密度：</p>
 <div class="arithmatex">\[
 \log f(x_i) = -\frac12\log(2\pi) - \frac12\log\sigma^2 - \frac{(x_i-\mu)^2}{2\sigma^2}
 \]</div>
@@ -12965,7 +12965,7 @@ k = np \implies p = \frac{k}{n}
 \]</div>
 <p><strong>就是样本均值</strong></p>
 <p><strong>第三步：对 <span class="arithmatex">\(\sigma^2\)</span> 求偏导</strong></p>
-<p>记 <span class="arithmatex">\(S = \sum_i(x_i-\hat\mu)^2\)</span>（在 <span class="arithmatex">\(\hat\mu\)</span> 处取值），则</p>
+<p>记 <span class="arithmatex">\(S = \sum_i(x_i-\hat\mu)^2\)</span>（<span class="arithmatex">\(\hat\mu\)</span> 处取值），则</p>
 <div class="arithmatex">\[
 \frac{\partial\ell}{\partial\sigma^2} = -\frac{n}{2\sigma^2} + \frac{S}{2\sigma^4}
 \]</div>
@@ -12976,9 +12976,9 @@ k = np \implies p = \frac{k}{n}
 <div class="arithmatex">\[
 \boxed{\ \hat\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i-\bar x)^2\ }
 \]</div>
-<p><strong>注意是除以 <span class="arithmatex">\(n\)</span>，不是 <span class="arithmatex">\(n-1\)</span></strong> ✓</p>
+<p><strong>注意除以 <span class="arithmatex">\(n\)</span>，不是 <span class="arithmatex">\(n-1\)</span></strong> ✓</p>
 <p><strong>第四步：验证是最大值</strong></p>
-<p>Hessian 的对角元：</p>
+<p>Hessian 对角元：</p>
 <div class="arithmatex">\[
 \frac{\partial^2\ell}{\partial\mu^2} = -\frac{n}{\sigma^2} &lt; 0 \;\checkmark
 \]</div>
@@ -12986,7 +12986,7 @@ k = np \implies p = \frac{k}{n}
 \frac{\partial^2\ell}{\partial(\sigma^2)^2} = \frac{n}{2\sigma^4} - \frac{S}{\sigma^6} = \frac{n}{2\sigma^4} - \frac{n\sigma^2}{\sigma^6}\bigg|_{\hat\sigma^2} = \frac{n}{2\sigma^4} - \frac{n}{\sigma^4} = -\frac{n}{2\sigma^4} &lt; 0 \;\checkmark
 \]</div>
 <p>（代入了 <span class="arithmatex">\(S = n\hat\sigma^2\)</span>。）</p>
-<p>所以是局部极大</p>
+<p>故为局部极大</p>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">MLE 的方差是有偏的（这是 MLE 的著名缺陷）</p>
@@ -12994,17 +12994,17 @@ k = np \implies p = \frac{k}{n}
 <div class="arithmatex">\[
 E\left[\sum_i(x_i-\bar x)^2\right] = (n-1)\sigma^2
 \]</div>
-<p>（这是统计学的基本结果：样本方差的「未修正」形式期望为 <span class="arithmatex">\((n-1)\sigma^2\)</span>。）</p>
+<p>（统计学基本结果：样本方差的「未修正」形式期望为 <span class="arithmatex">\((n-1)\sigma^2\)</span>。）</p>
 <p>所以</p>
 <div class="arithmatex">\[
 E[\hat\sigma^2_{\text{MLE}}] = \frac{n-1}{n}\sigma^2 &lt; \sigma^2
 \]</div>
-<p><strong>系统性地偏小</strong></p>
+<p><strong>系统性偏小</strong></p>
 <p><strong>修正</strong>（无偏估计）：</p>
 <div class="arithmatex">\[
 s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 \]</div>
-<p><strong>偏差的比例</strong> <span class="arithmatex">\(\frac{1}{n}\)</span>：</p>
+<p><strong>偏差比例</strong> <span class="arithmatex">\(\frac{1}{n}\)</span>：</p>
 <table>
 <thead>
 <tr>
@@ -13035,8 +13035,8 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 </tr>
 </tbody>
 </table>
-<p><strong>为什么会有偏差</strong>：因为 <span class="arithmatex">\(\bar x\)</span> 是在同一批数据上算的，
-数据「更靠近」自己的均值，导致平方和偏小。</p>
+<p><strong>为什么有偏差</strong>：<span class="arithmatex">\(\bar x\)</span> 在同一批数据上算，
+数据「更靠近」自己均值，导致平方和偏小。</p>
 <p><strong>工程取向</strong>：</p>
 <table>
 <thead>
@@ -13061,11 +13061,11 @@ s^2 = \frac{1}{n-1}\sum_i(x_i-\bar x)^2
 </tbody>
 </table>
 <p><strong>注意</strong>：MLE 有偏但<strong>一致</strong>（<span class="arithmatex">\(n\to\infty\)</span> 时偏差消失），
-且具备渐近有效性——所以在机器学习中通常直接用 <span class="arithmatex">\(n\)</span>。</p>
+且渐近有效——故机器学习中通常直接用 <span class="arithmatex">\(n\)</span>。</p>
 </div>
 <hr />
 <h3 id="3-mle-mse">例题 3：从 MLE 推出 MSE 损失<a class="headerlink" href="#3-mle-mse" title="Permanent link">&para;</a></h3>
-<p>证明：在高斯噪声假设下，最大化似然等价于最小化均方误差。</p>
+<p>证明：高斯噪声假设下，最大化似然等价于最小化均方误差。</p>
 <details class="note">
 <summary>思路</summary>
 <p>写出 <span class="arithmatex">\(y_i\)</span> 的分布，取负对数似然，看剩下什么。</p>
@@ -13091,7 +13091,7 @@ f(y_i) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(y_i-f(\boldsymbol{x}_i;\th
 <div class="arithmatex">\[
 \ell(\theta) = \sum_i\left[-\frac12\log(2\pi) - \log\sigma - \frac{(y_i-f(\boldsymbol{x}_i;\theta))^2}{2\sigma^2}\right]
 \]</div>
-<p>第四步：分离出与 <span class="arithmatex">\(\theta\)</span> 无关的部分</p>
+<p>第四步：分离与 <span class="arithmatex">\(\theta\)</span> 无关的部分</p>
 <div class="arithmatex">\[
 \ell(\theta) = -\frac{n}{2}\log(2\pi) - n\log\sigma - \frac{1}{2\sigma^2}\sum_i\big(y_i-f(\boldsymbol{x}_i;\theta)\big)^2
 \]</div>
@@ -13103,7 +13103,7 @@ f(y_i) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(y_i-f(\boldsymbol{x}_i;\th
 <div class="arithmatex">\[
 \min_\theta\sum_i\big(y_i-f(\boldsymbol{x}_i;\theta)\big)^2
 \]</div>
-<p><strong>这就是 MSE</strong></p>
+<p><strong>即 MSE</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">这个推导的三个重要推论</p>
@@ -13115,19 +13115,19 @@ f(y_i) = \frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{(y_i-f(\boldsymbol{x}_i;\th
 <p><strong>推论 2：<span class="arithmatex">\(\sigma^2\)</span> 不影响最优参数</strong></p>
 <p>注意 <span class="arithmatex">\(\frac{1}{2\sigma^2}\)</span> 是<strong>正的比例常数</strong>——
 它不改变极值位置。</p>
-<p><strong>含义</strong>：<strong>噪声大小不影响最优模型</strong>（只影响我们对估计的置信度）。</p>
-<p>这一点很实用：训练时不必知道噪声方差。</p>
-<p><strong>推论 3：<span class="arithmatex">\(\sigma^2\)</span> 可以事后估计</strong></p>
+<p><strong>含义</strong>：<strong>噪声大小不影响最优模型</strong>（只影响对估计的置信度）。</p>
+<p>这一点很实用：训练不必知道噪声方差。</p>
+<p><strong>推论 3：<span class="arithmatex">\(\sigma^2\)</span> 可事后估计</strong></p>
 <p>在最优 <span class="arithmatex">\(\theta\)</span> 处，令 <span class="arithmatex">\(\partial\ell/\partial\sigma = 0\)</span> 可得</p>
 <div class="arithmatex">\[
 \hat\sigma^2 = \frac1n\sum_i\big(y_i-f(\boldsymbol{x}_i;\hat\theta)\big)^2
 \]</div>
-<p><strong>就是残差的均方</strong> —— 这正是「训练完后看残差估计噪声水平」的依据。</p>
+<p><strong>就是残差的均方</strong>——正是「训练完后看残差估计噪声水平」的依据。</p>
 <p><strong>工程用途</strong>：用残差方差评估模型质量、构造预测区间。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">MSE 的隐含代价：对离群点敏感</p>
-<p>因为高斯噪声的尾部<strong>薄</strong>（<span class="arithmatex">\(e^{-z^2/2}\)</span> 衰减极快），
+<p>高斯噪声尾部<strong>薄</strong>（<span class="arithmatex">\(e^{-z^2/2}\)</span> 衰减极快），
 MSE 隐含假设「大误差极少见」。</p>
 <p><strong>若实际有大离群点</strong>：</p>
 <table>
@@ -13139,7 +13139,7 @@ MSE 隐含假设「大误差极少见」。</p>
 </thead>
 <tbody>
 <tr>
-<td>离群点产生平方级的巨大惩罚</td>
+<td>离群点产生平方级巨大惩罚</td>
 <td>主导整个损失</td>
 </tr>
 <tr>
@@ -13175,7 +13175,7 @@ MSE 隐含假设「大误差极少见」。</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Huber 损失的思路</strong>：小误差时像 MSE（光滑可导），
+<p><strong>Huber 损失思路</strong>：小误差时像 MSE（光滑可导），
 大误差时像 MAE（不被离群点主导）——综合两者优点。</p>
 </div>
 <hr />
@@ -13184,7 +13184,7 @@ MSE 隐含假设「大误差极少见」。</p>
 求 <span class="arithmatex">\(\lambda\)</span> 的 MLE，并检验 MLE 的不变性。</p>
 <details class="note">
 <summary>思路</summary>
-<p>写出似然（指数密度是 <span class="arithmatex">\(\lambda e^{-\lambda x}\)</span>），求导；再用不变性求 <span class="arithmatex">\(1/\lambda\)</span> 的 MLE。</p>
+<p>写出似然（指数密度 <span class="arithmatex">\(\lambda e^{-\lambda x}\)</span>），求导；再用不变性求 <span class="arithmatex">\(1/\lambda\)</span> 的 MLE。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13207,16 +13207,16 @@ MSE 隐含假设「大误差极少见」。</p>
 \]</div>
 <p>恒为负</p>
 <p><strong>第四步：检验不变性</strong></p>
-<p>指数分布的<strong>均值</strong>是 <span class="arithmatex">\(1/\lambda\)</span>。由 MLE 的不变性：</p>
+<p>指数分布的<strong>均值</strong>为 <span class="arithmatex">\(1/\lambda\)</span>。由 MLE 不变性：</p>
 <div class="arithmatex">\[
 \widehat{(1/\lambda)}_{\text{MLE}} = \frac{1}{\hat\lambda} = \bar x
 \]</div>
-<p><strong>即均值的 MLE 就是样本均值</strong> ✓ 与直觉一致。</p>
+<p><strong>即均值的 MLE 就是样本均值</strong> ✓ 符合直觉。</p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">MLE 不变性的实用价值</p>
 <p><strong>定理</strong>：若 <span class="arithmatex">\(\hat\theta\)</span> 是 <span class="arithmatex">\(\theta\)</span> 的 MLE，
-则对<strong>任意函数</strong> <span class="arithmatex">\(g\)</span>（不必是单调的！），<span class="arithmatex">\(g(\hat\theta)\)</span> 是 <span class="arithmatex">\(g(\theta)\)</span> 的 MLE。</p>
+则对<strong>任意函数</strong> <span class="arithmatex">\(g\)</span>（不必单调！），<span class="arithmatex">\(g(\hat\theta)\)</span> 是 <span class="arithmatex">\(g(\theta)\)</span> 的 MLE。</p>
 <p><strong>用途</strong>：</p>
 <table>
 <thead>
@@ -13244,26 +13244,26 @@ MSE 隐含假设「大误差极少见」。</p>
 </tr>
 </tbody>
 </table>
-<p><strong>这省掉了大量重复推导</strong>——不必每换一个量就重做一遍优化。</p>
+<p><strong>这省去大量重复推导</strong>——不必每换一个量就重做优化。</p>
 <p><strong>注意</strong>：不变性对 MLE 成立，但<strong>对无偏性不成立</strong>：</p>
 <div class="arithmatex">\[
 E[g(\hat\theta)] \neq g(E[\hat\theta])
 \]</div>
-<p>（除非 <span class="arithmatex">\(g\)</span> 是线性的。）</p>
+<p>（除非 <span class="arithmatex">\(g\)</span> 线性。）</p>
 <p><strong>例</strong>：<span class="arithmatex">\(1/\hat\lambda\)</span> 是 <span class="arithmatex">\(1/\lambda\)</span> 的 MLE，
-但<strong>不是无偏估计</strong>（因为倒数是非线性运算）：</p>
+但<strong>不是无偏估计</strong>（倒数是非线性运算）：</p>
 <div class="arithmatex">\[
 E\left[\frac{1}{\hat\lambda}\right] \neq \frac{1}{\lambda}
 \]</div>
-<p><strong>工程含义</strong>：优化目标和评价指标可以是同一个量（都用 MLE），
-但若要求「无偏」，需要额外修正。</p>
+<p><strong>工程含义</strong>：优化目标和评价指标可为同一个量（都用 MLE），
+但若要求「无偏」，需额外修正。</p>
 </div>
 <hr />
 <h2 id="_7">七、用在哪些课程里<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <h3 id="_8">模式识别 · 训练目标的理论依据<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>所有监督学习的损失函数</strong>都是某种分布假设下的 NLL</li>
-<li><strong>高斯判别分析</strong>：用 MLE 估计各类的均值与协方差</li>
+<li><strong>高斯判别分析</strong>：用 MLE 估计各类均值与协方差</li>
 <li><strong>GMM</strong>：用 EM 算法做 MLE（有隐变量时的推广）</li>
 <li><strong>逻辑回归</strong>：伯努利 NLL（即交叉熵）</li>
 </ul>
@@ -13287,10 +13287,10 @@ E\left[\frac{1}{\hat\lambda}\right] \neq \frac{1}{\lambda}
 </ul>
 <hr />
 <h2 id="_12">八、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> 某试验做了 20 次，成功 15 次。求成功率的 MLE。</p>
+<p><strong>Q1</strong> 某试验做 20 次，成功 15 次。求成功率的 MLE。</p>
 <details class="note">
 <summary>提示</summary>
-<p>伯努利的 MLE 就是频率。</p>
+<p>伯努利的 MLE 是频率。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13298,7 +13298,7 @@ E\left[\frac{1}{\hat\lambda}\right] \neq \frac{1}{\lambda}
 \hat p_{\text{MLE}} = \frac{k}{n} = \frac{15}{20} = 0.75
 \]</div>
 <p><strong>结果</strong>：<span class="arithmatex">\(0.75\)</span></p>
-<p><strong>验证（用对数似然比较几个候选值）</strong>：</p>
+<p><strong>验证（用对数似然比较候选值）</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13330,15 +13330,15 @@ E\left[\frac{1}{\hat\lambda}\right] \neq \frac{1}{\lambda}
 </tbody>
 </table>
 <p><span class="arithmatex">\(0.75\)</span> 处最大 ✓ 与 <span class="arithmatex">\(0.8\)</span> 很接近，但确实更优。</p>
-<p><strong>注意曲率（这是判断估计精度的关键）</strong>：</p>
-<p><span class="arithmatex">\(0.7\)</span> 与 <span class="arithmatex">\(0.8\)</span> 处的对数似然只差</p>
+<p><strong>注意曲率（判断估计精度的关键）</strong>：</p>
+<p><span class="arithmatex">\(0.7\)</span> 与 <span class="arithmatex">\(0.8\)</span> 处对数似然只差</p>
 <div class="arithmatex">\[
 \lvert-11.37 - (-11.39)\rvert = 0.02
 \]</div>
-<p><strong>非常平坦</strong> —— 说明 20 个样本<strong>信息量有限</strong>，
-<span class="arithmatex">\(\hat p\)</span> 的不确定性较大。</p>
+<p><strong>很平坦</strong>——说明 20 个样本<strong>信息量有限</strong>，
+<span class="arithmatex">\(\hat p\)</span> 不确定性较大。</p>
 <p><strong>这与费舍尔信息直接相关</strong>：曲率越大（峰越尖），估计越精确。
-伯努利的费舍尔信息是</p>
+伯努利费舍尔信息是</p>
 <div class="arithmatex">\[
 I(p) = \frac{n}{p(1-p)}
 \]</div>
@@ -13347,11 +13347,11 @@ I(p) = \frac{n}{p(1-p)}
 <div class="arithmatex">\[
 \frac{1}{I} = \frac{1}{106.7} \approx 0.0094
 \]</div>
-<p>即 <span class="arithmatex">\(\hat p\)</span> 的标准差约 <span class="arithmatex">\(\sqrt{0.0094} \approx 0.097\)</span> ——
-<strong>接近 0.1</strong>，说明 20 个样本给出的估计精度有限。</p>
+<p>即 <span class="arithmatex">\(\hat p\)</span> 标准差约 <span class="arithmatex">\(\sqrt{0.0094} \approx 0.097\)</span>——
+<strong>接近 0.1</strong>，说明 20 个样本估计精度有限。</p>
 </details>
 <hr />
-<p><strong>Q2</strong> 设数据 <span class="arithmatex">\(\{2, 4, 6, 8\}\)</span>，假设来自 <span class="arithmatex">\(N(\mu,\sigma^2)\)</span>。
+<p><strong>Q2</strong> 设数据 <span class="arithmatex">\(\{2, 4, 6, 8\}\)</span>，来自 <span class="arithmatex">\(N(\mu,\sigma^2)\)</span>。
 求 <span class="arithmatex">\(\mu\)</span> 与 <span class="arithmatex">\(\sigma^2\)</span> 的 MLE 与无偏估计。</p>
 <details class="note">
 <summary>提示</summary>
@@ -13432,12 +13432,12 @@ s^2 = \frac{20}{3} \approx 6.667
 </tr>
 </tbody>
 </table>
-<p><strong>偏差比例</strong>：<span class="arithmatex">\(\frac{1}{n} = 25\%\)</span> —— 小样本时偏差很显著</p>
-<p>这提醒我们：<strong><span class="arithmatex">\(n=4\)</span> 时用 MLE 的方差会低估 25%</strong>，
+<p><strong>偏差比例</strong>：<span class="arithmatex">\(\frac{1}{n} = 25\%\)</span>——小样本偏差显著</p>
+<p>这提醒：<strong><span class="arithmatex">\(n=4\)</span> 时用 MLE 的方差会低估 25%</strong>，
 做置信区间或风险评估时会<strong>过于自信</strong>。</p>
 </details>
 <hr />
-<p><strong>Q3</strong> 为什么 MLE 里要取对数，而不直接最大化似然？</p>
+<p><strong>Q3</strong> 为什么 MLE 要取对数，而不直接最大化似然？</p>
 <details class="note">
 <summary>提示</summary>
 <p>考虑数值范围与求导难度。</p>
@@ -13454,13 +13454,13 @@ L = \prod_{i=1}^{n}f(x_i)
 <div class="arithmatex">\[
 L \approx 10^{-400}
 \]</div>
-<p><strong>这已超出双精度浮点数的下限</strong>（约 <span class="arithmatex">\(10^{-308}\)</span>）→ 变为 <strong>0</strong>。</p>
+<p><strong>这已超出双精度浮点数下限</strong>（约 <span class="arithmatex">\(10^{-308}\)</span>）→ 变为 <strong>0</strong>。</p>
 <p><strong>取对数后</strong>：</p>
 <div class="arithmatex">\[
 \ell = \sum_i\log f(x_i) = 200\times(-4.6) = -920
 \]</div>
 <p><strong>完全在浮点范围内</strong></p>
-<p><strong>原因 2：乘积的导数很麻烦</strong></p>
+<p><strong>原因 2：乘积导数很麻烦</strong></p>
 <table>
 <thead>
 <tr>
@@ -13480,20 +13480,20 @@ L \approx 10^{-400}
 </tbody>
 </table>
 <p><strong>原因 3：与优化算法兼容</strong></p>
-<p>梯度下降、牛顿法等需要<strong>可加的损失函数</strong>：</p>
+<p>梯度下降、牛顿法等需要<strong>可加损失函数</strong>：</p>
 <div class="arithmatex">\[
 \text{损失} = \sum_i\text{（单样本损失）}
 \]</div>
 <p>这正是「小批量（mini-batch）」训练的基础——
-可以用一部分样本估计整个数据集的梯度。</p>
-<p><strong>正确性保证</strong>：<span class="arithmatex">\(\log\)</span> 是<strong>严格单调递增</strong>函数，所以</p>
+可用一部分样本估计整个数据集的梯度。</p>
+<p><strong>正确性保证</strong>：<span class="arithmatex">\(\log\)</span> 是<strong>严格单调递增</strong>函数，故</p>
 <div class="arithmatex">\[
 \arg\max L = \arg\max\log L
 \]</div>
 <p>极值位置<strong>完全不变</strong></p>
 </details>
 <hr />
-<p><strong>Q4</strong> 若假设噪声服从拉普拉斯分布（而非高斯），MLE 对应什么损失函数？</p>
+<p><strong>Q4</strong> 若噪声服从拉普拉斯分布（而非高斯），MLE 对应什么损失函数？</p>
 <details class="note">
 <summary>提示</summary>
 <p>拉普拉斯密度含 <span class="arithmatex">\(\exp(-|x-\mu|/b)\)</span>。</p>
@@ -13506,7 +13506,7 @@ L \approx 10^{-400}
 <div class="arithmatex">\[
 f(y) = \frac{1}{2b}\exp\left(-\frac{\lvert y-\mu\rvert}{b}\right)
 \]</div>
-<p><strong>负对数似然</strong>（单个样本）：</p>
+<p><strong>负对数似然</strong>（单样本）：</p>
 <div class="arithmatex">\[
 -\log f(y) = \log(2b) + \frac{\lvert y-\mu\rvert}{b}
 \]</div>
@@ -13514,7 +13514,7 @@ f(y) = \frac{1}{2b}\exp\left(-\frac{\lvert y-\mu\rvert}{b}\right)
 <div class="arithmatex">\[
 \text{NLL} \propto \sum_i\lvert y_i - f(\boldsymbol{x}_i;\theta)\rvert
 \]</div>
-<p><strong>这就是 MAE</strong></p>
+<p><strong>即 MAE</strong></p>
 <p><strong>为什么 MAE 更鲁棒（关键洞察）</strong>：</p>
 <table>
 <thead>
@@ -13537,7 +13537,7 @@ f(y) = \frac{1}{2b}\exp\left(-\frac{\lvert y-\mu\rvert}{b}\right)
 </tr>
 </tbody>
 </table>
-<p><strong>定量对比</strong>：一个误差为 10 的离群点</p>
+<p><strong>定量对比</strong>：误差为 10 的离群点</p>
 <table>
 <thead>
 <tr>
@@ -13556,13 +13556,13 @@ f(y) = \frac{1}{2b}\exp\left(-\frac{\lvert y-\mu\rvert}{b}\right)
 </tr>
 </tbody>
 </table>
-<p><strong>所以 MAE 不会被少数极端点带偏</strong></p>
-<p><strong>概率上的解释（一句话总结）</strong>：</p>
+<p><strong>故 MAE 不会被少数极端点带偏</strong></p>
+<p><strong>概率解释</strong>：</p>
 <div class="arithmatex">\[
 \text{MAE 鲁棒} \iff \text{拉普拉斯噪声尾部更厚} \iff \text{大误差更常见}
 \]</div>
-<p><strong>因为拉普拉斯假设「大误差本来就常见」，所以它不会把大误差
-当成异常而过度反应</strong> —— 这就是鲁棒性的来源。</p>
+<p><strong>拉普拉斯假设「大误差本来就常见」，故它不会把大误差
+当成异常而过度反应</strong>——这就是鲁棒性的来源。</p>
 <p><strong>实践建议</strong>：</p>
 <table>
 <thead>

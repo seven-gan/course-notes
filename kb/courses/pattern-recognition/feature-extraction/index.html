@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理那个藏在核技巧背后的东西 —— 维数灾难，并给出两类最经典的应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
+    <meta name="description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理藏在核技巧背后的维数灾难，并给出两类应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="特征提取与降维">
   
-  <meta property="og:description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理那个藏在核技巧背后的东西 —— 维数灾难，并给出两类最经典的应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
+  <meta property="og:description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理藏在核技巧背后的维数灾难，并给出两类应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/pattern-recognition/feature-extraction/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="特征提取与降维">
   
-  <meta name="twitter:description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理那个藏在核技巧背后的东西 —— 维数灾难，并给出两类最经典的应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
+  <meta name="twitter:description" content="特征提取与降维：前一页支持向量机与核方法用核技巧把线性方法搬进了高维空间：维数高本身不是问题，维数高又没有足够样本才是问题。这一页正面处理藏在核技巧背后的维数灾难，并给出两类应对手段：特征提取：把原来的 d 个特征变换成 k 个新特征（k d）。特征选择：从原来的 d 个特征里挑出 k 个，其余丢掉。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12238,8 +12238,8 @@
 <h1 id="_1">特征提取与降维<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <p>前一页 <a href="../svm-kernel/">支持向量机与核方法</a> 用核技巧把线性方法搬进了高维空间：
 <strong>维数高本身不是问题，维数高又没有足够样本才是问题</strong>。</p>
-<p>这一页正面处理那个藏在核技巧背后的东西 —— <strong>维数灾难</strong>，
-并给出两类最经典的应对手段：</p>
+<p>这一页正面处理藏在核技巧背后的<strong>维数灾难</strong>，
+并给出两类应对手段：</p>
 <blockquote>
 <p><strong>特征提取</strong>：把原来的 <span class="arithmatex">\(d\)</span> 个特征<strong>变换</strong>成 <span class="arithmatex">\(k\)</span> 个新特征（<span class="arithmatex">\(k \lt d\)</span>）。</p>
 <p><strong>特征选择</strong>：从原来的 <span class="arithmatex">\(d\)</span> 个特征里<strong>挑出</strong> <span class="arithmatex">\(k\)</span> 个，其余丢掉。</p>
@@ -12249,15 +12249,14 @@
 <div class="admonition tip">
 <p class="admonition-title">这一页的三条主线</p>
 <p><strong>主线 1：先量化问题</strong>
-维数灾难不是一句口号，它有两个可以算出来的后果 ——
+维数灾难有两个可以算出来的后果 ——
 体积集中与距离退化。先把它算清楚，后面的方法才有靶子。</p>
 <p><strong>主线 2：线性方法</strong>
 PCA 最大化投影方差，LDA 最大化类间散度与类内散度之比。
 两者都在找"一条好的投影方向"，但<strong>一个不看标签、一个必须看标签</strong>。</p>
 <p><strong>主线 3：非线性方法</strong>
-数据其实躺在一张弯曲的低维曲面上时，任何线性投影都会把它揉皱。
+数据躺在弯曲的低维曲面上时，任何线性投影都会把它揉皱。
 流形学习换用"沿曲面的距离"，核 PCA 换用"高维空间里的方差"。</p>
-<p>三条主线是<strong>同一个问题从易到难的三次尝试</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、维数灾难的定量描述<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12267,7 +12266,7 @@ PCA 最大化投影方差，LDA 最大化类间散度与类内散度之比。
 需要 <span class="arithmatex">\(10 \times 10 = 100\)</span> 个点；三维要 <span class="arithmatex">\(1000\)</span> 个。</p>
 <p><strong>一般地，<span class="arithmatex">\(d\)</span> 维单位超立方体里要维持同样的采样密度，样本量按 <span class="arithmatex">\(n^d\)</span> 增长</strong></p>
 <p>这就是<strong>维数灾难</strong>（本课程大纲 7.1）最朴素的样子。
-但它有两个更尖锐、更可以量化的后果，下面分别算。</p>
+它还有两个更尖锐、可量化的后果：</p>
 <h3 id="12">1.2 后果一：体积集中到角落<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：单位超立方体的内切球占了总体积的多少？</p>
 <p><span class="arithmatex">\(d\)</span> 维半径为 <span class="arithmatex">\(r\)</span> 的球体积是</p>
@@ -12317,7 +12316,7 @@ V_d(r) = \frac{\pi^{d/2}}{\Gamma\left(\frac d2 + 1\right)} r^{d}
 </tbody>
 </table>
 <p><strong>换个说法</strong>：高维立方体的体积<strong>几乎全部集中在角落附近</strong>，
-而"中心区域"（球内）是空的</p>
+"中心区域"（球内）是空的</p>
 <p><strong>后果</strong>：如果样本在立方体里均匀分布，
 那么<strong>绝大多数样本都落在离中心很远的角落</strong>，
 "中心附近"这个在低维里最有代表性的区域，
@@ -12688,8 +12687,7 @@ L 358.979688 200.946
 </figure>
 
 <p>上图把这条结论画成了两条曲线：
-<strong>要覆盖同样的密度，样本量随维数按指数增长</strong>。
-它提醒我们：<strong>降维不是"为了快"，而是为了"还有样本可用"</strong>。</p>
+<strong>要覆盖同样的密度，样本量随维数按指数增长</strong>。</p>
 <h3 id="13">1.3 后果二：距离退化（所有点都差不多远）<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：高维空间里，"最近的点"和"最远的点"差多少？</p>
 <p>设 <span class="arithmatex">\(n\)</span> 个样本在 <span class="arithmatex">\(d\)</span> 维单位立方体内均匀分布，
@@ -12707,8 +12705,8 @@ L 358.979688 200.946
   它们的判别力都建立在"近的确实近、远的确实远"上。</li>
 <li><strong>基于距离阈值的分类器退化</strong> —— 阈值取在哪里，邻居集合都差不多大。</li>
 </ul>
-<p><strong>下面用一组数值把这两条后果都验一遍</strong>。
-在 <span class="arithmatex">\([0,1]^d\)</span> 里随机撒点，分别算内切球体积占比与距离对比度的倒数：</p>
+<p><strong>下面用一组数值把这两条后果验一遍</strong>：
+在 <span class="arithmatex">\([0,1]^d\)</span> 里随机撒点，算内切球体积占比与距离对比度：</p>
 <table>
 <thead>
 <tr>
@@ -12758,12 +12756,12 @@ L 358.979688 200.946
 <p><strong>怎么读这张表</strong>：</p>
 <ul>
 <li><strong>第二列</strong>是 1.2 节的公式：从 <span class="arithmatex">\(2\)</span> 维的 <span class="arithmatex">\(0.785\)</span> 一路掉到 <span class="arithmatex">\(0\)</span> 附近，
-  到 <span class="arithmatex">\(500\)</span> 维已经小到双精度浮点数表示不出来（记作 <span class="arithmatex">\(0.000\times10^{0}\)</span>）。</li>
+  到 <span class="arithmatex">\(500\)</span> 维已小到双精度表示不出来（<span class="arithmatex">\(0.000\times10^{0}\)</span>）。</li>
 <li><strong>第三列</strong>是"最近距离的平均值"除以"最远距离的平均值"。
   这个比值<strong>从 <span class="arithmatex">\(2\)</span> 维的 <span class="arithmatex">\(0.036\)</span> 一路涨到 <span class="arithmatex">\(1000\)</span> 维的 <span class="arithmatex">\(0.909\)</span></strong> ——</li>
 </ul>
-<p><strong>第三列趋近于 <span class="arithmatex">\(1\)</span> 意味着：最近的点和最远的点几乎一样远</strong>
-这正好就是 1.3 节说的<strong>距离退化</strong>。</p>
+<p><strong>第三列趋近于 <span class="arithmatex">\(1\)</span>：最近的点和最远的点几乎一样远</strong>
+——这正是<strong>距离退化</strong>。</p>
 <div class="admonition warning">
 <p class="admonition-title">维数灾难不是「数据太多」，是「数据太稀」</p>
 <p>常见误解是"维数高 → 信息多 → 应该更容易分"。
@@ -12772,13 +12770,11 @@ L 358.979688 200.946
   任何非参数方法（密度估计、近邻、聚类）需要的样本量都按 <span class="arithmatex">\(n^d\)</span> 增长。</p>
 <p>· <strong>很多特征其实是相关的</strong>，真正承载判别信息的自由度远小于 <span class="arithmatex">\(d\)</span> ——
   所以"降维"往往不是丢信息，而是<strong>丢掉冗余与噪声</strong></p>
-<p>这也是为什么本页要花一整节先把这个代价算清楚：
-<strong>只有知道代价有多大，才知道为什么值得为降维付出变换的代价</strong>。</p>
+<p><strong>只有算清代价有多大，才明白为什么值得为降维付出变换的代价</strong>。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">降维是「有损」的，必须交代损失</p>
-<p>把 <span class="arithmatex">\(d\)</span> 维压到 <span class="arithmatex">\(k\)</span> 维<strong>一定会丢东西</strong>。
-凡是声称"降维不损失信息"的说法都是错的，
+<p>把 <span class="arithmatex">\(d\)</span> 维压到 <span class="arithmatex">\(k\)</span> 维<strong>一定会丢东西</strong>，
 正确的说法只有两种：</p>
 <p>· <strong>数据本来就在低维结构上</strong>（冗余维），此时丢的是噪声；
 · <strong>丢掉的信息对这个任务不重要</strong>（判别信息集中在少数方向），
@@ -12814,7 +12810,7 @@ PCA 用"保留方差比例"，本页第三节会给出这个量的算法。</p>
 </tbody>
 </table>
 <p><strong>所以降维与前面每一页都相关</strong> ——
-它不是新问题，而是前面所有方法在高维下的<strong>共同前提</strong>。</p>
+它是前面所有方法在高维下的<strong>共同前提</strong>。</p>
 <hr />
 <h2 id="_3">二、特征提取与降维的基本框架<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 三种思路<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -12854,13 +12850,13 @@ PCA 用"保留方差比例"，本页第三节会给出这个量的算法。</p>
 <ul>
 <li>特征提取<strong>压缩得更狠</strong>（<span class="arithmatex">\(k\)</span> 可以比选择方法小得多），
   但代价是<strong>解释性丧失</strong>：新特征是原特征的线性组合，
-  你没法再说"这是温度、那是压力"。</li>
+  没法再说"这是温度、那是压力"。</li>
 <li>特征选择<strong>保留原来特征的物理含义</strong>，
   在医学、故障诊断这类<strong>必须给出理由</strong>的场景里往往是硬需求 ✓</li>
 </ul>
 <p>这个取舍的完整讨论放在下一页。本页先专攻<strong>特征提取</strong>。</p>
 <h3 id="22-k">2.2 什么才算"好的 <span class="arithmatex">\(k\)</span> 个新方向"<a class="headerlink" href="#22-k" title="Permanent link">&para;</a></h3>
-<p>一个变换 <span class="arithmatex">\(W \in \mathbb{R}^{d \times k}\)</span> 好不好，取决于我们想保住什么。
+<p>一个变换 <span class="arithmatex">\(W\)</span> 好不好，取决于想保住什么。
 最常用的两种目标恰好对应本页的两大方法：</p>
 <table>
 <thead>
@@ -12890,29 +12886,29 @@ PCA 用"保留方差比例"，本页第三节会给出这个量的算法。</p>
 <blockquote>
 <p><strong>PCA 只看到 <span class="arithmatex">\(\boldsymbol{x}\)</span>，LDA 还要看到 <span class="arithmatex">\(y\)</span>。</strong></p>
 </blockquote>
-<p>第三节和第五节会分别推导它们，并说明为什么这个差别会在真实数据上
-造成完全不同的结果。</p>
+<p>第三节和第五节会分别推导它们，并说明这个差别在真实数据上
+会造成多大不同。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么「方差大」是一个合理的目标</p>
-<p>因为<strong>方差大 = 变化大 = 信号强</strong>，至少有三条理由：</p>
+<p>因为<strong>方差大 = 变化大 = 信号强</strong>，有三条理由：</p>
 <p>· <strong>噪声与信号的区分</strong>：噪声在各方向上的方差大致相同，
   而信号集中在少数方向 —— 保住大方差方向就是<strong>提高信噪比</strong></p>
 <p>· <strong>重构误差</strong>：本节第四节会证明，
   丢掉方差最小的那些方向，<strong>恰好等价于让平均重构误差最小</strong>。</p>
 <p>· <strong>信息论</strong>：在联合高斯假设下，
   主成分方向恰好是按"信息量"从大到小排的。</p>
-<p>但要注意第一条推论：<strong>如果判别信息恰好落在方差最小的方向上，
+<p>但要注意：<strong>判别信息若恰好落在方差最小的方向上，
 PCA 会把它丢掉</strong> ⚠ 第五节会用一组数据把这个反面例子跑出来。</p>
 </div>
 <hr />
 <h2 id="pca">三、PCA：两种推导及其等价性<a class="headerlink" href="#pca" title="Permanent link">&para;</a></h2>
-<p>主成分分析（PCA）的历史上有<strong>两条完全不同的出发点</strong>：</p>
+<p>PCA 的历史上有<strong>两条不同的出发点</strong>：</p>
 <ol>
 <li><strong>几何/统计的角度</strong>：找一个方向，使投影后的方差最大。</li>
 <li><strong>逼近/工程的角度</strong>：找一个低维子空间，使样本到它的距离最小。</li>
 </ol>
-<p><strong>这两条路的出发点毫无共同之处，但答案是同一组方向</strong> ——
-这就是本节要证明的核心结论，也是 PCA 这个方法的"合法性来源"。</p>
+<p><strong>两条路出发点毫无共同之处，答案却是同一组方向</strong> ——
+这是本节的核心结论，也是 PCA 的"合法性来源"。</p>
 <h3 id="31">3.1 预备：中心化与总体协方差矩阵<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
 <p>记样本矩阵 <span class="arithmatex">\(X \in \mathbb{R}^{n \times d}\)</span>，每行一个样本。
 先把每个特征<strong>减去自己的均值</strong>，得到 <span class="arithmatex">\(\tilde{X}\)</span>：</p>
@@ -12923,7 +12919,7 @@ PCA 会把它丢掉</strong> ⚠ 第五节会用一组数据把这个反面例�
 \]</div>
 <p><strong>为什么必须中心化</strong>：协方差衡量的是"围绕均值的波动"。
 不中心化就等于<strong>把均值当成信号</strong>，第一主成分会退化成"均值方向"，
-这在几何上毫无意义</p>
+几何上毫无意义</p>
 <p>中心化之后，<strong>总体协方差矩阵</strong>（除以 <span class="arithmatex">\(n\)</span>）为</p>
 <div class="arithmatex">\[
 C = \frac1n \tilde{X}^{\mathsf T}\tilde{X}
@@ -12977,10 +12973,10 @@ C\boldsymbol{w} = \lambda\boldsymbol{w}
 = \sum_{i=1}^{n}\left\|
 \boldsymbol{x}_i - W W^{\mathsf T}\boldsymbol{x}_i \right\|^2
 \]</div>
-<p>注意 <span class="arithmatex">\(W W^{\mathsf T}\)</span> 是一个<strong>投影矩阵</strong>：
-它把样本投到 <span class="arithmatex">\(W\)</span> 张成的子空间上。
+<p>注意 <span class="arithmatex">\(W W^{\mathsf T}\)</span> 是<strong>投影矩阵</strong>，
+把样本投到 <span class="arithmatex">\(W\)</span> 张成的子空间上，
 所以这个目标衡量的是<strong>样本到该子空间的距离平方和</strong>。</p>
-<p><strong>展开目标函数</strong>（这一步不跳步，因为它同时用到了两条恒等式）：</p>
+<p><strong>展开目标函数</strong>（这一步用到两条恒等式，不跳步）：</p>
 <div class="arithmatex">\[
 \left\|\boldsymbol{x} - WW^{\mathsf T}\boldsymbol{x}\right\|^2
 = \boldsymbol{x}^{\mathsf T}\boldsymbol{x}
@@ -13064,8 +13060,8 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
 \;\Longleftrightarrow\;
 \max_{\boldsymbol{w}}\boldsymbol{w}^{\mathsf T}C\boldsymbol{w}\ \text{逐列解}
 \]</div>
-<p><strong>三者是同一个优化问题</strong>
-这就是"<strong>最大方差 = 最小重构误差</strong>"的完整证明。</p>
+<p><strong>三者是同一个优化问题</strong> ——
+这就是"最大方差 = 最小重构误差"的完整证明。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 352.790313 237.225375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="主成分分析：方差最大的方向就是第一主成分">
 
@@ -13653,8 +13649,7 @@ L 84.097031 188.251386
 </figure>
 
 <p>上图是这段话的几何版本：<strong>数据在斜方向上摊得最开</strong>，
-那个方向既是投影方差最大的方向，也是样本到该直线距离平方和最小的方向。
-两条推导在图上指的是<strong>同一条直线</strong>。</p>
+那个方向既是投影方差最大的方向，也是样本到该直线距离平方和最小的方向。</p>
 <h3 id="35">3.5 等价性推出的一条实用结论<a class="headerlink" href="#35" title="Permanent link">&para;</a></h3>
 <p>回到</p>
 <div class="arithmatex">\[
@@ -13724,8 +13719,8 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
 </tr>
 </tbody>
 </table>
-<p><strong>实践提醒</strong>：当 <span class="arithmatex">\(n \ll d\)</span> 时（基因数据、文本数据常常如此），
-<span class="arithmatex">\(C\)</span> 是 <span class="arithmatex">\(d\times d\)</span> 的，<strong>直接做特征分解代价很大</strong>。
+<p><strong>实践提醒</strong>：当 <span class="arithmatex">\(n \ll d\)</span> 时（基因、文本数据常常如此），
+<span class="arithmatex">\(C\)</span> 是 <span class="arithmatex">\(d\times d\)</span> 的，<strong>直接特征分解代价很大</strong>。
 这时改对 <span class="arithmatex">\(n\times n\)</span> 的 <span class="arithmatex">\(\tilde{X}\tilde{X}^{\mathsf T}\)</span> 做特征分解，
 再用关系 <span class="arithmatex">\(\boldsymbol{v} = \tilde{X}^{\mathsf T}\boldsymbol{u}/\sqrt{n\lambda}\)</span> 换回去，
 代价从 <span class="arithmatex">\(O(d^3)\)</span> 降到 <span class="arithmatex">\(O(n^3)\)</span>
@@ -13767,9 +13762,9 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
 </tr>
 </tbody>
 </table>
-<p><strong>下面用一段可复现的实验把五步流程完整走一遍</strong>。
-数据在 <span class="arithmatex">\(5\)</span> 维空间里生成，但真实结构只有 <span class="arithmatex">\(2\)</span> 个方向，
-另外 <span class="arithmatex">\(3\)</span> 个方向是噪声：</p>
+<p><strong>下面用一段实验把五步流程走一遍</strong>：
+数据在 <span class="arithmatex">\(5\)</span> 维空间生成，真实结构只有 <span class="arithmatex">\(2\)</span> 个方向，
+另 <span class="arithmatex">\(3\)</span> 个方向是噪声：</p>
 <table>
 <thead>
 <tr>
@@ -13845,21 +13840,21 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
 </table>
 <p><strong>读表的三条要点</strong>：</p>
 <p><strong>第一条：前两个特征值占了 98.57%。</strong>
-这和数据生成方式完全吻合 —— 我们只用了 <span class="arithmatex">\(2\)</span> 个真实方向，
-加上 <span class="arithmatex">\(0.25\)</span> 的噪声，所以前两个成分几乎装下了全部结构</p>
+这与数据生成方式吻合 —— 只用了 <span class="arithmatex">\(2\)</span> 个真实方向加上 <span class="arithmatex">\(0.25\)</span> 的噪声，
+前两个成分几乎装下了全部结构</p>
 <p><strong>第二条：<span class="arithmatex">\(k=2\)</span> 之后迅速变平。</strong>
-第三、四、五个特征值分别是 <span class="arithmatex">\(0.067\)</span>、<span class="arithmatex">\(0.062\)</span>、<span class="arithmatex">\(0.055\)</span>，
-量级接近、彼此差不多 —— 这正是<strong>纯噪声的表现</strong>
+第三、四、五个特征值分别 <span class="arithmatex">\(0.067\)</span>、<span class="arithmatex">\(0.062\)</span>、<span class="arithmatex">\(0.055\)</span>，
+量级接近 —— 这正是<strong>纯噪声的表现</strong>
 （白噪声在各方向上分摊得比较均匀）。</p>
-<p>第三条：保留能量与相对重构误差之和恒为 <span class="arithmatex">\(1\)</span>。
-这是 3.5 节那条公式的数值验证，不是巧合</p>
+<p>第三条：保留能量与相对重构误差之和恒为 <span class="arithmatex">\(1\)</span> ——
+3.5 节那条公式的数值验证。</p>
 <p><strong>结论</strong>：取 <span class="arithmatex">\(k=2\)</span> 就够。这既符合"拐点"判据（<span class="arithmatex">\(2 \to 3\)</span> 之间曲线变平），
 也符合领域先验（真实自由度就是 <span class="arithmatex">\(2\)</span>）。</p>
 <h3 id="43">4.3 把两条推导跑在一起对比<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p>3.4 节的等价性证明是纸面推导。这里做一次<strong>数值对照</strong>：
-一条路线直接对协方差矩阵做特征分解（最大方差），
-另一条路线<strong>完全不做特征分解</strong>，而是在角度上做网格搜索 +
-局部细化，直接最小化重构误差平方和。看两者是否落在同一个方向：</p>
+<p>3.4 节的等价性证明是纸面推导，这里做一次<strong>数值对照</strong>：
+一条路线对协方差矩阵做特征分解（最大方差），
+另一条<strong>完全不做特征分解</strong>，而是在角度上网格搜索 +
+局部细化，直接最小化重构误差平方和，看两者是否落在同一方向：</p>
 <table>
 <thead>
 <tr>
@@ -13893,10 +13888,9 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
   这正是 3.5 节那条恒等式 <span class="arithmatex">\(J(W) = \sum_i\|\boldsymbol{x}_i\|^2 - n\sum_{j\le k}\lambda_j\)</span>
   在数值上的体现</li>
 </ul>
-<p><strong>把那个恒等式再验一遍</strong>：本页的算例里
-"网格最小残差平方和"与"<span class="arithmatex">\(n\)</span> 乘次特征值之和"两行数字<strong>完全相同</strong>，
-说明"丢掉小特征值方向"就是"重构误差最小"这件事，
-在数值上是<strong>严格恒等</strong>的，不是近似。</p>
+<p><strong>把那个恒等式再验一遍</strong>：
+上面两行数字<strong>完全相同</strong>，说明"丢掉小特征值方向"就是"重构误差最小"，
+在数值上是<strong>严格恒等</strong>而非近似。</p>
 <div class="admonition warning">
 <p class="admonition-title">标准化与「取几个主成分」必须一起决定</p>
 <p>两条常见错误：</p>
@@ -13914,12 +13908,11 @@ J(W) = \sum_{i=1}^{n}\left\|\boldsymbol{x}_i\right\|^2
 <p><strong>PCA 有一个致命盲点</strong>：它只看 <span class="arithmatex">\(\boldsymbol{x}\)</span>，<strong>完全不看标签 <span class="arithmatex">\(y\)</span></strong>。</p>
 <p><strong>后果</strong>：如果判别信息恰好落在方差很小的方向上，
 PCA 会<strong>优先丢掉它</strong></p>
-<p>这不是理论上的可能，而是会真实发生的：
-只要类内变化在某个方向上很大（方差大），
-而类间差异在另一个方向上很小（方差小），
+<p>只要类内变化在某方向很大（方差大），
+而类间差异在另一方向很小（方差小），
 PCA 就必然抓住前者、放弃后者。</p>
 <h3 id="52-fisher">5.2 Fisher 判据<a class="headerlink" href="#52-fisher" title="Permanent link">&para;</a></h3>
-<p><strong>线性判别分析（LDA）的想法</strong>：既然我们有标签，就别浪费它。
+<p><strong>线性判别分析（LDA）的想法</strong>：既然有标签就别浪费。
 希望投影之后</p>
 <ul>
 <li><strong>同类样本挤在一起</strong>（类内散度 <span class="arithmatex">\(S_w\)</span> 小）</li>
@@ -13962,9 +13955,9 @@ S_b\boldsymbol{w} = \lambda S_w\boldsymbol{w},
 <div class="arithmatex">\[
 \boldsymbol{w} \;\propto\; S_w^{-1}\left(\boldsymbol{m}_1-\boldsymbol{m}_2\right)
 \]</div>
-<p><strong>这就是两类 LDA 的闭式解</strong>
-它的含义非常好记：<strong>先用类内散度把空间"白化"，
-再沿着白化后的类均值连线方向投影</strong>。</p>
+<p><strong>这就是两类 LDA 的闭式解</strong>，含义很好记：
+<strong>先用类内散度把空间"白化"，
+再沿白化后的类均值连线方向投影</strong>。</p>
 <h3 id="54">5.4 多类推广与维数上限<a class="headerlink" href="#54" title="Permanent link">&para;</a></h3>
 <p>多类情形把散度改成</p>
 <div class="arithmatex">\[
@@ -14524,11 +14517,11 @@ L 324.644625 140.43368
 <li>PCA 方向：分离比 <span class="arithmatex">\(0.1506\)</span>；</li>
 <li>LDA 方向：分离比 <strong><span class="arithmatex">\(2.6350\)</span></strong> —— <strong>差了约 <span class="arithmatex">\(17.5\)</span> 倍</strong></li>
 </ul>
-<p><strong>Fisher 判据那一列</strong>更是直接给出了优化目标的值：
-PCA 方向约等于 <span class="arithmatex">\(0\)</span>，LDA 方向约 <span class="arithmatex">\(0.0139\)</span>。
-这正好说明 <strong>PCA 完全没有优化 Fisher 判据</strong> —— 它压根不知道有标签这回事。</p>
-<p>上图把这些结论画成了几何图像：<strong>类间散度大、类内散度小的那个方向</strong>，
-才是 LDA 要的。它和"方差最大"的方向可以毫不相干。</p>
+<p><strong>Fisher 判据那一列</strong>直接给出优化目标的值：
+PCA 方向约 <span class="arithmatex">\(0\)</span>，LDA 方向约 <span class="arithmatex">\(0.0139\)</span> ——
+<strong>PCA 完全没有优化 Fisher 判据</strong>，它压根不知道有标签这回事。</p>
+<p>上图把这些结论画成几何图像：<strong>类间散度大、类内散度小的方向</strong>
+才是 LDA 要的，它和"方差最大"的方向可以毫不相干。</p>
 <div class="admonition warning">
 <p class="admonition-title">PCA 与 LDA 的适用条件完全不同</p>
 <p>不要因为"LDA 效果更好"就以为它总是更优。两者的适用条件如下：</p>
@@ -14546,12 +14539,12 @@ PCA 方向约等于 <span class="arithmatex">\(0\)</span>，LDA 方向约 <span 
 <hr />
 <h2 id="pca_2">六、非线性方法：流形学习与核 PCA<a class="headerlink" href="#pca_2" title="Permanent link">&para;</a></h2>
 <h3 id="61">6.1 线性方法的根本局限<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
-<p>PCA 与 LDA 找的都是<strong>线性投影</strong>：<span class="arithmatex">\(\boldsymbol{z} = W^{\mathsf T}\boldsymbol{x}\)</span>。
-它们隐含地假设：<strong>数据在原始空间里就躺在一张平的（线性的）低维子空间上</strong>。</p>
+<p>PCA 与 LDA 找的都是<strong>线性投影</strong>：<span class="arithmatex">\(\boldsymbol{z} = W^{\mathsf T}\boldsymbol{x}\)</span>，
+隐含假设：<strong>数据在原始空间里就躺在一张平的（线性）低维子空间上</strong>。</p>
 <p>如果数据躺在一张弯曲的曲面上呢？</p>
 <p>想象一张卷起来的纸（二维曲面嵌在三维空间）。
-纸上相邻的两点，在三维空间里的直线距离（欧氏距离）可能很远，
-但<strong>沿着纸面走</strong>却只隔一点点。线性投影会把这张纸<strong>压扁</strong>，
+纸上相邻的两点，三维直线距离（欧氏距离）可能很远，
+<strong>沿纸面走</strong>却只隔一点点。线性投影会把这张纸<strong>压扁</strong>，
 本来离得近的点被压到一起 ✗</p>
 <p><strong>这就是"流形"的概念</strong>：数据实际躺在一个 <span class="arithmatex">\(k\)</span> 维曲面（流形）上，
 <span class="arithmatex">\(k\)</span> 远小于环境维数 <span class="arithmatex">\(d\)</span>。
@@ -14605,9 +14598,9 @@ C_\phi \boldsymbol{v}
 \tilde{\phi}(\boldsymbol{x}_i)^{\mathsf T}\boldsymbol{v}
 = \lambda\boldsymbol{v}
 \]</div>
-<p>第二步：注意到特征向量一定落在样本张成的空间里。
-上面的式子表明 <span class="arithmatex">\(C_\phi\boldsymbol{v}\)</span> 是 <span class="arithmatex">\(\tilde{\phi}(\boldsymbol{x}_i)\)</span> 的线性组合，
-所以最优的 <span class="arithmatex">\(\boldsymbol{v}\)</span> 可以写成</p>
+<p>第二步：特征向量一定落在样本张成的空间里：
+上式表明 <span class="arithmatex">\(C_\phi\boldsymbol{v}\)</span> 是 <span class="arithmatex">\(\tilde{\phi}(\boldsymbol{x}_i)\)</span> 的线性组合，
+所以最优的 <span class="arithmatex">\(\boldsymbol{v}\)</span> 可写成</p>
 <div class="arithmatex">\[
 \boldsymbol{v} = \sum_{i=1}^{n}\alpha_i\,\tilde{\phi}(\boldsymbol{x}_i)
 \]</div>
@@ -14683,9 +14676,8 @@ _{(\tilde{K}\boldsymbol{\alpha})_i}
 <li><strong>两端点在嵌入坐标里的距离</strong>：PCA 只有 <span class="arithmatex">\(0.4674\)</span>（几乎被压到一起），
   Isomap 有 <span class="arithmatex">\(3.4292\)</span> —— <strong>首尾被正确拉回到了两端</strong></li>
 </ul>
-<p><strong>Isomap 端点间测地距离 <span class="arithmatex">\(6.0812\)</span></strong> 与真实弧长 <span class="arithmatex">\(18.7522\)</span> 的关系
-也值得注意：两者<strong>不等</strong>（Isomap 用的是弦长累加而不是弧长，
-而且首尾之间还隔着一个邻域外的空隙）。
+<p><strong>Isomap 端点间测地距离 <span class="arithmatex">\(6.0812\)</span> 与真实弧长 <span class="arithmatex">\(18.7522\)</span> 并不相等</strong>
+（Isomap 用弦长累加而非弧长，首尾之间还隔着一个邻域外的空隙）。
 <strong>这说明流形学习给的是"保拓扑"的嵌入，不是精确等距</strong></p>
 <div class="admonition tip">
 <p class="admonition-title">流形学习与核 PCA 该选哪个</p>
@@ -14771,8 +14763,8 @@ _{(\tilde{K}\boldsymbol{\alpha})_i}
 <p><strong>第三步：Kaiser 准则。</strong></p>
 <p>特征值大于 <span class="arithmatex">\(1\)</span> 的有 <span class="arithmatex">\(5.2\)</span> 与 <span class="arithmatex">\(2.1\)</span> 两个，所以也是 <span class="arithmatex">\(k=2\)</span>。</p>
 <p><strong>答案：两个判据在本例给出相同答案 <span class="arithmatex">\(k=2\)</span></strong></p>
-<p>第四步：关于"两个答案不同"的一般讨论。</p>
-<p>本例恰好相同，但两个判据<strong>确实会不一致</strong>。原因是：</p>
+<p>第四步：关于"两个答案不同"的讨论。</p>
+<p>本例恰好相同，但两判据<strong>确实会不一致</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -14869,7 +14861,7 @@ C = \frac13\begin{pmatrix}2 &amp; 1\\ 1 &amp; 2\end{pmatrix}
 还原后确实只剩沿 <span class="arithmatex">\((1,1)\)</span> 的分量，
 丢掉的正是沿 <span class="arithmatex">\((1,-1)\)</span> 的那部分，占四分之一</p>
 <p><strong>"丢掉最小特征值方向"与"重构误差最小"是同一件事</strong> ——
-这就是 3.4 节等价性证明在最小例子上的样子</p>
+3.4 节等价性证明的最小例子。</p>
 </details>
 <h3 id="3-pca-lda">例题 3：判断该用 PCA 还是 LDA<a class="headerlink" href="#3-pca-lda" title="Permanent link">&para;</a></h3>
 <p><strong>题目</strong>：三个场景，分别说明该用 PCA 还是 LDA，并给出理由。</p>

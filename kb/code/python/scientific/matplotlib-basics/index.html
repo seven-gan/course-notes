@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量了。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来可能形状完全不同。所以「先画图再下结论」不是好习惯，而是纪律。">
+    <meta name="description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来形状可能完全不同。「先画图再下结论」不是好习惯，而是纪律。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="可视化基础">
   
-  <meta property="og:description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量了。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来可能形状完全不同。所以「先画图再下结论」不是好习惯，而是纪律。">
+  <meta property="og:description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来形状可能完全不同。「先画图再下结论」不是好习惯，而是纪律。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/code/python/scientific/matplotlib-basics/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="可视化基础">
   
-  <meta name="twitter:description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量了。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来可能形状完全不同。所以「先画图再下结论」不是好习惯，而是纪律。">
+  <meta name="twitter:description" content="可视化基础：前面几页把数据读进来、清洗干净、算出统计量。但数字很难一眼看出结构：第二行是真实的坑：均值、标准差、相关系数完全相同的几组数据，画出来形状可能完全不同。「先画图再下结论」不是好习惯，而是纪律。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11873,7 +11873,7 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><span class="kb-course-tag">编程基础</span></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Matplotlib 官方文档（Quick start guide / Pyplot tutorial）</code><code>本页示例在 Matplotlib 3.9 量级上实跑核对</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="10">10 可视化基础<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
-<p>前面几页把数据读进来、清洗干净、算出统计量了。
+<p>前面几页把数据读进来、清洗干净、算出统计量。
 但<strong>数字很难一眼看出结构</strong>：</p>
 <table>
 <thead>
@@ -11889,13 +11889,13 @@
 </tr>
 <tr>
 <td>一组均值与标准差相同的两组数据</td>
-<td>它们的分布一样吗？</td>
+<td>分布一样吗？</td>
 </tr>
 </tbody>
 </table>
 <p>第二行是真实的坑：<strong>均值、标准差、相关系数完全相同的几组数据，
-画出来可能形状完全不同</strong>。所以「先画图再下结论」不是好习惯，而是<strong>纪律</strong>。</p>
-<p>这一页解决四件事：</p>
+画出来形状可能完全不同</strong>。「先画图再下结论」不是好习惯，而是<strong>纪律</strong>。</p>
+<p>本页解决四件事：</p>
 <table>
 <thead>
 <tr>
@@ -11942,14 +11942,14 @@
 </tr>
 <tr>
 <td>存完图不 <code>close()</code></td>
-<td>循环画几百张图后<strong>内存吃满</strong> ✗</td>
+<td>循环画几百张后<strong>内存吃满</strong> ✗</td>
 </tr>
 </tbody>
 </table>
 </div>
 <hr />
 <h2 id="figure-axes">一、Figure 与 Axes：先搞清画布和坐标系<a class="headerlink" href="#figure-axes" title="Permanent link">&para;</a></h2>
-<p>Matplotlib 的结构是两层的，混淆它会产生大量困惑：</p>
+<p>Matplotlib 结构分两层，混淆它会产生大量困惑：</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
 <span class="normal"><a href="#__codelineno-0-3">3</a></span>
@@ -11979,8 +11979,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>注意 <code>Axes</code> 不是「坐标轴」</strong>（轴叫 <code>Axis</code>）。
-<strong>一幅图 = 一个 Axes</strong>；一张画布可以有多个 Axes。</p>
+<p><strong><code>Axes</code> 不是「坐标轴」</strong>（轴叫 <code>Axis</code>）。
+<strong>一幅图 = 一个 Axes</strong>；一张画布可有多个 Axes。</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
@@ -12001,7 +12001,7 @@
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a>│   └────────────────────────────────────────┘            │
 <a id="__codelineno-1-10" name="__codelineno-1-10"></a>└─────────────────────────────────────────────────────────┘
 </code></pre></div></td></tr></table></div>
-<p><strong>两种 API 风格</strong>是这一节的重点：</p>
+<p><strong>两种 API 风格</strong>是本节重点：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -12063,7 +12063,7 @@
 <tr>
 <td>传给函数</td>
 <td>只能传「全局状态」</td>
-<td><strong>可以把 <code>ax</code> 当参数传</strong> ✓</td>
+<td><strong>可把 <code>ax</code> 当参数传</strong> ✓</td>
 </tr>
 <tr>
 <td>何时知道目标</td>
@@ -12074,7 +12074,6 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">风格 A 最典型的翻车方式</p>
-<p>很多人这么写：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -12091,7 +12090,7 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;第二张&quot;</span><span class="p">)</span>                  <span class="c1"># 覆盖了上一个标题</span>
 </code></pre></div></td></tr></table></div></p>
 <p><strong>结果是一张图上有两条线、只有一个标题</strong> ——
-作者以为画了两张。</p>
+作者却以为画了两张。</p>
 <p><strong>风格 B 会立刻暴露这个问题</strong>（你必须明确指定往哪个 <code>ax</code> 画）：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
@@ -12171,7 +12170,7 @@
 线条数量: 1
 x 数据: [1, 2, 3, 4, 5, 6, 7]
 标题: 一周访问量趋势</code></pre>
-<p><strong>折线图的常调参数</strong>：</p>
+<p><strong>折线图常调参数</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12287,7 +12286,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </tbody>
 </table>
 <h3 id="23">2.3 柱状图：比较类别<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p><strong>适用</strong>：类别之间比大小。<strong>分组柱状</strong>与<strong>堆叠柱状</strong>是两个常用变体。</p>
+<p><strong>适用</strong>：类别之间比大小。<strong>分组柱状</strong>与<strong>堆叠柱状</strong>是常用变体。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -12364,13 +12363,13 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 <a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>纵轴下限: 80.0</code></pre>
-<p><strong>柱状图的长短代表数值大小</strong>，一旦截断纵轴，比例关系就被破坏了 ✗
-<strong>折线图</strong>截断纵轴是可以接受的（它表达的是变化趋势）。</p>
+<p><strong>柱状图的长短代表数值</strong>，截断纵轴就破坏了比例关系 ✗
+<strong>折线图</strong>截断纵轴可以接受（它表达的是趋势）。</p>
 <p>错误 2：用柱状图画「随时间变化」</p>
-<p>时间有顺序，应该用<strong>折线图</strong>。柱状图适用于<strong>无序的类别</strong>。</p>
+<p>时间有顺序，应该用<strong>折线图</strong>；柱状图适用于<strong>无序的类别</strong>。</p>
 </div>
 <h3 id="24">2.4 直方图：看分布<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
-<p><strong>适用</strong>：一个连续变量的取值分布（集中还是分散、单峰还是双峰、偏斜方向）。</p>
+<p><strong>适用</strong>：连续变量的取值分布（集中/分散、单峰/双峰、偏斜方向）。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -12413,7 +12412,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 样本均值: 77.87</code></pre>
 <div class="admonition tip">
 <p class="admonition-title"><code>bins</code> 怎么选：太少掩盖结构，太多变成噪声</p>
-<p><strong>同一个数据集，<code>bins</code> 不同，结论可能完全不同</strong>：</p>
+<p><strong>同一数据集，<code>bins</code> 不同，结论可能完全不同</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -12472,11 +12471,10 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </tr>
 </tbody>
 </table>
-<p><strong>经验起点</strong>：<code>bins ≈ √n</code>（500 个点用 22 左右），
-然后<strong>多看几个值</strong>再定</p>
-<p><strong>另一条重要提醒</strong>：<code>hist</code> 的返回是
+<p><strong>经验起点</strong>：<code>bins ≈ √n</code>（500 点约 22），再<strong>多看几个值</strong>定</p>
+<p><strong>另一条提醒</strong>：<code>hist</code> 返回
 <code>(counts, bin_edges, patches)</code> 三件套，
-每个都要接住或明确忽略，不要只接第一个</p>
+每个都要接住或明确忽略，别只接第一个</p>
 </div>
 <hr />
 <h2 id="_2">三、选图判据：先问「要回答什么」<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12552,7 +12550,7 @@ x 数据: [1, 2, 3, 4, 5, 6, 7]
 </div>
 <hr />
 <h2 id="_3">四、标注与装饰：让图能自己说话<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<p><strong>一张合格的图应当「不看正文也能懂」</strong>。这需要几样东西：</p>
+<p><strong>合格的图应当「不看正文也能懂」</strong>。这需要几样东西：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -12722,7 +12720,7 @@ y 轴标签: y
 </tr>
 </tbody>
 </table>
-<p><strong>判断依据</strong>：把标题单独拿出来看，能否知道这张图想说什么。</p>
+<p><strong>判断依据</strong>：标题单独拿出来看，能否知道这张图想说什么。</p>
 </div>
 <hr />
 <h2 id="_4">五、子图布局：一页放多张图<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
@@ -12830,15 +12828,15 @@ axes[0, 0] 的标题: sin</code></pre>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>形状: (1, 1)
 可以按下标访问: (0.9, 3.1)</code></pre>
-<p>这样写虽然略啰嗦，但<strong>循环画子图时不会因形状不同而崩</strong></p>
+<p>这样写略啰嗦，但<strong>循环画子图时不会因形状不同而崩</strong></p>
 </div>
 <hr />
 <h2 id="_5">六、中文字体：中文用户的第一道坎<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">不设字体，所有中文标签变成方框</p>
 <p><strong>现象</strong>：图能出，但标题、轴标签里的中文全成了 <code>□□□</code>。</p>
-<p><strong>原因</strong>：Matplotlib 的默认字体不含中文字形。</p>
-<p><strong>解决</strong>：指定一个<strong>含中文的字体族</strong>。</p>
+<p><strong>原因</strong>：Matplotlib 默认字体不含中文字形。</p>
+<p><strong>解决</strong>：指定<strong>含中文的字体族</strong>。</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
@@ -12929,11 +12927,11 @@ axes[0, 0] 的标题: sin</code></pre>
 <pre class="kb-output"><code>字体库里字体总数: 351
 名字里像中文字体的数量: 18
 有没有候选: True</code></pre>
-<p><strong>注意</strong>：上面<strong>只打印数量与布尔值</strong>，不打印完整字体清单 ——
-因为字体清单由本机决定，打印出来既不通用、也不稳定。</p>
-<p><strong>用它的方法</strong>：把 <code>cn</code> 里实际存在的名字填进 <code>font.sans-serif</code></p>
+<p><strong>注意</strong>：上面<strong>只打印数量与布尔值</strong>，不打印完整清单 ——
+字体清单由本机决定，打印出来既不通用也不稳定。</p>
+<p><strong>用法</strong>：把 <code>cn</code> 里实际存在的名字填进 <code>font.sans-serif</code></p>
 <h3 id="_7">一个字体都没装怎么办<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>不必依赖系统安装 —— 可以把字体文件随项目一起带走：</p>
+<p>不必依赖系统安装 —— 可把字体文件随项目带走：</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
@@ -12943,7 +12941,7 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="c1"># font_manager.fontManager.addfont(&quot;NotoSansCJK-Regular.ttc&quot;)</span>
 <a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="c1"># plt.rcParams[&quot;font.sans-serif&quot;] = [&quot;Noto Sans CJK SC&quot;]</span>
 </code></pre></div></td></tr></table></div>
-<p><strong>这样做的好处</strong>：换机器也能显示中文，不依赖对方装了什么字体</p>
+<p><strong>好处</strong>：换机器也能显示中文，不依赖对方装了什么字体</p>
 <hr />
 <h2 id="agg">七、后端：为什么脚本里要设 <code>Agg</code><a class="headerlink" href="#agg" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
@@ -12969,9 +12967,9 @@ axes[0, 0] 的标题: sin</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>不设 <code>Agg</code> 会怎样</strong>：脚本在末尾调用了弹窗式的显示，
-在没有图形界面的环境（服务器、CI、某些编辑器）里会<strong>卡住等关窗口</strong>，
-或者直接报错 ✗</p>
+<p><strong>不设 <code>Agg</code> 会怎样</strong>：脚本若调用弹窗式显示，
+在无图形界面的环境（服务器、CI、某些编辑器）里会<strong>卡住等关窗口</strong>，
+或直接报错 ✗</p>
 <p><strong>关键点：它必须在 <code>import matplotlib.pyplot</code> 之前</strong></p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
@@ -12980,8 +12978,8 @@ axes[0, 0] 的标题: sin</code></pre>
 <a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="n">matplotlib</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;Agg&quot;</span><span class="p">)</span>        <span class="c1"># ← 必须在下一行之前！</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </code></pre></div></td></tr></table></div></p>
-<p><strong>顺序写错会怎样</strong>：<code>pyplot</code> 已经按默认后端初始化了，
-之后再用 <code>use("Agg")</code> 可能不生效（并给出警告）</p>
+<p><strong>顺序写错</strong>：<code>pyplot</code> 已按默认后端初始化，
+之后再用 <code>use("Agg")</code> 可能不生效（并给警告）</p>
 </div>
 <hr />
 <h2 id="_8">八、保存图片：三个必知要点<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -13027,7 +13025,7 @@ axes[0, 0] 的标题: sin</code></pre>
 临时目录清理后还存在吗: True</code></pre>
 <div class="admonition tip">
 <p class="admonition-title">三个要点的顺序不能乱</p>
-<p><strong>① 先保存，再关闭</strong> ✗ 顺序反了会存出一张<strong>空白图</strong></p>
+<p><strong>① 先保存，再关闭</strong> ✗ 顺序反了会存出<strong>空白图</strong></p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
@@ -13073,8 +13071,8 @@ axes[0, 0] 的标题: sin</code></pre>
 </code></pre></div></td></tr></table></div></p>
 <pre class="kb-output"><code>生成的图文件数: 3
 全部非空: True</code></pre>
-<p><strong>不关的后果</strong>：Matplotlib 会保留每个 Figure 的引用，
-几百张之后<strong>内存持续增长</strong>，最后可能被杀进程 ✗</p>
+<p><strong>不关的后果</strong>：Matplotlib 保留每个 Figure 的引用，
+几百张后<strong>内存持续增长</strong>，最后可能被杀进程 ✗</p>
 <p><strong>③ 保存参数的选择</strong></p>
 <table>
 <thead>
@@ -13178,7 +13176,7 @@ axes[0, 0] 的标题: sin</code></pre>
 </table>
 <div class="admonition tip">
 <p class="admonition-title">一个自查清单：图存下来之后</p>
-<p>每次出图后，<strong>打开看一遍</strong>，问这四个问题：</p>
+<p>每次出图后<strong>打开看一遍</strong>，问这四个问题：</p>
 <table>
 <thead>
 <tr>
@@ -13193,7 +13191,7 @@ axes[0, 0] 的标题: sin</code></pre>
 </tr>
 <tr>
 <td>轴有单位吗？</td>
-<td><code>x</code>、<code>y</code> 这种无信息的标签</td>
+<td><code>x</code>、<code>y</code> 这种无信息标签</td>
 </tr>
 <tr>
 <td>中文正常吗？</td>
@@ -13235,8 +13233,8 @@ axes[0, 0] 的标题: sin</code></pre>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>问题</strong>：状态机风格下，<code>plt.plot()</code> 画到的是<strong>同一个「当前 Axes」</strong>
-—— 所以<strong>只有一张图，上面两条线</strong>，标题是最后设置的那个 ✗</p>
+<p><strong>问题</strong>：状态机风格下，<code>plt.plot()</code> 画到<strong>同一个「当前 Axes」</strong>
+—— <strong>只有一张图，上面两条线</strong>，标题是最后设的那个 ✗</p>
 <p><strong>验证这一点</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -13315,11 +13313,11 @@ axes[0, 0] 的标题: sin</code></pre>
 图 2 的标题: 图 2
 两张图各有多少线条: 1 1</code></pre>
 <p><strong>关键认识</strong>：<strong>风格 A 的「隐式当前对象」是这类 bug 的根源</strong>。
-改用 <code>fig, ax</code> 后，每张图对应一个明确的变量，<strong>画错也画不到别处</strong></p>
+改用 <code>fig, ax</code> 后，每张图对应明确变量，<strong>画错也画不到别处</strong></p>
 </details>
 <hr />
 <h3 id="2bins">例题 2：<code>bins</code> 的选择会改变结论<a class="headerlink" href="#2bins" title="Permanent link">&para;</a></h3>
-<p>给定一组<strong>双峰</strong>数据，分别用 <code>bins=4</code> 与 <code>bins=40</code> 画直方图，
+<p>给定<strong>双峰</strong>数据，分别用 <code>bins=4</code> 与 <code>bins=40</code> 画直方图，
 说明为什么结论可能不同。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
@@ -13372,12 +13370,12 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong><code>bins=4</code> 时</strong>：分箱宽度达到约 10 分，
+<p><strong><code>bins=4</code> 时</strong>：分箱宽度约 10 分，
 两群可能被并进同一格（或相邻格），<strong>看上去像一个宽峰</strong> ——
-结论会变成「成绩集中在 70–80 附近」，<strong>完全错误</strong> ✗</p>
+结论变成「成绩集中在 70–80 附近」，<strong>完全错误</strong> ✗</p>
 <p><strong><code>bins=40</code> 时</strong>：分箱宽度约 1 分，
-两个峰清楚分开，<strong>真实结构呈现出来</strong></p>
-<p><strong>所以「用直方图判断分布形状」时必须多看几个 <code>bins</code></strong>：</p>
+两个峰清楚分开，<strong>真实结构浮现</strong></p>
+<p><strong>所以用直方图判断分布形状时必须多看几个 <code>bins</code></strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13400,13 +13398,13 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
 </tr>
 </tbody>
 </table>
-<p><strong>判据（不是规则）</strong>：<strong><code>bins</code> 连续增大时结构保持稳定</strong>，
-说明那个结构是真的；<strong>结构随 bins 忽有忽无</strong>，说明是噪声</p>
-<p>这也是为什么「先画图」不能只画一张 —— 换个参数可能就变了。</p>
+<p><strong>判据（不是规则）</strong>：<strong><code>bins</code> 连续增大时结构稳定</strong>，
+说明结构是真的；<strong>结构随 bins 忽有忽无</strong>，则是噪声</p>
+<p>「先画图」不能只画一张 —— 换参数可能就变了。</p>
 </details>
 <hr />
 <h3 id="3">例题 3：中文字体与负号<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
-<p>下面代码的中文与负号都可能显示异常。给出完整修法。</p>
+<p>下面代码的中文与负号都可能异常。给出修法。</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
@@ -13489,7 +13487,7 @@ bins= 40  最高一组的区间: [59.9, 61.1]  人数 54
 <pre class="kb-output"><code>字体族已设几项: 5
 是否用 ASCII 减号: True
 x 轴第一个刻度: -6.0</code></pre>
-<p><strong>为什么两个设置都要</strong>：</p>
+<p><strong>为什么两个都要</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13506,12 +13504,12 @@ x 轴第一个刻度: -6.0</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>另一个办法</strong>：如果不想每次都写，可以放进一个
+<p><strong>另一个办法</strong>：不想每次都写，可放进一个
 <code>plt_style.py</code> 模块，或在项目里统一配置</p>
 </details>
 <hr />
 <h3 id="4">例题 4：批量出图与内存<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>下面代码要画 200 张图。它有什么问题？</p>
+<p>下面代码要画 200 张图。有什么问题？</p>
 <!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
 <span class="normal"><a href="#__codelineno-28-2">2</a></span>
@@ -13536,8 +13534,8 @@ x 轴第一个刻度: -6.0</code></pre>
 <details class="success">
 <summary>解答</summary>
 <p><strong>问题一：没有 <code>plt.close(fig)</code></strong> ——
-Matplotlib 会持续保留所有 Figure 的引用，
-<strong>内存随循环线性增长</strong>，200 张图不算多，
+Matplotlib 持续保留所有 Figure 的引用，
+<strong>内存随循环线性增长</strong>，200 张不算多，
 但上千张可能耗尽内存或被系统杀掉 ✗</p>
 <p><strong>问题二：<code>savefig</code> 的参数不全</strong> ——
 没设 <code>dpi</code>（默认较低）、没设 <code>bbox_inches="tight"</code>（会有多余白边）</p>
@@ -13585,10 +13583,10 @@ Matplotlib 会持续保留所有 Figure 的引用，
 全部非空: True
 当前打开的 Figure 数量: 0</code></pre>
 <p><strong>注意最后一行 <code>plt.get_fignums()</code></strong> ——
-它返回当前仍「活着」的 Figure 编号列表。
-<strong>正确关闭后它应当是空的（长度为 0）</strong></p>
+返回当前仍「活着」的 Figure 编号列表。
+<strong>正确关闭后它应当为空（长度为 0）</strong></p>
 <p><strong>另一个改进</strong>：把画图封装成函数，参数化（数据、路径、标题），
-这样批量出图只是循环调用：</p>
+批量出图就只是循环调用：</p>
 <table>
 <thead>
 <tr>
@@ -13652,9 +13650,9 @@ Matplotlib 会持续保留所有 Figure 的引用，
 线条数量: 2</code></pre>
 <p><strong>输出</strong>：<code>Axes 数量: 1</code>、<code>线条数量: 2</code>。</p>
 <p><strong>原因</strong>：状态机风格下，<code>plt.plot()</code> 总是画到
-<strong>「当前 Axes」</strong>（若不存在就自动建一个）。
+<strong>「当前 Axes」</strong>（不存在就自动建一个）。
 第二次调用时当前 Axes 已存在，于是<strong>加了一条线</strong></p>
-<p><strong>这与「画两张图」的直觉不同</strong>，所以要分清：</p>
+<p><strong>这与「画两张图」的直觉不同</strong>，要分清：</p>
 <table>
 <thead>
 <tr>
@@ -13673,18 +13671,18 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </tr>
 </tbody>
 </table>
-<p><strong>验证「是同一张图」的办法</strong>：拿 <code>plt.gcf()</code> 看它有几个 Axes、
+<p><strong>验证「是同一张图」</strong>：拿 <code>plt.gcf()</code> 看有几个 Axes、
 每个有几条线 —— 这类<strong>可核对的量</strong>比"看着像"可靠</p>
 </details>
 <hr />
 <p><strong>Q2</strong> 为什么 <code>matplotlib.use("Agg")</code> 必须写在 <code>import matplotlib.pyplot</code> 之前？</p>
 <details class="note">
 <summary>提示</summary>
-<p>模块导入时会不会已经做了初始化？</p>
+<p>模块导入时会不会已经初始化？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p>因为 <code>import matplotlib.pyplot</code> 这一步就会初始化后端。</p>
+<p>因为 <code>import matplotlib.pyplot</code> 这一步会初始化后端。</p>
 <table>
 <thead>
 <tr>
@@ -13734,11 +13732,11 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </tr>
 <tr>
 <td>本地交互探索</td>
-<td>其实没问题（可以保留默认）</td>
+<td>其实没问题（可保留默认）</td>
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：<strong><code>Agg</code> 表示「只画到文件」，这正是脚本要的</strong></p>
+<p><strong>一句话</strong>：<strong><code>Agg</code> 表示「只画到文件」，正是脚本要的</strong></p>
 </details>
 <hr />
 <p><strong>Q3</strong> 下面代码想给柱状图加均值参考线，但线没出现。为什么？</p>
@@ -13763,12 +13761,12 @@ Matplotlib 会持续保留所有 Figure 的引用，
 </code></pre></div></td></tr></table></div>
 <details class="note">
 <summary>提示</summary>
-<p><code>axhline</code> 画的线在数据范围里吗？会不会被某样东西挡住了？</p>
+<p><code>axhline</code> 画的线在数据范围里吗？会不会被挡住？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>这条线其实画出来了</strong> —— 但<strong>可能与第一根柱子的顶端重合</strong>
-（均值恰好接近 82），或者<strong>被柱子盖住</strong>。</p>
+<p><strong>这条线其实画出来了</strong> —— 但<strong>可能与第一根柱子顶端重合</strong>
+（均值恰好接近 82），或<strong>被柱子盖住</strong>。</p>
 <p><strong>验证它确实存在</strong>：</p>
 <p><!--kbpy-->
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1"> 1</a></span>
@@ -13804,7 +13802,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <pre class="kb-output"><code>柱子数量: 3
 线条数量: 1
 线的 y 值: [82.0, 82.0]</code></pre>
-<p><strong>所以「线没出现」通常是三个原因</strong>：</p>
+<p><strong>「线没出现」通常有三个原因</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13838,7 +13836,7 @@ Matplotlib 会持续保留所有 Figure 的引用，
 <p><strong>Q4</strong> 如何让同一张图上「上万个点」看起来清楚？给出至少两种做法。</p>
 <details class="note">
 <summary>提示</summary>
-<p>点太多会互相遮挡。透明度、点大小、抽样、二维密度图都是思路。</p>
+<p>点太多会互相遮挡。可用透明度、点大小、抽样、二维密度图。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -13943,7 +13941,7 @@ B 中非空格子数: 717</code></pre>
 </tr>
 </tbody>
 </table>
-<p><strong>关键认识</strong>：<strong>点的数量超过像素数时，散点图就不再有效</strong> ——
+<p><strong>关键认识</strong>：<strong>点数超过像素数时，散点图就不再有效</strong> ——
 这时要换成「用颜色表示密度」的画法</p>
 </details>
 <hr />
@@ -13962,7 +13960,7 @@ B 中非空格子数: 717</code></pre>
 </tr>
 <tr>
 <td><strong><code>Axis</code>（坐标轴）≠ <code>Axes</code>（坐标系）</strong></td>
-<td>术语混淆会导致看文档时理解错</td>
+<td>术语混淆会导致看文档理解错</td>
 </tr>
 <tr>
 <td><strong>四种图各对应一类问题</strong></td>

@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。">
+    <meta name="description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。现实里这个前提经常不成立：同样是「判错」，「延误治疗」与「多做一次复查」的代价差了成百上千倍。所以「错误率最小」把「漏诊」和「误诊」算作同样的一次错误，在医疗场景里是荒谬的。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="最小风险决策">
   
-  <meta property="og:description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。">
+  <meta property="og:description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。现实里这个前提经常不成立：同样是「判错」，「延误治疗」与「多做一次复查」的代价差了成百上千倍。所以「错误率最小」把「漏诊」和「误诊」算作同样的一次错误，在医疗场景里是荒谬的。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/pattern-recognition/bayes-min-risk/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="最小风险决策">
   
-  <meta name="twitter:description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。">
+  <meta name="twitter:description" content="最小风险决策：上一页最小错误率决策的结论是：判给后验最大的类，能让平均错误率最小。这个结论有一个隐含前提 —— 它假设「判错」这件事，不管错成什么方向，代价都是一样的。现实里这个前提经常不成立：同样是「判错」，「延误治疗」与「多做一次复查」的代价差了成百上千倍。所以「错误率最小」把「漏诊」和「误诊」算作同样的一次错误，在医疗场景里是荒谬的。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12226,14 +12226,11 @@
 </tr>
 </tbody>
 </table>
-<p><strong>看第一行与第二行</strong>：同样是「判错」，
-一个是「延误治疗」，一个是「多做一次复查」——
-<strong>两者代价差了成百上千倍</strong></p>
-<p><strong>所以「错误率最小」这个目标本身就有问题</strong>：
-它把「一次漏诊」和「一次误诊」算作<strong>同样的一次错误</strong>，
-这在医疗场景里是荒谬的。</p>
+<p><strong>同样是「判错」，「延误治疗」与「多做一次复查」的代价差了成百上千倍</strong>。
+所以「错误率最小」把「漏诊」和「误诊」算作同样的一次错误，
+在医疗场景里是荒谬的。</p>
 <p>这一页要做的，就是<strong>给不同的错误加上不同的代价</strong>，
-并把判决目标改成「<strong>让期望代价最小</strong>」。</p>
+把判决目标改成「<strong>让期望代价最小</strong>」。</p>
 <table>
 <thead>
 <tr>
@@ -12290,7 +12287,7 @@
 <tr>
 <td><strong>两者关系</strong></td>
 <td>—</td>
-<td>取 0-1 损失时，两者<strong>完全等价</strong> ✓</td>
+<td>取 0-1 损失时，两者<strong>完全等价</strong></td>
 </tr>
 </tbody>
 </table>
@@ -12324,17 +12321,14 @@
 </tr>
 </tbody>
 </table>
-<p><strong>「错误率最小」会把这两者同等看待</strong>：各算「一次错误」。</p>
-<p><strong>后果是什么</strong>：如果疾病很罕见（比如患病率 1%），
-那么为了降低总错误率，最优点会<strong>倾向于判「无病」</strong> ——
-于是漏诊率可能很高</p>
-<p><strong>具体算一下</strong>（用本页固定参数示意）：
-设先验 <span class="arithmatex">\(P(\omega_1) = 0.1\)</span>、<span class="arithmatex">\(P(\omega_2) = 0.9\)</span>，
-可以看出「判无病」在多数样本上是对的，总错误率自然更低。
+<p><strong>「错误率最小」把两者各算「一次错误」。</strong></p>
+<p><strong>后果</strong>：如果疾病很罕见（比如患病率 1%），为了降低总错误率，
+最优点会<strong>倾向于判「无病」</strong>，漏诊率可能很高</p>
+<p><strong>具体算一下</strong>：设先验 <span class="arithmatex">\(P(\omega_1) = 0.1\)</span>、<span class="arithmatex">\(P(\omega_2) = 0.9\)</span>，
+「判无病」在多数样本上是对的，总错误率自然更低。
 <strong>但如果漏诊的代价是误诊的 100 倍呢？</strong> ——
 那么为了少漏诊一次，宁可多犯几十次误诊也是划算的</p>
-<p><strong>结论</strong>：<strong>「让总错误率最小」并不是唯一合理的目标</strong> ——
-必须看错误的代价。</p>
+<p><strong>所以「让总错误率最小」并非唯一合理目标</strong>，还必须看错误的代价。</p>
 <h3 id="12">1.2 用决策论的语言重新描述问题<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
 <p>为了避免混淆，先把决策论的几个术语固定下来：</p>
 <table>
@@ -12372,7 +12366,7 @@
 <p class="admonition-title">「决策数」与「类别数」不一定相等 —— 这是本页第一个关键区分</p>
 <p>上一页里，判决就是把样本归到某一类，
 所以<strong>决策数 = 类别数</strong>（<span class="arithmatex">\(a = c\)</span>），决策 <span class="arithmatex">\(\alpha_i\)</span> 就是「判为 <span class="arithmatex">\(\omega_i\)</span>」。</p>
-<p>但<strong>一般情形下两者可以不同</strong> ✓ 例如：</p>
+<p>但<strong>一般情形下两者可以不同</strong> 例如：</p>
 <table>
 <thead>
 <tr>
@@ -12393,7 +12387,7 @@
 <td><strong>带拒识的分类</strong></td>
 <td>2</td>
 <td><strong>3</strong></td>
-<td><span class="arithmatex">\(\alpha_3\)</span> = 「拒绝判断」✓</td>
+<td><span class="arithmatex">\(\alpha_3\)</span> = 「拒绝判断」</td>
 </tr>
 <tr>
 <td>分级预警</td>
@@ -12405,12 +12399,12 @@
 <td>医疗筛查</td>
 <td>2</td>
 <td><strong>3</strong></td>
-<td><span class="arithmatex">\(\alpha_3\)</span> = 「进一步检查」✓</td>
+<td><span class="arithmatex">\(\alpha_3\)</span> = 「进一步检查」</td>
 </tr>
 </tbody>
 </table>
-<p><strong>这个区分很重要</strong>：本页先讲 <span class="arithmatex">\(a = c\)</span> 的常见情形，
-第八节再引入多出来的「拒识」决策（下一节 <a href="../bayes-reject/">带拒识的决策</a> 会详细展开）</p>
+<p>本页先讲 <span class="arithmatex">\(a = c\)</span> 的常见情形，第八节再引入「拒识」决策
+（下一节 <a href="../bayes-reject/">带拒识的决策</a> 会展开）</p>
 </div>
 <h3 id="13">1.3 损失函数：给每种「错法」标上代价<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p><strong>定义</strong>：损失函数（loss function）<span class="arithmatex">\(\lambda(\alpha_i \mid \omega_j)\)</span>
@@ -12567,16 +12561,16 @@
 <li><strong>看非对角之比</strong>：<span class="arithmatex">\(\lambda_{21} / \lambda_{12}\)</span> 就是两类错判的相对代价。
    第一行 <span class="arithmatex">\(1/1 = 1\)</span>，第二行 <span class="arithmatex">\(5/1 = 5\)</span>，第三行 <span class="arithmatex">\(50/1 = 50\)</span>。</li>
 </ol>
-<p><strong>注意最后一列</strong>：三个损失矩阵的区别<strong>只在于两类错判代价的比值</strong> ——
-<span class="arithmatex">\(1:1\)</span>、<span class="arithmatex">\(5:1\)</span>、<span class="arithmatex">\(50:1\)</span>，而对角与非对角的位置一模一样。
-本节后面会看到，<strong>这个比值直接决定了判决边界跑到哪里</strong></p>
+<p><strong>注意最后一列</strong>：三个损失矩阵的区别<strong>只在于两类错判代价的比值</strong>
+（<span class="arithmatex">\(1:1\)</span>、<span class="arithmatex">\(5:1\)</span>、<span class="arithmatex">\(50:1\)</span>），对角与非对角的位置一模一样。
+<strong>这个比值直接决定了判决边界跑到哪里</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">不要以为「损失矩阵」是一个固定的东西</p>
 <p>损失矩阵<strong>不是数据的性质，而是决策者的主观赋值</strong>。
 同一个数据集，医院急诊科和体检中心给出的 <span class="arithmatex">\(\lambda_{21}\)</span> 可以差几十倍，
 于是两边的判决边界也就落在不同位置。
 所以「某条边界是不是最优」这句话本身没有意义 ——
-必须先说清「在谁的损失矩阵下最优」。这是本章最容易被考到的一句话 ✓</p>
+必须先说清「在谁的损失矩阵下最优」。这是本章最容易被考到的一句话</p>
 </div>
 <p><strong>为什么只关心比值</strong>：后面会证明，判决规则只依赖 <span class="arithmatex">\(\lambda_{12}\)</span> 与 <span class="arithmatex">\(\lambda_{21}\)</span>
 的<strong>比值</strong>，与它们的绝对大小无关。
@@ -12589,14 +12583,13 @@
 但损失 <span class="arithmatex">\(\lambda_{ij}\)</span> 依赖<strong>真实类别 <span class="arithmatex">\(j\)</span></strong> —— 而真实类别我们不知道</p>
 <p><strong>怎么办</strong>：用后验概率 <span class="arithmatex">\(P(\omega_j \mid x)\)</span> 当作「真实类别是 <span class="arithmatex">\(\omega_j\)</span>」的可能性，
 <strong>对损失做加权平均</strong>。这个加权平均就是「期望损失」。</p>
-<p><strong>为什么这个做法合理</strong>：
-<span class="arithmatex">\(P(\omega_j \mid x)\)</span> 是我们<strong>目前掌握的全部信息</strong>下对真实类别的最好判断。
-用它加权，得到的就是「在这个 <span class="arithmatex">\(x\)</span> 上，采取某决策的<strong>平均</strong>损失」</p>
-<p><strong>先把两类问题的画面立起来</strong>：下面这张图画出两个一维高斯类的密度曲线，
-两条曲线的形状与位置决定了「哪一段 <span class="arithmatex">\(x\)</span> 更容易属于哪一类」。
-注意图中那条竖直虚线 —— 它所在的位置正是两条曲线的交点，
+<p><strong>为什么合理</strong>：<span class="arithmatex">\(P(\omega_j \mid x)\)</span> 是当前信息下对真实类别的最好判断，
+用它加权即得「在这个 <span class="arithmatex">\(x\)</span> 上，采取某决策的<strong>平均</strong>损失」</p>
+<p><strong>先把两类问题的画面立起来</strong>：下图画出两个一维高斯类的密度曲线，
+形状与位置决定「哪一段 <span class="arithmatex">\(x\)</span> 更容易属于哪一类」。
+注意那条竖直虚线 —— 它正是两条曲线的交点，
 也是不加代价、不加先验偏好时最自然的判决边界。
-本页后面要做的所有事情，本质上都是<strong>回答「这条虚线为什么会移动、往哪边移动」</strong>：</p>
+本页后面所有事情，本质上都是<strong>回答「这条虚线为什么会移动、往哪边移动」</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 402.762977 226.625463" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="两个一维高斯类的密度曲线；虚线的交点即判决边界">
 
@@ -13093,8 +13086,8 @@ L 261.394688 31.306588
 </tr>
 </tbody>
 </table>
-<p><strong>这张图说明什么</strong>：只要两类分布有重叠，就<strong>一定</strong>存在一段「两边都不太好判」的区域。
-最小风险决策要做的，就是决定<strong>把这条竖线放在重叠区的哪一侧</strong></p>
+<p><strong>这张图说明什么</strong>：只要两类分布有重叠，就<strong>一定</strong>有一段「两边都不太好判」的区域；
+最小风险决策要决定<strong>把这条竖线放在重叠区的哪一侧</strong></p>
 <h3 id="22">2.2 定义条件风险<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>条件风险</strong>（conditional risk），也叫条件期望风险：</p>
 <div class="arithmatex">\[\boxed{\;R(\alpha_i \mid x) = \sum_{j=1}^{c} \lambda_{ij}\, P(\omega_j \mid x)\;}\]</div>
@@ -13122,7 +13115,7 @@ L 261.394688 31.306588
 </tr>
 <tr>
 <td>对 <span class="arithmatex">\(j\)</span> 求和</td>
-<td>把所有可能的真实类别都考虑进来 ✓</td>
+<td>把所有可能的真实类别都考虑进来</td>
 </tr>
 </tbody>
 </table>
@@ -13149,7 +13142,7 @@ L 261.394688 31.306588
 <tr>
 <td>什么时侯相同</td>
 <td>—</td>
-<td><strong>代价全为 1 且判对代价为 0 时</strong> ✓</td>
+<td><strong>代价全为 1 且判对代价为 0 时</strong></td>
 </tr>
 </tbody>
 </table>
@@ -13162,9 +13155,8 @@ L 261.394688 31.306588
 <li>20.0 | 0.361066 0.638934 | 0.638934 0.361066 | 0.361066 0.361066 | 是</li>
 <li>25.0 | 0.010139 0.989861 | 0.989861 0.010139 | 0.010139 0.010139 | 是</li>
 </ul>
-<p><strong>最后一列全为「是」</strong> —— 印证了
-<strong>0-1 损失下，条件风险就是条件错误率</strong>
-（第八节会从公式上把这个等价关系推导出来）</p>
+<p><strong>最后一列全为「是」</strong>，印证了 <strong>0-1 损失下条件风险就是条件错误率</strong>
+（第八节会从公式上推导这个等价）</p>
 <h3 id="23">2.3 用非对称损失看差别<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(\lambda_{21}\)</span> 从 <span class="arithmatex">\(1\)</span> 提到 <span class="arithmatex">\(5\)</span>（即「把真实 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」的代价变高），
 再算一遍条件风险：</p>
@@ -13210,8 +13202,8 @@ L 261.394688 31.306588
 <p>有了条件风险，「最小风险决策」的逻辑与上一页完全平行 ——
 只是把「后验」换成「风险」，并且<strong>目标从最大改成最小</strong>：</p>
 <div class="arithmatex">\[\boxed{\;\alpha^* = \arg\min_{i=1,\dots,a} R(\alpha_i \mid x)\;}\]</div>
-<p><strong>要点</strong>：在观测到 <span class="arithmatex">\(x\)</span> 之后，
-<strong>把所有可能决策的条件风险都算出来，选最小的那个执行</strong></p>
+<p><strong>要点</strong>：观测到 <span class="arithmatex">\(x\)</span> 后，
+<strong>算出所有决策的条件风险，选最小的执行</strong></p>
 <p><strong>上一页与这一页的规则对照</strong>：</p>
 <table>
 <thead>
@@ -13235,7 +13227,7 @@ L 261.394688 31.306588
 <tr>
 <td>等价条件</td>
 <td>—</td>
-<td>0-1 损失时两者一致 ✓</td>
+<td>0-1 损失时两者一致</td>
 </tr>
 </tbody>
 </table>
@@ -13253,12 +13245,12 @@ L 261.394688 31.306588
 <tr>
 <td>最大后验（MAP）</td>
 <td>后验<strong>概率</strong> <span class="arithmatex">\(P(\omega_i\mid x)\)</span></td>
-<td><strong>最大</strong> ✓</td>
+<td><strong>最大</strong></td>
 </tr>
 <tr>
 <td>最小风险</td>
 <td>条件<strong>风险</strong> <span class="arithmatex">\(R(\alpha_i\mid x)\)</span></td>
-<td><strong>最小</strong> ✓</td>
+<td><strong>最小</strong></td>
 </tr>
 </tbody>
 </table>
@@ -13315,8 +13307,7 @@ L 261.394688 31.306588
 <li>R(a1) = 0 * P(w1|x) + 1 * P(w2|x) &lt;- 判 w1，只有真实是 w2 时才错，代价 1</li>
 <li>R(a2) = 5 * P(w1|x) + 0 * P(w2|x) &lt;- 判 w2，只有真实是 w1 时才错，代价 5</li>
 </ul>
-<p><strong>注意两式的结构完全对称</strong>，唯一差别是<strong>错的那一项乘的代价不同</strong>
-（<span class="arithmatex">\(1\)</span> 对 <span class="arithmatex">\(5\)</span>）</p>
+<p><strong>两式结构完全对称</strong>，差别只在<strong>错的那一项乘的代价</strong>（<span class="arithmatex">\(1\)</span> 对 <span class="arithmatex">\(5\)</span>）</p>
 <hr />
 <figure class="kb-fig">
 <svg viewBox="0 0 356.755937 236.585875" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="最小风险阈值随代价比移动：位移与代价比的对数成正比">
@@ -13944,12 +13935,12 @@ L(x) \gt \frac{\lambda_{12}}{\lambda_{21}} \cdot \frac{P(\omega_2)}{P(\omega_1)}
 <tr>
 <td><strong>代价比</strong> <span class="arithmatex">\(\lambda_{12}/\lambda_{21}\)</span></td>
 <td>「把 <span class="arithmatex">\(\omega_2\)</span> 错判成 <span class="arithmatex">\(\omega_1\)</span>」相对「把 <span class="arithmatex">\(\omega_1\)</span> 错判成 <span class="arithmatex">\(\omega_2\)</span>」的代价比</td>
-<td>阈值变大 → <strong>更难判 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</td>
+<td>阈值变大 → <strong>更难判 <span class="arithmatex">\(\omega_1\)</span></strong></td>
 </tr>
 <tr>
 <td><strong>先验比</strong> <span class="arithmatex">\(P(\omega_2)/P(\omega_1)\)</span></td>
 <td><span class="arithmatex">\(\omega_2\)</span> 相对 <span class="arithmatex">\(\omega_1\)</span> 的常见程度</td>
-<td>阈值变大 → 更难判 <span class="arithmatex">\(\omega_1\)</span> ✓</td>
+<td>阈值变大 → 更难判 <span class="arithmatex">\(\omega_1\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -13970,13 +13961,13 @@ L(x) \gt \frac{\lambda_{12}}{\lambda_{21}} \cdot \frac{P(\omega_2)}{P(\omega_1)}
 <td><span class="arithmatex">\(\lambda_{12} \gt \lambda_{21}\)</span></td>
 <td><span class="arithmatex">\(\gt 1\)</span></td>
 <td>变大</td>
-<td>「误把 <span class="arithmatex">\(\omega_2\)</span> 判成 <span class="arithmatex">\(\omega_1\)</span>」代价更大 → <strong>要更谨慎才判 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</td>
+<td>「误把 <span class="arithmatex">\(\omega_2\)</span> 判成 <span class="arithmatex">\(\omega_1\)</span>」代价更大 → <strong>要更谨慎才判 <span class="arithmatex">\(\omega_1\)</span></strong></td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\lambda_{12} \lt \lambda_{21}\)</span></td>
 <td><span class="arithmatex">\(\lt 1\)</span></td>
 <td>变小</td>
-<td>「误把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」代价更大 → <strong>宁可多判 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</td>
+<td>「误把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」代价更大 → <strong>宁可多判 <span class="arithmatex">\(\omega_1\)</span></strong></td>
 </tr>
 </tbody>
 </table>
@@ -14003,15 +13994,15 @@ L(x) \gt \frac{\lambda_{12}}{\lambda_{21}} \cdot \frac{P(\omega_2)}{P(\omega_1)}
 </tr>
 </tbody>
 </table>
-<p><strong>「漏诊代价越大 → 阈值越小 → 越容易判『有病』」</strong> ✓
+<p><strong>「漏诊代价越大 → 阈值越小 → 越容易判『有病』」</strong>
 这就是「宁可多做一些检查，也不要漏掉一个病人」的数学表达。</p>
 <h3 id="44-0-1">4.4 与上一页的关系：0-1 损失时完全退化<a class="headerlink" href="#44-0-1" title="Permanent link">&para;</a></h3>
 <p><strong>取 0-1 损失</strong>（<span class="arithmatex">\(\lambda_{12} = \lambda_{21} = 1\)</span>），阈值变成</p>
 <div class="arithmatex">\[\theta = \frac{1}{1} \cdot \frac{P(\omega_2)}{P(\omega_1)} = \frac{P(\omega_2)}{P(\omega_1)}\]</div>
-<p><strong>这正是上一页 <a href="../bayes-min-error/">最小错误率决策</a> 里的先验门槛</strong> ✓</p>
+<p><strong>这正是上一页 <a href="../bayes-min-error/">最小错误率决策</a> 里的先验门槛</strong></p>
 <p><strong>所以两者的关系是</strong>：</p>
 <div class="arithmatex">\[\text{最小风险决策} \xrightarrow{\;\lambda_{12}=\lambda_{21}=1\;} \text{最小错误率决策}\]</div>
-<p><strong>即：最小错误率决策是最小风险决策在「对称代价」下的特例</strong> ✓</p>
+<p><strong>即：最小错误率决策是最小风险决策在「对称代价」下的特例</strong></p>
 <h3 id="45">4.5 阈值随代价比移动（数值表）<a class="headerlink" href="#45" title="Permanent link">&para;</a></h3>
 <p>用本页固定参数（<span class="arithmatex">\(\mu_1=15,\sigma_1=3\)</span>，<span class="arithmatex">\(\mu_2=22,\sigma_2=4\)</span>，先验 <span class="arithmatex">\(0.6/0.4\)</span>），
 让 <span class="arithmatex">\(\lambda_{21}\)</span> 取不同的值（固定 <span class="arithmatex">\(\lambda_{12} = 1\)</span>），
@@ -14086,12 +14077,10 @@ L(x) \gt \frac{\lambda_{12}}{\lambda_{21}} \cdot \frac{P(\omega_2)}{P(\omega_1)}
 </tr>
 </tbody>
 </table>
-<p>表中边界是「判 <span class="arithmatex">\(\omega_1\)</span> 的区域的上界」，<span class="arithmatex">\(x\)</span> 超过它就改判 <span class="arithmatex">\(\omega_2\)</span>。
-这也说明什么：<strong>先验比那一列始终不动</strong> ——
-它只由两类先验决定，与损失无关；
-<strong>真正被 <span class="arithmatex">\(\lambda_{21}\)</span> 拉动的是「代价比」那一列</strong>，
-而边界是这两列乘积的单调函数。
-换句话说，<strong>先验决定边界的起点，损失决定边界往哪边挪、挪多少</strong> ✓</p>
+<p>表中边界是「判 <span class="arithmatex">\(\omega_1\)</span> 区域的上界」，<span class="arithmatex">\(x\)</span> 超过它就改判 <span class="arithmatex">\(\omega_2\)</span>。
+<strong>先验比那一列始终不动</strong>（只由先验决定，与损失无关），
+<strong>被 <span class="arithmatex">\(\lambda_{21}\)</span> 拉动的是「代价比」那一列</strong>，边界是两列乘积的单调函数 ——
+<strong>先验决定边界的起点，损失决定边界往哪边挪、挪多少</strong></p>
 <p><strong>看图印证</strong>：下图把同样的道理画了出来 ——
 两条加权密度曲线（也就是 <span class="arithmatex">\(P(omega_1)p(x|omega_1)\)</span> 与 <span class="arithmatex">\(P(omega_2)p(x|omega_2)\)</span>）
 是不动的，改变的是「代表决策代价的那条水平参照线」，
@@ -14652,10 +14641,9 @@ L 254.425781 37.659844
 </tr>
 </tbody>
 </table>
-<p><strong>这张图说明什么</strong>：边界的移动<strong>不是随机漂移，而是有明确方向</strong>的 ——
-被「看重」的那一类（代价高、或先验小）会<strong>抢占更大的判决区域</strong>。
-这也是核对本页所有数值表的<strong>几何直觉来源</strong>：
-只要在图上看交点往哪边挪，就能预判表格里边界增大还是减小 ✓</p>
+<p><strong>这张图说明什么</strong>：边界的移动<strong>有明确方向</strong> ——
+被「看重」的那一类（代价高、或先验小）会<strong>抢占更大的判决区域</strong>，
+这也让「交点往哪边挪、表格里边界增大还是减小」可以几何预判</p>
 <p><strong>读这张表的规律</strong>：</p>
 <table>
 <thead>
@@ -14667,26 +14655,22 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td><span class="arithmatex">\(\lambda_{21}\)</span> 从 <span class="arithmatex">\(1\)</span> 增到 <span class="arithmatex">\(100\)</span>，边界从 <span class="arithmatex">\(19.13\)</span> 移到 <span class="arithmatex">\(25.03\)</span></td>
-<td><strong>漏诊代价越大，判「有病」的范围越宽</strong> ✓</td>
+<td><strong>漏诊代价越大，判「有病」的范围越宽</strong></td>
 </tr>
 <tr>
 <td>阈值 <span class="arithmatex">\(\theta\)</span> 从 <span class="arithmatex">\(0.667\)</span> 降到 <span class="arithmatex">\(0.0067\)</span></td>
-<td>门槛越来越低 → 容易满足 → 容易判 <span class="arithmatex">\(\omega_1\)</span> ✓</td>
+<td>门槛越来越低 → 容易满足 → 容易判 <span class="arithmatex">\(\omega_1\)</span></td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\lambda_{21} = 1\)</span> 时边界 <span class="arithmatex">\(= 19.1346\)</span></td>
-<td>与上一页的<strong>最小错误率边界完全相同</strong> ✓</td>
+<td>与上一页的<strong>最小错误率边界完全相同</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一行非常重要</strong>：它说明
-<strong>最小错误率决策就是本页规则在对称代价下的特例</strong> ——
-两个页面在这里对上了 ✓</p>
-<p><strong>还有一个值得注意的数</strong>：<span class="arithmatex">\(\lambda_{21} = 100\)</span> 时边界已经到 <span class="arithmatex">\(25.03\)</span>，
-而 <span class="arithmatex">\(\omega_2\)</span> 的均值是 <span class="arithmatex">\(22\)</span> ——
-<strong>边界已经越过了第二类的中心</strong> ⚠
-这说明「忌漏诊」到极端时，
-<strong>即使 <span class="arithmatex">\(x\)</span> 明显靠近 <span class="arithmatex">\(\omega_2\)</span> 的典型取值，也仍然倾向判 <span class="arithmatex">\(\omega_1\)</span></strong> ✓</p>
+<p><strong>最小错误率决策就是本页规则在对称代价下的特例</strong></p>
+<p><strong>还有一个值得注意的数</strong>：<span class="arithmatex">\(\lambda_{21} = 100\)</span> 时边界已到 <span class="arithmatex">\(25.03\)</span>，
+越过 <span class="arithmatex">\(\omega_2\)</span> 的均值 <span class="arithmatex">\(22\)</span> ——<strong>边界已经越过了第二类的中心</strong> ⚠，
+「忌漏诊」到极端时，<strong>即使 <span class="arithmatex">\(x\)</span> 明显靠近 <span class="arithmatex">\(\omega_2\)</span> 的典型取值，也倾向判 <span class="arithmatex">\(\omega_1\)</span></strong></p>
 <hr />
 <h2 id="x">五、期望风险：从「每个 x」到「整体」<a class="headerlink" href="#x" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 定义<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
@@ -14715,7 +14699,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><span class="arithmatex">\(\int \cdots dx\)</span></td>
-<td>对所有 <span class="arithmatex">\(x\)</span> 加权求和 ✓</td>
+<td>对所有 <span class="arithmatex">\(x\)</span> 加权求和</td>
 </tr>
 </tbody>
 </table>
@@ -14734,7 +14718,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>期望风险 <span class="arithmatex">\(R\)</span></strong></td>
-<td>反映<strong>对整个特征空间所有样本</strong>所采取决策带来的平均风险 ✓</td>
+<td>反映<strong>对整个特征空间所有样本</strong>所采取决策带来的平均风险</td>
 </tr>
 </tbody>
 </table>
@@ -14742,22 +14726,19 @@ L 254.425781 37.659844
 <p><strong>这里的证明与上一页完全相同</strong>，因为逻辑内核一样：</p>
 <p><span class="arithmatex">\(p(x) \geq 0\)</span>，积分是「非负加权求和」。
 若在某个正测度区域上偏离「逐点选风险最小的决策」，
-那么这一段的被积函数变大，<strong>积分必然严格变大</strong> ✓</p>
+那么这一段的被积函数变大，<strong>积分必然严格变大</strong></p>
 <p><strong>所以</strong>：</p>
 <div class="arithmatex">\[\min_{\alpha(\cdot)} R \quad \Longleftarrow \quad \text{在每个 } x \text{ 上取 } \alpha^*(x) = \arg\min_i R(\alpha_i \mid x)\]</div>
-<p><strong>这个证明不需要重做</strong> —— 它只用到「非负权重」这一条，
-与「被加权的是什么量」无关 ✓</p>
+<p><strong>这个证明不需要重做</strong> —— 它只用到「非负权重」这一条</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么两个页面的证明可以共用</p>
 <p>上一页证的是「最小化 <span class="arithmatex">\(\int P(\text{error}\mid x)p(x)dx\)</span>」，
 这一页证的是「最小化 <span class="arithmatex">\(\int R(\alpha(x)\mid x)p(x)dx\)</span>」。</p>
 <p><strong>两者形式完全一致</strong>，只是被积函数换了名字：</p>
 <div class="arithmatex">\[\int \underbrace{(\text{每点的某个代价})}_{\text{可以是错误率，也可以是风险}} \cdot \underbrace{p(x)}_{\geq 0} \, dx\]</div>
-<p>所以「逐点最小 ⟹ 整体最小」对两种情况都成立 ✓</p>
-<p><strong>这条思路本身很值得记住</strong>：
-凡是「非负加权和」形式的目标函数，
-都可以拆成「逐项最小」来求解 ——
-这个模式在后面很多地方会反复出现 ✓</p>
+<p>所以「逐点最小 ⟹ 整体最小」对两种情况都成立</p>
+<p>凡「非负加权和」形式的目标函数都可拆成「逐项最小」求解 ——
+这个模式后面会反复出现</p>
 </div>
 <h3 id="53">5.3 数值对比：两种规则的期望风险<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
 <p>先把两种规则的期望风险写成积分式。</p>
@@ -14776,7 +14757,7 @@ L 254.425781 37.659844
 <div class="arithmatex">\[R(t) = \lambda_{12}P(\omega_2)\int_{-\infty}^{t}p(x\mid\omega_2)dx + \lambda_{21}P(\omega_1)\int_{t}^{+\infty}p(x\mid\omega_1)dx\]</div>
 <p><strong>这个式子说明什么</strong>：期望风险只由<strong>两个累积概率</strong>决定，
 而这两个累积概率又只由边界 <span class="arithmatex">\(t\)</span> 决定。
-所以比较两种规则，本质上就是<strong>比较同一个函数 <span class="arithmatex">\(R(t)\)</span> 在两个不同 <span class="arithmatex">\(t\)</span> 处的取值</strong> ✓</p>
+所以比较两种规则，就是<strong>比较同一个函数 <span class="arithmatex">\(R(t)\)</span> 在两个不同 <span class="arithmatex">\(t\)</span> 处的取值</strong></p>
 <p><strong>手算对照</strong>（取 <span class="arithmatex">\(\lambda_{12}=1,\lambda_{21}=5\)</span>，两种边界即上一节算出的 <span class="arithmatex">\(21.4510\)</span> 与 <span class="arithmatex">\(19.1346\)</span>）：</p>
 <table>
 <thead>
@@ -14890,7 +14871,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>风险规则的风险</strong></td>
-<td>本页规则的期望风险（应当最小）✓</td>
+<td>本页规则的期望风险（应当最小）</td>
 </tr>
 <tr>
 <td><strong>风险规则的错误率</strong></td>
@@ -14902,7 +14883,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>改善</strong></td>
-<td>最后一行百分比：本页规则相对上一页规则的风险降低幅度 ✓</td>
+<td>最后一行百分比：本页规则相对上一页规则的风险降低幅度</td>
 </tr>
 </tbody>
 </table>
@@ -14930,7 +14911,7 @@ L 254.425781 37.659844
 </table>
 <p><strong>看这两行</strong>：</p>
 <ul>
-<li>错误率最小规则的<strong>错误率更低</strong>（<span class="arithmatex">\(0.1452\)</span> 对 <span class="arithmatex">\(0.1876\)</span>）✓</li>
+<li>错误率最小规则的<strong>错误率更低</strong>（<span class="arithmatex">\(0.1452\)</span> 对 <span class="arithmatex">\(0.1876\)</span>）</li>
 <li>但它的<strong>期望风险更高</strong>（<span class="arithmatex">\(0.3470\)</span> 对 <span class="arithmatex">\(0.2255\)</span>）⚠</li>
 <li>风险最小规则把风险降低了约 <strong><span class="arithmatex">\(35\%\)</span></strong></li>
 </ul>
@@ -14957,11 +14938,11 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>所有错误的代价确实相同（或差别很小）</td>
-<td><strong>错误率最小</strong> ✓</td>
+<td><strong>错误率最小</strong></td>
 </tr>
 <tr>
 <td>错误代价明显不对等</td>
-<td><strong>风险最小</strong> ✓</td>
+<td><strong>风险最小</strong></td>
 </tr>
 <tr>
 <td>不确定代价比</td>
@@ -15090,20 +15071,19 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>高估的惩罚小得多</strong></td>
-<td>同样真值 <span class="arithmatex">\(20\)</span>、假设 <span class="arithmatex">\(50\)</span>，只多出约 <span class="arithmatex">\(4.6\%\)</span> ✓</td>
+<td>同样真值 <span class="arithmatex">\(20\)</span>、假设 <span class="arithmatex">\(50\)</span>，只多出约 <span class="arithmatex">\(4.6\%\)</span></td>
 </tr>
 <tr>
 <td><strong>在真值附近，风险曲线很平</strong></td>
-<td>真值 <span class="arithmatex">\(5\)</span>、假设 <span class="arithmatex">\(10\)</span>，只多出约 <span class="arithmatex">\(4.4\%\)</span> —— 说明<strong>不必精确</strong>，量级对就行 ✓</td>
+<td>真值 <span class="arithmatex">\(5\)</span>、假设 <span class="arithmatex">\(10\)</span>，只多出约 <span class="arithmatex">\(4.4\%\)</span> —— 说明<strong>不必精确</strong>，量级对就行</td>
 </tr>
 </tbody>
 </table>
 <p><strong>第 2 条的直觉</strong>：高估代价 → 判决更保守 →
-多判「昂贵的那一类」→ 虽然有错，但<strong>错的方向是「安全」的</strong> ✓</p>
-<p><strong>第 3 条的实践意义</strong>（很重要）：</p>
+多判「昂贵的那一类」→ 虽然有错，但<strong>错的方向是「安全」的</strong></p>
+<p><strong>第 3 条的实践意义</strong>：</p>
 <blockquote>
-<p><strong>损失的具体数值不要求精确，只要量级大致对，
-风险就几乎不受影响。</strong>
+<p><strong>损失的具体数值不要求精确，只要量级大致对，风险就几乎不受影响</strong>；
 但<strong>把代价比的方向搞反</strong>（该重视的没重视）会带来巨大损失 ⚠</p>
 </blockquote>
 <p><strong>所以实践建议</strong>：</p>
@@ -15117,15 +15097,15 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>用<strong>数量级</strong>估代价（「大约 5 倍」而不是「4.87 倍」）</td>
-<td>足够 ✓</td>
+<td>足够</td>
 </tr>
 <tr>
 <td>优先保证<strong>方向正确</strong>（哪个更贵）</td>
-<td>最关键 ✓</td>
+<td>最关键</td>
 </tr>
 <tr>
 <td>做<strong>敏感度分析</strong>：把代价在合理区间内变动，看判决是否翻转</td>
-<td>判断稳健性 ✓</td>
+<td>判断稳健性</td>
 </tr>
 </tbody>
 </table>
@@ -15161,13 +15141,13 @@ L 254.425781 37.659844
 </tbody>
 </table>
 <p><strong>注意拒识那一行的特点</strong>：<strong>不管真实是哪一类，损失都是 <span class="arithmatex">\(\lambda_r\)</span></strong> ——
-因为拒识没做出判断，所以「判错」这件事不发生，
-付的是「没判出来」的固定代价 ✓</p>
+拒识没做出判断，「判错」这件事不发生，
+付的是「没判出来」的固定代价</p>
 <p><strong>拒识的条件风险</strong>：</p>
 <div class="arithmatex">\[R(\alpha_3 \mid x) = \lambda_{31} P(\omega_1 \mid x) + \lambda_{32} P(\omega_2 \mid x)
 = \lambda_r \big[P(\omega_1 \mid x) + P(\omega_2 \mid x)\big] = \lambda_r\]</div>
-<p><strong>因为两个后验之和为 1</strong>，所以拒识的条件风险<strong>恒等于 <span class="arithmatex">\(\lambda_r\)</span></strong>，
-与 <span class="arithmatex">\(x\)</span> 无关 ✓ —— 这很直观：拒识的代价不取决于样本长什么样。</p>
+<p><strong>因为两个后验之和为 1</strong>，拒识的条件风险<strong>恒等于 <span class="arithmatex">\(\lambda_r\)</span></strong>，
+与 <span class="arithmatex">\(x\)</span> 无关 —— 拒识的代价不取决于样本长什么样。</p>
 <p><strong>手算三个决策的比较</strong>。</p>
 <p>判决规则是「取三个条件风险中最小者」。先按 2.2 节的定义把三个风险列出来：</p>
 <p>第一步，<span class="arithmatex">\(\alpha_1\)</span>（判 <span class="arithmatex">\(\omega_1\)</span>）的条件风险只来自「真实是 <span class="arithmatex">\(\omega_2\)</span>」这一项，
@@ -15293,24 +15273,21 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>拒识只出现在<strong>中间那几行</strong>（<span class="arithmatex">\(x = 19 \sim 21\)</span>）</td>
-<td><strong>拒识发生在两类都"没把握"的地方</strong> ✓</td>
+<td><strong>拒识发生在两类都"没把握"的地方</strong></td>
 </tr>
 <tr>
 <td>两端（<span class="arithmatex">\(x=16\)</span>、<span class="arithmatex">\(x=24\)</span>）从不拒识</td>
-<td>后验差距大 → 判错风险很小 ✓</td>
+<td>后验差距大 → 判错风险很小</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\lambda_r\)</span> 变大（<span class="arithmatex">\(0.2 \to 0.6\)</span>）时拒识区<strong>变窄</strong></td>
-<td>拒识变贵了 → 少用 ✓</td>
+<td>拒识变贵了 → 少用</td>
 </tr>
 </tbody>
 </table>
-<p><strong>中间那几行正是「重叠区」</strong> ——
-这与上一页的结论一致：
-<strong>难判的地方就是两类分布重叠的地方</strong></p>
+<p><strong>中间那几行正是「重叠区」</strong> —— 难判的地方就是两类分布重叠的地方</p>
 <p><strong>与上一页的呼应</strong>：上一页说「重叠区是错误率的来源」，
-这一页说「重叠区是拒识的用武之地」——
-<strong>同一段区域，两种不同的处理方式</strong></p>
+这一页说「重叠区是拒识的用武之地」——<strong>同一段区域，两种处理方式</strong></p>
 <hr />
 <h2 id="_8">八、多类情形<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p><span class="arithmatex">\(c\)</span> 类、<span class="arithmatex">\(c\)</span> 个决策（判为某一类）时，
@@ -15331,7 +15308,7 @@ L 254.425781 37.659844
 后验用 <span class="arithmatex">\(\dfrac{p(x\mid\omega_i)P(\omega_i)}{\sum_j p(x\mid\omega_j)P(\omega_j)}\)</span> 手算，
 风险用 <span class="arithmatex">\(\sum_j \lambda_{ij}P(\omega_j\mid x)\)</span> 手算。
 先做 <span class="arithmatex">\(x=14\)</span> 这一行作为示范：</p>
-<p>第一步，算三个加权密度（忽略公共常数因子，只比相对大小也行，但这里保留完整值）：
+<p>第一步，算三个加权密度：
 <span class="arithmatex">\(p(14\mid\omega_1)P(\omega_1)\)</span> 给出 <span class="arithmatex">\(0.5684\)</span>，
 <span class="arithmatex">\(p(14\mid\omega_2)P(\omega_2)\)</span> 给出 <span class="arithmatex">\(0.4281\)</span>，
 <span class="arithmatex">\(p(14\mid\omega_3)P(\omega_3)\)</span> 给出 <span class="arithmatex">\(0.0035\)</span>，三者之和为 <span class="arithmatex">\(1.0000\)</span>（归一化后即后验）。</p>
@@ -15434,7 +15411,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td>两者关系</td>
-<td>取 0-1 损失时，贝叶斯风险 <span class="arithmatex">\(=\)</span> 贝叶斯错误率 ✓</td>
+<td>取 0-1 损失时，贝叶斯风险 <span class="arithmatex">\(=\)</span> 贝叶斯错误率</td>
 <td></td>
 </tr>
 </tbody>
@@ -15452,7 +15429,7 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td><strong>作为下界</strong></td>
-<td>已知分布时，任何规则的风险都不可能低于它 ✓</td>
+<td>已知分布时，任何规则的风险都不可能低于它</td>
 </tr>
 <tr>
 <td><strong>判断"要不要再改进模型"</strong></td>
@@ -15478,10 +15455,9 @@ L 254.425781 37.659844
 <li>22.0000 | 0.22944599 | +0.00398606</li>
 <li>25.0000 | 0.31063624 | +0.08517632</li>
 </ul>
-<p>注意：t = 21.4510 是风险最小的边界，它的风险与贝叶斯风险相等 ✓</p>
-<p><strong>看最后一行</strong>：二分法求出的最优边界对应的风险
-与积分 <span class="arithmatex">\(\int\min(\cdot)\)</span> 得到的贝叶斯风险<strong>完全一致</strong>
-这也是两条独立路径的互相验证。</p>
+<p>注意：t = 21.4510 是风险最小的边界，它的风险与贝叶斯风险相等</p>
+<p>二分法求出的最优边界，与积分 <span class="arithmatex">\(\int\min(\cdot)\)</span> 得到的贝叶斯风险
+<strong>完全一致</strong> —— 两条独立路径互相验证。</p>
 <hr />
 <h2 id="_10">十、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：手算条件风险并判决<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -15547,7 +15523,7 @@ L 254.425781 37.659844
 <p>阈值：</p>
 <div class="arithmatex">\[\theta = \frac{\lambda_{12}}{\lambda_{21}} \cdot \frac{P(\omega_2)}{P(\omega_1)}
 = \frac{1}{5} \times \frac{0.4}{0.6} \approx 0.133333\]</div>
-<p>因为 <span class="arithmatex">\(L(20) = 0.3767 \gt \theta = 0.1333\)</span>，所以<strong>判 <span class="arithmatex">\(\omega_1\)</span></strong> ✓
+<p>因为 <span class="arithmatex">\(L(20) = 0.3767 \gt \theta = 0.1333\)</span>，所以<strong>判 <span class="arithmatex">\(\omega_1\)</span></strong>
 两种算法结论一致。</p>
 <p><strong>核对</strong>：</p>
 </details>
@@ -15595,7 +15571,7 @@ L 254.425781 37.659844
 <p><strong>第三步：判断移动方向。</strong></p>
 <p>阈值越来越小 → 条件 <span class="arithmatex">\(L(x) \gt \theta\)</span> <strong>越来越容易满足</strong>
 → <strong>判 <span class="arithmatex">\(\omega_1\)</span> 的区域越来越大</strong>
-→ 边界<strong>向 <span class="arithmatex">\(\omega_2\)</span> 一侧移动</strong> ✓</p>
+→ 边界<strong>向 <span class="arithmatex">\(\omega_2\)</span> 一侧移动</strong></p>
 <p>第四步：用二分法算出实际边界（验证上面的推断）。</p>
 <table>
 <thead>
@@ -15629,11 +15605,10 @@ L 254.425781 37.659844
 <p><span class="arithmatex">\(\lambda_{21} = 50\)</span> 表示「把 <span class="arithmatex">\(\omega_1\)</span> 错判成 <span class="arithmatex">\(\omega_2\)</span>」的代价
 是反方向错误的 <strong>50 倍</strong>。
 所以<strong>判决极度偏向避免这个方向的错误</strong> ——
-即使 <span class="arithmatex">\(x\)</span> 明显接近 <span class="arithmatex">\(\omega_2\)</span> 的典型值（<span class="arithmatex">\(22\)</span>），也宁可判 <span class="arithmatex">\(\omega_1\)</span> ✓</p>
-<p><strong>但要注意代价</strong>：这样做的后果是
-<strong><span class="arithmatex">\(\omega_2\)</span> 的样本大量被误判成 <span class="arithmatex">\(\omega_1\)</span></strong> ⚠
-这是「用大量便宜的错误换少量昂贵的错误」的策略 ——
-它在期望代价上是最优的，但<strong>错误率会明显上升</strong> ✓</p>
+即使 <span class="arithmatex">\(x\)</span> 明显接近 <span class="arithmatex">\(\omega_2\)</span> 的典型值（<span class="arithmatex">\(22\)</span>），也宁可判 <span class="arithmatex">\(\omega_1\)</span></p>
+<p><strong>但要注意代价</strong>：后果是
+<strong><span class="arithmatex">\(\omega_2\)</span> 的样本大量被误判成 <span class="arithmatex">\(\omega_1\)</span></strong> ⚠ ——
+用大量便宜的错误换少量昂贵的错误，期望代价最优，但<strong>错误率会明显上升</strong></p>
 <p><strong>逐项核对</strong>：</p>
 </details>
 <hr />
@@ -15731,26 +15706,26 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>错误率</td>
-<td><span class="arithmatex">\(0.145198\)</span> ✓</td>
+<td><span class="arithmatex">\(0.145198\)</span></td>
 <td><span class="arithmatex">\(0.187627\)</span></td>
 <td>A</td>
 </tr>
 <tr>
 <td>期望风险</td>
 <td><span class="arithmatex">\(0.346966\)</span></td>
-<td><span class="arithmatex">\(0.225460\)</span> ✓</td>
+<td><span class="arithmatex">\(0.225460\)</span></td>
 <td><strong>B</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>哪个更合理：规则 B</strong> ✓</p>
+<p><strong>哪个更合理：规则 B</strong></p>
 <p><strong>理由</strong>：代价是 <span class="arithmatex">\(\lambda_{21} = 5\)</span>，即「把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」
 的错误贵 5 倍。
 规则 A 虽然总错误数更少，
 但它把大量<strong>昂贵的错误</strong>（真 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>）留在里面 ——
 所以<strong>总代价高出 <span class="arithmatex">\(54\%\)</span></strong> ⚠</p>
 <p><strong>规则 B 的做法是主动多犯一些便宜的错</strong>（真 <span class="arithmatex">\(\omega_2\)</span> 判成 <span class="arithmatex">\(\omega_1\)</span>），
-以换取<strong>少的昂贵的错</strong> ✓</p>
+以换取<strong>少的昂贵的错</strong></p>
 <p><strong>一句话总结</strong>：</p>
 <blockquote>
 <p><strong>代价不对等时，应该比的是「代价」而不是「次数」。</strong></p>
@@ -15845,7 +15820,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>高估代价的后果轻微</strong></td>
-<td>只多出约 <span class="arithmatex">\(4.6\%\)</span> ✓</td>
+<td>只多出约 <span class="arithmatex">\(4.6\%\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -15867,17 +15842,15 @@ L 254.425781 37.659844
 <tr>
 <td><strong>高估</strong></td>
 <td>按「代价极大」设计 → <strong>过度倾向判 <span class="arithmatex">\(\omega_1\)</span></strong> → 多犯便宜的错误</td>
-<td>风险略有上升 ✓</td>
+<td>风险略有上升</td>
 </tr>
 </tbody>
 </table>
 <p><strong>实践含义</strong>：</p>
 <blockquote>
-<p><strong>在不确定代价时，宁可高估严重的那个方向，
-也不要低估。</strong> —— 因为高估的代价小、低估的代价大 ✓</p>
+<p><strong>在不确定代价时，宁可高估严重的那个方向，也不要低估</strong></p>
 </blockquote>
-<p>这与「保守原则」一致：
-<strong>当拿不准漏诊和误诊哪个更贵时，先按漏诊更贵来处理</strong> ✓</p>
+<p>拿不准漏诊和误诊谁更贵时，先按漏诊更贵处理（保守原则）</p>
 <p><strong>核对</strong>：</p>
 </details>
 <hr />
@@ -15908,7 +15881,7 @@ L 254.425781 37.659844
 <tr>
 <td><span class="arithmatex">\(\lambda_{11}\)</span></td>
 <td>真实 <span class="arithmatex">\(\omega_1\)</span>，判 <span class="arithmatex">\(\omega_1\)</span>（判对）</td>
-<td><span class="arithmatex">\(0\)</span> ✓</td>
+<td><span class="arithmatex">\(0\)</span></td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\lambda_{12}\)</span></td>
@@ -15923,13 +15896,12 @@ L 254.425781 37.659844
 <tr>
 <td><span class="arithmatex">\(\lambda_{22}\)</span></td>
 <td>真实 <span class="arithmatex">\(\omega_2\)</span>，判 <span class="arithmatex">\(\omega_2\)</span>（判对）</td>
-<td><span class="arithmatex">\(0\)</span> ✓</td>
+<td><span class="arithmatex">\(0\)</span></td>
 </tr>
 </tbody>
 </table>
 <p><strong>注意 <span class="arithmatex">\(\lambda_{12} = 3\)</span> 而 <span class="arithmatex">\(\lambda_{21} = 2\)</span></strong> ——
-矩阵第一行第二列是 <span class="arithmatex">\(3\)</span>，第二行第一列是 <span class="arithmatex">\(2\)</span> ⚠
-（容易看成 <span class="arithmatex">\(\lambda_{12}=2\)</span>，因为「第一行第二列」在纸上写出来就是 <span class="arithmatex">\(\Lambda[0][1]=3\)</span>）</p>
+矩阵第一行第二列是 <span class="arithmatex">\(3\)</span>，第二行第一列是 <span class="arithmatex">\(2\)</span> ⚠</p>
 <p><strong>第二步：算阈值。</strong></p>
 <div class="arithmatex">\[\frac{P(\omega_2)}{P(\omega_1)} = \frac{0.5}{0.5} = 1\]</div>
 <div class="arithmatex">\[\theta = \frac{\lambda_{12}}{\lambda_{21}} \times 1 = \frac{3}{2} = 1.5\]</div>
@@ -15938,18 +15910,18 @@ L 254.425781 37.659844
 <div class="arithmatex">\[L = \frac{0.02}{0.03} \approx 0.666667\]</div>
 <p><strong>第四步：判决。</strong></p>
 <p>因为 <span class="arithmatex">\(L = 0.6667 \lt \theta = 1.5\)</span> ——
-<strong>不满足「<span class="arithmatex">\(L \gt \theta\)</span>」的条件</strong>，所以<strong>采取 <span class="arithmatex">\(\alpha_2\)</span>（判 <span class="arithmatex">\(\omega_2\)</span>）</strong> ✓</p>
+<strong>不满足「<span class="arithmatex">\(L \gt \theta\)</span>」的条件</strong>，所以<strong>采取 <span class="arithmatex">\(\alpha_2\)</span>（判 <span class="arithmatex">\(\omega_2\)</span>）</strong></p>
 <p><strong>用条件风险核对</strong>：</p>
 <p>先算后验（先验相等，所以后验 <span class="arithmatex">\(=\)</span> 加权密度归一化）：</p>
 <div class="arithmatex">\[q_1 = \frac{0.02}{0.02+0.03} = 0.4, \qquad q_2 = \frac{0.03}{0.05} = 0.6\]</div>
 <div class="arithmatex">\[R(\alpha_1 \mid x) = 0 \times 0.4 + 3 \times 0.6 = 1.8\]</div>
 <div class="arithmatex">\[R(\alpha_2 \mid x) = 2 \times 0.4 + 0 \times 0.6 = 0.8\]</div>
-<p><span class="arithmatex">\(0.8 \lt 1.8\)</span> → 采取 <span class="arithmatex">\(\alpha_2\)</span> ✓
+<p><span class="arithmatex">\(0.8 \lt 1.8\)</span> → 采取 <span class="arithmatex">\(\alpha_2\)</span>
 <strong>两种算法一致。</strong></p>
 <p><strong>顺带看一个反直觉点</strong>：
 这里 <span class="arithmatex">\(\lambda_{21} = 2 \lt \lambda_{12} = 3\)</span>，
 即「把 <span class="arithmatex">\(\omega_1\)</span> 判成 <span class="arithmatex">\(\omega_2\)</span>」<strong>比反向错误便宜</strong>。
-所以判决<strong>更容易采取 <span class="arithmatex">\(\alpha_2\)</span></strong> ✓
+所以判决<strong>更容易采取 <span class="arithmatex">\(\alpha_2\)</span></strong>
 （阈值 <span class="arithmatex">\(1.5 \gt 1\)</span>，需要很强的证据才判 <span class="arithmatex">\(\omega_1\)</span>）</p>
 </details>
 <hr />
@@ -15966,7 +15938,7 @@ L 254.425781 37.659844
 <p><strong>正确的表述</strong>：</p>
 <div class="arithmatex">\[\text{最小风险决策} \xrightarrow{\;\lambda_{ij} = 1 - \delta_{ij}\;(\text{0-1 损失})\;} \text{最大后验决策}\]</div>
 <p><strong>箭头是单向的</strong>：只有在<strong>特定损失矩阵</strong>下两者才等价，
-不能反过来推广成「总是一样」✓</p>
+不能反过来推广成「总是一样」</p>
 <p><strong>举一个明确的反例</strong>（用本页参数，<span class="arithmatex">\(x = 20\)</span>）：</p>
 <table>
 <thead>
@@ -15993,7 +15965,7 @@ L 254.425781 37.659844
 </tbody>
 </table>
 <p><strong>后验完全一样</strong>（同一个 <span class="arithmatex">\(x\)</span>），
-<strong>判决却相反</strong> —— 说明等价性依赖于损失矩阵 ✓</p>
+<strong>判决却相反</strong> —— 说明等价性依赖于损失矩阵</p>
 <p><strong>为什么 0-1 损失下才等价（回顾推导）</strong>：</p>
 <div class="arithmatex">\[R(\alpha_i \mid x) = \sum_{j\neq i} 1 \cdot P(\omega_j \mid x) = 1 - P(\omega_i \mid x)\]</div>
 <p>「用 1 减去自己那类的后验」——
@@ -16010,11 +15982,11 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>各类错误代价确实相同</td>
-<td>用最大后验（更简单）✓</td>
+<td>用最大后验（更简单）</td>
 </tr>
 <tr>
 <td>代价不同</td>
-<td><strong>必须</strong>用最小风险 ✓</td>
+<td><strong>必须</strong>用最小风险</td>
 </tr>
 </tbody>
 </table>
@@ -16040,7 +16012,7 @@ L 254.425781 37.659844
 <p><strong>第四步：说明含义。</strong></p>
 <p><span class="arithmatex">\(\theta = 1\)</span> 意味着判决条件是 <span class="arithmatex">\(L(x) \gt 1\)</span>，
 即 <span class="arithmatex">\(p(x\mid\omega_1) \gt p(x\mid\omega_2)\)</span> ——
-<strong>这正好是最大似然（ML）判决</strong> ✓</p>
+<strong>这正好是最大似然（ML）判决</strong></p>
 <p><strong>所以这个结果的深刻含义是</strong>：</p>
 <blockquote>
 <p><strong>当代价比恰好等于「先验比的倒数」时，
@@ -16074,7 +16046,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td>一般情形</td>
-<td>最小风险判决（既看先验也看代价）✓</td>
+<td>最小风险判决（既看先验也看代价）</td>
 </tr>
 </tbody>
 </table>
@@ -16136,7 +16108,7 @@ L 254.425781 37.659844
 <td><span class="arithmatex">\(\lambda_{11}, \lambda_{22}\)</span></td>
 <td>判对</td>
 <td><span class="arithmatex">\(0\)</span></td>
-<td>判对无损失（通常约定）✓</td>
+<td>判对无损失（通常约定）</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\lambda_{21}\)</span></td>
@@ -16154,7 +16126,7 @@ L 254.425781 37.659844
 <td><span class="arithmatex">\(\lambda_r\)</span></td>
 <td><strong>复查</strong></td>
 <td><strong>最小</strong></td>
-<td>只是多花一次检查的费用和时间 ✓</td>
+<td>只是多花一次检查的费用和时间</td>
 </tr>
 </tbody>
 </table>
@@ -16182,7 +16154,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><span class="arithmatex">\(\alpha_3\)</span>（拒识）</td>
-<td><strong>恒为 <span class="arithmatex">\(\lambda_r\)</span></strong> ✓</td>
+<td><strong>恒为 <span class="arithmatex">\(\lambda_r\)</span></strong></td>
 </tr>
 </tbody>
 </table>
@@ -16197,26 +16169,23 @@ L 254.425781 37.659844
 <tbody>
 <tr>
 <td>vs 漏诊（<span class="arithmatex">\(\lambda_{21}\)</span>）</td>
-<td>复查能查出病 → 避免了「延误治疗」这个最大损失 ✓</td>
+<td>复查能查出病 → 避免了「延误治疗」这个最大损失</td>
 </tr>
 <tr>
 <td>vs 误诊（<span class="arithmatex">\(\lambda_{12}\)</span>）</td>
-<td>复查能排除病 → 避免了「不必要的治疗」✓</td>
+<td>复查能排除病 → 避免了「不必要的治疗」</td>
 </tr>
 </tbody>
 </table>
-<p><strong>复查的价值就在于「用很小的代价买到更多信息」</strong> ——
-所以它的损失应当小于「在信息不足时硬做的判断」</p>
-<p>第五步：这解释了临床流程里的一个现象。</p>
-<p>为什么筛查会「初筛 + 复查」而不是一次定论？
-因为在初筛阶段后验概率不够高（常常落在重叠区），
+<p><strong>复查的价值在于「用很小的代价买到更多信息」</strong> ——
+损失应小于「信息不足时硬做的判断」</p>
+</details>
+<p>第五步：这也解释了临床流程里的一个现象。</p>
+<p>筛查会「初筛 + 复查」而不是一次定论：初筛阶段后验不够高（常落在重叠区），
 此时<strong>复查（代价 <span class="arithmatex">\(\lambda_r\)</span> 很小）比硬判（可能付 <span class="arithmatex">\(\lambda_{21}\)</span>）更划算</strong></p>
 <p><strong>演示三个决策的判决分区</strong>：</p>
-<p><strong>注意其中的规律</strong>：
-<strong>复查只出现在中间那一段</strong> ——
-两端（后验差距大）直接判类，中间（后验接近）转复查
-这与第七节的结论完全一致。</p>
-</details>
+<p><strong>注意其中的规律</strong>：复查只出现在中间那一段 ——
+两端直接判类，中间转复查，与第七节结论一致。</p>
 <hr />
 <h2 id="_12">小结<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
 <table>
@@ -16233,7 +16202,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>决策空间 <span class="arithmatex">\(\{\alpha_1,\dots,\alpha_a\}\)</span>，<span class="arithmatex">\(a\)</span> 不一定等于 <span class="arithmatex">\(c\)</span></strong></td>
-<td>多出来的决策如「拒识」✓</td>
+<td>多出来的决策如「拒识」</td>
 </tr>
 <tr>
 <td><strong><span class="arithmatex">\(\lambda_{ij}\)</span> = 真实 <span class="arithmatex">\(\omega_j\)</span> 时采取决策 <span class="arithmatex">\(\alpha_i\)</span> 的损失</strong></td>
@@ -16257,7 +16226,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>两类阈值 <span class="arithmatex">\(\theta = \frac{\lambda_{12}}{\lambda_{21}}\cdot\frac{P(\omega_2)}{P(\omega_1)}\)</span></strong></td>
-<td>代价比 × 先验比 ✓</td>
+<td>代价比 × 先验比</td>
 </tr>
 <tr>
 <td><strong>0-1 损失时退化为最大后验判决</strong></td>
@@ -16269,7 +16238,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>拒识的条件风险恒为 <span class="arithmatex">\(\lambda_r\)</span></strong></td>
-<td>因为拒识没做判断，惩罚与样本无关 ✓</td>
+<td>因为拒识没做判断，惩罚与样本无关</td>
 </tr>
 <tr>
 <td><strong>拒识发生在重叠区</strong></td>
@@ -16281,7 +16250,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>低估代价的后果远大于高估</strong></td>
-<td>宁可高估严重方向，不要低估 ✓</td>
+<td>宁可高估严重方向，不要低估</td>
 </tr>
 <tr>
 <td><strong>损失不必精确，量级对即可</strong></td>
@@ -16289,7 +16258,7 @@ L 254.425781 37.659844
 </tr>
 <tr>
 <td><strong>边界的移动方向由「谁被看重」决定</strong></td>
-<td>代价高或先验小的一类会抢占更大判决区 ✓</td>
+<td>代价高或先验小的一类会抢占更大判决区</td>
 </tr>
 </tbody>
 </table>
@@ -16338,7 +16307,7 @@ L 254.425781 37.659844
 <p><strong>最后一件要记住的事</strong>：本页所有结论都建立在一个前提上 ——
 <strong>损失矩阵是给定的、且对角为 <span class="arithmatex">\(0\)</span></strong>。
 一旦这个前提变了（比如判对也有成本、或代价比本身估不准），
-就要回到第 ① 步重新推，而不能直接套 ④ 的公式 ✓</p>
+就要回到第 ① 步重新推，而不能直接套 ④ 的公式</p>
 <hr />
 <p><strong>下一页</strong>：<a href="../bayes-reject/">带拒识的决策</a> ——
 把本页第七节引入的「第三个决策」展开讲：

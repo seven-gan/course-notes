@@ -12017,8 +12017,6 @@ h^{*}\sim\epsilon^{1/(p+1)}
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「为什么值得用高阶方法」</strong> ——
-不是为了「理论上更漂亮」，而是<strong>实际能达到的精度更高</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、数值微分：差分的两类误差<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12176,8 +12174,6 @@ f'(x)\approx\frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
 </tr>
 </tbody>
 </table>
-<p>「中心差分用同样两次求值就得到二阶」 ——
-<strong>这是「对称性的免费收益」</strong></p>
 <p><strong>工程含义</strong>：<strong>能用中心差分就用中心差分</strong>
 （唯一例外是「边界处」—— 那里没有对称的邻点。）</p>
 </div>
@@ -12321,7 +12317,7 @@ f(x+ih) = f(x)+ihf'(x)-\frac{h^{2}}{2}f''(x)-\cdots
 <!-- 坐标轴（对数） -->
 <line class="gb" x1="46" y1="196" x2="404" y2="196" marker-end="url(#nd1-ah1)"/>
 <line class="gb" x1="46" y1="196" x2="46" y2="28" marker-end="url(#nd1-ah2)"/>
-<text class="lbl-s" x="386" y="188">h（对数轴）</text>
+<text class="lbl-s" x="426" y="188" text-anchor="end">h（对数轴）</text>
 <text class="lbl-s" x="54" y="40">误差</text>
 <!-- 截断误差：h 增大而增大 -->
 <path class="a1" d="M92,116 C130,104 180,78 260,44 C300,32 340,28 376,26" fill="none" stroke-width="2.4"/>
@@ -12339,7 +12335,7 @@ f(x+ih) = f(x)+ihf'(x)-\frac{h^{2}}{2}f''(x)-\cdots
 <!-- 说明 -->
 <text class="lbl-s" x="46" y="236">h 太大 → 截断误差主导；h 太小 → 舍入误差主导（甚至差分归零）</text>
 </svg>
-<figcaption>图 1　数值微分的两类误差与最优步长。横轴是步长 h（对数坐标），纵轴是误差。<b>截断误差</b>（实线，h^p）随 h 减小而下降；<b>舍入误差</b>（实线，/h）随 h 减小而<b>上升</b>。两者的和（虚线）呈 <b>U 形</b>，最低点给出最优步长 h^*¹/(p+1)。<b>关键：h 不能无限减小</b> —— 太小会导致差分归零，结果反而更差</figcaption>
+<figcaption>图 1　数值微分的两类误差与最优步长。横轴是步长 h（对数坐标），纵轴是误差。<b>截断误差</b>（实线，h^p）随 h 减小而下降；<b>舍入误差</b>（实线，/h）随 h 减小而<b>上升</b>。两者的和（虚线）呈 <b>U 形</b>，最低点给出最优步长 h＊ ≈ ε^(1/(p+1))。<b>关键：h 不能无限减小</b> —— 太小会导致差分归零，结果反而更差</figcaption>
 </figure>
 
 <hr />
@@ -12500,6 +12496,42 @@ S_{n} = \frac{h}{3}\left[f_0+4(f_1+f_3+\cdots)+2(f_2+f_4+\cdots)+f_n\right]
 <div class="arithmatex">\[
 E_{S} = -\frac{(b-a)h^{4}}{180}f^{(4)}(\xi)
 \]</div>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="梯形法则用分段直线拟合、Simpson 法则用分段抛物线拟合的对比示意">
+<defs>
+<marker id="nd2-ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path class="mk-c" d="M0,0 L10,5 L0,10 z"/></marker>
+</defs>
+<line class="ax" x1="34" y1="196" x2="206" y2="196" marker-end="url(#nd2-ah1)"/>
+<line class="ax" x1="34" y1="196" x2="34" y2="58" marker-end="url(#nd2-ah1)"/>
+<text class="l1" x="40" y="28">梯形法则</text>
+<path class="a1" d="M40,58 C70,62 98,76 120,92 C148,120 178,158 200,188" fill="none"/>
+<polygon class="f1" points="40,58 120,92 120,196 40,196"/>
+<path class="a1" d="M40,58 L120,92 L200,188" fill="none"/>
+<line class="gd" x1="40" y1="58" x2="40" y2="196"/>
+<line class="gd" x1="120" y1="92" x2="120" y2="196"/>
+<line class="gd" x1="200" y1="188" x2="200" y2="196"/>
+<circle class="d1" cx="40" cy="58" r="3.4"/>
+<circle class="d1" cx="120" cy="92" r="3.4"/>
+<circle class="d1" cx="200" cy="188" r="3.4"/>
+<text class="lbl-s" x="58" y="152">一个梯形</text>
+<text class="l1" x="40" y="216">分段直线，误差 O(h²)</text>
+<line class="ax" x1="234" y1="196" x2="406" y2="196" marker-end="url(#nd2-ah1)"/>
+<line class="ax" x1="234" y1="196" x2="234" y2="58" marker-end="url(#nd2-ah1)"/>
+<text class="l3" x="240" y="28">Simpson 法则</text>
+<text class="lbl-s" x="240" y="46">每段用 3 个点定一条抛物线</text>
+<path class="a1" d="M240,58 C290,86 350,150 400,188" fill="none"/>
+<path class="a3" d="M240,58 Q280,81.5 320,119" fill="none"/>
+<line class="gd" x1="240" y1="58" x2="240" y2="196"/>
+<line class="gd" x1="320" y1="119" x2="320" y2="196"/>
+<circle class="d3" cx="240" cy="58" r="3.4"/>
+<circle class="d3" cx="280" cy="85" r="3.4"/>
+<circle class="d3" cx="320" cy="119" r="3.4"/>
+<text class="l3" x="240" y="216">分段抛物线，误差 O(h⁴)</text>
+<text class="lbl" x="215" y="238" text-anchor="middle">同样多的函数值，Simpson 精度更高</text>
+</svg>
+<figcaption>图 2　同样多的函数值下两种数值积分的拟合方式对比。<b>左</b>：梯形法则把相邻节点用<b>直线</b>连起来逐段拟合曲线，蓝色实线与折线之间的空隙就是误差，精度只有 O(h 平方)；<b>右</b>：Simpson 法则每段用 3 个点定一条<b>抛物线</b>去贴合曲线，弯曲的抛物线更能跟上函数的弯度，精度提高到 O(h 四次方)。<b>要点</b>：函数值个数相同时，用抛物线拟合比用直线拟合更贴近曲线，所以 Simpson 的误差更小</figcaption>
+</figure>
+
 <div class="admonition note">
 <p class="admonition-title">Simpson 法则的一个「惊人的」性质</p>
 <p><strong>定理</strong>：Simpson 法则对任意三次多项式精确</p>
@@ -12543,8 +12575,6 @@ T = 0.5\left[\frac02+0.125+\frac12\right] = 0.5\times0.625 = 0.3125\;\times
 </tr>
 </tbody>
 </table>
-<p><strong>工程含义</strong>：<strong>「Simpson 比梯形好得多」不只是「阶数高一阶」</strong> ——
-它还<strong>对三次以下精确</strong>，这对工程问题（分段光滑）非常有利</p>
 </div>
 <h3 id="_9">精度对比<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
 <p><strong>对 <span class="arithmatex">\(\int_{0}^{1}e^{-x^{2}}\mathrm{d}x\)</span>（真值 <span class="arithmatex">\(0.7468241328\)</span>）</strong>：</p>
@@ -12608,7 +12638,6 @@ T = 0.5\left[\frac02+0.125+\frac12\right] = 0.5\times0.625 = 0.3125\;\times
 </tr>
 </tbody>
 </table>
-<p><strong>这与理论完全一致</strong></p>
 <p><strong>同一精度的成本对比</strong>：</p>
 <p><strong>要把误差降到 <span class="arithmatex">\(10^{-6}\)</span></strong>：</p>
 <table>
@@ -12724,8 +12753,7 @@ T = 0.5\left[\frac02+0.125+\frac12\right] = 0.5\times0.625 = 0.3125\;\times
 \int_{0}^{1}\frac{1}{t}\cdot2t\,\mathrm{d}t = \int_{0}^{1}2\,\mathrm{d}t = 2 \;\checkmark
 \]</div>
 <p>替换后被积函数变成常数 —— 奇点消失</p>
-<p><strong>这是「用解析手段改善数值方法」的范例</strong>
-（回顾「浮点数与误差」一页的「先变形再计算」原则。）</p>
+<p><strong>这是「用解析手段改善数值方法」的范例</strong></p>
 </div>
 <hr />
 <h2 id="gauss-monte-carlo">四、Gauss 求积与 Monte Carlo<a class="headerlink" href="#gauss-monte-carlo" title="Permanent link">&para;</a></h2>
@@ -12842,7 +12870,6 @@ x = 0,\ \pm\sqrt{\frac35},\qquad w = \frac89,\ \frac59
 </tr>
 </tbody>
 </table>
-<p>最后一条是 Gauss 求积的主要局限：</p>
 <p><strong>它假设函数光滑</strong>，所以<strong>无法自适应</strong>（细分级联会打破「最优节点」）✗</p>
 <p><strong>所以实际积分器常用「Gauss-Kronrod」配对</strong> ——
 用两套嵌套节点同时给出结果与误差估计</p>
@@ -12906,7 +12933,6 @@ x = 0,\ \pm\sqrt{\frac35},\qquad w = \frac89,\ \frac59
 </tbody>
 </table>
 <p>网格法的误差指数含 <span class="arithmatex">\(1/d\)</span> → <strong>维度高时几乎不收敛</strong> ✗</p>
-<p><strong>Monte Carlo 的 <span class="arithmatex">\(N^{-1/2}\)</span> 与维度无关</strong></p>
 <p>「维度的诅咒」被 Monte Carlo 绕过了 ——
 这是它<strong>唯一但决定性</strong>的优势 ✓</p>
 <p><strong>临界维度</strong>（粗略估计）：</p>
@@ -13011,7 +13037,6 @@ x = 0,\ \pm\sqrt{\frac35},\qquad w = \frac89,\ \frac59
 <p>dropout 的推理、变分推断的 ELBO 估计、
 策略梯度中的期望 —— <strong>这些都是 Monte Carlo 积分</strong></p>
 </div>
-<p>"""</p>
 <hr />
 <h2 id="_10">五、典型例题<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <h3 id="1">例题 1：三种差分格式的精度对比<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -13118,7 +13143,6 @@ E\approx\frac{h^{2}}{6}\lvert f'''\rvert = \frac{0.01}{6}\times0.540302 = 9.005\
 </tr>
 </tbody>
 </table>
-<p>为什么中心差分更容易验证：</p>
 <p><strong>因为 <span class="arithmatex">\(\sin\)</span> 的高阶导数形式简单</strong>（<span class="arithmatex">\(f''' = -\cos\)</span>），
 且 <span class="arithmatex">\(x = 1\)</span> 处没有使高阶项抵消的特殊性</p>
 <p><strong>工程含义（一个实用的自检）</strong>：</p>
@@ -13272,7 +13296,6 @@ E_{\text{Rich}}\approx-\frac{h^{4}}{4}\times\frac{f^{(5)}}{120} = -\frac{10^{-4}
 </tr>
 </tbody>
 </table>
-<p>这就是「Richardson 外推的价值不只是省计算，更是提高可达精度」</p>
 <p><strong>对积分同理</strong>：</p>
 <p>Romberg 算法用 <span class="arithmatex">\(h = 1, 1/2, 1/4, \ldots\)</span> 的梯形值逐层外推，
 可以用<strong>很少的函数求值</strong>达到<strong>极高精度</strong></p>
@@ -13486,7 +13509,6 @@ G_{3} = \frac49(0.7788008)+\frac{5}{18}(0.9873787+0.4550726)
 </tbody>
 </table>
 <p><strong>同为 3 次求值时，Gauss 好约 37 倍</strong></p>
-<p><strong>这才是公平的比较</strong></p>
 <p><strong>结论（工程判断）</strong>：</p>
 <table>
 <thead>
@@ -13517,7 +13539,6 @@ G_{3} = \frac49(0.7788008)+\frac{5}{18}(0.9873787+0.4550726)
 <p><strong>「可比性」的教训</strong>：</p>
 <p><strong>比较算法时必须「控制总成本相等」</strong> ——
 这是工程评估的基本原则</p>
-<p>这与「梯度下降与收敛」一页的「比较总代价而非每步代价」是同一原则</p>
 </div>
 <hr />
 <h3 id="4monte-carlo">例题 4：Monte Carlo 的误差与维度<a class="headerlink" href="#4monte-carlo" title="Permanent link">&para;</a></h3>
@@ -13683,7 +13704,6 @@ E[f]\approx0.7468,\qquad E[f^{2}] = \int_{0}^{1}e^{-2x^{2}}\mathrm{d}x\approx0.5
 </tr>
 </tbody>
 </table>
-<p>这就是「Monte Carlo 是唯一可行的高维积分方法」的原因 ✓</p>
 <p><strong>实用判断</strong>：</p>
 <table>
 <thead>
@@ -13707,8 +13727,6 @@ E[f]\approx0.7468,\qquad E[f^{2}] = \int_{0}^{1}e^{-2x^{2}}\mathrm{d}x\approx0.5
 </tr>
 </tbody>
 </table>
-<p><strong>「维度是分水岭」这个结论在工程中非常实用</strong> ——
-它决定了「用哪一类算法」</p>
 </div>
 <hr />
 <h2 id="_11">六、用在哪些课程里<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -14007,8 +14025,6 @@ f(x+ih) = f(x)+ihf'(x)-\frac{h^{2}}{2}f''(x)+\cdots
 <p><strong>「Romberg」值得特别提一下</strong>：</p>
 <p>它从梯形出发，用 Richardson 外推逐层提升阶 ——
 第一层外推<strong>恰好得到 Simpson</strong></p>
-<p><strong>所以「Simpson = 梯形的 Richardson 外推」</strong> ——
-这也是「为什么 Simpson 对三次多项式精确」的深层原因</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 为什么高维积分要用 Monte Carlo 而不是 Simpson？</p>
@@ -14452,8 +14468,6 @@ f'(x)\approx\frac{-f(x+2h)+8f(x+h)-8f(x-h)+f(x-2h)}{12h}
 </tr>
 </tbody>
 </table>
-<p>与统计中的「偏差-方差」以及「浮点数与误差」一页的
-「截断 vs 舍入」是同一个权衡的三个面孔</p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../../calculus/derivative/">导数与微分</a><a href="../../calculus/taylor/">泰勒展开</a><a href="../../calculus/integral/">积分</a></span></div></nav>
 

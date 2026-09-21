@@ -12608,7 +12608,7 @@
 <p>现实里这个前提基本不成立。我们手上真正有的只有两样东西：
 一堆已经量好的样本 <span class="arithmatex">\(x_1,\dots,x_n\)</span>，以及（在有监督情形下）
 每个样本的类别标签。<strong>密度函数本身从来没有被谁交到我们手里。</strong>
-于是整条链路上最关键的一环，变成了一个标准的反问题：</p>
+于是问题变成了一个标准的反问题：</p>
 <blockquote>
 <p>怎样从有限的样本里，把<strong>概率密度函数</strong>反推出来？</p>
 </blockquote>
@@ -12620,8 +12620,7 @@
 还能顺带解释为什么今天训练神经网络时大家用的是交叉熵和均方误差。</p>
 <hr />
 <h2 id="vs">一、两条技术路线：判别函数法 vs 密度估计法<a class="headerlink" href="#vs" title="Permanent link">&para;</a></h2>
-<p>从「怎样得到一个分类器」的角度看，历史上发展出了两条路线。
-理解它们的区别，比记住任何一个具体算法都重要。</p>
+<p>从「怎样得到一个分类器」的角度看，历史上发展出了两条路线。</p>
 <p><strong>第一条路线叫判别函数法。</strong> 它干脆绕开密度：
 不估 <span class="arithmatex">\(p(x\mid\omega_i)\)</span>，也不估 <span class="arithmatex">\(P(\omega_i)\)</span>，
 而是直接假定判别函数 <span class="arithmatex">\(g_i(x;\theta)\)</span> 的形式，
@@ -12633,7 +12632,7 @@
 用第 <span class="arithmatex">\(i\)</span> 类的样本把这个函数族的参数估出来，
 然后原封不动地套回贝叶斯公式。
 这一页要讲的<strong>最大似然估计</strong>，就是这条路线里最基础的估算工具。</p>
-<p>两条路线各有各的地盘，对照着看最清楚：</p>
+<p>两条路线的对照如下：</p>
 <table>
 <thead>
 <tr>
@@ -12676,22 +12675,22 @@
 <tr>
 <td>能否给出置信度</td>
 <td>未必，需要后处理</td>
-<td>天然给出后验概率 ✓</td>
+<td>天然给出后验概率</td>
 </tr>
 <tr>
 <td>能否支持拒识</td>
 <td>要另设距离或阈值</td>
-<td>直接比后验大小即可 ✓</td>
+<td>直接比后验大小即可</td>
 </tr>
 <tr>
 <td>能否生成新样本</td>
 <td>不能</td>
-<td>能，从估出的密度里采样 ✓</td>
+<td>能，从估出的密度里采样</td>
 </tr>
 <tr>
 <td>先验变化时</td>
 <td>需要重新训练或校正</td>
-<td>改一个常数即可 ✓</td>
+<td>改一个常数即可</td>
 </tr>
 <tr>
 <td>某一类完全没样本</td>
@@ -12705,10 +12704,9 @@
 </tr>
 </tbody>
 </table>
-<p><strong>这张表最该记住的一行是最后一行。</strong> 密度估计法的所有优势，
-都建立在「密度形式猜对了」这个前提上；
-一旦猜错，它不但不再有优势，还会错得比判别函数法更彻底 ——
-因为它会把一个错误的模型当作真理去生成后验概率。</p>
+<p><strong>密度估计法的所有优势都建立在「密度形式猜对了」这个前提上</strong>；
+一旦猜错，它不但没有优势，还会错得比判别函数法更彻底 ——
+会把错误的模型当作真理去生成后验概率。</p>
 <div class="admonition tip">
 <p class="admonition-title">两条路线不是对立的，而是两种偏置的交换</p>
 <p>判别函数法把「模型偏置」放在<strong>边界</strong>上：
@@ -12725,7 +12723,7 @@
 <h2 id="_2">二、参数估计与非参数估计的分野<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>走第二条路线之前，还有一次更基本的分岔：
 要不要假定密度的函数形式？
-这个问题的答案，把密度估计劈成了两半。</p>
+这劈出了密度估计的两半。</p>
 <p><strong>参数估计</strong>的做法是：先写下 <span class="arithmatex">\(p(x;\theta)\)</span> 的解析形式，
 其中 <span class="arithmatex">\(\theta\)</span> 是有限维的参数向量，然后只求 <span class="arithmatex">\(\theta\)</span>。
 例如一口咬定数据服从正态分布，那要估的就只有均值与方差两个量。
@@ -12765,7 +12763,7 @@
 <tr>
 <td>结果的形状</td>
 <td>光滑，但被函数形式锁死</td>
-<td>能逼近任意形状 ✓</td>
+<td>能逼近任意形状</td>
 </tr>
 <tr>
 <td>过拟合风险</td>
@@ -12790,12 +12788,11 @@
 </tbody>
 </table>
 <p><strong>一个容易忽略的事实</strong>：非参数方法并不是「没有参数」，
-它只是把参数的个数从「事先定死」换成了「随样本量增长」。
+它只是把参数个数从「事先定死」换成了「随样本量增长」。
 窗宽 <span class="arithmatex">\(h\)</span> 与非参数曲线的复杂度直接相关 ——
 <span class="arithmatex">\(h\)</span> 太大则曲线过于光滑、分辨不出双峰；
 <span class="arithmatex">\(h\)</span> 太小则每个样本周围一个尖峰、曲线像刺猬。
-<strong>所以非参数方法依然在调一个「复杂度旋钮」，
-只是这个旋钮比「选正态还是选混合」更连续、更好调。</strong></p>
+<strong>所以它依然在调一个「复杂度旋钮」，只是更连续、更好调。</strong></p>
 <p>在参数估计这一半里，还有最后一次分岔，那就是
 <strong>把参数看成固定的未知常数，还是看成随机变量</strong>：</p>
 <table>
@@ -12825,12 +12822,12 @@
 <tr>
 <td>样本很少时</td>
 <td>只靠数据，可能很离谱 ⚠</td>
-<td>先验可以兜底 ✓</td>
+<td>先验可以兜底</td>
 </tr>
 <tr>
 <td>样本很多时</td>
-<td>渐近最优 ✓</td>
-<td>与最大似然趋于一致 ✓</td>
+<td>渐近最优</td>
+<td>与最大似然趋于一致</td>
 </tr>
 <tr>
 <td>计算难度</td>
@@ -12840,12 +12837,12 @@
 <tr>
 <td>输出能否给出不确定性</td>
 <td>只能靠渐近方差近似</td>
-<td>天然给出 ✓</td>
+<td>天然给出</td>
 </tr>
 </tbody>
 </table>
-<p><strong>本页只讲左列。</strong> 右列的贝叶斯估计是下一页的主题；
-它和本页的关系可以一句话概括：
+<p><strong>本页只讲左列。</strong> 右列的贝叶斯估计是下一页的主题，
+两者的接口是：
 <strong>最大似然是「先验无穷平坦」时的贝叶斯估计</strong>。</p>
 <hr />
 <h2 id="_3">三、似然函数：怎么构造，为什么要取对数<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
@@ -12855,11 +12852,11 @@
 <p>样本 <span class="arithmatex">\(x_1,\dots,x_n\)</span> 相互独立，且每一个都服从同一个分布 <span class="arithmatex">\(p(x;\theta)\)</span>。
 有了这条假设，联合密度就能拆成连乘：</p>
 <div class="arithmatex">\[p(x_1,\dots,x_n;\theta) = \prod_{i=1}^{n} p(x_i;\theta)\]</div>
-<p><strong>为什么这条假设如此关键？</strong> 因为它在数学上等价于一句话：
+<p><strong>这条假设为什么关键？</strong> 它在数学上等价于一句话：
 「每个样本对参数的贡献可以单独看」。
 正是这句话让后面的连乘能被对数拆成连加，
 也让「每个样本贡献一个充分统计量、再把这些统计量加起来」
-成为可能。如果样本不独立，连乘立刻失效，
+成为可能。样本不独立，连乘立刻失效，
 整个最大似然框架就得推倒重来。</p>
 <h3 id="32">3.2 似然函数：把同一个式子翻过来读<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>把上面那个联合密度里的 <span class="arithmatex">\(\theta\)</span> 看成自变量、样本看成已知常数，
@@ -12883,9 +12880,8 @@
 <p>似然函数是把一个关于 <span class="arithmatex">\(x\)</span> 的概率密度，<strong>整体翻过来</strong>当成了
 关于 <span class="arithmatex">\(\theta\)</span> 的函数。它不是 <span class="arithmatex">\(\theta\)</span> 的概率密度，
 所以不能说「<span class="arithmatex">\(\theta\)</span> 取某个值的概率是 <span class="arithmatex">\(L(\theta)\)</span>」。</p>
-<p>后果很实际：<strong>似然函数的绝对值没有意义，只有比值有意义。</strong>
-两个不同模型的最大似然值不能直接比大小，
-这也是「用最大似然值当模型选择准则」会出问题的根源</p>
+<p>后果很实际：<strong>似然函数的绝对值没有意义，只有比值有意义</strong> ——
+两个不同模型的最大似然值不能直接比大小。</p>
 </div>
 <h3 id="33">3.3 为什么一定要取对数<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>实际操作中没人真的去对 <span class="arithmatex">\(L(\theta)\)</span> 求导，所有人都是对对数似然求导：</p>
@@ -12895,8 +12891,8 @@
 对任意 <span class="arithmatex">\(L_1 \gt L_2 \gt 0\)</span>，都有 <span class="arithmatex">\(\ln L_1 \gt \ln L_2\)</span>。
 所以</p>
 <div class="arithmatex">\[\arg\max_{\theta} L(\theta) = \arg\max_{\theta} \ell(\theta)\]</div>
-<p><strong>这一条是所有理由里最根本的</strong>：取对数不是近似，不是技巧，
-而是一个<strong>完全等价</strong>的变换。最优解一个比特都没变。</p>
+<p><strong>这一条是所有理由里最根本的</strong>：取对数不是近似，
+而是一个<strong>完全等价</strong>的变换，最优解一个比特都没变。</p>
 <p><strong>第二，连乘变成连加。</strong> 这带来三个直接好处：
 求导时用不上乘积法则，每一项的导数只需单独算；
 每一项的贡献可以单独解释；
@@ -12939,7 +12935,7 @@
 <tr>
 <td><span class="arithmatex">\(n\)</span> 较大时的取值</td>
 <td>迅速趋近 <span class="arithmatex">\(0\)</span>，会下溢 ⚠</td>
-<td>量级 <span class="arithmatex">\(O(n)\)</span>，安全 ✓</td>
+<td>量级 <span class="arithmatex">\(O(n)\)</span>，安全</td>
 </tr>
 <tr>
 <td>求导</td>
@@ -12948,18 +12944,18 @@
 </tr>
 <tr>
 <td>极值位置</td>
-<td>与对数似然相同 ✓</td>
-<td>与似然相同 ✓</td>
+<td>与对数似然相同</td>
+<td>与似然相同</td>
 </tr>
 <tr>
 <td>数值稳定性</td>
 <td>差</td>
-<td>好 ✓</td>
+<td>好</td>
 </tr>
 <tr>
 <td>与信息论的联系</td>
 <td>不直观</td>
-<td>取负号即交叉熵 ✓</td>
+<td>取负号即交叉熵</td>
 </tr>
 </tbody>
 </table>
@@ -13333,20 +13329,18 @@ z
 <figcaption>MLE 的似然曲面：峰值位置就是估计值</figcaption>
 </figure>
 
-<p>图里那条曲线把这一节的所有话都画出来了。
-横轴是待估的参数，纵轴是归一化后的似然，
+<p>横轴是待估的参数，纵轴是归一化后的似然，
 曲线的峰值位置就是最大似然估计值；
 图中那条虚线标出的正是 <span class="arithmatex">\(k/n\)</span> 这一点 ——
 它恰好落在曲线的最高处</p>
 <h3 id="34">3.4 一个补充说明：似然与概率密度不能混着用<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
-<p>初学者常有一个疑问：既然 <span class="arithmatex">\(L(\theta) = \prod_i p(x_i;\theta)\)</span>，
-那把它直接当「参数的概率」用不就行了？
-不行，原因有三条：</p>
+<p>既然 <span class="arithmatex">\(L(\theta) = \prod_i p(x_i;\theta)\)</span>，
+能不能直接把它当「参数的概率」用？不能，原因有三条：</p>
 <p><strong>其一，量纲不对。</strong> <span class="arithmatex">\(p(x_i;\theta)\)</span> 的单位是「每单位 <span class="arithmatex">\(x\)</span>」，
 连乘 <span class="arithmatex">\(n\)</span> 次后单位变成「每单位 <span class="arithmatex">\(x^n\)</span>」，这不是概率该有的量纲。</p>
 <p>其二，连续情形下样本密度可以大于 1。
-方差极小的正态分布在均值附近密度可以远大于 <span class="arithmatex">\(1\)</span>，
-那时「似然值大于 1」并不矛盾，但也说明它绝不是概率。</p>
+方差极小的正态分布在均值附近密度远大于 <span class="arithmatex">\(1\)</span>，
+那时「似然值大于 1」并不矛盾，却说明它不是概率。</p>
 <p>其三，参数的取值范围可能根本不支持积分。
 很多参数是无界实数，<span class="arithmatex">\(\int L(\theta)d\theta\)</span> 直接发散。</p>
 <p><strong>所以似然只能用来做两件事</strong>：比较不同 <span class="arithmatex">\(\theta\)</span> 的<strong>相对</strong>高低，
@@ -13355,8 +13349,8 @@ z
 <hr />
 <h2 id="_4">四、最大似然估计的一般求解步骤<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>把前面几节的思路整理成一个可以照抄的流程，一共五步。</p>
-<p><strong>第一步：写出参数化的密度。</strong> 明确写出 <span class="arithmatex">\(p(x;\theta)\)</span> 的解析表达式，
-<strong>并把支撑集条件一并写上</strong>。比如指数分布必须注明 <span class="arithmatex">\(x \ge 0\)</span>，
+<p><strong>第一步：写出参数化的密度。</strong> 写出 <span class="arithmatex">\(p(x;\theta)\)</span> 的解析表达式，
+<strong>并注明支撑集条件</strong>。比如指数分布必须注明 <span class="arithmatex">\(x \ge 0\)</span>，
 否则后面的求导会用到不该用的点。</p>
 <p><strong>第二步：构造似然函数。</strong> 用独立同分布假设把 <span class="arithmatex">\(n\)</span> 个样本的密度连乘。
 如果有几类样本，通常对每一类各自构造一个似然。</p>
@@ -13366,7 +13360,7 @@ z
 解出所有驻点。</p>
 <p><strong>第五步：验证是极大，并检查边界。</strong> 看二阶导（或海森矩阵）是否负定；
 如果驻点方程无解、或者解落在参数空间之外，
-就要回到参数空间的边界上去比较取值。</p>
+就要回到参数空间边界上比较取值。</p>
 <p>把这五步的常见坑一并列出：</p>
 <table>
 <thead>
@@ -13406,14 +13400,14 @@ z
 </table>
 <div class="admonition tip">
 <p class="admonition-title">求导之前先看一眼能不能化简</p>
-<p>大量最大似然问题在第三步就能「看」出答案，
-根本用不着真的求导。判断依据是<strong>充分统计量</strong>：</p>
+<p>很多最大似然问题在第三步就能「看」出答案，
+用不着真的求导，判断依据是<strong>充分统计量</strong>：</p>
 <p>如果 <span class="arithmatex">\(\ell(\theta)\)</span> 只通过某个统计量 <span class="arithmatex">\(T(x_1,\dots,x_n)\)</span>
 与样本发生关系，那么 <span class="arithmatex">\(T\)</span> 就是充分统计量，
 最优解一定是 <span class="arithmatex">\(T\)</span> 的函数。</p>
 <p>伯努利的 <span class="arithmatex">\(T\)</span> 是成功次数 <span class="arithmatex">\(k = \sum_i x_i\)</span>；
 正态的 <span class="arithmatex">\(T\)</span> 是 <span class="arithmatex">\(\sum_i x_i\)</span> 与 <span class="arithmatex">\(\sum_i x_i^2\)</span>。
-<strong>看出这两个统计量，后面的推导就只是走个形式</strong></p>
+<strong>看出它们，后面的推导就只是走个形式</strong></p>
 </div>
 <hr />
 <h2 id="_5">五、经典结果一：伯努利分布的频率估计<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -13431,7 +13425,7 @@ z
 <p>记 <span class="arithmatex">\(k = \sum_i x_i\)</span>，即样本中取 1 的个数，则</p>
 <div class="arithmatex">\[L(p) = p^{k}(1-p)^{n-k}\]</div>
 <p><strong>这一步已经能看出充分统计量了</strong>：整个似然只经过 <span class="arithmatex">\(k\)</span> 与样本发生关系，
-所以 <span class="arithmatex">\(k\)</span> 是充分统计量 —— 换句话说，
+所以 <span class="arithmatex">\(k\)</span> 是充分统计量 ——
 <strong>「有几个 1」已经包含了全部关于 <span class="arithmatex">\(p\)</span> 的信息，
 样本的排列顺序一点用都没有</strong></p>
 <h3 id="53">5.3 取对数并化简<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
@@ -13444,23 +13438,23 @@ z
 <div class="arithmatex">\[k - kp - np + kp = 0 \ \Longrightarrow\ k - np = 0\]</div>
 <p>于是</p>
 <div class="arithmatex">\[\hat p_{ML} = \frac{k}{n}\]</div>
-<p><strong>这就是「频率」</strong> —— 样本中取 1 的比例。
-最大似然在伯努利模型上给出的，恰好就是最朴素的那个估计。</p>
+<p><strong>这就是「频率」</strong> —— 样本中取 1 的比例，
+也就是最朴素的那个估计。</p>
 <h3 id="55">5.5 验证是极大而不是极小<a class="headerlink" href="#55" title="Permanent link">&para;</a></h3>
 <p>再求一次导：</p>
 <div class="arithmatex">\[\frac{d^2\ell}{dp^2} = -\frac{k}{p^2} - \frac{n-k}{(1-p)^2}\]</div>
 <p>在 <span class="arithmatex">\(0 \lt p \lt 1\)</span> 时，两项都是严格负的，所以二阶导恒为负，
 驻点必是<strong>严格极大值点</strong>。而且由于 <span class="arithmatex">\(\ell\)</span> 是严格凹的，
-<strong>这个极大值还是全局唯一</strong>的 ✓</p>
+<strong>这个极大值还是全局唯一</strong>的</p>
 <h3 id="56">5.6 边界情形与它的麻烦<a class="headerlink" href="#56" title="Permanent link">&para;</a></h3>
 <p>上面的推导默认了 <span class="arithmatex">\(0 \lt p \lt 1\)</span>，也默认了 <span class="arithmatex">\(k\)</span> 既不为 <span class="arithmatex">\(0\)</span> 也不为 <span class="arithmatex">\(n\)</span>。
-一旦样本极端，结论就变得很难看：</p>
+一旦样本极端，结论就很难看：</p>
 <ul>
 <li>若 <span class="arithmatex">\(k = 0\)</span>（<span class="arithmatex">\(n\)</span> 个样本全是 0），<span class="arithmatex">\(\hat p_{ML} = 0\)</span>；</li>
 <li>若 <span class="arithmatex">\(k = n\)</span>（<span class="arithmatex">\(n\)</span> 个样本全是 1），<span class="arithmatex">\(\hat p_{ML} = 1\)</span>。</li>
 </ul>
-<p>从「似然最大」的角度看，这两个答案都是<strong>对的</strong>：
-如果抛 <span class="arithmatex">\(n\)</span> 次硬币全是正面，那么让这批数据最不意外的 <span class="arithmatex">\(p\)</span> 就是 1。
+<p>从「似然最大」的角度看，这两个答案都是<strong>对的</strong> ——
+抛 <span class="arithmatex">\(n\)</span> 次硬币全是正面，让这批数据最不意外的 <span class="arithmatex">\(p\)</span> 就是 1。
 但从使用角度看，它有两个严重后果：</p>
 <p><strong>后果一，对数似然会取到 <span class="arithmatex">\(\pm\infty\)</span>。</strong> <span class="arithmatex">\(\hat p = 0\)</span> 时，
 只要新来一个取值为 1 的样本，<span class="arithmatex">\(\ln p\)</span> 就是 <span class="arithmatex">\(-\infty\)</span>，
@@ -13490,8 +13484,8 @@ z
 <h2 id="_6">六、经典结果二：一维正态的均值与方差<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>伯努利的例子太简单，一个参数、一个方程。
 正态分布要复杂得多：两个参数，
-而且对第二个参数求导时会出现「嵌套」，
-这个嵌套正是「方差估计有偏」这类结论的源头。</p>
+而且对第二个参数求导会出现「嵌套」——
+这个嵌套正是「方差估计有偏」的源头。</p>
 <h3 id="61">6.1 模型<a class="headerlink" href="#61" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[p(x;\mu,\sigma^2) = \frac{1}{\sqrt{2\pi}\,\sigma}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)\]</div>
 <p>用 <span class="arithmatex">\(\sigma^2\)</span> 而不是 <span class="arithmatex">\(\sigma\)</span> 当参数，是为了后面求导少一次链式法则，
@@ -13512,7 +13506,7 @@ z
 <div class="arithmatex">\[\sum_{i=1}^{n}(x_i - \mu) = 0 \ \Longrightarrow\ \sum_i x_i = n\mu
 \ \Longrightarrow\ \hat\mu_{ML} = \frac{1}{n}\sum_{i=1}^{n} x_i = \bar x\]</div>
 <p><strong>方差未知并不妨碍均值的估计</strong>：<span class="arithmatex">\(\sigma^2\)</span> 在求导结果里只是一个
-正数因子，被两边约掉了。这一点在自测里还会再考一次。</p>
+正数因子，被两边约掉了。</p>
 <h3 id="64-sigma2">6.4 对 <span class="arithmatex">\(\sigma^2\)</span> 求导<a class="headerlink" href="#64-sigma2" title="Permanent link">&para;</a></h3>
 <p>把 <span class="arithmatex">\(v = \sigma^2\)</span> 视作自变量，<span class="arithmatex">\(\ell\)</span> 中与 <span class="arithmatex">\(v\)</span> 有关的部分是</p>
 <div class="arithmatex">\[\ell(v) = -\frac{n}{2}\ln v - \frac{1}{2v}\sum_{i=1}^{n}(x_i-\mu)^2 + \text{（常数）}\]</div>
@@ -13522,11 +13516,10 @@ z
 <div class="arithmatex">\[-nv + \sum_{i=1}^{n}(x_i-\mu)^2 = 0 \ \Longrightarrow\ \hat v = \frac{1}{n}\sum_{i=1}^{n}(x_i-\mu)^2\]</div>
 <p>再代入 <span class="arithmatex">\(\hat\mu = \bar x\)</span>（已经求出的最优值），得到</p>
 <div class="arithmatex">\[\hat\sigma^2_{ML} = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar x)^2\]</div>
-<p><strong>两个参数是分两步解出来的</strong>，先 <span class="arithmatex">\(\mu\)</span> 后 <span class="arithmatex">\(\sigma^2\)</span>，
-这在多元情形也一样 —— 顺序不能颠倒，
-因为 <span class="arithmatex">\(\sigma^2\)</span> 的解里含有 <span class="arithmatex">\(\mu\)</span>。</p>
+<p><strong>两个参数分两步解</strong>，先 <span class="arithmatex">\(\mu\)</span> 后 <span class="arithmatex">\(\sigma^2\)</span>；多元情形也一样，
+顺序不能颠倒，因为 <span class="arithmatex">\(\sigma^2\)</span> 的解里含有 <span class="arithmatex">\(\mu\)</span>。</p>
 <h3 id="65-n-n-1">6.5 注意分母是 <span class="arithmatex">\(n\)</span> 而不是 <span class="arithmatex">\(n-1\)</span><a class="headerlink" href="#65-n-n-1" title="Permanent link">&para;</a></h3>
-<p>这是本页最值得停下来多看一眼的地方。</p>
+<p>这是本页最值得停一下的地方。</p>
 <p>统计学教科书里另有一个「样本方差」公式，分母是 <span class="arithmatex">\(n-1\)</span>：</p>
 <div class="arithmatex">\[s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar x)^2\]</div>
 <p>两者相差一个因子：</p>
@@ -13538,7 +13531,7 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 <h3 id="66">6.6 为什么最大似然的方差估计是有偏的<a class="headerlink" href="#66" title="Permanent link">&para;</a></h3>
 <p><strong>偏差的定义</strong>是估计量期望与真值之差。来算一下 <span class="arithmatex">\(\hat\sigma^2_{ML}\)</span> 的期望：</p>
 <div class="arithmatex">\[\mathbb{E}\left[\sum_{i=1}^{n}(x_i-\bar x)^2\right] = (n-1)\sigma^2\]</div>
-<p><strong>这个等式是全部结论的来源</strong>，值得单独解释一句：
+<p><strong>这个等式是全部结论的来源</strong>：
 <span class="arithmatex">\(n\)</span> 个离差平方和看起来应该贡献 <span class="arithmatex">\(n\sigma^2\)</span>，
 但样本均值 <span class="arithmatex">\(\bar x\)</span> 是从同一批样本算出来的，
 它已经被数据「拉过去」了一个自由度，
@@ -13573,7 +13566,7 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 <td><span class="arithmatex">\(s^2\)</span></td>
 <td><span class="arithmatex">\(n-1\)</span></td>
 <td><span class="arithmatex">\(\sigma^2\)</span></td>
-<td>无偏估计，工程与统计检验常用 ✓</td>
+<td>无偏估计，工程与统计检验常用</td>
 </tr>
 <tr>
 <td><span class="arithmatex">\(\hat\sigma_{ML} = \sqrt{\hat\sigma^2_{ML}}\)</span></td>
@@ -13614,7 +13607,7 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 <h3 id="72">7.2 取对数并求和<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[\ell(\mu,\Sigma) = -\frac{nd}{2}\ln(2\pi) - \frac{n}{2}\ln\lvert\Sigma\rvert
 - \frac{1}{2}\sum_{i=1}^{n}(x_i-\mu)^{\mathsf T}\Sigma^{-1}(x_i-\mu)\]</div>
-<p>三段结构与一维完全一样：常数项、复杂度惩罚项、拟合项。</p>
+<p>三段结构与一维完全一样。</p>
 <h3 id="73-mu">7.3 对 <span class="arithmatex">\(\mu\)</span> 求导<a class="headerlink" href="#73-mu" title="Permanent link">&para;</a></h3>
 <p>对二次型求导，用到 <span class="arithmatex">\(\nabla_\mu (x-\mu)^{\mathsf T}A(x-\mu) = -2A(x-\mu)\)</span>
 （<span class="arithmatex">\(A\)</span> 对称）：</p>
@@ -13670,7 +13663,7 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 </table>
 <p><strong>最后一行是多元情形新增的麻烦。</strong> 一维时方差只要是正数就没问题；
 多元时协方差矩阵必须正定，否则 <span class="arithmatex">\(\lvert\Sigma\rvert = 0\)</span>、<span class="arithmatex">\(\Sigma^{-1}\)</span> 不存在，
-整个密度公式直接失效。这在实践中离我们并不远：
+整个密度公式直接失效。
 <strong>只要样本数少于维数，或者样本落在低维子空间上，
 <span class="arithmatex">\(\hat\Sigma\)</span> 就会退化。</strong> 第十一节例题 3 会算一个具体的例子。</p>
 <p>逐项验证多元最大似然的两个公式：</p>
@@ -13686,14 +13679,13 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 <h2 id="_8">八、最大似然估计的统计性质<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>前面几节都在算「怎么求」。这一节回答「求出来的东西靠不靠得住」。
 结论分两类：<strong>样本很多时的好性质</strong>与<strong>样本很少时的坏性质</strong>，
-而这两类结论的适用范围完全不同，混用会出大错。</p>
+两者适用范围完全不同，混用会出大错。</p>
 <h3 id="81">8.1 一致性：样本越多越靠近真值<a class="headerlink" href="#81" title="Permanent link">&para;</a></h3>
 <p>记真参数为 <span class="arithmatex">\(\theta_0\)</span>。<strong>一致性</strong>说的是：</p>
 <div class="arithmatex">\[\hat\theta_{ML} \to \theta_0 \quad \text{（依概率收敛，} n \to \infty\text{）}\]</div>
 <p>直觉解释是「信息足够多时，错误答案会被数据否掉」：
 只要两个不同的参数给出不同的似然，
-样本一多，正确的那个参数的似然就会以指数速度甩开错误的那一个。
-这条性质是最大似然能被信任的最基本理由。</p>
+样本一多，正确的那个参数的似然就会以指数速度甩开错误的那一个。</p>
 <h3 id="82">8.2 渐近正态：误差是正态分布的<a class="headerlink" href="#82" title="Permanent link">&para;</a></h3>
 <p>在很一般的光滑条件下，估计误差经过 <span class="arithmatex">\(\sqrt{n}\)</span> 放大后无限接近正态：</p>
 <div class="arithmatex">\[\sqrt{n}\,(\hat\theta_{ML} - \theta_0)
@@ -13706,8 +13698,7 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 说明数据对参数的约束越强，估计也就越准。</p>
 <h3 id="83">8.3 渐近有效：没有比它更准的了<a class="headerlink" href="#83" title="Permanent link">&para;</a></h3>
 <p><strong>克拉美-罗下界</strong>告诉我们：任何无偏估计量的方差都不可能低于
-<span class="arithmatex">\(I(\theta_0)^{-1}/n\)</span>。而由 8.2 节，最大似然的渐近方差恰好<strong>取到这个下界</strong>。
-换句话说：</p>
+<span class="arithmatex">\(I(\theta_0)^{-1}/n\)</span>。而由 8.2 节，最大似然的渐近方差恰好<strong>取到这个下界</strong>。</p>
 <blockquote>
 <p>在渐近意义下，最大似然是所有无偏估计里方差最小的那一个。</p>
 </blockquote>
@@ -13728,17 +13719,17 @@ s^2 = \frac{n}{n-1}\,\hat\sigma^2_{ML}\]</div>
 「最大似然是渐近最优的，所以我的最大似然模型也是最优的」——
 前一句需要极限条件，后一句需要我们的样本真的够多。</p>
 <p><strong>一个实用的判断标准</strong>：
-如果待估参数的个数与样本量处在同一量级，
-那就别指望任何渐近结论成立。</p>
+待估参数的个数与样本量处在同一量级时，
+别指望任何渐近结论成立。</p>
 </div>
 <h3 id="85">8.5 变换不变性<a class="headerlink" href="#85" title="Permanent link">&para;</a></h3>
 <p>如果 <span class="arithmatex">\(\hat\theta_{ML}\)</span> 是 <span class="arithmatex">\(\theta\)</span> 的最大似然估计，
 而 <span class="arithmatex">\(g\)</span> 是任意（不一定一一的）函数，则</p>
 <div class="arithmatex">\[g(\hat\theta_{ML}) \ \text{是} \ g(\theta) \ \text{的最大似然估计}\]</div>
 <p><strong>证明只有一行</strong>：<span class="arithmatex">\(\arg\max\)</span> 只看函数值的高低，
-而 <span class="arithmatex">\(g\)</span> 是同一个函数作用在所有候选参数上，
+<span class="arithmatex">\(g\)</span> 是同一个函数作用在所有候选参数上，
 不改变「谁最高」这件事。</p>
-<p><strong>这条性质很方便，但也要小心</strong>：
+<p><strong>这条性质也要小心</strong>：
 对无偏性、方差这类涉及期望的量，
 变换不变性<strong>不成立</strong>，
 因为期望与非线性函数不可交换（上一节的琴生不等式警告）。</p>
@@ -14391,8 +14382,7 @@ z
 <span class="arithmatex">\(n = 10\)</span> 时分布又矮又宽，同一个真参数可能估出差别很大的值；
 <span class="arithmatex">\(n = 1000\)</span> 时分布又高又窄，几乎贴着真值。
 <strong>分布变窄的速度正是 <span class="arithmatex">\(1/\sqrt{n}\)</span></strong> ——
-样本量扩大 <span class="arithmatex">\(100\)</span> 倍，标准差只降到原来的 <span class="arithmatex">\(1/10\)</span>。
-这是最大似然效率最直观的样子 ✓</p>
+样本量扩大 <span class="arithmatex">\(100\)</span> 倍，标准差只降到原来的 <span class="arithmatex">\(1/10\)</span>。</p>
 <p>用一段蒙特卡洛模拟把「方差按 <span class="arithmatex">\(1/n\)</span> 收缩」验证一下：</p>
 <table>
 <thead>
@@ -14421,14 +14411,14 @@ z
 </tbody>
 </table>
 <p><strong>注意最后两行的对比</strong>：<span class="arithmatex">\(n\)</span> 从 <span class="arithmatex">\(1000\)</span> 涨到 <span class="arithmatex">\(10000\)</span>，
-样本量是原来的 <span class="arithmatex">\(10\)</span> 倍，而标准误只降到了原来的约 <span class="arithmatex">\(1/3.16\)</span>。
+样本量是原来的 <span class="arithmatex">\(10\)</span> 倍，标准误只降到原来的约 <span class="arithmatex">\(1/3.16\)</span>。
 「多收十倍数据、精度只提高三倍」是 <span class="arithmatex">\(1/\sqrt{n}\)</span> 规律的直接后果，
-也是为什么在模式识别里，
-<strong>靠无脑加大样本量来提高精度，往往是性价比最低的做法</strong> ⚠</p>
+也说明在模式识别里，
+<strong>无脑加大样本量提高精度，往往是性价比最低的做法</strong> ⚠</p>
 <hr />
 <h2 id="_9">九、负对数似然就是交叉熵与均方误差<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
-<p>这一节把最大似然和深度学习里的损失函数接上。
-结论是：<strong>那些看起来五花八门的损失函数，
+<p>这一节把最大似然和深度学习里的损失函数接上：
+<strong>那些五花八门的损失函数，
 绝大多数只是「某个密度假设下的负对数似然」</strong>。</p>
 <h3 id="91">9.1 伯努利 → 二元交叉熵<a class="headerlink" href="#91" title="Permanent link">&para;</a></h3>
 <p>对一组二值标签 <span class="arithmatex">\(y_i \in \{0,1\}\)</span>，把估计出的概率记为 <span class="arithmatex">\(q_i\)</span>。
@@ -14436,7 +14426,7 @@ z
 <div class="arithmatex">\[-\ell = -\sum_{i=1}^{n}\left[y_i \ln q_i + (1-y_i)\ln(1-q_i)\right]\]</div>
 <p>这正是<strong>二元交叉熵</strong>的表达式。
 于是「用交叉熵训练分类器」和「做最大似然估计」
-<strong>在数学上是同一件事</strong> ✓</p>
+<strong>在数学上是同一件事</strong></p>
 <h3 id="92">9.2 正态（方差固定）→ 均方误差<a class="headerlink" href="#92" title="Permanent link">&para;</a></h3>
 <p>设 <span class="arithmatex">\(y_i \mid x_i \sim N(f_\theta(x_i), \sigma^2)\)</span>，且 <span class="arithmatex">\(\sigma^2\)</span> 视为常数。
 负对数似然（丢掉与 <span class="arithmatex">\(\theta\)</span> 无关的项）是</p>
@@ -14452,8 +14442,7 @@ z
 \approx \mathbb{E}_{p_{data}}\big[-\ln p_\theta(x)\big] = H(p_{data}, p_\theta)\]</div>
 <p><strong>平均负对数似然就是交叉熵。</strong> 而交叉熵可以拆成</p>
 <div class="arithmatex">\[H(p_{data}, p_\theta) = H(p_{data}) + D_{KL}(p_{data}\,\|\,p_\theta)\]</div>
-<p>其中 <span class="arithmatex">\(H(p_{data})\)</span> 与模型无关，所以<strong>最小化交叉熵等价于最小化 KL 散度</strong> ——
-也就是让模型分布尽可能接近数据分布。</p>
+<p>其中 <span class="arithmatex">\(H(p_{data})\)</span> 与模型无关，所以<strong>最小化交叉熵等价于最小化 KL 散度</strong>。</p>
 <p>把常见的对应关系列全：</p>
 <table>
 <thead>
@@ -14467,7 +14456,7 @@ z
 <tr>
 <td>伯努利 <span class="arithmatex">\(q^{y}(1-q)^{1-y}\)</span></td>
 <td><span class="arithmatex">\(-\sum_i[y_i\ln q_i + (1-y_i)\ln(1-q_i)]\)</span></td>
-<td>二元交叉熵 ✓</td>
+<td>二元交叉熵</td>
 </tr>
 <tr>
 <td>多项分布</td>
@@ -14477,7 +14466,7 @@ z
 <tr>
 <td>正态，方差固定</td>
 <td><span class="arithmatex">\(\frac{1}{2\sigma^2}\sum_i(y_i-f_i)^2 + \text{const}\)</span></td>
-<td>均方误差 ✓</td>
+<td>均方误差</td>
 </tr>
 <tr>
 <td>正态，方差也学</td>
@@ -14498,24 +14487,21 @@ z
 </table>
 <div class="admonition tip">
 <p class="admonition-title">选损失函数就是选噪声分布</p>
-<p>这张表把「选哪种损失」从一个凭感觉的问题，
-变成了一个可以论证的问题：
+<p>这张表把「选哪种损失」从凭感觉变成可以论证：
 你要假定残差服从什么分布，就用对应的负对数似然。</p>
 <p>两个常见推论：</p>
 <p>均方误差对大残差<strong>惩罚很重</strong>（二阶增长），
 所以离群点会强烈拉扯结果；
 平均绝对误差对大残差只做<strong>线性惩罚</strong>，
-对离群点天然更稳健 ✓</p>
-<p>反过来，如果数据里确实有离群点，
-而你又用了均方误差，
-那么「模型效果不好」的根源可能根本不是优化没做好，
-而是<strong>噪声分布假设写错了</strong> ✓</p>
+对离群点天然更稳健</p>
+<p>反过来，数据里确实有离群点而你用了均方误差时，
+「模型效果不好」的根源可能不是优化没做好，
+而是<strong>噪声分布假设写错了</strong></p>
 </div>
 <hr />
 <h2 id="_10">十、最大似然什么时候会失效<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
 <p>最大似然很强，但它失效的方式也很典型。
-能预判失效，比会推公式更重要。
-下面把六种典型失效一次列全。</p>
+能预判失效，比会推公式更重要。下面把六种失效列全。</p>
 <h3 id="101">10.1 参数不可辨识<a class="headerlink" href="#101" title="Permanent link">&para;</a></h3>
 <p>如果两组不同的参数 <span class="arithmatex">\(\theta_1 \neq \theta_2\)</span> 让似然<strong>处处相等</strong>，
 那么最大似然无法在它们之间做选择，解不唯一。</p>
@@ -14523,7 +14509,7 @@ z
 似然完全不变；又比如两个因子的尺度一个放大 <span class="arithmatex">\(c\)</span> 倍、
 另一个缩小 <span class="arithmatex">\(c\)</span> 倍，乘积也不变。
 这时最大似然会给出<strong>无穷多组解</strong>，
-具体落在哪一组完全由优化算法的初始值决定。</p>
+落在哪一组由优化算法的初始值决定。</p>
 <h3 id="102">10.2 似然无界<a class="headerlink" href="#102" title="Permanent link">&para;</a></h3>
 <p>有些模型的最大似然<strong>根本不存在</strong>，因为似然可以无限大。
 最经典的例子就是<strong>一维高斯混合</strong>：
@@ -14607,13 +14593,13 @@ z
 <p class="admonition-title">「最大似然值更大」不等于「模型更好」</p>
 <p>似然函数不是概率密度，它的绝对值没有意义
 （见第三节的警告）。更具体地说：</p>
-<p>把模型复杂度提上去，训练集上的最大似然值几乎只会变大。
-参数越多，能拟合的密度形式越多，
-总能找到一个让训练数据「更不意外」的模型 ——
+<p>模型复杂度越高，训练集上的最大似然值几乎只会越大。
+参数越多、能拟合的密度形式越多，
+总能找到让训练数据「更不意外」的模型 ——
 极端情况下每个样本配一个尖峰，
 似然可以做到无穷大（10.2 节）。</p>
-<p>所以，<strong>不能拿训练集上的最大似然值直接选模型</strong>。
-要么用交叉验证，要么给复杂度加显式惩罚 ✓</p>
+<p>所以<strong>不能拿训练集的最大似然值直接选模型</strong>：
+要么用交叉验证，要么给复杂度加显式惩罚</p>
 </div>
 <hr />
 <h2 id="_11">十一、典型例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
@@ -14625,13 +14611,13 @@ z
 &copy; 给出一个能让估计值不落到边界上的常用做法，并说明它对应什么统计思想。</p>
 <details class="note">
 <summary>思路</summary>
-<p>前两问是纯计算，只要把第五节的三步（连乘、取对数、求导）走一遍。
+<p>前两问是纯计算，把第五节的三步（连乘、取对数、求导）走一遍。
 第三问是开放题，考的是「先验如何兜底」——
 第七节的表里已经埋了线索：
 <strong>边界解的根源是「只相信数据」</strong>，
-那补救的方向自然是「承认还有未知」。
-答这类题的关键不是背出一个名词，
-而是说清「加进去的这一项改变了什么」。</p>
+补救方向自然是「承认还有未知」。
+关键是说清「加进去的这一项改变了什么」，
+而不是背出一个名词。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -14658,8 +14644,7 @@ z
 对数似然给出 <span class="arithmatex">\(-\infty\)</span>，
 任何依赖似然的后验计算都会彻底崩掉</p>
 <p>这就是工程上的<strong>零概率问题</strong>：
-从有限样本里得出「不可能」这种绝对结论，
-是把「没观察到」误当成了「不会发生」。</p>
+把「没观察到」误当成了「不会发生」。</p>
 <p><strong>（c）加先验（或等价地做平滑）。</strong></p>
 <p>常用做法是把成功与失败各加一个小的伪计数：</p>
 <div class="arithmatex">\[\tilde p = \frac{k + \alpha}{n + 2\alpha}\]</div>
@@ -14671,9 +14656,8 @@ z
 也就是承认「在看数据之前，
 <span class="arithmatex">\(p\)</span> 取 0.5 附近最有可能」。
 <span class="arithmatex">\(\alpha\)</span> 越大，先验越强，估计越远离边界。</p>
-<p><strong>这条思路的准确性</strong>：本页是最大似然的地盘，
-加先验严格来说属于下一节的贝叶斯估计；
-但从这里可以看到两者的接口：
+<p><strong>一点补充</strong>：加先验严格来说属于下一节的贝叶斯估计，
+但这里已经能看到两者的接口：
 <strong>先验的作用就是把参数从边界上「拉回来」</strong></p>
 </details>
 <h3 id="2">例题 2：一维正态的最大似然估计（手算）<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -14701,12 +14685,12 @@ z
 = 16 + 4 + 0 + 4 + 16 = 40\]</div>
 <p>所以</p>
 <div class="arithmatex">\[\hat\sigma^2_{ML} = \frac{40}{5} = 8\]</div>
-<p>注意这里的分母是 <span class="arithmatex">\(n = 5\)</span>，不是 <span class="arithmatex">\(4\)</span> ✓</p>
+<p>注意这里的分母是 <span class="arithmatex">\(n = 5\)</span>，不是 <span class="arithmatex">\(4\)</span></p>
 <p><strong>（b）无偏样本方差。</strong></p>
 <div class="arithmatex">\[s^2 = \frac{40}{5-1} = \frac{40}{4} = 10\]</div>
 <p>比值为</p>
 <div class="arithmatex">\[\frac{s^2}{\hat\sigma^2_{ML}} = \frac{n}{n-1} = \frac{5}{4} = 1.25\]</div>
-<p>也就是无偏版本比最大似然版本<strong>大 <span class="arithmatex">\(25\%\)</span></strong> ✓
+<p>也就是无偏版本比最大似然版本<strong>大 <span class="arithmatex">\(25\%\)</span></strong>
 这个比值只与 <span class="arithmatex">\(n\)</span> 有关，与数据本身无关，是个通用公式。</p>
 <p><strong>（c）相对偏差。</strong></p>
 <p>由 <span class="arithmatex">\(\mathbb{E}[\hat\sigma^2_{ML}] = \frac{n-1}{n}\sigma^2\)</span>，</p>
@@ -14719,11 +14703,10 @@ z
 <p><strong>这组数字说明两件事</strong>：
 第一，偏差的<strong>绝对大小</strong>是 <span class="arithmatex">\(\sigma^2/n\)</span>，与真方差成正比；
 第二，偏差的<strong>相对大小</strong>只由 <span class="arithmatex">\(n\)</span> 决定，
-所以「<span class="arithmatex">\(n\)</span> 小的时候最大似然方差估计不可信」
-这个结论与数据的具体尺度无关。</p>
-<p><strong>一个容易犯的错</strong>：有人看到 <span class="arithmatex">\(n = 100\)</span> 时偏差只有 <span class="arithmatex">\(1\%\)</span>，
-就说「最大似然方差是无偏的」。
-这是把<strong>渐近无偏</strong>当成了<strong>无偏</strong> ——
+所以「<span class="arithmatex">\(n\)</span> 小时最大似然方差估计不可信」与数据的尺度无关。</p>
+<p><strong>一个容易犯的错</strong>：看到 <span class="arithmatex">\(n = 100\)</span> 时偏差只有 <span class="arithmatex">\(1\%\)</span>，
+就说「最大似然方差是无偏的」——
+这是把<strong>渐近无偏</strong>当成了<strong>无偏</strong>。
 对任意有限的 <span class="arithmatex">\(n\)</span>，偏差都严格为负，只是幅度越来越小</p>
 </details>
 <h3 id="3">例题 3：二元正态的最大似然估计<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
@@ -14762,18 +14745,16 @@ z
 <p>所以 <span class="arithmatex">\(\hat\Sigma_{ML}\)</span> <strong>奇异，逆矩阵不存在</strong></p>
 <p><strong>原因</strong>：三个点在平面上全部落在直线 <span class="arithmatex">\(y = (x+1)/2\)</span> 上
 （代入 <span class="arithmatex">\(x=1,3,5\)</span> 分别得到 <span class="arithmatex">\(y=1,2,3\)</span>，验证成立）。
-换句话说，<strong>样本只覆盖了平面上的一维子空间</strong>，
-沿垂直于这条直线的方向，数据的散布是 <span class="arithmatex">\(0\)</span>，
-对应方差为 <span class="arithmatex">\(0\)</span>，协方差矩阵自然退化。</p>
+也就是说，<strong>样本只覆盖了平面上的一维子空间</strong>：
+垂直于这条直线的方向上散布为 <span class="arithmatex">\(0\)</span>，协方差矩阵自然退化。</p>
 <p>严格地说，<span class="arithmatex">\(n = 3\)</span> 个点最多只能张成 <span class="arithmatex">\(3-1 = 2\)</span> 维的
 「中心化子空间」，而这里连 <span class="arithmatex">\(2\)</span> 维都没到（只有 <span class="arithmatex">\(1\)</span> 维）；
 只要样本数 <span class="arithmatex">\(n\)</span> 不大于维数 <span class="arithmatex">\(d\)</span>，这种退化就一定会发生。</p>
 <p><strong>对高斯判别的后果</strong>：
 密度公式里同时出现 <span class="arithmatex">\(\lvert\Sigma\rvert^{1/2}\)</span>（等于 <span class="arithmatex">\(0\)</span>）
 与 <span class="arithmatex">\(\Sigma^{-1}\)</span>（不存在），
-所以<strong>这个密度根本没有定义</strong>，
-马氏距离也算不出来，
-后续的判别函数、决策面全都无从谈起 ✗</p>
+所以<strong>密度根本没有定义</strong>，
+马氏距离、判别函数、决策面全都无从谈起 ✗</p>
 <p><strong>实践中的处理</strong>：先降维（把退化方向去掉），
 或者给 <span class="arithmatex">\(\Sigma\)</span> 加一个很小的对角正则项
 （相当于承认「每个方向至少有一点点散布」），
@@ -14792,11 +14773,10 @@ z
 <p>这题把第九节的两条对应关系反着用一遍。
 关键是分清「常数」与「与参数有关的项」——
 判等价性时只比较<strong>随参数变化</strong>的部分。
-第三问需要留一个心眼：
-多出来的那一项<strong>系数是正的</strong>，
-所以最小化它会倾向于把 <span class="arithmatex">\(\sigma\)</span> 推小，
-而 <span class="arithmatex">\(\sigma\)</span> 越小，拟合误差项的权就越大。
-这两件事的相互作用正是本题的要点。</p>
+第三问要留个心眼：多出来的那一项<strong>系数是正的</strong>，
+所以最小化它会把 <span class="arithmatex">\(\sigma\)</span> 推小，
+而 <span class="arithmatex">\(\sigma\)</span> 越小，拟合误差项的权就越大 ——
+两者的相互作用正是本题的要点。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -14818,10 +14798,9 @@ z
 <p>此时 <span class="arithmatex">\(y_i \in \{0,1\}\)</span>，<span class="arithmatex">\(q_i = q_\theta(x_i)\)</span>，则</p>
 <div class="arithmatex">\[-\ell(\theta) = -\sum_{i=1}^{n}
 \big[y_i\ln q_i + (1-y_i)\ln(1-q_i)\big]\]</div>
-<p>这正是<strong>二元交叉熵损失</strong> ✓</p>
-<p><strong>两种假定的对照</strong>：同一个「拟合得准不准」的问题，
-因为噪声分布假设不同，
-就变成了均方误差和交叉熵两种完全不同的损失 ——
+<p>这正是<strong>二元交叉熵损失</strong></p>
+<p><strong>两种假定的对照</strong>：同一个问题，因为噪声分布假设不同，
+就变成了均方误差和交叉熵两种损失 ——
 这也说明<strong>损失函数不是随便挑的，它携带的是分布假设</strong>。</p>
 <p><strong>（c）把 <span class="arithmatex">\(\sigma\)</span> 也当成参数。</strong></p>
 <p>此时 <span class="arithmatex">\(n\ln\sigma\)</span> 这一项不再能丢，目标变成</p>
@@ -14832,8 +14811,8 @@ z
 <div class="arithmatex">\[\frac{n}{\sigma} - \frac{1}{\sigma^3}\sum_{i=1}^{n}(y_i - f_\theta(x_i))^2 = 0
 \ \Longrightarrow\ \hat\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}\big(y_i - f_\theta(x_i)\big)^2
 = \hat\sigma^2_{ML}\]</div>
-<p><strong>也就是残差的均方 —— 与第六节完全一致的结论</strong> ✓</p>
-<p><strong>副作用主要有两个</strong>：</p>
+<p><strong>也就是残差的均方 —— 与第六节完全一致的结论</strong></p>
+<p><strong>副作用有两个</strong>：</p>
 <p>其一，<span class="arithmatex">\(\hat\sigma^2\)</span> 直接由残差算出，
 所以<strong>模型越能拟合训练数据，<span class="arithmatex">\(\hat\sigma\)</span> 就越小</strong>，
 而 <span class="arithmatex">\(\sigma\)</span> 越小，拟合项的权重 <span class="arithmatex">\(1/(2\sigma^2)\)</span> 就越大，
@@ -14844,10 +14823,10 @@ z
 连带把噪声的尺度低估，
 不确定性区间随之被算得过窄 ⚠</p>
 <p><strong>实用建议</strong>：如果目的只是拟合 <span class="arithmatex">\(f_\theta\)</span>，
-那把 <span class="arithmatex">\(\sigma\)</span> 当作固定常数最省事；
-只有当确实需要给出不确定性的量级时，
+把 <span class="arithmatex">\(\sigma\)</span> 当作固定常数最省事；
+只有确实需要给出不确定性量级时，
 才把 <span class="arithmatex">\(\sigma\)</span> 也估出来，
-并最好用无偏修正或加一个先验 ✓</p>
+并最好用无偏修正或加一个先验</p>
 </details>
 <hr />
 <h2 id="_12">十二、自测<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>
@@ -14909,12 +14888,12 @@ z
 所以无偏。而 <span class="arithmatex">\(\hat\sigma^2_{ML}\)</span> 里含有 <span class="arithmatex">\(\bar x\)</span> 的<strong>平方</strong>，
 是非线性函数，期望不能直接推进去，
 于是多出一个 <span class="arithmatex">\(-(1/n)\sigma^2\)</span> 的偏差</p>
-<p><strong>自由度为什么被吃掉？</strong> <span class="arithmatex">\(\bar x\)</span> 是用同一批样本算出来的。
-<span class="arithmatex">\(\bar x\)</span> 会主动靠近这批样本的中心，
+<p><strong>自由度为什么被吃掉？</strong> <span class="arithmatex">\(\bar x\)</span> 是用同一批样本算出来的，
+会主动靠近这批样本的中心，
 所以离差 <span class="arithmatex">\(x_i - \bar x\)</span> 平均而言比 <span class="arithmatex">\(x_i - \mu\)</span> 更小。
-严格地说，<span class="arithmatex">\(n\)</span> 个离差 <span class="arithmatex">\(x_i - \bar x\)</span> 之间存在一个线性约束
+严格地说，<span class="arithmatex">\(n\)</span> 个离差 <span class="arithmatex">\(x_i - \bar x\)</span> 之间存在线性约束
 <span class="arithmatex">\(\sum_i (x_i - \bar x) = 0\)</span>，
-所以它们实际上只有 <span class="arithmatex">\(n-1\)</span> 个自由度</p>
+所以实际上只有 <span class="arithmatex">\(n-1\)</span> 个自由度</p>
 <p><strong><span class="arithmatex">\(n = 8\)</span> 时的相对偏差</strong>：</p>
 <div class="arithmatex">\[\text{相对偏差} = -\frac{1}{n} = -0.125\]</div>
 <p>也就是 <span class="arithmatex">\(\hat\sigma^2_{ML}\)</span> 平均比真方差<strong>小 <span class="arithmatex">\(12.5\%\)</span></strong>；
@@ -14929,7 +14908,7 @@ z
 （第 <span class="arithmatex">\(jk\)</span> 个元素是 <span class="arithmatex">\(a_j a_k\)</span>，交换下标不变）。
 对称矩阵的和仍然对称，
 所以 <span class="arithmatex">\(\hat\Sigma_{ML}\)</span> 自动对称 ——
-这也是它作为协方差矩阵的基本要求 ✓</p>
+这也是它作为协方差矩阵的基本要求</p>
 <p><strong>样本数少于维数时会怎样</strong>：
 <span class="arithmatex">\(n\)</span> 个样本的中心化子空间维数最多是 <span class="arithmatex">\(\min(n-1, d)\)</span>。
 当 <span class="arithmatex">\(n - 1 \lt d\)</span> 时，<span class="arithmatex">\(\hat\Sigma\)</span> 必然奇异、
@@ -14954,13 +14933,13 @@ z
 正数因子，被整体约掉，
 所以 <span class="arithmatex">\(\hat\mu_{ML} = \bar x\)</span> <strong>完全不依赖 <span class="arithmatex">\(\sigma^2\)</span> 的估计</strong>。
 两个参数的估计在这个模型里是<strong>解耦</strong>的，
-方差的有偏不会传染给均值 ✓</p>
+方差的有偏不会传染给均值</p>
 <p><strong>(d) 错。</strong> 训练集上的最大似然值随模型复杂度单调增长，
 极端情况下甚至发散（第十节的警告）。
 它衡量的是「模型把训练数据解释得多好」，
 不是「模型对新数据预测得多好」。
 要比较模型应当用交叉验证，
-或者用带复杂度惩罚的准则 ✓</p>
+或者用带复杂度惩罚的准则</p>
 </details>
 <hr />
 <h2 id="_13">小结<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h2>
@@ -15010,11 +14989,11 @@ z
 </tr>
 <tr>
 <td><strong>伯努利：<span class="arithmatex">\(\hat p_{ML} = k/n\)</span>，就是频率</strong></td>
-<td><span class="arithmatex">\(k\)</span> 是充分统计量，样本顺序不提供额外信息 ✓</td>
+<td><span class="arithmatex">\(k\)</span> 是充分统计量，样本顺序不提供额外信息</td>
 </tr>
 <tr>
 <td><strong>伯努利的二阶导恒负，极大值全局唯一</strong></td>
-<td><span class="arithmatex">\(\ell(p)\)</span> 严格凹，这是好性质的来源 ✓</td>
+<td><span class="arithmatex">\(\ell(p)\)</span> 严格凹，这是好性质的来源</td>
 </tr>
 <tr>
 <td><strong>伯努利在 <span class="arithmatex">\(k=0\)</span> 或 <span class="arithmatex">\(k=n\)</span> 时给出边界解</strong></td>
@@ -15026,7 +15005,7 @@ z
 </tr>
 <tr>
 <td><strong><span class="arithmatex">\(\sigma^2\)</span> 未知不影响 <span class="arithmatex">\(\mu\)</span> 的估计</strong></td>
-<td>求导时 <span class="arithmatex">\(\sigma^2\)</span> 作为正数因子被约掉，两者解耦 ✓</td>
+<td>求导时 <span class="arithmatex">\(\sigma^2\)</span> 作为正数因子被约掉，两者解耦</td>
 </tr>
 <tr>
 <td><strong><span class="arithmatex">\(\mathbb{E}[\hat\sigma^2_{ML}] = \frac{n-1}{n}\sigma^2\)</span>，偏差 <span class="arithmatex">\(-\sigma^2/n\)</span></strong></td>
@@ -15058,7 +15037,7 @@ z
 </tr>
 <tr>
 <td><strong>渐近有效：渐近方差达到克拉美-罗下界</strong></td>
-<td>这是最大似然最重要的理论资本 ✓</td>
+<td>这是最大似然最重要的理论资本</td>
 </tr>
 <tr>
 <td><strong>渐近有效性是关于极限的，不能给小样本背书</strong></td>
@@ -15070,7 +15049,7 @@ z
 </tr>
 <tr>
 <td><strong>负对数似然 = 交叉熵</strong></td>
-<td>伯努利对应二元交叉熵，多项分布对应多分类交叉熵 ✓</td>
+<td>伯努利对应二元交叉熵，多项分布对应多分类交叉熵</td>
 </tr>
 <tr>
 <td><strong>正态 + 固定方差 → 均方误差</strong></td>
@@ -15078,7 +15057,7 @@ z
 </tr>
 <tr>
 <td><strong>选损失函数就是选噪声分布</strong></td>
-<td>均方误差惩罚重、对离群点敏感；绝对误差更稳健 ✓</td>
+<td>均方误差惩罚重、对离群点敏感；绝对误差更稳健</td>
 </tr>
 <tr>
 <td><strong>六种典型失效</strong></td>
@@ -15090,7 +15069,7 @@ z
 </tr>
 <tr>
 <td><strong>本页两张图</strong></td>
-<td>一张画似然曲面的峰值，一张画方差随样本量收缩 ✓</td>
+<td>一张画似然曲面的峰值，一张画方差随样本量收缩</td>
 </tr>
 </tbody>
 </table>
@@ -15122,7 +15101,7 @@ z
 <tr>
 <td>④</td>
 <td>由 <span class="arithmatex">\(\ln\)</span> 严格单调增把连乘换成连加</td>
-<td><span class="arithmatex">\(\arg\max L = \arg\max \ell\)</span>，解完全不变 ✓</td>
+<td><span class="arithmatex">\(\arg\max L = \arg\max \ell\)</span>，解完全不变</td>
 </tr>
 <tr>
 <td>⑤</td>
@@ -15142,16 +15121,14 @@ z
 <tr>
 <td>⑧</td>
 <td>由负对数似然读出损失函数</td>
-<td>交叉熵与均方误差都是它的特例 ✓</td>
+<td>交叉熵与均方误差都是它的特例</td>
 </tr>
 </tbody>
 </table>
-<p><strong>最后一件要记住的事</strong>：本页所有结论都建立在一个前提上 ——
-<strong>样本独立同分布，且密度的函数形式已经选对</strong>。
-一旦这个前提变了（样本相关、密度形式选错、
-或者参数个数与样本量同量级），
-前面的每一条公式都要重新检查适用条件，
-而不能直接套用 ✓</p>
+<p><strong>本页所有结论都建立在</strong>「样本独立同分布、密度形式已选对」
+<strong>这个前提上</strong>。一旦前提变了（样本相关、密度形式选错、
+参数个数与样本量同量级），
+前面的每条公式都要重新检查适用条件，不能直接套用。</p>
 <hr />
 <p><strong>上一页</strong>：<a href="../bayes-min-risk/">最小风险贝叶斯决策</a> ——
 前面几页一直在「密度已知」的前提下推判决规则：

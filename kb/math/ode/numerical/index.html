@@ -12104,9 +12104,6 @@ h^* = \sqrt{\frac{\epsilon_{\text{mach}}}{C}}
 </tr>
 </tbody>
 </table>
-<p><strong>它与「数值计算」模块的「数值微分」一页是同一个权衡</strong>
-—— 都是「截断误差随 <span class="arithmatex">\(h\)</span> 下降、舍入误差随 <span class="arithmatex">\(h\)</span> 上升」，
-最优点都出现在 <span class="arithmatex">\(h \sim \sqrt{\epsilon}\)</span> 附近。</p>
 </div>
 <h3 id="euler-heun">改进 Euler 法（Heun 法）<a class="headerlink" href="#euler-heun" title="Permanent link">&para;</a></h3>
 <p><strong>问题</strong>：Euler 法只用起点斜率，忽略了这步中斜率的变化。</p>
@@ -12245,8 +12242,6 @@ y(t+h)-y(t) = \int_t^{t+h}f\,\mathrm{d}s\approx\frac h2[f(t)+f(t+h)]
 </tr>
 </tbody>
 </table>
-<p><strong>第一列随 <span class="arithmatex">\(h \to 0\)</span> 趋近于 1</strong>，第二列却<strong>发散</strong> ——
-这确证了「差值估计的是预测值的误差」。</p>
 <p><strong>工程含义</strong>：这个性质<strong>仍然很有用</strong>，因为</p>
 <table>
 <thead>
@@ -13203,10 +13198,6 @@ k_4 = f(t_n+h,\ y_n+hk_3)
 </tr>
 </tbody>
 </table>
-<p>RK4 只需 124 次求值，Euler 要 <span class="arithmatex">\(10^6\)</span> 次 ——
-<strong>效率差约 <span class="arithmatex">\(8000\)</span> 倍</strong></p>
-<p><strong>这就是「RK4 是工程标准选择」的原因</strong>：
-它在「每步成本」与「所需步数」之间取得很好的平衡。</p>
 </div>
 <h3 id="rk45">自适应步长（RK45）<a class="headerlink" href="#rk45" title="Permanent link">&para;</a></h3>
 <p><strong>思路</strong>：同时用 4 阶和 5 阶方法，用两者之差估计误差，
@@ -13535,10 +13526,6 @@ y_{n+1} = y_n+h\,f(t_{n+1},y_{n+1})
 </tr>
 </tbody>
 </table>
-<p><strong>隐式 Euler 迅速趋零</strong>（<span class="arithmatex">\(z=-1000\)</span> 时 <span class="arithmatex">\(0.001\)</span>）
-<strong>梯形法却趋近于 1</strong>（<span class="arithmatex">\(z=-1000\)</span> 时 <span class="arithmatex">\(0.996\)</span>）✗ ——
-它把快速模态完整地保留成 <span class="arithmatex">\((-1)^{n}\)</span> 的符号交替振荡。</p>
-<p>这就是「梯形法虽然 A 稳定，却不适合强刚性问题」的原因</p>
 <p><strong>工程含义</strong>：选刚性求解器时<strong>不能只看「A 稳定」这个标签</strong>。
 实践中应优先选 <strong>L 稳定</strong> 的方法（隐式 Euler、BDF、TR-BDF2），
 因为刚性问题的本质就是「存在极快衰减的模态」，
@@ -13672,7 +13659,7 @@ y_{n+1} = y_n+h\,f(t_{n+1},y_{n+1})
 <!-- 隐式 Euler 稳定区域：以 (1,0) 为圆心 r=1 的圆外 -->
 <circle class="a1" cx="278" cy="126" r="52" fill="none" stroke-width="2.4" stroke-dasharray="7 4"/>
 <text class="l1" x="316" y="82">隐式 Euler</text>
-<text class="l1" x="312" y="98">（圆外，覆盖整个左半平面）</text>
+<text class="l1" x="426" y="98" text-anchor="end">（圆外，覆盖整个左半平面）</text>
 <!-- 负实轴上的困难点 -->
 <circle class="d2" cx="62" cy="126" r="5"/>
 <text class="lbl-s" x="34" y="152">大负实部</text>
@@ -13847,8 +13834,6 @@ y_2 = 0.82+\frac{0.1}{2}(-1.64-1.312) = 0.82-0.1476 = 0.6724
 </tbody>
 </table>
 <p><strong>比值应约为 <span class="arithmatex">\(1/h = 10\)</span></strong>。</p>
-<p><strong>实际比值约 15</strong> —— <strong>与理论量级相符</strong>
-（常数因子不同，所以不是精确的 10。）</p>
 <p><strong>验证「阶」的方法（<span class="arithmatex">\(h\)</span> 减半）</strong>：</p>
 <table>
 <thead>
@@ -13868,8 +13853,6 @@ y_2 = 0.82+\frac{0.1}{2}(-1.64-1.312) = 0.82-0.1476 = 0.6724
 </tr>
 </tbody>
 </table>
-<p>这是数值方法中的一个基本自检手段：
-<strong>把 <span class="arithmatex">\(h\)</span> 减半，看误差降到多少 —— 由此反推阶数</strong></p>
 <p><strong>工程实践</strong>：<strong>这个技巧可以用来验证求解器是否按预期收敛</strong>
 （若误差不按预期下降，可能是实现有错或步长已进入舍入误差主导区。）</p>
 </div>
@@ -14213,9 +14196,6 @@ h\to\frac h2 \implies \text{误差}\to\frac{\text{误差}}{2^4} = \frac{\text{�
 </tr>
 </tbody>
 </table>
-<p><strong>RK4 的「性价比」几乎是最优的</strong> ——
-更高阶的方法（如 RK8）每步要更多求值，
-而精度提升的收益有限</p>
 <p><strong>注意「精度」不解决「刚性」</strong>：</p>
 <p><strong>RK4 也是显式方法</strong> → 仍有稳定性限制 ✗</p>
 <table>

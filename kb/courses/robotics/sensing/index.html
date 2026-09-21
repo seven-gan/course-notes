@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有一个前提没解决：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息不会自己出现，全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
+    <meta name="description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有个前提：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="机器人的传感系统与信息融合">
   
-  <meta property="og:description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有一个前提没解决：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息不会自己出现，全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
+  <meta property="og:description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有个前提：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/sensing/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="机器人的传感系统与信息融合">
   
-  <meta name="twitter:description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有一个前提没解决：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息不会自己出现，全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
+  <meta name="twitter:description" content="机器人的传感系统与信息融合：前面几页把「要出多大力」算清楚了，但控制器还有个前提：它得先知道现在是什么状态 —— 关节转到哪了、末端在哪、手上有没有碰到东西。这些信息全靠传感器测出来。这一页沿着「内部传感器 → 外部传感器 → 信息融合」这条线，讲清机器人感知的三个问题：测什么、怎么测、多路信号怎么合成一份可信的估计。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11959,9 +11959,8 @@
 
 <h1 id="_1">机器人的传感系统与信息融合<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>前面几页把「<strong>要出多大力</strong>」算清楚了，但控制器还有一个前提没解决：
-它得先<strong>知道现在是什么状态</strong> —— 关节转到哪了、末端在哪、手上有没有碰到东西。
-这些信息<strong>不会自己出现</strong>，全靠<strong>传感器</strong>测出来。
+<p>前面几页把「<strong>要出多大力</strong>」算清楚了，但控制器还有个前提：它得先<strong>知道现在是什么状态</strong> ——
+关节转到哪了、末端在哪、手上有没有碰到东西。这些信息全靠<strong>传感器</strong>测出来。
 这一页沿着「<strong>内部传感器 → 外部传感器 → 信息融合</strong>」这条线，
 讲清机器人感知的三个问题：<strong>测什么、怎么测、多路信号怎么合成一份可信的估计</strong>。</p>
 </blockquote>
@@ -11995,8 +11994,7 @@
 </tr>
 </tbody>
 </table>
-<p><strong>没有传感器的机器人是「瞎子」</strong>：它只能按固定的指令走（开环），
-一旦有负载、有摩擦、有偏差，就会越走越偏。</p>
+<p><strong>没有传感器的机器人是「瞎子」</strong>：只能按固定指令开环运行，一旦有负载、摩擦、偏差就越走越偏。</p>
 <h3 id="12-vs">1.2 内部传感器 vs 外部传感器<a class="headerlink" href="#12-vs" title="Permanent link">&para;</a></h3>
 <p>这是机器人传感最常用的一种分类，<strong>分界线是「量的是机器人自己，还是环境」</strong>：</p>
 <table>
@@ -12035,7 +12033,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：<strong>内部传感器管「我在哪」，外部传感器管「世界什么样」。</strong></p>
 <p>把这条分界画成一棵分类树，各大类再各举几个代表器件：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 460 284" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="机器人传感器分类树：内部传感器与外部传感器">
@@ -12078,13 +12075,12 @@
 贯穿始终的只有一个问题：<strong>如何得到一份可信、够准、够快（实时）的状态估计</strong>。</p>
 </div>
 <h3 id="13">1.3 传感器给的是「带噪声的数」，不是「真值」<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>必须先立一个观念：<strong>任何传感器测出来都带误差</strong>。
-误差分两类，后面所有融合方法都围绕它们展开：</p>
+<p><strong>任何传感器测出来都带误差</strong>。误差分两类，后面所有融合方法都围绕它们展开：</p>
 <p>· <strong>系统误差（有偏）</strong>：每次都往同一个方向偏 —— 陀螺的<strong>零漂</strong>、编码器的<strong>安装偏心</strong>、
   超声测距受<strong>温度</strong>影响。<strong>可以用标定减小，但很难彻底消除</strong>；
 · <strong>随机误差（噪声）</strong>：每次都不一样，均值为零 —— 相机的<strong>像素噪声</strong>、加速度计的<strong>热噪声</strong>。
   <strong>单次测不准，但可以用多次平均、多路融合压下去</strong>。</p>
-<p><strong>所以「一个传感器够不够」这个问题，答案通常是「不够」</strong> —— 这正是第四节融合的由来。</p>
+<p><strong>所以「一个传感器够不够」，答案通常是「不够」</strong>。</p>
 <hr />
 <h2 id="_3">二、内部传感器：测量机器人自己<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 位置：编码器<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
@@ -12138,20 +12134,15 @@
 </tr>
 </tbody>
 </table>
-<p><strong>读这张表，两个结论</strong>：</p>
 <ol>
-<li><strong>分辨率非常高</strong>：<span class="arithmatex">\(1000 \times 4 \times 50 = 20\)</span> 万个计数/转，
-   角度分辨率 <span class="arithmatex">\(0.0018°\)</span> —— 这就是编码器能称霸位置测量的原因；</li>
-<li><strong>差分测速「低速失准」</strong>：均值一直很准（<span class="arithmatex">\(0.5000 / 0.1000 / 0.0200\)</span>），
-   但标准差几乎不变（约 <span class="arithmatex">\(0.009 \sim 0.015\)</span> rad/s）——
-   到了 <span class="arithmatex">\(0.02\)</span> rad/s 那一行，<strong>噪声已经和真实速度（<span class="arithmatex">\(0.0200\)</span>）一样大了</strong>，估计值基本不可用。</li>
+<li><strong>分辨率非常高</strong>：<span class="arithmatex">\(1000 \times 4 \times 50 = 20\)</span> 万个计数/转，角度分辨率 <span class="arithmatex">\(0.0018°\)</span> —— 编码器能称霸位置测量就靠这个；</li>
+<li><strong>差分测速「低速失准」</strong>：均值一直很准（<span class="arithmatex">\(0.5000 / 0.1000 / 0.0200\)</span>），标准差却几乎不变（约 <span class="arithmatex">\(0.009 \sim 0.015\)</span> rad/s）——
+   到了 <span class="arithmatex">\(0.02\)</span> rad/s 那一行，<strong>噪声已经和真实速度（<span class="arithmatex">\(0.0200\)</span>）一样大</strong>，估计值基本不可用。</li>
 </ol>
-<p><strong>原因是「量化」</strong>：位置本身是<strong>离散的整数计数</strong>，
-速度 = 位置差 ÷ 时间，<strong>除一个很小的 <span class="arithmatex">\(\Delta t\)</span>，就把量化误差放大了</strong>。
-速度越低，每步跨过的计数越少（最后一列：<span class="arithmatex">\(0.64\)</span> 个计数/步），
-「有的步跳 1 个计数、有的步不跳」的抖动就越显眼 —— 这就是<strong>低速测速的经典难题</strong>。</p>
-<p><strong>工程对策</strong>：加长差分窗口（多步平均）、用<strong>测速发电机</strong>、或把编码器和 IMU 融合
-（这正是第四节要做的事）。</p>
+<p><strong>原因是「量化」</strong>：位置本身是<strong>离散的整数计数</strong>，速度 = 位置差 ÷ 时间，
+<strong>除以很小的 <span class="arithmatex">\(\Delta t\)</span> 就把量化误差放大了</strong>。速度越低，每步跨过的计数越少（最后一列 <span class="arithmatex">\(0.64\)</span> 个计数/步），
+「有的步跳 1 个计数、有的步不动」的抖动就越显眼 —— 这就是<strong>低速测速的经典难题</strong>。</p>
+<p><strong>工程对策</strong>：加长差分窗口（多步平均）、用<strong>测速发电机</strong>、或把编码器和 IMU 融合（第四节要做的事）。</p>
 <div class="admonition tip">
 <p class="admonition-title">低速测速为什么要融合</p>
 <p>编码器差分在<strong>低速</strong>时量化噪声大，IMU 的陀螺在<strong>短时</strong>很好但<strong>长期漂移</strong> ——
@@ -12169,7 +12160,6 @@
 <p>· <strong>陀螺积分会漂</strong>：角速度积分成角度，零漂会<strong>随时间线性累积</strong> —— 积一分钟就偏出去；
 · <strong>加速度计含重力</strong>：它测的是「比力」，静止时也能读出 <span class="arithmatex">\(1g\)</span>，
   <strong>不能直接把读数当运动加速度</strong>，必须先减去重力分量。</p>
-<p><strong>这正是「IMU + 其他传感器」融合的动机</strong>（见第四节）。</p>
 <h3 id="24">2.4 力 / 力矩 与 方位<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>· <strong>关节力矩传感器</strong>：贴在关节输出轴或谐波减速器上（<strong>应变片</strong>原理），
   直接测「关节现在受了多大力矩」—— 有了它，就能做<strong>力矩控制、碰撞检测、拖动示教</strong>；
@@ -12231,7 +12221,7 @@
 它是第十章「力控制」的直接输入，也是机器人「手感」的来源。</p>
 <h3 id="33">3.3 视觉：机器人最重要的外部传感器<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>视觉信息量最大：能同时给出<strong>位置、形状、颜色、纹理</strong>。
-本课程在第十三章会系统展开，这里只用一个<strong>最小的例子</strong>看清视觉测距的本质 —— <strong>双目</strong>。</p>
+本课程第十三章会系统展开，这里只用<strong>双目</strong>这个最小例子看清视觉测距的本质。</p>
 <p><strong>双目立体视觉</strong>：两个相机像人的双眼，同时看同一点，
 <strong>左右图像里同一点的横坐标差</strong>叫<strong>视差</strong> <span class="arithmatex">\(d\)</span>。
 由相似三角形（或直接由针孔模型）可得：</p>
@@ -12239,7 +12229,7 @@
 z = \frac{f\,B}{d}
 \]</div>
 <p>其中 <span class="arithmatex">\(z\)</span> 是深度，<span class="arithmatex">\(f\)</span> 是焦距（像素），<span class="arithmatex">\(B\)</span> 是两相机间的<strong>基线</strong>，<span class="arithmatex">\(d\)</span> 是<strong>视差</strong>。</p>
-<p><strong>关键是要看清它的「性格」</strong>：视差 <span class="arithmatex">\(d\)</span> 在<strong>近处大、远处小</strong>，
+<p>视差 <span class="arithmatex">\(d\)</span> 在<strong>近处大、远处小</strong>，
 而 <span class="arithmatex">\(z\)</span> 与 <span class="arithmatex">\(d\)</span> <strong>成反比</strong> —— 于是远处的误差被<strong>放大</strong>。逐项算一遍：</p>
 <p>双目相机：焦距 f = 1000 px，基线 B = 0.10 m，视差噪声 σ_d = 0.2 px</p>
 <table>
@@ -12278,11 +12268,8 @@ z = \frac{f\,B}{d}
 </tr>
 </tbody>
 </table>
-<p><strong>读这张表</strong>：距离从 <span class="arithmatex">\(0.5\)</span> m 拉到 <span class="arithmatex">\(5\)</span> m（<strong>10 倍</strong>），
-深度误差从 <span class="arithmatex">\(0.5\)</span> mm 涨到 <span class="arithmatex">\(50\)</span> mm（<strong>100 倍</strong>） ——
-因为误差按 <span class="arithmatex">\(z^2\)</span> 增长（<span class="arithmatex">\(\sigma_z \approx \dfrac{z^2}{fB}\sigma_d\)</span>）。</p>
-<p><strong>这条结论是视觉测距的「物理定律」</strong>：
-<strong>基线越长、焦距越长，远处越准</strong>（车载双目基线做得比手机长，就是这个道理）；
+<p>因为误差按 <span class="arithmatex">\(z^2\)</span> 增长（<span class="arithmatex">\(\sigma_z \approx \dfrac{z^2}{fB}\sigma_d\)</span>）。</p>
+<p><strong>基线越长、焦距越长，远处越准</strong>（车载双目基线比手机长就是这个道理）；
 近距离准、远距离差，是<strong>所有三角法</strong>（含激光三角）的通病。</p>
 <p>把两台相机与目标点的几何关系画出来，「z 与 d 成反比」就来自相似三角形：</p>
 <figure class="kb-fig">
@@ -12317,12 +12304,10 @@ z = \frac{f\,B}{d}
 <hr />
 <h2 id="_5">四、信息融合：把多路信号合成一份可信的估计<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 为什么必须融合<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>回到第二节的两个坑：<strong>编码器低速测速差、陀螺长期漂移</strong>。
-再想想一、二节的所有传感器 —— 它们几乎都满足同一个规律：</p>
-<p>· <strong>一种传感器，总有自己的「盲区」</strong>：要么量程不够，要么噪声太大，要么会漂；
+<p>回到第二节的两个坑：<strong>编码器低速测速差、陀螺长期漂移</strong>。一、二节的所有传感器几乎都满足同一个规律：</p>
+<p>· <strong>一种传感器总有自己的「盲区」</strong>：要么量程不够，要么噪声太大，要么会漂；
 · <strong>不同传感器的盲区往往不重叠</strong>：一个的弱点正是另一个的强项。</p>
-<p><strong>信息融合就是「用多个不完美，换一个更完美」</strong> ——
-把多路冗余、互补的信息合成一份<strong>比任何单路都准</strong>的估计。</p>
+<p><strong>信息融合就是「用多个不完美，换一个更完美」</strong> —— 把多路冗余、互补的信息合成一份<strong>比任何单路都准</strong>的估计。</p>
 <h3 id="42">4.2 最简单的融合：按「可靠度」加权<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
 <p>假设有两个<strong>独立</strong>的估计 <span class="arithmatex">\(x_1,\,x_2\)</span>，误差标准差分别是 <span class="arithmatex">\(\sigma_1,\,\sigma_2\)</span>。
 要让合成估计的<strong>方差最小</strong>，就该<strong>给准的更大权重</strong>：</p>
@@ -12334,7 +12319,7 @@ w_i = \frac{1/\sigma_i^2}{\sum_j 1/\sigma_j^2}
 <div class="arithmatex">\[
 \sigma_{\text{fused}} = \frac{1}{\sqrt{1/\sigma_1^2 + 1/\sigma_2^2}}
 \]</div>
-<p><strong>记住这个式子</strong>：它告诉你<strong>融合一定不比最好的单路差</strong>，
+<p>这个式子说明<strong>融合一定不比最好的单路差</strong>，
 而且<strong>多一路就多一分信息</strong>（分母里的项越多，<span class="arithmatex">\(\sigma_{\text{fused}}\)</span> 越小）。</p>
 <h3 id="43">4.3 卡尔曼滤波：带时间维度的融合<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
 <p>上面的加权只处理<strong>同一时刻</strong>的多路量测。但传感器的信息是<strong>随时间来的</strong>，
@@ -12349,7 +12334,7 @@ K = \frac{P^-}{P^- + \sigma_{\text{meas}}^2},\qquad
 \hat{x} = \hat{x}^- + K\,(z - \hat{x}^-),\qquad
 P = (1-K)P^-
 \]</div>
-<p><strong><span class="arithmatex">\(K\)</span> 的物理意义非常好懂</strong>：它是「<strong>该信预测多一点，还是信量测多一点</strong>」的开关 ——</p>
+<p><strong><span class="arithmatex">\(K\)</span> 的物理意义</strong>：它是「<strong>该信预测多一点，还是信量测多一点</strong>」的开关 ——</p>
 <p>· 量测噪声 <span class="arithmatex">\(\sigma_{\text{meas}}\)</span> 很大（传感器很烂）→ <span class="arithmatex">\(K \to 0\)</span> → <strong>基本信预测</strong>；
 · 量测很准 → <span class="arithmatex">\(K \to 1\)</span> → <strong>基本信量测</strong>。</p>
 <p><strong>预测 - 更新 - 再预测</strong> 循环下去，就得到一条<strong>又平滑、又跟得上变化</strong>的估计。</p>
@@ -12379,14 +12364,9 @@ P = (1-K)P^-
 </tr>
 </tbody>
 </table>
-<p><strong>读最后三行</strong>：</p>
-<p>· 单用编码器，RMSE <span class="arithmatex">\(=0.0083\)</span> m；单用视觉，<span class="arithmatex">\(=0.0117\)</span> m；
-· <strong>融合后 <span class="arithmatex">\(=0.0069\)</span> m</strong> —— <strong>比最好的那一路还小</strong>。</p>
-<p>这就是融合的价值：<strong>不是「取一个折中」，而是「取长补短、去伪存真」</strong>。</p>
 <p><strong>（注意一处细节）</strong> 表头的理论上限 <span class="arithmatex">\(0.0179\)</span> m 是「<strong>同一时刻两路量测</strong>」的最优融合方差；
-而卡尔曼滤波<strong>还额外利用了时间上的连续性做平滑</strong>（过程噪声很小，
-相当于对估计做了低通），所以实际 RMSE 还能<strong>低于</strong>这个静态上限 ——
-<strong>「用了历史信息」是卡尔曼比单点加权更聪明的地方。</strong></p>
+而卡尔曼滤波<strong>还利用了时间上的连续性做平滑</strong>（相当于对估计做低通），
+所以实际 RMSE 能<strong>低于</strong>这个静态上限 —— <strong>「用了历史信息」是卡尔曼比单点加权更聪明的地方。</strong></p>
 <div class="admonition tip">
 <p class="admonition-title">融合的三种典型场景</p>
 <p>① <strong>冗余</strong>：两路测同一件事（编码器 + 视觉都测位置）→ 用加权 / Kalman 降噪；

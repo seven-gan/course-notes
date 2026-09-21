@@ -11878,8 +11878,7 @@
 <blockquote>
 <p><strong>随机信号不能用「某个时刻的值」描述，只能用「统计特性」描述。</strong></p>
 </blockquote>
-<p>这一页建立描述随机信号的工具：<strong>均值、自相关、功率谱密度</strong>。
-它们是<strong>维纳滤波、卡尔曼滤波、谱估计</strong>的直接基础。</p>
+<p>这一页建立描述随机信号的工具：<strong>均值、自相关、功率谱密度</strong>。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么必须学这个</p>
 <p>现代数字信号处理的课程大纲里，「随机过程和统计估计」紧跟在
@@ -11914,7 +11913,6 @@
 </tr>
 </tbody>
 </table>
-<p>跳过这一节，后面的「最优滤波」就只能背公式。</p>
 </div>
 <hr />
 <h2 id="_2">一、随机过程：从一个随机变量到一族随机变量<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12966,7 +12964,7 @@ R_{XX}(t_1,t_2) &amp;= R_{XX}(\tau), \quad \tau = t_1-t_2 \quad&amp;\text{（只
 <path class="a4" d="M252,96 C264,60 276,50 288,60 C300,72 312,80 324,84 L330,84 C342,80 354,72 366,60 C378,50 390,60 402,96" fill="none" stroke-width="2.2" opacity="0.95"/>
 <text class="l4" x="336" y="70">周期峰</text>
 <text class="lbl-s" x="240" y="124">峰值位置揭示周期成分</text>
-<text class="lbl-s" x="240" y="164">这是「用自相关检测周期性信号」的原理</text>
+<text class="lbl-s" x="424" y="164" text-anchor="end">这是「用自相关检测周期性信号」的原理</text>
 <text class="lbl-s" x="240" y="186">（周期信号被噪声掩盖时仍然有效）</text>
 <text class="lbl-s" x="240" y="212">工程应用：</text>
 <text class="lbl-s" x="240" y="234">· 语音基音检测</text>
@@ -12984,7 +12982,6 @@ R_{XX}(t_1,t_2) &amp;= R_{XX}(\tau), \quad \tau = t_1-t_2 \quad&amp;\text{（只
 <div class="arithmatex">\[
 \boxed{\ S_{XX}(\omega) = \int_{-\infty}^{\infty} R_{XX}(\tau)e^{-j\omega\tau}\,\mathrm{d}\tau\ }
 \]</div>
-<p>即：功率谱密度是自相关函数的傅里叶变换。</p>
 <p><strong>逆变换</strong>：</p>
 <div class="arithmatex">\[
 R_{XX}(\tau) = \frac{1}{2\pi}\int_{-\infty}^{\infty}S_{XX}(\omega)e^{j\omega\tau}\,\mathrm{d}\omega
@@ -13188,8 +13185,7 @@ S_{XX}(\omega) = \sigma^2\left[\frac{1}{a-j\omega}+\frac{1}{a+j\omega}\right]
 <li>随机游走的增量（Ornstein-Uhlenbeck 过程）</li>
 <li>慢变随机漂移（陀螺仪零偏、传感器漂移）</li>
 </ul>
-<p><strong>相关时间</strong>：<span class="arithmatex">\(\tau_c = 1/a\)</span>。<span class="arithmatex">\(a\)</span> 越小，相关时间越长，谱越窄。
-这与「时间-带宽不确定性」一致。</p>
+<p><strong>相关时间</strong>：<span class="arithmatex">\(\tau_c = 1/a\)</span>。<span class="arithmatex">\(a\)</span> 越小，相关时间越长，谱越窄。</p>
 </details>
 <hr />
 <h3 id="2">例题 2：白噪声通过低通滤波器<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -13218,15 +13214,13 @@ P = \frac{1}{2\pi}\int_{-\omega_c}^{\omega_c}\frac{N_0}{2}\,\mathrm{d}\omega
 = \frac{1}{2\pi}\cdot\frac{N_0}{2}\cdot2\omega_c
 = \frac{N_0\omega_c}{2\pi}
 \]</div>
-<p><strong>关键观察</strong>：<strong>输出功率正比于带宽 <span class="arithmatex">\(\omega_c\)</span></strong>。</p>
-<p><strong>这解释了「滤波器越宽，噪声越大」</strong>：
-带宽加倍，噪声功率加倍（+3 dB）。</p>
+<p><strong>关键观察</strong>：<strong>输出功率正比于带宽 <span class="arithmatex">\(\omega_c\)</span></strong>——
+「滤波器越宽，噪声越大」（带宽加倍，噪声功率加倍，+3 dB）。</p>
 <p><strong>&copy; 输出自相关</strong></p>
 <p>对矩形谱做逆变换，得到 <strong>sinc 函数</strong>：</p>
 <div class="arithmatex">\[
 R_{YY}(\tau) = \frac{N_0\omega_c}{2\pi}\cdot\frac{\sin(\omega_c\tau)}{\omega_c\tau}
 \]</div>
-<p>（这正是「矩形 ↔ sinc」变换对的又一次应用。）</p>
 <p><strong>零点位置</strong>：<span class="arithmatex">\(\tau = k\pi/\omega_c\)</span>（<span class="arithmatex">\(k\)</span> 为非零整数）。
 即<strong>相隔 <span class="arithmatex">\(\pi/\omega_c\)</span> 的采样点不相关</strong>。</p>
 </details>
@@ -13435,8 +13429,7 @@ E[XY] = E[X\cdot X^2] = E[X^3]
 </tbody>
 </table>
 <p><strong>具体例子</strong>：某些通信信号（如 BPSK）在二阶统计上是「白的」，
-需要用<strong>高阶累积量</strong>才能检测出来。
-这正是课程大纲里「高阶谱估计方法」的存在理由。</p>
+需要用<strong>高阶累积量</strong>才能检测出来。</p>
 </div>
 <hr />
 <h2 id="_12">六、用在哪些课程里<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h2>

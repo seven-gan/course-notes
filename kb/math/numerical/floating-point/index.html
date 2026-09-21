@@ -12223,7 +12223,6 @@ x = (-1)^{s}\times(1.f)_{2}\times2^{e-1023}
 </tbody>
 </table>
 <p>这就是「无偏舍入」的含义 —— 它在<strong>统计上</strong>更公平</p>
-<p><strong>工程含义</strong>：大量数据的求和，误差不会系统性累积</p>
 <p><strong>一个实用推论</strong>：若做大量求和，误差的增长是「随机游走」而非「线性」：</p>
 <table>
 <thead>
@@ -12243,8 +12242,7 @@ x = (-1)^{s}\times(1.f)_{2}\times2^{e-1023}
 </tr>
 </tbody>
 </table>
-<p><strong>所以 <span class="arithmatex">\(n\)</span> 项的求和误差约 <span class="arithmatex">\(\sqrt n\,\epsilon\)</span> 而非 <span class="arithmatex">\(n\epsilon\)</span></strong>
-（这是「为什么求和误差没那么可怕」的定量解释。）</p>
+<p><strong>所以 <span class="arithmatex">\(n\)</span> 项的求和误差约 <span class="arithmatex">\(\sqrt n\,\epsilon\)</span> 而非 <span class="arithmatex">\(n\epsilon\)</span></strong></p>
 </div>
 <h3 id="01-01">0.1 不是 0.1<a class="headerlink" href="#01-01" title="Permanent link">&para;</a></h3>
 <p><strong>这是最著名的例子</strong>：</p>
@@ -12301,7 +12299,7 @@ x = (-1)^{s}\times(1.f)_{2}\times2^{e-1023}
 </tr>
 </tbody>
 </table>
-<p><strong>工程含义（非常实用）</strong>：</p>
+<p><strong>工程含义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13075,7 +13073,7 @@ x_{1}x_{2} = \frac{c}{a}
 <div class="arithmatex">\[
 \kappa = \frac{\text{输出相对变化}}{\text{输入相对变化}}
 \]</div>
-<p>关键区分（这一对概念最容易混）：</p>
+<p>关键区分：</p>
 <table>
 <thead>
 <tr>
@@ -13127,7 +13125,6 @@ x_{1}x_{2} = \frac{c}{a}
 相对误差也至少 <span class="arithmatex">\(10^{12}\times10^{-16} = 10^{-4}\)</span> ✗</p>
 <p><strong>含义</strong>：这时应该「改问题」（如重新标定、正则化），而不是「换算法」</p>
 <p>推论 2：条件数好的「坏算法」可能也够用</p>
-<p>这就是「为什么朴素高斯消元在温和问题上没问题」</p>
 <p><strong>推论 3：条件数可以「事后估计」</strong></p>
 <p>大多数求解器会返回条件数的估计 ——
 <strong>应该检查它</strong></p>
@@ -13251,35 +13248,8 @@ x_{1}x_{2} = \frac{c}{a}
 </tr>
 </tbody>
 </table>
-<p>这就是「数值计算」模块的下一节为什么讲 QR 与 SVD」 ——
-它们<strong>不是「更高级的选项」，而是「正确性的必要保证」</strong></p>
-<p><strong>工程实践建议</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>情形</th>
-<th>做法</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(n\)</span> 很小、条件数良好</td>
-<td>正规方程可以 ✓</td>
-</tr>
-<tr>
-<td><strong>不确定</strong></td>
-<td><strong>默认用 QR 或 <code>lstsq</code></strong> ✓</td>
-</tr>
-<tr>
-<td>需要处理秩亏</td>
-<td>SVD（加截断）✓</td>
-</tr>
-</tbody>
-</table>
-<p><strong>「默认用 QR」的成本很低</strong>（计算量约为正规方程的 2 倍），
-而<strong>收益是避免灾难性错误</strong></p>
+<p><strong>QR/SVD 不只是「更高级的选项」，而是「正确性的必要保证」</strong></p>
 </div>
-<p>"""</p>
 <hr />
 <h2 id="_11">五、典型例题<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
 <h3 id="1-sqrt2">例题 1：手算 <span class="arithmatex">\(\sqrt{2}\)</span> 的浮点表示与相对误差<a class="headerlink" href="#1-sqrt2" title="Permanent link">&para;</a></h3>
@@ -13401,8 +13371,7 @@ f = 0110101000001001111001100110011111110011101111001101
 </tr>
 </tbody>
 </table>
-<p>这就是「为什么实际算出来的精度常比理论界好」
-但<strong>做安全设计时必须用最坏界</strong>。✓</p>
+<p><strong>做安全设计时必须用最坏界</strong>。✓</p>
 </div>
 <hr />
 <h3 id="2">例题 2：灾难性抵消的实际规模<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -13514,7 +13483,7 @@ f = 0110101000001001111001100110011111110011101111001101
 <p><strong>实用判据</strong>：</p>
 <p>若「结果的量级 ÷ 输入的量级」小于 <span class="arithmatex">\(10^{-15}\)</span>，这个算法不可用 ✗
 —— 必须改写。</p>
-<p><strong>工程意义（这个判据很实用）</strong>：</p>
+<p><strong>工程意义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13676,7 +13645,7 @@ E[e]\approx+\frac{1}{2}\times10^{-k}\times P(\text{恰在五})&gt;0
 </tr>
 </tbody>
 </table>
-<p><strong>相差 1000 倍</strong> ✓ —— 这就是「无偏舍入很重要」的定量说明。</p>
+<p><strong>相差 1000 倍</strong> ✓</p>
 </details>
 <hr />
 <h3 id="4kahan">例题 4：Kahan 求和的实际收益<a class="headerlink" href="#4kahan" title="Permanent link">&para;</a></h3>
@@ -14414,7 +14383,7 @@ A^{T}A\boldsymbol{x} = A^{T}\boldsymbol{b}
 </table>
 <p><strong>QR 的代价只是「常系数约 2 倍」</strong> ——
 相对于「避免完全错误的答案」，这个代价极小</p>
-<p><strong>一句话</strong>：不要用正规方程解最小二乘，除非你确知条件数很好</p>
+<p><strong>不要用正规方程解最小二乘，除非你确知条件数很好</strong></p>
 </details>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../../calculus/taylor/">泰勒展开</a><a href="../../calculus/derivative/">导数与微分</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../linear-solve/">线性方程组求解</a></span></div></nav>
 

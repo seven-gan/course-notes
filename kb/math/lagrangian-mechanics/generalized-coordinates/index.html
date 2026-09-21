@@ -11750,11 +11750,11 @@ L = T-V \quad\text{（动能减势能）}
 </tr>
 </tbody>
 </table>
-<p><strong>「约束自动被吸收」是最实用的优势</strong>：
+<p><strong>「约束自动被吸收」</strong>：
 牛顿法中要算「约束力」（如绳子张力、斜面支持力），
 而拉格朗日法<strong>完全不需要</strong></p>
 <p><strong>代价</strong>：方程是二阶微分方程，有时求解比牛顿法更繁琐。</p>
-<p><strong>但对于复杂机械系统（如多关节机器人），拉格朗日法的优势压倒性</strong></p>
+<p><strong>对复杂机械系统（如多关节机器人），优势压倒性</strong></p>
 </div>
 <hr />
 <h2 id="_1">一、广义坐标<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -11840,12 +11840,12 @@ n = 3N-m
 </tr>
 </tbody>
 </table>
-<p><strong>「平面单摆只有 1 个自由度」这件事很重要</strong>：</p>
+<p><strong>「平面单摆只有 1 个自由度」</strong>：</p>
 <p>质心位置 <span class="arithmatex">\((x,y)\)</span> 是 <span class="arithmatex">\(2\)</span> 个坐标，但受约束</p>
 <div class="arithmatex">\[
 x^2+y^2 = l^2
 \]</div>
-<p><strong>只剩下一个独立变量</strong>（角度）</p>
+<p><strong>只剩一个独立变量</strong></p>
 <p><strong>用角度而非 <span class="arithmatex">\((x,y)\)</span> 的好处</strong>：</p>
 <table>
 <thead>
@@ -11865,8 +11865,34 @@ x^2+y^2 = l^2
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「广义坐标自动吸收约束」的含义</strong></p>
+<p><strong>这就是「约束自动被吸收」</strong></p>
 </div>
+<p>以单摆为例，一个角度 <span class="arithmatex">\(\theta\)</span> 就锁定了整个位形：</p>
+<figure class="kb-fig">
+<svg viewBox="0 0 430 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="单摆的广义坐标示意">
+<!-- 铅垂参考线 -->
+<line class="gd" x1="150" y1="46" x2="150" y2="186"/>
+<!-- 摆杆与摆球 -->
+<line class="ax" x1="150" y1="46" x2="222.7" y2="139" style="stroke-width:2.5"/>
+<circle class="f1" cx="222.7" cy="139" r="12" style="opacity:0.5"/>
+<circle class="a1" cx="222.7" cy="139" r="12" fill="none"/>
+<circle class="dc" cx="150" cy="46" r="4"/>
+<!-- 角度弧 -->
+<path class="a2" d="M150,94 A48,48 0 0 0 179.5,83.8" fill="none" style="stroke-width:1.8"/>
+<text class="l2" x="157" y="80">θ</text>
+<!-- 坐标分解 -->
+<line class="gd" x1="222.7" y1="139" x2="150" y2="139"/>
+<text class="l1" x="180" y="133">l sin θ</text>
+<text class="l3" x="142" y="110" text-anchor="end">l cos θ</text>
+<!-- 右侧说明 -->
+<text class="lbl" x="252" y="112">自由度 = 1</text>
+<text class="lbl-s" x="252" y="138">广义坐标：θ</text>
+<text class="lbl-s" x="252" y="164">x = l·sin θ</text>
+<text class="lbl-s" x="252" y="190">y = −l·cos θ</text>
+</svg>
+<figcaption>图 2　单摆的广义坐标。悬点固定、摆长不变，于是摆球位置 (x, y) 恒满足约束 x² + y² = l²，两个坐标里只有一个能独立变化。改用摆角 θ 后，一个数就完全确定位形，而且约束自动满足（x = l·sin θ，y = −l·cos θ）—— 这正是「广义坐标自动吸收约束」的含义</figcaption>
+</figure>
+
 <h3 id="_3">广义速度与动能<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
 <p><strong>广义速度</strong>：<span class="arithmatex">\(\dot q_i = \dfrac{\mathrm{d}q_i}{\mathrm{d}t}\)</span>。</p>
 <p><strong>动能的一般形式</strong>：</p>
@@ -11889,7 +11915,7 @@ T = \frac12m\lvert\dot{\boldsymbol{r}}\rvert^2 = \frac12ml^2\dot\theta^2
 T = \frac12m(\dot l^2+l^2\dot\theta^2)
 \]</div>
 <p><strong><span class="arithmatex">\(m_{22} = ml^2\)</span> 依赖 <span class="arithmatex">\(l\)</span></strong> ✓ —— 这就是「<span class="arithmatex">\(m_{ij}\)</span> 依赖 <span class="arithmatex">\(q\)</span>」的例子。</p>
-<p><strong>这一项会产生「离心力」等惯性效应</strong>（几何耦合项）。</p>
+<p><strong>这一项产生「离心力」等惯性效应</strong>。</p>
 <hr />
 <h2 id="euler-lagrange_1">二、从变分原理推导 Euler-Lagrange 方程<a class="headerlink" href="#euler-lagrange_1" title="Permanent link">&para;</a></h2>
 <h3 id="hamilton">作用量与 Hamilton 原理<a class="headerlink" href="#hamilton" title="Permanent link">&para;</a></h3>
@@ -11909,7 +11935,7 @@ S = \int_{t_1}^{t_2}L(q,\dot q,t)\,\mathrm{d}t
 <p><strong>第一步：对 <span class="arithmatex">\(q(t)\)</span> 施加变分</strong></p>
 <p>设真实轨迹 <span class="arithmatex">\(q(t)\)</span>，考虑邻近轨迹 <span class="arithmatex">\(q(t)+\epsilon\eta(t)\)</span>，
 其中 <span class="arithmatex">\(\eta(t_1) = \eta(t_2) = 0\)</span>（<strong>端点固定</strong>）</p>
-<p>这个「端点固定」条件是关键 —— 它使边界项消失。</p>
+<p>这个「端点固定」条件使边界项消失。</p>
 <p><strong>第二步：作用量的变分</strong></p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}S}{\mathrm{d}\epsilon}\bigg|_{\epsilon=0}
@@ -11934,8 +11960,8 @@ S = \int_{t_1}^{t_2}L(q,\dot q,t)\,\mathrm{d}t
 <div class="arithmatex">\[
 \boxed{\ \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial L}{\partial\dot q_i}\right)-\frac{\partial L}{\partial q_i} = 0\ }
 \]</div>
-<p><strong>这是 <span class="arithmatex">\(n\)</span> 个二阶微分方程</strong>（每个自由度一个）</p>
-<p><strong>推导中的三个关键点</strong>：</p>
+<p><strong>这是 <span class="arithmatex">\(n\)</span> 个二阶微分方程</strong></p>
+<p><strong>三个关键点</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -11958,12 +11984,12 @@ S = \int_{t_1}^{t_2}L(q,\dot q,t)\,\mathrm{d}t
 </tr>
 </tbody>
 </table>
-<p><strong>注意「作用量极值」而非「最小」</strong>：
+<p><strong>「作用量极值」而非「最小」</strong>：
 一般是极小，但在某些情况下可以是极大或鞍点 ——
 统称「驻值」（stationary）</p>
 </div>
 <h3 id="_4">「动能减势能」为什么是对的<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<p><strong>一个常见困惑</strong>：为什么是 <span class="arithmatex">\(T-V\)</span>（相减）而不是 <span class="arithmatex">\(T+V\)</span>？</p>
+<p>为什么是 <span class="arithmatex">\(T-V\)</span>（相减）而不是 <span class="arithmatex">\(T+V\)</span>？</p>
 <p><strong>答</strong>：由变分原理<strong>反推</strong>出来的。看简单例子：</p>
 <p><strong>自由质点</strong>（<span class="arithmatex">\(T = \frac12m\dot x^2\)</span>、<span class="arithmatex">\(V = 0\)</span>）：</p>
 <div class="arithmatex">\[
@@ -11996,8 +12022,8 @@ m\ddot z-(-mg) = 0 \implies m\ddot z = -mg \;\checkmark
 m\ddot z-mg = 0 \implies \ddot z = +g \;\text{（方向反了）}✗
 \]</div>
 <p><strong>错误</strong></p>
-<p><strong>所以「相减」不是任意选择，而是被物理决定的</strong></p>
-<p><strong>直观理解（一个有用的类比）</strong>：</p>
+<p><strong>「相减」不是任意选择，而是被物理决定的</strong></p>
+<p><strong>一个有用的类比</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12020,12 +12046,12 @@ m\ddot z-mg = 0 \implies \ddot z = +g \;\text{（方向反了）}✗
 </tr>
 </tbody>
 </table>
-<p><strong>另一种理解</strong>：EL 方程给出的正是牛顿第二定律</p>
+<p>EL 方程给出的正是牛顿第二定律</p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}}{\mathrm{d}t}(m\dot q) = -\frac{\partial V}{\partial q}
 \]</div>
-<p>其中左边是动量的时间导数、右边是<strong>力的负梯度</strong>。
-<strong><span class="arithmatex">\(L\)</span> 只是把这两个角色分配给了 <span class="arithmatex">\(T\)</span> 与 <span class="arithmatex">\(-V\)</span></strong></p>
+<p>左边是动量的时间导数、右边是<strong>力的负梯度</strong>。
+<strong><span class="arithmatex">\(L\)</span> 把这两个角色分给了 <span class="arithmatex">\(T\)</span> 与 <span class="arithmatex">\(-V\)</span></strong></p>
 </div>
 <figure class="kb-fig">
 <svg viewBox="0 0 430 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="最小作用量原理：真实轨迹使作用量取驻值">
@@ -12131,12 +12157,12 @@ L = T-V_{\text{广义}}
 \]</div>
 <p>其中 <span class="arithmatex">\(V_{\text{广义}}\)</span> 可以依赖 <span class="arithmatex">\(\dot q\)</span>（如电磁场情形）</p>
 <p><strong>这一页只处理「<span class="arithmatex">\(V\)</span> 只依赖 <span class="arithmatex">\(q\)</span>」的情形</strong>（覆盖绝大多数机械系统）。</p>
-<p><strong>一个重要的检验</strong>：若 <span class="arithmatex">\(L\)</span> 不显含某个 <span class="arithmatex">\(q_k\)</span>（即 <span class="arithmatex">\(\partial L/\partial q_k = 0\)</span>），
+<p><strong>一个重要的检验</strong>：若 <span class="arithmatex">\(L\)</span> 不显含某个 <span class="arithmatex">\(q_k\)</span>（<span class="arithmatex">\(\partial L/\partial q_k = 0\)</span>），
 则</p>
 <div class="arithmatex">\[
 \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial L}{\partial\dot q_k}\right) = 0 \implies p_k\equiv\frac{\partial L}{\partial\dot q_k} = \text{const}
 \]</div>
-<p><strong>这就是「循环坐标 ⟹ 动量守恒」</strong>
+<p><strong>即「循环坐标 ⟹ 动量守恒」</strong>
 —— 详见下一页（约束与守恒量）。</p>
 </div>
 <hr />
@@ -12186,7 +12212,7 @@ L = \frac12ml^2\dot\theta^2-mgl(1-\cos\theta)
 <div class="arithmatex">\[
 \frac{\partial L}{\partial\theta} = -mgl\sin\theta
 \]</div>
-<p>（注意：对 <span class="arithmatex">\(\theta\)</span> 求导时 <span class="arithmatex">\(V\)</span> 的项给出 <span class="arithmatex">\(-mgl\sin\theta\)</span>。）</p>
+<p>（对 <span class="arithmatex">\(\theta\)</span> 求导时 <span class="arithmatex">\(V\)</span> 项给出 <span class="arithmatex">\(-mgl\sin\theta\)</span>。）</p>
 <p><strong>第六步：代回 EL 方程</strong></p>
 <div class="arithmatex">\[
 ml^2\ddot\theta-(-mgl\sin\theta) = 0
@@ -12204,12 +12230,12 @@ ml^2\ddot\theta-(-mgl\sin\theta) = 0
 <div class="arithmatex">\[
 \omega = \sqrt{\frac{g}{l}},\qquad T_{\text{周期}} = 2\pi\sqrt{\frac{l}{g}} \;\checkmark
 \]</div>
-<p><strong>与教科书结果一致</strong></p>
+<p><strong>与教科书一致</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">对比：牛顿法要处理约束力，拉格朗日法不用</p>
 <p><strong>牛顿法的做法</strong>：</p>
-<p>需要分解重力为「沿杆方向」与「切向」两个分量，
+<p>需分解重力为「沿杆」与「切向」两个分量，
 其中沿杆分量的<strong>张力</strong>与<strong>向心加速度</strong>平衡：</p>
 <table>
 <thead>
@@ -12231,12 +12257,12 @@ ml^2\ddot\theta-(-mgl\sin\theta) = 0
 </table>
 <p><strong>要额外算张力 <span class="arithmatex">\(T\)</span></strong> —— 而我们根本不关心它 ✗</p>
 <p><strong>拉格朗日法</strong>：</p>
-<p><strong>完全不需要张力</strong> —— 因为 <span class="arithmatex">\(\theta\)</span> 已经自动满足杆长约束</p>
-<p><strong>这就是「广义坐标吸收约束」的实际价值</strong></p>
+<p><strong>完全不需要张力</strong> —— <span class="arithmatex">\(\theta\)</span> 已自动满足杆长约束</p>
+<p><strong>这就是「广义坐标吸收约束」的价值</strong></p>
 <p><strong>工程含义（机器人学）</strong>：</p>
-<p>多关节机械臂的拉格朗日方程中，<strong>关节处的约束力（结构内力）不出现在方程里</strong> ——
+<p>多关节机械臂的拉格朗日方程中，<strong>约束力（结构内力）不出现在方程里</strong> ——
 我们只关心关节力矩
-这使得推导可以完全用能量方法系统化地进行。</p>
+于是推导可完全用能量方法系统化进行。</p>
 </div>
 <hr />
 <h3 id="2">例题 2：弹簧振子与阻尼<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -12275,7 +12301,7 @@ m\ddot x-(-kx) = -c\dot x
 <div class="arithmatex">\[
 \boxed{\ m\ddot x+c\dot x+kx = 0\ }
 \]</div>
-<p><strong>结果</strong>：标准的阻尼振子方程</p>
+<p><strong>结果</strong>：阻尼振子方程</p>
 <p><strong>第五步：分析（用特征方程）</strong></p>
 <p>设 <span class="arithmatex">\(x = e^{\lambda t}\)</span>：</p>
 <div class="arithmatex">\[
@@ -12354,12 +12380,12 @@ c_{\text{crit}} = 2\sqrt{mk}
 <div class="arithmatex">\[
 m\ddot x+kx+c\dot x = 0 \;\checkmark
 \]</div>
-<p><strong>与直接加广义力等价</strong></p>
-<p><strong>Rayleigh 函数的物理含义</strong>：<strong>它的一半是耗散功率</strong>：</p>
+<p><strong>两种做法等价</strong></p>
+<p><strong>Rayleigh 函数的一半是耗散功率</strong>：</p>
 <div class="arithmatex">\[
 P_{\text{耗散}} = c\dot x^2 = 2\mathcal{F}
 \]</div>
-<p><strong>工程价值（能量法分析阻尼系统）</strong>：</p>
+<p><strong>工程价值</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12382,9 +12408,9 @@ P_{\text{耗散}} = c\dot x^2 = 2\mathcal{F}
 </tr>
 </tbody>
 </table>
-<p><strong>这与「梯度下降与收敛」一页的「Lyapunov 方法」是同一思想</strong> ✓ ——
+<p><strong>这与「梯度下降与收敛」一页的思想相同</strong> ✓ ——
 用能量单调下降证明稳定性。</p>
-<p><strong>注意阻尼的本质</strong>：<strong>它使相空间体积收缩</strong>（耗散系统），
+<p><strong>阻尼的本质</strong>：<strong>它使相空间体积收缩</strong>（耗散系统），
 所以轨迹最终趋向吸引子</p>
 </div>
 <hr />
@@ -12522,7 +12548,7 @@ ml^2\ddot\theta_2+ml^2\ddot\theta_1\cos(\theta_1-\theta_2)+ml^2\dot\theta_1^2\si
 </tr>
 </tbody>
 </table>
-<p><strong>这解释了「为什么机械臂动力学建模与数值仿真不可或缺」</strong> ——
+<p><strong>所以动力学建模与数值仿真不可或缺</strong> ——
 即使只有两个连杆，也没有解析解</p>
 <p><strong>与非线性控制的联系</strong>：</p>
 <p><strong>反馈线性化</strong>就是「通过精心设计的控制律，
@@ -12558,13 +12584,13 @@ L = T = \frac12m(\dot x^2+\dot y^2+\dot z^2)
 \frac{\mathrm{d}}{\mathrm{d}t}(m\dot x) = 0 \implies m\dot x = \text{const}
 \]</div>
 <p><strong>同理 <span class="arithmatex">\(m\dot y\)</span>、<span class="arithmatex">\(m\dot z\)</span> 都是常数</strong></p>
-<p><strong>结果</strong>：<strong>三个方向的动量分量全部守恒</strong></p>
+<p><strong>三个方向的动量分量全部守恒</strong></p>
 <p><strong>第四步：一般结论</strong></p>
 <p><strong>若 <span class="arithmatex">\(L\)</span> 不显含某个 <span class="arithmatex">\(q_k\)</span>（循环坐标），则</strong></p>
 <div class="arithmatex">\[
 p_k\equiv\frac{\partial L}{\partial\dot q_k} = \text{const}
 \]</div>
-<p><strong>这就是「共轭动量守恒」</strong></p>
+<p><strong>即「共轭动量守恒」</strong></p>
 </details>
 <div class="admonition tip">
 <p class="admonition-title">「对称性 ⟺ 守恒律」—— Noether 定理的雏形</p>
@@ -12604,7 +12630,7 @@ p_k\equiv\frac{\partial L}{\partial\dot q_k} = \text{const}
 <div class="arithmatex">\[
 E = \sum_i\dot q_i\frac{\partial L}{\partial\dot q_i}-L
 \]</div>
-<p><strong>守恒</strong> ✓（可对时间求导验证为零。）</p>
+<p><strong>守恒</strong> ✓</p>
 <p><strong>对本例题</strong>：</p>
 <div class="arithmatex">\[
 E = m\dot x\cdot\dot x+m\dot y\cdot\dot y+m\dot z\cdot\dot z-\frac12m(\dot x^2+\dot y^2+\dot z^2) = \frac12m\lvert\dot{\boldsymbol{r}}\rvert^2 = T \;\checkmark
@@ -12633,11 +12659,11 @@ E = m\dot x\cdot\dot x+m\dot y\cdot\dot y+m\dot z\cdot\dot z-\frac12m(\dot x^2+\
 </tr>
 </tbody>
 </table>
-<p><strong>实践价值</strong>：<strong>守恒量可以作为数值积分的检验</strong></p>
+<p><strong>守恒量可作为数值积分的检验</strong></p>
 <p><strong>例如</strong>：用 RK4 仿真无阻尼摆时，
 应检查「总能量是否近似守恒」——
 <strong>若能量单调漂移，说明步长太大或算法不当</strong> ✗</p>
-<p>这是「仿真结果是否可信」的<strong>最基本的自检</strong></p>
+<p>这是仿真可信度的<strong>最基本自检</strong></p>
 </div>
 <hr />
 <h2 id="_6">五、自测<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
@@ -12669,7 +12695,7 @@ T = \frac12mR^2\dot\theta^2
 <div class="arithmatex">\[
 V = -mgR\cos\theta
 \]</div>
-<p>（取圆心为零势能点时，位置高度为 <span class="arithmatex">\(-R\cos\theta\)</span>，即最低点势能最低。）</p>
+<p>（取圆心为零势能点时高度为 <span class="arithmatex">\(-R\cos\theta\)</span>，最低点势能最低。）</p>
 <p><strong>第四步：拉格朗日量</strong></p>
 <div class="arithmatex">\[
 L = \frac12mR^2\dot\theta^2+mgR\cos\theta
@@ -12690,7 +12716,7 @@ mR^2\ddot\theta-(-mgR\sin\theta) = 0
 \boxed{\ \ddot\theta+\frac{g}{R}\sin\theta = 0\ }
 \]</div>
 <p><strong>与单摆方程形式相同，只是 <span class="arithmatex">\(l\to R\)</span></strong> ✓ ——
-因为「圆环上的珠子」与「绳摆」的几何约束本质相同。</p>
+因为「珠在圆环上」与「绳摆」的几何约束相同。</p>
 <p><strong>两个平衡点</strong>：</p>
 <table>
 <thead>
@@ -12741,7 +12767,7 @@ V''(\theta) = mgR\cos\theta
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「势能极小 ⟺ 稳定平衡」的判据</strong></p>
+<p><strong>即「势能极小 ⟺ 稳定平衡」的判据</strong></p>
 </details>
 <hr />
 <p><strong>Q2</strong> 判断：用拉格朗日法必须选「自然的」坐标（如角度、长度）。</p>
@@ -12812,7 +12838,7 @@ V''(\theta) = mgR\cos\theta
 \]</div>
 <p>方程会变得<strong>更复杂</strong>（含根号）——</p>
 <p><strong>物理完全一样，但方程难解</strong> ✗</p>
-<p><strong>所以「坐标可以任意选，但要选得聪明」</strong></p>
+<p><strong>坐标可以任意选，但要选得聪明</strong></p>
 <p><strong>工程选择原则</strong>：</p>
 <table>
 <thead>
@@ -12843,8 +12869,8 @@ V''(\theta) = mgR\cos\theta
 <p><strong>一个重要的反例（球坐标在极点）</strong>：</p>
 <p>用 <span class="arithmatex">\((\theta,\phi)\)</span> 描述球面时，<strong>极点处 <span class="arithmatex">\(\phi\)</span> 无定义</strong> ——
 <strong>方程在那里有奇点</strong> ✗</p>
-<p><strong>工程含义</strong>：<strong>卫星/机器人的姿态参数化必须避免奇异点</strong> ——
-这就是为什么用<strong>四元数</strong>（无奇点）而非欧拉角</p>
+<p><strong>工程含义</strong>：<strong>姿态参数化必须避免奇异点</strong> ——
+所以姿态参数用<strong>四元数</strong>（无奇点）而非欧拉角</p>
 </details>
 <hr />
 <p><strong>Q3</strong> 求竖直平面内「弹簧摆」（质量为 <span class="arithmatex">\(m\)</span> 的质点，用刚度 <span class="arithmatex">\(k\)</span> 的弹簧悬挂，
@@ -12880,7 +12906,7 @@ V''(\theta) = mgR\cos\theta
 <div class="arithmatex">\[
 x = l\sin\theta,\qquad y = l\cos\theta
 \]</div>
-<p><strong>注意「位置显含 <span class="arithmatex">\(l\)</span>」</strong>（与普通单摆的关键区别）✓</p>
+<p><strong>注意「位置显含 <span class="arithmatex">\(l\)</span>」</strong>（与普通单摆不同）✓</p>
 <p><strong>第三步：速度（要用乘积法则）</strong></p>
 <div class="arithmatex">\[
 \dot x = \dot l\sin\theta+l\cos\theta\,\dot\theta
@@ -12915,7 +12941,7 @@ V = -mgl\cos\theta+\frac12k(l-l_0)^2
 <div class="arithmatex">\[
 \boxed{\ L = \frac12m\left(\dot l^2+l^2\dot\theta^2\right)+mgl\cos\theta-\frac12k(l-l_0)^2\ }
 \]</div>
-<p><strong>对比普通单摆（<span class="arithmatex">\(l\)</span> 固定）</strong>：</p>
+<p><strong>对比单摆（<span class="arithmatex">\(l\)</span> 固定）</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12956,7 +12982,7 @@ m\ddot l = ml\dot\theta^2+mg\cos\theta-k(l-l_0)
 \]</div>
 <p><strong>注意 <span class="arithmatex">\(ml\dot\theta^2\)</span> 这一项</strong> —— <strong>离心力</strong> ✓</p>
 <p><strong>含义</strong>：<strong>摆得越快，弹簧被拉得越长</strong></p>
-<p><strong>这就是「两个自由度耦合」的物理表现</strong>：</p>
+<p><strong>这就是「两个自由度耦合」的表现</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12979,7 +13005,7 @@ m\ddot l = ml\dot\theta^2+mg\cos\theta-k(l-l_0)
 </tr>
 </tbody>
 </table>
-<p><strong>工程意义（离心调速器、旋转机械）</strong>：</p>
+<p><strong>工程意义</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -13002,7 +13028,7 @@ m\ddot l = ml\dot\theta^2+mg\cos\theta-k(l-l_0)
 </tr>
 </tbody>
 </table>
-<p><strong>这就是「单摆」与「弹簧摆」的本质区别</strong>：
+<p><strong>「单摆」与「弹簧摆」的本质区别</strong>：
 <strong>后者是耦合的非线性系统，可能出现能量在两个自由度间传递（拍频）</strong></p>
 </div>
 <hr />

@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="同时地图构建与定位：前面两页的机器人，已经学会了看、也学会了看着动 —— 但它一路都在心里默念同一句话：「我知道自己在世界里的哪个位置。」可这句话不是它自己想出来的，是别人替它放进去的：工位是标定好的，目标摆在哪是提前量好的。一旦走出工位、走进一个没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。">
+    <meta name="description" content="同时地图构建与定位：前面两页的机器人已学会看、也学会看着动 —— 但它一路都在默念：「我知道自己在世界里的哪个位置。」这句话不是它想的，是别人替它放进去的：工位标定好，目标摆哪也提前量好了。一走进没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。这一页讲怎么同时解开这个死结：同时定位与地图构建（SLAM）。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="同时地图构建与定位">
   
-  <meta property="og:description" content="同时地图构建与定位：前面两页的机器人，已经学会了看、也学会了看着动 —— 但它一路都在心里默念同一句话：「我知道自己在世界里的哪个位置。」可这句话不是它自己想出来的，是别人替它放进去的：工位是标定好的，目标摆在哪是提前量好的。一旦走出工位、走进一个没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。">
+  <meta property="og:description" content="同时地图构建与定位：前面两页的机器人已学会看、也学会看着动 —— 但它一路都在默念：「我知道自己在世界里的哪个位置。」这句话不是它想的，是别人替它放进去的：工位标定好，目标摆哪也提前量好了。一走进没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。这一页讲怎么同时解开这个死结：同时定位与地图构建（SLAM）。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/simultaneous-localization-mapping/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="同时地图构建与定位">
   
-  <meta name="twitter:description" content="同时地图构建与定位：前面两页的机器人，已经学会了看、也学会了看着动 —— 但它一路都在心里默念同一句话：「我知道自己在世界里的哪个位置。」可这句话不是它自己想出来的，是别人替它放进去的：工位是标定好的，目标摆在哪是提前量好的。一旦走出工位、走进一个没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。">
+  <meta name="twitter:description" content="同时地图构建与定位：前面两页的机器人已学会看、也学会看着动 —— 但它一路都在默念：「我知道自己在世界里的哪个位置。」这句话不是它想的，是别人替它放进去的：工位标定好，目标摆哪也提前量好了。一走进没去过的房间，这句话就崩了 —— 没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。这一页讲怎么同时解开这个死结：同时定位与地图构建（SLAM）。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12015,57 +12015,56 @@
 
 <h1 id="_1">同时地图构建与定位<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <blockquote>
-<p>前面两页的机器人，已经学会了<strong>看</strong>、也学会了<strong>看着动</strong> ——
-但它一路都在心里默念同一句话：<strong>「我知道自己在世界里的哪个位置。」</strong>
-可这句话不是它自己想出来的，是<strong>别人替它放进去的</strong>：
-工位是标定好的，目标摆在哪是提前量好的。
-一旦走出工位、走进一个<strong>没去过的房间</strong>，这句话就崩了 ——
+<p>前面两页的机器人已学会<strong>看</strong>、也学会<strong>看着动</strong> ——
+但它一路都在默念：「<strong>我知道自己在世界里的哪个位置。</strong>」
+这句话不是它想的，是<strong>别人替它放进去的</strong>：
+工位标定好，目标摆哪也提前量好了。
+一走进<strong>没去过的房间</strong>，这句话就崩了 ——
 <strong>没有地图，它不知道自己在哪；不知道自己在哪，又画不出地图。</strong>
-这一页讲的就是怎么同时解开这个死结：<strong>同时定位与地图构建（SLAM）</strong>。
-主线是三步：<strong>先把问题说清楚（一）→ 再看三条解法（二、三、四）→
-最后回到工程，多种传感器怎么凑成一套系统（五）</strong>。</p>
+这一页讲怎么同时解开这个死结：<strong>同时定位与地图构建（SLAM）</strong>。
+主线三步：<strong>说清问题（一）→ 三条解法（二、三、四）→ 回到工程（五）</strong>。</p>
 </blockquote>
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
 <p>SLAM 全部的难，都来自一个循环：<strong>定位要地图，建图要位姿。</strong>
-三条主流解法，差别只在<strong>「拿什么当被估计的对象」</strong>：
+三条主流解法，差别只在<strong>「拿什么当被估计对象」</strong>：
 <strong>EKF-SLAM</strong> 估一个高斯（位姿和地图一起塞进协方差矩阵）、
 <strong>FastSLAM</strong> 撒一把粒子（每条候选轨迹自带一份地图）、
 <strong>图优化</strong> 解一个最小二乘（整段轨迹一起拉直）。
-读的时候一直问自己：<strong>这一路把「不确定性」存在了哪里，又为它付出了什么代价。</strong></p>
+读时一直问：<strong>这一路把「不确定性」存在哪里，又付出了什么代价。</strong></p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">SLAM 不是「先建图、再定位」</p>
-<p>最容易犯的错，是把 SLAM 想成两个先后步骤 ——「先跑一圈把地图建好，再拿地图去定位」。
-真做起来根本行不通：<strong>建图的时候你已经在定位，定位的时候地图又在被改写。</strong>
+<p>最容易犯的错，是把 SLAM 想成两个先后步骤：「先跑一圈建图，再拿去定位」。
+真做起来行不通：<strong>建图时你已在定位，定位时地图又正被改写。</strong>
 SLAM 的核心恰恰是<strong>承认这两件事分不开</strong>，
-然后把<strong>位姿和地图放进同一个概率分布里一起估</strong> ——
+然后把<strong>位姿和地图放进同一概率分布里一起估</strong> ——
 这一页后面所有算法，都是这句话的不同实现。</p>
 </div>
 <hr />
 <h2 id="slam">一、SLAM 概述：先有鸡还是先有蛋<a class="headerlink" href="#slam" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 两个问题互相咬住<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>先把话说直白。移动机器人想知道两件事：</p>
+<p>先说直白。移动机器人想知道两件事：</p>
 <ul>
 <li><strong>我在哪</strong>（定位，localization）：我的位姿 <span class="arithmatex">\(x\)</span>；</li>
 <li><strong>周围是什么</strong>（建图，mapping）：环境的地图 <span class="arithmatex">\(m\)</span>。</li>
 </ul>
 <p><strong>分开看，两件事都有成熟办法</strong>：</p>
 <ul>
-<li>如果<strong>地图已知</strong>，定位就是上一页讲的卡尔曼滤波 —— 拿地图当参照，用观测校正里程计的漂移；</li>
-<li>如果<strong>位姿已知</strong>，建图就是「把每次观测到的地标，按已知位姿画到世界坐标里」。</li>
+<li>如果<strong>地图已知</strong>，定位就是上一页的卡尔曼滤波 —— 拿地图当参照，用观测校正漂移；</li>
+<li>如果<strong>位姿已知</strong>，建图就是「把每次看到的地标，按已知位姿画到世界坐标」。</li>
 </ul>
-<p><strong>麻烦在于：机器人两样都没有。</strong> 它手里只有两路带噪声的信息：</p>
+<p><strong>麻烦在于：机器人两样都没有。</strong> 它手里只有两路带噪信息：</p>
 <ul>
-<li><strong>控制量 / 里程计</strong> <span class="arithmatex">\(u_t\)</span>：我自己觉得走了多远、转了多少（会漂）；</li>
-<li><strong>观测量</strong> <span class="arithmatex">\(z_t\)</span>：传感器看到某个地标时，它相对我多远、什么方位（有噪声）。</li>
+<li><strong>控制量 / 里程计</strong> <span class="arithmatex">\(u_t\)</span>：自己觉得走了多远、转多少（会漂）；</li>
+<li><strong>观测量</strong> <span class="arithmatex">\(z_t\)</span>：传感器看到地标时，它相对我多远、什么方位（有噪声）。</li>
 </ul>
 <p>于是出现了一个循环依赖：</p>
 <div class="arithmatex">\[
 \text{定位需要地图} \;\longleftrightarrow\; \text{建图需要位姿}
 \]</div>
 <p><strong>这就是 SLAM 的「鸡与蛋」。</strong> 它不能靠「先随便解一个、再解另一个」绕开 ——
-因为用错了地图去定位，算出来的位姿照样是错的，反过来又把这个错误固化进地图，越走越偏。</p>
+用错地图去定位，位姿照样错，反过来又把错误固化进地图，越走越偏。</p>
 <p><strong>下图把这对循环依赖画出来</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 196" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="SLAM 的循环依赖：定位要用地图，建图要用位姿，两边互为前提">
@@ -12093,48 +12092,48 @@ SLAM 的核心恰恰是<strong>承认这两件事分不开</strong>，
 </figure>
 
 <h3 id="12-slam">1.2 把 SLAM 写成一个概率问题<a class="headerlink" href="#12-slam" title="Permanent link">&para;</a></h3>
-<p>既然两件事分不开，最干脆的做法是：<strong>把它们打包成一个对象，一起估。</strong></p>
-<p>打包的方式，就是写一个<strong>联合后验概率</strong>：</p>
+<p>既然两件事分不开，最干脆的做法是：<strong>打包成一个对象，一起估。</strong></p>
+<p>打包方式就是写一个<strong>联合后验概率</strong>：</p>
 <div class="arithmatex">\[
 p\big(x_{1:t},\; m \;\big|\; z_{1:t},\; u_{1:t}\big)
 \]</div>
-<p>逐项念一遍：<strong>在已知「从头到现在的全部观测 <span class="arithmatex">\(z_{1:t}\)</span>」与「全部控制 <span class="arithmatex">\(u_{1:t}\)</span>」的前提下，
+<p>逐项念一遍：<strong>在已知「从头到现在的观测 <span class="arithmatex">\(z_{1:t}\)</span>」与「全部控制 <span class="arithmatex">\(u_{1:t}\)</span>」下，
 位姿轨迹 <span class="arithmatex">\(x_{1:t}\)</span> 和地图 <span class="arithmatex">\(m\)</span> 的联合分布是什么。</strong></p>
 <p>这个式子里：</p>
 <ul>
-<li><span class="arithmatex">\(x_{1:t} = \{x_1, x_2, \dots, x_t\}\)</span> 是<strong>整段轨迹</strong>，不只是当前位姿 —— 这一点至关重要；</li>
+<li><span class="arithmatex">\(x_{1:t} = \{x_1, x_2, \dots, x_t\}\)</span> 是<strong>整段轨迹</strong>，不只当前位姿 —— 这点至关重要；</li>
 <li><span class="arithmatex">\(m\)</span> 是<strong>地图</strong>，最常见的形式是一组地标 <span class="arithmatex">\(\{m_1, \dots, m_N\}\)</span>；</li>
-<li><span class="arithmatex">\(z_{1:t}\)</span> 与 <span class="arithmatex">\(u_{1:t}\)</span> 是<strong>数据</strong>，是已知的。</li>
+<li><span class="arithmatex">\(z_{1:t}\)</span> 与 <span class="arithmatex">\(u_{1:t}\)</span> 是<strong>已知数据</strong>。</li>
 </ul>
-<p><strong>SLAM 的目标，就是求这个后验。</strong> 一旦有了它，「我在哪」是它的边缘分布，
-「地图长什么样」也是它的边缘分布 —— <strong>一个对象，同时回答两个问题。</strong></p>
-<p><strong>为什么必须带上整段轨迹，而不是只留当前位姿？</strong>
-因为「地标在哪」这件事，是靠「我在哪些位姿下看过它」累积出来的。
-如果每走一步就把历史位姿扔掉，那些位姿带来的信息也就跟着丢了 ——
+<p><strong>SLAM 的目标就是求它。</strong> 一旦有了它，「我在哪」是边缘分布，
+「地图长什么样」也是边缘分布 —— <strong>一个对象，同时回答两个问题。</strong></p>
+<p><strong>为什么必须带整段轨迹，而不只留当前位姿？</strong>
+因为「地标在哪」靠「我在哪些位姿下看过它」累积。
+如果每走一步就扔掉历史位姿，它们带来的信息也丢了 ——
 地图会越画越糊。<strong>SLAM 的状态里，历史不是包袱，是资产。</strong></p>
 <h3 id="13">1.3 关键一步：这个后验可以拆开<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
-<p>直接求 <span class="arithmatex">\(p(x_{1:t}, m \mid z_{1:t}, u_{1:t})\)</span> 是高维的，但它有一个非常好用的结构。
-按条件概率的乘法公式，把它拆成两段：</p>
+<p>直接求 <span class="arithmatex">\(p(x_{1:t}, m \mid z_{1:t}, u_{1:t})\)</span> 是高维的，但它有个好用的结构。
+按条件概率乘法公式，把它拆成两段：</p>
 <div class="arithmatex">\[
 p\big(x_{1:t},\, m \mid z_{1:t},\, u_{1:t}\big)
 = \underbrace{p\big(x_{1:t} \mid z_{1:t},\, u_{1:t}\big)}_{\text{轨迹后验}}
 \;\cdot\; \underbrace{p\big(m \mid x_{1:t},\, z_{1:t}\big)}_{\text{给定轨迹的地图后验}}
 \]</div>
-<p><strong>第一段</strong>是「机器人走过的轨迹」的后验；<strong>第二段</strong>是「已知这段轨迹，地图长什么样」。</p>
-<p>第二段还有一个更强的性质 —— <strong>条件独立</strong>。<strong>在给定整段轨迹 <span class="arithmatex">\(x_{1:t}\)</span> 的前提下</strong>，</p>
+<p><strong>第一段</strong>是「机器人轨迹」后验；<strong>第二段</strong>是「已知轨迹，地图长什么样」。</p>
+<p>第二段还有更强的性质 —— <strong>条件独立</strong>。<strong>给定整段轨迹 <span class="arithmatex">\(x_{1:t}\)</span> 时</strong>，</p>
 <div class="arithmatex">\[
 p\big(m \mid x_{1:t},\, z_{1:t}\big) \;=\; \prod_{i=1}^{N} p\big(m_i \mid x_{1:t},\, z_{1:t}\big)
 \]</div>
-<p>也就是说：<strong>一旦轨迹确定，每个地标就各算各的、互不干扰。</strong></p>
-<p>原因不难想：一次观测 <span class="arithmatex">\(z_t\)</span> 只依赖<strong>当前位姿</strong>和<strong>它看到的那个地标</strong>；
-在轨迹已知的前提下，两段观测之间唯一的联系 ——「同一台机器人、同一个位姿」——
-已经被钉死了，剩下的就只有各自的传感器噪声，<strong>自然是独立的</strong>。</p>
-<p><strong>这个分解是整个 SLAM 算法家族的骨架。</strong>
-它最直接的用处是第三节的 FastSLAM：<strong>轨迹（不好解析算）用采样，地图（好解析算）用公式</strong> ——
+<p>也就是说：<strong>一旦轨迹确定，各地标就各算各的、互不干扰。</strong></p>
+<p>原因不难想：一次观测 <span class="arithmatex">\(z_t\)</span> 只依赖<strong>当前位姿</strong>和<strong>它看到的地标</strong>；
+轨迹已知时，两段观测唯一的联系 ——「同一机器人、同一位姿」——
+已被钉死，只剩各自的传感器噪声，<strong>自然独立</strong>。</p>
+<p><strong>这个分解是 SLAM 算法家族的骨架。</strong>
+它最直接的用处是第三节的 FastSLAM：<strong>轨迹（难解析）用采样，地图（好解析）用公式</strong> ——
 分工的依据就在这里。</p>
 <h3 id="14">1.4 算例：位姿与地图被「锁」在一个联合分布里<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>口说无凭，把最小的一维 SLAM 逐项算一遍。机器人沿走廊前进，
-<strong>事先不知道地标在哪</strong>，看见一个就把它「收进」状态向量，和位姿一起估：</p>
+<strong>事先不知道地标在哪</strong>，看见一个就「收进」状态向量，和位姿一起估：</p>
 <ul>
 <li>一维 EKF-SLAM：机器人沿走廊走，看见地标就把它“收进”状态向量</li>
 <li>步 真实位置 估计位置 位姿σ(m) 纯里程计σ(m)</li>
@@ -12145,7 +12144,7 @@ p\big(m \mid x_{1:t},\, z_{1:t}\big) \;=\; \prod_{i=1}^{N} p\big(m_i \mid x_{1:t
 <li>16 16.000 15.957 0.5282 0.6403</li>
 <li>20 20.000 20.018 0.5336 0.6708</li>
 </ul>
-<p><strong>地图（地标是“边走边看见、顺手记下”的，不是事先给的）：</strong></p>
+<p><strong>地图（地标是“边走边看见、随手记下”的，不是事先给的）：</strong></p>
 <ul>
 <li>地标1 真值 3.00 估计 2.927 σ = 0.5142 m</li>
 <li>地标2 真值 8.00 估计 7.973 σ = 0.5194 m</li>
@@ -12154,77 +12153,68 @@ p\big(m \mid x_{1:t},\, z_{1:t}\big) \;=\; \prod_{i=1}^{N} p\big(m_i \mid x_{1:t
 <p>地标4 真值 18.00 估计 17.987 σ = 0.5295 m</p>
 </li>
 <li>
-<p>协方差矩阵规模：5×5（状态 = 1 个位姿 + 4 个地标）</p>
+<p>协方差矩阵规模：5×5（1 个位姿 + 4 个地标）</p>
 </li>
 <li>相关系数 ρ(位姿, 地标1) = +0.9635</li>
-<li>
-<p>相关系数 ρ(地标1, 地标2) = +0.9900</p>
-</li>
-<li>
-<p>位姿σ 稳在 0.534 m，同期纯里程计已涨到 0.671 m；</p>
-</li>
-<li>但“位姿相对地标1”的σ只有 0.1428 m ——</li>
-<li>绝对位置谁也说不清（整张地图可以整体平移），相对位置却已经很清楚。</li>
-<li>这就是 SLAM 的本质：地图和位姿必须装进同一个联合分布一起估，</li>
-<li>而那个非对角协方差，就是“谁跟谁锁在一起”的记账本。</li>
+<li>相关系数 ρ(地标1, 地标2) = +0.9900</li>
 </ul>
 <p><strong>三件事同时发生：</strong></p>
 <ul>
-<li><strong>位姿 σ 不再无界增长</strong>：纯里程计同期已经涨到 0.671 m，EKF 把它稳在 0.534 m；</li>
-<li><strong>地标被一个个记进地图</strong>：它们的位置是「位姿 + 观测」<strong>就地算出来</strong>的（不是事先给的）；</li>
-<li><strong>最关键的是那两个相关系数</strong>：位姿与地标 1 是 <strong>+0.9635</strong>，两个地标之间是 <strong>+0.9900</strong>。</li>
+<li><strong>位姿 σ 不再无界增长</strong>：纯里程计同期已涨到 0.671 m，EKF 稳在 0.534 m；</li>
+<li><strong>地标被一个个记进地图</strong>：位置由「位姿 + 观测」<strong>就地算出</strong>（非事先给）；</li>
+<li><strong>最关键的是两个相关系数</strong>：位姿与地标 1 是 <strong>+0.9635</strong>，两两之间是 <strong>+0.9900</strong>。</li>
 </ul>
-<p>相关系数接近 1 意味着：<strong>位姿和地标不是两份各自独立的估计，
-而是同一个联合分布里、被观测「锁」在一起的两个分量。</strong>
-这就是为什么在 SLAM 里「先估位姿、再建图」永远不成立 —— 它们本来就该一起动。</p>
+<p>相关系数接近 1 意味着：<strong>位姿和地标不是两份独立估计，
+而是同一联合分布里、被观测「锁」在一起的两个分量。</strong>
+所以 SLAM 里「先估位姿、再建图」永远不成立 —— 它们本该一起动。</p>
 <div class="admonition tip">
 <p class="admonition-title">为什么「相对位置」比「绝对位置」清楚得多</p>
-<p>注意最后那几行：位姿的<strong>绝对</strong> σ 是 0.534 m，但「位姿相对地标 1」的 σ 只有 <strong>0.1428 m</strong>。
+<p>注意最后几行：位姿的<strong>绝对</strong> σ 是 0.534 m，但「位姿相对地标 1」的 σ 只有 <strong>0.1428 m</strong>。
 看起来矛盾，其实正是 SLAM 的精髓：
-<strong>整张地图（位姿加上所有地标）可以整体平移一段距离，谁也看不出来</strong> ——
-因为所有地标都是从同一个不确定的位姿上「长」出来的，它们与位姿<strong>同漂同沉</strong>。</p>
+<strong>整张地图（位姿加所有地标）可整体平移一段距离，谁也看不出</strong> ——
+所有地标都从同一个不确定的位姿上「长」出来，与位姿<strong>同漂同沉</strong>。</p>
 <p>这个「一起漂」的自由度叫<strong>规范自由度（gauge freedom）</strong>，
 它是 SLAM 的<strong>结构性性质，不是算法的 bug</strong>：
-没有绝对参照时，世界坐标系的原点本来就是任意的，<strong>只有相对几何是确定的</strong>。</p>
-<p>工程上的对策也很直接：<strong>去找一个绝对参照</strong> ——
-要么用 GNSS / UWB 给出绝对位置，要么靠<strong>回环检测</strong>（第四节）认出「这地方我来过」，
-把「整张地图只差一个整体平移」这个自由度钉死。</p>
+没有绝对参照时，世界坐标系原点本就任意，<strong>只有相对几何确定</strong>。</p>
+<p>对策很直接：<strong>找一个绝对参照</strong> ——
+要么用 GNSS / UWB 给绝对位置，要么靠<strong>回环检测</strong>（第四节）认出「这地方我来过」，
+把「整张地图只差一个整体平移」的自由度钉死。</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">「位姿 σ 没降」不是算法没工作</p>
-<p>第一次做这个算例很容易困惑：既然看见了地标，为什么位姿的 σ 不往零掉？
-<strong>因为它本来就不该掉。</strong> 这个算例里所有地标都是「边走边发现」的，
-没有任何一个是「事先知道的绝对参照」。在只有相对观测的世界里，
-「我在原点附近 ±0.5 m」这件事<strong>永远不会变得更确定</strong> —— 你能确定的只是「我离地标 1 有多远」。</p>
-<p>换句话说：<strong>EKF-SLAM 估出来的是一张「相对地图」。</strong>
-想把它钉死在世界坐标系里，必须另请高明（绝对传感器，或回环）。
-下面的二维例子会把这同一件事再看一遍。</p>
+<p>既然看见了地标，为什么位姿 σ 不往零掉？
+<strong>因为它本来就不该掉。</strong> 算例里所有地标都是「边走边发现」的，
+没一个是事先知道的绝对参照。在只有相对观测的世界里，
+「我在原点附近 ±0.5 m」<strong>永远不会更确定</strong> —— 你能确定的只是「我离地标 1 多远」。</p>
+<p>换句话说：<strong>EKF-SLAM 估出的是一张「相对地图」。</strong>
+想钉死在世界坐标系里，须另请高明（绝对传感器或回环）。
+下面的二维例子再看一遍同一件事。</p>
 </div>
 <hr />
 <h2 id="slam_1">二、滤波式 SLAM：把位姿和地图塞进一个概率分布<a class="headerlink" href="#slam_1" title="Permanent link">&para;</a></h2>
 <h3 id="21-ekf-slam">2.1 EKF-SLAM：一个卡尔曼滤波装下整张地图<a class="headerlink" href="#21-ekf-slam" title="Permanent link">&para;</a></h3>
-<p>第一条路子最直接：<strong>既然位姿和地图要一起估，那就把它们拼成一个向量一起估。</strong></p>
-<p>把<strong>状态向量</strong>定义成位姿和所有地标的拼接：</p>
+<p>第一条路子最直接：<strong>既然要一起估，就把位姿和地图拼成一个向量。</strong></p>
+<p>把<strong>状态向量</strong>定义为位姿和所有地标的拼接：</p>
 <div class="arithmatex">\[
 \mu = \big[\;\underbrace{x,\; y,\; \theta}_{\text{位姿，3 维}},\;
 \underbrace{m_{1x},\; m_{1y},\; \dots,\; m_{Nx},\; m_{Ny}}_{\text{每个地标 2 维}}\;\big]^{\mathsf T}
 \]</div>
-<p>它的维度是 <span class="arithmatex">\(3 + 2N\)</span>。再用一个<strong>协方差矩阵</strong>记录「这些量各自多不确定、两两之间多相关」：</p>
+<p>维度是 <span class="arithmatex">\(3 + 2N\)</span>。再用<strong>协方差矩阵</strong>记录「这些量各自多不确定、两两多相关」：</p>
 <div class="arithmatex">\[
 \Sigma \;\in\; \mathbb{R}^{(3+2N)\times(3+2N)}
 \]</div>
-<p>剩下的就完全交给卡尔曼滤波：<strong>运动时「预测」，看到地标时「更新」。</strong>
-它为什么能直接套用？因为我们假设了 <span class="arithmatex">\((\mu, \Sigma)\)</span> 这个联合分布<strong>近似是高斯的</strong> ——
-这正是「EKF」里那个 E（Extended，扩展）要处理的非线性：模型不是线性的，就在当前估计处线性化。</p>
+<p>剩下的全交给卡尔曼滤波：<strong>运动时「预测」，看到地标时「更新」。</strong>
+它为什么能直接套用？因为假设了 <span class="arithmatex">\((\mu, \Sigma)\)</span> 这个联合分布<strong>近似高斯</strong> ——
+这正是「EKF」里 E（Extended，扩展）要处理的非线性：模型非线性，就在当前估计处线性化。</p>
 <h3 id="22">2.2 递推：预测走运动模型，更新走观测模型<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p><strong>预测</strong>（机器人动一步）：注意<strong>只有位姿那几行动，地标钉在世界上不动</strong>。</p>
 <div class="arithmatex">\[
 \bar\mu = f(\mu, u), \qquad
 \bar\Sigma = G\,\Sigma\,G^{\mathsf T} + V\,M\,V^{\mathsf T}
 \]</div>
-<p>其中 <span class="arithmatex">\(G\)</span> 是运动模型对状态的雅可比，<span class="arithmatex">\(M\)</span> 是控制噪声协方差，<span class="arithmatex">\(V\)</span> 把控制噪声投到状态上。</p>
-<p><strong>更新</strong>（看到第 <span class="arithmatex">\(j\)</span> 个地标，观测为 <span class="arithmatex">\(z\)</span>）：先算这一步的观测雅可比 <span class="arithmatex">\(H\)</span> ——
-它<strong>只在「位姿那 3 列」与「第 <span class="arithmatex">\(j\)</span> 个地标那 2 列」上非零</strong>，其余全是 0：</p>
+<p>其中 <span class="arithmatex">\(G\)</span> 是运动模型对状态的雅可比，<span class="arithmatex">\(M\)</span> 是控制噪声协方差，<span class="arithmatex">\(V\)</span> 把噪声投到状态。</p>
+<p><strong>更新</strong>（看到第 <span class="arithmatex">\(j\)</span> 个地标，观测为 <span class="arithmatex">\(z\)</span>）：先算观测雅可比 <span class="arithmatex">\(H\)</span> ——
+它<strong>只在「位姿那 3 列」与「第 <span class="arithmatex">\(j\)</span> 个地标那 2 列」上非零</strong>，其余全 0：</p>
 <div class="arithmatex">\[
 S = H\,\bar\Sigma\,H^{\mathsf T} + R, \qquad
 K = \bar\Sigma\,H^{\mathsf T}S^{-1}
@@ -12233,11 +12223,11 @@ K = \bar\Sigma\,H^{\mathsf T}S^{-1}
 \mu = \bar\mu + K\,(z - \hat z), \qquad
 \Sigma = (I - K H)\,\bar\Sigma
 \]</div>
-<p><strong>注意 <span class="arithmatex">\(K\)</span> 的尺寸</strong>：它是 <span class="arithmatex">\((3+2N)\times 2\)</span> 的。
-一次「看到地标 <span class="arithmatex">\(j\)</span>」的更新，会通过 <span class="arithmatex">\(K\)</span> <strong>同时修正位姿和协方差里所有与它相关的量</strong> ——
-因为协方差矩阵在告诉滤波器：「既然位姿要改，那些跟位姿强相关的地标，也得跟着一起改。」</p>
+<p><strong>注意 <span class="arithmatex">\(K\)</span> 的尺寸</strong>：<span class="arithmatex">\((3+2N)\times 2\)</span>。
+一次看到地标 <span class="arithmatex">\(j\)</span> 的更新，会通过 <span class="arithmatex">\(K\)</span> <strong>同时修正位姿和协方差里所有相关量</strong> ——
+协方差矩阵在告诉滤波器：「既然位姿要改，跟位姿强相关的地标也得跟着改。」</p>
 <p><strong>这就是 SLAM 与「先定位、再建图」的分水岭</strong>：
-更新不是只落在被看到的那一个地标上，而是<strong>沿着相关性传播到全图</strong>。</p>
+更新不只落在被看到的地标上，而是<strong>沿相关性传遍全图</strong>。</p>
 <p><strong>下图把这两步递推画成一个循环</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 278" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="EKF-SLAM 的递推：先按运动模型预测，看到地标后按观测模型更新，如此反复">
@@ -12268,9 +12258,9 @@ K = \bar\Sigma\,H^{\mathsf T}S^{-1}
 </figure>
 
 <h3 id="23-ekf-slam">2.3 算例：二维 EKF-SLAM<a class="headerlink" href="#23-ekf-slam" title="Permanent link">&para;</a></h3>
-<p>把上面那套搬到一个真二维场景：机器人沿半径 2 m 的圆走，
-一圈半、330 步；6 个地标提前摆在半径 4 m 的圆环上，
-<strong>但机器人并不知道它们在哪 —— 每个都是「第一次看见时」才进状态的</strong>：</p>
+<p>把那套搬到真二维：机器人沿半径 2 m 的圆走，
+一圈半、330 步；6 个地标提前摆在半径 4 m 圆环上，
+<strong>但机器人不知道它们在哪 —— 每个都是「第一次看见时」才进状态的</strong>：</p>
 <ul>
 <li>二维 EKF-SLAM：状态 = 位姿(3) + 每个地标(2)，一个卡尔曼滤波全搞定</li>
 <li>步 位姿误差(m) 地标最大误差(m) 位姿σ(m)</li>
@@ -12288,55 +12278,43 @@ K = \bar\Sigma\,H^{\mathsf T}S^{-1}
 <li>地标1 真值( 4.00, 0.00) 估计( 3.968, 0.051) σ=0.725</li>
 <li>地标2 真值( 2.00, 3.46) 估计( 1.916, 3.473) σ=0.738</li>
 <li>地标3 真值(-2.00, 3.46) 估计(-2.100, 3.428) σ=0.739</li>
-<li>
-<p>地标4 真值(-4.00, 0.00) 估计(-4.034, -0.093) σ=0.726</p>
-</li>
-<li>
-<p>绝对位姿σ = 0.722 m（基本等于出发时的先验 0.707，始终没降），</p>
-</li>
-<li>
-<p>但“机器人相对地标1”的σ = 0.187 m —— 地图内部早就一致了。</p>
-</li>
-<li>
-<p>状态维度 15，协方差矩阵 15×15；非对角非零元 210 个（占 100%）</p>
-</li>
-<li>地标一多，这个矩阵按 N² 膨胀 —— 这正是 EKF-SLAM 的规模瓶颈。</li>
+<li>地标4 真值(-4.00, 0.00) 估计(-4.034, -0.093) σ=0.726</li>
 </ul>
-<p><strong>结果很干净</strong>：位姿误差一路压在 0.08 m 以内，六个地标的最大误差 0.1 m 量级 ——
-<strong>地图画对了，而且这些地标没有一个是我们提前告诉它的。</strong>
-最后三行则是同一个老问题的二维版本：<strong>绝对位姿 σ 0.722 m（几乎就是出发时的先验 0.707，始终没降），
+<p><strong>结果很干净</strong>：位姿误差一路压在 0.08 m 内，六个地标最大误差 0.1 m 量级 ——
+<strong>地图画对了，且这些地标没一个是提前告诉它的。</strong>
+最后三行是同一老问题的二维版：<strong>绝对位姿 σ 0.722 m（几乎就是出发先验 0.707，始终没降），
 但「机器人相对地标 1」的 σ 只有 0.187 m。</strong>
-全局说不清、局部很清楚 —— 和第一节那段一维算例，是完全一样的结论。</p>
-<p><strong>真正要盯住的是倒数第二行</strong>：状态维度 15（3 个位姿 + 6 个地标 × 2），
+全局说不清、局部很清楚 —— 和第一节一维算例结论一样。</p>
+<p><strong>真正要盯的是倒数第二行</strong>：状态维度 15（3 位姿 + 6 地标 × 2），
 协方差矩阵 <span class="arithmatex">\(15\times15\)</span>，<strong>非对角非零元 210 个，占 100%</strong> —— 全稠密。</p>
 <div class="admonition warning">
 <p class="admonition-title">EKF-SLAM 的死穴：协方差是稠密的</p>
-<p>「非对角非零元占 100%」这句话，直接宣判了 EKF-SLAM 的规模。
+<p>「非对角非零元占 100%」直接宣判了 EKF-SLAM 的规模。
 <span class="arithmatex">\(N\)</span> 个地标 → 状态 <span class="arithmatex">\(3+2N\)</span> 维 → 协方差矩阵 <span class="arithmatex">\((3+2N)^2\)</span> 个数；
 <strong>每走一步都要动整个矩阵</strong>，所以计算量和内存都是 <span class="arithmatex">\(O(N^2)\)</span>。</p>
-<p>一个上百平方米的室内环境，特征点轻轻松松上万 —— 那就是 <span class="arithmatex">\(10^8\)</span> 个数，
-实时根本跑不动。<strong>后面两节的算法，一大半动机就是为了绕开这个平方。</strong>
-（顺带一提：为什么它不可能是块对角的？因为每个地标都沾着「位姿的误差」，
-而位姿是它们的<strong>共同祖先</strong> —— 例题 2 会把这件事说透。）</p>
+<p>上百平方米的室内环境，特征点轻松上万 —— 即 <span class="arithmatex">\(10^8\)</span> 个数，
+实时根本跑不动。<strong>后面两节的算法，一大半动机就是绕开这个平方。</strong>
+（顺带一问：为什么它不能是块对角的？每个地标都沾着位姿误差，
+而位姿是它们的<strong>共同祖先</strong> —— 例题 2 会说透。）</p>
 </div>
 <hr />
 <h2 id="fastslam">三、粒子滤波与 FastSLAM：用一堆假设代替一个高斯<a class="headerlink" href="#fastslam" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 高斯装不下，那就撒粒子<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p>EKF-SLAM 的前提是「位姿与地图的联合分布近似是高斯」。可真实位姿分布常常<strong>多峰</strong>：
-走进一条对称的走廊，你可能是「正向走」的，也可能是「反向走」的 —— 两个答案都合理，
+<p>EKF-SLAM 的前提是「位姿与地图的联合分布近似高斯」。可真实位姿分布常<strong>多峰</strong>：
+走进对称的走廊，你可能「正向走」，也可能「反向走」 —— 两个答案都合理，
 <strong>一个高斯盖不住两个峰。</strong></p>
-<p><strong>粒子滤波</strong>换了个思路：<strong>不求一个分布，直接撒一把样本。</strong></p>
+<p><strong>粒子滤波</strong>换个思路：<strong>不求一个分布，直接撒一把样本。</strong></p>
 <p>用 <span class="arithmatex">\(M\)</span> 个<strong>粒子</strong> <span class="arithmatex">\(\{x^{(1)}, \dots, x^{(M)}\}\)</span> 代表位姿的后验，
-每个粒子就是一条「可能的轨迹」，三步循环：</p>
+每个粒子就是一条「可能轨迹」，三步循环：</p>
 <ol>
-<li><strong>采样（预测）</strong>：每个粒子按运动模型往前推一步，各自加一点噪声；</li>
-<li><strong>加权（更新）</strong>：谁的轨迹更能解释眼前的观测，谁的权重就大；</li>
-<li><strong>重采样</strong>：按权重「优胜劣汰」—— 权重小的淘汰，权重大的繁殖。</li>
+<li><strong>采样（预测）</strong>：每个粒子按运动模型前推一步，各自加一点噪声；</li>
+<li><strong>加权（更新）</strong>：谁的轨迹更能解释眼前观测，谁权重就大；</li>
+<li><strong>重采样</strong>：按权重「优胜劣汰」—— 权重小的淘汰，大的繁殖。</li>
 </ol>
-<p>它的好处是<strong>不需要高斯假设</strong>，能表达多峰、能表达任意形状的分布；
-代价是<strong>要靠足够多的粒子</strong>，而且粒子会「退化」（3.3 节会讲）。</p>
+<p>好处是<strong>不需要高斯假设</strong>，能表达多峰、任意形状的分布；
+代价是<strong>要靠足够多的粒子</strong>，且粒子会「退化」（3.3 节会讲）。</p>
 <h3 id="32-fastslam">3.2 FastSLAM 的关键：地图不用采样<a class="headerlink" href="#32-fastslam" title="Permanent link">&para;</a></h3>
-<p>如果每个粒子都背着一整张地图去采样，要采的量太大了。
+<p>如果每个粒子都背一整张地图，要采的量太大。
 FastSLAM 用的是 1.3 节那条分解：</p>
 <div class="arithmatex">\[
 p\big(x_{1:t}, m \mid z_{1:t}, u_{1:t}\big)
@@ -12345,12 +12323,12 @@ p\big(x_{1:t}, m \mid z_{1:t}, u_{1:t}\big)
 \underbrace{p\big(m_i \mid x_{1:t}, z_{1:t}\big)}_{\text{每个粒子用一个小 EKF 算}}
 \]</div>
 <p><strong>这就是 Rao-Blackwell 分解</strong>：把「给定轨迹后能解析算的部分」（地图）
-从采样里拿出去，只对「没法解析算的部分」（轨迹）撒粒子。</p>
-<p>于是每个粒子只要带 <span class="arithmatex">\(N\)</span> 块<strong>小</strong>地图 —— 一个地标一块 <span class="arithmatex">\(2\times2\)</span> 的 EKF。
+从采样里拿出去，只对「没法解析的部分」（轨迹）撒粒子。</p>
+<p>于是每个粒子只要带 <span class="arithmatex">\(N\)</span> 块<strong>小</strong>地图 —— 一个地标一块 <span class="arithmatex">\(2\times2\)</span> 小 EKF。
 复杂度从 EKF-SLAM 的 <span class="arithmatex">\(O(N^2)\)</span> 变成 <span class="arithmatex">\(O(M\cdot N)\)</span>。
-<strong>特征一多，<span class="arithmatex">\(M\cdot N\)</span> 就远小于 <span class="arithmatex">\(N^2\)</span> —— 这就是 FastSLAM 的立身之本。</strong>
-（它还有一个额外好处：不同粒子可以算出<strong>完全不同的地图</strong>，
-所以 FastSLAM 天然能处理「数据关联歧义」—— 地图本身就带上了多假设。）</p>
+<strong>特征一多，<span class="arithmatex">\(M\cdot N\)</span> 就远小于 <span class="arithmatex">\(N^2\)</span> —— 这是 FastSLAM 的立身之本。</strong>
+（它还有个好处：不同粒子可以算出<strong>完全不同的地图</strong>，
+所以 FastSLAM 天然能处理「数据关联歧义」—— 地图本身自带多假设。）</p>
 <h3 id="33">3.3 算例：粒子数换精度<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>同一段数据算两遍，只改粒子数：</p>
 <ul>
@@ -12382,69 +12360,67 @@ p\big(x_{1:t}, m \mid z_{1:t}, u_{1:t}\big)
 <p>位姿 RMSE = 0.0610 m，地标最大误差 = 0.0889 m</p>
 </li>
 <li>
-<p>同一段数据、同一套观测：粒子少则粗糙、粒子多则精细，代价是计算量 M×N。</p>
+<p>（这段把起点当作已知，粒子都从同一点出发，所以“粒子散布”不大；</p>
 </li>
-<li>而 EKF-SLAM 的代价是 N²——“用粒子换掉高斯”正是为绕开这个平方来的。</li>
-<li>（这段把起点当作已知，粒子都从同一点出发，所以“粒子散布”不大；</li>
 <li>而绝对位置整体说不清的问题，前两个算例已经演示过了。）</li>
 </ul>
 <p><strong>粒子数从 10 加到 500，位姿 RMSE 从 0.1096 m 降到 0.0610 m，
-地标最大误差从 0.1695 m 降到 0.0889 m</strong> —— 精度是「买」来的，代价就是 <span class="arithmatex">\(M\)</span> 倍的计算量。
-而它买到的东西，EKF-SLAM 根本给不了：<strong>分布可以多峰、地图可以多假设。</strong></p>
+地标最大误差从 0.1695 m 降到 0.0889 m</strong> —— 精度是「买」来的，代价是 <span class="arithmatex">\(M\)</span> 倍计算量。
+而它买到的东西 EKF-SLAM 给不了：<strong>分布可多峰、地图可多假设。</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">粒子不是免费的：退化与「假自信」</p>
 <p>粒子滤波有两个经典的坑。</p>
-<p>一是<strong>粒子退化</strong>：跑几步之后，权重往往集中到少数几个粒子上，
-有效粒子数 <span class="arithmatex">\(N_{\text{eff}} = 1/\sum_k \big(w^{(k)}\big)^2\)</span> 急剧下降 —— 必须<strong>重采样</strong>救回来。
-本页算例里「有效粒子数 <span class="arithmatex">\(N_{\text{eff}} &lt; M/2\)</span>」这个判据，就是在监控它。</p>
-<p>二是<strong>重采样带来的「假自信」</strong>：重采样反复复制高权重的粒子，
-会把粒子多样性一并抹掉，<strong>于是「粒子散布」会比真实的不确定度还小。</strong>
-（本页算例里那个散布一直在 0.1 m 量级，就是这种偏小的表现 ——
-它<strong>不等于</strong>真实的位姿不确定度，别拿它当误差棒用。）
-工程上要盯着 <span class="arithmatex">\(N_{\text{eff}}\)</span>、控制重采样频率，必要时给分布人为「加点噪声」。</p>
-<p>一句话：<strong>粒子滤波的敌人从来不是「算得慢」，而是「自以为很确定」。</strong></p>
+<p>一是<strong>粒子退化</strong>：跑几步后权重往往集中到少数粒子上，
+有效粒子数 <span class="arithmatex">\(N_{\text{eff}} = 1/\sum_k \big(w^{(k)}\big)^2\)</span> 急剧下降 —— 必须<strong>重采样</strong>救回。
+本页算例里「<span class="arithmatex">\(N_{\text{eff}} &lt; M/2\)</span>」这个判据就在监控它。</p>
+<p>二是<strong>重采样的「假自信」</strong>：重采样反复复制高权重粒子，
+会把粒子多样性一并抹掉，<strong>于是「粒子散布」比真实不确定度还小。</strong>
+（本页算例里散布一直在 0.1 m 量级，就是这种偏小的表现 ——
+它<strong>不等于</strong>真实位姿不确定度，别拿它当误差棒。）
+工程上要盯 <span class="arithmatex">\(N_{\text{eff}}\)</span>、控重采样频率，必要时给分布人为「加点噪声」。</p>
+<p>一句话：<strong>粒子滤波的敌人从不是「算得慢」，而是「自以为确定」。</strong></p>
 </div>
 <hr />
 <h2 id="slam_2">四、图优化 SLAM：把整段轨迹当成一个最小二乘问题<a class="headerlink" href="#slam_2" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 换个视角：不求分布，只求最优轨迹<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>前两条路都在求「后验分布」。可很多时候，我们要的其实只是<strong>一个最优估计</strong>：
-<strong>在给定所有约束的前提下，哪条轨迹最说得通？</strong></p>
+<p>前两条路都在求「后验分布」。可很多时候只要<strong>一个最优估计</strong>：
+<strong>给定所有约束，哪条轨迹最说得通？</strong></p>
 <p>把 SLAM 画成一张<strong>图</strong>：</p>
 <ul>
-<li><strong>节点（顶点）</strong>：机器人的位姿（也可以把地标加进来）；</li>
-<li><strong>边</strong>：约束 —— 里程计给出的相邻位姿之间的相对位移、
-  回环给出的「这两帧其实是同一个地方」、以及「在该位姿下应该看到什么」。</li>
+<li><strong>节点（顶点）</strong>：机器人位姿（也可把地标加进来）；</li>
+<li><strong>边</strong>：约束 —— 里程计给的相邻位姿相对位移、
+  回环给的「这两帧其实是同一个地方」、以及「在该位姿下该看到什么」。</li>
 </ul>
-<p>每条边都希望自己的<strong>残差</strong> <span class="arithmatex">\(e_k\)</span> 尽量小。残差的定义很朴素：
-<strong>观测值，减去由节点当前取值算出来的预测值。</strong>
+<p>每条边都希望自己的<strong>残差</strong> <span class="arithmatex">\(e_k\)</span> 尽量小。残差定义很朴素：
+<strong>观测值减去由节点当前取值算出的预测值。</strong>
 于是「求最优轨迹」变成</p>
 <div class="arithmatex">\[
 x^\star = \arg\min_{x} \sum_k e_k(x)^{\mathsf T}\,\Omega_k\,e_k(x)
 \]</div>
 <p>其中 <span class="arithmatex">\(\Omega_k\)</span> 是这条边的<strong>信息矩阵</strong>（协方差的逆）：
-<strong>边越可信，它的权重越大。</strong> 这个形式叫<strong>马氏距离平方和</strong>，
-本质就是「按每条边自己的可信度，给它打分后再求和」。</p>
+<strong>边越可信，权重越大。</strong> 这个形式叫<strong>马氏距离平方和</strong>，
+本质就是「按每条边的可信度打分再求和」。</p>
 <h3 id="42-">4.2 怎么解：高斯-牛顿加「稀疏」<a class="headerlink" href="#42-" title="Permanent link">&para;</a></h3>
-<p><span class="arithmatex">\(e_k\)</span> 一般是 <span class="arithmatex">\(x\)</span> 的非线性函数（光一个旋转就够非线性了），
-所以在当前初值附近做一阶展开，就得到一个标准的最小二乘问题：</p>
+<p><span class="arithmatex">\(e_k\)</span> 一般是 <span class="arithmatex">\(x\)</span> 的非线性函数（光旋转就够非线性），
+所以在当前初值附近做一阶展开，得到标准的最小二乘问题：</p>
 <div class="arithmatex">\[
 H\,\Delta x = b, \qquad
 H = \sum_k J_k^{\mathsf T}\,\Omega_k\,J_k, \qquad
 b = -\sum_k J_k^{\mathsf T}\,\Omega_k\,e_k
 \]</div>
-<p>迭代 <span class="arithmatex">\(x \leftarrow x + \Delta x\)</span> 直到收敛（再加一点 Levenberg–Marquardt 阻尼就更稳）。
-这套「高斯-牛顿解非线性最小二乘」的通用套路，
-在<a href="../../../math/optimization/newton/">数学基础的高斯-牛顿法</a>那一页已经推过，这里直接拿来用。</p>
-<p><strong>图优化真正的威力，在 <span class="arithmatex">\(H\)</span> 的稀疏性。</strong> 一张图里，每条边通常只连两个节点，
+<p>迭代 <span class="arithmatex">\(x \leftarrow x + \Delta x\)</span> 直到收敛（再加点 Levenberg–Marquardt 阻尼更稳）。
+这套「高斯-牛顿解非线性最小二乘」通用套路，
+在<a href="../../../math/optimization/newton/">数学基础的高斯-牛顿法</a>已推过，直接用。</p>
+<p><strong>图优化真正的威力在 <span class="arithmatex">\(H\)</span> 的稀疏性。</strong> 每条边通常只连两个节点，
 所以 <span class="arithmatex">\(H\)</span> 是个<strong>巨大的稀疏矩阵</strong>。用稀疏 Cholesky 或共轭梯度
 （见<a href="../../../math/numerical/linear-solve/">稀疏线性方程组</a>），
-可以在毫秒级解出上万个节点的位姿图 ——
-<strong>今天几乎所有能跑起来的 SLAM 系统（激光的、视觉的），后端都是它。</strong></p>
+可在毫秒级解出上万个节点的位姿图 ——
+<strong>今天几乎所有能跑起来的 SLAM 系统（激光、视觉），后端都是它。</strong></p>
 <h3 id="43">4.3 算例：绕一圈，把漂移拉回来<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p>让机器人沿正方形走一圈（边长 5 m，每条边 10 段，共 41 个位姿节点）。
-里程计每条边都带一点噪声、外加一点「随时间累积的方向偏差」——
-于是<strong>航迹推算走完一圈时，终点已经不在起点了</strong>。
-再给它一条回环边：「第 40 步和第 0 步，其实是同一个地方」：</p>
+<p>让机器人沿正方形走一圈（边长 5 m，每边 10 段，共 41 个位姿节点）。
+里程计每条边都带一点噪声、外加「随时间累积的方向偏差」——
+于是<strong>航迹推算走完一圈，终点已不在起点</strong>。
+再给它一条回环边：「第 40 步和第 0 步其实是同一个地方」：</p>
 <ul>
 <li>图优化 SLAM：把“轨迹 + 回环”写成一张图，再用最小二乘一次解出来</li>
 <li>
@@ -12461,43 +12437,31 @@ b = -\sum_k J_k^{\mathsf T}\,\Omega_k\,e_k
 <li>25 ( 2.50, 5.00) ( 1.84, 4.77) ( 2.02, 5.02)</li>
 <li>30 ( 0.00, 5.00) ( -0.55, 4.67) ( -0.34, 4.97)</li>
 <li>35 ( 0.00, 2.50) ( -0.47, 2.10) ( -0.22, 2.45)</li>
-<li>
-<p>40 ( 0.00, 0.00) ( -0.28, -0.41) ( -0.01,-0.01)</p>
-</li>
-<li>
-<p>回环残差（终点离起点多远）：航迹推算 0.501 m → 图优化 0.012 m</p>
-</li>
-<li>
-<p>全程 RMS 位置误差 ：航迹推算 0.536 m → 图优化 0.333 m</p>
-</li>
-<li>
-<p>回环边一说“它俩其实是同一点”，整圈里程计的偏差就被均摊回整条轨迹——</p>
-</li>
-<li>这就是图优化：不滤波、不调参，直接解一个稀疏最小二乘。</li>
+<li>40 ( 0.00, 0.00) ( -0.28, -0.41) ( -0.01,-0.01)</li>
 </ul>
 <p>看那两行汇总：<strong>回环残差 0.501 m → 0.012 m，全程 RMS 位置误差 0.536 m → 0.333 m。</strong>
-逐节点对照更直观 —— 图优化那一列，每一个点都比航迹推算更贴近真值，
-而且<strong>误差被平摊到整圈</strong>，不再全压在终点上。</p>
-<p><strong>它凭什么一次就算好？</strong> 因为回环边等于对整条轨迹下了一道命令：
-「你最后必须回到起点」。而最小二乘做的事情，就是把这个命令<strong>翻译成「每一段各让一点」</strong>
-（例题 4 会把这件事在数学上写清楚）。</p>
+逐节点对照更直观 —— 图优化那列每个点都比航迹推算更贴近真值，
+而且<strong>误差被平摊到整圈</strong>，不再全压在终点。</p>
+<p><strong>它凭什么一次算好？</strong> 回环边等于对整条轨迹下了道命令：
+「你最后必须回到起点」。最小二乘做的事，就是把它<strong>翻译成「每段各让一点」</strong>
+（例题 4 会在数学上写清楚）。</p>
 <div class="admonition warning">
 <p class="admonition-title">图优化的前提，是先认出「这地方我来过」</p>
-<p>上面的例子之所以能一键修好，全靠那条回环边。可<strong>这条边从哪来</strong>？
+<p>上面的例子能一键修好，全靠那条回环边。可<strong>它从哪来</strong>？
 模型自己不会告诉你「第 40 步和第 0 步是同一个地方」——
-那是<strong>回环检测（loop closure）</strong>的任务：把当前观测和历史某一帧比对，
-判断「是不是同一个地点」。这本身就是一个不轻松的识别问题：
-环境会变、视角会变、光线会变、动态物体还会捣乱。</p>
+那是<strong>回环检测（loop closure）</strong>的任务：把当前观测与历史某帧比对，
+判断「是不是同一个地点」。这本身就是个不轻松的识别问题：
+环境、视角、光线会变，动态物体还捣乱。</p>
 <p>更要命的是，<strong>回环检测必须非常准</strong>：
-<strong>认错一次，优化就会把整张地图拧成一团麻花</strong>（一条错误的强约束，
-会把整条轨迹往错的方向拽）。所以实用系统都要做
-<strong>鲁棒核函数 + 一致性检验</strong>，并且遵循一条原则：
+<strong>认错一次，优化就把整张地图拧成麻花</strong>（一条错误的强约束，
+会把整条轨迹往错方向拽）。所以实用系统都要做
+<strong>鲁棒核函数 + 一致性检验</strong>，并遵循一条原则：
 <strong>宁可漏检（少一条边），也绝不错检。</strong></p>
 </div>
 <hr />
 <h2 id="slam_3">五、多传感器数据融合：SLAM 系统的工程底座<a class="headerlink" href="#slam_3" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 为什么单靠一种传感器不行<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
-<p>回头看前面四节，所有观测都被笼统地写成 <span class="arithmatex">\(z_t\)</span>。可真实系统里，<span class="arithmatex">\(z_t\)</span> 是一大堆传感器的合唱：</p>
+<p>回头看前面四节，所有观测都被写成 <span class="arithmatex">\(z_t\)</span>。可真实系统里，<span class="arithmatex">\(z_t\)</span> 是一堆传感器的合唱：</p>
 <table>
 <thead>
 <tr>
@@ -12540,29 +12504,29 @@ b = -\sum_k J_k^{\mathsf T}\,\Omega_k\,e_k
 </tr>
 </tbody>
 </table>
-<p>读这张表要抓住一条线：<strong>它们恰好互补</strong> ——
+<p>读这张表抓住一条线：<strong>它们恰好互补</strong> ——
 相对传感器（里程计、IMU）<strong>高频但会漂</strong>；绝对传感器（GNSS、地标、回环）<strong>低频但不漂</strong>。
-把它们拼起来，正是第一节说的那条「<strong>相对 + 绝对</strong>」。
-（传感器本身的性质、以及加权融合与卡尔曼滤波的基本功，
-在<a href="../sensing/">机器人的传感系统与信息融合</a>那一页已经打过底，
+拼起来，正是第一节说的那条「<strong>相对 + 绝对</strong>」。
+（传感器本身的性质、以及加权融合与卡尔曼滤波基本功，
+在<a href="../sensing/">机器人的传感系统与信息融合</a>已打过底，
 这里只讲它在 SLAM 里的具体形态。）</p>
 <h3 id="52">5.2 两种拼法：松耦合与紧耦合<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
-<p>同样是把多路传感器合起来，做法分两档：</p>
+<p>把多路传感器合起来，做法分两档：</p>
 <ul>
-<li><strong>松耦合（loosely coupled）</strong>：每个传感器<strong>各自先算出自己的结果</strong>，
-  再到状态层去融合 —— 比如「激光先自己算一个位姿，再和里程计做卡尔曼融合」。
-  实现简单、模块化好；缺点是<strong>丢掉了原始测量之间的关联信息</strong>，精度不如紧耦合。</li>
-<li><strong>紧耦合（tightly coupled）</strong>：把<strong>原始测量</strong>直接送进同一个估计器 ——
-  激光的每一个点、视觉的每一个特征点，都写进同一个滤波器或同一个优化里。
-  信息利用更充分、在传感器退化时更鲁棒（比如激光只剩几根线、相机只剩几个点时还能撑住）；
+<li><strong>松耦合（loosely coupled）</strong>：每个传感器<strong>各自先算结果</strong>，
+  再到状态层融合 —— 比如「激光先算位姿，再和里程计做卡尔曼融合」。
+  实现简单、模块化好；缺点是<strong>丢掉原始测量间的关联信息</strong>，精度不如紧耦合。</li>
+<li><strong>紧耦合（tightly coupled）</strong>：把<strong>原始测量</strong>直接送进同一估计器 ——
+  激光的每个点、视觉的每个特征点，都写进同一个滤波器或优化里。
+  信息利用更充分、传感器退化时更鲁棒（激光只剩几根线、相机只剩几个点也能撑住）；
   代价是模型复杂、计算量大、标定要求高。</li>
 </ul>
 <p><strong>一句话：松耦合是「各算各的，再开会」；紧耦合是「一起算」。</strong>
-两条路的取舍，就是「工程简单」与「信息利用率」之间的取舍。</p>
+两条路的取舍，就是「工程简单」与「信息利用率」的取舍。</p>
 <h3 id="53">5.3 算例：里程计 + 低频绝对观测<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
-<p>把 5.1 表里那条主线逐项算一遍：一个<strong>每步都到、但会漂</strong>的里程计，
+<p>把 5.1 表那条主线逐项算一遍：一个<strong>每步都到、但会漂</strong>的里程计，
 配一个<strong>不漂、但很稀疏</strong>的绝对观测（每 10 步才来一次）。
-我们比较三种用法，再加一个「绝对观测中途坏掉」的测试：</p>
+比较三种用法，再加「绝对观测中途坏掉」的测试：</p>
 <ul>
 <li>多传感器数据融合：里程计给“相对位移”（高频、会漂），绝对观测给“绝对坐标”（低频、不漂）</li>
 <li>里程计每步都到，但有 5% 的尺度偏差；绝对观测每 10 步才来一次，σ=0.12 m</li>
@@ -12630,30 +12594,16 @@ b = -\sum_k J_k^{\mathsf T}\,\Omega_k\,e_k
 </tr>
 </tbody>
 </table>
-<ul>
-<li>全程 RMSE：纯里程计 1.6094 m ｜ 零阶保持 5.2555 m ｜ 卡尔曼融合 0.4014 m</li>
-<li>后半程（第 40~60 步，绝对观测在第 40 步后“坏掉”）：</li>
-<li>
-<p>还有观测 0.5372 m ｜ 只剩里程计 2.2388 m</p>
-</li>
-<li>
-<p>里程计单独用会一路漂；绝对观测虽然不漂，却每 10 步才来一次 ——</p>
-</li>
-<li>中间「抱着旧坐标不放」，机器人早走远了，误差反而更大。</li>
-<li>稀疏的绝对信息，必须靠连续的相对信息串起来；</li>
-<li>卡尔曼融合正是干这件事：里程计负责「外推」，观测一来就「校正」，</li>
-<li>而且拆掉一路还能靠另一路撑住 —— 这正是 IMU、轮式里程计、激光、视觉一起上的原因。</li>
-</ul>
-<p>三行 RMSE 把话说尽了：<strong>纯里程计 1.6094 m</strong>（尺度偏差一路累积）、
+<p>三行 RMSE 说尽一切：<strong>纯里程计 1.6094 m</strong>（尺度偏差一路累积）、
 <strong>只用绝对观测 5.2555 m</strong>、<strong>卡尔曼融合 0.4014 m</strong>。</p>
-<p><strong>中间那个「只用绝对观测」为什么反而最差？</strong> 因为它每 10 步才更新一次，
-中间就<strong>抱着上一个坐标不放</strong> —— 而机器人一直在走。
-这个反直觉的结果说明了一件重要的事：<strong>稀疏的绝对信息，必须靠连续的相对信息串起来用</strong>，
+<p><strong>中间那个「只用绝对观测」为什么最差？</strong> 因为它每 10 步才更新，
+中间就<strong>抱着上一个坐标不放</strong> —— 而机器人在走。
+这个反直觉的结果说明：<strong>稀疏的绝对信息必须靠连续的相对信息串起来用</strong>，
 单独拿出来反而是灾难。</p>
-<p><strong>最后一行是断供测试</strong>：绝对观测在第 40 步之后「坏掉」，
-此时融合方案还能靠里程计外推，误差 0.5372 m，而纯里程计同期是 2.2388 m。
-<strong>融合的价值不只是「更准」，还在于「拆掉一路，系统还能撑住」</strong> ——
-这就是<strong>冗余</strong>的意义，也是 IMU、轮式里程计、激光、视觉一起上的根本原因。</p>
+<p><strong>最后一行是断供测试</strong>：绝对观测在第 40 步后「坏掉」，
+此时融合方案还能靠里程计外推，误差 0.5372 m，纯里程计同期是 2.2388 m。
+<strong>融合的价值不只「更准」，还在「拆掉一路还能撑住」</strong> ——
+这就是<strong>冗余</strong>的意义，也是 IMU、里程计、激光、视觉一起上的原因。</p>
 <hr />
 <h2 id="1slam">例题 1：SLAM 的后验为什么能拆成「轨迹 × 地图」<a class="headerlink" href="#1slam" title="Permanent link">&para;</a></h2>
 <p>从条件概率的乘法公式出发，证明</p>
@@ -12664,29 +12614,29 @@ p\big(x_{1:t}, m \mid z_{1:t}, u_{1:t}\big)
 <p>并说明「给定轨迹后，各 <span class="arithmatex">\(m_i\)</span> 条件独立」成立的理由。</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：套条件概率的定义。</strong> 对任意两个事件，<span class="arithmatex">\(p(A,B) = p(A)\,p(B\mid A)\)</span>。
+<p><strong>第一步：套条件概率定义。</strong> 对任意两个事件，<span class="arithmatex">\(p(A,B) = p(A)\,p(B\mid A)\)</span>。
 取 <span class="arithmatex">\(A = x_{1:t}\)</span>、<span class="arithmatex">\(B = m\)</span>：</p>
 <div class="arithmatex">\[
 p\big(x_{1:t}, m \mid z_{1:t}, u_{1:t}\big)
 = p\big(x_{1:t}\mid z_{1:t},u_{1:t}\big)\cdot
 p\big(m \mid x_{1:t},\, z_{1:t},\, u_{1:t}\big)
 \]</div>
-<p><strong>第二步：把多余的 <span class="arithmatex">\(u_{1:t}\)</span> 划掉。</strong> 上式第二项里，<strong>给定轨迹 <span class="arithmatex">\(x_{1:t}\)</span> 之后，
-控制量 <span class="arithmatex">\(u_{1:t}\)</span> 就不再提供关于地图的新信息</strong>了 ——
-<span class="arithmatex">\(u\)</span> 是通过影响「机器人走到哪」来间接影响地图的；轨迹一旦给定，这条通路就被旁路了。于是</p>
+<p><strong>第二步：把多余的 <span class="arithmatex">\(u_{1:t}\)</span> 划掉。</strong> 上式第二项里，<strong>给定轨迹 <span class="arithmatex">\(x_{1:t}\)</span> 后，
+控制量 <span class="arithmatex">\(u_{1:t}\)</span> 不再提供关于地图的新信息</strong> ——
+<span class="arithmatex">\(u\)</span> 通过影响「机器人走到哪」间接影响地图；轨迹给定后，这条通路被旁路。于是</p>
 <div class="arithmatex">\[
 p\big(m \mid x_{1:t},\, z_{1:t},\, u_{1:t}\big) = p\big(m \mid x_{1:t},\, z_{1:t}\big)
 \]</div>
-<p>两式合起来，就是题目要证的分解。<strong>第一步是恒等式，第二步靠「轨迹旁路了控制」。</strong></p>
+<p>两式合起来就是题目要证的分解。<strong>第一步恒等，第二步靠「轨迹旁路了控制」。</strong></p>
 <p><strong>第三步：拆开 <span class="arithmatex">\(m\)</span> 的各分量。</strong> 地图 <span class="arithmatex">\(m = \{m_1,\dots,m_N\}\)</span>。
-一次观测 <span class="arithmatex">\(z_t\)</span> 只与「当前位姿 <span class="arithmatex">\(x_t\)</span>」和「它看到的那些地标」有关；
-给定 <span class="arithmatex">\(x_{1:t}\)</span> 后，不同地标对应的观测之间<strong>没有共同的随机源</strong>了，所以</p>
+一次观测 <span class="arithmatex">\(z_t\)</span> 只与「当前位姿 <span class="arithmatex">\(x_t\)</span>」和「看到的地标」有关；
+给定 <span class="arithmatex">\(x_{1:t}\)</span> 后，不同地标对应的观测之间<strong>没有共同随机源</strong>，所以</p>
 <div class="arithmatex">\[
 p\big(m \mid x_{1:t},\, z_{1:t}\big) = \prod_{i=1}^{N} p\big(m_i \mid x_{1:t},\, z_{1:t}\big)
 \]</div>
-<p>注意每个因子只用到「曾经看到过 <span class="arithmatex">\(m_i\)</span> 的那些时刻」的观测，其余观测对它是无关的。</p>
-<p><strong>一句话</strong>：<strong>第一步是恒等式，第二步靠「轨迹旁路了控制」，第三步靠「观测在给定状态下独立」；
-三条加起来，SLAM 就被拆成了「轨迹」与「给定轨迹时的地图」两块。</strong></p>
+<p>注意每个因子只用到「曾看到 <span class="arithmatex">\(m_i\)</span> 的那些时刻」的观测，其余无关。</p>
+<p><strong>一句话</strong>：<strong>第一步恒等，第二步靠「轨迹旁路了控制」，第三步靠「观测给定状态下独立」；
+三条加起来，SLAM 就被拆成「轨迹」与「给定轨迹时的地图」两块。</strong></p>
 </details>
 <hr />
 <h2 id="2ekf-slam">例题 2：EKF-SLAM 的协方差为什么是稠密的<a class="headerlink" href="#2ekf-slam" title="Permanent link">&para;</a></h2>
@@ -12695,27 +12645,27 @@ p\big(m \mid x_{1:t},\, z_{1:t}\big) = \prod_{i=1}^{N} p\big(m_i \mid x_{1:t},\,
 以及这为什么决定了计算量是 <span class="arithmatex">\(O(N^2)\)</span>。</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：协方差的来源是「共同的祖先」。</strong> 每个地标都不是直接观测到的绝对位置，
-而是由<strong>首次看到它时的位姿</strong> <span class="arithmatex">\(x_{t_i}\)</span> 与观测 <span class="arithmatex">\(z_{t_i}\)</span> 算出来的：</p>
+<p><strong>第一步：协方差的来源是「共同的祖先」。</strong> 每个地标都不是直接观测的绝对位置，
+而是由<strong>首次看到它时的位姿</strong> <span class="arithmatex">\(x_{t_i}\)</span> 与观测 <span class="arithmatex">\(z_{t_i}\)</span> 算出：</p>
 <div class="arithmatex">\[
 m_i = x_{t_i} + (\text{相对观测})
 \]</div>
 <p>所以 <span class="arithmatex">\(m_i\)</span> 里<strong>含着 <span class="arithmatex">\(x_{t_i}\)</span> 的误差</strong>。</p>
-<p><strong>第二步：两个地标为什么相关。</strong> <span class="arithmatex">\(m_i\)</span> 与 <span class="arithmatex">\(m_j\)</span> 各自含着位姿误差，
-而位姿误差不是两次独立的随机量 —— 它是一段轨迹上<strong>同一个随机过程</strong>
-（里程计噪声一路积分出来的）。两个地标共享同一批误差源，于是</p>
+<p><strong>第二步：两个地标为什么相关。</strong> <span class="arithmatex">\(m_i\)</span> 与 <span class="arithmatex">\(m_j\)</span> 各自含位姿误差，
+而位姿误差不是两次独立随机量 —— 它是一段轨迹上<strong>同一个随机过程</strong>
+（里程计噪声一路积分而来）。两个地标共享同一批误差源，于是</p>
 <div class="arithmatex">\[
 \operatorname{cov}(m_i,\, m_j) \neq 0
 \]</div>
-<p>什么时候才会近似为零？只有在「两个地标是在位姿完全确定、且完全相同的同一时刻被观测到」时 ——
-现实中不存在。算例里这个矩阵 <span class="arithmatex">\(15\times15\)</span> 的<strong>非对角非零元占 100%</strong>，就是这件事的直接证据。</p>
+<p>什么时候近似为零？只有「两地在位姿完全确定、且同时被观测到」时 ——
+现实中不存在。算例里这个 <span class="arithmatex">\(15\times15\)</span> 矩阵的<strong>非对角非零元占 100%</strong>，就是直接证据。</p>
 <p><strong>第三步：稠密的代价。</strong> 矩阵规模是 <span class="arithmatex">\((3+2N)\times(3+2N)\)</span>。
 每更新一次要算 <span class="arithmatex">\(K = \Sigma H^{\mathsf T}S^{-1}\)</span> 和 <span class="arithmatex">\(\Sigma \leftarrow (I - KH)\Sigma\)</span>，
 都是对整个矩阵的操作 —— 时间和内存都是 <span class="arithmatex">\(O(N^2)\)</span>。</p>
-<p><strong>第四步：为什么「改一个地标会动到别的」。</strong> 从更新式看，
+<p><strong>第四步：为什么「改一个地标会动到别的」。</strong> 由更新式看，
 <span class="arithmatex">\(K\)</span> 的第 <span class="arithmatex">\(i\)</span> 个地标分块正比于 <span class="arithmatex">\(\operatorname{cov}(m_i, m_j)\)</span>。
-所以即使只看到地标 <span class="arithmatex">\(j\)</span>，位姿一被修正，<strong>所有与位姿相关的地标都会同步被修正</strong>。</p>
-<p><strong>一句话</strong>：<strong>地图里每个点都沾着位姿的误差，而位姿是它们的共同祖先 ——
+所以即使只看到地标 <span class="arithmatex">\(j\)</span>，位姿一修正，<strong>所有与位姿相关的地标都同步修正</strong>。</p>
+<p><strong>一句话</strong>：<strong>地图每个点都沾着位姿的误差，而位姿是它们的共同祖先 ——
 于是谁也不独立，矩阵全满，代价就是 <span class="arithmatex">\(N^2\)</span>。</strong></p>
 </details>
 <hr />
@@ -12727,19 +12677,19 @@ m_i = x_{t_i} + (\text{相对观测})
 <summary>解答</summary>
 <p><strong>第一步：每个粒子的地图。</strong> 由例题 1，给定轨迹后地图各点<strong>条件独立</strong>。
 所以每个粒子只要维护 <span class="arithmatex">\(N\)</span> 个<strong>互不耦合</strong>的 <span class="arithmatex">\(2\times2\)</span> 小滤波：
-更新一个地标是 <span class="arithmatex">\(O(1)\)</span>，<span class="arithmatex">\(N\)</span> 个就是 <span class="arithmatex">\(O(N)\)</span> —— 没有那个 <span class="arithmatex">\(N^2\)</span>。</p>
-<p><strong>第二步：乘上粒子数。</strong> 每次更新要对 <span class="arithmatex">\(M\)</span> 个粒子各做一遍 → 总计 <span class="arithmatex">\(O(MN)\)</span>。</p>
+更新一个地标是 <span class="arithmatex">\(O(1)\)</span>，<span class="arithmatex">\(N\)</span> 个即 <span class="arithmatex">\(O(N)\)</span> —— 没有 <span class="arithmatex">\(N^2\)</span>。</p>
+<p><strong>第二步：乘上粒子数。</strong> 每次更新对 <span class="arithmatex">\(M\)</span> 个粒子各做一遍 → 总计 <span class="arithmatex">\(O(MN)\)</span>。</p>
 <p><strong>第三步：比较。</strong> EKF-SLAM 是 <span class="arithmatex">\(O(N^2)\)</span>（与 <span class="arithmatex">\(M\)</span> 无关），FastSLAM 是 <span class="arithmatex">\(O(MN)\)</span>（对 <span class="arithmatex">\(N\)</span> 线性）。
 当</p>
 <div class="arithmatex">\[
 MN \ll N^2 \quad\Longleftrightarrow\quad M \ll N
 \]</div>
 <p>也就是<strong>粒子数远小于地标数</strong>时，FastSLAM 明显更省。
-（算例里 <span class="arithmatex">\(M\)</span> 取 10 或 500 都行，而真实环境的地标动辄上千。）</p>
+（算例里 <span class="arithmatex">\(M\)</span> 取 10 或 500 都行，而真实环境地标动辄上千。）</p>
 <p><strong>第四步：代价与前提。</strong> 这个「省」是拿精度换的：
-粒子少了估计粗糙 —— 算例 <span class="arithmatex">\(M=10\)</span> 时位姿 RMSE 是 0.1096 m，<span class="arithmatex">\(M=500\)</span> 时降到 0.0610 m；
-而且粒子会退化。它换来的好处也很实在：不受高斯假设限制，<strong>分布可以多峰、地图可以多假设</strong>。</p>
-<p><strong>一句话</strong>：<strong>能解析算的（地图）就别采样，把粒子全花在没法解析算的（轨迹）上 ——
+粒子少了估计粗糙 —— 算例 <span class="arithmatex">\(M=10\)</span> 时位姿 RMSE 0.1096 m，<span class="arithmatex">\(M=500\)</span> 时降到 0.0610 m；
+而且粒子会退化。换来的好处也很实在：不受高斯假设限制，<strong>分布可多峰、地图可多假设</strong>。</p>
+<p><strong>一句话</strong>：<strong>能解析算的（地图）就别采样，把粒子全花在没法解析的（轨迹）上 ——
 这就是 Rao-Blackwell 化的全部含义。</strong></p>
 </details>
 <hr />
@@ -12757,9 +12707,9 @@ J(x) = \sum_{k=0}^{n-1}\big(x_{k+1} - x_k - d_k\big)^2
 <p>第二项（<span class="arithmatex">\(\lambda \to \infty\)</span>）就是回环边：<strong>它要求终点必须回到起点。</strong></p>
 <p><strong>第二步：没有回环时会怎样。</strong> 只取第一项时，<span class="arithmatex">\(J\)</span> 的最小值点在 <span class="arithmatex">\(x_{k+1} = x_k + d_k\)</span>，
 也就是<strong>航迹推算</strong> —— 误差一路累加，终点落在 <span class="arithmatex">\(x_n^{\text{odom}} = \sum_k d_k\)</span>，
-早已不是 <span class="arithmatex">\(0\)</span>（算例里偏了 0.501 m）。</p>
+早已不是 <span class="arithmatex">\(0\)</span>（算例偏了 0.501 m）。</p>
 <p><strong>第三步：回环边把误差交给谁。</strong> 加上回环项后，<span class="arithmatex">\(J\)</span> 是<strong>凸二次函数</strong>，
-最优解必然唯一。为了看懂它，令每段的<strong>增量</strong>为 <span class="arithmatex">\(\Delta_k = x_{k+1} - x_k\)</span>，
+最优解必然唯一。为看清它，令每段的<strong>增量</strong>为 <span class="arithmatex">\(\Delta_k = x_{k+1} - x_k\)</span>，
 则回环约束等价于 <span class="arithmatex">\(\sum_k \Delta_k = 0\)</span>。问题变成：</p>
 <div class="arithmatex">\[
 \min_{\Delta}\ \sum_k \big(\Delta_k - d_k\big)^2
@@ -12778,52 +12728,52 @@ J(x) = \sum_{k=0}^{n-1}\big(x_{k+1} - x_k - d_k\big)^2
 \qquad\text{累计到第 }k\text{ 个节点：}\quad
 x_k = \sum_{j&lt;k} d_j \;-\; \frac{k}{n}\sum_{j} d_j
 \]</div>
-<p><strong>这就是「均摊」的精确含义</strong>：<strong>每一段都匀出相同的修正量 <span class="arithmatex">\(\frac1n\sum_j d_j\)</span></strong>，
-于是终点误差被<strong>线性地分摊到整条轨迹</strong>上 ——
-修正量正比于 <span class="arithmatex">\(k/n\)</span>，越靠后的节点被拉得越多（算例里图优化后每个点都更贴近真值，
+<p><strong>这就是「均摊」的精确含义</strong>：<strong>每段都匀出相同的修正量 <span class="arithmatex">\(\frac1n\sum_j d_j\)</span></strong>，
+于是终点误差被<strong>线性分摊到整条轨迹</strong>上 ——
+修正量正比于 <span class="arithmatex">\(k/n\)</span>，越靠后的节点被拉得越多（图优化后每个点都更贴近真值，
 RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p>
 <p><strong>一句话</strong>：<strong>回环边在对整条轨迹说「你最后必须回到起点」；
-最小二乘做的事情，就是把这个命令翻译成「每一段各让一点」。</strong></p>
+最小二乘做的事，就是把这个命令翻译成「每段各让一点」。</strong></p>
 </details>
 <hr />
 <h2 id="_2">自测<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p><strong>Q1</strong> SLAM 的状态里为什么必须保留<strong>整段轨迹</strong> <span class="arithmatex">\(x_{1:t}\)</span>，而不是像普通滤波那样只留当前位姿 <span class="arithmatex">\(x_t\)</span>？</p>
+<p><strong>Q1</strong> SLAM 的状态为什么必须保留<strong>整段轨迹</strong> <span class="arithmatex">\(x_{1:t}\)</span>，不像普通滤波那样只留当前位姿 <span class="arithmatex">\(x_t\)</span>？</p>
 <details class="note">
 <summary>提示</summary>
-<p>想想「地标的位置」是怎么算出来的 —— 它依赖的是哪些量？</p>
+<p>想想「地标的位置」是怎么算出来的 —— 它依赖哪些量？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为地图的估计依赖「我在哪些位姿下看过它」。</strong></p>
-<p>每个地标都是由<strong>首次看到它时的位姿 + 那次观测</strong>算出来的（写成算式就是 <span class="arithmatex">\(m = x + z\)</span>）。
-如果每走一步就把历史位姿丢掉，那么：
-后续每一次观测都在「基于一个已经被压缩掉的位姿」去更新地图，
-<strong>那些位姿原本携带的信息就永久丢失了</strong>，地图只会越画越糊。</p>
-<p>从贝叶斯的角度看更清楚：要算的是 <span class="arithmatex">\(p(m \mid x_{1:t}, z_{1:t})\)</span> ——
-地图的条件分布是<strong>以整段轨迹为条件</strong>的。把它换成「只以当前位姿为条件」，
-得到的就不是同一个问题了。</p>
+<p><strong>因为地图依赖「我在哪些位姿下看过它」。</strong></p>
+<p>每个地标都由<strong>首次看到它时的位姿 + 那次观测</strong>算出（即 <span class="arithmatex">\(m = x + z\)</span>）。
+如果每走一步就丢掉历史位姿：
+后续每次观测都在「基于一个已被压缩掉的位姿」更新地图，
+<strong>那些位姿携带的信息就永久丢失</strong>，地图只会越画越糊。</p>
+<p>从贝叶斯看更清楚：要算的是 <span class="arithmatex">\(p(m \mid x_{1:t}, z_{1:t})\)</span> ——
+地图的条件分布是<strong>以整段轨迹为条件</strong>。换成「只以当前位姿为条件」，
+得到的就不是同一个问题。</p>
 <p><strong>一句话</strong>：<strong>在 SLAM 里，历史位姿不是包袱，而是地图的「信息来源凭证」——
 丢掉历史，地图就没了根。</strong></p>
 </details>
-<p><strong>Q2</strong> 在一个「只有相对观测、没有任何绝对参照」的 SLAM 里，
-位姿的<strong>绝对</strong>不确定度会不会随着观测越来越多而下降？为什么？</p>
+<p><strong>Q2</strong> 在一个「只有相对观测、没有绝对参照」的 SLAM 里，
+位姿的<strong>绝对</strong>不确定度会不会随观测增多而下降？为什么？</p>
 <details class="note">
 <summary>提示</summary>
-<p>回想第一节那句「整张地图可以整体平移」——平移之后，所有观测还成立吗？</p>
+<p>回想第一节那句「整张地图可整体平移」——平移后，所有观测还成立吗？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>不会下降，它会稳定在一个由「过程噪声 vs 观测量」权衡出来的水平上。</strong></p>
+<p><strong>不会下降，它稳定在「过程噪声 vs 观测量」权衡出的水平上。</strong></p>
 <p>原因是<strong>规范自由度（gauge freedom）</strong>：
-没有绝对参照时，「把整张地图（位姿 + 所有地标）整体平移（甚至可以整体旋转）」
-之后，<strong>所有观测的相对量（距离、方位）都完全不变</strong> —— 数据无法区分这两种情形。
-既然数据分辨不出，后验当然就不会在这个方向上收窄。</p>
+没有绝对参照时，「把整张地图（位姿 + 所有地标）整体平移（甚至旋转）」
+之后，<strong>所有观测的相对量（距离、方位）完全不变</strong> —— 数据分不清。
+既然分辨不出，后验自然不会在这个方向上收窄。</p>
 <p>算例的证据很直接：
-· 一维那段，位姿 σ 稳在 0.534 m（出发先验是 0.5 m），纯里程计同期已经涨到 0.671 m；
-· 二维那段，绝对位姿 σ 是 0.722 m，几乎就是出发时的先验 0.707 m。
-但与此同时，「位姿相对地标 1」的 σ 只有 0.1428 m（一维）/ 0.187 m（二维）——
+· 一维那段，位姿 σ 稳在 0.534 m（出发先验 0.5 m），纯里程计同期已涨到 0.671 m；
+· 二维那段，绝对位姿 σ 是 0.722 m，几乎就是出发先验 0.707 m。
+但同时「位姿相对地标 1」的 σ 只有 0.1428 m（一维）/ 0.187 m（二维）——
 <strong>相对几何被观测钉得很死。</strong></p>
-<p>要消掉这个自由度，就得请<strong>绝对参照</strong>：GNSS / UWB / 已知地标，或者<strong>回环检测</strong>。</p>
+<p>要消掉这个自由度，就得请<strong>绝对参照</strong>：GNSS / UWB / 已知地标，或<strong>回环检测</strong>。</p>
 <p><strong>一句话</strong>：<strong>相对观测只能确定相对几何；绝对位置需要一个「外部锚点」——
 这是 SLAM 的结构性事实，不是算法不够好。</strong></p>
 </details>
@@ -12834,42 +12784,42 @@ RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>因为回环边是一条「强约束」，它会牵动整张图。</strong></p>
-<p>在图优化里，一条边的信息矩阵 <span class="arithmatex">\(\Omega_k\)</span> 越高，它在目标函数里的权重越大。
-回环一般置信度很高、权重很大，一条错的回环边等于给整张图下了一道<strong>错误的硬命令</strong>：
-「这两个相隔很远的地方，其实是同一个点」。
-优化器为了让总残差最小，会<strong>把整条轨迹拽过去迁就这条错误约束</strong> ——
-结果是整张地图被拧成一团麻花，而且<strong>很难事后发现是哪条边错了</strong>。</p>
-<p>反过来，漏检的代价小得多：少一条边，无非是这条回环的信息没被利用，
+<p><strong>因为回环边是强约束，会牵动整张图。</strong></p>
+<p>在图优化里，边的信息矩阵 <span class="arithmatex">\(\Omega_k\)</span> 越高，权重越大。
+回环一般置信度高、权重大，一条错边等于给整张图下了道<strong>错误的硬命令</strong>：
+「这两个相隔很远的地方其实是同一个点」。
+优化器为让总残差最小，会<strong>把整条轨迹拽过去迁就这条错约束</strong> ——
+结果是整张地图被拧成麻花，而且<strong>很难事后发现是哪条边错了</strong>。</p>
+<p>反过来，漏检代价小得多：少一条边，只是这条回环的信息没被利用，
 轨迹还是航迹推算的样子（会漂，但不会崩）。</p>
 <p>工程上的两条配套措施：
-· <strong>鲁棒核函数</strong>（如 Huber）：让「残差特别大的边」自动降权，免得一条错边带偏全局；
-· <strong>一致性检验</strong>：新回环必须和已有估计自洽才接受（例如检验闭环后的残差）。</p>
+· <strong>鲁棒核函数</strong>（如 Huber）：让「残差特别大的边」自动降权，免得错边带偏全局；
+· <strong>一致性检验</strong>：新回环要和已有估计自洽才接受（例如检验闭环后的残差）。</p>
 <p><strong>一句话</strong>：<strong>错检是往图里注毒，漏检只是少补一剂药 —— 所以宁缺毋滥。</strong></p>
 </details>
-<p><strong>Q4</strong> 相对传感器（里程计 / IMU）和绝对传感器（GNSS / 地标 / 回环）各自的优缺点是什么？
+<p><strong>Q4</strong> 相对传感器（里程计 / IMU）和绝对传感器（GNSS / 地标 / 回环）各自优缺点是什么？
 为什么这两类必须合起来用？</p>
 <details class="note">
 <summary>提示</summary>
-<p>看那张表的两列：频率与漂移。再想 5.3 节那个「只用绝对观测反而最差」的结果。</p>
+<p>看那张表两列：频率与漂移。再想 5.3 节「只用绝对观测反而最差」的结果。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
 <p><strong>两类传感器恰好互补：</strong></p>
 <p>· <strong>相对传感器</strong>：给「位移增量」——<strong>高频、连续</strong>，
-  但误差会<strong>一路积分累积</strong>（尺度偏差、打滑、陀螺漂移），所以<strong>越走越漂</strong>；
-· <strong>绝对传感器</strong>：给「在坐标系里的位置」——<strong>低频、不累积漂移</strong>，
+  但误差会<strong>一路累积</strong>（尺度偏差、打滑、陀螺漂移），所以<strong>越走越漂</strong>；
+· <strong>绝对传感器</strong>：给「坐标系里的位置」——<strong>低频、不累积漂移</strong>，
   但往往稀疏（每几步才来一次）、易受环境影响（室内没 GNSS）。</p>
 <p><strong>为什么必须合起来：</strong></p>
 <p>· <strong>只用相对传感器</strong> → 一路漂：算例 RMSE 1.6094 m；
 · <strong>只用绝对传感器</strong> → 两次观测之间只能「抱着旧坐标不放」，
-  而机器人在动，误差反而更大：算例 RMSE 5.2555 m；
-· <strong>融合</strong>（里程计负责外推、绝对观测负责校正）→ 算例 RMSE 0.4014 m，
+  而机器人在动，误差反而更大：RMSE 5.2555 m；
+· <strong>融合</strong>（里程计外推、绝对观测校正）→ 算例 RMSE 0.4014 m，
   比任何单独一路都好；更关键的是<strong>拆掉一路还能撑住</strong>
   （绝对观测在第 40 步后失效，融合方案靠里程计外推仍有 0.5372 m，
   而纯里程计同期是 2.2388 m）。</p>
 <p>实现上有<strong>松耦合</strong>（各传感器先各算各的，再融）和
-<strong>紧耦合</strong>（原始测量进同一个估计器）两档：前者简单模块化，后者信息利用率高、更鲁棒。</p>
+<strong>紧耦合</strong>（原始测量进同一个估计器）两档：前者简单，后者信息利用率高、更鲁棒。</p>
 <p><strong>一句话</strong>：<strong>相对信息负责「连续」，绝对信息负责「不漂」；
 缺了谁都不行 —— 这正是 SLAM 系统要背一堆传感器的原因。</strong></p>
 </details>
@@ -12885,7 +12835,7 @@ RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p
 <tbody>
 <tr>
 <td>SLAM 的循环：<strong>定位要地图、建图要位姿</strong></td>
-<td>它不能拆成两个先后步骤，只能一起估</td>
+<td>不能拆成两个先后步骤，只能一起估</td>
 </tr>
 <tr>
 <td>联合后验 <span class="arithmatex">\(p(x_{1:t}, m \mid z_{1:t}, u_{1:t})\)</span>，状态里<strong>必须带整段轨迹</strong></td>
@@ -12897,7 +12847,7 @@ RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p
 </tr>
 <tr>
 <td><strong>规范自由度</strong>：整体平移不改变任何观测</td>
-<td>绝对位姿 σ 不会降；相对几何才确定（0.1428 m vs 0.534 m）</td>
+<td>绝对位姿 σ 不降；相对几何才确定（0.1428 m vs 0.534 m）</td>
 </tr>
 <tr>
 <td><strong>EKF-SLAM</strong>：<span class="arithmatex">\(\mu = [\,x,\, m_1,\dots,m_N\,]\)</span>，状态 <span class="arithmatex">\(3+2N\)</span> 维</td>
@@ -12920,7 +12870,7 @@ RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p
 <td>算例 <span class="arithmatex">\(M=10\)</span> → RMSE 0.1096；<span class="arithmatex">\(M=500\)</span> → 0.0610</td>
 </tr>
 <tr>
-<td>⚠ 粒子会<strong>退化</strong>，重采样会带来「假自信」</td>
+<td>⚠ 粒子会<strong>退化</strong>，重采样带来「假自信」</td>
 <td>粒子散布会偏小，不等于真实不确定度</td>
 </tr>
 <tr>
@@ -12943,21 +12893,21 @@ RMS 从 0.536 m 降到 0.333 m，回环残差从 0.501 m 降到 0.012 m）。</p
 </table>
 <p><strong>四条最容易出错的地方</strong>：</p>
 <ol>
-<li><strong>把 SLAM 当「先建图再定位」</strong> —— 这两件事在真实数据里是<strong>互相咬住</strong>的。
-   一旦分两步做，第一步的错误会被第二步固化。<strong>正解是把位姿和地图放进同一个分布里一起估。</strong></li>
-<li><strong>拿「绝对位置说不清」当成算法失败</strong> —— 没有绝对参照时，<strong>位姿的绝对 σ 本来就不会降</strong>（规范自由度）。
-   要盯的是<strong>相对几何</strong>（算例里 0.1428 m），以及<strong>地图内部是否自洽</strong>。
+<li><strong>把 SLAM 当「先建图再定位」</strong> —— 这两件事在真实数据里<strong>互相咬住</strong>。
+   一旦分两步，第一步的错误会被第二步固化。<strong>正解是把位姿和地图放进同一分布一起估。</strong></li>
+<li><strong>拿「绝对位置说不清」当算法失败</strong> —— 无绝对参照时，<strong>位姿的绝对 σ 本来就不降</strong>（规范自由度）。
+   要盯的是<strong>相对几何</strong>（0.1428 m），以及<strong>地图内部是否自洽</strong>。
    想钉死全局，就得上绝对传感器或回环。</li>
-<li><strong>用 EKF-SLAM 硬扛大规模地图</strong> —— 它的协方差是<strong>全稠密的</strong>，<span class="arithmatex">\(O(N^2)\)</span>。
-   特征一多就崩。<strong>该上 FastSLAM（<span class="arithmatex">\(O(MN)\)</span>）或图优化（稀疏）的时候，别硬撑。</strong></li>
-<li><strong>把「融合」理解成「传感器越多越准」</strong> —— 5.3 节最反直觉的那个结果（只用绝对观测 RMSE 5.2555 m）
+<li><strong>用 EKF-SLAM 硬扛大规模地图</strong> —— 它的协方差<strong>全稠密</strong>，<span class="arithmatex">\(O(N^2)\)</span>。
+   特征一多就崩。<strong>该上 FastSLAM（<span class="arithmatex">\(O(MN)\)</span>）或图优化（稀疏）时，别硬撑。</strong></li>
+<li><strong>把「融合」理解成「传感器越多越准」</strong> —— 5.3 节最反直觉的结果（只用绝对观测 RMSE 5.2555 m）
    说明：<strong>信息怎么用，比有多少信息更重要。</strong>
    稀疏的绝对信息必须靠连续的相对信息串起来；而且融合真正的价值，
    一半在精度，一半在<strong>某一路失效时系统还能撑住</strong>。</li>
 </ol>
 <hr />
 <p><strong>下一章</strong>：<a href="../multi-robot-coordination/">多机器人的协调与控制</a></p>
-<p>这一页把「<strong>一个机器人如何在未知环境里同时搞清自己和环境</strong>」讲完了 ——
+<p>这一页把「<strong>一个机器人如何在未知环境里同时搞清自己与环境</strong>」讲完了 ——
 从问题定义、概率表述，到滤波、粒子、图优化三条解法，最后落到多传感器融合。
 可自始至终，主角只有<strong>一个</strong>机器人。
 下一章往外走一步：<strong>当一群机器人要一起干活时</strong> ——

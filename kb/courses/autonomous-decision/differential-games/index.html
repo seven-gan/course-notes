@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="微分对策：前面五章都只有一个决策者：静态优化是自己选 u、LQR 是自己设计反馈、动态规划是自己定策略 —— 无论哪一条路，都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统。">
+    <meta name="description" content="微分对策：前面五章都只有一个决策者：静态优化自己选 u、LQR 自己设计反馈、动态规划自己定策略 —— 都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统：除了可控输入 u，系统里还多出不受控制、专门往坏里推的输入 d：此时&#34;最优&#34;的含义变了：不再问&#34;怎样让代价最小&#34;，而要问&#34;如果对手总会挑最坏那一手，我该怎么办&#34;。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="微分对策">
   
-  <meta property="og:description" content="微分对策：前面五章都只有一个决策者：静态优化是自己选 u、LQR 是自己设计反馈、动态规划是自己定策略 —— 无论哪一条路，都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统。">
+  <meta property="og:description" content="微分对策：前面五章都只有一个决策者：静态优化自己选 u、LQR 自己设计反馈、动态规划自己定策略 —— 都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统：除了可控输入 u，系统里还多出不受控制、专门往坏里推的输入 d：此时&#34;最优&#34;的含义变了：不再问&#34;怎样让代价最小&#34;，而要问&#34;如果对手总会挑最坏那一手，我该怎么办&#34;。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/autonomous-decision/differential-games/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="微分对策">
   
-  <meta name="twitter:description" content="微分对策：前面五章都只有一个决策者：静态优化是自己选 u、LQR 是自己设计反馈、动态规划是自己定策略 —— 无论哪一条路，都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统。">
+  <meta name="twitter:description" content="微分对策：前面五章都只有一个决策者：静态优化自己选 u、LQR 自己设计反馈、动态规划自己定策略 —— 都是&#34;我选控制，让代价最小&#34;。这一章把对手请进系统：除了可控输入 u，系统里还多出不受控制、专门往坏里推的输入 d：此时&#34;最优&#34;的含义变了：不再问&#34;怎样让代价最小&#34;，而要问&#34;如果对手总会挑最坏那一手，我该怎么办&#34;。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12124,16 +12124,16 @@
 <div class="kb-metacard"><div class="kb-meta-row"><span class="kb-meta-label">用于课程</span><span class="kb-course-tags"><a class="kb-course-tag" href="../">无人系统自主决策与优化</a></span></div><div class="kb-meta-row"><span class="kb-meta-label">重要程度</span><span class="kb-imp" style="--imp-color:#e5484d">核心</span><span class="kb-imp-desc">被多个知识点依赖，必须掌握</span></div><div class="kb-meta-row"><span class="kb-meta-label">内容依据</span><span class="kb-sources"><code>Optimal Control（第 3 版）第 10 章 微分对策</code><code>本课程大纲 第 6 章</code><code>数值示例均以手算演算给出，公式号与教材 (10.x-n) 逐条对应</code></span></div><div class="kb-meta-row"><span class="kb-meta-label">中文对照</span><span class="kb-sources"><code>术语采用中文通用译法（对策值 / 鞍点 / 零和博弈 / 哈密顿-雅可比-艾萨克斯方程）</code></span><span class="kb-imp-desc">可自行翻书核对</span></div></div>
 
 <h1 id="_1">微分对策<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>前面五章都只有<strong>一个决策者</strong>：静态优化是自己选 <span class="arithmatex">\(\boldsymbol{u}\)</span>、LQR 是自己设计反馈、
-动态规划是自己定策略 —— 无论哪一条路，都是"我选控制，让代价最小"。</p>
-<p>这一章把<strong>对手</strong>请进系统。除了我们可控的输入 <span class="arithmatex">\(\boldsymbol{u}\)</span>，
-系统里还多出一个<strong>不受我们控制、而且专门往坏里推</strong>的输入 <span class="arithmatex">\(\boldsymbol{d}\)</span>：</p>
+<p>前面五章都只有<strong>一个决策者</strong>：静态优化自己选 <span class="arithmatex">\(\boldsymbol{u}\)</span>、LQR 自己设计反馈、
+动态规划自己定策略 —— 都是"我选控制，让代价最小"。</p>
+<p>这一章把<strong>对手</strong>请进系统：除了可控输入 <span class="arithmatex">\(\boldsymbol{u}\)</span>，
+系统里还多出<strong>不受控制、专门往坏里推</strong>的输入 <span class="arithmatex">\(\boldsymbol{d}\)</span>：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol{x}} = f(\boldsymbol{x}) + g(\boldsymbol{x})\boldsymbol{u}
 + k(\boldsymbol{x})\boldsymbol{d}
 \]</div>
-<p>此时"最优"的含义变了：我们不再问"怎样让代价最小"，
-而要问<strong>"如果对手总会挑最坏的那一手，我该怎么办"</strong>。</p>
+<p>此时"最优"的含义变了：不再问"怎样让代价最小"，
+而要问<strong>"如果对手总会挑最坏那一手，我该怎么办"</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -12163,15 +12163,15 @@
 <div class="admonition tip">
 <p class="admonition-title">这一页的核心问题</p>
 <p>要算的是<strong>最坏情况下的最优</strong>：<span class="arithmatex">\(\min_{\boldsymbol{u}}\max_{\boldsymbol{d}} J\)</span>。</p>
-<p>当 <span class="arithmatex">\(\min\)</span> 与 <span class="arithmatex">\(\max\)</span> 可以交换顺序时，存在一个<strong>鞍点</strong>
-<span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span>，它的值 <span class="arithmatex">\(V^*\)</span> 就叫<strong>对策值</strong>。
-整章的技术核心就是：<strong>这个交换什么时候成立，成立后方程长什么样。</strong></p>
+<p>当 <span class="arithmatex">\(\min\)</span> 与 <span class="arithmatex">\(\max\)</span> 可交换顺序时，存在<strong>鞍点</strong>
+<span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span>，其值 <span class="arithmatex">\(V^*\)</span> 叫<strong>对策值</strong>。
+整章技术核心：<strong>这个交换何时成立、成立后方程长什么样。</strong></p>
 </div>
 <hr />
 <h2 id="pontryagin-bellman">一、用 Pontryagin 最小原理与 Bellman 方程重新导出最优控制<a class="headerlink" href="#pontryagin-bellman" title="Permanent link">&para;</a></h2>
 <p>（大纲 6.1 ｜ 教材 10.1）</p>
-<p>先看<strong>单人</strong>情形。为什么要在对策这一章里重讲最优控制？
-因为对策的每一步推理都跟它同形 —— 先把"单人"的结果写成
+<p>先看<strong>单人</strong>情形。为什么要在这里重讲最优控制？
+因为对策的每一步推理都跟它同形 —— 先把"单人"结果写成
 Hamiltonian 语言，后面"多一个对手"就只是<strong>多一个输入</strong>而已。</p>
 <h3 id="11">1.1 系统与值积分<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
 <p>考虑连续时间非线性仿射系统</p>
@@ -12189,22 +12189,22 @@ V(\boldsymbol{x}(t)) = \int_t^{\infty} r(\boldsymbol{x},\boldsymbol{u})\,d\tau
 \qquad Q(\boldsymbol{x})&gt;0,\ R&gt;0
 \tag{10.1-2}
 \]</div>
-<p><strong>读法</strong>：<span class="arithmatex">\(V(\boldsymbol{x}(t))\)</span> 是"从当前状态出发、用某个控制律一路走到无穷"所累积的总代价。
-一个控制律称为<strong>可容许的</strong>，如果它连续、能镇定系统 (10.1-1)、并让 (10.1-2) 有界。
-最优控制问题就是：在所有可容许控制里挑一个，使 <span class="arithmatex">\(V\)</span> 最小。</p>
+<p><strong>读法</strong>：<span class="arithmatex">\(V(\boldsymbol{x}(t))\)</span> 是"从当前状态出发、用某个控制律一路走到无穷"累积的总代价。
+一个控制律<strong>可容许</strong>，如果它连续、能镇定系统 (10.1-1)、并让 (10.1-2) 有界。
+最优控制问题就是：在所有可容许控制里挑一个使 <span class="arithmatex">\(V\)</span> 最小。</p>
 <blockquote>
 <p>注意这里的指标是 <span class="arithmatex">\(Q(\boldsymbol{x})+\boldsymbol{u}^{\mathsf T}R\boldsymbol{u}\)</span>，
 <strong>不含 <span class="arithmatex">\(\frac12\)</span></strong>。这个写法出自教材第 10 章；
 上一章（动态规划）用的是 <span class="arithmatex">\(\frac12(\boldsymbol{x}^{\mathsf T}Q\boldsymbol{x}+\boldsymbol{u}^{\mathsf T}R\boldsymbol{u})\)</span>。
-两者的差别会在 1.3 节显现为一个 <span class="arithmatex">\(\frac12\)</span> 因子，
-本页按教材第 10 章的写法，并在用到的地方点明差异。</p>
+两者差别会在 1.3 节显现为一个 <span class="arithmatex">\(\frac12\)</span> 因子，
+本页按教材第 10 章写，并在用到处点明差异。</p>
 </blockquote>
 <h3 id="12-bellman-hamiltonian">1.2 Bellman 方程：Hamiltonian 被令为零<a class="headerlink" href="#12-bellman-hamiltonian" title="Permanent link">&para;</a></h3>
 <p><span class="arithmatex">\(V\)</span> 通过 <span class="arithmatex">\(\boldsymbol{x}(t)\)</span> 依赖时间，用 Leibniz 公式求导：</p>
 <div class="arithmatex">\[
 \frac{dV}{dt} = \left(\frac{\partial V}{\partial \boldsymbol{x}}\right)^{\mathsf T}\dot{\boldsymbol{x}}
 \]</div>
-<p>把 (10.1-2) 的被积函数记为 <span class="arithmatex">\(r\)</span>，则值积分与下面这个<strong>微分等式</strong>等价：</p>
+<p>把 (10.1-2) 的被积函数记为 <span class="arithmatex">\(r\)</span>，则值积分与这个<strong>微分等式</strong>等价：</p>
 <div class="arithmatex">\[
 0 = r(\boldsymbol{x},\boldsymbol{u}) + \dot V
 = Q(\boldsymbol{x}) + \boldsymbol{u}^{\mathsf T}R\boldsymbol{u}
@@ -12213,8 +12213,8 @@ V(\boldsymbol{x}(t)) = \int_t^{\infty} r(\boldsymbol{x},\boldsymbol{u})\,d\tau
 \equiv \mathcal{H}\!\left(\boldsymbol{x},\frac{\partial V}{\partial \boldsymbol{x}},\boldsymbol{u}\right)
 \tag{10.1-3}
 \]</div>
-<p>右边这个量 <span class="arithmatex">\(\mathcal{H}\)</span> 就叫 <strong>Hamiltonian 函数</strong>。
-于是 (10.1-3) 说的是：<strong>在最优值函数上，Hamiltonian 恒等于零。</strong></p>
+<p>右边这个量 <span class="arithmatex">\(\mathcal{H}\)</span> 叫 <strong>Hamiltonian 函数</strong>，
+(10.1-3) 说的是：<strong>在最优值函数上，Hamiltonian 恒等于零。</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">变分法里的 Hamiltonian 并不等于零，别把两处混起来</p>
 <p>在第 4 章用变分法推导时，Hamiltonian 只是一个<strong>中间量</strong> ——
@@ -12249,11 +12249,11 @@ V(\boldsymbol{x}(t)) = \int_t^{\infty} r(\boldsymbol{x},\boldsymbol{u})\,d\tau
 \equiv -\frac12 R^{-1}g^{\mathsf T}(\boldsymbol{x})\nabla V(\boldsymbol{x})
 \tag{10.1-6}
 \]</div>
-<p>这里那个 <span class="arithmatex">\(\frac12\)</span> 正是 1.1 节说过的口径差：因为指标里 <span class="arithmatex">\(R\)</span> 前没有 <span class="arithmatex">\(\frac12\)</span>，
-求导后 <span class="arithmatex">\(2R\)</span> 的因子留下了 <span class="arithmatex">\(\frac12\)</span>。若像上一章那样把指标写成
+<p>这里的 <span class="arithmatex">\(\frac12\)</span> 正是 1.1 节说的口径差：指标里 <span class="arithmatex">\(R\)</span> 前没有 <span class="arithmatex">\(\frac12\)</span>，
+求导后 <span class="arithmatex">\(2R\)</span> 留下 <span class="arithmatex">\(\frac12\)</span>。若按上一章写成
 <span class="arithmatex">\(\frac12(\boldsymbol{x}^{\mathsf T}Q\boldsymbol{x}+\boldsymbol{u}^{\mathsf T}R\boldsymbol{u})\)</span>，
-同一个式子会写成 <span class="arithmatex">\(\boldsymbol{u}=-R^{-1}g^{\mathsf T}\nabla V\)</span> ——
-<strong>两者是同一个结果，只是 <span class="arithmatex">\(R\)</span> 的口径不同</strong>。读文献时必须先看清指标里有没有 <span class="arithmatex">\(\frac12\)</span>。</p>
+同一式子会写成 <span class="arithmatex">\(\boldsymbol{u}=-R^{-1}g^{\mathsf T}\nabla V\)</span> ——
+<strong>结果相同，只是 <span class="arithmatex">\(R\)</span> 的口径不同</strong>。读文献时必须先看清指标里有没有 <span class="arithmatex">\(\frac12\)</span>。</p>
 <p>把 (10.1-6) 代回 (10.1-3)，并写成梯度 <span class="arithmatex">\(\nabla V = \partial V/\partial\boldsymbol{x}\)</span> 的形式：</p>
 <div class="arithmatex">\[
 0 = Q(\boldsymbol{x}) + \nabla V^{\mathsf T}(\boldsymbol{x}) f(\boldsymbol{x})
@@ -12261,7 +12261,7 @@ V(\boldsymbol{x}(t)) = \int_t^{\infty} r(\boldsymbol{x},\boldsymbol{u})\,d\tau
 \qquad V(\boldsymbol{0})=0
 \tag{10.1-7}
 \]</div>
-<p><strong>这就是 HJB 方程</strong>（上一章已见过），它也可以写成更紧凑的两种形式：</p>
+<p><strong>这就是 HJB 方程</strong>（上一章已见过），也可写成更紧凑的两种形式：</p>
 <div class="arithmatex">\[
 0 = \min_{\boldsymbol{u}} \left[\mathcal{H}(\boldsymbol{x},\nabla V^*,\boldsymbol{u})\right]
 \tag{10.1-8}
@@ -12270,7 +12270,7 @@ V(\boldsymbol{x}(t)) = \int_t^{\infty} r(\boldsymbol{x},\boldsymbol{u})\,d\tau
 \tag{10.1-9}
 \]</div>
 <p>三件事连起来读：<strong>Hamiltonian 是核心对象 → 它对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 求导给出控制律 →
-Bellman 方程说它恒为零</strong>。求解顺序是"先解 (10.1-7) 得到 <span class="arithmatex">\(V^*&gt;0\)</span>，
+Bellman 方程说它恒为零</strong>。求解顺序是"先解 (10.1-7) 得 <span class="arithmatex">\(V^*&gt;0\)</span>，
 再用 (10.1-6) 把最优控制写成状态反馈 <span class="arithmatex">\(\boldsymbol{u}(V^*(\boldsymbol{x}))\)</span>"。</p>
 <h3 id="14-hjb">1.4 三条推导路线给出同一个 HJB<a class="headerlink" href="#14-hjb" title="Permanent link">&para;</a></h3>
 <table>
@@ -12309,8 +12309,8 @@ Bellman 方程说它恒为零</strong>。求解顺序是"先解 (10.1-7) 得到 
 </tr>
 </tbody>
 </table>
-<p>三条路给出同一个 HJB，这本身就是结论：<strong>HJB 是这类最优控制问题的共同核心</strong>，
-而这一章选"PMP + Bellman"这条路的理由，是它<strong>能原样推广到有对手的情形</strong> ——
+<p>三条路给出同一个 HJB，这本身就是结论：<strong>HJB 是这类最优控制问题的共同核心</strong>；
+这一章选"PMP + Bellman"这条路，是因为它<strong>能原样推广到有对手的情形</strong> ——
 把 <span class="arithmatex">\(\min\)</span> 换成 <span class="arithmatex">\(\min\max\)</span> 就行。</p>
 <hr />
 <h2 id="_2">二、两人零和博弈<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12322,7 +12322,7 @@ Bellman 方程说它恒为零</strong>。求解顺序是"先解 (10.1-7) 得到 
 \tag{10.2-1}
 \]</div>
 <p>系统有两个输入：<strong>控制</strong> <span class="arithmatex">\(\boldsymbol{u}\)</span>（我们选，想最小化代价）
-与<strong>扰动</strong> <span class="arithmatex">\(\boldsymbol{d}\)</span>（对方选，想最大化代价）。性能指标取</p>
+与<strong>扰动</strong> <span class="arithmatex">\(\boldsymbol{d}\)</span>（对方选，想最大化代价）。指标取</p>
 <div class="arithmatex">\[
 J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 = \int_0^\infty \left(Q(\boldsymbol{x})
@@ -12330,11 +12330,11 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 \qquad Q = h^{\mathsf T}h \ge 0,\ R=R^{\mathsf T}&gt;0,\ \gamma&gt;0
 \tag{10.2-2}
 \]</div>
-<p><strong>两个符号要看清楚</strong>：<span class="arithmatex">\(\boldsymbol{u}\)</span> 前面是 <span class="arithmatex">\(+\)</span>，<span class="arithmatex">\(\boldsymbol{d}\)</span> 前面是 <span class="arithmatex">\(-\)</span>。
+<p><strong>两个符号要看清楚</strong>：<span class="arithmatex">\(\boldsymbol{u}\)</span> 前是 <span class="arithmatex">\(+\)</span>，<span class="arithmatex">\(\boldsymbol{d}\)</span> 前是 <span class="arithmatex">\(-\)</span>。
 想让 <span class="arithmatex">\(J\)</span> 小的一方会希望 <span class="arithmatex">\(\boldsymbol{d}\)</span> 也小 —— 因为 <span class="arithmatex">\(\boldsymbol{d}\)</span> 越大，
-<span class="arithmatex">\(-\gamma^2\|\boldsymbol{d}\|^2\)</span> 这一项越负、<span class="arithmatex">\(J\)</span> 越小，正合对手的心意。
+<span class="arithmatex">\(-\gamma^2\|\boldsymbol{d}\|^2\)</span> 越负、<span class="arithmatex">\(J\)</span> 越小，正合对手心意。
 <strong>这个"符号差"就是把两人推到对立面的机关。</strong>
-至于 <span class="arithmatex">\(\gamma\)</span> 的物理含义，要等第三节才看清，这里先把它当成"给扰动留的配额"。</p>
+至于 <span class="arithmatex">\(\gamma\)</span> 的物理含义，要等第三节才看清，这里先当成"给扰动留的配额"。</p>
 <h3 id="22-nash">2.2 鞍点与 Nash 条件<a class="headerlink" href="#22-nash" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
 V^*(\boldsymbol{x}(0)) = \min_{\boldsymbol{u}}\max_{\boldsymbol{d}} J(\boldsymbol{x},\boldsymbol{u},\boldsymbol{d})
@@ -12342,7 +12342,7 @@ V^*(\boldsymbol{x}(0)) = \min_{\boldsymbol{u}}\max_{\boldsymbol{d}} J(\boldsymbo
 \tag{10.2-4}
 \]</div>
 <p><strong>这一点最要紧</strong>：一般情况下 <span class="arithmatex">\(\min\max \ne \max\min\)</span>。
-两者相等时，存在一个<strong>鞍点</strong> <span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span>，<span class="arithmatex">\(V^*\)</span> 叫<strong>对策值</strong>。
+两者相等时，存在<strong>鞍点</strong> <span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span>，<span class="arithmatex">\(V^*\)</span> 叫<strong>对策值</strong>。
 等价的 Nash 均衡条件是</p>
 <div class="arithmatex">\[
 J(\boldsymbol{x}(0),\boldsymbol{u}^*,\boldsymbol{d})
@@ -12353,7 +12353,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u}^*,\boldsymbol{d})
 \]</div>
 <p><strong>读法</strong>：两边都<strong>没有单方面改变策略的动机</strong> ——
 固定住对手的策略，自己一改只会更差。
-左半边说的是"扰动方已取到最坏"，右半边说的是"控制方已取到最优"。</p>
+左半边说"扰动方已取到最坏"，右半边说"控制方已取到最优"。</p>
 <p><span class="arithmatex">\(\min\max\)</span> 与 <span class="arithmatex">\(\max\min\)</span> 的差别不是文字游戏，它们对应<strong>谁先动手</strong>：</p>
 <table>
 <thead>
@@ -12388,7 +12388,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u}^*,\boldsymbol{d})
 </table>
 <p>一般关系就是<strong>弱对偶</strong>：<span class="arithmatex">\(\max_{\boldsymbol{d}}\min_{\boldsymbol{u}} J \le \min_{\boldsymbol{u}}\max_{\boldsymbol{d}} J\)</span>。
 两边相等时，<span class="arithmatex">\(\max\min\)</span> 与 <span class="arithmatex">\(\min\max\)</span> <strong>可以互换</strong> —— 这正是鞍点的定义，
-也是"对策值"这个词站得住脚的前提。注意如果 <span class="arithmatex">\(J\)</span> 对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 不凸、
+也是"对策值"站得住脚的前提。若 <span class="arithmatex">\(J\)</span> 对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 不凸、
 对 <span class="arithmatex">\(\boldsymbol{d}\)</span> 不凹，两条边可能严格不等，那时<strong>鞍点不存在</strong>，
 只能谈上值与下值两个不同的数。</p>
 <h3 id="23-bellman-isaacs">2.3 值函数、Bellman 方程与 Isaacs 条件<a class="headerlink" href="#23-bellman-isaacs" title="Permanent link">&para;</a></h3>
@@ -12407,13 +12407,13 @@ V(\boldsymbol{x}(t),\boldsymbol{u},\boldsymbol{d})
 \equiv \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u},\boldsymbol{d})
 \tag{10.2-7}
 \]</div>
-<p>需求鞍点的必要条件（Nash 条件 (10.2-4) 的必要条件）就是 <strong>Isaacs 条件</strong>：</p>
+<p>求鞍点的必要条件（Nash 条件 (10.2-4) 的必要条件）就是 <strong>Isaacs 条件</strong>：</p>
 <div class="arithmatex">\[
 \min_{\boldsymbol{u}}\max_{\boldsymbol{d}}\ \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u},\boldsymbol{d})
 = \max_{\boldsymbol{d}}\min_{\boldsymbol{u}}\ \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u},\boldsymbol{d})
 \tag{10.2-8}
 \]</div>
-<p>它等价于下面的点态不等式（对一切策略 <span class="arithmatex">\(\boldsymbol{u},\boldsymbol{d}\)</span>，逐时刻成立）：</p>
+<p>它等价于下面的点态不等式（对一切策略 <span class="arithmatex">\(\boldsymbol{u},\boldsymbol{d}\)</span> 逐时刻成立）：</p>
 <div class="arithmatex">\[
 \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u}^*,\boldsymbol{d})
 \le \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u}^*,\boldsymbol{d}^*)
@@ -12440,7 +12440,7 @@ V(\boldsymbol{x}(t),\boldsymbol{u},\boldsymbol{d})
 <p>先看二阶导：由 (10.2-7) 得 <span class="arithmatex">\(\partial^2\mathcal{H}/\partial\boldsymbol{u}^2 = 2R &gt; 0\)</span>，
 而 <span class="arithmatex">\(\partial^2\mathcal{H}/\partial\boldsymbol{d}^2 = -2\gamma^2 \lt 0\)</span>。
 <strong>同一个驻点，对 <span class="arithmatex">\(\boldsymbol{u}\)</span> 是极小、对 <span class="arithmatex">\(\boldsymbol{d}\)</span> 是极大</strong> ——
-这正是"鞍点"的字面含义，也是英文里 saddle point 这个名字的由来。</p>
+这正是"鞍点"的字面含义，也是英文名 saddle point 的由来。</p>
 <p>分别求导并解出：</p>
 <div class="arithmatex">\[
 \boldsymbol{u} = \boldsymbol{u}(V(\boldsymbol{x}))
@@ -12465,8 +12465,8 @@ V(\boldsymbol{x}(t),\boldsymbol{u},\boldsymbol{d})
 \]</div>
 <p><strong>与单人情形 (10.1-7) 逐项对照</strong>：前三项一字不差，
 <strong>只多出最后一项</strong> <span class="arithmatex">\(+\frac{1}{4\gamma^2}\nabla V^{\mathsf T}kk^{\mathsf T}\nabla V\)</span>。
-这一项的意思是：对手也在通过 <span class="arithmatex">\(\gamma\)</span> 影响值函数 ——
-<span class="arithmatex">\(\gamma\)</span> 越小，这一项越大，值函数被抬高得越厉害（对手越强）。</p>
+它的意思是：对手也通过 <span class="arithmatex">\(\gamma\)</span> 影响值函数 ——
+<span class="arithmatex">\(\gamma\)</span> 越小，这一项越大，值函数被抬得越高（对手越强）。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 371.960117 238.035227" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="两人零和博弈的鞍点：min 与 max 在同一个策略对上相等">
 
@@ -13190,7 +13190,7 @@ z
 \]</div>
 <p>右边在 <span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span> 处两项同时为零，取到鞍点值；
 离开鞍点后第一项（<span class="arithmatex">\(\ge 0\)</span>）上升、第二项（<span class="arithmatex">\(\le 0\)</span>）下降，
-<strong>一边升一边降</strong>，鞍点的形状就显出来了。</p>
+<strong>一边升一边降</strong>，鞍点形状就显出来了。</p>
 <h3 id="26-hji-nash">2.6 定理：HJI 的半正定解就是 Nash 解<a class="headerlink" href="#26-hji-nash" title="Permanent link">&para;</a></h3>
 <p><strong>定理 10.2-2</strong>：设对策 (10.2-3) 有有限值。取 <span class="arithmatex">\(\gamma &gt; \gamma^* &gt; 0\)</span>，
 设 <span class="arithmatex">\(V^*(\boldsymbol{x})\in C^1\)</span> 是 HJI (10.2-13) 的光滑半正定解，且使闭环</p>
@@ -13204,7 +13204,7 @@ z
 <strong>零状态可观</strong>（<span class="arithmatex">\(\boldsymbol{u}\equiv\boldsymbol{0},\boldsymbol{y}\equiv\boldsymbol{0}\Rightarrow\boldsymbol{x}=\boldsymbol{0}\)</span>）。
 则 (10.2-11)、(10.2-12) 给出的 <span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span> 是鞍点均衡，
 对策有值，且<strong>对策值就是 <span class="arithmatex">\(V^*(\boldsymbol{x}(0))\)</span></strong>。</p>
-<p><strong>证明的思路值得记下来</strong>（它也是这一章的思维方式）。
+<p><strong>证明的思路值得记下来</strong>（也是这一章的思维方式）。
 对任意 <span class="arithmatex">\(C^1\)</span> 的 <span class="arithmatex">\(V\)</span>，把 <span class="arithmatex">\(\int r\,d\tau\)</span> <strong>加上再减去</strong> <span class="arithmatex">\(\int \dot V d\tau\)</span>，用 <span class="arithmatex">\(V(\boldsymbol{x}(\infty))=0\)</span>：</p>
 <div class="arithmatex">\[
 J_T(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
@@ -13217,18 +13217,18 @@ J_T(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 J_T = \int_0^T \mathcal{H}(\boldsymbol{x},\nabla V,\boldsymbol{u},\boldsymbol{d})\,dt
 - V(\boldsymbol{x}(T)) + V(\boldsymbol{x}(0))
 \]</div>
-<p>再令 <span class="arithmatex">\(V=V^*\)</span> 满足 HJI（即 <span class="arithmatex">\(\mathcal{H}(\boldsymbol{u}^*,\boldsymbol{d}^*)=0\)</span>）、
-用引理 (10.2-16) 把 <span class="arithmatex">\(\mathcal{H}\)</span> 换掉，并对 <span class="arithmatex">\(T\to\infty\)</span> 取极限：</p>
+<p>再令 <span class="arithmatex">\(V=V^*\)</span> 满足 HJI（<span class="arithmatex">\(\mathcal{H}(\boldsymbol{u}^*,\boldsymbol{d}^*)=0\)</span>）、
+用引理 (10.2-16) 换掉 <span class="arithmatex">\(\mathcal{H}\)</span>，并对 <span class="arithmatex">\(T\to\infty\)</span> 取极限：</p>
 <div class="arithmatex">\[
 J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 = \int_0^\infty\left[(\boldsymbol{u}-\boldsymbol{u}^*)^{\mathsf T}R(\boldsymbol{u}-\boldsymbol{u}^*)
 - \gamma^2\|\boldsymbol{d}-\boldsymbol{d}^*\|^2\right]dt + V^*(\boldsymbol{x}(0))
 \]</div>
 <p>右边在 <span class="arithmatex">\((\boldsymbol{u}^*,\boldsymbol{d}^*)\)</span> 处取鞍点值 <span class="arithmatex">\(V^*(\boldsymbol{x}(0))\)</span>，
-这就证明了 (10.2-5)。</p>
-<p><strong>顺带得到一个重要认识</strong>：<span class="arithmatex">\(V^*\)</span> 同时是<strong>值函数</strong>、又是闭环系统的 <strong>Lyapunov 函数</strong>、
-还是<strong>性能指标本身</strong>（<span class="arithmatex">\(J^*=V^*\)</span>）。这三个身份是同一个东西 ——
-后面第三节的稳定性证明、第四节的多玩家推广，都靠这一点。</p>
+即证 (10.2-5)。</p>
+<p><strong>顺带得到一个重要认识</strong>：<span class="arithmatex">\(V^*\)</span> 同时是<strong>值函数</strong>、闭环系统的 <strong>Lyapunov 函数</strong>、
+<strong>性能指标本身</strong>（<span class="arithmatex">\(J^*=V^*\)</span>）。三个身份是同一个东西 ——
+后面第三节的稳定性证明、第四节的多玩家推广都靠这一点。</p>
 <div class="admonition warning">
 <p class="admonition-title">两个容易踩的坑</p>
 <p>第一，HJI 的半正定解<strong>可能有多个</strong>。要选的是<strong>最小半正定解</strong>
@@ -13245,7 +13245,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 <p>给系统 (10.2-1) 配上输出 <span class="arithmatex">\(\boldsymbol{y}=h(\boldsymbol{x})\)</span>，
 再把<strong>性能输出</strong>定义为 <span class="arithmatex">\(\boldsymbol{z}(t)=[\boldsymbol{u}^{\mathsf T}(t)\ \ \boldsymbol{y}^{\mathsf T}(t)]^{\mathsf T}\)</span>。
 要求找一个反馈 <span class="arithmatex">\(\boldsymbol{u}(\boldsymbol{x})\)</span>，使得在 <span class="arithmatex">\(\boldsymbol{x}(0)=\boldsymbol{0}\)</span> 时，
-对一切 <span class="arithmatex">\(\boldsymbol{d}\in L_2[0,\infty)\)</span> 和一切 <span class="arithmatex">\(T&gt;0\)</span> 都有</p>
+对一切 <span class="arithmatex">\(\boldsymbol{d}\in L_2[0,\infty)\)</span>、<span class="arithmatex">\(T&gt;0\)</span> 都有</p>
 <div class="arithmatex">\[
 \frac{\int_0^T\|\boldsymbol{z}(t)\|^2 dt}{\int_0^T\|\boldsymbol{d}(t)\|^2 dt}
 = \frac{\int_0^T\left(h^{\mathsf T}h + \boldsymbol{u}^{\mathsf T}R\boldsymbol{u}\right)dt}
@@ -13254,13 +13254,13 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 \tag{10.3-1}
 \]</div>
 <p><strong>读法</strong>：<strong>从扰动到性能输出的"能量放大倍数"不超过 <span class="arithmatex">\(\gamma\)</span>。</strong>
-这就是"有界 <span class="arithmatex">\(L_2\)</span> 增益"。<span class="arithmatex">\(H_\infty\)</span> 控制问题则更进一步：求<strong>最小的</strong> <span class="arithmatex">\(\gamma^*&gt;0\)</span>，
+这就是"有界 <span class="arithmatex">\(L_2\)</span> 增益"。<span class="arithmatex">\(H_\infty\)</span> 控制问题更进一步：求<strong>最小的</strong> <span class="arithmatex">\(\gamma^*&gt;0\)</span>，
 使得任意 <span class="arithmatex">\(\gamma&gt;\gamma^*\)</span> 时 (10.3-1) 都有解 ——
-这个 <span class="arithmatex">\(\gamma^*\)</span> 就叫 <strong><span class="arithmatex">\(H_\infty\)</span> 增益</strong>（线性情形有显式表达）。</p>
-<p><strong>与零和博弈的连接点在这里</strong>：<span class="arithmatex">\(H_\infty\)</span> 里的 <span class="arithmatex">\(\boldsymbol{d}\)</span> 是外来的、
+这个 <span class="arithmatex">\(\gamma^*\)</span> 叫 <strong><span class="arithmatex">\(H_\infty\)</span> 增益</strong>（线性情形有显式表达）。</p>
+<p><strong>与零和博弈的连接点在这里</strong>：<span class="arithmatex">\(H_\infty\)</span> 里的 <span class="arithmatex">\(\boldsymbol{d}\)</span> 是外来、
 不可控的扰动；但设计要求"对一切 <span class="arithmatex">\(\boldsymbol{d}\)</span> 都成立"，
 等价于<strong>把 <span class="arithmatex">\(\boldsymbol{d}\)</span> 当成一个会挑最坏情况的对手</strong>。
-于是"最坏情形下设计 <span class="arithmatex">\(\boldsymbol{u}\)</span>"这件事，恰好就是 (10.2-3) 那个零和博弈。</p>
+于是"最坏情形下设计 <span class="arithmatex">\(\boldsymbol{u}\)</span>"恰好就是 (10.2-3) 那个零和博弈。</p>
 <h3 id="32-hji-h">3.2 HJI 的解给出 H∞ 控制器<a class="headerlink" href="#32-hji-h" title="Permanent link">&para;</a></h3>
 <p><strong>定理 10.3-1</strong>：取 <span class="arithmatex">\(\gamma&gt;\gamma^*&gt;0\)</span>，设 <span class="arithmatex">\(V^*&gt;0\)</span> 是 HJI (10.2-13) 的光滑正定解，
 且 (10.2-17) 零状态可观。则用</p>
@@ -13289,7 +13289,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 \int_0^T\left(h^{\mathsf T}h + \boldsymbol{u}^{\mathsf T}R\boldsymbol{u}\right)dt
 \le \gamma^2\int_0^T \boldsymbol{d}^{\mathsf T}\boldsymbol{d}\,dt
 \]</div>
-<p>(10.3-1) 得证。<strong>顺带</strong>：在 (10.3-3) 里取 <span class="arithmatex">\(\boldsymbol{d}=\boldsymbol{0}\)</span>，得到
+<p>(10.3-1) 得证。<strong>顺带</strong>：在 (10.3-3) 里取 <span class="arithmatex">\(\boldsymbol{d}=\boldsymbol{0}\)</span> 得
 <span class="arithmatex">\(dV/dt \le -\|\boldsymbol{z}\|^2 \le 0\)</span>，所以 <span class="arithmatex">\(V\)</span> 是 Lyapunov 函数，
 闭环稳定（严格论证还要用 LaSalle 定理与零状态可观，此处不展开）。</p>
 <p>(10.2-12) 那个</p>
@@ -13298,7 +13298,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 \tag{10.2-12}
 \]</div>
 <p>叫<strong>最坏扰动</strong>。要看清它的身份：它不是"要去施加的扰动"，
-而是设计时<strong>假想</strong>的那个把性能推到最不利方向的扰动，
+而是设计时<strong>假想</strong>的、把性能推到最不利方向的扰动，
 用来检验控制器在边界情况下够不够好。</p>
 <h3 id="33">3.3 线性二次零和对策与博弈黎卡提方程<a class="headerlink" href="#33" title="Permanent link">&para;</a></h3>
 <p>现在把问题限制到线性二次情形：动态</p>
@@ -13306,7 +13306,7 @@ J(\boldsymbol{x}(0),\boldsymbol{u},\boldsymbol{d})
 \dot{\boldsymbol{x}} = A\boldsymbol{x} + B\boldsymbol{u} + D\boldsymbol{d}
 \tag{10.3-4}
 \]</div>
-<p>值取二次型（<span class="arithmatex">\(\frac12\)</span> 又回来了，因为线性二次的指标惯例带 <span class="arithmatex">\(\frac12\)</span>）：</p>
+<p>值取二次型（<span class="arithmatex">\(\frac12\)</span> 又回来了，因线性二次的指标惯例带 <span class="arithmatex">\(\frac12\)</span>）：</p>
 <div class="arithmatex">\[
 V(\boldsymbol{x}(t),\boldsymbol{u},\boldsymbol{d})
 = \frac12\int_t^\infty\left(\boldsymbol{x}^{\mathsf T}H^{\mathsf T}H\boldsymbol{x}
@@ -13338,9 +13338,9 @@ S(A-BK+DL) + (A-BK+DL)^{\mathsf T}S + H^{\mathsf T}H
 <strong>只多出最后一项</strong> <span class="arithmatex">\(+\frac{1}{\gamma^2}SDD^{\mathsf T}S\)</span>。
 这一项就是对手的"位置"（<span class="arithmatex">\(D\)</span>）与"强度"（<span class="arithmatex">\(1/\gamma^2\)</span>）。</p>
 <p>存在 <span class="arithmatex">\(S&gt;0\)</span> 的条件是：<span class="arithmatex">\((A,B)\)</span> 可镇定、<span class="arithmatex">\((A,\sqrt{Q})\)</span> 可观测、且 <span class="arithmatex">\(\gamma&gt;\gamma^*\)</span>。
-<strong>解也可能不止一个</strong>，要的是使 <span class="arithmatex">\((A-BK+DL)\)</span> 极点全在左半平面的那个<strong>最小半正定解</strong>
-（"稳定解"）—— 与第 3 章里 ARE 取稳定解的做法完全类似，
-稳定解同样对应某个 Hamiltonian 矩阵的稳定特征空间。</p>
+<strong>解也可能不止一个</strong>，要的是使 <span class="arithmatex">\((A-BK+DL)\)</span> 极点全在左半平面的<strong>最小半正定解</strong>
+（"稳定解"）—— 与第 3 章 ARE 取稳定解类似，
+它同样对应某个 Hamiltonian 矩阵的稳定特征空间。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 351.804961 228.243855" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="H 无穷临界增益：只有 gamma 大于临界值，闭环对策才有解">
 
@@ -13789,7 +13789,7 @@ L 268.40168 19.487559
 </figure>
 
 <h3 id="34">3.4 临界增益怎么来的（标量情形）<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
-<p>把 (10.3-12) 用在标量系统上，<span class="arithmatex">\(\gamma^*\)</span> 会<strong>自己冒出来</strong>。
+<p>把 (10.3-12) 用在标量系统上，<span class="arithmatex">\(\gamma^*\)</span> <strong>自己冒出来</strong>。
 取 <span class="arithmatex">\(A=0\)</span>、<span class="arithmatex">\(B=1\)</span>、<span class="arithmatex">\(D=1\)</span>、<span class="arithmatex">\(H^{\mathsf T}H=q&gt;0\)</span>、<span class="arithmatex">\(R=r&gt;0\)</span>，GARE 变成</p>
 <div class="arithmatex">\[
 0 = 0 + 0 + q - \frac{S^2}{r} + \frac{S^2}{\gamma^2}
@@ -13799,12 +13799,12 @@ L 268.40168 19.487559
 <div class="arithmatex">\[
 \gamma \gt \sqrt{r} \equiv \gamma^*
 \]</div>
-<p>这就是临界增益的来历：<strong>它不是一个额外的假设，
-而是 GARE 有正解这一条件本身给出来的。</strong> 解出正根</p>
+<p>这就是临界增益的来历：<strong>它不是额外的假设，
+而是 GARE 有正解这一条件本身给出的。</strong> 解出正根</p>
 <div class="arithmatex">\[
 S = \sqrt{\frac{q\,r\,\gamma^2}{\gamma^2 - r}}
 \]</div>
-<p>再取 <span class="arithmatex">\(\gamma\to\infty\)</span>：<span class="arithmatex">\(S\to\sqrt{qr}\)</span>，而这正是<strong>同一系统在没有扰动时的 LQR 解</strong>
+<p>再取 <span class="arithmatex">\(\gamma\to\infty\)</span>：<span class="arithmatex">\(S\to\sqrt{qr}\)</span>，这正是<strong>同一系统无扰动时的 LQR 解</strong>
 （<span class="arithmatex">\(0=q-S^2/r\)</span>）。所以<strong><span class="arithmatex">\(\gamma\)</span> 越大，对策解越接近 LQR 解</strong>；
 <span class="arithmatex">\(\gamma\)</span> 越小、对手越强，<span class="arithmatex">\(S\)</span> 被抬得越高、越难满足。</p>
 <blockquote>
@@ -13815,7 +13815,7 @@ S = \sqrt{\frac{q\,r\,\gamma^2}{\gamma^2 - r}}
 <hr />
 <h2 id="_3">四、多人非零和博弈<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>（大纲 6.4 ｜ 教材 10.4）</p>
-<p>零和博弈是"一人所得即他人所失"。但真实的多智能体系统里，
+<p>零和博弈是"一人所得即他人所失"。但真实的多智能体系统
 <strong>既有朝共同目标使劲的合作，也有各自打算的竞争</strong>。这一节把两者放进同一套方程。</p>
 <h3 id="41">4.1 系统与各自的目标<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
 <div class="arithmatex">\[
@@ -13823,7 +13823,7 @@ S = \sqrt{\frac{q\,r\,\gamma^2}{\gamma^2 - r}}
 \qquad \boldsymbol{u}_j\in\mathbb{R}^{m_j}
 \tag{10.4-1}
 \]</div>
-<p>有 <span class="arithmatex">\(N\)</span> 个玩家，都通过影响同一个状态 <span class="arithmatex">\(\boldsymbol{x}\)</span> 而互相影响。
+<p>有 <span class="arithmatex">\(N\)</span> 个玩家，都通过影响同一个状态 <span class="arithmatex">\(\boldsymbol{x}\)</span> 互相影响。
 第 <span class="arithmatex">\(i\)</span> 个玩家的性能指标是</p>
 <div class="arithmatex">\[
 J_i = \int_0^\infty\left(Q_i(\boldsymbol{x})
@@ -13833,7 +13833,7 @@ J_i = \int_0^\infty\left(Q_i(\boldsymbol{x})
 \]</div>
 <p><strong><span class="arithmatex">\(R_{ij}\)</span> 的两种角色要分清</strong>：<span class="arithmatex">\(R_{ii}&gt;0\)</span> 是"我自己控制的代价权重"；
 <span class="arithmatex">\(R_{ij}\ge 0\ (j\ne i)\)</span> 是"<strong>别人的控制对我代价的影响</strong>" ——
-这一项就是耦合的来源，也是合作与竞争能同时进方程的原因。</p>
+这一项就是耦合来源，也是合作与竞争能同时进方程的原因。</p>
 <h3 id="42-nash">4.2 Nash 均衡的定义<a class="headerlink" href="#42-nash" title="Permanent link">&para;</a></h3>
 <p><strong>定义 10.4-1</strong>：策略组 <span class="arithmatex">\(\{\boldsymbol{u}_1^*,\dots,\boldsymbol{u}_N^*\}\)</span> 称为 <span class="arithmatex">\(N\)</span> 人博弈的
 <strong>Nash 均衡解</strong>，如果</p>

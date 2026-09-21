@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。它是「位置」与「速度」之间那座桥。">
+    <meta name="description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。 ---这是个非线性关系 —— f 里全是 cos、sin 和乘积项， q 变一点，p 的变化量说不清是几倍。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="机器人微分运动学">
   
-  <meta property="og:description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。它是「位置」与「速度」之间那座桥。">
+  <meta property="og:description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。 ---这是个非线性关系 —— f 里全是 cos、sin 和乘积项， q 变一点，p 的变化量说不清是几倍。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/differential-kinematics/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="机器人微分运动学">
   
-  <meta name="twitter:description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。它是「位置」与「速度」之间那座桥。">
+  <meta name="twitter:description" content="机器人微分运动学：上一页解逆解时，反复用到一块东西 —— 雅可比矩阵。这一页把它讲透：它把关节速度映到末端速度，能一眼看出哪些位形动不了，还能把力在关节与末端之间换算。 ---这是个非线性关系 —— f 里全是 cos、sin 和乘积项， q 变一点，p 的变化量说不清是几倍。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11885,8 +11885,7 @@
 <blockquote>
 <p>上一页解逆解时，反复用到一块东西 —— <strong>雅可比矩阵</strong>。
 这一页把它讲透：它把<strong>关节速度</strong>映到<strong>末端速度</strong>，
-能一眼看出<strong>哪些位形动不了</strong>，还能把<strong>力</strong>在关节与末端之间换算。
-它是「位置」与「速度」之间那座桥。</p>
+能一眼看出<strong>哪些位形动不了</strong>，还能把<strong>力</strong>在关节与末端之间换算。</p>
 </blockquote>
 <hr />
 <h2 id="_2">一、从位置关系走到速度关系<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -11907,19 +11906,16 @@
 <div class="arithmatex">\[
 \dot{\boldsymbol{p}} = \boldsymbol{J}(\boldsymbol{q})\,\dot{\boldsymbol{q}}
 \]</div>
-<p><strong>这件事的意义</strong>：非线性问题难解，线性问题到处都是现成工具。
-所以机器人的速度级控制（速度逆解、奇异分析、力控制）
-比位置级控制容易得多 —— <strong>代价是它只在当前位置附近有效</strong>。</p>
+<p><strong>这件事的意义</strong>：非线性问题难解，线性问题到处都有现成工具，所以速度级控制（速度逆解、奇异分析、力控制）
+比位置级容易得多 —— <strong>代价是它只在当前位置附近有效</strong>。</p>
 <h3 id="12-dt">1.2 微分运动：把「速度」乘上 <span class="arithmatex">\(dt\)</span><a class="headerlink" href="#12-dt" title="Permanent link">&para;</a></h3>
-<p>工程上更常说的是<strong>微分运动</strong>，也就是「极短时间内的位移」。
-对平移部分是</p>
+<p>工程上更常说的是<strong>微分运动</strong>，即「极短时间内的位移」。平移部分为</p>
 <div class="arithmatex">\[
 \Delta \boldsymbol{p} \approx \boldsymbol{J}(\boldsymbol{q})\,\Delta \boldsymbol{q}
 \]</div>
-<p><strong>注意这里是「近似」（<span class="arithmatex">\(\approx\)</span>）</strong>：
-因为 <span class="arithmatex">\(\boldsymbol{f}\)</span> 是非线性的，<span class="arithmatex">\(\boldsymbol{J}\,\Delta\boldsymbol{q}\)</span>
-只是<strong>一阶展开</strong>，丢掉了二阶及以上的项。</p>
-<p><strong>所以 <span class="arithmatex">\(\Delta\boldsymbol{q}\)</span> 越小，这个式子越准。</strong> 用同一组参数逐项验证：</p>
+<p><strong>这里是近似（<span class="arithmatex">\(\approx\)</span>）</strong>：因为 <span class="arithmatex">\(\boldsymbol{f}\)</span> 非线性，<span class="arithmatex">\(\boldsymbol{J}\,\Delta\boldsymbol{q}\)</span>
+只是一阶展开，丢掉了二阶及以上的项。</p>
+<p>用同一组参数逐项验证：</p>
 <table>
 <thead>
 <tr>
@@ -11950,13 +11946,6 @@
 </tr>
 </tbody>
 </table>
-<p><strong>读这三行</strong>：</p>
-<p>· 关节增量 <span class="arithmatex">\(10^\circ\)</span> 时，偏差约 <span class="arithmatex">\(1.3\times10^{-2}\)</span> —— <strong>近百分之一的量级</strong>，
-  已经不能忽略
-· 增量缩到 <span class="arithmatex">\(1^\circ\)</span>，偏差掉到 <span class="arithmatex">\(1.3\times10^{-4}\)</span> —— <strong>降了两个数量级</strong>
-· 增量再缩到 <span class="arithmatex">\(0.1^\circ\)</span>，偏差 <span class="arithmatex">\(1.35\times10^{-6}\)</span> —— <strong>又降两个数量级</strong></p>
-<p><strong>每缩小 10 倍，偏差缩小 100 倍</strong> —— 这正是<strong>一阶展开</strong>的特征
-（误差是增量的二阶量）。</p>
 <div class="admonition tip">
 <p class="admonition-title">记住这个「什么时候能信」的界线</p>
 <p>雅可比只在<strong>当前位置的邻域</strong>里成立，邻域大小取决于机器人的尺度和位形。</p>
@@ -12012,8 +12001,7 @@
 \dot{\boldsymbol{p}} = \boldsymbol{J}_1 \dot{q}_1 + \boldsymbol{J}_2 \dot{q}_2
 + \cdots + \boldsymbol{J}_n \dot{q}_n
 \]</div>
-<p><strong>这就是最有用的一句话</strong>：
-<strong>第 <span class="arithmatex">\(i\)</span> 列 <span class="arithmatex">\(\boldsymbol{J}_i\)</span> 是「只让第 <span class="arithmatex">\(i\)</span> 个关节以单位速度转动时，
+<p><strong>第 <span class="arithmatex">\(i\)</span> 列 <span class="arithmatex">\(\boldsymbol{J}_i\)</span> 是「只让第 <span class="arithmatex">\(i\)</span> 个关节以单位速度转动时，
 末端的速度」</strong> —— 也就是<strong>这个关节对末端速度的贡献方向</strong>。</p>
 <p>下图把「每一列的贡献相加」画出来：</p>
 <figure class="kb-fig">
@@ -12045,8 +12033,7 @@
 <figcaption>雅可比只与当前位形有关。把它按列展开，第 i 列就是「只让第 i 个关节以单位速度转动时末端的速度」；把所有列乘以对应关节速度再相加，就是末端速度</figcaption>
 </figure>
 
-<p><strong>平面两连杆的例子特别直观</strong>：取 <span class="arithmatex">\(a_1 = 1.0\)</span>、<span class="arithmatex">\(a_2 = 0.8\)</span>，
-位形 <span class="arithmatex">\(\theta_1 = 30^\circ\)</span>、<span class="arithmatex">\(\theta_2 = 45^\circ\)</span>。</p>
+<p><strong>平面两连杆的例子最直观</strong>：取 <span class="arithmatex">\(a_1 = 1.0\)</span>、<span class="arithmatex">\(a_2 = 0.8\)</span>，位形 <span class="arithmatex">\(\theta_1 = 30^\circ\)</span>、<span class="arithmatex">\(\theta_2 = 45^\circ\)</span>。</p>
 <p>· <strong>第 1 列</strong>：只有关节 1 转。末端绕<strong>基座</strong>画圆，
   所以速度方向<strong>垂直于「基座 → 末端」这条线</strong>，大小等于这条线的长度
 · <strong>第 2 列</strong>：只有关节 2 转。末端绕<strong>肘</strong>画圆，
@@ -12154,18 +12141,14 @@
 </tr>
 </tbody>
 </table>
-<p><strong>逐行对照</strong>：<span class="arithmatex">\(\det\boldsymbol{J}\)</span> 与 <span class="arithmatex">\(a_1a_2\sin\theta_2\)</span> 完全相等，
-说明闭式 <span class="arithmatex">\(\det \boldsymbol{J} = a_1a_2\sin\theta_2\)</span> 成立 ——
-<strong>一看就知道，只要 <span class="arithmatex">\(\sin\theta_2 = 0\)</span>，行列式就归零</strong>。下一节就用它。</p>
 <h3 id="23">2.3 速度椭球：一张图<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>把<strong>关节速度取成一个单位圆</strong>（各方向速度都取 1），
 经过 <span class="arithmatex">\(\boldsymbol{J}\)</span> 映射后，末端速度的集合变成一个<strong>椭圆</strong>：</p>
 <p>· <strong>远离奇异</strong>：椭圆<strong>接近圆</strong> —— 各方向都好动
 · <strong>接近奇异</strong>：椭圆<strong>越来越扁</strong> —— 某个方向几乎动不了
 · <strong>到了奇异</strong>：椭圆<strong>退化成一条线段</strong> —— 那个方向彻底动不了</p>
-<p><strong>所以「椭圆有多扁」就是「位形离奇异有多近」</strong>，
-这就是<strong>可操作度</strong>（manipulability）的几何含义 ——
-常用<strong>长轴与短轴之比</strong>来度量，越接近 1 越好。</p>
+<p><strong>「椭圆有多扁」就是「位形离奇异有多近」</strong>，这就是<strong>可操作度</strong>（manipulability）的几何含义 ——
+常用<strong>长轴与短轴之比</strong>度量，越接近 1 越好。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 284.733812 284.535375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="雅可比把关节速度单位圆映成末端速度椭圆：越接近奇异，椭圆越扁，直到退化成线段">
 
@@ -12626,7 +12609,7 @@ L 192.663813 37.659844
 <hr />
 <h2 id="_4">三、奇异位形：什么时候「动不了」<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31">3.1 定义：雅可比降秩<a class="headerlink" href="#31" title="Permanent link">&para;</a></h3>
-<p><strong>奇异位形</strong>（singularity）的定义只有一句：
+<p><strong>奇异位形</strong>（singularity）：
 <strong>雅可比矩阵 <span class="arithmatex">\(\boldsymbol{J}(\boldsymbol{q})\)</span> 不满秩</strong>的位形。</p>
 <p>对<strong>方形</strong>雅可比（<span class="arithmatex">\(n=6\)</span>，任务也是 6 维），这等价于</p>
 <div class="arithmatex">\[
@@ -12694,8 +12677,7 @@ L 192.663813 37.659844
 可在不动末端的前提下主动远离奇异。</p>
 </div>
 <h3 id="34">3.4 一张图：奇异位形的几何<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
-<p>手臂完全伸直时，<strong>两列雅可比指向同一个方向</strong>（都垂直于手臂）——
-末端因此<strong>只能沿这个方向动</strong>，而想沿手臂方向伸缩，<strong>瞬时动不了</strong>。</p>
+<p>手臂完全伸直时，<strong>两列雅可比指向同一个方向</strong>（都垂直于手臂）。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 273.692518 229.095375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="伸直位形的奇异：雅可比两列平行，末端在径向瞬时失去运动能力">
 
@@ -13050,8 +13032,8 @@ L 245.810834 153.377324
 \boxed{\ \boldsymbol{\tau} = \boldsymbol{J}^{\mathsf T}\boldsymbol{F}\ }
 \]</div>
 <p><strong>注意是转置 <span class="arithmatex">\(\boldsymbol{J}^{\mathsf T}\)</span>，不是逆 <span class="arithmatex">\(\boldsymbol{J}^{-1}\)</span>。</strong>
-这一点很重要：<strong>奇异位形下 <span class="arithmatex">\(\boldsymbol{J}\)</span> 不可逆、但 <span class="arithmatex">\(\boldsymbol{J}^{\mathsf T}\)</span> 永远存在</strong> ——
-所以<strong>力可以照常传递，位姿却动不了</strong>。这是静力分析和位置分析的关键区别。</p>
+<strong>奇异位形下 <span class="arithmatex">\(\boldsymbol{J}\)</span> 不可逆，但 <span class="arithmatex">\(\boldsymbol{J}^{\mathsf T}\)</span> 永远存在</strong> ——
+所以<strong>力可以照常传递，位姿却动不了</strong>，这是静力分析与位置分析的关键区别。</p>
 <ul>
 <li>末端受力 F = [ 3. -2.] N</li>
 <li>关节力矩 tau = J^T F = [-5.9644 -2.7323] N m</li>
@@ -13067,7 +13049,6 @@ L 245.810834 153.377324
 </li>
 <li>theta2 = 0.0 度：det J = 0.0000，J 的秩 = 1</li>
 </ul>
-<p><strong>四段输出各说一件事</strong>：</p>
 <p><strong>① 关节力矩 = <span class="arithmatex">\(\boldsymbol{J}^{\mathsf T}\boldsymbol{F}\)</span>。</strong>
 末端受 <span class="arithmatex">\((3, -2)\)</span> N 的力，两个关节要出 <span class="arithmatex">\(-5.96\)</span> 和 <span class="arithmatex">\(-2.73\)</span> N·m
 （<strong>符号相反</strong>，说明两个关节出力方向相反，这是正常的）。</p>
@@ -13080,9 +13061,7 @@ L 245.810834 153.377324
 速度椭球长轴大到 <span class="arithmatex">\(1.97\)</span>、短轴缩到 <span class="arithmatex">\(0.035\)</span>，
 <strong>力椭球则相反：短轴 <span class="arithmatex">\(0.51\)</span>、长轴涨到 <span class="arithmatex">\(28.2\)</span></strong>。</p>
 <p><strong>这是一条极有用的反直觉结论</strong>：
-<strong>好动的方向，出力小；动不了的方向，反倒最"抗压"。</strong>
-直觉解释：动不了的方向上，关节的位移对末端没用上
-（力臂几乎为零），于是同样的关节力矩能在那里顶住很大的外力。</p>
+<strong>好动的方向，出力小；动不了的方向，反倒最"抗压"。</strong></p>
 <p><strong>④ 奇异位形：秩从 2 掉到 1。</strong>
 注意此时 <span class="arithmatex">\(\det\boldsymbol{J}=0\)</span> 让<strong>位置</strong>彻底卡住，
 但 <span class="arithmatex">\(\boldsymbol{J}^{\mathsf T}\)</span> 依然存在 ——

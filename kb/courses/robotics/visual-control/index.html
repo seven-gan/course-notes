@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是这后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
+    <meta name="description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="机器人的视觉控制">
   
-  <meta property="og:description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是这后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
+  <meta property="og:description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/robotics/visual-control/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="机器人的视觉控制">
   
-  <meta name="twitter:description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是这后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
+  <meta name="twitter:description" content="机器人的视觉控制：上一页的机器人学会了看：从一张图里量出目标的位置与位姿。可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得动起来对准它。这一页讲的就是后半程：把「图像里的误差」变成「关节上的运动」，也就是视觉伺服（visual servoing）。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12039,24 +12039,24 @@
 <blockquote>
 <p>上一页的机器人学会了<strong>看</strong>：从一张图里量出目标的位置与位姿。
 可「量出来」只是半程 —— 量出「孔偏了 3 mm」，还得<strong>动起来对准它</strong>。
-这一页讲的就是这后半程：<strong>把「图像里的误差」变成「关节上的运动」</strong>，
+这一页讲的就是后半程：<strong>把「图像里的误差」变成「关节上的运动」</strong>，
 也就是<strong>视觉伺服（visual servoing）</strong>。
 主线是四种越来越大胆的做法：<strong>先估位姿再动（一）→ 直接看图像动（二）→
 把两者按自由度拼起来（三）→ 连特征都不要、只看灰度（四）</strong>，
-最后回到工程：<strong>一套视觉系统还要靠什么才能真的跑起来（五）</strong>。</p>
+最后回到工程：<strong>一套视觉系统还靠什么才真能跑起来（五）</strong>。</p>
 </blockquote>
 <div class="admonition tip">
 <p class="admonition-title">这一页的主线</p>
-<p>四种方法的差别只有一个：<strong>误差究竟定义在哪个空间里</strong>。
+<p>四种方法的差别只有一个：<strong>误差定义在哪个空间</strong>。
 PBVS 定义在<strong>笛卡尔空间</strong>（位姿）、IBVS 定义在<strong>图像空间</strong>（像素特征）、
 混合法<strong>按自由度切开</strong>（一半笛卡尔一半图像）、直接法定义在<strong>光度空间</strong>（灰度）。
 <strong>误差定义在哪，就决定了它听得见什么、听不见什么</strong> ——
 PBVS 听不见「出画」、IBVS 听不见「相机路径」、直接法听不见「大偏差」。
-读的时候一直问：<strong>这种方法最怕什么。</strong></p>
+读时一直问：<strong>这种方法最怕什么。</strong></p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">两种方法的名字别记反</p>
-<p><strong>PBVS 是「位置」在前，指的是误差算在笛卡尔空间</strong>（position-based）；
+<p><strong>PBVS 是「位置」在前，指误差算在笛卡尔空间</strong>（position-based）；
 <strong>IBVS 是「图像」在前，指的是误差算在图像平面</strong>（image-based）。
 <strong>它们都看了图像、都控制同一个机械臂</strong> —— 区别只在<strong>误差写在哪</strong>，
 不在「谁用了图像」。</p>
@@ -12064,31 +12064,31 @@ PBVS 听不见「出画」、IBVS 听不见「相机路径」、直接法听不�
 <hr />
 <h2 id="_2">一、基于位置的视觉控制：先估位姿，再走直线<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <h3 id="11">1.1 思路：把「测量」和「控制」直接接上<a class="headerlink" href="#11" title="Permanent link">&para;</a></h3>
-<p>上一页最后解决的是<strong>测量</strong> —— 用矩形目标约束、PnP 或消失点，从图像里解出目标的<strong>位姿</strong>。
-<strong>基于位置的视觉控制（PBVS）</strong> 就把这条路直接接到控制上：
-<strong>先用视觉估出目标相对相机的位姿，再在笛卡尔空间里算位姿误差，用经典位姿控制器把它驱到零。</strong></p>
+<p>上一页最后解决的是<strong>测量</strong> —— 用矩形目标约束、PnP 或消失点，从图像里解出目标<strong>位姿</strong>。
+<strong>基于位置的视觉控制（PBVS）</strong> 把这条路直接接到控制上：
+<strong>先用视觉估出目标相对相机的位姿，再在笛卡尔空间算位姿误差，用经典位姿控制器驱到零。</strong></p>
 <p>拆成三步：</p>
 <ol>
-<li><strong>看</strong>：从图像里提取特征，用上一页的方法解出目标在相机系下的位姿，或把它与期望位姿比较；</li>
-<li><strong>算误差</strong>：在<strong>笛卡尔空间</strong>里定义 6 维位姿误差 <span class="arithmatex">\(e\)</span>；</li>
+<li><strong>看</strong>：从图像里提取特征，用上一页的方法解出目标在相机系下的位姿，或与期望位姿比较；</li>
+<li><strong>算误差</strong>：在<strong>笛卡尔空间</strong>定义 6 维位姿误差 <span class="arithmatex">\(e\)</span>；</li>
 <li><strong>动</strong>：把 <span class="arithmatex">\(e\)</span> 换算成相机速度指令，交给机械臂（借助上一页的雅可比与分解运动控制）。</li>
 </ol>
-<p><strong>这一路最顺的地方</strong>是它与前面的内容天然衔接：
-位置控制、位姿控制都是现成的，PBVS 只是把「位姿误差由视觉测量提供」这一个环节换了进来。</p>
+<p><strong>这一路最顺</strong>的是它与前面的内容天然衔接：
+位置控制、位姿控制都是现成的，PBVS 只是把「位姿误差由视觉测量提供」这一环节换进来。</p>
 <h3 id="12">1.2 误差怎么定义：两个位姿之间的「对数」<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>设目标在世界系里固定，相机当前位姿为 <span class="arithmatex">\({}^{w}T_c\)</span>、期望位姿为 <span class="arithmatex">\({}^{w}T_{c^*}\)</span>。
-把「当前」和「期望」放到一起，得到<strong>相对位姿</strong></p>
+<p>设目标在世界系里固定，相机当前位姿 <span class="arithmatex">\({}^{w}T_c\)</span>、期望位姿 <span class="arithmatex">\({}^{w}T_{c^*}\)</span>。
+把「当前」与「期望」放到一起，得<strong>相对位姿</strong></p>
 <div class="arithmatex">\[
 {}^{c}T_{c^*} = \left({}^{w}T_c\right)^{-1}\,{}^{w}T_{c^*}
 \]</div>
-<p>相机一旦走到期望位姿，这个矩阵就是单位阵。于是把<strong>位姿误差</strong>定义成它的<strong>对数</strong>（落到李代数上）：</p>
+<p>相机走到期望位姿时，这个矩阵就是单位阵。于是把<strong>位姿误差</strong>定义成它的<strong>对数</strong>（落到李代数上）：</p>
 <div class="arithmatex">\[
 e = \log\left({}^{c}T_{c^*}\right)
 \]</div>
-<p><span class="arithmatex">\(\log\)</span> 的返回值是一个 6 维向量：前三维是平移误差，后三维是「<strong>转角乘单位转轴</strong>」<span class="arithmatex">\(\theta\boldsymbol u\)</span>，
+<p><span class="arithmatex">\(\log\)</span> 的返回值是 6 维向量：前三维是平移误差，后三维是「<strong>转角乘单位转轴</strong>」<span class="arithmatex">\(\theta\boldsymbol u\)</span>，
 单位与平移、转角一一对应。<strong>为什么不用矩阵元素相减</strong>：位姿空间是「弯的」，
-而 <span class="arithmatex">\(\log\)</span> 在这里做了一次<strong>局部拉直</strong> —— 它把位姿映射到 <span class="arithmatex">\(\mathbb{R}^6\)</span>，
-使得「<span class="arithmatex">\(e = 0\)</span>」精确等价于「位姿完全相同」，且偏差越大 <span class="arithmatex">\(e\)</span> 越大，正好可以当控制误差用。</p>
+而 <span class="arithmatex">\(\log\)</span> 在这里做了一次<strong>局部拉直</strong> —— 把位姿映射到 <span class="arithmatex">\(\mathbb{R}^6\)</span>，
+使得「<span class="arithmatex">\(e = 0\)</span>」精确等价于「位姿相同」，且偏差越大 <span class="arithmatex">\(e\)</span> 越大，正好能当控制误差用。</p>
 <h3 id="13">1.3 控制律：误差按指数衰减<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>最朴素的伺服律就是<strong>把误差按比例换成速度</strong>：</p>
 <div class="arithmatex">\[
@@ -12101,14 +12101,14 @@ M \leftarrow \exp(-\lambda e\Delta t)\,M
 = \exp(-\lambda e\Delta t)\exp(e)
 = \exp\big((1-\lambda\Delta t)\,e\big)
 \]</div>
-<p><strong>关键在这一步</strong>：两次指数都绕<strong>同一条轴</strong> <span class="arithmatex">\(e\)</span>，指数可以合并 —— 于是误差<strong>精确地</strong>按 <span class="arithmatex">\((1-\lambda\Delta t)^n\)</span> 衰减，
+<p><strong>关键在这一步</strong>：两次指数都绕<strong>同一轴</strong> <span class="arithmatex">\(e\)</span>，可合并 —— 于是误差<strong>精确地</strong>按 <span class="arithmatex">\((1-\lambda\Delta t)^n\)</span> 衰减，
 连续时间下就是</p>
 <div class="arithmatex">\[
 e(t) = e(0)\,e^{-\lambda t}
 \]</div>
-<p><strong>这就是 PBVS 好看的地方</strong>：位姿误差是一条干净的指数曲线，没有中间态、没有振荡；
-在笛卡尔空间里，相机走的是「直线平移加绕固定轴旋转」的螺旋运动 —— 路径<strong>可预测</strong>。
-深度变化、大转角，它都应付得来。</p>
+<p><strong>这就是 PBVS 好看的地方</strong>：位姿误差是干净的指数曲线，无中间态、无振荡；
+在笛卡尔空间里，相机走「直线平移加绕固定轴旋转」的螺旋运动 —— 路径<strong>可预测</strong>。
+深度变化、大转角都应付得来。</p>
 <h3 id="14">1.4 算例：误差很美，可图像没人管<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>给一个 0.12 m 见方的方靶，相机初始偏了约 0.24 m、转了约 19°，增益取 <span class="arithmatex">\(\lambda = 2\)</span> /s，
 同时盯住一件事 —— <strong>方靶的四个角点是不是还在画面里</strong>：</p>
@@ -12179,38 +12179,33 @@ e(t) = e(0)\,e^{-\lambda t}
 </tr>
 </tbody>
 </table>
-<ul>
-<li>看完这条曲线：位姿误差按 e^(−λt) 平滑归零（λ=2 时约 2 s 收敛到 2%）——</li>
-<li>但<strong>全程没有约束图像</strong>：相机走的是笛卡尔空间里的直线，图像里的角点轨迹是弯的，</li>
-<li>初始偏移大时角点会跑出画面（出画角点数一度不为 0）→ 这就是 PBVS 的软肋。</li>
-</ul>
-<p>看这条曲线：位姿误差平滑归零，<span class="arithmatex">\(\lambda = 2\)</span> 时约 2 s 收敛到 2% —— <strong>推导里的那条指数曲线是真的</strong>。
-但<strong>盯住「出画角点」那一列</strong>：一开始四个角点<strong>全在画面外</strong>，直到第 50 步才回到视野里。</p>
-<p>闭环里只有位姿误差，<strong>没有任何一项在约束「目标点必须留在视野内」</strong>：
-相机在笛卡尔空间走的是「最短」的路，它在图像里留下的轨迹却是弯的，
-初始偏差一大，中途就会把目标甩出画面。而<strong>目标一旦出画，测量就失效、控制也就断了</strong> ——
-这就是 PBVS 的软肋。<strong>它的误差里，没有「看得见」这个条件。</strong></p>
+<p>看这条曲线：位姿误差平滑归零，<span class="arithmatex">\(\lambda = 2\)</span> 时约 2 s 收敛到 2% —— <strong>推导里的指数曲线是真的</strong>。
+但<strong>盯住「出画角点」那一列</strong>：一开始四个角点<strong>全在画面外</strong>，直到第 50 步才回到视野。</p>
+<p>闭环里只有位姿误差，<strong>没有任何一项约束「目标点留在视野内」</strong>：
+相机在笛卡尔空间走「最短」的路，在图像里的轨迹却是弯的，
+初始偏差一大，中途就把目标甩出画面。而<strong>目标一出画，测量失效、控制也断了</strong> ——
+这就是 PBVS 的软肋。<strong>它的误差里没有「看得见」这条件。</strong></p>
 <hr />
 <h2 id="_3">二、基于图像的视觉控制：把误差直接定义在图像上<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="21">2.1 思路：绕过「位姿」这一步<a class="headerlink" href="#21" title="Permanent link">&para;</a></h3>
 <p>PBVS 要经过「图像 → 特征 → <strong>位姿</strong> → 控制」，
-而<strong>位姿估计恰恰是误差最大的一环</strong> —— 相机标定误差、角点噪声、目标模型误差，都会灌进那个位姿里。
-<strong>基于图像的视觉控制（IBVS）</strong> 干脆把中间那一步砍掉：<strong>直接在图像特征上定义误差、直接闭环。</strong></p>
-<p>取一组<strong>图像特征</strong> <span class="arithmatex">\(s\)</span>（点的像素坐标、直线参数、区域的矩……），记期望值 <span class="arithmatex">\(s^*\)</span>，误差就是最朴素的</p>
+而<strong>位姿估计恰是误差最大的一环</strong> —— 相机标定误差、角点噪声、目标模型误差，都会灌进这个位姿。
+<strong>基于图像的视觉控制（IBVS）</strong> 干脆把中间那步砍掉：<strong>直接在图像特征上定义误差、直接闭环。</strong></p>
+<p>取一组<strong>图像特征</strong> <span class="arithmatex">\(s\)</span>（点的像素坐标、直线参数、区域的矩……），记期望值 <span class="arithmatex">\(s^*\)</span>，误差即最朴素的</p>
 <div class="arithmatex">\[
 e = s - s^*
 \]</div>
-<p><strong>注意它和 PBVS 的分水岭</strong>：这里的 <span class="arithmatex">\(e\)</span> 是<strong>像素量</strong>，不是米、也不是弧度。
-于是「误差到零」的含义变成「<strong>图像对齐了</strong>」，而不是「位姿对了」。</p>
+<p><strong>注意它和 PBVS 的分水岭</strong>：这里的 <span class="arithmatex">\(e\)</span> 是<strong>像素量</strong>，不是米、不是弧度。
+于是「误差到零」的含义变成「<strong>图像对齐</strong>」，而不是「位姿对」。</p>
 <h3 id="22">2.2 图像雅可比：特征随相机怎么动<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
-<p>问题的关键是：<strong>相机怎么动，特征才会动？</strong> 这就需要一个把两者连起来的矩阵 —— <strong>图像雅可比</strong>（也叫交互矩阵）</p>
+<p>问题的关键是：<strong>相机怎么动，特征才动？</strong> 这需要一个把两者连起来的矩阵 —— <strong>图像雅可比</strong>（也叫交互矩阵）</p>
 <div class="arithmatex">\[
 L = \frac{\partial s}{\partial v}, \qquad \dot{s} = L\,v
 \]</div>
-<p>其中 <span class="arithmatex">\(v\)</span> 是相机的 6 维速度 <span class="arithmatex">\((v_x, v_y, v_z, \omega_x, \omega_y, \omega_z)\)</span>（都在相机系下）。
-以<strong>点特征</strong>为例：设点在相机系里的坐标为 <span class="arithmatex">\((X, Y, Z)\)</span>，归一化坐标 <span class="arithmatex">\(x = X/Z\)</span>、<span class="arithmatex">\(y = Y/Z\)</span>。
+<p>其中 <span class="arithmatex">\(v\)</span> 是相机 6 维速度 <span class="arithmatex">\((v_x, v_y, v_z, \omega_x, \omega_y, \omega_z)\)</span>（都在相机系下）。
+以<strong>点特征</strong>为例：设点在相机系的坐标为 <span class="arithmatex">\((X, Y, Z)\)</span>，归一化坐标 <span class="arithmatex">\(x = X/Z\)</span>、<span class="arithmatex">\(y = Y/Z\)</span>。
 点随相机运动的速度是 <span class="arithmatex">\(\dot{\boldsymbol P} = -\boldsymbol v_c - \boldsymbol\omega \times \boldsymbol P\)</span>，
-把它代入 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(y\)</span> 的时间导数并整理，就得到</p>
+代入 <span class="arithmatex">\(x\)</span> 与 <span class="arithmatex">\(y\)</span> 的时间导数并整理，得</p>
 <div class="arithmatex">\[
 L_{\text{point}} =
 \begin{bmatrix}
@@ -12220,28 +12215,28 @@ L_{\text{point}} =
 \]</div>
 <p><strong>盯住三件事</strong>：</p>
 <ul>
-<li>平移那几列里带着 <span class="arithmatex">\(\dfrac{1}{Z}\)</span> —— <strong>深度越远，同样的平移在图像上动得越少</strong>，
-  这是透视除法在闭环里留下的印记（也是为什么深度一错，雅可比就错）；</li>
-<li>它只用到 <span class="arithmatex">\(x, y, Z\)</span>，<strong>不需要完整的位姿</strong> —— 这正是 IBVS 的立身之本；</li>
-<li>4 个点叠起来就是 <span class="arithmatex">\(8\times 6\)</span>，用<strong>伪逆</strong>就能反解出相机速度。</li>
+<li>平移列里带着 <span class="arithmatex">\(\dfrac{1}{Z}\)</span> —— <strong>深度越远，同样的平移在图像上动越少</strong>，
+  这是透视除法留下的印记（深度一错，雅可比就错）；</li>
+<li>它只用到 <span class="arithmatex">\(x, y, Z\)</span>，<strong>不需要位姿</strong> —— 正是 IBVS 的立身之本；</li>
+<li>4 个点叠起来是 <span class="arithmatex">\(8\times 6\)</span>，用<strong>伪逆</strong>可反解出相机速度。</li>
 </ul>
 <h3 id="23">2.3 控制律，以及一个能把人带进沟里的坑<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>让特征误差按指数衰减：<span class="arithmatex">\(\dot s = -\lambda(s - s^*)\)</span>，代入 <span class="arithmatex">\(\dot s = Lv\)</span> 得</p>
 <div class="arithmatex">\[
 v = -\lambda\,L^{+}\,(s - s^*)
 \]</div>
-<p><span class="arithmatex">\(L\)</span> 是<strong>长方阵</strong>（特征数多于 6 时），所以用<strong>伪逆</strong> <span class="arithmatex">\(L^{+}\)</span>：
-在所有「能产生同一特征变化」的相机速度里，它挑出<strong>范数最小</strong>的那个。
-<strong>这个「最小范数」正是后面「相机回退」的伏笔。</strong></p>
+<p><span class="arithmatex">\(L\)</span> 是<strong>长方阵</strong>（特征数多于 6 时），用<strong>伪逆</strong> <span class="arithmatex">\(L^{+}\)</span>：
+在所有「能产生同一特征变化」的相机速度里，它挑<strong>范数最小</strong>者。
+<strong>这个「最小范数」正是「相机回退」的伏笔。</strong></p>
 <div class="admonition warning">
 <p class="admonition-title">误差和雅可比必须用同一个坐标系</p>
-<p>上面的 <span class="arithmatex">\(L\)</span> 是用<strong>归一化坐标</strong> <span class="arithmatex">\(x, y\)</span> 推出来的，配它的误差也必须是<strong>归一化坐标误差</strong>。
-如果直接把<strong>像素误差</strong>喂进去，<span class="arithmatex">\(L^{+}\)</span> 会把「差了一个焦距倍数」的错误量当成真实误差；
-再加上 <span class="arithmatex">\(L\)</span> 在某些方向本来就近于退化，解出来的速度会<strong>离谱地大</strong>。
+<p>上面的 <span class="arithmatex">\(L\)</span> 用<strong>归一化坐标</strong> <span class="arithmatex">\(x, y\)</span> 推出，配它的误差也必须是<strong>归一化坐标误差</strong>。
+如果直接把<strong>像素误差</strong>喂进去，<span class="arithmatex">\(L^{+}\)</span> 会把「差一个焦距倍数」的错误量当真误差；
+再加上 <span class="arithmatex">\(L\)</span> 在某些方向本就近于退化，解出的速度会<strong>离谱地大</strong>。
 本页算例就踩过这一脚：<strong>一开始相机直接飞到 <span class="arithmatex">\(x = -1.5\times10^{7}\)</span></strong>。
-修法很简单 —— 把像素误差除以焦距再解伪逆。<strong>记住：误差在哪，雅可比就得在哪。</strong></p>
+修法很简单 —— 把像素误差除以焦距再解伪逆。<strong>记住：误差在哪，雅可比在哪。</strong></p>
 </div>
-<p><strong>下图把这条 IBVS 闭环画出来：图像误差 → 控制律 → 关节运动 → 图像再变</strong>：</p>
+<p><strong>下图画出这条 IBVS 闭环：图像误差 → 控制律 → 关节运动 → 图像再变</strong>：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 226" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="基于图像的视觉伺服（IBVS）闭环：图像误差经控制律换成相机速度，关节运动又改变图像">
 <defs>
@@ -12277,7 +12272,7 @@ v = -\lambda\,L^{+}\,(s - s^*)
 </figure>
 
 <h3 id="24">2.4 算例：小偏差很乖，大转角就「回退」<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
-<p>跑两个场景：一个是 8° 偏转加 6° 自转的<strong>小偏差</strong>，一个是绕光轴 170° 的<strong>大转角</strong>：</p>
+<p>跑两个场景：一是 8° 偏转加 6° 自转的<strong>小偏差</strong>，一是绕光轴 170° 的<strong>大转角</strong>：</p>
 <ul>
 <li>IBVS：4 个点特征（共 8 个像素误差）；图像雅可比 L 由深度 Z 与归一化坐标实时给出</li>
 <li>期望特征 s*（方靶正对、距 0.80 m）：</li>
@@ -12296,12 +12291,7 @@ v = -\lambda\,L^{+}\,(s - s^*)
 <li>500 0.8016 0.8000</li>
 <li>600 0.2397 0.8000</li>
 <li>700 0.0717 0.8000</li>
-<li>
-<p>→ 误差单调收敛（每 100 步约乘 0.3）；图像里每个特征点几乎走直线趋近 s*</p>
-</li>
-<li>
-<p>【场景B】大偏差：绕光轴初始旋转 170° —— IBVS 的“相机回退”病</p>
-</li>
+<li>【场景B】大偏差：绕光轴初始旋转 170° —— IBVS 的“相机回退”病</li>
 <li>步 |e|(px) 相机距目标(m)</li>
 <li>0 338.1197 0.8000</li>
 <li>200 183.3911 6.5961</li>
@@ -12310,30 +12300,27 @@ v = -\lambda\,L^{+}\,(s - s^*)
 <li>800 7.5804 0.8373</li>
 <li>1000 1.0152 0.8048</li>
 <li>1200 0.1360 0.8006</li>
-<li>→ 为不“绕圈”，相机先沿光轴后退到 9.228 m（期望 0.80 m）再绕回来：</li>
-<li>图像里特征始终没出画，但相机跑了十几倍路程——这就是 IBVS 的相机回退。</li>
 </ul>
 <p><strong>场景 A（小偏差）</strong>：误差每 100 步约乘 0.3，图像里每个特征点几乎<strong>走直线</strong>趋近 <span class="arithmatex">\(s^*\)</span>。
-这就是 IBVS 最舒服的样子 —— <strong>误差定义在图像上，所以图像里的轨迹天然好看、特征不出画。</strong></p>
-<p><strong>场景 B（绕光轴 170°）</strong>：为了不「绕大圈」，相机<strong>先沿光轴一路后退到 9.228 m</strong>（期望 0.80 m），
+这就是 IBVS 最舒服的样子 —— <strong>误差定义在图像上，轨迹天然好看、特征不出画。</strong></p>
+<p><strong>场景 B（绕光轴 170°）</strong>：为了不「绕大圈」，相机<strong>先沿光轴退到 9.228 m</strong>（期望 0.80 m），
 再慢慢绕回来。图像里特征全程没出画，可相机跑了十几倍的路 —— 这就是著名的<strong>相机回退（camera retreat）</strong>。</p>
-<p>为什么会这样？绕光轴的大转角是 IBVS 的一块硬骨头。
-<strong>正方形有 90° 的旋转对称性</strong>：绕光轴转 180°，四个角点<strong>整体转回到了自己身上</strong>，
-图像几乎没变化 —— 也就是说，「<strong>绕光轴旋转</strong>」这个动作在图像上<strong>接近不可观测</strong>，
-图像雅可比在该方向上<strong>接近退化</strong>。当初始角是 170°（离 180° 只差 10°）时，
-误差虽不为零却很「别扭」：最小范数解 <span class="arithmatex">\(L^{+}\)</span> 找不到有效的旋转方向去消它，
-只好把误差摊到「<strong>沿光轴后退</strong>」上 —— 后退会让所有角点向图像中心收缩，在图像上确实能改变一点点。
-于是相机选择了「<strong>先退到很远，再转回来</strong>」这条荒谬的路。</p>
+<p>为什么？绕光轴的大转角是 IBVS 的硬骨头。
+<strong>正方形有 90° 的旋转对称性</strong>：绕光轴转 180°，四个角点<strong>整体转回自己身上</strong>，
+图像几乎没变化 —— 即「绕光轴旋转」在图像上<strong>接近不可观测</strong>，<span class="arithmatex">\(L\)</span> 在该方向<strong>接近退化</strong>。
+初值 170°（离 180° 只差 10°）时，最小范数解 <span class="arithmatex">\(L^{+}\)</span> 找不到有效的旋转方向，
+只好把误差摊到「<strong>沿光轴后退</strong>」上 —— 后退会让角点向图像中心收缩，图像上确实能变一点，
+于是相机选了「<strong>先退到很远，再转回来</strong>」这条荒谬的路。</p>
 <div class="admonition warning">
 <p class="admonition-title">IBVS 的误差里没有「路径」这个概念</p>
-<p>IBVS 保证的是「<strong>特征最终会收敛到 <span class="arithmatex">\(s^*\)</span></strong>」，<strong>不保证</strong>图像特征走直线、更不保证相机走直线。
-回退现象就是最极端的例子：<strong>图像里一切正常，笛卡尔空间里相机跑了十几倍的路。</strong>
-在有限工作空间里，这可能直接撞上工装或超出臂展 —— <strong>所以工程上几乎不会让 IBVS 单干。</strong></p>
+<p>IBVS 保证「<strong>特征最终收敛到 <span class="arithmatex">\(s^*\)</span></strong>」，<strong>不保证</strong>图像特征走直线、更不保证相机走直线。
+回退就是最极端的例子：<strong>图像里一切正常，笛卡尔空间里相机跑了十几倍的路。</strong>
+在有限工作空间里，这可能直接撞上工装或超出臂展 —— <strong>所以工程上几乎不让 IBVS 单干。</strong></p>
 </div>
 <hr />
 <h2 id="_4">三、混合视觉伺服控制：各管一半，取长补短<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <h3 id="31-6">3.1 把 6 个自由度切开<a class="headerlink" href="#31-6" title="Permanent link">&para;</a></h3>
-<p>把 PBVS 和 IBVS 摆在一起看，会发现它们是<strong>互补</strong>的：</p>
+<p>把 PBVS 和 IBVS 摆在一起，它们<strong>互补</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12355,14 +12342,14 @@ v = -\lambda\,L^{+}\,(s - s^*)
 </tr>
 </tbody>
 </table>
-<p><strong>混合视觉伺服（hybrid visual servoing）</strong> 的想法非常直接：
+<p><strong>混合视觉伺服（hybrid visual servoing）</strong> 想法很直接：
 <strong>谁擅长哪几个自由度，就让谁管哪几个自由度。</strong></p>
 <p>把相机的 6 维速度按「<strong>面内 / 面外</strong>」切开：</p>
 <ul>
-<li><strong>面内</strong>：与图像平面平行的平移 <span class="arithmatex">\(v_x, v_y\)</span>，以及绕光轴的旋转 <span class="arithmatex">\(\omega_z\)</span> ——
+<li><strong>面内</strong>：与图像平面平行的平移 <span class="arithmatex">\(v_x, v_y\)</span>，绕光轴的旋转 <span class="arithmatex">\(\omega_z\)</span> ——
   它们<strong>直接、线性地反映在图像上</strong>，交给 <strong>IBVS</strong> 最合适；</li>
-<li><strong>面外</strong>：进出平面的 <span class="arithmatex">\(v_z\)</span>、绕平面内两轴的旋转 <span class="arithmatex">\(\omega_x, \omega_y\)</span> ——
-  它们在图像上只表现为<strong>尺度变化与透视畸变</strong>，测起来难、控起来飘，交给 <strong>PBVS</strong>（它从位姿里直接读）。</li>
+<li><strong>面外</strong>：进出平面的 <span class="arithmatex">\(v_z\)</span>、绕平面内两轴旋转 <span class="arithmatex">\(\omega_x, \omega_y\)</span> ——
+  它们在图像上只表现为<strong>尺度变化与透视畸变</strong>，难测难控，交给 <strong>PBVS</strong>（从位姿里直接读）。</li>
 </ul>
 <p><strong>下图对照两种伺服：一边把误差写在图像上，一边先估位姿、再在笛卡尔空间算误差</strong>：</p>
 <figure class="kb-fig">
@@ -12413,15 +12400,15 @@ v = -\lambda\,L^{+}\,(s - s^*)
 </figure>
 
 <h3 id="32">3.2 选择矩阵：把两个速度场拼起来<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
-<p>用一个<strong>选择矩阵</strong> <span class="arithmatex">\(S\)</span> 来实现这张分工表：</p>
+<p>用一个<strong>选择矩阵</strong> <span class="arithmatex">\(S\)</span> 实现这张分工表：</p>
 <div class="arithmatex">\[
 v = S\,v_{\text{img}} + (I - S)\,v_{\text{pos}}
 \]</div>
 <p>取 <span class="arithmatex">\(S = \operatorname{diag}(1,1,0,0,0,1)\)</span>：对角元为 1 的分量走<strong>图像法</strong>（<span class="arithmatex">\(v_x, v_y, \omega_z\)</span>），
 为 0 的分量走<strong>位置法</strong>（<span class="arithmatex">\(v_z, \omega_x, \omega_y\)</span>）。
-<span class="arithmatex">\(S\)</span> 可以理解为一个<strong>开关矩阵</strong>，它只负责回答一句话：「第 <span class="arithmatex">\(i\)</span> 个自由度归谁」。</p>
+<span class="arithmatex">\(S\)</span> 可理解为一个<strong>开关矩阵</strong>，只回答一句话：「第 <span class="arithmatex">\(i\)</span> 个自由度归谁」。</p>
 <h3 id="33-170">3.3 算例：还是那个 170°<a class="headerlink" href="#33-170" title="Permanent link">&para;</a></h3>
-<p>拿刚才把 IBVS 逼出「回退」的那个坏初值，换混合方案再算一遍：</p>
+<p>拿刚才把 IBVS 逼出「回退」的坏初值，换混合方案再算一遍：</p>
 <ul>
 <li>选择矩阵 S（对角元）: [1. 1. 0. 0. 0. 1.]</li>
 <li>
@@ -12437,46 +12424,39 @@ v = S\,v_{\text{img}} + (I - S)\,v_{\text{pos}}
 <li>600 9.5583 0.8000 0</li>
 <li>800 1.2811 0.8000 0</li>
 <li>1000 0.1716 0.8000 0</li>
-<li>
-<p>1200 0.0230 0.8000 0</p>
-</li>
-<li>
-<p>混合方案最大工作距离 0.800 m（IBVS 单干是 9.228 m）——回退基本被消掉；</p>
-</li>
-<li>同时图像误差照样收敛到 0，特征全程不出画。</li>
+<li>1200 0.0230 0.8000 0</li>
 </ul>
-<p>小偏差（纯平移 0.05 m）：|e| 从 116.62 px 收敛到 0.0073 px</p>
-<p>同一个「坏初值」，混合方案的最大工作距离<strong>恒为 0.800 m</strong>（IBVS 单干是 9.228 m）：
-<span class="arithmatex">\(v_z\)</span> 被 PBVS 按位姿误差管住了，<strong>IBVS 再也没法用「后退」来偷懒</strong>；
+<p>同一个「坏初值」，混合方案最大工作距离<strong>恒为 0.800 m</strong>（IBVS 单干是 9.228 m）：
+<span class="arithmatex">\(v_z\)</span> 被 PBVS 按位姿误差管住，<strong>IBVS 再没法用「后退」偷懒</strong>；
 而 <span class="arithmatex">\(v_x, v_y, \omega_z\)</span> 仍由 IBVS 盯着，<strong>特征全程不出画、图像误差照样收敛到 0</strong>。
-小偏差场景（纯平移 0.05 m）也照常从 116.62 px 收敛到 0.0073 px。</p>
+小偏差场景（纯平移 0.05 m）照常从 116.62 px 收敛到 0.0073 px。</p>
 <p><strong>这就是「混合」的价值</strong>：它不是把两种方法简单叠加，而是<strong>按自由度分工，
-把各自最不擅长的那个方向让出去</strong> —— PBVS 让出「看得见」，IBVS 让出「深度与大转角」。
-工程上还有更精细的版本（例如把单应矩阵分解成旋转部分与平移部分，
+把各自最不擅长的方向让出去</strong> —— PBVS 让出「看得见」，IBVS 让出「深度与大转角」。
+工程上还有更精细的版本（例如把单应矩阵分解成旋转与平移部分，
 分别在图像空间与笛卡尔空间闭环的 <strong>2.5D 方法</strong>），思路完全一样：
-<strong>先想清楚每个自由度该由谁负责，再把它们拼起来。</strong></p>
+<strong>先想清楚每个自由度归谁，再把它们拼起来。</strong></p>
 <hr />
 <h2 id="_5">四、直接视觉控制：连「特征」都不要了<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <h3 id="41">4.1 思路：让像素自己说话<a class="headerlink" href="#41" title="Permanent link">&para;</a></h3>
-<p>PBVS 要位姿，IBVS 要特征点。可<strong>特征提取本身</strong>就是一堆麻烦：
-角点可能丢、可能配错、纹理弱的区域根本提不出点，亚像素精度还要额外的拟合步骤。
-<strong>直接视觉控制（直接法 / 光度法）</strong> 把这两层一起绕过去：<strong>直接用整幅图像的灰度当误差信号。</strong></p>
-<p>它的目标函数是<strong>模板与当前观测之间的灰度差平方和（SSD）</strong>：</p>
+<p>PBVS 要位姿，IBVS 要特征点。可<strong>特征提取本身</strong>就是麻烦：
+角点可能丢、可能配错、纹理弱的区域提不出点，亚像素精度还要额外拟合。
+<strong>直接视觉控制（直接法 / 光度法）</strong> 把这两层一起绕过：<strong>直接用整幅图像的灰度当误差信号。</strong></p>
+<p>它的目标函数是<strong>模板与当前观测的灰度差平方和（SSD）</strong>：</p>
 <div class="arithmatex">\[
 \text{SSD}(p) = \sum_{x}\Big[I\big(W(x;p)\big) - T(x)\Big]^2
 \]</div>
 <p>其中 <span class="arithmatex">\(T\)</span> 是模板图，<span class="arithmatex">\(I\)</span> 是当前图，<span class="arithmatex">\(W(x;p)\)</span> 是一个<strong>由参数 <span class="arithmatex">\(p\)</span> 描述的坐标变换</strong>
-（例如平移加旋转），含义是「把当前图像里的像素 <span class="arithmatex">\(x\)</span>，映射回模板的哪个位置去比较」。
-于是「<strong>把相机对准目标</strong>」这件事，被翻译成了一句纯粹的优化问题：<strong>让 SSD 最小</strong>。</p>
+（如平移加旋转），含义是「把当前图像里的像素 <span class="arithmatex">\(x\)</span>，映射回模板的哪里去比较」。
+于是「<strong>把相机对准目标</strong>」被翻译成一句纯粹的优化问题：<strong>让 SSD 最小</strong>。</p>
 <h3 id="42-">4.2 高斯-牛顿：把非线性最小二乘迭代成线性的<a class="headerlink" href="#42-" title="Permanent link">&para;</a></h3>
-<p><span class="arithmatex">\(W\)</span> 对 <span class="arithmatex">\(p\)</span> 一般是非线性的，但可以在当前 <span class="arithmatex">\(p\)</span> 附近做<strong>一阶展开</strong>。
+<p><span class="arithmatex">\(W\)</span> 对 <span class="arithmatex">\(p\)</span> 一般是非线性的，但可在当前 <span class="arithmatex">\(p\)</span> 附近做<strong>一阶展开</strong>。
 记残差 <span class="arithmatex">\(r = I(W(x;p)) - T(x)\)</span>，则</p>
 <div class="arithmatex">\[
 I\big(W(x;p+\Delta p)\big) \approx I\big(W(x;p)\big) + \nabla I^{\mathsf T}\frac{\partial W}{\partial p}\,\Delta p
 \;\Longrightarrow\;
 r(\Delta p) \approx r + J\,\Delta p
 \]</div>
-<p>这里的 <span class="arithmatex">\(J = \nabla I^{\mathsf T}\dfrac{\partial W}{\partial p}\)</span> 就是「<strong>图像梯度乘变换的雅可比</strong>」。
+<p>这里的 <span class="arithmatex">\(J = \nabla I^{\mathsf T}\dfrac{\partial W}{\partial p}\)</span> 就是「<strong>图像梯度乘变换雅可比</strong>」。
 最小化 <span class="arithmatex">\(\|r + J\Delta p\|^2\)</span>，令导数为零，得到<strong>高斯-牛顿</strong>的迭代式：</p>
 <div class="arithmatex">\[
 \Delta p = -\big(J^{\mathsf T}J\big)^{-1} J^{\mathsf T} r,
@@ -12485,8 +12465,8 @@ r(\Delta p) \approx r + J\,\Delta p
 <p><strong>整条回路里没有「角点」「匹配」这些字眼，只有像素和它的梯度。</strong>
 这也解释了它为什么对光照敏感：<strong>公式里唯一的信息来源就是图像的灰度梯度。</strong></p>
 <h3 id="43">4.3 算例：精度惊人，但收敛域是「局部的」<a class="headerlink" href="#43" title="Permanent link">&para;</a></h3>
-<p>用一块<strong>处处有梯度</strong>的合成纹理模板，人为把观测图平移、旋转一个已知量，
-再让算法<strong>只凭灰度</strong>把参数估回来：</p>
+<p>用一块<strong>处处有梯度</strong>的合成纹理模板，人为把观测图平移、旋转已知量，
+再让算法<strong>只凭灰度</strong>估回参数：</p>
 <ul>
 <li>直接视觉控制：模板 96x96；误差用整幅像素灰度差 SSD，不提取任何角点/边缘</li>
 <li>
@@ -12517,60 +12497,53 @@ r(\Delta p) \approx r + J\,\Delta p
 <ul>
 <li>真值 (6, -5, 0.040) → 估计 (6.000, -5.000, 0.04000)，SSD=0.000000</li>
 <li>真值 (12, -9, 0.080) → 估计 (-5.522, 5.812, 0.09591)，SSD=0.033677</li>
-<li>
-<p>→ 灰度优化只有“局部”收敛域：偏差 6 px 左右还能收敛，到 12 px 就卡在错误的极小。</p>
-</li>
-<li>
-<p>SSD 与 |p| 都归零：整条回路里没有“特征”二字，只有像素和它的梯度——</p>
-</li>
-<li>这就是直接视觉控制（直接法）最迷人的地方，也是它对光照、初值最敏感的原因。</li>
 </ul>
 <p><strong>第一步很漂亮</strong>：仅凭灰度，迭代几次就把参数从 0 估回真值，SSD 直接归零 —— <strong>一个角点都没提</strong>。
 <strong>第二步</strong>把它接成闭环：每步估出 <span class="arithmatex">\(\hat p\)</span>，令 <span class="arithmatex">\(p \leftarrow p - \lambda\hat p\)</span>，误差按 <span class="arithmatex">\(\lambda = 0.5\)</span> 指数收敛。
-<strong>第三步</strong>把偏差放大，同样的算法立刻露馅：偏差 6 px 还能收敛到真值，<strong>到 12 px 就卡在错误的极小</strong>。</p>
+<strong>第三步</strong>把偏差放大，同样算法立刻露馅：偏差 6 px 还能收敛到真值，<strong>到 12 px 就卡在错误的极小</strong>。</p>
 <div class="admonition warning">
 <p class="admonition-title">直接法的「收敛域」是局部的，而且很窄</p>
-<p>一阶展开 <span class="arithmatex">\(r + J\Delta p\)</span> 只在 <span class="arithmatex">\(\Delta p\)</span> 很小的邻域里成立。
-当偏差大到让 <span class="arithmatex">\(I(W(x;p))\)</span> 移动了纹理的<strong>一个周期</strong>（本页纹理最短周期 24 px），
-图像梯度的方向早就指向了<strong>另一个局部极小</strong>，高斯-牛顿再也回不来。
-<strong>工程上的标准解法是图像金字塔</strong>：先在降采样的<strong>粗尺度</strong>上做，
+<p>一阶展开 <span class="arithmatex">\(r + J\Delta p\)</span> 只在 <span class="arithmatex">\(\Delta p\)</span> 很小的邻域成立。
+当偏差大到让 <span class="arithmatex">\(I(W(x;p))\)</span> 移动纹理<strong>一个周期</strong>（本页纹理最短周期 24 px），
+图像梯度的方向早就指向<strong>另一个局部极小</strong>，高斯-牛顿再也回不来。
+<strong>标准解法是图像金字塔</strong>：先在降采样的<strong>粗尺度</strong>上做，
 此时同样的物理偏差只相当于几个像素、落进收敛域；得到粗解后<strong>逐层细化</strong>到原尺度。
-<strong>用「先粗后细」换「大收敛域加高精度」</strong>，是直接法能上现场的关键一步。</p>
+<strong>用「先粗后细」换「大收敛域加高精度」</strong>，是直接法上现场的关键一步。</p>
 </div>
 <hr />
 <h2 id="_6">五、机器人视觉系统：从「算法」回到「一套系统」<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <h3 id="51">5.1 手眼标定：相机到底装在哪<a class="headerlink" href="#51" title="Permanent link">&para;</a></h3>
-<p>前面四节的算法都默认了一件事：<strong>我们知道目标相对相机在哪</strong>。
-可要把它变成<strong>机器人的运动</strong>，还缺一环：<strong>相机与机械臂之间的固定关系</strong>。
+<p>前面四节的算法都默认：<strong>我们知道目标相对相机在哪</strong>。
+可要把它变成<strong>机器人的运动</strong>，还缺一环：<strong>相机与机械臂的固定关系</strong>。
 这就是<strong>手眼标定（hand-eye calibration）</strong>。</p>
-<p><strong>eye-in-hand</strong>（相机装在末端）最常见。让机械臂做若干次运动，
-每次都记下<strong>手（末端）的运动</strong> <span class="arithmatex">\(A\)</span>，并让相机拍下<strong>标定板</strong>、解出<strong>相机的运动</strong> <span class="arithmatex">\(B\)</span>。
-因为相机是被手「拎着」的，两者之间那个固定变换 <span class="arithmatex">\(X\)</span> 满足</p>
+<p><strong>eye-in-hand</strong>（相机装在末端）最常见。让机械臂做几次运动，
+每次都记下<strong>手（末端）的运动</strong> <span class="arithmatex">\(A\)</span>，让相机拍下<strong>标定板</strong>、解出<strong>相机的运动</strong> <span class="arithmatex">\(B\)</span>。
+因为相机被手「拎着」，两者间那个固定变换 <span class="arithmatex">\(X\)</span> 满足</p>
 <div class="arithmatex">\[
 A\,X = X\,B
 \]</div>
-<p><strong>这就是手眼标定方程</strong>。它的几何含义一句话：
-「手怎么动，相机就跟着怎么动」——<strong>同一个 <span class="arithmatex">\(X\)</span> 把两个视角的运动对齐，左右必然相等</strong>。
-（相机固定在基座上的 eye-to-hand 形式，经过坐标变换后是同一个方程。）</p>
+<p><strong>这就是手眼标定方程</strong>。几何含义一句话：
+「手怎么动，相机就跟着动」——<strong>同一个 <span class="arithmatex">\(X\)</span> 把两个视角的运动对齐，左右必相等</strong>。
+（相机固定在基座上的 eye-to-hand 形式，坐标变换后是同一个方程。）</p>
 <h3 id="52-ax-xb">5.2 解 AX = XB：旋转用零空间，平移用最小二乘<a class="headerlink" href="#52-ax-xb" title="Permanent link">&para;</a></h3>
-<p>把旋转和平移拆开，一个矩阵方程就变成两条：</p>
+<p>把旋转和平移拆开，一个矩阵方程变成两条：</p>
 <div class="arithmatex">\[
 R_A R_X = R_X R_B, \qquad (R_A - I)\,t_X = R_X\,t_B - t_A
 \]</div>
-<p><strong>旋转部分</strong>是「矩阵乘矩阵等于矩阵乘矩阵」，要把它线性化得靠 <strong>Kronecker 积</strong>：
+<p><strong>旋转部分</strong>是「矩阵乘矩阵等于矩阵乘矩阵」，要线性化得靠 <strong>Kronecker 积</strong>：
 把矩阵<strong>按列拉直</strong>成向量后，</p>
 <div class="arithmatex">\[
 \big(R_A \otimes I - I \otimes R_B^{\mathsf T}\big)\,\operatorname{vec}(R_X) = 0
 \]</div>
-<p>每个运动对贡献 9 个方程，<span class="arithmatex">\(N\)</span> 个运动对堆起来就是一个<strong>超定齐次方程</strong> ——
+<p>每个运动对贡献 9 个方程，<span class="arithmatex">\(N\)</span> 个运动对堆起来就是<strong>超定齐次方程</strong> ——
 <span class="arithmatex">\(\operatorname{vec}(R_X)\)</span> 落在它的<strong>零空间</strong>里，用 <strong>SVD 取最小奇异值对应的右奇异向量</strong>即可求解。
-（零空间的符号是任意的，用 <span class="arithmatex">\(\det R_X = +1\)</span> 定符号，再投影回旋转矩阵集合。）
-<strong>旋转解出来之后</strong>，平移方程对 <span class="arithmatex">\(t_X\)</span> 是<strong>线性的</strong>，直接一个最小二乘（<code>lstsq</code>）搞定。</p>
-<p><strong>注意这里有一个容易被忽略的前提</strong>：所有运动对的<strong>旋转轴不能彼此平行</strong>。
-如果机械臂只做纯平移、或者每一步都绕同一根轴转，
-零空间就不是一维的，解会<strong>不唯一</strong> —— 所以标定时要做<strong>姿态激励充分的运动</strong>。</p>
+（零空间的符号任意，用 <span class="arithmatex">\(\det R_X = +1\)</span> 定符号，再投影回旋转矩阵集合。）
+<strong>旋转解出后</strong>，平移方程对 <span class="arithmatex">\(t_X\)</span> 是<strong>线性的</strong>，直接一个最小二乘（<code>lstsq</code>）搞定。</p>
+<p><strong>注意有个易被忽略的前提</strong>：所有运动对的<strong>旋转轴不能彼此平行</strong>。
+如果机械臂只做纯平移、或每步都绕同一根轴转，
+零空间就不是一维的，解<strong>不唯一</strong> —— 所以标定时要做<strong>姿态激励充分的运动</strong>。</p>
 <h3 id="53">5.3 算例：标定与延迟，系统成败的两半<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
-<p>最后把「系统」这件事算一遍：先用手眼标定解出相机装在哪，再看<strong>视觉延迟</strong>对闭环的影响。</p>
+<p>最后把「系统」算一遍：先用手眼标定解出相机装在哪，再看<strong>视觉延迟</strong>对闭环的影响。</p>
 <ul>
 <li>手眼标定 AX = XB：A 是手（末端）的运动，B 是相机看到的运动，解出相机装在哪 (X)</li>
 <li>运动对数 N = 10</li>
@@ -12591,34 +12564,28 @@ R_A R_X = R_X R_B, \qquad (R_A - I)\,t_X = R_X\,t_B - t_A
 <p><strong>仿真 k=1 帧延迟，两种增益（初值误差 1，看误差怎么走）：</strong></p>
 <ul>
 <li>μ=0.9：x[10]=-0.68399, x[20]=+0.25219, x[39]=+0.03198 → 衰减（稳）</li>
-<li>
-<p>μ=1.1：x[10]=-1.25401, x[20]=-1.56731, x[39]=-6.24722 → 发散（不稳）</p>
-</li>
-<li>
-<p>系统视角：相机帧率、通信与算法耗时都会变成 k。延迟一帧就把增益上限砍掉一半以上——</p>
-</li>
-<li>所以“机器人视觉系统”的成败，一半在标定精度，一半在把延迟压到什么水平。</li>
+<li>μ=1.1：x[10]=-1.25401, x[20]=-1.56731, x[39]=-6.24722 → 发散（不稳）</li>
 </ul>
 <p><strong>标定部分</strong>：10 个运动对，解出的手眼关系转角误差 0.0000°、平移误差 0.000000 m，
-最大残差约 <span class="arithmatex">\(10^{-16}\)</span>（数值上就是 0）—— 说明这套线性解法是<strong>正确</strong>的。
-真实系统里这个残差会被图像噪声与标定误差抬起来，很多标定质量评价就盯着它。</p>
-<p><strong>延迟部分</strong>才更值得盯住。图像不是「此刻」的：采集要时间、传输要时间、算法也要时间 ——
-送到控制器手里的，往往是<strong>若干帧之前</strong>的画面。把离散闭环写成</p>
+最大残差约 <span class="arithmatex">\(10^{-16}\)</span>（数值上就是 0）—— 说明这套线性解法<strong>正确</strong>。
+真实系统里这个残差会被图像噪声与标定误差抬起，很多标定质量评价就盯它。</p>
+<p><strong>延迟部分</strong>更值得盯。图像不是「此刻」的：采集要时间、传输要时间、算法也要时间 ——
+送到控制器手里的，往往是<strong>几帧之前</strong>的画面。把离散闭环写成</p>
 <div class="arithmatex">\[
 x[n+1] = x[n] - \mu\,x[n-k], \qquad \mu = \lambda\Delta t
 \]</div>
-<p>它的稳定性上限有一个漂亮的闭式解：</p>
+<p>它的稳定性上限有个漂亮的闭式解：</p>
 <div class="arithmatex">\[
 \mu_{\max} = 2\sin\frac{\pi}{2(2k+1)}
 \]</div>
 <p>数值与理论<strong>完全吻合</strong>：<span class="arithmatex">\(k = 0\)</span> 时 2.00，<span class="arithmatex">\(k = 1\)</span> 时 1.00，<span class="arithmatex">\(k = 2\)</span> 时 0.618，<span class="arithmatex">\(k = 3\)</span> 时 0.445。
-<strong>延迟一帧，增益上限直接砍掉一半</strong>；30 fps 下 <span class="arithmatex">\(k = 1\)</span> 时 <span class="arithmatex">\(\lambda\)</span> 只能取到 30 /s。
+<strong>延迟一帧，增益上限直接砍半</strong>；30 fps 下 <span class="arithmatex">\(k = 1\)</span> 时 <span class="arithmatex">\(\lambda\)</span> 只能取到 30 /s。
 仿真里 <span class="arithmatex">\(\mu = 0.9\)</span> 稳稳衰减、<span class="arithmatex">\(\mu = 1.1\)</span> 立刻发散 —— 分界就在这条线上。</p>
 <div class="admonition warning">
 <p class="admonition-title">延迟不是「工程细节」，它就是稳定性参数</p>
-<p>相机帧率、图像传输、算法耗时，看起来是「实现问题」，
+<p>相机帧率、图像传输、算法耗时，看似「实现问题」，
 但在视觉伺服里它们<strong>直接出现在特征方程的系数上</strong>。
-所以工程上的两条硬规矩是：<strong>要么把增益压到满足 <span class="arithmatex">\(\mu_{\max}\)</span>，要么把延迟（帧率、算法）压下去</strong> ——
+所以工程上的两条硬规矩：<strong>要么把增益压到满足 <span class="arithmatex">\(\mu_{\max}\)</span>，要么把延迟（帧率、算法）压下去</strong> ——
 <strong>两者只能选一个，因为它们共用同一个增益。</strong></p>
 </div>
 <hr />
@@ -12628,41 +12595,41 @@ x[n+1] = x[n] - \mu\,x[n-k], \qquad \mu = \lambda\Delta t
 证明误差按 <span class="arithmatex">\(e(t) = e(0)e^{-\lambda t}\)</span> 衰减，并说明为什么这个收敛<strong>与图像无关</strong>。</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：把相对位姿写清楚。</strong> 记 <span class="arithmatex">\(M = {}^{c}T_{c^*} = \left({}^{w}T_c\right)^{-1}{}^{w}T_{c^*}\)</span>，
-由定义 <span class="arithmatex">\(e = \log M\)</span>，也就是 <span class="arithmatex">\(M = \exp(e)\)</span>。</p>
+<p><strong>第一步：写清相对位姿。</strong> 记 <span class="arithmatex">\(M = {}^{c}T_{c^*} = \left({}^{w}T_c\right)^{-1}{}^{w}T_{c^*}\)</span>，
+由定义 <span class="arithmatex">\(e = \log M\)</span>，即 <span class="arithmatex">\(M = \exp(e)\)</span>。</p>
 <p><strong>第二步：更新一次，看 <span class="arithmatex">\(M\)</span> 怎么变。</strong>
-位姿更新发生在 <span class="arithmatex">\({}^{w}T_c\)</span> 上，把它代进 <span class="arithmatex">\(M\)</span>：</p>
+位姿更新发生在 <span class="arithmatex">\({}^{w}T_c\)</span> 上，代进 <span class="arithmatex">\(M\)</span>：</p>
 <div class="arithmatex">\[
 M' = \left({}^{w}T_c \cdot \exp(\lambda e\Delta t)\right)^{-1}{}^{w}T_{c^*}
 = \exp(-\lambda e\Delta t)\,\left({}^{w}T_c\right)^{-1}{}^{w}T_{c^*}
 = \exp(-\lambda e\Delta t)\,M
 \]</div>
-<p><strong>第三步：用「同轴指数可交换」把两步并一步。</strong> 因为 <span class="arithmatex">\(M = \exp(e)\)</span>，</p>
+<p><strong>第三步：用「同轴指数可交换」把两步并一步。</strong> 因 <span class="arithmatex">\(M = \exp(e)\)</span>，</p>
 <div class="arithmatex">\[
 M' = \exp(-\lambda e\Delta t)\exp(e) = \exp\big((1 - \lambda\Delta t)\,e\big)
 \]</div>
-<p><strong>这一步是全题的关键</strong>：两个指数函数都沿<strong>同一条轴</strong> <span class="arithmatex">\(e\)</span>，所以
-<span class="arithmatex">\(\exp(A)\exp(B) = \exp(A+B)\)</span> 成立 —— 换成两个不同轴就需要 BCH 公式，也就不会有这么干净的结论了。</p>
+<p><strong>这一步是全题关键</strong>：两个指数函数都沿<strong>同一条轴</strong> <span class="arithmatex">\(e\)</span>，所以
+<span class="arithmatex">\(\exp(A)\exp(B) = \exp(A+B)\)</span> 成立 —— 换成两个不同轴就需 BCH 公式，就不会有这么干净的结论。</p>
 <p><strong>第四步：读出衰减律。</strong> 由 <span class="arithmatex">\(M' = \exp\big((1-\lambda\Delta t)e\big)\)</span> 得 <span class="arithmatex">\(e' = (1 - \lambda\Delta t)\,e\)</span>，
-迭代 <span class="arithmatex">\(n\)</span> 次就是 <span class="arithmatex">\(e_n = (1-\lambda\Delta t)^n e_0\)</span>。令 <span class="arithmatex">\(t = n\Delta t\)</span>、<span class="arithmatex">\(\Delta t\to0\)</span>：</p>
+迭代 <span class="arithmatex">\(n\)</span> 次得 <span class="arithmatex">\(e_n = (1-\lambda\Delta t)^n e_0\)</span>。令 <span class="arithmatex">\(t = n\Delta t\)</span>、<span class="arithmatex">\(\Delta t\to0\)</span>：</p>
 <div class="arithmatex">\[
 e(t) = e(0)\,e^{-\lambda t}
 \]</div>
-<p><strong>第五步：为什么与图像无关。</strong> 整条推导里只用到 <span class="arithmatex">\({}^{w}T_c\)</span>、<span class="arithmatex">\({}^{w}T_{c^*}\)</span> 与 <span class="arithmatex">\(\log/\exp\)</span>，
-<strong>没有出现一次特征、像素或投影</strong>。<span class="arithmatex">\(e\)</span> 只是两个位姿之间的一个纯几何量，
-闭环把它推向零，<strong>并不会顺带照顾图像里的任何东西</strong> ——
+<p><strong>第五步：为什么与图像无关。</strong> 整条推导只用到 <span class="arithmatex">\({}^{w}T_c\)</span>、<span class="arithmatex">\({}^{w}T_{c^*}\)</span> 与 <span class="arithmatex">\(\log/\exp\)</span>，
+<strong>没有出现一次特征、像素或投影</strong>。<span class="arithmatex">\(e\)</span> 只是两个位姿间的一个纯几何量，
+闭环把它推向零，<strong>并不照顾图像里的任何东西</strong> ——
 这正是它「收敛很漂亮、却可能把目标甩出画面」的根本原因。</p>
-<p><strong>一句话</strong>：<strong>PBVS 把收敛性建立在「<span class="arithmatex">\(SE(3)\)</span> 上同轴指数可交换」这一条代数性质上，
-代价是它对图像完全无感。</strong></p>
+<p><strong>一句话</strong>：<strong>PBVS 把收敛性建立在「<span class="arithmatex">\(SE(3)\)</span> 上同轴指数可交换」这条代数性质上，
+代价是它对图像无感。</strong></p>
 </details>
 <hr />
 <h2 id="2">例题 2：图像雅可比是怎么来的？为什么会有「相机回退」<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
-<p>点特征在相机系里的坐标为 <span class="arithmatex">\((X, Y, Z)\)</span>，归一化坐标 <span class="arithmatex">\(x = X/Z\)</span>、<span class="arithmatex">\(y = Y/Z\)</span>。
+<p>点特征在相机系的坐标为 <span class="arithmatex">\((X, Y, Z)\)</span>，归一化坐标 <span class="arithmatex">\(x = X/Z\)</span>、<span class="arithmatex">\(y = Y/Z\)</span>。
 相机速度为 <span class="arithmatex">\(v = (\boldsymbol v_c, \boldsymbol\omega)\)</span>。推导图像雅可比
 <span class="arithmatex">\(L = \partial(x,y)/\partial v\)</span> 的第一行，并解释「相机回退」的成因。</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：点随相机运动的速度。</strong> 相机在动、目标不动，等价于点在相机系里「反向」运动：</p>
+<p><strong>第一步：点随相机运动的速度。</strong> 相机在动、目标不动，等价于点在相机系「反向」运动：</p>
 <div class="arithmatex">\[
 \dot{\boldsymbol P} = -\boldsymbol v_c - \boldsymbol\omega\times\boldsymbol P
 \]</div>
@@ -12680,22 +12647,22 @@ e(t) = e(0)\,e^{-\lambda t}
 <div class="arithmatex">\[
 \dot x = -\frac{v_x}{Z} + \frac{x\,v_z}{Z} + xy\,\omega_x - (1+x^2)\,\omega_y + y\,\omega_z
 \]</div>
-<p><strong>第三步：读出雅可比的第一行。</strong> 把 6 个速度分量前的系数依次抄出来：</p>
+<p><strong>第三步：读出雅可比第一行。</strong> 把 6 个速度分量前的系数依次抄出来：</p>
 <div class="arithmatex">\[
 L_{\text{point}}^{(1)} = \left[-\frac{1}{Z},\; 0,\; \frac{x}{Z},\; xy,\; -(1+x^2),\; y\right]
 \]</div>
 <p>第二行同理，得到 <span class="arithmatex">\(L_{\text{point}}^{(2)} = \left[0,\;-\dfrac{1}{Z},\;\dfrac{y}{Z},\;1+y^2,\;-xy,\;-x\right]\)</span>。</p>
-<p><strong>注意平移列里的 <span class="arithmatex">\(1/Z\)</span></strong>：深度越大，同样的平移在图像上动得越少；
-而旋转列里<strong>没有 <span class="arithmatex">\(1/Z\)</span></strong> —— 这就是为什么「远目标难平移、却照样能转」。</p>
-<p><strong>第四步：回退的成因。</strong> 正方形有 <span class="arithmatex">\(90°\)</span> 的旋转对称性，
+<p><strong>注意平移列的 <span class="arithmatex">\(1/Z\)</span></strong>：深度越大，同样的平移在图像上动得越少；
+而旋转列里<strong>没有 <span class="arithmatex">\(1/Z\)</span></strong> —— 所以「远目标难平移、却照样能转」。</p>
+<p><strong>第四步：回退的成因。</strong> 正方形有 <span class="arithmatex">\(90°\)</span> 旋转对称性，
 绕光轴转 <span class="arithmatex">\(180°\)</span> 时四个角点<strong>整体转回自己身上</strong>、图像几乎不变 ——
-即「绕光轴旋转」这个方向在图像上<strong>接近不可观测</strong>，<span class="arithmatex">\(L\)</span> 在该方向上<strong>接近退化</strong>。
-而控制律取的是<strong>最小范数解</strong> <span class="arithmatex">\(L^{+}\)</span>：在众多「都能减小误差」的相机速度里挑范数最小的那个。
-当真正的旋转方向效率极低时，最小范数解会<strong>优先选择另一个有效方向</strong> ——
-「沿光轴后退」恰好能让所有角点向图像中心收缩，在图像上确实能改变一点点。
-于是相机退到远处再绕回来。<strong>算例：170° 初值下退到 9.228 m（期望 0.80 m）。</strong></p>
-<p><strong>一句话</strong>：<strong>回退不是算法出了 bug，而是「最小范数」在雅可比退化的方向上
-给出的一条数学上正确、工程上荒唐的最短路。</strong></p>
+即「绕光轴旋转」在图像上<strong>接近不可观测</strong>，<span class="arithmatex">\(L\)</span> 在该方向<strong>接近退化</strong>。
+而控制律取的是<strong>最小范数解</strong> <span class="arithmatex">\(L^{+}\)</span>：在众多「都能减小误差」的相机速度里挑范数最小者。
+当真正的旋转方向效率极低时，最小范数解会<strong>优先选另一个有效方向</strong> ——
+「沿光轴后退」恰好能让所有角点向图像中心收缩，在图像上确实能改变一点。
+于是相机退到远处再绕回来。<strong>算例：170° 初值退到 9.228 m（期望 0.80 m）。</strong></p>
+<p><strong>一句话</strong>：<strong>回退不是算法 bug，而是「最小范数」在雅可比退化的方向上
+给出的一条数学正确、工程荒唐的最短路。</strong></p>
 </details>
 <hr />
 <h2 id="3">例题 3：混合视觉伺服的选择矩阵在切什么<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
@@ -12712,34 +12679,34 @@ L_{\text{point}}^{(1)} = \left[-\frac{1}{Z},\; 0,\; \frac{x}{Z},\; xy,\; -(1+x^2
 <span class="arithmatex">\(v_x, v_y\)</span>（平行于图像平面的平移）与 <span class="arithmatex">\(\omega_z\)</span>（绕光轴旋转）
 是<strong>直接、线性出现在图像上</strong>的自由度，IBVS 用雅可比就能精确伺候；
 而 <span class="arithmatex">\(v_z\)</span>（进出平面）与 <span class="arithmatex">\(\omega_x, \omega_y\)</span>（绕平面内轴转）
-在图像上只表现为<strong>尺度变化与透视畸变</strong>，信息弱、容易和别的自由度耦合，
-交给 PBVS 从位姿误差里直接读更稳。</p>
-<p><strong>第三步：为什么回退会消失。</strong> 回退的直接来源是：
+在图像上只表现为<strong>尺度变化与透视畸变</strong>，信息弱、易和别的自由度耦合，
+交给 PBVS 从位姿误差直接读更稳。</p>
+<p><strong>第三步：为什么回退会消失。</strong> 回退的直接来源：
 <strong>IBVS 的最小范数解把误差摊给了 <span class="arithmatex">\(v_z\)</span></strong>（后退）。
-现在 <span class="arithmatex">\(v_z\)</span> 这一个分量<strong>被 <span class="arithmatex">\(S\)</span> 强制切给了 PBVS</strong>，
-IBVS 的输出 <span class="arithmatex">\(v_{\text{img}}\)</span> 里 <span class="arithmatex">\(v_z\)</span> 那一项直接被 <span class="arithmatex">\(S\)</span> 乘成 0、根本进不了控制量；
-而 PBVS 的 <span class="arithmatex">\(v_z\)</span> 来自 <span class="arithmatex">\(\lambda\log\left({}^{c}T_{c^*}\right)\)</span>，是<strong>真实的深度误差</strong>，
-恰好在 <span class="arithmatex">\(v_z\)</span> 方向把相机推到位。<strong>「后退」这条路被堵死了。</strong></p>
+现在 <span class="arithmatex">\(v_z\)</span> 这一个分量<strong>被 <span class="arithmatex">\(S\)</span> 强制切给 PBVS</strong>，
+IBVS 的输出 <span class="arithmatex">\(v_{\text{img}}\)</span> 里 <span class="arithmatex">\(v_z\)</span> 那一项直接被 <span class="arithmatex">\(S\)</span> 乘成 0、进不了控制量；
+而 PBVS 的 <span class="arithmatex">\(v_z\)</span> 来自 <span class="arithmatex">\(\lambda\log\left({}^{c}T_{c^*}\right)\)</span>，是<strong>真的深度误差</strong>，
+恰好在 <span class="arithmatex">\(v_z\)</span> 方向把相机推到位。<strong>「后退」这条路被堵死。</strong></p>
 <p><strong>第四步：逐项核对。</strong> 同一个 170° 坏初值，混合方案最大工作距离<strong>恒为 0.800 m</strong>
-（IBVS 单干是 9.228 m），图像误差照样收敛到 0、出画角点恒为 0；
-小偏差场景 116.62 px 收敛到 0.0073 px，<strong>没有牺牲精度。</strong></p>
-<p><strong>一句话</strong>：<strong>选择矩阵把「谁负责哪个自由度」写成了一个矩阵；
-分工的判据只有一条 —— 谁在这个自由度上听得更清楚。</strong></p>
+（IBVS 单干是 9.228 m），图像误差照样收敛到 0、出画角点恒 0；
+小偏差场景 116.62 px 收敛到 0.0073 px，<strong>没牺牲精度。</strong></p>
+<p><strong>一句话</strong>：<strong>选择矩阵把「谁负责哪个自由度」写成矩阵；
+分工判据只有一条 —— 谁在这个自由度上听得更清楚。</strong></p>
 </details>
 <hr />
 <h2 id="4">例题 4：直接法的收敛域为什么是局部的<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <p>直接法最小化 <span class="arithmatex">\(\text{SSD}(p) = \sum_x \left[I(W(x;p)) - T(x)\right]^2\)</span>，
 用高斯-牛顿迭代 <span class="arithmatex">\(\Delta p = -(J^{\mathsf T}J)^{-1}J^{\mathsf T}r\)</span>。
-说明这个迭代是怎么来的，以及为什么它的收敛域是「局部的」。</p>
+说明这个迭代怎么来的，以及为什么它的收敛域「局部」。</p>
 <details class="success">
 <summary>解答</summary>
-<p><strong>第一步：先线性化。</strong> 记 <span class="arithmatex">\(r = I(W(x;p)) - T(x)\)</span>。在 <span class="arithmatex">\(p\)</span> 附近对 <span class="arithmatex">\(W\)</span> 做一阶展开：</p>
+<p><strong>第一步：先线性化。</strong> 记 <span class="arithmatex">\(r = I(W(x;p)) - T(x)\)</span>。在 <span class="arithmatex">\(p\)</span> 附近对 <span class="arithmatex">\(W\)</span> 一阶展开：</p>
 <div class="arithmatex">\[
 I\big(W(x;p+\Delta p)\big) \approx I\big(W(x;p)\big) + \nabla I^{\mathsf T}\frac{\partial W}{\partial p}\,\Delta p
 \]</div>
 <p>于是残差近似为 <span class="arithmatex">\(r(\Delta p) \approx r + J\Delta p\)</span>，
-其中 <span class="arithmatex">\(J = \nabla I^{\mathsf T}\dfrac{\partial W}{\partial p}\)</span> 是「图像梯度乘变换的雅可比」。</p>
-<p><strong>第二步：最小化。</strong> 目标是把 <span class="arithmatex">\(\|r + J\Delta p\|^2\)</span> 压到最小。
+其中 <span class="arithmatex">\(J = \nabla I^{\mathsf T}\dfrac{\partial W}{\partial p}\)</span> 是「图像梯度乘变换雅可比」。</p>
+<p><strong>第二步：最小化。</strong> 把 <span class="arithmatex">\(\|r + J\Delta p\|^2\)</span> 压到最小。
 展开成 <span class="arithmatex">\(\|r\|^2 + 2r^{\mathsf T}J\Delta p + \Delta p^{\mathsf T}J^{\mathsf T}J\Delta p\)</span>，
 对 <span class="arithmatex">\(\Delta p\)</span> 求导并令其为零：</p>
 <div class="arithmatex">\[
@@ -12747,28 +12714,28 @@ I\big(W(x;p+\Delta p)\big) \approx I\big(W(x;p)\big) + \nabla I^{\mathsf T}\frac
 \;\Longrightarrow\;
 \Delta p = -\left(J^{\mathsf T}J\right)^{-1}J^{\mathsf T}r
 \]</div>
-<p>迭代 <span class="arithmatex">\(p \leftarrow p + \Delta p\)</span> 就是<strong>高斯-牛顿法</strong>（实现里给 <span class="arithmatex">\(J^{\mathsf T}J\)</span> 加了
-<span class="arithmatex">\(10^{-9}\)</span> 的阻尼，避免它在平坦区数不出逆）。<strong>注意 <span class="arithmatex">\(J\)</span> 里全是图像梯度 ——
+<p>迭代 <span class="arithmatex">\(p \leftarrow p + \Delta p\)</span> 就是<strong>高斯-牛顿法</strong>（实现里给 <span class="arithmatex">\(J^{\mathsf T}J\)</span> 加
+<span class="arithmatex">\(10^{-9}\)</span> 的阻尼，避免在平坦区数不出逆）。<strong>注意 <span class="arithmatex">\(J\)</span> 里全是图像梯度 ——
 没有角点、没有匹配、没有描述子。</strong></p>
-<p><strong>第三步：收敛域为什么局部。</strong> 线性化成立的前提是
-「<span class="arithmatex">\(W\)</span> 在一个迭代步内的变化足够小」。一旦目标偏差大到让
-<span class="arithmatex">\(I(W(x;p))\)</span> 相对模板<strong>移动超过纹理的一个周期</strong>（本页纹理最短周期 24 px），
-<span class="arithmatex">\(J\)</span> 指向的梯度方向就与「把偏差拉回来的方向」不再一致，
-迭代会<strong>滑向最近的另一个局部极小</strong>。算例正好卡在这条线上：</p>
+<p><strong>第三步：收敛域为什么局部。</strong> 线性化成立的前提：
+「<span class="arithmatex">\(W\)</span> 在一个迭代步内的变化足够小」。一旦偏差大到让
+<span class="arithmatex">\(I(W(x;p))\)</span> 相对模板<strong>移动超过纹理一个周期</strong>（本页纹理最短周期 24 px），
+<span class="arithmatex">\(J\)</span> 指向的梯度方向就与「把偏差拉回的方向」不再一致，
+迭代会<strong>滑向最近的另一个局部极小</strong>。算例正好卡在这线上：</p>
 <p>· 真值 <span class="arithmatex">\((6,-5,0.040)\)</span> → 收敛到真值，SSD <span class="arithmatex">\(= 0\)</span>；
-· 真值 <span class="arithmatex">\((12,-9,0.080)\)</span> → 停在一个错误的极小，SSD <span class="arithmatex">\(= 0.0337\)</span>。</p>
-<p><strong>第四步：工程上怎么救。</strong> 用<strong>图像金字塔</strong>：先在降采样图上跑，
-同样的物理偏差在粗尺度上只相当于几个像素、落进收敛域；
-得到粗解后<strong>逐层细化</strong>，最后在原尺度上收敛到亚像素。<strong>先粗后细，用层数换收敛域。</strong></p>
-<p><strong>一句话</strong>：<strong>直接法把「特征提取」换成了「梯度优化」——
-换来了完整的信息与亚像素精度，代价是它只能看见初值附近的那一小块。</strong></p>
+· 真值 <span class="arithmatex">\((12,-9,0.080)\)</span> → 停在错误的极小，SSD <span class="arithmatex">\(= 0.0337\)</span>。</p>
+<p><strong>第四步：工程怎么救。</strong> 用<strong>图像金字塔</strong>：先在降采样图上跑，
+同样的物理偏差在粗尺度只相当于几个像素、落进收敛域；
+得到粗解后<strong>逐层细化</strong>，最后在原尺度收敛到亚像素。<strong>先粗后细，用层数换收敛域。</strong></p>
+<p><strong>一句话</strong>：<strong>直接法把「特征提取」换成「梯度优化」——
+换来完整信息与亚像素精度，代价是它只能看见初值附近那一小块。</strong></p>
 </details>
 <hr />
 <h2 id="_7">自测<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p><strong>Q1</strong> PBVS 与 IBVS 的误差分别定义在什么空间？这让它们各自「最怕」什么？</p>
 <details class="note">
 <summary>提示</summary>
-<p>一个的误差里出现的是「米和弧度」，另一个出现的是「像素」。想清楚各自的误差里<strong>没有</strong>什么。</p>
+<p>一个的误差里出现的是「米和弧度」，另一个是「像素」。想清楚各自的误差里<strong>没有</strong>什么。</p>
 </details>
 <details class="success">
 <summary>解答</summary>
@@ -12803,72 +12770,72 @@ I\big(W(x;p+\Delta p)\big) \approx I\big(W(x;p)\big) + \nabla I^{\mathsf T}\frac
 </tr>
 </tbody>
 </table>
-<p><strong>PBVS</strong> 的误差是纯几何量，闭环把它推向零时<strong>不会照顾图像</strong>：
-相机在笛卡尔空间走直线，投影到图像里却是弯的轨迹，
-初始偏差大时中途就会把目标甩出视野（本页算例：一开始 4 个角点全在画外）。
+<p><strong>PBVS</strong> 的误差是纯几何量，闭环把它推向零时<strong>不顾图像</strong>：
+相机在笛卡尔空间走直线，投影到图像里却是弯轨迹，
+初始偏差大时中途就把目标甩出视野（本页算例：一开始 4 个角点全在画外）。
 <strong>IBVS</strong> 的误差是像素量，闭环把特征推到 <span class="arithmatex">\(s^*\)</span> 时<strong>不关心相机路径</strong>：
-为了绕过「绕光轴大转角」这个难走的方向，最小范数解会让相机先退到 9.228 m 再绕回来。</p>
+为了绕过「绕光轴大转角」这个难走方向，最小范数解会让相机先退到 9.228 m 再绕回来。</p>
 <p><strong>一句话</strong>：<strong>误差写在哪，闭环就只照顾哪里 ——
 PBVS 顾位姿不顾图像，IBVS 顾图像不顾相机。</strong></p>
 </details>
-<p><strong>Q2</strong> IBVS 为什么要用<strong>伪逆</strong> <span class="arithmatex">\(L^{+}\)</span>？什么情况下 <span class="arithmatex">\(L\)</span> 会退化，退化时会发生什么？</p>
+<p><strong>Q2</strong> IBVS 为什么要用<strong>伪逆</strong> <span class="arithmatex">\(L^{+}\)</span>？什么情况下 <span class="arithmatex">\(L\)</span> 退化，退化会发生什么？</p>
 <details class="note">
 <summary>提示</summary>
-<p>4 个点特征给出 8 个方程、只有 6 个未知速度。多出来的两个「自由度」怎么办？</p>
+<p>4 个点特征给出 8 个方程、只有 6 个未知速度。多出的两个「自由度」怎么办？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>为什么要伪逆</strong>：点特征数多于 3 个时，<span class="arithmatex">\(L\)</span> 是<strong>长方阵</strong>（如 <span class="arithmatex">\(8\times6\)</span>），
-方程 <span class="arithmatex">\(\dot s = Lv\)</span> 对 <span class="arithmatex">\(v\)</span> 是<strong>超定</strong>的（特征的 8 个变化率不可能被 6 个速度自由支配）。
-此时 <span class="arithmatex">\(L\)</span> 没有普通逆，<strong>伪逆 <span class="arithmatex">\(L^{+}\)</span> 给出最小二乘意义上的解，
-并进一步在众多解里选范数最小的那个</strong> —— 这正是「最小范数速度指令」的来源。</p>
-<p><strong>退化是什么意思</strong>：当 <span class="arithmatex">\(L\)</span> 的秩小于 6（存在某个相机运动方向<strong>不改变特征</strong>）时，
-该方向上的解不唯一、有效增益趋近于零。几种典型情形：</p>
-<p>· <strong>特征数不足</strong>：少于 3 个百分点、或特征共线，部分自由度不可观测；
-· <strong>目标在光轴上对称</strong>：本页的正方形绕光轴旋转在图像上<strong>接近不可观测</strong>，
+<p><strong>为什么要伪逆</strong>：点特征多于 3 个时，<span class="arithmatex">\(L\)</span> 是<strong>长方阵</strong>（如 <span class="arithmatex">\(8\times6\)</span>），
+方程 <span class="arithmatex">\(\dot s = Lv\)</span> 对 <span class="arithmatex">\(v\)</span> 是<strong>超定</strong>的（特征的 8 个变化率不可能被 6 个速度支配）。
+此时 <span class="arithmatex">\(L\)</span> 没有普通逆，<strong>伪逆 <span class="arithmatex">\(L^{+}\)</span> 给出最小二乘意义的解，
+并进一步在众多解里选范数最小者</strong> —— 这正是「最小范数速度指令」的来源。</p>
+<p><strong>退化是什么意思</strong>：当 <span class="arithmatex">\(L\)</span> 的秩小于 6（存在某相机运动方向<strong>不改变特征</strong>）时，
+该方向上解不唯一、有效增益趋近零。几种典型情形：</p>
+<p>· <strong>特征数不足</strong>：少于 3 个点、或特征共线，部分自由度不可观测；
+· <strong>目标在光轴上对称</strong>：本页正方形绕光轴旋转在图像上<strong>接近不可观测</strong>，
   <span class="arithmatex">\(L\)</span> 在 <span class="arithmatex">\(\omega_z\)</span> 方向接近退化；
-· <strong>深度信息缺失</strong>：<span class="arithmatex">\(L\)</span> 里的 <span class="arithmatex">\(1/Z\)</span> 一旦取错，整个雅可比的尺度都错。</p>
+· <strong>深度信息缺失</strong>：<span class="arithmatex">\(L\)</span> 里的 <span class="arithmatex">\(1/Z\)</span> 一旦取错，整个雅可比尺度都错。</p>
 <p><strong>退化会发生什么</strong>：最小范数解会把误差分摊到别的方向 ——
 轻则发生<strong>相机回退</strong>（本页算例退到 9.228 m），
 重则某个方向的速度被推到<strong>数值上极大</strong>（实现里若不限幅、误差量纲再弄错，
 相机一瞬间就飞到 <span class="arithmatex">\(10^7\)</span> 米外）。</p>
-<p><strong>一句话</strong>：<strong>伪逆给了「最小的动作」，可一旦雅可比在某个方向上失效，
+<p><strong>一句话</strong>：<strong>伪逆给了「最小的动作」，可一旦雅可比在某个方向失效，
 「最小的动作」就不再是「正确的动作」。</strong></p>
 </details>
 <p><strong>Q3</strong> 混合视觉伺服的选择矩阵按什么原则切分？为什么它比只用一种方法更稳？</p>
 <details class="note">
 <summary>提示</summary>
-<p>分别问自己：PBVS 的误差「看不见」什么？IBVS 的误差「管不住」什么？</p>
+<p>分别问：PBVS 的误差「看不见」什么？IBVS 的误差「管不住」什么？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>切分原则：按自由度看「谁在这个方向上听得更清楚」。</strong> 把 6 维速度按面内、面外分开：</p>
-<p>· <strong>面内</strong> <span class="arithmatex">\(v_x, v_y, \omega_z\)</span>：直接、线性地体现在图像上，<span class="arithmatex">\(L\)</span> 里对应列<strong>不带奇异</strong>，交给 <strong>IBVS</strong>；
+<p><strong>切分原则：按自由度看「谁在这个方向上听得更清」。</strong> 把 6 维速度按面内、面外分开：</p>
+<p>· <strong>面内</strong> <span class="arithmatex">\(v_x, v_y, \omega_z\)</span>：直接、线性地体现在图像上，<span class="arithmatex">\(L\)</span> 对应列<strong>不带奇异</strong>，交给 <strong>IBVS</strong>；
 · <strong>面外</strong> <span class="arithmatex">\(v_z, \omega_x, \omega_y\)</span>：在图像上只表现为尺度与透视畸变，
   和别的自由度耦合、测量弱，交给 <strong>PBVS</strong>（从位姿误差直接读）。</p>
-<p>实现上就是一个对角选择矩阵 <span class="arithmatex">\(S = \operatorname{diag}(1,1,0,0,0,1)\)</span>：
+<p>实现上是一个对角选择矩阵 <span class="arithmatex">\(S = \operatorname{diag}(1,1,0,0,0,1)\)</span>：
 <span class="arithmatex">\(v = S v_{\text{img}} + (I-S)v_{\text{pos}}\)</span>。</p>
-<p><strong>为什么更稳</strong>：因为它<strong>把两种方法各自最不擅长的那条路堵死了</strong>。</p>
-<p>· IBVS 的软肋是「用后退偷懒」—— 现在 <span class="arithmatex">\(v_z\)</span> 被 <span class="arithmatex">\(S\)</span> 切走，退不动了；
+<p><strong>为什么更稳</strong>：因为它<strong>把两种方法各自最不擅长的路堵死了</strong>。</p>
+<p>· IBVS 的软肋是「用后退偷懒」—— 现在 <span class="arithmatex">\(v_z\)</span> 被 <span class="arithmatex">\(S\)</span> 切走，退不动；
 · PBVS 的软肋是「让目标出画」—— 现在面内三个自由度仍由 IBVS 的图像误差盯着，特征不出画。</p>
 <p>算例对照最清楚：同一个 170° 坏初值，
-IBVS 单干退到 9.228 m，混合方案<strong>距离恒为 0.800 m</strong>，而图像误差照样收敛到 0；
-小偏差场景 116.62 px 收敛到 0.0073 px，<strong>精度没有打折</strong>。</p>
+IBVS 单干退到 9.228 m，混合方案<strong>距离恒为 0.800 m</strong>，图像误差照样收敛到 0；
+小偏差场景 116.62 px 收敛到 0.0073 px，<strong>精度没打折</strong>。</p>
 <p><strong>一句话</strong>：<strong>混合不是「两种方法取平均」，而是「按自由度分工」——
-稳的来源不是折中，而是让每个自由度都由最懂它的那个误差来管。</strong></p>
+稳的来源不是折中，而是让每个自由度都由最懂它的误差来管。</strong></p>
 </details>
-<p><strong>Q4</strong> 手眼标定在解决什么问题？为什么视觉延迟会让「增益上限」直接掉一半？</p>
+<p><strong>Q4</strong> 手眼标定解决什么问题？为什么视觉延迟会让「增益上限」直接掉一半？</p>
 <details class="note">
 <summary>提示</summary>
 <p>手眼标定的方程是 <span class="arithmatex">\(AX = XB\)</span>，三个字母分别是谁的运动？
-延迟闭环 <span class="arithmatex">\(x[n+1] = x[n] - \mu x[n-k]\)</span> 里，<span class="arithmatex">\(k\)</span> 每加 1 会发生什么？</p>
+延迟闭环 <span class="arithmatex">\(x[n+1] = x[n] - \mu x[n-k]\)</span> 里，<span class="arithmatex">\(k\)</span> 每加 1 会怎样？</p>
 </details>
 <details class="success">
 <summary>解答</summary>
-<p><strong>手眼标定解决的是「相机装在哪」</strong>。视觉测量给出的是<strong>目标相对相机</strong>的位姿，
-可机器人要动的是<strong>末端</strong> —— 中间缺一个固定变换 <span class="arithmatex">\(X\)</span>（相机与末端的关系）。
-让末端做若干次运动：手（末端）的运动记为 <span class="arithmatex">\(A\)</span>，相机看到的运动记为 <span class="arithmatex">\(B\)</span>。
-因为相机被末端「拎着」，同一个 <span class="arithmatex">\(X\)</span> 必须同时把两个视角的运动对齐，于是</p>
+<p><strong>手眼标定解决的是「相机装在哪」</strong>。视觉测量给出<strong>目标相对相机</strong>的位姿，
+可机器人要动的是<strong>末端</strong> —— 中间缺个固定变换 <span class="arithmatex">\(X\)</span>（相机与末端的关系）。
+让末端做几次运动：手（末端）的运动记为 <span class="arithmatex">\(A\)</span>，相机看到的运动记为 <span class="arithmatex">\(B\)</span>。
+因为相机被末端「拎着」，同一个 <span class="arithmatex">\(X\)</span> 必须把两个视角的运动对齐，于是</p>
 <div class="arithmatex">\[
 A X = X B
 \]</div>
@@ -12884,11 +12851,11 @@ x[n+1] = x[n] - \mu\,x[n-k]
 \]</div>
 <p>特征方程多了 <span class="arithmatex">\(k\)</span> 个根。可证明稳定上限为 <span class="arithmatex">\(\mu_{\max} = 2\sin\dfrac{\pi}{2(2k+1)}\)</span>：</p>
 <p>· <span class="arithmatex">\(k = 0\)</span> → <span class="arithmatex">\(2.00\)</span>；<span class="arithmatex">\(k = 1\)</span> → <span class="arithmatex">\(1.00\)</span>；<span class="arithmatex">\(k = 2\)</span> → <span class="arithmatex">\(0.618\)</span>；<span class="arithmatex">\(k = 3\)</span> → <span class="arithmatex">\(0.445\)</span>。</p>
-<p><strong>一帧延迟就把上限从 2 砍到 1</strong>，之后每加一帧继续掉。它意味着：
+<p><strong>一帧延迟就把上限从 2 砍到 1</strong>，之后每加一帧继续掉。这意味着：
 要么把增益 <span class="arithmatex">\(\lambda\)</span> 压到 <span class="arithmatex">\(\mu_{\max}/\Delta t\)</span> 以下（响应变慢），
-要么把帧率、传输、算法耗时压下去（成本上升）—— <strong>两者共用同一个增益，只能选一个。</strong></p>
+要么把帧率、传输、算法耗时压下去（成本上升）—— <strong>两者共用同一个增益，只能选一。</strong></p>
 <p><strong>一句话</strong>：<strong>手眼标定把「相机看到的」翻译成「末端要动的」；
-而延迟决定了这个翻译能多「实时」—— 系统成败，一半在标定，一半在延迟。</strong></p>
+而延迟决定这个翻译能多「实时」—— 系统成败，一半在标定，一半在延迟。</strong></p>
 </details>
 <hr />
 <h2 id="_8">小结<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
@@ -12964,18 +12931,18 @@ x[n+1] = x[n] - \mu\,x[n-k]
 </table>
 <p><strong>四条最容易出错的地方</strong>：</p>
 <ol>
-<li><strong>把「收敛」当成「没问题」</strong> —— PBVS 的位姿误差指数收敛得漂漂亮亮，目标却可能全程在画面外；IBVS 的特征单调收敛，相机却跑了十几倍的路。<strong>看误差曲线之前，先问这条误差里有没有你真正在乎的东西</strong></li>
-<li><strong>误差与雅可比不同源</strong> —— 图像雅可比用归一化坐标推出来，就得配归一化坐标的误差；混用像素误差，解出的速度会大到荒谬（本页算例：相机飞到 <span class="arithmatex">\(10^{7}\)</span> 米外）</li>
-<li><strong>拿 IBVS 或直接法去对付「大初始偏差」</strong> —— IBVS 会回退（170° → 9.228 m），直接法会掉进局部极小（12 px 就卡死）；<strong>工程上要么用混合、要么用金字塔、要么先做一次粗定位把偏差拉进收敛域</strong></li>
-<li><strong>把延迟当「实现细节」</strong> —— 相机帧率、传输与算法耗时都会变成延迟帧数 <span class="arithmatex">\(k\)</span>，而 <span class="arithmatex">\(k\)</span> 一增，增益上限就掉。<strong>系统调试时如果发现「增益加不上去」，先量一量延迟，别急着怀疑模型</strong></li>
+<li><strong>把「收敛」当成「没问题」</strong> —— PBVS 的位姿误差指数收敛得漂亮，目标却可能全程在画面外；IBVS 的特征单调收敛，相机却跑了十几倍的路。<strong>看误差曲线前，先问这条误差里有没有你真正在乎的</strong></li>
+<li><strong>误差与雅可比不同源</strong> —— 图像雅可比用归一化坐标推出，就得配归一化坐标的误差；混用像素误差，解出的速度大得荒谬（本页算例：相机飞到 <span class="arithmatex">\(10^{7}\)</span> 米外）</li>
+<li><strong>拿 IBVS 或直接法去对付「大初始偏差」</strong> —— IBVS 会回退（170° → 9.228 m），直接法会掉进局部极小（12 px 就卡死）；<strong>工程上要么用混合、要么用金字塔、要么先粗定位把偏差拉进收敛域</strong></li>
+<li><strong>把延迟当「实现细节」</strong> —— 相机帧率、传输与算法耗时都会变成延迟帧数 <span class="arithmatex">\(k\)</span>，而 <span class="arithmatex">\(k\)</span> 一增，增益上限就掉。<strong>系统调试时若发现「增益加不上去」，先量延迟，别急着怀疑模型</strong></li>
 </ol>
 <hr />
 <p><strong>下一章</strong>：<a href="../simultaneous-localization-mapping/">同时地图构建与定位</a></p>
 <p>这一页把「<strong>看见之后怎么动</strong>」讲完了 —— 从位置法、图像法、混合法到直接法，
-再回到手眼标定与延迟这两件系统级的事。
-可前面所有内容都建立在同一个隐含前提上：<strong>机器人知道「自己在世界里的哪」</strong>。
+再回到手眼标定与延迟这两件系统级事。
+可前面所有内容都建立在一个隐含前提上：<strong>机器人知道「自己在世界里的哪」</strong>。
 一旦走出工位、走进未知环境，这个前提就崩了 —— <strong>没有地图，也没有自己的位姿</strong>。
-下一章转入<strong>同时地图构建与定位（SLAM）</strong>，看机器人如何<strong>一边走、一边把地图和自己在图里的位置同时估出来</strong>。</p>
+下一章转入<strong>同时地图构建与定位（SLAM）</strong>，看机器人<strong>一边走、一边把地图和自己在图里的位置估出来</strong>。</p>
 <p><strong>上一页</strong>：<a href="../visual-measurement/">机器人的视觉测量</a></p>
 <nav class="kb-relnav" aria-label="前置与后续知识"><div class="kb-navitem"><span class="kb-navlabel">前置知识</span><span class="kb-navlinks"><a href="../visual-measurement/">机器人的视觉测量</a></span></div><div class="kb-navitem"><span class="kb-navlabel">后续应用</span><span class="kb-navlinks"><a href="../simultaneous-localization-mapping/">同时地图构建与定位</a></span></div></nav>
 

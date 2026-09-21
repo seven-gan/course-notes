@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的 —— 但「对」需要证明。">
+    <meta name="description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的，但需要证明：这样做能让平均错误率最小，并把这个错误率算出来。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="最小错误率决策">
   
-  <meta property="og:description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的 —— 但「对」需要证明。">
+  <meta property="og:description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的，但需要证明：这样做能让平均错误率最小，并把这个错误率算出来。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/pattern-recognition/bayes-min-error/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="最小错误率决策">
   
-  <meta name="twitter:description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的 —— 但「对」需要证明。">
+  <meta name="twitter:description" content="最小错误率决策：上一页贝叶斯决策的数学基础把后验概率 P(ω_i | x) 算出来了。这一页要回答一个更基本的问题：拿到后验概率之后，凭什么可以说「该判给哪一类」？一个很自然的想法是「谁的后验概率大就判谁」。这个想法是对的，但需要证明：这样做能让平均错误率最小，并把这个错误率算出来。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -12468,10 +12468,8 @@
 <p><strong>拿到后验概率之后，凭什么可以说「该判给哪一类」？</strong></p>
 </blockquote>
 <p>一个很自然的想法是「谁的后验概率大就判谁」。
-这个想法<strong>是对的</strong> —— 但「对」需要证明。
-这一页的核心，就是把「谁大判谁」这句话，
-证明成「<strong>这样做能让平均错误率最小</strong>」，
-并且把这个平均错误率算出来。</p>
+这个想法是对的，但需要证明：
+<strong>这样做能让平均错误率最小</strong>，并把这个错误率算出来。</p>
 <table>
 <thead>
 <tr>
@@ -12534,8 +12532,6 @@
 </tr>
 </tbody>
 </table>
-<p>读懂这四步，你就不是在「接受一个结论」，
-而是在<strong>跟着一个证明走完</strong></p>
 </div>
 <hr />
 <h2 id="_2">一、判决问题：怎么把后验变成一次决定<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -12568,11 +12564,9 @@
 <div class="arithmatex">\[\text{判 } \omega_1 \quad \text{当} \quad P(\omega_1 \mid x) \gt P(\omega_2 \mid x); \qquad \text{否则判 } \omega_2\]</div>
 <p><strong>多类情形</strong>（<span class="arithmatex">\(c \geq 3\)</span>）：</p>
 <div class="arithmatex">\[\text{判 } \omega_i \quad \text{当} \quad P(\omega_i \mid x) = \max_{j=1,\dots,c} P(\omega_j \mid x)\]</div>
-<p><strong>这个规则的朴素读法</strong>：
-「看到 <span class="arithmatex">\(x\)</span> 之后，哪一类最可能，就说是哪一类。」</p>
 <p><strong>它还有一个常用名字</strong>：<strong>最大后验（MAP, Maximum A Posteriori）判决</strong></p>
 <h3 id="12">1.2 判决规则画出来是什么样子<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p>先不看公式，先看图。<strong>判决规则在几何上只做一件事：
+<p><strong>判决规则在几何上只做一件事：
 在特征轴上找一个分界点，左边归一类、右边归另一类。</strong></p>
 <p>下面这张图把上一页的信号设定画成两条「加权密度」曲线
 （加权密度 = 似然 × 先验，第六节会正式定义）：</p>
@@ -13099,7 +13093,6 @@ L 261.394688 31.306588
 </tr>
 </tbody>
 </table>
-<p><strong>一句话</strong>：后面所有的推导，都是在回答<strong>「那条虚线为什么在那里」</strong></p>
 <p><strong>两条尾巴先记个印象</strong>：把横轴拉到很远的地方（<span class="arithmatex">\(x\)</span> 很大或很小）会发现，
 更「胖」的那条曲线（<span class="arithmatex">\(\omega_2\)</span>，标准差 <span class="arithmatex">\(4\)</span>）最终反而更高。
 这说明两条曲线的交点<strong>不止一个</strong> —— 第六节会专门处理这件事</p>
@@ -13123,11 +13116,9 @@ L 261.394688 31.306588
 </tr>
 </tbody>
 </table>
-<p><strong>第二个问题尤其关键</strong>：如果不知道下界在哪，
-就算当前方法表现很好，你也无法知道「还有多少改进空间」。</p>
-<p><strong>所以我们要给「判决」配一个可度量的目标</strong> ——
-这个目标就是<strong>平均错误率</strong>。
-然后证明：MAP 判决恰好让它最小</p>
+<p><strong>第二个问题尤其关键</strong>：不知道下界在哪，就无法知道「还有多少改进空间」。</p>
+<p><strong>所以我们要给「判决」配一个可度量的目标</strong>：<strong>平均错误率</strong> ——
+再证明 MAP 判决恰好让它最小</p>
 <h3 id="14">1.4 把「判错」写成一个概率<a class="headerlink" href="#14" title="Permanent link">&para;</a></h3>
 <p>要给判决定目标，第一步是<strong>把「判错」量化</strong>。</p>
 <p><strong>注意「判错」这件事的概率性质</strong>：给定 <span class="arithmatex">\(x\)</span> 之后，
@@ -13171,15 +13162,14 @@ P(\omega_1 \mid x), &amp; \text{若判 } \omega_2
 <p>于是「选后验大的那一类」等价于「<strong>选条件错误率小的那一类</strong>」：</p>
 <div class="arithmatex">\[\min\{\,P(\omega_2 \mid x),\; P(\omega_1 \mid x)\,\}
 = 1 - \max\{\,P(\omega_1 \mid x),\; P(\omega_2 \mid x)\,\}\]</div>
-<p><strong>这句话是整页的枢纽</strong>，用文字再说一遍：</p>
+<p><strong>这句话是整页的枢纽</strong>：</p>
 <blockquote>
 <p>判 <span class="arithmatex">\(\omega_1\)</span> 会错成 <span class="arithmatex">\(P(\omega_2 \mid x)\)</span>，判 <span class="arithmatex">\(\omega_2\)</span> 会错成 <span class="arithmatex">\(P(\omega_1 \mid x)\)</span>。
 想让错误概率小，就该选<strong>使错的那一项更小</strong>的那个判决 ——
 而这一项正好是<strong>另一类的后验</strong>。
 所以「让错误概率最小」 <span class="arithmatex">\(\iff\)</span> 「让被选中那一类的后验最大」</p>
 </blockquote>
-<p>这就把「谁大判谁」和「错误率最小」接上了。
-下一步（第三节）要做的，是把「每个 <span class="arithmatex">\(x\)</span> 上的错误率」汇总成「整体错误率」，
+<p>下一步（第三节）要做的，是把「每个 <span class="arithmatex">\(x\)</span> 上的错误率」汇总成「整体错误率」，
 并证明逐点最小确实能推出整体最小。</p>
 <h3 id="16">1.6 判决的翻转与条件错误率<a class="headerlink" href="#16" title="Permanent link">&para;</a></h3>
 <p>沿用上一页的信号设定（<strong>鲈鱼 <span class="arithmatex">\(\omega_1\)</span>：均值 15cm、标准差 3cm；
@@ -13478,10 +13468,6 @@ P(\omega_2 \mid x) = \frac{p(x \mid \omega_2)P(\omega_2)}{p(x)}\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>只有 <span class="arithmatex">\(x = 19.0\)</span> 这一行两种做法分歧</strong> ——
-似然比 <span class="arithmatex">\(0.7262\)</span> 落在 <span class="arithmatex">\(1\)</span> 与门槛 <span class="arithmatex">\(0.6667\)</span> <strong>之间</strong>，
-于是「只比似然」判 <span class="arithmatex">\(\omega_2\)</span>、正规判决判 <span class="arithmatex">\(\omega_1\)</span>
-这正是「先验门槛」在起作用的地方</p>
 <p><strong>为什么 <span class="arithmatex">\(18.0\)</span> 那一行的似然比正好是 <span class="arithmatex">\(4/3\)</span></strong>：
 两类的 <span class="arithmatex">\(|x - \mu_i|/\sigma_i\)</span> 恰好都等于 <span class="arithmatex">\(1\)</span>（标准化距离相同），
 密度只差前因子 <span class="arithmatex">\(\sigma_2/\sigma_1 = 4/3\)</span> ——
@@ -13770,9 +13756,8 @@ p(x \mid \omega_i)P(\omega_i) = \max_{j} p(x \mid \omega_j)P(\omega_j)\]</div>
 </tr>
 </tbody>
 </table>
-<p><strong>这个定义的关键点</strong>：
-<span class="arithmatex">\(p(x)\)</span> 是<strong>非负的</strong>（密度不可能小于 0）。
-<strong>这一点是下一步证明的全部依据</strong></p>
+<p><strong>这个定义的关键点</strong>：<span class="arithmatex">\(p(x)\)</span> 是<strong>非负的</strong>（密度不可能小于 0），
+这是下一步证明的全部依据</p>
 <p><strong>离散特征的情形</strong>：积分换成求和，</p>
 <div class="arithmatex">\[P(\text{error}) = \sum_{x} P(\text{error} \mid x)\, P(x)\]</div>
 <p><strong>逻辑完全一样</strong>，<span class="arithmatex">\(P(x) \geq 0\)</span>。本页后面用连续情形，
@@ -13866,7 +13851,7 @@ P(\omega_1 \mid x), &amp; \text{规则在 } x \text{ 处判 } \omega_2
 这也是它如此干净的原因</p>
 </div>
 <h3 id="34">3.4 由证明得到的判决规则<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
-<p>既然「逐点挑最小错误率」是最优的，把这句话写出来：</p>
+<p>既然逐点最优，把结论写出来：</p>
 <div class="arithmatex">\[\text{在 } x \text{ 处，选使 } P(\text{error} \mid x) \text{ 最小的那一类}\]</div>
 <p>而由 1.5 节，<span class="arithmatex">\(P(\text{error} \mid x)\)</span> 就是「另一类的后验」，
 所以「让错误率最小」等价于「<strong>判给后验最大的类</strong>」：</p>
@@ -16604,8 +16589,8 @@ L 358.279688 190.343531
 </div>
 <hr />
 <h3 id="53">5.3 用标准正态分布函数手算<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
-<p>上面的公式虽然清楚，但要算积分。
-在<strong>高斯情形</strong>下，积分有现成的表达 —— 用标准正态累积分布函数 <span class="arithmatex">\(\Phi\)</span>。</p>
+<p>上面的公式要算积分；<strong>高斯情形</strong>下积分有现成表达 ——
+用标准正态累积分布函数 <span class="arithmatex">\(\Phi\)</span>。</p>
 <p><strong>先做标准化</strong>。对于正态分布，<span class="arithmatex">\(x \sim \mathcal{N}(\mu, \sigma^2)\)</span> 时，</p>
 <div class="arithmatex">\[\int_{t}^{\infty} p(x\mid\omega_i)\,dx = 1 - \Phi\!\left(\frac{t - \mu_i}{\sigma_i}\right),
 \qquad
@@ -16614,7 +16599,6 @@ L 358.279688 190.343531
 <p>所以两类问题的错误率变成</p>
 <div class="arithmatex">\[P(\text{error}) = P(\omega_1)\Big[1 - \Phi(z_1)\Big] + P(\omega_2)\,\Phi(z_2),
 \qquad z_i = \frac{t - \mu_i}{\sigma_i}\]</div>
-<p><strong>这就是「查表就能算」的形式</strong></p>
 <p><strong>代入本页数值</strong>：</p>
 <table>
 <thead>
@@ -16707,12 +16691,11 @@ L 358.279688 190.343531
 </tr>
 </tbody>
 </table>
-<p><strong>第三条要小心理解</strong>：先验悬殊时，
-判决会<strong>偏向先验大的那一类</strong>（因为总错误率更小）。
+<p><strong>第三条要小心理解</strong>：先验悬殊时，判决会<strong>偏向先验大的那一类</strong>。
 代价是<strong>少数类几乎全被判错</strong>
 这正是 <a href="../bayes-min-risk/">最小风险决策</a>（尚未撰写）要解决的问题 ——
 当少数类的错判代价很高时，「总错误率最小」并不是我们想要的目标。</p>
-<p><strong>先看图</strong>。把两类均值固定、先验相等，只让「均值距离 / 标准差」这个比值
+<p>把两类均值固定、先验相等，只让「均值距离 / 标准差」这个比值
 <span class="arithmatex">\(d = |\mu_1-\mu_2|/\sigma\)</span> 变化，错误率随它怎么走：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 362.599688 224.009187" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="错误率随两类均值距离 d 的变化；距离越近错误率越高">
@@ -17199,30 +17182,6 @@ L 358.279688 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>用查表法手算「分布宽度」的影响</strong>（两类均值固定为 <span class="arithmatex">\(18\)</span> 与 <span class="arithmatex">\(22\)</span>、先验相等）：</p>
-<p><strong>看这张表</strong>：</p>
-<table>
-<thead>
-<tr>
-<th>观察</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><span class="arithmatex">\(\sigma\)</span> 从 4 降到 1，错误率从 <span class="arithmatex">\(0.309\)</span> 降到 <span class="arithmatex">\(0.023\)</span></td>
-<td><strong>分布越窄，重叠越少，错误率越低</strong> ✓</td>
-</tr>
-<tr>
-<td>闭式解 <span class="arithmatex">\(\Phi\!\left(-\dfrac{\Delta/2}{\sigma}\right)\)</span> 与积分结果一致</td>
-<td>等方差情形的现成公式</td>
-</tr>
-<tr>
-<td>错误率<strong>始终不为 0</strong></td>
-<td>只要 <span class="arithmatex">\(\sigma \gt 0\)</span>，两条高斯曲线就有重叠区 ⚠</td>
-</tr>
-</tbody>
-</table>
 <p><strong>为什么闭式解长这样</strong>：等方差等先验时边界在中点，
 错误率 = 类别 1 落到右半边（概率 <span class="arithmatex">\(1 - \Phi(\frac{t-\mu_1}{\sigma})\)</span>），
 而 <span class="arithmatex">\(t - \mu_1 = \Delta/2\)</span>，所以是 <span class="arithmatex">\(\Phi(-\frac{\Delta}{2\sigma})\)</span>
@@ -17265,7 +17224,6 @@ L 358.279688 187.272
 <p><strong>这个手算说明什么</strong>：不需要任何工具就能把边界<strong>夹在两数之间</strong>。
 想要更精确的值，把区间对半再算一次即可 ——
 这正是下一节二分法的手工版本</p>
-<p><strong>「两条曲线等高」这件事，可以直接手算核对</strong>：</p>
 <h3 id="62">6.2 二分法：把边界算成一个数<a class="headerlink" href="#62" title="Permanent link">&para;</a></h3>
 <p>边界方程 <span class="arithmatex">\(g(x) = 0\)</span> 一般<strong>没有解析解</strong>（本页的参数方差不等，
 所以方程不是简单的线性式）。<strong>实用做法是数值求解</strong>。</p>
@@ -17420,11 +17378,6 @@ L 358.279688 187.272
 两位小数（<span class="arithmatex">\(19.13\)</span>）与四位小数（<span class="arithmatex">\(19.1346\)</span>）给出的 <span class="arithmatex">\(z_2\)</span>
 分别是 <span class="arithmatex">\(-0.7175\)</span> 与 <span class="arithmatex">\(-0.7163\)</span> —— 在表里就会差一个格子</p>
 </div>
-<p><strong>先确认区间两端异号：</strong></p>
-<ul>
-<li>g(18) = +2.419707e-02 (&gt;0 判 w1)</li>
-<li>g(21) = -2.786862e-02 (&lt;0 判 w2)</li>
-</ul>
 <p><strong>二分法结果：</strong></p>
 <ul>
 <li>上边界 t_hi = 19.134612877004</li>
@@ -17706,7 +17659,6 @@ L 358.279688 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>情形二的手算对照表</strong>：</p>
 <p><strong>读这张表</strong>：</p>
 <table>
 <thead>
@@ -17900,7 +17852,6 @@ L 358.279688 187.272
 <strong>判别式也必须为正</strong>（因为图上两条曲线确实相交）；
 若算出负的判别式，一定是代数错了，不用怀疑图形 ⚠</p>
 </div>
-<p><strong>情形三的手算对照表</strong>（把两个因素分开）：</p>
 <p><strong>这张表把两个因素的影响分开了</strong>，是本页最有价值的对照之一：</p>
 <table>
 <thead>
@@ -18202,11 +18153,6 @@ L 358.279688 187.272
 是<strong>一条完全独立的路径</strong>。
 两条路径给出同一个数，才叫「验证」；
 如果模拟与解析差了几十倍标准误，那就说明推导里有错</p>
-<p><strong>为什么模拟能验证解析结果</strong>：
-模拟<strong>完全没有用</strong>积分公式 —— 它只是
-「生成样本、判决、数错」。
-两条独立路径得到同一个数（差在抽样误差范围内），
-说明我们的解析推导没错</p>
 <p><strong>注意最后一行</strong>：差值与「抽样误差量级」比较，
 而不是要求差为零 —— <strong>模拟结果本身就是随机的</strong>，
 不可能精确等于理论值
@@ -18435,12 +18381,6 @@ L 358.279688 187.272
 也就是 <span class="arithmatex">\(P(\omega_2\mid x) = 1/6 \approx 0.1667\)</span> 的地方 ——
 <strong>代价比把判决门槛从「后验 <span class="arithmatex">\(0.5\)</span>」压到了「后验 <span class="arithmatex">\(0.1667\)</span>」</strong>
 这就是下一节要讲的「最小风险决策」的核心机制。</p>
-<p><strong>这个等价关系，以及「换损失就换判决」这件事，用两张手算表看</strong>：</p>
-<p><strong>看第二张表的第一行</strong>（<span class="arithmatex">\(x = 16.0\)</span>）：
-<strong>最小风险判 <span class="arithmatex">\(\omega_2\)</span>，但最大后验判 <span class="arithmatex">\(\omega_1\)</span></strong> —— 两者不一致了</p>
-<p><strong>为什么</strong>：把「把 <span class="arithmatex">\(\omega_1\)</span> 错判成 <span class="arithmatex">\(\omega_2\)</span>」的损失从 <span class="arithmatex">\(1\)</span> 提到 <span class="arithmatex">\(5\)</span> 后，
-判 <span class="arithmatex">\(\omega_2\)</span> 的风险里那一项被放大，
-于是<strong>判决更倾向于不冒这个险，宁可多判 <span class="arithmatex">\(\omega_1\)</span></strong></p>
 <p><strong>这就是下一节要讲的内容</strong>：
 <strong>当两类错误的代价不同时，「错误率最小」不再是正确的目标</strong> ——
 应该最小化<strong>风险</strong>。</p>
@@ -18568,7 +18508,7 @@ L 358.279688 187.272
 </tbody>
 </table>
 <p><strong>两次判决相反，说明边界在 <span class="arithmatex">\(18.5\)</span> 与 <span class="arithmatex">\(19.5\)</span> 之间</strong>
-这与第 6.2 节算出的 <span class="arithmatex">\(19.1346\)</span> 一致。    这与第 6.2 节算出的 <span class="arithmatex">\(19.1346\)</span> 一致。</p>
+这与第 6.2 节算出的 <span class="arithmatex">\(19.1346\)</span> 一致。</p>
 <p><strong>把 <span class="arithmatex">\(x = 19.5\)</span> 的那一步也手算到底</strong>（其余同理）：</p>
 <p><strong>似然。</strong> 指数项</p>
 <div class="arithmatex">\[\frac{(19.5-15)^2}{2\times 3^2} = \frac{20.25}{18} \approx 1.125000,
@@ -18586,8 +18526,6 @@ L 358.279688 187.272
 <div class="arithmatex">\[P(\omega_1\mid 19.5) \approx \frac{0.025904}{0.058720} \approx 0.4411,
 \qquad P(\omega_2\mid 19.5) \approx \frac{0.032816}{0.058720} \approx 0.5589\]</div>
 <p>后验 2 更大 ⇒ <strong>判 <span class="arithmatex">\(\omega_2\)</span></strong>，条件错误率 <span class="arithmatex">\(0.4411\)</span> ✓</p>
-<p><strong>两次判决相反，说明边界夹在 <span class="arithmatex">\(18.5\)</span> 与 <span class="arithmatex">\(19.5\)</span> 之间</strong> ——
-这道题真正要练的是<strong>「怎么用两个点把边界夹住」</strong> ✓</p>
 </details>
 <hr />
 <h3 id="2">例题 2：手算判决边界，并用二分法核对<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
@@ -18931,8 +18869,6 @@ L 358.279688 187.272
 </tr>
 </tbody>
 </table>
-<p>其中 <span class="arithmatex">\(\omega_1\)</span> 的指数是 <span class="arithmatex">\(-\dfrac{64}{8} = -8\)</span>，
-所以似然是 <span class="arithmatex">\(0.199471 \times e^{-8} \approx 0.000067\)</span>。</p>
 <p><strong>第二步：乘先验得分子。</strong></p>
 <table>
 <thead>
@@ -18963,8 +18899,7 @@ L 358.279688 187.272
 <div class="arithmatex">\[P(\omega_2\mid 20) \approx \frac{0.053241}{0.059737} \approx 0.8913\]</div>
 <div class="arithmatex">\[P(\omega_3\mid 20) \approx \frac{0.006476}{0.059737} \approx 0.1084\]</div>
 <p><strong>校验</strong>：<span class="arithmatex">\(0.0003 + 0.8913 + 0.1084 = 1.0000\)</span></p>
-<p><strong>这一题的全部数字都在下面这张手算表里</strong>，
-每一列都能只用笔算出来（<span class="arithmatex">\(\sqrt{2\pi} \approx 2.5066\)</span>）：</p>
+<p><strong>全部数字都在下面这张手算表里</strong>（<span class="arithmatex">\(\sqrt{2\pi} \approx 2.5066\)</span>）：</p>
 <table>
 <thead>
 <tr>
@@ -19020,7 +18955,7 @@ L 358.279688 187.272
 <p><strong>把 <span class="arithmatex">\(\omega_1\)</span> 那一行也看清</strong>：标准化距离是 <span class="arithmatex">\(4\)</span>，
 所以指数项高达 <span class="arithmatex">\(8\)</span>，<span class="arithmatex">\(e^{-8} \approx 0.000335\)</span> ——
 似然被压到 <span class="arithmatex">\(10^{-5}\)</span> 量级，<strong>这就是「先验再大也救不回来」的情形</strong></p>
-<p><strong>第五步：判决与条件错误率。</strong>    <strong>第五步：判决与条件错误率。</strong></p>
+<p><strong>第五步：判决与条件错误率。</strong></p>
 <p>后验最大的是 <span class="arithmatex">\(\omega_2\)</span>（<span class="arithmatex">\(0.8913\)</span>），所以<strong>判 <span class="arithmatex">\(\omega_2\)</span></strong></p>
 <div class="arithmatex">\[P(\text{error}\mid 20) = 1 - 0.8913 = 0.1087\]</div>
 <p><strong>注意</strong>：<span class="arithmatex">\(x = 20\)</span> 距离 <span class="arithmatex">\(\omega_2\)</span> 的均值 <span class="arithmatex">\(18\)</span> 只有 <span class="arithmatex">\(2\)</span>（一个标准差），
@@ -19089,8 +19024,6 @@ L 358.279688 187.272
 </tr>
 </tbody>
 </table>
-<p><strong>两种做法给出相反的结论</strong>：
-只比似然判 <span class="arithmatex">\(\omega_2\)</span>，正确的贝叶斯判决是 <span class="arithmatex">\(\omega_1\)</span></p>
 <p><strong>加深理解</strong>：这个反例说明
 <strong>「证据」和「先验」是两件必须同时考虑的事</strong> ——
 <span class="arithmatex">\(x=19\)</span> 的证据略偏向 <span class="arithmatex">\(\omega_2\)</span>（似然比 <span class="arithmatex">\(0.726 \lt 1\)</span>），
@@ -19306,7 +19239,6 @@ L 358.279688 187.272
 <p>这正是「贝叶斯错误率是下界」的实践含义：
 错误率已经贴着这条下限走时，继续在模型上投入只会白费力气</p>
 <p><strong>实践含义</strong>：
-要降低错误率，只有三条路：    <strong>实践含义</strong>：
 要降低错误率，只有三条路：</p>
 <table>
 <thead>

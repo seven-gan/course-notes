@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   
-    <meta name="description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：四个点 (0,0),(0,1),(1,0),(1,1)，两个对角点为正类、另两个为负类。">
+    <meta name="description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：这一页讲怎么突破这条直线 —— 从多层感知器到深度学习。四个点：从后两式相加得 w_1+w_2+2b 0；而前两式相加得 w_1+w_2+2b 0 ——最直接的想法：让判别函数本身非线性。">
   
   
   
@@ -62,7 +62,7 @@
   <meta property="og:site_name" content="我的学习知识库">
   <meta property="og:title" content="典型非线性分类器">
   
-  <meta property="og:description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：四个点 (0,0),(0,1),(1,0),(1,1)，两个对角点为正类、另两个为负类。">
+  <meta property="og:description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：这一页讲怎么突破这条直线 —— 从多层感知器到深度学习。四个点：从后两式相加得 w_1+w_2+2b 0；而前两式相加得 w_1+w_2+2b 0 ——最直接的想法：让判别函数本身非线性。">
   
   
   <meta property="og:url" content="https://seven-gan.github.io/course-notes/kb/courses/pattern-recognition/nonlinear-classifier/">
@@ -74,7 +74,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="典型非线性分类器">
   
-  <meta name="twitter:description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：四个点 (0,0),(0,1),(1,0),(1,1)，两个对角点为正类、另两个为负类。">
+  <meta name="twitter:description" content="典型非线性分类器：线性分类器有一个硬性天花板：它只能画一条直线（或一个超平面）。异或（XOR）问题就是最简单的反例：这一页讲怎么突破这条直线 —— 从多层感知器到深度学习。四个点：从后两式相加得 w_1+w_2+2b 0；而前两式相加得 w_1+w_2+2b 0 ——最直接的想法：让判别函数本身非线性。">
   
   <meta name="twitter:image" content="https://seven-gan.github.io/course-notes/kb/assets/images/og-cover.png">
 
@@ -11852,9 +11852,7 @@
 <blockquote>
 <p><strong>它只能画一条直线（或一个超平面）。</strong></p>
 </blockquote>
-<p><strong>异或（XOR）问题</strong>就是最简单的反例：
-四个点 <span class="arithmatex">\((0,0),(0,1),(1,0),(1,1)\)</span>，
-两个对角点为正类、另两个为负类。</p>
+<p><strong>异或（XOR）问题</strong>就是最简单的反例：</p>
 <p><strong>没有任何一条直线能分开它们</strong></p>
 <p>这一页讲<strong>怎么突破这条直线</strong> —— 从多层感知器到深度学习。</p>
 <div class="admonition tip">
@@ -11941,7 +11939,7 @@ w_1+b \gt 0 \quad\text{（正类 }(1,0)\text{）}
 g(x) = w_1x_1 + w_2x_2 + w_{11}x_1^2 + w_{12}x_1x_2
 + w_{22}x_2^2 + b
 \]</div>
-<p><strong>这个判别函数画出的边界是二次曲线</strong>（椭圆、双曲线、抛物线），
+<p><strong>这个判别函数画出的边界是二次曲线</strong>，
 能分开异或问题</p>
 <p><strong>但"手工设计非线性项"很快就不可行了</strong>：</p>
 <table>
@@ -12382,8 +12380,7 @@ L 59.190313 53.829
 <p><strong>三个必须知道的点</strong>：</p>
 <p><strong>① 为什么零中心重要</strong>。
 若激活值恒为正，则某一层权重的梯度<strong>符号全部相同</strong>，
-更新只能"整体往一个方向走"，<strong>收敛变慢</strong>
-tanh 比 sigmoid 好的原因就在这里。</p>
+更新只能"整体往一个方向走"，<strong>收敛变慢</strong>。</p>
 <p><strong>② 饱和为什么致命</strong>。
 sigmoid 在 <span class="arithmatex">\(|z|\)</span> 很大时导数趋近于零。
 而反向传播是<strong>连乘</strong>——只要有一层饱和，
@@ -12394,7 +12391,6 @@ sigmoid 在 <span class="arithmatex">\(|z|\)</span> 很大时导数趋近于零�
 所以连乘时<strong>不会被压缩</strong></p>
 <p><strong>代价</strong>：负半轴导数为零 → 该神经元可能"死亡"（永远输出零）⚠</p>
 <h3 id="23">2.3 反向传播<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
-<p><strong>这是本页最核心的算法</strong>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="反向传播：误差从输出层往输入层逐层回传">
 
@@ -12584,16 +12580,13 @@ L 207.007621 103.130286
 \odot\left(W^{(l+1)\mathsf T}\boldsymbol\delta^{(l+1)}\right)
 \]</div>
 <p>其中 <span class="arithmatex">\(\odot\)</span> 是<strong>逐元素相乘</strong>（Hadamard 积）。</p>
-<p><strong>误差项 <span class="arithmatex">\(\delta\)</span> 从后一层"往回传"
-（乘 <span class="arithmatex">\(W^{\mathsf T}\)</span>），再乘本层的激活导数</strong></p>
 <p><strong>最后得到权重的梯度</strong>：</p>
 <div class="arithmatex">\[
 \frac{\partial L}{\partial W^{(l)}} = \boldsymbol\delta^{(l)}
 \left(\boldsymbol h^{(l-1)}\right)^{\mathsf T}
 \]</div>
-<p><strong>这个式子的形式很关键</strong>：<strong>本层的误差 × 上一层的输出</strong>。</p>
-<p><strong>它意味着</strong>：梯度是<strong>两个局部量的乘积</strong> ——
-这正好是"前向传播时存下激活值，反向传播时直接取用"的基础</p>
+<p><strong>这个式子的形式很关键</strong>：<strong>本层的误差 × 上一层的输出</strong>，
+即梯度是<strong>两个局部量的乘积</strong></p>
 <div class="admonition tip">
 <p class="admonition-title">反向传播为什么比数值求导快几个数量级</p>
 <p><strong>数值求导</strong>：对每个参数分别做一次扰动、重算一次前向传播。
@@ -12603,7 +12596,7 @@ L 207.007621 103.130286
 <p><strong>关键的复用机制</strong>：算第 <span class="arithmatex">\(l\)</span> 层的 <span class="arithmatex">\(\delta\)</span> 时，
 第 <span class="arithmatex">\(l+1\)</span> 层的 <span class="arithmatex">\(\delta\)</span> <strong>已经算好</strong>，可以直接用。
 这是动态规划式的复用，不是重复计算</p>
-<p>对百万参数的网络，这个差别是<strong>不可逾越的</strong> ——
+<p>对百万参数的网络，这个差别是<strong>不可逾越的</strong>。
 没有反向传播，深度学习根本跑不动。</p>
 </div>
 <hr />
@@ -13116,12 +13109,11 @@ L 184.747981 93.638
 </tr>
 </tbody>
 </table>
-<p><strong>权值共享的深层意义</strong>：它<strong>把"平移不变"这个先验写进了结构里</strong></p>
-<p><strong>为什么这对图像任务有效</strong>：一个边缘、一个纹理，
-出现在图像的任何位置都应该被同样地识别 ——
+<p><strong>权值共享的深层意义</strong>：它<strong>把"平移不变"这个先验写进了结构里</strong> ——
+一个边缘、一个纹理出现在图像的任何位置都应被同样地识别，
 <strong>没必要为每个位置各学一套参数</strong>。</p>
-<p><strong>这正是"归纳偏置"</strong>：好的结构设计能把问题的先验知识
-变成模型的一部分，从而<strong>用更少的数据学到更好的结果</strong></p>
+<p><strong>这正是"归纳偏置"</strong>：好的结构设计能把先验变成模型的一部分，
+从而<strong>用更少的数据学到更好的结果</strong></p>
 <h3 id="34">3.4 循环网络<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p><strong>处理序列数据</strong>：把同一组权重沿<strong>时间步</strong>反复使用。</p>
 <figure class="kb-fig">
@@ -13387,20 +13379,22 @@ L 262.789434 115.455345
 <li>
 <p>对照：把 x1*x2 作为第三个特征后，是否线性可分？</p>
 </li>
-<li>加了交互项后最好的「最小间隔」= 0.5426</li>
-</ul>
-<p>结论：原始二维下界为负（不可分）；加入交互项后可分 ✓</p>
-<ul>
-<li>训练 4000 轮后的输出（真实标签：0, 1, 1, 0）</li>
+<li>
+<p>加了交互项后最好的「最小间隔」= 0.5426</p>
+</li>
+<li>
+<p>训练 4000 轮后的输出（真实标签：0, 1, 1, 0）</p>
+</li>
 <li>输入 网络输出 四舍五入</li>
 <li>[0. 0.] 0.0223 0</li>
 <li>[0. 1.] 0.9719 1</li>
 <li>[1. 0.] 0.9738 1</li>
-<li>[1. 1.] 0.0342 0</li>
-</ul>
-<p>结论：4 个隐单元就足以学会异或 ✓</p>
-<ul>
-<li>sigmoid 的导数随 |z| 增大而急剧衰减</li>
+<li>
+<p>[1. 1.] 0.0342 0</p>
+</li>
+<li>
+<p>sigmoid 的导数随 |z| 增大而急剧衰减</p>
+</li>
 <li>z sigmoid(z) 导数 导数衰减倍数</li>
 <li>0.0 0.500000 2.500e-01 1 倍
 1.0 0.731059 1.966e-01 1 倍</li>
@@ -13416,13 +13410,7 @@ L 262.789434 115.455345
 1.0 1.0 1.0</li>
 <li>2.0 2.0 1.0</li>
 <li>4.0 4.0 1.0</li>
-<li>
-<p>8.0 8.0 1.0</p>
-</li>
-<li>
-<p>结论：sigmoid 在 z=8 处导数已降到 1e-3 量级，</p>
-</li>
-<li>多层连乘后梯度基本消失；ReLU 不会有这个问题 ✓</li>
+<li>8.0 8.0 1.0</li>
 </ul>
 <p><strong>三组数各自说明的事</strong>：</p>
 <table>

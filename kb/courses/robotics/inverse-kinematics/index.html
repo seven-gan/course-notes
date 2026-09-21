@@ -12024,16 +12024,13 @@
 </tr>
 </tbody>
 </table>
-<p><strong>为什么会这样</strong>：正向运动学是从关节往末端<strong>一步步乘</strong>，
-每一步都是「已知一个确定的矩阵，乘上去」，没有需要选择的地方。
+<p><strong>原因</strong>：正向运动学从关节往末端<strong>一步步乘</strong>，每步都是确定的矩阵乘法，没有选择余地；
 逆向运动学要把这个乘积<strong>反解</strong>出来 —— 得到的是一组<strong>三角函数方程</strong>。</p>
 <h3 id="12">1.2 三类麻烦，性质完全不同<a class="headerlink" href="#12" title="Permanent link">&para;</a></h3>
-<p><strong>① 多解 —— 同一个位姿，可能有好几组关节角都能到。</strong></p>
-<p>这不是「算法不好」，而是<strong>几何上真的有好几种站法</strong>：
-胳膊可以从上面绕过去，也可以从下面绕过去；肘可以朝上，也可以朝下。</p>
-<p><strong>② 无解 —— 目标本身就在机器人的能力之外。</strong></p>
-<p>末端离基座太远（够不着）或太近（缩不到那么紧），
-无论关节怎么转都到不了。</p>
+<p><strong>① 多解 —— 同一个位姿可能有好几组关节角都能到。</strong>
+这不是「算法不好」，而是<strong>几何上真有好几种站法</strong>：胳膊可以从上面或下面绕，肘可以朝上或朝下。</p>
+<p><strong>② 无解 —— 目标本身就在机器人能力之外。</strong>
+末端离基座太远（够不着）或太近（缩不到那么紧），无论关节怎么转都到不了。</p>
 <p><strong>③ 没有通用解析解 —— 结构不特殊时，只能迭代。</strong></p>
 <p>串联链越长、结构越一般，那组三角函数方程越难解出闭式。
 对一般六轴机构，<strong>没有万能的公式</strong>，
@@ -12041,10 +12038,8 @@
 <div class="admonition tip">
 <p class="admonition-title">记住这个不对称性</p>
 <p><strong>正向运动学是「算」，逆向运动学是「解」。</strong></p>
-<p>后果很实际：控制回路里可以放心地反复算正向运动学
-（快、稳定、结果唯一）；
-而逆向运动学通常只在<strong>规划阶段</strong>算一次，
-并且必须准备好处理「多解挑哪组」和「无解怎么办」。</p>
+<p>后果很实际：控制回路里可以放心地反复算正向运动学（快、稳定、结果唯一）；
+逆向运动学通常只在<strong>规划阶段</strong>算一次，且必须准备好处理「多解挑哪组」和「无解怎么办」。</p>
 </div>
 <h3 id="13">1.3 工作空间：先划清「到得了」的范围<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <p>讨论有没有解之前，先把「到得了的点」圈出来：</p>
@@ -12075,8 +12070,7 @@
 <p><strong>两条边界各有名字</strong>：</p>
 <p>· <span class="arithmatex">\(r = L_1 + L_2\)</span>：两段完全伸直，这是<strong>最远</strong>能到的地方
 · <span class="arithmatex">\(r = |L_1 - L_2|\)</span>：两段完全叠在一起，这是<strong>最近</strong>能到的地方</p>
-<p><strong>一旦目标落在区间之外，直接判「无解」，不必去迭代</strong> ——
-这是工程实现里第一步就该做的过滤。</p>
+<p><strong>一旦目标落在区间之外，直接判「无解」，不必去迭代</strong>。</p>
 <p>下图把这个「到得了」的范围画出来：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="平面两连杆的可达工作空间是一个圆环：外半径是杆长之和，内半径是最长杆与其余杆之差">
@@ -12140,13 +12134,11 @@ r^2 = x^2 + y^2 = a_1^2 + a_2^2 + 2a_1a_2\cos\theta_2
 <li>解 2：theta1 = 82.66 度 theta2 = -60.00 度 → 末端 (0.8660, 1.3000)</li>
 </ul>
 <p>工作空间外的点 (2.5, 0.0) 有解吗？ 无解</p>
-<p><strong>这个输出把两件事一起说清楚了</strong>：</p>
-<p>· <strong>两组解都精确回到同一个末端</strong> —— 逆解不难写，难在<strong>挑</strong>
-· 点 <span class="arithmatex">\((2.5, 0)\)</span> 距基座 <span class="arithmatex">\(2.5 &gt; a_1 + a_2 = 1.8\)</span>，<strong>直接判无解</strong>
-  （计算时要靠 <span class="arithmatex">\(|\cos\theta_2| &gt; 1\)</span> 挡住，走不到开方那一步）</p>
+<p>· <strong>两组解都精确回到同一个末端</strong> —— 逆解不难写，难在<strong>挑</strong>；
+· 点 <span class="arithmatex">\((2.5, 0)\)</span> 距基座 <span class="arithmatex">\(2.5 &gt; a_1 + a_2 = 1.8\)</span>，<strong>直接判无解</strong>（计算时靠 <span class="arithmatex">\(|\cos\theta_2| &gt; 1\)</span> 挡住，走不到开方那一步）。</p>
 <h3 id="24">2.4 两组解其实互为镜像<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>把坐标轴<strong>转到「基座 → 目标」的方向上</strong>再看，
-两组解就变成关于这条轴<strong>上下对称</strong>的镜像 —— 这正是「肘上 / 肘下」的由来。</p>
+两组解就变成关于这条轴<strong>上下对称</strong>的镜像。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 332.605572 245.727375" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="把目标方向转到水平来看：同一个末端点对应两组关节角，它们关于基座到目标的连线互为镜像">
 
@@ -12538,7 +12530,7 @@ z
 <figcaption>把目标方向转到水平来看：同一个末端点对应两组关节角，它们关于基座到目标的连线互为镜像</figcaption>
 </figure>
 
-<p><strong>这条对称性有个很实用的推论</strong>：
+<p><strong>推论</strong>：
 平面两连杆的能力<strong>只取决于距离 <span class="arithmatex">\(r\)</span></strong>，与目标在哪个方向无关 ——
 所以它的可达工作空间是一个<strong>圆环</strong>（内半径 <span class="arithmatex">\(|a_1-a_2|\)</span>，外半径 <span class="arithmatex">\(a_1+a_2\)</span>）。</p>
 <hr />
@@ -12569,9 +12561,6 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>为什么能拆开</strong>：因为第 4、5、6 三个关节<strong>只改变手腕的姿态，
-不移动腕心</strong>。所以先只盯住腕心这一个点解出前三个角，
-再回头解手腕的转动 —— 两个较小的方程组，各自都好解。</p>
 <p>下图把这一步拆分画出来：</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 470 244" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="腕心只随前三个关节移动，于是六轴逆解被拆成逆位置与逆姿态两步">
@@ -12635,8 +12624,7 @@ z
 \underbrace{2}_{\text{肘上/肘下}} \times
 \underbrace{2}_{\text{腕翻转}} \;=\; 8
 \]</div>
-<p><strong>所以「六轴机器人的逆解最多 8 组」</strong> ——
-这是个<strong>可以推出来的计数</strong>，不是背下来的数字。</p>
+<p><strong>所以「六轴机器人的逆解最多 8 组」</strong>。</p>
 <h3 id="34">3.4 什么时候能写出解析解<a class="headerlink" href="#34" title="Permanent link">&para;</a></h3>
 <p>有两类结构<strong>存在闭式解</strong>：</p>
 <table>
@@ -12657,11 +12645,8 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>Pieper 准则</strong>（Pieper，1968）说的是：
-只要三根相邻轴线<strong>相交或平行</strong>，那个三角函数方程组就能被<strong>因式分解</strong>成
-若干一元方程，从而解析求解。球形手腕正是它的一个特例。</p>
-<p><strong>反过来</strong>：不满足这两类条件的六轴机构，
-一般<strong>没有解析解</strong>，只能走数值迭代。</p>
+<p><strong>Pieper 准则</strong>（Pieper，1968）：只要三根相邻轴线<strong>相交或平行</strong>，那个三角函数方程组就能被<strong>因式分解</strong>成若干一元方程，从而解析求解；球形手腕正是它的一个特例。
+<strong>反过来</strong>，不满足这两类条件的六轴机构一般<strong>没有解析解</strong>，只能走数值迭代。</p>
 <h3 id="35-">3.5 一般结构的数值解法：牛顿-拉夫森<a class="headerlink" href="#35-" title="Permanent link">&para;</a></h3>
 <p>思路很朴素：<strong>把「末端位置误差」当成要消掉的量，反复修正关节角</strong>。</p>
 <p>设当前关节角 <span class="arithmatex">\(\boldsymbol{q}\)</span>，希望末端到达 <span class="arithmatex">\(\boldsymbol{p}\)</span>：</p>
@@ -12677,16 +12662,10 @@ z
 <li>初值 ( 60, 60) → theta1 = 30.00, theta2 = 60.00 度 （ 6 次迭代）</li>
 </ul>
 <p>从伸直位形 (0, 0) 出发： 失败 —— Singular matrix</p>
-<p><strong>这 4 行输出里藏了数值解法的全部特点</strong>：</p>
-<p><strong>① 迭代很快。</strong> 6～11 次就收敛到 <span class="arithmatex">\(10^{-12}\)</span> 以内 ——
-牛顿法是<strong>二阶收敛</strong>，误差平方级下降。</p>
-<p><strong>② 收敛到哪一组解，取决于初值。</strong> 
-从 <span class="arithmatex">\((10^\circ, 10^\circ)\)</span> 出发落到解 2，从 <span class="arithmatex">\((60^\circ, 60^\circ)\)</span> 出发落到解 1。
-数值法<strong>从来不告诉你"一共几组解"</strong>，它只给你<strong>离初值最近的那一组</strong>。</p>
-<p><strong>③ 初值选在奇异位形上会直接失败。</strong> 
-<span class="arithmatex">\((0^\circ, 0^\circ)\)</span> 是手臂完全伸直的位形，
-那里的雅可比<strong>不可逆</strong>（<span class="arithmatex">\(\det \boldsymbol{J} = 0\)</span>），
-<code>np.linalg.solve</code> 直接抛 <code>Singular matrix</code>。</p>
+<p><strong>① 迭代很快。</strong> 6～11 次就收敛到 <span class="arithmatex">\(10^{-12}\)</span> 以内 —— 牛顿法<strong>二阶收敛</strong>，误差平方级下降。</p>
+<p><strong>② 收敛到哪一组解取决于初值。</strong> 从 <span class="arithmatex">\((10^\circ, 10^\circ)\)</span> 出发落到解 2，从 <span class="arithmatex">\((60^\circ, 60^\circ)\)</span> 出发落到解 1 ——
+数值法<strong>从不告诉你"一共几组解"</strong>，只给<strong>离初值最近的那一组</strong>。</p>
+<p><strong>③ 初值选在奇异位形上会直接失败。</strong> <span class="arithmatex">\((0^\circ, 0^\circ)\)</span> 是手臂完全伸直的位形，那里雅可比<strong>不可逆</strong>（<span class="arithmatex">\(\det \boldsymbol{J} = 0\)</span>），<code>np.linalg.solve</code> 直接抛 <code>Singular matrix</code>。</p>
 <div class="admonition warning">
 <p class="admonition-title">工程含义：数值逆解必须配一个「安全的初值」</p>
 <p>由上面第 ②③ 条，工程实现里不能随手拿默认值当初值：</p>
@@ -12695,8 +12674,6 @@ z
 · <strong>初值避开奇异位形</strong> —— 否则迭代第一步就发散或报错
 · <strong>加迭代上限与误差阈值</strong> —— 迭代不收敛时必须能退出来，
   并向上报告「本周期无解」，而不是卡死控制回路</p>
-<p><strong>这也解释了为什么解析解仍然值钱</strong>：解析解一次给出<strong>全部</strong>解，
-可以按「离当前位置最近」去挑；数值解得换好几个初值才能拼出全貌。</p>
 </div>
 <hr />
 <h2 id="_5">四、解不唯一、或干脆没有解析解时怎么办<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -12764,11 +12741,8 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>原因</strong>：并联机构的每一条支链都是<strong>串联</strong>的，
-所以「给定末端位姿 → 各支链的关节角」是逐链独立的简单问题；
-反过来「给定各支链关节角 → 末端位姿」却要让所有支链<strong>同时满足</strong>，
-就成了耦合方程组。</p>
-<p><strong>这就是「对偶性」的含义</strong>：串联难的地方，正好是并联容易的地方。</p>
+<p><strong>原因</strong>：并联机构的每条支链都是<strong>串联</strong>的，所以「给定末端位姿 → 各支链关节角」是逐链独立的简单问题；
+反过来「给定各支链关节角 → 末端位姿」要让所有支链<strong>同时满足</strong>，就成了耦合方程组。</p>
 <div class="admonition tip">
 <p class="admonition-title">看结构决定「哪一头好算」</p>
 <p>判断机器人正逆运动学哪头容易，看<strong>运动传递的方向</strong>：</p>
@@ -13029,14 +13003,10 @@ r^2 = 0.8660^2 + 1.3000^2 = 0.7500 + 1.6900 = 2.4400
 <details class="success">
 <summary>解答</summary>
 <p><strong>因为每一条支链都是独立的串联链。</strong></p>
-<p><strong>逆向（容易）</strong>：给定末端位姿，
-每条支链的<strong>两端位置都已知了</strong>（一端接基座、一端接动平台），
-于是「求这条支链各关节角」就是逐条求解<strong>简单的串联链问题</strong> ——
-各支链<strong>互不相干</strong>，可以独立算。</p>
-<p><strong>正向（难）</strong>：给定所有支链的关节角，
-要反推动平台的位姿，就必须让<strong>所有支链同时满足</strong>约束 ——
-得到一个<strong>耦合方程组</strong>，且往往有多个解，
-还需要处理支链之间的相容性。</p>
+<p><strong>逆向（容易）</strong>：给定末端位姿，每条支链<strong>两端位置都已知</strong>（一端接基座、一端接动平台），
+于是「求这条支链各关节角」就是逐条求解<strong>简单的串联链问题</strong> —— 各支链<strong>互不相干</strong>，可独立算。</p>
+<p><strong>正向（难）</strong>：给定所有支链的关节角，要反推动平台位姿，就必须让<strong>所有支链同时满足</strong>约束 ——
+得到一个<strong>耦合方程组</strong>，且往往有多个解，还要处理支链之间的相容性。</p>
 <p><strong>这就是串联与并联的「对偶性」</strong>：</p>
 <table>
 <thead>

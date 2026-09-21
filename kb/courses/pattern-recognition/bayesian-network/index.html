@@ -12387,7 +12387,7 @@
 <div class="arithmatex">\[
 2^{d} - 1
 \]</div>
-<p><strong>这个数字增长得有多快</strong>，看下面这张表就够了。</p>
+<p><strong>这个数字增长得有多快</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -12436,9 +12436,8 @@
 </tr>
 </tbody>
 </table>
-<p><strong>最后一列值得盯一会儿</strong>：<span class="arithmatex">\(d = 50\)</span> 时参数已经到千万亿量级。
-而一个稍像样的模式识别问题，变量个数轻松超过 <span class="arithmatex">\(50\)</span>。
-<strong>这不是算力不够的问题，是「参数本身就是天文数字」的问题</strong></p>
+<p><strong>最后一列</strong>：<span class="arithmatex">\(d = 50\)</span> 时参数已经到千万亿量级。
+而一个稍像样的模式识别问题，变量个数轻松超过 <span class="arithmatex">\(50\)</span>。</p>
 <p><strong>更要命的还不是存储，而是估计</strong>。
 假设每个格子都要从数据里估出来。
 要让 <span class="arithmatex">\(10^{15}\)</span> 个格子每格平均有 <span class="arithmatex">\(10\)</span> 个样本，
@@ -12465,10 +12464,10 @@
 <div class="arithmatex">\[
 d \cdot 2^{k}
 \]</div>
-<p><strong>对比一下</strong>：<span class="arithmatex">\(d = 30\)</span>、每个节点最多 <span class="arithmatex">\(2\)</span> 个父节点时，
+<p><span class="arithmatex">\(d = 30\)</span>、每个节点最多 <span class="arithmatex">\(2\)</span> 个父节点时，
 上面这张表的行是 <span class="arithmatex">\(\approx 30 \times 4 = 120\)</span> 个参数，
 而自由联合表要 <span class="arithmatex">\(1073741823\)</span> 个。
-<strong>差了大约七百万倍</strong>。这就是「把参数大幅压下来」的确切含义</p>
+<strong>差了大约七百万倍</strong>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="贝叶斯网络：节点是变量，边是直接依赖">
  <defs>
@@ -12619,11 +12618,10 @@ L 237.078079 125.165343
 <figcaption>贝叶斯网络：节点是变量，边是直接依赖</figcaption>
 </figure>
 
-<p><strong>读这张图的一个要点</strong>：图中 <span class="arithmatex">\(X_1\)</span> 与 <span class="arithmatex">\(X_2\)</span> 都指向 <span class="arithmatex">\(X_3\)</span>，
+<p>图中 <span class="arithmatex">\(X_1\)</span> 与 <span class="arithmatex">\(X_2\)</span> 都指向 <span class="arithmatex">\(X_3\)</span>，
 <span class="arithmatex">\(X_3\)</span> 又分别指向 <span class="arithmatex">\(X_4\)</span> 与 <span class="arithmatex">\(X_5\)</span>。
 图上<strong>没有</strong><span class="arithmatex">\(X_1 \to X_4\)</span> 这样的边，
-所以 <span class="arithmatex">\(X_1\)</span> 对 <span class="arithmatex">\(X_4\)</span> 的影响只能"经由 <span class="arithmatex">\(X_3\)</span> 传递"——
-这个"经由"就是下一节要讲的链条结构。</p>
+所以 <span class="arithmatex">\(X_1\)</span> 对 <span class="arithmatex">\(X_4\)</span> 的影响只能"经由 <span class="arithmatex">\(X_3\)</span> 传递"。</p>
 <h3 id="13">1.3 一张表看懂"结构换参数"<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -12675,8 +12673,8 @@ L 237.078079 125.165343
 P(X_1, X_2, \dots, X_d) = \prod_{i=1}^{d} P\bigl(X_i \mid \mathrm{Pa}(X_i)\bigr)
 \]</div>
 <p>这就是贝叶斯网络的<strong>分解式</strong>（factorization）。
-<strong>它不是一个近似，而是「图 + 每个节点的条件概率表」这套表示
-与某一族联合分布之间的一个精确对应</strong></p>
+<strong>它不是近似，而是「图 + 每个节点的条件概率表」
+与某一族联合分布之间的精确对应</strong></p>
 <h3 id="22">2.2 每个因子的含义<a class="headerlink" href="#22" title="Permanent link">&para;</a></h3>
 <p>逐项拆开看，上式的每一个因子都对应图上的一件事：</p>
 <table>
@@ -12709,8 +12707,8 @@ P(X_1, X_2, \dots, X_d) = \prod_{i=1}^{d} P\bigl(X_i \mid \mathrm{Pa}(X_i)\bigr)
 </tr>
 </tbody>
 </table>
-<p><strong>关键理解</strong>：分解式之所以成立，靠的是<strong>每个节点只依赖它的父节点</strong>，
-而与它的<strong>非后代节点</strong>无关。这正是下面"条件独立性"一节要严格化的内容。</p>
+<p>分解式之所以成立，靠的是<strong>每个节点只依赖它的父节点</strong>，
+而与<strong>非后代节点</strong>无关。</p>
 <h3 id="23">2.3 分解式为什么能成立：从链式法则出发推<a class="headerlink" href="#23" title="Permanent link">&para;</a></h3>
 <p>不假设任何东西时，联合分布可以用<strong>乘法链式法则</strong>一步步拆开：</p>
 <div class="arithmatex">\[
@@ -12735,14 +12733,14 @@ P\bigl(X_i \mid X_1, \dots, X_{i-1}\bigr)
 <div class="arithmatex">\[
 \mathrm{Pa}(X_i) \subseteq \{X_1, \dots, X_{i-1}\}
 \]</div>
-<p>于是要证的缩减就变成「条件里多出来的那些变量可以删掉」。
-<strong>多出来的是哪些</strong>：编号在 <span class="arithmatex">\(X_i\)</span> 之前、但<strong>不是</strong> <span class="arithmatex">\(X_i\)</span> 父节点的那些节点。
-按图的结构，它们之所以编号在前，是因为它们是某个祖先或旁支，
-<strong>并不直接决定 <span class="arithmatex">\(X_i\)</span> 的取值</strong>，所以给定父节点后它们不再提供信息</p>
-<p><strong>更形式化的说法</strong>：图上的每个节点 <span class="arithmatex">\(X_i\)</span> ，
-在给定父节点后，与它的<strong>所有非后代节点</strong>条件独立。
-把这句话用在链式法则的每个因子上，就得到分解式。
-<strong>它的严格证明依赖 d-分离</strong>，下一节会把这个概念讲透。</p>
+<p>于是要证的缩减就变成「条件里多出来的变量可以删掉」。
+<strong>多出来的是哪些</strong>：编号在 <span class="arithmatex">\(X_i\)</span> 之前、但<strong>不是</strong>它父节点的节点。
+按图的结构，它们编号在前是因为它们是某个祖先或旁支，
+<strong>并不直接决定 <span class="arithmatex">\(X_i\)</span></strong>，所以给定父节点后不再提供信息</p>
+<p><strong>更形式化的说法</strong>：图上的每个节点 <span class="arithmatex">\(X_i\)</span>，
+在给定父节点后与它的<strong>所有非后代节点</strong>条件独立；
+把它用在链式法则的每个因子上，就得到分解式。
+<strong>严格证明依赖 d-分离</strong>，下一节会讲透。</p>
 <h3 id="24">2.4 算例核对：分解式 = 联合表<a class="headerlink" href="#24" title="Permanent link">&para;</a></h3>
 <p>下面用两种互相独立的方式算同一张联合分布：
 一种是<strong>直接按分解式逐格相乘</strong>，
@@ -12771,8 +12769,7 @@ P\bigl(X_i \mid X_1, \dots, X_{i-1}\bigr)
 <li>X1=1, X2=1 0.6500 0.6500</li>
 </ul>
 <p>参数个数：自由联合表要 15 个；本网络的条件概率表只要 7 个</p>
-<p><strong>输出里最值得看的是最后那段条件独立核对</strong>：
-<span class="arithmatex">\(P(X_3 = 1 \mid X_1, X_2)\)</span> 这一列，无论 <span class="arithmatex">\(X_1\)</span> 取 <span class="arithmatex">\(0\)</span> 还是 <span class="arithmatex">\(1\)</span>，
+<p><span class="arithmatex">\(P(X_3 = 1 \mid X_1, X_2)\)</span> 这一列，无论 <span class="arithmatex">\(X_1\)</span> 取 <span class="arithmatex">\(0\)</span> 还是 <span class="arithmatex">\(1\)</span>，
 结果都是 <span class="arithmatex">\(0.6500\)</span>，与 <span class="arithmatex">\(P(X_3 = 1 \mid X_2)\)</span> 一模一样。
 这说明网络结构<strong>确实</strong>把 <span class="arithmatex">\(X_1\)</span> 从 <span class="arithmatex">\(X_3\)</span> 的条件里"删掉"了，
 而删除是<strong>自动的</strong> —— 只要那张小表里没有 <span class="arithmatex">\(X_1\)</span> 这一维，
@@ -12790,12 +12787,11 @@ P(X, Y \mid Z) = P(X \mid Z)\,P(Y \mid Z)
 P(X \mid Y, Z) = P(X \mid Z)
 \]</div>
 <p><strong>第二种形式更好用</strong>：它说的是
-「<strong>知道了 <span class="arithmatex">\(Z\)</span> 之后，<span class="arithmatex">\(Y\)</span> 这个信息对 <span class="arithmatex">\(X\)</span> 不再有额外贡献</strong>」。
-这正是"条件独立"这个名字的来历 —— 不是"<span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 无关"，
-而是"<strong>在 <span class="arithmatex">\(Z\)</span> 的条件下</strong>它们无关"</p>
-<p><strong>特别提醒</strong>：<span class="arithmatex">\(X \perp Y\)</span>（边缘独立）与
-<span class="arithmatex">\(X \perp Y \mid Z\)</span>（条件独立）<strong>互不推出</strong>。
-这一页里最反直觉的内容全都在这个缝隙里</p>
+「<strong>知道了 <span class="arithmatex">\(Z\)</span> 之后，<span class="arithmatex">\(Y\)</span> 对 <span class="arithmatex">\(X\)</span> 不再有额外贡献</strong>」。
+它强调的不是"<span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> 无关"，
+而是"<strong>在 <span class="arithmatex">\(Z\)</span> 的条件下</strong>无关"</p>
+<p><span class="arithmatex">\(X \perp Y\)</span>（边缘独立）与
+<span class="arithmatex">\(X \perp Y \mid Z\)</span>（条件独立）<strong>互不推出</strong>。</p>
 <h3 id="32">3.2 三种基本结构<a class="headerlink" href="#32" title="Permanent link">&para;</a></h3>
 <p>任意一条路径都可以拆成这三种基本连接。
 <strong>判据的关键是：路径上的中间节点是否被观测</strong>。</p>
@@ -12816,17 +12812,16 @@ P(X \mid Y, Z) = P(X \mid Z)
 彼此之间没有任何通路，所以两端<strong>本来独立</strong>；
 而观测 <span class="arithmatex">\(Z\)</span> 之后，<span class="arithmatex">\(Z\)</span> 的取值同时约束了 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> ——
 <strong>两端反而变得相关</strong> ⚠</p>
-<p><strong>第三种结构是全部反直觉的来源</strong>。举一个具体例子来固定它：
+<p><strong>第三种结构</strong>。例如：
 设 <span class="arithmatex">\(Z\)</span> 表示"地面湿"，<span class="arithmatex">\(X\)</span> 表示"下雨"，<span class="arithmatex">\(Y\)</span> 表示"洒水车作业"。
 不下雨的日子与洒水车是否作业本来互相无关（<span class="arithmatex">\(X \perp Y\)</span>）。
 但只要我们知道<strong>地面湿了</strong>（<span class="arithmatex">\(Z\)</span> 被观测），
 "没下雨"就会推高"洒水车作业过"的可能性，
-而"下过雨"会压低它 —— <strong>两个原本无关的事件，因为观察了共同结果而相关</strong></p>
+而"下过雨"会压低它。</p>
 <p>反过来还有更绕的一层：若 <span class="arithmatex">\(Z\)</span> 有<strong>后代</strong> <span class="arithmatex">\(W\)</span>，
-那么<strong>观测 <span class="arithmatex">\(W\)</span> 也会打开</strong> <span class="arithmatex">\(X \to Z \leftarrow Y\)</span> 这条路。
+那么<strong>观测 <span class="arithmatex">\(W\)</span> 也会打开</strong> <span class="arithmatex">\(X \to Z \leftarrow Y\)</span> 这条路 ——
 因为 <span class="arithmatex">\(W\)</span> 携带了关于 <span class="arithmatex">\(Z\)</span> 的信息，
-观测 <span class="arithmatex">\(W\)</span> 就等于部分观测了 <span class="arithmatex">\(Z\)</span>。
-<strong>这一点在建模时最容易漏</strong></p>
+观测 <span class="arithmatex">\(W\)</span> 就等于部分观测了 <span class="arithmatex">\(Z\)</span>。</p>
 <h3 id="33-d-">3.3 d-分离<a class="headerlink" href="#33-d-" title="Permanent link">&para;</a></h3>
 <p>把上面的判据推广到整张图，就得到 <strong>d-分离</strong>（d-separation，
 "d"指方向 directional）。给定一个<strong>证据集合</strong> <span class="arithmatex">\(E\)</span>（已观测的节点集），
@@ -12850,7 +12845,7 @@ P(X \mid Y, Z) = P(X \mid Z)
   则存在至少一个与图相符的分布，使 <span class="arithmatex">\(X\)</span> 与 <span class="arithmatex">\(Y\)</span> <strong>不</strong>条件独立。</li>
 </ul>
 <p><strong>这两条合起来说明 d-分离是"信息最多"的判据</strong>：
-它给出的是图能保证的全部条件独立性，不多不少</p>
+它给出的是图能保证的全部条件独立性。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="贝叶斯网络的三种基本连接与 d-分离">
  <defs>
@@ -13134,13 +13129,11 @@ L 273.661738 89.623028
 </li>
 <li>共同子结构：未观测时两端严格独立，观测 Z 后偏差升到 0.2000 ⚠</li>
 </ul>
-<p><strong>输出里最该盯住的两行</strong>：</p>
 <p>前两行，两端偏差从 <span class="arithmatex">\(0.0735\)</span> 与 <span class="arithmatex">\(0.0882\)</span> <strong>掉到 <span class="arithmatex">\(0.0000\)</span></strong>：
 观测 Z 确实把通路切断了。
 最后一行，偏差从 <span class="arithmatex">\(0.0000\)</span> <strong>升到 <span class="arithmatex">\(0.2000\)</span></strong>：
 观测 Z 反而把通路打开了</p>
-<p><strong>前两行符合直觉，最后一行完全违背直觉</strong> ——
-而这正是"图上不能靠直觉判断相关性"的原因。</p>
+<p><strong>前两行符合直觉，最后一行完全违背直觉</strong>。</p>
 <div class="admonition warning">
 <p class="admonition-title">对撞结构是建模与数据分析里最常见的踩坑点</p>
 <p><strong>不要以为"相关"只能来自"共同原因"或"因果链"</strong>。
@@ -13175,7 +13168,7 @@ P(Q) = \sum_{h_1} \sum_{h_2} \cdots \sum_{h_m} P(Q, h_1, \dots, h_m)
 \]</div>
 <p><strong>复杂度是 <span class="arithmatex">\(H\)</span> 中变量取值组合的个数</strong>，也就是指数级</p>
 <h3 id="42">4.2 关键洞察：把求和移进连乘里<a class="headerlink" href="#42" title="Permanent link">&para;</a></h3>
-<p>变量消元的全部思想只有一句话：
+<p>变量消元的思想是：
 <strong>利用分解式，把"先展开、后求和"改成"边乘边求和"</strong>。</p>
 <p>把分解式代入上式。以一条链 <span class="arithmatex">\(X_1 \to X_2 \to X_3 \to X_4\)</span> 为例，
 联合分布是</p>
@@ -13329,8 +13322,8 @@ P(x_1) = \sum_{x_2} P(x_1)\,P(x_2 \mid x_1)
 <li>也就是说，换个求和顺序，峰值内存差 2 倍</li>
 <li>变量数再往上加，这个差距会指数级拉大，这正是近似推断的动机 ⚠</li>
 </ul>
-<p><strong>三行结果完全相同（都是 <span class="arithmatex">\(0.350000\)</span>）</strong>，说明消元顺序只影响<strong>代价</strong>，
-不影响<strong>答案</strong> —— 这一点必须先确认，否则"优化"就没有意义 ✓</p>
+<p><strong>三行结果完全相同</strong>，说明消元顺序只影响<strong>代价</strong>，
+不影响<strong>答案</strong>。</p>
 <figure class="kb-fig">
 <svg viewBox="0 0 321.12 191.592" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="变量消元：消元顺序不同，中间因子的大小差很多">
  <defs>
@@ -13404,8 +13397,8 @@ z
 </figure>
 
 <p><strong>图里两条横杠的长度不是重点，两行小字才是</strong>：
-上一条写着因子膨胀到 <span class="arithmatex">\(32\)</span> 个数，下一条写着不超过 <span class="arithmatex">\(4\)</span> 个数。
-这中间的差别，在变量更多时就是"能不能算完"的分界。</p>
+因子膨胀到 <span class="arithmatex">\(32\)</span> 与不超过 <span class="arithmatex">\(4\)</span> 的差别，
+在变量更多时就是"能不能算完"的分界。</p>
 <div class="admonition warning">
 <p class="admonition-title">变量消元有个看不见的代价：它把重复计算浪费掉了</p>
 <p>变量消元对<strong>一个</strong>查询是高效的，但对<strong>多个</strong>查询就不划算：
@@ -13427,7 +13420,7 @@ z
 <p>结论是明确的：<strong>在一般的有向无环图（或无向图）上做精确推断，
 是 NP 难问题</strong>。更细一层，即使在<strong>近似</strong>意义下，
 对某些推断任务也可能难以达到任意精度。</p>
-<p><strong>这条结论的正确读法</strong>（容易被误读成"贝叶斯网络没用"）：</p>
+<p><strong>这条结论的正确读法</strong>：</p>
 <ul>
 <li>它说的是<strong>最坏情况</strong>。存在一整类图，其上精确推断不可能在多项式时间内完成；</li>
 <li><strong>许多实际结构是"简单"的</strong>：树、森林、单连通图上的推断
@@ -13437,7 +13430,7 @@ z
 <p><strong>图论上刻画"难度"的量</strong>主要有两个：
 <strong>树宽</strong>（treewidth）与<strong>分支数</strong>（即最大入度）。
 树宽小意味着存在一条"通道状"的分解，把小规模消息依次传过去。
-<strong>树宽是决定精确推断难易的核心指标</strong> ✓</p>
+<strong>树宽是决定精确推断难易的核心指标</strong></p>
 <h3 id="52">5.2 不同结构的代价对照<a class="headerlink" href="#52" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
@@ -13470,7 +13463,7 @@ z
 </tr>
 </tbody>
 </table>
-<p><strong>注意第二行那句"与树宽成指数"</strong>：它精确地说明了难点在哪 ——
+<p><strong>注意第二行那句"与树宽成指数"</strong>：
 代价是<strong>关于树宽</strong>指数级、<strong>关于变量个数</strong>多项式级。
 所以"图很大"不等于"难"，<strong>图很稠密才是难</strong></p>
 <h3 id="53">5.3 近似方向<a class="headerlink" href="#53" title="Permanent link">&para;</a></h3>
@@ -13560,7 +13553,7 @@ P(C \mid X_1, \dots, X_d)
 </tr>
 </tbody>
 </table>
-<p><strong>第一行最值得记住</strong>：若两个特征在给定类别后仍高度相关，
+<p><strong>第一行</strong>：若两个特征在给定类别后仍高度相关，
 朴素贝叶斯会把<strong>同一个证据数两遍</strong>，
 于是后验概率被推向 <span class="arithmatex">\(0\)</span> 或 <span class="arithmatex">\(1\)</span> ——
 <strong>输出看起来"很有把握"，实际上这份把握是虚的</strong></p>
@@ -13585,9 +13578,7 @@ P(C \mid X_1, \dots, X_d)
 <li>平滑后：雨类下 P(戴墨镜 = 1) = 0.1000，不再为零 ✓</li>
 <li>于是判别结果从不平滑的「晴」改回更合理的「雨」</li>
 </ul>
-<p><strong>同一个样本含 3 个特征，不平滑时「雨」类的联合打分为零：</strong></p>
-<p>只要训练集里有一个没出现的特征组合，整条后验就被判死 ⚠</p>
-<p><strong>输出里最刺眼的那个零</strong>：不平滑时「雨」类的联合打分是 <span class="arithmatex">\(0.00000000\)</span>。
+<p>不平滑时「雨」类的联合打分是 <span class="arithmatex">\(0.00000000\)</span>。
 它的来源只有一个 —— 雨类样本里从未出现过"戴墨镜"，
 于是 <span class="arithmatex">\(P(\text{戴墨镜}=1 \mid \text{雨}) = 0\)</span>，
 而<strong>乘式中只要有一个因子是零，整个乘积就是零</strong></p>
@@ -13597,7 +13588,7 @@ P(C \mid X_1, \dots, X_d)
 <p>网络结构给定后，剩下的工作是估<strong>条件概率表</strong>：
 对每个节点 <span class="arithmatex">\(X_i\)</span> 与它的父节点的每一种取值组合 <span class="arithmatex">\(\mathrm{pa}\)</span>，
 估出 <span class="arithmatex">\(P(X_i \mid \mathrm{Pa}(X_i) = \mathrm{pa})\)</span>。</p>
-<p><strong>极大似然估计</strong>非常直接：数频数、除总数。</p>
+<p><strong>极大似然估计</strong>：数频数、除总数。</p>
 <div class="arithmatex">\[
 \hat{P}(X_i = a \mid \mathrm{Pa}(X_i) = \mathrm{pa})
 = \frac{N(X_i = a,\ \mathrm{Pa}(X_i) = \mathrm{pa})}
@@ -13608,7 +13599,7 @@ P(C \mid X_1, \dots, X_d)
 <h3 id="72">7.2 为什么必须平滑<a class="headerlink" href="#72" title="Permanent link">&para;</a></h3>
 <p>上面这个频率式有一个致命弱点：<strong>分子可能为零</strong>。
 只要某个组合在训练数据里<strong>一次都没出现</strong>，估计出的概率就是 <span class="arithmatex">\(0\)</span>。</p>
-<p><strong>而零一旦进了连乘，后果是毁灭性的</strong>：</p>
+<p><strong>而零一旦进了连乘</strong>：</p>
 <div class="arithmatex">\[
 P(\text{某个样本}) = P(C) \prod_{j=1}^{d} P(X_j \mid C)
 \]</div>
@@ -13632,7 +13623,7 @@ P(\text{某个样本}) = P(C) \prod_{j=1}^{d} P(X_j \mid C)
 <span class="arithmatex">\(\alpha \gt 0\)</span> 是平滑强度，<span class="arithmatex">\(\alpha = 1\)</span> 就是"加一"。</p>
 <p><strong>分母为什么要加 <span class="arithmatex">\(\alpha K\)</span></strong>：因为分子一共加了 <span class="arithmatex">\(\alpha \cdot K\)</span>
 （每种取值各加 <span class="arithmatex">\(\alpha\)</span>），要让这一行所有取值的概率之和仍然等于 <span class="arithmatex">\(1\)</span>，
-分母必须加上相同的量 ✓ 这是最容易抄错的地方 ⚠</p>
+分母必须加上相同的量 ✓</p>
 <table>
 <thead>
 <tr>
